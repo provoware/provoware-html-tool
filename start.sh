@@ -14,9 +14,13 @@ NEXT_STEPS=()
 TEXT_JSON='{
   "help_title": "Provoware Start-Routine",
   "help_usage": "Verwendung:",
+  "help_accessibility": "Barrierefreiheit: Jeder Status hat Symbol + Text, damit Hinweise nicht nur über Farbe verstanden werden.",
+  "help_keyboard": "Tastatur-Hinweis: Alle Befehle sind per Enter startbar, ohne Maus.",
+  "help_icon_legend": "Symbol-Legende: ✅ Erfolg, ⚠️ Hinweis, ❌ Fehler, ➡️ Aktion, ℹ️ Zusatzinfo.",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
   "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
+  "error_debug": "Detaillierte Analyse starten: ./start.sh --check --debug",
   "safe_help_1": "Safe-Mode Hilfe: Dieser Modus zeigt nur sichere Prüfungen und klare nächste Schritte.",
   "safe_help_2": "Wiederherstellung: Starten Sie danach ./start.sh --repair, damit fehlende Werkzeuge automatisch nachinstalliert werden.",
   "safe_help_3": "Protokoll-Nutzung: Öffnen Sie Details mit cat {{LOG_FILE}} und teilen Sie die letzte Fehlermeldung.",
@@ -59,6 +63,10 @@ Einfache Begriffe:
   Repair (Reparatur) = automatische Behebung
   Format = einheitliche Schreibweise im Code
   Test = kurzer Selbsttest mit Erfolg/Fehler-Ausgabe
+
+$(get_text "help_accessibility")
+$(get_text "help_keyboard")
+$(get_text "help_icon_legend")
 TXT
 }
 
@@ -97,6 +105,7 @@ print_error_with_actions() {
 	print_step "➡️" "$(replace_placeholders "$(get_text "error_retry")")"
 	print_step "➡️" "$(replace_placeholders "$(get_text "error_repair")")"
 	print_step "➡️" "$(replace_placeholders "$(get_text "error_log")")"
+	print_step "➡️" "$(replace_placeholders "$(get_text "error_debug")")"
 }
 
 print_summary() {
@@ -128,15 +137,39 @@ validate_args() {
 		return 1
 	fi
 
+	local mode_count=0
+	local debug_count=0
+
 	for arg in "$@"; do
 		case "$arg" in
-		--check) MODE="check" ;;
-		--repair) MODE="repair" ;;
-		--format) MODE="format" ;;
-		--test) MODE="test" ;;
-		--safe) MODE="safe" ;;
-		--help | -h) MODE="help" ;;
-		--debug) DEBUG_MODE="1" ;;
+		--check)
+			MODE="check"
+			mode_count=$((mode_count + 1))
+			;;
+		--repair)
+			MODE="repair"
+			mode_count=$((mode_count + 1))
+			;;
+		--format)
+			MODE="format"
+			mode_count=$((mode_count + 1))
+			;;
+		--test)
+			MODE="test"
+			mode_count=$((mode_count + 1))
+			;;
+		--safe)
+			MODE="safe"
+			mode_count=$((mode_count + 1))
+			;;
+		--help | -h)
+			MODE="help"
+			mode_count=$((mode_count + 1))
+			;;
+		--debug)
+			DEBUG_MODE="1"
+			debug_count=$((debug_count + 1))
+			;;
 		*)
 			print_error_with_actions "Unbekannte Option '$arg'."
 			record_next_step "./start.sh --help ausführen"
@@ -145,13 +178,40 @@ validate_args() {
 		esac
 	done
 
+	if [[ "$mode_count" -gt 1 ]]; then
+		print_error_with_actions "Mehrere Modus-Optionen erkannt. Bitte nur einen Modus pro Start verwenden."
+		record_next_step "Beispiel: './start.sh --check --debug'"
+		return 1
+	fi
+
+	if [[ "$debug_count" -gt 1 ]]; then
+		print_error_with_actions "Option '--debug' wurde mehrfach gesetzt. Bitte nur einmal verwenden."
+		record_next_step "Befehl auf genau ein '--debug' reduzieren"
+		return 1
+	fi
+
 	print_step "✅" "Eingabeprüfung abgeschlossen (Modus: ${MODE}, Debug: ${DEBUG_MODE})."
 	record_checked "Eingabeparameter"
+}
+
+print_debug_context() {
+	print_step "ℹ️" "Debug-Details: Arbeitsordner=${PROJECT_ROOT}"
+	print_step "ℹ️" "Debug-Details: Shell=${SHELL:-unbekannt}"
+	print_step "ℹ️" "Debug-Details: Nutzer=$(id -un 2>/dev/null || printf 'unbekannt')"
+	print_step "ℹ️" "Debug-Details: Betriebssystem=$(uname -s 2>/dev/null || printf 'unbekannt')"
+	if [[ -w "$LOG_DIR" ]]; then
+		print_step "ℹ️" "Debug-Details: Log-Verzeichnis ist beschreibbar."
+	else
+		print_error_with_actions "Debug-Details: Log-Verzeichnis ist nicht beschreibbar."
+		record_next_step "Schreibrechte für '${LOG_DIR}' prüfen"
+	fi
+	record_checked "Debug-Kontext"
 }
 
 run_debug_hint() {
 	if [[ "$DEBUG_MODE" == "1" ]]; then
 		print_step "ℹ️" "Debug aktiv: Zusätzliche Fehlersuche-Infos werden geschrieben."
+		print_debug_context
 		record_checked "Debug-Hinweise"
 	fi
 }

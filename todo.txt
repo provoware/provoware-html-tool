@@ -3,22 +3,22 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
-## Iteration 2026-02-21 (Zeilenlimit + JSON-Texte)
+## Iteration 2026-02-21 (Argument-Validierung + Debug-Hilfe)
 ### A) Fundstelle
-- Problem: Die Start-Routine hatte kein hartes Zeilenlimit pro Datei und Tool-Texte waren nicht zentral als JSON gepflegt.
-- Risiko: Dateien wachsen unkontrolliert und spätere Textanpassungen werden fehleranfällig.
-- Erwartung: Start-Checks melden Überschreitungen klar und Hilfetexte sind zentral über JSON ersetzbar.
+- Problem: Die Start-Routine akzeptierte mehrere Modus-Optionen gleichzeitig und gab im Fehlerfall zu wenig direkte Hilfe für die Analyse.
+- Risiko: Unklare Bedienung führt zu falschen Aufrufen und verzögert die Reparatur bei Fehlern.
+- Erwartung: Genau ein Modus wird strikt validiert und Debug-Hinweise liefern klare nächste Schritte in einfacher Sprache.
 
 ### B) Change-Scope
-- Ziel: Qualitäts- und Wartbarkeitsregel „maximal 1200 Zeilen pro Datei“ plus JSON-Textverwaltung in der Start-Routine liefern.
+- Ziel: Eingabevalidierung und barrierearme Hilfetexte der Start-Routine robuster machen, ohne Nebenänderungen.
 - Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh --check` und `./start.sh --test` prüfen das 1200-Zeilenlimit und geben klare Aktionen bei Verstößen aus.
+- Abnahmekriterium: `./start.sh --check --debug` zeigt Debug-Kontext; mehrfache Modus-Optionen werden mit klarer Aktion abgelehnt.
 
 ### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: JSON-basierte Textverwaltung direkt in `start.sh` ergänzt (einfaches späteres Ersetzen von Hilfetexten).
-- Punkt 2 – Änderung: Neuer Qualitätscheck `check_line_limit` implementiert (maximal 1200 Zeilen je Datei, klare Fehlermeldung mit Next Steps).
-- Punkt 3 – Änderung: Safe-Mode-Hilfe um Entwicklerdoku-Hinweis erweitert (barrierearme, klare Sprache mit konkreter Aktion).
+- Punkt 1 – Änderung: Hilfebereich um barrierefreie Symbol-Legende, Tastatur-Hinweis und Klartext-Erklärung ergänzt.
+- Punkt 2 – Änderung: Eingabevalidierung erweitert, damit nur ein Modus und nur ein `--debug` akzeptiert werden.
+- Punkt 3 – Änderung: Fehlerpfad und Debug-Modus mit zusätzlicher Aktion `./start.sh --check --debug` und technischem Kontext verbessert.
 
 ## Nächste offene Punkte (Backlog)
 1. **Externe Text-JSON vorbereiten**
@@ -37,5 +37,5 @@ Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich e
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
 
-DONE: Zeilenlimit-Check (1200) und JSON-Textsteuerung in der Start-Routine ergänzt (2026-02-21)
-NEXT: Externe Text-JSON in `config/` und erweiterte Entwicklerdoku als eigene Iteration liefern (2026-02-21)
+DONE: Argumentvalidierung, Debug-Kontext und barrierefreie Hilfe in der Start-Routine erweitert (2026-02-21)
+NEXT: Externe Text-JSON in `config/` und Kontrast-Selbsttest als nächste Iteration liefern (2026-02-21)
