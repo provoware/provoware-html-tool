@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: `start.sh` um Debug-Modus, automatische Tool-Reparatur und Selbsttest im Startlauf erweitert.
-- Warum: Offene Punkte verlangten mehr Autonomie bei Abhängigkeitsprüfung, klareres Fehlerfeedback und robustere Qualitätsroutine.
-- Wirkung: Start erkennt fehlende Werkzeuge, versucht automatische Installation, liefert klare Next Steps und bestätigt den Ablauf mit zusätzlichem Selbsttest.
+- Was: Prozessrichtlinien in `AGENTS.md` professionalisiert und `todo.txt` auf einen klaren, automatisierbaren Entwicklungsablauf umgestellt.
+- Warum: Der bisherige Ablauf war teilweise uneinheitlich; für stabile Releases werden eindeutige Regeln, automatische Checks und barrierefreie Standards benötigt.
+- Wirkung: Iterationen sind nun klar begrenzt, besser prüfbar und mit konkreten Start-/Qualitäts-/Accessibility-Schritten direkt umsetzbar.
