@@ -79,3 +79,33 @@ Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich e
 - Maximal 1–4 Dateien ändern.
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
+
+## Iteration 2026-02-21 (Infodatei für Strukturtransparenz und Wartbarkeit)
+### A) Fundstelle
+- Problem: Es fehlt eine zentrale, leicht verständliche Übersicht über Verzeichnisse und Dateien, wodurch Wartung und Onboarding unnötig Zeit kosten.
+- Risiko: Neue Änderungen landen leichter in falschen Dateien und Standards werden uneinheitlich umgesetzt.
+- Erwartung: Eine kompakte Infodatei macht Struktur, Dateizweck und Pflegeablauf sofort verständlich.
+
+### B) Change-Scope
+- Ziel: Dokumentationsbasis für Wartbarkeit verbessern, ohne Logik zu verändern.
+- Dateien: `INFODATEI.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
+- Abnahmekriterium: `INFODATEI.md` enthält Verzeichnisstruktur, vollständige Dateiliste mit Rollen und klare Fehlerhilfe in einfacher Sprache.
+
+### C) Patch (genau 3 Punkte)
+- Punkt 1 – Änderung: Neue Datei `INFODATEI.md` erstellt mit klarer Verzeichnisstruktur und Dateiliste zur schnelleren Navigation.
+- Punkt 2 – Änderung: Pro Datei eine kurze Wartungsrolle und konkrete Pflegehinweise ergänzt, damit Standards einheitlich bleiben.
+- Punkt 3 – Änderung: Barrierearme Hilfe-Sektion ergänzt (Erneut versuchen, Reparatur starten, Protokoll öffnen) in einfacher Sprache.
+
+### D) Checks
+- Format: `./start.sh --format`
+- Tests: `./start.sh --test`
+- Start-Routine-Check: `./start.sh --check`
+
+### E) Ergebnis
+- Status: DONE
+- Doku aktualisiert: todo + changelog + registry
+- Laienvorschläge (2):
+  1. Öffne bei Unsicherheit immer zuerst `INFODATEI.md`, dort steht kurz, welche Datei wofür da ist.
+  2. Nutze vor jeder Änderung `./start.sh --check`, damit du Probleme früh siehst statt erst am Ende.
+- Nächster Schritt (1, detailliert): Lege in der nächsten Iteration eine zusätzliche Datei `config/themes.json` an und ergänze in `start.sh --release-check` eine automatische Kontrastprüfung mit klarer Textausgabe pro Theme, damit Lesbarkeit messbar und barrierefrei abgesichert wird.
