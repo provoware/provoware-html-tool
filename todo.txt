@@ -4,20 +4,20 @@
 Das Projekt soll **selbstständig starten, prüfen, reparieren und verständlich erklären**, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
 ## Iteration-Backlog (nächste 3 kleinste vollständige Punkte)
-1. **Start-Routine standardisieren**
-   - `./start.sh --check`, `--repair`, `--format`, `--test` als feste Abläufe absichern.
-   - Jede Ausgabe in einfacher Sprache mit klarer Aktion formulieren.
-   - Erfolg/Fehler jeweils mit kurzer Zusammenfassung am Ende ausgeben.
+1. **Safe-Mode um Hilfeelemente erweitern**
+   - Im Safe-Mode konkrete Hilfetexte für Wiederherstellung und Protokoll-Nutzung ergänzen.
+   - Fehlerhinweise mit festen Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“) durchgängig absichern.
+   - Abschlussmeldung mit klarer Nutzeraktion für den nächsten Schritt ergänzen.
 
-2. **Automatische Qualitätsprüfung absichern**
-   - Formatierung + Lint + Tests als festen Standard in der Start-Routine ausführen.
-   - Bei Fehlern: konkrete Next Steps („Befehl ausführen“, „Protokoll öffnen“, „erneut starten“).
-   - Abbruch nur mit klarer Ursache und Lösungsvorschlag.
+2. **Theme- und Kontrastprüfung vorbereiten**
+   - Konfigurierbare Theme-Datei im Ordner `config/` einführen.
+   - Start-Check um eine verständliche Kontrast-Selbstprüfung erweitern.
+   - Ergebnis im Log mit Text + Symbol ausgeben (nicht nur Farbe).
 
-3. **Barrierefreiheit + Theme-Qualität prüfen**
-   - Kontrastprüfung für helle/dunkle Themes als Pflichtprüfung ergänzen.
-   - Fokus-Reihenfolge und Statusanzeigen mit Text/Icon zusätzlich zu Farbe absichern.
-   - Hilfehinweise an kritischen Aktionen ergänzen.
+3. **Automatischen Testumfang ausbauen**
+   - Für `./start.sh --test` zusätzliche Checks für Pflichtbefehle ergänzen.
+   - Testausgabe in einfacher Sprache mit Next Steps standardisieren.
+   - Fehler ohne Crash behandeln und im Log nachvollziehbar machen.
 
 ## Team-Standard (kurz)
 - Pro Iteration genau 3 abgeschlossene Punkte.
@@ -25,5 +25,5 @@ Das Projekt soll **selbstständig starten, prüfen, reparieren und verständlich
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
 
-DONE: AGENTS.md auf klare, professionelle und barrierefreundliche Prozessregeln umgestellt (2026-02-21)
-NEXT: Start-Routine-Befehle (`--check/--repair/--format/--test`) technisch in einem Durchlauf validieren und Fehlermeldungen vereinheitlichen (2026-02-21)
+DONE: Start-Routine um Pflichtkommandos `--repair`, `--format`, `--test` erweitert und Zusammenfassung für geprüft/fehlend/gelöst ergänzt (2026-02-21)
+NEXT: Safe-Mode-Hilfe und barrierefreundliche Fehlertexte weiter vereinheitlichen (2026-02-21)
