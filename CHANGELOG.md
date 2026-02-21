@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: Projektübersicht aus der Vorgabe wurde strukturiert in `todo.txt` als priorisierte Arbeitsplanung eingetragen.
-- Warum: Die bisherige Basis hatte keine umsetzbare Roadmap für robuste Startlogik, Accessibility und Plugin-Architektur.
-- Wirkung: Nächste Iterationen können jetzt mit klaren, messbaren Micro-Patches release-orientiert abgearbeitet werden.
+- Was: `start.sh` als ausführbare, robuste Startroutine mit Modus-Prüfung (`--check`, `--safe`, `--help`) und klaren deutschen Hilfetexten umgesetzt.
+- Warum: Der Projektstart hatte keine automatische Prüfung, kein strukturiertes Nutzerfeedback und keinen barrierearmen Fehlerpfad mit Next Steps.
+- Wirkung: Voraussetzungen, Qualitätschecks und Formatierungsversuche laufen jetzt automatisch mit verständlichen Statusmeldungen und Protokollpfad.

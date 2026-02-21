@@ -42,5 +42,5 @@ Modultool ist ein portables Offline-Desktop-System für kreative Projekte und mo
 - Notfall-Schalter `--safe` direkt beim Start.
 - Lokale Rollen/Schutzlevel (kritische Meta-Dateien absichern).
 
-DONE: Projektübersicht aus Nutzervorgabe strukturiert, priorisiert und in klare Arbeitsblöcke übertragen (2026-02-21)
-NEXT: Nächste Iteration setzt 3 kleinste umsetzbare Punkte aus Block 1 und 4 als merge-fertigen Micro-Patch um (2026-02-21)
+DONE: Startskript liefert jetzt automatische Checks, Safe-Mode und klare Next Steps in deutscher Sprache (2026-02-21)
+NEXT: Nächste Iteration ergänzt automatische Reparatur für fehlende Tools und prüft Kontrast/Themes in der UI (2026-02-21)
