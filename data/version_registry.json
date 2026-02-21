@@ -1,8 +1,7 @@
 {
   "global_version": "2026.02.21",
   "files": {
-    "start.sh": "2026.02.21",
-    "README.md": "2026.02.21",
+    "AGENTS.md": "2026.02.21",
     "todo.txt": "2026.02.21",
     "CHANGELOG.md": "2026.02.21",
     "data/version_registry.json": "2026.02.21"
