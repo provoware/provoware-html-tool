@@ -1,8 +1,8 @@
 {
   "global_version": "2026.02.21",
-  "iteration": "2026.02.21-external-text-fallback-prep",
+  "iteration": "2026.02.21-readme-a11y-ops-optimization",
   "files": {
-    "start.sh": "2026.02.21",
+    "README.md": "2026.02.21",
     "todo.txt": "2026.02.21",
     "CHANGELOG.md": "2026.02.21",
     "data/version_registry.json": "2026.02.21"
