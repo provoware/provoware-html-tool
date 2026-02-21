@@ -1,9 +1,4 @@
 # AGENTS.md
-Ziel: Jede Iteration schließt **genau drei klar abgegrenzte Punkte vollständig** ab, ist merge-ready und erhöht den Release-Reifegrad.
-Leitmotiv: Drei kleinste vollständige Punkte pro Iteration, harte Qualitäts-Gates, sofort integrierbar. Eine der drei Aufgaben muss immer eine sinnvolle Erweiterung der Hilfselemente, der Texte oder der Barrierefreiheit sein.
-
-────────────────────────────────────────────────────────────
-
 ## 0) Grundregel (Atomare Iteration)
 Jede Iteration muss:
  - genau **3 klar abgegrenzte Punkte** vollständig abschließen (nicht nur „anarbeiten“)
@@ -11,10 +6,6 @@ Jede Iteration muss:
  - alle Punkte so klein wie möglich halten (smallest shippable change)
  - merge-ready sein (Code + Doku + Checks erledigt)
  - den Release-Fortschritt messbar erhöhen
-
-Zählregel für die drei Punkte:
-- Die drei Pflichtpunkte beziehen sich immer auf funktionale Produktaspekte außerhalb reiner Info-Dateien.
-- Info-Dateien (z. B. `README.md`, `CHANGELOG.md`, `todo.txt`) sind verpflichtende Begleit-Dokumentation und zählen nicht als eigener Funktionspunkt.
 
 Maximal:
 - 1 Problemklasse
@@ -30,7 +21,7 @@ Vor dem Patch festhalten:
 - Problem (1 Satz)
 - Ziel (1 Satz)
 - Exakte Dateien (Liste)
-- Exakter Patch-Block je Datei
+- Exakter Patch-Block je Datei (Zeilennummer)
 - Abnahmekriterium „fertig“ (1 Satz, testbar)
 
  Verboten:
@@ -71,30 +62,16 @@ Anforderungen:
 
 ────────────────────────────────────────────────────────────
 
-## 5) Gates (Reihenfolge fix, Exitcode 0 erwartet)
-GATE 1 – Syntax:
-- `python -m compileall -q .`
 
-GATE 2 – Repo-Quality:
-- `bash tools/run_quality_checks.sh`
-
-GATE 3 – Smoke (wenn vorhanden):
-- `python tools/smoke_test.py`
-
-GATE 4 – End-to-End Start:
-- `bash start.sh`
-
-GATE 5 – Mini-UX-Check (2 Minuten):
 - deutsche, verständliche Dialoge im betroffenen Bereich
 - Fehlerdialog mit Next Steps (z. B. „Erneut versuchen“, „Reparatur“, „Protokoll“)
 - betroffene Funktion läuft ohne Crash
 - Barrierefreiheit/Kontrast im betroffenen Bereich geprüft
 
-Wenn ein Gate rot:
 - 1 gezielter Fix in derselben Iteration
-- Gates erneut
-Wenn erneut rot:
-- STOP → NEXT ITERATION planen
+
+
+
 
 ────────────────────────────────────────────────────────────
 
@@ -118,22 +95,12 @@ README regelmäßig aktualisieren (mindestens alle 2–3 Iterationen oder sofort
 
 ────────────────────────────────────────────────────────────
 
-## 7) Definition of Done (nur dann DONE)
- Eine Iteration ist nur DONE, wenn:
- - drei klar definierte Punkte vollständig abgeschlossen sind
- - mindestens eine Aufgabe eine sinnvolle Erweiterung der Hilfselemente, Texte oder Barrierefreiheit darstellt
- - merge-ready (kein offener Pflichtpunkt)
- - Change-Scope eingehalten
- - Gates grün ODER sauber als NEXT ITERATION dokumentiert
  - README + CHANGELOG + todo aktualisiert
  - mindestens 1 Hilfeelement verbessert/ergänzt
- - mindestens 1 Accessibility-Aspekt verbessert/geprüft
  - Release-Reifegrad erhöht und klar dokumentiert
 
 ────────────────────────────────────────────────────────────
 
-## 8) Merge- und Release-Flow (Standard)
-Nach jeder DONE-Iteration:
 - zeitnah mergen (kein unnötiges Warten)
  - direkt die nächsten drei kleinsten vollständigen Punkte planen
 - immer auf vollständig release-fertig hinarbeiten
@@ -168,12 +135,6 @@ Minimalformat:
  - Punkt 2 – Änderung:
  - Punkt 3 – Änderung:
 
-### D) Gates
-- G1:
-- G2:
-- G3:
-- G4:
-- G5:
 
 ### E) Ergebnis
 - Status: DONE / NEXT ITERATION (wenn einer der 2 Punkte offen bleibt)
@@ -191,17 +152,3 @@ Richtlinien:
 - **files**: Für jede geänderte Datei muss die Versionsnummer (Datum oder, bei Dokumenten, eine Nummer) erhöht oder eingetragen werden.
 - Das Aktualisieren der Registry zählt als Teil der Iterationsarbeit und darf keine weiteren Dateien beeinflussen.
 - Änderungen ohne Anpassung der Registry gelten als unvollständig.
-
-Beispiel:
-
-```json
-{
-  "global_version": "2026.02.11",
-  "files": {
-    "app/main.py": "2026.02.11",
-    "core/settings.py": "2026.02.11",
-    "start.sh": "2026.02.11",
-    "AGENTS.md": "2.3"
-  }
-}
-```
