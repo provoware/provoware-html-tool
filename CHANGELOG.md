@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: `start.sh --safe` enthält jetzt eigene Hilfeelemente für Wiederherstellung und Protokoll-Nutzung sowie eine klare Abschlussaktion.
-- Warum: Im Safe-Mode fehlten bisher verständliche Leitplanken für Nutzer ohne Technik-Hintergrund.
-- Wirkung: Erwartbare Fehler laufen ohne Crash durch und liefern immer die festen Aktionen „Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“.
+- Was: `start.sh` nutzt jetzt JSON-basierte Tool-Texte und prüft automatisch das Zeilenlimit von maximal 1200 Zeilen pro Datei.
+- Warum: Texte sollen später einfach ersetzbar sein und Dateigrößen müssen dauerhaft wartbar bleiben.
+- Wirkung: `--check`, `--test` und `--safe` geben klare, barrierearme Hinweise bei Limit-Verstößen und zeigen direkte nächste Schritte.

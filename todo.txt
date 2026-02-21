@@ -1,35 +1,35 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
 ## Zielbild (einfach erklärt)
-Das Projekt soll **selbstständig starten, prüfen, reparieren und verständlich erklären**, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
+Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
-## Iteration 2026-02-21 (Safe-Mode-Hilfe)
+## Iteration 2026-02-21 (Zeilenlimit + JSON-Texte)
 ### A) Fundstelle
-- Problem: Im Safe-Mode fehlten konkrete Hilfetexte für Wiederherstellung und Protokoll-Nutzung bei Fehlern.
-- Risiko: Nutzer brechen den Ablauf ab, weil nächste Schritte nicht klar genug sind.
-- Erwartung: Safe-Mode meldet klar, was geprüft wurde und was Nutzer danach tun sollen.
+- Problem: Die Start-Routine hatte kein hartes Zeilenlimit pro Datei und Tool-Texte waren nicht zentral als JSON gepflegt.
+- Risiko: Dateien wachsen unkontrolliert und spätere Textanpassungen werden fehleranfällig.
+- Erwartung: Start-Checks melden Überschreitungen klar und Hilfetexte sind zentral über JSON ersetzbar.
 
 ### B) Change-Scope
-- Ziel: Safe-Mode barrierefreundlich und fehlertolerant machen, ohne neue Problemklasse zu öffnen.
+- Ziel: Qualitäts- und Wartbarkeitsregel „maximal 1200 Zeilen pro Datei“ plus JSON-Textverwaltung in der Start-Routine liefern.
 - Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh --safe` zeigt Hilfehinweise, feste Fehleraktionen und klare Next Steps ohne Crash.
+- Abnahmekriterium: `./start.sh --check` und `./start.sh --test` prüfen das 1200-Zeilenlimit und geben klare Aktionen bei Verstößen aus.
 
 ### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: Safe-Mode-Hilfe mit Wiederherstellung und Protokoll-Nutzung ergänzt.
-- Punkt 2 – Änderung: Safe-Mode behandelt fehlende Pflichtdateien robust und zeigt standardisierte Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“).
-- Punkt 3 – Änderung: Abschluss im Safe-Mode mit klarer Nutzeraktion für den nächsten Schritt ergänzt.
+- Punkt 1 – Änderung: JSON-basierte Textverwaltung direkt in `start.sh` ergänzt (einfaches späteres Ersetzen von Hilfetexten).
+- Punkt 2 – Änderung: Neuer Qualitätscheck `check_line_limit` implementiert (maximal 1200 Zeilen je Datei, klare Fehlermeldung mit Next Steps).
+- Punkt 3 – Änderung: Safe-Mode-Hilfe um Entwicklerdoku-Hinweis erweitert (barrierearme, klare Sprache mit konkreter Aktion).
 
 ## Nächste offene Punkte (Backlog)
-1. **Theme- und Kontrastprüfung vorbereiten**
+1. **Externe Text-JSON vorbereiten**
+   - JSON-Texte aus `start.sh` in `config/` als eigene Datei auslagern.
+   - Laden mit robuster Fallback-Strategie ergänzen.
+   - Update-Workflow in `README.md` dokumentieren.
+
+2. **Theme- und Kontrastprüfung vorbereiten**
    - Konfigurierbare Theme-Datei im Ordner `config/` einführen.
    - Start-Check um eine verständliche Kontrast-Selbstprüfung erweitern.
    - Ergebnis im Log mit Text + Symbol ausgeben (nicht nur Farbe).
-
-2. **Automatischen Testumfang ausbauen**
-   - Für `./start.sh --test` zusätzliche Checks für Pflichtbefehle ergänzen.
-   - Testausgabe in einfacher Sprache mit Next Steps standardisieren.
-   - Fehler ohne Crash behandeln und im Log nachvollziehbar machen.
 
 ## Team-Standard (kurz)
 - Pro Iteration genau 3 abgeschlossene Punkte.
@@ -37,5 +37,5 @@ Das Projekt soll **selbstständig starten, prüfen, reparieren und verständlich
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
 
-DONE: Safe-Mode-Hilfeelemente und robuste Fehlerführung mit festen Aktionen ergänzt (2026-02-21)
-NEXT: Theme-Konfiguration und Kontrast-Selbstprüfung als nächste kleine Iteration liefern (2026-02-21)
+DONE: Zeilenlimit-Check (1200) und JSON-Textsteuerung in der Start-Routine ergänzt (2026-02-21)
+NEXT: Externe Text-JSON in `config/` und erweiterte Entwicklerdoku als eigene Iteration liefern (2026-02-21)
