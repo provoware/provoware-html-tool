@@ -6,16 +6,45 @@ LOG_DIR="${PROJECT_ROOT}/logs"
 LOG_FILE="${LOG_DIR}/start.log"
 MODE="start"
 DEBUG_MODE="0"
+LINE_LIMIT=1200
 CHECKED_ITEMS=()
 MISSING_ITEMS=()
 FIXED_ITEMS=()
 NEXT_STEPS=()
+TEXT_JSON='{
+  "help_title": "Provoware Start-Routine",
+  "help_usage": "Verwendung:",
+  "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
+  "error_repair": "Reparatur starten: ./start.sh --repair",
+  "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
+  "safe_help_1": "Safe-Mode Hilfe: Dieser Modus zeigt nur sichere Prüfungen und klare nächste Schritte.",
+  "safe_help_2": "Wiederherstellung: Starten Sie danach ./start.sh --repair, damit fehlende Werkzeuge automatisch nachinstalliert werden.",
+  "safe_help_3": "Protokoll-Nutzung: Öffnen Sie Details mit cat {{LOG_FILE}} und teilen Sie die letzte Fehlermeldung.",
+  "line_limit_ok": "Zeilenlimit geprüft: alle Dateien liegen bei maximal {{LIMIT}} Zeilen.",
+  "line_limit_fail": "Zeilenlimit überschritten: {{FILE}} hat {{LINES}} Zeilen (maximal {{LIMIT}}).",
+  "developer_doc_hint": "Entwicklerdoku: Regeln, Startbefehle und Qualitätsablauf stehen in README.md und todo.txt."
+}'
+
+get_text() {
+	local key="$1"
+	local value
+	if ! command -v python3 >/dev/null 2>&1; then
+		printf '%s' "$key"
+		return 0
+	fi
+	value="$(python3 -c 'import json,sys; print(json.loads(sys.stdin.read()).get(sys.argv[1], sys.argv[1]))' "$key" <<<"$TEXT_JSON" 2>/dev/null || true)"
+	if [[ -z "$value" ]]; then
+		printf '%s' "$key"
+		return 0
+	fi
+	printf '%s' "$value"
+}
 
 print_help() {
-	cat <<'TXT'
-Provoware Start-Routine
+	cat <<TXT
+$(get_text "help_title")
 
-Verwendung:
+$(get_text "help_usage")
   ./start.sh             Normaler Start mit Check, Reparatur, Formatierung und Test
   ./start.sh --check     Nur automatische Prüfungen ausführen
   ./start.sh --repair    Nur automatische Reparaturen ausführen
@@ -55,12 +84,19 @@ record_next_step() {
 	NEXT_STEPS+=("$1")
 }
 
+replace_placeholders() {
+	local template="$1"
+	template="${template//\{\{LOG_FILE\}\}/$LOG_FILE}"
+	template="${template//\{\{LIMIT\}\}/$LINE_LIMIT}"
+	printf '%s' "$template"
+}
+
 print_error_with_actions() {
 	local cause="$1"
 	print_step "❌" "${cause}"
-	print_step "➡️" "Erneut versuchen: Befehl mit denselben Optionen erneut starten."
-	print_step "➡️" "Reparatur starten: ./start.sh --repair"
-	print_step "➡️" "Protokoll öffnen: cat ${LOG_FILE}"
+	print_step "➡️" "$(replace_placeholders "$(get_text "error_retry")")"
+	print_step "➡️" "$(replace_placeholders "$(get_text "error_repair")")"
+	print_step "➡️" "$(replace_placeholders "$(get_text "error_log")")"
 }
 
 print_summary() {
@@ -184,6 +220,34 @@ check_required_files() {
 	[[ $missing -eq 0 ]]
 }
 
+check_line_limit() {
+	local oversize_found=0
+	local file
+	while IFS= read -r file; do
+		local lines
+		lines="$(wc -l <"${PROJECT_ROOT}/${file}")"
+		if [[ "$lines" -gt "$LINE_LIMIT" ]]; then
+			local msg
+			msg="$(get_text "line_limit_fail")"
+			msg="${msg//\{\{FILE\}\}/$file}"
+			msg="${msg//\{\{LINES\}\}/$lines}"
+			msg="${msg//\{\{LIMIT\}\}/$LINE_LIMIT}"
+			print_error_with_actions "$msg"
+			record_missing "Zeilenlimit: $file"
+			oversize_found=1
+		fi
+	done < <(cd "$PROJECT_ROOT" && rg --files)
+
+	if [[ "$oversize_found" -eq 0 ]]; then
+		print_step "✅" "$(replace_placeholders "$(get_text "line_limit_ok")")"
+		record_checked "Zeilenlimit"
+		return 0
+	fi
+
+	record_next_step "Datei auf maximal ${LINE_LIMIT} Zeilen kürzen und erneut prüfen"
+	return 1
+}
+
 run_formatting() {
 	if ensure_tool "shfmt"; then
 		shfmt -w "$PROJECT_ROOT/start.sh"
@@ -210,9 +274,9 @@ run_quality_checks() {
 }
 
 run_tests() {
-	print_step "✅" "Schnelltest gestartet: Syntax + Pflichtdateien."
-	if bash -n "$PROJECT_ROOT/start.sh" && check_required_files; then
-		print_step "✅" "Selbsttest erfolgreich (Syntax und Pflichtdateien ok)."
+	print_step "✅" "Schnelltest gestartet: Syntax + Pflichtdateien + Zeilenlimit."
+	if bash -n "$PROJECT_ROOT/start.sh" && check_required_files && check_line_limit; then
+		print_step "✅" "Selbsttest erfolgreich (Syntax, Pflichtdateien, Zeilenlimit ok)."
 		record_checked "Selbsttest"
 	else
 		print_error_with_actions "Selbsttest fehlgeschlagen."
@@ -224,6 +288,7 @@ run_tests() {
 run_check_mode() {
 	print_step "✅" "Check-Modus aktiv."
 	check_required_files
+	check_line_limit
 	run_quality_checks
 }
 
@@ -244,22 +309,23 @@ run_start_mode() {
 }
 
 print_safe_mode_help() {
-	print_step "ℹ️" "Safe-Mode Hilfe: Dieser Modus zeigt nur sichere Prüfungen und klare nächste Schritte."
-	print_step "ℹ️" "Wiederherstellung: Starten Sie danach './start.sh --repair', damit fehlende Werkzeuge automatisch nachinstalliert werden."
-	print_step "ℹ️" "Protokoll-Nutzung: Öffnen Sie Details mit 'cat ${LOG_FILE}' und teilen Sie die letzte Fehlermeldung."
+	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_1")")"
+	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_2")")"
+	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_3")")"
+	print_step "ℹ️" "$(replace_placeholders "$(get_text "developer_doc_hint")")"
 	record_checked "Safe-Mode Hilfeelemente"
 }
 
 run_safe_mode() {
 	print_step "⚠️" "Safe-Mode aktiv: nur Basisprüfung, keine Schreibänderung außer Log."
 	print_safe_mode_help
-	if check_required_files; then
+	if check_required_files && check_line_limit; then
 		print_step "✅" "Safe-Mode erfolgreich abgeschlossen."
 		record_next_step "Optional: './start.sh --check' für Codequalität starten"
 		return 0
 	fi
 
-	print_error_with_actions "Safe-Mode hat fehlende Pflichtdateien erkannt."
+	print_error_with_actions "Safe-Mode hat fehlende Pflichtdateien oder Zeilenlimit-Probleme erkannt."
 	record_next_step "Nach Reparatur erneut './start.sh --safe' ausführen"
 	return 1
 }
