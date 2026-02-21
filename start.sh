@@ -243,11 +243,25 @@ run_start_mode() {
 	print_step "✅" "Start erfolgreich abgeschlossen."
 }
 
+print_safe_mode_help() {
+	print_step "ℹ️" "Safe-Mode Hilfe: Dieser Modus zeigt nur sichere Prüfungen und klare nächste Schritte."
+	print_step "ℹ️" "Wiederherstellung: Starten Sie danach './start.sh --repair', damit fehlende Werkzeuge automatisch nachinstalliert werden."
+	print_step "ℹ️" "Protokoll-Nutzung: Öffnen Sie Details mit 'cat ${LOG_FILE}' und teilen Sie die letzte Fehlermeldung."
+	record_checked "Safe-Mode Hilfeelemente"
+}
+
 run_safe_mode() {
 	print_step "⚠️" "Safe-Mode aktiv: nur Basisprüfung, keine Schreibänderung außer Log."
-	check_required_files
-	print_step "✅" "Safe-Mode erfolgreich."
-	record_next_step "Bei Bedarf danach './start.sh --check' nutzen"
+	print_safe_mode_help
+	if check_required_files; then
+		print_step "✅" "Safe-Mode erfolgreich abgeschlossen."
+		record_next_step "Optional: './start.sh --check' für Codequalität starten"
+		return 0
+	fi
+
+	print_error_with_actions "Safe-Mode hat fehlende Pflichtdateien erkannt."
+	record_next_step "Nach Reparatur erneut './start.sh --safe' ausführen"
+	return 1
 }
 
 main() {
