@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: `start.sh` als ausführbare, robuste Startroutine mit Modus-Prüfung (`--check`, `--safe`, `--help`) und klaren deutschen Hilfetexten umgesetzt.
-- Warum: Der Projektstart hatte keine automatische Prüfung, kein strukturiertes Nutzerfeedback und keinen barrierearmen Fehlerpfad mit Next Steps.
-- Wirkung: Voraussetzungen, Qualitätschecks und Formatierungsversuche laufen jetzt automatisch mit verständlichen Statusmeldungen und Protokollpfad.
+- Was: `start.sh` um Debug-Modus, automatische Tool-Reparatur und Selbsttest im Startlauf erweitert.
+- Warum: Offene Punkte verlangten mehr Autonomie bei Abhängigkeitsprüfung, klareres Fehlerfeedback und robustere Qualitätsroutine.
+- Wirkung: Start erkennt fehlende Werkzeuge, versucht automatische Installation, liefert klare Next Steps und bestätigt den Ablauf mit zusätzlichem Selbsttest.

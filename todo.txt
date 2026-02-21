@@ -34,13 +34,5 @@ Modultool ist ein portables Offline-Desktop-System für kreative Projekte und mo
    - Logging/Debug-Ausgaben in einfacher Sprache mit klaren Lösungsvorschlägen.
    - Tool-Logik getrennt halten von variablen Dateien und Konfiguration.
 
-## Ergänzungen (neu aufgenommen)
-- Konfig-Migrationen für JSON-Versionen (z. B. v1 → v2).
-- Deterministische Defaults für alle neu erzeugten Dateien.
-- Read-only Testmodus für Diagnose auf problematischen Datenträgern.
-- Benutzer-Audit-Trail (welcher UI-Button löst welche Aktion aus).
-- Notfall-Schalter `--safe` direkt beim Start.
-- Lokale Rollen/Schutzlevel (kritische Meta-Dateien absichern).
-
-DONE: Startskript liefert jetzt automatische Checks, Safe-Mode und klare Next Steps in deutscher Sprache (2026-02-21)
-NEXT: Nächste Iteration ergänzt automatische Reparatur für fehlende Tools und prüft Kontrast/Themes in der UI (2026-02-21)
+DONE: Debug-Modus, automatische Tool-Reparatur und Start-Selbsttest in der Startroutine ergänzt (2026-02-21)
+NEXT: Kontrast- und Theme-Selbsttest als eigenen Prüfblock mit verständlicher Fehlerhilfe ergänzen (2026-02-21)
