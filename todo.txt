@@ -3,22 +3,35 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
-## Iteration 2026-02-21 (Argument-Validierung + Debug-Hilfe)
+## Iteration 2026-02-21 (Voraussetzungen + Reparatur-Feedback)
 ### A) Fundstelle
-- Problem: Die Start-Routine akzeptierte mehrere Modus-Optionen gleichzeitig und gab im Fehlerfall zu wenig direkte Hilfe für die Analyse.
-- Risiko: Unklare Bedienung führt zu falschen Aufrufen und verzögert die Reparatur bei Fehlern.
-- Erwartung: Genau ein Modus wird strikt validiert und Debug-Hinweise liefern klare nächste Schritte in einfacher Sprache.
+- Problem: Die Start-Routine prüfte zentrale Laufzeitvoraussetzungen nicht einheitlich und bei Auto-Reparatur fehlten klare Zwischenmeldungen je Paketmanager.
+- Risiko: Fehlende Werkzeuge werden zu spät erkannt und Nutzer erhalten zu wenig direkte Handlungsanweisungen bei Installationsfehlern.
+- Erwartung: Voraussetzungen werden früh geprüft, Reparaturversuche klar gemeldet und Selbsttest deckt Voraussetzungen mit ab.
 
 ### B) Change-Scope
-- Ziel: Eingabevalidierung und barrierearme Hilfetexte der Start-Routine robuster machen, ohne Nebenänderungen.
+- Ziel: Professionellere, effizientere Startroutine mit robuster Voraussetzungskontrolle und verständlichem Fehlerpfad in einfacher Sprache.
 - Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh --check --debug` zeigt Debug-Kontext; mehrfache Modus-Optionen werden mit klarer Aktion abgelehnt.
+- Abnahmekriterium: `./start.sh --check`, `./start.sh --repair`, `./start.sh --test` zeigen Voraussetzungen, Reparaturstatus und klare nächste Schritte.
 
 ### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: Hilfebereich um barrierefreie Symbol-Legende, Tastatur-Hinweis und Klartext-Erklärung ergänzt.
-- Punkt 2 – Änderung: Eingabevalidierung erweitert, damit nur ein Modus und nur ein `--debug` akzeptiert werden.
-- Punkt 3 – Änderung: Fehlerpfad und Debug-Modus mit zusätzlicher Aktion `./start.sh --check --debug` und technischem Kontext verbessert.
+- Punkt 1 – Änderung: Werkzeugnamen werden vor Auto-Reparatur validiert, damit unerwartete Eingaben sauber abgefangen werden.
+- Punkt 2 – Änderung: Auto-Reparatur meldet jetzt getrennt, ob apt-get oder Homebrew versucht wurde und welche Aktion als Nächstes sinnvoll ist.
+- Punkt 3 – Änderung: Neue Prüfung `check_runtime_prerequisites` kontrolliert `bash`, `python3`, `rg` und wird in Check/Test integriert.
+
+### D) Checks
+- Format: `./start.sh --format`
+- Tests: `./start.sh --test`
+- Start-Routine-Check: `./start.sh --check` und `./start.sh --repair`
+
+### E) Ergebnis
+- Status: DONE
+- Doku aktualisiert: todo + changelog + registry
+- Laienvorschläge (2):
+  1. Starte morgens immer zuerst `./start.sh --check`, damit fehlende Werkzeuge sofort sichtbar sind.
+  2. Nutze bei Fehlern direkt `./start.sh --check --debug`, dann steht im Protokoll schon die nötige Ursache.
+- Nächster Schritt (1, detailliert): Lege als nächste Iteration eine Datei `config/messages.json` an, verschiebe alle Texte aus `TEXT_JSON` dorthin und ergänze einen Fallback auf interne Standardtexte, falls die Datei fehlt.
 
 ## Nächste offene Punkte (Backlog)
 1. **Externe Text-JSON vorbereiten**
@@ -37,5 +50,5 @@ Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich e
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
 
-DONE: Argumentvalidierung, Debug-Kontext und barrierefreie Hilfe in der Start-Routine erweitert (2026-02-21)
+DONE: Laufzeitvoraussetzungen, validierte Auto-Reparatur und klarere Paketmanager-Rückmeldungen ergänzt (2026-02-21)
 NEXT: Externe Text-JSON in `config/` und Kontrast-Selbsttest als nächste Iteration liefern (2026-02-21)
