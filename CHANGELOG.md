@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: `start.sh` nutzt jetzt JSON-basierte Tool-Texte und prüft automatisch das Zeilenlimit von maximal 1200 Zeilen pro Datei.
-- Warum: Texte sollen später einfach ersetzbar sein und Dateigrößen müssen dauerhaft wartbar bleiben.
-- Wirkung: `--check`, `--test` und `--safe` geben klare, barrierearme Hinweise bei Limit-Verstößen und zeigen direkte nächste Schritte.
+- Was: `start.sh` prüft jetzt strikt auf genau einen Modus, erweitert Hilfeelemente für Barrierefreiheit und ergänzt Debug-Kontext im Fehlerpfad.
+- Warum: Falsche Parameterkombinationen sollen keine unklaren Ergebnisse mehr erzeugen und Nutzer sollen Probleme schneller selbst verstehen.
+- Wirkung: Startbefehle sind robuster, Fehlermeldungen enthalten direkte Aktionen (inklusive Debug-Befehl) und Status bleibt über Symbol + Text verständlich.
