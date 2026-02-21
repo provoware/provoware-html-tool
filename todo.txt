@@ -3,18 +3,30 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll **selbstständig starten, prüfen, reparieren und verständlich erklären**, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
-## Iteration-Backlog (nächste 3 kleinste vollständige Punkte)
-1. **Safe-Mode um Hilfeelemente erweitern**
-   - Im Safe-Mode konkrete Hilfetexte für Wiederherstellung und Protokoll-Nutzung ergänzen.
-   - Fehlerhinweise mit festen Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“) durchgängig absichern.
-   - Abschlussmeldung mit klarer Nutzeraktion für den nächsten Schritt ergänzen.
+## Iteration 2026-02-21 (Safe-Mode-Hilfe)
+### A) Fundstelle
+- Problem: Im Safe-Mode fehlten konkrete Hilfetexte für Wiederherstellung und Protokoll-Nutzung bei Fehlern.
+- Risiko: Nutzer brechen den Ablauf ab, weil nächste Schritte nicht klar genug sind.
+- Erwartung: Safe-Mode meldet klar, was geprüft wurde und was Nutzer danach tun sollen.
 
-2. **Theme- und Kontrastprüfung vorbereiten**
+### B) Change-Scope
+- Ziel: Safe-Mode barrierefreundlich und fehlertolerant machen, ohne neue Problemklasse zu öffnen.
+- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
+- Abnahmekriterium: `./start.sh --safe` zeigt Hilfehinweise, feste Fehleraktionen und klare Next Steps ohne Crash.
+
+### C) Patch (genau 3 Punkte)
+- Punkt 1 – Änderung: Safe-Mode-Hilfe mit Wiederherstellung und Protokoll-Nutzung ergänzt.
+- Punkt 2 – Änderung: Safe-Mode behandelt fehlende Pflichtdateien robust und zeigt standardisierte Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“).
+- Punkt 3 – Änderung: Abschluss im Safe-Mode mit klarer Nutzeraktion für den nächsten Schritt ergänzt.
+
+## Nächste offene Punkte (Backlog)
+1. **Theme- und Kontrastprüfung vorbereiten**
    - Konfigurierbare Theme-Datei im Ordner `config/` einführen.
    - Start-Check um eine verständliche Kontrast-Selbstprüfung erweitern.
    - Ergebnis im Log mit Text + Symbol ausgeben (nicht nur Farbe).
 
-3. **Automatischen Testumfang ausbauen**
+2. **Automatischen Testumfang ausbauen**
    - Für `./start.sh --test` zusätzliche Checks für Pflichtbefehle ergänzen.
    - Testausgabe in einfacher Sprache mit Next Steps standardisieren.
    - Fehler ohne Crash behandeln und im Log nachvollziehbar machen.
@@ -25,5 +37,5 @@ Das Projekt soll **selbstständig starten, prüfen, reparieren und verständlich
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
 
-DONE: Start-Routine um Pflichtkommandos `--repair`, `--format`, `--test` erweitert und Zusammenfassung für geprüft/fehlend/gelöst ergänzt (2026-02-21)
-NEXT: Safe-Mode-Hilfe und barrierefreundliche Fehlertexte weiter vereinheitlichen (2026-02-21)
+DONE: Safe-Mode-Hilfeelemente und robuste Fehlerführung mit festen Aktionen ergänzt (2026-02-21)
+NEXT: Theme-Konfiguration und Kontrast-Selbstprüfung als nächste kleine Iteration liefern (2026-02-21)
