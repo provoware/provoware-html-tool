@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: `start.sh` validiert jetzt Werkzeugnamen für Auto-Reparatur, prüft Laufzeitvoraussetzungen (`bash`, `python3`, `rg`) im Check/Test und gibt differenziertes Paketmanager-Feedback aus.
-- Warum: Fehler sollen früher erkannt werden, damit die Entwicklung effizienter läuft und Nutzer im Reparaturfall klare nächste Schritte erhalten.
-- Wirkung: Die Startroutine arbeitet professioneller mit klaren Statusmeldungen, robustem Eingabe-Handling und besserer Diagnosebasis im Alltag.
+- Was: `start.sh` hat jetzt den neuen Modus `--release-check` mit klarer Hilfe-Ausgabe und eindeutiger Release-Statusmeldung (bestanden/unvollständig).
+- Warum: Für ein optimales Release braucht es ein einheitliches Qualitäts-Gate, das alle Kernprüfungen in einem Schritt zusammenfasst.
+- Wirkung: Teams können vor Veröffentlichung schneller, barriereärmer und reproduzierbar entscheiden, ob die Version release-fähig ist.

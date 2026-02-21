@@ -3,6 +3,36 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
+## Iteration 2026-02-21 (Release-Check und klare Freigabe-Hinweise)
+### A) Fundstelle
+- Problem: Es fehlte ein einzelner, klarer Befehl, der den echten Release-Status mit verständlichen nächsten Schritten prüft.
+- Risiko: Vor einer Veröffentlichung bleiben Lücken unentdeckt und der Ablauf wird für Teams uneinheitlich.
+- Erwartung: Ein eigener Release-Check liefert klare Ja/Nein-Aussage plus einfache Aktionen.
+
+### B) Change-Scope
+- Ziel: Release-Readiness in der Start-Routine messbar machen und als festen Qualitäts-Gate nutzbar machen.
+- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
+- Abnahmekriterium: `./start.sh --release-check` meldet klar, ob Release-fähig oder nicht, inkl. nächster Schritte.
+
+### C) Patch (genau 3 Punkte)
+- Punkt 1 – Änderung: Neuer Modus `--release-check` ergänzt, inklusive Hilfe-Text in einfacher Sprache (Barrierefreiheit: Symbol + Text).
+- Punkt 2 – Änderung: Release-Check prüft Voraussetzungen, Pflichtdateien, Zeilenlimit, Syntax und Kern-Tools (`shfmt`, `shellcheck`) in einem Durchlauf.
+- Punkt 3 – Änderung: Klare Ergebnis-Ausgabe ergänzt: „bestanden“ oder „unvollständig“ mit konkreten nächsten Aktionen.
+
+### D) Checks
+- Format: `./start.sh --format`
+- Tests: `./start.sh --test`
+- Start-Routine-Check: `./start.sh --release-check`
+
+### E) Ergebnis
+- Status: DONE
+- Doku aktualisiert: todo + changelog + registry
+- Laienvorschläge (2):
+  1. Nutze vor jedem Release immer `./start.sh --release-check`, dann siehst du in einem Schritt, ob noch etwas fehlt.
+  2. Wenn „unvollständig“ erscheint, arbeite die angezeigten nächsten Schritte der Reihe nach ab, dann kommst du sicher zum Ziel.
+- Nächster Schritt (1, detailliert): Ergänze als nächste Iteration einen automatischen HTML-/A11y-Test (Barrierefreiheitstest) in `--release-check`, damit auch Kontrast, Fokus-Reihenfolge und ARIA-Hinweise automatisch mitgeprüft werden.
+
 ## Iteration 2026-02-21 (Voraussetzungen + Reparatur-Feedback)
 ### A) Fundstelle
 - Problem: Die Start-Routine prüfte zentrale Laufzeitvoraussetzungen nicht einheitlich und bei Auto-Reparatur fehlten klare Zwischenmeldungen je Paketmanager.

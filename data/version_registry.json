@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.21",
-  "iteration": "2026.02.21-runtime-prerequisites-repair-feedback",
+  "iteration": "2026.02.21-release-check-gate",
   "files": {
     "start.sh": "2026.02.21",
     "todo.txt": "2026.02.21",

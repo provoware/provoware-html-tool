@@ -26,7 +26,10 @@ TEXT_JSON='{
   "safe_help_3": "Protokoll-Nutzung: Öffnen Sie Details mit cat {{LOG_FILE}} und teilen Sie die letzte Fehlermeldung.",
   "line_limit_ok": "Zeilenlimit geprüft: alle Dateien liegen bei maximal {{LIMIT}} Zeilen.",
   "line_limit_fail": "Zeilenlimit überschritten: {{FILE}} hat {{LINES}} Zeilen (maximal {{LIMIT}}).",
-  "developer_doc_hint": "Entwicklerdoku: Regeln, Startbefehle und Qualitätsablauf stehen in README.md und todo.txt."
+  "developer_doc_hint": "Entwicklerdoku: Regeln, Startbefehle und Qualitätsablauf stehen in README.md und todo.txt.",
+  "release_help": "Release-Check: Prüft automatisch Kernkriterien für eine stabile Veröffentlichung (Release).",
+  "release_ready": "Release-Check bestanden: Alle Pflichtkriterien sind erfüllt.",
+  "release_not_ready": "Release-Check unvollständig: Mindestens ein Pflichtkriterium fehlt noch."
 }'
 
 get_text() {
@@ -55,6 +58,7 @@ $(get_text "help_usage")
   ./start.sh --format    Nur Formatierung ausführen
   ./start.sh --test      Nur Tests ausführen
   ./start.sh --safe      Safe-Mode: nur Basis-Checks + klare Hilfehinweise
+  ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
   ./start.sh --help      Hilfe anzeigen
 
@@ -67,6 +71,7 @@ Einfache Begriffe:
 $(get_text "help_accessibility")
 $(get_text "help_keyboard")
 $(get_text "help_icon_legend")
+$(get_text "release_help")
 TXT
 }
 
@@ -164,6 +169,10 @@ validate_args() {
 			;;
 		--help | -h)
 			MODE="help"
+			mode_count=$((mode_count + 1))
+			;;
+		--release-check)
+			MODE="release-check"
 			mode_count=$((mode_count + 1))
 			;;
 		--debug)
@@ -412,6 +421,43 @@ print_safe_mode_help() {
 	record_checked "Safe-Mode Hilfeelemente"
 }
 
+run_release_check() {
+	print_step "✅" "Release-Check aktiv: Vollständige Freigabeprüfung läuft."
+	local failed=0
+
+	if ! check_runtime_prerequisites; then
+		failed=1
+	fi
+	if ! check_required_files; then
+		failed=1
+	fi
+	if ! check_line_limit; then
+		failed=1
+	fi
+	if ! bash -n "$PROJECT_ROOT/start.sh"; then
+		print_error_with_actions "Syntaxprüfung für start.sh fehlgeschlagen."
+		failed=1
+	fi
+	if ! ensure_tool "shfmt"; then
+		failed=1
+	fi
+	if ! ensure_tool "shellcheck"; then
+		failed=1
+	fi
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "✅" "$(get_text "release_ready")"
+		record_checked "Release-Check"
+		record_next_step "Release Tag setzen und anschließend ./start.sh --test ausführen"
+		return 0
+	fi
+
+	print_step "⚠️" "$(get_text "release_not_ready")"
+	record_missing "Release-Check"
+	record_next_step "Fehlende Punkte beheben und erneut './start.sh --release-check' ausführen"
+	return 1
+}
+
 run_safe_mode() {
 	print_step "⚠️" "Safe-Mode aktiv: nur Basisprüfung, keine Schreibänderung außer Log."
 	print_safe_mode_help
@@ -449,6 +495,9 @@ main() {
 		;;
 	test)
 		run_tests
+		;;
+	release-check)
+		run_release_check
 		;;
 	safe)
 		run_safe_mode
