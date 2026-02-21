@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.21",
-  "iteration": "2026.02.21-release-check-gate",
+  "iteration": "2026.02.21-external-text-fallback-prep",
   "files": {
     "start.sh": "2026.02.21",
     "todo.txt": "2026.02.21",
