@@ -7,16 +7,18 @@ LOG_FILE="${LOG_DIR}/start.log"
 MODE="start"
 DEBUG_MODE="0"
 LINE_LIMIT=1200
+TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 CHECKED_ITEMS=()
 MISSING_ITEMS=()
 FIXED_ITEMS=()
 NEXT_STEPS=()
-TEXT_JSON='{
+DEFAULT_TEXT_JSON='{
   "help_title": "Provoware Start-Routine",
   "help_usage": "Verwendung:",
   "help_accessibility": "Barrierefreiheit: Jeder Status hat Symbol + Text, damit Hinweise nicht nur über Farbe verstanden werden.",
   "help_keyboard": "Tastatur-Hinweis: Alle Befehle sind per Enter startbar, ohne Maus.",
   "help_icon_legend": "Symbol-Legende: ✅ Erfolg, ⚠️ Hinweis, ❌ Fehler, ➡️ Aktion, ℹ️ Zusatzinfo.",
+  "help_message_source": "Textquelle: Externe Datei config/messages.json wird genutzt, sonst sichere Standardtexte.",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
   "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
@@ -31,15 +33,43 @@ TEXT_JSON='{
   "release_ready": "Release-Check bestanden: Alle Pflichtkriterien sind erfüllt.",
   "release_not_ready": "Release-Check unvollständig: Mindestens ein Pflichtkriterium fehlt noch."
 }'
+TEXT_JSON_CACHE=""
+
+load_text_json() {
+	if [[ -n "$TEXT_JSON_CACHE" ]]; then
+		printf '%s' "$TEXT_JSON_CACHE"
+		return 0
+	fi
+
+	local candidate_json="$DEFAULT_TEXT_JSON"
+	if [[ -f "$TEXT_CONFIG_FILE" ]]; then
+		if command -v python3 >/dev/null 2>&1 && python3 -c 'import json,sys; json.load(open(sys.argv[1], encoding="utf-8"))' "$TEXT_CONFIG_FILE" >/dev/null 2>&1; then
+			candidate_json="$(cat "$TEXT_CONFIG_FILE")"
+			record_checked "Textkonfiguration geladen"
+		else
+			record_missing "Textkonfiguration ungültig"
+			record_next_step "Konfigurationsdatei config/messages.json prüfen und erneut versuchen"
+		fi
+	fi
+
+	TEXT_JSON_CACHE="$candidate_json"
+	printf '%s' "$TEXT_JSON_CACHE"
+}
 
 get_text() {
 	local key="$1"
-	local value
+	if [[ -z "$key" || ! "$key" =~ ^[a-z0-9_]+$ ]]; then
+		printf '%s' "invalid_text_key"
+		return 0
+	fi
+
 	if ! command -v python3 >/dev/null 2>&1; then
 		printf '%s' "$key"
 		return 0
 	fi
-	value="$(python3 -c 'import json,sys; print(json.loads(sys.stdin.read()).get(sys.argv[1], sys.argv[1]))' "$key" <<<"$TEXT_JSON" 2>/dev/null || true)"
+
+	local value
+	value="$(python3 -c 'import json,sys; print(json.loads(sys.stdin.read()).get(sys.argv[1], sys.argv[1]))' "$key" <<<"$(load_text_json)" 2>/dev/null || true)"
 	if [[ -z "$value" ]]; then
 		printf '%s' "$key"
 		return 0
@@ -71,6 +101,7 @@ Einfache Begriffe:
 $(get_text "help_accessibility")
 $(get_text "help_keyboard")
 $(get_text "help_icon_legend")
+$(get_text "help_message_source")
 $(get_text "release_help")
 TXT
 }

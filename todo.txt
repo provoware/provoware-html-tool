@@ -3,6 +3,36 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
+## Iteration 2026-02-21 (Externe Textquelle mit sicherem Fallback)
+### A) Fundstelle
+- Problem: Texte lagen nur intern in `start.sh`, wodurch zentrale Pflege und robuste Fehlerhinweise bei fehlerhafter Konfiguration fehlten.
+- Risiko: Bei ungültiger Textkonfiguration entstehen unklare Ausgaben und Teams pflegen Hilfetexte uneinheitlich.
+- Erwartung: Die Start-Routine kann externe Texte laden, Eingaben validieren und bei Fehlern verständliche nächste Schritte melden.
+
+### B) Change-Scope
+- Ziel: Vorbereitung der Auslagerung nach `config/` mit sicherer Fallback-Logik und klarer Hilfe-Ausgabe.
+- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
+- Abnahmekriterium: `./start.sh --check`, `./start.sh --test`, `./start.sh --help` laufen stabil und zeigen bei fehlender/ungültiger Textdatei weiterhin verständliche Standardtexte.
+
+### C) Patch (genau 3 Punkte)
+- Punkt 1 – Änderung: `start.sh` lädt Texte jetzt optional aus `config/messages.json` und nutzt bei Fehlern automatisch sichere Standardtexte.
+- Punkt 2 – Änderung: `get_text` validiert den Textschlüssel (Input-Validierung) und liefert immer einen klaren Rückgabewert (Output-Bestätigung ohne Absturz).
+- Punkt 3 – Änderung: Hilfe-Ausgabe erweitert um den neuen Hinweis zur Textquelle in einfacher Sprache (Barrierefreiheit/Hilfetext).
+
+### D) Checks
+- Format: `./start.sh --format`
+- Tests: `./start.sh --test`
+- Start-Routine-Check: `./start.sh --check`
+
+### E) Ergebnis
+- Status: DONE
+- Doku aktualisiert: todo + changelog + registry
+- Laienvorschläge (2):
+  1. Lege später eine Datei `config/messages.json` an, wenn du Texte ohne Codeänderung anpassen willst.
+  2. Nutze bei Problemen zuerst `./start.sh --help`, dort steht jetzt auch, woher Texte geladen werden.
+- Nächster Schritt (1, detailliert): Erstelle in der nächsten Iteration die Datei `config/messages.json` mit allen Schlüsseln aus den Standardtexten und ergänze einen kurzen Schema-Check, der fehlende Pflichtschlüssel mit klaren Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“) meldet.
+
 ## Iteration 2026-02-21 (Release-Check und klare Freigabe-Hinweise)
 ### A) Fundstelle
 - Problem: Es fehlte ein einzelner, klarer Befehl, der den echten Release-Status mit verständlichen nächsten Schritten prüft.
