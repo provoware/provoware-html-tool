@@ -218,23 +218,40 @@ run_debug_hint() {
 
 try_auto_install_tool() {
 	local tool_name="$1"
+	if [[ ! "$tool_name" =~ ^[a-zA-Z0-9._+-]+$ ]]; then
+		print_error_with_actions "Ungültiger Werkzeugname '${tool_name}'."
+		record_next_step "Werkzeugnamen prüfen und erneut versuchen"
+		return 1
+	fi
 
 	print_step "⚠️" "${tool_name} fehlt. Automatische Reparatur wird versucht."
 	record_missing "$tool_name"
+	local install_attempted="0"
 	if command -v apt-get >/dev/null 2>&1; then
+		install_attempted="1"
 		if apt-get update >/dev/null 2>&1 && apt-get install -y "$tool_name" >/dev/null 2>&1; then
 			print_step "✅" "${tool_name} wurde über apt-get installiert."
 			record_fixed "$tool_name via apt-get"
 			return 0
 		fi
+		print_step "⚠️" "apt-get konnte ${tool_name} nicht installieren."
+		record_next_step "Bei apt-get-Fehlern zuerst './start.sh --check --debug' ausführen"
 	fi
 
 	if command -v brew >/dev/null 2>&1; then
+		install_attempted="1"
 		if brew install "$tool_name" >/dev/null 2>&1; then
 			print_step "✅" "${tool_name} wurde über Homebrew installiert."
 			record_fixed "$tool_name via brew"
 			return 0
 		fi
+		print_step "⚠️" "Homebrew konnte ${tool_name} nicht installieren."
+		record_next_step "Bei brew-Fehlern zuerst './start.sh --check --debug' ausführen"
+	fi
+
+	if [[ "$install_attempted" == "0" ]]; then
+		print_step "⚠️" "Kein unterstützter Paketmanager gefunden (apt-get/brew)."
+		record_next_step "Tool manuell installieren und danach './start.sh --check' ausführen"
 	fi
 
 	print_step "⚠️" "Automatische Reparatur für ${tool_name} nicht erfolgreich."
@@ -273,6 +290,24 @@ check_required_files() {
 		else
 			print_error_with_actions "Datei fehlt: ${file}."
 			record_missing "$file"
+			missing=1
+		fi
+	done
+
+	[[ $missing -eq 0 ]]
+}
+
+check_runtime_prerequisites() {
+	local missing=0
+	local runtime_tool
+	for runtime_tool in "bash" "python3" "rg"; do
+		if command -v "$runtime_tool" >/dev/null 2>&1; then
+			print_step "✅" "Voraussetzung verfügbar: ${runtime_tool}"
+			record_checked "Voraussetzung ${runtime_tool}"
+		else
+			print_error_with_actions "Voraussetzung fehlt: ${runtime_tool}."
+			record_missing "Voraussetzung ${runtime_tool}"
+			record_next_step "Fehlendes Werkzeug '${runtime_tool}' installieren"
 			missing=1
 		fi
 	done
@@ -334,9 +369,9 @@ run_quality_checks() {
 }
 
 run_tests() {
-	print_step "✅" "Schnelltest gestartet: Syntax + Pflichtdateien + Zeilenlimit."
-	if bash -n "$PROJECT_ROOT/start.sh" && check_required_files && check_line_limit; then
-		print_step "✅" "Selbsttest erfolgreich (Syntax, Pflichtdateien, Zeilenlimit ok)."
+	print_step "✅" "Schnelltest gestartet: Voraussetzungen + Syntax + Pflichtdateien + Zeilenlimit."
+	if check_runtime_prerequisites && bash -n "$PROJECT_ROOT/start.sh" && check_required_files && check_line_limit; then
+		print_step "✅" "Selbsttest erfolgreich (Voraussetzungen, Syntax, Pflichtdateien, Zeilenlimit ok)."
 		record_checked "Selbsttest"
 	else
 		print_error_with_actions "Selbsttest fehlgeschlagen."
@@ -347,6 +382,7 @@ run_tests() {
 
 run_check_mode() {
 	print_step "✅" "Check-Modus aktiv."
+	check_runtime_prerequisites
 	check_required_files
 	check_line_limit
 	run_quality_checks
