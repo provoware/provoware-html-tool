@@ -1,0 +1,46 @@
+# TODO – Modultool Projektübersicht (professionell übertragen)
+
+## Zielbild (für Laien verständlich)
+Modultool ist ein portables Offline-Desktop-System für kreative Projekte und modulare HTML-Tools (Plugins). Es soll ohne Installation starten, auch bei Fehlern stabil bleiben (Safe-Mode), und über eine barrierefreie Oberfläche einfach bedienbar sein.
+
+## Priorisierte Aufgabenblöcke
+1. **Robuster Startpfad (Start + Selfcheck + Reparatur)**
+   - Startskript prüft Voraussetzungen automatisch.
+   - Fehlerfälle zeigen klare Next Steps: „Erneut versuchen“, „Reparatur“, „Protokoll öffnen“.
+   - Safe-Mode muss immer startbar bleiben.
+
+2. **Meta-System als Single Source of Truth**
+   - `meta/registry.json`, `progress.json`, `checkpoints.json`, `messages.json`, `actions.json`, `standards.json`, `ablageplan.json` sauber definieren.
+   - UI liest Status, Texte und Aktionen aus Meta-Dateien statt aus Hardcode.
+   - Kompatibilitätsmatrix für Core/Plugin/Capability ergänzen.
+
+3. **Projekt- und Plugin-Stabilität**
+   - Projektstruktur bei Erstellung automatisch anlegen und prüfen.
+   - Plugin-Manifeste strikt validieren (`id`, `name`, `version`, `entry`, `core_compat`, `capabilities`).
+   - Statusmodell sicher führen: `active`, `disabled`, `error`, `incompatible`.
+
+4. **Barrierefreiheit (Accessibility) & Hilfeelemente**
+   - Vollständige Tastatursteuerung, sichtbarer Fokus, hoher Kontrast, verständliche Sprache.
+   - Hilfetexte direkt an Aktionen anzeigen (kurz, klar, ohne Fachjargon).
+   - Status immer doppelt ausgeben: Farbe + Text/Icon.
+
+5. **Import/Export, Recovery und Transparenz**
+   - ZIP-Import mit Traversal-Schutz, Größenlimit, Quarantäne.
+   - Auto-Repair mit Sicherung beschädigter Dateien und nachvollziehbaren Reports.
+   - Diagnoseexport als Support-ZIP (Status, Logs, Meta, Projektstruktur).
+
+6. **Qualität, Automatisierung und Wartbarkeit**
+   - Automatische Formatierung und sinnvolle Qualitätschecks in der Startroutine.
+   - Logging/Debug-Ausgaben in einfacher Sprache mit klaren Lösungsvorschlägen.
+   - Tool-Logik getrennt halten von variablen Dateien und Konfiguration.
+
+## Ergänzungen (neu aufgenommen)
+- Konfig-Migrationen für JSON-Versionen (z. B. v1 → v2).
+- Deterministische Defaults für alle neu erzeugten Dateien.
+- Read-only Testmodus für Diagnose auf problematischen Datenträgern.
+- Benutzer-Audit-Trail (welcher UI-Button löst welche Aktion aus).
+- Notfall-Schalter `--safe` direkt beim Start.
+- Lokale Rollen/Schutzlevel (kritische Meta-Dateien absichern).
+
+DONE: Projektübersicht aus Nutzervorgabe strukturiert, priorisiert und in klare Arbeitsblöcke übertragen (2026-02-21)
+NEXT: Nächste Iteration setzt 3 kleinste umsetzbare Punkte aus Block 1 und 4 als merge-fertigen Micro-Patch um (2026-02-21)
