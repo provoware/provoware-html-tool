@@ -1,6 +1,4 @@
 # AGENTS.md
-# AGENTS.md – Three-Point-Completion Iteration (Merge-Ready by Default)
-Version: 2.4
 Ziel: Jede Iteration schließt **genau drei klar abgegrenzte Punkte vollständig** ab, ist merge-ready und erhöht den Release-Reifegrad.
 Leitmotiv: Drei kleinste vollständige Punkte pro Iteration, harte Qualitäts-Gates, sofort integrierbar. Eine der drei Aufgaben muss immer eine sinnvolle Erweiterung der Hilfselemente, der Texte oder der Barrierefreiheit sein.
 
@@ -49,7 +47,7 @@ Vor dem Patch festhalten:
 - Jede betroffene Funktion validiert Eingaben (input) und bestätigt Ergebnis (output).
 - Fehlerpfade enthalten klare Next Steps in einfacher Sprache.
 - Mindestens ein Hilfeelement pro betroffener Stelle verbessern/ergänzen.
-
+- vorher zelen der änderung ermitteln für genaues zielgerichtetes patchen 
 ────────────────────────────────────────────────────────────
 
 ## 3) Architektur- und Qualitätsstandards (verpflichtend)
