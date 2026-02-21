@@ -3,6 +3,36 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
+## Iteration 2026-02-21 (README-Optimierung für Bedienung, A11y und Standards)
+### A) Fundstelle
+- Problem: Die README war zu kurz für einen einheitlichen, barrierearmen Ablauf und erklärte Pflichtbefehle sowie Fehlerpfade nicht ausreichend klar.
+- Risiko: Nutzer und Teams führen Start, Reparatur und Qualitätssicherung uneinheitlich aus.
+- Erwartung: README bietet klare Schritt-für-Schritt-Nutzung, A11y-Standards und Best Practices in einfacher Sprache.
+
+### B) Change-Scope
+- Ziel: Dokumentation für Startroutine, Barrierefreiheit und Team-Standards auf ein konsistentes, leicht nutzbares Niveau heben.
+- Dateien: `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
+- Abnahmekriterium: README enthält vollständige Startbefehle, A11y-Richtlinien, Debug-/Log-Hinweise und strukturierte Best-Practice-Anleitung.
+
+### C) Patch (genau 3 Punkte)
+- Punkt 1 – Änderung: README strukturiert erweitert mit vollständigen Pflichtbefehlen (`--check`, `--repair`, `--format`, `--test`) und klaren Betriebsmodi.
+- Punkt 2 – Änderung: README ergänzt um Hilfeelemente zur Barrierefreiheit (klare Sprache, Status über Symbol+Text, direkte Fehleraktionen) in leicht verständlicher Form.
+- Punkt 3 – Änderung: README ergänzt um einheitliche Team-Standards, Debug-/Log-Nutzung und Wartbarkeitsstruktur (`system/`, `config/`, `data/`, `logs`).
+
+### D) Checks
+- Format: `./start.sh --format`
+- Tests: `./start.sh --test`
+- Start-Routine-Check: `./start.sh --check` und `./start.sh --repair`
+
+### E) Ergebnis
+- Status: DONE
+- Doku aktualisiert: todo + changelog + registry
+- Laienvorschläge (2):
+  1. Nutze täglich zuerst `./start.sh --check`, dann siehst du sofort, ob etwas fehlt.
+  2. Wenn eine Fehlermeldung kommt, kopiere den vorgeschlagenen nächsten Schritt direkt aus der Ausgabe.
+- Nächster Schritt (1, detailliert): Ergänze in der nächsten Iteration eine echte Theme-Konfiguration in `config/` inklusive Kontrast-Check im `--release-check`, damit Lesbarkeit über mehrere Farbthemen automatisch geprüft und klar mit Symbol+Text gemeldet wird.
+
 ## Iteration 2026-02-21 (Externe Textquelle mit sicherem Fallback)
 ### A) Fundstelle
 - Problem: Texte lagen nur intern in `start.sh`, wodurch zentrale Pflege und robuste Fehlerhinweise bei fehlerhafter Konfiguration fehlten.
@@ -33,82 +63,19 @@ Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich e
   2. Nutze bei Problemen zuerst `./start.sh --help`, dort steht jetzt auch, woher Texte geladen werden.
 - Nächster Schritt (1, detailliert): Erstelle in der nächsten Iteration die Datei `config/messages.json` mit allen Schlüsseln aus den Standardtexten und ergänze einen kurzen Schema-Check, der fehlende Pflichtschlüssel mit klaren Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“) meldet.
 
-## Iteration 2026-02-21 (Release-Check und klare Freigabe-Hinweise)
-### A) Fundstelle
-- Problem: Es fehlte ein einzelner, klarer Befehl, der den echten Release-Status mit verständlichen nächsten Schritten prüft.
-- Risiko: Vor einer Veröffentlichung bleiben Lücken unentdeckt und der Ablauf wird für Teams uneinheitlich.
-- Erwartung: Ein eigener Release-Check liefert klare Ja/Nein-Aussage plus einfache Aktionen.
-
-### B) Change-Scope
-- Ziel: Release-Readiness in der Start-Routine messbar machen und als festen Qualitäts-Gate nutzbar machen.
-- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
-- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh --release-check` meldet klar, ob Release-fähig oder nicht, inkl. nächster Schritte.
-
-### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: Neuer Modus `--release-check` ergänzt, inklusive Hilfe-Text in einfacher Sprache (Barrierefreiheit: Symbol + Text).
-- Punkt 2 – Änderung: Release-Check prüft Voraussetzungen, Pflichtdateien, Zeilenlimit, Syntax und Kern-Tools (`shfmt`, `shellcheck`) in einem Durchlauf.
-- Punkt 3 – Änderung: Klare Ergebnis-Ausgabe ergänzt: „bestanden“ oder „unvollständig“ mit konkreten nächsten Aktionen.
-
-### D) Checks
-- Format: `./start.sh --format`
-- Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --release-check`
-
-### E) Ergebnis
-- Status: DONE
-- Doku aktualisiert: todo + changelog + registry
-- Laienvorschläge (2):
-  1. Nutze vor jedem Release immer `./start.sh --release-check`, dann siehst du in einem Schritt, ob noch etwas fehlt.
-  2. Wenn „unvollständig“ erscheint, arbeite die angezeigten nächsten Schritte der Reihe nach ab, dann kommst du sicher zum Ziel.
-- Nächster Schritt (1, detailliert): Ergänze als nächste Iteration einen automatischen HTML-/A11y-Test (Barrierefreiheitstest) in `--release-check`, damit auch Kontrast, Fokus-Reihenfolge und ARIA-Hinweise automatisch mitgeprüft werden.
-
-## Iteration 2026-02-21 (Voraussetzungen + Reparatur-Feedback)
-### A) Fundstelle
-- Problem: Die Start-Routine prüfte zentrale Laufzeitvoraussetzungen nicht einheitlich und bei Auto-Reparatur fehlten klare Zwischenmeldungen je Paketmanager.
-- Risiko: Fehlende Werkzeuge werden zu spät erkannt und Nutzer erhalten zu wenig direkte Handlungsanweisungen bei Installationsfehlern.
-- Erwartung: Voraussetzungen werden früh geprüft, Reparaturversuche klar gemeldet und Selbsttest deckt Voraussetzungen mit ab.
-
-### B) Change-Scope
-- Ziel: Professionellere, effizientere Startroutine mit robuster Voraussetzungskontrolle und verständlichem Fehlerpfad in einfacher Sprache.
-- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
-- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh --check`, `./start.sh --repair`, `./start.sh --test` zeigen Voraussetzungen, Reparaturstatus und klare nächste Schritte.
-
-### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: Werkzeugnamen werden vor Auto-Reparatur validiert, damit unerwartete Eingaben sauber abgefangen werden.
-- Punkt 2 – Änderung: Auto-Reparatur meldet jetzt getrennt, ob apt-get oder Homebrew versucht wurde und welche Aktion als Nächstes sinnvoll ist.
-- Punkt 3 – Änderung: Neue Prüfung `check_runtime_prerequisites` kontrolliert `bash`, `python3`, `rg` und wird in Check/Test integriert.
-
-### D) Checks
-- Format: `./start.sh --format`
-- Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check` und `./start.sh --repair`
-
-### E) Ergebnis
-- Status: DONE
-- Doku aktualisiert: todo + changelog + registry
-- Laienvorschläge (2):
-  1. Starte morgens immer zuerst `./start.sh --check`, damit fehlende Werkzeuge sofort sichtbar sind.
-  2. Nutze bei Fehlern direkt `./start.sh --check --debug`, dann steht im Protokoll schon die nötige Ursache.
-- Nächster Schritt (1, detailliert): Lege als nächste Iteration eine Datei `config/messages.json` an, verschiebe alle Texte aus `TEXT_JSON` dorthin und ergänze einen Fallback auf interne Standardtexte, falls die Datei fehlt.
-
 ## Nächste offene Punkte (Backlog)
-1. **Externe Text-JSON vorbereiten**
-   - JSON-Texte aus `start.sh` in `config/` als eigene Datei auslagern.
-   - Laden mit robuster Fallback-Strategie ergänzen.
-   - Update-Workflow in `README.md` dokumentieren.
-
-2. **Theme- und Kontrastprüfung vorbereiten**
+1. **Theme- und Kontrastprüfung vorbereiten**
    - Konfigurierbare Theme-Datei im Ordner `config/` einführen.
    - Start-Check um eine verständliche Kontrast-Selbstprüfung erweitern.
    - Ergebnis im Log mit Text + Symbol ausgeben (nicht nur Farbe).
+
+2. **System-Ordner für Kernlogik aufbauen**
+   - stabile Start-Hilfsfunktionen aus `start.sh` schrittweise in `system/` überführen.
+   - klare Schnittstelle zwischen Logik (`system/`) und Konfiguration (`config/`) definieren.
+   - Migration mit kleinen, testbaren Schritten dokumentieren.
 
 ## Team-Standard (kurz)
 - Pro Iteration genau 3 abgeschlossene Punkte.
 - Maximal 1–4 Dateien ändern.
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
-
-DONE: Laufzeitvoraussetzungen, validierte Auto-Reparatur und klarere Paketmanager-Rückmeldungen ergänzt (2026-02-21)
-NEXT: Externe Text-JSON in `config/` und Kontrast-Selbsttest als nächste Iteration liefern (2026-02-21)
