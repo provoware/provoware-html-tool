@@ -25,7 +25,7 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
-  - Robuste Modul-Interoperabilität: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD, Genres-Archivprofile und Abkopplung in Einzelfenster.
+  - Modul-Interoperabilität ausgebaut: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD im Genres-Archiv, Profilarchive (default/techno/hörspiele) und Abkopplung in Einzelfenster.
   - Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
 
 

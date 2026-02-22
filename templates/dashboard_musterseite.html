@@ -337,6 +337,40 @@
       border-color: #ffb487;
       color: #ffb487;
     }
+    .module-option-list {
+      margin: .45rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      display: grid;
+      gap: .3rem;
+    }
+    .drag-list {
+      list-style: none;
+      margin: .4rem 0;
+      padding: 0;
+      display: grid;
+      gap: .35rem;
+    }
+    .drag-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      border: 1px solid rgba(127, 168, 255, 0.35);
+      border-radius: 8px;
+      padding: .35rem .55rem;
+      background: rgba(10, 21, 44, 0.72);
+      cursor: move;
+    }
+    .drag-item[aria-selected="true"] {
+      border-color: var(--focus);
+      box-shadow: inset 0 0 0 1px var(--focus);
+    }
+    .drag-item button {
+      min-height: 36px;
+      width: auto;
+      padding: .2rem .45rem;
+    }
     .tool-card[data-accent="a"] { border-color: var(--accent-a); }
     .tool-card[data-accent="b"] { border-color: var(--accent-b); }
     .tool-card[data-accent="c"] { border-color: var(--accent-c); }
@@ -521,6 +555,13 @@
           <li class="plugin-status-item"><span>Dashboard</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
         </ul>
       </section>
+      <section class="quick-help" aria-labelledby="module-sidebar-options-title" id="module-sidebar-options">
+        <strong id="module-sidebar-options-title">Moduloptionen (abhängig vom Modul):</strong>
+        <ul class="module-option-list" id="module-option-list">
+          <li>Bitte Modul öffnen, um Optionen zu sehen.</li>
+        </ul>
+        <p class="subline" id="module-option-help">Hilfe: Optionen zeigen immer Text + Symbol, nicht nur Farbe.</p>
+      </section>
     </aside>
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
@@ -530,6 +571,7 @@
         <button type="button" data-action="window-hide">Fenster ausblenden</button>
         <button type="button" data-action="window-maximize">Fenster maximieren</button>
         <button type="button" data-action="window-reset">Volle Sicht wiederherstellen</button>
+        <button type="button" data-action="window-detach">Als Einzelfenster öffnen</button>
       </div>
       <section class="main-grid" aria-label="Leeres Haupt-Grid 3x3">
         <div class="main-grid-cell">Feld 1 (frei)</div>
@@ -592,6 +634,20 @@
           </div>
           <p class="result" id="gms-feedback" role="status" aria-live="polite">Noch keine Änderung.</p>
           <p class="subline" id="gms-profile-info">Aktives Profil: default.</p>
+          <label for="gms-profile-select"><strong>Archivprofil:</strong></label>
+          <select id="gms-profile-select" aria-label="Profil für Genres-Archiv">
+            <option value="default">default</option>
+            <option value="techno">techno</option>
+            <option value="hoerspiele">hörspiele</option>
+          </select>
+          <label for="gms-new-profile"><strong>Neues Profil:</strong></label>
+          <input id="gms-new-profile" type="text" placeholder="z. B. Ambient" aria-describedby="gms-profile-help">
+          <p id="gms-profile-help" class="subline">Profilname bitte kurz und eindeutig eingeben.</p>
+          <div class="actions">
+            <button type="button" data-action="gms-profile-switch">Profil laden</button>
+            <button type="button" data-action="gms-profile-create">Profil erstellen</button>
+          </div>
+          <p class="result" id="gms-profile-result" role="status" aria-live="polite">Profile bereit.</p>
           <label for="gms-random-count"><strong>Zufallsanzahl:</strong></label>
           <select id="gms-random-count" aria-label="Anzahl für Zufallsgenerator">
             <option value="1">1</option>
@@ -607,7 +663,11 @@
           <p class="result" id="gms-random-result" role="status" aria-live="polite">Noch kein Zufallsergebnis.</p>
           <h3>Verlauf</h3>
           <ul id="gms-history" aria-label="Letzte Zufallsausgaben"></ul>
+          <h3>Archiv-Einträge (Drag&Drop + CRUD)</h3>
+          <ul id="gms-entry-list" class="drag-list" aria-label="Einträge im aktuellen Profil"></ul>
           <div class="actions">
+            <button type="button" data-action="gms-entry-rename">Eintrag umbenennen</button>
+            <button type="button" data-action="gms-entry-delete">Eintrag löschen</button>
             <button type="button" data-action="gms-copy-history">Verlauf kopieren</button>
             <button type="button" data-action="gms-clear-history">Verlauf löschen</button>
             <button type="button" data-action="gms-export">Export für Exportzentrum</button>
@@ -690,14 +750,13 @@
   </dialog>
   <dialog id="project-dialog" aria-labelledby="project-title" aria-describedby="project-text" aria-modal="true">
     <h2 id="project-title">📁 Projekt-Routine</h2>
-    <p id="project-text">Bitte Projektordner bestätigen. Die Start-Routine prüft den Ordner beim nächsten Start und erstellt ihn bei Bedarf automatisch im Nutzerverzeichnis.</p>
+    <p id="project-text">Bitte Projektordner eingeben und bestätigen. Es gibt keinen Standardordner mehr. Die Start-Routine prüft den Ordner beim nächsten Start und erstellt ihn bei Bedarf automatisch.</p>
     <label for="project-path-input"><strong>Projektordner (absoluter Pfad):</strong></label>
     <input id="project-path-input" type="text" autocomplete="off" spellcheck="false" aria-describedby="project-hint">
-    <p class="subline" id="project-hint">Beispiel: /home/name/Provoware-Projekte/Standardprojekt</p>
+    <p class="subline" id="project-hint">Beispiel: /home/name/Provoware-Projekte/MeinProjekt</p>
     <p class="result" id="project-dialog-result" role="status" aria-live="polite">Bitte Pfad prüfen und speichern.</p>
     <div class="actions">
       <button type="button" data-action="project-save">Pfad speichern</button>
-      <button type="button" data-action="project-default">Standardpfad nutzen</button>
       <button type="button" data-action="project-close">Später</button>
     </div>
   </dialog>
@@ -723,11 +782,12 @@
       const modeSwitchNode = document.getElementById('mode-switch');
       const shellNode = document.querySelector('.shell');
       const pluginStatusListNode = document.getElementById('plugin-status-list');
+      const moduleOptionListNode = document.getElementById('module-option-list');
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
       const serverModuleSources = __MODULE_SOURCES__;
-      const defaultProjectPath = '/home/USER/Provoware-Projekte/Standardprojekt';
+      const detachedWindows = {};
       let isProMode = false;
       const gmsPlugin = (function createGmsArchivPlugin() {
         const MODULE_ID = 'gms-archiv';
@@ -735,10 +795,13 @@
         const state = {
           currentProfile: 'default',
           profiles: {
-            default: { genres: ['Synthwave', 'Lo-Fi'], moods: ['Ruhig'], styles: ['Cinematic'], history: [] }
+            default: { genres: ['Synthwave', 'Lo-Fi'], moods: ['Ruhig'], styles: ['Cinematic'], history: [] },
+            techno: { genres: ['Techno'], moods: ['Energie'], styles: ['Peak-Time'], history: [] },
+            hoerspiele: { genres: ['Hörspiel'], moods: ['Spannung'], styles: ['Erzählerisch'], history: [] }
           },
           mounted: false,
-          lastRandomResult: ''
+          lastRandomResult: '',
+          selectedEntryIndex: -1
         };
         function getProfileData() {
           if (!state.profiles[state.currentProfile]) {
@@ -825,6 +888,60 @@
           info.textContent = 'Aktives Profil: ' + state.currentProfile + '.';
           return true;
         }
+        function renderProfileSelect() {
+          const selectNode = safeNode('gms-profile-select');
+          if (!selectNode) {
+            return false;
+          }
+          const keys = Object.keys(state.profiles);
+          selectNode.innerHTML = '';
+          keys.forEach(function (key) {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = key;
+            if (key === state.currentProfile) {
+              option.selected = true;
+            }
+            selectNode.appendChild(option);
+          });
+          return true;
+        }
+        function renderEntryList() {
+          const listNode = safeNode('gms-entry-list');
+          const categoryNode = safeNode('gms-category');
+          if (!listNode || !categoryNode) {
+            return false;
+          }
+          const category = categoryNode.value;
+          const data = getProfileData();
+          const items = Array.isArray(data[category]) ? data[category] : [];
+          listNode.innerHTML = '';
+          if (!items.length) {
+            const li = document.createElement('li');
+            li.textContent = 'Noch keine Einträge in dieser Kategorie.';
+            listNode.appendChild(li);
+            state.selectedEntryIndex = -1;
+            return true;
+          }
+          items.forEach(function (item, index) {
+            const li = document.createElement('li');
+            li.className = 'drag-item';
+            li.setAttribute('draggable', 'true');
+            li.setAttribute('data-entry-index', String(index));
+            li.setAttribute('aria-selected', state.selectedEntryIndex === index ? 'true' : 'false');
+            const label = document.createElement('span');
+            label.textContent = item;
+            const pick = document.createElement('button');
+            pick.type = 'button';
+            pick.textContent = 'Auswählen';
+            pick.setAttribute('data-action', 'gms-entry-pick');
+            pick.setAttribute('data-entry-index', String(index));
+            li.appendChild(label);
+            li.appendChild(pick);
+            listNode.appendChild(li);
+          });
+          return true;
+        }
         const services = {
           storage: {
             read: function () { return getProfileData(); },
@@ -893,7 +1010,9 @@
           mount: function () {
             state.mounted = true;
             renderProfileInfo();
+            renderProfileSelect();
             renderHistory();
+            renderEntryList();
             return true;
           },
           unmount: function () { state.mounted = false; return true; },
@@ -908,8 +1027,13 @@
             if (nextState.profiles && typeof nextState.profiles === 'object') {
               state.profiles = nextState.profiles;
             }
+            if (typeof nextState.selectedEntryIndex === 'number' && Number.isInteger(nextState.selectedEntryIndex)) {
+              state.selectedEntryIndex = nextState.selectedEntryIndex;
+            }
             renderProfileInfo();
+            renderProfileSelect();
             renderHistory();
+            renderEntryList();
             return true;
           },
           exportPayload: services.exportCenter.exportPayload,
@@ -931,6 +1055,78 @@
               const result = addUniqueByCategory(category, entries);
               if (feedbackNode) { feedbackNode.textContent = '✅ Gespeichert: ' + result.added + '. Duplikat übersprungen: ' + result.duplicates + '.'; }
               services.log.info('Einträge gespeichert in ' + category + ': +' + result.added + ', Duplikate ' + result.duplicates);
+              renderEntryList();
+              return true;
+            }
+            if (actionValue === 'gms-profile-switch') {
+              const profileNode = safeNode('gms-profile-select');
+              const profileName = profileNode ? profileNode.value : '';
+              if (typeof profileName !== 'string' || profileName.trim().length === 0 || !state.profiles[profileName]) {
+                setResult('⚠️ Profil nicht gefunden. Bitte Profil erneut wählen.');
+                return true;
+              }
+              state.currentProfile = profileName.trim();
+              state.selectedEntryIndex = -1;
+              renderProfileInfo();
+              renderHistory();
+              renderEntryList();
+              const profileResult = safeNode('gms-profile-result');
+              if (profileResult) { profileResult.textContent = '✅ Profil geladen: ' + state.currentProfile + '.'; }
+              return true;
+            }
+            if (actionValue === 'gms-profile-create') {
+              const input = safeNode('gms-new-profile');
+              const raw = input ? input.value : '';
+              const nextName = typeof raw === 'string' ? raw.trim().toLowerCase() : '';
+              if (!nextName || /[^a-z0-9\-äöü]/i.test(nextName)) {
+                setResult('⚠️ Profilname ungültig. Bitte nur Buchstaben, Zahlen oder Bindestrich nutzen.');
+                return true;
+              }
+              if (!state.profiles[nextName]) {
+                state.profiles[nextName] = { genres: [], moods: [], styles: [], history: [] };
+              }
+              state.currentProfile = nextName;
+              if (input) { input.value = ''; }
+              renderProfileInfo();
+              renderProfileSelect();
+              renderHistory();
+              renderEntryList();
+              const profileResult = safeNode('gms-profile-result');
+              if (profileResult) { profileResult.textContent = '✅ Profil erstellt: ' + state.currentProfile + '.'; }
+              return true;
+            }
+            if (actionValue === 'gms-entry-pick') {
+              return true;
+            }
+            if (actionValue === 'gms-entry-delete') {
+              const category = categoryNode ? categoryNode.value : '';
+              const active = getProfileData();
+              if (state.selectedEntryIndex < 0 || !Array.isArray(active[category]) || !active[category][state.selectedEntryIndex]) {
+                setResult('⚠️ Bitte zuerst einen Eintrag auswählen.');
+                return true;
+              }
+              active[category].splice(state.selectedEntryIndex, 1);
+              state.selectedEntryIndex = -1;
+              renderEntryList();
+              setResult('✅ Eintrag gelöscht.');
+              return true;
+            }
+            if (actionValue === 'gms-entry-rename') {
+              const category = categoryNode ? categoryNode.value : '';
+              const active = getProfileData();
+              const current = state.selectedEntryIndex >= 0 && Array.isArray(active[category]) ? active[category][state.selectedEntryIndex] : '';
+              if (!current) {
+                setResult('⚠️ Bitte zuerst einen Eintrag auswählen.');
+                return true;
+              }
+              const renamed = window.prompt('Neuen Namen eingeben:', current);
+              if (typeof renamed !== 'string' || renamed.trim().length === 0) {
+                setResult('⚠️ Umbenennen abgebrochen. Bitte erneut versuchen.');
+                return true;
+              }
+              active[category][state.selectedEntryIndex] = renamed.trim();
+              renderEntryList();
+              setResult('✅ Eintrag umbenannt.');
               return true;
             }
             if (actionValue === 'gms-random') {
@@ -953,6 +1149,7 @@
             if (actionValue === 'gms-clear-history') {
               profileData.history = [];
               renderHistory();
+              renderEntryList();
               setResult('✅ Verlauf gelöscht.');
               return true;
             }
@@ -1131,11 +1328,15 @@
         if (validateProjectPath(serverProjectPath)) {
           return normalizeProjectPath(serverProjectPath);
         }
-        return defaultProjectPath;
+        return '';
       }
       function updateProjectStatus(pathValue) {
-        if (!projectStatusNode || typeof pathValue !== 'string') {
+        if (!projectStatusNode) {
           return false;
+        }
+        if (typeof pathValue !== 'string' || pathValue.trim().length === 0) {
+          projectStatusNode.textContent = 'Projektordner: noch nicht gesetzt. Bitte im Dialog einen Pfad eingeben.';
+          return true;
         }
         projectStatusNode.textContent = 'Projektordner aktiv: ' + pathValue + '.';
         return true;
@@ -1169,6 +1370,32 @@
             buttonNode.removeAttribute('aria-current');
           }
         });
+        return true;
+      }
+      function renderModuleSidebarOptions(moduleKey, sourceMeta) {
+        if (!moduleOptionListNode) {
+          return false;
+        }
+        const optionsByModule = {
+          genres: ['📥 Import aus Genres-Ordner', '🧼 Dublettenprüfung starten', '🗃️ Profil in Archiv speichern'],
+          'gms-archiv': ['🧲 Drag&Drop Reihenfolge ändern', '✏️ Einträge umbenennen/löschen', '🪟 Optional als Einzelfenster öffnen'],
+          zitate: ['📝 Neue Quelle anlegen', '📚 Zitate in Sammlung verschieben', '✅ Zitat-Favorit markieren'],
+          songeditor: ['🎹 Akkordspur wählen', '📦 Exportprofil wählen', '🧪 Entwurf lokal testen'],
+          todo: ['🗂️ Aufgabe priorisieren', '🔁 Status auf "In Arbeit" setzen', '✅ Aufgabe abschließen'],
+          dashboard: ['📊 Status lesen', '🛠️ Fehlerhilfe öffnen', '🎨 Theme prüfen']
+        };
+        const items = optionsByModule[moduleKey] || ['Bitte gültiges Modul wählen.'];
+        moduleOptionListNode.innerHTML = '';
+        items.forEach(function (entry) {
+          const li = document.createElement('li');
+          li.textContent = entry;
+          moduleOptionListNode.appendChild(li);
+        });
+        if (sourceMeta) {
+          const li = document.createElement('li');
+          li.textContent = 'ℹ️ Datenquelle aktiv: ' + sourceMeta.dataSource;
+          moduleOptionListNode.appendChild(li);
+        }
         return true;
       }
       function setPluginStatus(selectedModule) {
@@ -1232,6 +1459,7 @@
         setModuleStatus(statusText);
         setActiveNavigation(selectedModule);
         setPluginStatus(selectedModule);
+        renderModuleSidebarOptions(selectedModule, sourceMeta);
         setDebugDetails(debugTitle, debugStep);
         appendDebugLog('✅ Modul geladen: ' + sourceMeta.label + ' | Datenquelle: ' + sourceMeta.dataSource + ' (' + getTimeStamp() + ').');
         updateSyncStatus('✅ Modul bereit: ' + sourceMeta.label + ' (' + getTimeStamp() + ')');
@@ -1259,7 +1487,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-default', 'project-close', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -1284,12 +1512,6 @@
         if (actionValue === 'project-save') {
           const userPath = projectPathInput ? projectPathInput.value : '';
           return saveProjectPath(userPath);
-        }
-        if (actionValue === 'project-default') {
-          if (projectPathInput) {
-            projectPathInput.value = defaultProjectPath;
-          }
-          return saveProjectPath(defaultProjectPath);
         }
         if (actionValue === 'project-close') {
           if (projectDialog && typeof projectDialog.close === 'function') {
@@ -1319,6 +1541,23 @@
             shellNode.style.borderRadius = '';
           }
           return setResult('✅ Volle Sicht wiederhergestellt.');
+        }
+        if (actionValue === 'window-detach') {
+          const selected = moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '';
+          const sourceMeta = getModuleSourceMeta(selected);
+          if (!sourceMeta) {
+            return setResult('⚠️ Erst ein Modul wählen und öffnen, dann Einzelfenster starten.');
+          }
+          const windowId = 'module_' + selected;
+          const featureString = 'width=760,height=580,resizable=yes,scrollbars=yes';
+          const detached = window.open('', windowId, featureString);
+          if (!detached) {
+            return setResult('⚠️ Einzelfenster blockiert. Bitte Pop-up erlauben und erneut versuchen.');
+          }
+          detachedWindows[windowId] = detached;
+          detached.document.title = 'Einzelfenster: ' + sourceMeta.label;
+          detached.document.body.innerHTML = '<main style="font-family:Arial,sans-serif;padding:1rem;"><h1>' + sourceMeta.label + '</h1><p>Datenquelle: ' + sourceMeta.dataSource + '</p><p>' + sourceMeta.detail + '</p><p>Nächster Schritt: ' + sourceMeta.nextStep + '</p></main>';
+          return setResult('✅ Einzelfenster geöffnet für ' + sourceMeta.label + '.');
         }
         if (actionValue === 'save') {
           const message = '✅ Gespeichert um ' + getTimeStamp() + '.';
@@ -1401,6 +1640,14 @@
         if (!(target instanceof HTMLElement)) {
           return;
         }
+        const pickedIndex = target.getAttribute('data-entry-index');
+        if (target.getAttribute('data-action') === 'gms-entry-pick') {
+          gmsPlugin.setState((function () {
+            const snap = gmsPlugin.getState();
+            snap.selectedEntryIndex = Number(pickedIndex);
+            return snap;
+          })());
+        }
         const moduleTarget = target.getAttribute('data-module-nav');
         if (typeof moduleTarget === 'string' && moduleTarget.length > 0 && moduleSelector) {
           moduleSelector.value = moduleTarget;
@@ -1417,6 +1664,53 @@
         executeShortcut(event);
         keepDialogFocusInside(event);
       });
+      document.addEventListener('change', function (event) {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) {
+          return;
+        }
+        if (target.id === 'gms-category') {
+          gmsPlugin.setState(gmsPlugin.getState());
+        }
+      });
+      document.addEventListener('dragstart', function (event) {
+        const target = event.target;
+        if (!(target instanceof HTMLElement) || !target.classList.contains('drag-item')) {
+          return;
+        }
+        event.dataTransfer.setData('text/plain', target.getAttribute('data-entry-index') || '-1');
+      });
+      document.addEventListener('dragover', function (event) {
+        const target = event.target;
+        if (target instanceof HTMLElement && target.closest('.drag-item')) {
+          event.preventDefault();
+        }
+      });
+      document.addEventListener('drop', function (event) {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) {
+          return;
+        }
+        const dropItem = target.closest('.drag-item');
+        if (!dropItem || !event.dataTransfer) {
+          return;
+        }
+        event.preventDefault();
+        const fromIndex = Number(event.dataTransfer.getData('text/plain'));
+        const toIndex = Number(dropItem.getAttribute('data-entry-index'));
+        const state = gmsPlugin.getState();
+        const categoryNode = document.getElementById('gms-category');
+        const category = categoryNode ? categoryNode.value : '';
+        const profile = state.profiles[state.currentProfile];
+        if (!profile || !Array.isArray(profile[category]) || Number.isNaN(fromIndex) || Number.isNaN(toIndex) || fromIndex === toIndex) {
+          return;
+        }
+        const moved = profile[category].splice(fromIndex, 1)[0];
+        profile[category].splice(toIndex, 0, moved);
+        state.selectedEntryIndex = toIndex;
+        gmsPlugin.setState(state);
+        setResult('✅ Reihenfolge aktualisiert (Drag&Drop).');
+      });
       applyTheme('balanced');
       updateProjectStatus(getStoredProjectPath());
       if (projectPathInput) {
@@ -1428,6 +1722,7 @@
       gmsPlugin.mount();
       setActiveNavigation('dashboard');
       setPluginStatus('dashboard');
+      renderModuleSidebarOptions('dashboard', getModuleSourceMeta('dashboard'));
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
       setDebugDetails('Startzustand aktiv', 'Wählen Sie ein Modul oder öffnen Sie bei Bedarf den Fehlerdialog.');
       appendDebugLog('ℹ️ Startzustand aktiv (' + getTimeStamp() + ').');
