@@ -1,4 +1,4 @@
-## 2026-02-22 – Modul-Hauptbereich statt reinem Hinweisfenster verbessert
-- Was: Dashboard-Template um einen echten Modul-Starter (Auswahl + Aktion „Modul öffnen“ + Alt+O) sowie einen Debug-Verlauf erweitert und die Smoke-Marker dafür ergänzt.
-- Warum: Das Projekt sollte als modulares Haupttool nutzbar sein und nicht nur als statisches Hinweisfenster.
-- Wirkung: Nutzer können jetzt Module gezielt auswählen, erhalten validierte Rückmeldungen mit Next Steps und sehen die letzten Debug-Ereignisse barrierearm im UI.
+## 2026-02-22 – Backlog in todo-Liste strukturiert ergänzt
+- Was: Alle vom Nutzer genannten offenen Punkte in `todo.txt` in die Bereiche Struktur, Design, UX, Barrierefreiheit, Funktional und Zukunftssicherheit übernommen.
+- Warum: Die nächsten Iterationen sollen klar priorisiert, nachvollziehbar und ohne Informationsverlust planbar sein.
+- Wirkung: Das Team hat jetzt eine vollständige, einheitlich strukturierte To-do-Grundlage für die nächsten drei-Punkte-Iterationen.
