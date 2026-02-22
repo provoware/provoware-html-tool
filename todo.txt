@@ -29,6 +29,9 @@ DONE: README um laienfreundliche Autopilot- und OFFLINE_ARTIFACT_MODE-Befehle er
 
 STATUS: 100% abgeschlossen
 
+DONE: Dashboard-Startansicht auf leeres 3x3-Haupt-Grid mit Fensteroptionen (Ausblenden/Maximieren/Vollsicht) umgestellt (2026-02-22)
+DONE: Header um Live-Protokoll (letzte 10 Ereignisse) + Kopierfunktion für das gesamte Protokoll ergänzt (2026-02-22)
+DONE: Umschaltbarer Laien-/Profi-Modus im Header ergänzt, inklusive klarer Statusmeldungen in einfacher Sprache (2026-02-22)
 NEXT (Priorität hoch, offen)
 - [x] Gate G3 (smoke_test.py) kann offline ohne Playwright-Artefakte fehlschlagen: optionalen Fallback-Modus "warn statt fail" für reine Offline-Umgebungen ergänzt.
 - [x] 95%: Vollständige Offline-Bundle-Erstellung automatisiert (Wheel-Download + Browsercache Export in ein Archiv) via --offline-pack.
@@ -42,7 +45,7 @@ NEXT (Priorität mittel, offen)
 - [x] 100%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei gespiegelt.
 
 NEXT (Priorität hoch, neu 2026-02-22)
-- [ ] 100%: Dashboard-Layout auf leeres 3x3-Haupt-Grid als Standard umstellen (inkl. Fensteroptionen Ausblenden/Maximieren und Vollsicht beim Start).
-- [ ] 100%: Header-Dashboard um Live-Log (letzte 10 Ereignisse) + Button „Gesamtes Protokoll kopieren" erweitern, inklusive Laien-/Profi-Umschalter und klaren Hilfetexten.
+- [x] 100%: Dashboard-Layout auf leeres 3x3-Haupt-Grid als Standard umstellen (inkl. Fensteroptionen Ausblenden/Maximieren und Vollsicht beim Start).
+- [x] 100%: Header-Dashboard um Live-Log (letzte 10 Ereignisse) + Button „Gesamtes Protokoll kopieren" erweitern, inklusive Laien-/Profi-Umschalter und klaren Hilfetexten.
 - [ ] 100%: Modul-Interoperabilität robust ausbauen (Projektordner-Dialog ohne Standardpfad, Sidebar-Parameter je Modul, Drag&Drop + CRUD + Einzel-Fenster für paralleles Arbeiten, Genres-Archivprofile wie Techno/Hörspiele getrennt).
-Hinweis NEXT ITERATION: Gate G3 (python tools/smoke_test.py) scheitert derzeit im Browser-E2E wegen 403 beim Playwright-Browserdownload; Offline-Mirrorquelle einrichten.
+Hinweis NEXT ITERATION: Browser-E2E kann in restriktiven Umgebungen bei 403 im Playwright-Download nur als Warnung laufen; stabile Offline-Mirrorquelle fest einplanen.

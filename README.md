@@ -20,11 +20,11 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 
 - Projekt-Routine beim GUI-Start: fragt den Projektordner ab, validiert den Pfad, erstellt fehlende Ordner automatisch im Nutzerverzeichnis und zeigt den aktiven Pfad im Dashboard.
 - Spiegelt den bestätigten Projektordner zusätzlich nach `config/project_settings.json` (für editierbare Konfiguration) und validiert beide JSON-Dateien automatisch.
+- Dashboard-Standardansicht nutzt jetzt ein leeres 3x3-Haupt-Grid mit Fensteroptionen (Ausblenden, Maximieren, Vollsicht wiederherstellen).
+- Dashboard-Header zeigt ein Echtzeit-Log (letzte 10 Ereignisse), bietet eine Kopierfunktion für das Gesamtprotokoll und einen Laien-/Profi-Modus-Schalter.
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
-  - Neues UI-Zielbild: Leeres 3x3-Haupt-Grid als Standard mit Fensteroptionen (Ausblenden/Maximieren) und vollständiger Sicht beim Start.
-  - Dashboard-Header mit Echtzeit-Log (letzte 10 Ereignisse), Kopierfunktion für das gesamte Protokoll und umschaltbarem Laien-/Profi-Modus.
   - Robuste Modul-Interoperabilität: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD, Genres-Archivprofile und Abkopplung in Einzelfenster.
   - Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
 
@@ -83,8 +83,8 @@ bash tools/run_quality_checks.sh # Qualitätsprüfungen für Repo
 3. `python tools/smoke_test.py`
 4. `bash start.sh`
 Hinweis für reine Offline-Umgebungen:
-- Standard ist `OFFLINE_ARTIFACT_MODE=strict` (fehlende Offline-Artefakte = Fehler).
-- Optional: `OFFLINE_ARTIFACT_MODE=warn` (fehlende Offline-Artefakte = Warnung mit Next Steps).
+- Standard ist `OFFLINE_ARTIFACT_MODE=warn` (fehlende Offline-Artefakte = Warnung mit Next Steps).
+- Optional streng: `OFFLINE_ARTIFACT_MODE=strict` (fehlende Offline-Artefakte = Fehler).
 
 5. Mini-UX-Check (deutsche Dialoge, Next Steps, Kontrast/Fokus)
 

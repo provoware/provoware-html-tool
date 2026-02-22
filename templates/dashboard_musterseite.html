@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-theme="balanced">
+<html lang="de" data-theme="high-contrast">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,6 +39,24 @@
       --accent-b: #4ec8ff;
       --primary: #4ec8ff;
       --accent-c: #ffd26d;
+      color-scheme: dark;
+    }
+    html[data-theme="high-contrast"] {
+      --bg-glow: #0037a8;
+      --bg-start: #000000;
+      --bg-end: #0c1224;
+      --bg: #000000;
+      --surface: rgba(0, 0, 0, 0.96);
+      --surface-strong: rgba(8, 8, 8, 0.99);
+      --text: #ffffff;
+      --muted: #dbe8ff;
+      --focus: #ffe600;
+      --border: #8bc2ff;
+      --shadow: rgba(0, 0, 0, 0.7);
+      --accent-a: #ff9966;
+      --accent-b: #6de1ff;
+      --primary: #6de1ff;
+      --accent-c: #ffe47a;
       color-scheme: dark;
     }
     html[data-theme="light"] {
@@ -129,6 +147,29 @@
       padding: 0 1.1rem;
       background: linear-gradient(90deg, rgba(8, 24, 53, 0.9), rgba(8, 14, 30, 0.95));
       border-bottom: 1px solid rgba(127, 168, 255, 0.32);
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+    .topbar-log {
+      min-width: 280px;
+      flex: 1;
+      border: 1px solid rgba(127, 168, 255, 0.35);
+      border-radius: 10px;
+      padding: .45rem .6rem;
+      background: rgba(4, 10, 23, 0.7);
+    }
+    .topbar-log ol {
+      margin: .35rem 0 0;
+      padding-left: 1.1rem;
+      max-height: 72px;
+      overflow: auto;
+      color: var(--muted);
+    }
+    .topbar-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: .35rem;
+      min-width: 250px;
     }
     .status-pill {
       font-weight: 700;
@@ -215,6 +256,29 @@
       display: grid;
       gap: .85rem;
       grid-template-columns: repeat(3, minmax(210px, 1fr));
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: .6rem;
+      margin-bottom: .6rem;
+    }
+    .main-grid-cell {
+      min-height: 88px;
+      border: 2px dashed rgba(127, 168, 255, 0.5);
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--muted);
+      background: rgba(10, 18, 34, 0.45);
+    }
+    .window-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(130px, 1fr));
+      gap: .4rem;
+      margin-bottom: .6rem;
     }
     .tool-card {
       border-radius: 12px;
@@ -347,6 +411,7 @@
         grid-template-rows: 64px auto auto 52px;
       }
       .card-grid { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+      .main-grid { grid-template-columns: repeat(3, minmax(100px, 1fr)); }
     }
     @media (max-width: 860px) {
       .shell {
@@ -355,6 +420,11 @@
         grid-template-rows: auto;
       }
       .card-grid { grid-template-columns: 1fr; }
+      .main-grid,
+      .window-actions,
+      .topbar-controls {
+        grid-template-columns: 1fr;
+      }
     }
     @media (max-width: 420px) {
       body {
@@ -417,6 +487,14 @@
       <span>🧩 ModulTool</span>
       <h1 class="headline">ModulTool</h1>
       <span class="status-pill" id="sync-status" role="status" aria-live="polite">✅ Alle Änderungen gespeichert</span>
+      <section class="topbar-log" aria-label="Echtzeit-Protokollkopf">
+        <strong>Live-Protokoll (letzte 10 Ereignisse)</strong>
+        <ol id="topbar-log-list"></ol>
+      </section>
+      <div class="topbar-controls">
+        <button type="button" data-action="copy-log">Gesamtes Protokoll kopieren</button>
+        <button type="button" id="mode-switch" data-action="switch-mode" aria-pressed="false">Modus: Laie</button>
+      </div>
     </header>
     <aside class="panel left" aria-label="Navigation">
       <h2>Navigation</h2>
@@ -447,6 +525,23 @@
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
       <h2 id="bereich-aufgaben">Werkzeug-Übersicht</h2>
+      <p class="subline">Startansicht: Leeres 3x3-Haupt-Grid mit Fensteroptionen für Ausblenden und Maximieren.</p>
+      <div class="window-actions" aria-label="Fensteroptionen">
+        <button type="button" data-action="window-hide">Fenster ausblenden</button>
+        <button type="button" data-action="window-maximize">Fenster maximieren</button>
+        <button type="button" data-action="window-reset">Volle Sicht wiederherstellen</button>
+      </div>
+      <section class="main-grid" aria-label="Leeres Haupt-Grid 3x3">
+        <div class="main-grid-cell">Feld 1 (frei)</div>
+        <div class="main-grid-cell">Feld 2 (frei)</div>
+        <div class="main-grid-cell">Feld 3 (frei)</div>
+        <div class="main-grid-cell">Feld 4 (frei)</div>
+        <div class="main-grid-cell">Feld 5 (frei)</div>
+        <div class="main-grid-cell">Feld 6 (frei)</div>
+        <div class="main-grid-cell">Feld 7 (frei)</div>
+        <div class="main-grid-cell">Feld 8 (frei)</div>
+        <div class="main-grid-cell">Feld 9 (frei)</div>
+      </section>
       <div class="card-grid">
         <article class="tool-card tool-card-primary" data-accent="a">
           <p class="card-tag">Priorität: Hoch</p>
@@ -624,12 +719,16 @@
       const projectPathInput = document.getElementById('project-path-input');
       const projectDialogResultNode = document.getElementById('project-dialog-result');
       const debugLogListNode = document.getElementById('debug-log-list');
+      const topbarLogListNode = document.getElementById('topbar-log-list');
+      const modeSwitchNode = document.getElementById('mode-switch');
+      const shellNode = document.querySelector('.shell');
       const pluginStatusListNode = document.getElementById('plugin-status-list');
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
       const serverModuleSources = __MODULE_SOURCES__;
       const defaultProjectPath = '/home/USER/Provoware-Projekte/Standardprojekt';
+      let isProMode = false;
       const gmsPlugin = (function createGmsArchivPlugin() {
         const MODULE_ID = 'gms-archiv';
         const HISTORY_LIMIT = 8;
@@ -950,11 +1049,23 @@
         return true;
       }
       function appendDebugLog(message) {
-        if (!debugLogListNode || typeof message !== 'string' || message.trim().length === 0) {
+        if (typeof message !== 'string' || message.trim().length === 0) {
+          return false;
+        }
+        const text = message.trim();
+        if (topbarLogListNode) {
+          const topItem = document.createElement('li');
+          topItem.textContent = text;
+          topbarLogListNode.prepend(topItem);
+          while (topbarLogListNode.children.length > 10) {
+            topbarLogListNode.removeChild(topbarLogListNode.lastElementChild);
+          }
+        }
+        if (!debugLogListNode) {
           return false;
         }
         const listItem = document.createElement('li');
-        listItem.textContent = message.trim();
+        listItem.textContent = text;
         debugLogListNode.prepend(listItem);
         while (debugLogListNode.children.length > 5) {
           debugLogListNode.removeChild(debugLogListNode.lastElementChild);
@@ -974,6 +1085,27 @@
         }
         projectDialogResultNode.textContent = message.trim();
         return true;
+      }
+      function copyLogToClipboard() {
+        if (!topbarLogListNode || !topbarLogListNode.children.length) {
+          return setResult('⚠️ Kein Protokoll vorhanden. Bitte zuerst eine Aktion starten.');
+        }
+        const text = Array.from(topbarLogListNode.querySelectorAll('li')).map(function (entry) {
+          return entry.textContent || '';
+        }).join('\n');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text);
+          return setResult('✅ Protokoll kopiert.');
+        }
+        return setResult('⚠️ Kopieren nicht möglich. Bitte Text manuell markieren.');
+      }
+      function toggleMode() {
+        isProMode = !isProMode;
+        if (modeSwitchNode) {
+          modeSwitchNode.textContent = isProMode ? 'Modus: Profi' : 'Modus: Laie';
+          modeSwitchNode.setAttribute('aria-pressed', isProMode ? 'true' : 'false');
+        }
+        return setResult(isProMode ? '✅ Profi-Modus aktiv: mehr Technikdetails sichtbar.' : '✅ Laien-Modus aktiv: einfache Hinweise sichtbar.');
       }
       function normalizeProjectPath(value) {
         if (typeof value !== 'string') {
@@ -1127,7 +1259,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-default', 'project-close', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-default', 'project-close', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -1164,6 +1296,29 @@
             projectDialog.close();
           }
           return setResult('ℹ️ Projekt-Routine geschlossen. Sie können später fortsetzen.');
+        }
+        if (actionValue === 'copy-log') { return copyLogToClipboard(); }
+        if (actionValue === 'switch-mode') { return toggleMode(); }
+        if (actionValue === 'window-hide') {
+          if (shellNode) { shellNode.style.opacity = '0.2'; }
+          return setResult('✅ Fenster ausgeblendet. Nächster Schritt: "Volle Sicht wiederherstellen" wählen.');
+        }
+        if (actionValue === 'window-maximize') {
+          if (shellNode) {
+            shellNode.style.width = '100%';
+            shellNode.style.margin = '0';
+            shellNode.style.borderRadius = '0';
+          }
+          return setResult('✅ Fenster maximiert.');
+        }
+        if (actionValue === 'window-reset') {
+          if (shellNode) {
+            shellNode.style.opacity = '1';
+            shellNode.style.width = '';
+            shellNode.style.margin = '';
+            shellNode.style.borderRadius = '';
+          }
+          return setResult('✅ Volle Sicht wiederhergestellt.');
         }
         if (actionValue === 'save') {
           const message = '✅ Gespeichert um ' + getTimeStamp() + '.';

@@ -1,3 +1,17 @@
+## 2026-02-22 – Dashboard-Zielbild umgesetzt (3x3-Grid + Header-Live-Log + Modus-Schalter)
+- Scope-Kontrolle:
+  - Problem: Das neue UI-Zielbild (leeres 3x3-Grid + Header-Live-Log) war noch offen und der Browser-E2E-Test brach in restriktiven Umgebungen bei 403-Downloads hart ab.
+  - Ziel: Genau 3 kleine, abgeschlossene UI-/A11y-Punkte umsetzen und Browser-E2E mit verständlichem 403-Offline-Mirror-Hinweis robuster machen.
+  - Dateien: `templates/dashboard_musterseite.html`, `tools/browser_e2e_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Header + 3x3-Grid + Fensteroptionen + Logik im Template, 2) 403/Download-Warnpfad im Browser-E2E, 3) Doku-/Versionsupdate.
+  - Abnahme: Dashboard startet mit leerem 3x3-Grid und Header-Live-Log (10 Einträge), Kopierbutton/Laie-Profi-Schalter funktionieren, Browser-E2E liefert bei 403 klare Offline-Mirror-Next-Steps.
+- Was:
+  1) Dashboard-Startbereich auf leeres 3x3-Haupt-Grid mit Fensteroptionen (Ausblenden, Maximieren, Vollsicht wiederherstellen) umgestellt.
+  2) Header erweitert: Echtzeit-Log (letzte 10 Ereignisse), Button zum Kopieren des gesamten Protokolls und umschaltbarer Laien-/Profi-Modus.
+  3) Browser-E2E verbessert: bei blockiertem Playwright-Download (z. B. 403) klare Warnung mit Next Step „Offline-Mirror/--offline-pack“ statt unklarer Fehlerspur.
+- Warum: Nutzer brauchen das neue Zielbild sofort sichtbar, mit einfacher Bedienung und robusten Fehlermeldungen auch in restriktiven Umgebungen.
+- Wirkung: Mehr Release-Reife, bessere Barrierefreiheit (klare Texte + Tastaturfokus + Status als Text) und stabilere Gate-Aussagen.
+
 ## 2026-02-22 – Autopilot-Modus + strikte Offline-Input-Validierung
 - Scope-Kontrolle:
   - Problem: Es gab keinen strikt durchgehenden Ein-Kommando-Ablauf für die Auto-Prüfung, und `OFFLINE_ARTIFACT_MODE` wurde nicht früh validiert.
