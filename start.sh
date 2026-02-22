@@ -50,7 +50,8 @@ DEFAULT_TEXT_JSON='{
   "dashboard_intro": "Dashboard-Guide: So wird eine Oberfläche laienfreundlich, barrierefrei und klar bedienbar.",
   "dashboard_layout": "Layout-Regel: Oben Status, Mitte wichtigste Aufgaben, unten Hilfe + nächste Schritte.",
   "dashboard_accessibility": "Barrierefreiheit-Regel: Hoher Kontrast, große Klickflächen, Fokusrahmen und klare Sprache.",
-  "dashboard_feedback": "Feedback-Regel: Jede Aktion zeigt sofort Ergebnis + nächsten Schritt in einfacher Sprache."
+  "dashboard_feedback": "Feedback-Regel: Jede Aktion zeigt sofort Ergebnis + nächsten Schritt in einfacher Sprache.",
+  "help_weakness_report": "Schwachstellen-Bericht: Zeigt verbleibende Risiken mit direkten Befehlen für schnelle Verbesserungen."
 }'
 TEXT_JSON_CACHE=""
 THEME_LIST_CACHE=""
@@ -186,6 +187,7 @@ $(get_text "help_usage")
   ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
   ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
   ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
+  ./start.sh --weakness-report Zeigt verbleibende Schwachstellen mit konkreten Befehlen
   ./start.sh --visual-baseline-check Screenshot-Baseline prüfen (Soll-Ist-Schutz für Layout)
   ./start.sh --full-gates Vollständige Gates 1-5 strikt nacheinander ausführen
   ./start.sh --ux-check-auto Automatischer Mini-UX-Check für Texte, Next Steps und A11y-Marker
@@ -208,6 +210,7 @@ $(get_text "help_full_gates")
   Optionaler Python-Lint: Wenn ruff installiert ist, wird er automatisch genutzt (keine Pflichtabhängigkeit).
 $(get_text "help_status_summary")
 $(get_text "help_doctor")
+$(get_text "help_weakness_report")
 $(get_text "release_help")
 TXT
 }
@@ -273,6 +276,10 @@ validate_args() {
 			;;
 		--dashboard-template)
 			MODE="dashboard-template"
+			mode_count=$((mode_count + 1))
+			;;
+		--weakness-report)
+			MODE="weakness-report"
 			mode_count=$((mode_count + 1))
 			;;
 		--visual-baseline-check)
@@ -920,6 +927,60 @@ PY
 	return 1
 }
 
+run_weakness_report_mode() {
+	print_step "✅" "Schwachstellen-Bericht gestartet (automatischer Rest-Risiko-Check)."
+	local issues=0
+
+	if ! command -v ruff >/dev/null 2>&1; then
+		print_step "⚠️" "Schwachstelle: Optionaler Python-Lint (ruff) ist noch nicht aktiv."
+		print_step "➡️" "Befehl: python3 -m pip install ruff && ruff check tools"
+		record_next_step "Optionalen Ruff-Lint aktivieren, damit Python-Fehler früher sichtbar werden"
+		issues=$((issues + 1))
+	fi
+
+	if [[ ! -f "$PROJECT_ROOT/logs/artifacts/dashboard-dialog-e2e.png" ]]; then
+		print_step "⚠️" "Schwachstelle: Es fehlt ein aktuelles Browser-Screenshot-Artefakt."
+		print_step "➡️" "Befehl: python3 tools/browser_e2e_test.py"
+		record_next_step "Browser-E2E ausführen und neues Screenshot-Artefakt für den Visual-Guard erzeugen"
+		issues=$((issues + 1))
+	fi
+
+	if ! python3 - "$PROJECT_ROOT/config/themes.json" <<'PY'; then
+from pathlib import Path
+import json
+import sys
+
+path = Path(sys.argv[1])
+data = json.loads(path.read_text(encoding="utf-8"))
+themes = data.get("themes", {})
+required = {"bg", "text", "primary", "focus"}
+for name, values in themes.items():
+    missing = sorted(required.difference(values.keys()))
+    if missing:
+        print(f"Theme '{name}' fehlt: {', '.join(missing)}")
+        raise SystemExit(1)
+print("Theme-Konfiguration vollständig")
+PY
+		print_step "⚠️" "Schwachstelle: Theme-Konfiguration ist unvollständig für robuste A11y-Anzeige."
+		print_step "➡️" "Befehl: config/themes.json öffnen und je Theme bg/text/primary/focus ergänzen"
+		record_next_step "Theme-Konfiguration vervollständigen und danach './start.sh --weakness-report' wiederholen"
+		issues=$((issues + 1))
+	else
+		record_checked "Theme-Konfiguration Vollständigkeit"
+	fi
+
+	if [[ "$issues" -eq 0 ]]; then
+		print_step "✅" "Keine kritischen Rest-Schwachstellen gefunden."
+		record_checked "Schwachstellen-Bericht"
+		record_next_step "Optional: './start.sh --full-gates' für den vollständigen Merge-Check ausführen"
+		return 0
+	fi
+
+	print_step "⚠️" "Schwachstellen-Bericht abgeschlossen: ${issues} Punkt(e) mit Verbesserungspotenzial gefunden."
+	record_missing "Schwachstellen ${issues}"
+	return 0
+}
+
 print_safe_mode_help() {
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_1")")"
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_2")")"
@@ -999,6 +1060,9 @@ main() {
 		;;
 	ux-check-auto)
 		run_auto_ux_check_mode
+		;;
+	weakness-report)
+		run_weakness_report_mode
 		;;
 	visual-baseline-check)
 		run_visual_baseline_check_mode
