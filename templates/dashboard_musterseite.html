@@ -786,7 +786,8 @@
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
-      const serverModuleSources = __MODULE_SOURCES__;
+      const injectedModuleSources = typeof __MODULE_SOURCES__ !== 'undefined' ? __MODULE_SOURCES__ : null;
+      const serverModuleSources = normalizeModuleSources(injectedModuleSources);
       const detachedWindows = {};
       let isProMode = false;
       const gmsPlugin = (function createGmsArchivPlugin() {
@@ -1398,6 +1399,26 @@
         }
         return true;
       }
+
+      function normalizeModuleSources(rawValue) {
+        if (!rawValue || typeof rawValue !== 'object' || Array.isArray(rawValue)) {
+          appendDebugLog('⚠️ Modulquellen fehlen oder sind ungültig. Nächster Schritt: Start über "bash start.sh" wiederholen.');
+          return {};
+        }
+        return rawValue;
+      }
+      function getThemePreference() {
+        const allowed = ['balanced', 'high-contrast', 'light', 'dark'];
+        const htmlTheme = html && typeof html.getAttribute === 'function' ? html.getAttribute('data-theme') : '';
+        if (typeof htmlTheme === 'string' && allowed.includes(htmlTheme.trim())) {
+          return htmlTheme.trim();
+        }
+        const selectorTheme = themeSelector && typeof themeSelector.value === 'string' ? themeSelector.value.trim() : '';
+        if (allowed.includes(selectorTheme)) {
+          return selectorTheme;
+        }
+        return 'high-contrast';
+      }
       function setPluginStatus(selectedModule) {
         if (!pluginStatusListNode || typeof selectedModule !== 'string' || selectedModule.trim().length === 0) {
           return false;
@@ -1640,21 +1661,25 @@
         if (!(target instanceof HTMLElement)) {
           return;
         }
-        const pickedIndex = target.getAttribute('data-entry-index');
-        if (target.getAttribute('data-action') === 'gms-entry-pick') {
+        const clickableNode = target.closest('[data-action], [data-module-nav]');
+        if (!(clickableNode instanceof HTMLElement)) {
+          return;
+        }
+        const pickedIndex = clickableNode.getAttribute('data-entry-index');
+        if (clickableNode.getAttribute('data-action') === 'gms-entry-pick') {
           gmsPlugin.setState((function () {
             const snap = gmsPlugin.getState();
             snap.selectedEntryIndex = Number(pickedIndex);
             return snap;
           })());
         }
-        const moduleTarget = target.getAttribute('data-module-nav');
+        const moduleTarget = clickableNode.getAttribute('data-module-nav');
         if (typeof moduleTarget === 'string' && moduleTarget.length > 0 && moduleSelector) {
           moduleSelector.value = moduleTarget;
           openModule(moduleTarget);
           return;
         }
-        const action = target.getAttribute('data-action');
+        const action = clickableNode.getAttribute('data-action');
         if (typeof action !== 'string' || action.length === 0) {
           return;
         }
@@ -1711,7 +1736,10 @@
         gmsPlugin.setState(state);
         setResult('✅ Reihenfolge aktualisiert (Drag&Drop).');
       });
-      applyTheme('balanced');
+      applyTheme(getThemePreference());
+      if (themeSelector) {
+        themeSelector.value = html.getAttribute('data-theme') || 'high-contrast';
+      }
       updateProjectStatus(getStoredProjectPath());
       if (projectPathInput) {
         projectPathInput.value = getStoredProjectPath();

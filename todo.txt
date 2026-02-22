@@ -86,3 +86,9 @@ NEXT ITERATION TRIAD (Vorschlag)
 2) P0: Default-Theme/Theme-Konsistenz in Template + Config vereinheitlichen.
 3) P1 (A11y/Hilfe): Projektdialog nur bei ungültigem Pfad auto-öffnen + klare Warntexte statt hartem Blocken.
 
+
+
+DONE: Dashboard fail-safe für fehlende Modulquellen umgesetzt (kein Direktstart-Crash, klare Next Steps) (2026-02-22)
+DONE: Click-Delegation mit closest('[data-action], [data-module-nav]') robust gemacht (2026-02-22)
+DONE: Theme-Start auf validierte Voreinstellung umgestellt (kein hartes applyTheme('balanced')) (2026-02-22)
+NEXT: Theme-Persistenz als eigener UX-Punkt ergänzen (Speichern + Wiederherstellen, inkl. Test) (2026-02-22)
