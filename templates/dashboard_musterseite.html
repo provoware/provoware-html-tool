@@ -53,6 +53,15 @@
       line-height: 1.5;
       background: var(--bg);
       color: var(--text);
+      transition: background-color .25s ease, color .25s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
     }
 
     .skip-link {
@@ -195,7 +204,7 @@
         <option value="light">Light (hell)</option>
         <option value="dark">Dark (dunkel)</option>
       </select>
-      <p class="muted" id="theme-help">Hinweis: Status wird nie nur über Farben gezeigt (immer Symbol + Text). Für beste Lesbarkeit bitte mit „High Contrast“ starten.</p>
+      <p class="muted" id="theme-help">Hinweis: Status wird nie nur über Farben gezeigt (immer Symbol + Text). Für beste Lesbarkeit bitte mit „High Contrast“ starten. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
     </section>
   </main>
 
