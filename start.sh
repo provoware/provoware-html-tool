@@ -99,6 +99,7 @@ $(get_text "help_usage")
   ./start.sh --safe      Safe-Mode: nur Basis-Checks + klare Hilfehinweise
   ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
   ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
+  ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
   ./start.sh --help      Hilfe anzeigen
@@ -224,6 +225,10 @@ validate_args() {
 			;;
 		--dashboard-guide)
 			MODE="dashboard-guide"
+			mode_count=$((mode_count + 1))
+			;;
+		--dashboard-template)
+			MODE="dashboard-template"
 			mode_count=$((mode_count + 1))
 			;;
 		--debug)
@@ -509,6 +514,38 @@ run_dashboard_guide() {
 	record_next_step "Guide in der echten GUI schrittweise umsetzen: zuerst Statusbereich, dann Aufgabenkarten, dann Hilfebereich"
 }
 
+run_dashboard_template_mode() {
+	local template_file="${PROJECT_ROOT}/templates/dashboard_musterseite.html"
+	if [[ ! -f "$template_file" ]]; then
+		print_error_with_actions "Dashboard-Template fehlt: ${template_file}"
+		record_missing "Dashboard-Template"
+		record_next_step "Datei wiederherstellen und danach './start.sh --dashboard-template' ausführen"
+		return 1
+	fi
+
+	local missing_parts=0
+	local required_marker
+	for required_marker in "data-theme-switcher" "id=\"error-dialog\"" "aria-live=\"polite\"" "data-action=\"retry\"" "data-action=\"repair\"" "data-action=\"log\""; do
+		if ! grep -q "$required_marker" "$template_file"; then
+			missing_parts=1
+		fi
+	done
+
+	if [[ "$missing_parts" -ne 0 ]]; then
+		print_error_with_actions "Dashboard-Template ist unvollständig: Mindestens ein Pflichtbereich fehlt."
+		record_missing "Dashboard-Template-Struktur"
+		record_next_step "Template prüfen und Pflichtbereiche (Theme, Dialog, Aktionsbuttons, aria-live) ergänzen"
+		return 1
+	fi
+
+	print_step "✅" "Dashboard-Template geprüft und einsatzbereit: ${template_file}"
+	print_step "ℹ️" "Nutzung: Datei im Browser öffnen und Buttons direkt testen (ohne Build-Schritt)."
+	print_step "➡️" "Nächster Schritt: Bei Bedarf Text anpassen und dieselbe Datei als Projekt-Startseite nutzen."
+	record_checked "Dashboard-Template"
+	record_next_step "Template optional kopieren: cp templates/dashboard_musterseite.html logs/gui/index.html"
+	return 0
+}
+
 run_check_mode() {
 	print_step "✅" "Check-Modus aktiv."
 	check_runtime_prerequisites
@@ -754,6 +791,9 @@ main() {
 		;;
 	dashboard-guide)
 		run_dashboard_guide
+		;;
+	dashboard-template)
+		run_dashboard_template_mode
 		;;
 	safe)
 		run_safe_mode

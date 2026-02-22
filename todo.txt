@@ -1,36 +1,36 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-DONE: Dashboard-Guide ergänzt (`./start.sh --dashboard-guide`) und fehlende Gate-Skripte (`tools/run_quality_checks.sh`, `tools/smoke_test.py`) angelegt. (2026-02-22)
-NEXT: Theme-Werte nach `config/themes.json` auslagern und im Doctor-/Release-Check als automatische Kontrastprüfung einbinden. (2026-02-22)
+DONE: Dashboard-Musterseite als sofort nutzbares HTML-Template erstellt und per Startmodus `--dashboard-template` + Smoke-Test validierbar gemacht. (2026-02-22)
+NEXT: Theme-Werte nach `config/themes.json` auslagern und eine automatische Kontrastprüfung (WCAG-Kontrasttest) im Smoke-Test ergänzen. (2026-02-22)
 
-## Iteration 2026-02-22 (Dashboard-Guide + Pflicht-Gates)
+## Iteration 2026-02-22 (Dashboard-Template + Template-Validierung)
 ### A) Fundstelle (beobachten)
-- Problem: Für die Nutzerfrage zum laienperfekten Dashboard fehlte ein direkt abrufbarer Leitfaden im Tool; außerdem fehlten Pflichtdateien für GATE 2 und GATE 3.
-- Risiko: Empfehlungen gehen im Chat verloren und der Quality-Flow bleibt unvollständig.
-- Erwartung: Ein eigener Guide-Modus liefert klare GUI-Regeln und alle Gates laufen automatisiert durch.
+- Problem: Es fehlte eine direkt nutzbare, konkrete Dashboard-Musterseite mit Bereichen, Buttons, Fehlerdialogen und Theme-Umschalter.
+- Risiko: Nutzer müssen Struktur und A11y selbst zusammensuchen und starten uneinheitlich.
+- Erwartung: Eine sofort nutzbare Vorlage mit klarer Bedienung und automatischer Prüfung steht bereit.
 
 ### B) Change-Scope (vor Patch)
-- Ziel: Dashboard-Guidance direkt im Tool anbieten und die fehlenden Qualitäts-/Smoke-Skripte bereitstellen.
-- Dateien: `start.sh`, `tools/run_quality_checks.sh`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Ziel: Konkrete Musterseite bereitstellen und Start-/Smoke-Prüfung dafür automatisieren.
+- Dateien: `start.sh`, `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Block.
-- Abnahmekriterium: `./start.sh --dashboard-guide` liefert klare Regeln; alle fünf Gates sind ausführbar.
+- Abnahmekriterium: `./start.sh --dashboard-template` liefert Erfolg; Smoke-Test bestätigt Pflichtmarker und lauffähige Ausgabe.
 
 ### C) Patch (kurz)
-- Punkt 1 – Änderung: Neuer Modus `--dashboard-guide` mit klaren Regeln für Layout, A11y und Nutzerfeedback.
-- Punkt 2 – Änderung: `tools/run_quality_checks.sh` ergänzt (automatische Format-/Lint-Prüfung mit verständlichen Next Steps).
-- Punkt 3 – Änderung: `tools/smoke_test.py` ergänzt (Smoke-Test für `./start.sh --check` mit Ausgabe-Validierung).
+- Punkt 1 – Änderung: Neue Dashboard-Musterseite mit A11y-freundlicher Struktur, Theme-Umschalter und Fehlerdialog in `templates/dashboard_musterseite.html`.
+- Punkt 2 – Änderung: Neuer Startmodus `--dashboard-template` in `start.sh` mit Validierung der Template-Pflichtbereiche und klaren Next Steps.
+- Punkt 3 – Änderung: `tools/smoke_test.py` erweitert um automatischen Test für `--dashboard-template` und Marker-Prüfung der Musterseite.
 
 ### D) Gates
-- G1: `python -m compileall -q .` (grün)
-- G2: `bash tools/run_quality_checks.sh` (grün; bei fehlenden Tools mit verständlichem Hinweis)
-- G3: `python tools/smoke_test.py` (grün)
-- G4: `bash start.sh` (grün)
-- G5: Mini-UX-Check (grün: klare deutsche Dialoge, Next Steps, kein Crash, Kontrast-/A11y-Hinweise)
+- G1: `python -m compileall -q .`
+- G2: `bash tools/run_quality_checks.sh`
+- G3: `python tools/smoke_test.py`
+- G4: `bash start.sh`
+- G5: Mini-UX-Check (deutsche Dialoge, Fehlerdialog mit Next Steps, kein Crash, Kontrast/Theme geprüft)
 
 ### E) Ergebnis
 - Status: DONE
 - Doku: README + CHANGELOG + todo aktualisiert
 - Laienvorschläge:
-  1. Nutze zuerst `./start.sh --dashboard-guide`, damit du eine klare Reihenfolge für dein GUI-Layout bekommst.
-  2. Nutze danach `./start.sh --doctor`, um konkrete Verbesserungsbefehle für die nächste Runde zu erhalten.
-- Nächster Schritt: Lege `config/themes.json` an und lies die Werte in `start.sh`, damit Kontrastregeln zentral gepflegt und automatisch getestet werden können.
+  1. Öffnen Sie zuerst `templates/dashboard_musterseite.html` im Browser und klicken Sie jeden Button einmal durch.
+  2. Wechseln Sie danach nacheinander auf `light`, `dark` und `high-contrast`, damit Sie Lesbarkeit und Fokusrahmen direkt sehen.
+- Nächster Schritt: Legen Sie `config/themes.json` an, lesen Sie die Theme-Werte im Template per kleinem Build-Skript ein und ergänzen Sie einen automatischen Kontrasttest, damit jede Farbkombination messbar barrierefrei bleibt.
