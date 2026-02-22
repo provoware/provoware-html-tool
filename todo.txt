@@ -53,3 +53,36 @@ Hinweis NEXT ITERATION: Browser-E2E kann in restriktiven Umgebungen bei 403 im P
 DONE: Projektdialog arbeitet jetzt ohne Standardordner und fordert einen expliziten Nutzerpfad mit klaren Next Steps (2026-02-22)
 DONE: Sidebar zeigt modulbezogene Optionen + Datenquelle und unterstützt Einzelfenster-Start je aktivem Modul (2026-02-22)
 DONE: GMS-Archivprofile (default/techno/hörspiele) mit Drag&Drop-Reihenfolge und CRUD (umbenennen/löschen) ergänzt (2026-02-22)
+
+AUDIT (2026-02-22) – Nutzerliste „P0/P1/P2“ geprüft
+DONE (bereits erledigt)
+- [x] 2026-02-22 | Frontend/UX-Modules | „Open Module“ aktiviert Panel/Plugin statt nur Status-Text (sichtbare Modulkarte + Sidebar-Optionen + Plugin-Mount).
+
+NEXT (offen, priorisiert und testbar)
+- [ ] P0 | Frontend/Template | Fail-Safe für `__MODULE_SOURCES__` ergänzen (Direkt-Öffnung ohne ReferenceError).
+- [ ] P0 | Frontend/Template | Theme-Quellen harmonisieren (`balanced` überall konsistent einführen oder überall entfernen).
+- [ ] P0 | Frontend/Template | Kein hartes Default-Theme im JS (`applyTheme('balanced')` auf Config/Preference umstellen).
+- [ ] P0 | Frontend/UI | Klick-Delegation mit `closest('[data-action]')` robust machen (Icon/Span-Klick).
+- [ ] P0 | Frontend/Security | `innerHTML` im Popup/Renderpfad minimieren, Textausgaben auf `textContent` umstellen.
+- [ ] P0 | Scripts/Start | `apt-get`-Reparatur nur mit Root/Sudo ausführen und klaren Alternativpfad melden.
+- [ ] P0 | Scripts/Start | Restliche `python`-Aufrufe in Gates/Workflow auf `python3` umstellen.
+- [ ] P0 | Scripts/Logs | Repair-/Installer-Fehlerausgaben in Logdatei sichtbar machen (nicht komplett verschlucken).
+- [ ] P0 | CI/GitHub | CI von `--repair` entkoppeln oder root-fähig über Matrix aufsetzen.
+- [ ] P1 | UX/Status | Statische Footer-Aussagen durch echte dynamische Werte ersetzen (Version, Pfad, Backup).
+- [ ] P1 | Config/Modules | Modulquellen weiter synchronisieren (insb. `todo` klar UI-fähig oder entfernen).
+- [ ] P1 | Projekt/State | Projektpfad als Single-Source-of-Truth festlegen (klare Priorität config/context/localStorage).
+- [ ] P1 | UX/First-Run | Projektdialog nur bei fehlendem/ungültigem Pfad automatisch öffnen.
+- [ ] P1 | Validation | Pfadprüfung von „hart blockierend“ auf „warnen + Vorschlag“ anpassen (z. B. Leerzeichen).
+- [ ] P1 | QA/Scripts | `run_quality_checks.sh` in `--check` (read-only) und `--fix` (schreibend) trennen.
+- [ ] P1 | QA/Tests | Marker-Tests auf kleine Verhaltens-/DOM-Checks erweitern (Fokus/Skiplink).
+- [ ] P1 | Dependencies | `rg` optional mit Fallback (`find`) in Checks/Start-Routine machen.
+- [ ] P2 | Frontend/Build | Dev-Modus (mehrere Dateien) vs. optionales Onefile-Release trennen.
+- [ ] P2 | Storage/Linux | Logs/State Fallback auf `$XDG_STATE_HOME` bzw. `~/.local/state` ergänzen.
+- [ ] P2 | Shortcuts | konfliktarme Shortcuts (z. B. Ctrl+Shift+…) + UI-Hinweise ergänzen.
+- [ ] P2 | Docs/Truth | Doku ehrlich schärfen: Auto-Repair nur mit sudo/root + Netz vollständig wirksam.
+
+NEXT ITERATION TRIAD (Vorschlag)
+1) P0: `__MODULE_SOURCES__` Fail-Safe + robustes Click-Handling per `closest('[data-action]')`.
+2) P0: Default-Theme/Theme-Konsistenz in Template + Config vereinheitlichen.
+3) P1 (A11y/Hilfe): Projektdialog nur bei ungültigem Pfad auto-öffnen + klare Warntexte statt hartem Blocken.
+

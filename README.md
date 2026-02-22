@@ -206,3 +206,9 @@ bash start.sh --offline-pack
 # Archiv auf Offline-Rechner kopieren und dort entpacken
 tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 ```
+
+
+## Audit-Update (2026-02-22, Nutzerliste P0/P1/P2)
+- Der Backlog wurde als Statusprüfung neu bewertet: **1 Punkt erledigt, Rest priorisiert offen**.
+- Die offenen Punkte sind jetzt testbar in `todo.txt` als eigener Audit-Block gepflegt.
+- `WAITME.md` fasst den Stand laienverständlich zusammen (Blocker, Risiken, empfohlene Befehle).
