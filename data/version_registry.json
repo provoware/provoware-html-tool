@@ -1,10 +1,10 @@
 {
-  "global_version": "2026.02.21",
-  "iteration": "2026.02.21-infodatei-wartbarkeit",
+  "global_version": "2026.02.22",
+  "iteration": "2026.02.22-gui-autostart",
   "files": {
-    "INFODATEI.md": "2026.02.21",
-    "todo.txt": "2026.02.21",
-    "CHANGELOG.md": "2026.02.21",
-    "data/version_registry.json": "2026.02.21"
+    "start.sh": "2026.02.22",
+    "todo.txt": "2026.02.22",
+    "CHANGELOG.md": "2026.02.22",
+    "data/version_registry.json": "2026.02.22"
   }
 }

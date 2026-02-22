@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: Neue `INFODATEI.md` ergänzt mit Verzeichnisstruktur, Dateiliste und Wartungshinweisen in einfacher Sprache.
-- Warum: Für offene Punkte zur Wartbarkeit fehlte eine zentrale Navigations- und Standardübersicht für alle Projektdateien.
-- Wirkung: Änderungen sind schneller auffindbar, Standards klarer umsetzbar und Fehleraktionen direkt verständlich dokumentiert.
+- Was: `start.sh` startet jetzt nach dem Vollablauf automatisch eine lokale Status-GUI inklusive barrierearmer Hilfehinweise.
+- Warum: Der gewünschte Zielablauf fordert vollautomatischen Start bis in die GUI ohne manuelle Zwischenschritte.
+- Wirkung: Nutzer erhalten nach Check/Repair/Format/Test sofort eine erreichbare GUI-Statusseite mit klaren Fehleraktionen und nächsten Schritten.
