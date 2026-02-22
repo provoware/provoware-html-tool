@@ -1,3 +1,17 @@
+## 2026-02-22 – Modul-Starter an konfigurierbare Backend-Datenquellen gekoppelt
+- Scope-Kontrolle:
+  - Problem: Der Modul-Starter konnte Module öffnen, zeigte aber keine echte Datenquellen-Kopplung und zu wenig transparente Nutzerdetails.
+  - Ziel: Modulstart an konfigurierbare Datenquellen anbinden, Kurzdetails interaktiv anzeigen und Fehlerhinweise in einfacher Sprache verbessern.
+  - Dateien: `start.sh`, `templates/dashboard_musterseite.html`, `config/module_sources.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Start-Routine lädt/validiert Datenquellen-Konfiguration und injiziert sie ins Dashboard, 2) Modul-Starter zeigt Datenquelle + Detail + Next Step, 3) Doku/To-do/Version aktualisiert.
+  - Abnahme: `bash start.sh` startet GUI ohne Crash; beim Modul-Öffnen erscheint Datenquelle plus Kurzdetail im Status und Debug-Bereich.
+- Was:
+  1) Neue Datei `config/module_sources.json` als zentrale, wartbare Datenquellen-Kopplung für alle Module ergänzt.
+  2) `start.sh` um robuste Input-Validierung für Modulquellen erweitert und Daten transparent in die Dashboard-Vorlage übernommen.
+  3) Modul-Starter im Dashboard zeigt jetzt kurze, klare Infos zu Datenquelle und nächsten Schritten (A11y-Hilfetextpunkt).
+- Warum: Nutzer sollen beim Modulstart sofort verstehen, welche echte Datenbasis genutzt wird und was als nächstes zu tun ist.
+- Wirkung: Bessere Release-Reife, klarere Bedienung für Laien und saubere Trennung von Systemlogik, Konfiguration und UI.
+
 ## 2026-02-22 – GMS-Archiv-Untermodul als Plugin-Karte integriert
 - Scope-Kontrolle:
   - Problem: Es fehlte eine laienfreundliche Sammelstelle für Genres, Stimmungen und Stile mit Zufallsausgabe, Verlauf und Export/Import-Anbindung im Hauptmodul.

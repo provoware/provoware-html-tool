@@ -1,0 +1,38 @@
+{
+  "genres": {
+    "label": "Genreverwaltung",
+    "data_source": "data/project_context.json",
+    "detail": "Lädt den aktiven Projektkontext als Basis für Genre-Daten.",
+    "next_step": "bash start.sh --dashboard-template"
+  },
+  "gms-archiv": {
+    "label": "GMS-Archiv",
+    "data_source": "data/project_context.json",
+    "detail": "Nutzt den Projektpfad und lokale Verlaufsdaten für Genres, Stimmungen und Stile.",
+    "next_step": "bash start.sh --check"
+  },
+  "zitate": {
+    "label": "Zitatbibliothek",
+    "data_source": "data/project_context.json",
+    "detail": "Greift auf den Projektpfad zu und hält Quellen für spätere Backend-Anbindung bereit.",
+    "next_step": "bash start.sh --check"
+  },
+  "songeditor": {
+    "label": "Songeditor",
+    "data_source": "config/project_settings.json",
+    "detail": "Verwendet editierbare Projekteinstellungen als Eingabe für Song-Projekte.",
+    "next_step": "bash start.sh --test"
+  },
+  "dashboard": {
+    "label": "Dashboard",
+    "data_source": "data/version_registry.json",
+    "detail": "Zeigt Versions- und Statusdaten der letzten Iteration transparent an.",
+    "next_step": "bash start.sh --ux-check-auto"
+  },
+  "todo": {
+    "label": "To-Do-Liste",
+    "data_source": "todo.txt",
+    "detail": "Liest offene und erledigte Aufgaben direkt aus der Projektliste.",
+    "next_step": "bash start.sh --check"
+  }
+}

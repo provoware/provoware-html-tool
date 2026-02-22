@@ -1,3 +1,6 @@
+DONE: Modul-Starter an `config/module_sources.json` gekoppelt, inklusive Input-Validierung und transparenter Datenquellen-Anzeige im Status/Debug (2026-02-22)
+DONE: Dashboard-Modulöffnung zeigt kurze Details + Next Step je Datenquelle in einfacher Sprache (2026-02-22)
+DONE: Start-Routine injiziert validierte Modulquellen in das Hauptmodul ohne neue Abhängigkeiten (2026-02-22)
 DONE: GMS-Archiv als neue Sidebar-Ansicht im Hauptmodul ergänzt (Bulk-Adding, Zufall, Verlauf, Export/Import-Merge) (2026-02-22)
 DONE: Plugin-API-Vertrag im Dashboard umgesetzt (mount/unmount, getState/setState, exportPayload/importPayload) (2026-02-22)
 DONE: Laienfreundliche Hilfe-/Feedbacktexte für Duplikate, Kopieren und Import-Fehler ergänzt (2026-02-22)
