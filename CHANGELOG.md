@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2026-02-22 – Doctor-Modus + Test-Ausgabe-Validierung
-- Was: Neuer Modus `--doctor` ergänzt, der automatische Prüfungen ausführt und klare Verbesserungsbefehle für Qualität, Barrierefreiheit und Release ausgibt.
-- Warum: Nutzer sollten direkt verständliche, vollständige Befehle erhalten, um den nächsten sinnvollen Verbesserungsschritt ohne Fachwissen auszuführen.
-- Wirkung: Bessere Nutzerführung, robusteres Feedback im Alltag und höherer Release-Reifegrad durch einen klaren, wiederholbaren Verbesserungsablauf.
+## 2026-02-22 – Dashboard-Guide + vollständige Gates
+- Was: Neuen Modus `--dashboard-guide` ergänzt und die fehlenden Gate-Skripte `tools/run_quality_checks.sh` sowie `tools/smoke_test.py` erstellt.
+- Warum: Laien brauchen eine klare GUI-Leitlinie und alle Pflicht-Gates sollen automatisch ausführbar sein.
+- Wirkung: Bessere Nutzerführung für Dashboard-Design und reproduzierbare Qualitätsprüfung mit vollständigem Gate-Ablauf.

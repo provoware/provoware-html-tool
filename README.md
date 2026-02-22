@@ -18,6 +18,7 @@ Fachbegriffe sind immer kurz erklärt (in Klammern), damit der Ablauf auch ohne 
 ./start.sh --format
 ./start.sh --test
 ./start.sh --doctor
+./start.sh --dashboard-guide
 ```
 
 Optional mit Detail-Protokoll (Debug = Fehlersuche):
@@ -32,6 +33,7 @@ Optional mit Detail-Protokoll (Debug = Fehlersuche):
 - `./start.sh --format` → Nur Formatierung
 - `./start.sh --test` → Nur Selbsttests
 - `./start.sh --doctor` → Verbesserungsbericht mit klaren Befehlen
+- `./start.sh --dashboard-guide` → Laien-Guide für Dashboard-Aufbau und GUI-Layout
 - `./start.sh --safe` → Sicherer Basis-Modus mit klaren Hilfehinweisen
 - `./start.sh --release-check` → Kompakter Release-Check mit Ergebnis
 - `./start.sh --help` → Hilfe anzeigen
@@ -82,8 +84,8 @@ Wenn die Datei fehlt oder ungültig ist, werden sichere Standardtexte genutzt (F
   ```
 
 ## Theme- und Kontrast-Stand
-Mehrere Themes mit Kontrast-Selbsttest sind als nächster Ausbauschritt geplant.
-Bis dahin werden Statusinformationen bereits robust über **Symbol + Text** ausgegeben, damit Lesbarkeit nicht nur von Farben abhängt.
+Das Tool unterstützt die Themes `light`, `dark` und `high-contrast` für gute Lesbarkeit bei unterschiedlichen Bedürfnissen.
+Statusinformationen werden robust über **Symbol + Text** ausgegeben, damit Lesbarkeit nicht nur von Farben abhängt.
 
 ## Best Practices für Teams
 1. Vor jeder Änderung zuerst `./start.sh --check` ausführen.
@@ -93,12 +95,14 @@ Bis dahin werden Statusinformationen bereits robust über **Symbol + Text** ausg
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `29%`
+- Fortschritt: `36%`
 - Abgeschlossen:
   - Auto-Reparatur für Runtime-Tools
   - GUI-Theme-Auswahl mit Fokus auf Kontrast
   - Doctor-Modus mit klaren Verbesserungsbefehlen
+  - Dashboard-Guide für laienfreundliches GUI-Layout
+  - Pflicht-Gates G2 und G3 mit Tools-Skripten automatisiert
 - Offen:
   - Konfigurationsdatei für Themes in `config/`
   - weitere Auslagerung von Kernlogik nach `system/`
-- Nächster Schritt: Theme-Konfigurationsdatei einführen und im Doctor-/Release-Check automatisch auswerten.
+- Nächster Schritt: Dashboard-Guide als eigene GUI-Seite ausgeben und per Smoke-Test auf Schlüsseltexte prüfen.
