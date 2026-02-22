@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2026-02-22 – Dashboard-Musterseite als sofort nutzbares Template
-- Was: Neues HTML-Template `templates/dashboard_musterseite.html` mit Bereichen, Aktionsbuttons, Fehlerdialog und Theme-Umschalter erstellt; neuer Modus `--dashboard-template` in `start.sh` ergänzt; Smoke-Test um Template-Prüfungen erweitert.
-- Warum: Für die nächste Iteration wurde eine direkt nutzbare, laienfreundliche Dashboard-Seite mit klaren Fehlermeldungen, Next Steps und robuster Barrierefreiheit benötigt.
-- Wirkung: Nutzer können sofort mit einer konkreten Musterseite starten, Themes wechseln, Fehlerdialoge testen und die Struktur automatisch per Startmodus und Smoke-Test validieren.
+## 2026-02-22 – Theme-Konfiguration + A11y-Härtung + Smoke-Validierung
+- Was: `config/themes.json` ergänzt, Theme-Validierung in `start.sh` erweitert und `tools/smoke_test.py` um Konfigurations- und A11y-Marker-Prüfung ausgebaut; `templates/dashboard_musterseite.html` mit Skip-Link und verbessertem Fehlerdialog vervollständigt.
+- Warum: Themes sollten zentral gepflegt, Eingaben robust validiert und Barrierefreiheit messbar abgesichert werden.
+- Wirkung: Start-Routine, Template und Smoke-Test laufen konsistent zusammen, geben klare Next Steps aus und erhöhen die Release-Reife ohne manuelle Nacharbeit.
