@@ -48,15 +48,16 @@ render_gui_status_html() {
 	local gui_file="$1"
 	local gui_theme="$2"
 	local theme_choices="$3"
-	local bg_color="$4"
-	local text_color="$5"
-	local panel_color="$6"
-	local border_color="$7"
-	local focus_color="$8"
-	local ok_color="$9"
-	local warn_color="${10}"
+	local gui_port="$4"
+	local bg_color="$5"
+	local text_color="$6"
+	local panel_color="$7"
+	local border_color="$8"
+	local focus_color="$9"
+	local ok_color="${10}"
+	local warn_color="${11}"
 
-	if [[ -z "$gui_file" || -z "$gui_theme" || -z "$theme_choices" ]]; then
+	if [[ -z "$gui_file" || -z "$gui_theme" || -z "$theme_choices" || -z "$gui_port" ]]; then
 		printf '%s\n' "Pflichtwerte für GUI-Datei fehlen."
 		return 1
 	fi
@@ -86,12 +87,14 @@ render_gui_status_html() {
 		    <p><strong>Was geprüft wurde:</strong> Check, Repair, Format und Test wurden automatisch ausgeführt.</p>
 		    <p id="theme-note"><strong>Hilfe (Help = Unterstützung):</strong> Theme kann mit <code>GUI_THEME=${theme_choices}</code> gewählt werden.</p>
 		    <p><strong>Nutzerhilfe:</strong> Bei Problemen zuerst "Erneut versuchen", dann "Reparatur starten", danach "Protokoll öffnen".</p>
-		    <ul>
-		      <li>➡️ Erneut versuchen: <code>./start.sh</code></li>
-		      <li>➡️ Reparatur starten: <code>./start.sh --repair</code></li>
-		      <li>➡️ Protokoll öffnen: <code>cat logs/start.log</code></li>
+		    <ul aria-label="Befehlshinweise mit klarer Reihenfolge">
+		      <li><strong>1) Erneut versuchen (Neustart):</strong> <code>./start.sh</code></li>
+		      <li><strong>2) Reparatur starten (Auto-Fix):</strong> <code>./start.sh --repair</code></li>
+		      <li><strong>3) Protokoll öffnen (Logdatei):</strong> <code>cat logs/start.log</code></li>
+		      <li><strong>4) Debug starten (Fehlerdetails):</strong> <code>./start.sh --check --debug</code></li>
+		      <li><strong>5) Wenn kein Auto-Öffnen klappt:</strong> URL direkt öffnen <code>http://127.0.0.1:${gui_port}/</code></li>
 		    </ul>
-		    <p class="hint">Diese GUI ist tastaturfreundlich (Tab + Enter), nutzt Status nicht nur über Farben und bietet ein Kontrast-Theme für gute Lesbarkeit.</p>
+		    <p class="hint">Diese GUI ist tastaturfreundlich (Tab + Enter), nutzt Status nicht nur über Farben und bietet Kontrast-Themes für gute Lesbarkeit.</p>
 		  </main>
 		</body>
 		</html>
