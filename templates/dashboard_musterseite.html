@@ -212,6 +212,14 @@
     h2 { font-size: 1.15rem; margin-bottom: .6rem; }
     h3 { font-size: 1.45rem; }
 
+    .debug-log-list,
+    #debug-log-list {
+      margin: .6rem 0 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      min-height: 3.2rem;
+    }
+
     .actions {
       display: grid;
       gap: .5rem;
@@ -309,7 +317,7 @@
         <li class="nav-item">✅ To-Do-Liste</li>
         <li class="nav-item">📊 Dashboard</li>
       </ul>
-      <p class="quick-help" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll.</p>
+      <p class="quick-help" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll, Alt+O Modul öffnen.</p>
     </aside>
 
     <section class="main" aria-labelledby="bereich-aufgaben">
@@ -339,6 +347,23 @@
           </div>
         </article>
 
+        <article class="tool-card" data-accent="c" aria-labelledby="modul-starter-title">
+          <h2 id="modul-starter-title">Modul-Starter</h2>
+          <label for="module-switcher"><strong>Modul wählen:</strong></label>
+          <select id="module-switcher" aria-describedby="module-help shortcut-help">
+            <option value="">Bitte Modul auswählen</option>
+            <option value="genres">Genreverwaltung</option>
+            <option value="zitate">Zitate</option>
+            <option value="songeditor">Songeditor</option>
+            <option value="dashboard">Dashboard</option>
+          </select>
+          <div class="actions">
+            <button type="button" data-action="open-module" aria-keyshortcuts="Alt+O" aria-describedby="module-help shortcut-help">Modul öffnen</button>
+          </div>
+          <p class="result" id="module-status" role="status" aria-live="polite">Noch kein Modul geöffnet.</p>
+        </article>
+
+
         <article class="tool-card" data-accent="b">
           <h2>Zufallsgenerator</h2>
           <div class="actions">
@@ -360,6 +385,7 @@
           <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
           <p class="subline" id="debug-last-event" data-debug-event>Letztes Ereignis: Startzustand um --:--:--.</p>
           <p class="subline" id="debug-next-step" data-debug-next-step>Nächster Schritt: Aktion wählen oder Alt+L für Protokoll nutzen.</p>
+          <ul id="debug-log-list" aria-label="Letzte Debug-Ereignisse"></ul>
           <div class="actions">
             <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
           </div>
@@ -392,6 +418,7 @@
           <p id="theme-help">Hinweis: Status nie nur über Farbe, sondern immer mit Symbol + Text. Kontrast (Helligkeits-Unterschied) bleibt in allen drei Themes gut lesbar. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
           <p class="subline" id="theme-status" role="status" aria-live="polite">Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.</p>
         </li>
+        <li class="settings-item" id="module-help">Modulhilfe: Wählen Sie links ein Modul und öffnen Sie es mit Alt+O. Bei Fehlern folgen Sie den Next Steps im Debug-Log.</li>
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
       </ul>
     </aside>
@@ -430,6 +457,9 @@
       const debugEventNode = document.getElementById('debug-last-event');
       const debugNextStepNode = document.getElementById('debug-next-step');
       const themeStatusNode = document.getElementById('theme-status');
+      const moduleSelector = document.getElementById('module-switcher');
+      const moduleStatusNode = document.getElementById('module-status');
+      const debugLogListNode = document.getElementById('debug-log-list');
       let lastDialogTrigger = null;
 
       function getDialogFocusableElements() {
@@ -514,6 +544,53 @@
         return true;
       }
 
+
+
+      function appendDebugLog(message) {
+        if (!debugLogListNode || typeof message !== 'string' || message.trim().length === 0) {
+          return false;
+        }
+        const listItem = document.createElement('li');
+        listItem.textContent = message.trim();
+        debugLogListNode.prepend(listItem);
+        while (debugLogListNode.children.length > 5) {
+          debugLogListNode.removeChild(debugLogListNode.lastElementChild);
+        }
+        return true;
+      }
+
+      function setModuleStatus(message) {
+        if (!moduleStatusNode || typeof message !== 'string' || message.trim().length === 0) {
+          return false;
+        }
+        moduleStatusNode.textContent = message.trim();
+        return true;
+      }
+
+      function openModule(selectedModule) {
+        const moduleConfig = {
+          genres: { label: 'Genreverwaltung', command: './start.sh --dashboard-template' },
+          zitate: { label: 'Zitate', command: './start.sh --check' },
+          songeditor: { label: 'Songeditor', command: './start.sh --test' },
+          dashboard: { label: 'Dashboard', command: './start.sh --ux-check-auto' }
+        };
+
+        if (typeof selectedModule !== 'string' || !(selectedModule in moduleConfig)) {
+          setDebugDetails('Modulstart fehlgeschlagen', 'Bitte zuerst ein Modul auswählen und dann erneut „Modul öffnen“ drücken.');
+          appendDebugLog('⚠️ Modulstart abgebrochen: Keine gültige Auswahl.');
+          setModuleStatus('⚠️ Kein Modul gestartet: Bitte ein Modul auswählen.');
+          return setResult('⚠️ Modul konnte nicht geöffnet werden. Bitte Auswahl prüfen.');
+        }
+
+        const targetModule = moduleConfig[selectedModule];
+        const nextStep = 'Führen Sie als nächsten Schritt ' + targetModule.command + ' aus.';
+        setModuleStatus('✅ Modul aktiv: ' + targetModule.label + '.');
+        setDebugDetails('Modul gewechselt zu ' + targetModule.label, nextStep);
+        appendDebugLog('✅ Modul geladen: ' + targetModule.label + ' (' + getTimeStamp() + ').');
+        updateSyncStatus('✅ Modul bereit: ' + targetModule.label + ' (' + getTimeStamp() + ')');
+        return setResult('✅ Modul geöffnet: ' + targetModule.label + '.');
+      }
+
       function applyTheme(themeValue) {
         const allowed = ['high-contrast', 'light', 'dark'];
         if (typeof themeValue !== 'string' || !allowed.includes(themeValue)) {
@@ -532,14 +609,20 @@
           themeStatusNode.textContent = helperTextByTheme[themeValue] || 'Aktives Theme geändert.';
         }
         setDebugDetails('Theme geändert', 'Prüfen Sie kurz Lesbarkeit, Fokusrahmen und Symboltexte im gewählten Theme.');
+        appendDebugLog('ℹ️ Theme aktiv: ' + themeValue + ' (' + getTimeStamp() + ').');
         setResult('✅ Theme wurde gesetzt: ' + themeValue + '.');
         return true;
       }
 
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
+        }
+
+        if (actionValue === 'open-module') {
+          const selectedValue = moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '';
+          return openModule(selectedValue);
         }
 
         if (actionValue === 'save') {
@@ -607,7 +690,8 @@
           s: 'save',
           r: 'retry',
           p: 'repair',
-          l: 'log'
+          l: 'log',
+          o: 'open-module'
         };
         const shortcutKey = normalizeShortcutKey(event);
         const actionFromShortcut = shortcutMap[shortcutKey];
@@ -645,7 +729,8 @@
 
       applyTheme('high-contrast');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
-      setDebugDetails('Startzustand aktiv', 'Wählen Sie eine Aktion oder öffnen Sie bei Bedarf den Fehlerdialog.');
+      setDebugDetails('Startzustand aktiv', 'Wählen Sie ein Modul oder öffnen Sie bei Bedarf den Fehlerdialog.');
+      appendDebugLog('ℹ️ Startzustand aktiv (' + getTimeStamp() + ').');
     })();
   </script>
 </body>
