@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **91%**
+- Fortschritt: **93%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -11,9 +11,9 @@
   - Fehlerdialog erhielt Fokusfang (Tab/Shift+Tab) und Fokus-Rückgabe auf auslösendes Element für stabilere Tastaturnutzung.
   - Fokus-Checker validiert nun zusätzlich Dialog-Fokusfang und Fokus-Rückgabe als feste A11y-Qualitätsregel.
 - Offene Aufgaben:
-  - Optionaler Visual-Baseline-Vergleich (Soll-Ist-Screenshot) für Layout-Drift fehlt noch.
   - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
+  - Optional: Pixelgenauer Bildvergleich (Diff-Metrik) als zweiter Visual-Guard zusätzlich zur Artefakt-Prüfung.
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
@@ -30,6 +30,7 @@ bash start.sh
 ./start.sh --format
 ./start.sh --test
 ./start.sh --dashboard-template
+./start.sh --visual-baseline-check
 ./start.sh --full-gates
 ./start.sh --release-check
 ```
@@ -103,6 +104,39 @@ cat logs/start.log
   - CI-Artefakte für Fehlerfall (Logdateien und optional Screenshot) ergänzen
 - Nächster Schritt: Optionalen Browser-E2E-Test mit Screenshot-Artefakten ergänzen und in CI als zusätzlichen Prüfpfad einbinden.
 
+
+
+## Iteration 2026-02-22 (Visual-Baseline-Schutz integriert)
+### A) Fundstelle (beobachten)
+- Problem: Layout-Drift war als offener Punkt vorhanden, aber es gab noch keinen festen Soll-Ist-Screenshot-Check.
+- Risiko: Visuelle Regressionen werden spät erkannt, obwohl Browser-E2E bereits ein Artefakt erzeugt.
+- Erwartung: Full-Smoke prüft das Screenshot-Artefakt automatisch und gibt klare Next Steps aus.
+
+### B) Change-Scope (vor Patch)
+- Ziel: Drei kleine, sofort nutzbare Punkte liefern: neues Visual-Check-Tool, Startmodus, Smoke-Integration.
+- Dateien: `tools/visual_baseline_check.py`, `start.sh`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Block.
+- Abnahmekriterium: `python3 tools/visual_baseline_check.py`, `./start.sh --visual-baseline-check` und `python3 tools/smoke_test.py --profile full` laufen erfolgreich durch und melden klare Erfolgstexte.
+
+### C) Patch (kurz)
+- Punkt 1 – Änderung: Neues Tool `tools/visual_baseline_check.py` validiert PNG-Artefakt, Dateigröße und Eingabewerte mit klaren Fehlermeldungen.
+- Punkt 2 – Änderung: `start.sh` unterstützt jetzt `--visual-baseline-check` inkl. Hilfeeintrag und verständlichen Next Steps.
+- Punkt 3 – Änderung: `tools/smoke_test.py --profile full` ruft den Visual-Baseline-Check nach Browser-E2E auf.
+
+### D) Gates
+- G1: `python -m compileall -q .`
+- G2: `bash tools/run_quality_checks.sh`
+- G3: `python tools/smoke_test.py`
+- G4: `bash start.sh`
+- G5: Mini-UX-Check (deutsche Dialoge, Fehlerdialog mit Next Steps, kein Crash, Kontrast/Theme geprüft)
+
+### E) Ergebnis
+- Status: DONE
+- Doku: README + CHANGELOG + todo aktualisiert
+- Laienvorschläge:
+  1. Führen Sie nach visuellen Änderungen immer zuerst `python3 tools/browser_e2e_test.py` und danach `./start.sh --visual-baseline-check` aus.
+  2. Wenn der Baseline-Check fehlschlägt, prüfen Sie zuerst, ob das Dashboard vollständig geladen war und erstellen Sie den Screenshot neu.
+- Nächster Schritt: Ergänzen Sie als nächsten Ausbau einen pixelgenauen Bildvergleich (Differenzwert in Prozent), damit auch kleine Layout-Verschiebungen automatisch messbar werden.
 
 ## Iteration 2026-02-22 (Effiziente Smoke-Profile + optionaler Ruff-Lint + zielgerichtete Gates)
 ### A) Fundstelle (beobachten)
