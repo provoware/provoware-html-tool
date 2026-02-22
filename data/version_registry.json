@@ -1,17 +1,17 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-project-routine-dashboard-path-persistence",
+  "iteration": "2026.02.22-dependency-map-auto-resolution",
   "files": {
-    "start.sh": "2026.02.22.21",
+    "start.sh": "2026.02.22.22",
     "tools/smoke_test.py": "2026.02.22.9",
     "templates/dashboard_musterseite.html": "2026.02.22.21",
-    "README.md": "2026.02.22.21",
-    "todo.txt": "2026.02.22.21",
-    "CHANGELOG.md": "2026.02.22.21",
-    "data/version_registry.json": "2026.02.22.21",
+    "README.md": "2026.02.22.22",
+    "todo.txt": "2026.02.22.22",
+    "CHANGELOG.md": "2026.02.22.22",
+    "data/version_registry.json": "2026.02.22.22",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
-    "system/start_core.sh": "2026.02.22.2",
+    "system/start_core.sh": "2026.02.22.3",
     "system/start_gui.sh": "2026.02.22.1",
     ".github/workflows/full-gates.yml": "2026.02.22.7",
     "tools/focus_order_check.py": "2026.02.22.1",
@@ -19,6 +19,7 @@
     "tools/visual_baseline_check.py": "2026.02.22.8",
     "INFODATEI.md": "2026.02.22.2",
     "AGENTS.md": "2.5",
-    "data/project_context.json": "2026.02.22.1"
+    "data/project_context.json": "2026.02.22.1",
+    "config/dependency_map.json": "2026.02.22.1"
   }
 }

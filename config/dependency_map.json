@@ -1,0 +1,21 @@
+{
+  "shellcheck": {
+    "apt": "shellcheck",
+    "brew": "shellcheck"
+  },
+  "shfmt": {
+    "apt": "shfmt",
+    "brew": "shfmt"
+  },
+  "rg": {
+    "apt": "ripgrep",
+    "brew": "ripgrep"
+  },
+  "curl": {
+    "apt": "curl",
+    "brew": "curl"
+  },
+  "ruff": {
+    "pip": "ruff"
+  }
+}

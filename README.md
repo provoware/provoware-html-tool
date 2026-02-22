@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **91%**
+- Fortschritt: **94%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -78,6 +78,14 @@ Die Start-Routine meldet immer verständlich:
 - Bedienung per Tastatur ohne Maus.
 - Kontrast-Checks über mehrere Themes.
 - Fehlertexte mit klaren, direkten Lösungsschritten.
+
+
+## Professionelle Abhängigkeitsauflösung (neu)
+Die Start-Routine kann Abhängigkeiten jetzt über eine zentrale Zuordnung in `config/dependency_map.json` auflösen.
+
+- Vorteil: Paketnamen sind pro Paketmanager sauber gepflegt (apt, brew, pip).
+- Praxis: `--repair` und Auto-Checks nutzen diese Zuordnung automatisch.
+- Hilfe für Einsteiger: Bei Fehlern werden immer klare Next Steps ausgegeben (erneut versuchen, Reparatur starten, Protokoll öffnen).
 
 ## Offline-Fähigkeit (inklusive Playwright)
 Die Start-Routine nutzt jetzt einen robusteren Offline-Weg:
