@@ -1,174 +1,127 @@
-# AGENTS.md
-# AGENTS.md – Three-Point-Completion Iteration (Merge-Ready by Default)
-Version: 2.4
-Ziel: Jede Iteration schließt **genau drei klar abgegrenzte Punkte vollständig** ab, ist merge-ready und erhöht den Release-Reifegrad.
-Leitmotiv: Drei kleinste vollständige Punkte pro Iteration, harte Qualitäts-Gates, sofort integrierbar. Eine der drei Aufgaben muss immer eine sinnvolle Erweiterung der Hilfselemente, der Texte oder der Barrierefreiheit sein.
+# AGENTS.md – Projektstandard provoware-html-tool
+Version: 2.5
 
-────────────────────────────────────────────────────────────
+Ziel: Jede Iteration liefert **genau 3 kleine, vollständig abgeschlossene Punkte**, ist direkt merge-ready und verbessert Release-Reife, Barrierefreiheit und Laientauglichkeit.
 
-## 0) Grundregel (Atomare Iteration)
+---
+
+## 1) Pflichtprinzip pro Iteration
 Jede Iteration muss:
- - genau **3 klar abgegrenzte Punkte** vollständig abschließen (nicht nur „anarbeiten“)
- - mindestens einen Punkt beinhalten, der eine sinnvolle Erweiterung der Hilfselemente, der Texte oder der Barrierefreiheit darstellt
- - alle Punkte so klein wie möglich halten (smallest shippable change)
- - merge-ready sein (Code + Doku + Checks erledigt)
- - den Release-Fortschritt messbar erhöhen
+1. genau **3 klar getrennte Punkte** vollständig abschließen,
+2. mindestens **1 Punkt für Hilfeelemente, Texte oder Barrierefreiheit** enthalten,
+3. klein bleiben (smallest shippable change),
+4. inklusive Doku + Checks merge-ready sein.
 
-Zählregel für die drei Punkte:
-- Die drei Pflichtpunkte beziehen sich immer auf funktionale Produktaspekte außerhalb reiner Info-Dateien.
-- Info-Dateien (z. B. `README.md`, `CHANGELOG.md`, `todo.txt`) sind verpflichtende Begleit-Dokumentation und zählen nicht als eigener Funktionspunkt.
+**Nicht erlaubt:**
+- Halb-fertige Teilergebnisse,
+- Nebenbei-Refactorings außerhalb des Scope,
+- mehr als 4 geänderte Dateien pro Iteration (außer Pflicht-Doku-Dateien).
 
-Maximal:
-- 1 Problemklasse
-- 1–4 Dateien
-- 1 zusammenhängender Patch-Block pro Datei
+---
 
-Wenn mehr nötig ist: STOP → neue Iteration planen.
-
-────────────────────────────────────────────────────────────
-
-## 1) Scope-Kontrolle (bindend vor jedem Patch)
-Vor dem Patch festhalten:
+## 2) Scope-Kontrolle vor jedem Patch (kurz dokumentieren)
+Vor Änderungen immer festhalten:
 - Problem (1 Satz)
 - Ziel (1 Satz)
-- Exakte Dateien (Liste)
-- Exakter Patch-Block je Datei
-- Abnahmekriterium „fertig“ (1 Satz, testbar)
+- Dateien (Liste)
+- Patch-Block je Datei (1 Block)
+- Abnahmekriterium (1 testbarer Satz)
 
- Verboten:
- - Nebenbei-Refactorings außerhalb des Patch-Blocks
- - Umbenennen/Umstrukturieren ohne zwingenden Grund
- - Mehr als 3 Punkte in einer Iteration
- - Teilergebnisse ohne klare Fertigstellung
+---
 
-────────────────────────────────────────────────────────────
+## 3) Technische Qualitätsregeln (verbindlich)
+- Eingaben validieren (Input-Validierung), Ergebnisse bestätigen (Output-Check).
+- Fehlertexte in einfacher Sprache mit klaren Next Steps (z. B. „Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“).
+- Keine neuen Abhängigkeiten ohne klaren Nutzen.
+- Einheitliche Standards und Formatierung erzwingen.
+- Tool-Logik wartbar trennen:
+  - `system/` Kernlogik,
+  - `config/` Einstellungen,
+  - `data/` variable Daten,
+  - `tools/` Prüf- und Hilfsskripte,
+  - `templates/` UI-Vorlagen.
 
-## 2) Patch-Methodik (vollständig, klein, robust)
- - Nur notwendige Änderungen für die drei konkreten Punkte.
-- Keine neuen Abhängigkeiten ohne zwingenden Bedarf.
-- Jede betroffene Funktion validiert Eingaben (input) und bestätigt Ergebnis (output).
-- Fehlerpfade enthalten klare Next Steps in einfacher Sprache.
-- Mindestens ein Hilfeelement pro betroffener Stelle verbessern/ergänzen.
+---
 
-────────────────────────────────────────────────────────────
+## 4) Barrierefreiheit & UX (immer mitprüfen)
+- Einfache deutsche Sprache, Fachbegriff in Klammern kurz erklären.
+- Kontrast robust für mehrere Themes.
+- Fokusfreundliche Bedienung (Tastatur zuerst).
+- Status nie nur per Farbe, sondern immer zusätzlich als Text/Label.
+- Mindestens ein Hilfeelement pro betroffenem Bereich verbessern.
 
-## 3) Architektur- und Qualitätsstandards (verpflichtend)
-- Einheitliche Standards und Best Practices in jedem Patch.
-- Barrierefreiheit (Accessibility) immer mitdenken: verständliche Sprache, klare Kontraste, fokusfreundliches Verhalten.
-- Farb-/Kontrastverhalten robust halten; mehrere Themes als unterstütztes Zielbild nicht brechen.
-- Tool-Logik sauber trennen, Struktur wartbar halten.
-- System-Dateien getrennt von variablen Dateien und Konfiguration organisieren.
-- Debug- und Logging-Modus mit detaillierten, laienverständlichen Hinweisen pflegen.
+---
 
-────────────────────────────────────────────────────────────
+## 5) Vollautomatische Start-Routine (Pflichtbild)
+`start.sh` muss soweit möglich autonom arbeiten:
+- Voraussetzungen automatisch prüfen,
+- fehlende Abhängigkeiten sinnvoll automatisch auflösen,
+- Formatierung und sinnvolle Tests automatisiert anstoßen,
+- Nutzer klar informieren: geprüft, fehlt, gelöst, nächster Schritt.
 
-## 4) Vollautomatische Prüfung & Start-Routine
-Pflichtziel: Start-Routine prüft automatisch Voraussetzungen und löst Abhängigkeiten soweit möglich automatisiert auf.
+Debug-/Logging-Modus muss laienverständlich bleiben und konkrete Lösungswege nennen.
 
-Anforderungen:
-- Bei Start klare Nutzer-Rückmeldung: was geprüft wurde, was fehlt, wie es gelöst wurde.
-- Automatische sinnvolle Tests für Codequalität.
-- Automatisches Code-Formatting als standardisierter Schritt.
-- Fehlerausgaben enthalten einfache Lösungsvorschläge.
+---
 
-────────────────────────────────────────────────────────────
+## 6) Gates (Reihenfolge fix)
+Alle Gates mit Exitcode 0:
+1. `python -m compileall -q .`
+2. `bash tools/run_quality_checks.sh`
+3. `python tools/smoke_test.py`
+4. `bash start.sh`
+5. Mini-UX-Check (2 Minuten):
+   - verständliche deutsche Dialoge,
+   - Fehlerdialog mit Next Steps,
+   - kein Crash im betroffenen Bereich,
+   - Kontrast/Fokus geprüft.
 
-## 5) Gates (Reihenfolge fix, Exitcode 0 erwartet)
-GATE 1 – Syntax:
-- `python -m compileall -q .`
+Wenn ein Gate fehlschlägt:
+- ein gezielter Fix in derselben Iteration,
+- Gates erneut laufen lassen,
+- bei erneutem Fehlschlag: in `todo.txt` als NEXT ITERATION dokumentieren.
 
-GATE 2 – Repo-Quality:
-- `bash tools/run_quality_checks.sh`
+---
 
-GATE 3 – Smoke (wenn vorhanden):
-- `python tools/smoke_test.py`
+## 7) Pflicht-Dokumentation pro Iteration
+Immer aktualisieren:
+- `README.md` (Fortschritt %, Abgeschlossen, Offen),
+- `CHANGELOG.md` (Was, Warum, Wirkung),
+- `todo.txt` (`DONE` + `NEXT` mit Datum),
+- `data/version_registry.json` (global_version + geänderte Dateien).
 
-GATE 4 – End-to-End Start:
-- `bash start.sh`
+Regel Version-Registry:
+- `global_version` = Iterationsdatum `YYYY.MM.DD`.
+- Jede geänderte Datei muss einen aktualisierten Eintrag erhalten.
 
-GATE 5 – Mini-UX-Check (2 Minuten):
-- deutsche, verständliche Dialoge im betroffenen Bereich
-- Fehlerdialog mit Next Steps (z. B. „Erneut versuchen“, „Reparatur“, „Protokoll“)
-- betroffene Funktion läuft ohne Crash
-- Barrierefreiheit/Kontrast im betroffenen Bereich geprüft
+---
 
-Wenn ein Gate rot:
-- 1 gezielter Fix in derselben Iteration
-- Gates erneut
-Wenn erneut rot:
-- STOP → NEXT ITERATION planen
+## 8) Definition of Done
+DONE nur wenn:
+- 3 Punkte vollständig abgeschlossen,
+- mindestens 1 A11y-/Hilfe-/Textpunkt erfüllt,
+- merge-ready ohne Pflichtlücken,
+- Gates grün oder sauber als NEXT ITERATION dokumentiert,
+- README + CHANGELOG + todo + version_registry aktualisiert,
+- Release-Reifegrad sichtbar erhöht.
 
-────────────────────────────────────────────────────────────
+---
 
-## 6) Dokumentation (pro Iteration Pflicht)
-### 6.0 README-Status
-README regelmäßig aktualisieren (mindestens alle 2–3 Iterationen oder sofort bei kritischen Scope-/Release-Änderungen):
-- exakte Prozentzahl Fortschritt (z. B. `81%`)
-- Liste **Abgeschlossen**
-- Liste **Offen**
-
-### 6.1 CHANGELOG.md (Mini)
-- 3 Zeilen: Was, Warum, Wirkung
-
-### 6.2 todo.txt (Pflicht)
-- `DONE: … (Datum)`
-- `NEXT: … (Datum)`
-
-### 6.3 Ergebnis-Hinweise
-- Immer 2 kurze Laienvorschläge (leicht verständlich)
-- Immer 1 detaillierter nächster Schritt in einfacher Sprache
-
-────────────────────────────────────────────────────────────
-
-## 7) Definition of Done (nur dann DONE)
- Eine Iteration ist nur DONE, wenn:
- - drei klar definierte Punkte vollständig abgeschlossen sind
- - mindestens eine Aufgabe eine sinnvolle Erweiterung der Hilfselemente, Texte oder Barrierefreiheit darstellt
- - merge-ready (kein offener Pflichtpunkt)
- - Change-Scope eingehalten
- - Gates grün ODER sauber als NEXT ITERATION dokumentiert
- - README + CHANGELOG + todo aktualisiert
- - mindestens 1 Hilfeelement verbessert/ergänzt
- - mindestens 1 Accessibility-Aspekt verbessert/geprüft
- - Release-Reifegrad erhöht und klar dokumentiert
-
-────────────────────────────────────────────────────────────
-
-## 8) Merge- und Release-Flow (Standard)
-Nach jeder DONE-Iteration:
-- zeitnah mergen (kein unnötiges Warten)
- - direkt die nächsten drei kleinsten vollständigen Punkte planen
-- immer auf vollständig release-fertig hinarbeiten
-
-Release-Doku bei Release-bezogenen Iterationen zusätzlich:
-- `RELEASE_CHECKLIST.md` aktualisieren (Fortschritt %, Abgeschlossen, Offen, nächster Schritt)
-- README-Release-Status synchron halten
-- `docs/developer_manual.md` um nächsten technischen Release-Schritt ergänzen
-
-Minimalformat:
-- Fortschritt: `X%`
-- Abgeschlossen: `N`
-- Offen: `M`
-- Nächster Schritt: 1 klarer Arbeitsschritt mit einfacher Begründung
-
-────────────────────────────────────────────────────────────
-
-## 9) Iterations-Template (zwingend)
-### A) Fundstelle (beobachten)
+## 9) Kurzes Iterations-Template
+### A) Fundstelle
 - Problem:
 - Risiko:
 - Erwartung:
 
-### B) Change-Scope (vor Patch)
+### B) Scope
 - Ziel:
 - Dateien:
 - Patch-Block je Datei:
 - Abnahmekriterium:
 
-### C) Patch (kurz)
- - Punkt 1 – Änderung:
- - Punkt 2 – Änderung:
- - Punkt 3 – Änderung:
+### C) Umsetzung (3 Punkte)
+- Punkt 1:
+- Punkt 2:
+- Punkt 3:
 
 ### D) Gates
 - G1:
@@ -178,32 +131,7 @@ Minimalformat:
 - G5:
 
 ### E) Ergebnis
-- Status: DONE / NEXT ITERATION (wenn einer der 2 Punkte offen bleibt)
-- Doku: README + CHANGELOG + todo aktualisiert
-- Laienvorschläge: 2 kurze Empfehlungen
-- Nächster Schritt: 1 detaillierter Vorschlag in einfacher Sprache
-
-## 10) Versionierung und Registry (neu)
-
-Alle Änderungen am Code oder an Dokumenten müssen in der Versions‑Registry (`data/version_registry.json`) nachgeführt werden.
-
-Richtlinien:
-
-- **global_version**: Setzt das Datum der letzten Iteration im Format `YYYY.MM.DD`.
-- **files**: Für jede geänderte Datei muss die Versionsnummer (Datum oder, bei Dokumenten, eine Nummer) erhöht oder eingetragen werden.
-- Das Aktualisieren der Registry zählt als Teil der Iterationsarbeit und darf keine weiteren Dateien beeinflussen.
-- Änderungen ohne Anpassung der Registry gelten als unvollständig.
-
-Beispiel:
-
-```json
-{
-  "global_version": "2026.02.11",
-  "files": {
-    "app/main.py": "2026.02.11",
-    "core/settings.py": "2026.02.11",
-    "start.sh": "2026.02.11",
-    "AGENTS.md": "2.3"
-  }
-}
-```
+- Status: DONE / NEXT ITERATION
+- Doku aktualisiert: README + CHANGELOG + todo + version_registry
+- 2 Laienvorschläge:
+- 1 detaillierter nächster Schritt (einfach erklärt):
