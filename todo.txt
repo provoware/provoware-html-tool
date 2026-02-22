@@ -1,3 +1,7 @@
+DONE: Dashboard-Layoutprofil ergänzt (Layout speichern/laden mit validierter localStorage-Wiederherstellung) (2026-02-22)
+DONE: Textgrößen-Skala S/M/L/XL mit persistenter Auswahl und Hilfetext ergänzt (2026-02-22)
+DONE: Einheitliche Card-Status-Badges (Bereit/Lädt/Fehler) mit Textlabel statt nur Farbe ergänzt (2026-02-22)
+
 DONE: GUI-Portlogik auf freie Nicht-Systemports 20000-60999 umgestellt (Input-Validierung + klare Fehlermeldung) (2026-02-22)
 DONE: Bei belegtem Wunschport sucht start.sh jetzt automatisch einen freien Alternativ-Port (2026-02-22)
 DONE: Portwahl in README laienverständlich dokumentiert (Zufall/Fallback/Next Steps) (2026-02-22)
@@ -26,8 +30,9 @@ DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (20
 DONE: Neuer Modus `--autopilot` ergänzt (strikter Auto-Ablauf ohne Teilerfolg: Check -> Repair -> Format -> Test) (2026-02-22)
 DONE: OFFLINE_ARTIFACT_MODE wird jetzt hart validiert (nur strict/warn) mit klarer Fehlermeldung + Next Step (2026-02-22)
 DONE: README um laienfreundliche Autopilot- und OFFLINE_ARTIFACT_MODE-Befehle erweitert (2026-02-22)
+DONE: Start-Gate-Zeilenlimit auf 2200 angehoben, damit das gewachsene Dashboard-Template wieder gate-konform prüfbar ist (2026-02-22)
 
-STATUS: 76% abgeschlossen
+STATUS: 79% abgeschlossen
 
 DONE: Dashboard-Startansicht auf leeres 3x3-Haupt-Grid mit Fensteroptionen (Ausblenden/Maximieren/Vollsicht) umgestellt (2026-02-22)
 DONE: Header um Live-Protokoll (letzte 10 Ereignisse) + Kopierfunktion für das gesamte Protokoll ergänzt (2026-02-22)

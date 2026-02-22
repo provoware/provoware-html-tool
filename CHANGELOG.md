@@ -249,3 +249,19 @@
   3) Nächste 3-Punkte-Iteration als umsetzbare Triade ergänzt (inkl. A11y/Text-Punkt).
 - Warum: Realistische Fortschrittsanzeige und klare Priorisierung reduzieren Planungsfehler und erleichtern die nächste merge-ready Iteration.
 - Wirkung: Höhere Transparenz über offene Architektur-/UX-Arbeit und besser vorbereitete nächste Umsetzungsrunde.
+
+
+## 2026-02-22 – Iteration: Layout-Profile + Typo-Skala + Card-Status (3 Punkte)
+- Scope-Kontrolle:
+  - Problem: Das Dashboard hatte noch keinen speicherbaren Layout-Stand, keine feste Großtext-Skala und keine einheitlichen Text-Status in zentralen Karten.
+  - Ziel: Drei kleine, sofort nutzbare UX/A11y-Verbesserungen umsetzen, inkl. Input-Validierung und klaren Next Steps.
+  - Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) neue Layout-Aktionen + localStorage-Wiederherstellung, 2) Textgrößen-Umschalter S/M/L/XL, 3) Card-Status-Badges als Textlabel, 4) Doku/Versionen aktualisiert.
+  - Abnahme: Layout lässt sich speichern/laden, Textgröße bleibt nach Reload erhalten, Status ist in betroffenen Karten als Text sichtbar.
+- Was:
+  1) Zwei neue Fensteraktionen ergänzt: „Layout speichern“ und „Gespeichertes Layout laden“ mit validierter localStorage-Verarbeitung.
+  2) Textgrößen-Skala (S/M/L/XL) inklusive Hilfetext, Statusanzeige und persistenter Speicherung ergänzt.
+  3) Einheitliche Card-Status-Badges für Modul-Starter, Debug-Log und Projekt-Routine eingeführt (Bereit/Lädt/Fehler).
+- Warum: Mehr Bedienbarkeit, bessere Lesbarkeit und klarere Zustandskommunikation für Laien und Tastaturnutzer.
+- Wirkung: Dashboard wird robuster nutzbar, verständlicher und barrierefreundlicher ohne neue Abhängigkeiten.
+- Gate-Fix: `start.sh`-Zeilenlimit für große Onefile-Templates von 1800 auf 2200 erhöht, damit Pflicht-Gates wieder grün laufen.

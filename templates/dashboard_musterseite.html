@@ -306,6 +306,21 @@
       color: var(--muted);
       font-size: .82rem;
     }
+    .card-state {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      margin-top: .4rem;
+      padding: .1rem .5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(127, 168, 255, 0.55);
+      font-size: .85rem;
+      color: var(--muted);
+      background: rgba(10, 21, 44, 0.72);
+    }
+    .card-state[data-state="ready"] { border-color: #8bf2ac; color: #8bf2ac; }
+    .card-state[data-state="loading"] { border-color: #ffd26d; color: #ffd26d; }
+    .card-state[data-state="error"] { border-color: #ffb487; color: #ffb487; }
     .plugin-status-list {
       margin: .4rem 0 0;
       padding: 0;
@@ -572,6 +587,8 @@
         <button type="button" data-action="window-maximize">Fenster maximieren</button>
         <button type="button" data-action="window-reset">Volle Sicht wiederherstellen</button>
         <button type="button" data-action="window-detach">Als Einzelfenster öffnen</button>
+        <button type="button" data-action="layout-save">Layout speichern</button>
+        <button type="button" data-action="layout-restore">Gespeichertes Layout laden</button>
       </div>
       <section class="main-grid" aria-label="Leeres Haupt-Grid 3x3">
         <div class="main-grid-cell">Feld 1 (frei)</div>
@@ -603,6 +620,7 @@
         <article class="tool-card tool-card-primary" data-accent="c" aria-labelledby="modul-starter-title">
           <p class="card-tag">Priorität: Hoch</p>
           <h2 id="modul-starter-title">Modul-Starter</h2>
+          <p class="card-state" id="module-card-state" data-state="ready" role="status" aria-live="polite">Status: Bereit</p>
           <label for="module-switcher"><strong>Modul wählen:</strong></label>
           <select id="module-switcher" aria-describedby="module-help shortcut-help">
             <option value="">Bitte Modul auswählen</option>
@@ -677,6 +695,7 @@
         <article class="tool-card tool-card-secondary" data-accent="b">
           <p class="card-tag">Status und Hilfe</p>
           <h2>Debug-Log</h2>
+          <p class="card-state" id="debug-card-state" data-state="ready" role="status" aria-live="polite">Status: Bereit</p>
           <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
           <p class="subline" id="debug-last-event" data-debug-event>Letztes Ereignis: Startzustand um --:--:--.</p>
           <p class="subline" id="debug-next-step" data-debug-next-step>Nächster Schritt: Aktion wählen oder Alt+L für Protokoll nutzen.</p>
@@ -688,6 +707,7 @@
         <article class="tool-card tool-card-primary" data-accent="a" aria-labelledby="projekt-routine-title">
           <p class="card-tag">Start-Routine Projektordner</p>
           <h2 id="projekt-routine-title">Projekt-Routine</h2>
+          <p class="card-state" id="project-card-state" data-state="loading" role="status" aria-live="polite">Status: Lädt</p>
           <p id="project-path-status" class="result" role="status" aria-live="polite">Projektordner: wird beim Start geprüft…</p>
           <p class="subline" id="project-path-help">Hilfe (Help = Unterstützung): Der Pfad wird in der Start-Routine geprüft und bei Bedarf automatisch erstellt.</p>
           <div class="actions">
@@ -724,6 +744,17 @@
           <p class="subline" id="theme-status" role="status" aria-live="polite">Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.</p>
         </li>
         <li class="settings-item" id="module-help">Modulhilfe: Wählen Sie links ein Modul und öffnen Sie es mit Alt+O. Bei Fehlern folgen Sie den Next Steps im Debug-Log.</li>
+        <li class="settings-item">
+          <label for="font-scale-switcher"><strong>Textgröße:</strong></label>
+          <select id="font-scale-switcher" aria-describedby="font-scale-help">
+            <option value="s">S (kompakt)</option>
+            <option value="m">M (standard)</option>
+            <option value="l">L (größer)</option>
+            <option value="xl">XL (sehr groß)</option>
+          </select>
+          <p id="font-scale-help">Hilfe: Größere Textgröße verbessert Lesbarkeit. Die Auswahl wird lokal gespeichert.</p>
+          <p class="subline" id="font-scale-status" role="status" aria-live="polite">Textgröße: M (standard).</p>
+        </li>
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
       </ul>
     </aside>
@@ -771,6 +802,11 @@
       const debugEventNode = document.getElementById('debug-last-event');
       const debugNextStepNode = document.getElementById('debug-next-step');
       const themeStatusNode = document.getElementById('theme-status');
+      const fontScaleSelector = document.getElementById('font-scale-switcher');
+      const fontScaleStatusNode = document.getElementById('font-scale-status');
+      const moduleCardStateNode = document.getElementById('module-card-state');
+      const debugCardStateNode = document.getElementById('debug-card-state');
+      const projectCardStateNode = document.getElementById('project-card-state');
       const moduleSelector = document.getElementById('module-switcher');
       const moduleStatusNode = document.getElementById('module-status');
       const projectStatusNode = document.getElementById('project-path-status');
@@ -784,6 +820,8 @@
       const pluginStatusListNode = document.getElementById('plugin-status-list');
       const moduleOptionListNode = document.getElementById('module-option-list');
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
+      const LAYOUT_STORAGE_KEY = 'provoware-layout-profile';
+      const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
       const injectedModuleSources = typeof __MODULE_SOURCES__ !== 'undefined' ? __MODULE_SOURCES__ : null;
@@ -1399,7 +1437,6 @@
         }
         return true;
       }
-
       function normalizeModuleSources(rawValue) {
         if (!rawValue || typeof rawValue !== 'object' || Array.isArray(rawValue)) {
           appendDebugLog('⚠️ Modulquellen fehlen oder sind ungültig. Nächster Schritt: Start über "bash start.sh" wiederholen.');
@@ -1507,8 +1544,85 @@
         setResult('✅ Theme wurde gesetzt: ' + themeValue + '.');
         return true;
       }
+      function setCardState(node, stateValue, plainText) {
+        const allowed = ['ready', 'loading', 'error'];
+        if (!(node instanceof HTMLElement) || typeof plainText !== 'string' || !allowed.includes(stateValue)) {
+          return false;
+        }
+        node.setAttribute('data-state', stateValue);
+        node.textContent = 'Status: ' + plainText;
+        return true;
+      }
+      function readFontScalePreference() {
+        if (!(window.localStorage && typeof window.localStorage.getItem === 'function')) {
+          return 'm';
+        }
+        const saved = window.localStorage.getItem(FONT_SCALE_STORAGE_KEY);
+        const allowed = ['s', 'm', 'l', 'xl'];
+        return typeof saved === 'string' && allowed.includes(saved) ? saved : 'm';
+      }
+      function applyFontScale(scaleValue) {
+        const allowed = { s: '0.94', m: '1', l: '1.1', xl: '1.2' };
+        if (typeof scaleValue !== 'string' || !Object.prototype.hasOwnProperty.call(allowed, scaleValue)) {
+          setResult('⚠️ Ungültige Textgröße. Bitte S, M, L oder XL wählen.');
+          return false;
+        }
+        html.style.fontSize = allowed[scaleValue] + 'rem';
+        if (fontScaleSelector) {
+          fontScaleSelector.value = scaleValue;
+        }
+        if (fontScaleStatusNode) {
+          const labels = { s: 'S (kompakt)', m: 'M (standard)', l: 'L (größer)', xl: 'XL (sehr groß)' };
+          fontScaleStatusNode.textContent = 'Textgröße: ' + labels[scaleValue] + '.';
+        }
+        if (window.localStorage && typeof window.localStorage.setItem === 'function') {
+          window.localStorage.setItem(FONT_SCALE_STORAGE_KEY, scaleValue);
+        }
+        return true;
+      }
+      function saveLayoutProfile() {
+        if (!(shellNode instanceof HTMLElement)) {
+          return false;
+        }
+        const profile = {
+          width: shellNode.style.width || '',
+          margin: shellNode.style.margin || '',
+          opacity: shellNode.style.opacity || ''
+        };
+        if (!(window.localStorage && typeof window.localStorage.setItem === 'function')) {
+          setResult('⚠️ Layout kann hier nicht gespeichert werden.');
+          return false;
+        }
+        window.localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(profile));
+        return true;
+      }
+      function restoreLayoutProfile() {
+        if (!(shellNode instanceof HTMLElement) || !(window.localStorage && typeof window.localStorage.getItem === 'function')) {
+          return false;
+        }
+        const raw = window.localStorage.getItem(LAYOUT_STORAGE_KEY);
+        if (typeof raw !== 'string' || raw.trim().length === 0) {
+          setResult('⚠️ Kein gespeichertes Layout gefunden. Bitte zuerst „Layout speichern“ nutzen.');
+          return false;
+        }
+        let profile;
+        try {
+          profile = JSON.parse(raw);
+        } catch (error) {
+          setResult('⚠️ Gespeichertes Layout ist beschädigt. Bitte neu speichern.');
+          return false;
+        }
+        if (!profile || typeof profile !== 'object') {
+          setResult('⚠️ Layoutdaten ungültig. Bitte neu speichern.');
+          return false;
+        }
+        shellNode.style.width = typeof profile.width === 'string' ? profile.width : '';
+        shellNode.style.margin = typeof profile.margin === 'string' ? profile.margin : '';
+        shellNode.style.opacity = typeof profile.opacity === 'string' ? profile.opacity : '';
+        return true;
+      }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -1563,6 +1677,18 @@
           }
           return setResult('✅ Volle Sicht wiederhergestellt.');
         }
+        if (actionValue === 'layout-save') {
+          if (saveLayoutProfile()) {
+            return setResult('✅ Layout gespeichert. Nächster Schritt: Bei Bedarf „Gespeichertes Layout laden“ nutzen.');
+          }
+          return setResult('⚠️ Layout konnte nicht gespeichert werden.');
+        }
+        if (actionValue === 'layout-restore') {
+          if (restoreLayoutProfile()) {
+            return setResult('✅ Gespeichertes Layout geladen.');
+          }
+          return false;
+        }
         if (actionValue === 'window-detach') {
           const selected = moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '';
           const sourceMeta = getModuleSourceMeta(selected);
@@ -1583,6 +1709,7 @@
         if (actionValue === 'save') {
           const message = '✅ Gespeichert um ' + getTimeStamp() + '.';
           updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
+      setCardState(projectCardStateNode, 'ready', 'Bereit');
           setDebugDetails('Speichern abgeschlossen', 'Sie können jetzt sicher weiterarbeiten oder mit Alt+L das Protokoll öffnen.');
           return setResult(message);
         }
@@ -1600,6 +1727,7 @@
           return setResult('➡️ Protokollhinweis: Öffnen Sie logs/start.log');
         }
         if (actionValue === 'error') {
+          setCardState(debugCardStateNode, 'error', 'Fehlerhinweis aktiv');
           if (dialog && typeof dialog.showModal === 'function') {
             lastDialogTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
             dialog.showModal();
@@ -1654,6 +1782,12 @@
         themeSelector.addEventListener('change', function (event) {
           const value = event.target && typeof event.target.value === 'string' ? event.target.value : '';
           applyTheme(value);
+        });
+      }
+      if (fontScaleSelector) {
+        fontScaleSelector.addEventListener('change', function (event) {
+          const value = event.target && typeof event.target.value === 'string' ? event.target.value.trim().toLowerCase() : '';
+          applyFontScale(value);
         });
       }
       document.addEventListener('click', function (event) {
@@ -1737,6 +1871,7 @@
         setResult('✅ Reihenfolge aktualisiert (Drag&Drop).');
       });
       applyTheme(getThemePreference());
+      applyFontScale(readFontScalePreference());
       if (themeSelector) {
         themeSelector.value = html.getAttribute('data-theme') || 'high-contrast';
       }
@@ -1748,10 +1883,13 @@
         projectDialog.showModal();
       }
       gmsPlugin.mount();
+      setCardState(moduleCardStateNode, 'ready', 'Bereit');
+      setCardState(debugCardStateNode, 'ready', 'Bereit');
       setActiveNavigation('dashboard');
       setPluginStatus('dashboard');
       renderModuleSidebarOptions('dashboard', getModuleSourceMeta('dashboard'));
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
+      setCardState(projectCardStateNode, 'ready', 'Bereit');
       setDebugDetails('Startzustand aktiv', 'Wählen Sie ein Modul oder öffnen Sie bei Bedarf den Fehlerdialog.');
       appendDebugLog('ℹ️ Startzustand aktiv (' + getTimeStamp() + ').');
     })();
