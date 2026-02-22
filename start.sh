@@ -95,12 +95,29 @@ load_text_json() {
 
 	local candidate_json="$DEFAULT_TEXT_JSON"
 	if [[ -f "$TEXT_CONFIG_FILE" ]]; then
-		if command -v python3 >/dev/null 2>&1 && python3 -c 'import json,sys; json.load(open(sys.argv[1], encoding="utf-8"))' "$TEXT_CONFIG_FILE" >/dev/null 2>&1; then
-			candidate_json="$(cat "$TEXT_CONFIG_FILE")"
-			record_checked "Textkonfiguration geladen"
+		if command -v python3 >/dev/null 2>&1; then
+			local validation_output
+			validation_output="$(python3 -c 'import json,sys
+path=sys.argv[1]
+defaults=json.loads(sys.argv[2])
+with open(path, encoding="utf-8") as fh:
+    loaded=json.load(fh)
+if not isinstance(loaded, dict):
+    raise SystemExit("Formatfehler: Objekt (JSON mit Schlüsseln) erwartet")
+missing=[k for k in defaults if not isinstance(loaded.get(k), str) or not loaded.get(k).strip()]
+if missing:
+    raise SystemExit("Pflichttexte fehlen oder sind leer: " + ", ".join(missing))
+print(json.dumps(loaded, ensure_ascii=False))' "$TEXT_CONFIG_FILE" "$DEFAULT_TEXT_JSON" 2>&1)" || true
+			if [[ -n "$validation_output" ]] && [[ "$validation_output" == \{* ]]; then
+				candidate_json="$validation_output"
+				record_checked "Textkonfiguration geladen (config/messages.json)"
+			else
+				record_missing "Textkonfiguration ungültig"
+				record_next_step "Konfigurationsdatei config/messages.json prüfen: $validation_output"
+			fi
 		else
-			record_missing "Textkonfiguration ungültig"
-			record_next_step "Konfigurationsdatei config/messages.json prüfen und erneut versuchen"
+			record_missing "python3 für Textkonfiguration fehlt"
+			record_next_step "python3 installieren oder sichere Standardtexte nutzen"
 		fi
 	fi
 

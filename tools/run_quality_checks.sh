@@ -6,6 +6,7 @@ TARGET_FILES=("${PROJECT_ROOT}/start.sh" "${PROJECT_ROOT}/system/start_core.sh" 
 CONTRAST_CHECK="${PROJECT_ROOT}/tools/check_theme_contrast.py"
 FOCUS_CHECK="${PROJECT_ROOT}/tools/focus_order_check.py"
 SMOKE_CHECK="${PROJECT_ROOT}/tools/smoke_test.py"
+MESSAGES_CONFIG="${PROJECT_ROOT}/config/messages.json"
 
 print_step() {
   local icon="$1"
@@ -41,7 +42,7 @@ for target_file in "${TARGET_FILES[@]}"; do
   fi
 done
 
-for required_file in "$CONTRAST_CHECK" "$FOCUS_CHECK" "$SMOKE_CHECK"; do
+for required_file in "$CONTRAST_CHECK" "$FOCUS_CHECK" "$SMOKE_CHECK" "$MESSAGES_CONFIG"; do
   if [[ ! -f "$required_file" ]]; then
     print_step "❌" "Qualitätsprüfung abgebrochen: Datei fehlt (${required_file#${PROJECT_ROOT}/})."
     print_step "➡️" "Nächster Schritt: Fehlende Datei wiederherstellen und erneut prüfen."
@@ -57,6 +58,17 @@ fi
 
 print_step "✅" "Qualitätsprüfung gestartet (effizienter Standardlauf)."
 run_checked_command "Syntaxprüfung (python -m compileall -q .)" python3 -m compileall -q "$PROJECT_ROOT"
+
+run_checked_command "JSON-Prüfung (config/messages.json)" python3 -c 'import json,sys
+path=sys.argv[1]
+with open(path, encoding="utf-8") as fh:
+    data=json.load(fh)
+if not isinstance(data, dict) or not data:
+    raise SystemExit("messages.json ist leer oder kein Objekt")
+missing=[k for k,v in data.items() if not isinstance(v, str) or not v.strip()]
+if missing:
+    raise SystemExit("Leere oder ungültige Textwerte: " + ", ".join(missing))
+print("messages.json gültig")' "$MESSAGES_CONFIG"
 
 if command -v shfmt >/dev/null 2>&1; then
   run_checked_command "Formatierung (shfmt)" shfmt -w "${TARGET_FILES[@]}"

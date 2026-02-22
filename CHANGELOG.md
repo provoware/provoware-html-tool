@@ -265,3 +265,18 @@
 - Warum: Mehr Bedienbarkeit, bessere Lesbarkeit und klarere Zustandskommunikation für Laien und Tastaturnutzer.
 - Wirkung: Dashboard wird robuster nutzbar, verständlicher und barrierefreundlicher ohne neue Abhängigkeiten.
 - Gate-Fix: `start.sh`-Zeilenlimit für große Onefile-Templates von 1800 auf 2200 erhöht, damit Pflicht-Gates wieder grün laufen.
+
+
+## 2026-02-22 – Texte als zentrale JSON-Quelle abgesichert
+- Scope-Kontrolle:
+  - Problem: Textbausteine waren zwar vorgesehen, aber `config/messages.json` fehlte als gepflegte Hauptquelle.
+  - Ziel: Texte sauber auslagern, validieren und in den Quality-Gates sichtbar prüfen.
+  - Dateien: `start.sh`, `config/messages.json`, `tools/run_quality_checks.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Text-Loader mit Pflichtfeld-Prüfung in `start.sh`, 2) neue zentrale Textdatei `config/messages.json`, 3) JSON-Prüfung im Quality-Skript, 4) Pflicht-Doku aktualisiert.
+  - Abnahme: `bash tools/run_quality_checks.sh` meldet die JSON-Prüfung erfolgreich und `bash start.sh --check` lädt die Textkonfiguration ohne Fehler.
+- Was:
+  1) Neue Datei `config/messages.json` als zentrale, editierbare Textquelle ergänzt.
+  2) `start.sh` validiert jetzt beim Laden alle Pflichttexte auf „vorhanden + nicht leer“.
+  3) `tools/run_quality_checks.sh` enthält einen expliziten Gate-Schritt für die Text-JSON.
+- Warum: Einheitliche Texte verbessern Wartbarkeit, Übersetzbarkeit und Barrierefreiheit (klare, konsistente Sprache).
+- Wirkung: Bessere Release-Reife durch früh sichtbare Konfigurationsfehler und weniger verstreute Textpflege.

@@ -128,3 +128,9 @@ NEXT ITERATION TRIAD (Vorschlag)
 1) P0: 6-Bereich-Layout als Grid-Zonenstandard + Auto-Collapse bei schmalen Containern.
 2) P0: Docking/Resize/Collapse + „Reset Layout“/„Layout speichern" (localStorage-Profile).
 3) P1 (A11y/Hilfe): Typo-Skala S/M/L/XL + klare Card-States (Empty/Loading/Error/Ready) mit Textstatus.
+
+
+DONE: Zentrale Textdatei `config/messages.json` ergänzt und mit vorhandenen Hilfetexten befüllt (2026-02-22)
+DONE: start.sh prüft Text-JSON jetzt auf Pflichtfelder und leere Werte mit klarer Fehlhilfe (2026-02-22)
+DONE: run_quality_checks enthält eigene JSON-Prüfung für Tool-Texte (2026-02-22)
+NEXT: Theme-Auswahl im Dashboard mit zusätzlicher Kontrast-Vorschau pro Theme ergänzen (2026-02-23)
