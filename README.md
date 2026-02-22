@@ -16,7 +16,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 ```
 
 ## Entwicklungsstand
-- Fortschritt: **86%**
+- Fortschritt: **88%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -47,6 +47,10 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - Hilfe-/Textpunkt: Fehlende optionale Suche (`rg`) wird verständlich erklärt („langsamer, aber funktionsfähig“) und mit Next Step versehen.
 - Neu in dieser Iteration: Quality-Gate prüft automatisch, ob README oben den Sofortblock und unten den Konsolen-Spickzettel vollständig enthält (mit klarer Fehlerhilfe).
 
+
+- Neu in dieser Iteration: Footer zeigt jetzt echte Live-Werte (Version, aktiver Projektpfad, Backup-Status) statt statischer Platzhaltertexte.
+- Neu in dieser Iteration: Theme-Hilfe ergänzt eine klare Kontrast-Vorschau pro Theme (Text statt nur Farbe).
+- Neu in dieser Iteration: Theme-Liste in `config/themes.json` ist mit Dashboard und Validierung harmonisiert (`balanced`, `high-contrast`, `light`, `dark`).
 - **Offen**
   - (Erledigt) Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
