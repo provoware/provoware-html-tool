@@ -164,6 +164,7 @@ $(get_text "help_usage")
   ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
   ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
   ./start.sh --full-gates Vollständige Gates 1-4 strikt nacheinander ausführen
+  ./start.sh --ux-check-auto Automatischer Mini-UX-Check für Texte, Next Steps und A11y-Marker
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
   ./start.sh --help      Hilfe anzeigen
@@ -335,6 +336,10 @@ validate_args() {
 			;;
 		--dashboard-template)
 			MODE="dashboard-template"
+			mode_count=$((mode_count + 1))
+			;;
+		--ux-check-auto)
+			MODE="ux-check-auto"
 			mode_count=$((mode_count + 1))
 			;;
 		--debug)
@@ -875,6 +880,61 @@ run_full_gates_mode() {
 	return 1
 }
 
+run_auto_ux_check_mode() {
+	print_step "✅" "Automatischer Mini-UX-Check gestartet (Texte, Next Steps, A11y, Kontrast-Hinweise)."
+	local template_file="${PROJECT_ROOT}/templates/dashboard_musterseite.html"
+	if [[ ! -f "$template_file" ]]; then
+		print_error_with_actions "Mini-UX-Check fehlgeschlagen: Dashboard-Template fehlt."
+		record_missing "Mini-UX-Template"
+		record_next_step "Datei templates/dashboard_musterseite.html wiederherstellen und erneut starten"
+		return 1
+	fi
+
+	if python3 - "$template_file" <<'PY'; then
+from pathlib import Path
+import re
+import sys
+
+template_path = Path(sys.argv[1])
+content = template_path.read_text(encoding="utf-8")
+
+required_markers = {
+    "next_steps": 'id="hilfe-next-steps"',
+    "error_dialog": 'id="error-dialog"',
+    "a11y_modal": 'aria-modal="true"',
+    "theme_help": 'id="theme-help"',
+    "theme_desc": 'aria-describedby="theme-help"',
+}
+missing_markers = [label for label, marker in required_markers.items() if marker not in content]
+if missing_markers:
+    print("fehlende Marker: " + ", ".join(missing_markers))
+    raise SystemExit(1)
+
+next_step_commands = ["./start.sh", "./start.sh --repair", "cat logs/status_summary.txt"]
+if any(cmd not in content for cmd in next_step_commands):
+    print("fehlende Next-Step-Befehle im Hilfebereich")
+    raise SystemExit(1)
+
+if "hoher Kontrast" not in content or "Theme" not in content:
+    print("fehlende Kontrast- oder Theme-Hinweise")
+    raise SystemExit(1)
+
+if len(re.findall(r"Nächster|nächsten Schritte|Erneut versuchen|Reparatur", content, flags=re.IGNORECASE)) < 4:
+    print("zu wenige leicht verständliche Hilfetexte")
+    raise SystemExit(1)
+PY
+		print_step "✅" "Mini-UX-Check erfolgreich: Deutsche Hilfetexte, Next Steps und A11y-Marker sind vollständig."
+		record_checked "Mini-UX-Check"
+		record_next_step "Optional: Template im Browser öffnen und Dialogfluss per Tastatur (Tab/Enter) manuell prüfen"
+		return 0
+	fi
+
+	print_error_with_actions "Mini-UX-Check fehlgeschlagen: Pflichttexte oder A11y-Marker sind unvollständig."
+	record_missing "Mini-UX-Check"
+	record_next_step "Template-Hinweise ergänzen und './start.sh --ux-check-auto' erneut starten"
+	return 1
+}
+
 print_safe_mode_help() {
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_1")")"
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_2")")"
@@ -951,6 +1011,9 @@ main() {
 		;;
 	full-gates)
 		run_full_gates_mode
+		;;
+	ux-check-auto)
+		run_auto_ux_check_mode
 		;;
 	repair)
 		run_repair_mode

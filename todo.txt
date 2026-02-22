@@ -1,7 +1,7 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-DONE: Full-Gates-Modus (`--full-gates`) ergänzt, barrierearmen Statusbericht (`logs/status_summary.txt`) eingeführt und Dashboard-Template um Hilfebereich mit klaren Next Steps erweitert. (2026-02-22)
-NEXT: WCAG-Kontrasttest automatisieren und Theme-Farbwerte zentral aus Template in eine gemeinsame Konfigurationsdatei auslagern. (2026-02-22)
+DONE: Mini-UX-Autocheck (`--ux-check-auto`) ergänzt, Theme-Hilfetext für Screenreader erweitert und Smoke-Test um UX-Prüfung ergänzt. (2026-02-22)
+NEXT: WCAG-Kontrasttest (automatische Kontrast-Prüfung) als eigenen Gate-Schritt ergänzen und CI-Ausführung anbinden. (2026-02-22)
 
 ## Iteration 2026-02-22 (Full-Gates + Statusbericht + Hilfe)
 ### A) Fundstelle (beobachten)
@@ -34,3 +34,9 @@ NEXT: WCAG-Kontrasttest automatisieren und Theme-Farbwerte zentral aus Template 
   1. Nutzen Sie zuerst `./start.sh --full-gates`, damit alle Kernprüfungen automatisch und in richtiger Reihenfolge laufen.
   2. Öffnen Sie danach `cat logs/status_summary.txt`, weil dort alle Ergebnisse in einfacher Sprache gesammelt stehen.
 - Nächster Schritt: Ergänzen Sie als Nächstes einen automatischen Kontrastrechner, der bei jedem Lauf alle Theme-Farben gegen WCAG-Mindestwerte prüft und bei Fehlern direkt Korrekturvorschläge ausgibt.
+
+
+## Iteration 2026-02-22 (Mini-UX-Autocheck + Theme-Hilfe + Smoke)
+- 3 Punkte abgeschlossen: neuer Auto-UX-Check in start.sh, verbesserte Theme-Hilfe im Template, Smoke-Test-Erweiterung.
+- Hilfe/A11y erweitert: Theme-Hilfe mit Screenreader-Bezug und beschreibendem Attribut (`aria-describedby`).
+- Nächster technischer Schritt: automatischen Kontrastrechner als zusätzliches Gate einbauen.

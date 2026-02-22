@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-full-gates-status-help",
+  "iteration": "2026.02.22-mini-ux-autocheck-theme-help-smoke",
   "files": {
     "start.sh": "2026.02.22",
     "tools/smoke_test.py": "2026.02.22",

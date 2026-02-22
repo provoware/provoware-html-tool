@@ -73,6 +73,26 @@ if "einsatzbereit" not in template_result.stdout:
     sys.exit(1)
 
 
+print_step("✅", "Smoke-Test erweitert: ./start.sh --ux-check-auto")
+ux_result = subprocess.run(
+    ["bash", str(START_SCRIPT), "--ux-check-auto"],
+    cwd=PROJECT_ROOT,
+    text=True,
+    capture_output=True,
+)
+
+if ux_result.returncode != 0:
+    print_step("❌", "Smoke-Test fehlgeschlagen: --ux-check-auto lieferte Fehler.")
+    print(ux_result.stdout)
+    print(ux_result.stderr)
+    print_step("➡️", "Nächster Schritt: UX-Hinweise im Template ergänzen und erneut testen.")
+    sys.exit(ux_result.returncode)
+
+if "Mini-UX-Check erfolgreich" not in ux_result.stdout:
+    print_step("❌", "Smoke-Test fehlgeschlagen: UX-Erfolgsausgabe fehlt.")
+    print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --ux-check-auto' prüfen.")
+    sys.exit(1)
+
 if os.environ.get("SKIP_FULL_GATES") != "1":
     print_step("✅", "Smoke-Test erweitert: ./start.sh --full-gates")
     full_gates_result = subprocess.run(
@@ -114,6 +134,8 @@ required_markers = [
     'class="skip-link"',
     'aria-modal="true"',
     'id="hilfe-next-steps"',
+    'id="theme-help"',
+    'aria-describedby="theme-help"',
 ]
 missing = [marker for marker in required_markers if marker not in content]
 if missing:
