@@ -351,6 +351,8 @@ required_markers = [
     'aria-keyshortcuts="Alt+O"',
     'id="module-switcher"',
     'id="module-status"',
+    'id="module-source-preview"',
+    'id="project-switch-input" type="text" value="" placeholder="/home/name/Projektordner"',
     'id="module-help"',
     'id="debug-log-list"',
     'data-action="open-module"',

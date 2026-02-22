@@ -603,7 +603,7 @@
         <label>
           <span class="breadcrumb" id="project-breadcrumb">Projektpfad: noch nicht gesetzt</span>
           Projekt-Kontext
-          <input id="project-switch-input" type="text" value="/workspace/provoware-html-tool" aria-describedby="project-switch-help">
+          <input id="project-switch-input" type="text" value="" placeholder="/home/name/Projektordner" aria-describedby="project-switch-help">
         </label>
         <label for="global-search-input">Globale Suche
           <input id="global-search-input" type="search" placeholder="Modul, Aktion oder Hilfe suchen" aria-describedby="global-search-status">
@@ -667,6 +667,7 @@
             <button type="button" data-action="open-module" aria-keyshortcuts="Alt+O" aria-describedby="module-help shortcut-help">Modul öffnen</button>
           </div>
           <p class="result" id="module-status" role="status" aria-live="polite">Noch kein Modul geöffnet.</p>
+          <p class="subline" id="module-source-preview">Kurzdetails: Bitte Modul auswählen, um Datenquelle und nächsten Schritt zu sehen.</p>
         </article>
         <article class="tool-card tool-card-primary" data-accent="b" id="gms-archiv-view" aria-labelledby="gms-title">
           <p class="card-tag">Plugin: Hauptmodul-Ansicht</p>
@@ -1644,9 +1645,23 @@
         const detail = typeof sourceMeta.detail === 'string' ? sourceMeta.detail.trim() : '';
         const nextStep = typeof sourceMeta.next_step === 'string' ? sourceMeta.next_step.trim() : '';
         if (!label || !dataSource || !detail || !nextStep) {
+          appendDebugLog('⚠️ Modulquelle unvollständig für "' + normalizedKey + '". Nächster Schritt: config/module_sources.json prüfen.');
           return null;
         }
         return { label: label, dataSource: dataSource, detail: detail, nextStep: nextStep };
+      }
+      function renderModulePreview(selectedModule) {
+        const previewNode = document.getElementById('module-source-preview');
+        if (!(previewNode instanceof HTMLElement)) {
+          return false;
+        }
+        const sourceMeta = getModuleSourceMeta(selectedModule);
+        if (!sourceMeta) {
+          previewNode.textContent = 'Kurzdetails: Keine gültige Modulauswahl. Nächster Schritt: Modul wählen und erneut versuchen.';
+          return false;
+        }
+        previewNode.textContent = 'Kurzdetails: ' + sourceMeta.detail + ' Datenquelle: ' + sourceMeta.dataSource + '. Nächster Schritt: ' + sourceMeta.nextStep + '.';
+        return true;
       }
       function openModule(selectedModule) {
         const sourceMeta = getModuleSourceMeta(selectedModule);
@@ -1660,6 +1675,7 @@
         const debugTitle = 'Modul gewechselt zu ' + sourceMeta.label;
         const debugStep = sourceMeta.detail + ' Nächster Schritt: ' + sourceMeta.nextStep;
         setModuleStatus(statusText);
+        renderModulePreview(selectedModule);
         setActiveNavigation(selectedModule);
         setPluginStatus(selectedModule);
         renderModuleSidebarOptions(selectedModule, sourceMeta);
@@ -2081,6 +2097,13 @@
           globalSearchStatusNode.textContent = 'Suche aktiv: "' + value + '". Nächster Schritt: Passendes Modul öffnen.';
         });
       }
+      if (moduleSelector) {
+        moduleSelector.addEventListener('change', function (event) {
+          const target = event.target;
+          const selectedValue = target && typeof target.value === 'string' ? target.value.trim() : '';
+          renderModulePreview(selectedValue);
+        });
+      }
       document.addEventListener('click', function (event) {
         const target = event.target;
         if (!(target instanceof HTMLElement)) {
@@ -2188,6 +2211,7 @@
       setActiveNavigation('dashboard');
       setPluginStatus('dashboard');
       renderModuleSidebarOptions('dashboard', getModuleSourceMeta('dashboard'));
+      renderModulePreview('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
       setCardState(projectCardStateNode, 'ready', 'Bereit');
       setDebugDetails('Startzustand aktiv', 'Wählen Sie ein Modul oder öffnen Sie bei Bedarf den Fehlerdialog.');

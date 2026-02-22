@@ -1,3 +1,8 @@
+DONE: Modul-Starter zeigt Kurzdetails je Modul schon bei der Auswahl (Detail + Datenquelle + Next Step) (2026-02-22)
+DONE: Projektordner-Feld in der Control-Bar startet ohne Standardpfad und mit klarem Platzhalter (2026-02-22)
+DONE: Smoke-Test prüft Marker für Modul-Kurzdetails und standardfreien Projektpfad-Einstieg (2026-02-22)
+NEXT: Modul-Kurzdetails zusätzlich als kompakte Tooltip-Hilfe pro Sidebar-Eintrag anbieten (2026-02-23)
+
 DONE: Hauptbereich hat jetzt eine einheitliche Control-Bar (Projektpfad, globale Suche, primäre Aktion Projekt wechseln) mit Input-/Output-Validierung (2026-02-22)
 DONE: Rechter Bereich zeigt jetzt einen dauerhaften Kontext-Inspector mit Details/Hilfe/Meta/Shortcuts in einfacher Sprache (2026-02-22)
 DONE: Shortcut-Overlay per F1/? mit filterbarer Liste und klaren Next Steps ergänzt (2026-02-22)

@@ -1,3 +1,17 @@
+## 2026-02-22 – Iteration: Modul-Interoperabilität final geschlossen (3 Punkte)
+- Scope-Kontrolle:
+  - Problem: Zwei Interoperabilitäts-Punkte waren zwar weit umgesetzt, aber noch nicht sauber als vollständig abgeschlossen und transparent vor dem Modulstart sichtbar.
+  - Ziel: Genau 3 kleine Punkte final abschließen: modulbezogene Kurzdetails vor dem Öffnen, Projektfeld ohne Standardordner, und Smoke-Absicherung für diese Zustände.
+  - Dateien: `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Dashboard-Feinschliff, 2) Testmarker, 3) Pflichtdoku und Versionsstand aktualisiert.
+  - Abnahme: Modulauswahl zeigt sofort Datenquellen-Kurzdetails mit Next Step; Projektfeld ist initial leer; Smoke-Test erkennt beide Marker.
+- Was:
+  1) Modul-Starter zeigt Kurzdetails je Modul direkt bei der Auswahl (Detail + Datenquelle + Next Step), inklusive Fallback-Hinweis bei ungültiger Quelle.
+  2) Projektordner-Feld in der Control-Bar startet ohne voreingestellten Standardpfad und nutzt klaren Platzhalter statt stiller Vorgabe.
+  3) `tools/smoke_test.py` prüft neue Marker für Kurzdetails und standardfreien Projektpfad-Einstieg automatisiert.
+- Warum: Transparente Entscheidungen vor Modulstart reduzieren Fehlbedienung und verbessern Verständlichkeit für Laien.
+- Wirkung: Die genannten Interoperabilitäts-Punkte sind vollständig, testbar und merge-ready abgeschlossen.
+
 ## 2026-02-22 – GUI-Triade: Control-Bar, Kontext-Inspector, Shortcut-Overlay
 - Scope-Kontrolle:
   - Problem: Für offene GUI-Punkte fehlten eine konsistente Steuerleiste, ein sichtbarer Kontextbereich und ein schneller Tastaturzugang zu Aktionen.
