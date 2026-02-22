@@ -190,12 +190,12 @@
     <section class="card" aria-labelledby="bereich-theme">
       <h2 id="bereich-theme">Bereich: Theme-Umschalter</h2>
       <label for="theme-switcher"><strong>Theme wählen:</strong></label>
-      <select id="theme-switcher" data-theme-switcher>
+      <select id="theme-switcher" data-theme-switcher aria-describedby="theme-help">
         <option value="high-contrast">High Contrast (hoher Kontrast)</option>
         <option value="light">Light (hell)</option>
         <option value="dark">Dark (dunkel)</option>
       </select>
-      <p class="muted">Hinweis: Status wird nie nur über Farben gezeigt (immer Symbol + Text).</p>
+      <p class="muted" id="theme-help">Hinweis: Status wird nie nur über Farben gezeigt (immer Symbol + Text). Für beste Lesbarkeit bitte mit „High Contrast“ starten.</p>
     </section>
   </main>
 
