@@ -1,81 +1,36 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-## Zielbild (einfach erklärt)
-Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
+DONE: Doctor-Modus ergänzt (`./start.sh --doctor`) inkl. klarer Verbesserungsbefehle und zusätzlicher Test-Ausgabe-Validierung. (2026-02-22)
+NEXT: Theme-Konfiguration nach `config/themes.json` auslagern und im Release-/Doctor-Check mit automatischer Kontrastmeldung auswerten. (2026-02-22)
 
-## Iteration 2026-02-22 (Runtime-Abhängigkeiten automatisch reparieren)
-### A) Fundstelle
-- Problem: Die Start-Prüfung meldete fehlende Laufzeitwerkzeuge, versuchte aber nicht für alle erforderlichen Tools automatisch eine Reparatur.
-- Risiko: Startabbrüche ohne durchgängige Selbstheilung bei erwartbaren Abhängigkeitsfehlern.
-- Erwartung: `./start.sh --check` und `./start.sh --test` reparieren fehlende Runtime-Tools (außer `bash`) automatisch und geben klare nächste Schritte aus.
+## Iteration 2026-02-22 (Doctor-Modus + robuste Test-Rückmeldung)
+### A) Fundstelle (beobachten)
+- Problem: Es fehlte ein klarer Modus, der konkrete Verbesserungen als vollständige Befehle ausgibt; außerdem bestätigte der Selbsttest den Ausgabe-Erfolg nicht explizit.
+- Risiko: Nutzer wissen nicht eindeutig, welcher nächste Schritt sinnvoll ist; Testläufe könnten stillschweigend unklare Ergebnisse liefern.
+- Erwartung: Ein neuer Doctor-Modus liefert verständliche Handlungsschritte, und der Selbsttest bestätigt aktiv eine vorhandene Ausgabe.
 
-### B) Change-Scope
-- Ziel: Laufzeit-Prüfung um automatische Reparatur, validierte Sonderbehandlung für `bash` und ein zusätzliches Hilfeelement in einfacher Sprache erweitern.
-- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+### B) Change-Scope (vor Patch)
+- Ziel: Diagnosemodus für Verbesserungen bereitstellen, Test-Ausgabe validieren und Hilfe-/Textsystem um barrierefreie Hinweise erweitern.
+- Dateien: `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: Bei fehlendem `curl`, `rg` oder `python3` wird automatische Reparatur versucht; bei Erfolg erscheint eine Erfolgsbestätigung, bei Fehlern ein klarer Fehlerpfad mit Aktionen.
+- Abnahmekriterium „fertig“: `./start.sh --doctor` liefert klare Befehle; `./start.sh --test` bestätigt Testausgabe; Hilfe zeigt den neuen Modus.
 
-### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: `check_runtime_prerequisites` prüft jetzt zusätzlich `curl` als Pflichtvoraussetzung.
-- Punkt 2 – Änderung: Fehlende Runtime-Tools (`python3`, `rg`, `curl`) werden im Check direkt über `ensure_tool` automatisch repariert und bei Erfolg explizit bestätigt.
-- Punkt 3 – Änderung: Ein neues Hilfeelement in einfacher Sprache erklärt nach erfolgreicher Prüfung den nächsten stabilen Schritt (`./start.sh --repair` bei neuen Fehlern).
+### C) Patch (kurz)
+- Punkt 1 – Änderung: Neuer Modus `--doctor` mit strukturiertem Verbesserungsbericht und vollständigen Befehlen.
+- Punkt 2 – Änderung: `run_tests` prüft zusätzlich, ob Protokollausgabe vorhanden ist, und liefert bei Problemen klare Next Steps.
+- Punkt 3 – Änderung: Hilfe- und Textbausteine für den Doctor-Modus ergänzt (barrierefreundlich mit einfacher Sprache).
 
-### D) Checks
-- Format: `./start.sh --format`
-- Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check`
+### D) Gates
+- G1: `python -m compileall -q .` (grün)
+- G2: `bash tools/run_quality_checks.sh` (rot: Datei fehlt im Repo)
+- G3: `python tools/smoke_test.py` (rot: Datei fehlt im Repo)
+- G4: `bash start.sh` (grün)
+- G5: Mini-UX-Check (grün im betroffenen Bereich: klare deutsche Dialoge, Next Steps vorhanden, kein Crash, Kontrast-/A11y-Hinweise vorhanden)
 
 ### E) Ergebnis
-- Status: DONE
-- Doku aktualisiert: todo + changelog + registry
-- Laienvorschläge (2):
-  1. Starte bei Problemen zuerst `./start.sh --check`, damit fehlende Werkzeuge automatisch ergänzt werden.
-  2. Wenn ein Fehler bleibt, nutze direkt `./start.sh --repair` und öffne danach mit `cat logs/start.log` das Protokoll.
-- Nächster Schritt (1, detailliert): Verschiebe in der nächsten Iteration die Paketmanager-Logik in eine neue Datei unter `system/`, damit `start.sh` nur noch den Ablauf steuert und Konfigurationen klar aus `config/` liest.
-
-## Iteration 2026-02-22 (GUI-Themes + Kontrast)
-### A) Fundstelle
-- Problem: Die lokale GUI hatte noch keine wählbaren Themes mit robuster Kontrastdarstellung und validierter Theme-Eingabe.
-- Risiko: Schlechte Lesbarkeit je nach Umgebung und unklare Fehler bei falschen Theme-Werten.
-- Erwartung: `./start.sh` validiert `GUI_THEME` und erzeugt eine GUI mit klar lesbaren Light/Dark/High-Contrast-Varianten.
-
-### B) Change-Scope
-- Ziel: Theme-Auswahl in `launch_local_gui` mit Input-Validierung, klaren Fehleraktionen und fokussierbarer GUI-Ausgabe ergänzen.
-- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
-- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `GUI_THEME=light|dark|high-contrast ./start.sh` startet erfolgreich und bei ungültigem Theme erscheint ein klarer Fehlerpfad mit nächsten Schritten.
-
-### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: `launch_local_gui` validiert jetzt `GUI_THEME` (light/dark/high-contrast) und bricht bei ungültiger Eingabe kontrolliert mit „Erneut versuchen / Reparatur starten / Protokoll öffnen“ ab.
-- Punkt 2 – Änderung: Die HTML-Ausgabe nutzt pro Theme definierte Farbwerte, Fokus-Markierung und Status-Badges mit Text + Symbol für bessere Barrierefreiheit.
-- Punkt 3 – Änderung: Die GUI ergänzt ein Hilfeelement in einfacher Sprache zur Theme-Auswahl inklusive Befehl `GUI_THEME=... ./start.sh`.
-
-### D) Checks
-- Format: `./start.sh --format`
-- Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check` und `GUI_THEME=high-contrast ./start.sh`
-
-### E) Ergebnis
-- Status: DONE
-- Doku aktualisiert: todo + changelog + registry
-- Laienvorschläge (2):
-  1. Nutze bei schlechter Lesbarkeit direkt `GUI_THEME=high-contrast ./start.sh` für maximale Lesbarkeit.
-  2. Für hellen Bildschirmmodus nutze `GUI_THEME=light ./start.sh`, für dunkle Umgebung `GUI_THEME=dark ./start.sh`.
-- Nächster Schritt (1, detailliert): Lege als nächste Iteration eine separate Theme-Konfigurationsdatei in `config/` an, lies sie in `start.sh` ein und erweitere `--release-check` um eine automatische Kontrast-Prüfmeldung pro Theme in einfacher Sprache.
-
-## Nächste offene Punkte (Backlog)
-1. **Theme- und Kontrastprüfung vorbereiten**
-   - Konfigurierbare Theme-Datei im Ordner `config/` einführen.
-   - Start-Check um eine verständliche Kontrast-Selbstprüfung erweitern.
-   - Ergebnis im Log mit Text + Symbol ausgeben (nicht nur Farbe).
-
-2. **System-Ordner für Kernlogik aufbauen**
-   - stabile Start-Hilfsfunktionen aus `start.sh` schrittweise in `system/` überführen.
-   - klare Schnittstelle zwischen Logik (`system/`) und Konfiguration (`config/`) definieren.
-   - Migration mit kleinen, testbaren Schritten dokumentieren.
-
-## Team-Standard (kurz)
-- Pro Iteration genau 3 abgeschlossene Punkte.
-- Maximal 1–4 Dateien ändern.
-- Jede Änderung in `data/version_registry.json` nachziehen.
-- Immer `todo.txt` + `CHANGELOG.md` pflegen.
+- Status: NEXT ITERATION (zwei Pflicht-Gates fehlen als Dateien im Repo)
+- Doku: README + CHANGELOG + todo aktualisiert
+- Laienvorschläge:
+  1. Nutze `./start.sh --doctor`, um sofort konkrete Befehle für den nächsten Schritt zu bekommen.
+  2. Starte bei Unsicherheit immer `./start.sh --check --debug` und öffne danach `cat logs/start.log`.
+- Nächster Schritt: Lege `tools/run_quality_checks.sh` und `tools/smoke_test.py` als kleine Standard-Skripte an, damit alle Pflicht-Gates automatisch vollständig grün laufen.

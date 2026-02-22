@@ -1,8 +1,9 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-runtime-auto-repair",
+  "iteration": "2026.02.22-doctor-mode",
   "files": {
     "start.sh": "2026.02.22",
+    "README.md": "2026.02.22",
     "todo.txt": "2026.02.22",
     "CHANGELOG.md": "2026.02.22",
     "data/version_registry.json": "2026.02.22"

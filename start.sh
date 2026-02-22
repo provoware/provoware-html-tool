@@ -15,6 +15,7 @@ NEXT_STEPS=()
 DEFAULT_TEXT_JSON='{
   "help_title": "Provoware Start-Routine",
   "help_usage": "Verwendung:",
+  "help_doctor": "Doctor-Modus: Zeigt konkrete Verbesserungen mit vollständigen Befehlen.",
   "help_accessibility": "Barrierefreiheit: Jeder Status hat Symbol + Text, damit Hinweise nicht nur über Farbe verstanden werden.",
   "help_keyboard": "Tastatur-Hinweis: Alle Befehle sind per Enter startbar, ohne Maus.",
   "help_icon_legend": "Symbol-Legende: ✅ Erfolg, ⚠️ Hinweis, ❌ Fehler, ➡️ Aktion, ℹ️ Zusatzinfo.",
@@ -31,7 +32,11 @@ DEFAULT_TEXT_JSON='{
   "developer_doc_hint": "Entwicklerdoku: Regeln, Startbefehle und Qualitätsablauf stehen in README.md und todo.txt.",
   "release_help": "Release-Check: Prüft automatisch Kernkriterien für eine stabile Veröffentlichung (Release).",
   "release_ready": "Release-Check bestanden: Alle Pflichtkriterien sind erfüllt.",
-  "release_not_ready": "Release-Check unvollständig: Mindestens ein Pflichtkriterium fehlt noch."
+  "release_not_ready": "Release-Check unvollständig: Mindestens ein Pflichtkriterium fehlt noch.",
+  "doctor_intro": "Doctor-Bericht: Diese Punkte verbessern Stabilität, Qualität und Barrierefreiheit.",
+  "doctor_accessibility": "Barrierefreiheit verbessern: GUI-Theme testen mit GUI_THEME=high-contrast ./start.sh",
+  "doctor_quality": "Codequalität verbessern: ./start.sh --format && ./start.sh --test",
+  "doctor_release": "Release-Reife prüfen: ./start.sh --release-check"
 }'
 TEXT_JSON_CACHE=""
 
@@ -88,6 +93,7 @@ $(get_text "help_usage")
   ./start.sh --format    Nur Formatierung ausführen
   ./start.sh --test      Nur Tests ausführen
   ./start.sh --safe      Safe-Mode: nur Basis-Checks + klare Hilfehinweise
+  ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
   ./start.sh --help      Hilfe anzeigen
@@ -102,6 +108,7 @@ $(get_text "help_accessibility")
 $(get_text "help_keyboard")
 $(get_text "help_icon_legend")
 $(get_text "help_message_source")
+$(get_text "help_doctor")
 $(get_text "release_help")
 TXT
 }
@@ -204,6 +211,10 @@ validate_args() {
 			;;
 		--release-check)
 			MODE="release-check"
+			mode_count=$((mode_count + 1))
+			;;
+		--doctor)
+			MODE="doctor"
 			mode_count=$((mode_count + 1))
 			;;
 		--debug)
@@ -432,13 +443,46 @@ run_quality_checks() {
 run_tests() {
 	print_step "✅" "Schnelltest gestartet: Voraussetzungen + Syntax + Pflichtdateien + Zeilenlimit."
 	if check_runtime_prerequisites && bash -n "$PROJECT_ROOT/start.sh" && check_required_files && check_line_limit; then
-		print_step "✅" "Selbsttest erfolgreich (Voraussetzungen, Syntax, Pflichtdateien, Zeilenlimit ok)."
+		if [[ -s "$LOG_FILE" ]]; then
+			print_step "✅" "Selbsttest erfolgreich (Voraussetzungen, Syntax, Pflichtdateien, Zeilenlimit ok)."
+			record_checked "Testausgabe vorhanden"
+		else
+			print_error_with_actions "Selbsttest lieferte keine Protokollausgabe."
+			record_next_step "Erneut './start.sh --test --debug' ausführen und Log prüfen"
+			return 1
+		fi
 		record_checked "Selbsttest"
 	else
 		print_error_with_actions "Selbsttest fehlgeschlagen."
 		record_next_step "./start.sh --check --debug ausführen"
 		return 1
 	fi
+}
+
+run_doctor_mode() {
+	print_step "✅" "Doctor-Modus aktiv: Verbesserungsbericht wird erstellt."
+	local failed=0
+
+	check_runtime_prerequisites || failed=1
+	check_required_files || failed=1
+	check_line_limit || failed=1
+	run_quality_checks || failed=1
+
+	print_step "ℹ️" "$(get_text "doctor_intro")"
+	print_step "➡️" "$(get_text "doctor_quality")"
+	print_step "➡️" "$(get_text "doctor_accessibility")"
+	print_step "➡️" "$(get_text "doctor_release")"
+	record_checked "Doctor-Bericht"
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "✅" "Doctor-Modus: Keine kritischen Probleme gefunden."
+		record_next_step "Optional: GUI mit 'GUI_THEME=dark ./start.sh' gegenprüfen"
+		return 0
+	fi
+
+	print_step "⚠️" "Doctor-Modus: Verbesserungen empfohlen, siehe Schritte oben."
+	record_next_step "Empfohlene Befehle nacheinander ausführen und danach erneut './start.sh --doctor' starten"
+	return 1
 }
 
 run_check_mode() {
@@ -680,6 +724,9 @@ main() {
 		;;
 	release-check)
 		run_release_check
+		;;
+	doctor)
+		run_doctor_mode
 		;;
 	safe)
 		run_safe_mode
