@@ -1,3 +1,6 @@
+DONE: Browser-E2E akzeptiert jetzt --browser (chromium/firefox/webkit) mit browser-spezifischen Artefaktnamen. (2026-02-22)
+DONE: CI führt --weakness-report als zusätzlichen separaten Qualitätskanal aus. (2026-02-22)
+NEXT: CI-Browser-Matrix für Firefox/WebKit als Pflichtlauf ergänzen und Artefakte je Engine hochladen. (2026-02-22)
 DONE: Schwachstellen-Bericht mit klaren Befehlen + Smoke-Check ergänzt (2026-02-22)
 NEXT: CI um --weakness-report als zusätzlichen Pflichtlauf ergänzen (2026-02-22)
 DONE: Browser-E2E-Test mit Dialog-Fokusfang/Fokus-Rückgabe und Screenshot-Artefakt ergänzt. (2026-02-22)

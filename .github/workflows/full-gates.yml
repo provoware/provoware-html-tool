@@ -34,6 +34,9 @@ jobs:
       - name: Run strict browser e2e
         run: python tools/browser_e2e_test.py --require-browser
 
+      - name: Run weakness report channel
+        run: bash start.sh --weakness-report
+
       - name: Upload logs and screenshots
         if: always()
         uses: actions/upload-artifact@v4
