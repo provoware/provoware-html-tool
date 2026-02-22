@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="de" data-theme="high-contrast">
+<html lang="de" data-theme="balanced">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Provoware ModulTool Dashboard</title>
   <style>
     :root {
+      --bg-glow: #284b9a;
       --bg-start: #020717;
       --bg-end: #061229;
       --bg: #020717;
@@ -16,10 +17,29 @@
       --focus: #f8d23f;
       --border: #7fa8ff;
       --shadow: rgba(0, 0, 0, 0.5);
-      --accent-a: #ff6a3d;
-      --accent-b: #00b5ff;
-      --primary: #00b5ff;
-      --accent-c: #f4bb31;
+      --accent-a: #ff7a52;
+      --accent-b: #47c2ff;
+      --primary: #47c2ff;
+      --accent-c: #ffd061;
+      color-scheme: dark;
+    }
+
+    html[data-theme="balanced"] {
+      --bg-glow: #1d4287;
+      --bg-start: #081022;
+      --bg-end: #162746;
+      --bg: #081022;
+      --surface: rgba(11, 23, 46, 0.9);
+      --surface-strong: rgba(8, 18, 36, 0.96);
+      --text: #f3f7ff;
+      --muted: #b8c6e6;
+      --focus: #ffd95a;
+      --border: #79a1f7;
+      --shadow: rgba(0, 0, 0, 0.48);
+      --accent-a: #ff845d;
+      --accent-b: #4ec8ff;
+      --primary: #4ec8ff;
+      --accent-c: #ffd26d;
       color-scheme: dark;
     }
 
@@ -66,7 +86,7 @@
       min-height: 100vh;
       font-family: "Inter", "Segoe UI", Arial, sans-serif;
       color: var(--text);
-      background: radial-gradient(circle at top, #0f2a63 0%, transparent 38%), linear-gradient(130deg, var(--bg-start), var(--bg-end));
+      background: radial-gradient(circle at top, var(--bg-glow) 0%, transparent 38%), linear-gradient(130deg, var(--bg-start), var(--bg-end));
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -190,6 +210,30 @@
       padding: .62rem .72rem;
     }
 
+    .nav-group-title {
+      margin-top: .5rem;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .nav-button {
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid rgba(127, 168, 255, 0.42);
+      background: rgba(10, 20, 43, 0.76);
+      color: inherit;
+      text-align: left;
+      padding: .45rem .6rem;
+      width: 100%;
+      font-size: .97rem;
+    }
+
+    .nav-button[aria-current="page"] {
+      border-color: var(--focus);
+      box-shadow: inset 0 0 0 1px var(--focus);
+      font-weight: 700;
+    }
+
     .card-grid {
       display: grid;
       gap: .85rem;
@@ -200,8 +244,67 @@
       border-radius: 12px;
       border: 2px solid rgba(127, 168, 255, 0.4);
       padding: .8rem;
-      background: linear-gradient(160deg, rgba(22, 35, 66, 0.95), rgba(10, 18, 36, 0.92));
+      background: linear-gradient(160deg, rgba(20, 33, 63, 0.94), rgba(10, 19, 36, 0.94));
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.32);
+    }
+
+    .tool-card-primary {
+      border-width: 3px;
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.38);
+    }
+
+    .tool-card-secondary {
+      border-style: solid;
+    }
+
+    .tool-card-utility {
+      border-style: dashed;
+    }
+
+    .card-tag {
+      display: inline-block;
+      margin-bottom: .35rem;
+      padding: .1rem .45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(127, 168, 255, 0.55);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .plugin-status-list {
+      margin: .4rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: .35rem;
+    }
+
+    .plugin-status-item {
+      display: flex;
+      justify-content: space-between;
+      gap: .5rem;
+      align-items: center;
+      border: 1px solid rgba(127, 168, 255, 0.3);
+      border-radius: 8px;
+      padding: .4rem .55rem;
+      background: rgba(10, 21, 44, 0.72);
+    }
+
+    .plugin-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(127, 168, 255, 0.4);
+      font-size: .8rem;
+      padding: .1rem .45rem;
+    }
+
+    .plugin-pill-online {
+      border-color: #8bf2ac;
+      color: #8bf2ac;
+    }
+
+    .plugin-pill-offline {
+      border-color: #ffb487;
+      color: #ffb487;
     }
 
     .tool-card[data-accent="a"] { border-color: var(--accent-a); }
@@ -310,21 +413,35 @@
 
     <aside class="panel left" aria-label="Navigation">
       <h2>Navigation</h2>
-      <ul class="nav-list">
-        <li class="nav-item">📚 Genres</li>
-        <li class="nav-item">🧾 Zitate</li>
-        <li class="nav-item">🎵 Songeditor</li>
-        <li class="nav-item">✅ To-Do-Liste</li>
-        <li class="nav-item">📊 Dashboard</li>
+      <p class="nav-group-title">Arbeitsmodule</p>
+      <ul class="nav-list" aria-label="Arbeitsmodule">
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="genres">📚 Genres</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="zitate">🧾 Zitate</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="songeditor">🎵 Songeditor</button></li>
+      </ul>
+      <p class="nav-group-title">Organisation</p>
+      <ul class="nav-list" aria-label="Organisation und Überblick">
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="todo">✅ To-Do-Liste</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="dashboard" aria-current="page">📊 Dashboard</button></li>
       </ul>
       <p class="quick-help" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll, Alt+O Modul öffnen.</p>
+      <section class="quick-help" aria-label="Pluginstatus">
+        <strong>Pluginstatus (sichtbar):</strong>
+        <ul class="plugin-status-list" id="plugin-status-list" aria-live="polite">
+          <li class="plugin-status-item"><span>Genres</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
+          <li class="plugin-status-item"><span>Zitate</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
+          <li class="plugin-status-item"><span>Songeditor</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
+          <li class="plugin-status-item"><span>Dashboard</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
+        </ul>
+      </section>
     </aside>
 
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
       <h2 id="bereich-aufgaben">Werkzeug-Übersicht</h2>
       <div class="card-grid">
-        <article class="tool-card" data-accent="a">
+        <article class="tool-card tool-card-primary" data-accent="a">
+          <p class="card-tag">Priorität: Hoch</p>
           <h2>Genreverwaltung</h2>
           <div class="actions">
             <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Genre speichern</button>
@@ -332,7 +449,8 @@
           </div>
         </article>
 
-        <article class="tool-card" data-accent="b">
+        <article class="tool-card tool-card-secondary" data-accent="b">
+          <p class="card-tag">Priorität: Mittel</p>
           <h2>Archiv</h2>
           <div class="actions">
             <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Beispiel speichern</button>
@@ -340,14 +458,16 @@
           </div>
         </article>
 
-        <article class="tool-card" data-accent="c">
+        <article class="tool-card tool-card-secondary" data-accent="c">
+          <p class="card-tag">Priorität: Mittel</p>
           <h2>Dashboard</h2>
           <div class="actions">
             <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Übersicht anzeigen</button>
           </div>
         </article>
 
-        <article class="tool-card" data-accent="c" aria-labelledby="modul-starter-title">
+        <article class="tool-card tool-card-primary" data-accent="c" aria-labelledby="modul-starter-title">
+          <p class="card-tag">Priorität: Hoch</p>
           <h2 id="modul-starter-title">Modul-Starter</h2>
           <label for="module-switcher"><strong>Modul wählen:</strong></label>
           <select id="module-switcher" aria-describedby="module-help shortcut-help">
@@ -364,7 +484,8 @@
         </article>
 
 
-        <article class="tool-card" data-accent="b">
+        <article class="tool-card tool-card-utility" data-accent="b">
+          <p class="card-tag">Hilfswerkzeug</p>
           <h2>Zufallsgenerator</h2>
           <div class="actions">
             <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Genre zufällig wählen</button>
@@ -372,7 +493,8 @@
           </div>
         </article>
 
-        <article class="tool-card" data-accent="a">
+        <article class="tool-card tool-card-utility" data-accent="a">
+          <p class="card-tag">Hilfswerkzeug</p>
           <h2>Text-Templates</h2>
           <div class="actions">
             <button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Vorlage laden</button>
@@ -380,7 +502,8 @@
           </div>
         </article>
 
-        <article class="tool-card" data-accent="b">
+        <article class="tool-card tool-card-secondary" data-accent="b">
+          <p class="card-tag">Status und Hilfe</p>
           <h2>Debug-Log</h2>
           <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
           <p class="subline" id="debug-last-event" data-debug-event>Letztes Ereignis: Startzustand um --:--:--.</p>
@@ -409,6 +532,7 @@
         <li class="settings-item">
           <label for="theme-switcher"><strong>Design:</strong></label>
           <select id="theme-switcher" data-theme-switcher aria-describedby="theme-help">
+            <option value="balanced">Balanced (ausgeglichen)</option>
             <option value="high-contrast">High Contrast (hoher Kontrast)</option>
             <option value="light">Light (hell)</option>
             <option value="dark">Dark (dunkel)</option>
@@ -460,6 +584,8 @@
       const moduleSelector = document.getElementById('module-switcher');
       const moduleStatusNode = document.getElementById('module-status');
       const debugLogListNode = document.getElementById('debug-log-list');
+      const pluginStatusListNode = document.getElementById('plugin-status-list');
+      const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       let lastDialogTrigger = null;
 
       function getDialogFocusableElements() {
@@ -567,12 +693,58 @@
         return true;
       }
 
+      function setActiveNavigation(moduleKey) {
+        if (!Array.isArray(navButtonNodes) || typeof moduleKey !== 'string' || moduleKey.trim().length === 0) {
+          return false;
+        }
+        navButtonNodes.forEach(function (buttonNode) {
+          if (!(buttonNode instanceof HTMLElement)) {
+            return;
+          }
+          const current = buttonNode.getAttribute('data-module-nav') === moduleKey.trim();
+          if (current) {
+            buttonNode.setAttribute('aria-current', 'page');
+          } else {
+            buttonNode.removeAttribute('aria-current');
+          }
+        });
+        return true;
+      }
+
+      function setPluginStatus(selectedModule) {
+        if (!pluginStatusListNode || typeof selectedModule !== 'string' || selectedModule.trim().length === 0) {
+          return false;
+        }
+        const normalized = selectedModule.trim();
+        const pluginRows = Array.from(pluginStatusListNode.querySelectorAll('.plugin-status-item'));
+        if (!pluginRows.length) {
+          return false;
+        }
+        pluginRows.forEach(function (row) {
+          if (!(row instanceof HTMLElement)) {
+            return;
+          }
+          const nameNode = row.querySelector('span');
+          const statusNode = row.querySelector('.plugin-pill');
+          if (!nameNode || !statusNode) {
+            return;
+          }
+          const rowKey = nameNode.textContent ? nameNode.textContent.trim().toLowerCase() : '';
+          const isActive = rowKey === normalized || (normalized === 'dashboard' && rowKey === 'dashboard');
+          statusNode.textContent = isActive ? 'Aktiv' : 'Wartet';
+          statusNode.classList.toggle('plugin-pill-online', isActive);
+          statusNode.classList.toggle('plugin-pill-offline', !isActive);
+        });
+        return true;
+      }
+
       function openModule(selectedModule) {
         const moduleConfig = {
           genres: { label: 'Genreverwaltung', command: './start.sh --dashboard-template' },
           zitate: { label: 'Zitate', command: './start.sh --check' },
           songeditor: { label: 'Songeditor', command: './start.sh --test' },
-          dashboard: { label: 'Dashboard', command: './start.sh --ux-check-auto' }
+          dashboard: { label: 'Dashboard', command: './start.sh --ux-check-auto' },
+          todo: { label: 'To-Do-Liste', command: './start.sh --check' }
         };
 
         if (typeof selectedModule !== 'string' || !(selectedModule in moduleConfig)) {
@@ -585,6 +757,8 @@
         const targetModule = moduleConfig[selectedModule];
         const nextStep = 'Führen Sie als nächsten Schritt ' + targetModule.command + ' aus.';
         setModuleStatus('✅ Modul aktiv: ' + targetModule.label + '.');
+        setActiveNavigation(selectedModule);
+        setPluginStatus(selectedModule);
         setDebugDetails('Modul gewechselt zu ' + targetModule.label, nextStep);
         appendDebugLog('✅ Modul geladen: ' + targetModule.label + ' (' + getTimeStamp() + ').');
         updateSyncStatus('✅ Modul bereit: ' + targetModule.label + ' (' + getTimeStamp() + ')');
@@ -592,13 +766,14 @@
       }
 
       function applyTheme(themeValue) {
-        const allowed = ['high-contrast', 'light', 'dark'];
+        const allowed = ['balanced', 'high-contrast', 'light', 'dark'];
         if (typeof themeValue !== 'string' || !allowed.includes(themeValue)) {
           setResult('⚠️ Ungültiges Theme. Erlaubt sind: high-contrast, light, dark.');
           return false;
         }
 
         const helperTextByTheme = {
+          balanced: 'Aktives Theme: balanced. Ruhige Farben mit klarer Lesbarkeit.',
           'high-contrast': 'Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.',
           light: 'Aktives Theme: light. Bitte Fokusrahmen gut sichtbar prüfen.',
           dark: 'Aktives Theme: dark. Bitte Helligkeit und Lesbarkeit kurz prüfen.'
@@ -715,6 +890,12 @@
         if (!(target instanceof HTMLElement)) {
           return;
         }
+        const moduleTarget = target.getAttribute('data-module-nav');
+        if (typeof moduleTarget === 'string' && moduleTarget.length > 0 && moduleSelector) {
+          moduleSelector.value = moduleTarget;
+          openModule(moduleTarget);
+          return;
+        }
         const action = target.getAttribute('data-action');
         if (typeof action !== 'string' || action.length === 0) {
           return;
@@ -727,7 +908,9 @@
         keepDialogFocusInside(event);
       });
 
-      applyTheme('high-contrast');
+      applyTheme('balanced');
+      setActiveNavigation('dashboard');
+      setPluginStatus('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
       setDebugDetails('Startzustand aktiv', 'Wählen Sie ein Modul oder öffnen Sie bei Bedarf den Fehlerdialog.');
       appendDebugLog('ℹ️ Startzustand aktiv (' + getTimeStamp() + ').');
