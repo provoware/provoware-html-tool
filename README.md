@@ -22,6 +22,10 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - Spiegelt den bestätigten Projektordner zusätzlich nach `config/project_settings.json` (für editierbare Konfiguration) und validiert beide JSON-Dateien automatisch.
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
+  - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
+  - Neues UI-Zielbild: Leeres 3x3-Haupt-Grid als Standard mit Fensteroptionen (Ausblenden/Maximieren) und vollständiger Sicht beim Start.
+  - Dashboard-Header mit Echtzeit-Log (letzte 10 Ereignisse), Kopierfunktion für das gesamte Protokoll und umschaltbarem Laien-/Profi-Modus.
+  - Robuste Modul-Interoperabilität: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD, Genres-Archivprofile und Abkopplung in Einzelfenster.
   - Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
 
 
