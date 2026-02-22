@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **89%**
+- Fortschritt: **91%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -11,9 +11,9 @@
   - Fehlerdialog erhielt Fokusfang (Tab/Shift+Tab) und Fokus-Rückgabe auf auslösendes Element für stabilere Tastaturnutzung.
   - Fokus-Checker validiert nun zusätzlich Dialog-Fokusfang und Fokus-Rückgabe als feste A11y-Qualitätsregel.
 - Offene Aufgaben:
-  - Optionaler echter Browser-E2E-Test (mit Screenshot-Artefakt) für Dialog-Interaktion fehlt noch.
-  - CI soll bei Gate-Fehlern Artefakte (Logs/Screenshots) automatisch anhängen.
-  - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll ohne neue Pflichtabhängigkeit vorbereitet werden.
+  - Optionaler Visual-Baseline-Vergleich (Soll-Ist-Screenshot) für Layout-Drift fehlt noch.
+  - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
+  - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 

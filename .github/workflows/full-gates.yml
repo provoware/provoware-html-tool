@@ -6,24 +6,40 @@ on:
   pull_request:
 
 jobs:
-  quality-and-gates:
+  quality-and-e2e:
     runs-on: ubuntu-latest
     steps:
-      - name: Repository auschecken
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Python einrichten
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
-      - name: Shell-Werkzeuge installieren
+      - name: Install browser dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y shellcheck shfmt ripgrep
+          python -m pip install --upgrade pip
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
 
-      - name: Abhängigkeiten automatisch prüfen und reparieren
-        run: bash start.sh --repair
+      - name: Run repair and full gates
+        run: |
+          bash start.sh --repair
+          python -m compileall -q .
+          bash tools/run_quality_checks.sh
+          python tools/smoke_test.py --profile full
+          bash start.sh
 
-      - name: Gate 1 bis 5 ausführen
-        run: bash start.sh --full-gates
+      - name: Run strict browser e2e
+        run: python tools/browser_e2e_test.py --require-browser
+
+      - name: Upload logs and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-artifacts
+          path: |
+            logs/
+            logs/artifacts/
+          if-no-files-found: warn
