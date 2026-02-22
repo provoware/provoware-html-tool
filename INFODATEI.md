@@ -1,44 +1,30 @@
-# INFODATEI – Verzeichnisstruktur und Dateiliste
+# INFODATEI – Orientierung für Laiennutzer
 
-Zweck: Diese Datei zeigt in **einfacher Sprache** die aktuelle Struktur, damit Wartung (Maintenance = einfache Pflege) schneller und sicherer klappt.
+Diese Datei erklärt die wichtigsten Informationsdateien in **einfacher Sprache**.
 
-## 1) Verzeichnisstruktur (Top-Level)
+## Welche Dateien sind wichtig?
 
-```text
-.
-├── AGENTS.md
-├── CHANGELOG.md
-├── INFODATEI.md
-├── README.md
-├── start.sh
-├── todo.txt
-└── data/
-    └── version_registry.json
-```
-
-## 2) Dateiliste mit Rolle
-
-| Datei | Rolle | Hinweise für Wartung |
+| Datei | Wofür ist sie da? | Wann ändern? |
 |---|---|---|
-| `start.sh` | Startroutine (Check, Repair, Format, Test) | Enthält Nutzerfeedback, Input-Prüfung, Fehlerpfade und Logging. |
-| `README.md` | Bedienhilfe in einfacher Sprache | Bei neuen Modus-Optionen sofort aktualisieren. |
-| `todo.txt` | Iterationsprotokoll | Jede Iteration mit Fundstelle, Scope, 3 Punkten und Ergebnis dokumentieren. |
-| `CHANGELOG.md` | Kurzänderung (Was, Warum, Wirkung) | Pro Iteration exakt 3 Zeilen pflegen. |
-| `data/version_registry.json` | Versionsregister | Jede geänderte Datei und `global_version` aktualisieren. |
-| `AGENTS.md` | Verbindliche Arbeitsregeln | Vor jedem Patch Scope und Grenzen prüfen. |
-| `INFODATEI.md` | Struktur- und Navigationshilfe | Diese Datei bei neuen Dateien/Ordnern sofort nachziehen. |
+| `README.md` | Hauptanleitung (Start, Befehle, Hilfe) | Bei neuen Befehlen oder geänderten Abläufen |
+| `CHANGELOG.md` | Kurzprotokoll „Was, Warum, Wirkung“ | Nach jeder Iteration |
+| `todo.txt` | Aufgaben- und Statusliste (DONE/NEXT) | In jeder Iteration |
+| `data/version_registry.json` | Versions-Register aller geänderten Dateien | Immer bei jeder Änderung |
 
-## 3) Pflege-Regeln für klare Standards
+## Standardablauf (einfach)
+1. `bash start.sh --check` (prüfen)
+2. `bash start.sh --repair` (automatisch beheben)
+3. `bash start.sh --full-gates` (alle Pflichtprüfungen)
 
-1. Immer zuerst `./start.sh --check` ausführen.
-2. Vor Abschluss immer `./start.sh --format` und `./start.sh --test` ausführen.
-3. Nach jeder Änderung immer diese drei Dateien aktualisieren: `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`.
+## Wenn ein Fehler kommt
+1. **Erneut versuchen**: denselben Befehl nochmals starten.
+2. **Reparatur**: `bash start.sh --repair`
+3. **Protokoll lesen**: `cat logs/start.log`
+4. **Status lesen**: `cat logs/status_summary.txt`
 
-## 4) Hilfe bei Fehlern (barrierearm)
-
-Wenn etwas fehlschlägt, nutze diese Reihenfolge:
-1. **Erneut versuchen**: Befehl noch einmal starten.
-2. **Reparatur starten**: `./start.sh --repair`
-3. **Protokoll öffnen**: `cat logs/start.log`
-
-So bleiben Fehlertexte klar und Aktionen direkt umsetzbar.
+## Qualitätsregel
+Nach jeder fertigen Iteration müssen diese Dateien aktuell sein:
+- `README.md`
+- `CHANGELOG.md`
+- `todo.txt`
+- `data/version_registry.json`
