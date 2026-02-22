@@ -1,14 +1,14 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-release-gap-clarity",
+  "iteration": "2026.02.22-infotext-cleanup",
   "files": {
     "start.sh": "2026.02.22.13",
     "tools/smoke_test.py": "2026.02.22.8",
     "templates/dashboard_musterseite.html": "2026.02.22.5",
-    "README.md": "2026.02.22.13",
-    "todo.txt": "2026.02.22.13",
-    "CHANGELOG.md": "2026.02.22.13",
-    "data/version_registry.json": "2026.02.22.13",
+    "README.md": "2026.02.22.14",
+    "todo.txt": "2026.02.22.14",
+    "CHANGELOG.md": "2026.02.22.14",
+    "data/version_registry.json": "2026.02.22.14",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.1",
@@ -16,6 +16,7 @@
     ".github/workflows/full-gates.yml": "2026.02.22.7",
     "tools/focus_order_check.py": "2026.02.22.1",
     "tools/browser_e2e_test.py": "2026.02.22.7",
-    "tools/visual_baseline_check.py": "2026.02.22.8"
+    "tools/visual_baseline_check.py": "2026.02.22.8",
+    "INFODATEI.md": "2026.02.22.2"
   }
 }
