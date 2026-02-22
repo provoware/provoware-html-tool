@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOG_DIR="${PROJECT_ROOT}/logs"
 LOG_FILE="${LOG_DIR}/start.log"
@@ -17,14 +16,11 @@ THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
 CORE_HELPER_FILE="${PROJECT_ROOT}/system/start_core.sh"
 GUI_HELPER_FILE="${PROJECT_ROOT}/system/start_gui.sh"
 PROJECT_CONTEXT_FILE="${PROJECT_ROOT}/data/project_context.json"
+PROJECT_SETTINGS_FILE="${PROJECT_ROOT}/config/project_settings.json"
 DASHBOARD_PROJECT_PATH=""
-# shellcheck disable=SC2034
 CHECKED_ITEMS=()
-# shellcheck disable=SC2034
 MISSING_ITEMS=()
-# shellcheck disable=SC2034
 FIXED_ITEMS=()
-# shellcheck disable=SC2034
 NEXT_STEPS=()
 DEFAULT_TEXT_JSON='{
   "help_title": "Provoware Start-Routine",
@@ -61,7 +57,6 @@ DEFAULT_TEXT_JSON='{
 }'
 TEXT_JSON_CACHE=""
 THEME_LIST_CACHE=""
-
 : "${PLAYWRIGHT_BROWSERS_PATH:=${PROJECT_ROOT}/data/playwright-browsers}"
 export PLAYWRIGHT_BROWSERS_PATH
 
@@ -106,7 +101,6 @@ load_text_json() {
 	TEXT_JSON_CACHE="$candidate_json"
 	printf '%s' "$TEXT_JSON_CACHE"
 }
-
 
 get_text() {
 	local key="$1"
@@ -866,16 +860,30 @@ resolve_dashboard_project_path() {
 		escaped_path='"'"$input_path"'"'
 	fi
 
-	mkdir -p "$(dirname "$PROJECT_CONTEXT_FILE")"
-	cat >"$PROJECT_CONTEXT_FILE" <<JSON
-{
-  "project_path": $escaped_path,
-  "updated_at": "$(date '+%Y-%m-%d %H:%M:%S')"
+	mkdir -p "$(dirname "$PROJECT_CONTEXT_FILE")" "$(dirname "$PROJECT_SETTINGS_FILE")"
+	local now_ts
+	now_ts="$(date '+%Y-%m-%d %H:%M:%S')"
+	printf '{
+  "project_path": %s,
+  "updated_at": "%s"
 }
-JSON
+' "$escaped_path" "$now_ts" >"$PROJECT_CONTEXT_FILE"
+	printf '{
+  "project_path": %s,
+  "path_source": "start_routine",
+  "updated_at": "%s"
+}
+' "$escaped_path" "$now_ts" >"$PROJECT_SETTINGS_FILE"
+	if ! python3 -c 'import json,sys; json.load(open(sys.argv[1], encoding="utf-8")); json.load(open(sys.argv[2], encoding="utf-8"))' "$PROJECT_CONTEXT_FILE" "$PROJECT_SETTINGS_FILE" >/dev/null 2>&1; then
+		print_error_with_actions "Projektpfad konnte nicht sicher gespeichert werden (JSON-Prüfung fehlgeschlagen)."
+		record_missing "Projektpfad-Konfiguration"
+		record_next_step "Dateien data/project_context.json und config/project_settings.json prüfen, dann './start.sh --debug' erneut starten"
+		return 1
+	fi
 
 	DASHBOARD_PROJECT_PATH="$input_path"
 	record_checked "Projektpfad gespeichert"
+	record_checked "Projektpfad in config gespiegelt"
 	return 0
 }
 
