@@ -17,6 +17,7 @@ Fachbegriffe sind immer kurz erklärt (in Klammern), damit der Ablauf auch ohne 
 ./start.sh --repair
 ./start.sh --format
 ./start.sh --test
+./start.sh --doctor
 ```
 
 Optional mit Detail-Protokoll (Debug = Fehlersuche):
@@ -30,6 +31,7 @@ Optional mit Detail-Protokoll (Debug = Fehlersuche):
 - `./start.sh --repair` → Nur automatische Reparatur
 - `./start.sh --format` → Nur Formatierung
 - `./start.sh --test` → Nur Selbsttests
+- `./start.sh --doctor` → Verbesserungsbericht mit klaren Befehlen
 - `./start.sh --safe` → Sicherer Basis-Modus mit klaren Hilfehinweisen
 - `./start.sh --release-check` → Kompakter Release-Check mit Ergebnis
 - `./start.sh --help` → Hilfe anzeigen
@@ -86,9 +88,17 @@ Bis dahin werden Statusinformationen bereits robust über **Symbol + Text** ausg
 ## Best Practices für Teams
 1. Vor jeder Änderung zuerst `./start.sh --check` ausführen.
 2. Vor Merge immer `./start.sh --format` und `./start.sh --test` ausführen.
-3. Vor Release `./start.sh --release-check` nutzen.
-4. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
+3. Für Verbesserungsvorschläge im Klartext `./start.sh --doctor` nutzen.
+4. Vor Release `./start.sh --release-check` nutzen.
+5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `24%`
-- Nächster Fokus: Theme-/Kontrastprüfung und strukturierte Auslagerung von Kernlogik in `system/`.
+- Fortschritt: `29%`
+- Abgeschlossen:
+  - Auto-Reparatur für Runtime-Tools
+  - GUI-Theme-Auswahl mit Fokus auf Kontrast
+  - Doctor-Modus mit klaren Verbesserungsbefehlen
+- Offen:
+  - Konfigurationsdatei für Themes in `config/`
+  - weitere Auslagerung von Kernlogik nach `system/`
+- Nächster Schritt: Theme-Konfigurationsdatei einführen und im Doctor-/Release-Check automatisch auswerten.

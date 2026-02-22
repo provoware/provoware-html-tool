@@ -1,5 +1,6 @@
 # CHANGELOG
 
-- Was: `start.sh` repariert fehlende Runtime-Abhängigkeiten (`python3`, `rg`, `curl`) jetzt direkt im Voraussetzungen-Check automatisch und bestätigt den Erfolg klar.
-- Warum: Die Startroutine sollte erwartbare Abhängigkeitsfehler ohne manuelle Zwischenschritte beheben und dabei robusten Nutzertext ausgeben.
-- Wirkung: Nutzer erhalten einen stabileren Vollautomatik-Start mit verständlichen nächsten Schritten und weniger Abbrüchen bei fehlenden Tools.
+## 2026-02-22 – Doctor-Modus + Test-Ausgabe-Validierung
+- Was: Neuer Modus `--doctor` ergänzt, der automatische Prüfungen ausführt und klare Verbesserungsbefehle für Qualität, Barrierefreiheit und Release ausgibt.
+- Warum: Nutzer sollten direkt verständliche, vollständige Befehle erhalten, um den nächsten sinnvollen Verbesserungsschritt ohne Fachwissen auszuführen.
+- Wirkung: Bessere Nutzerführung, robusteres Feedback im Alltag und höherer Release-Reifegrad durch einen klaren, wiederholbaren Verbesserungsablauf.
