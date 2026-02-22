@@ -1,3 +1,17 @@
+## 2026-02-22 – Iteration: README-Anker als Pflicht-Qualitätsgate (3 Punkte)
+- Scope-Kontrolle:
+  - Problem: Der README-Standard (Befehlsblock oben + Spickzettel unten) war bisher nicht automatisch abgesichert.
+  - Ziel: Drei kleine, abgeschlossene Punkte für automatisierte README-Prüfung, Gate-Integration und laienklare Fehlerhilfe umsetzen.
+  - Dateien: `tools/check_readme_structure.py`, `tools/run_quality_checks.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) neues README-Prüfskript, 2) Gate-Aufruf in Quality-Checks, 3) Doku- und Statusdateien aktualisiert.
+  - Abnahme: `bash tools/run_quality_checks.sh` meldet bei fehlenden README-Ankern einen klaren Fehler mit Next Step und läuft bei vollständiger Struktur grün.
+- Was:
+  1) Neues Skript `tools/check_readme_structure.py` prüft die beiden Pflichtbereiche inkl. vollständiger Befehlslisten.
+  2) `tools/run_quality_checks.sh` enthält die README-Prüfung als festen Schritt im Standardlauf.
+  3) README/Statusdoku erklärt die neue Automatik in einfacher Sprache.
+- Warum: Dokumentationsqualität wird reproduzierbar, ohne manuelle Sichtprüfung vor jedem Release.
+- Wirkung: Höhere Release-Reife, klarere Qualitätsgates und bessere Hilfe für Einsteiger bei Doku-Fehlern.
+
 ## 2026-02-22 – Iteration: Start-/CI-Härtung (3 Punkte)
 - Scope-Kontrolle:
   - Problem: Offene P0-Punkte in Start/CI konnten bei fehlenden Rechten oder uneinheitlichem Python-Aufruf zu unklaren Fehlern führen.

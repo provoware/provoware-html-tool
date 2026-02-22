@@ -16,7 +16,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 ```
 
 ## Entwicklungsstand
-- Fortschritt: **85%**
+- Fortschritt: **86%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -45,6 +45,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - Hilfe/Sicherheit: Einzelfenster-Inhalt wird ohne `innerHTML` aufgebaut (robuster gegen fehlerhafte Inhalte) und bleibt für Laien klar lesbar.
 - Neu in dieser Iteration: Start-Routine nutzt jetzt einen robusten Dateilisten-Fallback ohne `rg` (automatisch `find`), inklusive klarer Nutzerhinweise.
 - Hilfe-/Textpunkt: Fehlende optionale Suche (`rg`) wird verständlich erklärt („langsamer, aber funktionsfähig“) und mit Next Step versehen.
+- Neu in dieser Iteration: Quality-Gate prüft automatisch, ob README oben den Sofortblock und unten den Konsolen-Spickzettel vollständig enthält (mit klarer Fehlerhilfe).
 
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
@@ -271,6 +272,12 @@ tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 - **Punkt 3 (Einheitliche Standards):** Shell-Dateien laufen konsistent durch shfmt-Checks, damit Gates reproduzierbar grün bleiben.
 
 **Hinweis in einfacher Sprache:** Wenn ein Check fehlschlägt, folgen Sie direkt den „Nächster Schritt“-Hinweisen im Terminal.
+
+
+## Iteration-Update (2026-02-22): README-Struktur wird automatisch geprüft
+- **Punkt 1 (Qualität):** Neues Prüfskript validiert Pflichtanker in der README (Top-Befehle + Spickzettel) mit Input- und Output-Check.
+- **Punkt 2 (Automatik):** `tools/run_quality_checks.sh` führt die README-Prüfung fest im Gate aus, damit Abweichungen sofort auffallen.
+- **Punkt 3 (Hilfe/A11y):** Fehlermeldungen nennen in einfacher Sprache den nächsten Schritt, damit auch Einsteiger die Doku schnell reparieren können.
 
 ## Was fehlt noch für Release?
 Aktuell fehlen vor allem diese Punkte für eine stabile Freigabe (Release):

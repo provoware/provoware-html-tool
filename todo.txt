@@ -158,3 +158,8 @@ DONE: Projektdialog öffnet beim Start nur noch bei ungültigem oder fehlendem P
 DONE: Pfad-Eingabe mit doppelten Leerzeichen blockiert nicht mehr hart, sondern speichert mit Warnhinweis + Next Step (2026-02-22)
 DONE: Einzelfenster-Ausgabe ohne innerHTML auf sichere DOM-Erzeugung umgestellt (2026-02-22)
 NEXT: P0 Theme-Konsistenz weiter umsetzen (kein harter Default, konsistente Quellen) (2026-02-23)
+
+DONE: Neues Tool `tools/check_readme_structure.py` prüft Pflichtanker in README (Top-Befehle + Spickzettel) robust per Input-/Output-Validierung (2026-02-22)
+DONE: Qualitätsgate ruft README-Ankerprüfung jetzt automatisch in `tools/run_quality_checks.sh` auf (2026-02-22)
+DONE: Hilfetexte für README-Gate-Fehler in einfacher Sprache mit klarem Next Step ergänzt (2026-02-22)
+NEXT: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen. (2026-02-23)

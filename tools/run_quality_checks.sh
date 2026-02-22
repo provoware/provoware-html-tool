@@ -6,6 +6,7 @@ TARGET_FILES=("${PROJECT_ROOT}/start.sh" "${PROJECT_ROOT}/system/start_core.sh" 
 CONTRAST_CHECK="${PROJECT_ROOT}/tools/check_theme_contrast.py"
 FOCUS_CHECK="${PROJECT_ROOT}/tools/focus_order_check.py"
 SMOKE_CHECK="${PROJECT_ROOT}/tools/smoke_test.py"
+README_CHECK="${PROJECT_ROOT}/tools/check_readme_structure.py"
 MESSAGES_CONFIG="${PROJECT_ROOT}/config/messages.json"
 MODE="check"
 
@@ -53,7 +54,7 @@ for target_file in "${TARGET_FILES[@]}"; do
   fi
 done
 
-for required_file in "$CONTRAST_CHECK" "$FOCUS_CHECK" "$SMOKE_CHECK" "$MESSAGES_CONFIG"; do
+for required_file in "$CONTRAST_CHECK" "$FOCUS_CHECK" "$SMOKE_CHECK" "$README_CHECK" "$MESSAGES_CONFIG"; do
   if [[ ! -f "$required_file" ]]; then
     print_step "❌" "Qualitätsprüfung abgebrochen: Datei fehlt (${required_file#${PROJECT_ROOT}/})."
     print_step "➡️" "Nächster Schritt: Fehlende Datei wiederherstellen und erneut prüfen."
@@ -80,6 +81,8 @@ missing=[k for k,v in data.items() if not isinstance(v, str) or not v.strip()]
 if missing:
     raise SystemExit("Leere oder ungültige Textwerte: " + ", ".join(missing))
 print("messages.json gültig")' "$MESSAGES_CONFIG"
+
+run_checked_command "README-Ankerprüfung (Top-Befehle + Spickzettel)" python3 "$README_CHECK"
 
 if command -v shfmt >/dev/null 2>&1; then
   if [[ "$MODE" == "fix" ]]; then

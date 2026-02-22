@@ -1,15 +1,15 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-project-dialog-path-warning-safe-detach",
+  "iteration": "2026.02.22-readme-structure-quality-gate",
   "files": {
     "start.sh": "2026.02.22.44",
     "tools/smoke_test.py": "2026.02.22.27",
     "templates/dashboard_musterseite.html": "2026.02.22.41",
-    "README.md": "2026.02.22.46",
-    "todo.txt": "2026.02.22.46",
-    "CHANGELOG.md": "2026.02.22.46",
-    "data/version_registry.json": "2026.02.22.46",
-    "tools/run_quality_checks.sh": "2026.02.22.43",
+    "README.md": "2026.02.22.47",
+    "todo.txt": "2026.02.22.47",
+    "CHANGELOG.md": "2026.02.22.47",
+    "data/version_registry.json": "2026.02.22.47",
+    "tools/run_quality_checks.sh": "2026.02.22.47",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.44",
     "system/start_gui.sh": "2026.02.22.1",
@@ -23,7 +23,8 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.46",
-    "config/messages.json": "2026.02.22.41"
+    "WAITME.md": "2026.02.22.47",
+    "config/messages.json": "2026.02.22.41",
+    "tools/check_readme_structure.py": "2026.02.22.47"
   }
 }
