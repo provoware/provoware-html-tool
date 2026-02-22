@@ -210,6 +210,12 @@ required_markers = [
     'aria-keyshortcuts="Alt+R"',
     'aria-keyshortcuts="Alt+P"',
     'aria-keyshortcuts="Alt+L"',
+    'id="sync-status"',
+    'id="footer-sync-status"',
+    'id="debug-last-event"',
+    'id="debug-next-step"',
+    'setDebugDetails(',
+    'updateSyncStatus(',
 ]
 missing = [marker for marker in required_markers if marker not in content]
 if missing:

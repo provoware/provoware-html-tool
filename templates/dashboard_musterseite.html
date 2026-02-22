@@ -297,7 +297,7 @@
     <header class="topbar" aria-label="Obere Statusleiste">
       <span>🧩 ModulTool</span>
       <h1 class="headline">ModulTool</h1>
-      <span class="status-pill">✅ Alle Änderungen gespeichert</span>
+      <span class="status-pill" id="sync-status" role="status" aria-live="polite">✅ Alle Änderungen gespeichert</span>
     </header>
 
     <aside class="panel left" aria-label="Navigation">
@@ -358,6 +358,8 @@
         <article class="tool-card" data-accent="b">
           <h2>Debug-Log</h2>
           <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
+          <p class="subline" id="debug-last-event" data-debug-event>Letztes Ereignis: Startzustand um --:--:--.</p>
+          <p class="subline" id="debug-next-step" data-debug-next-step>Nächster Schritt: Aktion wählen oder Alt+L für Protokoll nutzen.</p>
           <div class="actions">
             <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
           </div>
@@ -387,7 +389,7 @@
           </select>
         </li>
         <li class="settings-item">
-          <p id="theme-help">Hinweis: Status nie nur über Farbe, sondern immer mit Symbol + Text. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
+          <p id="theme-help">Hinweis: Status nie nur über Farbe, sondern immer mit Symbol + Text. Kontrast (Helligkeits-Unterschied) bleibt in allen drei Themes gut lesbar. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
         </li>
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
       </ul>
@@ -396,7 +398,7 @@
     <footer class="footer">
       <span>Version 13.0 – Pfad: /home</span>
       <span>Auto-Backup: Aktiv</span>
-      <span>Alle Änderungen gespeichert</span>
+      <span id="footer-sync-status">Alle Änderungen gespeichert</span>
     </footer>
   </main>
 
@@ -422,12 +424,50 @@
       const resultNode = document.getElementById('result');
       const dialog = document.getElementById('error-dialog');
       const themeSelector = document.getElementById('theme-switcher');
+      const syncStatusNode = document.getElementById('sync-status');
+      const footerSyncStatusNode = document.getElementById('footer-sync-status');
+      const debugEventNode = document.getElementById('debug-last-event');
+      const debugNextStepNode = document.getElementById('debug-next-step');
 
       function setResult(message) {
         if (!resultNode || typeof message !== 'string' || message.trim().length === 0) {
           return false;
         }
         resultNode.textContent = message;
+        return true;
+      }
+
+      function getTimeStamp() {
+        return new Date().toLocaleTimeString('de-DE');
+      }
+
+      function updateSyncStatus(statusText) {
+        if (typeof statusText !== 'string' || statusText.trim().length === 0) {
+          return false;
+        }
+        const fullText = statusText.trim();
+        if (syncStatusNode) {
+          syncStatusNode.textContent = fullText;
+        }
+        if (footerSyncStatusNode) {
+          footerSyncStatusNode.textContent = fullText.replace(/^✅\s*/, '');
+        }
+        return true;
+      }
+
+      function setDebugDetails(eventLabel, nextStep) {
+        if (typeof eventLabel !== 'string' || eventLabel.trim().length === 0) {
+          return false;
+        }
+        if (typeof nextStep !== 'string' || nextStep.trim().length === 0) {
+          return false;
+        }
+        if (debugEventNode) {
+          debugEventNode.textContent = 'Letztes Ereignis: ' + eventLabel.trim() + ' um ' + getTimeStamp() + '.';
+        }
+        if (debugNextStepNode) {
+          debugNextStepNode.textContent = 'Nächster Schritt: ' + nextStep.trim();
+        }
         return true;
       }
 
@@ -448,24 +488,43 @@
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
 
-        if (actionValue === 'save') return setResult('✅ Gespeichert um ' + new Date().toLocaleTimeString('de-DE') + '.');
-        if (actionValue === 'retry') return setResult('➡️ Erneut versuchen wurde vorbereitet. Aktion jetzt wiederholen.');
-        if (actionValue === 'repair') return setResult('➡️ Reparaturhinweis: Starten Sie ./start.sh --repair');
-        if (actionValue === 'log') return setResult('➡️ Protokollhinweis: Öffnen Sie logs/start.log');
+        if (actionValue === 'save') {
+          const message = '✅ Gespeichert um ' + getTimeStamp() + '.';
+          updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
+          setDebugDetails('Speichern abgeschlossen', 'Sie können jetzt sicher weiterarbeiten oder mit Alt+L das Protokoll öffnen.');
+          return setResult(message);
+        }
+        if (actionValue === 'retry') {
+          updateSyncStatus('✅ Aktion erneut bereit (' + getTimeStamp() + ')');
+          setDebugDetails('Erneut versuchen vorbereitet', 'Führen Sie die gewünschte Aktion jetzt erneut aus.');
+          return setResult('➡️ Erneut versuchen wurde vorbereitet. Aktion jetzt wiederholen.');
+        }
+        if (actionValue === 'repair') {
+          setDebugDetails('Reparatur empfohlen', 'Führen Sie ./start.sh --repair aus und prüfen Sie danach den Statusbericht.');
+          return setResult('➡️ Reparaturhinweis: Starten Sie ./start.sh --repair');
+        }
+        if (actionValue === 'log') {
+          setDebugDetails('Protokollhilfe geöffnet', 'Öffnen Sie logs/start.log und suchen Sie nach der letzten ❌-Meldung.');
+          return setResult('➡️ Protokollhinweis: Öffnen Sie logs/start.log');
+        }
 
         if (actionValue === 'error') {
           if (dialog && typeof dialog.showModal === 'function') {
             dialog.showModal();
+            setDebugDetails('Fehlerdialog geöffnet', 'Wählen Sie im Dialog zuerst „Erneut versuchen“ und prüfen Sie danach das Protokoll.');
             return setResult('❌ Fehlerdialog geöffnet. Bitte nächsten Schritt wählen.');
           }
+          setDebugDetails('Fehlerdialog fehlgeschlagen', 'Browser aktualisieren und Aktion erneut ausführen.');
           return setResult('⚠️ Fehlerdialog konnte nicht geöffnet werden. Browser prüfen.');
         }
 
         if (actionValue === 'close-dialog') {
           if (dialog && typeof dialog.close === 'function') {
             dialog.close();
+            setDebugDetails('Fehlerdialog geschlossen', 'Sie können jetzt ohne Dialog weiterarbeiten.');
             return setResult('✅ Fehlerdialog geschlossen.');
           }
+          setDebugDetails('Dialog konnte nicht schließen', 'Seite neu laden und Aktion wiederholen.');
           return setResult('⚠️ Dialog konnte nicht geschlossen werden.');
         }
 
@@ -524,6 +583,8 @@
       });
 
       applyTheme('high-contrast');
+      updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
+      setDebugDetails('Startzustand aktiv', 'Wählen Sie eine Aktion oder öffnen Sie bei Bedarf den Fehlerdialog.');
     })();
   </script>
 </body>
