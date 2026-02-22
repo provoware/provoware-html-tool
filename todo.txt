@@ -143,3 +143,7 @@ DONE: Qualitätslauf trennt jetzt klar `--check` (nur prüfen) und `--fix` (mit 
 DONE: Start-Routine nutzt Dateilisten-Fallback mit `find`, wenn `rg` fehlt (kein harter Abbruch) (2026-02-22)
 DONE: Hilfehinweis für optionales `rg` ergänzt („langsamer, aber funktionsfähig“) inkl. Next Step (2026-02-22)
 NEXT: shellcheck/shfmt in Offline-Umgebung über lokales Mirror-Paket bereitstellen, damit Gates ohne Warnung laufen (2026-02-22)
+
+DONE: Theme-Validierung akzeptiert jetzt Liste ODER Objektstruktur und gibt klare Next Steps aus (2026-02-22)
+DONE: Netzwerkprüfung ist robuster (curl oder DNS-Fallback per python3), damit Auto-Reparatur seltener fälschlich offline meldet (2026-02-22)
+DONE: Qualitätsprüfung formatiert jetzt auch system/start_core.sh konsistent über shfmt (2026-02-22)

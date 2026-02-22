@@ -1,17 +1,17 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-check-fix-rg-fallback",
+  "iteration": "2026.02.22-validation-network-format-consistency",
   "files": {
-    "start.sh": "2026.02.22.43",
+    "start.sh": "2026.02.22.44",
     "tools/smoke_test.py": "2026.02.22.27",
     "templates/dashboard_musterseite.html": "2026.02.22.40",
-    "README.md": "2026.02.22.43",
-    "todo.txt": "2026.02.22.43",
-    "CHANGELOG.md": "2026.02.22.43",
-    "data/version_registry.json": "2026.02.22.43",
+    "README.md": "2026.02.22.44",
+    "todo.txt": "2026.02.22.44",
+    "CHANGELOG.md": "2026.02.22.44",
+    "data/version_registry.json": "2026.02.22.44",
     "tools/run_quality_checks.sh": "2026.02.22.43",
     "tools/check_theme_contrast.py": "2026.02.22",
-    "system/start_core.sh": "2026.02.22.42",
+    "system/start_core.sh": "2026.02.22.43",
     "system/start_gui.sh": "2026.02.22.1",
     ".github/workflows/full-gates.yml": "2026.02.22.42",
     "tools/focus_order_check.py": "2026.02.22.1",
@@ -23,7 +23,7 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.43",
+    "WAITME.md": "2026.02.22.44",
     "config/messages.json": "2026.02.22.41"
   }
 }

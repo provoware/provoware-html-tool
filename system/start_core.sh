@@ -213,21 +213,21 @@ install_with_package_manager() {
 	}
 
 	case "$manager_name" in
-		apt)
-			command -v apt-get >/dev/null 2>&1 || return 1
-			local apt_cmd
-			apt_cmd="$(ensure_apt_access)" || return 1
-			run_install_command bash -lc "$apt_cmd update && $apt_cmd install -y '$package_name'"
-			;;
-		brew)
-			command -v brew >/dev/null 2>&1 || return 1
-			run_install_command brew install "$package_name"
-			;;
-		pip)
-			command -v python3 >/dev/null 2>&1 || return 1
-			run_install_command python3 -m pip install --disable-pip-version-check --quiet "$package_name"
-			;;
-		*) return 1 ;;
+	apt)
+		command -v apt-get >/dev/null 2>&1 || return 1
+		local apt_cmd
+		apt_cmd="$(ensure_apt_access)" || return 1
+		run_install_command bash -lc "$apt_cmd update && $apt_cmd install -y '$package_name'"
+		;;
+	brew)
+		command -v brew >/dev/null 2>&1 || return 1
+		run_install_command brew install "$package_name"
+		;;
+	pip)
+		command -v python3 >/dev/null 2>&1 || return 1
+		run_install_command python3 -m pip install --disable-pip-version-check --quiet "$package_name"
+		;;
+	*) return 1 ;;
 	esac
 
 	if [[ -s "$install_log_file" ]]; then
