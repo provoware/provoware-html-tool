@@ -51,3 +51,14 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - Reparatur mit `apt-get` prüft jetzt zuerst Root/Sudo (Administratorrechte) und zeigt klare nächste Schritte.
 - Installationsfehler stehen sichtbar in `logs/install.log` (Protokolldatei).
 - Gates und CI nutzen konsistent `python3`; CI startet keine Reparatur mehr im Runner.
+
+
+## Update 2026-02-22 (Check/Fix + Fallback)
+- Qualitätsprüfung kann jetzt klar getrennt laufen: `--check` (nur prüfen) und `--fix` (mit Korrekturen).
+- Wenn `rg` fehlt, nutzt das System automatisch `find` (langsamer, aber stabil).
+- Warnungen erklären jetzt klar, dass optionales Werkzeug fehlt, aber die Prüfung weiterläuft.
+
+### Nächste sinnvolle Befehle
+- `bash tools/run_quality_checks.sh --check`
+- `bash tools/run_quality_checks.sh --fix`
+- `bash start.sh --check --debug`

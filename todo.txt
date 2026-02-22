@@ -137,3 +137,9 @@ DONE: Zentrale Textdatei `config/messages.json` ergänzt und mit vorhandenen Hil
 DONE: start.sh prüft Text-JSON jetzt auf Pflichtfelder und leere Werte mit klarer Fehlhilfe (2026-02-22)
 DONE: run_quality_checks enthält eigene JSON-Prüfung für Tool-Texte (2026-02-22)
 NEXT: Theme-Auswahl im Dashboard mit zusätzlicher Kontrast-Vorschau pro Theme ergänzen (2026-02-23)
+
+
+DONE: Qualitätslauf trennt jetzt klar `--check` (nur prüfen) und `--fix` (mit Formatierung) für CI/lokal (2026-02-22)
+DONE: Start-Routine nutzt Dateilisten-Fallback mit `find`, wenn `rg` fehlt (kein harter Abbruch) (2026-02-22)
+DONE: Hilfehinweis für optionales `rg` ergänzt („langsamer, aber funktionsfähig“) inkl. Next Step (2026-02-22)
+NEXT: shellcheck/shfmt in Offline-Umgebung über lokales Mirror-Paket bereitstellen, damit Gates ohne Warnung laufen (2026-02-22)

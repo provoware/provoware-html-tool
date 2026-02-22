@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **82%**
+- Fortschritt: **84%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -28,6 +28,10 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - Neue Layout-Profile im Dashboard: „Layout speichern“ und „Gespeichertes Layout laden“ sichern Fensterzustand lokal und stellen ihn wieder her.
 - A11y-Erweiterung: Textgrößen-Skala S/M/L/XL mit lokaler Speicherung und klarer Statusrückmeldung.
 - Einheitliche Card-Status-Badges (Bereit/Lädt/Fehler) als Text + Label statt nur Farbe für bessere Verständlichkeit.
+- Neu in dieser Iteration: Quality-Skript mit Modus `--check` (nur prüfen) und `--fix` (mit Formatierung), damit Teams sauber zwischen CI-Prüfung und lokaler Korrektur trennen können.
+- Neu in dieser Iteration: Start-Routine nutzt jetzt einen robusten Dateilisten-Fallback ohne `rg` (automatisch `find`), inklusive klarer Nutzerhinweise.
+- Hilfe-/Textpunkt: Fehlende optionale Suche (`rg`) wird verständlich erklärt („langsamer, aber funktionsfähig“) und mit Next Step versehen.
+
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
@@ -80,7 +84,8 @@ bash start.sh --release-check   # Release-Checkliste ausführen
 python tools/smoke_test.py      # schneller Funktionstest
 OFFLINE_ARTIFACT_MODE=warn python tools/smoke_test.py --profile full # Offline-Artefakte nur als Warnung behandeln
 OFFLINE_ARTIFACT_MODE=strict bash start.sh --test # strenger Modus: ungültige Werte werden sofort gestoppt
-bash tools/run_quality_checks.sh # Qualitätsprüfungen für Repo
+bash tools/run_quality_checks.sh --check # Qualitätsprüfungen nur lesend (CI-sicher)
+bash tools/run_quality_checks.sh --fix   # Qualitätsprüfungen + Formatierung (lokaler Fix)
 ```
 
 ## Pflicht-Gates (Reihenfolge)
