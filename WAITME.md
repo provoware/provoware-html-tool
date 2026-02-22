@@ -95,3 +95,14 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash tools/run_quality_checks.sh`
 - `python tools/smoke_test.py`
 - `bash start.sh --ux-check-auto`
+
+## Update 2026-02-22 (README-Gate automatisiert)
+- Die Qualitätsprüfung kontrolliert jetzt automatisch, ob die README oben die wichtigsten Befehle und unten den Spickzettel enthält.
+- Wenn ein Pflichtbefehl fehlt, zeigt das Tool eine klare Fehlermeldung mit nächstem Schritt zum Korrigieren.
+- Dadurch wird die Dokumentation zuverlässiger, auch wenn mehrere Personen parallel arbeiten.
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`
