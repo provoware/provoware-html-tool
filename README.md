@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **96%**
+- Fortschritt: **97%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -14,6 +14,9 @@
   - Visual-Baseline prüft jetzt ein Chromium-Artefakt gegen eine freigegebene Baseline und unterstützt bewusstes Freigeben via `--accept-current`.
   - Schwachstellen-Bericht prüft jetzt Browser-Artefakte für Chromium, Firefox und WebKit sowie den Baseline-Status als Rest-Risiko-Check.
   - Theme-Auswahl meldet den aktiven Kontrastmodus jetzt live als Screenreader-Status mit verständlicher Prüfhilfe.
+  - Offline-Erkennung ergänzt: automatische Reparatur überspringt Paketinstallation ohne Netzwerk und zeigt klare Next Steps.
+  - Full-Gates laufen jetzt fehlertolerant mit Zeitlimit und automatischem Retry pro Gate für stabilere Ausführung.
+  - Hilfe-/Fehlertexte erweitert: Wiederholungsversuche werden transparent protokolliert und laienverständlich erklärt.
 - Offene Aufgaben:
   - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
