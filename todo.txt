@@ -1,2 +1,31 @@
 DONE: Modul-Hauptbereich im HTML-Dashboard mit Modul-Starter, Alt+O-Shortcut, validierter Auswahl und Debug-Verlauf umgesetzt (2026-02-22)
-NEXT: Modul-Starter im nächsten Schritt mit echten Modul-URLs oder Startskript-Parametern verbinden und pro Modul einen direkten Öffnen-Button ergänzen (2026-02-22)
+NEXT: Offene Punkte in die Umsetzungs-Pipeline übernommen und nach Bereichen priorisiert (2026-02-22)
+
+OFFEN – Struktur
+- Sidebar gruppieren
+- Kartenhierarchie einführen
+- Einstellungsbereich tabben
+
+OFFEN – Design
+- Farbpalette vereinheitlichen
+- Glow & Effekte reduzieren
+- Typografie standardisieren
+
+OFFEN – UX
+- Arbeitsmodus + Dashboardmodus
+- Tooltipps & klare Icons
+- Autosave-Feedback erweitern
+
+OFFEN – Barrierefreiheit
+- Fokusrahmen + Tastatursteuerung
+- Kontraste prüfen
+- Icons nicht allein nutzen
+
+OFFEN – Funktional
+- Dashboard mit Pluginstatus verbinden
+- Systemstatuskarte einführen
+- Suche erweitern
+
+OFFEN – Zukunftssicherheit
+- Responsive Layout
+- Komponentenstruktur modularisieren
