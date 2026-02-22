@@ -7,6 +7,17 @@ CONTRAST_CHECK="${PROJECT_ROOT}/tools/check_theme_contrast.py"
 FOCUS_CHECK="${PROJECT_ROOT}/tools/focus_order_check.py"
 SMOKE_CHECK="${PROJECT_ROOT}/tools/smoke_test.py"
 MESSAGES_CONFIG="${PROJECT_ROOT}/config/messages.json"
+MODE="check"
+
+if [[ "${1:-}" == "--fix" ]]; then
+  MODE="fix"
+elif [[ "${1:-}" == "--check" || -z "${1:-}" ]]; then
+  MODE="check"
+else
+  printf "❌ Unbekannter Modus: %s\n" "${1}"
+  printf "➡️ Nächster Schritt: Verwende --check (nur prüfen) oder --fix (mit Formatierung).\n"
+  exit 1
+fi
 
 print_step() {
   local icon="$1"
@@ -56,7 +67,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
-print_step "✅" "Qualitätsprüfung gestartet (effizienter Standardlauf)."
+print_step "✅" "Qualitätsprüfung gestartet (Modus: ${MODE})."
 run_checked_command "Syntaxprüfung (python -m compileall -q .)" python3 -m compileall -q "$PROJECT_ROOT"
 
 run_checked_command "JSON-Prüfung (config/messages.json)" python3 -c 'import json,sys
@@ -71,9 +82,13 @@ if missing:
 print("messages.json gültig")' "$MESSAGES_CONFIG"
 
 if command -v shfmt >/dev/null 2>&1; then
-  run_checked_command "Formatierung (shfmt)" shfmt -w "${TARGET_FILES[@]}"
+  if [[ "$MODE" == "fix" ]]; then
+    run_checked_command "Formatierung (shfmt --write)" shfmt -w "${TARGET_FILES[@]}"
+  else
+    run_checked_command "Format-Check (shfmt --diff)" shfmt -d "${TARGET_FILES[@]}"
+  fi
 else
-  print_step "⚠️" "shfmt nicht gefunden. Formatierung wurde übersprungen."
+  print_step "⚠️" "shfmt nicht gefunden. Formatierungsprüfung wurde übersprungen."
   print_step "➡️" "Nächster Schritt: './start.sh --repair' ausführen."
 fi
 

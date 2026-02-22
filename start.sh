@@ -544,7 +544,7 @@ check_required_files() {
 check_runtime_prerequisites() {
 	local missing=0
 	local runtime_tool
-	for runtime_tool in "bash" "python3" "rg" "curl"; do
+	for runtime_tool in "bash" "python3" "curl"; do
 		if command -v "$runtime_tool" >/dev/null 2>&1; then
 			print_step "✅" "Voraussetzung verfügbar: ${runtime_tool}"
 			record_checked "Voraussetzung ${runtime_tool}"
@@ -572,12 +572,33 @@ check_runtime_prerequisites() {
 	done
 
 	if [[ "$missing" -eq 0 ]]; then
+		if command -v rg >/dev/null 2>&1; then
+			print_step "✅" "Optionales Suchwerkzeug verfügbar: rg (schnelle Dateisuche)."
+			record_checked "Optional rg"
+		else
+			print_step "⚠️" "Optionales Suchwerkzeug rg fehlt. Fallback mit find ist aktiv (langsamer, aber funktionsfähig)."
+			record_next_step "Optional: './start.sh --repair' für schnellere Prüfungen mit rg"
+		fi
+
 		print_step "ℹ️" "Hilfe: Voraussetzungen sind bereit. Bei neuen Fehlern zuerst './start.sh --repair' ausführen."
 		record_checked "Voraussetzungen vollständig"
 		return 0
 	fi
 
 	return 1
+}
+
+list_repo_files() {
+	if command -v rg >/dev/null 2>&1; then
+		(cd "$PROJECT_ROOT" && rg --files)
+		return 0
+	fi
+
+	(cd "$PROJECT_ROOT" && find . -type f \
+		-not -path './.git/*' \
+		-not -path './.venv/*' \
+		-not -path './node_modules/*' \
+		-print | sed 's#^\./##')
 }
 
 check_line_limit() {
@@ -596,7 +617,7 @@ check_line_limit() {
 			record_missing "Zeilenlimit: $file"
 			oversize_found=1
 		fi
-	done < <(cd "$PROJECT_ROOT" && rg --files)
+	done < <(list_repo_files)
 
 	if [[ "$oversize_found" -eq 0 ]]; then
 		print_step "✅" "$(replace_placeholders "$(get_text "line_limit_ok")")"

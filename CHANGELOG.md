@@ -294,3 +294,25 @@
   3) `tools/run_quality_checks.sh` enthält einen expliziten Gate-Schritt für die Text-JSON.
 - Warum: Einheitliche Texte verbessern Wartbarkeit, Übersetzbarkeit und Barrierefreiheit (klare, konsistente Sprache).
 - Wirkung: Bessere Release-Reife durch früh sichtbare Konfigurationsfehler und weniger verstreute Textpflege.
+
+
+## 2026-02-22 – Iteration: Check/Fix-Trennung + rg-Fallback (3 Punkte)
+### Scope-Kontrolle
+- Problem: Qualitätslauf und Start-Routine waren bei fehlendem `rg`/Formatmodus noch nicht klar genug zwischen Prüfung und Korrektur getrennt.
+- Ziel: Read-only-Qualitätsmodus, klarer Fix-Modus und robuster Dateisuche-Fallback mit einfachen Hinweisen bereitstellen.
+- Dateien: `tools/run_quality_checks.sh`, `start.sh`, `README.md`, `todo.txt`, `CHANGELOG.md`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: (1) Moduslogik `--check/--fix`, (2) optionales `rg` + `find`-Fallback, (3) Doku/Status synchronisieren.
+- Abnahmekriterium: `bash tools/run_quality_checks.sh --check` läuft ohne Schreibzugriff, `--fix` führt Formatierung aus, und `bash start.sh --check` bleibt ohne `rg` funktionsfähig.
+
+### Was
+1. `tools/run_quality_checks.sh` um Modus `--check` (Standard) und `--fix` erweitert; unbekannte Moduswerte stoppen mit klarer Next-Step-Meldung.
+2. `start.sh` so angepasst, dass `rg` optional ist; Dateiliste fällt automatisch auf `find` zurück (ohne harten Abbruch).
+3. Hilfe-/Textverbesserung: verständliche Nutzerhinweise für optionales `rg` („langsamer, aber funktionsfähig“) plus konkrete Befehlsvorschläge ergänzt.
+
+### Warum
+- CI und lokale Entwicklung brauchen unterschiedliche Qualitätsläufe (nur prüfen vs. aktiv korrigieren).
+- Fehlende optionale Tools dürfen keine Kernprüfung blockieren.
+- Laien sollen bei Warnungen sofort wissen, ob sie weiterarbeiten können und was der nächste Schritt ist.
+
+### Wirkung
+- Stabilerer Start in Minimalumgebungen, klarere Qualitäts-Workflows und bessere Verständlichkeit bei optionalen Abhängigkeiten.

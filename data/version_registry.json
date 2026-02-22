@@ -1,15 +1,15 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-start-ci-hardening",
+  "iteration": "2026.02.22-check-fix-rg-fallback",
   "files": {
-    "start.sh": "2026.02.22.42",
+    "start.sh": "2026.02.22.43",
     "tools/smoke_test.py": "2026.02.22.27",
     "templates/dashboard_musterseite.html": "2026.02.22.40",
-    "README.md": "2026.02.22.42",
-    "todo.txt": "2026.02.22.42",
-    "CHANGELOG.md": "2026.02.22.42",
-    "data/version_registry.json": "2026.02.22.42",
-    "tools/run_quality_checks.sh": "2026.02.22.41",
+    "README.md": "2026.02.22.43",
+    "todo.txt": "2026.02.22.43",
+    "CHANGELOG.md": "2026.02.22.43",
+    "data/version_registry.json": "2026.02.22.43",
+    "tools/run_quality_checks.sh": "2026.02.22.43",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.42",
     "system/start_gui.sh": "2026.02.22.1",
@@ -23,7 +23,7 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.42",
+    "WAITME.md": "2026.02.22.43",
     "config/messages.json": "2026.02.22.41"
   }
 }
