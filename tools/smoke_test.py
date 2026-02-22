@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import argparse
 import json
 import os
 import re
@@ -19,6 +20,25 @@ FOCUS_CHECK = PROJECT_ROOT / "tools" / "focus_order_check.py"
 
 def print_step(icon: str, text: str) -> None:
     print(f"{icon} {text}")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Smoke-Test mit zwei Profilen: 'quick' für schnelle Rückmeldung "
+            "und 'full' für komplette Start-Prüfung."
+        )
+    )
+    parser.add_argument(
+        "--profile",
+        choices=["quick", "full"],
+        default="full",
+        help="quick = effizienter Kurzlauf, full = kompletter Lauf inkl. Startmodi.",
+    )
+    return parser.parse_args()
+
+
+ARGS = parse_args()
 
 
 if not START_SCRIPT.exists():
@@ -56,45 +76,46 @@ if not FOCUS_CHECK.exists():
     print_step("➡️", "Nächster Schritt: Fokus-Checker-Datei ergänzen und erneut testen.")
     sys.exit(1)
 
-print_step("✅", "Smoke-Test gestartet: ./start.sh --check")
-check_result = subprocess.run(
-    ["bash", str(START_SCRIPT), "--check"],
-    cwd=PROJECT_ROOT,
-    text=True,
-    capture_output=True,
-)
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) gestartet: ./start.sh --check")
+    check_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--check"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
 
-if check_result.returncode != 0:
-    print_step("❌", "Smoke-Test fehlgeschlagen: --check lieferte Fehler.")
-    print(check_result.stdout)
-    print(check_result.stderr)
-    print_step("➡️", "Nächster Schritt: './start.sh --check --debug' ausführen und Log prüfen.")
-    sys.exit(check_result.returncode)
+    if check_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: --check lieferte Fehler.")
+        print(check_result.stdout)
+        print(check_result.stderr)
+        print_step("➡️", "Nächster Schritt: './start.sh --check --debug' ausführen und Log prüfen.")
+        sys.exit(check_result.returncode)
 
-if "Check-Modus aktiv" not in check_result.stdout:
-    print_step("❌", "Smoke-Test fehlgeschlagen: erwartete Erfolgsausgabe fehlt.")
-    print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --check' prüfen.")
-    sys.exit(1)
+    if "Check-Modus aktiv" not in check_result.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: erwartete Erfolgsausgabe fehlt.")
+        print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --check' prüfen.")
+        sys.exit(1)
 
-print_step("✅", "Smoke-Test erweitert: ./start.sh --dashboard-template")
-template_result = subprocess.run(
-    ["bash", str(START_SCRIPT), "--dashboard-template"],
-    cwd=PROJECT_ROOT,
-    text=True,
-    capture_output=True,
-)
+    print_step("✅", "Smoke-Test (full) erweitert: ./start.sh --dashboard-template")
+    template_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--dashboard-template"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
 
-if template_result.returncode != 0:
-    print_step("❌", "Smoke-Test fehlgeschlagen: --dashboard-template lieferte Fehler.")
-    print(template_result.stdout)
-    print(template_result.stderr)
-    print_step("➡️", "Nächster Schritt: Template-Marker prüfen und erneut testen.")
-    sys.exit(template_result.returncode)
+    if template_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: --dashboard-template lieferte Fehler.")
+        print(template_result.stdout)
+        print(template_result.stderr)
+        print_step("➡️", "Nächster Schritt: Template-Marker prüfen und erneut testen.")
+        sys.exit(template_result.returncode)
 
-if "einsatzbereit" not in template_result.stdout:
-    print_step("❌", "Smoke-Test fehlgeschlagen: Template-Erfolgsausgabe fehlt.")
-    print_step("➡️", "Nächster Schritt: Startausgabe von '--dashboard-template' prüfen.")
-    sys.exit(1)
+    if "einsatzbereit" not in template_result.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Template-Erfolgsausgabe fehlt.")
+        print_step("➡️", "Nächster Schritt: Startausgabe von '--dashboard-template' prüfen.")
+        sys.exit(1)
 
 
 print_step("✅", "Smoke-Test erweitert: python tools/check_theme_contrast.py")
@@ -137,27 +158,28 @@ if "Fokus-Check bestanden" not in focus_result.stdout:
     print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/focus_order_check.py' prüfen.")
     sys.exit(1)
 
-print_step("✅", "Smoke-Test erweitert: ./start.sh --ux-check-auto")
-ux_result = subprocess.run(
-    ["bash", str(START_SCRIPT), "--ux-check-auto"],
-    cwd=PROJECT_ROOT,
-    text=True,
-    capture_output=True,
-)
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: ./start.sh --ux-check-auto")
+    ux_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--ux-check-auto"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
 
-if ux_result.returncode != 0:
-    print_step("❌", "Smoke-Test fehlgeschlagen: --ux-check-auto lieferte Fehler.")
-    print(ux_result.stdout)
-    print(ux_result.stderr)
-    print_step("➡️", "Nächster Schritt: UX-Hinweise im Template ergänzen und erneut testen.")
-    sys.exit(ux_result.returncode)
+    if ux_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: --ux-check-auto lieferte Fehler.")
+        print(ux_result.stdout)
+        print(ux_result.stderr)
+        print_step("➡️", "Nächster Schritt: UX-Hinweise im Template ergänzen und erneut testen.")
+        sys.exit(ux_result.returncode)
 
-if "Mini-UX-Check erfolgreich" not in ux_result.stdout:
-    print_step("❌", "Smoke-Test fehlgeschlagen: UX-Erfolgsausgabe fehlt.")
-    print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --ux-check-auto' prüfen.")
-    sys.exit(1)
+    if "Mini-UX-Check erfolgreich" not in ux_result.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: UX-Erfolgsausgabe fehlt.")
+        print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --ux-check-auto' prüfen.")
+        sys.exit(1)
 
-if os.environ.get("SKIP_FULL_GATES") != "1":
+if ARGS.profile == "full" and os.environ.get("SKIP_FULL_GATES") != "1":
     print_step("✅", "Smoke-Test erweitert: ./start.sh --full-gates")
     full_gates_result = subprocess.run(
         ["bash", str(START_SCRIPT), "--full-gates"],
@@ -178,16 +200,17 @@ if os.environ.get("SKIP_FULL_GATES") != "1":
         print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --full-gates' prüfen.")
         sys.exit(1)
 
-if not STATUS_SUMMARY.exists() or STATUS_SUMMARY.stat().st_size == 0:
-    print_step("❌", "Smoke-Test fehlgeschlagen: logs/status_summary.txt fehlt oder ist leer.")
-    print_step("➡️", "Nächster Schritt: './start.sh --check' ausführen und Schreibrechte prüfen.")
-    sys.exit(1)
+if ARGS.profile == "full":
+    if not STATUS_SUMMARY.exists() or STATUS_SUMMARY.stat().st_size == 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: logs/status_summary.txt fehlt oder ist leer.")
+        print_step("➡️", "Nächster Schritt: './start.sh --check' ausführen und Schreibrechte prüfen.")
+        sys.exit(1)
 
-status_content = STATUS_SUMMARY.read_text(encoding="utf-8")
-if "Geprueft:" not in status_content or "Naechste Schritte:" not in status_content and "Naechster Schritt:" not in status_content:
-    print_step("❌", "Smoke-Test fehlgeschlagen: Statusbericht enthält nicht alle Pflichtzeilen.")
-    print_step("➡️", "Nächster Schritt: Statusbericht-Format im Startskript prüfen.")
-    sys.exit(1)
+    status_content = STATUS_SUMMARY.read_text(encoding="utf-8")
+    if "Geprueft:" not in status_content or "Naechste Schritte:" not in status_content and "Naechster Schritt:" not in status_content:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Statusbericht enthält nicht alle Pflichtzeilen.")
+        print_step("➡️", "Nächster Schritt: Statusbericht-Format im Startskript prüfen.")
+        sys.exit(1)
 content = DASHBOARD_TEMPLATE.read_text(encoding="utf-8")
 required_markers = [
     'class="shell"',
@@ -248,4 +271,7 @@ if missing_options:
     print_step("➡️", "Nächster Schritt: Fehlende Optionen im Theme-Umschalter ergänzen.")
     sys.exit(1)
 
-print_step("✅", "Smoke-Test bestanden: Startmodi, A11y-Marker und Theme-Konfiguration sind korrekt.")
+print_step(
+    "✅",
+    f"Smoke-Test bestanden (Profil: {ARGS.profile}): Startmodi/A11y-Marker/Theme-Konfiguration sind korrekt.",
+)

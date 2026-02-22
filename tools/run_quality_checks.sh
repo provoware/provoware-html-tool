@@ -55,7 +55,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 1
 fi
 
-print_step "✅" "Qualitätsprüfung gestartet."
+print_step "✅" "Qualitätsprüfung gestartet (effizienter Standardlauf)."
 run_checked_command "Syntaxprüfung (python -m compileall -q .)" python3 -m compileall -q "$PROJECT_ROOT"
 
 if command -v shfmt >/dev/null 2>&1; then
@@ -72,8 +72,15 @@ else
   print_step "➡️" "Nächster Schritt: './start.sh --repair' ausführen."
 fi
 
+if command -v ruff >/dev/null 2>&1; then
+  run_checked_command "Python-Lint (ruff check tools)" ruff check "${PROJECT_ROOT}/tools"
+else
+  print_step "⚠️" "ruff nicht gefunden. Python-Lint ist vorbereitet, aber optional (keine Pflichtabhängigkeit)."
+  print_step "➡️" "Nächster Schritt: Optional installieren mit 'python3 -m pip install ruff' und erneut prüfen."
+fi
+
 run_checked_command "WCAG-Kontrastprüfung" python3 "$CONTRAST_CHECK"
 run_checked_command "Fokus-Reihenfolge-Prüfung" python3 "$FOCUS_CHECK"
-run_checked_command "Smoke-Kurzlauf" env SKIP_FULL_GATES=1 python3 "$SMOKE_CHECK"
+run_checked_command "Smoke-Kurzlauf (Profil quick)" env SKIP_FULL_GATES=1 python3 "$SMOKE_CHECK" --profile quick
 
-print_step "✅" "Repo-Quality abgeschlossen."
+print_step "✅" "Repo-Quality abgeschlossen. Für Vollprüfung optional: python3 tools/smoke_test.py --profile full"
