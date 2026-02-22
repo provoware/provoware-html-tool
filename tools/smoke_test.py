@@ -164,6 +164,11 @@ if "Geprueft:" not in status_content or "Naechste Schritte:" not in status_conte
     sys.exit(1)
 content = DASHBOARD_TEMPLATE.read_text(encoding="utf-8")
 required_markers = [
+    'class="shell"',
+    'class="topbar"',
+    'class="panel left"',
+    'class="panel right"',
+    'class="card-grid"',
     'data-theme-switcher',
     'id="error-dialog"',
     'data-action="retry"',

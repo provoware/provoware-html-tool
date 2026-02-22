@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-shortcuts-a11y-smoke",
+  "iteration": "2026.02.22-reference-layout-neon-a11y",
   "files": {
     "start.sh": "2026.02.22",
     "tools/smoke_test.py": "2026.02.22",

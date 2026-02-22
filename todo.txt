@@ -1,33 +1,26 @@
-DONE: GUI-Erzeugung und Theme-Farbberechnung aus start.sh nach system/start_gui.sh ausgelagert und mit klarer Fehlerhilfe abgesichert. (2026-02-22)
-NEXT: Als Nächstes CI-Pipeline für full-gates und Artefakt-Upload von logs/status_summary.txt automatisieren. (2026-02-22)
+DONE: Dashboard-Musterseite auf Drei-Spalten-Layout mit Topbar, linker Navigation, mittlerem Kartenbereich und rechter Einstellungsleiste umgestellt, damit die Darstellung dem Referenzbild deutlich näher kommt. (2026-02-22)
+DONE: Neon-/Glas-Look mit robusten Kontrastfarben für High-Contrast/Light/Dark umgesetzt und Fokusrahmen in allen Themes vereinheitlicht. (2026-02-22)
+DONE: Hilfe- und A11y-Elemente ausgebaut (Skip-Link, Tastaturkürzel-Hilfe, Fehlerdialog mit Next Steps, Screenreader-Status) und per Smoke-Marker abgesichert. (2026-02-22)
+NEXT: Feintuning für pixelnahe Annäherung: exakte Icon-Sets, Typografie-Metriken und Modulabstände per visuellem Vergleich in 3 Breakpoints prüfen. (2026-02-22)
 
-DONE: Check-Modus mit klaren Exitcodes gehärtet, Startmodus mit Failfast abgesichert und Reduced-Motion-Hilfe im Template ergänzt. (2026-02-22)
-NEXT: Als Nächstes GUI-Erzeugung und Theme-Farbzuordnung aus start.sh nach system/ auslagern und dafür gezielte Shell-Tests pro Funktion ergänzen. (2026-02-22)
+# TODO – provoware-html-tool (Design-Abgleich Referenzbild)
 
-# TODO – provoware-html-tool (optimierter Entwicklungsprozess)
-
-DONE: Start-Kernlogik in system/start_core.sh ausgelagert, Auto-Bootstrap ergänzt und Repo-Quality auf beide Shell-Dateien erweitert. (2026-02-22)
-NEXT: Als Nächstes GUI-Erzeugung und Theme-Farbzuordnung aus start.sh nach system/ auslagern und mit Unit-nahen Shellchecks absichern. (2026-02-22)
-
-DONE: WCAG-Kontrasttest automatisiert, Repo-Quality erweitert und Full-Gates auf 1-5 mit Auto-UX-Check umgestellt. (2026-02-22)
-NEXT: CI-Pipeline so erweitern, dass `bash start.sh --full-gates` bei jedem Commit Pflicht ist und Statusdatei als Artefakt speichert. (2026-02-22)
-
-## Iteration 2026-02-22 (Full-Gates + Statusbericht + Hilfe)
+## Iteration 2026-02-22 (Bildanalyse + Layout-Näherung + Detail-ToDo)
 ### A) Fundstelle (beobachten)
-- Problem: Pflicht-Gates liefen nicht als strikt geketteter Startmodus, und ein leicht vorlesbarer Gesamtstatus fehlte.
-- Risiko: Uneinheitliche Freigabequalität und unklare Hilfe für Nutzer bei Fehlern.
-- Erwartung: Ein Befehl für Gates 1-4, klare Statusdatei und sichtbare Next Steps im Template.
+- Problem: Das bisherige Muster war funktional, aber nicht nah genug an der gezeigten Referenz mit klarer Seitenstruktur und Neon-Panel-Optik.
+- Risiko: Nutzer erkennen den gewünschten visuellen Standard nicht wieder und Bedienung wirkt uneinheitlich.
+- Erwartung: Sichtbar ähnliche Informationsarchitektur mit starker Lesbarkeit und klaren Hilfen in einfacher Sprache.
 
 ### B) Change-Scope (vor Patch)
-- Ziel: Vollautomatische Gate-Kette, barrierearmen Statusbericht und Hilfebereich mit festen Lösungen bereitstellen.
-- Dateien: `start.sh`, `tools/smoke_test.py`, `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Ziel: Struktur, Farben und Darstellung auf Referenzstil annähern und alle nötigen Nacharbeiten präzise im To-Do festhalten.
+- Dateien: `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Block.
-- Abnahmekriterium: `./start.sh --full-gates` läuft erfolgreich, `logs/status_summary.txt` wird erzeugt, Smoke-Test validiert neue Marker und Template-Hilfebereich.
+- Abnahmekriterium: Template zeigt neue 3-Spalten-Struktur inkl. Hilfe-/A11y-Marker, Smoke-Test prüft neue Layout-Marker, Doku enthält exakte Restaufgaben.
 
 ### C) Patch (kurz)
-- Punkt 1 – Änderung: Neuer Modus `--full-gates` führt Gates 1-4 strikt nacheinander aus und stoppt mit klaren Next Steps.
-- Punkt 2 – Änderung: Startskript erzeugt `logs/status_summary.txt` als einfache, screenreaderfreundliche Ergebniszusammenfassung.
-- Punkt 3 – Änderung: Dashboard-Template ergänzt einen eigenen Hilfebereich mit festen, leicht verständlichen Lösungsbefehlen.
+- Punkt 1 – Änderung: Hauptlayout in Topbar + links Navigation + mittig Kartenraster + rechts Einstellungen + Footer umgebaut.
+- Punkt 2 – Änderung: Farb- und Kartenstil auf dunklen Neon-Look mit klaren Accent-Rahmen und Theme-Umschaltung harmonisiert.
+- Punkt 3 – Änderung: Hilfe- und Barrierefreiheits-Elemente erweitert und mit zusätzlichen Smoke-Markern automatisch abgesichert.
 
 ### D) Gates
 - G1: `python -m compileall -q .`
@@ -40,14 +33,18 @@ NEXT: CI-Pipeline so erweitern, dass `bash start.sh --full-gates` bei jedem Comm
 - Status: DONE
 - Doku: README + CHANGELOG + todo aktualisiert
 - Laienvorschläge:
-  1. Nutzen Sie zuerst `./start.sh --full-gates`, damit alle Kernprüfungen automatisch und in richtiger Reihenfolge laufen.
-  2. Öffnen Sie danach `cat logs/status_summary.txt`, weil dort alle Ergebnisse in einfacher Sprache gesammelt stehen.
-- Nächster Schritt: Ergänzen Sie als Nächstes einen automatischen Kontrastrechner, der bei jedem Lauf alle Theme-Farben gegen WCAG-Mindestwerte prüft und bei Fehlern direkt Korrekturvorschläge ausgibt.
+  1. Öffnen Sie das Dashboard zuerst im High-Contrast-Theme, weil dort Lesbarkeit und Fokus am deutlichsten sichtbar sind.
+  2. Nutzen Sie bei Problemen direkt den Fehlerdialog und arbeiten Sie die drei Next Steps nacheinander ab.
+- Nächster Schritt: Erstellen Sie einen visuellen Soll-Ist-Check mit festen Messpunkten (Schriftgröße, Abstände, Randstärken) und gleichen Sie danach gezielt Icons und Texte gegen die Referenz an.
 
-
-## Iteration 2026-02-22 (Mini-UX-Autocheck + Theme-Hilfe + Smoke)
-- 3 Punkte abgeschlossen: neuer Auto-UX-Check in start.sh, verbesserte Theme-Hilfe im Template, Smoke-Test-Erweiterung.
-- Hilfe/A11y erweitert: Theme-Hilfe mit Screenreader-Bezug und beschreibendem Attribut (`aria-describedby`).
-- Nächster technischer Schritt: automatischen Kontrastrechner als zusätzliches Gate einbauen.
-DONE: Tastatur-Kürzel und A11y-Hilfe im Dashboard ergänzt, Smoke-Test erweitert (2026-02-22)
-NEXT: Automatischen Browser-UX-Test für Fokus-Reihenfolge und Dialog-Bedienung ergänzen (2026-02-22)
+## Exakte Detail-ToDo-Liste für noch nähere Bildanpassung
+1. Top-Leiste weiter angleichen: Höhe auf Pixelbasis messen, Fensterpunkte links als echte dekorative Statuspunkte ergänzen, Nutzericon rechts als klaren Fokus-Button mit ARIA-Label umsetzen.
+2. Linke Navigation finalisieren: Suchfeld in eigener Zeile mit Lupenicon und Platzhalter-Text, aktive Navigation mit farblich klarer Kontur, Abmelden-Bereich stets unten fixieren.
+3. Mittleres Modulraster perfektionieren: Kartenhöhen je Reihe vereinheitlichen, Icon-Action oben rechts pro Karte ergänzen, Platzhalterkarten `(Leer)` visuell gedimmt mit erklärendem Tooltip versehen.
+4. Rechte Einstellungsleiste schärfen: Bereiche Design/Sprache/Schnellhilfe/Statistik als getrennte Panelabschnitte mit konsistenten Überschriften-Abständen darstellen.
+5. Typografie angleichen: Überschrift- und Fließtext-Hierarchie nach Referenz skalieren (Titel groß, Bereichstitel mittel, Hilfetext kleiner, aber WCAG-kontraststark).
+6. Farb-Feinschliff: Neon-Randfarben pro Modultyp in Themes identisch mappen, dabei minimale Kontrastwerte automatisch gegen Hintergrund testen.
+7. Zustandsanzeigen erweitern: „Alle Änderungen gespeichert“ in Topbar und Footer synchronisieren und bei Aktion live aktualisieren.
+8. Fehler- und Debugbereich ausbauen: Debug-Log mit letztem Ereignis, Zeitstempel und nächstem Schritt in einfacher Sprache ausgeben.
+9. Accessibility-Best-Practice nachziehen: Landmark-Rollen prüfen, Tab-Reihenfolge im kompletten 3-Spalten-Layout dokumentieren, Screenreader-Text für dekorative Elemente ergänzen.
+10. Automatischer Visual-Check: Screenshot-Vergleich (Baseline vs. aktuell) in Start- oder Testpfad integrieren, um Layout-Drift früh zu erkennen.
