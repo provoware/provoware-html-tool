@@ -71,7 +71,7 @@ NEXT (offen, priorisiert und testbar)
 - [ ] P0 | Frontend/Template | Theme-Quellen harmonisieren (`balanced` überall konsistent einführen oder überall entfernen).
 - [ ] P0 | Frontend/Template | Kein hartes Default-Theme im JS (`applyTheme('balanced')` auf Config/Preference umstellen).
 - [ ] P0 | Frontend/UI | Klick-Delegation mit `closest('[data-action]')` robust machen (Icon/Span-Klick).
-- [ ] P0 | Frontend/Security | `innerHTML` im Popup/Renderpfad minimieren, Textausgaben auf `textContent` umstellen.
+- [x] P0 | Frontend/Security | `innerHTML` im Popup/Renderpfad minimieren, Textausgaben auf `textContent` umstellen.
 - [x] P0 | Scripts/Start | `apt-get`-Reparatur nur mit Root/Sudo ausführen und klaren Alternativpfad melden.
 - [x] P0 | Scripts/Start | Restliche `python`-Aufrufe in Gates/Workflow auf `python3` umstellen.
 - [x] P0 | Scripts/Logs | Repair-/Installer-Fehlerausgaben in Logdatei sichtbar machen (nicht komplett verschlucken).
@@ -79,8 +79,8 @@ NEXT (offen, priorisiert und testbar)
 - [ ] P1 | UX/Status | Statische Footer-Aussagen durch echte dynamische Werte ersetzen (Version, Pfad, Backup).
 - [ ] P1 | Config/Modules | Modulquellen weiter synchronisieren (insb. `todo` klar UI-fähig oder entfernen).
 - [ ] P1 | Projekt/State | Projektpfad als Single-Source-of-Truth festlegen (klare Priorität config/context/localStorage).
-- [ ] P1 | UX/First-Run | Projektdialog nur bei fehlendem/ungültigem Pfad automatisch öffnen.
-- [ ] P1 | Validation | Pfadprüfung von „hart blockierend“ auf „warnen + Vorschlag“ anpassen (z. B. Leerzeichen).
+- [x] P1 | UX/First-Run | Projektdialog nur bei fehlendem/ungültigem Pfad automatisch öffnen.
+- [x] P1 | Validation | Pfadprüfung von „hart blockierend“ auf „warnen + Vorschlag“ anpassen (z. B. Leerzeichen).
 - [ ] P1 | QA/Scripts | `run_quality_checks.sh` in `--check` (read-only) und `--fix` (schreibend) trennen.
 - [ ] P1 | QA/Tests | Marker-Tests auf kleine Verhaltens-/DOM-Checks erweitern (Fokus/Skiplink).
 - [ ] P1 | Dependencies | `rg` optional mit Fallback (`find`) in Checks/Start-Routine machen.
@@ -152,3 +152,9 @@ DONE: README zeigt wichtigste Konsole-Befehle jetzt direkt am Anfang als Sofortb
 DONE: README hängt einen dauerhaften Konsolen-Spickzettel ganz unten an (2026-02-22)
 DONE: Start-Zusammenfassung zeigt jetzt Kurzstatus-Zähler + Release-Hinweis bei offenen Punkten (2026-02-22)
 NEXT: Automatische README-Prüfung ergänzen, die „Wichtigste Befehle oben + Spickzettel unten“ im Quality-Gate verifiziert (2026-02-23)
+
+
+DONE: Projektdialog öffnet beim Start nur noch bei ungültigem oder fehlendem Pfad (2026-02-22)
+DONE: Pfad-Eingabe mit doppelten Leerzeichen blockiert nicht mehr hart, sondern speichert mit Warnhinweis + Next Step (2026-02-22)
+DONE: Einzelfenster-Ausgabe ohne innerHTML auf sichere DOM-Erzeugung umgestellt (2026-02-22)
+NEXT: P0 Theme-Konsistenz weiter umsetzen (kein harter Default, konsistente Quellen) (2026-02-23)

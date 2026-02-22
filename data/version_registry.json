@@ -1,14 +1,14 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-readme-command-anchors-start-feedback-release-gaps",
+  "iteration": "2026.02.22-project-dialog-path-warning-safe-detach",
   "files": {
     "start.sh": "2026.02.22.44",
     "tools/smoke_test.py": "2026.02.22.27",
-    "templates/dashboard_musterseite.html": "2026.02.22.40",
-    "README.md": "2026.02.22.45",
-    "todo.txt": "2026.02.22.45",
-    "CHANGELOG.md": "2026.02.22.45",
-    "data/version_registry.json": "2026.02.22.45",
+    "templates/dashboard_musterseite.html": "2026.02.22.41",
+    "README.md": "2026.02.22.46",
+    "todo.txt": "2026.02.22.46",
+    "CHANGELOG.md": "2026.02.22.46",
+    "data/version_registry.json": "2026.02.22.46",
     "tools/run_quality_checks.sh": "2026.02.22.43",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.44",
@@ -23,7 +23,7 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.45",
+    "WAITME.md": "2026.02.22.46",
     "config/messages.json": "2026.02.22.41"
   }
 }
