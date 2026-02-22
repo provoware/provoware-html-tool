@@ -45,7 +45,7 @@ DEFAULT_TEXT_JSON='{
   "release_not_ready": "Release-Check unvollständig: Mindestens ein Pflichtkriterium fehlt noch.",
   "doctor_intro": "Doctor-Bericht: Diese Punkte verbessern Stabilität, Qualität und Barrierefreiheit.",
   "doctor_accessibility": "Barrierefreiheit verbessern: GUI-Theme testen mit GUI_THEME=high-contrast ./start.sh",
-  "doctor_quality": "Codequalität verbessern: ./start.sh --format && ./start.sh --test",
+  "doctor_quality": "Codequalität verbessern: ./start.sh --format && ./start.sh --test (optional mit Ruff-Lint für Python)",
   "doctor_release": "Release-Reife prüfen: ./start.sh --release-check",
   "dashboard_intro": "Dashboard-Guide: So wird eine Oberfläche laienfreundlich, barrierefrei und klar bedienbar.",
   "dashboard_layout": "Layout-Regel: Oben Status, Mitte wichtigste Aufgaben, unten Hilfe + nächste Schritte.",
@@ -204,6 +204,7 @@ $(get_text "help_icon_legend")
 $(get_text "help_message_source")
 $(get_text "help_full_gates")
   Extra-Check: Automatischer Kontrasttest (WCAG) läuft in Gate 2 mit.
+  Optionaler Python-Lint: Wenn ruff installiert ist, wird er automatisch genutzt (keine Pflichtabhängigkeit).
 $(get_text "help_status_summary")
 $(get_text "help_doctor")
 $(get_text "release_help")
@@ -498,6 +499,21 @@ run_quality_checks() {
 	else
 		print_step "⚠️" "Codequalität-Check übersprungen, da shellcheck fehlt."
 	fi
+
+	if command -v ruff >/dev/null 2>&1; then
+		print_step "ℹ️" "Optionaler Python-Lint aktiv: ruff check tools"
+		if ruff check "$PROJECT_ROOT/tools"; then
+			print_step "✅" "Python-Lint geprüft (ruff ohne Fehler)."
+			record_checked "Python-Lint"
+		else
+			print_error_with_actions "ruff meldet Python-Lint-Probleme."
+			record_next_step "ruff-Hinweise in tools/ beheben"
+			return 1
+		fi
+	else
+		print_step "⚠️" "ruff fehlt. Python-Lint bleibt optional und wurde übersprungen."
+		record_next_step "Optional: python3 -m pip install ruff und danach './start.sh --test'"
+	fi
 }
 
 run_tests() {
@@ -516,7 +532,7 @@ run_tests() {
 	fi
 	record_checked "compileall"
 
-	print_step "ℹ️" "Zusatztest: bash tools/run_quality_checks.sh"
+	print_step "ℹ️" "Zusatztest: bash tools/run_quality_checks.sh (effizienter Kurzlauf)"
 	if ! bash "$PROJECT_ROOT/tools/run_quality_checks.sh"; then
 		print_error_with_actions "Selbsttest fehlgeschlagen: Repo-Quality meldet Fehler."
 		record_next_step "Quality-Hinweise beheben und danach './start.sh --test' erneut starten"
@@ -772,8 +788,8 @@ run_full_gates_mode() {
 	fi
 
 	if [[ "$failed" -eq 0 ]]; then
-		print_step "ℹ️" "GATE 3: python tools/smoke_test.py"
-		if SKIP_FULL_GATES=1 python "$PROJECT_ROOT/tools/smoke_test.py"; then
+		print_step "ℹ️" "GATE 3: python tools/smoke_test.py --profile full"
+		if SKIP_FULL_GATES=1 python "$PROJECT_ROOT/tools/smoke_test.py" --profile full; then
 			print_step "✅" "GATE 3 erfolgreich."
 			record_checked "GATE 3"
 		else

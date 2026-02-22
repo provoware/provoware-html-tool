@@ -81,3 +81,6 @@ NEXT: Browser-E2E-Test mit stabilem Screenshot-Lauf (Container-Crash beheben) un
   1. Nutzen Sie immer zuerst `./start.sh --check`, damit Probleme vor dem Start klar angezeigt werden.
   2. Bei Tastaturproblemen starten Sie `python tools/focus_order_check.py`, um die Reihenfolge sofort zu prüfen.
 - Nächster Schritt: Ergänzen Sie einen Browser-E2E-Test, der den Fehlerdialog öffnet, den Fokus im Dialog hält und bei Fehlern automatisch ein Screenshot-Artefakt in der CI speichert.
+
+DONE: Effiziente Smoke-Profile + optionaler Ruff-Lint in Quality-Gates ergänzt (2026-02-22)
+NEXT: Browser-E2E-Test mit Dialog-Fokusfang und Screenshot-Artefakt in CI ergänzen (2026-02-22)

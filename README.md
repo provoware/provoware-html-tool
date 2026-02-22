@@ -76,7 +76,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `86%`
+- Fortschritt: `88%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -100,3 +100,36 @@ cat logs/start.log
   - Zusätzlicher Browser-E2E-Test für Fokus-Reihenfolge und Dialog-Fokusfang
   - CI-Artefakte für Fehlerfall (Logdateien und optional Screenshot) ergänzen
 - Nächster Schritt: Browser-E2E-Test in `tools/` ergänzen und in `start.sh --full-gates` optional als Gate 6 einbinden.
+
+
+## Iteration 2026-02-22 (Effiziente Smoke-Profile + optionaler Ruff-Lint + zielgerichtete Gates)
+### A) Fundstelle (beobachten)
+- Problem: Python-Lint fehlte als vorbereiteter Schritt ohne Pflichtabhängigkeit und die Smoke-Ausführung war für schnelle Iterationen zu schwergewichtig.
+- Risiko: Langsame Rückmeldung senkt praktische Effizienz und wichtige Python-Probleme bleiben optional unklar.
+- Erwartung: Ein schneller Standardlauf mit optionalem Ruff-Lint und ein klarer Vollmodus für tiefe Absicherung.
+
+### B) Change-Scope (vor Patch)
+- Ziel: Drei kleine, vollständige Punkte für effiziente Quality-Gates inkl. Hilfehinweisen umsetzen.
+- Dateien: `tools/smoke_test.py`, `tools/run_quality_checks.sh`, `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Block.
+- Abnahmekriterium: Quality-Check nutzt Smoke-Profil `quick`, optionaler Ruff-Lint läuft ohne Pflichtabhängigkeit und Full-Gates nutzen explizit `--profile full`.
+
+### C) Patch (kurz)
+- Punkt 1 – Änderung: `tools/smoke_test.py` um Profilsteuerung `--profile quick|full` erweitert, damit Kurzlauf und Vollprüfung sauber getrennt sind.
+- Punkt 2 – Änderung: `tools/run_quality_checks.sh` auf effizienten Kurzlauf mit optionalem Ruff-Lint (nur wenn vorhanden) umgestellt.
+- Punkt 3 – Änderung: Hilfe-/Text-Erweiterung in `start.sh` für optionalen Python-Lint und klare Gate-Kommunikation ergänzt (Barrierefrei: einfache Sprache + Next Steps).
+
+### D) Gates
+- G1: `python -m compileall -q .`
+- G2: `bash tools/run_quality_checks.sh`
+- G3: `python tools/smoke_test.py --profile full`
+- G4: `bash start.sh`
+- G5: `bash start.sh --ux-check-auto`
+
+### E) Ergebnis
+- Status: DONE
+- Doku: README + CHANGELOG + todo aktualisiert
+- Laienvorschläge:
+  1. Für schnelle tägliche Prüfung immer zuerst `bash tools/run_quality_checks.sh` ausführen.
+  2. Vor einem Merge zusätzlich `python tools/smoke_test.py --profile full` starten, damit alle Startmodi geprüft werden.
+- Nächster Schritt: Ergänzen Sie als nächstes einen Browser-E2E-Szenariotest mit Fokus-Fang im Fehlerdialog und speichern Sie bei Fehlern automatisch ein Screenshot-Artefakt.

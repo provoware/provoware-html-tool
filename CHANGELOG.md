@@ -5,6 +5,11 @@
 
 # CHANGELOG
 
+## 2026-02-22 – Effiziente Tests + optionaler Ruff-Lint + Smoke-Profile
+- Was: `tools/smoke_test.py` unterstützt jetzt `--profile quick|full`, `tools/run_quality_checks.sh` nutzt den effizienten Quick-Lauf und führt Ruff-Lint nur optional aus, wenn Ruff vorhanden ist.
+- Warum: Qualität soll schnell prüfbar sein, ohne neue Pflichtabhängigkeit, und trotzdem mit klarer Vollprüfung für Merge-Sicherheit.
+- Wirkung: Kürzere Feedback-Zyklen im Alltag, gezieltere Volltests vor Merge und bessere Hilfeausgaben in einfacher Sprache.
+
 ## 2026-02-22 – Repo-Quality gehärtet + Selbsttest erweitert + klare Fehlerhilfen
 - Was: `tools/run_quality_checks.sh` um `run_checked_command`, Pflichtprüfung `python -m compileall -q .` und Smoke-Kurzlauf (`SKIP_FULL_GATES=1 python3 tools/smoke_test.py`) erweitert; `start.sh --test` führt nun zusätzlich compileall und Repo-Quality aus.
 - Warum: Qualitätsfehler sollten früher und automatisiert erkannt werden, ohne dass Nutzer mehrere manuelle Befehle kennen müssen.
