@@ -1,11 +1,11 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **76%**
+- Fortschritt: **79%**
 - Erledigte Aufgaben:
-  - Barrierefreie Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl) für Kernaktionen im Dashboard ergänzt.
-  - A11y-Attribute `aria-keyshortcuts` + erklärender Hilfehinweis für Screenreader ergänzt.
-  - Smoke-Test prüft jetzt die neuen Tastaturhilfen automatisch.
+  - Dashboard-Layout auf Referenzstruktur mit Topbar, linker Navigation, mittlerem Modulraster und rechter Einstellungsleiste umgestellt.
+  - Neon-/Glas-Design in drei Themes (`high-contrast`, `light`, `dark`) mit robusten Fokus- und Kontrastrahmen vereinheitlicht.
+  - Hilfe- und A11y-Elemente (Skip-Link, Next Steps, Tastaturkürzel, Fehlerdialog) erweitert und im Smoke-Test abgesichert.
 - Offene Aufgaben:
   - CI-Pipeline soll die Full-Gates 1–5 bei jedem Commit automatisch ausführen.
   - Zusätzlicher automatischer Browser-Test für Fokus-Reihenfolge im Dialog fehlt noch.
@@ -73,7 +73,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `76%`
+- Fortschritt: `79%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -90,6 +90,7 @@ cat logs/start.log
   - Startmodus stoppt jetzt bei fehlgeschlagenem Selbsttest mit klaren Next Steps
   - Dashboard-Template respektiert reduzierte Bewegung (prefers-reduced-motion) und erklärt den Hinweis für Laien
   - Barrierefreie Tastatur-Kürzel (Alt+S/Alt+R/Alt+P/Alt+L) mit erklärendem Hilfe-Text und Screenreader-Attributen im Dashboard
+  - Dashboard-Template optisch auf Referenzbild angenähert: Drei-Spalten-Layout, Modul-Kartenraster, Einstellungen rechts und klarer Footer-Status
 - Offen:
   - CI-Anbindung für den erweiterten Repo-Quality-Check (`start.sh` + `system/start_core.sh`)
   - CI-Anbindung für den neuen Mini-UX-Check

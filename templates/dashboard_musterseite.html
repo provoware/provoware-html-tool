@@ -3,61 +3,74 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Provoware Dashboard-Musterseite</title>
+  <title>Provoware ModulTool Dashboard</title>
   <style>
     :root {
-      --bg: #0b0f14;
-      --surface: #101820;
-      --text: #ffffff;
-      --muted: #d1d5db;
-      --primary: #74f2ce;
-      --warn: #ffe08a;
-      --danger: #ff8f8f;
-      --focus: #ffd60a;
-      --border: #ffffff;
-      --shadow: rgba(0, 0, 0, 0.35);
+      --bg-start: #020717;
+      --bg-end: #061229;
+      --bg: #020717;
+      --surface: rgba(7, 16, 36, 0.86);
+      --surface-strong: rgba(4, 11, 27, 0.95);
+      --text: #f3f6ff;
+      --muted: #b9c5de;
+      --focus: #f8d23f;
+      --border: #7fa8ff;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --accent-a: #ff6a3d;
+      --accent-b: #00b5ff;
+      --primary: #00b5ff;
+      --accent-c: #f4bb31;
       color-scheme: dark;
     }
 
     html[data-theme="light"] {
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --text: #0f172a;
-      --muted: #334155;
-      --primary: #0f766e;
-      --warn: #92400e;
-      --danger: #b91c1c;
-      --focus: #1d4ed8;
-      --border: #0f172a;
-      --shadow: rgba(15, 23, 42, 0.15);
+      --bg-start: #eaf0ff;
+      --bg-end: #f7f8fb;
+      --bg: #f7f8fb;
+      --surface: rgba(255, 255, 255, 0.95);
+      --surface-strong: rgba(247, 249, 255, 0.98);
+      --text: #09152d;
+      --muted: #324367;
+      --focus: #1f4aff;
+      --border: #314d93;
+      --shadow: rgba(16, 32, 74, 0.18);
+      --accent-a: #d14a22;
+      --accent-b: #006cc5;
+      --primary: #006cc5;
+      --accent-c: #a57300;
       color-scheme: light;
     }
 
     html[data-theme="dark"] {
-      --bg: #111827;
-      --surface: #1f2937;
-      --text: #f9fafb;
-      --muted: #e5e7eb;
-      --primary: #34d399;
-      --warn: #fbbf24;
-      --danger: #fca5a5;
-      --focus: #f59e0b;
-      --border: #93c5fd;
-      --shadow: rgba(0, 0, 0, 0.45);
+      --bg-start: #030813;
+      --bg-end: #101f3a;
+      --bg: #030813;
+      --surface: rgba(12, 24, 47, 0.86);
+      --surface-strong: rgba(7, 18, 35, 0.95);
+      --text: #ecf4ff;
+      --muted: #a8b8d8;
+      --focus: #ffd64d;
+      --border: #6f94ff;
+      --shadow: rgba(0, 0, 0, 0.56);
+      --accent-a: #ee6a3f;
+      --accent-b: #2ec7ff;
+      --primary: #2ec7ff;
+      --accent-c: #f2b632;
       color-scheme: dark;
     }
 
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      line-height: 1.5;
-      background: var(--bg);
+      min-height: 100vh;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
       color: var(--text);
-      transition: background-color .25s ease, color .25s ease;
+      background: radial-gradient(circle at top, #0f2a63 0%, transparent 38%), linear-gradient(130deg, var(--bg-start), var(--bg-end));
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * {
+      *, *::before, *::after {
         animation: none !important;
         transition: none !important;
         scroll-behavior: auto !important;
@@ -68,78 +81,157 @@
       position: absolute;
       left: -999px;
       top: 0;
-      background: var(--surface);
-      color: var(--text);
+      padding: .65rem .9rem;
       border: 2px solid var(--focus);
-      padding: .5rem .8rem;
-      border-radius: 0 0 8px 8px;
+      background: var(--surface-strong);
+      color: var(--text);
+      border-radius: 0 0 10px 10px;
+      z-index: 30;
     }
 
     .skip-link:focus {
-      left: .6rem;
-      top: .4rem;
-      z-index: 10;
+      left: .7rem;
+      top: .5rem;
     }
 
-    .layout {
-      max-width: 980px;
-      margin: 1.25rem auto;
-      padding: 0 1rem;
+    .shell {
+      width: min(1440px, calc(100% - 1.5rem));
+      margin: .9rem auto;
+      border-radius: 14px;
+      border: 1px solid rgba(127, 168, 255, 0.35);
+      background: linear-gradient(180deg, rgba(7, 17, 37, 0.92), rgba(5, 13, 31, 0.95));
+      box-shadow: 0 18px 48px var(--shadow);
+      overflow: hidden;
       display: grid;
-      gap: 1rem;
+      grid-template-columns: 280px minmax(0, 1fr) 320px;
+      grid-template-rows: 64px minmax(0, 1fr) 52px;
+      grid-template-areas:
+        "top top top"
+        "left main right"
+        "foot foot foot";
     }
 
-    .card {
-      background: var(--surface);
-      border: 3px solid var(--border);
-      border-radius: 12px;
+    .topbar {
+      grid-area: top;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.1rem;
+      background: linear-gradient(90deg, rgba(8, 24, 53, 0.9), rgba(8, 14, 30, 0.95));
+      border-bottom: 1px solid rgba(127, 168, 255, 0.32);
+    }
+
+    .status-pill {
+      font-weight: 700;
+      color: #a4ffc8;
+      border: 1px solid rgba(131, 250, 173, 0.5);
+      border-radius: 999px;
+      padding: .2rem .7rem;
+      background: rgba(8, 53, 25, 0.4);
+    }
+
+    .panel {
       padding: 1rem;
-      box-shadow: 0 6px 18px var(--shadow);
+      background: var(--surface);
     }
 
-    h1, h2 {
-      margin: 0 0 .6rem 0;
+    .left {
+      grid-area: left;
+      border-right: 1px solid rgba(127, 168, 255, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
     }
 
-    p {
-      margin: .2rem 0 .6rem 0;
+    .right {
+      grid-area: right;
+      border-left: 1px solid rgba(127, 168, 255, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
     }
 
-    .muted {
+    .main {
+      grid-area: main;
+      padding: 1rem;
+      background: linear-gradient(180deg, rgba(9, 18, 39, 0.78), rgba(6, 14, 31, 0.88));
+      display: grid;
+      gap: .9rem;
+      align-content: start;
+    }
+
+    .headline {
+      text-align: center;
+      font-size: 1.85rem;
+      margin: 0;
+    }
+
+    .subline {
+      margin: 0;
+      text-align: center;
       color: var(--muted);
     }
 
-    .status {
-      display: inline-flex;
-      gap: .5rem;
-      align-items: center;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      border-radius: 999px;
-      padding: .2rem .6rem;
-      font-weight: 700;
+    .nav-list,
+    .settings-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: .4rem;
     }
+
+    .nav-item,
+    .settings-item,
+    .quick-help {
+      border-radius: 10px;
+      border: 1px solid rgba(127, 168, 255, 0.24);
+      background: var(--surface-strong);
+      padding: .62rem .72rem;
+    }
+
+    .card-grid {
+      display: grid;
+      gap: .85rem;
+      grid-template-columns: repeat(3, minmax(210px, 1fr));
+    }
+
+    .tool-card {
+      border-radius: 12px;
+      border: 2px solid rgba(127, 168, 255, 0.4);
+      padding: .8rem;
+      background: linear-gradient(160deg, rgba(22, 35, 66, 0.95), rgba(10, 18, 36, 0.92));
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.32);
+    }
+
+    .tool-card[data-accent="a"] { border-color: var(--accent-a); }
+    .tool-card[data-accent="b"] { border-color: var(--accent-b); }
+    .tool-card[data-accent="c"] { border-color: var(--accent-c); }
+
+    h1, h2, h3, p { margin: 0; }
+    h2 { font-size: 1.15rem; margin-bottom: .6rem; }
+    h3 { font-size: 1.45rem; }
 
     .actions {
-      display: flex;
-      gap: .6rem;
-      flex-wrap: wrap;
+      display: grid;
+      gap: .5rem;
+      margin-top: .7rem;
     }
 
-    button {
-      border: 2px solid var(--border);
-      background: transparent;
-      color: inherit;
-      border-radius: 8px;
-      padding: .5rem .8rem;
-      font-size: 1rem;
-      cursor: pointer;
+    button,
+    select {
       min-height: 44px;
+      border-radius: 8px;
+      border: 2px solid rgba(127, 168, 255, 0.55);
+      background: rgba(10, 22, 44, 0.86);
+      color: inherit;
+      font-size: 1rem;
+      padding: .5rem .7rem;
+      width: 100%;
     }
 
-    button:hover {
-      border-color: var(--primary);
-    }
+    button:hover,
+    select:hover { border-color: var(--focus); }
 
     button:focus-visible,
     select:focus-visible,
@@ -148,65 +240,164 @@
       outline-offset: 3px;
     }
 
+    .result {
+      margin-top: .4rem;
+      color: var(--muted);
+      min-height: 1.4rem;
+    }
+
+    .footer {
+      grid-area: foot;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 .9rem;
+      border-top: 1px solid rgba(127, 168, 255, 0.32);
+      background: rgba(4, 10, 23, 0.95);
+      color: var(--muted);
+    }
+
     dialog {
-      border: 3px solid var(--danger);
-      border-radius: 10px;
-      max-width: 560px;
-      width: calc(100% - 2rem);
-      background: var(--surface);
+      border: 3px solid var(--accent-a);
+      border-radius: 12px;
+      width: min(560px, calc(100% - 2rem));
+      background: var(--surface-strong);
       color: var(--text);
     }
 
-    dialog::backdrop {
-      background: rgba(0, 0, 0, .6);
+    dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
+
+    @media (max-width: 1240px) {
+      .shell {
+        grid-template-columns: 250px minmax(0, 1fr);
+        grid-template-areas:
+          "top top"
+          "left main"
+          "right right"
+          "foot foot";
+        grid-template-rows: 64px auto auto 52px;
+      }
+      .card-grid { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .shell {
+        grid-template-columns: 1fr;
+        grid-template-areas: "top" "left" "main" "right" "foot";
+        grid-template-rows: auto;
+      }
+      .card-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <a href="#bereich-aufgaben" class="skip-link">Direkt zu den Aktionen springen</a>
+  <a href="#bereich-aufgaben" class="skip-link">Direkt zum Arbeitsbereich springen</a>
 
-  <main class="layout" role="main" aria-live="polite">
-    <section class="card">
-      <h1>Dashboard-Musterseite (sofort nutzbar)</h1>
-      <p class="muted">Klare Bereiche, große Buttons, verständliche Fehlerdialoge und Theme-Umschalter.</p>
-      <p><span class="status">✅ System bereit</span></p>
-    </section>
+  <main class="shell" role="main" aria-live="polite">
+    <header class="topbar" aria-label="Obere Statusleiste">
+      <span>🧩 ModulTool</span>
+      <h1 class="headline">ModulTool</h1>
+      <span class="status-pill">✅ Alle Änderungen gespeichert</span>
+    </header>
 
-    <section class="card" aria-labelledby="bereich-aufgaben">
-      <h2 id="bereich-aufgaben">Bereich: Aktionen</h2>
-      <p>Jeder Button bestätigt das Ergebnis und zeigt bei Fehlern klare nächste Schritte.</p>
-      <p class="muted" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll.</p>
-      <div class="actions">
-        <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Speichern</button>
-        <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Erneut versuchen</button>
-        <button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Reparatur starten</button>
-        <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Protokoll öffnen</button>
-        <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
+    <aside class="panel left" aria-label="Navigation">
+      <h2>Navigation</h2>
+      <ul class="nav-list">
+        <li class="nav-item">📚 Genres</li>
+        <li class="nav-item">🧾 Zitate</li>
+        <li class="nav-item">🎵 Songeditor</li>
+        <li class="nav-item">✅ To-Do-Liste</li>
+        <li class="nav-item">📊 Dashboard</li>
+      </ul>
+      <p class="quick-help" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll.</p>
+    </aside>
+
+    <section class="main" aria-labelledby="bereich-aufgaben">
+      <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
+      <h2 id="bereich-aufgaben">Werkzeug-Übersicht</h2>
+      <div class="card-grid">
+        <article class="tool-card" data-accent="a">
+          <h2>Genreverwaltung</h2>
+          <div class="actions">
+            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Genre speichern</button>
+            <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Hinzufügen</button>
+          </div>
+        </article>
+
+        <article class="tool-card" data-accent="b">
+          <h2>Archiv</h2>
+          <div class="actions">
+            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Beispiel speichern</button>
+            <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Bearbeiten</button>
+          </div>
+        </article>
+
+        <article class="tool-card" data-accent="c">
+          <h2>Dashboard</h2>
+          <div class="actions">
+            <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Übersicht anzeigen</button>
+          </div>
+        </article>
+
+        <article class="tool-card" data-accent="b">
+          <h2>Zufallsgenerator</h2>
+          <div class="actions">
+            <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Genre zufällig wählen</button>
+            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Speichern</button>
+          </div>
+        </article>
+
+        <article class="tool-card" data-accent="a">
+          <h2>Text-Templates</h2>
+          <div class="actions">
+            <button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Vorlage laden</button>
+            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Einfügen</button>
+          </div>
+        </article>
+
+        <article class="tool-card" data-accent="b">
+          <h2>Debug-Log</h2>
+          <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
+          <div class="actions">
+            <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
+          </div>
+        </article>
       </div>
-      <p id="result" class="muted" role="status" aria-live="polite">Noch keine Aktion ausgeführt.</p>
+
+      <section class="tool-card" data-accent="a" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
+        <h2 id="bereich-hilfe">Schnellhilfe mit Next Steps</h2>
+        <ol>
+          <li>Neu starten: <code>./start.sh</code></li>
+          <li>Auto-Reparatur: <code>./start.sh --repair</code></li>
+          <li>Protokoll lesen: <code>cat logs/status_summary.txt</code></li>
+        </ol>
+        <p class="result">Fehlerdialog zeigt immer klare Schritte: „Erneut versuchen“, „Reparatur“, „Protokoll“.</p>
+      </section>
     </section>
 
+    <aside class="panel right" aria-label="Einstellungen und Hilfe">
+      <h2>Einstellungen</h2>
+      <ul class="settings-list">
+        <li class="settings-item">
+          <label for="theme-switcher"><strong>Design:</strong></label>
+          <select id="theme-switcher" data-theme-switcher aria-describedby="theme-help">
+            <option value="high-contrast">High Contrast (hoher Kontrast)</option>
+            <option value="light">Light (hell)</option>
+            <option value="dark">Dark (dunkel)</option>
+          </select>
+        </li>
+        <li class="settings-item">
+          <p id="theme-help">Hinweis: Status nie nur über Farbe, sondern immer mit Symbol + Text. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
+        </li>
+        <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
+      </ul>
+    </aside>
 
-    <section class="card" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
-      <h2 id="bereich-hilfe">Bereich: Hilfe und nächste Schritte</h2>
-      <p>Wenn etwas nicht klappt, nutzen Sie diese festen Schritte in genau dieser Reihenfolge:</p>
-      <ol>
-        <li>Erneut versuchen mit <code>./start.sh</code></li>
-        <li>Automatische Reparatur mit <code>./start.sh --repair</code></li>
-        <li>Statusbericht lesen mit <code>cat logs/status_summary.txt</code></li>
-      </ol>
-      <p class="muted">Barrierefreiheit: Der Statusbericht nutzt einfache Sprache und ist für Screenreader (Vorlese-Hilfe) optimiert.</p>
-    </section>
-    <section class="card" aria-labelledby="bereich-theme">
-      <h2 id="bereich-theme">Bereich: Theme-Umschalter</h2>
-      <label for="theme-switcher"><strong>Theme wählen:</strong></label>
-      <select id="theme-switcher" data-theme-switcher aria-describedby="theme-help">
-        <option value="high-contrast">High Contrast (hoher Kontrast)</option>
-        <option value="light">Light (hell)</option>
-        <option value="dark">Dark (dunkel)</option>
-      </select>
-      <p class="muted" id="theme-help">Hinweis: Status wird nie nur über Farben gezeigt (immer Symbol + Text). Für beste Lesbarkeit bitte mit „High Contrast“ starten. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
-    </section>
+    <footer class="footer">
+      <span>Version 13.0 – Pfad: /home</span>
+      <span>Auto-Backup: Aktiv</span>
+      <span>Alle Änderungen gespeichert</span>
+    </footer>
   </main>
 
   <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text" aria-modal="true">

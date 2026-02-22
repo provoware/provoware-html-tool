@@ -10,6 +10,11 @@
 
 # CHANGELOG
 
+## 2026-02-22 – Referenznahes Dashboard-Layout + Neon-Design + A11y-Absicherung
+- Was: `templates/dashboard_musterseite.html` wurde auf ein referenznahes Drei-Spalten-Layout (Topbar/Navigation/Karten/Einstellungen/Footer) mit Neon-Panel-Stil umgebaut; `tools/smoke_test.py` prüft dafür zusätzliche Layout-Marker.
+- Warum: Das Projekt sollte in Design, Layout und Darstellung deutlich näher an der bereitgestellten Zielansicht liegen, ohne Barrierefreiheit und Theme-Robustheit zu verlieren.
+- Wirkung: Klarere visuelle Struktur, bessere Wiedererkennbarkeit, weiterhin starke A11y-Hilfen und automatische Absicherung der neuen Oberfläche.
+
 ## 2026-02-22 – Tastatur-Kürzel + A11y-Hilfe + Smoke-Absicherung
 - Was: Dashboard erhielt Alt-Kürzel für Speichern/Retry/Reparatur/Log inklusive `aria-keyshortcuts` und Hilfe-Text; Smoke-Test prüft die Marker automatisch.
 - Warum: Bedienung ohne Maus und klare Screenreader-Hinweise sollten robuster und schneller nutzbar werden.
