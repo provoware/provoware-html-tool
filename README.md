@@ -15,8 +15,19 @@ bash start.sh --release-check   # zeigt klar, was für Release noch fehlt
 cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzten Ausführung
 ```
 
+## Update 2026-02-22 (Grid-Dashboard-Module abgeschlossen)
+- Hauptbereich ist jetzt ein leeres 3x3-Grid mit klaren Rasterfeldern und dynamischer Modulfläche.
+- Neues Sammelmodul **„Genres-Archiv + Zufall + Liste“** liegt standardmäßig in der Sidebar und wird nur bei Aktivierung in die Mitte gebracht.
+- Debugging und Entwickleroptionen sind als eigenes Einzelmodul getrennt; andere Bereiche bleiben im Hauptbereich ausgeblendet, bis sie aktiv geöffnet werden.
+
+### Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py --profile quick`
+- `bash start.sh --ux-check-auto`
+
 ## Entwicklungsstand
-- Fortschritt: **95%**
+- Fortschritt: **96%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).

@@ -257,6 +257,25 @@
       gap: .85rem;
       grid-template-columns: repeat(3, minmax(210px, 1fr));
     }
+    .module-stage {
+      border: 2px solid rgba(127, 168, 255, 0.45);
+      border-radius: 12px;
+      padding: .75rem;
+      background: rgba(6, 14, 31, 0.9);
+      min-height: 240px;
+    }
+    .module-empty {
+      min-height: 196px;
+      display: grid;
+      place-items: center;
+      border: 2px dashed rgba(127, 168, 255, 0.45);
+      border-radius: 10px;
+      color: var(--muted);
+      text-align: center;
+      padding: .75rem;
+    }
+    .module-panel { display: none; }
+    .module-panel.active { display: block; }
     .main-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(120px, 1fr));
@@ -567,10 +586,8 @@
       <h2>Navigation</h2>
       <p class="nav-group-title">Arbeitsmodule</p>
       <ul class="nav-list" aria-label="Arbeitsmodule">
-        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="genres">📚 Genres</button></li>
-        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="gms-archiv">🗂️ GMS-Archiv</button></li>
-        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="zitate">🧾 Zitate</button></li>
-        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="songeditor">🎵 Songeditor</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="gms-suite">🧩 Genres-Archiv + Zufall + Liste</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="debug-dev">🛠️ Debugging & Entwickleroptionen</button></li>
       </ul>
       <p class="nav-group-title">Organisation</p>
       <ul class="nav-list" aria-label="Organisation und Überblick">
@@ -581,11 +598,8 @@
       <section class="quick-help" aria-label="Pluginstatus">
         <strong>Pluginstatus (sichtbar):</strong>
         <ul class="plugin-status-list" id="plugin-status-list" aria-live="polite">
-          <li class="plugin-status-item"><span>Genres</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
-          <li class="plugin-status-item"><span>GMS-Archiv</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
-          <li class="plugin-status-item"><span>Zitate</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
-          <li class="plugin-status-item"><span>Songeditor</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
-          <li class="plugin-status-item"><span>Dashboard</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
+          <li class="plugin-status-item"><span>Genres-Archiv + Zufall + Liste</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
+          <li class="plugin-status-item"><span>Debugging & Entwickleroptionen</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
         </ul>
       </section>
       <section class="quick-help" aria-labelledby="module-sidebar-options-title" id="module-sidebar-options">
@@ -634,34 +648,18 @@
         <div class="main-grid-cell">Feld 8 (frei)</div>
         <div class="main-grid-cell">Feld 9 (frei)</div>
       </section>
-      <div class="card-grid">
-        <article class="tool-card tool-card-primary" data-accent="a">
-          <p class="card-tag">Priorität: Hoch</p>
-          <h2>Genreverwaltung</h2>
-          <div class="actions">
-            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Genre speichern</button>
-            <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Hinzufügen</button>
-          </div>
-        </article>
-        <article class="tool-card tool-card-secondary" data-accent="c">
-          <p class="card-tag">Priorität: Mittel</p>
-          <h2>Dashboard</h2>
-          <div class="actions">
-            <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Übersicht anzeigen</button>
-          </div>
-        </article>
-        <article class="tool-card tool-card-primary" data-accent="c" aria-labelledby="modul-starter-title">
-          <p class="card-tag">Priorität: Hoch</p>
+      <div class="card-grid" hidden aria-hidden="true"></div>
+      <section class="module-stage card-grid" aria-label="Aktives Modul im Hauptbereich" id="module-stage">
+        <div class="module-empty" id="module-stage-empty">Noch kein Modul aktiv. Öffnen Sie links ein Modul. Das Modul wird dann dynamisch in dieses 3x3-Grid eingebettet.</div>
+        <article class="tool-card tool-card-primary module-panel" data-accent="c" aria-labelledby="modul-starter-title">
+          <p class="card-tag">Startmodul</p>
           <h2 id="modul-starter-title">Modul-Starter</h2>
           <p class="card-state" id="module-card-state" data-state="ready" role="status" aria-live="polite">Status: Bereit</p>
           <label for="module-switcher"><strong>Modul wählen:</strong></label>
           <select id="module-switcher" aria-describedby="module-help shortcut-help">
             <option value="">Bitte Modul auswählen</option>
-            <option value="genres">Genreverwaltung</option>
-            <option value="gms-archiv">GMS-Archiv</option>
-            <option value="zitate">Zitate</option>
-            <option value="songeditor">Songeditor</option>
-            <option value="dashboard">Dashboard</option>
+            <option value="gms-suite">Genres-Archiv + Zufall + Liste</option>
+            <option value="debug-dev">Debugging & Entwickleroptionen</option>
           </select>
           <div class="actions">
             <button type="button" data-action="open-module" aria-keyshortcuts="Alt+O" aria-describedby="module-help shortcut-help">Modul öffnen</button>
@@ -669,9 +667,9 @@
           <p class="result" id="module-status" role="status" aria-live="polite">Noch kein Modul geöffnet.</p>
           <p class="subline" id="module-source-preview">Kurzdetails: Bitte Modul auswählen, um Datenquelle und nächsten Schritt zu sehen.</p>
         </article>
-        <article class="tool-card tool-card-primary" data-accent="b" id="gms-archiv-view" aria-labelledby="gms-title">
+        <article class="tool-card tool-card-primary module-panel" data-accent="b" id="gms-suite-view" aria-labelledby="gms-title">
           <p class="card-tag">Plugin: Hauptmodul-Ansicht</p>
-          <h2 id="gms-title">GMS-Archiv</h2>
+          <h2 id="gms-title">Genres-Archiv + Zufall + Liste</h2>
           <p class="subline">Genres, Stimmungen und Stile als Profil-Archiv. Hilfe: Mehrere Werte per Komma eingeben.</p>
           <label for="gms-category"><strong>Kategorie:</strong></label>
           <select id="gms-category" aria-label="Kategorie für Archiv-Eintrag">
@@ -728,9 +726,9 @@
           <p id="gms-export-help" class="subline">Hilfe: Export-Dateiname ist Linux-kompatibel und enthält den Arbeitsstatus (z. B. release-ready oder in-abstimmung).</p>
           <p id="gms-export-filename-status" class="result" role="status" aria-live="polite">Dateiname: noch nicht erstellt.</p>
         </article>
-        <article class="tool-card tool-card-secondary" data-accent="b">
+<article class="tool-card tool-card-secondary module-panel" data-accent="a" id="debug-dev-view">
           <p class="card-tag">Status und Hilfe</p>
-          <h2>Debug-Log</h2>
+          <h2>Debugging & Entwickleroptionen</h2>
           <p class="card-state" id="debug-card-state" data-state="ready" role="status" aria-live="polite">Status: Bereit</p>
           <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
           <p class="subline" id="debug-last-event" data-debug-event>Letztes Ereignis: Startzustand um --:--:--.</p>
@@ -740,7 +738,7 @@
             <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
           </div>
         </article>
-        <article class="tool-card tool-card-primary" data-accent="a" aria-labelledby="projekt-routine-title">
+<article class="tool-card tool-card-primary module-panel" data-accent="a" id="project-routine-view" aria-labelledby="projekt-routine-title">
           <p class="card-tag">Start-Routine Projektordner</p>
           <h2 id="projekt-routine-title">Projekt-Routine</h2>
           <p class="card-state" id="project-card-state" data-state="loading" role="status" aria-live="polite">Status: Lädt</p>
@@ -750,9 +748,14 @@
             <button type="button" data-action="project-setup">Projektordner anpassen</button>
           </div>
         </article>
-      </div>
+      </section>
       <section class="tool-card" data-accent="a" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
         <h2 id="bereich-hilfe">Schnellhilfe mit Next Steps</h2>
+        <div class="actions" aria-label="Schnellaktionen">
+          <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Zwischenstand speichern</button>
+          <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Aktion erneut versuchen</button>
+          <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Nächsten Protokoll-Schritt zeigen</button>
+        </div>
         <ol>
           <li>Neu starten: <code>./start.sh</code></li>
           <li>Auto-Reparatur: <code>./start.sh --repair</code></li>
@@ -903,6 +906,9 @@
       const pluginStatusListNode = document.getElementById('plugin-status-list');
       const moduleOptionListNode = document.getElementById('module-option-list');
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
+      const moduleStageNode = document.getElementById('module-stage');
+      const moduleStageEmptyNode = document.getElementById('module-stage-empty');
+      const modulePanelNodes = Array.from(document.querySelectorAll('.module-panel'));
       const LAYOUT_STORAGE_KEY = 'provoware-layout-profile';
       const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
       const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
@@ -914,6 +920,7 @@
       const serverModuleSources = normalizeModuleSources(injectedModuleSources);
       const detachedWindows = {};
       let isProMode = false;
+      let activeModuleKey = '';
       const gmsPlugin = (function createGmsArchivPlugin() {
         const MODULE_ID = 'gms-archiv';
         const HISTORY_LIMIT = 8;
@@ -1562,12 +1569,8 @@
           return false;
         }
         const optionsByModule = {
-          genres: ['📥 Import aus Genres-Ordner', '🧼 Dublettenprüfung starten', '🗃️ Profil in Archiv speichern'],
-          'gms-archiv': ['🧲 Drag&Drop Reihenfolge ändern', '✏️ Einträge umbenennen/löschen', '🪟 Optional als Einzelfenster öffnen'],
-          zitate: ['📝 Neue Quelle anlegen', '📚 Zitate in Sammlung verschieben', '✅ Zitat-Favorit markieren'],
-          songeditor: ['🎹 Akkordspur wählen', '📦 Exportprofil wählen', '🧪 Entwurf lokal testen'],
-          todo: ['🗂️ Aufgabe priorisieren', '🔁 Status auf "In Arbeit" setzen', '✅ Aufgabe abschließen'],
-          dashboard: ['📊 Status lesen', '🛠️ Fehlerhilfe öffnen', '🎨 Theme prüfen']
+          'gms-suite': ['🧲 Reihenfolge im Archiv per Drag&Drop ändern', '🎲 Zufallsvorschlag erzeugen und direkt kopieren', '📋 Liste pflegen mit Umbenennen/Löschen'],
+          'debug-dev': ['🪵 Live-Debug-Log lesen', '🧪 Fehlermeldung mit Next Steps auslösen', '🛠️ Entwicklerhinweise nur bei Bedarf öffnen']
         };
         const items = optionsByModule[moduleKey] || ['Bitte gültiges Modul wählen.'];
         moduleOptionListNode.innerHTML = '';
@@ -1606,7 +1609,8 @@
         if (!pluginStatusListNode || typeof selectedModule !== 'string' || selectedModule.trim().length === 0) {
           return false;
         }
-        const normalized = selectedModule.trim();
+        const sourceMeta = getModuleSourceMeta(selectedModule);
+        const activeLabel = sourceMeta ? sourceMeta.label.trim().toLowerCase() : '';
         const pluginRows = Array.from(pluginStatusListNode.querySelectorAll('.plugin-status-item'));
         if (!pluginRows.length) {
           return false;
@@ -1621,7 +1625,7 @@
             return;
           }
           const rowKey = nameNode.textContent ? nameNode.textContent.trim().toLowerCase() : '';
-          const isActive = rowKey === normalized || (normalized === 'dashboard' && rowKey === 'dashboard');
+          const isActive = !!activeLabel && rowKey === activeLabel;
           statusNode.textContent = isActive ? 'Aktiv' : 'Wartet';
           statusNode.classList.toggle('plugin-pill-online', isActive);
           statusNode.classList.toggle('plugin-pill-offline', !isActive);
@@ -1633,10 +1637,14 @@
           return null;
         }
         const normalizedKey = moduleKey.trim();
-        if (!serverModuleSources || typeof serverModuleSources !== 'object' || !(normalizedKey in serverModuleSources)) {
+        const localFallback = {
+          'gms-suite': { label: 'Genres-Archiv + Zufall + Liste', data_source: 'data/project_context.json', detail: 'Gebündeltes Modul für Archiv, Zufallsgenerator und Listenpflege im selben Bereich.', next_step: 'Einträge speichern oder Zufall erzeugen.' },
+          'debug-dev': { label: 'Debugging & Entwickleroptionen', data_source: 'logs/status_summary.txt', detail: 'Zeigt Live-Protokoll, Fehlerhilfe und nächste technische Schritte.', next_step: 'Bei Fehlern zuerst Log lesen und dann Reparatur starten.' }
+        };
+        const sourceMeta = (serverModuleSources && typeof serverModuleSources === 'object' && normalizedKey in serverModuleSources) ? serverModuleSources[normalizedKey] : localFallback[normalizedKey];
+        if (!sourceMeta) {
           return null;
         }
-        const sourceMeta = serverModuleSources[normalizedKey];
         if (!sourceMeta || typeof sourceMeta !== 'object') {
           return null;
         }
@@ -1663,6 +1671,27 @@
         previewNode.textContent = 'Kurzdetails: ' + sourceMeta.detail + ' Datenquelle: ' + sourceMeta.dataSource + '. Nächster Schritt: ' + sourceMeta.nextStep + '.';
         return true;
       }
+      function switchActiveModulePanel(moduleKey) {
+        if (!Array.isArray(modulePanelNodes) || !modulePanelNodes.length) {
+          return false;
+        }
+        modulePanelNodes.forEach(function (panelNode) {
+          if (!(panelNode instanceof HTMLElement)) {
+            return;
+          }
+          const shouldShow = panelNode.id === moduleKey + '-view';
+          panelNode.classList.toggle('active', shouldShow);
+        });
+        if (moduleStageEmptyNode instanceof HTMLElement) {
+          moduleStageEmptyNode.hidden = false;
+          if (moduleKey) {
+            const activePanel = document.getElementById(moduleKey + '-view');
+            moduleStageEmptyNode.hidden = activePanel instanceof HTMLElement;
+          }
+        }
+        activeModuleKey = moduleKey;
+        return true;
+      }
       function openModule(selectedModule) {
         const sourceMeta = getModuleSourceMeta(selectedModule);
         if (typeof selectedModule !== 'string' || !sourceMeta) {
@@ -1676,6 +1705,7 @@
         const debugStep = sourceMeta.detail + ' Nächster Schritt: ' + sourceMeta.nextStep;
         setModuleStatus(statusText);
         renderModulePreview(selectedModule);
+        switchActiveModulePanel(selectedModule);
         setActiveNavigation(selectedModule);
         setPluginStatus(selectedModule);
         renderModuleSidebarOptions(selectedModule, sourceMeta);
@@ -1858,25 +1888,29 @@
         if (actionValue === 'copy-log') { return copyLogToClipboard(); }
         if (actionValue === 'switch-mode') { return toggleMode(); }
         if (actionValue === 'window-hide') {
-          if (shellNode) { shellNode.style.opacity = '0.2'; }
-          return setResult('✅ Fenster ausgeblendet. Nächster Schritt: "Volle Sicht wiederherstellen" wählen.');
+          if (!activeModuleKey) {
+            return setResult('⚠️ Kein aktives Modul im Grid. Bitte zuerst ein Modul öffnen.');
+          }
+          switchActiveModulePanel('');
+          return setResult('✅ Modul aus dem Grid ausgeblendet.');
         }
         if (actionValue === 'window-maximize') {
-          if (shellNode) {
-            shellNode.style.width = '100%';
-            shellNode.style.margin = '0';
-            shellNode.style.borderRadius = '0';
+          if (!activeModuleKey) {
+            return setResult('⚠️ Kein aktives Modul im Grid. Bitte zuerst ein Modul öffnen.');
           }
-          return setResult('✅ Fenster maximiert.');
+          if (moduleStageNode) {
+            moduleStageNode.style.minHeight = '70vh';
+          }
+          return setResult('✅ Aktives Modul im Grid vergrößert.');
         }
         if (actionValue === 'window-reset') {
-          if (shellNode) {
-            shellNode.style.opacity = '1';
-            shellNode.style.width = '';
-            shellNode.style.margin = '';
-            shellNode.style.borderRadius = '';
+          if (moduleStageNode) {
+            moduleStageNode.style.minHeight = '';
           }
-          return setResult('✅ Volle Sicht wiederhergestellt.');
+          if (activeModuleKey) {
+            switchActiveModulePanel(activeModuleKey);
+          }
+          return setResult('✅ Grid-Sicht wiederhergestellt.');
         }
         if (actionValue === 'layout-save') {
           if (saveLayoutProfile()) {
@@ -1891,7 +1925,7 @@
           return false;
         }
         if (actionValue === 'window-detach') {
-          const selected = moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '';
+          const selected = activeModuleKey || (moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '');
           const sourceMeta = getModuleSourceMeta(selected);
           if (!sourceMeta) {
             return setResult('⚠️ Erst ein Modul wählen und öffnen, dann Einzelfenster starten.');
@@ -2206,6 +2240,7 @@
         projectDialog.showModal();
       }
       gmsPlugin.mount();
+      switchActiveModulePanel('');
       setCardState(moduleCardStateNode, 'ready', 'Bereit');
       setCardState(debugCardStateNode, 'ready', 'Bereit');
       setActiveNavigation('dashboard');

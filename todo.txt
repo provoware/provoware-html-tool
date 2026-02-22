@@ -1,3 +1,8 @@
+DONE: Hauptbereich als leeres 3x3-Grid mit dynamischer Modulfläche stabilisiert (kein Unter-Rand-Rutschen) (2026-02-22)
+DONE: Sammelmodul „Genres-Archiv + Zufall + Liste“ als aktivierbares Sidebar-Modul umgesetzt (2026-02-22)
+DONE: Debugging & Entwickleroptionen als separates Einzelmodul mit Fensterfunktionen (ausblenden/maximieren/ablösen) umgesetzt (2026-02-22)
+NEXT: 3-spaltigen Footer mit vorbereiteten Schnellfunktionen (noch ohne Business-Logik) als klickbare Platzhalter ergänzen (2026-02-23)
+
 DONE: Modul-Starter zeigt Kurzdetails je Modul schon bei der Auswahl (Detail + Datenquelle + Next Step) (2026-02-22)
 DONE: Projektordner-Feld in der Control-Bar startet ohne Standardpfad und mit klarem Platzhalter (2026-02-22)
 DONE: Smoke-Test prüft Marker für Modul-Kurzdetails und standardfreien Projektpfad-Einstieg (2026-02-22)
