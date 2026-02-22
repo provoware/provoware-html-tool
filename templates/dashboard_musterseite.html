@@ -691,6 +691,8 @@
             <button type="button" data-action="gms-export">Export für Exportzentrum</button>
             <button type="button" data-action="gms-import-demo">Demo-Import (Merge)</button>
           </div>
+          <p id="gms-export-help" class="subline">Hilfe: Export-Dateiname ist Linux-kompatibel und enthält den Arbeitsstatus (z. B. release-ready oder in-abstimmung).</p>
+          <p id="gms-export-filename-status" class="result" role="status" aria-live="polite">Dateiname: noch nicht erstellt.</p>
         </article>
         <article class="tool-card tool-card-secondary" data-accent="b">
           <p class="card-tag">Status und Hilfe</p>
@@ -820,6 +822,7 @@
       const projectCardStateNode = document.getElementById('project-card-state');
       const moduleSelector = document.getElementById('module-switcher');
       const moduleStatusNode = document.getElementById('module-status');
+      const gmsExportFilenameStatusNode = document.getElementById('gms-export-filename-status');
       const projectStatusNode = document.getElementById('project-path-status');
       const projectDialog = document.getElementById('project-dialog');
       const projectPathInput = document.getElementById('project-path-input');
@@ -1206,8 +1209,19 @@
               return true;
             }
             if (actionValue === 'gms-export') {
-              const payload = JSON.stringify(this.exportPayload(), null, 2);
-              return services.ui.copy(payload);
+              const exportData = this.exportPayload();
+              if (!exportData || typeof exportData !== 'object' || !exportData.data) {
+                setResult('⚠️ Export fehlgeschlagen. Nächster Schritt: Einträge prüfen und erneut exportieren.');
+                return true;
+              }
+              const fileName = buildExportFileName(exportData.module, exportData.profile);
+              const payload = JSON.stringify(Object.assign({}, exportData, { file_name: fileName }), null, 2);
+              const copied = services.ui.copy(payload);
+              if (gmsExportFilenameStatusNode) {
+                gmsExportFilenameStatusNode.textContent = 'Dateiname: ' + fileName;
+              }
+              setResult(copied ? '✅ Export kopiert. Dateiname: ' + fileName : '⚠️ Export erstellt, aber Kopieren ist fehlgeschlagen. Dateiname: ' + fileName);
+              return true;
             }
             if (actionValue === 'gms-import-demo') {
               const demo = { data: { genres: ['Electro'], moods: ['Hell'], styles: ['Minimal'] } };
@@ -1268,6 +1282,38 @@
       }
       function getTimeStamp() {
         return new Date().toLocaleTimeString('de-DE');
+      }
+      function deriveExportWorkflowStatus() {
+        const syncText = syncStatusNode && typeof syncStatusNode.textContent === 'string' ? syncStatusNode.textContent.toLowerCase() : '';
+        const backupEnabled = readBackupPreference();
+        if (syncText.indexOf('alle änderungen gespeichert') !== -1 && backupEnabled) {
+          return 'release-ready';
+        }
+        if (syncText.indexOf('gespeichert') !== -1) {
+          return 'review-ready';
+        }
+        return 'in-abstimmung';
+      }
+      function sanitizeForLinuxFileName(value) {
+        if (typeof value !== 'string' || value.trim().length === 0) {
+          return 'ohne-inhalt';
+        }
+        const clean = value.trim().toLowerCase()
+          .replace(/[ä]/g, 'ae')
+          .replace(/[ö]/g, 'oe')
+          .replace(/[ü]/g, 'ue')
+          .replace(/[ß]/g, 'ss')
+          .replace(/[^a-z0-9._-]+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, '');
+        return clean.length > 0 ? clean.slice(0, 60) : 'ohne-inhalt';
+      }
+      function buildExportFileName(moduleId, profileName) {
+        const modulePart = sanitizeForLinuxFileName(moduleId);
+        const profilePart = sanitizeForLinuxFileName(profileName);
+        const statusPart = deriveExportWorkflowStatus();
+        const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        return [modulePart, profilePart, statusPart, datePart].join('__') + '.json';
       }
       function updateSyncStatus(statusText) {
         if (typeof statusText !== 'string' || statusText.trim().length === 0) {

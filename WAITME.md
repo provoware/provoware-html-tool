@@ -141,3 +141,15 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash tools/run_quality_checks.sh`
 - `python tools/smoke_test.py`
 - `bash start.sh --ux-check-auto`
+
+
+## Update 2026-02-22 (kurz)
+- Neu: Export-Dateiname ist Linux-kompatibel und trägt den Arbeitsstatus direkt im Namen.
+- Neu: Der letzte Dateiname wird im Dashboard als Text angezeigt (barrierearm für Screenreader).
+- Neu: Smoke-Test prüft diese Stelle automatisch.
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`
