@@ -72,8 +72,11 @@ cat logs/start.log
   - Automatischer Mini-UX-Check (`--ux-check-auto`) prüft Hilfe-Texte, Next Steps und wichtige A11y-Marker im Template
   - Neuer WCAG-Kontrasttest (`python tools/check_theme_contrast.py`) als fester Teil von Repo-Quality und Smoke-Test
   - Full-Gates führen jetzt automatisiert Gates 1-5 aus (inklusive Mini-UX-Check)
+  - Start-Kernlogik weiter in `system/start_core.sh` ausgelagert (Statusausgabe, Fehlerdialoge, Statusbericht und Dependency-Bootstrap)
+  - Start-Routine erweitert um automatisches Werkzeug-Bootstrap mit klarer Nutzer-Rückmeldung (`python3`, `rg`, `curl`, `shfmt`, `shellcheck`)
+  - Repo-Quality prüft jetzt `start.sh` und `system/start_core.sh` gemeinsam (Format + Lint + WCAG-Kontrasttest)
 - Offen:
-  - Weitere Auslagerung von Start-Kernlogik in `system/`
-  - CI-Anbindung für den neuen WCAG-Kontrasttest
+  - Weitere Auslagerung von GUI-Erzeugung und Theme-Berechnung aus `start.sh` in `system/`
+  - CI-Anbindung für den erweiterten Repo-Quality-Check (`start.sh` + `system/start_core.sh`)
   - CI-Anbindung für den neuen Mini-UX-Check
 - Nächster Schritt: Die neuen Full-Gates in einer CI-Pipeline automatisch bei jedem Commit ausführen und bei Fehlern mit Statusbericht abbrechen.

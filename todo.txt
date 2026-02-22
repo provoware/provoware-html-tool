@@ -1,5 +1,8 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
+DONE: Start-Kernlogik in system/start_core.sh ausgelagert, Auto-Bootstrap ergänzt und Repo-Quality auf beide Shell-Dateien erweitert. (2026-02-22)
+NEXT: Als Nächstes GUI-Erzeugung und Theme-Farbzuordnung aus start.sh nach system/ auslagern und mit Unit-nahen Shellchecks absichern. (2026-02-22)
+
 DONE: WCAG-Kontrasttest automatisiert, Repo-Quality erweitert und Full-Gates auf 1-5 mit Auto-UX-Check umgestellt. (2026-02-22)
 NEXT: CI-Pipeline so erweitern, dass `bash start.sh --full-gates` bei jedem Commit Pflicht ist und Statusdatei als Artefakt speichert. (2026-02-22)
 

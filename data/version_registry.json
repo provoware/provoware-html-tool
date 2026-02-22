@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-wcag-contrast-full-gates-1-5",
+  "iteration": "2026.02.22-start-core-system-bootstrap-quality",
   "files": {
     "start.sh": "2026.02.22",
     "tools/smoke_test.py": "2026.02.22",
@@ -10,6 +10,7 @@
     "CHANGELOG.md": "2026.02.22",
     "data/version_registry.json": "2026.02.22",
     "tools/run_quality_checks.sh": "2026.02.22",
-    "tools/check_theme_contrast.py": "2026.02.22"
+    "tools/check_theme_contrast.py": "2026.02.22",
+    "system/start_core.sh": "2026.02.22"
   }
 }
