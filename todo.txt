@@ -1,5 +1,5 @@
-DONE: Modul-Hauptbereich im HTML-Dashboard mit Modul-Starter, Alt+O-Shortcut, validierter Auswahl und Debug-Verlauf umgesetzt (2026-02-22)
-NEXT: Offene Punkte in die Umsetzungs-Pipeline übernommen und nach Bereichen priorisiert (2026-02-22)
+DONE: Dashboard mit ruhigerem Farbschema, Kartenhierarchie und gruppierter Sidebar inkl. Pluginstatus sichtbar umgesetzt (2026-02-22)
+NEXT: Fokuspfade im Dialog- und Sidebar-Bereich per zusätzlichem E2E-Test weiter absichern (2026-02-22)
 
 OFFEN – Struktur
 - Sidebar gruppieren

@@ -8,12 +8,14 @@ Ein Werkzeug für ein barrierearmes HTML-Dashboard mit klarer Start-Routine, aut
   - Vollautomatische Start-Routine mit Check, Reparatur (automatische Behebung), Tests und Formatierung.
   - Pflicht-Gates 1–5 als feste Reihenfolge mit klaren Statusmeldungen.
   - Fokus auf Barrierefreiheit: Skip-Link, Tastatur-Navigation, Kontrasthinweise, klare Next Steps.
+  - Professionelleres UI: neues „balanced“-Theme, klare Kartenhierarchie und gruppierte Sidebar für bessere Orientierung.
+  - Sichtbarer Pluginstatus in der Sidebar mit Text-Status (nicht nur Farbe).
   - Modularer HTML-Hauptbereich mit Modul-Starter (Auswahl + validierter Start + Next-Step-Hinweis).
   - Debug-Log mit Verlauf (letzte 5 Ereignisse) für transparentes Nutzerfeedback.
   - Getrennte Struktur für Wartbarkeit: `system/`, `config/`, `tools/`, `templates/`, `data/`.
 - Offen:
   - Optional: CI-Artefakte für alle Browser langfristig archivieren.
-  - Optional: Theme-Farbwerte weiter feinjustieren.
+  - Optional: Weitere Feinanpassung für Plugin-Status bei sehr kleinen Displays.
   - Optional: Modul-Starter später an echte Backend-Module koppeln.
 
 ## Schnellstart (für Laien)
