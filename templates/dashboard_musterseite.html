@@ -55,6 +55,23 @@
       color: var(--text);
     }
 
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--surface);
+      color: var(--text);
+      border: 2px solid var(--focus);
+      padding: .5rem .8rem;
+      border-radius: 0 0 8px 8px;
+    }
+
+    .skip-link:focus {
+      left: .6rem;
+      top: .4rem;
+      z-index: 10;
+    }
+
     .layout {
       max-width: 980px;
       margin: 1.25rem auto;
@@ -71,10 +88,18 @@
       box-shadow: 0 6px 18px var(--shadow);
     }
 
-    h1, h2 { margin: 0 0 .6rem 0; }
-    p { margin: .2rem 0 .6rem 0; }
+    h1, h2 {
+      margin: 0 0 .6rem 0;
+    }
 
-    .muted { color: var(--muted); }
+    p {
+      margin: .2rem 0 .6rem 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
     .status {
       display: inline-flex;
       gap: .5rem;
@@ -86,7 +111,12 @@
       font-weight: 700;
     }
 
-    .actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .actions {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
     button {
       border: 2px solid var(--border);
       background: transparent;
@@ -95,10 +125,16 @@
       padding: .5rem .8rem;
       font-size: 1rem;
       cursor: pointer;
+      min-height: 44px;
     }
-    button:hover { border-color: var(--primary); }
+
+    button:hover {
+      border-color: var(--primary);
+    }
+
     button:focus-visible,
-    select:focus-visible {
+    select:focus-visible,
+    a:focus-visible {
       outline: 3px solid var(--focus);
       outline-offset: 3px;
     }
@@ -112,10 +148,14 @@
       color: var(--text);
     }
 
-    dialog::backdrop { background: rgba(0,0,0,.6); }
+    dialog::backdrop {
+      background: rgba(0, 0, 0, .6);
+    }
   </style>
 </head>
 <body>
+  <a href="#bereich-aufgaben" class="skip-link">Direkt zu den Aktionen springen</a>
+
   <main class="layout" role="main" aria-live="polite">
     <section class="card">
       <h1>Dashboard-Musterseite (sofort nutzbar)</h1>
@@ -133,7 +173,7 @@
         <button type="button" data-action="log">Protokoll öffnen</button>
         <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
       </div>
-      <p id="result" class="muted" aria-live="polite">Noch keine Aktion ausgeführt.</p>
+      <p id="result" class="muted" role="status" aria-live="polite">Noch keine Aktion ausgeführt.</p>
     </section>
 
     <section class="card" aria-labelledby="bereich-theme">
@@ -148,9 +188,14 @@
     </section>
   </main>
 
-  <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text">
+  <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text" aria-modal="true">
     <h2 id="error-title">❌ Fehler erkannt</h2>
     <p id="error-text">Die Aktion konnte nicht abgeschlossen werden. Bitte folgen Sie den nächsten Schritten.</p>
+    <ul>
+      <li>Erneut versuchen</li>
+      <li>Reparatur ausführen mit <code>./start.sh --repair</code></li>
+      <li>Protokoll öffnen mit <code>cat logs/start.log</code></li>
+    </ul>
     <div class="actions">
       <button type="button" data-action="retry">Erneut versuchen</button>
       <button type="button" data-action="repair">Reparatur</button>
@@ -167,7 +212,7 @@
       const themeSelector = document.getElementById('theme-switcher');
 
       function setResult(message) {
-        if (!resultNode) {
+        if (!resultNode || typeof message !== 'string' || message.trim().length === 0) {
           return false;
         }
         resultNode.textContent = message;
@@ -176,7 +221,7 @@
 
       function applyTheme(themeValue) {
         const allowed = ['high-contrast', 'light', 'dark'];
-        if (!allowed.includes(themeValue)) {
+        if (typeof themeValue !== 'string' || !allowed.includes(themeValue)) {
           setResult('⚠️ Ungültiges Theme. Erlaubt sind: high-contrast, light, dark.');
           return false;
         }
@@ -187,7 +232,7 @@
 
       function executeAction(actionValue) {
         const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog'];
-        if (!known.includes(actionValue)) {
+        if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
 

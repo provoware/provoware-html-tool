@@ -8,6 +8,7 @@ MODE="start"
 DEBUG_MODE="0"
 LINE_LIMIT=1200
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
+THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
 CHECKED_ITEMS=()
 MISSING_ITEMS=()
 FIXED_ITEMS=()
@@ -43,6 +44,9 @@ DEFAULT_TEXT_JSON='{
   "dashboard_feedback": "Feedback-Regel: Jede Aktion zeigt sofort Ergebnis + nächsten Schritt in einfacher Sprache."
 }'
 TEXT_JSON_CACHE=""
+THEME_LIST_CACHE=""
+
+DEFAULT_THEMES_CSV="high-contrast,light,dark"
 
 load_text_json() {
 	if [[ -n "$TEXT_JSON_CACHE" ]]; then
@@ -84,6 +88,62 @@ get_text() {
 		return 0
 	fi
 	printf '%s' "$value"
+}
+
+load_theme_list_csv() {
+	if [[ -n "$THEME_LIST_CACHE" ]]; then
+		printf '%s' "$THEME_LIST_CACHE"
+		return 0
+	fi
+
+	local fallback="$DEFAULT_THEMES_CSV"
+	if [[ -f "$THEME_CONFIG_FILE" ]]; then
+		if command -v python3 >/dev/null 2>&1; then
+			local parsed_csv
+			parsed_csv="$(python3 -c 'import json,sys,re
+path=sys.argv[1]
+data=json.load(open(path, encoding="utf-8"))
+themes=data.get("themes", [])
+valid=[]
+for item in themes:
+    if isinstance(item, str) and re.fullmatch(r"[a-z][a-z0-9-]{1,30}", item):
+        valid.append(item)
+if not valid:
+    raise SystemExit(2)
+print(",".join(valid))' "$THEME_CONFIG_FILE" 2>/dev/null || true)"
+			if [[ -n "$parsed_csv" ]]; then
+				fallback="$parsed_csv"
+				record_checked "Theme-Konfiguration geladen"
+			else
+				record_missing "Theme-Konfiguration ungültig"
+				record_next_step "Datei config/themes.json prüfen und erneut versuchen"
+			fi
+		else
+			record_missing "python3 für Theme-Konfiguration fehlt"
+			record_next_step "python3 installieren oder Standard-Themes nutzen"
+		fi
+	fi
+
+	THEME_LIST_CACHE="$fallback"
+	printf '%s' "$THEME_LIST_CACHE"
+}
+
+is_allowed_theme() {
+	local candidate="$1"
+	if [[ -z "$candidate" || ! "$candidate" =~ ^[a-z][a-z0-9-]{1,30}$ ]]; then
+		return 1
+	fi
+
+	local list_csv
+	list_csv="$(load_theme_list_csv)"
+	local item
+	IFS=',' read -r -a _themes <<<"$list_csv"
+	for item in "${_themes[@]}"; do
+		if [[ "$candidate" == "$item" ]]; then
+			return 0
+		fi
+	done
+	return 1
 }
 
 print_help() {
@@ -538,6 +598,19 @@ run_dashboard_template_mode() {
 		return 1
 	fi
 
+	local configured_themes
+	configured_themes="$(load_theme_list_csv)"
+	IFS=',' read -r -a _theme_items <<<"$configured_themes"
+	local configured_theme
+	for configured_theme in "${_theme_items[@]}"; do
+		if ! grep -q "<option value=\"${configured_theme}\"" "$template_file"; then
+			print_error_with_actions "Dashboard-Template enthält kein auswählbares Theme '${configured_theme}'."
+			record_missing "Theme-Option ${configured_theme}"
+			record_next_step "Theme-Option im Template ergänzen oder config/themes.json anpassen"
+			return 1
+		fi
+	done
+
 	print_step "✅" "Dashboard-Template geprüft und einsatzbereit: ${template_file}"
 	print_step "ℹ️" "Nutzung: Datei im Browser öffnen und Buttons direkt testen (ohne Build-Schritt)."
 	print_step "➡️" "Nächster Schritt: Bei Bedarf Text anpassen und dieselbe Datei als Projekt-Startseite nutzen."
@@ -570,16 +643,12 @@ launch_local_gui() {
 	fi
 
 	local gui_theme="${GUI_THEME:-high-contrast}"
-	case "$gui_theme" in
-	light | dark | high-contrast)
-		record_checked "GUI-Theme ${gui_theme}"
-		;;
-	*)
-		print_error_with_actions "Ungültiges GUI_THEME '${gui_theme}'. Erlaubt: light, dark, high-contrast."
+	if ! is_allowed_theme "$gui_theme"; then
+		print_error_with_actions "Ungültiges GUI_THEME '${gui_theme}'. Erlaubte Werte laut config/themes.json oder Standard: $(load_theme_list_csv)."
 		record_next_step "GUI_THEME setzen, z. B. 'GUI_THEME=high-contrast ./start.sh'"
 		return 1
-		;;
-	esac
+	fi
+	record_checked "GUI-Theme ${gui_theme}"
 
 	local bg_color="#0b0f14"
 	local text_color="#ffffff"

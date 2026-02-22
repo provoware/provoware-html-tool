@@ -1,24 +1,24 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-DONE: Dashboard-Musterseite als sofort nutzbares HTML-Template erstellt und per Startmodus `--dashboard-template` + Smoke-Test validierbar gemacht. (2026-02-22)
-NEXT: Theme-Werte nach `config/themes.json` auslagern und eine automatische Kontrastprüfung (WCAG-Kontrasttest) im Smoke-Test ergänzen. (2026-02-22)
+DONE: Theme-Konfiguration in `config/themes.json` eingeführt, Start-/Template-Validierung verknüpft und Dashboard-Template mit Skip-Link + verbessertem Fehlerdialog barriereärmer gemacht. (2026-02-22)
+NEXT: Theme-Farbwerte in eine zentrale Datei auslagern und einen automatischen WCAG-Kontrasttest als eigenen Tool-Check ergänzen. (2026-02-22)
 
-## Iteration 2026-02-22 (Dashboard-Template + Template-Validierung)
+## Iteration 2026-02-22 (Theme-Config + A11y + Smoke)
 ### A) Fundstelle (beobachten)
-- Problem: Es fehlte eine direkt nutzbare, konkrete Dashboard-Musterseite mit Bereichen, Buttons, Fehlerdialogen und Theme-Umschalter.
-- Risiko: Nutzer müssen Struktur und A11y selbst zusammensuchen und starten uneinheitlich.
-- Erwartung: Eine sofort nutzbare Vorlage mit klarer Bedienung und automatischer Prüfung steht bereit.
+- Problem: Theme-Werte waren nicht zentral konfiguriert und die A11y-Absicherung war im Smoke-Test noch nicht vollständig.
+- Risiko: Uneinheitliche Themes, unklare Fehlermeldungen und spätere Regressionen bei Barrierefreiheit.
+- Erwartung: Konfigurierbare Themes, robuste Prüfung und klar verständliche Nutzerhinweise mit Next Steps.
 
 ### B) Change-Scope (vor Patch)
-- Ziel: Konkrete Musterseite bereitstellen und Start-/Smoke-Prüfung dafür automatisieren.
-- Dateien: `start.sh`, `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Ziel: Theme-Konfiguration zentralisieren, Template-A11y verbessern und automatische Prüfung dafür ergänzen.
+- Dateien: `start.sh`, `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `config/themes.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Block.
-- Abnahmekriterium: `./start.sh --dashboard-template` liefert Erfolg; Smoke-Test bestätigt Pflichtmarker und lauffähige Ausgabe.
+- Abnahmekriterium: `./start.sh --dashboard-template` prüft Theme-Optionen aus Konfiguration, Smoke-Test validiert A11y-Marker + Theme-Datei erfolgreich.
 
 ### C) Patch (kurz)
-- Punkt 1 – Änderung: Neue Dashboard-Musterseite mit A11y-freundlicher Struktur, Theme-Umschalter und Fehlerdialog in `templates/dashboard_musterseite.html`.
-- Punkt 2 – Änderung: Neuer Startmodus `--dashboard-template` in `start.sh` mit Validierung der Template-Pflichtbereiche und klaren Next Steps.
-- Punkt 3 – Änderung: `tools/smoke_test.py` erweitert um automatischen Test für `--dashboard-template` und Marker-Prüfung der Musterseite.
+- Punkt 1 – Änderung: Theme-Konfiguration in `config/themes.json` eingeführt und in `start.sh` für GUI-/Template-Validierung angebunden.
+- Punkt 2 – Änderung: Dashboard-Template um Skip-Link, `aria-modal` und klarere Fehler-Next-Steps erweitert.
+- Punkt 3 – Änderung: Smoke-Test um Theme-Konfigurationsprüfung, Namensvalidierung und A11y-Marker ergänzt.
 
 ### D) Gates
 - G1: `python -m compileall -q .`
@@ -31,6 +31,6 @@ NEXT: Theme-Werte nach `config/themes.json` auslagern und eine automatische Kont
 - Status: DONE
 - Doku: README + CHANGELOG + todo aktualisiert
 - Laienvorschläge:
-  1. Öffnen Sie zuerst `templates/dashboard_musterseite.html` im Browser und klicken Sie jeden Button einmal durch.
-  2. Wechseln Sie danach nacheinander auf `light`, `dark` und `high-contrast`, damit Sie Lesbarkeit und Fokusrahmen direkt sehen.
-- Nächster Schritt: Legen Sie `config/themes.json` an, lesen Sie die Theme-Werte im Template per kleinem Build-Skript ein und ergänzen Sie einen automatischen Kontrasttest, damit jede Farbkombination messbar barrierefrei bleibt.
+  1. Öffnen Sie die Musterseite im Browser und drücken Sie zuerst Tab, damit Sie den neuen Sprung-Link (Skip-Link) direkt sehen.
+  2. Wählen Sie nacheinander alle Themes aus und klicken Sie dann auf „Beispiel-Fehler anzeigen“, um die nächsten Schritte im Dialog zu prüfen.
+- Nächster Schritt: Legen Sie eine Datei für Theme-Farbwerte an, lesen Sie sie automatisch im Template-Build ein und ergänzen Sie danach einen messbaren Kontrasttest, damit jede Farbkombination dauerhaft barrierefrei bleibt.
