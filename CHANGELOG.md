@@ -1,3 +1,17 @@
+## 2026-02-22 – Modul-Interoperabilität robust erweitert (Dialog/Sidebar/Drag&Drop)
+- Scope-Kontrolle:
+  - Problem: Für den modulübergreifenden Arbeitsfluss fehlten ein Standardordner-freier Projektdialog, modulbezogene Sidebar-Optionen und robuste Archiv-Interaktionen.
+  - Ziel: Genau 3 kleine, abgeschlossene Punkte für Interoperabilität liefern, inklusive Hilfe-/A11y-Verbesserungen in einfacher Sprache.
+  - Dateien: `templates/dashboard_musterseite.html`, `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) UI/JS-Interoperabilität im Template, 2) Zeilenlimit für größere UI-Iteration angepasst, 3) Pflichtdoku + Versionsstand aktualisiert.
+  - Abnahme: Projektdialog erzwingt Eingabe ohne Standardpfad, Sidebar zeigt modulbezogene Optionen, GMS-Archiv unterstützt Profile + Drag&Drop/CRUD und Module lassen sich als Einzelfenster öffnen.
+- Was:
+  1) Projektordner-Dialog auf „ohne Standardordner“ umgestellt (kein Default-Button mehr, klare Hilfe-/Fehlertexte mit Next Steps).
+  2) Modulbezogene Sidebar-Optionen ergänzt und Fensteraktion „Als Einzelfenster öffnen“ integriert (mit valider Modulauswahl).
+  3) GMS-Archiv erweitert: Profilumschaltung/-anlage (default/techno/hörspiele), Drag&Drop-Reihenfolge, CRUD-Aktionen (umbenennen/löschen) mit verständlichem Nutzerfeedback.
+- Warum: Der modulare Workflow braucht robuste Übergänge zwischen Navigation, Datenprofilen und parallelem Arbeiten, ohne implizite Standardannahmen.
+- Wirkung: Höhere Release-Reife, bessere Barrierefreiheit (Textstatus + Hilfe) und mehr Alltagstauglichkeit für Laien.
+
 ## 2026-02-22 – Dashboard-Zielbild umgesetzt (3x3-Grid + Header-Live-Log + Modus-Schalter)
 - Scope-Kontrolle:
   - Problem: Das neue UI-Zielbild (leeres 3x3-Grid + Header-Live-Log) war noch offen und der Browser-E2E-Test brach in restriktiven Umgebungen bei 403-Downloads hart ab.

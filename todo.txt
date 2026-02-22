@@ -47,5 +47,9 @@ NEXT (Priorität mittel, offen)
 NEXT (Priorität hoch, neu 2026-02-22)
 - [x] 100%: Dashboard-Layout auf leeres 3x3-Haupt-Grid als Standard umstellen (inkl. Fensteroptionen Ausblenden/Maximieren und Vollsicht beim Start).
 - [x] 100%: Header-Dashboard um Live-Log (letzte 10 Ereignisse) + Button „Gesamtes Protokoll kopieren" erweitern, inklusive Laien-/Profi-Umschalter und klaren Hilfetexten.
-- [ ] 100%: Modul-Interoperabilität robust ausbauen (Projektordner-Dialog ohne Standardpfad, Sidebar-Parameter je Modul, Drag&Drop + CRUD + Einzel-Fenster für paralleles Arbeiten, Genres-Archivprofile wie Techno/Hörspiele getrennt).
+- [x] 100%: Modul-Interoperabilität robust ausgebaut (Projektordner-Dialog ohne Standardpfad, Sidebar-Optionen je Modul, Drag&Drop + CRUD + Einzel-Fenster, Genres-Archivprofile techno/hörspiele).
 Hinweis NEXT ITERATION: Browser-E2E kann in restriktiven Umgebungen bei 403 im Playwright-Download nur als Warnung laufen; stabile Offline-Mirrorquelle fest einplanen.
+
+DONE: Projektdialog arbeitet jetzt ohne Standardordner und fordert einen expliziten Nutzerpfad mit klaren Next Steps (2026-02-22)
+DONE: Sidebar zeigt modulbezogene Optionen + Datenquelle und unterstützt Einzelfenster-Start je aktivem Modul (2026-02-22)
+DONE: GMS-Archivprofile (default/techno/hörspiele) mit Drag&Drop-Reihenfolge und CRUD (umbenennen/löschen) ergänzt (2026-02-22)
