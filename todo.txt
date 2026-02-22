@@ -1,3 +1,7 @@
+DONE: Hauptbereich hat jetzt eine einheitliche Control-Bar (Projektpfad, globale Suche, primäre Aktion Projekt wechseln) mit Input-/Output-Validierung (2026-02-22)
+DONE: Rechter Bereich zeigt jetzt einen dauerhaften Kontext-Inspector mit Details/Hilfe/Meta/Shortcuts in einfacher Sprache (2026-02-22)
+DONE: Shortcut-Overlay per F1/? mit filterbarer Liste und klaren Next Steps ergänzt (2026-02-22)
+
 DONE: apt-get-Reparatur prüft jetzt Root/Sudo und zeigt klare Next Steps in einfacher Sprache (2026-02-22)
 DONE: Installationsfehler werden in logs/install.log geschrieben und als konkreter Hinweis ausgegeben (2026-02-22)
 DONE: Gate-/CI-Pythonaufrufe auf python3 vereinheitlicht und CI von --repair entkoppelt (2026-02-22)

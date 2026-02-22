@@ -1,3 +1,17 @@
+## 2026-02-22 – GUI-Triade: Control-Bar, Kontext-Inspector, Shortcut-Overlay
+- Scope-Kontrolle:
+  - Problem: Für offene GUI-Punkte fehlten eine konsistente Steuerleiste, ein sichtbarer Kontextbereich und ein schneller Tastaturzugang zu Aktionen.
+  - Ziel: Genau 3 kleine, abgeschlossene GUI-Punkte mit A11y-/Hilfe-Fokus umsetzen, ohne neue Abhängigkeiten.
+  - Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Dashboard-UI/JS erweitert, 2) Pflichtdoku aktualisiert, 3) Versionseinträge synchronisiert.
+  - Abnahme: Control-Bar ist sichtbar und validiert Eingaben; Inspector zeigt Kontexttext; Overlay öffnet per F1/? mit Filter und verständlichen Next Steps.
+- Was:
+  1) Neue Control-Bar im Hauptbereich ergänzt (Breadcrumb-Projektpfad, globale Suche, Aktion „Projekt wechseln" mit Input-Validierung/Status).
+  2) Rechten Bereich um Kontext-Inspector mit Details/Hilfe/Meta/Shortcuts erweitert und beim Modulwechsel dynamisch aktualisiert.
+  3) Neues Shortcut-Overlay ergänzt (F1/?, Filterfeld, Trefferstatus, tastaturfreundliches Schließen, klare Laientexte).
+- Warum: Offene GUI-Punkte werden konkret geschlossen und die Bedienung per Tastatur + Klartext-Hilfe wird deutlich besser.
+- Wirkung: Mehr Release-Reife im Dashboard, konsistentere Orientierung und schnellere Bedienung für Laien und Profis.
+
 ## 2026-02-22 – Backup-Schalter im Dashboard + Validierung + Smoke-Absicherung
 - Scope-Kontrolle:
   - Problem: Der Backup-Status war nur im Footer sichtbar, aber nicht direkt bedienbar; zudem fehlte eine feste Smoke-Absicherung für den neuen UI-Bereich.

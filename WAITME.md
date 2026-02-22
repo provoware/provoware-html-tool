@@ -2,6 +2,18 @@
 
 Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 
+
+## Update 2026-02-22 (GUI offen weitergeführt)
+- Oben im Arbeitsbereich gibt es jetzt eine klare Steuerleiste (Projektpfad, Suche, Projekt wechseln).
+- Rechts gibt es jetzt einen festen Kontext-Inspector mit Details, Hilfe, Meta-Infos und Kürzeln.
+- Neu: Shortcut-Übersicht per F1 oder ? mit Suchfilter (Overlay = überlagerndes Fenster).
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`
+
 ## Kurzfazit
 - Die eingereichte P0/P1/P2-Liste wurde gegen den aktuellen Code geprüft.
 - Ein Punkt ist bereits erledigt („Open Module“ aktiviert echte Modulansicht).
