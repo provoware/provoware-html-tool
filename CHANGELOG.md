@@ -1,3 +1,8 @@
+## 2026-02-22 – CI-Schwachstellenkanal + Browser-E2E-Parameter + Hilfetext
+- Was: `tools/browser_e2e_test.py` unterstützt jetzt `--browser chromium|firefox|webkit` und erstellt Browser-spezifische Artefaktnamen; CI führt zusätzlich `bash start.sh --weakness-report` als eigenen Qualitätskanal aus.
+- Warum: Die Browser-Abdeckung soll vorbereitet und transparent dokumentiert werden, während Schwachstellenberichte in CI sichtbar bleiben.
+- Wirkung: Bessere Wartbarkeit für spätere Firefox/WebKit-Ausweitung, klarere Hilfehinweise und zusätzlicher CI-Qualitätsnachweis.
+
 ## 2026-02-22 – Schwachstellen-Bericht + Smoke-Absicherung + Hilfetext
 - Was: `start.sh` erhielt den neuen Modus `--weakness-report` mit konkreten Befehlen zu verbleibenden Risiken; `tools/smoke_test.py` prüft den Bericht im Full-Profil automatisch.
 - Warum: Offene Rest-Risiken sollten sichtbar, verständlich und direkt mit Next Steps behebbar sein.

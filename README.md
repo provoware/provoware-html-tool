@@ -15,7 +15,7 @@
   - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
   - Optional: Pixelgenauer Bildvergleich (Diff-Metrik) als zweiter Visual-Guard zusätzlich zur Artefakt-Prüfung.
-  - Optional: Schwachstellen-Bericht in CI als zusätzlichen Qualitätskanal ausführen.
+  - Browser-E2E soll später als CI-Matrix auch mit Firefox/WebKit laufen (derzeit nur Chromium als Pflichtlauf).
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
@@ -36,6 +36,9 @@ bash start.sh
 ./start.sh --weakness-report
 ./start.sh --full-gates
 ./start.sh --release-check
+python tools/browser_e2e_test.py --browser chromium
+python tools/browser_e2e_test.py --browser firefox
+python tools/browser_e2e_test.py --browser webkit
 ```
 
 ## Automatische Gates (in Reihenfolge)
