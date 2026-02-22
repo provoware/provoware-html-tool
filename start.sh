@@ -598,10 +598,22 @@ run_dashboard_template_mode() {
 
 run_check_mode() {
 	print_step "✅" "Check-Modus aktiv."
-	check_runtime_prerequisites
-	check_required_files
-	check_line_limit
-	run_quality_checks
+	local failed=0
+	check_runtime_prerequisites || failed=1
+	check_required_files || failed=1
+	check_line_limit || failed=1
+	run_quality_checks || failed=1
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "✅" "Check-Modus erfolgreich abgeschlossen."
+		record_checked "Check-Modus"
+		return 0
+	fi
+
+	print_error_with_actions "Check-Modus meldet offene Probleme."
+	record_missing "Check-Modus"
+	record_next_step "'./start.sh --repair' ausführen und danach './start.sh --check --debug' wiederholen"
+	return 1
 }
 
 run_repair_mode() {
@@ -738,10 +750,14 @@ launch_local_gui() {
 run_start_mode() {
 	print_step "✅" "Startmodus aktiv: Check, Repair, Format, Test laufen automatisch."
 	run_dependency_bootstrap || true
-	run_check_mode
+	run_check_mode || true
 	run_repair_mode
 	run_formatting
-	run_tests
+	if ! run_tests; then
+		print_error_with_actions "Startmodus abgebrochen: Selbsttest nicht erfolgreich."
+		record_next_step "'./start.sh --debug' ausführen und danach die gemeldeten Schritte nacheinander beheben"
+		return 1
+	fi
 	launch_local_gui || true
 	print_step "✅" "Start erfolgreich abgeschlossen."
 }
@@ -855,6 +871,14 @@ if "hoher Kontrast" not in content or "Theme" not in content:
 
 if len(re.findall(r"Nächster|nächsten Schritte|Erneut versuchen|Reparatur", content, flags=re.IGNORECASE)) < 4:
     print("zu wenige leicht verständliche Hilfetexte")
+    raise SystemExit(1)
+
+if "focus-visible" not in content:
+    print("fehlender Tastatur-Fokushinweis (focus-visible)")
+    raise SystemExit(1)
+
+if "Daten sparen" not in content:
+    print("fehlender Hinweis für reduzierte Bewegung")
     raise SystemExit(1)
 PY
 		print_step "✅" "Mini-UX-Check erfolgreich: Deutsche Hilfetexte, Next Steps und A11y-Marker sind vollständig."

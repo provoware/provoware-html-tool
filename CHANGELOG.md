@@ -1,3 +1,8 @@
+## 2026-02-22 – Check-Status gehärtet + Start-Failfast + Reduced-Motion-Hilfe
+- Was: `start.sh` prüft `--check` jetzt mit gesammeltem Fehlerstatus und beendet `start` bei fehlgeschlagenem Selbsttest; Mini-UX-Check fordert zusätzlich Fokus-Hinweis und Reduced-Motion-Text.
+- Warum: Fehler durften nicht still in den nächsten Schritt laufen, und Barrierefreiheit sollte auch für reduzierte Bewegung klar abgesichert sein.
+- Wirkung: Verlässlichere Exitcodes für Automatisierung, verständlichere Next Steps bei Abbruch und bessere A11y-Unterstützung für sensible Nutzer:innen.
+
 # CHANGELOG
 
 ## 2026-02-22 – Start-Kernlogik ausgelagert + Auto-Bootstrap + Quality-Update

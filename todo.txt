@@ -1,3 +1,6 @@
+DONE: Check-Modus mit klaren Exitcodes gehärtet, Startmodus mit Failfast abgesichert und Reduced-Motion-Hilfe im Template ergänzt. (2026-02-22)
+NEXT: Als Nächstes GUI-Erzeugung und Theme-Farbzuordnung aus start.sh nach system/ auslagern und dafür gezielte Shell-Tests pro Funktion ergänzen. (2026-02-22)
+
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
 DONE: Start-Kernlogik in system/start_core.sh ausgelagert, Auto-Bootstrap ergänzt und Repo-Quality auf beide Shell-Dateien erweitert. (2026-02-22)
