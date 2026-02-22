@@ -98,7 +98,6 @@ load_text_json() {
 	TEXT_JSON_CACHE="$candidate_json"
 	printf '%s' "$TEXT_JSON_CACHE"
 }
-
 get_text() {
 	local key="$1"
 	if [[ -z "$key" || ! "$key" =~ ^[a-z0-9_]+$ ]]; then
@@ -1022,24 +1021,11 @@ run_weakness_report_mode() {
 		issues=$((issues + 1))
 	fi
 
-	if ! python3 - "$PROJECT_ROOT/config/themes.json" <<'PY'; then
-from pathlib import Path
-import json
-import sys
-
-path = Path(sys.argv[1])
-data = json.loads(path.read_text(encoding="utf-8"))
-themes = data.get("themes", {})
-required = {"bg", "text", "primary", "focus"}
-for name, values in themes.items():
-    missing = sorted(required.difference(values.keys()))
-    if missing:
-        print(f"Theme '{name}' fehlt: {', '.join(missing)}")
-        raise SystemExit(1)
-print("Theme-Konfiguration vollständig")
-PY
+	if ! validate_theme_config; then
 		print_step "⚠️" "Schwachstelle: Theme-Konfiguration ist unvollständig für robuste A11y-Anzeige."
+		print_step "➡️" "Befehl: python3 -m json.tool config/themes.json"
 		print_step "➡️" "Befehl: config/themes.json öffnen und je Theme bg/text/primary/focus ergänzen"
+		print_step "ℹ️" "Hilfe: Beispielstruktur {'themes': {'high-contrast': {'bg':'#000000','text':'#FFFFFF','primary':'#00E5FF','focus':'#FFD400'}}}"
 		record_next_step "Theme-Konfiguration vervollständigen und danach './start.sh --weakness-report' wiederholen"
 		issues=$((issues + 1))
 	else
@@ -1058,6 +1044,24 @@ PY
 	return 0
 }
 
+validate_theme_config() {
+	python3 - "$PROJECT_ROOT/config/themes.json" <<'PY'
+from pathlib import Path
+import json, sys
+p = Path(sys.argv[1])
+if not p.exists(): raise SystemExit("config/themes.json fehlt")
+t = json.loads(p.read_text(encoding="utf-8")).get("themes")
+req = {"bg", "text", "primary", "focus"}
+if isinstance(t, list): raise SystemExit("Theme-Liste ohne Farbwerte erkannt")
+if not isinstance(t, dict) or not t: raise SystemExit("Ungültige Theme-Struktur")
+for n, v in t.items():
+    if not isinstance(v, dict): raise SystemExit(f"Theme '{n}' ist kein Objekt")
+    miss = sorted(req.difference(v.keys()))
+    if miss: raise SystemExit(f"Theme '{n}' fehlt: {', '.join(miss)}")
+print("Theme-Struktur vollständig")
+PY
+}
+
 print_safe_mode_help() {
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_1")")"
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_2")")"
@@ -1069,6 +1073,7 @@ print_safe_mode_help() {
 run_release_check() {
 	print_step "✅" "Release-Check aktiv: Vollständige Freigabeprüfung läuft."
 	local failed=0
+	local theme_validation_status=0
 
 	if ! check_runtime_prerequisites; then
 		failed=1
@@ -1089,6 +1094,18 @@ run_release_check() {
 	if ! ensure_tool "shellcheck"; then
 		failed=1
 	fi
+	if ! validate_theme_config; then
+		theme_validation_status=1
+		failed=1
+		print_step "⚠️" "Theme-Validierung für Release fehlgeschlagen."
+		print_step "➡️" "Befehl: python3 -m json.tool config/themes.json"
+		print_step "➡️" "Befehl: Farben je Theme ergänzen (bg/text/primary/focus)"
+		record_next_step "Theme-Datei auf Objektstruktur mit Farbwerten umstellen und Release-Check erneut starten"
+	fi
+
+	if [[ "$theme_validation_status" -eq 0 ]]; then
+		record_checked "Theme-Validierung (Release)"
+	fi
 
 	if [[ "$failed" -eq 0 ]]; then
 		print_step "✅" "$(get_text "release_ready")"
@@ -1098,6 +1115,7 @@ run_release_check() {
 	fi
 
 	print_step "⚠️" "$(get_text "release_not_ready")"
+	print_step "➡️" "Schnellfix: './start.sh --repair && ./start.sh --format && ./start.sh --test && ./start.sh --release-check'"
 	record_missing "Release-Check"
 	record_next_step "Fehlende Punkte beheben und erneut './start.sh --release-check' ausführen"
 	return 1

@@ -1,3 +1,8 @@
+## 2026-02-22 – Release-Check um Theme-Struktur + klare Schnellfixe erweitert
+- Was: `start.sh` validiert Theme-Formate in `--weakness-report` und `--release-check` jetzt robust, inklusive Hilfeausgabe mit Beispielschema und konkreten Befehlen.
+- Warum: Für ein optimales Release mussten Restlücken ohne Python-Traceback in einfacher Sprache sichtbar werden, besonders bei Theme/A11y-Konfiguration.
+- Wirkung: Teams sehen sofort, was noch fehlt (Tools, Theme-Struktur, Artefakte) und können mit einem klaren Schnellfix-Befehl direkt nacharbeiten.
+
 ## 2026-02-22 – GUI-Autostart + Konsolenstruktur + Befehlshinweise
 - Was: Browser-Autostart robuster gemacht, Abschnittsausgaben in der Konsole ergänzt und GUI-Hinweise als klare Schrittliste erweitert.
 - Warum: Nutzer kamen bei Headless/SSH-Umgebungen nicht automatisch in die Dashboard-GUI und Hinweise wirkten chaotisch.
