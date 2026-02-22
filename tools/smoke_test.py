@@ -17,6 +17,7 @@ STATUS_SUMMARY = PROJECT_ROOT / "logs" / "status_summary.txt"
 CONTRAST_CHECK = PROJECT_ROOT / "tools" / "check_theme_contrast.py"
 FOCUS_CHECK = PROJECT_ROOT / "tools" / "focus_order_check.py"
 BROWSER_E2E_CHECK = PROJECT_ROOT / "tools" / "browser_e2e_test.py"
+VISUAL_BASELINE_CHECK = PROJECT_ROOT / "tools" / "visual_baseline_check.py"
 
 
 def print_step(icon: str, text: str) -> None:
@@ -205,6 +206,30 @@ if ARGS.profile == "full":
         print_step("❌", "Smoke-Test fehlgeschlagen: Browser-E2E-Ausgabe fehlt.")
         print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/browser_e2e_test.py' prüfen.")
         sys.exit(1)
+
+    if "übersprungen" in browser_result.stdout:
+        print_step("⚠️", "Smoke-Test Hinweis: Visual-Baseline-Check übersprungen, da Browser-E2E kein Artefakt erzeugt hat.")
+        print_step("➡️", "Nächster Schritt: Playwright installieren und dann 'python3 tools/browser_e2e_test.py' erneut ausführen.")
+    else:
+        print_step("✅", "Smoke-Test (full) erweitert: python tools/visual_baseline_check.py")
+        visual_result = subprocess.run(
+            ["python3", str(VISUAL_BASELINE_CHECK)],
+            cwd=PROJECT_ROOT,
+            text=True,
+            capture_output=True,
+        )
+
+        if visual_result.returncode != 0:
+            print_step("❌", "Smoke-Test fehlgeschlagen: Visual-Baseline-Check lieferte Fehler.")
+            print(visual_result.stdout)
+            print(visual_result.stderr)
+            print_step("➡️", "Nächster Schritt: Screenshot-Artefakt mit Browser-E2E neu erzeugen und erneut testen.")
+            sys.exit(visual_result.returncode)
+
+        if "Visual-Baseline-Check bestanden" not in visual_result.stdout:
+            print_step("❌", "Smoke-Test fehlgeschlagen: Visual-Baseline-Erfolgsausgabe fehlt.")
+            print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/visual_baseline_check.py' prüfen.")
+            sys.exit(1)
 
 if ARGS.profile == "full" and os.environ.get("SKIP_FULL_GATES") != "1":
     print_step("✅", "Smoke-Test erweitert: ./start.sh --full-gates")

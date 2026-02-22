@@ -186,6 +186,7 @@ $(get_text "help_usage")
   ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
   ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
   ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
+  ./start.sh --visual-baseline-check Screenshot-Baseline prüfen (Soll-Ist-Schutz für Layout)
   ./start.sh --full-gates Vollständige Gates 1-5 strikt nacheinander ausführen
   ./start.sh --ux-check-auto Automatischer Mini-UX-Check für Texte, Next Steps und A11y-Marker
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
@@ -272,6 +273,10 @@ validate_args() {
 			;;
 		--dashboard-template)
 			MODE="dashboard-template"
+			mode_count=$((mode_count + 1))
+			;;
+		--visual-baseline-check)
+			MODE="visual-baseline-check"
 			mode_count=$((mode_count + 1))
 			;;
 		--ux-check-auto)
@@ -829,6 +834,28 @@ run_full_gates_mode() {
 	return 1
 }
 
+run_visual_baseline_check_mode() {
+	print_step "✅" "Visual-Baseline-Check gestartet (Screenshot-Soll-Ist-Schutz)."
+	if [[ ! -f "$PROJECT_ROOT/tools/visual_baseline_check.py" ]]; then
+		print_error_with_actions "Visual-Baseline-Check fehlgeschlagen: tools/visual_baseline_check.py fehlt."
+		record_missing "Visual-Baseline-Tool"
+		record_next_step "Datei tools/visual_baseline_check.py wiederherstellen und erneut starten"
+		return 1
+	fi
+
+	if python3 "$PROJECT_ROOT/tools/visual_baseline_check.py"; then
+		print_step "✅" "Visual-Baseline erfolgreich geprüft."
+		record_checked "Visual-Baseline"
+		record_next_step "Optional: Screenshot-Artefakt in logs/artifacts visuell mit der letzten Iteration vergleichen"
+		return 0
+	fi
+
+	print_error_with_actions "Visual-Baseline-Check meldet Abweichung oder fehlendes Artefakt."
+	record_missing "Visual-Baseline"
+	record_next_step "Erst 'python3 tools/browser_e2e_test.py' ausführen, dann './start.sh --visual-baseline-check' wiederholen"
+	return 1
+}
+
 run_auto_ux_check_mode() {
 	print_step "✅" "Automatischer Mini-UX-Check gestartet (Texte, Next Steps, A11y, Kontrast-Hinweise)."
 	local template_file="${PROJECT_ROOT}/templates/dashboard_musterseite.html"
@@ -854,6 +881,7 @@ required_markers = {
     "theme_help": 'id="theme-help"',
     "theme_desc": 'aria-describedby="theme-help"',
 }
+
 missing_markers = [label for label, marker in required_markers.items() if marker not in content]
 if missing_markers:
     print("fehlende Marker: " + ", ".join(missing_markers))
@@ -971,6 +999,9 @@ main() {
 		;;
 	ux-check-auto)
 		run_auto_ux_check_mode
+		;;
+	visual-baseline-check)
+		run_visual_baseline_check_mode
 		;;
 	repair)
 		run_repair_mode

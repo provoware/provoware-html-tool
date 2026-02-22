@@ -1,20 +1,21 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-browser-e2e-ci-artifacts",
+  "iteration": "2026.02.22-visual-baseline-check",
   "files": {
-    "start.sh": "2026.02.22.4",
-    "tools/smoke_test.py": "2026.02.22.6",
+    "start.sh": "2026.02.22.7",
+    "tools/smoke_test.py": "2026.02.22.7",
     "templates/dashboard_musterseite.html": "2026.02.22.4",
-    "README.md": "2026.02.22.6",
-    "todo.txt": "2026.02.22.6",
-    "CHANGELOG.md": "2026.02.22.6",
-    "data/version_registry.json": "2026.02.22.6",
+    "README.md": "2026.02.22.7",
+    "todo.txt": "2026.02.22.7",
+    "CHANGELOG.md": "2026.02.22.7",
+    "data/version_registry.json": "2026.02.22.7",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22",
     "system/start_gui.sh": "2026.02.22",
     ".github/workflows/full-gates.yml": "2026.02.22.6",
     "tools/focus_order_check.py": "2026.02.22.1",
-    "tools/browser_e2e_test.py": "2026.02.22.6"
+    "tools/browser_e2e_test.py": "2026.02.22.6",
+    "tools/visual_baseline_check.py": "2026.02.22.7"
   }
 }

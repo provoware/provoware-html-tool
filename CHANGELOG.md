@@ -1,3 +1,8 @@
+## 2026-02-22 – Visual-Baseline-Schutz
+- Was: Neues Tool `tools/visual_baseline_check.py` ergänzt, neuen `start.sh`-Modus `--visual-baseline-check` eingebaut und Full-Smoke um den Check erweitert.
+- Warum: Der offene Punkt „Soll-Ist-Screenshot gegen Layout-Drift“ sollte als fester, automatischer Qualitätsbaustein abgeschlossen werden.
+- Wirkung: Visuelle Artefakte werden jetzt aktiv geprüft; bei Problemen erscheinen klare Next Steps in einfacher Sprache.
+
 ## 2026-02-22 – Browser-E2E + CI-Artefakte + Smoke-Integration
 - Was: Neues Tool `tools/browser_e2e_test.py` prüft den Fehlerdialog im Browser (Fokusfang, Fokus-Rückgabe) und erstellt ein Screenshot-Artefakt; `tools/smoke_test.py` ruft den Lauf im Full-Profil auf; `.github/workflows/full-gates.yml` lädt Logs/Screenshots als Artefakte hoch.
 - Warum: Der offene Nachweis für echte Browser-Interaktion und reproduzierbare Fehlerdiagnose in CI sollte vollständig geschlossen werden.
