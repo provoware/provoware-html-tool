@@ -14,6 +14,7 @@ DASHBOARD_TEMPLATE = PROJECT_ROOT / "templates" / "dashboard_musterseite.html"
 THEME_CONFIG = PROJECT_ROOT / "config" / "themes.json"
 STATUS_SUMMARY = PROJECT_ROOT / "logs" / "status_summary.txt"
 CONTRAST_CHECK = PROJECT_ROOT / "tools" / "check_theme_contrast.py"
+FOCUS_CHECK = PROJECT_ROOT / "tools" / "focus_order_check.py"
 
 
 def print_step(icon: str, text: str) -> None:
@@ -48,6 +49,11 @@ if not THEME_CONFIG.exists():
 if not CONTRAST_CHECK.exists():
     print_step("❌", "Smoke-Test abgebrochen: tools/check_theme_contrast.py fehlt.")
     print_step("➡️", "Nächster Schritt: Kontrast-Checker-Datei ergänzen und erneut testen.")
+    sys.exit(1)
+
+if not FOCUS_CHECK.exists():
+    print_step("❌", "Smoke-Test abgebrochen: tools/focus_order_check.py fehlt.")
+    print_step("➡️", "Nächster Schritt: Fokus-Checker-Datei ergänzen und erneut testen.")
     sys.exit(1)
 
 print_step("✅", "Smoke-Test gestartet: ./start.sh --check")
@@ -109,6 +115,26 @@ if contrast_result.returncode != 0:
 if "Kontrast-Check abgeschlossen" not in contrast_result.stdout:
     print_step("❌", "Smoke-Test fehlgeschlagen: Kontrast-Erfolgsausgabe fehlt.")
     print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/check_theme_contrast.py' prüfen.")
+    sys.exit(1)
+
+print_step("✅", "Smoke-Test erweitert: python tools/focus_order_check.py")
+focus_result = subprocess.run(
+    ["python3", str(FOCUS_CHECK)],
+    cwd=PROJECT_ROOT,
+    text=True,
+    capture_output=True,
+)
+
+if focus_result.returncode != 0:
+    print_step("❌", "Smoke-Test fehlgeschlagen: Fokus-Check lieferte Fehler.")
+    print(focus_result.stdout)
+    print(focus_result.stderr)
+    print_step("➡️", "Nächster Schritt: Tab-Reihenfolge und Pflichtaktionen im Template prüfen.")
+    sys.exit(focus_result.returncode)
+
+if "Fokus-Check bestanden" not in focus_result.stdout:
+    print_step("❌", "Smoke-Test fehlgeschlagen: Fokus-Check-Erfolgsausgabe fehlt.")
+    print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/focus_order_check.py' prüfen.")
     sys.exit(1)
 
 print_step("✅", "Smoke-Test erweitert: ./start.sh --ux-check-auto")
