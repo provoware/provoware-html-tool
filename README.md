@@ -15,7 +15,15 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - **Offen**
   - Optionale Langzeit-Archivierung von CI-Artefakten.
   - Zusätzliche Feinanpassung für sehr kleine Displays.
-  - Optionale spätere Kopplung des Modul-Starters an echte Backend-Module.
+  - Optionale Kopplung des Modul-Starters an echte Backend-Module (Datenquellen).
+
+
+## Hinweis zum GUI-Start (Hauptmodul)
+Standardmäßig öffnet `bash start.sh` jetzt direkt die Hauptmodul-Ansicht (Dashboard) statt nur der Startstatus-Seite.
+
+- Standard: `GUI_ENTRY=dashboard` (Hauptmodul)
+- Alternative: `GUI_ENTRY=status` (nur Startstatus)
+- Ungültige Werte werden validiert und mit klarer Fehlermeldung + Next Step abgewiesen.
 
 ## Schnellstart (für Einsteiger)
 ```bash

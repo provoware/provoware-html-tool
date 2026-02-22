@@ -1,5 +1,6 @@
-DONE: README mit einfacher Sprache, vollständigen Befehlen und klaren Next Steps für Einsteiger aktualisiert (2026-02-22)
-NEXT: Start-Routine um zusätzliches automatisches Dependency-Feedback pro Betriebssystem erweitern und in Smoke-Test absichern (2026-02-22)
+DONE: GUI-Einstieg korrigiert: Standard startet jetzt im Hauptmodul (GUI_ENTRY=dashboard) mit validiertem Fallback auf Statusseite (2026-02-22)
+NEXT: Hauptmodul mit echten Backend-Modulen (Datenquellen) verbinden und Lade-/Fehlerzustände als Textstatus ergänzen (2026-02-22)
+
 
 OFFEN – Struktur
 - Sidebar gruppieren
