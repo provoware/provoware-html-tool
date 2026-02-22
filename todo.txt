@@ -27,7 +27,7 @@ DONE: Neuer Modus `--autopilot` ergänzt (strikter Auto-Ablauf ohne Teilerfolg: 
 DONE: OFFLINE_ARTIFACT_MODE wird jetzt hart validiert (nur strict/warn) mit klarer Fehlermeldung + Next Step (2026-02-22)
 DONE: README um laienfreundliche Autopilot- und OFFLINE_ARTIFACT_MODE-Befehle erweitert (2026-02-22)
 
-STATUS: 100% abgeschlossen
+STATUS: 76% abgeschlossen
 
 DONE: Dashboard-Startansicht auf leeres 3x3-Haupt-Grid mit Fensteroptionen (Ausblenden/Maximieren/Vollsicht) umgestellt (2026-02-22)
 DONE: Header um Live-Protokoll (letzte 10 Ereignisse) + Kopierfunktion für das gesamte Protokoll ergänzt (2026-02-22)
@@ -92,3 +92,34 @@ DONE: Dashboard fail-safe für fehlende Modulquellen umgesetzt (kein Direktstart
 DONE: Click-Delegation mit closest('[data-action], [data-module-nav]') robust gemacht (2026-02-22)
 DONE: Theme-Start auf validierte Voreinstellung umgestellt (kein hartes applyTheme('balanced')) (2026-02-22)
 NEXT: Theme-Persistenz als eigener UX-Punkt ergänzen (Speichern + Wiederherstellen, inkl. Test) (2026-02-22)
+
+AUDIT (2026-02-22) – 20-Punkte-Layout/UX-Liste analysiert
+DONE (bereits umgesetzt)
+- [x] Theme-System über Tokens/Variablen mit mehreren Themes und Kontrast-Hinweisen ist vorhanden.
+- [x] Inline-Hilfe in einfacher Sprache mit klaren Next Steps ist im Dashboard vorhanden.
+- [x] Fehlerdialoge sind lösungsorientiert formuliert (kurze Ursache + nächste Schritte).
+
+NEXT (offen, priorisiert und testbar)
+- [ ] P0 | Layout | 6-Bereich-Layout als Standard einführen (Header/Sidebar/Main/Inspector/Statusbar/Overlay) mit Auto-Collapse.
+- [ ] P0 | Responsive | Container-First-Responsive mit `@container` + definierte Modul-Minimalbreiten ergänzen.
+- [ ] P0 | Panels | Docking/Resize/Collapse je Panel umsetzen (Minimieren, Andocken, Vollbild, Breite ziehen, Reset).
+- [ ] P0 | Layout-State | „Layout speichern“ + „Reset Layout“ als Profile in localStorage persistieren.
+- [ ] P1 | Design-System | 8px-Spacing-System als Tokens (`--space-1..n`) vereinheitlichen und zufällige Abstände entfernen.
+- [ ] P1 | A11y/Typografie | Feste rem-Typo-Skala + Großtextmodus (S/M/L/XL) ergänzen.
+- [ ] P1 | Main-UX | Konsequente Control-Bar oben im Main-Bereich mit Projekt, Suche und Primäraktionen einführen.
+- [ ] P1 | Kontext | Rechten Inspector als Standard-Kontextbereich ausbauen (Details/Hilfe/Meta/Shortcuts statt Popup-Zwang).
+- [ ] P1 | Komponenten | Einheitliche Card-States (Empty/Loading/Error/Ready) mit sichtbaren Text-Badges standardisieren.
+- [ ] P1 | Feedback | Sofort-Feedback kombinieren: Toast unten rechts + Inline-Status je Modul (`aria-live`).
+- [ ] P1 | Shortcuts | Quick-Actions-Overlay (F1/?) mit filterbarer Shortcut-Liste pro Modul ergänzen.
+- [ ] P1 | Aktionen | Primär-/Sekundärbuttons pro Kontext strikt trennen (genau 1 Primary).
+- [ ] P1 | Orientierung | Breadcrumbs + Projekt-Kopfzeile (Name/Pfad/Wechseln/Öffnen) dauerhaft anzeigen.
+- [ ] P1 | Datenansichten | Listen/Tabellen mit Sticky-Header + virtueller Höhe/Scroll-Container ausbauen.
+- [ ] P1 | Suche | Globale Suche im Header + Filterchips pro Modul ergänzen.
+- [ ] P1 | Import | Drag&Drop-Zonen sichtbar markieren (klare Aktion + Undo-Hinweis).
+- [ ] P1 | Vertrauen | Undo/Redo visuell im Statusbereich mit kleiner Historie anzeigen.
+- [ ] P1 | Themes | Kontrast-Check in Start-/Qualitätsgates als festen Abnahmepunkt ausweisen.
+
+NEXT ITERATION TRIAD (Vorschlag)
+1) P0: 6-Bereich-Layout als Grid-Zonenstandard + Auto-Collapse bei schmalen Containern.
+2) P0: Docking/Resize/Collapse + „Reset Layout“/„Layout speichern" (localStorage-Profile).
+3) P1 (A11y/Hilfe): Typo-Skala S/M/L/XL + klare Card-States (Empty/Loading/Error/Ready) mit Textstatus.

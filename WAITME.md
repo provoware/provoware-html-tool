@@ -1,6 +1,6 @@
 # WAITME – Arbeitsstand & Nächste Schritte
 
-Stand: 2026-02-22
+Stand: 2026-02-22 (Audit 20-Punkte-Liste ergänzt)
 
 ## Kurzfazit
 - Die eingereichte P0/P1/P2-Liste wurde gegen den aktuellen Code geprüft.
@@ -33,3 +33,9 @@ Stand: 2026-02-22
 - `bash tools/run_quality_checks.sh`
 - `python tools/smoke_test.py`
 - `bash start.sh --ux-check-auto`
+
+
+## Update 2026-02-22 (Layout-/UX-Audit)
+- Die neue 20-Punkte-Liste wurde geprüft und als offene, priorisierte Aufgaben in `todo.txt` übernommen.
+- Der Fortschrittswert wurde auf 76% gesetzt, damit der Status ehrlich zu den offenen Punkten passt.
+- Nächste sinnvolle Triade ist vorbereitet: 6-Bereich-Layout, Layout-Speichern/Reset, Typo-Skala mit klaren Zustands-Texten.

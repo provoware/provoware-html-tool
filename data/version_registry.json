@@ -1,14 +1,14 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-dashboard-hardening-triad",
+  "iteration": "2026.02.22-layout-audit-todo-sync",
   "files": {
     "start.sh": "2026.02.22.34",
     "tools/smoke_test.py": "2026.02.22.27",
     "templates/dashboard_musterseite.html": "2026.02.22.37",
-    "README.md": "2026.02.22.37",
-    "todo.txt": "2026.02.22.37",
-    "CHANGELOG.md": "2026.02.22.37",
-    "data/version_registry.json": "2026.02.22.37",
+    "README.md": "2026.02.22.38",
+    "todo.txt": "2026.02.22.38",
+    "CHANGELOG.md": "2026.02.22.38",
+    "data/version_registry.json": "2026.02.22.38",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.3",
@@ -23,6 +23,6 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.37"
+    "WAITME.md": "2026.02.22.38"
   }
 }

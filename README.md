@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **100%**
+- Fortschritt: **76%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -22,6 +22,8 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - Spiegelt den bestätigten Projektordner zusätzlich nach `config/project_settings.json` (für editierbare Konfiguration) und validiert beide JSON-Dateien automatisch.
 - Dashboard-Standardansicht nutzt jetzt ein leeres 3x3-Haupt-Grid mit Fensteroptionen (Ausblenden, Maximieren, Vollsicht wiederherstellen).
 - Dashboard-Header zeigt ein Echtzeit-Log (letzte 10 Ereignisse), bietet eine Kopierfunktion für das Gesamtprotokoll und einen Laien-/Profi-Modus-Schalter.
+
+- Offene UX-/Layout-Roadmap aus der 20-Punkte-Liste wurde auditiert und priorisiert (P0/P1) in `todo.txt` übernommen.
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
