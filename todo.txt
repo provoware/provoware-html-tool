@@ -1,3 +1,8 @@
+DONE: Untermodule belegen bei Aktivierung den nächsten freien 3x3-Grid-Platz und bleiben als Untermodule im Raster bedienbar (2026-02-22)
+DONE: Fensteroptionen (Ausblenden/Maximieren/Einzelfenster) als Symbolleiste direkt in den Untermodulen umgesetzt; Schnellhilfe in den rechten Bereich verschoben (2026-02-22)
+DONE: To-Do-Untermodul mit Datumsoption ergänzt und GMS-Eingaben in getrennte Felder (Genres/Moods/Stile) mit Enter-Bestätigung erweitert (2026-02-22)
+NEXT: Browser-E2E in restriktiven Umgebungen mit Offline-Mirror standardisieren (`./start.sh --offline-pack`), damit 403-Downloads kein Vollgate blockieren (2026-02-23)
+
 DONE: Hauptbereich als leeres 3x3-Grid mit dynamischer Modulfläche stabilisiert (kein Unter-Rand-Rutschen) (2026-02-22)
 DONE: Sammelmodul „Genres-Archiv + Zufall + Liste“ als aktivierbares Sidebar-Modul umgesetzt (2026-02-22)
 DONE: Debugging & Entwickleroptionen als separates Einzelmodul mit Fensterfunktionen (ausblenden/maximieren/ablösen) umgesetzt (2026-02-22)

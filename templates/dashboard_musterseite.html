@@ -257,15 +257,8 @@
       gap: .85rem;
       grid-template-columns: repeat(3, minmax(210px, 1fr));
     }
-    .module-stage {
-      border: 2px solid rgba(127, 168, 255, 0.45);
-      border-radius: 12px;
-      padding: .75rem;
-      background: rgba(6, 14, 31, 0.9);
-      min-height: 240px;
-    }
     .module-empty {
-      min-height: 196px;
+      min-height: 160px;
       display: grid;
       place-items: center;
       border: 2px dashed rgba(127, 168, 255, 0.45);
@@ -278,27 +271,37 @@
     .module-panel.active { display: block; }
     .main-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
       gap: .6rem;
       margin-bottom: .6rem;
     }
     .main-grid-cell {
-      min-height: 88px;
+      min-height: 220px;
       border: 2px dashed rgba(127, 168, 255, 0.5);
       border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      align-items: stretch;
       text-align: center;
       color: var(--muted);
       background: rgba(10, 18, 34, 0.45);
+      padding: .35rem;
     }
-    .window-actions {
+    .grid-slot-label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100%;
+    }
+    .module-window-actions {
       display: grid;
-      grid-template-columns: repeat(3, minmax(130px, 1fr));
+      grid-template-columns: repeat(3, 42px);
+      justify-content: end;
       gap: .4rem;
       margin-bottom: .6rem;
     }
+    .module-window-actions button { min-height: 42px; padding: .2rem; }
+    .module-panel.active { display: block; height: 100%; }
+    .main-grid-cell .tool-card { height: 100%; }
     .control-bar {
       display: grid;
       grid-template-columns: minmax(220px, 1fr) minmax(180px, 1fr) 220px;
@@ -602,13 +605,6 @@
           <li class="plugin-status-item"><span>Debugging & Entwickleroptionen</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
         </ul>
       </section>
-      <section class="quick-help" aria-labelledby="module-sidebar-options-title" id="module-sidebar-options">
-        <strong id="module-sidebar-options-title">Moduloptionen (abhängig vom Modul):</strong>
-        <ul class="module-option-list" id="module-option-list">
-          <li>Bitte Modul öffnen, um Optionen zu sehen.</li>
-        </ul>
-        <p class="subline" id="module-option-help">Hilfe: Optionen zeigen immer Text + Symbol, nicht nur Farbe.</p>
-      </section>
     </aside>
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
@@ -628,29 +624,25 @@
         </div>
       </section>
       <p class="subline" id="global-search-status" role="status" aria-live="polite">Suche bereit: Bitte Begriff eingeben.</p>
-      <p class="subline">Startansicht: Leeres 3x3-Haupt-Grid mit Fensteroptionen für Ausblenden und Maximieren.</p>
-      <div class="window-actions" aria-label="Fensteroptionen">
-        <button type="button" data-action="window-hide">Fenster ausblenden</button>
-        <button type="button" data-action="window-maximize">Fenster maximieren</button>
-        <button type="button" data-action="window-reset">Volle Sicht wiederherstellen</button>
-        <button type="button" data-action="window-detach">Als Einzelfenster öffnen</button>
-        <button type="button" data-action="layout-save">Layout speichern</button>
-        <button type="button" data-action="layout-restore">Gespeichertes Layout laden</button>
+      <p class="subline">Startansicht: Leeres 3x3-Haupt-Grid. Aktivierte Untermodule rutschen automatisch auf den nächsten freien Grid-Platz.</p>
+      <div class="module-window-actions" aria-label="Globale Fensteroptionen">
+        <button type="button" data-action="layout-save" aria-label="Layout speichern" title="Layout speichern">💾</button>
+        <button type="button" data-action="layout-restore" aria-label="Gespeichertes Layout laden" title="Gespeichertes Layout laden">↺</button>
+        <button type="button" data-action="window-reset" aria-label="Grid zurücksetzen" title="Grid zurücksetzen">▣</button>
       </div>
-      <section class="main-grid" aria-label="Leeres Haupt-Grid 3x3">
-        <div class="main-grid-cell">Feld 1 (frei)</div>
-        <div class="main-grid-cell">Feld 2 (frei)</div>
-        <div class="main-grid-cell">Feld 3 (frei)</div>
-        <div class="main-grid-cell">Feld 4 (frei)</div>
-        <div class="main-grid-cell">Feld 5 (frei)</div>
-        <div class="main-grid-cell">Feld 6 (frei)</div>
-        <div class="main-grid-cell">Feld 7 (frei)</div>
-        <div class="main-grid-cell">Feld 8 (frei)</div>
-        <div class="main-grid-cell">Feld 9 (frei)</div>
+      <section class="main-grid" aria-label="Haupt-Grid 3x3" id="module-grid">
+        <div class="main-grid-cell" data-slot-index="1"><div class="grid-slot-label">Feld 1 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="2"><div class="grid-slot-label">Feld 2 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="3"><div class="grid-slot-label">Feld 3 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="4"><div class="grid-slot-label">Feld 4 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="5"><div class="grid-slot-label">Feld 5 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="6"><div class="grid-slot-label">Feld 6 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="7"><div class="grid-slot-label">Feld 7 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="8"><div class="grid-slot-label">Feld 8 (frei)</div></div>
+        <div class="main-grid-cell" data-slot-index="9"><div class="grid-slot-label">Feld 9 (frei)</div></div>
       </section>
       <div class="card-grid" hidden aria-hidden="true"></div>
-      <section class="module-stage card-grid" aria-label="Aktives Modul im Hauptbereich" id="module-stage">
-        <div class="module-empty" id="module-stage-empty">Noch kein Modul aktiv. Öffnen Sie links ein Modul. Das Modul wird dann dynamisch in dieses 3x3-Grid eingebettet.</div>
+      <div class="module-empty" id="module-stage-empty">Noch kein Modul aktiv. Öffnen Sie links ein Modul. Das Modul wird dann dynamisch in das 3x3-Grid eingebettet.</div>
         <article class="tool-card tool-card-primary module-panel" data-accent="c" aria-labelledby="modul-starter-title">
           <p class="card-tag">Startmodul</p>
           <h2 id="modul-starter-title">Modul-Starter</h2>
@@ -669,16 +661,16 @@
         </article>
         <article class="tool-card tool-card-primary module-panel" data-accent="b" id="gms-suite-view" aria-labelledby="gms-title">
           <p class="card-tag">Plugin: Hauptmodul-Ansicht</p>
-          <h2 id="gms-title">Genres-Archiv + Zufall + Liste</h2>
-          <p class="subline">Genres, Stimmungen und Stile als Profil-Archiv. Hilfe: Mehrere Werte per Komma eingeben.</p>
-          <label for="gms-category"><strong>Kategorie:</strong></label>
-          <select id="gms-category" aria-label="Kategorie für Archiv-Eintrag">
-            <option value="genres">Genres</option>
-            <option value="moods">Stimmungen</option>
-            <option value="styles">Stile</option>
-          </select>
-          <label for="gms-bulk-input"><strong>Sammel-Eingabe:</strong></label>
-          <input id="gms-bulk-input" type="text" placeholder="z. B. Synthwave, LoFi, Melancholisch">
+          <h2 id="gms-title">Genres-Archiv + Zufall + Liste</h2><div class="module-window-actions" aria-label="Fensteroptionen im Untermodul"><button type="button" data-action="window-hide" aria-label="Untermodul ausblenden" title="Untermodul ausblenden">✕</button><button type="button" data-action="window-maximize" aria-label="Untermodul maximieren" title="Untermodul maximieren">⤢</button><button type="button" data-action="window-detach" aria-label="Untermodul als Einzelfenster öffnen" title="Untermodul als Einzelfenster öffnen">↗</button></div>
+          <p class="subline">Genres, Stimmungen und Stile als Profil-Archiv mit getrennten Eingabefeldern. Enter bestätigt direkt.</p>
+          <label for="gms-genre-input"><strong>Genres:</strong></label>
+          <input id="gms-genre-input" type="text" placeholder="z. B. Synthwave, LoFi" aria-describedby="gms-input-help">
+          <label for="gms-mood-input"><strong>Stimmungen:</strong></label>
+          <input id="gms-mood-input" type="text" placeholder="z. B. Ruhig, Düster" aria-describedby="gms-input-help">
+          <label for="gms-style-input"><strong>Stile:</strong></label>
+          <input id="gms-style-input" type="text" placeholder="z. B. Cinematic, Minimal" aria-describedby="gms-input-help">
+          <p id="gms-input-help" class="subline">Hilfe: Mit Enter bestätigen oder den Speichern-Button nutzen.</p>
+          <select id="gms-category" aria-label="Kategorie für Listenaktionen" hidden><option value="genres">Genres</option><option value="moods">Stimmungen</option><option value="styles">Stile</option></select>
           <div class="actions">
             <button type="button" data-action="gms-add">Einträge speichern</button>
           </div>
@@ -728,7 +720,7 @@
         </article>
 <article class="tool-card tool-card-secondary module-panel" data-accent="a" id="debug-dev-view">
           <p class="card-tag">Status und Hilfe</p>
-          <h2>Debugging & Entwickleroptionen</h2>
+          <h2>Debugging & Entwickleroptionen</h2><div class="module-window-actions" aria-label="Fensteroptionen im Untermodul"><button type="button" data-action="window-hide" aria-label="Untermodul ausblenden" title="Untermodul ausblenden">✕</button><button type="button" data-action="window-maximize" aria-label="Untermodul maximieren" title="Untermodul maximieren">⤢</button><button type="button" data-action="window-detach" aria-label="Untermodul als Einzelfenster öffnen" title="Untermodul als Einzelfenster öffnen">↗</button></div>
           <p class="card-state" id="debug-card-state" data-state="ready" role="status" aria-live="polite">Status: Bereit</p>
           <p class="result" id="result" role="status" aria-live="polite">Keine Fehler.</p>
           <p class="subline" id="debug-last-event" data-debug-event>Letztes Ereignis: Startzustand um --:--:--.</p>
@@ -737,6 +729,22 @@
           <div class="actions">
             <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
           </div>
+        </article>
+        <article class="tool-card tool-card-secondary module-panel" data-accent="c" id="todo-view" aria-labelledby="todo-title">
+          <p class="card-tag">Untermodul: Projekt-To-Do</p>
+          <h2 id="todo-title">To-Do-Liste (nutzerbasiert)</h2><div class="module-window-actions" aria-label="Fensteroptionen im Untermodul"><button type="button" data-action="window-hide" aria-label="Untermodul ausblenden" title="Untermodul ausblenden">✕</button><button type="button" data-action="window-maximize" aria-label="Untermodul maximieren" title="Untermodul maximieren">⤢</button><button type="button" data-action="window-detach" aria-label="Untermodul als Einzelfenster öffnen" title="Untermodul als Einzelfenster öffnen">↗</button></div>
+          <p class="subline">Standardfunktionen: Aufgabe erfassen, Fälligkeit (Datum), erledigen, löschen.</p>
+          <label for="todo-input"><strong>Aufgabe:</strong></label>
+          <input id="todo-input" type="text" placeholder="z. B. Introtext für Kundin prüfen">
+          <label for="todo-date"><strong>Fällig am:</strong></label>
+          <input id="todo-date" type="date">
+          <div class="actions">
+            <button type="button" data-action="todo-add">To-Do hinzufügen</button>
+            <button type="button" data-action="todo-toggle">Als erledigt markieren</button>
+            <button type="button" data-action="todo-delete">Aus Liste entfernen</button>
+          </div>
+          <p class="result" id="todo-result" role="status" aria-live="polite">Noch keine To-Do-Aktion.</p>
+          <ul id="todo-list" class="drag-list" aria-label="Projektorientierte Nutzer-To-Do-Liste"></ul>
         </article>
 <article class="tool-card tool-card-primary module-panel" data-accent="a" id="project-routine-view" aria-labelledby="projekt-routine-title">
           <p class="card-tag">Start-Routine Projektordner</p>
@@ -748,8 +756,19 @@
             <button type="button" data-action="project-setup">Projektordner anpassen</button>
           </div>
         </article>
+    </section>
+    <aside class="panel right" aria-label="Einstellungen und Hilfe">
+      <h2>Einstellungen</h2>
+      <section class="quick-help" aria-labelledby="inspector-title">
+        <strong id="inspector-title">Kontext-Inspector (Details + Hilfe):</strong>
+        <div class="inspector-grid">
+          <p id="inspector-details">Details: Dashboard ist aktiv. Status: Bereit.</p>
+          <p id="inspector-help">Hilfe: Öffnen Sie „Shortcut-Übersicht“, wenn Sie nur per Tastatur arbeiten.</p>
+          <p id="inspector-meta">Meta: Quelle config/module_sources.json, letzter Wechsel: Start.</p>
+          <p id="inspector-shortcuts">Shortcuts: Alt+S Speichern, Alt+O Modul öffnen, F1 oder ? für Overlay.</p>
+        </div>
       </section>
-      <section class="tool-card" data-accent="a" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
+      <section class="quick-help" data-accent="a" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
         <h2 id="bereich-hilfe">Schnellhilfe mit Next Steps</h2>
         <div class="actions" aria-label="Schnellaktionen">
           <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Zwischenstand speichern</button>
@@ -762,20 +781,6 @@
           <li><button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Reparatur jetzt erklären</button></li>
           <li>Protokoll lesen: <code>cat logs/status_summary.txt</code></li>
         </ol>
-        <p class="result">Fehlerdialog zeigt immer klare Schritte: „Erneut versuchen“, „Reparatur“, „Protokoll“.</p>
-        <p class="subline">Sehr kleines Display: Nutzen Sie 200% Zoom, Hochformat und den Link „Direkt zum Arbeitsbereich springen“, damit Fokus (aktive Tastatur-Markierung) und Texte klar bleiben.</p>
-      </section>
-    </section>
-    <aside class="panel right" aria-label="Einstellungen und Hilfe">
-      <h2>Einstellungen</h2>
-      <section class="quick-help" aria-labelledby="inspector-title">
-        <strong id="inspector-title">Kontext-Inspector (Details + Hilfe):</strong>
-        <div class="inspector-grid">
-          <p id="inspector-details">Details: Dashboard ist aktiv. Status: Bereit.</p>
-          <p id="inspector-help">Hilfe: Öffnen Sie „Shortcut-Übersicht“, wenn Sie nur per Tastatur arbeiten.</p>
-          <p id="inspector-meta">Meta: Quelle config/module_sources.json, letzter Wechsel: Start.</p>
-          <p id="inspector-shortcuts">Shortcuts: Alt+S Speichern, Alt+O Modul öffnen, F1 oder ? für Overlay.</p>
-        </div>
       </section>
       <ul class="settings-list">
         <li class="settings-item">
@@ -904,11 +909,12 @@
       const modeSwitchNode = document.getElementById('mode-switch');
       const shellNode = document.querySelector('.shell');
       const pluginStatusListNode = document.getElementById('plugin-status-list');
-      const moduleOptionListNode = document.getElementById('module-option-list');
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
-      const moduleStageNode = document.getElementById('module-stage');
+      const moduleGridNode = document.getElementById('module-grid');
       const moduleStageEmptyNode = document.getElementById('module-stage-empty');
       const modulePanelNodes = Array.from(document.querySelectorAll('.module-panel'));
+      const moduleGridCells = Array.from(document.querySelectorAll('.main-grid-cell'));
+      const moduleSlots = {};
       const LAYOUT_STORAGE_KEY = 'provoware-layout-profile';
       const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
       const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
@@ -1172,21 +1178,39 @@
           importPayload: services.exportCenter.importPayload,
           handleAction: function (actionValue) {
             const categoryNode = safeNode('gms-category');
-            const inputNode = safeNode('gms-bulk-input');
+            const genreInputNode = safeNode('gms-genre-input');
+            const moodInputNode = safeNode('gms-mood-input');
+            const styleInputNode = safeNode('gms-style-input');
             const feedbackNode = safeNode('gms-feedback');
             const randomNode = safeNode('gms-random-result');
             const countNode = safeNode('gms-random-count');
             const profileData = getProfileData();
             if (actionValue === 'gms-add') {
-              const category = categoryNode ? categoryNode.value : '';
-              const entries = normalizeEntries(inputNode ? inputNode.value : '');
-              if (!entries.length) {
+              const groupedInputs = [
+                { key: 'genres', node: genreInputNode },
+                { key: 'moods', node: moodInputNode },
+                { key: 'styles', node: styleInputNode }
+              ];
+              let addedTotal = 0;
+              let duplicateTotal = 0;
+              groupedInputs.forEach(function (group) {
+                const entries = normalizeEntries(group.node ? group.node.value : '');
+                if (!entries.length) {
+                  return;
+                }
+                const result = addUniqueByCategory(group.key, entries);
+                addedTotal += result.added;
+                duplicateTotal += result.duplicates;
+                if (group.node) {
+                  group.node.value = '';
+                }
+              });
+              if (addedTotal === 0 && duplicateTotal === 0) {
                 if (feedbackNode) { feedbackNode.textContent = '⚠️ Bitte mindestens einen Eintrag eingeben.'; }
                 return true;
               }
-              const result = addUniqueByCategory(category, entries);
-              if (feedbackNode) { feedbackNode.textContent = '✅ Gespeichert: ' + result.added + '. Duplikat übersprungen: ' + result.duplicates + '.'; }
-              services.log.info('Einträge gespeichert in ' + category + ': +' + result.added + ', Duplikate ' + result.duplicates);
+              if (feedbackNode) { feedbackNode.textContent = '✅ Gespeichert: ' + addedTotal + '. Duplikat übersprungen: ' + duplicateTotal + '.'; }
+              services.log.info('Einträge gespeichert: +' + addedTotal + ', Duplikate ' + duplicateTotal);
               renderEntryList();
               return true;
             }
@@ -1565,24 +1589,18 @@
         return true;
       }
       function renderModuleSidebarOptions(moduleKey, sourceMeta) {
-        if (!moduleOptionListNode) {
+        if (!inspectorHelpNode) {
           return false;
         }
         const optionsByModule = {
-          'gms-suite': ['🧲 Reihenfolge im Archiv per Drag&Drop ändern', '🎲 Zufallsvorschlag erzeugen und direkt kopieren', '📋 Liste pflegen mit Umbenennen/Löschen'],
-          'debug-dev': ['🪵 Live-Debug-Log lesen', '🧪 Fehlermeldung mit Next Steps auslösen', '🛠️ Entwicklerhinweise nur bei Bedarf öffnen']
+          'gms-suite': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
+          'debug-dev': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
+          'todo': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.'
         };
-        const items = optionsByModule[moduleKey] || ['Bitte gültiges Modul wählen.'];
-        moduleOptionListNode.innerHTML = '';
-        items.forEach(function (entry) {
-          const li = document.createElement('li');
-          li.textContent = entry;
-          moduleOptionListNode.appendChild(li);
-        });
-        if (sourceMeta) {
-          const li = document.createElement('li');
-          li.textContent = 'ℹ️ Datenquelle aktiv: ' + sourceMeta.dataSource;
-          moduleOptionListNode.appendChild(li);
+        const helpText = optionsByModule[moduleKey] || 'Bitte Modul wählen und über die Symbolleiste steuern.';
+        inspectorHelpNode.textContent = 'Hilfe: ' + helpText;
+        if (sourceMeta && inspectorMetaNode) {
+          inspectorMetaNode.textContent = 'Meta: Quelle ' + sourceMeta.dataSource + ', letzter Wechsel: ' + getTimeStamp() + '.';
         }
         return true;
       }
@@ -1672,24 +1690,33 @@
         return true;
       }
       function switchActiveModulePanel(moduleKey) {
-        if (!Array.isArray(modulePanelNodes) || !modulePanelNodes.length) {
+        if (typeof moduleKey !== 'string') {
           return false;
         }
-        modulePanelNodes.forEach(function (panelNode) {
-          if (!(panelNode instanceof HTMLElement)) {
-            return;
-          }
-          const shouldShow = panelNode.id === moduleKey + '-view';
-          panelNode.classList.toggle('active', shouldShow);
-        });
-        if (moduleStageEmptyNode instanceof HTMLElement) {
-          moduleStageEmptyNode.hidden = false;
-          if (moduleKey) {
-            const activePanel = document.getElementById(moduleKey + '-view');
-            moduleStageEmptyNode.hidden = activePanel instanceof HTMLElement;
-          }
+        const activePanel = document.getElementById(moduleKey + '-view');
+        if (!(activePanel instanceof HTMLElement)) {
+          return false;
         }
+        const occupied = new Set(Object.values(moduleSlots));
+        let slot = moduleSlots[moduleKey] || null;
+        if (!slot) {
+          slot = moduleGridCells.find(function (cell) { return !occupied.has(Number(cell.getAttribute('data-slot-index'))); });
+        }
+        if (!slot) {
+          setResult('⚠️ Kein freier Grid-Platz mehr. Bitte zuerst ein Untermodul ausblenden.');
+          return false;
+        }
+        const slotIndex = Number(slot.getAttribute('data-slot-index'));
+        moduleSlots[moduleKey] = slotIndex;
+        const label = slot.querySelector('.grid-slot-label');
+        if (label) { label.remove(); }
+        activePanel.classList.add('active');
+        slot.appendChild(activePanel);
         activeModuleKey = moduleKey;
+        const hasActive = Object.keys(moduleSlots).length > 0;
+        if (moduleStageEmptyNode instanceof HTMLElement) {
+          moduleStageEmptyNode.hidden = hasActive;
+        }
         return true;
       }
       function openModule(selectedModule) {
@@ -1850,7 +1877,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -1888,28 +1915,39 @@
         if (actionValue === 'copy-log') { return copyLogToClipboard(); }
         if (actionValue === 'switch-mode') { return toggleMode(); }
         if (actionValue === 'window-hide') {
-          if (!activeModuleKey) {
-            return setResult('⚠️ Kein aktives Modul im Grid. Bitte zuerst ein Modul öffnen.');
+          if (!activeModuleKey || !moduleSlots[activeModuleKey]) {
+            return setResult('⚠️ Kein aktives Untermodul im Grid. Bitte zuerst ein Modul öffnen.');
           }
-          switchActiveModulePanel('');
-          return setResult('✅ Modul aus dem Grid ausgeblendet.');
+          const panel = document.getElementById(activeModuleKey + '-view');
+          const slotIndex = moduleSlots[activeModuleKey];
+          const slotNode = moduleGridCells.find(function (cell) { return Number(cell.getAttribute('data-slot-index')) === slotIndex; });
+          if (panel instanceof HTMLElement) {
+            panel.classList.remove('active');
+            moduleGridNode.appendChild(panel);
+          }
+          if (slotNode instanceof HTMLElement) {
+            slotNode.innerHTML = '<div class="grid-slot-label">Feld ' + slotIndex + ' (frei)</div>';
+          }
+          delete moduleSlots[activeModuleKey];
+          activeModuleKey = '';
+          return setResult('✅ Untermodul aus dem Grid ausgeblendet.');
         }
         if (actionValue === 'window-maximize') {
           if (!activeModuleKey) {
-            return setResult('⚠️ Kein aktives Modul im Grid. Bitte zuerst ein Modul öffnen.');
+            return setResult('⚠️ Kein aktives Untermodul im Grid. Bitte zuerst ein Modul öffnen.');
           }
-          if (moduleStageNode) {
-            moduleStageNode.style.minHeight = '70vh';
+          const panel = document.getElementById(activeModuleKey + '-view');
+          if (panel instanceof HTMLElement) {
+            panel.style.transform = 'scale(1.02)';
+            panel.style.borderWidth = '3px';
           }
-          return setResult('✅ Aktives Modul im Grid vergrößert.');
+          return setResult('✅ Aktives Untermodul im Grid vergrößert.');
         }
         if (actionValue === 'window-reset') {
-          if (moduleStageNode) {
-            moduleStageNode.style.minHeight = '';
-          }
-          if (activeModuleKey) {
-            switchActiveModulePanel(activeModuleKey);
-          }
+          modulePanelNodes.forEach(function (panel) {
+            panel.style.transform = '';
+            panel.style.borderWidth = '';
+          });
           return setResult('✅ Grid-Sicht wiederhergestellt.');
         }
         if (actionValue === 'layout-save') {
@@ -1956,6 +1994,59 @@
           mainNode.appendChild(nextStepNode);
           detached.document.body.appendChild(mainNode);
           return setResult('✅ Einzelfenster geöffnet für ' + sourceMeta.label + '.');
+        }
+
+        if (actionValue === 'todo-add' || actionValue === 'todo-toggle' || actionValue === 'todo-delete') {
+          const todoInput = document.getElementById('todo-input');
+          const todoDate = document.getElementById('todo-date');
+          const todoList = document.getElementById('todo-list');
+          const todoResult = document.getElementById('todo-result');
+          if (!(todoList instanceof HTMLElement) || !(todoResult instanceof HTMLElement)) {
+            return setResult('⚠️ To-Do-Modul nicht bereit. Bitte neu laden.');
+          }
+          if (!window.__todoItems) {
+            window.__todoItems = [];
+            window.__todoSelected = -1;
+          }
+          if (actionValue === 'todo-add') {
+            const text = todoInput && typeof todoInput.value === 'string' ? todoInput.value.trim() : '';
+            const due = todoDate && typeof todoDate.value === 'string' ? todoDate.value : '';
+            if (!text) {
+              todoResult.textContent = '⚠️ Bitte zuerst eine Aufgabe eingeben.';
+              return true;
+            }
+            window.__todoItems.push({ text: text, due: due, done: false });
+            if (todoInput) { todoInput.value = ''; }
+            todoResult.textContent = '✅ To-Do hinzugefügt.';
+          }
+          if (actionValue === 'todo-toggle') {
+            if (window.__todoSelected < 0 || !window.__todoItems[window.__todoSelected]) {
+              todoResult.textContent = '⚠️ Bitte zuerst eine Aufgabe auswählen.';
+              return true;
+            }
+            const item = window.__todoItems[window.__todoSelected];
+            item.done = !item.done;
+            todoResult.textContent = item.done ? '✅ Aufgabe als erledigt markiert.' : 'ℹ️ Aufgabe wieder offen.';
+          }
+          if (actionValue === 'todo-delete') {
+            if (window.__todoSelected < 0 || !window.__todoItems[window.__todoSelected]) {
+              todoResult.textContent = '⚠️ Bitte zuerst eine Aufgabe auswählen.';
+              return true;
+            }
+            window.__todoItems.splice(window.__todoSelected, 1);
+            window.__todoSelected = -1;
+            todoResult.textContent = '✅ Aufgabe entfernt.';
+          }
+          todoList.innerHTML = '';
+          window.__todoItems.forEach(function (item, index) {
+            const li = document.createElement('li');
+            li.className = 'drag-item';
+            li.setAttribute('data-todo-index', String(index));
+            li.setAttribute('aria-selected', window.__todoSelected === index ? 'true' : 'false');
+            li.textContent = (item.done ? '✅ ' : '⬜ ') + item.text + (item.due ? ' (fällig: ' + item.due + ')' : '');
+            todoList.appendChild(li);
+          });
+          return true;
         }
         if (actionValue === 'save') {
           const message = '✅ Gespeichert um ' + getTimeStamp() + '.';
@@ -2143,7 +2234,7 @@
         if (!(target instanceof HTMLElement)) {
           return;
         }
-        const clickableNode = target.closest('[data-action], [data-module-nav]');
+        const clickableNode = target.closest('[data-action], [data-module-nav], [data-todo-index]');
         if (!(clickableNode instanceof HTMLElement)) {
           return;
         }
@@ -2161,6 +2252,16 @@
           openModule(moduleTarget);
           return;
         }
+        if (clickableNode.hasAttribute('data-todo-index')) {
+          window.__todoSelected = Number(clickableNode.getAttribute('data-todo-index'));
+          const todoList = document.getElementById('todo-list');
+          if (todoList) {
+            Array.from(todoList.children).forEach(function (child, idx) {
+              child.setAttribute('aria-selected', window.__todoSelected === idx ? 'true' : 'false');
+            });
+          }
+          return;
+        }
         const action = clickableNode.getAttribute('data-action');
         if (typeof action !== 'string' || action.length === 0) {
           return;
@@ -2170,14 +2271,17 @@
       document.addEventListener('keydown', function (event) {
         executeShortcut(event);
         keepDialogFocusInside(event);
+        if (event.key === 'Enter' && event.target instanceof HTMLElement) {
+          if (['gms-genre-input', 'gms-mood-input', 'gms-style-input'].includes(event.target.id)) {
+            event.preventDefault();
+            executeAction('gms-add');
+          }
+        }
       });
       document.addEventListener('change', function (event) {
         const target = event.target;
         if (!(target instanceof HTMLElement)) {
           return;
-        }
-        if (target.id === 'gms-category') {
-          gmsPlugin.setState(gmsPlugin.getState());
         }
       });
       document.addEventListener('dragstart', function (event) {
@@ -2240,7 +2344,6 @@
         projectDialog.showModal();
       }
       gmsPlugin.mount();
-      switchActiveModulePanel('');
       setCardState(moduleCardStateNode, 'ready', 'Bereit');
       setCardState(debugCardStateNode, 'ready', 'Bereit');
       setActiveNavigation('dashboard');

@@ -1,3 +1,17 @@
+## 2026-02-22 – Layout- und Modul-Feinschliff
+### Was
+1. 3x3-Hauptgrid auf dynamische Untermodul-Platzierung umgestellt (nächster freier Slot bei Aktivierung).
+2. Fensteroptionen als Symbolleiste direkt in Untermodulen ergänzt; Schnellhilfe in den rechten Bereich verschoben.
+3. GMS-Eingaben in getrennte Felder (Genres/Moods/Stile) mit Enter-Bestätigung erweitert und To-Do-Untermodul mit Datumsoption ergänzt.
+
+### Warum
+- Das bisherige Layout entsprach nicht der gewünschten schematischen Raster-Logik.
+- Untermodul-Optionen mussten direkt am jeweiligen Modul erreichbar sein.
+- Nutzerorientierte Projekt-To-Dos und getrennte Archiv-Eingaben verbessern Alltagstauglichkeit und Bedienbarkeit.
+
+### Wirkung
+- Klarere Bedienung, besseres Grid-Verhalten und mehr Barrierefreiheit durch direkte, kontextnahe Aktionen.
+
 ## 2026-02-22 – Iteration: Grid-Hauptbereich mit dynamischen Modulen (3 Punkte)
 - Scope-Kontrolle:
   - Problem: Inhalte und Schriften rutschten teils unter Ränder; Module waren nicht klar auf Sidebar-Start + dynamische Mitte getrennt.

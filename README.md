@@ -1,3 +1,10 @@
+## Update 2026-02-22 (Grid-Layout und Untermodule korrigiert)
+- Untermodule rutschen bei Aktivierung jetzt in den nächsten freien Platz im 3x3-Grid.
+- Fensteroptionen sind als Symbole direkt im jeweiligen Untermodul sichtbar (nicht mehr als separate Leiste unter dem Header).
+- Schnellhilfe mit Next Steps wurde in den rechten Bereich verschoben; zusätzlich gibt es ein neues nutzerorientiertes To-Do-Untermodul mit Datumsfeld.
+- Genres, Stimmungen und Stile haben jetzt getrennte Eingabefelder; Enter bestätigt die Eingabe direkt.
+- Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; Offline-Mirror ist eingeplant (`./start.sh --offline-pack`).
+
 # provoware-html-tool
 
 Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
