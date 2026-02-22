@@ -178,3 +178,9 @@ DONE: Dashboard-Einstellungen um sichtbaren Auto-Backup-Schalter mit Hilfe/Statu
 DONE: Backup-Einstellung validiert jetzt Input/Output robust (ungültige Werte -> Auto-Reset auf Aktiv + Debug-Hinweis) (2026-02-22)
 DONE: Smoke-Test prüft nun Backup-A11y-Marker (`backup-switcher`, Hilfe, Status) als Pflichtkriterium (2026-02-22)
 NEXT: Backup-Schalter zusätzlich mit Tastenkürzel-Hilfe (Shortcut-Overlay) verbinden. (2026-02-23)
+
+
+DONE: GMS-Export nutzt jetzt Linux-kompatible Dateinamen mit Status (`release-ready|review-ready|in-abstimmung`) und Datum (2026-02-22)
+DONE: GMS-Export zeigt den erzeugten Dateinamen sichtbar als A11y-Statuszeile mit klarer Hilfe (2026-02-22)
+DONE: Smoke-Test prüft neue Export-Hilfe-/Dateinamensmarker als Pflichtkriterium (2026-02-22)
+NEXT: Export-Dialog um direkte Dateispeicherung (Download) mit gleicher Dateinamenslogik ergänzen. (2026-02-23)

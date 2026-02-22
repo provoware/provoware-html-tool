@@ -16,7 +16,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 ```
 
 ## Entwicklungsstand
-- Fortschritt: **89%**
+- Fortschritt: **90%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -341,3 +341,9 @@ bash start.sh --full-gates
 bash start.sh --release-check
 cat logs/status_summary.txt
 ```
+
+
+## Update 2026-02-22 (Linux-Dateiname + Export-Status)
+- Export im GMS-Archiv erzeugt jetzt einen Linux-kompatiblen Dateinamen (nur sichere Zeichen).
+- Der Dateiname enthält automatisch den Arbeitsstatus (`release-ready`, `review-ready`, `in-abstimmung`) und das Datum.
+- Hilfe-/Statuszeile zeigt den letzten erzeugten Dateinamen direkt im Dashboard für klare Nachvollziehbarkeit.

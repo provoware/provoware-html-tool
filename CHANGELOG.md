@@ -425,3 +425,24 @@
 - Warum: Offline-Risiken werden früher erkannt, ohne den Hauptjob zu destabilisieren.
 - Wirkung: Mehr Release-Reife für Umgebungen mit eingeschränktem Netz und bessere Bedienbarkeit durch klare Sprache.
 
+
+
+## Iteration 2026-02-22 – Dateibezeichnung + Exportstatus (3 Punkte)
+### A) Fundstelle
+- Problem: Exportdaten hatten keinen standardisierten Linux-Dateinamen mit Arbeitsstatus.
+- Risiko: Austausch zwischen Systemen war fehleranfällig und Status im Team unklar.
+- Erwartung: Dateiname ist robust, nachvollziehbar und laienverständlich.
+
+### B) Scope
+- Ziel: Linux-kompatible Dateibezeichnung und sichtbare Statushilfe beim Export umsetzen.
+- Dateien: `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei:
+  - `templates/dashboard_musterseite.html`: Dateiname mit Status+Datum generieren, Export validieren, Hilfe-/Statusausgabe ergänzen.
+  - `tools/smoke_test.py`: neue Export-A11y-/Strukturmarker als Pflichtprüfung ergänzen.
+  - Doku-Dateien + Version-Registry: Fortschritt, DONE/NEXT und Versionsstand synchronisieren.
+- Abnahmekriterium: Export zeigt einen Linux-kompatiblen Dateinamen inkl. Status und Smoke-Test erkennt die neuen Marker.
+
+### C) Umsetzung (3 Punkte)
+- Punkt 1: Neue Dateinamenslogik mit Zeichenbereinigung (Linux-kompatibel) für Export implementiert.
+- Punkt 2: Exportvalidierung verbessert (Input/Output geprüft, klare Next Steps bei Fehlern).
+- Punkt 3: Hilfe-/A11y-Status im GMS-Bereich ergänzt (sichtbar + `aria-live`).

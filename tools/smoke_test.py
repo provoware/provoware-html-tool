@@ -363,6 +363,9 @@ required_markers = [
     'id="backup-switcher"',
     'id="backup-help"',
     'id="backup-status"',
+    'id="gms-export-help"',
+    'id="gms-export-filename-status"',
+    'file_name',
     'setDebugDetails(',
     'updateSyncStatus(',
 ]
