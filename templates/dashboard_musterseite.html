@@ -390,6 +390,7 @@
         </li>
         <li class="settings-item">
           <p id="theme-help">Hinweis: Status nie nur über Farbe, sondern immer mit Symbol + Text. Kontrast (Helligkeits-Unterschied) bleibt in allen drei Themes gut lesbar. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
+          <p class="subline" id="theme-status" role="status" aria-live="polite">Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.</p>
         </li>
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
       </ul>
@@ -428,6 +429,7 @@
       const footerSyncStatusNode = document.getElementById('footer-sync-status');
       const debugEventNode = document.getElementById('debug-last-event');
       const debugNextStepNode = document.getElementById('debug-next-step');
+      const themeStatusNode = document.getElementById('theme-status');
       let lastDialogTrigger = null;
 
       function getDialogFocusableElements() {
@@ -518,7 +520,18 @@
           setResult('⚠️ Ungültiges Theme. Erlaubt sind: high-contrast, light, dark.');
           return false;
         }
+
+        const helperTextByTheme = {
+          'high-contrast': 'Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.',
+          light: 'Aktives Theme: light. Bitte Fokusrahmen gut sichtbar prüfen.',
+          dark: 'Aktives Theme: dark. Bitte Helligkeit und Lesbarkeit kurz prüfen.'
+        };
+
         html.setAttribute('data-theme', themeValue);
+        if (themeStatusNode) {
+          themeStatusNode.textContent = helperTextByTheme[themeValue] || 'Aktives Theme geändert.';
+        }
+        setDebugDetails('Theme geändert', 'Prüfen Sie kurz Lesbarkeit, Fokusrahmen und Symboltexte im gewählten Theme.');
         setResult('✅ Theme wurde gesetzt: ' + themeValue + '.');
         return true;
       }

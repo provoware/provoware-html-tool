@@ -1,3 +1,8 @@
+## 2026-02-22 – Baseline-Freigabe + Multi-Browser-Risiko-Check + Theme-Livehilfe
+- Was: `tools/visual_baseline_check.py` vergleicht jetzt Chromium-Artefakt gegen eine freigegebene Baseline (inkl. `--accept-current`), `start.sh --weakness-report` prüft Artefakte für Chromium/Firefox/WebKit plus Baseline-Status, und das Dashboard meldet den aktiven Theme-Kontrast als Live-Status.
+- Warum: Offene Punkte zu Visual-Guard und Browser-Abdeckung sollten mit klaren Next Steps abschließbar werden, während die Theme-Hilfe für Tastatur- und Screenreader-Nutzung verständlicher wird.
+- Wirkung: Höhere Release-Reife durch reproduzierbaren Soll-Ist-Vergleich, transparentere Rest-Risiken und bessere Barrierefreiheits-Rückmeldung direkt in der Oberfläche.
+
 ## 2026-02-22 – CI-Schwachstellenkanal + Browser-E2E-Parameter + Hilfetext
 - Was: `tools/browser_e2e_test.py` unterstützt jetzt `--browser chromium|firefox|webkit` und erstellt Browser-spezifische Artefaktnamen; CI führt zusätzlich `bash start.sh --weakness-report` als eigenen Qualitätskanal aus.
 - Warum: Die Browser-Abdeckung soll vorbereitet und transparent dokumentiert werden, während Schwachstellenberichte in CI sichtbar bleiben.

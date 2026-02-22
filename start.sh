@@ -887,6 +887,7 @@ required_markers = {
     "a11y_modal": 'aria-modal="true"',
     "theme_help": 'id="theme-help"',
     "theme_desc": 'aria-describedby="theme-help"',
+    "theme_status": 'id="theme-status"',
 }
 
 missing_markers = [label for label, marker in required_markers.items() if marker not in content]
@@ -938,10 +939,20 @@ run_weakness_report_mode() {
 		issues=$((issues + 1))
 	fi
 
-	if [[ ! -f "$PROJECT_ROOT/logs/artifacts/dashboard-dialog-e2e.png" ]]; then
-		print_step "⚠️" "Schwachstelle: Es fehlt ein aktuelles Browser-Screenshot-Artefakt."
-		print_step "➡️" "Befehl: python3 tools/browser_e2e_test.py"
-		record_next_step "Browser-E2E ausführen und neues Screenshot-Artefakt für den Visual-Guard erzeugen"
+	local browser
+	for browser in chromium firefox webkit; do
+		if [[ ! -f "$PROJECT_ROOT/logs/artifacts/dashboard-dialog-e2e-${browser}.png" ]]; then
+			print_step "⚠️" "Schwachstelle: Browser-Artefakt für ${browser} fehlt."
+			print_step "➡️" "Befehl: python3 tools/browser_e2e_test.py --browser ${browser}"
+			record_next_step "Browser-E2E für ${browser} ausführen und Artefakt für die Multi-Browser-Absicherung erzeugen"
+			issues=$((issues + 1))
+		fi
+	done
+
+	if ! python3 "$PROJECT_ROOT/tools/visual_baseline_check.py" >/dev/null 2>&1; then
+		print_step "⚠️" "Schwachstelle: Visual-Baseline weicht ab oder ist noch nicht freigegeben."
+		print_step "➡️" "Befehl: python3 tools/visual_baseline_check.py"
+		record_next_step "Visual-Baseline prüfen und bei gewollter UI-Änderung mit --accept-current freigeben"
 		issues=$((issues + 1))
 	fi
 
