@@ -513,6 +513,16 @@
             <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
           </div>
         </article>
+
+        <article class="tool-card tool-card-primary" data-accent="a" aria-labelledby="projekt-routine-title">
+          <p class="card-tag">Start-Routine Projektordner</p>
+          <h2 id="projekt-routine-title">Projekt-Routine</h2>
+          <p id="project-path-status" class="result" role="status" aria-live="polite">Projektordner: wird beim Start geprüft…</p>
+          <p class="subline" id="project-path-help">Hilfe (Help = Unterstützung): Der Pfad wird in der Start-Routine geprüft und bei Bedarf automatisch erstellt.</p>
+          <div class="actions">
+            <button type="button" data-action="project-setup">Projektordner anpassen</button>
+          </div>
+        </article>
       </div>
 
       <section class="tool-card" data-accent="a" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
@@ -570,6 +580,20 @@
     </div>
   </dialog>
 
+  <dialog id="project-dialog" aria-labelledby="project-title" aria-describedby="project-text" aria-modal="true">
+    <h2 id="project-title">📁 Projekt-Routine</h2>
+    <p id="project-text">Bitte Projektordner bestätigen. Die Start-Routine prüft den Ordner beim nächsten Start und erstellt ihn bei Bedarf automatisch im Nutzerverzeichnis.</p>
+    <label for="project-path-input"><strong>Projektordner (absoluter Pfad):</strong></label>
+    <input id="project-path-input" type="text" autocomplete="off" spellcheck="false" aria-describedby="project-hint">
+    <p class="subline" id="project-hint">Beispiel: /home/name/Provoware-Projekte/Standardprojekt</p>
+    <p class="result" id="project-dialog-result" role="status" aria-live="polite">Bitte Pfad prüfen und speichern.</p>
+    <div class="actions">
+      <button type="button" data-action="project-save">Pfad speichern</button>
+      <button type="button" data-action="project-default">Standardpfad nutzen</button>
+      <button type="button" data-action="project-close">Später</button>
+    </div>
+  </dialog>
+
   <script>
     (function () {
       const html = document.documentElement;
@@ -583,10 +607,16 @@
       const themeStatusNode = document.getElementById('theme-status');
       const moduleSelector = document.getElementById('module-switcher');
       const moduleStatusNode = document.getElementById('module-status');
+      const projectStatusNode = document.getElementById('project-path-status');
+      const projectDialog = document.getElementById('project-dialog');
+      const projectPathInput = document.getElementById('project-path-input');
+      const projectDialogResultNode = document.getElementById('project-dialog-result');
       const debugLogListNode = document.getElementById('debug-log-list');
       const pluginStatusListNode = document.getElementById('plugin-status-list');
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       let lastDialogTrigger = null;
+      const serverProjectPath = '__PROJECT_PATH__';
+      const defaultProjectPath = '/home/USER/Provoware-Projekte/Standardprojekt';
 
       function getDialogFocusableElements() {
         if (!dialog) {
@@ -693,6 +723,66 @@
         return true;
       }
 
+      function setProjectDialogResult(message) {
+        if (!projectDialogResultNode || typeof message !== 'string' || message.trim().length === 0) {
+          return false;
+        }
+        projectDialogResultNode.textContent = message.trim();
+        return true;
+      }
+
+      function normalizeProjectPath(value) {
+        if (typeof value !== 'string') {
+          return '';
+        }
+        return value.trim();
+      }
+
+      function validateProjectPath(value) {
+        const pathValue = normalizeProjectPath(value);
+        if (pathValue.length < 2 || pathValue.startsWith('/') === false) {
+          return false;
+        }
+        if (/\s{2,}/.test(pathValue)) {
+          return false;
+        }
+        return true;
+      }
+
+      function getStoredProjectPath() {
+        const localValue = window.localStorage.getItem('provoware-project-path');
+        if (validateProjectPath(localValue)) {
+          return normalizeProjectPath(localValue);
+        }
+        if (validateProjectPath(serverProjectPath)) {
+          return normalizeProjectPath(serverProjectPath);
+        }
+        return defaultProjectPath;
+      }
+
+      function updateProjectStatus(pathValue) {
+        if (!projectStatusNode || typeof pathValue !== 'string') {
+          return false;
+        }
+        projectStatusNode.textContent = 'Projektordner aktiv: ' + pathValue + '.';
+        return true;
+      }
+
+      function saveProjectPath(pathValue) {
+        const normalized = normalizeProjectPath(pathValue);
+        if (!validateProjectPath(normalized)) {
+          setProjectDialogResult('⚠️ Ungültiger Pfad. Bitte absoluten Pfad eingeben, z. B. /home/name/Ordner.');
+          return false;
+        }
+        window.localStorage.setItem('provoware-project-path', normalized);
+        updateProjectStatus(normalized);
+        setProjectDialogResult('✅ Pfad gespeichert. Nächster Schritt: start.sh neu starten, damit die Prüfung und ggf. Erstellung läuft.');
+        setDebugDetails('Projektpfad aktualisiert', 'Führen Sie ./start.sh aus. Die Start-Routine prüft den Ordner und erstellt ihn bei Bedarf.');
+        appendDebugLog('✅ Projektpfad gespeichert: ' + normalized + ' (' + getTimeStamp() + ').');
+        setResult('✅ Projektordner im Dashboard aktualisiert.');
+        return true;
+      }
+
       function setActiveNavigation(moduleKey) {
         if (!Array.isArray(navButtonNodes) || typeof moduleKey !== 'string' || moduleKey.trim().length === 0) {
           return false;
@@ -790,7 +880,7 @@
       }
 
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-default', 'project-close'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -798,6 +888,34 @@
         if (actionValue === 'open-module') {
           const selectedValue = moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '';
           return openModule(selectedValue);
+        }
+
+        if (actionValue === 'project-setup') {
+          if (projectDialog && typeof projectDialog.showModal === 'function') {
+            projectDialog.showModal();
+            if (projectPathInput) {
+              projectPathInput.value = getStoredProjectPath();
+              projectPathInput.focus();
+            }
+            return setResult('ℹ️ Projekt-Routine geöffnet. Bitte Pfad prüfen und speichern.');
+          }
+          return setResult('⚠️ Projekt-Routine kann in diesem Browser nicht als Dialog geöffnet werden.');
+        }
+        if (actionValue === 'project-save') {
+          const userPath = projectPathInput ? projectPathInput.value : '';
+          return saveProjectPath(userPath);
+        }
+        if (actionValue === 'project-default') {
+          if (projectPathInput) {
+            projectPathInput.value = defaultProjectPath;
+          }
+          return saveProjectPath(defaultProjectPath);
+        }
+        if (actionValue === 'project-close') {
+          if (projectDialog && typeof projectDialog.close === 'function') {
+            projectDialog.close();
+          }
+          return setResult('ℹ️ Projekt-Routine geschlossen. Sie können später fortsetzen.');
         }
 
         if (actionValue === 'save') {
@@ -909,6 +1027,13 @@
       });
 
       applyTheme('balanced');
+      updateProjectStatus(getStoredProjectPath());
+      if (projectPathInput) {
+        projectPathInput.value = getStoredProjectPath();
+      }
+      if (projectDialog && typeof projectDialog.showModal === 'function') {
+        projectDialog.showModal();
+      }
       setActiveNavigation('dashboard');
       setPluginStatus('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');

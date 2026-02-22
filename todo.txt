@@ -1,8 +1,9 @@
+DONE: Projekt-Routine beim GUI-Start ergänzt (Pfadabfrage, Validierung, Auto-Erstellung, Persistenz im Dashboard) (2026-02-22)
 DONE: Offline-Checkpfad für Playwright in der Start-Routine ergänzt (Modul + Browsercache mit klaren Next Steps) (2026-02-22)
 DONE: Repair-Modus verbessert: nutzt zuerst lokale Offline-Wheels und danach optional Online-Installation (2026-02-22)
 DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (2026-02-22)
 
-STATUS: 88% abgeschlossen
+STATUS: 91% abgeschlossen
 
 NEXT (Priorität hoch, offen)
 - [ ] 92%: Vollständige Offline-Bundle-Erstellung automatisieren (Wheel-Download + Browsercache export in ein Archiv).
@@ -12,3 +13,5 @@ NEXT (Priorität hoch, offen)
 NEXT (Priorität mittel, offen)
 - [ ] 99%: GUI-Hilfebereich um kurzen Abschnitt „Offline testen“ erweitern (einfache Sprache + vollständige Befehle).
 - [ ] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen.
+
+- [ ] 93%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei spiegeln.
