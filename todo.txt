@@ -1,2 +1,2 @@
-DONE: Alle Infotextdateien auf einfache Sprache, klare Struktur und laienfreundliche Standardbefehle bereinigt und vereinheitlicht (2026-02-22)
-NEXT: Optional eine zusätzliche Kurzfassung als 1-Seiten-Startblatt mit nur 5 Befehlen ergänzen (2026-02-22)
+DONE: Modul-Hauptbereich im HTML-Dashboard mit Modul-Starter, Alt+O-Shortcut, validierter Auswahl und Debug-Verlauf umgesetzt (2026-02-22)
+NEXT: Modul-Starter im nächsten Schritt mit echten Modul-URLs oder Startskript-Parametern verbinden und pro Modul einen direkten Öffnen-Button ergänzen (2026-02-22)
