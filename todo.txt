@@ -1,7 +1,7 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-DONE: Mini-UX-Autocheck (`--ux-check-auto`) ergänzt, Theme-Hilfetext für Screenreader erweitert und Smoke-Test um UX-Prüfung ergänzt. (2026-02-22)
-NEXT: WCAG-Kontrasttest (automatische Kontrast-Prüfung) als eigenen Gate-Schritt ergänzen und CI-Ausführung anbinden. (2026-02-22)
+DONE: WCAG-Kontrasttest automatisiert, Repo-Quality erweitert und Full-Gates auf 1-5 mit Auto-UX-Check umgestellt. (2026-02-22)
+NEXT: CI-Pipeline so erweitern, dass `bash start.sh --full-gates` bei jedem Commit Pflicht ist und Statusdatei als Artefakt speichert. (2026-02-22)
 
 ## Iteration 2026-02-22 (Full-Gates + Statusbericht + Hilfe)
 ### A) Fundstelle (beobachten)
