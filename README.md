@@ -16,7 +16,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 ```
 
 ## Entwicklungsstand
-- Fortschritt: **92%**
+- Fortschritt: **95%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -58,11 +58,14 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - Neu in dieser Iteration: Sichtbarer Auto-Backup-Schalter im Einstellungsbereich mit klarer Hilfe in einfacher Sprache (Ein/Aus + nächster Schritt).
 - Neu in dieser Iteration: Backup-Einstellung wird robust validiert (nur true/false); ungültige Werte werden automatisch auf „Aktiv“ korrigiert und im Debug-Log erklärt.
 - Neu in dieser Iteration: Smoke-Test prüft jetzt feste Backup-A11y-Marker (`backup-switcher`, Hilfetext, Statusausgabe) für stabile UI-Qualität.
+- Neu in dieser Iteration: Modul-Starter zeigt Kurzdetails zur konfigurierten Datenquelle bereits bei der Auswahl (vor dem Öffnen) für transparente Entscheidungen.
+- Neu in dieser Iteration: Projektordner-Feld in der Control-Bar startet ohne voreingestellten Standardwert und verlangt bewusst eine gültige Eingabe.
+- Hilfe-/A11y-Punkt: Smoke-Test prüft jetzt feste Marker für die neue Kurzdetails-Zeile und den standardfreien Projektpfad-Einstieg.
 - **Offen**
   - (Erledigt) Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
-  - Modul-Interoperabilität ausgebaut: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD im Genres-Archiv, Profilarchive (default/techno/hörspiele) und Abkopplung in Einzelfenster.
-  - Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
+  - (Erledigt) Modul-Interoperabilität ausgebaut: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD im Genres-Archiv, Profilarchive (default/techno/hörspiele) und Abkopplung in Einzelfenster.
+  - (Erledigt) Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
 
 
 

@@ -1,3 +1,20 @@
+## Update 2026-02-22 (Modul-Interoperabilität abgeschlossen)
+- Modul-Auswahl zeigt jetzt sofort kurze, klare Datenquellen-Infos (Quelle, Zweck, nächster Schritt).
+- Das Projektordner-Feld startet ohne versteckten Standardordner (kein stiller Vorwert).
+- Die automatische Prüfung (Smoke-Test = kurzer Funktionstest) kontrolliert diese neuen Punkte direkt.
+
+### Top-Blocker
+- Kein kritischer Blocker offen. Optional: Kurzdetails noch zusätzlich als Tooltip in der Sidebar zeigen.
+
+### Betriebsrisiken
+- Wenn `config/module_sources.json` unvollständig ist, zeigt das Dashboard jetzt einen klaren Hinweis mit Next Step.
+
+### Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`
+
 # WAITME – Arbeitsstand & Nächste Schritte
 
 Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
