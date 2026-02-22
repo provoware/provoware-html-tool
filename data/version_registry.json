@@ -1,14 +1,14 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-offline-dependency-playwright-todo-status",
+  "iteration": "2026.02.22-project-routine-dashboard-path-persistence",
   "files": {
-    "start.sh": "2026.02.22.20",
+    "start.sh": "2026.02.22.21",
     "tools/smoke_test.py": "2026.02.22.9",
-    "templates/dashboard_musterseite.html": "2026.02.22.7",
-    "README.md": "2026.02.22.20",
-    "todo.txt": "2026.02.22.20",
-    "CHANGELOG.md": "2026.02.22.20",
-    "data/version_registry.json": "2026.02.22.20",
+    "templates/dashboard_musterseite.html": "2026.02.22.21",
+    "README.md": "2026.02.22.21",
+    "todo.txt": "2026.02.22.21",
+    "CHANGELOG.md": "2026.02.22.21",
+    "data/version_registry.json": "2026.02.22.21",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.2",
@@ -18,6 +18,7 @@
     "tools/browser_e2e_test.py": "2026.02.22.7",
     "tools/visual_baseline_check.py": "2026.02.22.8",
     "INFODATEI.md": "2026.02.22.2",
-    "AGENTS.md": "2.5"
+    "AGENTS.md": "2.5",
+    "data/project_context.json": "2026.02.22.1"
   }
 }

@@ -5,13 +5,15 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **88%**
+- Fortschritt: **91%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
   - Barrierefreiheit mit Tastaturfokus, Kontrast-Checks und verständlichen Fehlermeldungen.
   - Saubere Projektstruktur: System, Konfiguration, Werkzeuge und variable Daten sind getrennt.
   - Mehrere Themes für robustes Farb- und Kontrastverhalten.
+
+- Projekt-Routine beim GUI-Start: fragt den Projektordner ab, validiert den Pfad, erstellt fehlende Ordner automatisch im Nutzerverzeichnis und zeigt den aktiven Pfad im Dashboard.
 - **Offen**
   - Vollautomatisches Offline-Bundle für Abhängigkeiten (inklusive Playwright-Browsercache) als Ein-Befehl-Export.
   - Zusätzliche Feinanpassung für sehr kleine Displays.
@@ -110,3 +112,16 @@ cat logs/status_summary.txt
 ## Detaillierter nächster Schritt (einfach erklärt)
 Führen Sie `bash start.sh --full-gates` aus und lesen Sie danach `logs/status_summary.txt`.
 So sehen Sie in Klartext, welche Prüfung erfolgreich war und welche nächste Aktion empfohlen wird.
+
+## Projektordner-Routine (neu)
+Beim Start der GUI läuft jetzt zuerst eine Projekt-Routine:
+- Fragt den Projektordner ab (Interaktion im Terminal oder über `PROJECT_FOLDER=/pfad`).
+- Prüft den Pfad per Input-Validierung.
+- Erstellt fehlende Ordner transparent im Nutzerverzeichnis.
+- Speichert den aktiven Pfad in `data/project_context.json` und zeigt ihn im Dashboard an.
+
+Beispiele:
+```bash
+bash start.sh
+PROJECT_FOLDER=/home/$USER/Provoware-Projekte/MeinProjekt bash start.sh
+```

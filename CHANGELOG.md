@@ -1,3 +1,16 @@
+## 2026-02-22 – Projekt-Routine mit persistentem Projektpfad im Dashboard
+- Scope-Kontrolle:
+  - Problem: Beim GUI-Start fehlte eine klare Projektordner-Routine mit Prüfung, automatischer Erstellung und sichtbarer Pfadanzeige im Dashboard.
+  - Ziel: Beim Start zuerst Projektordner abfragen/validieren, bei Fehlen transparent anlegen und den Pfad persistent im Hauptmodul anzeigen.
+  - Dateien: `start.sh`, `templates/dashboard_musterseite.html`, `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Abnahme: `bash start.sh` legt bei fehlendem Ordner den Standardpfad an und Dashboard zeigt den aktiven Projektpfad mit Hilfeelement.
+- Was:
+  1) `start.sh` erweitert um Projekt-Routine mit Input-Validierung, Auto-Erstellung und Speicherung in `data/project_context.json`.
+  2) Dashboard ergänzt um Projekt-Routine-Karte + Dialog für Pfadpflege (lokal persistent) und klare Next Steps in einfacher Sprache.
+  3) Dokumentation und To-do auf neuen Stand gebracht.
+- Warum: Nutzer sollen ohne technische Hürden direkt mit einem gültigen Projektordner starten.
+- Wirkung: Höhere Release-Reife, transparenter Startablauf und besseres Verständnis im Dashboard.
+
 ## 2026-02-22 – Offline-Abhängigkeitsauflösung mit Playwright verbessert + To-do-Status geschärft
 - Scope-Kontrolle:
   - Problem: Offline-Umgebungen scheitern häufig bei Playwright-Modul/Browserverfügbarkeit und To-do zeigte keine Fortschrittszahl.

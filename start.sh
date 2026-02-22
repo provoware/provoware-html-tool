@@ -15,6 +15,8 @@ TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
 CORE_HELPER_FILE="${PROJECT_ROOT}/system/start_core.sh"
 GUI_HELPER_FILE="${PROJECT_ROOT}/system/start_gui.sh"
+PROJECT_CONTEXT_FILE="${PROJECT_ROOT}/data/project_context.json"
+DASHBOARD_PROJECT_PATH=""
 # shellcheck disable=SC2034
 CHECKED_ITEMS=()
 # shellcheck disable=SC2034
@@ -763,6 +765,77 @@ run_repair_mode() {
 	print_step "✅" "Repair-Modus abgeschlossen."
 }
 
+validate_project_path_input() {
+	local candidate="$1"
+	if [[ -z "$candidate" ]]; then
+		return 1
+	fi
+	if [[ "$candidate" == ~* ]]; then
+		candidate="${HOME}${candidate#\~}"
+	fi
+	if [[ "$candidate" != /* ]]; then
+		return 1
+	fi
+	if [[ "$candidate" =~ [[:cntrl:]] ]]; then
+		return 1
+	fi
+	return 0
+}
+
+resolve_dashboard_project_path() {
+	local input_path="${PROJECT_FOLDER:-}"
+	local default_path="${HOME}/Provoware-Projekte/Standardprojekt"
+
+	if [[ -z "$input_path" ]] && [[ -t 0 ]]; then
+		print_step "ℹ️" "Projekt-Routine: Bitte Projektordner wählen. Bei leerer Eingabe wird Standard genutzt."
+		printf 'Projektordner [Standard: %s]: ' "$default_path"
+		IFS= read -r input_path || true
+	fi
+
+	if [[ -z "$input_path" ]]; then
+		input_path="$default_path"
+		print_step "ℹ️" "Kein Ordner eingegeben. Standardpfad wird genutzt: ${input_path}"
+	fi
+
+	if ! validate_project_path_input "$input_path"; then
+		print_step "⚠️" "Ungültiger Projektordner '${input_path}'. Nutze sicheren Standardpfad im Nutzerverzeichnis."
+		input_path="$default_path"
+	fi
+
+	if [[ -d "$input_path" ]]; then
+		print_step "✅" "Projektordner vorhanden: ${input_path}"
+		record_checked "Projektordner erkannt"
+	else
+		if mkdir -p "$input_path"; then
+			print_step "✅" "Projektordner wurde transparent neu erstellt: ${input_path}"
+			record_fixed "Projektordner automatisch erstellt"
+		else
+			print_error_with_actions "Projektordner konnte nicht erstellt werden: ${input_path}"
+			record_missing "Projektordner"
+			record_next_step "Anderen Pfad setzen, z. B. PROJECT_FOLDER=${default_path} ./start.sh"
+			return 1
+		fi
+	fi
+
+	local escaped_path
+	escaped_path="$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$input_path" 2>/dev/null || true)"
+	if [[ -z "$escaped_path" ]]; then
+		escaped_path='"'"$input_path"'"'
+	fi
+
+	mkdir -p "$(dirname "$PROJECT_CONTEXT_FILE")"
+	cat >"$PROJECT_CONTEXT_FILE" <<JSON
+{
+  "project_path": $escaped_path,
+  "updated_at": "$(date '+%Y-%m-%d %H:%M:%S')"
+}
+JSON
+
+	DASHBOARD_PROJECT_PATH="$input_path"
+	record_checked "Projektpfad gespeichert"
+	return 0
+}
+
 launch_local_gui() {
 	local gui_port="${GUI_PORT:-8765}"
 	if [[ ! "$gui_port" =~ ^[0-9]+$ ]] || [[ "$gui_port" -lt 1024 ]] || [[ "$gui_port" -gt 65535 ]]; then
@@ -806,6 +879,9 @@ launch_local_gui() {
 	local gui_file="${gui_dir}/index.html"
 	local gui_pid_file="${gui_dir}/server.pid"
 	mkdir -p "$gui_dir"
+	if [[ "$gui_entry" == "dashboard" ]]; then
+		resolve_dashboard_project_path || return 1
+	fi
 	local theme_choices
 	theme_choices="$(load_theme_list_csv | sed 's/,/|/g')"
 	if ! render_gui_status_html "$gui_file" "$gui_theme" "$theme_choices" "$gui_port" "$bg_color" "$text_color" "$panel_color" "$border_color" "$focus_color" "$ok_color" "$warn_color"; then
@@ -817,7 +893,22 @@ launch_local_gui() {
 	record_checked "GUI-Datei erzeugt"
 	if [[ "$gui_entry" == "dashboard" ]]; then
 		if [[ -f "${PROJECT_ROOT}/templates/dashboard_musterseite.html" ]] && cp "${PROJECT_ROOT}/templates/dashboard_musterseite.html" "$gui_file"; then
+			if [[ -n "$DASHBOARD_PROJECT_PATH" ]]; then
+				python3 - "$gui_file" "$DASHBOARD_PROJECT_PATH" <<'PY'
+import pathlib
+import sys
+
+path = pathlib.Path(sys.argv[1])
+project_path = sys.argv[2]
+text = path.read_text(encoding="utf-8")
+import json
+escaped_project_path = json.dumps(project_path)[1:-1]
+text = text.replace("__PROJECT_PATH__", escaped_project_path)
+path.write_text(text, encoding="utf-8")
+PY
+			fi
 			print_step "✅" "Hauptmodul-GUI als Startseite aktiviert (GUI_ENTRY=dashboard)."
+			print_step "ℹ️" "Aktiver Projektordner im Dashboard: ${DASHBOARD_PROJECT_PATH}"
 			record_checked "GUI-Einstieg dashboard"
 		else
 			print_step "⚠️" "Hauptmodul-Template fehlt oder ist nicht lesbar, Statusseite bleibt aktiv."
