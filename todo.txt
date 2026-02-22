@@ -1,5 +1,5 @@
-DONE: Dashboard mit ruhigerem Farbschema, Kartenhierarchie und gruppierter Sidebar inkl. Pluginstatus sichtbar umgesetzt (2026-02-22)
-NEXT: Fokuspfade im Dialog- und Sidebar-Bereich per zusätzlichem E2E-Test weiter absichern (2026-02-22)
+DONE: README mit einfacher Sprache, vollständigen Befehlen und klaren Next Steps für Einsteiger aktualisiert (2026-02-22)
+NEXT: Start-Routine um zusätzliches automatisches Dependency-Feedback pro Betriebssystem erweitern und in Smoke-Test absichern (2026-02-22)
 
 OFFEN – Struktur
 - Sidebar gruppieren

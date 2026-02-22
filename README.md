@@ -1,76 +1,73 @@
 # provoware-html-tool
 
-Ein Werkzeug für ein barrierearmes HTML-Dashboard mit klarer Start-Routine, automatischen Prüfungen und verständlichen Fehlermeldungen in einfacher Sprache.
+Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
+
+Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
 - Fortschritt: **100%**
-- Abgeschlossen:
-  - Vollautomatische Start-Routine mit Check, Reparatur (automatische Behebung), Tests und Formatierung.
-  - Pflicht-Gates 1–5 als feste Reihenfolge mit klaren Statusmeldungen.
-  - Fokus auf Barrierefreiheit: Skip-Link, Tastatur-Navigation, Kontrasthinweise, klare Next Steps.
-  - Professionelleres UI: neues „balanced“-Theme, klare Kartenhierarchie und gruppierte Sidebar für bessere Orientierung.
-  - Sichtbarer Pluginstatus in der Sidebar mit Text-Status (nicht nur Farbe).
-  - Modularer HTML-Hauptbereich mit Modul-Starter (Auswahl + validierter Start + Next-Step-Hinweis).
-  - Debug-Log mit Verlauf (letzte 5 Ereignisse) für transparentes Nutzerfeedback.
-  - Getrennte Struktur für Wartbarkeit: `system/`, `config/`, `tools/`, `templates/`, `data/`.
-- Offen:
-  - Optional: CI-Artefakte für alle Browser langfristig archivieren.
-  - Optional: Weitere Feinanpassung für Plugin-Status bei sehr kleinen Displays.
-  - Optional: Modul-Starter später an echte Backend-Module koppeln.
+- **Abgeschlossen**
+  - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
+  - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
+  - Barrierefreiheit mit Tastaturfokus, Kontrast-Checks und verständlichen Fehlermeldungen.
+  - Saubere Projektstruktur: System, Konfiguration, Werkzeuge und variable Daten sind getrennt.
+  - Mehrere Themes für robustes Farb- und Kontrastverhalten.
+- **Offen**
+  - Optionale Langzeit-Archivierung von CI-Artefakten.
+  - Zusätzliche Feinanpassung für sehr kleine Displays.
+  - Optionale spätere Kopplung des Modul-Starters an echte Backend-Module.
 
-## Schnellstart (für Laien)
+## Schnellstart (für Einsteiger)
 ```bash
 bash start.sh
 ```
 
-Wenn etwas nicht klappt:
-1. `bash start.sh --check`
-2. `bash start.sh --repair`
-3. `bash start.sh --full-gates`
+Wenn etwas nicht funktioniert:
+1. `bash start.sh --check` (prüft alle Voraussetzungen)
+2. `bash start.sh --repair` (versucht Probleme automatisch zu beheben)
+3. `bash start.sh --full-gates` (führt alle Pflichtprüfungen komplett aus)
 
-## Wichtige Befehle
+## Wichtige Befehle mit einfacher Erklärung
 ```bash
-bash start.sh --help
-bash start.sh --check
-bash start.sh --repair
-bash start.sh --format
-bash start.sh --test
-bash start.sh --full-gates
-bash start.sh --weakness-report
-bash start.sh --release-check
-python tools/smoke_test.py
-bash tools/run_quality_checks.sh
+bash start.sh --help            # zeigt alle Optionen
+bash start.sh --check           # Auto-Prüfung (Checks)
+bash start.sh --repair          # Auto-Reparatur (abhängige Pakete/Fehlerpfade)
+bash start.sh --format          # Auto-Formatierung (einheitlicher Code-Stil)
+bash start.sh --test            # automatische Tests
+bash start.sh --full-gates      # alle Pflicht-Gates in Reihenfolge
+bash start.sh --weakness-report # Bericht zu Schwachstellen
+bash start.sh --release-check   # Release-Checkliste ausführen
+python tools/smoke_test.py      # schneller Funktionstest
+bash tools/run_quality_checks.sh # Qualitätsprüfungen für Repo
 ```
 
-## Pflicht-Gates (automatisch)
+## Pflicht-Gates (Reihenfolge)
 1. `python -m compileall -q .`
 2. `bash tools/run_quality_checks.sh`
 3. `python tools/smoke_test.py`
 4. `bash start.sh`
-5. Mini-UX-Check (deutsche Texte, klare Fehlerwege, Kontrast/Fokus)
+5. Mini-UX-Check (deutsche Dialoge, Next Steps, Kontrast/Fokus)
 
-## Start-Routine mit Nutzerfeedback
-Die Start-Routine prüft automatisch Voraussetzungen (Dependencies = benötigte Pakete), zeigt fehlende Teile an und versucht sinnvolle automatische Reparaturen.
+## Nutzerfeedback der Start-Routine
+Die Start-Routine meldet immer verständlich:
+- **Geprüft:** Was wurde getestet?
+- **Fehlt:** Was fehlt noch?
+- **Gelöst:** Was wurde automatisch behoben?
+- **Nächster Schritt:** Was soll ich jetzt tun?
 
-Klare Rückmeldung:
-- Geprüft: Was wurde getestet?
-- Fehlt: Was fehlt noch?
-- Gelöst: Was wurde automatisch behoben?
-- Nächster Schritt: Was soll ich jetzt tun?
+## Ordnerstruktur (für Wartbarkeit)
+- `system/` = stabile Kernlogik
+- `config/` = Einstellungen und Themes
+- `tools/` = Prüf- und Testskripte
+- `templates/` = HTML-Vorlagen
+- `data/` = variable Daten (z. B. Versionsregister)
+- `logs/` = Protokolle für Debugging
 
-## Projektstruktur
-- `system/` → stabile Kernlogik
-- `config/` → Konfigurationen (Themes, Einstellungen)
-- `data/` → variable Daten (z. B. Versionsregister)
-- `templates/` → HTML-Vorlagen
-- `tools/` → Prüf- und Testskripte
-- `logs/` → Protokolle für Analyse
-
-## Barrierefreiheit (A11y = Accessibility)
-- Klare, einfache Sprache in Meldungen.
-- Tastatur-Bedienung ohne Maus.
-- Kontrast-Checks für verschiedene Themes.
-- Fehlertexte mit soforten Next Steps.
+## Barrierefreiheit (Accessibility)
+- Einfache Sprache in Dialogen.
+- Bedienung per Tastatur ohne Maus.
+- Kontrast-Checks über mehrere Themes.
+- Fehlertexte mit klaren, direkten Lösungsschritten.
 
 ## Debugging und Logging
 ```bash
@@ -79,12 +76,16 @@ cat logs/start.log
 cat logs/status_summary.txt
 ```
 
-## Kurzleitfaden für Teams
+## Team-Standardablauf
 1. Vor jeder Änderung: `bash start.sh --check`
 2. Vor Commit: `bash start.sh --format && bash start.sh --test`
 3. Vor Merge: `bash start.sh --full-gates`
-4. Nach Iteration immer aktualisieren: `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+4. Nach jeder Iteration: `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json` aktualisieren
 
-## Laienvorschläge
-- Nutzen Sie immer zuerst `--check`, bevor Sie länger nach Fehlern suchen.
-- Bei Problemen mit Anzeige/Farben starten Sie `--weakness-report`; dort stehen direkte Befehle als Hilfe.
+## Zwei kurze Laienvorschläge
+- Starten Sie immer zuerst mit `--check`, das spart Zeit bei der Fehlersuche.
+- Nutzen Sie bei Unsicherheit `--repair`; danach erneut `--check` ausführen.
+
+## Detaillierter nächster Schritt (einfach erklärt)
+Führen Sie `bash start.sh --full-gates` aus und lesen Sie danach `logs/status_summary.txt`.
+So sehen Sie in Klartext, welche Prüfung erfolgreich war und welche nächste Aktion empfohlen wird.
