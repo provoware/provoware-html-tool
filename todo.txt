@@ -36,3 +36,9 @@ NEXT (Priorität mittel, offen)
 - [ ] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen.
 
 - [x] 100%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei gespiegelt.
+
+NEXT (Priorität hoch, neu 2026-02-22)
+- [ ] 100%: Dashboard-Layout auf leeres 3x3-Haupt-Grid als Standard umstellen (inkl. Fensteroptionen Ausblenden/Maximieren und Vollsicht beim Start).
+- [ ] 100%: Header-Dashboard um Live-Log (letzte 10 Ereignisse) + Button „Gesamtes Protokoll kopieren" erweitern, inklusive Laien-/Profi-Umschalter und klaren Hilfetexten.
+- [ ] 100%: Modul-Interoperabilität robust ausbauen (Projektordner-Dialog ohne Standardpfad, Sidebar-Parameter je Modul, Drag&Drop + CRUD + Einzel-Fenster für paralleles Arbeiten, Genres-Archivprofile wie Techno/Hörspiele getrennt).
+Hinweis NEXT ITERATION: Gate G3 (python tools/smoke_test.py) scheitert derzeit im Browser-E2E wegen 403 beim Playwright-Browserdownload; Offline-Mirrorquelle einrichten.

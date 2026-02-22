@@ -1,3 +1,19 @@
+## 2026-02-22 – Neue 3-Punkte-Iteration für UI-Workflow und Modul-Robustheit als To-do geplant
+- Scope-Kontrolle:
+  - Problem: Es fehlte ein klar priorisierter, umsetzbarer Dreier-Block für das neue Zielbild (3x3-Grid, Logheader, Interoperabilität).
+  - Ziel: Nutzeranforderungen in genau drei merge-ready To-do-Punkte überführen, davon mindestens ein klarer A11y-/Hilfepunkt in einfacher Sprache.
+  - Dateien: `todo.txt`, `README.md`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) drei neue NEXT-Punkte in todo, 2) offene Roadmap im README ergänzen, 3) Scope + Wirkung im Changelog dokumentieren, 4) Versionsregister aktualisieren.
+  - Abnahme: In `todo.txt` stehen genau drei neue, klar getrennte NEXT-Punkte zur Umsetzung der genannten Anforderungen.
+- Was:
+  1) Drei neue priorisierte NEXT-Punkte ergänzt: leeres 3x3-Grid mit Fensteroptionen, Header-Live-Log mit Vollkopie + Laien/Profi-Umschalter, robuste Interoperabilität inkl. Genres-Profilarchiv.
+  2) README-Offen-Liste mit denselben drei Punkten synchronisiert, damit Roadmap und To-do konsistent bleiben.
+  3) Dokumentations- und Versionsstand aktualisiert (inkl. Iterationsnachweis).
+- Warum: Die Anforderungen sind umfangreich; durch drei klar getrennte Arbeitspakete bleiben Iterationen klein, testbar und für Laien nachvollziehbar.
+- Wirkung: Höhere Planungssicherheit, bessere Priorisierung und direkte Merge-Bereitschaft der nächsten Umsetzungsrunde.
+
+- Gate-Status: G1, G2, G4, G5 sind grün; G3 (`python tools/smoke_test.py`) scheitert im Browser-E2E an externer 403-Sperre beim Playwright-Browserdownload und ist als NEXT in `todo.txt` dokumentiert.
+
 ## 2026-02-22 – Robuste GUI-Portsuche mit Zufall + Fallback im Fehlerfall
 - Scope-Kontrolle:
   - Problem: Der GUI-Start nutzte einen statischen Standardport und suchte bei belegtem Port keinen automatischen Alternativ-Port.
