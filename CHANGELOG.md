@@ -1,3 +1,8 @@
+## 2026-02-22 – Schwachstellen-Bericht + Smoke-Absicherung + Hilfetext
+- Was: `start.sh` erhielt den neuen Modus `--weakness-report` mit konkreten Befehlen zu verbleibenden Risiken; `tools/smoke_test.py` prüft den Bericht im Full-Profil automatisch.
+- Warum: Offene Rest-Risiken sollten sichtbar, verständlich und direkt mit Next Steps behebbar sein.
+- Wirkung: Besserer Release-Überblick, laienfreundliche Hilfe und stabilere Qualitätsprüfung ohne manuelle Suche.
+
 ## 2026-02-22 – Visual-Baseline-Schutz
 - Was: Neues Tool `tools/visual_baseline_check.py` ergänzt, neuen `start.sh`-Modus `--visual-baseline-check` eingebaut und Full-Smoke um den Check erweitert.
 - Warum: Der offene Punkt „Soll-Ist-Screenshot gegen Layout-Drift“ sollte als fester, automatischer Qualitätsbaustein abgeschlossen werden.

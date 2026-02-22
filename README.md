@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **93%**
+- Fortschritt: **94%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -10,10 +10,12 @@
   - Hilfe- und A11y-Elemente (Skip-Link, Next Steps, Tastaturkürzel, Fehlerdialog) erweitert und im Smoke-Test abgesichert.
   - Fehlerdialog erhielt Fokusfang (Tab/Shift+Tab) und Fokus-Rückgabe auf auslösendes Element für stabilere Tastaturnutzung.
   - Fokus-Checker validiert nun zusätzlich Dialog-Fokusfang und Fokus-Rückgabe als feste A11y-Qualitätsregel.
+  - Neuer Modus `--weakness-report` zeigt verbleibende Schwachstellen mit direkten Befehlen und klaren Next Steps in einfacher Sprache.
 - Offene Aufgaben:
   - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
   - Optional: Pixelgenauer Bildvergleich (Diff-Metrik) als zweiter Visual-Guard zusätzlich zur Artefakt-Prüfung.
+  - Optional: Schwachstellen-Bericht in CI als zusätzlichen Qualitätskanal ausführen.
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
@@ -31,6 +33,7 @@ bash start.sh
 ./start.sh --test
 ./start.sh --dashboard-template
 ./start.sh --visual-baseline-check
+./start.sh --weakness-report
 ./start.sh --full-gates
 ./start.sh --release-check
 ```

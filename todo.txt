@@ -1,3 +1,5 @@
+DONE: Schwachstellen-Bericht mit klaren Befehlen + Smoke-Check ergänzt (2026-02-22)
+NEXT: CI um --weakness-report als zusätzlichen Pflichtlauf ergänzen (2026-02-22)
 DONE: Browser-E2E-Test mit Dialog-Fokusfang/Fokus-Rückgabe und Screenshot-Artefakt ergänzt. (2026-02-22)
 DONE: Smoke-Test (Profil full) ruft Browser-E2E automatisch auf. (2026-02-22)
 DONE: CI lädt Logs und Screenshots als Artefakte immer hoch. (2026-02-22)

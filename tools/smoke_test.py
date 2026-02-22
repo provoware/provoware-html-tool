@@ -231,6 +231,28 @@ if ARGS.profile == "full":
             print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/visual_baseline_check.py' prüfen.")
             sys.exit(1)
 
+
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: ./start.sh --weakness-report")
+    weakness_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--weakness-report"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
+
+    if weakness_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: --weakness-report lieferte Fehler.")
+        print(weakness_result.stdout)
+        print(weakness_result.stderr)
+        print_step("➡️", "Nächster Schritt: Schwachstellen-Bericht in start.sh prüfen und erneut testen.")
+        sys.exit(weakness_result.returncode)
+
+    if "Schwachstellen-Bericht abgeschlossen" not in weakness_result.stdout and "Keine kritischen Rest-Schwachstellen gefunden" not in weakness_result.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Schwachstellen-Bericht-Ausgabe fehlt.")
+        print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --weakness-report' prüfen.")
+        sys.exit(1)
+
 if ARGS.profile == "full" and os.environ.get("SKIP_FULL_GATES") != "1":
     print_step("✅", "Smoke-Test erweitert: ./start.sh --full-gates")
     full_gates_result = subprocess.run(
