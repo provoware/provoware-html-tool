@@ -23,7 +23,6 @@
       --accent-c: #ffd061;
       color-scheme: dark;
     }
-
     html[data-theme="balanced"] {
       --bg-glow: #1d4287;
       --bg-start: #081022;
@@ -42,7 +41,6 @@
       --accent-c: #ffd26d;
       color-scheme: dark;
     }
-
     html[data-theme="light"] {
       --bg-start: #eaf0ff;
       --bg-end: #f7f8fb;
@@ -60,7 +58,6 @@
       --accent-c: #a57300;
       color-scheme: light;
     }
-
     html[data-theme="dark"] {
       --bg-start: #030813;
       --bg-end: #101f3a;
@@ -78,9 +75,7 @@
       --accent-c: #f2b632;
       color-scheme: dark;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -88,7 +83,6 @@
       color: var(--text);
       background: radial-gradient(circle at top, var(--bg-glow) 0%, transparent 38%), linear-gradient(130deg, var(--bg-start), var(--bg-end));
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation: none !important;
@@ -96,7 +90,6 @@
         scroll-behavior: auto !important;
       }
     }
-
     .skip-link {
       position: absolute;
       left: -999px;
@@ -108,12 +101,10 @@
       border-radius: 0 0 10px 10px;
       z-index: 30;
     }
-
     .skip-link:focus {
       left: .7rem;
       top: .5rem;
     }
-
     .shell {
       width: min(1440px, calc(100% - 1.5rem));
       margin: .9rem auto;
@@ -130,7 +121,6 @@
         "left main right"
         "foot foot foot";
     }
-
     .topbar {
       grid-area: top;
       display: flex;
@@ -140,7 +130,6 @@
       background: linear-gradient(90deg, rgba(8, 24, 53, 0.9), rgba(8, 14, 30, 0.95));
       border-bottom: 1px solid rgba(127, 168, 255, 0.32);
     }
-
     .status-pill {
       font-weight: 700;
       color: #a4ffc8;
@@ -149,12 +138,10 @@
       padding: .2rem .7rem;
       background: rgba(8, 53, 25, 0.4);
     }
-
     .panel {
       padding: 1rem;
       background: var(--surface);
     }
-
     .left {
       grid-area: left;
       border-right: 1px solid rgba(127, 168, 255, 0.35);
@@ -162,7 +149,6 @@
       flex-direction: column;
       gap: .9rem;
     }
-
     .right {
       grid-area: right;
       border-left: 1px solid rgba(127, 168, 255, 0.35);
@@ -170,7 +156,6 @@
       flex-direction: column;
       gap: .9rem;
     }
-
     .main {
       grid-area: main;
       padding: 1rem;
@@ -179,19 +164,16 @@
       gap: .9rem;
       align-content: start;
     }
-
     .headline {
       text-align: center;
       font-size: 1.85rem;
       margin: 0;
     }
-
     .subline {
       margin: 0;
       text-align: center;
       color: var(--muted);
     }
-
     .nav-list,
     .settings-list {
       list-style: none;
@@ -200,7 +182,6 @@
       display: grid;
       gap: .4rem;
     }
-
     .nav-item,
     .settings-item,
     .quick-help {
@@ -209,13 +190,11 @@
       background: var(--surface-strong);
       padding: .62rem .72rem;
     }
-
     .nav-group-title {
       margin-top: .5rem;
       font-size: .95rem;
       color: var(--muted);
     }
-
     .nav-button {
       min-height: 44px;
       border-radius: 8px;
@@ -227,19 +206,16 @@
       width: 100%;
       font-size: .97rem;
     }
-
     .nav-button[aria-current="page"] {
       border-color: var(--focus);
       box-shadow: inset 0 0 0 1px var(--focus);
       font-weight: 700;
     }
-
     .card-grid {
       display: grid;
       gap: .85rem;
       grid-template-columns: repeat(3, minmax(210px, 1fr));
     }
-
     .tool-card {
       border-radius: 12px;
       border: 2px solid rgba(127, 168, 255, 0.4);
@@ -247,20 +223,16 @@
       background: linear-gradient(160deg, rgba(20, 33, 63, 0.94), rgba(10, 19, 36, 0.94));
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.32);
     }
-
     .tool-card-primary {
       border-width: 3px;
       box-shadow: 0 12px 20px rgba(0, 0, 0, 0.38);
     }
-
     .tool-card-secondary {
       border-style: solid;
     }
-
     .tool-card-utility {
       border-style: dashed;
     }
-
     .card-tag {
       display: inline-block;
       margin-bottom: .35rem;
@@ -270,7 +242,6 @@
       color: var(--muted);
       font-size: .82rem;
     }
-
     .plugin-status-list {
       margin: .4rem 0 0;
       padding: 0;
@@ -278,7 +249,6 @@
       display: grid;
       gap: .35rem;
     }
-
     .plugin-status-item {
       display: flex;
       justify-content: space-between;
@@ -289,32 +259,26 @@
       padding: .4rem .55rem;
       background: rgba(10, 21, 44, 0.72);
     }
-
     .plugin-pill {
       border-radius: 999px;
       border: 1px solid rgba(127, 168, 255, 0.4);
       font-size: .8rem;
       padding: .1rem .45rem;
     }
-
     .plugin-pill-online {
       border-color: #8bf2ac;
       color: #8bf2ac;
     }
-
     .plugin-pill-offline {
       border-color: #ffb487;
       color: #ffb487;
     }
-
     .tool-card[data-accent="a"] { border-color: var(--accent-a); }
     .tool-card[data-accent="b"] { border-color: var(--accent-b); }
     .tool-card[data-accent="c"] { border-color: var(--accent-c); }
-
     h1, h2, h3, p { margin: 0; }
     h2 { font-size: 1.15rem; margin-bottom: .6rem; }
     h3 { font-size: 1.45rem; }
-
     .debug-log-list,
     #debug-log-list {
       margin: .6rem 0 0;
@@ -322,15 +286,14 @@
       color: var(--muted);
       min-height: 3.2rem;
     }
-
     .actions {
       display: grid;
       gap: .5rem;
       margin-top: .7rem;
     }
-
     button,
-    select {
+    select,
+    input {
       min-height: 44px;
       border-radius: 8px;
       border: 2px solid rgba(127, 168, 255, 0.55);
@@ -340,24 +303,22 @@
       padding: .5rem .7rem;
       width: 100%;
     }
-
     button:hover,
-    select:hover { border-color: var(--focus); }
-
+    select:hover,
+    input:hover { border-color: var(--focus); }
     button:focus-visible,
     select:focus-visible,
+    input:focus-visible,
     a:focus-visible {
       outline: 3px solid var(--focus);
       outline-offset: 3px;
     }
-
     .result {
       margin-top: .4rem;
       color: var(--muted);
       min-height: 1.4rem;
     }
-
-    .footer {
+      .footer {
       grid-area: foot;
       display: flex;
       justify-content: space-between;
@@ -367,7 +328,6 @@
       background: rgba(4, 10, 23, 0.95);
       color: var(--muted);
     }
-
     dialog {
       border: 3px solid var(--accent-a);
       border-radius: 12px;
@@ -375,9 +335,7 @@
       background: var(--surface-strong);
       color: var(--text);
     }
-
     dialog::backdrop { background: rgba(0, 0, 0, 0.7); }
-
     @media (max-width: 1240px) {
       .shell {
         grid-template-columns: 250px minmax(0, 1fr);
@@ -390,7 +348,6 @@
       }
       .card-grid { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
     }
-
     @media (max-width: 860px) {
       .shell {
         grid-template-columns: 1fr;
@@ -399,18 +356,15 @@
       }
       .card-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 420px) {
       body {
         font-size: 0.96rem;
       }
-
       .shell {
         width: calc(100% - .7rem);
         margin: .35rem auto;
         border-radius: 10px;
       }
-
       .topbar,
       .panel,
       .main,
@@ -418,40 +372,33 @@
         padding-left: .7rem;
         padding-right: .7rem;
       }
-
       .topbar {
         gap: .45rem;
         flex-wrap: wrap;
         justify-content: center;
       }
-
       .headline {
         width: 100%;
         font-size: 1.45rem;
       }
-
       .status-pill {
         width: 100%;
         text-align: center;
       }
-
       .tool-card,
       .settings-item,
       .quick-help {
         padding: .7rem;
       }
-
       h2 {
         font-size: 1.04rem;
       }
-
       button,
       select,
       .nav-button {
         min-height: 46px;
         font-size: .96rem;
       }
-
       .footer {
         flex-direction: column;
         align-items: flex-start;
@@ -465,19 +412,18 @@
 </head>
 <body>
   <a href="#bereich-aufgaben" class="skip-link">Direkt zum Arbeitsbereich springen</a>
-
   <main class="shell" role="main" aria-live="polite">
     <header class="topbar" aria-label="Obere Statusleiste">
       <span>🧩 ModulTool</span>
       <h1 class="headline">ModulTool</h1>
       <span class="status-pill" id="sync-status" role="status" aria-live="polite">✅ Alle Änderungen gespeichert</span>
     </header>
-
     <aside class="panel left" aria-label="Navigation">
       <h2>Navigation</h2>
       <p class="nav-group-title">Arbeitsmodule</p>
       <ul class="nav-list" aria-label="Arbeitsmodule">
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="genres">📚 Genres</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="gms-archiv">🗂️ GMS-Archiv</button></li>
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="zitate">🧾 Zitate</button></li>
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="songeditor">🎵 Songeditor</button></li>
       </ul>
@@ -491,13 +437,13 @@
         <strong>Pluginstatus (sichtbar):</strong>
         <ul class="plugin-status-list" id="plugin-status-list" aria-live="polite">
           <li class="plugin-status-item"><span>Genres</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
+          <li class="plugin-status-item"><span>GMS-Archiv</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
           <li class="plugin-status-item"><span>Zitate</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
           <li class="plugin-status-item"><span>Songeditor</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
           <li class="plugin-status-item"><span>Dashboard</span><span class="plugin-pill plugin-pill-online">Aktiv</span></li>
         </ul>
       </section>
     </aside>
-
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
       <h2 id="bereich-aufgaben">Werkzeug-Übersicht</h2>
@@ -510,16 +456,6 @@
             <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Hinzufügen</button>
           </div>
         </article>
-
-        <article class="tool-card tool-card-secondary" data-accent="b">
-          <p class="card-tag">Priorität: Mittel</p>
-          <h2>Archiv</h2>
-          <div class="actions">
-            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Beispiel speichern</button>
-            <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Bearbeiten</button>
-          </div>
-        </article>
-
         <article class="tool-card tool-card-secondary" data-accent="c">
           <p class="card-tag">Priorität: Mittel</p>
           <h2>Dashboard</h2>
@@ -527,7 +463,6 @@
             <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Übersicht anzeigen</button>
           </div>
         </article>
-
         <article class="tool-card tool-card-primary" data-accent="c" aria-labelledby="modul-starter-title">
           <p class="card-tag">Priorität: Hoch</p>
           <h2 id="modul-starter-title">Modul-Starter</h2>
@@ -535,6 +470,7 @@
           <select id="module-switcher" aria-describedby="module-help shortcut-help">
             <option value="">Bitte Modul auswählen</option>
             <option value="genres">Genreverwaltung</option>
+            <option value="gms-archiv">GMS-Archiv</option>
             <option value="zitate">Zitate</option>
             <option value="songeditor">Songeditor</option>
             <option value="dashboard">Dashboard</option>
@@ -544,26 +480,45 @@
           </div>
           <p class="result" id="module-status" role="status" aria-live="polite">Noch kein Modul geöffnet.</p>
         </article>
-
-
-        <article class="tool-card tool-card-utility" data-accent="b">
-          <p class="card-tag">Hilfswerkzeug</p>
-          <h2>Zufallsgenerator</h2>
+        <article class="tool-card tool-card-primary" data-accent="b" id="gms-archiv-view" aria-labelledby="gms-title">
+          <p class="card-tag">Plugin: Hauptmodul-Ansicht</p>
+          <h2 id="gms-title">GMS-Archiv</h2>
+          <p class="subline">Genres, Stimmungen und Stile als Profil-Archiv. Hilfe: Mehrere Werte per Komma eingeben.</p>
+          <label for="gms-category"><strong>Kategorie:</strong></label>
+          <select id="gms-category" aria-label="Kategorie für Archiv-Eintrag">
+            <option value="genres">Genres</option>
+            <option value="moods">Stimmungen</option>
+            <option value="styles">Stile</option>
+          </select>
+          <label for="gms-bulk-input"><strong>Sammel-Eingabe:</strong></label>
+          <input id="gms-bulk-input" type="text" placeholder="z. B. Synthwave, LoFi, Melancholisch">
           <div class="actions">
-            <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Genre zufällig wählen</button>
-            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Speichern</button>
+            <button type="button" data-action="gms-add">Einträge speichern</button>
+          </div>
+          <p class="result" id="gms-feedback" role="status" aria-live="polite">Noch keine Änderung.</p>
+          <p class="subline" id="gms-profile-info">Aktives Profil: default.</p>
+          <label for="gms-random-count"><strong>Zufallsanzahl:</strong></label>
+          <select id="gms-random-count" aria-label="Anzahl für Zufallsgenerator">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <div class="actions">
+            <button type="button" data-action="gms-random">Zufall erzeugen</button>
+            <button type="button" data-action="gms-copy-random">Ergebnis kopieren</button>
+          </div>
+          <p class="result" id="gms-random-result" role="status" aria-live="polite">Noch kein Zufallsergebnis.</p>
+          <h3>Verlauf</h3>
+          <ul id="gms-history" aria-label="Letzte Zufallsausgaben"></ul>
+          <div class="actions">
+            <button type="button" data-action="gms-copy-history">Verlauf kopieren</button>
+            <button type="button" data-action="gms-clear-history">Verlauf löschen</button>
+            <button type="button" data-action="gms-export">Export für Exportzentrum</button>
+            <button type="button" data-action="gms-import-demo">Demo-Import (Merge)</button>
           </div>
         </article>
-
-        <article class="tool-card tool-card-utility" data-accent="a">
-          <p class="card-tag">Hilfswerkzeug</p>
-          <h2>Text-Templates</h2>
-          <div class="actions">
-            <button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Vorlage laden</button>
-            <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Einfügen</button>
-          </div>
-        </article>
-
         <article class="tool-card tool-card-secondary" data-accent="b">
           <p class="card-tag">Status und Hilfe</p>
           <h2>Debug-Log</h2>
@@ -575,7 +530,6 @@
             <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
           </div>
         </article>
-
         <article class="tool-card tool-card-primary" data-accent="a" aria-labelledby="projekt-routine-title">
           <p class="card-tag">Start-Routine Projektordner</p>
           <h2 id="projekt-routine-title">Projekt-Routine</h2>
@@ -586,19 +540,18 @@
           </div>
         </article>
       </div>
-
       <section class="tool-card" data-accent="a" aria-labelledby="bereich-hilfe" id="hilfe-next-steps">
         <h2 id="bereich-hilfe">Schnellhilfe mit Next Steps</h2>
         <ol>
           <li>Neu starten: <code>./start.sh</code></li>
           <li>Auto-Reparatur: <code>./start.sh --repair</code></li>
+          <li><button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Reparatur jetzt erklären</button></li>
           <li>Protokoll lesen: <code>cat logs/status_summary.txt</code></li>
         </ol>
         <p class="result">Fehlerdialog zeigt immer klare Schritte: „Erneut versuchen“, „Reparatur“, „Protokoll“.</p>
         <p class="subline">Sehr kleines Display: Nutzen Sie 200% Zoom, Hochformat und den Link „Direkt zum Arbeitsbereich springen“, damit Fokus (aktive Tastatur-Markierung) und Texte klar bleiben.</p>
       </section>
     </section>
-
     <aside class="panel right" aria-label="Einstellungen und Hilfe">
       <h2>Einstellungen</h2>
       <ul class="settings-list">
@@ -619,14 +572,12 @@
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
       </ul>
     </aside>
-
     <footer class="footer">
       <span>Version 13.0 – Pfad: /home</span>
       <span>Auto-Backup: Aktiv</span>
       <span id="footer-sync-status">Alle Änderungen gespeichert</span>
     </footer>
   </main>
-
   <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text" aria-modal="true">
     <h2 id="error-title">❌ Fehler erkannt</h2>
     <p id="error-text">Die Aktion konnte nicht abgeschlossen werden. Bitte folgen Sie den nächsten Schritten.</p>
@@ -642,7 +593,6 @@
       <button type="button" data-action="close-dialog">Dialog schließen</button>
     </div>
   </dialog>
-
   <dialog id="project-dialog" aria-labelledby="project-title" aria-describedby="project-text" aria-modal="true">
     <h2 id="project-title">📁 Projekt-Routine</h2>
     <p id="project-text">Bitte Projektordner bestätigen. Die Start-Routine prüft den Ordner beim nächsten Start und erstellt ihn bei Bedarf automatisch im Nutzerverzeichnis.</p>
@@ -656,7 +606,6 @@
       <button type="button" data-action="project-close">Später</button>
     </div>
   </dialog>
-
   <script>
     (function () {
       const html = document.documentElement;
@@ -680,14 +629,257 @@
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
       const defaultProjectPath = '/home/USER/Provoware-Projekte/Standardprojekt';
-
+      const gmsPlugin = (function createGmsArchivPlugin() {
+        const MODULE_ID = 'gms-archiv';
+        const HISTORY_LIMIT = 8;
+        const state = {
+          currentProfile: 'default',
+          profiles: {
+            default: { genres: ['Synthwave', 'Lo-Fi'], moods: ['Ruhig'], styles: ['Cinematic'], history: [] }
+          },
+          mounted: false,
+          lastRandomResult: ''
+        };
+        function getProfileData() {
+          if (!state.profiles[state.currentProfile]) {
+            state.profiles[state.currentProfile] = { genres: [], moods: [], styles: [], history: [] };
+          }
+          return state.profiles[state.currentProfile];
+        }
+        function normalizeEntries(value) {
+          if (typeof value !== 'string') {
+            return [];
+          }
+          return value.split(',').map(function (item) { return item.trim(); }).filter(Boolean);
+        }
+        function addUniqueByCategory(category, entries) {
+          const profileData = getProfileData();
+          if (!['genres', 'moods', 'styles'].includes(category) || !Array.isArray(entries)) {
+            return { added: 0, duplicates: 0 };
+          }
+          const known = new Set(profileData[category].map(function (item) { return item.toLowerCase(); }));
+          let added = 0;
+          let duplicates = 0;
+          entries.forEach(function (entry) {
+            const low = entry.toLowerCase();
+            if (known.has(low)) {
+              duplicates += 1;
+              return;
+            }
+            known.add(low);
+            profileData[category].push(entry);
+            added += 1;
+          });
+          return { added: added, duplicates: duplicates };
+        }
+        function addHistoryItem(text) {
+          const profileData = getProfileData();
+          if (typeof text !== 'string' || text.trim().length === 0) {
+            return false;
+          }
+          profileData.history.unshift(text.trim());
+          if (profileData.history.length > HISTORY_LIMIT) {
+            profileData.history.length = HISTORY_LIMIT;
+          }
+          return true;
+        }
+        function chooseRandom(items, count) {
+          if (!Array.isArray(items) || items.length === 0) {
+            return [];
+          }
+          const safeCount = Math.max(1, Math.min(count, items.length));
+          const copy = items.slice();
+          const selected = [];
+          while (selected.length < safeCount && copy.length > 0) {
+            const index = Math.floor(Math.random() * copy.length);
+            selected.push(copy.splice(index, 1)[0]);
+          }
+          return selected;
+        }
+        function safeNode(id) { return document.getElementById(id); }
+        function renderHistory() {
+          const listNode = safeNode('gms-history');
+          if (!listNode) {
+            return false;
+          }
+          const profileData = getProfileData();
+          listNode.innerHTML = '';
+          if (!profileData.history.length) {
+            const li = document.createElement('li');
+            li.textContent = 'Noch kein Verlauf.';
+            listNode.appendChild(li);
+            return true;
+          }
+          profileData.history.forEach(function (entry, index) {
+            const li = document.createElement('li');
+            li.textContent = String(index + 1) + '. ' + entry;
+            listNode.appendChild(li);
+          });
+          return true;
+        }
+        function renderProfileInfo() {
+          const info = safeNode('gms-profile-info');
+          if (!info) {
+            return false;
+          }
+          info.textContent = 'Aktives Profil: ' + state.currentProfile + '.';
+          return true;
+        }
+        const services = {
+          storage: {
+            read: function () { return getProfileData(); },
+            write: function (nextState) {
+              if (!nextState || typeof nextState !== 'object') {
+                return false;
+              }
+              const profileData = getProfileData();
+              ['genres', 'moods', 'styles', 'history'].forEach(function (key) {
+                if (Array.isArray(nextState[key])) {
+                  profileData[key] = nextState[key].slice();
+                }
+              });
+              return true;
+            }
+          },
+          profile: {
+            getCurrent: function () { return state.currentProfile; },
+            setCurrent: function (profileKey) {
+              if (typeof profileKey !== 'string' || profileKey.trim().length === 0) {
+                return false;
+              }
+              state.currentProfile = profileKey.trim();
+              renderProfileInfo();
+              renderHistory();
+              return true;
+            }
+          },
+          ui: {
+            toast: function (message) { return setResult(message); },
+            copy: function (value) {
+              if (typeof value !== 'string' || value.trim().length === 0) {
+                setResult('⚠️ Nichts zu kopieren.');
+                return false;
+              }
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(value).then(function () { setResult('✅ Kopiert.'); });
+                return true;
+              }
+              setResult('⚠️ Kopieren nicht möglich. Bitte Text markieren und kopieren.');
+              return false;
+            }
+          },
+          exportCenter: {
+            exportPayload: function () {
+              return { module: MODULE_ID, profile: state.currentProfile, data: getProfileData() };
+            },
+            importPayload: function (payload) {
+              if (!payload || typeof payload !== 'object' || !payload.data) {
+                return { ok: false, reason: 'Import kaputt. Bitte Abbrechen oder Reparatur versuchen.' };
+              }
+              const incoming = payload.data;
+              ['genres', 'moods', 'styles'].forEach(function (key) {
+                const clean = Array.isArray(incoming[key]) ? incoming[key].filter(function (item) { return typeof item === 'string' && item.trim().length > 0; }) : [];
+                addUniqueByCategory(key, clean);
+              });
+              renderHistory();
+              return { ok: true };
+            }
+          },
+          log: {
+            info: function (message) { appendDebugLog('ℹ️ GMS: ' + message + ' (' + getTimeStamp() + ').'); }
+          }
+        };
+        return {
+          mount: function () {
+            state.mounted = true;
+            renderProfileInfo();
+            renderHistory();
+            return true;
+          },
+          unmount: function () { state.mounted = false; return true; },
+          getState: function () { return JSON.parse(JSON.stringify(state)); },
+          setState: function (nextState) {
+            if (!nextState || typeof nextState !== 'object') {
+              return false;
+            }
+            if (typeof nextState.currentProfile === 'string' && nextState.currentProfile.trim().length > 0) {
+              state.currentProfile = nextState.currentProfile.trim();
+            }
+            if (nextState.profiles && typeof nextState.profiles === 'object') {
+              state.profiles = nextState.profiles;
+            }
+            renderProfileInfo();
+            renderHistory();
+            return true;
+          },
+          exportPayload: services.exportCenter.exportPayload,
+          importPayload: services.exportCenter.importPayload,
+          handleAction: function (actionValue) {
+            const categoryNode = safeNode('gms-category');
+            const inputNode = safeNode('gms-bulk-input');
+            const feedbackNode = safeNode('gms-feedback');
+            const randomNode = safeNode('gms-random-result');
+            const countNode = safeNode('gms-random-count');
+            const profileData = getProfileData();
+            if (actionValue === 'gms-add') {
+              const category = categoryNode ? categoryNode.value : '';
+              const entries = normalizeEntries(inputNode ? inputNode.value : '');
+              if (!entries.length) {
+                if (feedbackNode) { feedbackNode.textContent = '⚠️ Bitte mindestens einen Eintrag eingeben.'; }
+                return true;
+              }
+              const result = addUniqueByCategory(category, entries);
+              if (feedbackNode) { feedbackNode.textContent = '✅ Gespeichert: ' + result.added + '. Duplikat übersprungen: ' + result.duplicates + '.'; }
+              services.log.info('Einträge gespeichert in ' + category + ': +' + result.added + ', Duplikate ' + result.duplicates);
+              return true;
+            }
+            if (actionValue === 'gms-random') {
+              const count = countNode ? Number(countNode.value) : 1;
+              const merged = profileData.genres.concat(profileData.moods, profileData.styles);
+              const resultItems = chooseRandom(merged, count);
+              if (!resultItems.length) {
+                if (randomNode) { randomNode.textContent = '⚠️ Keine Daten vorhanden. Bitte zuerst Einträge speichern.'; }
+                return true;
+              }
+              state.lastRandomResult = resultItems.join(', ');
+              addHistoryItem(state.lastRandomResult);
+              renderHistory();
+              if (randomNode) { randomNode.textContent = '🎲 ' + state.lastRandomResult; }
+              services.log.info('Zufall erzeugt: ' + state.lastRandomResult);
+              return true;
+            }
+            if (actionValue === 'gms-copy-random') { return services.ui.copy(state.lastRandomResult); }
+            if (actionValue === 'gms-copy-history') { return services.ui.copy(profileData.history.join('\n')); }
+            if (actionValue === 'gms-clear-history') {
+              profileData.history = [];
+              renderHistory();
+              setResult('✅ Verlauf gelöscht.');
+              return true;
+            }
+            if (actionValue === 'gms-export') {
+              const payload = JSON.stringify(this.exportPayload(), null, 2);
+              return services.ui.copy(payload);
+            }
+            if (actionValue === 'gms-import-demo') {
+              const demo = { data: { genres: ['Electro'], moods: ['Hell'], styles: ['Minimal'] } };
+              const merged = this.importPayload(demo);
+              if (!merged.ok) {
+                setResult('⚠️ Import kaputt. Abbrechen / Reparatur versuchen / Backup laden.');
+                return true;
+              }
+              setResult('✅ Demo-Import gemerged.');
+              return true;
+            }
+            return false;
+          }
+        };
+      })();
       function getDialogFocusableElements() {
         if (!dialog) {
           return [];
         }
         return Array.from(dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
       }
-
       function restoreFocusAfterDialog() {
         if (!lastDialogTrigger || typeof lastDialogTrigger.focus !== 'function') {
           return false;
@@ -695,7 +887,6 @@
         lastDialogTrigger.focus();
         return true;
       }
-
       function keepDialogFocusInside(event) {
         if (!dialog || !dialog.open || !event || event.key !== 'Tab') {
           return false;
@@ -707,7 +898,6 @@
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
         const active = document.activeElement;
-
         if (event.shiftKey && active === first) {
           event.preventDefault();
           last.focus();
@@ -720,7 +910,6 @@
         }
         return false;
       }
-
       function setResult(message) {
         if (!resultNode || typeof message !== 'string' || message.trim().length === 0) {
           return false;
@@ -728,11 +917,9 @@
         resultNode.textContent = message;
         return true;
       }
-
       function getTimeStamp() {
         return new Date().toLocaleTimeString('de-DE');
       }
-
       function updateSyncStatus(statusText) {
         if (typeof statusText !== 'string' || statusText.trim().length === 0) {
           return false;
@@ -746,7 +933,6 @@
         }
         return true;
       }
-
       function setDebugDetails(eventLabel, nextStep) {
         if (typeof eventLabel !== 'string' || eventLabel.trim().length === 0) {
           return false;
@@ -762,9 +948,6 @@
         }
         return true;
       }
-
-
-
       function appendDebugLog(message) {
         if (!debugLogListNode || typeof message !== 'string' || message.trim().length === 0) {
           return false;
@@ -777,7 +960,6 @@
         }
         return true;
       }
-
       function setModuleStatus(message) {
         if (!moduleStatusNode || typeof message !== 'string' || message.trim().length === 0) {
           return false;
@@ -785,7 +967,6 @@
         moduleStatusNode.textContent = message.trim();
         return true;
       }
-
       function setProjectDialogResult(message) {
         if (!projectDialogResultNode || typeof message !== 'string' || message.trim().length === 0) {
           return false;
@@ -793,14 +974,12 @@
         projectDialogResultNode.textContent = message.trim();
         return true;
       }
-
       function normalizeProjectPath(value) {
         if (typeof value !== 'string') {
           return '';
         }
         return value.trim();
       }
-
       function validateProjectPath(value) {
         const pathValue = normalizeProjectPath(value);
         if (pathValue.length < 2 || pathValue.startsWith('/') === false) {
@@ -811,7 +990,6 @@
         }
         return true;
       }
-
       function getStoredProjectPath() {
         const localValue = window.localStorage.getItem('provoware-project-path');
         if (validateProjectPath(localValue)) {
@@ -822,7 +1000,6 @@
         }
         return defaultProjectPath;
       }
-
       function updateProjectStatus(pathValue) {
         if (!projectStatusNode || typeof pathValue !== 'string') {
           return false;
@@ -830,7 +1007,6 @@
         projectStatusNode.textContent = 'Projektordner aktiv: ' + pathValue + '.';
         return true;
       }
-
       function saveProjectPath(pathValue) {
         const normalized = normalizeProjectPath(pathValue);
         if (!validateProjectPath(normalized)) {
@@ -845,7 +1021,6 @@
         setResult('✅ Projektordner im Dashboard aktualisiert.');
         return true;
       }
-
       function setActiveNavigation(moduleKey) {
         if (!Array.isArray(navButtonNodes) || typeof moduleKey !== 'string' || moduleKey.trim().length === 0) {
           return false;
@@ -863,7 +1038,6 @@
         });
         return true;
       }
-
       function setPluginStatus(selectedModule) {
         if (!pluginStatusListNode || typeof selectedModule !== 'string' || selectedModule.trim().length === 0) {
           return false;
@@ -890,23 +1064,21 @@
         });
         return true;
       }
-
       function openModule(selectedModule) {
         const moduleConfig = {
           genres: { label: 'Genreverwaltung', command: './start.sh --dashboard-template' },
+          'gms-archiv': { label: 'GMS-Archiv', command: './start.sh --check' },
           zitate: { label: 'Zitate', command: './start.sh --check' },
           songeditor: { label: 'Songeditor', command: './start.sh --test' },
           dashboard: { label: 'Dashboard', command: './start.sh --ux-check-auto' },
           todo: { label: 'To-Do-Liste', command: './start.sh --check' }
         };
-
         if (typeof selectedModule !== 'string' || !(selectedModule in moduleConfig)) {
           setDebugDetails('Modulstart fehlgeschlagen', 'Bitte zuerst ein Modul auswählen und dann erneut „Modul öffnen“ drücken.');
           appendDebugLog('⚠️ Modulstart abgebrochen: Keine gültige Auswahl.');
           setModuleStatus('⚠️ Kein Modul gestartet: Bitte ein Modul auswählen.');
           return setResult('⚠️ Modul konnte nicht geöffnet werden. Bitte Auswahl prüfen.');
         }
-
         const targetModule = moduleConfig[selectedModule];
         const nextStep = 'Führen Sie als nächsten Schritt ' + targetModule.command + ' aus.';
         setModuleStatus('✅ Modul aktiv: ' + targetModule.label + '.');
@@ -917,21 +1089,18 @@
         updateSyncStatus('✅ Modul bereit: ' + targetModule.label + ' (' + getTimeStamp() + ')');
         return setResult('✅ Modul geöffnet: ' + targetModule.label + '.');
       }
-
       function applyTheme(themeValue) {
         const allowed = ['balanced', 'high-contrast', 'light', 'dark'];
         if (typeof themeValue !== 'string' || !allowed.includes(themeValue)) {
           setResult('⚠️ Ungültiges Theme. Erlaubt sind: high-contrast, light, dark.');
           return false;
         }
-
         const helperTextByTheme = {
           balanced: 'Aktives Theme: balanced. Ruhige Farben mit klarer Lesbarkeit.',
           'high-contrast': 'Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.',
           light: 'Aktives Theme: light. Bitte Fokusrahmen gut sichtbar prüfen.',
           dark: 'Aktives Theme: dark. Bitte Helligkeit und Lesbarkeit kurz prüfen.'
         };
-
         html.setAttribute('data-theme', themeValue);
         if (themeStatusNode) {
           themeStatusNode.textContent = helperTextByTheme[themeValue] || 'Aktives Theme geändert.';
@@ -941,18 +1110,18 @@
         setResult('✅ Theme wurde gesetzt: ' + themeValue + '.');
         return true;
       }
-
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-default', 'project-close'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-default', 'project-close', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
-
+        if (actionValue.startsWith('gms-')) {
+          return gmsPlugin.handleAction(actionValue);
+        }
         if (actionValue === 'open-module') {
           const selectedValue = moduleSelector && typeof moduleSelector.value === 'string' ? moduleSelector.value.trim() : '';
           return openModule(selectedValue);
         }
-
         if (actionValue === 'project-setup') {
           if (projectDialog && typeof projectDialog.showModal === 'function') {
             projectDialog.showModal();
@@ -980,7 +1149,6 @@
           }
           return setResult('ℹ️ Projekt-Routine geschlossen. Sie können später fortsetzen.');
         }
-
         if (actionValue === 'save') {
           const message = '✅ Gespeichert um ' + getTimeStamp() + '.';
           updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
@@ -1000,7 +1168,6 @@
           setDebugDetails('Protokollhilfe geöffnet', 'Öffnen Sie logs/start.log und suchen Sie nach der letzten ❌-Meldung.');
           return setResult('➡️ Protokollhinweis: Öffnen Sie logs/start.log');
         }
-
         if (actionValue === 'error') {
           if (dialog && typeof dialog.showModal === 'function') {
             lastDialogTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -1015,7 +1182,6 @@
           setDebugDetails('Fehlerdialog fehlgeschlagen', 'Browser aktualisieren und Aktion erneut ausführen.');
           return setResult('⚠️ Fehlerdialog konnte nicht geöffnet werden. Browser prüfen.');
         }
-
         if (actionValue === 'close-dialog') {
           if (dialog && typeof dialog.close === 'function') {
             dialog.close();
@@ -1026,22 +1192,18 @@
           setDebugDetails('Dialog konnte nicht schließen', 'Seite neu laden und Aktion wiederholen.');
           return setResult('⚠️ Dialog konnte nicht geschlossen werden.');
         }
-
         return false;
       }
-
       function normalizeShortcutKey(event) {
         if (!event || typeof event.key !== 'string') {
           return '';
         }
         return event.key.trim().toLowerCase();
       }
-
       function executeShortcut(event) {
         if (!event || event.altKey !== true) {
           return false;
         }
-
         const shortcutMap = {
           s: 'save',
           r: 'retry',
@@ -1054,18 +1216,15 @@
         if (typeof actionFromShortcut !== 'string') {
           return false;
         }
-
         event.preventDefault();
         return executeAction(actionFromShortcut);
       }
-
       if (themeSelector) {
         themeSelector.addEventListener('change', function (event) {
           const value = event.target && typeof event.target.value === 'string' ? event.target.value : '';
           applyTheme(value);
         });
       }
-
       document.addEventListener('click', function (event) {
         const target = event.target;
         if (!(target instanceof HTMLElement)) {
@@ -1083,12 +1242,10 @@
         }
         executeAction(action);
       });
-
       document.addEventListener('keydown', function (event) {
         executeShortcut(event);
         keepDialogFocusInside(event);
       });
-
       applyTheme('balanced');
       updateProjectStatus(getStoredProjectPath());
       if (projectPathInput) {
@@ -1097,6 +1254,7 @@
       if (projectDialog && typeof projectDialog.showModal === 'function') {
         projectDialog.showModal();
       }
+      gmsPlugin.mount();
       setActiveNavigation('dashboard');
       setPluginStatus('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');

@@ -1,3 +1,6 @@
+DONE: GMS-Archiv als neue Sidebar-Ansicht im Hauptmodul ergänzt (Bulk-Adding, Zufall, Verlauf, Export/Import-Merge) (2026-02-22)
+DONE: Plugin-API-Vertrag im Dashboard umgesetzt (mount/unmount, getState/setState, exportPayload/importPayload) (2026-02-22)
+DONE: Laienfreundliche Hilfe-/Feedbacktexte für Duplikate, Kopieren und Import-Fehler ergänzt (2026-02-22)
 DONE: Projektordner wird jetzt zusätzlich in config/project_settings.json gespiegelt und als JSON validiert (2026-02-22)
 DONE: Smoke-Test unterstützt OFFLINE_ARTIFACT_MODE=warn für reine Offline-Umgebungen (klare Warnung statt Abbruch) (2026-02-22)
 DONE: README um Offline-Warnmodus und editierbare Projektpfad-Konfiguration erweitert (2026-02-22)
