@@ -1,5 +1,15 @@
 # provoware-html-tool
 
+## Entwicklungsstand (Iteration-Übersicht)
+- Fortschritt: **76%**
+- Erledigte Aufgaben:
+  - Barrierefreie Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl) für Kernaktionen im Dashboard ergänzt.
+  - A11y-Attribute `aria-keyshortcuts` + erklärender Hilfehinweis für Screenreader ergänzt.
+  - Smoke-Test prüft jetzt die neuen Tastaturhilfen automatisch.
+- Offene Aufgaben:
+  - CI-Pipeline soll die Full-Gates 1–5 bei jedem Commit automatisch ausführen.
+  - Zusätzlicher automatischer Browser-Test für Fokus-Reihenfolge im Dialog fehlt noch.
+
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
 ## Schnellstart
@@ -63,7 +73,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `73%`
+- Fortschritt: `76%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -79,6 +89,7 @@ cat logs/start.log
   - Check-Modus gibt jetzt einen klaren Gesamtstatus mit Exitcode, damit Fehler nicht still weiterlaufen
   - Startmodus stoppt jetzt bei fehlgeschlagenem Selbsttest mit klaren Next Steps
   - Dashboard-Template respektiert reduzierte Bewegung (prefers-reduced-motion) und erklärt den Hinweis für Laien
+  - Barrierefreie Tastatur-Kürzel (Alt+S/Alt+R/Alt+P/Alt+L) mit erklärendem Hilfe-Text und Screenreader-Attributen im Dashboard
 - Offen:
   - CI-Anbindung für den erweiterten Repo-Quality-Check (`start.sh` + `system/start_core.sh`)
   - CI-Anbindung für den neuen Mini-UX-Check

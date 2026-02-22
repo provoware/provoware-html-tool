@@ -49,3 +49,5 @@ NEXT: CI-Pipeline so erweitern, dass `bash start.sh --full-gates` bei jedem Comm
 - 3 Punkte abgeschlossen: neuer Auto-UX-Check in start.sh, verbesserte Theme-Hilfe im Template, Smoke-Test-Erweiterung.
 - Hilfe/A11y erweitert: Theme-Hilfe mit Screenreader-Bezug und beschreibendem Attribut (`aria-describedby`).
 - Nächster technischer Schritt: automatischen Kontrastrechner als zusätzliches Gate einbauen.
+DONE: Tastatur-Kürzel und A11y-Hilfe im Dashboard ergänzt, Smoke-Test erweitert (2026-02-22)
+NEXT: Automatischen Browser-UX-Test für Fokus-Reihenfolge und Dialog-Bedienung ergänzen (2026-02-22)

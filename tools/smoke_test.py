@@ -174,6 +174,11 @@ required_markers = [
     'id="hilfe-next-steps"',
     'id="theme-help"',
     'aria-describedby="theme-help"',
+    'id="shortcut-help"',
+    'aria-keyshortcuts="Alt+S"',
+    'aria-keyshortcuts="Alt+R"',
+    'aria-keyshortcuts="Alt+P"',
+    'aria-keyshortcuts="Alt+L"',
 ]
 missing = [marker for marker in required_markers if marker not in content]
 if missing:

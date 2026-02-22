@@ -175,11 +175,12 @@
     <section class="card" aria-labelledby="bereich-aufgaben">
       <h2 id="bereich-aufgaben">Bereich: Aktionen</h2>
       <p>Jeder Button bestätigt das Ergebnis und zeigt bei Fehlern klare nächste Schritte.</p>
+      <p class="muted" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll.</p>
       <div class="actions">
-        <button type="button" data-action="save">Speichern</button>
-        <button type="button" data-action="retry">Erneut versuchen</button>
-        <button type="button" data-action="repair">Reparatur starten</button>
-        <button type="button" data-action="log">Protokoll öffnen</button>
+        <button type="button" data-action="save" aria-keyshortcuts="Alt+S" aria-describedby="shortcut-help">Speichern</button>
+        <button type="button" data-action="retry" aria-keyshortcuts="Alt+R" aria-describedby="shortcut-help">Erneut versuchen</button>
+        <button type="button" data-action="repair" aria-keyshortcuts="Alt+P" aria-describedby="shortcut-help">Reparatur starten</button>
+        <button type="button" data-action="log" aria-keyshortcuts="Alt+L" aria-describedby="shortcut-help">Protokoll öffnen</button>
         <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
       </div>
       <p id="result" class="muted" role="status" aria-live="polite">Noch keine Aktion ausgeführt.</p>
@@ -280,6 +281,34 @@
         return false;
       }
 
+      function normalizeShortcutKey(event) {
+        if (!event || typeof event.key !== 'string') {
+          return '';
+        }
+        return event.key.trim().toLowerCase();
+      }
+
+      function executeShortcut(event) {
+        if (!event || event.altKey !== true) {
+          return false;
+        }
+
+        const shortcutMap = {
+          s: 'save',
+          r: 'retry',
+          p: 'repair',
+          l: 'log'
+        };
+        const shortcutKey = normalizeShortcutKey(event);
+        const actionFromShortcut = shortcutMap[shortcutKey];
+        if (typeof actionFromShortcut !== 'string') {
+          return false;
+        }
+
+        event.preventDefault();
+        return executeAction(actionFromShortcut);
+      }
+
       if (themeSelector) {
         themeSelector.addEventListener('change', function (event) {
           const value = event.target && typeof event.target.value === 'string' ? event.target.value : '';
@@ -297,6 +326,10 @@
           return;
         }
         executeAction(action);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        executeShortcut(event);
       });
 
       applyTheme('high-contrast');

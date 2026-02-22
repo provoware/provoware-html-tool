@@ -10,6 +10,11 @@
 
 # CHANGELOG
 
+## 2026-02-22 – Tastatur-Kürzel + A11y-Hilfe + Smoke-Absicherung
+- Was: Dashboard erhielt Alt-Kürzel für Speichern/Retry/Reparatur/Log inklusive `aria-keyshortcuts` und Hilfe-Text; Smoke-Test prüft die Marker automatisch.
+- Warum: Bedienung ohne Maus und klare Screenreader-Hinweise sollten robuster und schneller nutzbar werden.
+- Wirkung: Bessere Barrierefreiheit im Alltag, weniger Klickaufwand und automatische Qualitätssicherung für die neuen Hilfselemente.
+
 ## 2026-02-22 – Start-Kernlogik ausgelagert + Auto-Bootstrap + Quality-Update
 - Was: Neue Datei `system/start_core.sh` eingeführt und Kernfunktionen für Status, Fehlerdialoge, barrierearmen Statusbericht sowie Dependency-Bootstrap aus `start.sh` ausgelagert; `tools/run_quality_checks.sh` prüft nun zusätzlich `system/start_core.sh`; Smoke-Test validiert die neue Kernlogik-Datei.
 - Warum: Die Startlogik sollte wartbarer strukturiert werden (Systemkern getrennt), automatische Voraussetzungen klarer kommunizieren und Qualitätsprüfungen beide Shell-Komponenten abdecken.
