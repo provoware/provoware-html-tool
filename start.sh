@@ -157,8 +157,6 @@ print(",".join(valid))' "$THEME_CONFIG_FILE" 2>/dev/null || true)"
 	printf '%s' "$THEME_LIST_CACHE"
 }
 
-
-
 is_network_available() {
 	if ! command -v curl >/dev/null 2>&1; then
 		return 1
@@ -227,10 +225,6 @@ $(get_text "help_usage")
   Nur Reparatur (Repair):         ./start.sh --repair
   Nur Formatierung (Format):      ./start.sh --format
   Nur Selbsttest (Test):          ./start.sh --test
-  Safe-Mode:                      ./start.sh --safe
-  Verbesserungsbericht:           ./start.sh --doctor
-  Dashboard-Guide:                ./start.sh --dashboard-guide
-  Dashboard-Template:             ./start.sh --dashboard-template
   Schwachstellen-Bericht:         ./start.sh --weakness-report
   Screenshot-Baseline-Check:      ./start.sh --visual-baseline-check
   Pflicht-Gates 1-5:              ./start.sh --full-gates
@@ -246,16 +240,8 @@ Einfache Begriffe:
   Test = kurzer Selbsttest mit Erfolg/Fehler-Ausgabe
 
 $(get_text "help_accessibility")
-$(get_text "help_keyboard")
 $(get_text "help_icon_legend")
-$(get_text "help_message_source")
 $(get_text "help_full_gates")
-  Extra-Check: Automatischer Kontrasttest (WCAG) läuft in Gate 2 mit.
-  Optionaler Python-Lint: Wenn ruff installiert ist, wird er automatisch genutzt (keine Pflichtabhängigkeit).
-$(get_text "help_status_summary")
-$(get_text "help_doctor")
-$(get_text "help_weakness_report")
-$(get_text "release_help")
 TXT
 }
 
@@ -645,11 +631,6 @@ run_dashboard_guide() {
 	print_step "➡️" "$(get_text "dashboard_layout")"
 	print_step "➡️" "$(get_text "dashboard_accessibility")"
 	print_step "➡️" "$(get_text "dashboard_feedback")"
-	print_step "ℹ️" "Farben: Standardmäßig high-contrast nutzen; optional light/dark als Auswahl anbieten."
-	print_step "ℹ️" "Struktur: 1 Hauptaktion pro Bereich, maximal 5 Hauptpunkte pro Bildschirm, klare Überschriften."
-	print_step "ℹ️" "Eingabeprüfung: Pflichtfelder sofort prüfen und bei Fehlern konkrete Lösungen anzeigen."
-	print_step "ℹ️" "Output-Bestätigung: Nach jeder Aktion sichtbar bestätigen (z. B. 'Gespeichert um 10:42 Uhr')."
-	print_step "➡️" "Vollständige Befehle: './start.sh --check', './start.sh --repair', './start.sh --test', './start.sh --release-check'"
 	record_checked "Dashboard-Guide"
 	record_next_step "Guide in der echten GUI schrittweise umsetzen: zuerst Statusbereich, dann Aufgabenkarten, dann Hilfebereich"
 }
@@ -743,6 +724,13 @@ launch_local_gui() {
 	fi
 	record_checked "GUI-Theme ${gui_theme}"
 
+	local gui_entry="${GUI_ENTRY:-dashboard}"
+	if [[ "$gui_entry" != "dashboard" && "$gui_entry" != "status" ]]; then
+		print_error_with_actions "Ungültiges GUI_ENTRY '${gui_entry}'. Erlaubt sind nur 'dashboard' oder 'status'."
+		record_next_step "GUI_ENTRY korrigieren, z. B. 'GUI_ENTRY=dashboard ./start.sh'"
+		return 1
+	fi
+
 	local palette
 	palette="$(resolve_theme_colors "$gui_theme" 2>/dev/null || true)"
 	if [[ -z "$palette" ]]; then
@@ -772,6 +760,18 @@ launch_local_gui() {
 		return 1
 	fi
 	record_checked "GUI-Datei erzeugt"
+	if [[ "$gui_entry" == "dashboard" ]]; then
+		if [[ -f "${PROJECT_ROOT}/templates/dashboard_musterseite.html" ]] && cp "${PROJECT_ROOT}/templates/dashboard_musterseite.html" "$gui_file"; then
+			print_step "✅" "Hauptmodul-GUI als Startseite aktiviert (GUI_ENTRY=dashboard)."
+			record_checked "GUI-Einstieg dashboard"
+		else
+			print_step "⚠️" "Hauptmodul-Template fehlt oder ist nicht lesbar, Statusseite bleibt aktiv."
+			record_next_step "Template prüfen: templates/dashboard_musterseite.html und danach './start.sh' neu starten"
+		fi
+	else
+		print_step "ℹ️" "GUI-Einstieg auf Statusseite gesetzt (GUI_ENTRY=status)."
+		record_checked "GUI-Einstieg status"
+	fi
 
 	local server_ok="0"
 	if [[ -f "$gui_pid_file" ]] && kill -0 "$(cat "$gui_pid_file" 2>/dev/null)" 2>/dev/null && curl -fsS "http://127.0.0.1:${gui_port}/" >/dev/null 2>&1; then

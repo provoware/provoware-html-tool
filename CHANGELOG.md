@@ -1,3 +1,8 @@
+## 2026-02-22 – Start öffnet jetzt das Hauptmodul statt nur die Statusseite
+- Was: `start.sh` nutzt standardmäßig `GUI_ENTRY=dashboard` und kopiert die Hauptmodul-Datei `templates/dashboard_musterseite.html` als GUI-Startseite; optional bleibt `GUI_ENTRY=status` verfügbar.
+- Warum: Nutzer landeten trotz „GUI gestartet“ nur in einer Statuskarte und nicht im eigentlichen ModulTool.
+- Wirkung: Direkter Einstieg in die Hauptoberfläche, validierter GUI-Eingang mit klarer Fehlermeldung und weiterhin barrierefreundlicher Fallback auf die Statusseite.
+
 ## 2026-02-22 – Dashboard-UX mit klarerer Struktur und sichtbarem Pluginstatus verbessert
 - Was: Neues Standard-Theme „balanced“, Kartenhierarchie mit Prioritäts-Tags und gruppierte Sidebar-Navigation inkl. sichtbarem Pluginstatus ergänzt.
 - Warum: Nutzer sollen schneller erkennen, was wichtig ist, wo sie klicken und welches Modul aktiv ist – ohne Farbchaos.
