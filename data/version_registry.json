@@ -1,19 +1,19 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-text-json-validation-quality-gate",
+  "iteration": "2026.02.22-start-ci-hardening",
   "files": {
-    "start.sh": "2026.02.22.41",
+    "start.sh": "2026.02.22.42",
     "tools/smoke_test.py": "2026.02.22.27",
     "templates/dashboard_musterseite.html": "2026.02.22.40",
-    "README.md": "2026.02.22.41",
-    "todo.txt": "2026.02.22.41",
-    "CHANGELOG.md": "2026.02.22.41",
-    "data/version_registry.json": "2026.02.22.41",
+    "README.md": "2026.02.22.42",
+    "todo.txt": "2026.02.22.42",
+    "CHANGELOG.md": "2026.02.22.42",
+    "data/version_registry.json": "2026.02.22.42",
     "tools/run_quality_checks.sh": "2026.02.22.41",
     "tools/check_theme_contrast.py": "2026.02.22",
-    "system/start_core.sh": "2026.02.22.3",
+    "system/start_core.sh": "2026.02.22.42",
     "system/start_gui.sh": "2026.02.22.1",
-    ".github/workflows/full-gates.yml": "2026.02.22.7",
+    ".github/workflows/full-gates.yml": "2026.02.22.42",
     "tools/focus_order_check.py": "2026.02.22.1",
     "tools/browser_e2e_test.py": "2026.02.22.8",
     "tools/visual_baseline_check.py": "2026.02.22.8",
@@ -23,7 +23,7 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.41",
+    "WAITME.md": "2026.02.22.42",
     "config/messages.json": "2026.02.22.41"
   }
 }

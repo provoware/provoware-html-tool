@@ -238,3 +238,9 @@ tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 - **Punkt 3 (Hilfe/A11y):** `tools/run_quality_checks.sh` prüft `config/messages.json` automatisch und gibt klare Next Steps in einfacher Sprache.
 
 **Antwort auf die Frage „Sind Texte im Tool in JSON ausgelagert?“:** Ja. Die zentrale Datei ist `config/messages.json`; bei Fehlern nutzt das Tool sichere Standardtexte.
+
+
+## Update 2026-02-22 – Start-/CI-Härtung (3 Punkte)
+- `apt-get`-Reparatur läuft nur noch mit Root/Sudo (Administratorrechten) und gibt klare Next Steps, wenn Rechte fehlen.
+- Installer-Fehler werden in `logs/install.log` geschrieben und als direkter Befehl `cat logs/install.log` angezeigt.
+- Pflicht-Gates und CI nutzen jetzt konsistent `python3`; der CI-Job ist von `--repair` entkoppelt, damit Runner ohne Root stabiler bleiben.

@@ -19,20 +19,19 @@ jobs:
 
       - name: Install browser dependencies
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install playwright
-          python -m playwright install --with-deps chromium
+          python3 -m pip install --upgrade pip
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
 
-      - name: Run repair and full gates
+      - name: Run full gates (without repair)
         run: |
-          bash start.sh --repair
-          python -m compileall -q .
+          python3 -m compileall -q .
           bash tools/run_quality_checks.sh
-          python tools/smoke_test.py --profile full
+          python3 tools/smoke_test.py --profile full
           bash start.sh
 
       - name: Run strict browser e2e
-        run: python tools/browser_e2e_test.py --require-browser
+        run: python3 tools/browser_e2e_test.py --require-browser
 
       - name: Run weakness report channel
         run: bash start.sh --weakness-report

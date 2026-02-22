@@ -189,10 +189,48 @@ get_dependency_package() {
 install_with_package_manager() {
 	local manager_name="$1"
 	local package_name="$2"
+	local install_log_file="${LOG_DIR}/install.log"
+	mkdir -p "$LOG_DIR"
+	: >"$install_log_file"
+
+	run_install_command() {
+		"$@" >>"$install_log_file" 2>&1
+	}
+
+	ensure_apt_access() {
+		if [[ "$(id -u 2>/dev/null || printf '1')" -eq 0 ]]; then
+			printf 'apt-get'
+			return 0
+		fi
+		if command -v sudo >/dev/null 2>&1; then
+			printf 'sudo apt-get'
+			return 0
+		fi
+		print_step "⚠️" "apt-get benötigt Root-Rechte (Administratorrechte)."
+		print_step "➡️" "Nächster Schritt: Mit Root starten oder sudo installieren, dann './start.sh --repair' erneut ausführen."
+		record_next_step "Root/Sudo für apt-get bereitstellen und './start.sh --repair' erneut starten"
+		return 1
+	}
+
 	case "$manager_name" in
-		apt) command -v apt-get >/dev/null 2>&1 && apt-get update >/dev/null 2>&1 && apt-get install -y "$package_name" >/dev/null 2>&1 ;;
-		brew) command -v brew >/dev/null 2>&1 && brew install "$package_name" >/dev/null 2>&1 ;;
-		pip) command -v python3 >/dev/null 2>&1 && python3 -m pip install --disable-pip-version-check --quiet "$package_name" >/dev/null 2>&1 ;;
+		apt)
+			command -v apt-get >/dev/null 2>&1 || return 1
+			local apt_cmd
+			apt_cmd="$(ensure_apt_access)" || return 1
+			run_install_command bash -lc "$apt_cmd update && $apt_cmd install -y '$package_name'"
+			;;
+		brew)
+			command -v brew >/dev/null 2>&1 || return 1
+			run_install_command brew install "$package_name"
+			;;
+		pip)
+			command -v python3 >/dev/null 2>&1 || return 1
+			run_install_command python3 -m pip install --disable-pip-version-check --quiet "$package_name"
+			;;
 		*) return 1 ;;
 	esac
+
+	if [[ -s "$install_log_file" ]]; then
+		record_checked "Installer-Log ${install_log_file}"
+	fi
 }
