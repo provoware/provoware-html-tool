@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **98%**
+- Fortschritt: **99%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -21,9 +21,9 @@
   - Konsolenausgabe nutzt jetzt Abschnittsblöcke für Start, Check, Repair und Full-Gates, damit die Reihenfolge deutlich ruhiger lesbar ist.
   - GUI-Befehlshinweise wurden als nummerierte Schrittfolge mit einfachen Begriffserklärungen erweitert (inklusive Debug-Befehl).
 - Offene Aufgaben:
-  - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
-  - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
-  - Browser-E2E soll später als CI-Matrix auch mit Firefox/WebKit laufen (derzeit nur Chromium als Pflichtlauf).
+  - Browser-E2E-Artefakte für Chromium/Firefox/WebKit müssen erzeugt und im CI-Flow abgelegt werden.
+  - `config/themes.json` sollte von einer reinen Liste auf eine Farbwert-Struktur je Theme umgestellt werden (`bg`, `text`, `primary`, `focus`).
+  - Optionale Python-Lint-Absicherung (Ruff) sollte im CI als weiche Warnung ergänzt werden.
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
@@ -214,3 +214,36 @@ cat logs/start.log
 - Laienvorschläge: (1) Bei Fehlermeldungen zuerst „Erneut versuchen“, dann „Reparatur“ nutzen. (2) Bei unklaren Meldungen `cat logs/start.log` öffnen und letzte ❌-Zeile lesen.
 - Nächster Schritt: Einen echten Browser-E2E-Dialogtest ergänzen, der den Fokusweg mit Tab-Tasten automatisch durchklickt und bei Fehlern ein Bild als Nachweis speichert.
 
+
+
+## Iteration 2026-02-22 (Release-Lücken klarer gemacht)
+### A) Fundstelle (beobachten)
+- Problem: Der Release-Check meldete nur fehlende Tools, aber nicht klar genug die verbleibenden Release-Lücken aus Theme-Struktur und Rest-Risiken.
+- Risiko: Teams übersehen leicht, warum der Release trotz grünem Alltagstest noch nicht vollständig freigabefähig ist.
+- Erwartung: Start-Routine nennt Lücken mit exakten Befehlen und verständlichen Next Steps in einfacher Sprache.
+
+### B) Change-Scope (vor Patch)
+- Ziel: Drei kleinste, vollständige Punkte für Release-Transparenz und A11y-Hilfe umsetzen.
+- Dateien: `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Block.
+- Abnahmekriterium: `./start.sh --weakness-report` und `./start.sh --release-check` zeigen klare, reproduzierbare Hinweise zu Theme-Struktur und verbleibenden Release-Lücken.
+
+### C) Patch (kurz)
+- Punkt 1 – Änderung: Theme-Validierung im Schwachstellen-Bericht robust gegen Listenformat gemacht (kein Python-Traceback mehr, klare Fehlermeldung).
+- Punkt 2 – Änderung: Release-Check prüft jetzt explizit die Theme-Struktur und liefert direkte Reparaturbefehle (`json.tool`, Farbwerte ergänzen).
+- Punkt 3 – Änderung: Hilfeelemente/Nutzertexte erweitert (Schnellfix-Befehl + Beispielstruktur), damit auch Laien ohne Fachwissen den nächsten Schritt ausführen können.
+
+### D) Gates
+- G1: `python -m compileall -q .`
+- G2: `bash tools/run_quality_checks.sh`
+- G3: `python tools/smoke_test.py`
+- G4: `bash start.sh`
+- G5: Mini-UX-Check (deutsche Hinweise, Next Steps, kein Crash, Theme/A11y geprüft)
+
+### E) Ergebnis
+- Status: DONE
+- Doku: README + CHANGELOG + todo aktualisiert
+- Laienvorschläge:
+  1. Starten Sie zuerst `./start.sh --repair`, damit fehlende Werkzeuge automatisch nachinstalliert werden.
+  2. Führen Sie danach den Komplettlauf `./start.sh --full-gates` aus, um alle Pflichtprüfungen in Reihenfolge zu sehen.
+- Nächster Schritt: Stellen Sie `config/themes.json` vollständig auf Theme-Objekte mit Farbwerten um und speichern Sie pro Browser ein aktuelles E2E-Artefakt, damit der Release-Check ohne Restwarnung grün wird.

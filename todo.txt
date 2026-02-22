@@ -109,3 +109,7 @@ DONE: Visual-Baseline-Check (Screenshot-Artefakt) mit Startmodus und Full-Smoke-
 NEXT: Browser-E2E optional auf Firefox/WebKit erweitern und Artefakte je Browser sichern (2026-02-22)
 DONE: GUI-Autostart mit klarer Headless-Erklärung, strukturierter Konsolenausgabe und verbesserten Befehlshinweisen umgesetzt (2026-02-22)
 NEXT: Optional Browser-Öffnen über konfigurierbaren Öffner (BROWSER_CMD) ergänzen und im Startdialog erklären (2026-02-22)
+
+DONE: Release-Check zeigt Theme-Struktur-Lücken jetzt ohne Traceback mit klaren Reparaturbefehlen (2026-02-22)
+NEXT: config/themes.json auf vollständige Farbwerte je Theme umstellen und Browser-Artefakte für chromium/firefox/webkit erzeugen (2026-02-22)
+
