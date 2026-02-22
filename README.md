@@ -34,6 +34,7 @@ Optional mit Detail-Protokoll (Debug = Fehlersuche):
 - `./start.sh --test` → Nur Selbsttests
 - `./start.sh --doctor` → Verbesserungsbericht mit klaren Befehlen
 - `./start.sh --dashboard-guide` → Laien-Guide für Dashboard-Aufbau und GUI-Layout
+- `./start.sh --dashboard-template` → Sofort nutzbare Dashboard-Musterseite als HTML-Template prüfen
 - `./start.sh --safe` → Sicherer Basis-Modus mit klaren Hilfehinweisen
 - `./start.sh --release-check` → Kompakter Release-Check mit Ergebnis
 - `./start.sh --help` → Hilfe anzeigen
@@ -95,14 +96,17 @@ Statusinformationen werden robust über **Symbol + Text** ausgegeben, damit Lesb
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `36%`
+- Fortschritt: `42%`
 - Abgeschlossen:
   - Auto-Reparatur für Runtime-Tools
   - GUI-Theme-Auswahl mit Fokus auf Kontrast
   - Doctor-Modus mit klaren Verbesserungsbefehlen
   - Dashboard-Guide für laienfreundliches GUI-Layout
   - Pflicht-Gates G2 und G3 mit Tools-Skripten automatisiert
+  - Dashboard-Musterseite als direkt nutzbares HTML-Template mit Theme-Umschalter, Buttons und Fehlerdialog
+  - Startmodus '--dashboard-template' mit Struktur-Validierung und klaren Next Steps
+  - Smoke-Test prüft jetzt auch Template-Marker und Template-Startmodus
 - Offen:
   - Konfigurationsdatei für Themes in `config/`
   - weitere Auslagerung von Kernlogik nach `system/`
-- Nächster Schritt: Dashboard-Guide als eigene GUI-Seite ausgeben und per Smoke-Test auf Schlüsseltexte prüfen.
+- Nächster Schritt: Theme-Werte und Texte in konfigurierbare Dateien auslagern und den Template-Selbsttest um Kontrast-Messung erweitern.

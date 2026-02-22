@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="de" data-theme="high-contrast">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Provoware Dashboard-Musterseite</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --surface: #101820;
+      --text: #ffffff;
+      --muted: #d1d5db;
+      --primary: #74f2ce;
+      --warn: #ffe08a;
+      --danger: #ff8f8f;
+      --focus: #ffd60a;
+      --border: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.35);
+      color-scheme: dark;
+    }
+
+    html[data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #334155;
+      --primary: #0f766e;
+      --warn: #92400e;
+      --danger: #b91c1c;
+      --focus: #1d4ed8;
+      --border: #0f172a;
+      --shadow: rgba(15, 23, 42, 0.15);
+      color-scheme: light;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #111827;
+      --surface: #1f2937;
+      --text: #f9fafb;
+      --muted: #e5e7eb;
+      --primary: #34d399;
+      --warn: #fbbf24;
+      --danger: #fca5a5;
+      --focus: #f59e0b;
+      --border: #93c5fd;
+      --shadow: rgba(0, 0, 0, 0.45);
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .layout {
+      max-width: 980px;
+      margin: 1.25rem auto;
+      padding: 0 1rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 3px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+
+    h1, h2 { margin: 0 0 .6rem 0; }
+    p { margin: .2rem 0 .6rem 0; }
+
+    .muted { color: var(--muted); }
+    .status {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: .2rem .6rem;
+      font-weight: 700;
+    }
+
+    .actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+    button {
+      border: 2px solid var(--border);
+      background: transparent;
+      color: inherit;
+      border-radius: 8px;
+      padding: .5rem .8rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover { border-color: var(--primary); }
+    button:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    dialog {
+      border: 3px solid var(--danger);
+      border-radius: 10px;
+      max-width: 560px;
+      width: calc(100% - 2rem);
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    dialog::backdrop { background: rgba(0,0,0,.6); }
+  </style>
+</head>
+<body>
+  <main class="layout" role="main" aria-live="polite">
+    <section class="card">
+      <h1>Dashboard-Musterseite (sofort nutzbar)</h1>
+      <p class="muted">Klare Bereiche, große Buttons, verständliche Fehlerdialoge und Theme-Umschalter.</p>
+      <p><span class="status">✅ System bereit</span></p>
+    </section>
+
+    <section class="card" aria-labelledby="bereich-aufgaben">
+      <h2 id="bereich-aufgaben">Bereich: Aktionen</h2>
+      <p>Jeder Button bestätigt das Ergebnis und zeigt bei Fehlern klare nächste Schritte.</p>
+      <div class="actions">
+        <button type="button" data-action="save">Speichern</button>
+        <button type="button" data-action="retry">Erneut versuchen</button>
+        <button type="button" data-action="repair">Reparatur starten</button>
+        <button type="button" data-action="log">Protokoll öffnen</button>
+        <button type="button" data-action="error">Beispiel-Fehler anzeigen</button>
+      </div>
+      <p id="result" class="muted" aria-live="polite">Noch keine Aktion ausgeführt.</p>
+    </section>
+
+    <section class="card" aria-labelledby="bereich-theme">
+      <h2 id="bereich-theme">Bereich: Theme-Umschalter</h2>
+      <label for="theme-switcher"><strong>Theme wählen:</strong></label>
+      <select id="theme-switcher" data-theme-switcher>
+        <option value="high-contrast">High Contrast (hoher Kontrast)</option>
+        <option value="light">Light (hell)</option>
+        <option value="dark">Dark (dunkel)</option>
+      </select>
+      <p class="muted">Hinweis: Status wird nie nur über Farben gezeigt (immer Symbol + Text).</p>
+    </section>
+  </main>
+
+  <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text">
+    <h2 id="error-title">❌ Fehler erkannt</h2>
+    <p id="error-text">Die Aktion konnte nicht abgeschlossen werden. Bitte folgen Sie den nächsten Schritten.</p>
+    <div class="actions">
+      <button type="button" data-action="retry">Erneut versuchen</button>
+      <button type="button" data-action="repair">Reparatur</button>
+      <button type="button" data-action="log">Protokoll öffnen</button>
+      <button type="button" data-action="close-dialog">Dialog schließen</button>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const resultNode = document.getElementById('result');
+      const dialog = document.getElementById('error-dialog');
+      const themeSelector = document.getElementById('theme-switcher');
+
+      function setResult(message) {
+        if (!resultNode) {
+          return false;
+        }
+        resultNode.textContent = message;
+        return true;
+      }
+
+      function applyTheme(themeValue) {
+        const allowed = ['high-contrast', 'light', 'dark'];
+        if (!allowed.includes(themeValue)) {
+          setResult('⚠️ Ungültiges Theme. Erlaubt sind: high-contrast, light, dark.');
+          return false;
+        }
+        html.setAttribute('data-theme', themeValue);
+        setResult('✅ Theme wurde gesetzt: ' + themeValue + '.');
+        return true;
+      }
+
+      function executeAction(actionValue) {
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog'];
+        if (!known.includes(actionValue)) {
+          return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
+        }
+
+        if (actionValue === 'save') return setResult('✅ Gespeichert um ' + new Date().toLocaleTimeString('de-DE') + '.');
+        if (actionValue === 'retry') return setResult('➡️ Erneut versuchen wurde vorbereitet. Aktion jetzt wiederholen.');
+        if (actionValue === 'repair') return setResult('➡️ Reparaturhinweis: Starten Sie ./start.sh --repair');
+        if (actionValue === 'log') return setResult('➡️ Protokollhinweis: Öffnen Sie logs/start.log');
+
+        if (actionValue === 'error') {
+          if (dialog && typeof dialog.showModal === 'function') {
+            dialog.showModal();
+            return setResult('❌ Fehlerdialog geöffnet. Bitte nächsten Schritt wählen.');
+          }
+          return setResult('⚠️ Fehlerdialog konnte nicht geöffnet werden. Browser prüfen.');
+        }
+
+        if (actionValue === 'close-dialog') {
+          if (dialog && typeof dialog.close === 'function') {
+            dialog.close();
+            return setResult('✅ Fehlerdialog geschlossen.');
+          }
+          return setResult('⚠️ Dialog konnte nicht geschlossen werden.');
+        }
+
+        return false;
+      }
+
+      if (themeSelector) {
+        themeSelector.addEventListener('change', function (event) {
+          const value = event.target && typeof event.target.value === 'string' ? event.target.value : '';
+          applyTheme(value);
+        });
+      }
+
+      document.addEventListener('click', function (event) {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) {
+          return;
+        }
+        const action = target.getAttribute('data-action');
+        if (typeof action !== 'string' || action.length === 0) {
+          return;
+        }
+        executeAction(action);
+      });
+
+      applyTheme('high-contrast');
+    })();
+  </script>
+</body>
+</html>
