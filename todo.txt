@@ -1,3 +1,4 @@
+DONE: SC2155-Blocker in start.sh behoben (Offline-Paket nutzt jetzt getrennte Deklaration/Zuweisung für shellcheck-konforme Robustheit) (2026-02-22)
 DONE: Dashboard-Feinanpassung für sehr kleine Displays ergänzt (≤420px: bessere Abstände, Fokusfreundlichkeit, lesbare Statuszeile + Hilfehinweis) (2026-02-22)
 DONE: start.sh um einen Schalter `--offline-pack` erweitert, der Offline-Artefakte in data/ vorbereitet und als Archiv bündelt (2026-02-22)
 DONE: Playwright-Offline-Validierung als festen Smoke-Test-Schritt ergänzt (klare Next Steps bei Fehlern) (2026-02-22)
@@ -13,6 +14,7 @@ DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (20
 STATUS: 99% abgeschlossen
 
 NEXT (Priorität hoch, offen)
+- [ ] Gate G3 (smoke_test.py) kann offline ohne Playwright-Artefakte fehlschlagen: optionalen Fallback-Modus "warn statt fail" für reine Offline-Umgebungen ergänzen.
 - [x] 95%: Vollständige Offline-Bundle-Erstellung automatisiert (Wheel-Download + Browsercache Export in ein Archiv) via --offline-pack.
 - [x] 97%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigener Testschritt mit klarer Fehlerhilfe ergänzt.
 - [x] 99%: start.sh um einen Schalter `--offline-pack` erweitert, der alle Offline-Artefakte in `data/` vorbereitet.

@@ -1,3 +1,17 @@
+## 2026-02-22 – Shellcheck-Blocker im Offline-Paket behoben + robustere Qualitätshinweise
+- Scope-Kontrolle:
+  - Problem: `start.sh --check` scheiterte durch Shellcheck-Hinweis SC2155 im Offline-Paket-Modus.
+  - Ziel: Shellcheck-konforme Variablenzuweisung nutzen, die Start-Routine gegen ähnliche Fälle härten und Hilfetexte für Laien klarer machen.
+  - Dateien: `start.sh`, `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) SC2155-Fix per getrennter Deklaration/Zuweisung, 2) Doku-Hinweis für Fehlerbild + Next Steps, 3) To-do/Gates-Status + Versionsregister aktualisiert.
+  - Abnahme: `./start.sh --check` meldet keinen SC2155-Fehler mehr an der Offline-Paket-Zuweisung.
+- Was:
+  1) `start.sh` im Offline-Paket-Modus auf Shellcheck-Best-Practice angepasst (`local package_file` und separate Zuweisung).
+  2) README um leicht verständlichen Hilfehinweis „SC2155 erkennen und beheben“ mit konkreten Befehlen ergänzt.
+  3) To-do und Versionsregister aktualisiert; Gate-Status mit transparentem Hinweis auf Offline-Einschränkung dokumentiert.
+- Warum: Ein einzelner Lint-Blocker darf die autonome Start-Routine nicht stoppen.
+- Wirkung: Check/Repair laufen robuster, Fehler sind einfacher reproduzierbar und Laien erhalten klare Next Steps.
+
 ## 2026-02-22 – Professionellere Abhängigkeitsauflösung über zentrale Mapping-Konfiguration
 - Scope-Kontrolle:
   - Problem: Paketnamen unterscheiden sich je Paketmanager und führten zu unnötigen Reparaturfehlern in der Start-Routine.
