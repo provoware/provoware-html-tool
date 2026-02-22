@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **94%**
+- Fortschritt: **99%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -15,7 +15,7 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 
 - Projekt-Routine beim GUI-Start: fragt den Projektordner ab, validiert den Pfad, erstellt fehlende Ordner automatisch im Nutzerverzeichnis und zeigt den aktiven Pfad im Dashboard.
 - **Offen**
-  - Vollautomatisches Offline-Bundle für Abhängigkeiten (inklusive Playwright-Browsercache) als Ein-Befehl-Export.
+  - Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Zusätzliche Feinanpassung für sehr kleine Displays.
   - Optionale Kopplung des Modul-Starters an echte Backend-Module (Datenquellen).
 
@@ -132,4 +132,26 @@ Beispiele:
 ```bash
 bash start.sh
 PROJECT_FOLDER=/home/$USER/Provoware-Projekte/MeinProjekt bash start.sh
+```
+
+
+## Offline-Paket in einem Befehl (neu)
+Für Systeme ohne Internet gibt es jetzt einen direkten Export:
+
+```bash
+bash start.sh --offline-pack
+```
+
+Was passiert automatisch:
+1. Prüft und ergänzt Playwright-Artefakte (Wheels + Browsercache), soweit möglich.
+2. Bündelt `data/offline_wheels` und `data/playwright-browsers` als Archiv in `data/`.
+3. Zeigt klare Next Steps in einfacher Sprache.
+
+Typischer Einsatz:
+```bash
+# Online vorbereiten
+bash start.sh --offline-pack
+
+# Archiv auf Offline-Rechner kopieren und dort entpacken
+tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 ```
