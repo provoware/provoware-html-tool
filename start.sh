@@ -36,7 +36,11 @@ DEFAULT_TEXT_JSON='{
   "doctor_intro": "Doctor-Bericht: Diese Punkte verbessern Stabilität, Qualität und Barrierefreiheit.",
   "doctor_accessibility": "Barrierefreiheit verbessern: GUI-Theme testen mit GUI_THEME=high-contrast ./start.sh",
   "doctor_quality": "Codequalität verbessern: ./start.sh --format && ./start.sh --test",
-  "doctor_release": "Release-Reife prüfen: ./start.sh --release-check"
+  "doctor_release": "Release-Reife prüfen: ./start.sh --release-check",
+  "dashboard_intro": "Dashboard-Guide: So wird eine Oberfläche laienfreundlich, barrierefrei und klar bedienbar.",
+  "dashboard_layout": "Layout-Regel: Oben Status, Mitte wichtigste Aufgaben, unten Hilfe + nächste Schritte.",
+  "dashboard_accessibility": "Barrierefreiheit-Regel: Hoher Kontrast, große Klickflächen, Fokusrahmen und klare Sprache.",
+  "dashboard_feedback": "Feedback-Regel: Jede Aktion zeigt sofort Ergebnis + nächsten Schritt in einfacher Sprache."
 }'
 TEXT_JSON_CACHE=""
 
@@ -94,6 +98,7 @@ $(get_text "help_usage")
   ./start.sh --test      Nur Tests ausführen
   ./start.sh --safe      Safe-Mode: nur Basis-Checks + klare Hilfehinweise
   ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
+  ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
   ./start.sh --help      Hilfe anzeigen
@@ -215,6 +220,10 @@ validate_args() {
 			;;
 		--doctor)
 			MODE="doctor"
+			mode_count=$((mode_count + 1))
+			;;
+		--dashboard-guide)
+			MODE="dashboard-guide"
 			mode_count=$((mode_count + 1))
 			;;
 		--debug)
@@ -485,6 +494,21 @@ run_doctor_mode() {
 	return 1
 }
 
+run_dashboard_guide() {
+	print_step "✅" "Guide-Modus aktiv: Laienfreundliches Dashboard-Design wird angezeigt."
+	print_step "ℹ️" "$(get_text "dashboard_intro")"
+	print_step "➡️" "$(get_text "dashboard_layout")"
+	print_step "➡️" "$(get_text "dashboard_accessibility")"
+	print_step "➡️" "$(get_text "dashboard_feedback")"
+	print_step "ℹ️" "Farben: Standardmäßig high-contrast nutzen; optional light/dark als Auswahl anbieten."
+	print_step "ℹ️" "Struktur: 1 Hauptaktion pro Bereich, maximal 5 Hauptpunkte pro Bildschirm, klare Überschriften."
+	print_step "ℹ️" "Eingabeprüfung: Pflichtfelder sofort prüfen und bei Fehlern konkrete Lösungen anzeigen."
+	print_step "ℹ️" "Output-Bestätigung: Nach jeder Aktion sichtbar bestätigen (z. B. 'Gespeichert um 10:42 Uhr')."
+	print_step "➡️" "Vollständige Befehle: './start.sh --check', './start.sh --repair', './start.sh --test', './start.sh --release-check'"
+	record_checked "Dashboard-Guide"
+	record_next_step "Guide in der echten GUI schrittweise umsetzen: zuerst Statusbereich, dann Aufgabenkarten, dann Hilfebereich"
+}
+
 run_check_mode() {
 	print_step "✅" "Check-Modus aktiv."
 	check_runtime_prerequisites
@@ -727,6 +751,9 @@ main() {
 		;;
 	doctor)
 		run_doctor_mode
+		;;
+	dashboard-guide)
+		run_dashboard_guide
 		;;
 	safe)
 		run_safe_mode

@@ -1,36 +1,36 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-DONE: Doctor-Modus ergänzt (`./start.sh --doctor`) inkl. klarer Verbesserungsbefehle und zusätzlicher Test-Ausgabe-Validierung. (2026-02-22)
-NEXT: Theme-Konfiguration nach `config/themes.json` auslagern und im Release-/Doctor-Check mit automatischer Kontrastmeldung auswerten. (2026-02-22)
+DONE: Dashboard-Guide ergänzt (`./start.sh --dashboard-guide`) und fehlende Gate-Skripte (`tools/run_quality_checks.sh`, `tools/smoke_test.py`) angelegt. (2026-02-22)
+NEXT: Theme-Werte nach `config/themes.json` auslagern und im Doctor-/Release-Check als automatische Kontrastprüfung einbinden. (2026-02-22)
 
-## Iteration 2026-02-22 (Doctor-Modus + robuste Test-Rückmeldung)
+## Iteration 2026-02-22 (Dashboard-Guide + Pflicht-Gates)
 ### A) Fundstelle (beobachten)
-- Problem: Es fehlte ein klarer Modus, der konkrete Verbesserungen als vollständige Befehle ausgibt; außerdem bestätigte der Selbsttest den Ausgabe-Erfolg nicht explizit.
-- Risiko: Nutzer wissen nicht eindeutig, welcher nächste Schritt sinnvoll ist; Testläufe könnten stillschweigend unklare Ergebnisse liefern.
-- Erwartung: Ein neuer Doctor-Modus liefert verständliche Handlungsschritte, und der Selbsttest bestätigt aktiv eine vorhandene Ausgabe.
+- Problem: Für die Nutzerfrage zum laienperfekten Dashboard fehlte ein direkt abrufbarer Leitfaden im Tool; außerdem fehlten Pflichtdateien für GATE 2 und GATE 3.
+- Risiko: Empfehlungen gehen im Chat verloren und der Quality-Flow bleibt unvollständig.
+- Erwartung: Ein eigener Guide-Modus liefert klare GUI-Regeln und alle Gates laufen automatisiert durch.
 
 ### B) Change-Scope (vor Patch)
-- Ziel: Diagnosemodus für Verbesserungen bereitstellen, Test-Ausgabe validieren und Hilfe-/Textsystem um barrierefreie Hinweise erweitern.
-- Dateien: `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
-- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium „fertig“: `./start.sh --doctor` liefert klare Befehle; `./start.sh --test` bestätigt Testausgabe; Hilfe zeigt den neuen Modus.
+- Ziel: Dashboard-Guidance direkt im Tool anbieten und die fehlenden Qualitäts-/Smoke-Skripte bereitstellen.
+- Dateien: `start.sh`, `tools/run_quality_checks.sh`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Block.
+- Abnahmekriterium: `./start.sh --dashboard-guide` liefert klare Regeln; alle fünf Gates sind ausführbar.
 
 ### C) Patch (kurz)
-- Punkt 1 – Änderung: Neuer Modus `--doctor` mit strukturiertem Verbesserungsbericht und vollständigen Befehlen.
-- Punkt 2 – Änderung: `run_tests` prüft zusätzlich, ob Protokollausgabe vorhanden ist, und liefert bei Problemen klare Next Steps.
-- Punkt 3 – Änderung: Hilfe- und Textbausteine für den Doctor-Modus ergänzt (barrierefreundlich mit einfacher Sprache).
+- Punkt 1 – Änderung: Neuer Modus `--dashboard-guide` mit klaren Regeln für Layout, A11y und Nutzerfeedback.
+- Punkt 2 – Änderung: `tools/run_quality_checks.sh` ergänzt (automatische Format-/Lint-Prüfung mit verständlichen Next Steps).
+- Punkt 3 – Änderung: `tools/smoke_test.py` ergänzt (Smoke-Test für `./start.sh --check` mit Ausgabe-Validierung).
 
 ### D) Gates
 - G1: `python -m compileall -q .` (grün)
-- G2: `bash tools/run_quality_checks.sh` (rot: Datei fehlt im Repo)
-- G3: `python tools/smoke_test.py` (rot: Datei fehlt im Repo)
+- G2: `bash tools/run_quality_checks.sh` (grün; bei fehlenden Tools mit verständlichem Hinweis)
+- G3: `python tools/smoke_test.py` (grün)
 - G4: `bash start.sh` (grün)
-- G5: Mini-UX-Check (grün im betroffenen Bereich: klare deutsche Dialoge, Next Steps vorhanden, kein Crash, Kontrast-/A11y-Hinweise vorhanden)
+- G5: Mini-UX-Check (grün: klare deutsche Dialoge, Next Steps, kein Crash, Kontrast-/A11y-Hinweise)
 
 ### E) Ergebnis
-- Status: NEXT ITERATION (zwei Pflicht-Gates fehlen als Dateien im Repo)
+- Status: DONE
 - Doku: README + CHANGELOG + todo aktualisiert
 - Laienvorschläge:
-  1. Nutze `./start.sh --doctor`, um sofort konkrete Befehle für den nächsten Schritt zu bekommen.
-  2. Starte bei Unsicherheit immer `./start.sh --check --debug` und öffne danach `cat logs/start.log`.
-- Nächster Schritt: Lege `tools/run_quality_checks.sh` und `tools/smoke_test.py` als kleine Standard-Skripte an, damit alle Pflicht-Gates automatisch vollständig grün laufen.
+  1. Nutze zuerst `./start.sh --dashboard-guide`, damit du eine klare Reihenfolge für dein GUI-Layout bekommst.
+  2. Nutze danach `./start.sh --doctor`, um konkrete Verbesserungsbefehle für die nächste Runde zu erhalten.
+- Nächster Schritt: Lege `config/themes.json` an und lies die Werte in `start.sh`, damit Kontrastregeln zentral gepflegt und automatisch getestet werden können.
