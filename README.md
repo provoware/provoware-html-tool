@@ -27,7 +27,7 @@ bash start.sh
 5. Mini-UX-Check (manuell, 2 Minuten)
 
 ## Start-Routine (vollautomatisch)
-`start.sh` prüft Voraussetzungen, versucht fehlende Werkzeuge automatisch zu reparieren (Repair = automatische Behebung), kann die Pflicht-Gates 1-4 strikt automatisch ausführen und gibt klare nächste Schritte aus.
+`start.sh` prüft Voraussetzungen, versucht fehlende Werkzeuge automatisch zu reparieren (Repair = automatische Behebung), kann die Pflicht-Gates 1-5 strikt automatisch ausführen und gibt klare nächste Schritte aus.
 
 ### Erwartete Mindestausgabe
 - Geprüft: …
@@ -63,15 +63,17 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `61%`
+- Fortschritt: `66%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
   - Theme-Konfiguration in `config/themes.json` mit Validierung in Start- und Smoke-Routine
   - A11y-Erweiterungen: Skip-Link, `aria-modal`, Fokusfreundliche Elemente und klare Next Steps
   - Automatischer Mini-UX-Check (`--ux-check-auto`) prüft Hilfe-Texte, Next Steps und wichtige A11y-Marker im Template
+  - Neuer WCAG-Kontrasttest (`python tools/check_theme_contrast.py`) als fester Teil von Repo-Quality und Smoke-Test
+  - Full-Gates führen jetzt automatisiert Gates 1-5 aus (inklusive Mini-UX-Check)
 - Offen:
   - Weitere Auslagerung von Start-Kernlogik in `system/`
-  - Automatischer WCAG-Kontrasttest als separater Check
+  - CI-Anbindung für den neuen WCAG-Kontrasttest
   - CI-Anbindung für den neuen Mini-UX-Check
 - Nächster Schritt: Die neuen Full-Gates in einer CI-Pipeline automatisch bei jedem Commit ausführen und bei Fehlern mit Statusbericht abbrechen.

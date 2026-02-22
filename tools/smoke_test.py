@@ -11,6 +11,7 @@ START_SCRIPT = PROJECT_ROOT / "start.sh"
 DASHBOARD_TEMPLATE = PROJECT_ROOT / "templates" / "dashboard_musterseite.html"
 THEME_CONFIG = PROJECT_ROOT / "config" / "themes.json"
 STATUS_SUMMARY = PROJECT_ROOT / "logs" / "status_summary.txt"
+CONTRAST_CHECK = PROJECT_ROOT / "tools" / "check_theme_contrast.py"
 
 
 def print_step(icon: str, text: str) -> None:
@@ -30,6 +31,11 @@ if not DASHBOARD_TEMPLATE.exists():
 if not THEME_CONFIG.exists():
     print_step("❌", "Smoke-Test abgebrochen: config/themes.json fehlt.")
     print_step("➡️", "Nächster Schritt: Theme-Konfiguration anlegen und erneut testen.")
+    sys.exit(1)
+
+if not CONTRAST_CHECK.exists():
+    print_step("❌", "Smoke-Test abgebrochen: tools/check_theme_contrast.py fehlt.")
+    print_step("➡️", "Nächster Schritt: Kontrast-Checker-Datei ergänzen und erneut testen.")
     sys.exit(1)
 
 print_step("✅", "Smoke-Test gestartet: ./start.sh --check")
@@ -73,6 +79,26 @@ if "einsatzbereit" not in template_result.stdout:
     sys.exit(1)
 
 
+print_step("✅", "Smoke-Test erweitert: python tools/check_theme_contrast.py")
+contrast_result = subprocess.run(
+    ["python3", str(CONTRAST_CHECK)],
+    cwd=PROJECT_ROOT,
+    text=True,
+    capture_output=True,
+)
+
+if contrast_result.returncode != 0:
+    print_step("❌", "Smoke-Test fehlgeschlagen: Kontrast-Check lieferte Fehler.")
+    print(contrast_result.stdout)
+    print(contrast_result.stderr)
+    print_step("➡️", "Nächster Schritt: Theme-Farben im Template anpassen und erneut testen.")
+    sys.exit(contrast_result.returncode)
+
+if "Kontrast-Check abgeschlossen" not in contrast_result.stdout:
+    print_step("❌", "Smoke-Test fehlgeschlagen: Kontrast-Erfolgsausgabe fehlt.")
+    print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/check_theme_contrast.py' prüfen.")
+    sys.exit(1)
+
 print_step("✅", "Smoke-Test erweitert: ./start.sh --ux-check-auto")
 ux_result = subprocess.run(
     ["bash", str(START_SCRIPT), "--ux-check-auto"],
@@ -109,7 +135,7 @@ if os.environ.get("SKIP_FULL_GATES") != "1":
         print_step("➡️", "Nächster Schritt: Gate-Ausgaben prüfen und erneut testen.")
         sys.exit(full_gates_result.returncode)
 
-    if "Alle automatischen Gates 1-4 erfolgreich abgeschlossen" not in full_gates_result.stdout:
+    if "Alle automatischen Gates 1-5 erfolgreich abgeschlossen" not in full_gates_result.stdout:
         print_step("❌", "Smoke-Test fehlgeschlagen: Gate-Erfolgsausgabe fehlt.")
         print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --full-gates' prüfen.")
         sys.exit(1)

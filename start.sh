@@ -22,7 +22,7 @@ DEFAULT_TEXT_JSON='{
   "help_keyboard": "Tastatur-Hinweis: Alle Befehle sind per Enter startbar, ohne Maus.",
   "help_icon_legend": "Symbol-Legende: ✅ Erfolg, ⚠️ Hinweis, ❌ Fehler, ➡️ Aktion, ℹ️ Zusatzinfo.",
   "help_message_source": "Textquelle: Externe Datei config/messages.json wird genutzt, sonst sichere Standardtexte.",
-  "help_full_gates": "Voll-Gates: Führt die vier Pflicht-Gates in fixer Reihenfolge aus und stoppt bei Fehlern mit klaren Next Steps.",
+  "help_full_gates": "Voll-Gates: Führt die fünf Pflicht-Gates in fixer Reihenfolge aus und stoppt bei Fehlern mit klaren Next Steps.",
   "help_status_summary": "Statusbericht: Legt logs/status_summary.txt in einfacher Sprache für Screenreader an.",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
@@ -163,7 +163,7 @@ $(get_text "help_usage")
   ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
   ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
   ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
-  ./start.sh --full-gates Vollständige Gates 1-4 strikt nacheinander ausführen
+  ./start.sh --full-gates Vollständige Gates 1-5 strikt nacheinander ausführen
   ./start.sh --ux-check-auto Automatischer Mini-UX-Check für Texte, Next Steps und A11y-Marker
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
@@ -180,6 +180,7 @@ $(get_text "help_keyboard")
 $(get_text "help_icon_legend")
 $(get_text "help_message_source")
 $(get_text "help_full_gates")
+  Extra-Check: Automatischer Kontrasttest (WCAG) läuft in Gate 2 mit.
 $(get_text "help_status_summary")
 $(get_text "help_doctor")
 $(get_text "release_help")
@@ -821,7 +822,7 @@ run_start_mode() {
 }
 
 run_full_gates_mode() {
-	print_step "✅" "Full-Gates-Modus aktiv: Gates 1-4 werden strikt ausgeführt."
+	print_step "✅" "Full-Gates-Modus aktiv: Gates 1-5 werden strikt ausgeführt."
 	local failed=0
 
 	print_step "ℹ️" "GATE 1: python -m compileall -q ."
@@ -835,7 +836,7 @@ run_full_gates_mode() {
 	fi
 
 	if [[ "$failed" -eq 0 ]]; then
-		print_step "ℹ️" "GATE 2: bash tools/run_quality_checks.sh"
+		print_step "ℹ️" "GATE 2: bash tools/run_quality_checks.sh (inklusive Kontrastprüfung)"
 		if bash "$PROJECT_ROOT/tools/run_quality_checks.sh"; then
 			print_step "✅" "GATE 2 erfolgreich."
 			record_checked "GATE 2"
@@ -871,9 +872,17 @@ run_full_gates_mode() {
 	fi
 
 	if [[ "$failed" -eq 0 ]]; then
-		print_step "✅" "Alle automatischen Gates 1-4 erfolgreich abgeschlossen."
-		record_next_step "Für Gate 5 jetzt 2 Minuten Mini-UX-Check manuell durchführen"
-		return 0
+		print_step "ℹ️" "GATE 5: ./start.sh --ux-check-auto"
+		if bash "$PROJECT_ROOT/start.sh" --ux-check-auto; then
+			print_step "✅" "GATE 5 erfolgreich."
+			record_checked "GATE 5"
+			print_step "✅" "Alle automatischen Gates 1-5 erfolgreich abgeschlossen."
+			record_next_step "Optional: ./start.sh --release-check für finalen Release-Status ausführen"
+			return 0
+		fi
+		print_error_with_actions "GATE 5 fehlgeschlagen."
+		record_next_step "Mini-UX-Hinweise beheben und './start.sh --full-gates' erneut starten"
+		failed=1
 	fi
 
 	print_step "⚠️" "Full-Gates-Modus beendet mit mindestens einem Fehler."
