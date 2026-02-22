@@ -1,24 +1,24 @@
 # TODO – provoware-html-tool (optimierter Entwicklungsprozess)
 
-DONE: Theme-Konfiguration in `config/themes.json` eingeführt, Start-/Template-Validierung verknüpft und Dashboard-Template mit Skip-Link + verbessertem Fehlerdialog barriereärmer gemacht. (2026-02-22)
-NEXT: Theme-Farbwerte in eine zentrale Datei auslagern und einen automatischen WCAG-Kontrasttest als eigenen Tool-Check ergänzen. (2026-02-22)
+DONE: Full-Gates-Modus (`--full-gates`) ergänzt, barrierearmen Statusbericht (`logs/status_summary.txt`) eingeführt und Dashboard-Template um Hilfebereich mit klaren Next Steps erweitert. (2026-02-22)
+NEXT: WCAG-Kontrasttest automatisieren und Theme-Farbwerte zentral aus Template in eine gemeinsame Konfigurationsdatei auslagern. (2026-02-22)
 
-## Iteration 2026-02-22 (Theme-Config + A11y + Smoke)
+## Iteration 2026-02-22 (Full-Gates + Statusbericht + Hilfe)
 ### A) Fundstelle (beobachten)
-- Problem: Theme-Werte waren nicht zentral konfiguriert und die A11y-Absicherung war im Smoke-Test noch nicht vollständig.
-- Risiko: Uneinheitliche Themes, unklare Fehlermeldungen und spätere Regressionen bei Barrierefreiheit.
-- Erwartung: Konfigurierbare Themes, robuste Prüfung und klar verständliche Nutzerhinweise mit Next Steps.
+- Problem: Pflicht-Gates liefen nicht als strikt geketteter Startmodus, und ein leicht vorlesbarer Gesamtstatus fehlte.
+- Risiko: Uneinheitliche Freigabequalität und unklare Hilfe für Nutzer bei Fehlern.
+- Erwartung: Ein Befehl für Gates 1-4, klare Statusdatei und sichtbare Next Steps im Template.
 
 ### B) Change-Scope (vor Patch)
-- Ziel: Theme-Konfiguration zentralisieren, Template-A11y verbessern und automatische Prüfung dafür ergänzen.
-- Dateien: `start.sh`, `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `config/themes.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Ziel: Vollautomatische Gate-Kette, barrierearmen Statusbericht und Hilfebereich mit festen Lösungen bereitstellen.
+- Dateien: `start.sh`, `tools/smoke_test.py`, `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Block.
-- Abnahmekriterium: `./start.sh --dashboard-template` prüft Theme-Optionen aus Konfiguration, Smoke-Test validiert A11y-Marker + Theme-Datei erfolgreich.
+- Abnahmekriterium: `./start.sh --full-gates` läuft erfolgreich, `logs/status_summary.txt` wird erzeugt, Smoke-Test validiert neue Marker und Template-Hilfebereich.
 
 ### C) Patch (kurz)
-- Punkt 1 – Änderung: Theme-Konfiguration in `config/themes.json` eingeführt und in `start.sh` für GUI-/Template-Validierung angebunden.
-- Punkt 2 – Änderung: Dashboard-Template um Skip-Link, `aria-modal` und klarere Fehler-Next-Steps erweitert.
-- Punkt 3 – Änderung: Smoke-Test um Theme-Konfigurationsprüfung, Namensvalidierung und A11y-Marker ergänzt.
+- Punkt 1 – Änderung: Neuer Modus `--full-gates` führt Gates 1-4 strikt nacheinander aus und stoppt mit klaren Next Steps.
+- Punkt 2 – Änderung: Startskript erzeugt `logs/status_summary.txt` als einfache, screenreaderfreundliche Ergebniszusammenfassung.
+- Punkt 3 – Änderung: Dashboard-Template ergänzt einen eigenen Hilfebereich mit festen, leicht verständlichen Lösungsbefehlen.
 
 ### D) Gates
 - G1: `python -m compileall -q .`
@@ -31,6 +31,6 @@ NEXT: Theme-Farbwerte in eine zentrale Datei auslagern und einen automatischen W
 - Status: DONE
 - Doku: README + CHANGELOG + todo aktualisiert
 - Laienvorschläge:
-  1. Öffnen Sie die Musterseite im Browser und drücken Sie zuerst Tab, damit Sie den neuen Sprung-Link (Skip-Link) direkt sehen.
-  2. Wählen Sie nacheinander alle Themes aus und klicken Sie dann auf „Beispiel-Fehler anzeigen“, um die nächsten Schritte im Dialog zu prüfen.
-- Nächster Schritt: Legen Sie eine Datei für Theme-Farbwerte an, lesen Sie sie automatisch im Template-Build ein und ergänzen Sie danach einen messbaren Kontrasttest, damit jede Farbkombination dauerhaft barrierefrei bleibt.
+  1. Nutzen Sie zuerst `./start.sh --full-gates`, damit alle Kernprüfungen automatisch und in richtiger Reihenfolge laufen.
+  2. Öffnen Sie danach `cat logs/status_summary.txt`, weil dort alle Ergebnisse in einfacher Sprache gesammelt stehen.
+- Nächster Schritt: Ergänzen Sie als Nächstes einen automatischen Kontrastrechner, der bei jedem Lauf alle Theme-Farben gegen WCAG-Mindestwerte prüft und bei Fehlern direkt Korrekturvorschläge ausgibt.

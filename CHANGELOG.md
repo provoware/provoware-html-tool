@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2026-02-22 – Theme-Konfiguration + A11y-Härtung + Smoke-Validierung
-- Was: `config/themes.json` ergänzt, Theme-Validierung in `start.sh` erweitert und `tools/smoke_test.py` um Konfigurations- und A11y-Marker-Prüfung ausgebaut; `templates/dashboard_musterseite.html` mit Skip-Link und verbessertem Fehlerdialog vervollständigt.
-- Warum: Themes sollten zentral gepflegt, Eingaben robust validiert und Barrierefreiheit messbar abgesichert werden.
-- Wirkung: Start-Routine, Template und Smoke-Test laufen konsistent zusammen, geben klare Next Steps aus und erhöhen die Release-Reife ohne manuelle Nacharbeit.
+## 2026-02-22 – Full-Gates + Statusbericht + Hilfebereich
+- Was: `start.sh` um den Modus `--full-gates` (Gates 1-4 in fixer Reihenfolge) und eine barrierearme Statusdatei `logs/status_summary.txt` erweitert; `tools/smoke_test.py` prüft beide neuen Funktionen automatisch; `templates/dashboard_musterseite.html` um einen klaren Hilfebereich mit Next Steps ergänzt.
+- Warum: Qualitäts-Gates sollten vollständig automatisiert laufen, Ergebnisse auch für Screenreader lesbar sein und Nutzer bei Fehlern klare Sofort-Schritte sehen.
+- Wirkung: Start-Routine ist release-näher, testet mehr autonom und verbessert Bedienbarkeit/Barrierefreiheit mit konkreten Lösungswegen.

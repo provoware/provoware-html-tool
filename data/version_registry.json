@@ -1,11 +1,10 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-theme-config-a11y-smoke",
+  "iteration": "2026.02.22-full-gates-status-help",
   "files": {
     "start.sh": "2026.02.22",
-    "templates/dashboard_musterseite.html": "2026.02.22",
     "tools/smoke_test.py": "2026.02.22",
-    "config/themes.json": "2026.02.22",
+    "templates/dashboard_musterseite.html": "2026.02.22",
     "README.md": "2026.02.22",
     "todo.txt": "2026.02.22",
     "CHANGELOG.md": "2026.02.22",
