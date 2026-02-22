@@ -11,6 +11,7 @@ NETWORK_CHECK_TIMEOUT=2
 COMMAND_TIMEOUT=180
 RETRY_MAX=2
 STATUS_SUMMARY_FILE=""
+DEPENDENCY_CONFIG_FILE="${PROJECT_ROOT}/config/dependency_map.json"
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
 CORE_HELPER_FILE="${PROJECT_ROOT}/system/start_core.sh"
@@ -65,6 +66,8 @@ THEME_LIST_CACHE=""
 export PLAYWRIGHT_BROWSERS_PATH
 
 DEFAULT_THEMES_CSV="high-contrast,light,dark"
+DEFAULT_DEPENDENCY_JSON='{"shellcheck":{"apt":"shellcheck","brew":"shellcheck"},"shfmt":{"apt":"shfmt","brew":"shfmt"},"rg":{"apt":"ripgrep","brew":"ripgrep"},"curl":{"apt":"curl","brew":"curl"},"ruff":{"pip":"ruff"}}'
+DEPENDENCY_JSON_CACHE=""
 
 if [[ ! -f "$CORE_HELPER_FILE" ]]; then
 	printf '%s\n' "❌ Kernlogik fehlt: system/start_core.sh" >&2
@@ -103,6 +106,8 @@ load_text_json() {
 	TEXT_JSON_CACHE="$candidate_json"
 	printf '%s' "$TEXT_JSON_CACHE"
 }
+
+
 get_text() {
 	local key="$1"
 	if [[ -z "$key" || ! "$key" =~ ^[a-z0-9_]+$ ]]; then
@@ -391,27 +396,24 @@ try_auto_install_tool() {
 		return 1
 	fi
 	local install_attempted="0"
-	if command -v apt-get >/dev/null 2>&1; then
+	local manager package
+	for manager in apt brew pip; do
+		package="$(get_dependency_package "$tool_name" "$manager" | head -n 1 | tr -d '[:space:]')"
+		if [[ -z "$package" ]]; then
+			continue
+		fi
+		if ! command -v "${manager/apt/apt-get}" >/dev/null 2>&1 && [[ "$manager" != "pip" ]]; then
+			continue
+		fi
 		install_attempted="1"
-		if apt-get update >/dev/null 2>&1 && apt-get install -y "$tool_name" >/dev/null 2>&1; then
-			print_step "✅" "${tool_name} wurde über apt-get installiert."
-			record_fixed "$tool_name via apt-get"
+		if install_with_package_manager "$manager" "$package"; then
+			print_step "✅" "${tool_name} wurde über ${manager} installiert (${package})."
+			record_fixed "$tool_name via ${manager}"
 			return 0
 		fi
-		print_step "⚠️" "apt-get konnte ${tool_name} nicht installieren."
-		record_next_step "Bei apt-get-Fehlern zuerst './start.sh --check --debug' ausführen"
-	fi
-
-	if command -v brew >/dev/null 2>&1; then
-		install_attempted="1"
-		if brew install "$tool_name" >/dev/null 2>&1; then
-			print_step "✅" "${tool_name} wurde über Homebrew installiert."
-			record_fixed "$tool_name via brew"
-			return 0
-		fi
-		print_step "⚠️" "Homebrew konnte ${tool_name} nicht installieren."
-		record_next_step "Bei brew-Fehlern zuerst './start.sh --check --debug' ausführen"
-	fi
+		print_step "⚠️" "${manager} konnte ${tool_name} (${package}) nicht installieren."
+		record_next_step "Bei ${manager}-Fehlern zuerst './start.sh --check --debug' ausführen"
+	done
 
 	if [[ "$install_attempted" == "0" ]]; then
 		print_step "⚠️" "Kein unterstützter Paketmanager gefunden (apt-get/brew)."
@@ -684,7 +686,6 @@ run_dashboard_template_mode() {
 	record_next_step "Template optional kopieren: cp templates/dashboard_musterseite.html logs/gui/index.html"
 	return 0
 }
-
 
 prepare_playwright_offline_assets() {
 	print_step "ℹ️" "Playwright-Vorbereitung: Offline-fähige Browser-Assets werden geprüft."

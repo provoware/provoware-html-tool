@@ -1,17 +1,20 @@
 DONE: Projekt-Routine beim GUI-Start ergänzt (Pfadabfrage, Validierung, Auto-Erstellung, Persistenz im Dashboard) (2026-02-22)
+DONE: Abhängigkeits-Mapping in config/dependency_map.json eingeführt (apt/brew/pip) und Start-Routine daran angebunden (2026-02-22)
+DONE: Auto-Reparatur für Python-Qualitätstool ruff per pip ergänzt (klarer Fallback mit Next Steps) (2026-02-22)
+DONE: README-Hilfe um leicht verständliche Erklärung zur professionellen Abhängigkeitsauflösung erweitert (2026-02-22)
 DONE: Offline-Checkpfad für Playwright in der Start-Routine ergänzt (Modul + Browsercache mit klaren Next Steps) (2026-02-22)
 DONE: Repair-Modus verbessert: nutzt zuerst lokale Offline-Wheels und danach optional Online-Installation (2026-02-22)
 DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (2026-02-22)
 
-STATUS: 91% abgeschlossen
+STATUS: 94% abgeschlossen
 
 NEXT (Priorität hoch, offen)
-- [ ] 92%: Vollständige Offline-Bundle-Erstellung automatisieren (Wheel-Download + Browsercache export in ein Archiv).
-- [ ] 95%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigenen Testschritt mit klarer Fehlerhilfe ergänzen.
-- [ ] 97%: start.sh um einen Schalter `--offline-pack` erweitern, der alle Offline-Artefakte in `data/` vorbereitet.
+- [ ] 95%: Vollständige Offline-Bundle-Erstellung automatisieren (Wheel-Download + Browsercache export in ein Archiv).
+- [ ] 97%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigenen Testschritt mit klarer Fehlerhilfe ergänzen.
+- [ ] 99%: start.sh um einen Schalter `--offline-pack` erweitern, der alle Offline-Artefakte in `data/` vorbereitet.
 
 NEXT (Priorität mittel, offen)
-- [ ] 99%: GUI-Hilfebereich um kurzen Abschnitt „Offline testen“ erweitern (einfache Sprache + vollständige Befehle).
+- [ ] 100%: GUI-Hilfebereich um kurzen Abschnitt „Offline testen“ erweitern (einfache Sprache + vollständige Befehle).
 - [ ] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen.
 
 - [ ] 93%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei spiegeln.

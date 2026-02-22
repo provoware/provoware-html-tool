@@ -162,3 +162,37 @@ run_dependency_bootstrap() {
 	print_step "➡️" "Nächster Schritt: './start.sh --repair' ausführen und danach './start.sh --check --debug' starten."
 	return 1
 }
+
+load_dependency_json() {
+	if [[ -n "${DEPENDENCY_JSON_CACHE:-}" ]]; then
+		printf '%s' "$DEPENDENCY_JSON_CACHE"
+		return 0
+	fi
+	local candidate_json="$DEFAULT_DEPENDENCY_JSON"
+	if [[ -f "$DEPENDENCY_CONFIG_FILE" ]] && command -v python3 >/dev/null 2>&1 && python3 -c 'import json,sys; json.load(open(sys.argv[1], encoding="utf-8"))' "$DEPENDENCY_CONFIG_FILE" >/dev/null 2>&1; then
+		candidate_json="$(cat "$DEPENDENCY_CONFIG_FILE")"
+		record_checked "Abhängigkeits-Konfiguration geladen"
+	fi
+	DEPENDENCY_JSON_CACHE="$candidate_json"
+	printf '%s' "$DEPENDENCY_JSON_CACHE"
+}
+
+get_dependency_package() {
+	local tool_name="$1"
+	local manager_name="$2"
+	if [[ -z "$tool_name" || -z "$manager_name" ]] || [[ ! "$tool_name" =~ ^[a-zA-Z0-9._+-]+$ ]] || [[ ! "$manager_name" =~ ^[a-zA-Z0-9._+-]+$ ]] || ! command -v python3 >/dev/null 2>&1; then
+		return 1
+	fi
+	python3 -c 'import json,sys; print((json.loads(sys.stdin.read()).get(sys.argv[1], {}) or {}).get(sys.argv[2], ""))' "$tool_name" "$manager_name" <<<"$(load_dependency_json)" 2>/dev/null
+}
+
+install_with_package_manager() {
+	local manager_name="$1"
+	local package_name="$2"
+	case "$manager_name" in
+		apt) command -v apt-get >/dev/null 2>&1 && apt-get update >/dev/null 2>&1 && apt-get install -y "$package_name" >/dev/null 2>&1 ;;
+		brew) command -v brew >/dev/null 2>&1 && brew install "$package_name" >/dev/null 2>&1 ;;
+		pip) command -v python3 >/dev/null 2>&1 && python3 -m pip install --disable-pip-version-check --quiet "$package_name" >/dev/null 2>&1 ;;
+		*) return 1 ;;
+	esac
+}

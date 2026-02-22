@@ -1,3 +1,16 @@
+## 2026-02-22 – Professionellere Abhängigkeitsauflösung über zentrale Mapping-Konfiguration
+- Scope-Kontrolle:
+  - Problem: Paketnamen unterscheiden sich je Paketmanager und führten zu unnötigen Reparaturfehlern in der Start-Routine.
+  - Ziel: Abhängigkeiten zentral konfigurieren, automatisch je Umgebung korrekt installieren und Hinweise laienverständlich ausgeben.
+  - Dateien: `start.sh`, `system/start_core.sh`, `config/dependency_map.json`, `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Abnahme: `bash start.sh --repair` kann hinterlegte Tools über apt/brew/pip per Mapping auflösen und liefert bei Fehlern klare Next Steps.
+- Was:
+  1) `start.sh` um eine zentral geladene Abhängigkeits-Konfiguration erweitert (`config/dependency_map.json`) inkl. Input-Validierung für Tool-/Managernamen.
+  2) Auto-Reparatur nutzt jetzt paketmanager-spezifische Paketnamen und unterstützt für geeignete Tools zusätzlich pip-Installation.
+  3) README und To-do um Hilfeelemente in einfacher Sprache ergänzt, damit auch Laien den neuen Ablauf sicher nutzen können.
+- Warum: Einheitliche, konfigurierbare Abhängigkeitsauflösung macht die Start-Routine wartbarer und verlässlicher.
+- Wirkung: Weniger Installationsfehler, bessere Wiederholbarkeit und klarere Nutzerführung bei Reparatur und Debugging.
+
 ## 2026-02-22 – Projekt-Routine mit persistentem Projektpfad im Dashboard
 - Scope-Kontrolle:
   - Problem: Beim GUI-Start fehlte eine klare Projektordner-Routine mit Prüfung, automatischer Erstellung und sichtbarer Pfadanzeige im Dashboard.
