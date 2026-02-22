@@ -1,3 +1,8 @@
+## 2026-02-22 – Live-Status-Sync + Debug-Nächste-Schritte + Smoke-Härtung
+- Was: Dashboard synchronisiert den Speicherstatus jetzt in Topbar und Footer, ergänzt Debug-Details (letztes Ereignis + Zeitstempel + nächster Schritt) und erweitert Smoke-Marker für die neuen Hilfselemente.
+- Warum: Nutzer:innen brauchen konsistente Rückmeldung über den Zustand und klarere Hilfe direkt im Fehlerfall.
+- Wirkung: Bessere Barrierefreiheit/Orientierung, verständlichere Debug-Hinweise und stabilere automatische Absicherung der UI-Hilfen.
+
 # CHANGELOG
 
 ## 2026-02-22 – Repo-Quality gehärtet + Selbsttest erweitert + klare Fehlerhilfen

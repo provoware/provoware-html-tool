@@ -1,8 +1,10 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **84%**
+- Fortschritt: **86%**
 - Erledigte Aufgaben:
+  - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
+  - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
   - Dashboard-Layout auf Referenzstruktur mit Topbar, linker Navigation, mittlerem Modulraster und rechter Einstellungsleiste umgestellt.
   - Neon-/Glas-Design in drei Themes (`high-contrast`, `light`, `dark`) mit robusten Fokus- und Kontrastrahmen vereinheitlicht.
   - Hilfe- und A11y-Elemente (Skip-Link, Next Steps, Tastaturkürzel, Fehlerdialog) erweitert und im Smoke-Test abgesichert.
@@ -74,7 +76,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `84%`
+- Fortschritt: `86%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
