@@ -316,3 +316,17 @@
 
 ### Wirkung
 - Stabilerer Start in Minimalumgebungen, klarere Qualitäts-Workflows und bessere Verständlichkeit bei optionalen Abhängigkeiten.
+
+## 2026-02-22 – Iteration: Robustere Validierung + stabilere Auto-Reparatur (3 Punkte)
+- Scope-Kontrolle:
+  - Problem: Theme-Validierung war strenger als die reale Konfiguration, die Netzprüfung konnte ohne curl unnötig fehlschlagen und shfmt-Checks waren zwischen Start- und Quality-Skript nicht vollständig konsistent.
+  - Ziel: Drei kleine, merge-ready Fixes für Validierung, Netz-Fallback und einheitliche Formatprüfung abschließen.
+  - Dateien: `start.sh`, `system/start_core.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Theme-Validierung/Fehlermeldungen + Netz-Fallback in `start.sh`, 2) konsistente Shell-Formatierung in `system/start_core.sh`, 3) Doku/Status/Version aktualisiert.
+  - Abnahme: `config/themes.json` mit Liste bleibt gültig, Reparatur erkennt Netz auch ohne curl robuster, und die Pflicht-Gates laufen ohne shfmt-Diff-Fehler.
+- Was:
+  1) `validate_theme_config` akzeptiert jetzt zwei gültige Standards (Theme-Liste oder Theme-Objekt mit Farbwerten) und gibt klare Next Steps.
+  2) `is_network_available` nutzt jetzt curl **oder** python3-DNS-Fallback, damit Auto-Reparatur stabiler arbeitet.
+  3) Shell-Skripte wurden konsistent formatiert, damit Quality-Checks reproduzierbar grün laufen.
+- Warum: Weniger Fehlalarme, robustere Reparatur und einheitliche Qualitätsstandards reduzieren Betriebsfehler.
+- Wirkung: Höhere Release-Reife, klarere Hilfetexte und stabilere Gates in unterschiedlichen Umgebungen.

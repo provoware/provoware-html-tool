@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **84%**
+- Fortschritt: **85%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -249,3 +249,11 @@ tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 - `apt-get`-Reparatur läuft nur noch mit Root/Sudo (Administratorrechten) und gibt klare Next Steps, wenn Rechte fehlen.
 - Installer-Fehler werden in `logs/install.log` geschrieben und als direkter Befehl `cat logs/install.log` angezeigt.
 - Pflicht-Gates und CI nutzen jetzt konsistent `python3`; der CI-Job ist von `--repair` entkoppelt, damit Runner ohne Root stabiler bleiben.
+
+
+## Iteration-Update (2026-02-22): Validierung und Auto-Reparatur robuster
+- **Punkt 1 (Qualität):** Theme-Validierung akzeptiert jetzt beide gültigen Standards: einfache Theme-Liste oder detailliertes Farbobjekt.
+- **Punkt 2 (Stabilität):** Netzprüfung nutzt `curl` und zusätzlich einen python3-DNS-Fallback, damit Reparatur seltener fälschlich „offline“ meldet.
+- **Punkt 3 (Einheitliche Standards):** Shell-Dateien laufen konsistent durch shfmt-Checks, damit Gates reproduzierbar grün bleiben.
+
+**Hinweis in einfacher Sprache:** Wenn ein Check fehlschlägt, folgen Sie direkt den „Nächster Schritt“-Hinweisen im Terminal.

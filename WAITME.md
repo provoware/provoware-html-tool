@@ -62,3 +62,14 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash tools/run_quality_checks.sh --check`
 - `bash tools/run_quality_checks.sh --fix`
 - `bash start.sh --check --debug`
+
+## Update 2026-02-22 (Validierung + Reparatur robuster)
+- Theme-Prüfung akzeptiert jetzt beide gültigen Formate (Liste oder Objekt mit Farben).
+- Netzprüfung hat einen Fallback über DNS (Namensauflösung), falls `curl` fehlt oder blockiert ist.
+- Quality/Gates laufen konsistenter, weil Shell-Dateien einheitlich formatiert werden.
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`

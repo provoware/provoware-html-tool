@@ -185,12 +185,29 @@ print(",".join(valid))' "$THEME_CONFIG_FILE" 2>/dev/null || true)"
 }
 
 is_network_available() {
-	if ! command -v curl >/dev/null 2>&1; then
-		return 1
+	if command -v curl >/dev/null 2>&1; then
+		if curl --silent --show-error --max-time "$NETWORK_CHECK_TIMEOUT" https://example.com >/dev/null 2>&1; then
+			return 0
+		fi
 	fi
 
-	if curl --silent --show-error --max-time "$NETWORK_CHECK_TIMEOUT" https://example.com >/dev/null 2>&1; then
-		return 0
+	if command -v python3 >/dev/null 2>&1; then
+		if python3 - "$NETWORK_CHECK_TIMEOUT" <<'PY' >/dev/null 2>&1; then
+import socket
+import sys
+
+timeout = float(sys.argv[1])
+for host in ("example.com", "pypi.org"):
+    try:
+        socket.setdefaulttimeout(timeout)
+        socket.gethostbyname(host)
+        raise SystemExit(0)
+    except Exception:
+        continue
+raise SystemExit(1)
+PY
+			return 0
+		fi
 	fi
 
 	return 1
@@ -1044,7 +1061,8 @@ launch_local_gui() {
 	fi
 
 	local gui_port=""
-	if ! gui_port="$(python3 - "$requested_gui_port" "$GUI_PORT_MIN" "$GUI_PORT_MAX" "$GUI_PORT_RANDOM_ATTEMPTS" <<'PY'
+	if ! gui_port="$(
+		python3 - "$requested_gui_port" "$GUI_PORT_MIN" "$GUI_PORT_MAX" "$GUI_PORT_RANDOM_ATTEMPTS" <<'PY'
 import random
 import socket
 import sys
@@ -1080,7 +1098,7 @@ for _ in range(max(1, attempts)):
 
 raise SystemExit(1)
 PY
-)"; then
+	)"; then
 		print_error_with_actions "Kein freier GUI-Port gefunden. Bitte kurz warten und erneut versuchen."
 		record_next_step "Offene Ports prüfen und erneut './start.sh' ausführen"
 		return 1
@@ -1428,11 +1446,11 @@ run_weakness_report_mode() {
 	fi
 
 	if ! validate_theme_config; then
-		print_step "⚠️" "Schwachstelle: Theme-Konfiguration ist unvollständig für robuste A11y-Anzeige."
+		print_step "⚠️" "Schwachstelle: Theme-Konfiguration ist ungültig oder leer."
 		print_step "➡️" "Befehl: python3 -m json.tool config/themes.json"
-		print_step "➡️" "Befehl: config/themes.json öffnen und je Theme bg/text/primary/focus ergänzen"
-		print_step "ℹ️" "Hilfe: Beispielstruktur {'themes': {'high-contrast': {'bg':'#000000','text':'#FFFFFF','primary':'#00E5FF','focus':'#FFD400'}}}"
-		record_next_step "Theme-Konfiguration vervollständigen und danach './start.sh --weakness-report' wiederholen"
+		print_step "➡️" "Befehl: config/themes.json öffnen und entweder eine Theme-Liste ODER Farbobjekte pflegen"
+		print_step "ℹ️" "Hilfe: Liste {'themes':['high-contrast','light','dark']} | Objekt {'themes': {'high-contrast': {'bg':'#000000','text':'#FFFFFF','primary':'#00E5FF','focus':'#FFD400'}}}"
+		record_next_step "Theme-Konfiguration korrigieren und danach './start.sh --weakness-report' wiederholen"
 		issues=$((issues + 1))
 	else
 		record_checked "Theme-Konfiguration Vollständigkeit"
@@ -1458,13 +1476,18 @@ p = Path(sys.argv[1])
 if not p.exists(): raise SystemExit("config/themes.json fehlt")
 t = json.loads(p.read_text(encoding="utf-8")).get("themes")
 req = {"bg", "text", "primary", "focus"}
-if isinstance(t, list): raise SystemExit("Theme-Liste ohne Farbwerte erkannt")
-if not isinstance(t, dict) or not t: raise SystemExit("Ungültige Theme-Struktur")
+if isinstance(t, list):
+    clean = [name for name in t if isinstance(name, str) and name.strip()]
+    if not clean:
+        raise SystemExit("Theme-Liste ist leer oder enthält ungültige Einträge")
+    print("Theme-Liste gültig")
+    raise SystemExit(0)
+if not isinstance(t, dict) or not t: raise SystemExit("Ungültige Theme-Struktur: erwartet Liste oder Objekt unter 'themes'")
 for n, v in t.items():
     if not isinstance(v, dict): raise SystemExit(f"Theme '{n}' ist kein Objekt")
     miss = sorted(req.difference(v.keys()))
     if miss: raise SystemExit(f"Theme '{n}' fehlt: {', '.join(miss)}")
-print("Theme-Struktur vollständig")
+print("Theme-Objektstruktur vollständig")
 PY
 }
 
@@ -1505,8 +1528,8 @@ run_release_check() {
 		failed=1
 		print_step "⚠️" "Theme-Validierung für Release fehlgeschlagen."
 		print_step "➡️" "Befehl: python3 -m json.tool config/themes.json"
-		print_step "➡️" "Befehl: Farben je Theme ergänzen (bg/text/primary/focus)"
-		record_next_step "Theme-Datei auf Objektstruktur mit Farbwerten umstellen und Release-Check erneut starten"
+		print_step "➡️" "Befehl: Theme-Liste korrigieren ODER bei Farbobjekt je Theme bg/text/primary/focus ergänzen"
+		record_next_step "Theme-Datei korrigieren (Liste oder Farbobjekt) und Release-Check erneut starten"
 	fi
 
 	if [[ "$theme_validation_status" -eq 0 ]]; then
@@ -1565,12 +1588,12 @@ main() {
 	weakness-report)
 		run_weakness_report_mode
 		;;
-		visual-baseline-check)
-			run_visual_baseline_check_mode
-			;;
-		offline-pack)
-			run_offline_pack_mode
-			;;
+	visual-baseline-check)
+		run_visual_baseline_check_mode
+		;;
+	offline-pack)
+		run_offline_pack_mode
+		;;
 	repair)
 		run_repair_mode
 		;;
