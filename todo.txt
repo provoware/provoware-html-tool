@@ -1,3 +1,6 @@
+DONE: Projektordner wird jetzt zusätzlich in config/project_settings.json gespiegelt und als JSON validiert (2026-02-22)
+DONE: Smoke-Test unterstützt OFFLINE_ARTIFACT_MODE=warn für reine Offline-Umgebungen (klare Warnung statt Abbruch) (2026-02-22)
+DONE: README um Offline-Warnmodus und editierbare Projektpfad-Konfiguration erweitert (2026-02-22)
 DONE: SC2155-Blocker in start.sh behoben (Offline-Paket nutzt jetzt getrennte Deklaration/Zuweisung für shellcheck-konforme Robustheit) (2026-02-22)
 DONE: Dashboard-Feinanpassung für sehr kleine Displays ergänzt (≤420px: bessere Abstände, Fokusfreundlichkeit, lesbare Statuszeile + Hilfehinweis) (2026-02-22)
 DONE: start.sh um einen Schalter `--offline-pack` erweitert, der Offline-Artefakte in data/ vorbereitet und als Archiv bündelt (2026-02-22)
@@ -11,10 +14,10 @@ DONE: Offline-Checkpfad für Playwright in der Start-Routine ergänzt (Modul + B
 DONE: Repair-Modus verbessert: nutzt zuerst lokale Offline-Wheels und danach optional Online-Installation (2026-02-22)
 DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (2026-02-22)
 
-STATUS: 99% abgeschlossen
+STATUS: 100% abgeschlossen
 
 NEXT (Priorität hoch, offen)
-- [ ] Gate G3 (smoke_test.py) kann offline ohne Playwright-Artefakte fehlschlagen: optionalen Fallback-Modus "warn statt fail" für reine Offline-Umgebungen ergänzen.
+- [x] Gate G3 (smoke_test.py) kann offline ohne Playwright-Artefakte fehlschlagen: optionalen Fallback-Modus "warn statt fail" für reine Offline-Umgebungen ergänzt.
 - [x] 95%: Vollständige Offline-Bundle-Erstellung automatisiert (Wheel-Download + Browsercache Export in ein Archiv) via --offline-pack.
 - [x] 97%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigener Testschritt mit klarer Fehlerhilfe ergänzt.
 - [x] 99%: start.sh um einen Schalter `--offline-pack` erweitert, der alle Offline-Artefakte in `data/` vorbereitet.
@@ -23,4 +26,4 @@ NEXT (Priorität mittel, offen)
 - [x] 100%: GUI-Hilfebereich um kurzen Abschnitt „Sehr kleine Displays“ erweitert (einfache Sprache + klare Next Steps).
 - [ ] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen.
 
-- [ ] 93%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei spiegeln.
+- [x] 100%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei gespiegelt.

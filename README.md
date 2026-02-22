@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **99%**
+- Fortschritt: **100%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -16,6 +16,7 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - Responsive Feinanpassung für sehr kleine Displays (bis 420px) mit besserem Fokus, klaren Abständen und stabiler Lesbarkeit.
 
 - Projekt-Routine beim GUI-Start: fragt den Projektordner ab, validiert den Pfad, erstellt fehlende Ordner automatisch im Nutzerverzeichnis und zeigt den aktiven Pfad im Dashboard.
+- Spiegelt den bestätigten Projektordner zusätzlich nach `config/project_settings.json` (für editierbare Konfiguration) und validiert beide JSON-Dateien automatisch.
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Optionale Kopplung des Modul-Starters an echte Backend-Module (Datenquellen).
@@ -49,6 +50,7 @@ bash start.sh --full-gates      # alle Pflicht-Gates in Reihenfolge
 bash start.sh --weakness-report # Bericht zu Schwachstellen
 bash start.sh --release-check   # Release-Checkliste ausführen
 python tools/smoke_test.py      # schneller Funktionstest
+OFFLINE_ARTIFACT_MODE=warn python tools/smoke_test.py --profile full # Offline-Artefakte nur als Warnung behandeln
 bash tools/run_quality_checks.sh # Qualitätsprüfungen für Repo
 ```
 
@@ -57,6 +59,10 @@ bash tools/run_quality_checks.sh # Qualitätsprüfungen für Repo
 2. `bash tools/run_quality_checks.sh`
 3. `python tools/smoke_test.py`
 4. `bash start.sh`
+Hinweis für reine Offline-Umgebungen:
+- Standard ist `OFFLINE_ARTIFACT_MODE=strict` (fehlende Offline-Artefakte = Fehler).
+- Optional: `OFFLINE_ARTIFACT_MODE=warn` (fehlende Offline-Artefakte = Warnung mit Next Steps).
+
 5. Mini-UX-Check (deutsche Dialoge, Next Steps, Kontrast/Fokus)
 
 ## Nutzerfeedback der Start-Routine

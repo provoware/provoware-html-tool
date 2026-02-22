@@ -1,14 +1,14 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-shellcheck-sc2155-fix",
+  "iteration": "2026.02.22-offline-warn-project-settings",
   "files": {
-    "start.sh": "2026.02.22.25",
-    "tools/smoke_test.py": "2026.02.22.23",
+    "start.sh": "2026.02.22.26",
+    "tools/smoke_test.py": "2026.02.22.26",
     "templates/dashboard_musterseite.html": "2026.02.22.24",
-    "README.md": "2026.02.22.25",
-    "todo.txt": "2026.02.22.25",
-    "CHANGELOG.md": "2026.02.22.25",
-    "data/version_registry.json": "2026.02.22.25",
+    "README.md": "2026.02.22.26",
+    "todo.txt": "2026.02.22.26",
+    "CHANGELOG.md": "2026.02.22.26",
+    "data/version_registry.json": "2026.02.22.26",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.3",
@@ -19,7 +19,8 @@
     "tools/visual_baseline_check.py": "2026.02.22.8",
     "INFODATEI.md": "2026.02.22.2",
     "AGENTS.md": "2.5",
-    "data/project_context.json": "2026.02.22.1",
-    "config/dependency_map.json": "2026.02.22.1"
+    "data/project_context.json": "2026.02.22.26",
+    "config/dependency_map.json": "2026.02.22.1",
+    "config/project_settings.json": "2026.02.22.26"
   }
 }

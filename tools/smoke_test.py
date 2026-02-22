@@ -49,12 +49,17 @@ def run_playwright_offline_validation() -> None:
     browser_dir = PROJECT_ROOT / "data" / "playwright-browsers"
 
     bundle_files = sorted((PROJECT_ROOT / "data").glob("offline_bundle_*.tar.gz"))
+    offline_warn_mode = os.environ.get("OFFLINE_ARTIFACT_MODE", "strict").strip().lower() == "warn"
 
     if not wheel_dir.exists() or not browser_dir.exists():
         if bundle_files:
             print_step("⚠️", "Smoke-Test Hinweis: Einzelordner fehlen, aber ein Offline-Bundle ist vorhanden.")
             print_step("➡️", f"Nächster Schritt: Bei Bedarf Bundle nutzen: {bundle_files[-1].name}")
             print_step("✅", "Playwright-Offline-Validierung erfolgreich: Bundle für Offline-Transfer ist vorhanden.")
+            return
+        if offline_warn_mode:
+            print_step("⚠️", "Smoke-Test Hinweis: Offline-Artefakte fehlen, Warnmodus ist aktiv.")
+            print_step("➡️", "Nächster Schritt: Für volle Sicherheit './start.sh --offline-pack' ausführen oder OFFLINE_ARTIFACT_MODE=strict nutzen.")
             return
         print_step("❌", "Smoke-Test fehlgeschlagen: Offline-Artefakte für Playwright fehlen.")
         print_step("➡️", "Nächster Schritt: './start.sh --repair' oder './start.sh --offline-pack' ausführen.")

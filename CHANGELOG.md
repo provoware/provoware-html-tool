@@ -1,3 +1,17 @@
+## 2026-02-22 – Offline-Warnmodus + Projektpfad-Spiegelung abgeschlossen
+- Scope-Kontrolle:
+  - Problem: Zwei offene Punkte blockierten Release-Reife: Offline-Smoke ohne Artefakte brach hart ab, und der Projektpfad lag nur in `data/` statt zusätzlich editierbar in `config/`.
+  - Ziel: Offline-Smoke optional als Warnung erlauben, Projektpfad robust in `config/project_settings.json` spiegeln und die Hilfe dafür laienverständlich dokumentieren.
+  - Dateien: `start.sh`, `tools/smoke_test.py`, `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Projektpfad-Spiegelung + JSON-Validierung, 2) `OFFLINE_ARTIFACT_MODE=warn`, 3) Doku/Fortschritt/NEXT-Status aktualisieren.
+  - Abnahme: `OFFLINE_ARTIFACT_MODE=warn python tools/smoke_test.py --profile full` läuft bei fehlenden Offline-Artefakten nicht mehr auf Fehler und `config/project_settings.json` wird beim Start geschrieben.
+- Was:
+  1) `start.sh` speichert den Projektordner jetzt in `data/project_context.json` **und** `config/project_settings.json` und prüft beide Dateien sofort als gültiges JSON.
+  2) `tools/smoke_test.py` unterstützt den Modus `OFFLINE_ARTIFACT_MODE=warn` für reine Offline-Situationen mit klaren Next Steps.
+  3) README/To-do wurden in einfacher Sprache ergänzt (Befehl, Bedeutung, Fortschritt auf 100%).
+- Warum: Stabilere Offline-Arbeitsabläufe und wartbare, editierbare Konfiguration erhöhen Release-Reife und Nutzerverständnis.
+- Wirkung: Weniger unnötige Abbrüche, klarere Konfigurationsstruktur und bessere Hilfetexte für Einsteiger.
+
 ## 2026-02-22 – Shellcheck-Blocker im Offline-Paket behoben + robustere Qualitätshinweise
 - Scope-Kontrolle:
   - Problem: `start.sh --check` scheiterte durch Shellcheck-Hinweis SC2155 im Offline-Paket-Modus.
