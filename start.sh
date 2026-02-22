@@ -501,22 +501,39 @@ run_quality_checks() {
 }
 
 run_tests() {
-	print_step "✅" "Schnelltest gestartet: Voraussetzungen + Syntax + Pflichtdateien + Zeilenlimit."
-	if check_runtime_prerequisites && bash -n "$PROJECT_ROOT/start.sh" && check_required_files && check_line_limit; then
-		if [[ -s "$LOG_FILE" ]]; then
-			print_step "✅" "Selbsttest erfolgreich (Voraussetzungen, Syntax, Pflichtdateien, Zeilenlimit ok)."
-			record_checked "Testausgabe vorhanden"
-		else
-			print_error_with_actions "Selbsttest lieferte keine Protokollausgabe."
-			record_next_step "Erneut './start.sh --test --debug' ausführen und Log prüfen"
-			return 1
-		fi
-		record_checked "Selbsttest"
-	else
+	print_step "✅" "Schnelltest gestartet: Voraussetzungen + Syntax + Pflichtdateien + Zeilenlimit + Repo-Quality."
+	if ! check_runtime_prerequisites || ! bash -n "$PROJECT_ROOT/start.sh" || ! check_required_files || ! check_line_limit; then
 		print_error_with_actions "Selbsttest fehlgeschlagen."
 		record_next_step "./start.sh --check --debug ausführen"
 		return 1
 	fi
+
+	print_step "ℹ️" "Zusatztest: python -m compileall -q ."
+	if ! python -m compileall -q "$PROJECT_ROOT"; then
+		print_error_with_actions "Selbsttest fehlgeschlagen: Syntax-Kompilierung (compileall) meldet Fehler."
+		record_next_step "Fehlermeldung lesen und danach './start.sh --test --debug' erneut ausführen"
+		return 1
+	fi
+	record_checked "compileall"
+
+	print_step "ℹ️" "Zusatztest: bash tools/run_quality_checks.sh"
+	if ! bash "$PROJECT_ROOT/tools/run_quality_checks.sh"; then
+		print_error_with_actions "Selbsttest fehlgeschlagen: Repo-Quality meldet Fehler."
+		record_next_step "Quality-Hinweise beheben und danach './start.sh --test' erneut starten"
+		return 1
+	fi
+	record_checked "Repo-Quality"
+
+	if [[ -s "$LOG_FILE" ]]; then
+		print_step "✅" "Selbsttest erfolgreich (inklusive Repo-Quality und Syntax-Kompilierung)."
+		record_checked "Testausgabe vorhanden"
+	else
+		print_error_with_actions "Selbsttest lieferte keine Protokollausgabe."
+		record_next_step "Erneut './start.sh --test --debug' ausführen und Log prüfen"
+		return 1
+	fi
+
+	record_checked "Selbsttest"
 }
 
 run_doctor_mode() {
