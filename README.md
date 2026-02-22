@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **94%**
+- Fortschritt: **96%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -11,10 +11,12 @@
   - Fehlerdialog erhielt Fokusfang (Tab/Shift+Tab) und Fokus-Rückgabe auf auslösendes Element für stabilere Tastaturnutzung.
   - Fokus-Checker validiert nun zusätzlich Dialog-Fokusfang und Fokus-Rückgabe als feste A11y-Qualitätsregel.
   - Neuer Modus `--weakness-report` zeigt verbleibende Schwachstellen mit direkten Befehlen und klaren Next Steps in einfacher Sprache.
+  - Visual-Baseline prüft jetzt ein Chromium-Artefakt gegen eine freigegebene Baseline und unterstützt bewusstes Freigeben via `--accept-current`.
+  - Schwachstellen-Bericht prüft jetzt Browser-Artefakte für Chromium, Firefox und WebKit sowie den Baseline-Status als Rest-Risiko-Check.
+  - Theme-Auswahl meldet den aktiven Kontrastmodus jetzt live als Screenreader-Status mit verständlicher Prüfhilfe.
 - Offene Aufgaben:
   - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.
-  - Optional: Pixelgenauer Bildvergleich (Diff-Metrik) als zweiter Visual-Guard zusätzlich zur Artefakt-Prüfung.
   - Browser-E2E soll später als CI-Matrix auch mit Firefox/WebKit laufen (derzeit nur Chromium als Pflichtlauf).
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.

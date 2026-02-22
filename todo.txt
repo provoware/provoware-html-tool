@@ -1,3 +1,7 @@
+DONE: Visual-Baseline vergleicht Chromium-Artefakt jetzt gegen freigegebene Baseline inkl. --accept-current. (2026-02-22)
+DONE: Schwachstellen-Bericht prüft Browser-Artefakte je Engine (chromium/firefox/webkit) plus Baseline-Status. (2026-02-22)
+DONE: Theme-Hilfe meldet aktives Theme live als Screenreader-Status mit Kontrast-Hinweis. (2026-02-22)
+NEXT: CI-Matrix-Lauf für Firefox/WebKit als Pflicht-Gate ergänzen und Baseline-Artefakte je Browser versionieren. (2026-02-22)
 DONE: Browser-E2E akzeptiert jetzt --browser (chromium/firefox/webkit) mit browser-spezifischen Artefaktnamen. (2026-02-22)
 DONE: CI führt --weakness-report als zusätzlichen separaten Qualitätskanal aus. (2026-02-22)
 NEXT: CI-Browser-Matrix für Firefox/WebKit als Pflichtlauf ergänzen und Artefakte je Engine hochladen. (2026-02-22)
