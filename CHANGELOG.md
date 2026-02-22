@@ -213,3 +213,10 @@
   3) Schnellhilfe um einen verständlichen Hinweis für sehr kleine Displays erweitert (Zoom + Skip-Link + Hochformat).
 - Warum: Mobile Kleinstgeräte brauchen robustere Mikro-Layouts, damit Barrierefreiheit auch unter engem Platz erhalten bleibt.
 - Wirkung: Bessere Nutzbarkeit auf sehr kleinen Bildschirmen, weniger Überlauf-Risiko und klarere Hilfe für Laien.
+
+
+## 2026-02-22 – Audit der Nutzer-Backlogliste + To-do/WaitMe/AGENTS geschärft
+- Was: Die komplette P0/P1/P2-Liste wurde gegen den Ist-Stand geprüft, als DONE/OFFEN bewertet und in `todo.txt` als priorisierter Audit-Block dokumentiert.
+- Warum: Offene Punkte sollen ohne Interpretationslücken in den nächsten 3-Punkte-Iterationen umgesetzt werden können.
+- Wirkung: Transparenter Arbeitsstand, klarere Priorisierung und besserer Übergabestatus für Team und Einsteiger.
+- Zusätzlich: `WAITME.md` als kompakte Statusseite eingeführt; `AGENTS.md` auf Version 2.6 mit festen Regeln für Backlog-Audits erweitert.

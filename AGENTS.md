@@ -1,5 +1,5 @@
 # AGENTS.md – Projektstandard provoware-html-tool
-Version: 2.5
+Version: 2.6
 
 Ziel: Jede Iteration liefert **genau 3 kleine, vollständig abgeschlossene Punkte**, ist direkt merge-ready und verbessert Release-Reife, Barrierefreiheit und Laientauglichkeit.
 
@@ -135,3 +135,19 @@ DONE nur wenn:
 - Doku aktualisiert: README + CHANGELOG + todo + version_registry
 - 2 Laienvorschläge:
 - 1 detaillierter nächster Schritt (einfach erklärt):
+
+
+## 10) Backlog-Audit aus Nutzerlisten (Pflicht bei Review-Aufträgen)
+Wenn der Auftrag „prüfen was erledigt/offen ist“ enthält:
+1. Jeden Punkt als **DONE/OFFEN** gegen Code+Skripte prüfen (keine Schätzung).
+2. Ergebnis in `todo.txt` als eigener Audit-Block mit Datum dokumentieren.
+3. Offene Punkte priorisiert und testbar formulieren (P0/P1/P2 + Abnahmehinweis).
+4. Einen 3-Punkte-Vorschlag für die nächste Iteration ergänzen (mindestens 1 A11y/Hilfe/Text-Punkt).
+
+## 11) WaitMe-Datei (Pflichtstatus)
+- Datei `WAITME.md` pflegen als Kurzstatus für Menschen: 
+  - aktueller Stand in einfacher Sprache,
+  - Top-Blocker,
+  - Betriebsrisiken,
+  - nächste sinnvolle Befehle.
+- Keine Fachbegriffe ohne Kurz-Erklärung in Klammern.
