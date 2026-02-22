@@ -1354,10 +1354,10 @@
         if (pathValue.length < 2 || pathValue.startsWith('/') === false) {
           return false;
         }
-        if (/\s{2,}/.test(pathValue)) {
-          return false;
-        }
         return true;
+      }
+      function hasExtraWhitespaceInPath(value) {
+        return typeof value === 'string' && /\s{2,}/.test(value);
       }
       function getStoredProjectPath() {
         const localValue = window.localStorage.getItem('provoware-project-path');
@@ -1386,9 +1386,14 @@
           setProjectDialogResult('⚠️ Ungültiger Pfad. Bitte absoluten Pfad eingeben, z. B. /home/name/Ordner.');
           return false;
         }
+        if (hasExtraWhitespaceInPath(pathValue)) {
+          setProjectDialogResult('⚠️ Pfad gespeichert. Hinweis: Mehrere Leerzeichen erkannt. Bitte kurz prüfen, ob das so gewünscht ist.');
+        }
         window.localStorage.setItem('provoware-project-path', normalized);
         updateProjectStatus(normalized);
-        setProjectDialogResult('✅ Pfad gespeichert. Nächster Schritt: start.sh neu starten, damit die Prüfung und ggf. Erstellung läuft.');
+        if (!hasExtraWhitespaceInPath(pathValue)) {
+          setProjectDialogResult('✅ Pfad gespeichert. Nächster Schritt: start.sh neu starten, damit die Prüfung und ggf. Erstellung läuft.');
+        }
         setDebugDetails('Projektpfad aktualisiert', 'Führen Sie ./start.sh aus. Die Start-Routine prüft den Ordner und erstellt ihn bei Bedarf.');
         appendDebugLog('✅ Projektpfad gespeichert: ' + normalized + ' (' + getTimeStamp() + ').');
         setResult('✅ Projektordner im Dashboard aktualisiert.');
@@ -1703,7 +1708,23 @@
           }
           detachedWindows[windowId] = detached;
           detached.document.title = 'Einzelfenster: ' + sourceMeta.label;
-          detached.document.body.innerHTML = '<main style="font-family:Arial,sans-serif;padding:1rem;"><h1>' + sourceMeta.label + '</h1><p>Datenquelle: ' + sourceMeta.dataSource + '</p><p>' + sourceMeta.detail + '</p><p>Nächster Schritt: ' + sourceMeta.nextStep + '</p></main>';
+          detached.document.body.textContent = '';
+          const mainNode = detached.document.createElement('main');
+          mainNode.style.fontFamily = 'Arial, sans-serif';
+          mainNode.style.padding = '1rem';
+          const titleNode = detached.document.createElement('h1');
+          titleNode.textContent = sourceMeta.label;
+          const sourceNode = detached.document.createElement('p');
+          sourceNode.textContent = 'Datenquelle: ' + sourceMeta.dataSource;
+          const detailNode = detached.document.createElement('p');
+          detailNode.textContent = sourceMeta.detail;
+          const nextStepNode = detached.document.createElement('p');
+          nextStepNode.textContent = 'Nächster Schritt: ' + sourceMeta.nextStep;
+          mainNode.appendChild(titleNode);
+          mainNode.appendChild(sourceNode);
+          mainNode.appendChild(detailNode);
+          mainNode.appendChild(nextStepNode);
+          detached.document.body.appendChild(mainNode);
           return setResult('✅ Einzelfenster geöffnet für ' + sourceMeta.label + '.');
         }
         if (actionValue === 'save') {
@@ -1879,7 +1900,8 @@
       if (projectPathInput) {
         projectPathInput.value = getStoredProjectPath();
       }
-      if (projectDialog && typeof projectDialog.showModal === 'function') {
+      const initialProjectPath = getStoredProjectPath();
+      if (projectDialog && typeof projectDialog.showModal === 'function' && !validateProjectPath(initialProjectPath)) {
         projectDialog.showModal();
       }
       gmsPlugin.mount();

@@ -40,6 +40,9 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - A11y-Erweiterung: Textgrößen-Skala S/M/L/XL mit lokaler Speicherung und klarer Statusrückmeldung.
 - Einheitliche Card-Status-Badges (Bereit/Lädt/Fehler) als Text + Label statt nur Farbe für bessere Verständlichkeit.
 - Neu in dieser Iteration: Quality-Skript mit Modus `--check` (nur prüfen) und `--fix` (mit Formatierung), damit Teams sauber zwischen CI-Prüfung und lokaler Korrektur trennen können.
+- Neu in dieser Iteration: Projektdialog öffnet sich beim Start nur noch, wenn kein gültiger Projektpfad vorhanden ist (ruhigerer Erststart).
+- Neu in dieser Iteration: Pfad-Eingabe mit doppelten Leerzeichen wird nicht mehr hart blockiert, sondern mit verständlichem Warnhinweis gespeichert.
+- Hilfe/Sicherheit: Einzelfenster-Inhalt wird ohne `innerHTML` aufgebaut (robuster gegen fehlerhafte Inhalte) und bleibt für Laien klar lesbar.
 - Neu in dieser Iteration: Start-Routine nutzt jetzt einen robusten Dateilisten-Fallback ohne `rg` (automatisch `find`), inklusive klarer Nutzerhinweise.
 - Hilfe-/Textpunkt: Fehlende optionale Suche (`rg`) wird verständlich erklärt („langsamer, aber funktionsfähig“) und mit Next Step versehen.
 

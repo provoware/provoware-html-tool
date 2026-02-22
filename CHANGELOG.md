@@ -351,3 +351,22 @@
 
 ### Wirkung
 - Besseres Nutzerfeedback beim Start, mehr Barrierefreiheit durch klare Textzustände und schnellerer Einstieg in die tägliche Konsole-Nutzung.
+
+## 2026-02-22 – Iteration: Projektpfad-Dialog, Pfadwarnung, sichere Einzelfenster-Ausgabe
+
+### Scope-Kontrolle
+- Problem: Drei offene Backlog-Punkte führten zu unnötigem Dialog beim Start, harter Pfadblockade und unsicherer HTML-Ausgabe im Einzelfenster.
+- Ziel: Erststart ruhiger machen, Pfadprüfung laienfreundlicher gestalten und Renderpfad absichern.
+- Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Dialog-/Pfad-/Detach-Logik, 2) README-Fortschrittsnotiz, 3) Changelog-Eintrag, 4) Todo-Status, 5) WAITME-Kurzstatus, 6) Versionsregister.
+- Abnahmekriterium: Projektdialog öffnet nur bei ungültigem/leeren Pfad, Pfade mit Doppel-Leerzeichen speichern mit Warnung, Einzelfenster rendert ohne `innerHTML`.
+
+### Umsetzung (3 Punkte)
+- Punkt 1: Projektdialog wird beim Start nur bei fehlendem oder ungültigem Pfad automatisch geöffnet.
+- Punkt 2: Pfad mit doppelten Leerzeichen wird als Warnung statt harter Blockade behandelt.
+- Punkt 3: Einzelfenster-Inhalt wird als sichere DOM-Knoten erzeugt statt per `innerHTML`.
+
+### Wirkung
+- Weniger Unterbrechungen beim Start und klarere Nutzerführung.
+- Bessere Barrierefreiheit durch einfache Warntexte mit nächstem Schritt.
+- Geringere Angriffsfläche im Renderpfad (sicherere Ausgabe).

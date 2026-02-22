@@ -83,3 +83,15 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash start.sh --check`
 - `bash start.sh --release-check`
 - `cat logs/status_summary.txt`
+
+
+## Update 2026-02-22 (Projektpfad + sichere Ausgabe)
+- Der Projektdialog öffnet sich jetzt nur noch automatisch, wenn der Pfad fehlt oder ungültig ist.
+- Pfade mit doppelten Leerzeichen werden nicht hart blockiert: Das Tool speichert und zeigt einen klaren Warnhinweis.
+- Einzelfenster werden jetzt ohne `innerHTML` aufgebaut (sicherere Textausgabe).
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`
