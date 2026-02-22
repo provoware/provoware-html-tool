@@ -779,7 +779,8 @@ run_offline_pack_mode() {
 	local wheel_dir="$PROJECT_ROOT/data/offline_wheels"
 	local browser_dir="$PLAYWRIGHT_BROWSERS_PATH"
 	local package_dir="$PROJECT_ROOT/data"
-	local package_file="offline_bundle_$(date '+%Y%m%d_%H%M%S').tar.gz"
+	local package_file
+	package_file="offline_bundle_$(date '+%Y%m%d_%H%M%S').tar.gz"
 	local package_path="$package_dir/$package_file"
 
 	mkdir -p "$wheel_dir" "$browser_dir" "$package_dir"

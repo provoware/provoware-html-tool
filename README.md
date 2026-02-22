@@ -101,6 +101,21 @@ PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 -m playwright install 
 PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 tools/browser_e2e_test.py
 ```
 
+## Häufiger Fehler SC2155 (einfach erklärt)
+Wenn `shellcheck` meldet „Declare and assign separately“ (SC2155), dann wurde eine Variable direkt bei `local` gesetzt.
+
+Sichere Lösung (Best Practice):
+```bash
+local paket_datei
+paket_datei="wert"
+```
+
+Schnelle Prüfung:
+```bash
+bash start.sh --check --debug
+bash tools/run_quality_checks.sh
+```
+
 ## Debugging und Logging
 ```bash
 bash start.sh --check --debug
