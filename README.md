@@ -67,11 +67,13 @@ bash start.sh --check           # Auto-Prüfung (Checks)
 bash start.sh --repair          # Auto-Reparatur (abhängige Pakete/Fehlerpfade)
 bash start.sh --format          # Auto-Formatierung (einheitlicher Code-Stil)
 bash start.sh --test            # automatische Tests
+bash start.sh --autopilot       # strikter Auto-Ablauf (Check -> Repair -> Format -> Test)
 bash start.sh --full-gates      # alle Pflicht-Gates in Reihenfolge
 bash start.sh --weakness-report # Bericht zu Schwachstellen
 bash start.sh --release-check   # Release-Checkliste ausführen
 python tools/smoke_test.py      # schneller Funktionstest
 OFFLINE_ARTIFACT_MODE=warn python tools/smoke_test.py --profile full # Offline-Artefakte nur als Warnung behandeln
+OFFLINE_ARTIFACT_MODE=strict bash start.sh --test # strenger Modus: ungültige Werte werden sofort gestoppt
 bash tools/run_quality_checks.sh # Qualitätsprüfungen für Repo
 ```
 

@@ -283,6 +283,7 @@ $(get_text "help_usage")
   Nur Reparatur (Repair):         ./start.sh --repair
   Nur Formatierung (Format):      ./start.sh --format
   Nur Selbsttest (Test):          ./start.sh --test
+  Autopilot (strikt):             ./start.sh --autopilot
   Schwachstellen-Bericht:         ./start.sh --weakness-report
   Screenshot-Baseline-Check:      ./start.sh --visual-baseline-check
   Pflicht-Gates 1-5:              ./start.sh --full-gates
@@ -297,6 +298,7 @@ Einfache Begriffe:
   Repair (Reparatur) = automatische Behebung
   Format = einheitliche Schreibweise im Code
   Test = kurzer Selbsttest mit Erfolg/Fehler-Ausgabe
+  Autopilot = führt Check, Reparatur, Format und Test ohne Teilerfolg aus
 
 $(get_text "help_accessibility")
 $(get_text "help_icon_legend")
@@ -337,6 +339,10 @@ validate_args() {
 			;;
 		--test)
 			MODE="test"
+			mode_count=$((mode_count + 1))
+			;;
+		--autopilot)
+			MODE="autopilot"
 			mode_count=$((mode_count + 1))
 			;;
 		--safe)
@@ -624,6 +630,8 @@ run_quality_checks() {
 }
 
 run_tests() {
+	validate_offline_artifact_mode || return 1
+
 	print_step "✅" "Schnelltest gestartet: Voraussetzungen + Syntax + Pflichtdateien + Zeilenlimit + Repo-Quality."
 	if ! check_runtime_prerequisites || ! bash -n "$PROJECT_ROOT/start.sh" || ! check_required_files || ! check_line_limit; then
 		print_error_with_actions "Selbsttest fehlgeschlagen."
@@ -657,6 +665,52 @@ run_tests() {
 	fi
 
 	record_checked "Selbsttest"
+}
+
+validate_offline_artifact_mode() {
+	local mode="${OFFLINE_ARTIFACT_MODE:-strict}"
+	if [[ "$mode" != "strict" && "$mode" != "warn" ]]; then
+		print_error_with_actions "Ungültiger Wert für OFFLINE_ARTIFACT_MODE: '${mode}'. Erlaubt sind nur 'strict' oder 'warn'."
+		record_next_step "Beispiel: OFFLINE_ARTIFACT_MODE=warn ./start.sh --test"
+		return 1
+	fi
+
+	record_checked "OFFLINE_ARTIFACT_MODE=${mode}"
+	return 0
+}
+
+run_autopilot_mode() {
+	print_section "Autopilot" || true
+	print_step "✅" "Autopilot aktiv: Check, Reparatur, Format und Test laufen strikt nacheinander."
+
+	if ! run_check_mode; then
+		print_error_with_actions "Autopilot gestoppt: Check nicht erfolgreich."
+		record_next_step "./start.sh --check --debug ausführen und die Hinweise Schritt für Schritt abarbeiten"
+		return 1
+	fi
+
+	if ! run_repair_mode; then
+		print_error_with_actions "Autopilot gestoppt: Reparatur nicht erfolgreich."
+		record_next_step "./start.sh --repair --debug ausführen und fehlende Werkzeuge prüfen"
+		return 1
+	fi
+
+	if ! run_formatting; then
+		print_error_with_actions "Autopilot gestoppt: Formatierung nicht erfolgreich."
+		record_next_step "./start.sh --format --debug ausführen und Ausgabe prüfen"
+		return 1
+	fi
+
+	if ! run_tests; then
+		print_error_with_actions "Autopilot gestoppt: Tests nicht erfolgreich."
+		record_next_step "./start.sh --test --debug ausführen und gemeldete Next Steps beheben"
+		return 1
+	fi
+
+	print_step "✅" "Autopilot erfolgreich abgeschlossen."
+	record_checked "Autopilot"
+	record_next_step "Optional: ./start.sh --full-gates für den vollständigen Gate-Durchlauf starten"
+	return 0
 }
 
 run_doctor_mode() {
@@ -1485,6 +1539,9 @@ main() {
 		;;
 	test)
 		run_tests
+		;;
+	autopilot)
+		run_autopilot_mode
 		;;
 	release-check)
 		run_release_check
