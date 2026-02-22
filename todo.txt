@@ -23,6 +23,10 @@ DONE: Offline-Checkpfad für Playwright in der Start-Routine ergänzt (Modul + B
 DONE: Repair-Modus verbessert: nutzt zuerst lokale Offline-Wheels und danach optional Online-Installation (2026-02-22)
 DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (2026-02-22)
 
+DONE: Neuer Modus `--autopilot` ergänzt (strikter Auto-Ablauf ohne Teilerfolg: Check -> Repair -> Format -> Test) (2026-02-22)
+DONE: OFFLINE_ARTIFACT_MODE wird jetzt hart validiert (nur strict/warn) mit klarer Fehlermeldung + Next Step (2026-02-22)
+DONE: README um laienfreundliche Autopilot- und OFFLINE_ARTIFACT_MODE-Befehle erweitert (2026-02-22)
+
 STATUS: 100% abgeschlossen
 
 NEXT (Priorität hoch, offen)

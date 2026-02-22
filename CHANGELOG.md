@@ -1,3 +1,17 @@
+## 2026-02-22 – Autopilot-Modus + strikte Offline-Input-Validierung
+- Scope-Kontrolle:
+  - Problem: Es gab keinen strikt durchgehenden Ein-Kommando-Ablauf für die Auto-Prüfung, und `OFFLINE_ARTIFACT_MODE` wurde nicht früh validiert.
+  - Ziel: Einen klaren Autopilot-Modus ergänzen, Umgebungswert robust validieren und die Befehle laienverständlich dokumentieren.
+  - Dateien: `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) neuer CLI-Modus + Input-Validierung in `start.sh`, 2) Befehle in README ergänzen, 3) Fortschritt und Versionseinträge aktualisieren.
+  - Abnahme: `bash start.sh --autopilot` läuft strikt sequenziell ohne Teilerfolg, und ungültiger `OFFLINE_ARTIFACT_MODE` bricht mit Next-Step-Hinweis ab.
+- Was:
+  1) Neuer Modus `--autopilot` ergänzt (Check -> Repair -> Format -> Test), inklusive klarer Stop-Regeln und verständlicher Next Steps.
+  2) Input-Validierung für `OFFLINE_ARTIFACT_MODE` ergänzt (nur `strict` oder `warn`) mit klarer Fehlermeldung in einfacher Sprache.
+  3) README-/To-do-Dokumentation aktualisiert, damit Nutzer die neue Auto-Routine direkt mit vollständigem Befehl nutzen können.
+- Warum: Ein strikter Ein-Befehl-Ablauf reduziert Bedienfehler, und frühe Input-Validierung verhindert schwer lesbare Folgefehler.
+- Wirkung: Mehr Release-Reife, bessere Fehlertoleranz und klarere Nutzerführung für Einsteiger.
+
 ## 2026-02-22 – Neue 3-Punkte-Iteration für UI-Workflow und Modul-Robustheit als To-do geplant
 - Scope-Kontrolle:
   - Problem: Es fehlte ein klar priorisierter, umsetzbarer Dreier-Block für das neue Zielbild (3x3-Grid, Logheader, Interoperabilität).
