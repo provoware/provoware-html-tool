@@ -1,3 +1,6 @@
+DONE: GUI-Portlogik auf freie Nicht-Systemports 20000-60999 umgestellt (Input-Validierung + klare Fehlermeldung) (2026-02-22)
+DONE: Bei belegtem Wunschport sucht start.sh jetzt automatisch einen freien Alternativ-Port (2026-02-22)
+DONE: Portwahl in README laienverständlich dokumentiert (Zufall/Fallback/Next Steps) (2026-02-22)
 DONE: Modul-Starter an `config/module_sources.json` gekoppelt, inklusive Input-Validierung und transparenter Datenquellen-Anzeige im Status/Debug (2026-02-22)
 DONE: Dashboard-Modulöffnung zeigt kurze Details + Next Step je Datenquelle in einfacher Sprache (2026-02-22)
 DONE: Start-Routine injiziert validierte Modulquellen in das Hauptmodul ohne neue Abhängigkeiten (2026-02-22)

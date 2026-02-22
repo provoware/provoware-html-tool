@@ -12,6 +12,7 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
   - Barrierefreiheit mit Tastaturfokus, Kontrast-Checks und verständlichen Fehlermeldungen.
   - Saubere Projektstruktur: System, Konfiguration, Werkzeuge und variable Daten sind getrennt.
   - Mehrere Themes für robustes Farb- und Kontrastverhalten.
+- Robuste Portlogik: GUI nutzt zufällige, freie Nicht-Systemports (20000–60999) und sucht bei Portfehlern automatisch einen Alternativ-Port.
 
 - Responsive Feinanpassung für sehr kleine Displays (bis 420px) mit besserem Fokus, klaren Abständen und stabiler Lesbarkeit.
 
@@ -80,6 +81,12 @@ Hinweis für reine Offline-Umgebungen:
 - Optional: `OFFLINE_ARTIFACT_MODE=warn` (fehlende Offline-Artefakte = Warnung mit Next Steps).
 
 5. Mini-UX-Check (deutsche Dialoge, Next Steps, Kontrast/Fokus)
+
+
+Hinweis zur Portwahl:
+- Ohne `GUI_PORT` wird ein freier Zufallsport zwischen `20000` und `60999` genutzt.
+- Ist ein gesetzter Port belegt, wählt die Start-Routine automatisch einen freien Alternativ-Port.
+- Fehlertexte zeigen immer Next Steps in einfacher Sprache.
 
 ## Nutzerfeedback der Start-Routine
 Die Start-Routine meldet immer verständlich:

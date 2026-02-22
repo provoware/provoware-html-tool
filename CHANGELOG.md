@@ -1,3 +1,17 @@
+## 2026-02-22 – Robuste GUI-Portsuche mit Zufall + Fallback im Fehlerfall
+- Scope-Kontrolle:
+  - Problem: Der GUI-Start nutzte einen statischen Standardport und suchte bei belegtem Port keinen automatischen Alternativ-Port.
+  - Ziel: Portbesorgung robust machen: freie Nicht-Systemports zufällig wählen, belegte Wunschports automatisch abfangen und klare Next Steps ausgeben.
+  - Dateien: `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Portauswahl/Fallback/Fehlerhandling in `start.sh`, 2) Laienhilfe zur Portwahl in README, 3) Fortschritt und Versionen aktualisieren.
+  - Abnahme: `bash start.sh` nutzt einen freien Port im Bereich 20000–60999; bei belegtem `GUI_PORT` wird automatisch ein Alternativ-Port genutzt.
+- Was:
+  1) `start.sh` erweitert: valide Portgrenzen (`20000–60999`), Zufallswahl freier Ports und automatische Fallback-Suche bei belegtem Wunschport.
+  2) Fehler- und Hilfetexte in einfacher Sprache ergänzt, inklusive konkreter Next Steps für erneuten Start und optional festen Port.
+  3) README/To-do/Versionsregister aktualisiert, damit Verhalten und Bedienung transparent dokumentiert sind.
+- Warum: Portkonflikte sind ein häufiger Startfehler; automatische Fallbacks erhöhen Stabilität und senken Einstiegshürden.
+- Wirkung: Höhere Release-Reife, robustere Startautomatik und verständlichere Nutzerführung im Fehlerfall.
+
 ## 2026-02-22 – Modul-Starter an konfigurierbare Backend-Datenquellen gekoppelt
 - Scope-Kontrolle:
   - Problem: Der Modul-Starter konnte Module öffnen, zeigte aber keine echte Datenquellen-Kopplung und zu wenig transparente Nutzerdetails.
