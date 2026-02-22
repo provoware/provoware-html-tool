@@ -1,3 +1,8 @@
+DONE: Offline-Erkennung für Reparatur ergänzt, damit fehlende Netzverbindung klar erkannt und verständlich erklärt wird. (2026-02-22)
+DONE: Full-Gates mit Retry+Timeout gehärtet, damit temporäre Fehler automatisch abgefangen werden. (2026-02-22)
+DONE: Fehlerhandling bei wiederholten Gate-Fehlern mit klaren Next Steps vereinheitlicht. (2026-02-22)
+NEXT: Retry-Strategie optional pro Gate konfigurierbar machen (Anzahl/Timeout über config) und in UI-Hilfe anzeigen. (2026-02-22)
+
 DONE: Visual-Baseline vergleicht Chromium-Artefakt jetzt gegen freigegebene Baseline inkl. --accept-current. (2026-02-22)
 DONE: Schwachstellen-Bericht prüft Browser-Artefakte je Engine (chromium/firefox/webkit) plus Baseline-Status. (2026-02-22)
 DONE: Theme-Hilfe meldet aktives Theme live als Screenreader-Status mit Kontrast-Hinweis. (2026-02-22)

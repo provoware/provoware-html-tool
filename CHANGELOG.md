@@ -1,3 +1,8 @@
+## 2026-02-22 – Offline-Stabilität + Gate-Retry + klare Fehlertoleranz
+- Was: `start.sh` erkennt Offline-Zustände vor Auto-Installation, führt Full-Gates mit automatischem Retry plus Zeitlimit aus und protokolliert Fehlversuche mit klaren Next Steps in einfacher Sprache.
+- Warum: Instabiles oder fehlendes Netzwerk soll nicht zu unklaren Reparaturfehlern führen, und temporäre Aussetzer in Gates sollen robust abgefangen werden.
+- Wirkung: Höhere Offline-Stabilität, fehlertolerantere Start-/Gate-Läufe und besser verständliche Hilfeausgaben für Nutzer:innen.
+
 ## 2026-02-22 – Baseline-Freigabe + Multi-Browser-Risiko-Check + Theme-Livehilfe
 - Was: `tools/visual_baseline_check.py` vergleicht jetzt Chromium-Artefakt gegen eine freigegebene Baseline (inkl. `--accept-current`), `start.sh --weakness-report` prüft Artefakte für Chromium/Firefox/WebKit plus Baseline-Status, und das Dashboard meldet den aktiven Theme-Kontrast als Live-Status.
 - Warum: Offene Punkte zu Visual-Guard und Browser-Abdeckung sollten mit klaren Next Steps abschließbar werden, während die Theme-Hilfe für Tastatur- und Screenreader-Nutzung verständlicher wird.

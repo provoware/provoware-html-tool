@@ -7,6 +7,9 @@ LOG_FILE="${LOG_DIR}/start.log"
 MODE="start"
 DEBUG_MODE="0"
 LINE_LIMIT=1200
+NETWORK_CHECK_TIMEOUT=2
+COMMAND_TIMEOUT=180
+RETRY_MAX=2
 STATUS_SUMMARY_FILE=""
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
@@ -155,6 +158,48 @@ print(",".join(valid))' "$THEME_CONFIG_FILE" 2>/dev/null || true)"
 	printf '%s' "$THEME_LIST_CACHE"
 }
 
+
+
+is_network_available() {
+	if ! command -v curl >/dev/null 2>&1; then
+		return 1
+	fi
+
+	if curl --silent --show-error --max-time "$NETWORK_CHECK_TIMEOUT" https://example.com >/dev/null 2>&1; then
+		return 0
+	fi
+
+	return 1
+}
+
+run_with_retry() {
+	local label="$1"
+	shift
+
+	if [[ -z "$label" || "$#" -eq 0 ]]; then
+		print_error_with_actions "Interner Fehler: Prüfungsname oder Befehl fehlt."
+		record_next_step "Startskript prüfen und './start.sh --check --debug' erneut ausführen"
+		return 1
+	fi
+
+	local attempt=1
+	while [[ "$attempt" -le "$RETRY_MAX" ]]; do
+		print_step "ℹ️" "${label}: Versuch ${attempt}/${RETRY_MAX}."
+		if timeout "$COMMAND_TIMEOUT" "$@"; then
+			print_step "✅" "${label} erfolgreich."
+			return 0
+		fi
+
+		if [[ "$attempt" -lt "$RETRY_MAX" ]]; then
+			print_step "⚠️" "${label} fehlgeschlagen. Wiederhole automatisch."
+		fi
+		attempt=$((attempt + 1))
+	done
+
+	print_error_with_actions "${label} nach ${RETRY_MAX} Versuchen nicht erfolgreich."
+	record_next_step "Bei instabilem Netz zuerst './start.sh --repair' und danach den Befehl erneut ausführen"
+	return 1
+}
 is_allowed_theme() {
 	local candidate="$1"
 	if [[ -z "$candidate" || ! "$candidate" =~ ^[a-z][a-z0-9-]{1,30}$ ]]; then
@@ -350,6 +395,11 @@ try_auto_install_tool() {
 
 	print_step "⚠️" "${tool_name} fehlt. Automatische Reparatur wird versucht."
 	record_missing "$tool_name"
+	if ! is_network_available; then
+		print_step "⚠️" "Offline erkannt: Paketinstallation für ${tool_name} wird übersprungen."
+		record_next_step "Netzwerk verbinden und danach './start.sh --repair' erneut ausführen"
+		return 1
+	fi
 	local install_attempted="0"
 	if command -v apt-get >/dev/null 2>&1; then
 		install_attempted="1"
@@ -778,7 +828,7 @@ run_full_gates_mode() {
 	local failed=0
 
 	print_step "ℹ️" "GATE 1: python -m compileall -q ."
-	if python -m compileall -q "$PROJECT_ROOT"; then
+	if run_with_retry "GATE 1" python -m compileall -q "$PROJECT_ROOT"; then
 		print_step "✅" "GATE 1 erfolgreich."
 		record_checked "GATE 1"
 	else
@@ -789,7 +839,7 @@ run_full_gates_mode() {
 
 	if [[ "$failed" -eq 0 ]]; then
 		print_step "ℹ️" "GATE 2: bash tools/run_quality_checks.sh (inklusive Kontrastprüfung)"
-		if bash "$PROJECT_ROOT/tools/run_quality_checks.sh"; then
+		if run_with_retry "GATE 2" bash "$PROJECT_ROOT/tools/run_quality_checks.sh"; then
 			print_step "✅" "GATE 2 erfolgreich."
 			record_checked "GATE 2"
 		else
@@ -801,7 +851,7 @@ run_full_gates_mode() {
 
 	if [[ "$failed" -eq 0 ]]; then
 		print_step "ℹ️" "GATE 3: python tools/smoke_test.py --profile full"
-		if SKIP_FULL_GATES=1 python "$PROJECT_ROOT/tools/smoke_test.py" --profile full; then
+		if run_with_retry "GATE 3" env SKIP_FULL_GATES=1 python "$PROJECT_ROOT/tools/smoke_test.py" --profile full; then
 			print_step "✅" "GATE 3 erfolgreich."
 			record_checked "GATE 3"
 		else
@@ -813,7 +863,7 @@ run_full_gates_mode() {
 
 	if [[ "$failed" -eq 0 ]]; then
 		print_step "ℹ️" "GATE 4: bash start.sh --check"
-		if bash "$PROJECT_ROOT/start.sh" --check; then
+		if run_with_retry "GATE 4" bash "$PROJECT_ROOT/start.sh" --check; then
 			print_step "✅" "GATE 4 erfolgreich."
 			record_checked "GATE 4"
 		else
@@ -825,7 +875,7 @@ run_full_gates_mode() {
 
 	if [[ "$failed" -eq 0 ]]; then
 		print_step "ℹ️" "GATE 5: ./start.sh --ux-check-auto"
-		if bash "$PROJECT_ROOT/start.sh" --ux-check-auto; then
+		if run_with_retry "GATE 5" bash "$PROJECT_ROOT/start.sh" --ux-check-auto; then
 			print_step "✅" "GATE 5 erfolgreich."
 			record_checked "GATE 5"
 			print_step "✅" "Alle automatischen Gates 1-5 erfolgreich abgeschlossen."
