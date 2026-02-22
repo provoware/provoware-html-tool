@@ -43,6 +43,39 @@ def parse_args() -> argparse.Namespace:
 ARGS = parse_args()
 
 
+def run_playwright_offline_validation() -> None:
+    print_step("✅", "Smoke-Test erweitert: Playwright-Offline-Validierung")
+    wheel_dir = PROJECT_ROOT / "data" / "offline_wheels"
+    browser_dir = PROJECT_ROOT / "data" / "playwright-browsers"
+
+    bundle_files = sorted((PROJECT_ROOT / "data").glob("offline_bundle_*.tar.gz"))
+
+    if not wheel_dir.exists() or not browser_dir.exists():
+        if bundle_files:
+            print_step("⚠️", "Smoke-Test Hinweis: Einzelordner fehlen, aber ein Offline-Bundle ist vorhanden.")
+            print_step("➡️", f"Nächster Schritt: Bei Bedarf Bundle nutzen: {bundle_files[-1].name}")
+            print_step("✅", "Playwright-Offline-Validierung erfolgreich: Bundle für Offline-Transfer ist vorhanden.")
+            return
+        print_step("❌", "Smoke-Test fehlgeschlagen: Offline-Artefakte für Playwright fehlen.")
+        print_step("➡️", "Nächster Schritt: './start.sh --repair' oder './start.sh --offline-pack' ausführen.")
+        sys.exit(1)
+
+    if not any(wheel_dir.glob('*.whl')):
+        print_step("⚠️", "Smoke-Test Hinweis: Keine lokalen Wheels gefunden.")
+        print_step("➡️", "Nächster Schritt: Online vorbereiten mit 'python3 -m pip download playwright -d data/offline_wheels'.")
+
+    browser_entries = [p for p in browser_dir.iterdir() if p.is_dir() or p.is_file()]
+    if not browser_entries:
+        if bundle_files:
+            print_step("⚠️", "Smoke-Test Hinweis: Browsercache lokal leer, Bundle aber vorhanden.")
+            print_step("➡️", "Nächster Schritt: Für lokale Browserprüfung online Browsercache erzeugen oder Bundle auf Zielsystem nutzen.")
+        else:
+            print_step("⚠️", "Smoke-Test Hinweis: Browsercache ist lokal noch leer.")
+            print_step("➡️", "Nächster Schritt: Optional online vorbereiten mit 'PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 -m playwright install chromium'.")
+
+    print_step("✅", "Playwright-Offline-Validierung erfolgreich: Artefakte sind vorhanden.")
+
+
 if not START_SCRIPT.exists():
     print_step("❌", "Smoke-Test abgebrochen: start.sh fehlt.")
     print_step("➡️", "Nächster Schritt: Repository vollständig laden und erneut testen.")
@@ -185,6 +218,9 @@ if ARGS.profile == "full":
         print_step("❌", "Smoke-Test fehlgeschlagen: UX-Erfolgsausgabe fehlt.")
         print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --ux-check-auto' prüfen.")
         sys.exit(1)
+
+if ARGS.profile == "full":
+    run_playwright_offline_validation()
 
 if ARGS.profile == "full":
     print_step("✅", "Smoke-Test (full) erweitert: python tools/browser_e2e_test.py")

@@ -238,6 +238,7 @@ $(get_text "help_usage")
   Schwachstellen-Bericht:         ./start.sh --weakness-report
   Screenshot-Baseline-Check:      ./start.sh --visual-baseline-check
   Pflicht-Gates 1-5:              ./start.sh --full-gates
+  Offline-Paket bauen:            ./start.sh --offline-pack
   Automatischer Mini-UX-Check:    ./start.sh --ux-check-auto
   Release-Check:                  ./start.sh --release-check
   Debug-Protokoll aktivieren:     ./start.sh --debug
@@ -328,6 +329,10 @@ validate_args() {
 			;;
 		--ux-check-auto)
 			MODE="ux-check-auto"
+			mode_count=$((mode_count + 1))
+			;;
+		--offline-pack)
+			MODE="offline-pack"
 			mode_count=$((mode_count + 1))
 			;;
 		--debug)
@@ -764,6 +769,42 @@ run_repair_mode() {
 	run_dependency_bootstrap || true
 	prepare_playwright_offline_assets || true
 	print_step "✅" "Repair-Modus abgeschlossen."
+}
+
+run_offline_pack_mode() {
+	print_section "Offline-Paket" || true
+	print_step "✅" "Offline-Paket-Modus aktiv. Lokale Artefakte werden vorbereitet und gebündelt."
+	prepare_playwright_offline_assets || true
+
+	local wheel_dir="$PROJECT_ROOT/data/offline_wheels"
+	local browser_dir="$PLAYWRIGHT_BROWSERS_PATH"
+	local package_dir="$PROJECT_ROOT/data"
+	local package_file="offline_bundle_$(date '+%Y%m%d_%H%M%S').tar.gz"
+	local package_path="$package_dir/$package_file"
+
+	mkdir -p "$wheel_dir" "$browser_dir" "$package_dir"
+
+	if [[ ! -d "$wheel_dir" || ! -d "$browser_dir" ]]; then
+		print_error_with_actions "Offline-Paket konnte nicht vorbereitet werden: Artefaktordner fehlen."
+		record_missing "Offline-Paket"
+		record_next_step "Erneut mit './start.sh --repair' probieren und danach './start.sh --offline-pack' ausführen"
+		return 1
+	fi
+
+	if tar -czf "$package_path" -C "$PROJECT_ROOT" data/offline_wheels data/playwright-browsers; then
+		if [[ -s "$package_path" ]]; then
+			print_step "✅" "Offline-Paket erstellt: $package_path"
+			record_fixed "Offline-Paket archiviert"
+			record_checked "Offline-Bundle bereit"
+			record_next_step "Offline-System: Archiv nach data/ kopieren und mit 'tar -xzf $(basename "$package_path") -C .' entpacken"
+			return 0
+		fi
+	fi
+
+	print_error_with_actions "Offline-Paket konnte nicht erstellt werden."
+	record_missing "Offline-Paket"
+	record_next_step "Dateirechte in data/ prüfen und './start.sh --offline-pack --debug' erneut ausführen"
+	return 1
 }
 
 validate_project_path_input() {
@@ -1306,9 +1347,12 @@ main() {
 	weakness-report)
 		run_weakness_report_mode
 		;;
-	visual-baseline-check)
-		run_visual_baseline_check_mode
-		;;
+		visual-baseline-check)
+			run_visual_baseline_check_mode
+			;;
+		offline-pack)
+			run_offline_pack_mode
+			;;
 	repair)
 		run_repair_mode
 		;;

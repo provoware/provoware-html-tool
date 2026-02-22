@@ -1,3 +1,6 @@
+DONE: start.sh um einen Schalter `--offline-pack` erweitert, der Offline-Artefakte in data/ vorbereitet und als Archiv bündelt (2026-02-22)
+DONE: Playwright-Offline-Validierung als festen Smoke-Test-Schritt ergänzt (klare Next Steps bei Fehlern) (2026-02-22)
+DONE: Hilfe-/Befehlsübersicht in start.sh um Offline-Paket-Befehl ergänzt (2026-02-22)
 DONE: Projekt-Routine beim GUI-Start ergänzt (Pfadabfrage, Validierung, Auto-Erstellung, Persistenz im Dashboard) (2026-02-22)
 DONE: Abhängigkeits-Mapping in config/dependency_map.json eingeführt (apt/brew/pip) und Start-Routine daran angebunden (2026-02-22)
 DONE: Auto-Reparatur für Python-Qualitätstool ruff per pip ergänzt (klarer Fallback mit Next Steps) (2026-02-22)
@@ -6,12 +9,12 @@ DONE: Offline-Checkpfad für Playwright in der Start-Routine ergänzt (Modul + B
 DONE: Repair-Modus verbessert: nutzt zuerst lokale Offline-Wheels und danach optional Online-Installation (2026-02-22)
 DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (2026-02-22)
 
-STATUS: 94% abgeschlossen
+STATUS: 99% abgeschlossen
 
 NEXT (Priorität hoch, offen)
-- [ ] 95%: Vollständige Offline-Bundle-Erstellung automatisieren (Wheel-Download + Browsercache export in ein Archiv).
-- [ ] 97%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigenen Testschritt mit klarer Fehlerhilfe ergänzen.
-- [ ] 99%: start.sh um einen Schalter `--offline-pack` erweitern, der alle Offline-Artefakte in `data/` vorbereitet.
+- [x] 95%: Vollständige Offline-Bundle-Erstellung automatisiert (Wheel-Download + Browsercache Export in ein Archiv) via --offline-pack.
+- [x] 97%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigener Testschritt mit klarer Fehlerhilfe ergänzt.
+- [x] 99%: start.sh um einen Schalter `--offline-pack` erweitert, der alle Offline-Artefakte in `data/` vorbereitet.
 
 NEXT (Priorität mittel, offen)
 - [ ] 100%: GUI-Hilfebereich um kurzen Abschnitt „Offline testen“ erweitern (einfache Sprache + vollständige Befehle).

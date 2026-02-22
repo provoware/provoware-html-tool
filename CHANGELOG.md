@@ -56,3 +56,18 @@
 - Was: README komplett sprachlich vereinfacht, Befehle mit Klartext-Erklärung ergänzt und AGENTS.md als projektoptimierte Arbeitsrichtlinie (Version 2.5) überarbeitet.
 - Warum: Team und Einsteiger sollen dieselben, verständlichen Qualitätsregeln nutzen und schneller mit Start, Prüfung und Fehlerbehebung zurechtkommen.
 - Wirkung: Konsistente Arbeitsweise, bessere Barrierefreiheit in der Kommunikation und weniger Reibung bei Iteration, Testing und Übergabe.
+
+
+## 2026-02-22 – Offline-Paket-Export + Smoke-Offline-Validierung ergänzt
+- Scope-Kontrolle:
+  - Problem: Zwei offene Kernpunkte fehlten noch: Offline-Bundle per Ein-Befehl und eine feste Playwright-Offline-Validierung im Smoke-Test.
+  - Ziel: Start-Routine soll Offline-Artefakte als Archiv bereitstellen, Smoke-Test soll Offline-Bereitschaft mit klaren Next Steps prüfen, und die Hilfe soll den neuen Befehl zeigen.
+  - Dateien: `start.sh`, `tools/smoke_test.py`, `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) neuer `--offline-pack`-Modus + Hilfezeile, 2) neuer Smoke-Check `run_playwright_offline_validation`, 3) Doku-/Fortschrittsupdate.
+  - Abnahme: `bash start.sh --offline-pack` erzeugt ein Archiv unter `data/` und `python tools/smoke_test.py --profile full` enthält die Playwright-Offline-Validierung.
+- Was:
+  1) `start.sh` um Modus `--offline-pack` erweitert, der Playwright-Artefakte vorbereitet und als `offline_bundle_*.tar.gz` bündelt.
+  2) `tools/smoke_test.py` um festen Schritt „Playwright-Offline-Validierung“ ergänzt (inkl. klarer Fehlerhilfe/Next Steps).
+  3) Hilfe-/Doku-Texte für Laien erweitert (README + To-do-Fortschritt aktualisiert).
+- Warum: Offline-Betrieb wird damit reproduzierbar, transparent und ohne manuelle Einzelarbeit möglich.
+- Wirkung: Höhere Release-Reife, klarere Nutzerführung und robusterer Qualitätssicherungsablauf für Offline-Szenarien.
