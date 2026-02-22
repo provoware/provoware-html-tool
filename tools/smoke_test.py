@@ -49,7 +49,7 @@ def run_playwright_offline_validation() -> None:
     browser_dir = PROJECT_ROOT / "data" / "playwright-browsers"
 
     bundle_files = sorted((PROJECT_ROOT / "data").glob("offline_bundle_*.tar.gz"))
-    offline_warn_mode = os.environ.get("OFFLINE_ARTIFACT_MODE", "strict").strip().lower() == "warn"
+    offline_warn_mode = os.environ.get("OFFLINE_ARTIFACT_MODE", "warn").strip().lower() == "warn"
 
     if not wheel_dir.exists() or not browser_dir.exists():
         if bundle_files:

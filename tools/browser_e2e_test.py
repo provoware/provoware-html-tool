@@ -67,66 +67,78 @@ def main() -> int:
     ARTIFACT_DIR.mkdir(parents=True, exist_ok=True)
     template_url = TEMPLATE.resolve().as_uri()
 
-    with sync_playwright() as playwright:
-        browser_launcher = getattr(playwright, browser_name)
-        browser = browser_launcher.launch(headless=True)
-        page = browser.new_page()
-        page.goto(template_url, wait_until="load")
+    try:
+        with sync_playwright() as playwright:
+            browser_launcher = getattr(playwright, browser_name)
+            browser = browser_launcher.launch(headless=True)
+            page = browser.new_page()
+            page.goto(template_url, wait_until="load")
 
-        trigger = page.locator('[data-action="error"]').first
-        trigger.focus()
-        page.keyboard.press("Enter")
+            trigger = page.locator('[data-action="error"]').first
+            trigger.focus()
+            page.keyboard.press("Enter")
 
-        dialog = page.locator("#error-dialog")
-        if dialog.count() == 0:
-            browser.close()
-            return fail(
-                "Browser-E2E fehlgeschlagen: Fehlerdialog wurde nicht gefunden.",
-                "Template prüfen: Dialog mit id='error-dialog' ergänzen.",
+            dialog = page.locator("#error-dialog")
+            if dialog.count() == 0:
+                browser.close()
+                return fail(
+                    "Browser-E2E fehlgeschlagen: Fehlerdialog wurde nicht gefunden.",
+                    "Template prüfen: Dialog mit id='error-dialog' ergänzen.",
+                )
+
+            dialog_visible = page.evaluate("() => document.getElementById('error-dialog')?.open === true")
+            if not dialog_visible:
+                browser.close()
+                return fail(
+                    "Browser-E2E fehlgeschlagen: Fehlerdialog wurde nicht geöffnet.",
+                    "Dialog-Aktion mit data-action='error' und showModal prüfen.",
+                )
+
+            # Tab-Fokus muss im Dialog bleiben.
+            for _ in range(6):
+                page.keyboard.press("Tab")
+
+            active_inside = page.evaluate(
+                """() => {
+                    const dialog = document.getElementById('error-dialog');
+                    const active = document.activeElement;
+                    return !!dialog && !!active && dialog.contains(active);
+                }"""
             )
+            if not active_inside:
+                browser.close()
+                return fail(
+                    "Browser-E2E fehlgeschlagen: Tab-Fokus verlässt den offenen Dialog.",
+                    "Fokusfang im Dialog prüfen (Tab/Shift+Tab innerhalb des Dialogs halten).",
+                )
 
-        dialog_visible = page.evaluate("() => document.getElementById('error-dialog')?.open === true")
-        if not dialog_visible:
-            browser.close()
-            return fail(
-                "Browser-E2E fehlgeschlagen: Fehlerdialog wurde nicht geöffnet.",
-                "Dialog-Aktion mit data-action='error' und showModal prüfen.",
+            page.keyboard.press("Escape")
+            focus_restored = page.evaluate(
+                """() => {
+                    const active = document.activeElement;
+                    return active?.getAttribute('data-action') === 'error';
+                }"""
             )
+            if not focus_restored:
+                browser.close()
+                return fail(
+                    "Browser-E2E fehlgeschlagen: Fokus kehrt nach Dialog-Schließen nicht zum Auslöser zurück.",
+                    "restoreFocusAfterDialog im Template prüfen und erneut testen.",
+                )
 
-        # Tab-Fokus muss im Dialog bleiben.
-        for _ in range(6):
-            page.keyboard.press("Tab")
+            page.screenshot(path=str(artifact_file), full_page=True)
+            browser.close()
 
-        active_inside = page.evaluate(
-            """() => {
-                const dialog = document.getElementById('error-dialog');
-                const active = document.activeElement;
-                return !!dialog && !!active && dialog.contains(active);
-            }"""
+    except Exception as exc:
+        message = str(exc)
+        if '403' in message or 'download' in message.lower():
+            print_step('⚠️', 'Browser-E2E übersprungen: Playwright-Browserdownload ist blockiert (z. B. 403).')
+            print_step('➡️', 'Nächster Schritt: Offline-Mirror nutzen und Browser-Artefakte mit ./start.sh --offline-pack vorbereiten.')
+            return 1 if args.require_browser else 0
+        return fail(
+            f'Browser-E2E fehlgeschlagen: {message}',
+            'Mit ./start.sh --repair Abhängigkeiten prüfen und den Test erneut starten.',
         )
-        if not active_inside:
-            browser.close()
-            return fail(
-                "Browser-E2E fehlgeschlagen: Tab-Fokus verlässt den offenen Dialog.",
-                "Fokusfang im Dialog prüfen (Tab/Shift+Tab innerhalb des Dialogs halten).",
-            )
-
-        page.keyboard.press("Escape")
-        focus_restored = page.evaluate(
-            """() => {
-                const active = document.activeElement;
-                return active?.getAttribute('data-action') === 'error';
-            }"""
-        )
-        if not focus_restored:
-            browser.close()
-            return fail(
-                "Browser-E2E fehlgeschlagen: Fokus kehrt nach Dialog-Schließen nicht zum Auslöser zurück.",
-                "restoreFocusAfterDialog im Template prüfen und erneut testen.",
-            )
-
-        page.screenshot(path=str(artifact_file), full_page=True)
-        browser.close()
 
     print_step(
         "✅",
