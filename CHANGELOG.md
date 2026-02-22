@@ -1,3 +1,8 @@
+## 2026-02-22 – GUI-Auslagerung nach system/start_gui.sh
+- Was: GUI-HTML-Erzeugung und Theme-Farbberechnung aus `start.sh` in `system/start_gui.sh` ausgelagert, inklusive Eingabevalidierung und klaren Fehlermeldungen mit Next Steps.
+- Warum: Die Startdatei sollte weiter verschlankt werden, damit GUI-Logik getrennt wartbar bleibt und Themes zentral berechnet werden.
+- Wirkung: Bessere Struktur in `system/`, robustere Theme-Verarbeitung und leichter testbare GUI-Bausteine für künftige Erweiterungen.
+
 ## 2026-02-22 – Check-Status gehärtet + Start-Failfast + Reduced-Motion-Hilfe
 - Was: `start.sh` prüft `--check` jetzt mit gesammeltem Fehlerstatus und beendet `start` bei fehlgeschlagenem Selbsttest; Mini-UX-Check fordert zusätzlich Fokus-Hinweis und Reduced-Motion-Text.
 - Warum: Fehler durften nicht still in den nächsten Schritt laufen, und Barrierefreiheit sollte auch für reduzierte Bewegung klar abgesichert sein.

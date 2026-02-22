@@ -9,6 +9,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 START_SCRIPT = PROJECT_ROOT / "start.sh"
 START_CORE = PROJECT_ROOT / "system" / "start_core.sh"
+START_GUI = PROJECT_ROOT / "system" / "start_gui.sh"
 DASHBOARD_TEMPLATE = PROJECT_ROOT / "templates" / "dashboard_musterseite.html"
 THEME_CONFIG = PROJECT_ROOT / "config" / "themes.json"
 STATUS_SUMMARY = PROJECT_ROOT / "logs" / "status_summary.txt"
@@ -27,6 +28,11 @@ if not START_SCRIPT.exists():
 if not START_CORE.exists():
     print_step("❌", "Smoke-Test abgebrochen: system/start_core.sh fehlt.")
     print_step("➡️", "Nächster Schritt: Kernlogik-Datei unter system/ ergänzen.")
+    sys.exit(1)
+
+if not START_GUI.exists():
+    print_step("❌", "Smoke-Test abgebrochen: system/start_gui.sh fehlt.")
+    print_step("➡️", "Nächster Schritt: GUI-Helfer-Datei unter system/ ergänzen.")
     sys.exit(1)
 
 if not DASHBOARD_TEMPLATE.exists():

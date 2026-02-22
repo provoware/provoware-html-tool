@@ -1,3 +1,6 @@
+DONE: GUI-Erzeugung und Theme-Farbberechnung aus start.sh nach system/start_gui.sh ausgelagert und mit klarer Fehlerhilfe abgesichert. (2026-02-22)
+NEXT: Als Nächstes CI-Pipeline für full-gates und Artefakt-Upload von logs/status_summary.txt automatisieren. (2026-02-22)
+
 DONE: Check-Modus mit klaren Exitcodes gehärtet, Startmodus mit Failfast abgesichert und Reduced-Motion-Hilfe im Template ergänzt. (2026-02-22)
 NEXT: Als Nächstes GUI-Erzeugung und Theme-Farbzuordnung aus start.sh nach system/ auslagern und dafür gezielte Shell-Tests pro Funktion ergänzen. (2026-02-22)
 

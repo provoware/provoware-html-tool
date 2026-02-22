@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TARGET_FILES=("${PROJECT_ROOT}/start.sh" "${PROJECT_ROOT}/system/start_core.sh")
+TARGET_FILES=("${PROJECT_ROOT}/start.sh" "${PROJECT_ROOT}/system/start_core.sh" "${PROJECT_ROOT}/system/start_gui.sh")
 CONTRAST_CHECK="${PROJECT_ROOT}/tools/check_theme_contrast.py"
 
 print_step() {
