@@ -1,3 +1,17 @@
+## 2026-02-22 – Iteration: Start-/CI-Härtung (3 Punkte)
+- Scope-Kontrolle:
+  - Problem: Offene P0-Punkte in Start/CI konnten bei fehlenden Rechten oder uneinheitlichem Python-Aufruf zu unklaren Fehlern führen.
+  - Ziel: Drei kleine Fixes für robuste Reparatur, sichtbare Installer-Logs und konsistente Gate-/CI-Ausführung abschließen.
+  - Dateien: `system/start_core.sh`, `start.sh`, `.github/workflows/full-gates.yml`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Root/Sudo-Guard + Installer-Log, 2) python3 in Gates, 3) CI ohne --repair + python3, 4) Doku/Status aktualisiert.
+  - Abnahme: Bei fehlendem Root/Sudo erscheint ein klarer Hinweis, Installer-Fehler landen in `logs/install.log`, Gates laufen mit `python3` und CI ruft kein `--repair` auf.
+- Was:
+  1) `apt-get`-Installationen validieren Root/Sudo vor dem Start und liefern einfache Next Steps.
+  2) Installer-Ausgaben werden in `logs/install.log` erfasst und bei Fehlern transparent verlinkt.
+  3) Gate- und Workflow-Aufrufe wurden auf `python3` standardisiert, CI ist von `--repair` entkoppelt.
+- Warum: Klarere Fehlersuche, weniger CI-Risiko und einheitliche Runtime-Befehle erhöhen Release-Reife und Laienverständlichkeit.
+- Wirkung: Robustere automatische Start-Routine mit besserem Nutzerfeedback und stabileren Checks in lokalen sowie CI-Umgebungen.
+
 ## 2026-02-22 – Modul-Interoperabilität robust erweitert (Dialog/Sidebar/Drag&Drop)
 - Scope-Kontrolle:
   - Problem: Für den modulübergreifenden Arbeitsfluss fehlten ein Standardordner-freier Projektdialog, modulbezogene Sidebar-Optionen und robuste Archiv-Interaktionen.

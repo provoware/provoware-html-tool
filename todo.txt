@@ -1,3 +1,6 @@
+DONE: apt-get-Reparatur prüft jetzt Root/Sudo und zeigt klare Next Steps in einfacher Sprache (2026-02-22)
+DONE: Installationsfehler werden in logs/install.log geschrieben und als konkreter Hinweis ausgegeben (2026-02-22)
+DONE: Gate-/CI-Pythonaufrufe auf python3 vereinheitlicht und CI von --repair entkoppelt (2026-02-22)
 DONE: Dashboard-Layoutprofil ergänzt (Layout speichern/laden mit validierter localStorage-Wiederherstellung) (2026-02-22)
 DONE: Textgrößen-Skala S/M/L/XL mit persistenter Auswahl und Hilfetext ergänzt (2026-02-22)
 DONE: Einheitliche Card-Status-Badges (Bereit/Lädt/Fehler) mit Textlabel statt nur Farbe ergänzt (2026-02-22)
@@ -69,10 +72,10 @@ NEXT (offen, priorisiert und testbar)
 - [ ] P0 | Frontend/Template | Kein hartes Default-Theme im JS (`applyTheme('balanced')` auf Config/Preference umstellen).
 - [ ] P0 | Frontend/UI | Klick-Delegation mit `closest('[data-action]')` robust machen (Icon/Span-Klick).
 - [ ] P0 | Frontend/Security | `innerHTML` im Popup/Renderpfad minimieren, Textausgaben auf `textContent` umstellen.
-- [ ] P0 | Scripts/Start | `apt-get`-Reparatur nur mit Root/Sudo ausführen und klaren Alternativpfad melden.
-- [ ] P0 | Scripts/Start | Restliche `python`-Aufrufe in Gates/Workflow auf `python3` umstellen.
-- [ ] P0 | Scripts/Logs | Repair-/Installer-Fehlerausgaben in Logdatei sichtbar machen (nicht komplett verschlucken).
-- [ ] P0 | CI/GitHub | CI von `--repair` entkoppeln oder root-fähig über Matrix aufsetzen.
+- [x] P0 | Scripts/Start | `apt-get`-Reparatur nur mit Root/Sudo ausführen und klaren Alternativpfad melden.
+- [x] P0 | Scripts/Start | Restliche `python`-Aufrufe in Gates/Workflow auf `python3` umstellen.
+- [x] P0 | Scripts/Logs | Repair-/Installer-Fehlerausgaben in Logdatei sichtbar machen (nicht komplett verschlucken).
+- [x] P0 | CI/GitHub | CI von `--repair` entkoppeln oder root-fähig über Matrix aufsetzen.
 - [ ] P1 | UX/Status | Statische Footer-Aussagen durch echte dynamische Werte ersetzen (Version, Pfad, Backup).
 - [ ] P1 | Config/Modules | Modulquellen weiter synchronisieren (insb. `todo` klar UI-fähig oder entfernen).
 - [ ] P1 | Projekt/State | Projektpfad als Single-Source-of-Truth festlegen (klare Priorität config/context/localStorage).

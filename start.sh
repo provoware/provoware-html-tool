@@ -488,7 +488,9 @@ try_auto_install_tool() {
 			return 0
 		fi
 		print_step "⚠️" "${manager} konnte ${tool_name} (${package}) nicht installieren."
-		record_next_step "Bei ${manager}-Fehlern zuerst './start.sh --check --debug' ausführen"
+		print_step "ℹ️" "Installationsdetails: ${LOG_DIR}/install.log"
+		record_next_step "Installationsprotokoll öffnen: cat ${LOG_DIR}/install.log"
+		record_next_step "Bei ${manager}-Fehlern danach './start.sh --check --debug' ausführen"
 	done
 
 	if [[ "$install_attempted" == "0" ]]; then
@@ -656,8 +658,8 @@ run_tests() {
 		return 1
 	fi
 
-	print_step "ℹ️" "Zusatztest: python -m compileall -q ."
-	if ! python -m compileall -q "$PROJECT_ROOT"; then
+	print_step "ℹ️" "Zusatztest: python3 -m compileall -q ."
+	if ! python3 -m compileall -q "$PROJECT_ROOT"; then
 		print_error_with_actions "Selbsttest fehlgeschlagen: Syntax-Kompilierung (compileall) meldet Fehler."
 		record_next_step "Fehlermeldung lesen und danach './start.sh --test --debug' erneut ausführen"
 		return 1
@@ -1225,8 +1227,8 @@ run_full_gates_mode() {
 	print_step "✅" "Full-Gates-Modus aktiv: Gates 1-5 werden strikt ausgeführt."
 	local failed=0
 
-	print_step "ℹ️" "GATE 1: python -m compileall -q ."
-	if run_with_retry "GATE 1" python -m compileall -q "$PROJECT_ROOT"; then
+	print_step "ℹ️" "GATE 1: python3 -m compileall -q ."
+	if run_with_retry "GATE 1" python3 -m compileall -q "$PROJECT_ROOT"; then
 		print_step "✅" "GATE 1 erfolgreich."
 		record_checked "GATE 1"
 	else
@@ -1248,8 +1250,8 @@ run_full_gates_mode() {
 	fi
 
 	if [[ "$failed" -eq 0 ]]; then
-		print_step "ℹ️" "GATE 3: python tools/smoke_test.py --profile full"
-		if run_with_retry "GATE 3" env SKIP_FULL_GATES=1 python "$PROJECT_ROOT/tools/smoke_test.py" --profile full; then
+		print_step "ℹ️" "GATE 3: python3 tools/smoke_test.py --profile full"
+		if run_with_retry "GATE 3" env SKIP_FULL_GATES=1 python3 "$PROJECT_ROOT/tools/smoke_test.py" --profile full; then
 			print_step "✅" "GATE 3 erfolgreich."
 			record_checked "GATE 3"
 		else

@@ -1,6 +1,6 @@
 # WAITME – Arbeitsstand & Nächste Schritte
 
-Stand: 2026-02-22 (Text-JSON und Quality-Check ergänzt)
+Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 
 ## Kurzfazit
 - Die eingereichte P0/P1/P2-Liste wurde gegen den aktuellen Code geprüft.
@@ -13,9 +13,9 @@ Stand: 2026-02-22 (Text-JSON und Quality-Check ergänzt)
 3. Theme-Konsistenz + kein hartes `applyTheme('balanced')`.
 
 ## Betriebs-/Start-Risiken
-- `apt-get`-Reparatur braucht klare Root/Sudo-Logik und verständliche Fehlermeldung.
-- CI nutzt aktuell `--repair`; das ist in GitHub-Runnern fehleranfällig.
-- Einige Logs werden bei Installationsfehlern zu stark unterdrückt.
+- In Offline-Umgebungen bleiben `shfmt` und `shellcheck` ggf. weiter fehlend; dann nur mit Hinweis statt Auto-Fix.
+- Browser-E2E kann ohne vorinstallierte Playwright-Browser nur eingeschränkt laufen (Warnung statt harter Abbruch).
+- Bei Netzwerkproblemen kann automatische Reparatur verzögert sein; `logs/install.log` zeigt die genaue Ursache.
 
 ## Laienfreundliche Empfehlung
 - Starten Sie zuerst immer mit `bash start.sh --check --debug`.
@@ -29,9 +29,9 @@ Stand: 2026-02-22 (Text-JSON und Quality-Check ergänzt)
 - Das Start-Design bleibt konsistent und springt nicht mehr hart auf ein anderes Theme.
 
 ### Nächste sinnvolle Befehle
-- `python -m compileall -q .`
+- `python3 -m compileall -q .`
 - `bash tools/run_quality_checks.sh`
-- `python tools/smoke_test.py`
+- `python3 tools/smoke_test.py`
 - `bash start.sh --ux-check-auto`
 
 
@@ -45,3 +45,9 @@ Stand: 2026-02-22 (Text-JSON und Quality-Check ergänzt)
 - Textbausteine liegen jetzt zentral in `config/messages.json`.
 - Beim Start prüft das Tool automatisch, ob Pflichttexte fehlen oder leer sind.
 - Die Qualitätsprüfung meldet Textfehler direkt mit einfachem nächsten Schritt.
+
+
+## Update 2026-02-22 (Start/CI robust)
+- Reparatur mit `apt-get` prüft jetzt zuerst Root/Sudo (Administratorrechte) und zeigt klare nächste Schritte.
+- Installationsfehler stehen sichtbar in `logs/install.log` (Protokolldatei).
+- Gates und CI nutzen konsistent `python3`; CI startet keine Reparatur mehr im Runner.
