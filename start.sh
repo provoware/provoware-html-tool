@@ -340,19 +340,40 @@ check_required_files() {
 check_runtime_prerequisites() {
 	local missing=0
 	local runtime_tool
-	for runtime_tool in "bash" "python3" "rg"; do
+	for runtime_tool in "bash" "python3" "rg" "curl"; do
 		if command -v "$runtime_tool" >/dev/null 2>&1; then
 			print_step "✅" "Voraussetzung verfügbar: ${runtime_tool}"
 			record_checked "Voraussetzung ${runtime_tool}"
-		else
+			continue
+		fi
+
+		if [[ "$runtime_tool" == "bash" ]]; then
 			print_error_with_actions "Voraussetzung fehlt: ${runtime_tool}."
 			record_missing "Voraussetzung ${runtime_tool}"
-			record_next_step "Fehlendes Werkzeug '${runtime_tool}' installieren"
+			record_next_step "System-Bash installieren und danach erneut versuchen"
+			missing=1
+			continue
+		fi
+
+		print_step "⚠️" "Voraussetzung fehlt: ${runtime_tool}. Starte automatische Reparatur."
+		if ensure_tool "$runtime_tool"; then
+			print_step "✅" "Automatische Reparatur erfolgreich: ${runtime_tool} ist jetzt verfügbar."
+			record_fixed "Voraussetzung ${runtime_tool}"
+		else
+			print_error_with_actions "Voraussetzung fehlt weiterhin: ${runtime_tool}."
+			record_missing "Voraussetzung ${runtime_tool}"
+			record_next_step "Einfacher Start: './start.sh --repair' und danach './start.sh --check'"
 			missing=1
 		fi
 	done
 
-	[[ $missing -eq 0 ]]
+	if [[ "$missing" -eq 0 ]]; then
+		print_step "ℹ️" "Hilfe: Voraussetzungen sind bereit. Bei neuen Fehlern zuerst './start.sh --repair' ausführen."
+		record_checked "Voraussetzungen vollständig"
+		return 0
+	fi
+
+	return 1
 }
 
 check_line_limit() {

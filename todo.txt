@@ -3,6 +3,36 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
+## Iteration 2026-02-22 (Runtime-Abhängigkeiten automatisch reparieren)
+### A) Fundstelle
+- Problem: Die Start-Prüfung meldete fehlende Laufzeitwerkzeuge, versuchte aber nicht für alle erforderlichen Tools automatisch eine Reparatur.
+- Risiko: Startabbrüche ohne durchgängige Selbstheilung bei erwartbaren Abhängigkeitsfehlern.
+- Erwartung: `./start.sh --check` und `./start.sh --test` reparieren fehlende Runtime-Tools (außer `bash`) automatisch und geben klare nächste Schritte aus.
+
+### B) Change-Scope
+- Ziel: Laufzeit-Prüfung um automatische Reparatur, validierte Sonderbehandlung für `bash` und ein zusätzliches Hilfeelement in einfacher Sprache erweitern.
+- Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
+- Abnahmekriterium: Bei fehlendem `curl`, `rg` oder `python3` wird automatische Reparatur versucht; bei Erfolg erscheint eine Erfolgsbestätigung, bei Fehlern ein klarer Fehlerpfad mit Aktionen.
+
+### C) Patch (genau 3 Punkte)
+- Punkt 1 – Änderung: `check_runtime_prerequisites` prüft jetzt zusätzlich `curl` als Pflichtvoraussetzung.
+- Punkt 2 – Änderung: Fehlende Runtime-Tools (`python3`, `rg`, `curl`) werden im Check direkt über `ensure_tool` automatisch repariert und bei Erfolg explizit bestätigt.
+- Punkt 3 – Änderung: Ein neues Hilfeelement in einfacher Sprache erklärt nach erfolgreicher Prüfung den nächsten stabilen Schritt (`./start.sh --repair` bei neuen Fehlern).
+
+### D) Checks
+- Format: `./start.sh --format`
+- Tests: `./start.sh --test`
+- Start-Routine-Check: `./start.sh --check`
+
+### E) Ergebnis
+- Status: DONE
+- Doku aktualisiert: todo + changelog + registry
+- Laienvorschläge (2):
+  1. Starte bei Problemen zuerst `./start.sh --check`, damit fehlende Werkzeuge automatisch ergänzt werden.
+  2. Wenn ein Fehler bleibt, nutze direkt `./start.sh --repair` und öffne danach mit `cat logs/start.log` das Protokoll.
+- Nächster Schritt (1, detailliert): Verschiebe in der nächsten Iteration die Paketmanager-Logik in eine neue Datei unter `system/`, damit `start.sh` nur noch den Ablauf steuert und Konfigurationen klar aus `config/` liest.
+
 ## Iteration 2026-02-22 (GUI-Themes + Kontrast)
 ### A) Fundstelle
 - Problem: Die lokale GUI hatte noch keine wählbaren Themes mit robuster Kontrastdarstellung und validierter Theme-Eingabe.

@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-gui-theme-contrast",
+  "iteration": "2026.02.22-runtime-auto-repair",
   "files": {
     "start.sh": "2026.02.22",
     "todo.txt": "2026.02.22",
