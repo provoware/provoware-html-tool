@@ -235,3 +235,17 @@
 
 ### Wirkung
 - Höhere Laufzeitstabilität, bessere Bedienbarkeit und nachvollziehbarerer Theme-Start mit klaren Hilfetexten für nächste Schritte.
+
+## 2026-02-22 – 20-Punkte-Layoutliste auditiert und in To-do priorisiert
+- Scope-Kontrolle:
+  - Problem: Die neue 20-Punkte-Liste zu Layout/UX war noch nicht als klar priorisierte, testbare Roadmap im Projektstatus verankert.
+  - Ziel: Offene Punkte verlässlich in `todo.txt` übernehmen und die Fortschritts-Prozentangabe auf den realen offenen Umfang aktualisieren.
+  - Dateien: `todo.txt`, `README.md`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Audit-Block mit DONE/OFFEN + Prioritäten, 2) Fortschritt im README korrigieren, 3) Iterationsprotokoll ergänzen, 4) Versionsregister angleichen.
+  - Abnahme: `todo.txt` enthält einen eigenen Audit-Block zur 20-Punkte-Liste mit priorisierten offenen Punkten und README zeigt die angepasste Prozentangabe.
+- Was:
+  1) 20-Punkte-Liste analysiert und als Audit-Block in `todo.txt` mit DONE/OFFEN und P0/P1-Priorisierung übernommen.
+  2) Status-Prozent in README von 100% auf 76% korrigiert, damit Offen/Done transparent zusammenpassen.
+  3) Nächste 3-Punkte-Iteration als umsetzbare Triade ergänzt (inkl. A11y/Text-Punkt).
+- Warum: Realistische Fortschrittsanzeige und klare Priorisierung reduzieren Planungsfehler und erleichtern die nächste merge-ready Iteration.
+- Wirkung: Höhere Transparenz über offene Architektur-/UX-Arbeit und besser vorbereitete nächste Umsetzungsrunde.
