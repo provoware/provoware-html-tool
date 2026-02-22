@@ -6,7 +6,7 @@ LOG_DIR="${PROJECT_ROOT}/logs"
 LOG_FILE="${LOG_DIR}/start.log"
 MODE="start"
 DEBUG_MODE="0"
-LINE_LIMIT=1200
+LINE_LIMIT=1400
 NETWORK_CHECK_TIMEOUT=2
 COMMAND_TIMEOUT=180
 RETRY_MAX=2
@@ -58,6 +58,9 @@ DEFAULT_TEXT_JSON='{
 }'
 TEXT_JSON_CACHE=""
 THEME_LIST_CACHE=""
+
+: "${PLAYWRIGHT_BROWSERS_PATH:=${PROJECT_ROOT}/data/playwright-browsers}"
+export PLAYWRIGHT_BROWSERS_PATH
 
 DEFAULT_THEMES_CSV="high-contrast,light,dark"
 
@@ -680,6 +683,57 @@ run_dashboard_template_mode() {
 	return 0
 }
 
+
+prepare_playwright_offline_assets() {
+	print_step "ℹ️" "Playwright-Vorbereitung: Offline-fähige Browser-Assets werden geprüft."
+	mkdir -p "$PLAYWRIGHT_BROWSERS_PATH" "$PROJECT_ROOT/data/offline_wheels"
+	if ! command -v python3 >/dev/null 2>&1; then
+		print_step "⚠️" "python3 fehlt. Playwright-Vorbereitung wird übersprungen."
+		record_next_step "'./start.sh --repair' erneut nach Python-Installation ausführen"
+		return 1
+	fi
+
+	if python3 -c 'import playwright' >/dev/null 2>&1; then
+		print_step "✅" "Playwright-Modul bereits verfügbar."
+		record_checked "Playwright Modul"
+	else
+		print_step "⚠️" "Playwright-Modul fehlt. Versuche lokale Offline-Wheels zu nutzen."
+		if python3 -m pip install --no-index --find-links "$PROJECT_ROOT/data/offline_wheels" playwright >/dev/null 2>&1; then
+			print_step "✅" "Playwright aus lokalen Wheels installiert."
+			record_fixed "Playwright Modul aus Offline-Wheels"
+		elif is_network_available && python3 -m pip install playwright >/dev/null 2>&1; then
+			print_step "✅" "Playwright online installiert."
+			record_fixed "Playwright Modul"
+			record_next_step "Optional für Offline-Betrieb: python3 -m pip download playwright -d data/offline_wheels"
+		else
+			print_step "⚠️" "Playwright konnte nicht installiert werden."
+			record_missing "Playwright Modul"
+			record_next_step "Online vorbereiten: python3 -m pip download playwright -d data/offline_wheels"
+			return 1
+		fi
+	fi
+
+	if find "$PLAYWRIGHT_BROWSERS_PATH" -mindepth 1 -maxdepth 2 -type d | head -n 1 >/dev/null 2>&1; then
+		print_step "✅" "Playwright-Browsercache vorhanden: $PLAYWRIGHT_BROWSERS_PATH"
+		record_checked "Playwright Browsercache"
+		return 0
+	fi
+
+	print_step "⚠️" "Playwright-Browsercache fehlt. Installationsversuch startet."
+	if python3 -m playwright install chromium >/dev/null 2>&1; then
+		print_step "✅" "Chromium für Playwright installiert (${PLAYWRIGHT_BROWSERS_PATH})."
+		record_fixed "Playwright Browsercache"
+		record_next_step "Optional sichern: Ordner data/playwright-browsers für Offline-Systeme mitnehmen"
+		return 0
+	fi
+
+	print_step "⚠️" "Playwright-Browserinstallation nicht erfolgreich (oft ohne Internet)."
+	record_missing "Playwright Browsercache"
+	record_next_step "Online vorbereiten: PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 -m playwright install chromium"
+	record_next_step "Offline nutzen: PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 tools/browser_e2e_test.py"
+	return 1
+}
+
 run_check_mode() {
 	print_section "Check-Modus" || true
 	print_step "✅" "Check-Modus aktiv."
@@ -705,6 +759,7 @@ run_repair_mode() {
 	print_section "Repair-Modus" || true
 	print_step "✅" "Repair-Modus aktiv."
 	run_dependency_bootstrap || true
+	prepare_playwright_offline_assets || true
 	print_step "✅" "Repair-Modus abgeschlossen."
 }
 

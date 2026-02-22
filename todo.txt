@@ -1,32 +1,14 @@
-DONE: GUI-Einstieg korrigiert: Standard startet jetzt im Hauptmodul (GUI_ENTRY=dashboard) mit validiertem Fallback auf Statusseite (2026-02-22)
-NEXT: Hauptmodul mit echten Backend-Modulen (Datenquellen) verbinden und Lade-/Fehlerzustände als Textstatus ergänzen (2026-02-22)
+DONE: Offline-Checkpfad für Playwright in der Start-Routine ergänzt (Modul + Browsercache mit klaren Next Steps) (2026-02-22)
+DONE: Repair-Modus verbessert: nutzt zuerst lokale Offline-Wheels und danach optional Online-Installation (2026-02-22)
+DONE: To-do-Liste auf Status-Prozent + priorisierte offene Punkte umgestellt (2026-02-22)
 
+STATUS: 88% abgeschlossen
 
-OFFEN – Struktur
-- Sidebar gruppieren
-- Kartenhierarchie einführen
-- Einstellungsbereich tabben
+NEXT (Priorität hoch, offen)
+- [ ] 92%: Vollständige Offline-Bundle-Erstellung automatisieren (Wheel-Download + Browsercache export in ein Archiv).
+- [ ] 95%: Playwright-Offline-Validierung in `tools/smoke_test.py` als eigenen Testschritt mit klarer Fehlerhilfe ergänzen.
+- [ ] 97%: start.sh um einen Schalter `--offline-pack` erweitern, der alle Offline-Artefakte in `data/` vorbereitet.
 
-OFFEN – Design
-- Farbpalette vereinheitlichen
-- Glow & Effekte reduzieren
-- Typografie standardisieren
-
-OFFEN – UX
-- Arbeitsmodus + Dashboardmodus
-- Tooltipps & klare Icons
-- Autosave-Feedback erweitern
-
-OFFEN – Barrierefreiheit
-- Fokusrahmen + Tastatursteuerung
-- Kontraste prüfen
-- Icons nicht allein nutzen
-
-OFFEN – Funktional
-- Dashboard mit Pluginstatus verbinden
-- Systemstatuskarte einführen
-- Suche erweitern
-
-OFFEN – Zukunftssicherheit
-- Responsive Layout
-- Komponentenstruktur modularisieren
+NEXT (Priorität mittel, offen)
+- [ ] 99%: GUI-Hilfebereich um kurzen Abschnitt „Offline testen“ erweitern (einfache Sprache + vollständige Befehle).
+- [ ] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen.

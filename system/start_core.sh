@@ -127,6 +127,31 @@ run_dependency_bootstrap() {
 		fi
 	done
 
+	if command -v python3 >/dev/null 2>&1; then
+		if python3 -c 'import playwright' >/dev/null 2>&1; then
+			print_step "✅" "Playwright-Python-Modul verfügbar (Browser-Automation für Tests)."
+			record_checked "Playwright Modul"
+		else
+			print_step "⚠️" "Playwright-Python-Modul fehlt. Offline-freundlicher Installationspfad wird vorbereitet."
+			record_missing "Playwright Modul"
+			record_next_step "Online vorbereiten: python3 -m pip download playwright -d data/offline_wheels"
+			record_next_step "Offline installieren: python3 -m pip install --no-index --find-links data/offline_wheels playwright"
+			failed=1
+		fi
+
+		local pw_cache_dir="${PLAYWRIGHT_BROWSERS_PATH:-${PROJECT_ROOT}/data/playwright-browsers}"
+		if [[ -d "$pw_cache_dir" ]] && find "$pw_cache_dir" -mindepth 1 -maxdepth 2 -type d | head -n 1 >/dev/null 2>&1; then
+			print_step "✅" "Playwright-Browsercache gefunden: ${pw_cache_dir}"
+			record_checked "Playwright Browsercache"
+		else
+			print_step "⚠️" "Playwright-Browsercache fehlt oder ist leer: ${pw_cache_dir}"
+			record_missing "Playwright Browsercache"
+			record_next_step "Online vorbereiten: PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 -m playwright install chromium"
+			record_next_step "Offline nutzen: PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 tools/browser_e2e_test.py"
+			failed=1
+		fi
+	fi
+
 	if [[ "$failed" -eq 0 ]]; then
 		print_step "✅" "Start-Prüfung abgeschlossen: Alle benötigten Werkzeuge sind einsatzbereit."
 		record_fixed "Werkzeuge automatisch bestätigt"
