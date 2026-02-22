@@ -435,12 +435,99 @@ run_repair_mode() {
 	print_step "✅" "Repair-Modus abgeschlossen."
 }
 
+launch_local_gui() {
+	local gui_port="${GUI_PORT:-8765}"
+	if [[ ! "$gui_port" =~ ^[0-9]+$ ]] || [[ "$gui_port" -lt 1024 ]] || [[ "$gui_port" -gt 65535 ]]; then
+		print_error_with_actions "Ungültiger GUI_PORT '${gui_port}'. Erlaubt sind Zahlen von 1024 bis 65535."
+		record_next_step "GUI_PORT korrigieren, z. B. 'GUI_PORT=8765 ./start.sh'"
+		return 1
+	fi
+
+	if ! command -v python3 >/dev/null 2>&1; then
+		print_error_with_actions "GUI-Start nicht möglich, weil python3 fehlt."
+		record_next_step "'./start.sh --repair' starten, damit fehlende Werkzeuge automatisch installiert werden"
+		return 1
+	fi
+
+	local gui_dir="${LOG_DIR}/gui"
+	local gui_file="${gui_dir}/index.html"
+	local gui_pid_file="${gui_dir}/server.pid"
+	mkdir -p "$gui_dir"
+	cat >"$gui_file" <<HTML
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Provoware GUI Startstatus</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.5; }
+    .panel { max-width: 720px; border: 2px solid currentColor; border-radius: 12px; padding: 1rem 1.25rem; }
+    a, button { font-size: 1rem; }
+    .hint { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <main class="panel" role="main" aria-live="polite">
+    <h1>✅ Provoware ist gestartet</h1>
+    <p><strong>Was geprüft wurde:</strong> Check, Repair, Format und Test wurden automatisch ausgeführt.</p>
+    <p><strong>Nutzerhilfe:</strong> Bei Problemen zuerst „Erneut versuchen“, dann „Reparatur starten“, danach „Protokoll öffnen“.</p>
+    <ul>
+      <li>➡️ Erneut versuchen: <code>./start.sh</code></li>
+      <li>➡️ Reparatur starten: <code>./start.sh --repair</code></li>
+      <li>➡️ Protokoll öffnen: <code>cat logs/start.log</code></li>
+    </ul>
+    <p class="hint">Diese GUI ist tastaturfreundlich (Tab + Enter) und nutzt Status nicht nur über Farben, sondern auch über Text und Symbole.</p>
+  </main>
+</body>
+</html>
+HTML
+	record_checked "GUI-Datei erzeugt"
+
+	local server_ok="0"
+	if [[ -f "$gui_pid_file" ]] && kill -0 "$(cat "$gui_pid_file" 2>/dev/null)" 2>/dev/null && curl -fsS "http://127.0.0.1:${gui_port}/" >/dev/null 2>&1; then
+		server_ok="1"
+		print_step "✅" "GUI-Server läuft bereits auf Port ${gui_port}."
+	fi
+
+	if [[ "$server_ok" == "0" ]]; then
+		rm -f "$gui_pid_file"
+		python3 -m http.server "$gui_port" --directory "$gui_dir" >/dev/null 2>&1 &
+		echo "$!" >"$gui_pid_file"
+		sleep 1
+		if curl -fsS "http://127.0.0.1:${gui_port}/" >/dev/null 2>&1; then
+			print_step "✅" "GUI-Server gestartet auf Port ${gui_port}."
+			record_fixed "GUI-Server automatisch gestartet"
+		else
+			print_error_with_actions "GUI-Server konnte nicht gestartet werden."
+			record_next_step "Port prüfen und erneut './start.sh' ausführen"
+			return 1
+		fi
+	fi
+
+	local gui_url="http://127.0.0.1:${gui_port}/"
+	if command -v xdg-open >/dev/null 2>&1; then
+		xdg-open "$gui_url" >/dev/null 2>&1 || true
+		print_step "✅" "GUI im Browser geöffnet: ${gui_url}"
+	elif command -v open >/dev/null 2>&1; then
+		open "$gui_url" >/dev/null 2>&1 || true
+		print_step "✅" "GUI im Browser geöffnet: ${gui_url}"
+	else
+		print_step "⚠️" "Kein Browser-Öffner gefunden. GUI manuell öffnen: ${gui_url}"
+		record_next_step "URL im Browser öffnen: ${gui_url}"
+	fi
+
+	return 0
+}
+
 run_start_mode() {
 	print_step "✅" "Startmodus aktiv: Check, Repair, Format, Test laufen automatisch."
 	run_check_mode
 	run_repair_mode
 	run_formatting
 	run_tests
+	launch_local_gui || true
 	print_step "✅" "Start erfolgreich abgeschlossen."
 }
 

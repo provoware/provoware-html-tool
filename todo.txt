@@ -3,65 +3,35 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
-## Iteration 2026-02-21 (README-Optimierung für Bedienung, A11y und Standards)
+## Iteration 2026-02-22 (GUI-Autostart aus der Startroutine)
 ### A) Fundstelle
-- Problem: Die README war zu kurz für einen einheitlichen, barrierearmen Ablauf und erklärte Pflichtbefehle sowie Fehlerpfade nicht ausreichend klar.
-- Risiko: Nutzer und Teams führen Start, Reparatur und Qualitätssicherung uneinheitlich aus.
-- Erwartung: README bietet klare Schritt-für-Schritt-Nutzung, A11y-Standards und Best Practices in einfacher Sprache.
+- Problem: Nach dem Vollstart wurde keine GUI automatisch geöffnet, obwohl der gewünschte Ablauf „vollautomatisch prüfen, reparieren und direkt GUI starten“ ist.
+- Risiko: Nutzer müssen manuell nacharbeiten und verlieren Vertrauen in den automatischen Start.
+- Erwartung: `./start.sh` startet nach Check/Repair/Format/Test selbstständig eine lokale GUI mit klaren Hilfeaktionen.
 
 ### B) Change-Scope
-- Ziel: Dokumentation für Startroutine, Barrierefreiheit und Team-Standards auf ein konsistentes, leicht nutzbares Niveau heben.
-- Dateien: `README.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
-- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: README enthält vollständige Startbefehle, A11y-Richtlinien, Debug-/Log-Hinweise und strukturierte Best-Practice-Anleitung.
-
-### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: README strukturiert erweitert mit vollständigen Pflichtbefehlen (`--check`, `--repair`, `--format`, `--test`) und klaren Betriebsmodi.
-- Punkt 2 – Änderung: README ergänzt um Hilfeelemente zur Barrierefreiheit (klare Sprache, Status über Symbol+Text, direkte Fehleraktionen) in leicht verständlicher Form.
-- Punkt 3 – Änderung: README ergänzt um einheitliche Team-Standards, Debug-/Log-Nutzung und Wartbarkeitsstruktur (`system/`, `config/`, `data/`, `logs`).
-
-### D) Checks
-- Format: `./start.sh --format`
-- Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check` und `./start.sh --repair`
-
-### E) Ergebnis
-- Status: DONE
-- Doku aktualisiert: todo + changelog + registry
-- Laienvorschläge (2):
-  1. Nutze täglich zuerst `./start.sh --check`, dann siehst du sofort, ob etwas fehlt.
-  2. Wenn eine Fehlermeldung kommt, kopiere den vorgeschlagenen nächsten Schritt direkt aus der Ausgabe.
-- Nächster Schritt (1, detailliert): Ergänze in der nächsten Iteration eine echte Theme-Konfiguration in `config/` inklusive Kontrast-Check im `--release-check`, damit Lesbarkeit über mehrere Farbthemen automatisch geprüft und klar mit Symbol+Text gemeldet wird.
-
-## Iteration 2026-02-21 (Externe Textquelle mit sicherem Fallback)
-### A) Fundstelle
-- Problem: Texte lagen nur intern in `start.sh`, wodurch zentrale Pflege und robuste Fehlerhinweise bei fehlerhafter Konfiguration fehlten.
-- Risiko: Bei ungültiger Textkonfiguration entstehen unklare Ausgaben und Teams pflegen Hilfetexte uneinheitlich.
-- Erwartung: Die Start-Routine kann externe Texte laden, Eingaben validieren und bei Fehlern verständliche nächste Schritte melden.
-
-### B) Change-Scope
-- Ziel: Vorbereitung der Auslagerung nach `config/` mit sicherer Fallback-Logik und klarer Hilfe-Ausgabe.
+- Ziel: Eine robuste GUI-Startfunktion in die Startroutine integrieren, inklusive Eingabeprüfung, Fehlerpfad und barrierearmem Hilfetext.
 - Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh --check`, `./start.sh --test`, `./start.sh --help` laufen stabil und zeigen bei fehlender/ungültiger Textdatei weiterhin verständliche Standardtexte.
+- Abnahmekriterium: `./start.sh` erzeugt eine lokale Status-GUI, startet den GUI-Server automatisch und meldet bei Problemen klare nächste Schritte.
 
 ### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: `start.sh` lädt Texte jetzt optional aus `config/messages.json` und nutzt bei Fehlern automatisch sichere Standardtexte.
-- Punkt 2 – Änderung: `get_text` validiert den Textschlüssel (Input-Validierung) und liefert immer einen klaren Rückgabewert (Output-Bestätigung ohne Absturz).
-- Punkt 3 – Änderung: Hilfe-Ausgabe erweitert um den neuen Hinweis zur Textquelle in einfacher Sprache (Barrierefreiheit/Hilfetext).
+- Punkt 1 – Änderung: Neue Funktion `launch_local_gui` ergänzt mit Input-Validierung für `GUI_PORT` und robustem Fehlerpfad („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“).
+- Punkt 2 – Änderung: Automatisch erzeugte Status-GUI mit klarer Sprache, Tastaturhinweis und Statusdarstellung über Text + Symbol statt nur Farbe.
+- Punkt 3 – Änderung: Vollstart (`./start.sh`) erweitert, sodass die GUI nach den automatischen Checks/Tests selbst gestartet und als nächster Schritt ausgegeben wird.
 
 ### D) Checks
 - Format: `./start.sh --format`
 - Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check`
+- Start-Routine-Check: `./start.sh --check` und `./start.sh`
 
 ### E) Ergebnis
 - Status: DONE
 - Doku aktualisiert: todo + changelog + registry
 - Laienvorschläge (2):
-  1. Lege später eine Datei `config/messages.json` an, wenn du Texte ohne Codeänderung anpassen willst.
-  2. Nutze bei Problemen zuerst `./start.sh --help`, dort steht jetzt auch, woher Texte geladen werden.
-- Nächster Schritt (1, detailliert): Erstelle in der nächsten Iteration die Datei `config/messages.json` mit allen Schlüsseln aus den Standardtexten und ergänze einen kurzen Schema-Check, der fehlende Pflichtschlüssel mit klaren Aktionen („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“) meldet.
+  1. Starte künftig nur `./start.sh`; die Routine erledigt Prüfung, Reparatur und GUI-Start in einem Schritt.
+  2. Wenn die GUI nicht erscheint, kopiere die angezeigte URL aus der Ausgabe und öffne sie direkt im Browser.
+- Nächster Schritt (1, detailliert): Ergänze als nächste Iteration eine echte, dauerhafte GUI-Datei im Projektordner `system/` plus Theme-Konfiguration in `config/`, und lasse `--release-check` automatisch prüfen, ob Kontrastwerte pro Theme die Lesbarkeit sicher erfüllen.
 
 ## Nächste offene Punkte (Backlog)
 1. **Theme- und Kontrastprüfung vorbereiten**
@@ -79,33 +49,3 @@ Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich e
 - Maximal 1–4 Dateien ändern.
 - Jede Änderung in `data/version_registry.json` nachziehen.
 - Immer `todo.txt` + `CHANGELOG.md` pflegen.
-
-## Iteration 2026-02-21 (Infodatei für Strukturtransparenz und Wartbarkeit)
-### A) Fundstelle
-- Problem: Es fehlt eine zentrale, leicht verständliche Übersicht über Verzeichnisse und Dateien, wodurch Wartung und Onboarding unnötig Zeit kosten.
-- Risiko: Neue Änderungen landen leichter in falschen Dateien und Standards werden uneinheitlich umgesetzt.
-- Erwartung: Eine kompakte Infodatei macht Struktur, Dateizweck und Pflegeablauf sofort verständlich.
-
-### B) Change-Scope
-- Ziel: Dokumentationsbasis für Wartbarkeit verbessern, ohne Logik zu verändern.
-- Dateien: `INFODATEI.md`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
-- Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `INFODATEI.md` enthält Verzeichnisstruktur, vollständige Dateiliste mit Rollen und klare Fehlerhilfe in einfacher Sprache.
-
-### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: Neue Datei `INFODATEI.md` erstellt mit klarer Verzeichnisstruktur und Dateiliste zur schnelleren Navigation.
-- Punkt 2 – Änderung: Pro Datei eine kurze Wartungsrolle und konkrete Pflegehinweise ergänzt, damit Standards einheitlich bleiben.
-- Punkt 3 – Änderung: Barrierearme Hilfe-Sektion ergänzt (Erneut versuchen, Reparatur starten, Protokoll öffnen) in einfacher Sprache.
-
-### D) Checks
-- Format: `./start.sh --format`
-- Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check`
-
-### E) Ergebnis
-- Status: DONE
-- Doku aktualisiert: todo + changelog + registry
-- Laienvorschläge (2):
-  1. Öffne bei Unsicherheit immer zuerst `INFODATEI.md`, dort steht kurz, welche Datei wofür da ist.
-  2. Nutze vor jeder Änderung `./start.sh --check`, damit du Probleme früh siehst statt erst am Ende.
-- Nächster Schritt (1, detailliert): Lege in der nächsten Iteration eine zusätzliche Datei `config/themes.json` an und ergänze in `start.sh --release-check` eine automatische Kontrastprüfung mit klarer Textausgabe pro Theme, damit Lesbarkeit messbar und barrierefrei abgesichert wird.
