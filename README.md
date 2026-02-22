@@ -15,6 +15,8 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 
 - Responsive Feinanpassung für sehr kleine Displays (bis 420px) mit besserem Fokus, klaren Abständen und stabiler Lesbarkeit.
 
+- Neues Untermodul **„GMS-Archiv“** als integrierte Hauptmodul-Karte: Bulk-Import per Komma, Zufallsgenerator (Genres/Stimmungen/Stile), Verlauf mit Kopieren/Löschen/Export-Import-Merge und klare Laien-Feedbacktexte.
+
 - Projekt-Routine beim GUI-Start: fragt den Projektordner ab, validiert den Pfad, erstellt fehlende Ordner automatisch im Nutzerverzeichnis und zeigt den aktiven Pfad im Dashboard.
 - Spiegelt den bestätigten Projektordner zusätzlich nach `config/project_settings.json` (für editierbare Konfiguration) und validiert beide JSON-Dateien automatisch.
 - **Offen**

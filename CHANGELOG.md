@@ -1,3 +1,17 @@
+## 2026-02-22 – GMS-Archiv-Untermodul als Plugin-Karte integriert
+- Scope-Kontrolle:
+  - Problem: Es fehlte eine laienfreundliche Sammelstelle für Genres, Stimmungen und Stile mit Zufallsausgabe, Verlauf und Export/Import-Anbindung im Hauptmodul.
+  - Ziel: Ein GMS-Archiv als Plugin-Karte im Main-Content bereitstellen, inkl. Bulk-Adding, Random-Generator, Verlauf und robuster Validierung ohne neue Abhängigkeiten.
+  - Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) UI + Plugin-API + Validierung/Feedback, 2) Hilfe-/Fortschrittsdoku aktualisiert, 3) DONE/NEXT + Versionsregister aktualisiert.
+  - Abnahme: `OFFLINE_ARTIFACT_MODE=warn python tools/smoke_test.py` und `bash start.sh` laufen erfolgreich; Sidebar zeigt „GMS-Archiv“ und Plugin-Aktionen reagieren mit verständlichen Statusmeldungen.
+- Was:
+  1) Dashboard um neues Untermodul „GMS-Archiv“ erweitert (Sidebar, Modulstarter, Hauptkarte) mit großer, tastaturfreundlicher Bedienung und klaren Labels.
+  2) Plugin-Vertrag im Frontend ergänzt (`mount/unmount`, `getState/setState`, `exportPayload/importPayload`) inkl. Services für Storage, Profile, UI, Exportzentrum und Logging.
+  3) Funktionen für Bulk-Adding (Komma), Duplikat-Schutz (case-insensitive), Zufallserzeugung, Verlauf (begrenzt), Kopieren/Löschen/Export/Import-Merge und laienfeste Fehlermeldungen ergänzt.
+- Warum: Das Projekt braucht ein integriertes, barrierearmes Archiv-Modul statt verstreuter Einzelfunktionen.
+- Wirkung: Höhere Release-Reife, bessere Profil-Integration und klarere Einsteiger-Bedienung direkt im Hauptmodul.
+
 ## 2026-02-22 – Offline-Warnmodus + Projektpfad-Spiegelung abgeschlossen
 - Scope-Kontrolle:
   - Problem: Zwei offene Punkte blockierten Release-Reife: Offline-Smoke ohne Artefakte brach hart ab, und der Projektpfad lag nur in `data/` statt zusätzlich editierbar in `config/`.
