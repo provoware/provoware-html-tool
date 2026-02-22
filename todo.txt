@@ -203,3 +203,8 @@ DONE: GMS-Export nutzt jetzt Linux-kompatible Dateinamen mit Status (`release-re
 DONE: GMS-Export zeigt den erzeugten Dateinamen sichtbar als A11y-Statuszeile mit klarer Hilfe (2026-02-22)
 DONE: Smoke-Test prüft neue Export-Hilfe-/Dateinamensmarker als Pflichtkriterium (2026-02-22)
 NEXT: Export-Dialog um direkte Dateispeicherung (Download) mit gleicher Dateinamenslogik ergänzen. (2026-02-23)
+
+DONE: Footer als 3-spaltiger Bereich mit Schnellfunktionen (Speichern/Erneut versuchen/Protokoll) umgesetzt und direkt bedienbar gemacht (2026-02-22)
+DONE: Sidebar-Module zeigen jetzt Kurzdetails als Tooltip + ARIA-Label mit Next Step für Tastatur/Screenreader (2026-02-22)
+DONE: Smoke-Test prüft neue Footer-/Sidebar-Marker automatisiert, damit die UI-Verbesserungen nicht unbemerkt regressieren (2026-02-22)
+NEXT: Footer-Schnellfunktionen optional um konfigurierbare Favoriten pro Projekt erweitern (2026-02-23)

@@ -1,3 +1,20 @@
+## Update 2026-02-22 (Footer + Modulhilfe)
+- Der Footer ist jetzt in 3 Bereiche geteilt und hat direkte Schnellknöpfe für Speichern, Erneut versuchen und Protokoll.
+- In der linken Modul-Liste sehen Sie jetzt pro Modul kurze Hinweise (Tooltip = kurzer Über-Hinweis) mit nächstem Schritt.
+- Der Smoke-Test prüft diese Stellen automatisch, damit sie bei Änderungen nicht versehentlich verloren gehen.
+
+### Top-Blocker
+- Keine neuen Blocker aus dieser Iteration.
+
+### Betriebsrisiken
+- Browser-E2E kann in gesperrten Netzen weiterhin an fehlenden Browser-Downloads scheitern (Offline-Paket als Ausweg).
+
+### Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py`
+- `bash start.sh`
+
 # WAITME – Kurzstatus
 
 Stand: 2026-02-22 (Layout-Anpassung auf Raster-Schema)

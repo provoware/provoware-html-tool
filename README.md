@@ -1,3 +1,8 @@
+## Update 2026-02-22 (Footer-Schnellfunktionen + Sidebar-Hinweise)
+- Footer ist jetzt klar 3-spaltig: Status, Datensicherung und Schnellfunktionen (Speichern, Erneut versuchen, Protokoll öffnen).
+- Sidebar-Module zeigen jetzt automatische Kurzdetails als Tooltip + Screenreader-Label mit Next Step.
+- Smoke-Test prüft die neuen Marker (Footer-Schnellfunktionen + Hinweis-Initialisierung) automatisch.
+
 ## Update 2026-02-22 (Grid-Layout und Untermodule korrigiert)
 - Untermodule rutschen bei Aktivierung jetzt in den nächsten freien Platz im 3x3-Grid.
 - Fensteroptionen sind als Symbole direkt im jeweiligen Untermodul sichtbar (nicht mehr als separate Leiste unter dem Header).
