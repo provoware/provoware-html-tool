@@ -741,6 +741,7 @@
         </li>
         <li class="settings-item">
           <p id="theme-help">Hinweis: Status nie nur über Farbe, sondern immer mit Symbol + Text. Kontrast (Helligkeits-Unterschied) bleibt in allen drei Themes gut lesbar. Daten sparen: Wenn Ihr Gerät reduzierte Bewegung nutzt, werden Animationen automatisch deaktiviert.</p>
+          <p class="subline" id="theme-contrast-preview">Kontrast-Vorschau: balanced ≈ 10:1, high-contrast ≈ 17:1, light ≈ 11:1, dark ≈ 12:1.</p>
           <p class="subline" id="theme-status" role="status" aria-live="polite">Aktives Theme: high-contrast. Empfohlen für maximalen Kontrast.</p>
         </li>
         <li class="settings-item" id="module-help">Modulhilfe: Wählen Sie links ein Modul und öffnen Sie es mit Alt+O. Bei Fehlern folgen Sie den Next Steps im Debug-Log.</li>
@@ -759,8 +760,8 @@
       </ul>
     </aside>
     <footer class="footer">
-      <span>Version 13.0 – Pfad: /home</span>
-      <span>Auto-Backup: Aktiv</span>
+      <span id="footer-version-path">Version: wird geladen… | Projektpfad: wird geprüft…</span>
+      <span id="footer-backup-status">Auto-Backup: Aktiv (Standard)</span>
       <span id="footer-sync-status">Alle Änderungen gespeichert</span>
     </footer>
   </main>
@@ -799,6 +800,8 @@
       const themeSelector = document.getElementById('theme-switcher');
       const syncStatusNode = document.getElementById('sync-status');
       const footerSyncStatusNode = document.getElementById('footer-sync-status');
+      const footerVersionPathNode = document.getElementById('footer-version-path');
+      const footerBackupStatusNode = document.getElementById('footer-backup-status');
       const debugEventNode = document.getElementById('debug-last-event');
       const debugNextStepNode = document.getElementById('debug-next-step');
       const themeStatusNode = document.getElementById('theme-status');
@@ -822,6 +825,8 @@
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       const LAYOUT_STORAGE_KEY = 'provoware-layout-profile';
       const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
+      const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
+      const APP_VERSION = '13.1';
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
       const injectedModuleSources = typeof __MODULE_SOURCES__ !== 'undefined' ? __MODULE_SOURCES__ : null;
@@ -1380,6 +1385,18 @@
         projectStatusNode.textContent = 'Projektordner aktiv: ' + pathValue + '.';
         return true;
       }
+      function updateFooterContext(pathValue) {
+        const validatedPath = typeof pathValue === 'string' && validateProjectPath(pathValue) ? normalizeProjectPath(pathValue) : 'nicht gesetzt';
+        const backupRaw = window.localStorage && typeof window.localStorage.getItem === 'function' ? window.localStorage.getItem(BACKUP_STORAGE_KEY) : null;
+        const backupEnabled = backupRaw === null ? true : backupRaw === 'true';
+        if (footerVersionPathNode) {
+          footerVersionPathNode.textContent = 'Version: ' + APP_VERSION + ' | Projektpfad: ' + validatedPath;
+        }
+        if (footerBackupStatusNode) {
+          footerBackupStatusNode.textContent = backupEnabled ? 'Auto-Backup: Aktiv' : 'Auto-Backup: Inaktiv. Nächster Schritt: Backup einschalten.';
+        }
+        return true;
+      }
       function saveProjectPath(pathValue) {
         const normalized = normalizeProjectPath(pathValue);
         if (!validateProjectPath(normalized)) {
@@ -1391,6 +1408,7 @@
         }
         window.localStorage.setItem('provoware-project-path', normalized);
         updateProjectStatus(normalized);
+        updateFooterContext(normalized);
         if (!hasExtraWhitespaceInPath(pathValue)) {
           setProjectDialogResult('✅ Pfad gespeichert. Nächster Schritt: start.sh neu starten, damit die Prüfung und ggf. Erstellung läuft.');
         }
@@ -1531,7 +1549,7 @@
       function applyTheme(themeValue) {
         const allowed = ['balanced', 'high-contrast', 'light', 'dark'];
         if (typeof themeValue !== 'string' || !allowed.includes(themeValue)) {
-          setResult('⚠️ Ungültiges Theme. Erlaubt sind: high-contrast, light, dark.');
+          setResult('⚠️ Ungültiges Theme. Erlaubt sind: balanced, high-contrast, light, dark.');
           return false;
         }
         const helperTextByTheme = {
@@ -1897,6 +1915,7 @@
         themeSelector.value = html.getAttribute('data-theme') || 'high-contrast';
       }
       updateProjectStatus(getStoredProjectPath());
+      updateFooterContext(getStoredProjectPath());
       if (projectPathInput) {
         projectPathInput.value = getStoredProjectPath();
       }

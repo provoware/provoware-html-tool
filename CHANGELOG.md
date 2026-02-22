@@ -1,3 +1,16 @@
+## 2026-02-22 – Footer-Livewerte, Theme-Hilfe und Theme-Config synchronisiert
+- Scope-Kontrolle:
+  - Problem: Footer zeigte statische Platzhalter statt echter Statuswerte, Theme-Hilfe hatte keine kurze Kontrastübersicht und `balanced` war nicht in `config/themes.json` gelistet.
+  - Ziel: Live-Status im Footer, verständliche Kontrast-Hilfe in einfacher Sprache und konsistente Theme-Quellen in UI + Config.
+  - Dateien: `templates/dashboard_musterseite.html`, `config/themes.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Abnahme: Dashboard zeigt dynamische Footer-Werte nach Pfadänderung; Theme-Hilfe zeigt Kontrast-Vorschau; Theme-Datei enthält alle 4 erlaubten Themes.
+- Was:
+  1) Footer im Dashboard auf dynamische Statusfelder umgestellt (Version, Projektpfad, Backup-Status).
+  2) A11y-/Hilfe-Punkt ergänzt: Theme-Hilfe enthält nun eine klare Kontrast-Vorschau als Text je Theme.
+  3) Theme-Konfiguration vereinheitlicht: `balanced` in `config/themes.json` ergänzt, Fehltext für ungültige Themes präzisiert.
+- Warum: Nutzer sollen Status direkt verstehen, ohne technische Suche und ohne Farbwissen.
+- Wirkung: Mehr Release-Reife, bessere Barrierefreiheit und konsistentere Theme-Logik.
+
 ## 2026-02-22 – Iteration: README-Anker als Pflicht-Qualitätsgate (3 Punkte)
 - Scope-Kontrolle:
   - Problem: Der README-Standard (Befehlsblock oben + Spickzettel unten) war bisher nicht automatisch abgesichert.

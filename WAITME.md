@@ -117,3 +117,15 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `PROVOWARE_FORCE_OFFLINE=1 OFFLINE_ARTIFACT_MODE=warn bash start.sh --check`
 - `PROVOWARE_FORCE_OFFLINE=1 OFFLINE_ARTIFACT_MODE=warn python3 tools/smoke_test.py --profile quick`
 - `bash tools/run_quality_checks.sh --check`
+
+
+## Update 2026-02-22 (Footer + Theme-Hilfe)
+- Der Footer zeigt jetzt echte Werte: Version, aktiver Projektpfad und Backup-Status.
+- Die Theme-Hilfe zeigt eine kurze Kontrast-Vorschau als Text (Verhältnis), damit nicht nur Farben entscheiden.
+- Die Theme-Liste ist jetzt überall gleich (balanced, high-contrast, light, dark).
+
+### Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`

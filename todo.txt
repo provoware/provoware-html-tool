@@ -168,3 +168,8 @@ DONE: CI-Workflow ergänzt um Job „offline-simulation-check“ ohne Internetzu
 DONE: start.sh unterstützt Offline-Simulation per PROVOWARE_FORCE_OFFLINE=1 mit klaren Next Steps in einfacher Sprache (2026-02-22)
 DONE: README/WAITME um Offline-Simulationsbefehle und Laienhilfe erweitert (2026-02-22)
 NEXT: Offline-Simulationsjob optional um strikten Lauf mit vorbereiteten Offline-Artefakten erweitern (2026-02-23)
+
+DONE: Footer zeigt jetzt echte Livewerte (Version/Projektpfad/Backup-Status) statt statischer Platzhalter (2026-02-22)
+DONE: Theme-Hilfe ergänzt Kontrast-Vorschau als Klartext je Theme (2026-02-22)
+DONE: Theme-Liste in config/themes.json mit Dashboard-Validierung harmonisiert (balanced/high-contrast/light/dark) (2026-02-22)
+NEXT: Backup-Einstellung als sichtbaren Schalter im Dashboard ergänzen (inkl. Persistenz-Test). (2026-02-23)
