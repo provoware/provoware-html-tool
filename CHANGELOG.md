@@ -59,3 +59,9 @@
 - Was: `start.sh` um den Modus `--full-gates` (Gates 1-4 in fixer Reihenfolge) und eine barrierearme Statusdatei `logs/status_summary.txt` erweitert; `tools/smoke_test.py` prüft beide neuen Funktionen automatisch; `templates/dashboard_musterseite.html` um einen klaren Hilfebereich mit Next Steps ergänzt.
 - Warum: Qualitäts-Gates sollten vollständig automatisiert laufen, Ergebnisse auch für Screenreader lesbar sein und Nutzer bei Fehlern klare Sofort-Schritte sehen.
 - Wirkung: Start-Routine ist release-näher, testet mehr autonom und verbessert Bedienbarkeit/Barrierefreiheit mit konkreten Lösungswegen.
+
+## 2026-02-22 – Dialog-Fokusfang + Fokus-Rückgabe + A11y-Check geschärft
+- Was: `templates/dashboard_musterseite.html` ergänzt jetzt Fokusfang (Tab/Shift+Tab) im offenen Fehlerdialog und gibt den Fokus nach dem Schließen zurück auf das auslösende Element.
+- Warum: Tastaturbedienung und Screenreader-Fluss im Dialog sollten stabil ohne Fokusverlust funktionieren.
+- Wirkung: Bessere Barrierefreiheit im Fehlerfall; der Fokus bleibt nachvollziehbar und der A11y-Check erkennt fehlende Dialog-Fokuslogik frühzeitig.
+

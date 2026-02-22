@@ -4,16 +4,16 @@
   "files": {
     "start.sh": "2026.02.22.4",
     "tools/smoke_test.py": "2026.02.22.4",
-    "templates/dashboard_musterseite.html": "2026.02.22.3",
-    "README.md": "2026.02.22.4",
-    "todo.txt": "2026.02.22.4",
-    "CHANGELOG.md": "2026.02.22.4",
-    "data/version_registry.json": "2026.02.22.4",
+    "templates/dashboard_musterseite.html": "2026.02.22.4",
+    "README.md": "2026.02.22.5",
+    "todo.txt": "2026.02.22.5",
+    "CHANGELOG.md": "2026.02.22.5",
+    "data/version_registry.json": "2026.02.22.5",
     "tools/run_quality_checks.sh": "2026.02.22.4",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22",
     "system/start_gui.sh": "2026.02.22",
     ".github/workflows/full-gates.yml": "2026.02.22",
-    "tools/focus_order_check.py": "2026.02.22"
+    "tools/focus_order_check.py": "2026.02.22.1"
   }
 }

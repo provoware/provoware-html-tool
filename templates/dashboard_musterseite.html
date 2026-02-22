@@ -428,6 +428,47 @@
       const footerSyncStatusNode = document.getElementById('footer-sync-status');
       const debugEventNode = document.getElementById('debug-last-event');
       const debugNextStepNode = document.getElementById('debug-next-step');
+      let lastDialogTrigger = null;
+
+      function getDialogFocusableElements() {
+        if (!dialog) {
+          return [];
+        }
+        return Array.from(dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+      }
+
+      function restoreFocusAfterDialog() {
+        if (!lastDialogTrigger || typeof lastDialogTrigger.focus !== 'function') {
+          return false;
+        }
+        lastDialogTrigger.focus();
+        return true;
+      }
+
+      function keepDialogFocusInside(event) {
+        if (!dialog || !dialog.open || !event || event.key !== 'Tab') {
+          return false;
+        }
+        const focusable = getDialogFocusableElements();
+        if (!focusable.length) {
+          return false;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+
+        if (event.shiftKey && active === first) {
+          event.preventDefault();
+          last.focus();
+          return true;
+        }
+        if (!event.shiftKey && active === last) {
+          event.preventDefault();
+          first.focus();
+          return true;
+        }
+        return false;
+      }
 
       function setResult(message) {
         if (!resultNode || typeof message !== 'string' || message.trim().length === 0) {
@@ -510,7 +551,12 @@
 
         if (actionValue === 'error') {
           if (dialog && typeof dialog.showModal === 'function') {
+            lastDialogTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
             dialog.showModal();
+            const firstDialogButton = getDialogFocusableElements()[0];
+            if (firstDialogButton && typeof firstDialogButton.focus === 'function') {
+              firstDialogButton.focus();
+            }
             setDebugDetails('Fehlerdialog geöffnet', 'Wählen Sie im Dialog zuerst „Erneut versuchen“ und prüfen Sie danach das Protokoll.');
             return setResult('❌ Fehlerdialog geöffnet. Bitte nächsten Schritt wählen.');
           }
@@ -521,6 +567,7 @@
         if (actionValue === 'close-dialog') {
           if (dialog && typeof dialog.close === 'function') {
             dialog.close();
+            restoreFocusAfterDialog();
             setDebugDetails('Fehlerdialog geschlossen', 'Sie können jetzt ohne Dialog weiterarbeiten.');
             return setResult('✅ Fehlerdialog geschlossen.');
           }
@@ -580,6 +627,7 @@
 
       document.addEventListener('keydown', function (event) {
         executeShortcut(event);
+        keepDialogFocusInside(event);
       });
 
       applyTheme('high-contrast');
