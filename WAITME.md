@@ -73,3 +73,13 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash tools/run_quality_checks.sh`
 - `python tools/smoke_test.py`
 - `bash start.sh`
+
+## Update 2026-02-22 (README-Anker + Start-Feedback)
+- Die wichtigsten Befehle stehen jetzt direkt am Anfang der README und zusätzlich ganz unten als Spickzettel.
+- Beim Start sehen Sie jetzt einen Kurzstatus mit Zahlen: geprüft, automatisch gelöst, offen.
+- Wenn noch etwas offen ist, kommt ein klarer Hinweis zum Release-Check mit nächstem Befehl.
+
+### Nächste sinnvolle Befehle
+- `bash start.sh --check`
+- `bash start.sh --release-check`
+- `cat logs/status_summary.txt`

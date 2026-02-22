@@ -65,9 +65,17 @@ print_summary() {
 	local checked_text="${CHECKED_ITEMS[*]:-keine}"
 	local missing_text="${MISSING_ITEMS[*]:-nichts}"
 	local fixed_text="${FIXED_ITEMS[*]:-nichts}"
+	local checked_count="${#CHECKED_ITEMS[@]}"
+	local missing_count="${#MISSING_ITEMS[@]}"
+	local fixed_count="${#FIXED_ITEMS[@]}"
+	local next_count="${#NEXT_STEPS[@]}"
+	print_step "🧾" "Kurzstatus: ${checked_count} geprüft, ${fixed_count} automatisch gelöst, ${missing_count} offen."
 	print_step "📋" "Geprüft: ${checked_text}"
 	print_step "📋" "Fehlt: ${missing_text}"
 	print_step "📋" "Automatisch gelöst: ${fixed_text}"
+	if [[ "$missing_count" -gt 0 ]]; then
+		print_step "⚠️" "Es sind noch offene Punkte vorhanden. Für Release-Reife jetzt './start.sh --release-check' nutzen."
+	fi
 	if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
 		local step
 		for step in "${NEXT_STEPS[@]}"; do
@@ -76,6 +84,8 @@ print_summary() {
 	else
 		print_step "➡️" "Nächster Schritt: Bei Bedarf './start.sh --debug' für Details nutzen."
 	fi
+	print_step "ℹ️" "Zusammenfassung gespeichert für Konsole/Screenreader: ${STATUS_SUMMARY_FILE:-logs/status_summary.txt}"
+	print_step "ℹ️" "Next-Step-Zähler: ${next_count}"
 }
 
 write_accessible_status_summary() {

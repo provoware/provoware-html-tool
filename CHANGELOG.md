@@ -330,3 +330,24 @@
   3) Shell-Skripte wurden konsistent formatiert, damit Quality-Checks reproduzierbar grün laufen.
 - Warum: Weniger Fehlalarme, robustere Reparatur und einheitliche Qualitätsstandards reduzieren Betriebsfehler.
 - Wirkung: Höhere Release-Reife, klarere Hilfetexte und stabilere Gates in unterschiedlichen Umgebungen.
+
+## 2026-02-22 – Iteration: README-Befehlsanker + Start-Feedback + Release-Klarheit (3 Punkte)
+### Scope-Kontrolle
+- Problem: Wichtige Konsole-Befehle waren nicht gleichzeitig ganz oben und als fester Anhang ganz unten sichtbar; zudem fehlte ein klarer Kurzstatus im Start-Feedback.
+- Ziel: Befehlsorientierung in der README verbessern, Start-Feedback laienfreundlicher machen und „was fehlt für Release“ transparent zusammenfassen.
+- Dateien: `README.md`, `system/start_core.sh`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: (1) README mit Sofortblock + Bottom-Spickzettel + Release-Lücken, (2) Start-Zusammenfassung mit Zählern/Release-Hinweis, (3) Pflicht-Doku/Versionsstand aktualisiert.
+- Abnahmekriterium: README zeigt wichtigste Befehle direkt am Anfang und am Ende; `bash start.sh --check` enthält einen klaren Kurzstatus mit offenen Punkten.
+
+### Was
+1. README erweitert: neue Sektion „Wichtigste Befehle (Sofort sichtbar)“ direkt oben und „Konsolen-Spickzettel“ als dauerhafter Abschluss unten.
+2. Start-Feedback verbessert: `print_summary` zeigt jetzt Zähler (geprüft/gelöst/offen), klaren Release-Hinweis bei offenen Punkten und sichtbaren Speicherort der barrierearmen Zusammenfassung.
+3. Release-Transparenz ergänzt: README enthält neue Sektion „Was fehlt noch für Release?“ mit klaren 3 Hauptlücken und empfohlenem Prüfpfad.
+
+### Warum
+- Nutzer in der Konsole brauchen die wichtigsten Befehle ohne Scroll-Suche.
+- Klare Zähler plus Next Steps reduzieren Unsicherheit bei Fehlerfällen.
+- Transparente Release-Lücken helfen bei Priorisierung und verhindern verfrühte Freigaben.
+
+### Wirkung
+- Besseres Nutzerfeedback beim Start, mehr Barrierefreiheit durch klare Textzustände und schnellerer Einstieg in die tägliche Konsole-Nutzung.
