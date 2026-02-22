@@ -4,6 +4,17 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
+## Wichtigste Befehle (Sofort sichtbar)
+Wenn Sie direkt in der Konsole arbeiten, starten Sie mit diesen Befehlen:
+
+```bash
+bash start.sh --check           # prüft Voraussetzungen und Grundqualität
+bash start.sh --repair          # behebt fehlende Werkzeuge so weit wie möglich automatisch
+bash start.sh --full-gates      # führt alle Pflicht-Gates in fixer Reihenfolge aus
+bash start.sh --release-check   # zeigt klar, was für Release noch fehlt
+cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzten Ausführung
+```
+
 ## Entwicklungsstand
 - Fortschritt: **85%**
 - **Abgeschlossen**
@@ -257,3 +268,31 @@ tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 - **Punkt 3 (Einheitliche Standards):** Shell-Dateien laufen konsistent durch shfmt-Checks, damit Gates reproduzierbar grün bleiben.
 
 **Hinweis in einfacher Sprache:** Wenn ein Check fehlschlägt, folgen Sie direkt den „Nächster Schritt“-Hinweisen im Terminal.
+
+## Was fehlt noch für Release?
+Aktuell fehlen vor allem diese Punkte für eine stabile Freigabe (Release):
+
+1. Offline-fähige Bereitstellung für `shellcheck`/`shfmt` ohne Warnungen in restriktiven Umgebungen.
+2. Stabiler Browser-E2E ohne externen Download (z. B. interner Mirror für Playwright-Browser).
+3. Abschluss der offenen P0/P1-UX-Punkte aus `todo.txt` (inklusive Theme-Vorschau und Modul-Interoperabilität).
+
+Empfohlener Prüfpfad:
+
+```bash
+bash start.sh --repair
+bash start.sh --full-gates
+bash start.sh --release-check
+```
+
+## Konsolen-Spickzettel (immer unten angehängt)
+Praktische Kurzliste zum Nachlesen am Ende der README:
+
+```bash
+bash start.sh --check
+bash start.sh --repair
+bash start.sh --format
+bash start.sh --test
+bash start.sh --full-gates
+bash start.sh --release-check
+cat logs/status_summary.txt
+```

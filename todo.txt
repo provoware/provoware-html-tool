@@ -147,3 +147,8 @@ NEXT: shellcheck/shfmt in Offline-Umgebung über lokales Mirror-Paket bereitstel
 DONE: Theme-Validierung akzeptiert jetzt Liste ODER Objektstruktur und gibt klare Next Steps aus (2026-02-22)
 DONE: Netzwerkprüfung ist robuster (curl oder DNS-Fallback per python3), damit Auto-Reparatur seltener fälschlich offline meldet (2026-02-22)
 DONE: Qualitätsprüfung formatiert jetzt auch system/start_core.sh konsistent über shfmt (2026-02-22)
+
+DONE: README zeigt wichtigste Konsole-Befehle jetzt direkt am Anfang als Sofortblock (2026-02-22)
+DONE: README hängt einen dauerhaften Konsolen-Spickzettel ganz unten an (2026-02-22)
+DONE: Start-Zusammenfassung zeigt jetzt Kurzstatus-Zähler + Release-Hinweis bei offenen Punkten (2026-02-22)
+NEXT: Automatische README-Prüfung ergänzen, die „Wichtigste Befehle oben + Spickzettel unten“ im Quality-Gate verifiziert (2026-02-23)
