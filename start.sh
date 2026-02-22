@@ -9,6 +9,8 @@ LINE_LIMIT=2200
 NETWORK_CHECK_TIMEOUT=2
 COMMAND_TIMEOUT=180
 RETRY_MAX=2
+FORCE_OFFLINE_MODE="${PROVOWARE_FORCE_OFFLINE:-0}"
+OFFLINE_SIMULATION_LOGGED="0"
 GUI_PORT_MIN=20000
 GUI_PORT_MAX=60999
 GUI_PORT_RANDOM_ATTEMPTS=25
@@ -185,6 +187,16 @@ print(",".join(valid))' "$THEME_CONFIG_FILE" 2>/dev/null || true)"
 }
 
 is_network_available() {
+	if [[ "$FORCE_OFFLINE_MODE" == "1" ]]; then
+		if [[ "$OFFLINE_SIMULATION_LOGGED" != "1" ]]; then
+			print_step "⚠️" "Offline-Simulation aktiv: PROVOWARE_FORCE_OFFLINE=1 blockiert absichtlich alle Online-Prüfungen."
+			record_checked "Offline-Simulation aktiv (ohne Internet-Testlauf)"
+			record_next_step "Für normalen Betrieb ohne Simulation: 'unset PROVOWARE_FORCE_OFFLINE' und Befehl erneut ausführen"
+			OFFLINE_SIMULATION_LOGGED="1"
+		fi
+		return 1
+	fi
+
 	if command -v curl >/dev/null 2>&1; then
 		if curl --silent --show-error --max-time "$NETWORK_CHECK_TIMEOUT" https://example.com >/dev/null 2>&1; then
 			return 0
