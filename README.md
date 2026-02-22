@@ -212,3 +212,15 @@ tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 - Der Backlog wurde als Statusprüfung neu bewertet: **1 Punkt erledigt, Rest priorisiert offen**.
 - Die offenen Punkte sind jetzt testbar in `todo.txt` als eigener Audit-Block gepflegt.
 - `WAITME.md` fasst den Stand laienverständlich zusammen (Blocker, Risiken, empfohlene Befehle).
+
+
+## Iteration-Update (2026-02-22): Stabiler Dashboard-Start + robustere Bedienung
+- **Punkt 1 (Stabilität):** Das Dashboard verarbeitet fehlende Modulquellen jetzt fail-safe. Bei Direktaufruf ohne Start-Routine gibt es klare Hilfe statt Script-Abbruch.
+- **Punkt 2 (Bedienung):** Klicks nutzen robuste Delegation mit `closest('[data-action]')`. Dadurch funktionieren Buttons auch bei verschachtelten Elementen zuverlässig.
+- **Punkt 3 (A11y/Theme):** Start-Theme wird konsistent aus gültiger Voreinstellung gewählt (kein harter Wechsel auf `balanced`).
+
+**Fortschritt:** 89% (stabilere Frontend-Laufzeit + bessere Tastatur/Klick-Resistenz umgesetzt; offen bleiben CI-/Repair-Themen).
+
+**Offen:**
+- Auto-Reparatur mit klarer Sudo/Root-Rückmeldung weiter absichern.
+- UI-Tests um Theme-Persistenz (Speichern/Wiederherstellen) erweitern.

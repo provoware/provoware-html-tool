@@ -220,3 +220,18 @@
 - Warum: Offene Punkte sollen ohne Interpretationslücken in den nächsten 3-Punkte-Iterationen umgesetzt werden können.
 - Wirkung: Transparenter Arbeitsstand, klarere Priorisierung und besserer Übergabestatus für Team und Einsteiger.
 - Zusätzlich: `WAITME.md` als kompakte Statusseite eingeführt; `AGENTS.md` auf Version 2.6 mit festen Regeln für Backlog-Audits erweitert.
+
+
+## 2026-02-22 – Iteration: Dashboard-Härtung (3 Punkte)
+### Was
+1. Modulquellen-Injektion im Template fail-safe gemacht (kein Crash bei fehlendem `__MODULE_SOURCES__`).
+2. Click-Delegation auf `closest('[data-action], [data-module-nav]')` umgestellt.
+3. Initiales Theme auf konsistente, validierte Auswahl umgestellt (kein erzwungenes `balanced`).
+
+### Warum
+- Direktöffnungen der HTML-Datei konnten an einer fehlenden Injektion abbrechen.
+- Verschachtelte Button-Inhalte waren nicht immer klickfest.
+- Ein harter Theme-Wechsel war inkonsistent zur Nutzerauswahl und reduzierte Kontrast-Vorhersagbarkeit.
+
+### Wirkung
+- Höhere Laufzeitstabilität, bessere Bedienbarkeit und nachvollziehbarerer Theme-Start mit klaren Hilfetexten für nächste Schritte.
