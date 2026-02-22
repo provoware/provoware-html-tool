@@ -280,6 +280,23 @@
       gap: .4rem;
       margin-bottom: .6rem;
     }
+    .control-bar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(180px, 1fr) 220px;
+      gap: .5rem;
+      align-items: end;
+      padding: .65rem;
+      border: 1px solid rgba(127, 168, 255, 0.4);
+      border-radius: 10px;
+      background: rgba(9, 20, 41, 0.8);
+      margin-bottom: .6rem;
+    }
+    .control-bar label { display: grid; gap: .25rem; font-weight: 700; }
+    .breadcrumb { display: inline-flex; align-items: center; gap: .35rem; color: var(--muted); font-size: .9rem; margin-bottom: .2rem; }
+    .inspector-grid { display: grid; gap: .5rem; margin-top: .55rem; }
+    .quick-overlay { border: 2px solid var(--focus); border-radius: 12px; width: min(640px, calc(100% - 1.5rem)); }
+    .shortcut-list { list-style: none; padding: 0; margin: .55rem 0 0; display: grid; gap: .35rem; max-height: 270px; overflow: auto; }
+    .shortcut-list li { border: 1px solid rgba(127, 168, 255, 0.35); border-radius: 8px; padding: .45rem .55rem; background: rgba(9, 20, 41, 0.72); }
     .tool-card {
       border-radius: 12px;
       border: 2px solid rgba(127, 168, 255, 0.4);
@@ -471,6 +488,7 @@
       .card-grid { grid-template-columns: 1fr; }
       .main-grid,
       .window-actions,
+      .control-bar,
       .topbar-controls {
         grid-template-columns: 1fr;
       }
@@ -581,6 +599,21 @@
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
       <h2 id="bereich-aufgaben">Werkzeug-Übersicht</h2>
+      <section class="control-bar" aria-label="Steuerleiste">
+        <label>
+          <span class="breadcrumb" id="project-breadcrumb">Projektpfad: noch nicht gesetzt</span>
+          Projekt-Kontext
+          <input id="project-switch-input" type="text" value="/workspace/provoware-html-tool" aria-describedby="project-switch-help">
+        </label>
+        <label for="global-search-input">Globale Suche
+          <input id="global-search-input" type="search" placeholder="Modul, Aktion oder Hilfe suchen" aria-describedby="global-search-status">
+        </label>
+        <div class="actions" style="margin-top:0;">
+          <button type="button" data-action="project-switch" aria-describedby="project-switch-help">Projekt wechseln</button>
+          <p class="subline" id="project-switch-help">Hilfe: Pfad eintragen, dann „Projekt wechseln“ drücken.</p>
+        </div>
+      </section>
+      <p class="subline" id="global-search-status" role="status" aria-live="polite">Suche bereit: Bitte Begriff eingeben.</p>
       <p class="subline">Startansicht: Leeres 3x3-Haupt-Grid mit Fensteroptionen für Ausblenden und Maximieren.</p>
       <div class="window-actions" aria-label="Fensteroptionen">
         <button type="button" data-action="window-hide">Fenster ausblenden</button>
@@ -731,6 +764,15 @@
     </section>
     <aside class="panel right" aria-label="Einstellungen und Hilfe">
       <h2>Einstellungen</h2>
+      <section class="quick-help" aria-labelledby="inspector-title">
+        <strong id="inspector-title">Kontext-Inspector (Details + Hilfe):</strong>
+        <div class="inspector-grid">
+          <p id="inspector-details">Details: Dashboard ist aktiv. Status: Bereit.</p>
+          <p id="inspector-help">Hilfe: Öffnen Sie „Shortcut-Übersicht“, wenn Sie nur per Tastatur arbeiten.</p>
+          <p id="inspector-meta">Meta: Quelle config/module_sources.json, letzter Wechsel: Start.</p>
+          <p id="inspector-shortcuts">Shortcuts: Alt+S Speichern, Alt+O Modul öffnen, F1 oder ? für Overlay.</p>
+        </div>
+      </section>
       <ul class="settings-list">
         <li class="settings-item">
           <label for="theme-switcher"><strong>Design:</strong></label>
@@ -765,6 +807,10 @@
           <p class="subline" id="backup-status" role="status" aria-live="polite">Auto-Backup: Aktiv (Standard).</p>
         </li>
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
+        <li class="settings-item">
+          <button type="button" data-action="open-shortcuts">Shortcut-Übersicht öffnen (F1 oder ?)</button>
+          <p class="subline">Hilfe: Die Übersicht zeigt alle Kürzel und kann nach Stichwort gefiltert werden.</p>
+        </li>
       </ul>
     </aside>
     <footer class="footer">
@@ -786,6 +832,17 @@
       <button type="button" data-action="repair">Reparatur</button>
       <button type="button" data-action="log">Protokoll öffnen</button>
       <button type="button" data-action="close-dialog">Dialog schließen</button>
+    </div>
+  </dialog>
+  <dialog id="shortcut-overlay" class="quick-overlay" aria-labelledby="shortcut-overlay-title" aria-describedby="shortcut-overlay-help" aria-modal="true">
+    <h2 id="shortcut-overlay-title">⌨️ Shortcut-Übersicht</h2>
+    <p id="shortcut-overlay-help">Fachwort: Overlay (überlagerndes Fenster). Tipp: Suchbegriff eingeben, um passende Befehle schneller zu finden.</p>
+    <label for="shortcut-filter"><strong>Suche in Kürzeln:</strong></label>
+    <input id="shortcut-filter" type="search" placeholder="z. B. speichern, reparatur, modul" autocomplete="off">
+    <p id="shortcut-filter-status" class="result" role="status" aria-live="polite">6 Einträge sichtbar.</p>
+    <ul id="shortcut-list" class="shortcut-list"></ul>
+    <div class="actions">
+      <button type="button" data-action="close-shortcuts">Schließen</button>
     </div>
   </dialog>
   <dialog id="project-dialog" aria-labelledby="project-title" aria-describedby="project-text" aria-modal="true">
@@ -825,7 +882,18 @@
       const gmsExportFilenameStatusNode = document.getElementById('gms-export-filename-status');
       const projectStatusNode = document.getElementById('project-path-status');
       const projectDialog = document.getElementById('project-dialog');
+      const shortcutOverlay = document.getElementById('shortcut-overlay');
+      const shortcutFilterInput = document.getElementById('shortcut-filter');
+      const shortcutFilterStatusNode = document.getElementById('shortcut-filter-status');
+      const shortcutListNode = document.getElementById('shortcut-list');
       const projectPathInput = document.getElementById('project-path-input');
+      const projectSwitchInput = document.getElementById('project-switch-input');
+      const projectBreadcrumbNode = document.getElementById('project-breadcrumb');
+      const globalSearchInput = document.getElementById('global-search-input');
+      const globalSearchStatusNode = document.getElementById('global-search-status');
+      const inspectorDetailsNode = document.getElementById('inspector-details');
+      const inspectorHelpNode = document.getElementById('inspector-help');
+      const inspectorMetaNode = document.getElementById('inspector-meta');
       const projectDialogResultNode = document.getElementById('project-dialog-result');
       const debugLogListNode = document.getElementById('debug-log-list');
       const topbarLogListNode = document.getElementById('topbar-log-list');
@@ -837,7 +905,8 @@
       const LAYOUT_STORAGE_KEY = 'provoware-layout-profile';
       const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
       const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
-      const APP_VERSION = '13.1';
+      const APP_VERSION = '13.2';
+      const shortcutEntries = [{ key: 'Alt+S', title: 'Speichern', detail: 'Speichert Änderungen im aktiven Modul.' }, { key: 'Alt+R', title: 'Erneut versuchen', detail: 'Startet die letzte Aktion neu.' }, { key: 'Alt+P', title: 'Reparatur', detail: 'Öffnet die Reparatur-Hilfe mit Befehlen.' }, { key: 'Alt+L', title: 'Protokoll', detail: 'Zeigt den nächsten Log-Schritt.' }, { key: 'Alt+O', title: 'Modul öffnen', detail: 'Öffnet das gewählte Modul.' }, { key: 'F1 / ?', title: 'Shortcut-Übersicht', detail: 'Öffnet das Overlay mit Filter.' }];
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
       const injectedModuleSources = typeof __MODULE_SOURCES__ !== 'undefined' ? __MODULE_SOURCES__ : null;
@@ -1594,6 +1663,9 @@
         setActiveNavigation(selectedModule);
         setPluginStatus(selectedModule);
         renderModuleSidebarOptions(selectedModule, sourceMeta);
+        if (inspectorDetailsNode) { inspectorDetailsNode.textContent = 'Details: ' + sourceMeta.label + ' ist aktiv. Status: Bereit.'; }
+        if (inspectorHelpNode) { inspectorHelpNode.textContent = 'Hilfe: ' + sourceMeta.nextStep; }
+        if (inspectorMetaNode) { inspectorMetaNode.textContent = 'Meta: Quelle ' + sourceMeta.dataSource + ', letzter Wechsel: ' + getTimeStamp() + '.'; }
         setDebugDetails(debugTitle, debugStep);
         appendDebugLog('✅ Modul geladen: ' + sourceMeta.label + ' | Datenquelle: ' + sourceMeta.dataSource + ' (' + getTimeStamp() + ').');
         updateSyncStatus('✅ Modul bereit: ' + sourceMeta.label + ' (' + getTimeStamp() + ')');
@@ -1732,7 +1804,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -1764,6 +1836,9 @@
           }
           return setResult('ℹ️ Projekt-Routine geschlossen. Sie können später fortsetzen.');
         }
+        if (actionValue === 'open-shortcuts') { return openShortcutOverlay(); }
+        if (actionValue === 'close-shortcuts') { return closeShortcutOverlay(); }
+        if (actionValue === 'project-switch') { return applyProjectSwitch(); }
         if (actionValue === 'copy-log') { return copyLogToClipboard(); }
         if (actionValue === 'switch-mode') { return toggleMode(); }
         if (actionValue === 'window-hide') {
@@ -1879,6 +1954,62 @@
         }
         return false;
       }
+      function renderShortcutList(filterValue) {
+        if (!shortcutListNode || !shortcutFilterStatusNode) {
+          return false;
+        }
+        const normalized = typeof filterValue === 'string' ? filterValue.trim().toLowerCase() : '';
+        const visibleItems = shortcutEntries.filter(function (entry) {
+          const rowText = (entry.key + ' ' + entry.title + ' ' + entry.detail).toLowerCase();
+          return normalized.length === 0 ? true : rowText.includes(normalized);
+        });
+        shortcutListNode.innerHTML = '';
+        visibleItems.forEach(function (entry) {
+          const li = document.createElement('li');
+          li.textContent = entry.key + ' – ' + entry.title + ': ' + entry.detail;
+          shortcutListNode.appendChild(li);
+        });
+        if (!visibleItems.length) {
+          const li = document.createElement('li');
+          li.textContent = 'Kein Treffer. Nächster Schritt: Anderen Suchbegriff testen.';
+          shortcutListNode.appendChild(li);
+        }
+        shortcutFilterStatusNode.textContent = String(visibleItems.length) + ' Einträge sichtbar.';
+        return true;
+      }
+      function openShortcutOverlay() {
+        if (!shortcutOverlay || typeof shortcutOverlay.showModal !== 'function') {
+          return setResult('⚠️ Shortcut-Übersicht nicht verfügbar. Bitte Seite neu laden.');
+        }
+        renderShortcutList('');
+        shortcutOverlay.showModal();
+        if (shortcutFilterInput) {
+          shortcutFilterInput.value = '';
+          shortcutFilterInput.focus();
+        }
+        return setResult('ℹ️ Shortcut-Übersicht geöffnet.');
+      }
+      function closeShortcutOverlay() {
+        if (!shortcutOverlay || !shortcutOverlay.open) {
+          return false;
+        }
+        shortcutOverlay.close();
+        return setResult('ℹ️ Shortcut-Übersicht geschlossen.');
+      }
+      function applyProjectSwitch() {
+        if (!projectSwitchInput || typeof projectSwitchInput.value !== 'string') {
+          return setResult('⚠️ Projektwechsel nicht möglich. Bitte Eingabe prüfen.');
+        }
+        const candidate = projectSwitchInput.value.trim();
+        if (!validateProjectPath(candidate)) {
+          return setResult('⚠️ Ungültiger Projektpfad. Nächster Schritt: Absoluten Pfad eingeben und erneut versuchen.');
+        }
+        persistProjectPath(candidate, 'Steuerleiste');
+        if (projectBreadcrumbNode) {
+          projectBreadcrumbNode.textContent = 'Projektpfad: ' + candidate;
+        }
+        return setResult('✅ Projektpfad gewechselt: ' + candidate + '.');
+      }
       function normalizeShortcutKey(event) {
         if (!event || typeof event.key !== 'string') {
           return '';
@@ -1886,7 +2017,14 @@
         return event.key.trim().toLowerCase();
       }
       function executeShortcut(event) {
-        if (!event || event.altKey !== true) {
+        if (!event) {
+          return false;
+        }
+        if (event.key === 'F1' || event.key === '?') {
+          event.preventDefault();
+          return openShortcutOverlay();
+        }
+        if (event.altKey !== true) {
           return false;
         }
         const shortcutMap = {
@@ -1922,6 +2060,25 @@
           if (applyBackupPreference(enabled, 'Bedienfeld')) {
             setResult(enabled ? '✅ Auto-Backup aktiviert.' : 'ℹ️ Auto-Backup deaktiviert. Bitte bei Änderungen manuell speichern.');
           }
+        });
+      }
+      if (shortcutFilterInput) {
+        shortcutFilterInput.addEventListener('input', function (event) {
+          const value = event && event.target && typeof event.target.value === 'string' ? event.target.value : '';
+          renderShortcutList(value);
+        });
+      }
+      if (globalSearchInput) {
+        globalSearchInput.addEventListener('input', function (event) {
+          if (!globalSearchStatusNode) {
+            return;
+          }
+          const value = event && event.target && typeof event.target.value === 'string' ? event.target.value.trim() : '';
+          if (!value) {
+            globalSearchStatusNode.textContent = 'Suche bereit: Bitte Begriff eingeben.';
+            return;
+          }
+          globalSearchStatusNode.textContent = 'Suche aktiv: "' + value + '". Nächster Schritt: Passendes Modul öffnen.';
         });
       }
       document.addEventListener('click', function (event) {
@@ -2012,6 +2169,12 @@
       }
       updateProjectStatus(getStoredProjectPath());
       updateFooterContext(getStoredProjectPath());
+      if (projectBreadcrumbNode) {
+        projectBreadcrumbNode.textContent = 'Projektpfad: ' + getStoredProjectPath();
+      }
+      if (projectSwitchInput) {
+        projectSwitchInput.value = getStoredProjectPath();
+      }
       if (projectPathInput) {
         projectPathInput.value = getStoredProjectPath();
       }

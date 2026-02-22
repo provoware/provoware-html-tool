@@ -16,7 +16,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 ```
 
 ## Entwicklungsstand
-- Fortschritt: **90%**
+- Fortschritt: **92%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -48,6 +48,10 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - Neu in dieser Iteration: Quality-Gate prüft automatisch, ob README oben den Sofortblock und unten den Konsolen-Spickzettel vollständig enthält (mit klarer Fehlerhilfe).
 
 
+
+- Neu in dieser Iteration: Hauptbereich hat jetzt eine klare Control-Bar (Projektpfad, globale Suche, primäre Aktion „Projekt wechseln") für konsistente Orientierung.
+- Neu in dieser Iteration: Rechter Bereich enthält jetzt einen dauerhaften Kontext-Inspector (Details/Hilfe/Meta/Shortcuts) statt versteckter Kontextinfos.
+- Neu in dieser Iteration: Quick-Actions-Overlay per F1/? ergänzt (filterbare Shortcut-Liste mit einfacher Hilfe und Next Steps).
 - Neu in dieser Iteration: Footer zeigt jetzt echte Live-Werte (Version, aktiver Projektpfad, Backup-Status) statt statischer Platzhaltertexte.
 - Neu in dieser Iteration: Theme-Hilfe ergänzt eine klare Kontrast-Vorschau pro Theme (Text statt nur Farbe).
 - Neu in dieser Iteration: Theme-Liste in `config/themes.json` ist mit Dashboard und Validierung harmonisiert (`balanced`, `high-contrast`, `light`, `dark`).
