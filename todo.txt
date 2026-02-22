@@ -1,6 +1,6 @@
 DONE: CI-Workflow für Full-Gates ergänzt, damit Push/PR automatisch Reparatur und Gates 1-5 ausführen. (2026-02-22)
 DONE: Fokusreihenfolge-Autocheck als neues Tool ergänzt, damit Skip-Link und Kernaktionen für Tastatur sicher geprüft werden. (2026-02-22)
-DONE: Repo-Quality und Smoke-Test um Fokus-Check erweitert, damit A11y-Fehler früh und automatisch erkannt werden. (2026-02-22)
+DONE: Repo-Quality um compileall + Smoke-Kurzlauf erweitert und Selbsttest in start.sh daran angebunden. (2026-02-22)
 NEXT: Browser-E2E-Test mit Dialog-Fokusfang und CI-Artefakten (Logs/Screenshot) ergänzen. (2026-02-22)
 
 # TODO – provoware-html-tool (Design-Abgleich Referenzbild)

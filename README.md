@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **83%**
+- Fortschritt: **84%**
 - Erledigte Aufgaben:
   - Dashboard-Layout auf Referenzstruktur mit Topbar, linker Navigation, mittlerem Modulraster und rechter Einstellungsleiste umgestellt.
   - Neon-/Glas-Design in drei Themes (`high-contrast`, `light`, `dark`) mit robusten Fokus- und Kontrastrahmen vereinheitlicht.
@@ -9,6 +9,7 @@
 - Offene Aufgaben:
   - Zusätzlicher automatischer Browser-Test für Fokus-Reihenfolge im Dialog fehlt noch.
   - CI soll bei Gate-Fehlern Artefakte (Logs/Screenshots) automatisch anhängen.
+  - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll ohne neue Pflichtabhängigkeit vorbereitet werden.
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
@@ -73,7 +74,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `83%`
+- Fortschritt: `84%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -91,6 +92,8 @@ cat logs/start.log
   - Dashboard-Template respektiert reduzierte Bewegung (prefers-reduced-motion) und erklärt den Hinweis für Laien
   - Barrierefreie Tastatur-Kürzel (Alt+S/Alt+R/Alt+P/Alt+L) mit erklärendem Hilfe-Text und Screenreader-Attributen im Dashboard
   - Dashboard-Template optisch auf Referenzbild angenähert: Drei-Spalten-Layout, Modul-Kartenraster, Einstellungen rechts und klarer Footer-Status
+  - Repo-Quality führt jetzt zusätzlich eine harte Syntaxprüfung (`python -m compileall -q .`) und einen Smoke-Kurzlauf aus, damit Fehler früher sichtbar werden
+  - Selbsttest (`./start.sh --test`) integriert jetzt compileall + Repo-Quality automatisch mit klaren Next Steps bei Fehlern
 - Offen:
   - Zusätzlicher Browser-E2E-Test für Fokus-Reihenfolge und Dialog-Fokusfang
   - CI-Artefakte für Fehlerfall (Logdateien und optional Screenshot) ergänzen

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-02-22 – Repo-Quality gehärtet + Selbsttest erweitert + klare Fehlerhilfen
+- Was: `tools/run_quality_checks.sh` um `run_checked_command`, Pflichtprüfung `python -m compileall -q .` und Smoke-Kurzlauf (`SKIP_FULL_GATES=1 python3 tools/smoke_test.py`) erweitert; `start.sh --test` führt nun zusätzlich compileall und Repo-Quality aus.
+- Warum: Qualitätsfehler sollten früher und automatisiert erkannt werden, ohne dass Nutzer mehrere manuelle Befehle kennen müssen.
+- Wirkung: Höhere Wartbarkeit durch wiederverwendete Prüf-Helferfunktion, robustere automatische Gates und verständliche Next Steps bei jedem Fehlerpfad.
+
 ## 2026-02-22 – CI-Full-Gates + Fokusreihenfolge-Autocheck + Quality-Integration
 - Was: Neue CI-Workflow-Datei `.github/workflows/full-gates.yml` führt bei Push/PR automatisch `bash start.sh --repair` und danach `bash start.sh --full-gates` aus; neuer Checker `tools/focus_order_check.py` prüft Skip-Link, Pflichtaktionen und Theme-Fokusreihenfolge.
 - Warum: Die offenen Punkte „Full-Gates in CI“ und „automatische Fokusprüfung“ sollten in eine robuste, wiederholbare Standardprüfung überführt werden.
