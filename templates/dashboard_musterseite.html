@@ -399,6 +399,68 @@
       }
       .card-grid { grid-template-columns: 1fr; }
     }
+
+    @media (max-width: 420px) {
+      body {
+        font-size: 0.96rem;
+      }
+
+      .shell {
+        width: calc(100% - .7rem);
+        margin: .35rem auto;
+        border-radius: 10px;
+      }
+
+      .topbar,
+      .panel,
+      .main,
+      .footer {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .topbar {
+        gap: .45rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .headline {
+        width: 100%;
+        font-size: 1.45rem;
+      }
+
+      .status-pill {
+        width: 100%;
+        text-align: center;
+      }
+
+      .tool-card,
+      .settings-item,
+      .quick-help {
+        padding: .7rem;
+      }
+
+      h2 {
+        font-size: 1.04rem;
+      }
+
+      button,
+      select,
+      .nav-button {
+        min-height: 46px;
+        font-size: .96rem;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .2rem;
+        min-height: 80px;
+        padding-top: .45rem;
+        padding-bottom: .45rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -533,6 +595,7 @@
           <li>Protokoll lesen: <code>cat logs/status_summary.txt</code></li>
         </ol>
         <p class="result">Fehlerdialog zeigt immer klare Schritte: „Erneut versuchen“, „Reparatur“, „Protokoll“.</p>
+        <p class="subline">Sehr kleines Display: Nutzen Sie 200% Zoom, Hochformat und den Link „Direkt zum Arbeitsbereich springen“, damit Fokus (aktive Tastatur-Markierung) und Texte klar bleiben.</p>
       </section>
     </section>
 

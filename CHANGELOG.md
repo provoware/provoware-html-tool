@@ -71,3 +71,17 @@
   3) Hilfe-/Doku-Texte für Laien erweitert (README + To-do-Fortschritt aktualisiert).
 - Warum: Offline-Betrieb wird damit reproduzierbar, transparent und ohne manuelle Einzelarbeit möglich.
 - Wirkung: Höhere Release-Reife, klarere Nutzerführung und robusterer Qualitätssicherungsablauf für Offline-Szenarien.
+
+## 2026-02-22 – Feinanpassung für sehr kleine Displays (A11y + Hilfe)
+- Scope-Kontrolle:
+  - Problem: Auf sehr kleinen Displays (z. B. 320–420px) waren Abstände, Statuszeile und Karten für Touch/Fokus zu dicht.
+  - Ziel: Lesbarkeit, Fokusfreundlichkeit und Bedienbarkeit für sehr kleine Screens verbessern, ohne neue Abhängigkeiten.
+  - Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) neues CSS-Breakpoint ≤420px inkl. Topbar/Footer/Karten/Buttons, 2) Hilfehinweis für Kleinst-Displays ergänzt, 3) Doku- und Versionsstand aktualisiert.
+  - Abnahme: Dashboard bleibt bei ≤420px ohne horizontales Chaos bedienbar; Fokus und Status bleiben sichtbar; Hilfehinweis ist vorhanden.
+- Was:
+  1) Neuer Media-Query-Bereich für `max-width: 420px` mit kompakteren Abständen, umbruchfähiger Topbar und besser lesbarer Footer-Struktur.
+  2) Interaktive Elemente auf kleinen Displays weiter fokus- und touchfreundlich gehalten (Mindesthöhe, klare Textgröße).
+  3) Schnellhilfe um einen verständlichen Hinweis für sehr kleine Displays erweitert (Zoom + Skip-Link + Hochformat).
+- Warum: Mobile Kleinstgeräte brauchen robustere Mikro-Layouts, damit Barrierefreiheit auch unter engem Platz erhalten bleibt.
+- Wirkung: Bessere Nutzbarkeit auf sehr kleinen Bildschirmen, weniger Überlauf-Risiko und klarere Hilfe für Laien.

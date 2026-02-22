@@ -13,10 +13,11 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
   - Saubere Projektstruktur: System, Konfiguration, Werkzeuge und variable Daten sind getrennt.
   - Mehrere Themes für robustes Farb- und Kontrastverhalten.
 
+- Responsive Feinanpassung für sehr kleine Displays (bis 420px) mit besserem Fokus, klaren Abständen und stabiler Lesbarkeit.
+
 - Projekt-Routine beim GUI-Start: fragt den Projektordner ab, validiert den Pfad, erstellt fehlende Ordner automatisch im Nutzerverzeichnis und zeigt den aktiven Pfad im Dashboard.
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
-  - Zusätzliche Feinanpassung für sehr kleine Displays.
   - Optionale Kopplung des Modul-Starters an echte Backend-Module (Datenquellen).
 
 
