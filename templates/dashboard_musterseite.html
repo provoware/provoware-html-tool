@@ -756,6 +756,12 @@
           <p id="font-scale-help">Hilfe: Größere Textgröße verbessert Lesbarkeit. Die Auswahl wird lokal gespeichert.</p>
           <p class="subline" id="font-scale-status" role="status" aria-live="polite">Textgröße: M (standard).</p>
         </li>
+        <li class="settings-item">
+          <label for="backup-switcher"><strong>Auto-Backup:</strong></label>
+          <input id="backup-switcher" type="checkbox" aria-describedby="backup-help backup-status" checked>
+          <p id="backup-help">Hilfe: Auto-Backup sichert Änderungen im Hintergrund. Empfehlung: Aktiv lassen. Wenn aus, bitte manuell speichern.</p>
+          <p class="subline" id="backup-status" role="status" aria-live="polite">Auto-Backup: Aktiv (Standard).</p>
+        </li>
         <li class="settings-item">Nutzerstatistik: 0 aktive Fehler, letzte Prüfung erfolgreich.</li>
       </ul>
     </aside>
@@ -807,6 +813,8 @@
       const themeStatusNode = document.getElementById('theme-status');
       const fontScaleSelector = document.getElementById('font-scale-switcher');
       const fontScaleStatusNode = document.getElementById('font-scale-status');
+      const backupToggleNode = document.getElementById('backup-switcher');
+      const backupStatusNode = document.getElementById('backup-status');
       const moduleCardStateNode = document.getElementById('module-card-state');
       const debugCardStateNode = document.getElementById('debug-card-state');
       const projectCardStateNode = document.getElementById('project-card-state');
@@ -1387,8 +1395,7 @@
       }
       function updateFooterContext(pathValue) {
         const validatedPath = typeof pathValue === 'string' && validateProjectPath(pathValue) ? normalizeProjectPath(pathValue) : 'nicht gesetzt';
-        const backupRaw = window.localStorage && typeof window.localStorage.getItem === 'function' ? window.localStorage.getItem(BACKUP_STORAGE_KEY) : null;
-        const backupEnabled = backupRaw === null ? true : backupRaw === 'true';
+        const backupEnabled = readBackupPreference();
         if (footerVersionPathNode) {
           footerVersionPathNode.textContent = 'Version: ' + APP_VERSION + ' | Projektpfad: ' + validatedPath;
         }
@@ -1601,6 +1608,40 @@
         if (window.localStorage && typeof window.localStorage.setItem === 'function') {
           window.localStorage.setItem(FONT_SCALE_STORAGE_KEY, scaleValue);
         }
+        return true;
+      }
+      function readBackupPreference() {
+        if (!(window.localStorage && typeof window.localStorage.getItem === 'function')) {
+          return true;
+        }
+        const rawValue = window.localStorage.getItem(BACKUP_STORAGE_KEY);
+        if (rawValue === null) {
+          return true;
+        }
+        if (rawValue !== 'true' && rawValue !== 'false') {
+          appendDebugLog('⚠️ Backup-Einstellung war ungültig. Nächster Schritt: Einstellung wird automatisch auf Aktiv gesetzt.');
+          window.localStorage.setItem(BACKUP_STORAGE_KEY, 'true');
+          return true;
+        }
+        return rawValue === 'true';
+      }
+      function applyBackupPreference(isEnabled, sourceLabel) {
+        if (typeof isEnabled !== 'boolean') {
+          setResult('⚠️ Backup-Einstellung ist ungültig. Bitte erneut versuchen.');
+          return false;
+        }
+        if (window.localStorage && typeof window.localStorage.setItem === 'function') {
+          window.localStorage.setItem(BACKUP_STORAGE_KEY, String(isEnabled));
+        }
+        if (backupToggleNode) {
+          backupToggleNode.checked = isEnabled;
+        }
+        if (backupStatusNode) {
+          backupStatusNode.textContent = isEnabled ? 'Auto-Backup: Aktiv. Änderungen werden zusätzlich gesichert.' : 'Auto-Backup: Inaktiv. Nächster Schritt: Bitte manuell speichern oder Backup wieder aktivieren.';
+        }
+        updateFooterContext(getStoredProjectPath());
+        const sourceText = typeof sourceLabel === 'string' && sourceLabel.trim().length > 0 ? sourceLabel.trim() : 'Unbekannt';
+        appendDebugLog('ℹ️ Backup-Einstellung: ' + (isEnabled ? 'aktiv' : 'inaktiv') + ' (' + sourceText + ', ' + getTimeStamp() + ').');
         return true;
       }
       function saveLayoutProfile() {
@@ -1829,6 +1870,14 @@
           applyFontScale(value);
         });
       }
+      if (backupToggleNode) {
+        backupToggleNode.addEventListener('change', function (event) {
+          const enabled = Boolean(event.target && event.target.checked);
+          if (applyBackupPreference(enabled, 'Bedienfeld')) {
+            setResult(enabled ? '✅ Auto-Backup aktiviert.' : 'ℹ️ Auto-Backup deaktiviert. Bitte bei Änderungen manuell speichern.');
+          }
+        });
+      }
       document.addEventListener('click', function (event) {
         const target = event.target;
         if (!(target instanceof HTMLElement)) {
@@ -1911,6 +1960,7 @@
       });
       applyTheme(getThemePreference());
       applyFontScale(readFontScalePreference());
+      applyBackupPreference(readBackupPreference(), 'Start');
       if (themeSelector) {
         themeSelector.value = html.getAttribute('data-theme') || 'high-contrast';
       }

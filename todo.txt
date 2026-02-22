@@ -173,3 +173,8 @@ DONE: Footer zeigt jetzt echte Livewerte (Version/Projektpfad/Backup-Status) sta
 DONE: Theme-Hilfe ergänzt Kontrast-Vorschau als Klartext je Theme (2026-02-22)
 DONE: Theme-Liste in config/themes.json mit Dashboard-Validierung harmonisiert (balanced/high-contrast/light/dark) (2026-02-22)
 NEXT: Backup-Einstellung als sichtbaren Schalter im Dashboard ergänzen (inkl. Persistenz-Test). (2026-02-23)
+
+DONE: Dashboard-Einstellungen um sichtbaren Auto-Backup-Schalter mit Hilfe/Status in einfacher Sprache ergänzt (2026-02-22)
+DONE: Backup-Einstellung validiert jetzt Input/Output robust (ungültige Werte -> Auto-Reset auf Aktiv + Debug-Hinweis) (2026-02-22)
+DONE: Smoke-Test prüft nun Backup-A11y-Marker (`backup-switcher`, Hilfe, Status) als Pflichtkriterium (2026-02-22)
+NEXT: Backup-Schalter zusätzlich mit Tastenkürzel-Hilfe (Shortcut-Overlay) verbinden. (2026-02-23)

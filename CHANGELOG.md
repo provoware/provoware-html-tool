@@ -1,3 +1,17 @@
+## 2026-02-22 – Backup-Schalter im Dashboard + Validierung + Smoke-Absicherung
+- Scope-Kontrolle:
+  - Problem: Der Backup-Status war nur im Footer sichtbar, aber nicht direkt bedienbar; zudem fehlte eine feste Smoke-Absicherung für den neuen UI-Bereich.
+  - Ziel: Drei kleine, abgeschlossene Punkte liefern: Backup-Schalter mit Hilfe, robuste Input-/Output-Validierung und Testmarker im Smoke-Gate.
+  - Dateien: `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) UI + JS-Validierung, 2) Smoke-Marker, 3) Pflichtdoku + Versionsstand aktualisiert.
+  - Abnahme: Backup-Schalter speichert zuverlässig, zeigt Textstatus (nicht nur Farbe) und Smoke-Test prüft die neuen Pflichtmarker.
+- Was:
+  1) Dashboard-Einstellungen um Auto-Backup-Schalter inkl. Hilfetext und Live-Status (`aria-live`) erweitert.
+  2) Backup-Preference robust gemacht: ungültige localStorage-Werte werden automatisch auf sicheren Standard „Aktiv“ zurückgesetzt und verständlich protokolliert.
+  3) `tools/smoke_test.py` um Pflichtmarker für den neuen Backup-Bereich ergänzt.
+- Warum: Laien brauchen eine sichtbare, sofort verständliche Steuerung und klare Rückmeldung mit nächstem Schritt.
+- Wirkung: Mehr Barrierefreiheit, bessere Bedienbarkeit und stabilere Release-Prüfung.
+
 ## 2026-02-22 – Footer-Livewerte, Theme-Hilfe und Theme-Config synchronisiert
 - Scope-Kontrolle:
   - Problem: Footer zeigte statische Platzhalter statt echter Statuswerte, Theme-Hilfe hatte keine kurze Kontrastübersicht und `balanced` war nicht in `config/themes.json` gelistet.

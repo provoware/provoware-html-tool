@@ -360,6 +360,9 @@ required_markers = [
     'id="footer-sync-status"',
     'id="debug-last-event"',
     'id="debug-next-step"',
+    'id="backup-switcher"',
+    'id="backup-help"',
+    'id="backup-status"',
     'setDebugDetails(',
     'updateSyncStatus(',
 ]

@@ -129,3 +129,15 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash tools/run_quality_checks.sh`
 - `python3 tools/smoke_test.py`
 - `bash start.sh --ux-check-auto`
+
+
+## Update 2026-02-22 (Backup-Schalter sichtbar)
+- Sie können Auto-Backup jetzt direkt im Einstellungsbereich ein- oder ausschalten.
+- Der Status wird als Text gezeigt (nicht nur Farbe), damit es leichter verständlich bleibt.
+- Wenn ein alter, ungültiger Wert gefunden wird, setzt das Tool automatisch auf sicheren Standard „Aktiv" zurück und erklärt das im Protokoll (Log = Aufzeichnung).
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`
