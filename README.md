@@ -63,7 +63,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `69%`
+- Fortschritt: `73%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -73,13 +73,13 @@ cat logs/start.log
   - Neuer WCAG-Kontrasttest (`python tools/check_theme_contrast.py`) als fester Teil von Repo-Quality und Smoke-Test
   - Full-Gates führen jetzt automatisiert Gates 1-5 aus (inklusive Mini-UX-Check)
   - Start-Kernlogik weiter in `system/start_core.sh` ausgelagert (Statusausgabe, Fehlerdialoge, Statusbericht und Dependency-Bootstrap)
+  - GUI-Erzeugung und Theme-Farbberechnung nach `system/start_gui.sh` ausgelagert (klare Trennung von Startsteuerung und GUI-Bausteinen)
   - Start-Routine erweitert um automatisches Werkzeug-Bootstrap mit klarer Nutzer-Rückmeldung (`python3`, `rg`, `curl`, `shfmt`, `shellcheck`)
   - Repo-Quality prüft jetzt `start.sh` und `system/start_core.sh` gemeinsam (Format + Lint + WCAG-Kontrasttest)
   - Check-Modus gibt jetzt einen klaren Gesamtstatus mit Exitcode, damit Fehler nicht still weiterlaufen
   - Startmodus stoppt jetzt bei fehlgeschlagenem Selbsttest mit klaren Next Steps
   - Dashboard-Template respektiert reduzierte Bewegung (prefers-reduced-motion) und erklärt den Hinweis für Laien
 - Offen:
-  - Weitere Auslagerung von GUI-Erzeugung und Theme-Berechnung aus `start.sh` in `system/`
   - CI-Anbindung für den erweiterten Repo-Quality-Check (`start.sh` + `system/start_core.sh`)
   - CI-Anbindung für den neuen Mini-UX-Check
 - Nächster Schritt: Die neuen Full-Gates in einer CI-Pipeline automatisch bei jedem Commit ausführen und bei Fehlern mit Statusbericht abbrechen.

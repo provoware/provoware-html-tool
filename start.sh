@@ -11,6 +11,7 @@ STATUS_SUMMARY_FILE=""
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
 CORE_HELPER_FILE="${PROJECT_ROOT}/system/start_core.sh"
+GUI_HELPER_FILE="${PROJECT_ROOT}/system/start_gui.sh"
 # shellcheck disable=SC2034
 CHECKED_ITEMS=()
 # shellcheck disable=SC2034
@@ -62,8 +63,16 @@ if [[ ! -f "$CORE_HELPER_FILE" ]]; then
 	exit 1
 fi
 
+if [[ ! -f "$GUI_HELPER_FILE" ]]; then
+	printf '%s\n' "❌ GUI-Helfer fehlt: system/start_gui.sh" >&2
+	printf '%s\n' "➡️ Nächster Schritt: Repository vollständig laden und erneut './start.sh --check' ausführen." >&2
+	exit 1
+fi
+
 # shellcheck source=system/start_core.sh
 source "$CORE_HELPER_FILE"
+# shellcheck source=system/start_gui.sh
+source "$GUI_HELPER_FILE"
 
 load_text_json() {
 	if [[ -n "$TEXT_JSON_CACHE" ]]; then
@@ -638,31 +647,15 @@ launch_local_gui() {
 	fi
 	record_checked "GUI-Theme ${gui_theme}"
 
-	local bg_color="#0b0f14"
-	local text_color="#ffffff"
-	local panel_color="#101820"
-	local border_color="#ffffff"
-	local focus_color="#ffd60a"
-	local ok_color="#74f2ce"
-	local warn_color="#ffe08a"
-	if [[ "$gui_theme" == "light" ]]; then
-		bg_color="#f8fafc"
-		text_color="#0f172a"
-		panel_color="#ffffff"
-		border_color="#0f172a"
-		focus_color="#1d4ed8"
-		ok_color="#0f766e"
-		warn_color="#92400e"
+	local palette
+	palette="$(resolve_theme_colors "$gui_theme" 2>/dev/null || true)"
+	if [[ -z "$palette" ]]; then
+		print_error_with_actions "Theme-Farben konnten für '${gui_theme}' nicht berechnet werden."
+		record_missing "Theme-Farbberechnung"
+		record_next_step "Theme prüfen und mit 'GUI_THEME=high-contrast ./start.sh --debug' erneut starten"
+		return 1
 	fi
-	if [[ "$gui_theme" == "dark" ]]; then
-		bg_color="#111827"
-		text_color="#f9fafb"
-		panel_color="#1f2937"
-		border_color="#93c5fd"
-		focus_color="#f59e0b"
-		ok_color="#34d399"
-		warn_color="#fbbf24"
-	fi
+	IFS='|' read -r bg_color text_color panel_color border_color focus_color ok_color warn_color <<<"$palette"
 
 	if ! command -v python3 >/dev/null 2>&1; then
 		print_error_with_actions "GUI-Start nicht möglich, weil python3 fehlt."
@@ -674,41 +667,14 @@ launch_local_gui() {
 	local gui_file="${gui_dir}/index.html"
 	local gui_pid_file="${gui_dir}/server.pid"
 	mkdir -p "$gui_dir"
-	cat >"$gui_file" <<-HTML
-		<!doctype html>
-		<html lang="de">
-		<head>
-		  <meta charset="utf-8">
-		  <meta name="viewport" content="width=device-width, initial-scale=1">
-		  <title>Provoware GUI Startstatus</title>
-		  <style>
-		    :root { color-scheme: light dark; }
-		    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; background: ${bg_color}; color: ${text_color}; }
-		    .panel { max-width: 760px; border: 3px solid ${border_color}; border-radius: 12px; padding: 1rem 1.25rem; background: ${panel_color}; }
-		    .badge-ok { display: inline-block; border: 2px solid ${ok_color}; color: ${ok_color}; padding: .1rem .5rem; border-radius: 999px; font-weight: 700; }
-		    .badge-warn { display: inline-block; border: 2px solid ${warn_color}; color: ${warn_color}; padding: .1rem .5rem; border-radius: 999px; font-weight: 700; }
-		    a, button { font-size: 1rem; color: inherit; }
-		    a:focus-visible, button:focus-visible { outline: 3px solid ${focus_color}; outline-offset: 3px; border-radius: 4px; }
-		    .hint { margin-top: 1rem; }
-		  </style>
-		</head>
-		<body>
-		  <main class="panel" role="main" aria-live="polite">
-		    <h1>✅ Provoware ist gestartet</h1>
-		    <p><span class="badge-ok">Status: OK</span> <span class="badge-warn">Theme: ${gui_theme}</span></p>
-		    <p><strong>Was geprüft wurde:</strong> Check, Repair, Format und Test wurden automatisch ausgeführt.</p>
-		    <p><strong>Hilfe (Help = Unterstützung):</strong> Theme kann mit <code>GUI_THEME=light|dark|high-contrast</code> gewählt werden.</p>
-		    <p><strong>Nutzerhilfe:</strong> Bei Problemen zuerst "Erneut versuchen", dann "Reparatur starten", danach "Protokoll öffnen".</p>
-		    <ul>
-		      <li>➡️ Erneut versuchen: <code>./start.sh</code></li>
-		      <li>➡️ Reparatur starten: <code>./start.sh --repair</code></li>
-		      <li>➡️ Protokoll öffnen: <code>cat logs/start.log</code></li>
-		    </ul>
-		    <p class="hint">Diese GUI ist tastaturfreundlich (Tab + Enter), nutzt Status nicht nur über Farben und bietet ein Kontrast-Theme für gute Lesbarkeit.</p>
-		  </main>
-		</body>
-		</html>
-	HTML
+	local theme_choices
+	theme_choices="$(load_theme_list_csv | sed 's/,/|/g')"
+	if ! render_gui_status_html "$gui_file" "$gui_theme" "$theme_choices" "$bg_color" "$text_color" "$panel_color" "$border_color" "$focus_color" "$ok_color" "$warn_color"; then
+		print_error_with_actions "GUI-Datei konnte nicht erzeugt werden."
+		record_missing "GUI-Datei"
+		record_next_step "Dateirechte prüfen und './start.sh --debug' erneut ausführen"
+		return 1
+	fi
 	record_checked "GUI-Datei erzeugt"
 
 	local server_ok="0"

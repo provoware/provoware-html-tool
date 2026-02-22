@@ -1,6 +1,6 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-check-failfast-reduced-motion",
+  "iteration": "2026.02.22-gui-theme-outsource-system",
   "files": {
     "start.sh": "2026.02.22",
     "tools/smoke_test.py": "2026.02.22",
@@ -11,6 +11,7 @@
     "data/version_registry.json": "2026.02.22",
     "tools/run_quality_checks.sh": "2026.02.22",
     "tools/check_theme_contrast.py": "2026.02.22",
-    "system/start_core.sh": "2026.02.22"
+    "system/start_core.sh": "2026.02.22",
+    "system/start_gui.sh": "2026.02.22"
   }
 }
