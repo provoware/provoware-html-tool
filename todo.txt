@@ -1,3 +1,8 @@
+DONE: Browser-E2E-Test mit Dialog-Fokusfang/Fokus-Rückgabe und Screenshot-Artefakt ergänzt. (2026-02-22)
+DONE: Smoke-Test (Profil full) ruft Browser-E2E automatisch auf. (2026-02-22)
+DONE: CI lädt Logs und Screenshots als Artefakte immer hoch. (2026-02-22)
+NEXT: Optionalen Soll-Ist-Visualvergleich (Baseline-Screenshot) für Layout-Drift ergänzen. (2026-02-22)
+
 DONE: Live-Sync-Status (Topbar+Footer), Debug-Nächsteschritt-Hinweise und Smoke-Absicherung umgesetzt. (2026-02-22)
 DONE: CI-Workflow für Full-Gates ergänzt, damit Push/PR automatisch Reparatur und Gates 1-5 ausführen. (2026-02-22)
 DONE: Fokusreihenfolge-Autocheck als neues Tool ergänzt, damit Skip-Link und Kernaktionen für Tastatur sicher geprüft werden. (2026-02-22)

@@ -1,3 +1,8 @@
+## 2026-02-22 – Browser-E2E + CI-Artefakte + Smoke-Integration
+- Was: Neues Tool `tools/browser_e2e_test.py` prüft den Fehlerdialog im Browser (Fokusfang, Fokus-Rückgabe) und erstellt ein Screenshot-Artefakt; `tools/smoke_test.py` ruft den Lauf im Full-Profil auf; `.github/workflows/full-gates.yml` lädt Logs/Screenshots als Artefakte hoch.
+- Warum: Der offene Nachweis für echte Browser-Interaktion und reproduzierbare Fehlerdiagnose in CI sollte vollständig geschlossen werden.
+- Wirkung: Höhere Release-Reife durch automatischen Dialog-E2E-Check, bessere A11y-Absicherung und sofort verfügbare CI-Artefakte bei Erfolg/Fehler.
+
 ## 2026-02-22 – Live-Status-Sync + Debug-Nächste-Schritte + Smoke-Härtung
 - Was: Dashboard synchronisiert den Speicherstatus jetzt in Topbar und Footer, ergänzt Debug-Details (letztes Ereignis + Zeitstempel + nächster Schritt) und erweitert Smoke-Marker für die neuen Hilfselemente.
 - Warum: Nutzer:innen brauchen konsistente Rückmeldung über den Zustand und klarere Hilfe direkt im Fehlerfall.

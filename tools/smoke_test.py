@@ -16,6 +16,7 @@ THEME_CONFIG = PROJECT_ROOT / "config" / "themes.json"
 STATUS_SUMMARY = PROJECT_ROOT / "logs" / "status_summary.txt"
 CONTRAST_CHECK = PROJECT_ROOT / "tools" / "check_theme_contrast.py"
 FOCUS_CHECK = PROJECT_ROOT / "tools" / "focus_order_check.py"
+BROWSER_E2E_CHECK = PROJECT_ROOT / "tools" / "browser_e2e_test.py"
 
 
 def print_step(icon: str, text: str) -> None:
@@ -74,6 +75,11 @@ if not CONTRAST_CHECK.exists():
 if not FOCUS_CHECK.exists():
     print_step("❌", "Smoke-Test abgebrochen: tools/focus_order_check.py fehlt.")
     print_step("➡️", "Nächster Schritt: Fokus-Checker-Datei ergänzen und erneut testen.")
+    sys.exit(1)
+
+if not BROWSER_E2E_CHECK.exists():
+    print_step("❌", "Smoke-Test abgebrochen: tools/browser_e2e_test.py fehlt.")
+    print_step("➡️", "Nächster Schritt: Browser-E2E-Testdatei ergänzen und erneut testen.")
     sys.exit(1)
 
 if ARGS.profile == "full":
@@ -177,6 +183,27 @@ if ARGS.profile == "full":
     if "Mini-UX-Check erfolgreich" not in ux_result.stdout:
         print_step("❌", "Smoke-Test fehlgeschlagen: UX-Erfolgsausgabe fehlt.")
         print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --ux-check-auto' prüfen.")
+        sys.exit(1)
+
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: python tools/browser_e2e_test.py")
+    browser_result = subprocess.run(
+        ["python3", str(BROWSER_E2E_CHECK)],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
+
+    if browser_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Browser-E2E lieferte Fehler.")
+        print(browser_result.stdout)
+        print(browser_result.stderr)
+        print_step("➡️", "Nächster Schritt: Browser-E2E-Fehler lösen und erneut testen.")
+        sys.exit(browser_result.returncode)
+
+    if "Browser-E2E" not in browser_result.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Browser-E2E-Ausgabe fehlt.")
+        print_step("➡️", "Nächster Schritt: Ausgabe von 'python tools/browser_e2e_test.py' prüfen.")
         sys.exit(1)
 
 if ARGS.profile == "full" and os.environ.get("SKIP_FULL_GATES") != "1":
