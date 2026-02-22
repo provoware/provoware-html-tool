@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TARGET_FILE="${PROJECT_ROOT}/start.sh"
+TARGET_FILES=("${PROJECT_ROOT}/start.sh" "${PROJECT_ROOT}/system/start_core.sh")
 CONTRAST_CHECK="${PROJECT_ROOT}/tools/check_theme_contrast.py"
 
 print_step() {
@@ -11,11 +11,13 @@ print_step() {
   printf '%s %s\n' "$icon" "$text"
 }
 
-if [[ ! -f "$TARGET_FILE" ]]; then
-  print_step "❌" "Qualitätsprüfung abgebrochen: Datei start.sh fehlt."
-  print_step "➡️" "Nächster Schritt: Repository vollständig laden und erneut starten."
-  exit 1
-fi
+for target_file in "${TARGET_FILES[@]}"; do
+  if [[ ! -f "$target_file" ]]; then
+    print_step "❌" "Qualitätsprüfung abgebrochen: Datei fehlt (${target_file#${PROJECT_ROOT}/})."
+    print_step "➡️" "Nächster Schritt: Repository vollständig laden und erneut starten."
+    exit 1
+  fi
+done
 
 if [[ ! -f "$CONTRAST_CHECK" ]]; then
   print_step "❌" "Qualitätsprüfung abgebrochen: Kontrast-Checker fehlt."
@@ -26,7 +28,7 @@ fi
 print_step "✅" "Qualitätsprüfung gestartet."
 
 if command -v shfmt >/dev/null 2>&1; then
-  shfmt -w "$TARGET_FILE"
+  shfmt -w "${TARGET_FILES[@]}"
   print_step "✅" "Formatierung erfolgreich (shfmt)."
 else
   print_step "⚠️" "shfmt nicht gefunden. Formatierung wurde übersprungen."
@@ -34,7 +36,7 @@ else
 fi
 
 if command -v shellcheck >/dev/null 2>&1; then
-  shellcheck "$TARGET_FILE"
+  shellcheck -x "${TARGET_FILES[@]}"
   print_step "✅" "Codequalität erfolgreich (shellcheck ohne Fehler)."
 else
   print_step "⚠️" "shellcheck nicht gefunden. Lint-Prüfung wurde übersprungen."

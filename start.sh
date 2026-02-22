@@ -10,9 +10,14 @@ LINE_LIMIT=1200
 STATUS_SUMMARY_FILE=""
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
+CORE_HELPER_FILE="${PROJECT_ROOT}/system/start_core.sh"
+# shellcheck disable=SC2034
 CHECKED_ITEMS=()
+# shellcheck disable=SC2034
 MISSING_ITEMS=()
+# shellcheck disable=SC2034
 FIXED_ITEMS=()
+# shellcheck disable=SC2034
 NEXT_STEPS=()
 DEFAULT_TEXT_JSON='{
   "help_title": "Provoware Start-Routine",
@@ -50,6 +55,15 @@ TEXT_JSON_CACHE=""
 THEME_LIST_CACHE=""
 
 DEFAULT_THEMES_CSV="high-contrast,light,dark"
+
+if [[ ! -f "$CORE_HELPER_FILE" ]]; then
+	printf '%s\n' "❌ Kernlogik fehlt: system/start_core.sh" >&2
+	printf '%s\n' "➡️ Nächster Schritt: Repository vollständig laden und erneut './start.sh --check' ausführen." >&2
+	exit 1
+fi
+
+# shellcheck source=system/start_core.sh
+source "$CORE_HELPER_FILE"
 
 load_text_json() {
 	if [[ -n "$TEXT_JSON_CACHE" ]]; then
@@ -187,101 +201,12 @@ $(get_text "release_help")
 TXT
 }
 
-print_step() {
-	local icon="$1"
-	local text="$2"
-	printf '%s %s\n' "$icon" "$text" | tee -a "$LOG_FILE"
-}
-
-record_checked() {
-	CHECKED_ITEMS+=("$1")
-}
-
-record_missing() {
-	MISSING_ITEMS+=("$1")
-}
-
-record_fixed() {
-	FIXED_ITEMS+=("$1")
-}
-
-record_next_step() {
-	NEXT_STEPS+=("$1")
-}
-
-replace_placeholders() {
-	local template="$1"
-	template="${template//\{\{LOG_FILE\}\}/$LOG_FILE}"
-	template="${template//\{\{LIMIT\}\}/$LINE_LIMIT}"
-	printf '%s' "$template"
-}
-
-print_error_with_actions() {
-	local cause="$1"
-	print_step "❌" "${cause}"
-	print_step "➡️" "$(replace_placeholders "$(get_text "error_retry")")"
-	print_step "➡️" "$(replace_placeholders "$(get_text "error_repair")")"
-	print_step "➡️" "$(replace_placeholders "$(get_text "error_log")")"
-	print_step "➡️" "$(replace_placeholders "$(get_text "error_debug")")"
-}
-
-print_summary() {
-	local checked_text="${CHECKED_ITEMS[*]:-keine}"
-	local missing_text="${MISSING_ITEMS[*]:-nichts}"
-	local fixed_text="${FIXED_ITEMS[*]:-nichts}"
-	print_step "📋" "Geprüft: ${checked_text}"
-	print_step "📋" "Fehlt: ${missing_text}"
-	print_step "📋" "Automatisch gelöst: ${fixed_text}"
-	if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
-		local step
-		for step in "${NEXT_STEPS[@]}"; do
-			print_step "➡️" "Nächster Schritt: ${step}"
-		done
-	else
-		print_step "➡️" "Nächster Schritt: Bei Bedarf './start.sh --debug' für Details nutzen."
-	fi
-}
-
 ensure_writable_log() {
 	mkdir -p "$LOG_DIR"
 	: >"$LOG_FILE"
 	STATUS_SUMMARY_FILE="${LOG_DIR}/status_summary.txt"
 	: >"$STATUS_SUMMARY_FILE"
 	record_checked "Log-Verzeichnis"
-}
-
-write_accessible_status_summary() {
-	if [[ -z "$STATUS_SUMMARY_FILE" || ! "$STATUS_SUMMARY_FILE" =~ ^/ ]]; then
-		print_error_with_actions "Statusbericht-Pfad ist ungültig."
-		record_next_step "Startskript ohne geänderte Umgebungsvariablen erneut ausführen"
-		return 1
-	fi
-
-	{
-		printf 'Provoware Statusbericht\n'
-		printf 'Geprueft: %s\n' "${CHECKED_ITEMS[*]:-keine}"
-		printf 'Fehlt: %s\n' "${MISSING_ITEMS[*]:-nichts}"
-		printf 'Automatisch geloest: %s\n' "${FIXED_ITEMS[*]:-nichts}"
-		if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
-			printf 'Naechste Schritte:\n'
-			local step
-			for step in "${NEXT_STEPS[@]}"; do
-				printf -- '- %s\n' "$step"
-			done
-		else
-			printf 'Naechster Schritt: Bei Bedarf ./start.sh --debug nutzen.\n'
-		fi
-	} >"$STATUS_SUMMARY_FILE"
-
-	if [[ -s "$STATUS_SUMMARY_FILE" ]]; then
-		print_step "✅" "Statusbericht erstellt: ${STATUS_SUMMARY_FILE}"
-		record_checked "Statusbericht"
-		return 0
-	fi
-
-	print_error_with_actions "Statusbericht konnte nicht geschrieben werden."
-	record_next_step "Schreibrechte im Ordner logs prüfen und Start erneut ausführen"
-	return 1
 }
 
 validate_args() {
@@ -460,7 +385,7 @@ ensure_tool() {
 check_required_files() {
 	local missing=0
 	local file
-	for file in "README.md" "todo.txt" "CHANGELOG.md" "data/version_registry.json"; do
+	for file in "README.md" "todo.txt" "CHANGELOG.md" "data/version_registry.json" "system/start_core.sh"; do
 		if [[ -f "${PROJECT_ROOT}/${file}" ]]; then
 			print_step "✅" "Datei gefunden: ${file}"
 			record_checked "Datei ${file}"
@@ -553,7 +478,7 @@ run_formatting() {
 
 run_quality_checks() {
 	if ensure_tool "shellcheck"; then
-		if shellcheck "$PROJECT_ROOT/start.sh"; then
+		if shellcheck -x "$PROJECT_ROOT/start.sh" "$PROJECT_ROOT/system/start_core.sh"; then
 			print_step "✅" "Codequalität geprüft (shellcheck ohne Fehler)."
 			record_checked "Codequalität"
 		else
@@ -681,8 +606,7 @@ run_check_mode() {
 
 run_repair_mode() {
 	print_step "✅" "Repair-Modus aktiv."
-	ensure_tool "shfmt" || true
-	ensure_tool "shellcheck" || true
+	run_dependency_bootstrap || true
 	print_step "✅" "Repair-Modus abgeschlossen."
 }
 
@@ -813,6 +737,7 @@ launch_local_gui() {
 
 run_start_mode() {
 	print_step "✅" "Startmodus aktiv: Check, Repair, Format, Test laufen automatisch."
+	run_dependency_bootstrap || true
 	run_check_mode
 	run_repair_mode
 	run_formatting

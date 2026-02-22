@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-02-22 – Start-Kernlogik ausgelagert + Auto-Bootstrap + Quality-Update
+- Was: Neue Datei `system/start_core.sh` eingeführt und Kernfunktionen für Status, Fehlerdialoge, barrierearmen Statusbericht sowie Dependency-Bootstrap aus `start.sh` ausgelagert; `tools/run_quality_checks.sh` prüft nun zusätzlich `system/start_core.sh`; Smoke-Test validiert die neue Kernlogik-Datei.
+- Warum: Die Startlogik sollte wartbarer strukturiert werden (Systemkern getrennt), automatische Voraussetzungen klarer kommunizieren und Qualitätsprüfungen beide Shell-Komponenten abdecken.
+- Wirkung: Bessere Trennung der Tool-Logik, robustere automatische Vorbereitung fehlender Werkzeuge und stabilere Lint-/Format-Absicherung für den ausgelagerten Start-Kern.
+
 ## 2026-02-22 – WCAG-Kontrasttest + Full-Gates 1-5 + Smoke-Update
 - Was: Neues Tool `tools/check_theme_contrast.py` ergänzt, `tools/run_quality_checks.sh` um automatische Kontrastprüfung erweitert und `start.sh --full-gates` auf Gates 1-5 (inklusive `--ux-check-auto`) ausgebaut.
 - Warum: Kontrast, UX und Gate-Konsistenz sollten ohne manuelle Zwischenschritte automatisch abgesichert werden.
