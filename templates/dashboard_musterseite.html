@@ -470,15 +470,36 @@
       color: var(--muted);
       min-height: 1.4rem;
     }
-      .footer {
+    .footer {
       grid-area: foot;
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: center;
-      padding: 0 .9rem;
+      gap: .6rem;
+      padding: .45rem .9rem;
       border-top: 1px solid rgba(127, 168, 255, 0.32);
       background: rgba(4, 10, 23, 0.95);
       color: var(--muted);
+    }
+    .footer-column {
+      display: grid;
+      gap: .25rem;
+      min-height: 100%;
+      align-content: center;
+    }
+    .footer-column strong {
+      color: var(--text);
+      font-size: .9rem;
+    }
+    .footer-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .3rem;
+    }
+    .footer-actions button {
+      min-height: 40px;
+      font-size: .9rem;
+      padding: .35rem;
     }
     dialog {
       border: 3px solid var(--accent-a);
@@ -559,12 +580,14 @@
         font-size: .96rem;
       }
       .footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: .2rem;
+        grid-template-columns: 1fr;
+        gap: .5rem;
         min-height: 80px;
         padding-top: .45rem;
         padding-bottom: .45rem;
+      }
+      .footer-actions {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -822,10 +845,10 @@
         </li>
       </ul>
     </aside>
-    <footer class="footer">
-      <span id="footer-version-path">Version: wird geladen… | Projektpfad: wird geprüft…</span>
-      <span id="footer-backup-status">Auto-Backup: Aktiv (Standard)</span>
-      <span id="footer-sync-status">Alle Änderungen gespeichert</span>
+    <footer class="footer" aria-label="Footer mit Schnellfunktionen und Status">
+      <section class="footer-column" aria-label="Systemstatus"><strong>Status</strong><span id="footer-version-path">Version: wird geladen… | Projektpfad: wird geprüft…</span></section>
+      <section class="footer-column" aria-label="Datensicherung"><strong>Datensicherung</strong><span id="footer-backup-status">Auto-Backup: Aktiv (Standard)</span></section>
+      <section class="footer-column" aria-label="Schnellfunktionen im Footer"><strong>Footer-Schnellfunktionen</strong><div class="footer-actions"><button type="button" data-action="save">Speichern</button><button type="button" data-action="retry">Erneut versuchen</button><button type="button" data-action="log">Protokoll öffnen</button></div><span id="footer-sync-status">Alle Änderungen gespeichert</span></section>
     </footer>
   </main>
   <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text" aria-modal="true">
@@ -1604,6 +1627,18 @@
         }
         return true;
       }
+      function renderSidebarModuleHints() {
+        if (!Array.isArray(navButtonNodes) || navButtonNodes.length === 0) { return false; }
+        navButtonNodes.forEach(function (buttonNode) {
+          if (!(buttonNode instanceof HTMLElement)) { return; }
+          const sourceMeta = getModuleSourceMeta(buttonNode.getAttribute('data-module-nav'));
+          if (!sourceMeta) { return; }
+          const hint = sourceMeta.detail + ' Nächster Schritt: ' + sourceMeta.nextStep;
+          buttonNode.setAttribute('title', hint);
+          buttonNode.setAttribute('aria-label', sourceMeta.label + '. ' + hint);
+        });
+        return true;
+      }
       function normalizeModuleSources(rawValue) {
         if (!rawValue || typeof rawValue !== 'object' || Array.isArray(rawValue)) {
           appendDebugLog('⚠️ Modulquellen fehlen oder sind ungültig. Nächster Schritt: Start über "bash start.sh" wiederholen.');
@@ -1995,7 +2030,6 @@
           detached.document.body.appendChild(mainNode);
           return setResult('✅ Einzelfenster geöffnet für ' + sourceMeta.label + '.');
         }
-
         if (actionValue === 'todo-add' || actionValue === 'todo-toggle' || actionValue === 'todo-delete') {
           const todoInput = document.getElementById('todo-input');
           const todoDate = document.getElementById('todo-date');
@@ -2349,6 +2383,7 @@
       setActiveNavigation('dashboard');
       setPluginStatus('dashboard');
       renderModuleSidebarOptions('dashboard', getModuleSourceMeta('dashboard'));
+      renderSidebarModuleHints();
       renderModulePreview('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
       setCardState(projectCardStateNode, 'ready', 'Bereit');

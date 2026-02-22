@@ -1,3 +1,15 @@
+## [2026-02-22] – Iteration: Footer-Quick-Actions + Modulhinweise
+### Was
+- Dashboard-Footer in drei klar getrennte Bereiche mit bedienbaren Schnellaktionen umgebaut.
+- Sidebar-Navigation ergänzt um modulbezogene Kurzdetails (Tooltip + ARIA-Label) mit verständlichem Next Step.
+- Smoke-Test um Pflichtmarker für die neuen UI-Elemente erweitert.
+
+### Warum
+- Offener Punkt „3-spaltiger Footer mit vorbereiteten Schnellfunktionen“ wird damit vollständig und barrierefreundlich abgeschlossen.
+
+### Wirkung
+- Schnellere Bedienung für Laien, bessere Tastatur-/Screenreader-Unterstützung und stabilere Regressionserkennung.
+
 ## 2026-02-22 – Layout- und Modul-Feinschliff
 ### Was
 1. 3x3-Hauptgrid auf dynamische Untermodul-Platzierung umgestellt (nächster freier Slot bei Aktivierung).
