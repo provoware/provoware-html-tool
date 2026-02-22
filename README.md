@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **100%**
+- Fortschritt: **88%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -13,7 +13,7 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
   - Saubere Projektstruktur: System, Konfiguration, Werkzeuge und variable Daten sind getrennt.
   - Mehrere Themes für robustes Farb- und Kontrastverhalten.
 - **Offen**
-  - Optionale Langzeit-Archivierung von CI-Artefakten.
+  - Vollautomatisches Offline-Bundle für Abhängigkeiten (inklusive Playwright-Browsercache) als Ein-Befehl-Export.
   - Zusätzliche Feinanpassung für sehr kleine Displays.
   - Optionale Kopplung des Modul-Starters an echte Backend-Module (Datenquellen).
 
@@ -76,6 +76,19 @@ Die Start-Routine meldet immer verständlich:
 - Bedienung per Tastatur ohne Maus.
 - Kontrast-Checks über mehrere Themes.
 - Fehlertexte mit klaren, direkten Lösungsschritten.
+
+## Offline-Fähigkeit (inklusive Playwright)
+Die Start-Routine nutzt jetzt einen robusteren Offline-Weg:
+- Browsercache-Ordner: `data/playwright-browsers`
+- Wheel-Ordner für Python-Pakete: `data/offline_wheels`
+- Repair-Logik: zuerst offline aus lokalen Artefakten, danach optional online
+
+Beispiel (online vorbereiten, später offline nutzen):
+```bash
+python3 -m pip download playwright -d data/offline_wheels
+PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 -m playwright install chromium
+PLAYWRIGHT_BROWSERS_PATH=data/playwright-browsers python3 tools/browser_e2e_test.py
+```
 
 ## Debugging und Logging
 ```bash

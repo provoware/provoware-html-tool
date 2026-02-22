@@ -1,3 +1,16 @@
+## 2026-02-22 – Offline-Abhängigkeitsauflösung mit Playwright verbessert + To-do-Status geschärft
+- Scope-Kontrolle:
+  - Problem: Offline-Umgebungen scheitern häufig bei Playwright-Modul/Browserverfügbarkeit und To-do zeigte keine Fortschrittszahl.
+  - Ziel: Repair und Bootstrap sollen Offline-Artefakte berücksichtigen, klare Next Steps liefern und To-do mit Status-Prozent priorisieren.
+  - Dateien: `start.sh`, `system/start_core.sh`, `README.md`, `todo.txt`, `data/version_registry.json`.
+  - Abnahme: `bash start.sh --repair` zeigt klare Playwright-Offline-Hinweise; Doku enthält Offline-Befehle; todo enthält Prozentstatus + offene Punkte.
+- Was:
+  1) `start.sh` erweitert den Repair-Modus um `prepare_playwright_offline_assets` (lokale Wheels zuerst, dann optional online, plus Browsercache-Pfad).
+  2) `system/start_core.sh` prüft Playwright-Modul und Browsercache bereits im Bootstrap und gibt einfache Next Steps für Online-Vorbereitung/Offline-Nutzung.
+  3) `todo.txt` wurde auf Status-Prozent + priorisierte offene Punkte umgestellt; `README.md` dokumentiert die Offline-Strategie mit Befehlen.
+- Warum: Maximale Offline-Fähigkeit reduziert Ausfälle in restriktiven Netzwerken und macht Start-/Testabläufe robuster.
+- Wirkung: Bessere automatische Selbstheilung, verständlichere Hinweise für Laien und klarer sichtbarer Projektfortschritt.
+
 ## 2026-02-22 – Start öffnet jetzt das Hauptmodul statt nur die Statusseite
 - Was: `start.sh` nutzt standardmäßig `GUI_ENTRY=dashboard` und kopiert die Hauptmodul-Datei `templates/dashboard_musterseite.html` als GUI-Startseite; optional bleibt `GUI_ENTRY=status` verfügbar.
 - Warum: Nutzer landeten trotz „GUI gestartet“ nur in einer Statuskarte und nicht im eigentlichen ModulTool.
