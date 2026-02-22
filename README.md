@@ -1,15 +1,17 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **86%**
+- Fortschritt: **89%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
   - Dashboard-Layout auf Referenzstruktur mit Topbar, linker Navigation, mittlerem Modulraster und rechter Einstellungsleiste umgestellt.
   - Neon-/Glas-Design in drei Themes (`high-contrast`, `light`, `dark`) mit robusten Fokus- und Kontrastrahmen vereinheitlicht.
   - Hilfe- und A11y-Elemente (Skip-Link, Next Steps, Tastaturkürzel, Fehlerdialog) erweitert und im Smoke-Test abgesichert.
+  - Fehlerdialog erhielt Fokusfang (Tab/Shift+Tab) und Fokus-Rückgabe auf auslösendes Element für stabilere Tastaturnutzung.
+  - Fokus-Checker validiert nun zusätzlich Dialog-Fokusfang und Fokus-Rückgabe als feste A11y-Qualitätsregel.
 - Offene Aufgaben:
-  - Zusätzlicher automatischer Browser-Test für Fokus-Reihenfolge im Dialog fehlt noch.
+  - Optionaler echter Browser-E2E-Test (mit Screenshot-Artefakt) für Dialog-Interaktion fehlt noch.
   - CI soll bei Gate-Fehlern Artefakte (Logs/Screenshots) automatisch anhängen.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll ohne neue Pflichtabhängigkeit vorbereitet werden.
 
@@ -99,7 +101,7 @@ cat logs/start.log
 - Offen:
   - Zusätzlicher Browser-E2E-Test für Fokus-Reihenfolge und Dialog-Fokusfang
   - CI-Artefakte für Fehlerfall (Logdateien und optional Screenshot) ergänzen
-- Nächster Schritt: Browser-E2E-Test in `tools/` ergänzen und in `start.sh --full-gates` optional als Gate 6 einbinden.
+- Nächster Schritt: Optionalen Browser-E2E-Test mit Screenshot-Artefakten ergänzen und in CI als zusätzlichen Prüfpfad einbinden.
 
 
 ## Iteration 2026-02-22 (Effiziente Smoke-Profile + optionaler Ruff-Lint + zielgerichtete Gates)
@@ -133,3 +135,34 @@ cat logs/start.log
   1. Für schnelle tägliche Prüfung immer zuerst `bash tools/run_quality_checks.sh` ausführen.
   2. Vor einem Merge zusätzlich `python tools/smoke_test.py --profile full` starten, damit alle Startmodi geprüft werden.
 - Nächster Schritt: Ergänzen Sie als nächstes einen Browser-E2E-Szenariotest mit Fokus-Fang im Fehlerdialog und speichern Sie bei Fehlern automatisch ein Screenshot-Artefakt.
+
+## Iteration 2026-02-22 (Dialog-Fokus robust gemacht)
+### A) Fundstelle (beobachten)
+- Problem: Der Fehlerdialog hatte keinen expliziten Fokusfang und keine sichere Fokus-Rückgabe nach dem Schließen.
+- Risiko: Tastaturnutzende können Fokus verlieren oder in der Seite „springen“, besonders bei Fehlerfällen.
+- Erwartung: Dialog bleibt per Tab steuerbar, Fokus kehrt danach sauber zum Auslöser zurück.
+
+### B) Change-Scope (vor Patch)
+- Ziel: Dialog-A11y stabilisieren und automatisiert absichern.
+- Dateien: `templates/dashboard_musterseite.html`, `tools/focus_order_check.py`
+- Patch-Block je Datei: 1 zusammenhängender Block (Dialog-Fokuslogik; Checker-Regeln).
+- Abnahmekriterium: Fokus-Check und Smoke-Test bestätigen Fokusfang + Fokus-Rückgabe ohne Fehler.
+
+### C) Patch (kurz)
+- Punkt 1 – Änderung: Fehlerdialog erhält Fokusfang (Tab/Shift+Tab) im offenen Zustand.
+- Punkt 2 – Änderung: Beim Schließen wird der Fokus auf das zuvor aktive Auslöser-Element zurückgesetzt.
+- Punkt 3 – Änderung: `tools/focus_order_check.py` prüft zusätzlich Fokusfang und Fokus-Rückgabe als A11y-Pflicht.
+
+### D) Gates
+- G1: `python -m compileall -q .`
+- G2: `bash tools/run_quality_checks.sh`
+- G3: `python tools/smoke_test.py`
+- G4: `bash start.sh`
+- G5: `bash start.sh --ux-check-auto`
+
+### E) Ergebnis
+- Status: DONE
+- Doku: README + CHANGELOG + todo aktualisiert
+- Laienvorschläge: (1) Bei Fehlermeldungen zuerst „Erneut versuchen“, dann „Reparatur“ nutzen. (2) Bei unklaren Meldungen `cat logs/start.log` öffnen und letzte ❌-Zeile lesen.
+- Nächster Schritt: Einen echten Browser-E2E-Dialogtest ergänzen, der den Fokusweg mit Tab-Tasten automatisch durchklickt und bei Fehlern ein Bild als Nachweis speichert.
+

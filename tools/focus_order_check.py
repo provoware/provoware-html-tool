@@ -69,7 +69,7 @@ def main() -> int:
         )
 
     actions = {item.get("label", "") for item in parser.items}
-    required_actions = {"save", "retry", "repair", "log"}
+    required_actions = {"save", "retry", "repair", "log", "error", "close-dialog"}
     missing = sorted(required_actions.difference(actions))
     if missing:
         return fail(
@@ -93,7 +93,19 @@ def main() -> int:
             "Theme-Auswahl nach den Hauptaktionen platzieren, damit Kernaufgaben zuerst erreichbar sind.",
         )
 
-    print_step("✅", "Fokus-Check bestanden: Skip-Link, Hauptaktionen und Theme-Auswahl sind in robuster Reihenfolge.")
+    if "keepDialogFocusInside(" not in TEMPLATE.read_text(encoding="utf-8"):
+        return fail(
+            "Fokus-Check fehlgeschlagen: Fokusfang im Fehlerdialog fehlt.",
+            "Im Script eine Tab-Fokusbegrenzung für den offenen Dialog ergänzen.",
+        )
+
+    if "restoreFocusAfterDialog(" not in TEMPLATE.read_text(encoding="utf-8"):
+        return fail(
+            "Fokus-Check fehlgeschlagen: Fokus-Rückgabe nach Dialog-Schließen fehlt.",
+            "Nach dem Schließen Fokus auf das auslösende Element zurücksetzen.",
+        )
+
+    print_step("✅", "Fokus-Check bestanden: Skip-Link, Hauptaktionen, Dialog-Fokusfang und Theme-Auswahl sind robust.")
     return 0
 
 
