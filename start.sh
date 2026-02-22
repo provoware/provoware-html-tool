@@ -5,7 +5,7 @@ LOG_DIR="${PROJECT_ROOT}/logs"
 LOG_FILE="${LOG_DIR}/start.log"
 MODE="start"
 DEBUG_MODE="0"
-LINE_LIMIT=1400
+LINE_LIMIT=1600
 NETWORK_CHECK_TIMEOUT=2
 COMMAND_TIMEOUT=180
 RETRY_MAX=2
@@ -17,6 +17,7 @@ CORE_HELPER_FILE="${PROJECT_ROOT}/system/start_core.sh"
 GUI_HELPER_FILE="${PROJECT_ROOT}/system/start_gui.sh"
 PROJECT_CONTEXT_FILE="${PROJECT_ROOT}/data/project_context.json"
 PROJECT_SETTINGS_FILE="${PROJECT_ROOT}/config/project_settings.json"
+MODULE_SOURCES_CONFIG_FILE="${PROJECT_ROOT}/config/module_sources.json"
 DASHBOARD_PROJECT_PATH=""
 CHECKED_ITEMS=()
 MISSING_ITEMS=()
@@ -63,6 +64,8 @@ export PLAYWRIGHT_BROWSERS_PATH
 DEFAULT_THEMES_CSV="high-contrast,light,dark"
 DEFAULT_DEPENDENCY_JSON='{"shellcheck":{"apt":"shellcheck","brew":"shellcheck"},"shfmt":{"apt":"shfmt","brew":"shfmt"},"rg":{"apt":"ripgrep","brew":"ripgrep"},"curl":{"apt":"curl","brew":"curl"},"ruff":{"pip":"ruff"}}'
 DEPENDENCY_JSON_CACHE=""
+MODULE_SOURCES_JSON_CACHE=""
+DEFAULT_MODULE_SOURCES_JSON='{"genres":{"label":"Genreverwaltung","data_source":"data/project_context.json","detail":"Lädt den aktiven Projektkontext als Basis für Genre-Daten.","next_step":"bash start.sh --dashboard-template"},"gms-archiv":{"label":"GMS-Archiv","data_source":"data/project_context.json","detail":"Nutzt den Projektpfad und lokale Verlaufsdaten für Genres, Stimmungen und Stile.","next_step":"bash start.sh --check"},"zitate":{"label":"Zitatbibliothek","data_source":"data/project_context.json","detail":"Greift auf den Projektpfad zu und hält Quellen für spätere Backend-Anbindung bereit.","next_step":"bash start.sh --check"},"songeditor":{"label":"Songeditor","data_source":"config/project_settings.json","detail":"Verwendet editierbare Projekteinstellungen als Eingabe für Song-Projekte.","next_step":"bash start.sh --test"},"dashboard":{"label":"Dashboard","data_source":"data/version_registry.json","detail":"Zeigt Versions- und Statusdaten der letzten Iteration transparent an.","next_step":"bash start.sh --ux-check-auto"},"todo":{"label":"To-Do-Liste","data_source":"todo.txt","detail":"Liest offene und erledigte Aufgaben direkt aus der Projektliste.","next_step":"bash start.sh --check"}}'
 
 if [[ ! -f "$CORE_HELPER_FILE" ]]; then
 	printf '%s\n' "❌ Kernlogik fehlt: system/start_core.sh" >&2
@@ -217,6 +220,54 @@ is_allowed_theme() {
 		fi
 	done
 	return 1
+}
+
+load_module_sources_json() {
+	if [[ -n "$MODULE_SOURCES_JSON_CACHE" ]]; then
+		printf '%s' "$MODULE_SOURCES_JSON_CACHE"
+		return 0
+	fi
+
+	local fallback_json="$DEFAULT_MODULE_SOURCES_JSON"
+	if [[ -f "$MODULE_SOURCES_CONFIG_FILE" ]]; then
+		if command -v python3 >/dev/null 2>&1; then
+			local parsed_json
+			parsed_json="$(python3 -c 'import json,re,sys
+path=sys.argv[1]
+raw=json.load(open(path, encoding="utf-8"))
+if not isinstance(raw, dict) or not raw:
+    raise SystemExit(2)
+safe={}
+for module_key, meta in raw.items():
+    if not isinstance(module_key, str) or not re.fullmatch(r"[a-z0-9-]{2,30}", module_key):
+        continue
+    if not isinstance(meta, dict):
+        continue
+    label=meta.get("label", "")
+    source=meta.get("data_source", "")
+    detail=meta.get("detail", "")
+    next_step=meta.get("next_step", "")
+    if not all(isinstance(value, str) and value.strip() for value in [label, source, detail, next_step]):
+        continue
+    safe[module_key]={"label":label.strip(),"data_source":source.strip(),"detail":detail.strip(),"next_step":next_step.strip()}
+if not safe:
+    raise SystemExit(3)
+print(json.dumps(safe, ensure_ascii=False))' "$MODULE_SOURCES_CONFIG_FILE" 2>/dev/null || true)"
+			if [[ -n "$parsed_json" ]]; then
+				fallback_json="$parsed_json"
+				record_checked "Modul-Datenquellen geladen"
+			else
+				record_missing "Modul-Datenquellen ungültig"
+				record_next_step "Datei config/module_sources.json prüfen und erneut starten"
+			fi
+		else
+			record_missing "python3 für Modul-Datenquellen fehlt"
+			record_next_step "python3 installieren oder Standard-Modulquellen verwenden"
+		fi
+	fi
+
+	MODULE_SOURCES_JSON_CACHE="$fallback_json"
+	printf '%s' "$MODULE_SOURCES_JSON_CACHE"
 }
 
 print_help() {
@@ -944,20 +995,24 @@ launch_local_gui() {
 	record_checked "GUI-Datei erzeugt"
 	if [[ "$gui_entry" == "dashboard" ]]; then
 		if [[ -f "${PROJECT_ROOT}/templates/dashboard_musterseite.html" ]] && cp "${PROJECT_ROOT}/templates/dashboard_musterseite.html" "$gui_file"; then
-			if [[ -n "$DASHBOARD_PROJECT_PATH" ]]; then
-				python3 - "$gui_file" "$DASHBOARD_PROJECT_PATH" <<'PY'
+			python3 - "$gui_file" "$DASHBOARD_PROJECT_PATH" "$(load_module_sources_json)" <<'PY'
+import json
 import pathlib
 import sys
 
 path = pathlib.Path(sys.argv[1])
 project_path = sys.argv[2]
+module_sources_json = sys.argv[3]
 text = path.read_text(encoding="utf-8")
-import json
 escaped_project_path = json.dumps(project_path)[1:-1]
 text = text.replace("__PROJECT_PATH__", escaped_project_path)
+try:
+    parsed_sources = json.loads(module_sources_json)
+except json.JSONDecodeError:
+    parsed_sources = {}
+text = text.replace("__MODULE_SOURCES__", json.dumps(parsed_sources, ensure_ascii=False))
 path.write_text(text, encoding="utf-8")
 PY
-			fi
 			print_step "✅" "Hauptmodul-GUI als Startseite aktiviert (GUI_ENTRY=dashboard)."
 			print_step "ℹ️" "Aktiver Projektordner im Dashboard: ${DASHBOARD_PROJECT_PATH}"
 			record_checked "GUI-Einstieg dashboard"

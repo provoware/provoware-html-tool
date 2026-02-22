@@ -21,8 +21,22 @@ Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen
 - Spiegelt den bestätigten Projektordner zusätzlich nach `config/project_settings.json` (für editierbare Konfiguration) und validiert beide JSON-Dateien automatisch.
 - **Offen**
   - Optionaler CI-Job für Offline-Simulation (ohne Internet).
-  - Optionale Kopplung des Modul-Starters an echte Backend-Module (Datenquellen).
+  - Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
 
+
+
+## Modul-Starter mit echten Datenquellen (neu)
+Der Modul-Starter nutzt jetzt eine zentrale Konfiguration in `config/module_sources.json`.
+
+- Jede Modulauswahl prüft Eingaben (Input-Validierung) und zeigt die aktive Datenquelle direkt als Text an.
+- Die Nutzerinfo ist transparent: Modulname, Datenquelle, kurze Erklärung und nächster Befehl werden im Debug-Bereich angezeigt.
+- Bei Fehlern (z. B. ungültige Auswahl oder fehlende Datenquelle) wird eine klare Meldung mit Next Step ausgegeben.
+
+Beispiel:
+```bash
+bash start.sh
+# im Dashboard: Modul wählen -> „Modul öffnen“
+```
 
 ## Hinweis zum GUI-Start (Hauptmodul)
 Standardmäßig öffnet `bash start.sh` jetzt direkt die Hauptmodul-Ansicht (Dashboard) statt nur der Startstatus-Seite.

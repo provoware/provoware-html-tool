@@ -628,6 +628,7 @@
       const navButtonNodes = Array.from(document.querySelectorAll('[data-module-nav]'));
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
+      const serverModuleSources = __MODULE_SOURCES__;
       const defaultProjectPath = '/home/USER/Provoware-Projekte/Standardprojekt';
       const gmsPlugin = (function createGmsArchivPlugin() {
         const MODULE_ID = 'gms-archiv';
@@ -1064,30 +1065,45 @@
         });
         return true;
       }
-      function openModule(selectedModule) {
-        const moduleConfig = {
-          genres: { label: 'Genreverwaltung', command: './start.sh --dashboard-template' },
-          'gms-archiv': { label: 'GMS-Archiv', command: './start.sh --check' },
-          zitate: { label: 'Zitate', command: './start.sh --check' },
-          songeditor: { label: 'Songeditor', command: './start.sh --test' },
-          dashboard: { label: 'Dashboard', command: './start.sh --ux-check-auto' },
-          todo: { label: 'To-Do-Liste', command: './start.sh --check' }
-        };
-        if (typeof selectedModule !== 'string' || !(selectedModule in moduleConfig)) {
-          setDebugDetails('Modulstart fehlgeschlagen', 'Bitte zuerst ein Modul auswählen und dann erneut „Modul öffnen“ drücken.');
-          appendDebugLog('⚠️ Modulstart abgebrochen: Keine gültige Auswahl.');
-          setModuleStatus('⚠️ Kein Modul gestartet: Bitte ein Modul auswählen.');
-          return setResult('⚠️ Modul konnte nicht geöffnet werden. Bitte Auswahl prüfen.');
+      function getModuleSourceMeta(moduleKey) {
+        if (typeof moduleKey !== 'string' || moduleKey.trim().length === 0) {
+          return null;
         }
-        const targetModule = moduleConfig[selectedModule];
-        const nextStep = 'Führen Sie als nächsten Schritt ' + targetModule.command + ' aus.';
-        setModuleStatus('✅ Modul aktiv: ' + targetModule.label + '.');
+        const normalizedKey = moduleKey.trim();
+        if (!serverModuleSources || typeof serverModuleSources !== 'object' || !(normalizedKey in serverModuleSources)) {
+          return null;
+        }
+        const sourceMeta = serverModuleSources[normalizedKey];
+        if (!sourceMeta || typeof sourceMeta !== 'object') {
+          return null;
+        }
+        const label = typeof sourceMeta.label === 'string' ? sourceMeta.label.trim() : '';
+        const dataSource = typeof sourceMeta.data_source === 'string' ? sourceMeta.data_source.trim() : '';
+        const detail = typeof sourceMeta.detail === 'string' ? sourceMeta.detail.trim() : '';
+        const nextStep = typeof sourceMeta.next_step === 'string' ? sourceMeta.next_step.trim() : '';
+        if (!label || !dataSource || !detail || !nextStep) {
+          return null;
+        }
+        return { label: label, dataSource: dataSource, detail: detail, nextStep: nextStep };
+      }
+      function openModule(selectedModule) {
+        const sourceMeta = getModuleSourceMeta(selectedModule);
+        if (typeof selectedModule !== 'string' || !sourceMeta) {
+          setDebugDetails('Modulstart fehlgeschlagen', 'Bitte zuerst ein Modul auswählen und dann erneut „Modul öffnen“ drücken.');
+          appendDebugLog('⚠️ Modulstart abgebrochen: Keine gültige Auswahl oder fehlende Datenquelle.');
+          setModuleStatus('⚠️ Kein Modul gestartet: Bitte ein Modul auswählen.');
+          return setResult('⚠️ Modul konnte nicht geöffnet werden. Bitte Auswahl und Datenquelle prüfen.');
+        }
+        const statusText = '✅ Modul aktiv: ' + sourceMeta.label + '. Datenquelle: ' + sourceMeta.dataSource + '.';
+        const debugTitle = 'Modul gewechselt zu ' + sourceMeta.label;
+        const debugStep = sourceMeta.detail + ' Nächster Schritt: ' + sourceMeta.nextStep;
+        setModuleStatus(statusText);
         setActiveNavigation(selectedModule);
         setPluginStatus(selectedModule);
-        setDebugDetails('Modul gewechselt zu ' + targetModule.label, nextStep);
-        appendDebugLog('✅ Modul geladen: ' + targetModule.label + ' (' + getTimeStamp() + ').');
-        updateSyncStatus('✅ Modul bereit: ' + targetModule.label + ' (' + getTimeStamp() + ')');
-        return setResult('✅ Modul geöffnet: ' + targetModule.label + '.');
+        setDebugDetails(debugTitle, debugStep);
+        appendDebugLog('✅ Modul geladen: ' + sourceMeta.label + ' | Datenquelle: ' + sourceMeta.dataSource + ' (' + getTimeStamp() + ').');
+        updateSyncStatus('✅ Modul bereit: ' + sourceMeta.label + ' (' + getTimeStamp() + ')');
+        return setResult('✅ Modul geöffnet: ' + sourceMeta.label + '. Datenquelle: ' + sourceMeta.dataSource + '.');
       }
       function applyTheme(themeValue) {
         const allowed = ['balanced', 'high-contrast', 'light', 'dark'];
