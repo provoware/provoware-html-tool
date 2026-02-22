@@ -1,15 +1,15 @@
 {
   "global_version": "2026.02.22",
-  "iteration": "2026.02.22-layout-profile-fontscale-cardstate-gatefix",
+  "iteration": "2026.02.22-text-json-validation-quality-gate",
   "files": {
-    "start.sh": "2026.02.22.35",
+    "start.sh": "2026.02.22.41",
     "tools/smoke_test.py": "2026.02.22.27",
     "templates/dashboard_musterseite.html": "2026.02.22.40",
-    "README.md": "2026.02.22.40",
-    "todo.txt": "2026.02.22.40",
-    "CHANGELOG.md": "2026.02.22.40",
-    "data/version_registry.json": "2026.02.22.40",
-    "tools/run_quality_checks.sh": "2026.02.22.4",
+    "README.md": "2026.02.22.41",
+    "todo.txt": "2026.02.22.41",
+    "CHANGELOG.md": "2026.02.22.41",
+    "data/version_registry.json": "2026.02.22.41",
+    "tools/run_quality_checks.sh": "2026.02.22.41",
     "tools/check_theme_contrast.py": "2026.02.22",
     "system/start_core.sh": "2026.02.22.3",
     "system/start_gui.sh": "2026.02.22.1",
@@ -23,6 +23,7 @@
     "config/dependency_map.json": "2026.02.22.1",
     "config/project_settings.json": "2026.02.22.26",
     "config/module_sources.json": "2026.02.22.28",
-    "WAITME.md": "2026.02.22.38"
+    "WAITME.md": "2026.02.22.41",
+    "config/messages.json": "2026.02.22.41"
   }
 }

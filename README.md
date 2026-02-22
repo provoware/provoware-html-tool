@@ -5,7 +5,7 @@ Leicht verständliches Werkzeug für ein barrierearmes HTML-Dashboard.
 Das Projekt liefert eine **vollautomatische Start-Routine**, die Voraussetzungen prüft, Probleme möglichst selbst behebt und klare Nutzerhinweise ausgibt.
 
 ## Entwicklungsstand
-- Fortschritt: **79%**
+- Fortschritt: **82%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
@@ -230,3 +230,11 @@ tar -xzf data/offline_bundle_YYYYMMDD_HHMMSS.tar.gz -C .
 **Offen:**
 - Auto-Reparatur mit klarer Sudo/Root-Rückmeldung weiter absichern.
 - UI-Tests um Theme-Persistenz (Speichern/Wiederherstellen) erweitern.
+
+
+## Iteration-Update (2026-02-22): Texte zentral in JSON + Validierung
+- **Punkt 1 (Wartbarkeit):** Texte sind jetzt aktiv in `config/messages.json` ausgelagert und werden von `start.sh` mit Fallback geladen.
+- **Punkt 2 (Qualität):** Die Start-Routine validiert bei jedem Laden, ob alle Pflichttexte vorhanden und nicht leer sind (Input-Validierung + Output-Check).
+- **Punkt 3 (Hilfe/A11y):** `tools/run_quality_checks.sh` prüft `config/messages.json` automatisch und gibt klare Next Steps in einfacher Sprache.
+
+**Antwort auf die Frage „Sind Texte im Tool in JSON ausgelagert?“:** Ja. Die zentrale Datei ist `config/messages.json`; bei Fehlern nutzt das Tool sichere Standardtexte.
