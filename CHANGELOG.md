@@ -1,5 +1,5 @@
 # CHANGELOG
 
-- Was: `start.sh` startet jetzt nach dem Vollablauf automatisch eine lokale Status-GUI inklusive barrierearmer Hilfehinweise.
-- Warum: Der gewünschte Zielablauf fordert vollautomatischen Start bis in die GUI ohne manuelle Zwischenschritte.
-- Wirkung: Nutzer erhalten nach Check/Repair/Format/Test sofort eine erreichbare GUI-Statusseite mit klaren Fehleraktionen und nächsten Schritten.
+- Was: `start.sh` unterstützt nun `GUI_THEME` (light/dark/high-contrast) mit validierter Eingabe und klaren Fehleraktionen.
+- Warum: Für robuste Barrierefreiheit brauchte die lokale GUI mehrere Themes mit verlässlicher Lesbarkeit und Tastaturfokus.
+- Wirkung: Nutzer können die GUI-Lesbarkeit aktiv steuern und erhalten bei falscher Eingabe direkte, verständliche nächste Schritte.

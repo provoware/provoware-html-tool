@@ -3,35 +3,35 @@
 ## Zielbild (einfach erklärt)
 Das Projekt soll selbstständig starten, prüfen, reparieren und verständlich erklären, was passiert. Nutzer sollen ohne Fachwissen erkennen: „Alles ok“ oder „Das ist der nächste Klick“. Gleichzeitig bleibt der Code wartbar, getestet und barrierefrei.
 
-## Iteration 2026-02-22 (GUI-Autostart aus der Startroutine)
+## Iteration 2026-02-22 (GUI-Themes + Kontrast)
 ### A) Fundstelle
-- Problem: Nach dem Vollstart wurde keine GUI automatisch geöffnet, obwohl der gewünschte Ablauf „vollautomatisch prüfen, reparieren und direkt GUI starten“ ist.
-- Risiko: Nutzer müssen manuell nacharbeiten und verlieren Vertrauen in den automatischen Start.
-- Erwartung: `./start.sh` startet nach Check/Repair/Format/Test selbstständig eine lokale GUI mit klaren Hilfeaktionen.
+- Problem: Die lokale GUI hatte noch keine wählbaren Themes mit robuster Kontrastdarstellung und validierter Theme-Eingabe.
+- Risiko: Schlechte Lesbarkeit je nach Umgebung und unklare Fehler bei falschen Theme-Werten.
+- Erwartung: `./start.sh` validiert `GUI_THEME` und erzeugt eine GUI mit klar lesbaren Light/Dark/High-Contrast-Varianten.
 
 ### B) Change-Scope
-- Ziel: Eine robuste GUI-Startfunktion in die Startroutine integrieren, inklusive Eingabeprüfung, Fehlerpfad und barrierearmem Hilfetext.
+- Ziel: Theme-Auswahl in `launch_local_gui` mit Input-Validierung, klaren Fehleraktionen und fokussierbarer GUI-Ausgabe ergänzen.
 - Dateien: `start.sh`, `todo.txt`, `CHANGELOG.md`, `data/version_registry.json`
 - Patch-Block je Datei: jeweils ein zusammenhängender Änderungsblock.
-- Abnahmekriterium: `./start.sh` erzeugt eine lokale Status-GUI, startet den GUI-Server automatisch und meldet bei Problemen klare nächste Schritte.
+- Abnahmekriterium: `GUI_THEME=light|dark|high-contrast ./start.sh` startet erfolgreich und bei ungültigem Theme erscheint ein klarer Fehlerpfad mit nächsten Schritten.
 
 ### C) Patch (genau 3 Punkte)
-- Punkt 1 – Änderung: Neue Funktion `launch_local_gui` ergänzt mit Input-Validierung für `GUI_PORT` und robustem Fehlerpfad („Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“).
-- Punkt 2 – Änderung: Automatisch erzeugte Status-GUI mit klarer Sprache, Tastaturhinweis und Statusdarstellung über Text + Symbol statt nur Farbe.
-- Punkt 3 – Änderung: Vollstart (`./start.sh`) erweitert, sodass die GUI nach den automatischen Checks/Tests selbst gestartet und als nächster Schritt ausgegeben wird.
+- Punkt 1 – Änderung: `launch_local_gui` validiert jetzt `GUI_THEME` (light/dark/high-contrast) und bricht bei ungültiger Eingabe kontrolliert mit „Erneut versuchen / Reparatur starten / Protokoll öffnen“ ab.
+- Punkt 2 – Änderung: Die HTML-Ausgabe nutzt pro Theme definierte Farbwerte, Fokus-Markierung und Status-Badges mit Text + Symbol für bessere Barrierefreiheit.
+- Punkt 3 – Änderung: Die GUI ergänzt ein Hilfeelement in einfacher Sprache zur Theme-Auswahl inklusive Befehl `GUI_THEME=... ./start.sh`.
 
 ### D) Checks
 - Format: `./start.sh --format`
 - Tests: `./start.sh --test`
-- Start-Routine-Check: `./start.sh --check` und `./start.sh`
+- Start-Routine-Check: `./start.sh --check` und `GUI_THEME=high-contrast ./start.sh`
 
 ### E) Ergebnis
 - Status: DONE
 - Doku aktualisiert: todo + changelog + registry
 - Laienvorschläge (2):
-  1. Starte künftig nur `./start.sh`; die Routine erledigt Prüfung, Reparatur und GUI-Start in einem Schritt.
-  2. Wenn die GUI nicht erscheint, kopiere die angezeigte URL aus der Ausgabe und öffne sie direkt im Browser.
-- Nächster Schritt (1, detailliert): Ergänze als nächste Iteration eine echte, dauerhafte GUI-Datei im Projektordner `system/` plus Theme-Konfiguration in `config/`, und lasse `--release-check` automatisch prüfen, ob Kontrastwerte pro Theme die Lesbarkeit sicher erfüllen.
+  1. Nutze bei schlechter Lesbarkeit direkt `GUI_THEME=high-contrast ./start.sh` für maximale Lesbarkeit.
+  2. Für hellen Bildschirmmodus nutze `GUI_THEME=light ./start.sh`, für dunkle Umgebung `GUI_THEME=dark ./start.sh`.
+- Nächster Schritt (1, detailliert): Lege als nächste Iteration eine separate Theme-Konfigurationsdatei in `config/` an, lies sie in `start.sh` ein und erweitere `--release-check` um eine automatische Kontrast-Prüfmeldung pro Theme in einfacher Sprache.
 
 ## Nächste offene Punkte (Backlog)
 1. **Theme- und Kontrastprüfung vorbereiten**
