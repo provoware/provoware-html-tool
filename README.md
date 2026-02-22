@@ -15,6 +15,7 @@ bash start.sh
 ./start.sh --format
 ./start.sh --test
 ./start.sh --dashboard-template
+./start.sh --full-gates
 ./start.sh --release-check
 ```
 
@@ -26,13 +27,14 @@ bash start.sh
 5. Mini-UX-Check (manuell, 2 Minuten)
 
 ## Start-Routine (vollautomatisch)
-`start.sh` prüft Voraussetzungen, versucht fehlende Werkzeuge automatisch zu reparieren (Repair = automatische Behebung) und gibt klare nächste Schritte aus.
+`start.sh` prüft Voraussetzungen, versucht fehlende Werkzeuge automatisch zu reparieren (Repair = automatische Behebung), kann die Pflicht-Gates 1-4 strikt automatisch ausführen und gibt klare nächste Schritte aus.
 
 ### Erwartete Mindestausgabe
 - Geprüft: …
 - Fehlt: …
 - Automatisch gelöst: …
 - Nächster Schritt: …
+- Statusbericht: logs/status_summary.txt (einfache Sprache für Screenreader)
 
 ## Projektstruktur (Wartbarkeit)
 - `system/` → stabile Kernlogik (in Vorbereitung)
@@ -61,7 +63,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `48%`
+- Fortschritt: `56%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -70,4 +72,4 @@ cat logs/start.log
 - Offen:
   - Weitere Auslagerung von Start-Kernlogik in `system/`
   - Automatischer WCAG-Kontrasttest als separater Check
-- Nächster Schritt: Theme-Farben aus dem Template in eine gemeinsame Konfigurationsdatei auslagern und automatisch gegen Kontrastregeln prüfen.
+- Nächster Schritt: Die neuen Full-Gates in einer CI-Pipeline automatisch bei jedem Commit ausführen und bei Fehlern mit Statusbericht abbrechen.

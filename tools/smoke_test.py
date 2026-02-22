@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import os
 import re
 import subprocess
 import sys
@@ -9,6 +10,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 START_SCRIPT = PROJECT_ROOT / "start.sh"
 DASHBOARD_TEMPLATE = PROJECT_ROOT / "templates" / "dashboard_musterseite.html"
 THEME_CONFIG = PROJECT_ROOT / "config" / "themes.json"
+STATUS_SUMMARY = PROJECT_ROOT / "logs" / "status_summary.txt"
 
 
 def print_step(icon: str, text: str) -> None:
@@ -70,6 +72,38 @@ if "einsatzbereit" not in template_result.stdout:
     print_step("➡️", "Nächster Schritt: Startausgabe von '--dashboard-template' prüfen.")
     sys.exit(1)
 
+
+if os.environ.get("SKIP_FULL_GATES") != "1":
+    print_step("✅", "Smoke-Test erweitert: ./start.sh --full-gates")
+    full_gates_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--full-gates"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
+
+    if full_gates_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: --full-gates lieferte Fehler.")
+        print(full_gates_result.stdout)
+        print(full_gates_result.stderr)
+        print_step("➡️", "Nächster Schritt: Gate-Ausgaben prüfen und erneut testen.")
+        sys.exit(full_gates_result.returncode)
+
+    if "Alle automatischen Gates 1-4 erfolgreich abgeschlossen" not in full_gates_result.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Gate-Erfolgsausgabe fehlt.")
+        print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --full-gates' prüfen.")
+        sys.exit(1)
+
+if not STATUS_SUMMARY.exists() or STATUS_SUMMARY.stat().st_size == 0:
+    print_step("❌", "Smoke-Test fehlgeschlagen: logs/status_summary.txt fehlt oder ist leer.")
+    print_step("➡️", "Nächster Schritt: './start.sh --check' ausführen und Schreibrechte prüfen.")
+    sys.exit(1)
+
+status_content = STATUS_SUMMARY.read_text(encoding="utf-8")
+if "Geprueft:" not in status_content or "Naechste Schritte:" not in status_content and "Naechster Schritt:" not in status_content:
+    print_step("❌", "Smoke-Test fehlgeschlagen: Statusbericht enthält nicht alle Pflichtzeilen.")
+    print_step("➡️", "Nächster Schritt: Statusbericht-Format im Startskript prüfen.")
+    sys.exit(1)
 content = DASHBOARD_TEMPLATE.read_text(encoding="utf-8")
 required_markers = [
     'data-theme-switcher',
@@ -79,6 +113,7 @@ required_markers = [
     'data-action="log"',
     'class="skip-link"',
     'aria-modal="true"',
+    'id="hilfe-next-steps"',
 ]
 missing = [marker for marker in required_markers if marker not in content]
 if missing:

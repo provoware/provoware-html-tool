@@ -7,6 +7,7 @@ LOG_FILE="${LOG_DIR}/start.log"
 MODE="start"
 DEBUG_MODE="0"
 LINE_LIMIT=1200
+STATUS_SUMMARY_FILE=""
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
 CHECKED_ITEMS=()
@@ -21,6 +22,8 @@ DEFAULT_TEXT_JSON='{
   "help_keyboard": "Tastatur-Hinweis: Alle Befehle sind per Enter startbar, ohne Maus.",
   "help_icon_legend": "Symbol-Legende: ✅ Erfolg, ⚠️ Hinweis, ❌ Fehler, ➡️ Aktion, ℹ️ Zusatzinfo.",
   "help_message_source": "Textquelle: Externe Datei config/messages.json wird genutzt, sonst sichere Standardtexte.",
+  "help_full_gates": "Voll-Gates: Führt die vier Pflicht-Gates in fixer Reihenfolge aus und stoppt bei Fehlern mit klaren Next Steps.",
+  "help_status_summary": "Statusbericht: Legt logs/status_summary.txt in einfacher Sprache für Screenreader an.",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
   "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
@@ -160,6 +163,7 @@ $(get_text "help_usage")
   ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
   ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
   ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
+  ./start.sh --full-gates Vollständige Gates 1-4 strikt nacheinander ausführen
   ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
   ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
   ./start.sh --help      Hilfe anzeigen
@@ -174,6 +178,8 @@ $(get_text "help_accessibility")
 $(get_text "help_keyboard")
 $(get_text "help_icon_legend")
 $(get_text "help_message_source")
+$(get_text "help_full_gates")
+$(get_text "help_status_summary")
 $(get_text "help_doctor")
 $(get_text "release_help")
 TXT
@@ -237,7 +243,43 @@ print_summary() {
 ensure_writable_log() {
 	mkdir -p "$LOG_DIR"
 	: >"$LOG_FILE"
+	STATUS_SUMMARY_FILE="${LOG_DIR}/status_summary.txt"
+	: >"$STATUS_SUMMARY_FILE"
 	record_checked "Log-Verzeichnis"
+}
+
+write_accessible_status_summary() {
+	if [[ -z "$STATUS_SUMMARY_FILE" || ! "$STATUS_SUMMARY_FILE" =~ ^/ ]]; then
+		print_error_with_actions "Statusbericht-Pfad ist ungültig."
+		record_next_step "Startskript ohne geänderte Umgebungsvariablen erneut ausführen"
+		return 1
+	fi
+
+	{
+		printf 'Provoware Statusbericht\n'
+		printf 'Geprueft: %s\n' "${CHECKED_ITEMS[*]:-keine}"
+		printf 'Fehlt: %s\n' "${MISSING_ITEMS[*]:-nichts}"
+		printf 'Automatisch geloest: %s\n' "${FIXED_ITEMS[*]:-nichts}"
+		if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
+			printf 'Naechste Schritte:\n'
+			local step
+			for step in "${NEXT_STEPS[@]}"; do
+				printf -- '- %s\n' "$step"
+			done
+		else
+			printf 'Naechster Schritt: Bei Bedarf ./start.sh --debug nutzen.\n'
+		fi
+	} >"$STATUS_SUMMARY_FILE"
+
+	if [[ -s "$STATUS_SUMMARY_FILE" ]]; then
+		print_step "✅" "Statusbericht erstellt: ${STATUS_SUMMARY_FILE}"
+		record_checked "Statusbericht"
+		return 0
+	fi
+
+	print_error_with_actions "Statusbericht konnte nicht geschrieben werden."
+	record_next_step "Schreibrechte im Ordner logs prüfen und Start erneut ausführen"
+	return 1
 }
 
 validate_args() {
@@ -277,6 +319,10 @@ validate_args() {
 			;;
 		--release-check)
 			MODE="release-check"
+			mode_count=$((mode_count + 1))
+			;;
+		--full-gates)
+			MODE="full-gates"
 			mode_count=$((mode_count + 1))
 			;;
 		--doctor)
@@ -769,6 +815,66 @@ run_start_mode() {
 	print_step "✅" "Start erfolgreich abgeschlossen."
 }
 
+run_full_gates_mode() {
+	print_step "✅" "Full-Gates-Modus aktiv: Gates 1-4 werden strikt ausgeführt."
+	local failed=0
+
+	print_step "ℹ️" "GATE 1: python -m compileall -q ."
+	if python -m compileall -q "$PROJECT_ROOT"; then
+		print_step "✅" "GATE 1 erfolgreich."
+		record_checked "GATE 1"
+	else
+		print_error_with_actions "GATE 1 fehlgeschlagen."
+		record_next_step "Syntaxfehler beheben und './start.sh --full-gates' erneut starten"
+		failed=1
+	fi
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "ℹ️" "GATE 2: bash tools/run_quality_checks.sh"
+		if bash "$PROJECT_ROOT/tools/run_quality_checks.sh"; then
+			print_step "✅" "GATE 2 erfolgreich."
+			record_checked "GATE 2"
+		else
+			print_error_with_actions "GATE 2 fehlgeschlagen."
+			record_next_step "Quality-Hinweise beheben und './start.sh --full-gates' erneut starten"
+			failed=1
+		fi
+	fi
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "ℹ️" "GATE 3: python tools/smoke_test.py"
+		if SKIP_FULL_GATES=1 python "$PROJECT_ROOT/tools/smoke_test.py"; then
+			print_step "✅" "GATE 3 erfolgreich."
+			record_checked "GATE 3"
+		else
+			print_error_with_actions "GATE 3 fehlgeschlagen."
+			record_next_step "Smoke-Test-Hinweise beheben und './start.sh --full-gates' erneut starten"
+			failed=1
+		fi
+	fi
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "ℹ️" "GATE 4: bash start.sh --check"
+		if bash "$PROJECT_ROOT/start.sh" --check; then
+			print_step "✅" "GATE 4 erfolgreich."
+			record_checked "GATE 4"
+		else
+			print_error_with_actions "GATE 4 fehlgeschlagen."
+			record_next_step "Startausgabe prüfen und './start.sh --check --debug' ausführen"
+			failed=1
+		fi
+	fi
+
+	if [[ "$failed" -eq 0 ]]; then
+		print_step "✅" "Alle automatischen Gates 1-4 erfolgreich abgeschlossen."
+		record_next_step "Für Gate 5 jetzt 2 Minuten Mini-UX-Check manuell durchführen"
+		return 0
+	fi
+
+	print_step "⚠️" "Full-Gates-Modus beendet mit mindestens einem Fehler."
+	return 1
+}
+
 print_safe_mode_help() {
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_1")")"
 	print_step "ℹ️" "$(replace_placeholders "$(get_text "safe_help_2")")"
@@ -843,6 +949,9 @@ main() {
 	check)
 		run_check_mode
 		;;
+	full-gates)
+		run_full_gates_mode
+		;;
 	repair)
 		run_repair_mode
 		;;
@@ -874,6 +983,7 @@ main() {
 	esac
 
 	print_summary
+	write_accessible_status_summary || true
 	print_step "✅" "Routine abgeschlossen. Protokoll: ${LOG_FILE}"
 }
 
