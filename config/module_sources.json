@@ -32,8 +32,8 @@
   "todo": {
     "label": "To-Do-Liste",
     "data_source": "todo.txt",
-    "detail": "Liest offene und erledigte Aufgaben direkt aus der Projektliste.",
-    "next_step": "bash start.sh --check"
+    "detail": "Verwaltet nutzerbasierte, projektorientierte Aufgaben mit Datum und Status direkt im Dashboard-Untermodul.",
+    "next_step": "bash start.sh --ux-check-auto"
   },
   "gms-suite": {
     "label": "Genres-Archiv + Zufall + Liste",

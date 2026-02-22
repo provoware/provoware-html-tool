@@ -1,5 +1,28 @@
 # WAITME – Kurzstatus
 
+Stand: 2026-02-22 (Layout-Anpassung auf Raster-Schema)
+
+## Aktueller Stand (einfach erklärt)
+- Untermodule landen beim Öffnen im nächsten freien Rasterfeld (Grid = Tabellenraster).
+- Modul-Fensteroptionen sind jetzt direkt als Symbole im Untermodul.
+- Schnellhilfe mit Next Steps sitzt jetzt im rechten Seitenbereich.
+- Neue To-Do-Liste ist nutzerorientiert (nicht Entwicklungs-Todo) und hat ein Datum-Feld.
+- Genres, Moods und Stile haben getrennte Eingabefelder; Enter speichert direkt.
+
+## Top-Blocker
+- Browser-E2E kann in gesperrten Umgebungen wegen Playwright-Download (403) scheitern.
+
+## Betriebsrisiken
+- Ohne Offline-Mirror fehlen Browser-Artefakte für den Volltest.
+
+## Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py`
+- `bash start.sh --offline-pack`
+
+# WAITME – Kurzstatus
+
 Stand: 2026-02-22 (Grid-Module getrennt und stabil)
 
 ## Aktueller Stand (einfach erklärt)
