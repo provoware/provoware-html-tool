@@ -34,5 +34,17 @@
     "data_source": "todo.txt",
     "detail": "Liest offene und erledigte Aufgaben direkt aus der Projektliste.",
     "next_step": "bash start.sh --check"
+  },
+  "gms-suite": {
+    "label": "Genres-Archiv + Zufall + Liste",
+    "data_source": "data/project_context.json",
+    "detail": "Gebündeltes Modul für Archivpflege, Zufallsgenerator und Listenverwaltung.",
+    "next_step": "bash start.sh --check"
+  },
+  "debug-dev": {
+    "label": "Debugging & Entwickleroptionen",
+    "data_source": "logs/status_summary.txt",
+    "detail": "Stellt Live-Protokoll und klare Next Steps für Fehlersuche bereit.",
+    "next_step": "bash start.sh --repair"
   }
 }

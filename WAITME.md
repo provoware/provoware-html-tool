@@ -1,3 +1,24 @@
+# WAITME – Kurzstatus
+
+Stand: 2026-02-22 (Grid-Module getrennt und stabil)
+
+## Aktueller Stand (einfach erklärt)
+- Die Mitte ist jetzt ein leeres 3x3-Raster (Grid = Tabellenraster).
+- Module starten in der Sidebar und kommen nur bei Aktivierung in die Mitte.
+- Das GMS-Sammelmodul und das Debug/Entwickler-Modul sind sauber getrennt.
+
+## Top-Blocker
+- Kein harter Blocker offen; nächster Fokus ist der 3-spaltige Footer für Schnellfunktionen.
+
+## Betriebsrisiken
+- Browser-Screenshot/Visual-Baseline kann ohne vollständige Browser-Artefakte eingeschränkt sein.
+
+## Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py --profile quick`
+- `bash start.sh --ux-check-auto`
+
 ## Update 2026-02-22 (Modul-Interoperabilität abgeschlossen)
 - Modul-Auswahl zeigt jetzt sofort kurze, klare Datenquellen-Infos (Quelle, Zweck, nächster Schritt).
 - Das Projektordner-Feld startet ohne versteckten Standardordner (kein stiller Vorwert).

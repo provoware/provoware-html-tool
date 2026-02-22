@@ -1,3 +1,17 @@
+## 2026-02-22 – Iteration: Grid-Hauptbereich mit dynamischen Modulen (3 Punkte)
+- Scope-Kontrolle:
+  - Problem: Inhalte und Schriften rutschten teils unter Ränder; Module waren nicht klar auf Sidebar-Start + dynamische Mitte getrennt.
+  - Ziel: Genau 3 Punkte liefern: stabiles 3x3-Grid, neues GMS-Sammelmodul, getrenntes Debug/Dev-Einzelmodul.
+  - Dateien: `templates/dashboard_musterseite.html`, `config/module_sources.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+  - Patch-Block je Datei: 1) Layout+Interaktion, 2) Modulquellen, 3) Pflichtdoku/Versionsstand.
+  - Abnahme: Nur aktivierte Module erscheinen in der Mitte; Ausblenden entfernt das Untermodul wieder; Ablösen öffnet als großes Einzelfenster.
+- Was:
+  1) Hauptbereich als stabiles leeres 3x3-Grid belassen und Modulfläche als dynamischen Stage-Bereich ergänzt (kein Überlaufen unter Ränder).
+  2) „Genres-Archiv + Zufall + Liste“ als gebündeltes Modul umgesetzt und über Sidebar/Starter aktivierbar gemacht.
+  3) Debugging & Entwickleroptionen als separates Einzelmodul geführt; Fensteraktionen steuern jetzt das aktive Modul im Grid (ausblenden/maximieren/ablösen).
+- Warum: Klarere Bedienung, bessere Lesbarkeit und robuste Anpassung an unterschiedliche Fenstergrößen.
+- Wirkung: Dashboard ist näher an der Zielstruktur (Header, Sidebars, 3x3-Grid, 3-spaltiger Footer) und deutlich laienfreundlicher.
+
 ## 2026-02-22 – Iteration: Modul-Interoperabilität final geschlossen (3 Punkte)
 - Scope-Kontrolle:
   - Problem: Zwei Interoperabilitäts-Punkte waren zwar weit umgesetzt, aber noch nicht sauber als vollständig abgeschlossen und transparent vor dem Modulstart sichtbar.
