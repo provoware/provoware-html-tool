@@ -1,3 +1,8 @@
+## 2026-02-22 – GUI-Autostart + Konsolenstruktur + Befehlshinweise
+- Was: Browser-Autostart robuster gemacht, Abschnittsausgaben in der Konsole ergänzt und GUI-Hinweise als klare Schrittliste erweitert.
+- Warum: Nutzer kamen bei Headless/SSH-Umgebungen nicht automatisch in die Dashboard-GUI und Hinweise wirkten chaotisch.
+- Wirkung: Startausgabe ist ruhiger, Next Steps sind verständlicher und die GUI ist auch ohne Auto-Öffnen sofort erreichbar.
+
 ## 2026-02-22 – Offline-Stabilität + Gate-Retry + klare Fehlertoleranz
 - Was: `start.sh` erkennt Offline-Zustände vor Auto-Installation, führt Full-Gates mit automatischem Retry plus Zeitlimit aus und protokolliert Fehlversuche mit klaren Next Steps in einfacher Sprache.
 - Warum: Instabiles oder fehlendes Netzwerk soll nicht zu unklaren Reparaturfehlern führen, und temporäre Aussetzer in Gates sollen robust abgefangen werden.

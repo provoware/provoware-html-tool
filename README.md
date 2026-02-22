@@ -1,7 +1,7 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **97%**
+- Fortschritt: **98%**
 - Erledigte Aufgaben:
   - Live-Sync-Status zwischen Topbar und Footer ergänzt, damit Speichermeldungen konsistent und besser sichtbar sind.
   - Debug-Log zeigt jetzt letztes Ereignis mit Zeitstempel und klaren nächsten Schritt in einfacher Sprache.
@@ -17,6 +17,9 @@
   - Offline-Erkennung ergänzt: automatische Reparatur überspringt Paketinstallation ohne Netzwerk und zeigt klare Next Steps.
   - Full-Gates laufen jetzt fehlertolerant mit Zeitlimit und automatischem Retry pro Gate für stabilere Ausführung.
   - Hilfe-/Fehlertexte erweitert: Wiederholungsversuche werden transparent protokolliert und laienverständlich erklärt.
+  - GUI-Autostart erkennt jetzt Headless-/Desktop-Grenzen sauber und zeigt bei fehlendem Auto-Öffnen eine klare Begründung mit direktem URL-Hinweis.
+  - Konsolenausgabe nutzt jetzt Abschnittsblöcke für Start, Check, Repair und Full-Gates, damit die Reihenfolge deutlich ruhiger lesbar ist.
+  - GUI-Befehlshinweise wurden als nummerierte Schrittfolge mit einfachen Begriffserklärungen erweitert (inklusive Debug-Befehl).
 - Offene Aufgaben:
   - CI soll Browser-E2E später auf Firefox/WebKit erweitern.
   - Optionaler Lint-Schritt für Python-Dateien (z. B. Ruff) soll langfristig als weiche Warnung in CI laufen.

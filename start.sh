@@ -223,22 +223,22 @@ print_help() {
 $(get_text "help_title")
 
 $(get_text "help_usage")
-  ./start.sh             Normaler Start mit Check, Reparatur, Formatierung und Test
-  ./start.sh --check     Nur automatische Prüfungen ausführen
-  ./start.sh --repair    Nur automatische Reparaturen ausführen
-  ./start.sh --format    Nur Formatierung ausführen
-  ./start.sh --test      Nur Tests ausführen
-  ./start.sh --safe      Safe-Mode: nur Basis-Checks + klare Hilfehinweise
-  ./start.sh --doctor    Verbesserungsbericht mit klaren Befehlen anzeigen
-  ./start.sh --dashboard-guide Laien-Guide für ein perfektes Dashboard anzeigen
-  ./start.sh --dashboard-template Konkrete Dashboard-Musterseite als HTML-Template bereitstellen
-  ./start.sh --weakness-report Zeigt verbleibende Schwachstellen mit konkreten Befehlen
-  ./start.sh --visual-baseline-check Screenshot-Baseline prüfen (Soll-Ist-Schutz für Layout)
-  ./start.sh --full-gates Vollständige Gates 1-5 strikt nacheinander ausführen
-  ./start.sh --ux-check-auto Automatischer Mini-UX-Check für Texte, Next Steps und A11y-Marker
-  ./start.sh --release-check Vollständiger Release-Check mit klaren nächsten Schritten
-  ./start.sh --debug     Zusätzliche Debug-Hinweise im Protokoll
-  ./start.sh --help      Hilfe anzeigen
+  Start komplett:                 ./start.sh
+  Nur Prüfung (Check):            ./start.sh --check
+  Nur Reparatur (Repair):         ./start.sh --repair
+  Nur Formatierung (Format):      ./start.sh --format
+  Nur Selbsttest (Test):          ./start.sh --test
+  Safe-Mode:                      ./start.sh --safe
+  Verbesserungsbericht:           ./start.sh --doctor
+  Dashboard-Guide:                ./start.sh --dashboard-guide
+  Dashboard-Template:             ./start.sh --dashboard-template
+  Schwachstellen-Bericht:         ./start.sh --weakness-report
+  Screenshot-Baseline-Check:      ./start.sh --visual-baseline-check
+  Pflicht-Gates 1-5:              ./start.sh --full-gates
+  Automatischer Mini-UX-Check:    ./start.sh --ux-check-auto
+  Release-Check:                  ./start.sh --release-check
+  Debug-Protokoll aktivieren:     ./start.sh --debug
+  Hilfe anzeigen:                 ./start.sh --help
 
 Einfache Begriffe:
   Check (Prüfung) = automatische Kontrolle
@@ -701,6 +701,7 @@ run_dashboard_template_mode() {
 }
 
 run_check_mode() {
+	print_section "Check-Modus" || true
 	print_step "✅" "Check-Modus aktiv."
 	local failed=0
 	check_runtime_prerequisites || failed=1
@@ -721,6 +722,7 @@ run_check_mode() {
 }
 
 run_repair_mode() {
+	print_section "Repair-Modus" || true
 	print_step "✅" "Repair-Modus aktiv."
 	run_dependency_bootstrap || true
 	print_step "✅" "Repair-Modus abgeschlossen."
@@ -764,7 +766,7 @@ launch_local_gui() {
 	mkdir -p "$gui_dir"
 	local theme_choices
 	theme_choices="$(load_theme_list_csv | sed 's/,/|/g')"
-	if ! render_gui_status_html "$gui_file" "$gui_theme" "$theme_choices" "$bg_color" "$text_color" "$panel_color" "$border_color" "$focus_color" "$ok_color" "$warn_color"; then
+	if ! render_gui_status_html "$gui_file" "$gui_theme" "$theme_choices" "$gui_port" "$bg_color" "$text_color" "$panel_color" "$border_color" "$focus_color" "$ok_color" "$warn_color"; then
 		print_error_with_actions "GUI-Datei konnte nicht erzeugt werden."
 		record_missing "GUI-Datei"
 		record_next_step "Dateirechte prüfen und './start.sh --debug' erneut ausführen"
@@ -794,14 +796,26 @@ launch_local_gui() {
 	fi
 
 	local gui_url="http://127.0.0.1:${gui_port}/"
+	local open_ok="0"
 	if command -v xdg-open >/dev/null 2>&1; then
-		xdg-open "$gui_url" >/dev/null 2>&1 || true
-		print_step "✅" "GUI im Browser geöffnet: ${gui_url}"
+		if xdg-open "$gui_url" >/dev/null 2>&1; then
+			open_ok="1"
+			print_step "✅" "GUI im Browser geöffnet: ${gui_url}"
+		else
+			print_step "⚠️" "Browser-Öffnung über xdg-open nicht möglich (z. B. SSH/Headless-Umgebung)."
+		fi
 	elif command -v open >/dev/null 2>&1; then
-		open "$gui_url" >/dev/null 2>&1 || true
-		print_step "✅" "GUI im Browser geöffnet: ${gui_url}"
-	else
-		print_step "⚠️" "Kein Browser-Öffner gefunden. GUI manuell öffnen: ${gui_url}"
+		if open "$gui_url" >/dev/null 2>&1; then
+			open_ok="1"
+			print_step "✅" "GUI im Browser geöffnet: ${gui_url}"
+		else
+			print_step "⚠️" "Browser-Öffnung über open nicht möglich (z. B. Server ohne Desktop)."
+		fi
+	fi
+
+	if [[ "$open_ok" == "0" ]]; then
+		print_step "ℹ️" "Warum kein Auto-Öffnen? Es läuft wahrscheinlich ohne Desktop-Sitzung oder ohne Standardbrowser."
+		print_command_hint "Dashboard manuell öffnen" "$gui_url" || true
 		record_next_step "URL im Browser öffnen: ${gui_url}"
 	fi
 
@@ -809,6 +823,7 @@ launch_local_gui() {
 }
 
 run_start_mode() {
+	print_section "Startmodus" || true
 	print_step "✅" "Startmodus aktiv: Check, Repair, Format, Test laufen automatisch."
 	run_dependency_bootstrap || true
 	run_check_mode || true
@@ -824,6 +839,7 @@ run_start_mode() {
 }
 
 run_full_gates_mode() {
+	print_section "Full-Gates" || true
 	print_step "✅" "Full-Gates-Modus aktiv: Gates 1-5 werden strikt ausgeführt."
 	local failed=0
 

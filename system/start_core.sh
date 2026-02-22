@@ -6,6 +6,29 @@ print_step() {
 	printf '%s %s\n' "$icon" "$text" | tee -a "$LOG_FILE"
 }
 
+print_section() {
+	local title="$1"
+	if [[ -z "$title" ]]; then
+		print_error_with_actions "Abschnittstitel fehlt."
+		record_next_step "Startskript erneut ohne geänderte Parameter ausführen"
+		return 1
+	fi
+	print_step "🧭" "──────── ${title} ────────"
+	return 0
+}
+
+print_command_hint() {
+	local label="$1"
+	local command_text="$2"
+	if [[ -z "$label" || -z "$command_text" ]]; then
+		print_error_with_actions "Befehlshinweis unvollständig."
+		record_next_step "Hilfe mit './start.sh --help' prüfen und danach erneut starten"
+		return 1
+	fi
+	print_step "➡️" "${label}: ${command_text}"
+	return 0
+}
+
 record_checked() {
 	CHECKED_ITEMS+=("$1")
 }
