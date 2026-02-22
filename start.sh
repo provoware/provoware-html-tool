@@ -9,6 +9,9 @@ LINE_LIMIT=1600
 NETWORK_CHECK_TIMEOUT=2
 COMMAND_TIMEOUT=180
 RETRY_MAX=2
+GUI_PORT_MIN=20000
+GUI_PORT_MAX=60999
+GUI_PORT_RANDOM_ATTEMPTS=25
 STATUS_SUMMARY_FILE=""
 DEPENDENCY_CONFIG_FILE="${PROJECT_ROOT}/config/dependency_map.json"
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
@@ -939,11 +942,68 @@ resolve_dashboard_project_path() {
 }
 
 launch_local_gui() {
-	local gui_port="${GUI_PORT:-8765}"
-	if [[ ! "$gui_port" =~ ^[0-9]+$ ]] || [[ "$gui_port" -lt 1024 ]] || [[ "$gui_port" -gt 65535 ]]; then
-		print_error_with_actions "Ungültiger GUI_PORT '${gui_port}'. Erlaubt sind Zahlen von 1024 bis 65535."
-		record_next_step "GUI_PORT korrigieren, z. B. 'GUI_PORT=8765 ./start.sh'"
+	local requested_gui_port="${GUI_PORT:-}"
+	if [[ -n "$requested_gui_port" ]] && { [[ ! "$requested_gui_port" =~ ^[0-9]+$ ]] || [[ "$requested_gui_port" -lt "$GUI_PORT_MIN" ]] || [[ "$requested_gui_port" -gt "$GUI_PORT_MAX" ]]; }; then
+		print_error_with_actions "Ungültiger GUI_PORT '${requested_gui_port}'. Erlaubt sind Zahlen von ${GUI_PORT_MIN} bis ${GUI_PORT_MAX} (keine Systemports)."
+		record_next_step "GUI_PORT korrigieren, z. B. 'GUI_PORT=24567 ./start.sh'"
 		return 1
+	fi
+
+	local gui_port=""
+	if ! gui_port="$(python3 - "$requested_gui_port" "$GUI_PORT_MIN" "$GUI_PORT_MAX" "$GUI_PORT_RANDOM_ATTEMPTS" <<'PY'
+import random
+import socket
+import sys
+
+preferred_raw = (sys.argv[1] or "").strip()
+port_min = int(sys.argv[2])
+port_max = int(sys.argv[3])
+attempts = int(sys.argv[4])
+
+def is_free(port: int) -> bool:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        sock.bind(("127.0.0.1", port))
+        return True
+    except OSError:
+        return False
+    finally:
+        sock.close()
+
+if preferred_raw:
+    preferred = int(preferred_raw)
+    if is_free(preferred):
+        print(f"preferred:{preferred}")
+        raise SystemExit(0)
+    print(f"fallback:{preferred}")
+
+for _ in range(max(1, attempts)):
+    candidate = random.SystemRandom().randint(port_min, port_max)
+    if is_free(candidate):
+        print(f"random:{candidate}")
+        raise SystemExit(0)
+
+raise SystemExit(1)
+PY
+)"; then
+		print_error_with_actions "Kein freier GUI-Port gefunden. Bitte kurz warten und erneut versuchen."
+		record_next_step "Offene Ports prüfen und erneut './start.sh' ausführen"
+		return 1
+	fi
+
+	local gui_port_source="${gui_port%%:*}"
+	gui_port="${gui_port##*:}"
+	if [[ "$gui_port_source" == "fallback" ]]; then
+		print_step "⚠️" "Gewünschter GUI-Port ${requested_gui_port} ist belegt. Es wird automatisch ein freier Alternativ-Port gesucht."
+		record_next_step "Optional festen Port setzen: GUI_PORT=24567 ./start.sh"
+		gui_port_source="random"
+	fi
+	if [[ "$gui_port_source" == "random" ]]; then
+		print_step "ℹ️" "GUI-Port wurde zufällig gewählt (${gui_port}), damit Konflikte automatisch vermieden werden."
+		record_checked "GUI-Port zufällig gewählt"
+	else
+		record_checked "GUI-Port ${gui_port}"
 	fi
 
 	local gui_theme="${GUI_THEME:-high-contrast}"
