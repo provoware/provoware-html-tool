@@ -1,7 +1,7 @@
-DONE: Dashboard-Musterseite auf Drei-Spalten-Layout mit Topbar, linker Navigation, mittlerem Kartenbereich und rechter Einstellungsleiste umgestellt, damit die Darstellung dem Referenzbild deutlich näher kommt. (2026-02-22)
-DONE: Neon-/Glas-Look mit robusten Kontrastfarben für High-Contrast/Light/Dark umgesetzt und Fokusrahmen in allen Themes vereinheitlicht. (2026-02-22)
-DONE: Hilfe- und A11y-Elemente ausgebaut (Skip-Link, Tastaturkürzel-Hilfe, Fehlerdialog mit Next Steps, Screenreader-Status) und per Smoke-Marker abgesichert. (2026-02-22)
-NEXT: Feintuning für pixelnahe Annäherung: exakte Icon-Sets, Typografie-Metriken und Modulabstände per visuellem Vergleich in 3 Breakpoints prüfen. (2026-02-22)
+DONE: CI-Workflow für Full-Gates ergänzt, damit Push/PR automatisch Reparatur und Gates 1-5 ausführen. (2026-02-22)
+DONE: Fokusreihenfolge-Autocheck als neues Tool ergänzt, damit Skip-Link und Kernaktionen für Tastatur sicher geprüft werden. (2026-02-22)
+DONE: Repo-Quality und Smoke-Test um Fokus-Check erweitert, damit A11y-Fehler früh und automatisch erkannt werden. (2026-02-22)
+NEXT: Browser-E2E-Test mit Dialog-Fokusfang und CI-Artefakten (Logs/Screenshot) ergänzen. (2026-02-22)
 
 # TODO – provoware-html-tool (Design-Abgleich Referenzbild)
 
@@ -48,3 +48,35 @@ NEXT: Feintuning für pixelnahe Annäherung: exakte Icon-Sets, Typografie-Metrik
 8. Fehler- und Debugbereich ausbauen: Debug-Log mit letztem Ereignis, Zeitstempel und nächstem Schritt in einfacher Sprache ausgeben.
 9. Accessibility-Best-Practice nachziehen: Landmark-Rollen prüfen, Tab-Reihenfolge im kompletten 3-Spalten-Layout dokumentieren, Screenreader-Text für dekorative Elemente ergänzen.
 10. Automatischer Visual-Check: Screenshot-Vergleich (Baseline vs. aktuell) in Start- oder Testpfad integrieren, um Layout-Drift früh zu erkennen.
+
+## Iteration 2026-02-22 (CI-Gates + Fokus-A11y-Check + Testintegration)
+### A) Fundstelle (beobachten)
+- Problem: Zwei offene Kernpunkte fehlten noch: automatische Full-Gates in CI und maschinelle Fokusreihenfolge-Prüfung.
+- Risiko: Fehler würden erst spät auffallen und Tastaturbedienung könnte unbemerkt regressieren.
+- Erwartung: CI prüft jetzt standardisiert, und Fokus-/A11y-Regeln werden automatisch als Quality- und Smoke-Bestandteil abgesichert.
+
+### B) Change-Scope (vor Patch)
+- Ziel: Genau drei kleine, merge-fertige Punkte umsetzen: CI-Workflow, Fokus-Checker, Integration in vorhandene Checks.
+- Dateien: `.github/workflows/full-gates.yml`, `tools/focus_order_check.py`, `tools/run_quality_checks.sh`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `data/version_registry.json`
+- Patch-Block je Datei: jeweils ein zusammenhängender Block.
+- Abnahmekriterium: CI-Datei vorhanden, Fokus-Checker läuft mit Exitcode 0, Quality- und Smoke-Lauf rufen den Fokus-Checker erfolgreich auf.
+
+### C) Patch (kurz)
+- Punkt 1 – Änderung: CI-Workflow für Push/PR ergänzt, der Repair + Full-Gates automatisch ausführt.
+- Punkt 2 – Änderung: Neues A11y-Hilfeelement als Fokusreihenfolge-Checker mit klaren Next Steps ergänzt.
+- Punkt 3 – Änderung: Quality- und Smoke-Test um den neuen Fokus-Checker erweitert.
+
+### D) Gates
+- G1: `python -m compileall -q .`
+- G2: `bash tools/run_quality_checks.sh`
+- G3: `python tools/smoke_test.py`
+- G4: `bash start.sh`
+- G5: Mini-UX-Check (deutsche Dialoge, Fehlerdialog mit Next Steps, kein Crash, Kontrast/Theme geprüft)
+
+### E) Ergebnis
+- Status: DONE
+- Doku: README + CHANGELOG + todo aktualisiert
+- Laienvorschläge:
+  1. Nutzen Sie immer zuerst `./start.sh --check`, damit Probleme vor dem Start klar angezeigt werden.
+  2. Bei Tastaturproblemen starten Sie `python tools/focus_order_check.py`, um die Reihenfolge sofort zu prüfen.
+- Nächster Schritt: Ergänzen Sie einen Browser-E2E-Test, der den Fehlerdialog öffnet, den Fokus im Dialog hält und bei Fehlern automatisch ein Screenshot-Artefakt in der CI speichert.

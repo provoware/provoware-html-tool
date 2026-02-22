@@ -1,0 +1,29 @@
+name: full-gates
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  quality-and-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Shell-Werkzeuge installieren
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck shfmt ripgrep
+
+      - name: Abhängigkeiten automatisch prüfen und reparieren
+        run: bash start.sh --repair
+
+      - name: Gate 1 bis 5 ausführen
+        run: bash start.sh --full-gates

@@ -1,3 +1,10 @@
+# CHANGELOG
+
+## 2026-02-22 – CI-Full-Gates + Fokusreihenfolge-Autocheck + Quality-Integration
+- Was: Neue CI-Workflow-Datei `.github/workflows/full-gates.yml` führt bei Push/PR automatisch `bash start.sh --repair` und danach `bash start.sh --full-gates` aus; neuer Checker `tools/focus_order_check.py` prüft Skip-Link, Pflichtaktionen und Theme-Fokusreihenfolge.
+- Warum: Die offenen Punkte „Full-Gates in CI“ und „automatische Fokusprüfung“ sollten in eine robuste, wiederholbare Standardprüfung überführt werden.
+- Wirkung: Höhere Release-Reife durch automatische Pipeline-Prüfung, bessere A11y-Absicherung der Tastaturbedienung und klarere Fehlerhinweise mit Next Steps.
+
 ## 2026-02-22 – GUI-Auslagerung nach system/start_gui.sh
 - Was: GUI-HTML-Erzeugung und Theme-Farbberechnung aus `start.sh` in `system/start_gui.sh` ausgelagert, inklusive Eingabevalidierung und klaren Fehlermeldungen mit Next Steps.
 - Warum: Die Startdatei sollte weiter verschlankt werden, damit GUI-Logik getrennt wartbar bleibt und Themes zentral berechnet werden.
@@ -7,8 +14,6 @@
 - Was: `start.sh` prüft `--check` jetzt mit gesammeltem Fehlerstatus und beendet `start` bei fehlgeschlagenem Selbsttest; Mini-UX-Check fordert zusätzlich Fokus-Hinweis und Reduced-Motion-Text.
 - Warum: Fehler durften nicht still in den nächsten Schritt laufen, und Barrierefreiheit sollte auch für reduzierte Bewegung klar abgesichert sein.
 - Wirkung: Verlässlichere Exitcodes für Automatisierung, verständlichere Next Steps bei Abbruch und bessere A11y-Unterstützung für sensible Nutzer:innen.
-
-# CHANGELOG
 
 ## 2026-02-22 – Referenznahes Dashboard-Layout + Neon-Design + A11y-Absicherung
 - Was: `templates/dashboard_musterseite.html` wurde auf ein referenznahes Drei-Spalten-Layout (Topbar/Navigation/Karten/Einstellungen/Footer) mit Neon-Panel-Stil umgebaut; `tools/smoke_test.py` prüft dafür zusätzliche Layout-Marker.

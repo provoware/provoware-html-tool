@@ -4,6 +4,7 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET_FILES=("${PROJECT_ROOT}/start.sh" "${PROJECT_ROOT}/system/start_core.sh" "${PROJECT_ROOT}/system/start_gui.sh")
 CONTRAST_CHECK="${PROJECT_ROOT}/tools/check_theme_contrast.py"
+FOCUS_CHECK="${PROJECT_ROOT}/tools/focus_order_check.py"
 
 print_step() {
   local icon="$1"
@@ -27,6 +28,12 @@ fi
 
 print_step "✅" "Qualitätsprüfung gestartet."
 
+if [[ ! -f "$FOCUS_CHECK" ]]; then
+  print_step "❌" "Qualitätsprüfung abgebrochen: Fokus-Checker fehlt."
+  print_step "➡️" "Nächster Schritt: Datei tools/focus_order_check.py wiederherstellen."
+  exit 1
+fi
+
 if command -v shfmt >/dev/null 2>&1; then
   shfmt -w "${TARGET_FILES[@]}"
   print_step "✅" "Formatierung erfolgreich (shfmt)."
@@ -46,6 +53,8 @@ fi
 if command -v python3 >/dev/null 2>&1; then
   python3 "$CONTRAST_CHECK"
   print_step "✅" "WCAG-Kontrastprüfung erfolgreich."
+  python3 "$FOCUS_CHECK"
+  print_step "✅" "Fokus-Reihenfolge-Prüfung erfolgreich."
 else
   print_step "❌" "python3 fehlt. Kontrastprüfung konnte nicht gestartet werden."
   print_step "➡️" "Nächster Schritt: python3 installieren und Prüfung erneut starten."

@@ -1,14 +1,14 @@
 # provoware-html-tool
 
 ## Entwicklungsstand (Iteration-Übersicht)
-- Fortschritt: **79%**
+- Fortschritt: **83%**
 - Erledigte Aufgaben:
   - Dashboard-Layout auf Referenzstruktur mit Topbar, linker Navigation, mittlerem Modulraster und rechter Einstellungsleiste umgestellt.
   - Neon-/Glas-Design in drei Themes (`high-contrast`, `light`, `dark`) mit robusten Fokus- und Kontrastrahmen vereinheitlicht.
   - Hilfe- und A11y-Elemente (Skip-Link, Next Steps, Tastaturkürzel, Fehlerdialog) erweitert und im Smoke-Test abgesichert.
 - Offene Aufgaben:
-  - CI-Pipeline soll die Full-Gates 1–5 bei jedem Commit automatisch ausführen.
   - Zusätzlicher automatischer Browser-Test für Fokus-Reihenfolge im Dialog fehlt noch.
+  - CI soll bei Gate-Fehlern Artefakte (Logs/Screenshots) automatisch anhängen.
 
 Ein leicht verständliches Start- und Qualitäts-Tool für ein HTML-Dashboard mit Fokus auf Barrierefreiheit, klaren Meldungen und stabilen Standardabläufen.
 
@@ -73,7 +73,7 @@ cat logs/start.log
 5. Nach jeder Iteration `todo.txt`, `CHANGELOG.md` und `data/version_registry.json` aktualisieren.
 
 ## Release-Status
-- Fortschritt: `79%`
+- Fortschritt: `83%`
 - Abgeschlossen:
   - Automatische Repair- und Quality-Routine in `start.sh`
   - Dashboard-Musterseite mit Theme-Umschalter, Fehlerdialog und Ergebnisbereich
@@ -92,6 +92,6 @@ cat logs/start.log
   - Barrierefreie Tastatur-Kürzel (Alt+S/Alt+R/Alt+P/Alt+L) mit erklärendem Hilfe-Text und Screenreader-Attributen im Dashboard
   - Dashboard-Template optisch auf Referenzbild angenähert: Drei-Spalten-Layout, Modul-Kartenraster, Einstellungen rechts und klarer Footer-Status
 - Offen:
-  - CI-Anbindung für den erweiterten Repo-Quality-Check (`start.sh` + `system/start_core.sh`)
-  - CI-Anbindung für den neuen Mini-UX-Check
-- Nächster Schritt: Die neuen Full-Gates in einer CI-Pipeline automatisch bei jedem Commit ausführen und bei Fehlern mit Statusbericht abbrechen.
+  - Zusätzlicher Browser-E2E-Test für Fokus-Reihenfolge und Dialog-Fokusfang
+  - CI-Artefakte für Fehlerfall (Logdateien und optional Screenshot) ergänzen
+- Nächster Schritt: Browser-E2E-Test in `tools/` ergänzen und in `start.sh --full-gates` optional als Gate 6 einbinden.
