@@ -45,3 +45,25 @@ jobs:
             logs/
             logs/artifacts/
           if-no-files-found: warn
+
+  offline-simulation-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run offline simulation gates
+        env:
+          PROVOWARE_FORCE_OFFLINE: "1"
+          OFFLINE_ARTIFACT_MODE: "warn"
+        run: |
+          python3 -m compileall -q .
+          bash tools/run_quality_checks.sh --check
+          python3 tools/smoke_test.py --profile quick
+          bash start.sh --check
+

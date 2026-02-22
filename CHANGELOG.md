@@ -384,3 +384,17 @@
 - Weniger Unterbrechungen beim Start und klarere Nutzerführung.
 - Bessere Barrierefreiheit durch einfache Warntexte mit nächstem Schritt.
 - Geringere Angriffsfläche im Renderpfad (sicherere Ausgabe).
+
+## 2026-02-22 – Offline-Simulation als CI-Gate + Start-Feedback verbessert
+- Scope-Kontrolle:
+  - Problem: Ein offener To-do-Punkt war ein echter CI-Lauf für Offline-Simulation ohne Internet.
+  - Ziel: Optionalen CI-Job für Offline-Simulation umsetzen und die Start-Routine mit klaren Erklärtexten absichern.
+  - Dateien: `.github/workflows/full-gates.yml`, `start.sh`, `README.md`, `todo.txt`, `WAITME.md`, `CHANGELOG.md`, `data/version_registry.json`.
+  - Abnahme: CI enthält den Job `offline-simulation-check`; lokaler Start mit `PROVOWARE_FORCE_OFFLINE=1` zeigt verständliche Next Steps.
+- Was:
+  1) Neuer Workflow-Job `offline-simulation-check` führt `compileall`, `run_quality_checks --check`, `smoke_test --profile quick` und `start.sh --check` in simuliertem Offline-Modus aus.
+  2) `start.sh` erkennt `PROVOWARE_FORCE_OFFLINE=1` und meldet den Simulationsstatus deutlich inklusive nächsten Schritten.
+  3) README, WAITME und todo wurden mit Laienhilfe, Befehlen und Status-Update synchronisiert.
+- Warum: Offline-Risiken werden früher erkannt, ohne den Hauptjob zu destabilisieren.
+- Wirkung: Mehr Release-Reife für Umgebungen mit eingeschränktem Netz und bessere Bedienbarkeit durch klare Sprache.
+

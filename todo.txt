@@ -48,7 +48,7 @@ NEXT (Priorität hoch, offen)
 
 NEXT (Priorität mittel, offen)
 - [x] 100%: GUI-Hilfebereich um kurzen Abschnitt „Sehr kleine Displays“ erweitert (einfache Sprache + klare Next Steps).
-- [ ] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen.
+- [x] 100%: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzt (PROVOWARE_FORCE_OFFLINE=1 + OFFLINE_ARTIFACT_MODE=warn).
 
 - [x] 100%: Projektordner-Pfad in Dashboard zusätzlich in eine bearbeitbare config-Datei gespiegelt.
 
@@ -163,3 +163,8 @@ DONE: Neues Tool `tools/check_readme_structure.py` prüft Pflichtanker in README
 DONE: Qualitätsgate ruft README-Ankerprüfung jetzt automatisch in `tools/run_quality_checks.sh` auf (2026-02-22)
 DONE: Hilfetexte für README-Gate-Fehler in einfacher Sprache mit klarem Next Step ergänzt (2026-02-22)
 NEXT: Optionalen CI-Job für Offline-Simulation (ohne Internet) ergänzen. (2026-02-23)
+
+DONE: CI-Workflow ergänzt um Job „offline-simulation-check“ ohne Internetzugriff (2026-02-22)
+DONE: start.sh unterstützt Offline-Simulation per PROVOWARE_FORCE_OFFLINE=1 mit klaren Next Steps in einfacher Sprache (2026-02-22)
+DONE: README/WAITME um Offline-Simulationsbefehle und Laienhilfe erweitert (2026-02-22)
+NEXT: Offline-Simulationsjob optional um strikten Lauf mit vorbereiteten Offline-Artefakten erweitern (2026-02-23)

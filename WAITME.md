@@ -106,3 +106,14 @@ Stand: 2026-02-22 (Start-/CI-Härtung ergänzt)
 - `bash tools/run_quality_checks.sh`
 - `python tools/smoke_test.py`
 - `bash start.sh`
+
+
+## Update 2026-02-22 (Offline-Simulationsjob)
+- CI enthält jetzt einen zusätzlichen Offline-Testlauf ohne Internet (Simulation).
+- `start.sh` kann Offline absichtlich simulieren und gibt klare nächste Schritte aus.
+- Das hilft früh zu sehen, ob ein Release auch in restriktiven Umgebungen stabil bleibt.
+
+### Nächste sinnvolle Befehle
+- `PROVOWARE_FORCE_OFFLINE=1 OFFLINE_ARTIFACT_MODE=warn bash start.sh --check`
+- `PROVOWARE_FORCE_OFFLINE=1 OFFLINE_ARTIFACT_MODE=warn python3 tools/smoke_test.py --profile quick`
+- `bash tools/run_quality_checks.sh --check`

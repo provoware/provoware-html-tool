@@ -48,7 +48,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - Neu in dieser Iteration: Quality-Gate prüft automatisch, ob README oben den Sofortblock und unten den Konsolen-Spickzettel vollständig enthält (mit klarer Fehlerhilfe).
 
 - **Offen**
-  - Optionaler CI-Job für Offline-Simulation (ohne Internet).
+  - (Erledigt) Optionaler CI-Job für Offline-Simulation (ohne Internet).
   - Gate-Hinweis: Voller Smoke-Test kann in restriktiven Umgebungen beim Browser-E2E wegen gesperrtem Playwright-Download (403) scheitern; dafür Offline-Mirror einplanen.
   - Modul-Interoperabilität ausgebaut: Projektordner-Dialog ohne Standardordner, modulbezogene Sidebar-Optionen, Drag&Drop/CRUD im Genres-Archiv, Profilarchive (default/techno/hörspiele) und Abkopplung in Einzelfenster.
   - Modul-Starter ist jetzt an konfigurierbare Datenquellen gekoppelt (`config/module_sources.json`) und zeigt transparente Kurzdetails je Modul.
@@ -292,6 +292,34 @@ Empfohlener Prüfpfad:
 bash start.sh --repair
 bash start.sh --full-gates
 bash start.sh --release-check
+```
+
+
+## Update 2026-02-22 – Offline-Simulationsjob + klare Laienhilfe (3 Punkte)
+
+### Scope-Kontrolle
+- **Problem:** Ein offener Punkt war ein echter CI-Testlauf ohne Internet, damit Offline-Risiken früher sichtbar werden.
+- **Ziel:** CI soll einen zusätzlichen Offline-Simulationslauf haben und `start.sh` soll dafür ein klares, erklärendes Feedback geben.
+- **Dateien:** `.github/workflows/full-gates.yml`, `start.sh`, `README.md`, `todo.txt`, `CHANGELOG.md`, `WAITME.md`, `data/version_registry.json`.
+- **Patch-Block je Datei:**
+  - `.github/workflows/full-gates.yml`: neuer Job `offline-simulation-check` mit `PROVOWARE_FORCE_OFFLINE=1`.
+  - `start.sh`: Netzprüfung respektiert jetzt die Offline-Simulation und meldet klare nächste Schritte.
+  - `README.md`: neue Befehle und Erklärung zur Offline-Simulation in einfacher Sprache.
+  - `todo.txt`: offener CI-Punkt als erledigt markiert und Follow-up ergänzt.
+  - `CHANGELOG.md`: Iterationsprotokoll der drei abgeschlossenen Punkte ergänzt.
+  - `WAITME.md`: Kurzstatus und nächste Befehle für Menschen aktualisiert.
+  - `data/version_registry.json`: Versionsstände der geänderten Dateien aktualisiert.
+- **Abnahmekriterium:** CI-Workflow enthält einen separaten Offline-Job, und lokaler Lauf mit `PROVOWARE_FORCE_OFFLINE=1 bash start.sh --check` liefert erklärendes Feedback statt stiller Fehlersuche.
+
+### Umsetzung (3 Punkte)
+1. **CI:** Neuer Job `offline-simulation-check` führt compile/quality/smoke/start im Offline-Modus aus.
+2. **Start-Routine:** `start.sh` unterstützt harte Offline-Simulation mit klaren Hinweisen und Next Steps.
+3. **Hilfe/A11y-Text:** Dokumentation erklärt die neue Simulation in einfacher Sprache inklusive kompletter Befehle.
+
+### Neue Befehle (offline simulieren)
+```bash
+PROVOWARE_FORCE_OFFLINE=1 OFFLINE_ARTIFACT_MODE=warn bash start.sh --check
+PROVOWARE_FORCE_OFFLINE=1 OFFLINE_ARTIFACT_MODE=warn python3 tools/smoke_test.py --profile quick
 ```
 
 ## Konsolen-Spickzettel (immer unten angehängt)
