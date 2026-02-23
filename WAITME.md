@@ -1,5 +1,25 @@
 # WAITME – Kurzstatus
 
+Stand: 2026-02-23 (CLI-Alias + Prioritätsabschnitt)
+
+## Aktueller Stand (einfach erklärt)
+- Neuer Kurzschalter: `--show-all-next-steps` zeigt alle gebündelten Hinweise direkt in der Konsole.
+- Die Startausgabe zeigt jetzt einen klaren Abschnitt „Empfohlene Reihenfolge (Priorität)“.
+- Neue Hilfetexte dafür sind zentral in `config/messages.json` gepflegt (einheitlich und leicht wartbar).
+
+## Top-Blocker
+- Kein kritischer Blocker aus dieser Mini-Iteration.
+
+## Betriebsrisiken
+- Bei sehr vielen Hinweisen kann der Vollmodus die Konsole länger machen; Standard bleibt deshalb kurz.
+
+## Nächste sinnvolle Befehle
+- `bash start.sh --check --show-all-next-steps`
+- `bash start.sh --help`
+- `python tools/smoke_test.py --profile full`
+
+# WAITME – Kurzstatus
+
 Stand: 2026-02-23 (gebündelte Hinweise optional vollständig anzeigen)
 
 ## Aktueller Stand (einfach erklärt)

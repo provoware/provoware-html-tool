@@ -29,5 +29,11 @@
   "dashboard_layout": "Layout-Regel: Oben Status, Mitte wichtigste Aufgaben, unten Hilfe + nächste Schritte.",
   "dashboard_accessibility": "Barrierefreiheit-Regel: Hoher Kontrast, große Klickflächen, Fokusrahmen und klare Sprache.",
   "dashboard_feedback": "Feedback-Regel: Jede Aktion zeigt sofort Ergebnis + nächsten Schritt in einfacher Sprache.",
-  "help_weakness_report": "Schwachstellen-Bericht: Zeigt verbleibende Risiken mit direkten Befehlen für schnelle Verbesserungen."
+  "help_weakness_report": "Schwachstellen-Bericht: Zeigt verbleibende Risiken mit direkten Befehlen für schnelle Verbesserungen.",
+  "help_show_all_next_steps": "Alle gebündelten Hinweise direkt anzeigen: ./start.sh --check --show-all-next-steps",
+  "summary_more_hints_collapsed": "Weitere Hinweise wurden gebündelt, damit die Liste kurz bleibt.",
+  "summary_more_hints_expanded": "Zusätzliche Hinweise (vollständig eingeblendet):",
+  "summary_more_hints_next_step": "Nächster Schritt: Für alle zusätzlichen Hinweise 'cat {{STATUS_SUMMARY_FILE}}' ausführen oder './start.sh --check --show-all-next-steps' nutzen.",
+  "summary_more_hints_status_tip": "Hinweis: Vollständige Details stehen im Startprotokoll. Tipp: Mit './start.sh --check --show-all-next-steps' können alle Hinweise direkt angezeigt werden.",
+  "summary_priority_title": "Empfohlene Reihenfolge (Priorität):"
 }

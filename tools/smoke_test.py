@@ -141,6 +141,37 @@ if ARGS.profile == "full":
         print_step("➡️", "Nächster Schritt: Fehlermeldung in einfacher Sprache ergänzen.")
         sys.exit(1)
 
+
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: CLI-Schalter --show-all-next-steps")
+    show_flag_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--check", "--show-all-next-steps"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
+
+    if show_flag_result.returncode != 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: --show-all-next-steps lieferte Fehler.")
+        print(show_flag_result.stdout)
+        print(show_flag_result.stderr)
+        print_step("➡️", "Nächster Schritt: Argument-Validierung in start.sh prüfen.")
+        sys.exit(show_flag_result.returncode)
+
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: Hilfe enthält --show-all-next-steps")
+    help_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--help"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+    )
+
+    if help_result.returncode != 0 or "--show-all-next-steps" not in (help_result.stdout + help_result.stderr):
+        print_step("❌", "Smoke-Test fehlgeschlagen: Hilfeeintrag für --show-all-next-steps fehlt.")
+        print_step("➡️", "Nächster Schritt: Hilfeausgabe in start.sh ergänzen.")
+        sys.exit(1)
+
 if ARGS.profile == "full":
     print_step("✅", "Smoke-Test (full) erweitert: PROVOWARE_SHOW_ALL_NEXT_STEPS Input-Validierung")
     show_all_result = subprocess.run(

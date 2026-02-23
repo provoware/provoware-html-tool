@@ -42,6 +42,7 @@ DEFAULT_TEXT_JSON='{
   "help_message_source": "Textquelle: Externe Datei config/messages.json wird genutzt, sonst sichere Standardtexte.",
   "help_full_gates": "Voll-Gates: Führt die fünf Pflicht-Gates in fixer Reihenfolge aus und stoppt bei Fehlern mit klaren Next Steps.",
   "help_status_summary": "Statusbericht: Legt logs/status_summary.txt in einfacher Sprache für Screenreader an.",
+  "help_show_all_next_steps": "Alle gebündelten Hinweise direkt anzeigen: ./start.sh --check --show-all-next-steps",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
   "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
@@ -63,7 +64,12 @@ DEFAULT_TEXT_JSON='{
   "dashboard_layout": "Layout-Regel: Oben Status, Mitte wichtigste Aufgaben, unten Hilfe + nächste Schritte.",
   "dashboard_accessibility": "Barrierefreiheit-Regel: Hoher Kontrast, große Klickflächen, Fokusrahmen und klare Sprache.",
   "dashboard_feedback": "Feedback-Regel: Jede Aktion zeigt sofort Ergebnis + nächsten Schritt in einfacher Sprache.",
-  "help_weakness_report": "Schwachstellen-Bericht: Zeigt verbleibende Risiken mit direkten Befehlen für schnelle Verbesserungen."
+  "help_weakness_report": "Schwachstellen-Bericht: Zeigt verbleibende Risiken mit direkten Befehlen für schnelle Verbesserungen.",
+  "summary_more_hints_collapsed": "Weitere Hinweise wurden gebündelt, damit die Liste kurz bleibt.",
+  "summary_more_hints_expanded": "Zusätzliche Hinweise (vollständig eingeblendet):",
+  "summary_more_hints_next_step": "Nächster Schritt: Für alle zusätzlichen Hinweise cat {{STATUS_SUMMARY_FILE}} ausführen oder ./start.sh --check --show-all-next-steps nutzen.",
+  "summary_more_hints_status_tip": "Hinweis: Vollständige Details stehen im Startprotokoll. Tipp: Mit ./start.sh --check --show-all-next-steps können alle Hinweise direkt angezeigt werden.",
+  "summary_priority_title": "Empfohlene Reihenfolge (Priorität):"
 }'
 TEXT_JSON_CACHE=""
 THEME_LIST_CACHE=""
@@ -340,7 +346,7 @@ $(get_text "help_usage")
   Offline-Paket bauen:            ./start.sh --offline-pack
   Automatischer Mini-UX-Check:    ./start.sh --ux-check-auto
   Release-Check:                  ./start.sh --release-check
-  Alle gebündelten Hinweise:      PROVOWARE_SHOW_ALL_NEXT_STEPS=1 ./start.sh --check
+  $(get_text "help_show_all_next_steps")
   Debug-Protokoll aktivieren:     ./start.sh --debug
   Hilfe anzeigen:                 ./start.sh --help
 
@@ -366,13 +372,14 @@ ensure_writable_log() {
 }
 
 validate_args() {
-	if [[ $# -gt 2 ]]; then
-		print_error_with_actions "Zu viele Parameter. Bitte maximal eine Modus-Option und optional --debug nutzen."
+	if [[ $# -gt 3 ]]; then
+		print_error_with_actions "Zu viele Parameter. Bitte maximal eine Modus-Option sowie optional --debug und --show-all-next-steps nutzen."
 		return 1
 	fi
 
 	local mode_count=0
 	local debug_count=0
+	local show_all_count=0
 
 	for arg in "$@"; do
 		case "$arg" in
@@ -444,6 +451,10 @@ validate_args() {
 			DEBUG_MODE="1"
 			debug_count=$((debug_count + 1))
 			;;
+		--show-all-next-steps)
+			SHOW_ALL_NEXT_STEPS="1"
+			show_all_count=$((show_all_count + 1))
+			;;
 		*)
 			print_error_with_actions "Unbekannte Option '$arg'."
 			record_next_step "./start.sh --help ausführen"
@@ -461,6 +472,12 @@ validate_args() {
 	if [[ "$debug_count" -gt 1 ]]; then
 		print_error_with_actions "Option '--debug' wurde mehrfach gesetzt. Bitte nur einmal verwenden."
 		record_next_step "Befehl auf genau ein '--debug' reduzieren"
+		return 1
+	fi
+
+	if [[ "$show_all_count" -gt 1 ]]; then
+		print_error_with_actions "Option '--show-all-next-steps' wurde mehrfach gesetzt. Bitte nur einmal verwenden."
+		record_next_step "Befehl auf genau ein '--show-all-next-steps' reduzieren"
 		return 1
 	fi
 

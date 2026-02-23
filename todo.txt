@@ -1,12 +1,18 @@
 DONE 2026-02-23
+- [x] Optionalen Kurzschalter `--show-all-next-steps` ergänzt (gleicher Effekt wie Umgebungsvariable, inkl. Validierung gegen Mehrfachnutzung).
+- [x] Zusammenfassungs- und Hinweistexte für gebündelte Hinweise zentral in `config/messages.json` gepflegt.
+- [x] Statusbericht erweitert um Abschnitt „Empfohlene Reihenfolge (Priorität)“ für klare Abarbeitung.
+- [x] Smoke-Test (Profil full) prüft den neuen CLI-Schalter und den Hilfeeintrag automatisch.
+
+NEXT 2026-02-24
+- [ ] Optionalen Prioritätsmodus P0/P1 im Statusbericht ergänzen (z. B. Prefix im Next-Step-Text).
+- [ ] Mini-UX-Check um Prüfung des Prioritätsabschnitts erweitern.
+- [ ] Hilfeblock in README um ein kurzes „Wann nutze ich --show-all-next-steps?“ Beispiel ergänzen.
+
+DONE 2026-02-23
 - [x] Optionaler Schalter `PROVOWARE_SHOW_ALL_NEXT_STEPS` (0/1) ergänzt, inklusive Input-Validierung mit klarer Fehlermeldung.
 - [x] Start-Zusammenfassung kann gebündelte Hinweise jetzt auf Wunsch vollständig direkt ausgeben (besser für Hilfe/Support ohne Extra-Schritt).
 - [x] Smoke-Test (Profil full) prüft den Fehlerpfad für ungültiges `PROVOWARE_SHOW_ALL_NEXT_STEPS` automatisch.
-
-NEXT 2026-02-24
-- [ ] Optionalen Kurzschalter `--show-all-next-steps` ergänzen (Alias ohne Umgebungsvariable, gleicher Effekt).
-- [ ] UX-Hinweistext in `config/messages.json` auslagern, damit Hilfetexte zentral konfigurierbar bleiben.
-- [ ] Statusbericht um kleinen Abschnitt „Empfohlene Reihenfolge (Priorität)" für sehr viele Hinweise erweitern.
 
 DONE 2026-02-23
 - [x] Maximieren-Fehler behoben: Maximieren/Wiederherstellen per Toggle für Untermodule.
