@@ -659,6 +659,7 @@
       <div class="topbar-controls">
         <button type="button" data-action="copy-log">Gesamtes Protokoll kopieren</button>
         <button type="button" data-action="project-setup" aria-describedby="project-switch-help">Projekt wechseln</button>
+        <button type="button" data-action="export-all-data">Gesamt-Daten-Export</button>
         <button type="button" id="mode-switch" data-action="switch-mode" aria-pressed="false">Modus: Laie</button>
       </div>
       <section class="recent-projects" aria-label="Zuletzt genutzte Projekte">
@@ -678,6 +679,7 @@
       <p class="nav-group-title">Organisation</p>
       <ul class="nav-list" aria-label="Organisation und Überblick">
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="todo">✅ To-Do-Liste</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="template-archive">🗂️ Template-Archiv</button></li>
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="dashboard" aria-current="page">📊 Dashboard</button></li>
       </ul>
       <p class="quick-help" id="shortcut-help">Tastatur-Kürzel (Keyboard Shortcut = Schnellbefehl): Alt+S Speichern, Alt+R Erneut versuchen, Alt+P Reparatur, Alt+L Protokoll, Alt+O Modul öffnen.</p>
@@ -686,6 +688,7 @@
         <ul class="plugin-status-list" id="plugin-status-list" aria-live="polite">
           <li class="plugin-status-item"><span>Genres-Archiv + Zufall + Liste</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
           <li class="plugin-status-item"><span>Debugging & Entwickleroptionen</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
+          <li class="plugin-status-item"><span>Template-Archiv</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
         </ul>
       </section>
     </aside>
@@ -723,6 +726,7 @@
             <option value="">Bitte Modul auswählen</option>
             <option value="gms-suite">Genres-Archiv + Zufall + Liste</option>
             <option value="debug-dev">Debugging & Entwickleroptionen</option>
+            <option value="template-archive">Template-Archiv</option>
           </select>
           <div class="actions">
             <button type="button" data-action="open-module" aria-keyshortcuts="Alt+O" aria-describedby="module-help shortcut-help">Modul öffnen</button>
@@ -816,6 +820,25 @@
           </div>
           <p class="result" id="todo-result" role="status" aria-live="polite">Noch keine To-Do-Aktion.</p>
           <ul id="todo-list" class="drag-list" aria-label="Projektorientierte Nutzer-To-Do-Liste"></ul>
+        </article>
+        <article class="tool-card tool-card-secondary module-panel" data-accent="b" id="template-archive-view" aria-labelledby="template-archive-title">
+          <p class="card-tag">Untermodul: Template-Archiv</p>
+          <h2 id="template-archive-title">Template-Archiv für Profile und Fragmente</h2><div class="module-window-actions" aria-label="Fensteroptionen im Untermodul"><button type="button" data-action="window-hide" aria-label="Untermodul ausblenden" title="Untermodul ausblenden">✕</button><button type="button" data-action="window-maximize" aria-label="Untermodul maximieren" title="Untermodul maximieren">⤢</button><button type="button" data-action="window-detach" aria-label="Untermodul als Einzelfenster öffnen" title="Untermodul als Einzelfenster öffnen">↗</button></div>
+          <p class="subline">Hilfe: Speichern Sie hier Coden, Content, Textfragmente, Prompting und eigene Befehle als wiederverwendbare Buttons.</p>
+          <label for="template-title-input"><strong>Titel:</strong></label>
+          <input id="template-title-input" type="text" maxlength="80" placeholder="z. B. Prompt für Code-Review" aria-describedby="template-help-text">
+          <label for="template-category-input"><strong>Profil/Kategorie:</strong></label>
+          <input id="template-category-input" type="text" maxlength="40" placeholder="z. B. Coden, Content, Prompting">
+          <label for="template-content-input"><strong>Textinhalt:</strong></label>
+          <textarea id="template-content-input" rows="5" placeholder="Template-Inhalt oder Befehl eingeben"></textarea>
+          <div class="actions">
+            <button type="button" data-action="template-add">Template speichern</button>
+            <button type="button" data-action="template-update">Auswahl aktualisieren</button>
+            <button type="button" data-action="template-delete">Auswahl löschen</button>
+          </div>
+          <p class="result" id="template-result" role="status" aria-live="polite">Noch kein Template gespeichert.</p>
+          <p class="subline" id="template-help-text">Hinweis: Beim Klick auf ein Template wird es protokolliert und automatisch in die Zwischenablage kopiert.</p>
+          <ul id="template-list" class="module-option-list" aria-label="Gespeicherte Templates als Buttons"></ul>
         </article>
 <article class="tool-card tool-card-primary module-panel" data-accent="a" id="project-routine-view" aria-labelledby="projekt-routine-title">
           <p class="card-tag">Start-Routine Projektordner</p>
@@ -969,6 +992,7 @@
       const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
       const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
       const RECENT_PROJECT_STORAGE_KEY = 'provoware-recent-projects';
+      const TEMPLATE_ARCHIVE_STORAGE_KEY = 'provoware-template-archive';
       const APP_VERSION = '13.2';
       const shortcutEntries = [{ key: 'Alt+S', title: 'Speichern', detail: 'Speichert Änderungen im aktiven Modul.' }, { key: 'Alt+R', title: 'Erneut versuchen', detail: 'Startet die letzte Aktion neu.' }, { key: 'Alt+P', title: 'Reparatur', detail: 'Öffnet die Reparatur-Hilfe mit Befehlen.' }, { key: 'Alt+L', title: 'Protokoll', detail: 'Zeigt den nächsten Log-Schritt.' }, { key: 'Alt+O', title: 'Modul öffnen', detail: 'Öffnet das gewählte Modul.' }, { key: 'F1 / ?', title: 'Shortcut-Übersicht', detail: 'Öffnet das Overlay mit Filter.' }];
       let lastDialogTrigger = null;
@@ -1731,6 +1755,81 @@
         });
         return true;
       }
+      function readTemplateArchiveState() {
+        const fallback = { templates: [], selectedIndex: -1 };
+        const raw = window.localStorage.getItem(TEMPLATE_ARCHIVE_STORAGE_KEY);
+        if (typeof raw !== 'string' || raw.trim().length === 0) {
+          return fallback;
+        }
+        try {
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.templates)) {
+            return fallback;
+          }
+          const templates = parsed.templates
+            .filter(function (entry) {
+              return entry && typeof entry === 'object' && typeof entry.title === 'string' && typeof entry.category === 'string' && typeof entry.content === 'string';
+            })
+            .map(function (entry) {
+              return {
+                title: entry.title.trim().slice(0, 80),
+                category: entry.category.trim().slice(0, 40),
+                content: entry.content.trim()
+              };
+            })
+            .filter(function (entry) { return entry.title.length > 0 && entry.content.length > 0; });
+          const selectedIndex = Number.isInteger(parsed.selectedIndex) ? parsed.selectedIndex : -1;
+          return { templates: templates, selectedIndex: selectedIndex >= 0 && selectedIndex < templates.length ? selectedIndex : -1 };
+        } catch (error) {
+          appendDebugLog('⚠️ Template-Archiv konnte nicht geladen werden. Nächster Schritt: Template neu speichern.');
+          return fallback;
+        }
+      }
+      function writeTemplateArchiveState(state) {
+        if (!state || typeof state !== 'object' || !Array.isArray(state.templates)) {
+          return false;
+        }
+        const payload = JSON.stringify({ templates: state.templates, selectedIndex: state.selectedIndex }, null, 2);
+        window.localStorage.setItem(TEMPLATE_ARCHIVE_STORAGE_KEY, payload);
+        return window.localStorage.getItem(TEMPLATE_ARCHIVE_STORAGE_KEY) === payload;
+      }
+      function renderTemplateArchive() {
+        const listNode = document.getElementById('template-list');
+        const resultNode = document.getElementById('template-result');
+        if (!listNode) {
+          return false;
+        }
+        const state = readTemplateArchiveState();
+        listNode.innerHTML = '';
+        if (!state.templates.length) {
+          const li = document.createElement('li');
+          li.textContent = 'Noch keine Templates vorhanden. Bitte Titel und Text speichern.';
+          listNode.appendChild(li);
+          if (resultNode) {
+            resultNode.textContent = 'Noch kein Template gespeichert.';
+          }
+          return true;
+        }
+        state.templates.forEach(function (entry, index) {
+          const li = document.createElement('li');
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.setAttribute('data-template-index', String(index));
+          button.className = 'recent-projects-button';
+          const info = entry.category.length > 0 ? ' [' + entry.category + ']' : '';
+          button.textContent = entry.title + info;
+          button.setAttribute('aria-label', 'Template ' + entry.title + '. Kategorie: ' + (entry.category || 'ohne Kategorie') + '. Klick kopiert den Inhalt.');
+          if (index === state.selectedIndex) {
+            button.setAttribute('aria-current', 'true');
+          }
+          li.appendChild(button);
+          listNode.appendChild(li);
+        });
+        if (resultNode) {
+          resultNode.textContent = 'Templates verfügbar: ' + String(state.templates.length) + '.';
+        }
+        return true;
+      }
       function renderModuleSidebarOptions(moduleKey, sourceMeta) {
         if (!inspectorHelpNode) {
           return false;
@@ -1738,7 +1837,8 @@
         const optionsByModule = {
           'gms-suite': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
           'debug-dev': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
-          'todo': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.'
+          'todo': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
+          'template-archive': 'Optionen direkt im Untermodul über Symbolleiste: Speichern, bearbeiten, als Button kopieren.'
         };
         const helpText = optionsByModule[moduleKey] || 'Bitte Modul wählen und über die Symbolleiste steuern.';
         inspectorHelpNode.textContent = 'Hilfe: ' + helpText;
@@ -1812,7 +1912,8 @@
         const normalizedKey = moduleKey.trim();
         const localFallback = {
           'gms-suite': { label: 'Genres-Archiv + Zufall + Liste', data_source: 'data/project_context.json', detail: 'Gebündeltes Modul für Archiv, Zufallsgenerator und Listenpflege im selben Bereich.', next_step: 'Einträge speichern oder Zufall erzeugen.' },
-          'debug-dev': { label: 'Debugging & Entwickleroptionen', data_source: 'logs/status_summary.txt', detail: 'Zeigt Live-Protokoll, Fehlerhilfe und nächste technische Schritte.', next_step: 'Bei Fehlern zuerst Log lesen und dann Reparatur starten.' }
+          'debug-dev': { label: 'Debugging & Entwickleroptionen', data_source: 'logs/status_summary.txt', detail: 'Zeigt Live-Protokoll, Fehlerhilfe und nächste technische Schritte.', next_step: 'Bei Fehlern zuerst Log lesen und dann Reparatur starten.' },
+          'template-archive': { label: 'Template-Archiv', data_source: 'data/template_archive.json', detail: 'Verwaltet wiederverwendbare Textbausteine inklusive automatischem Kopieren und Protokoll.', next_step: 'Template auswählen und direkt in Zielwerkzeug einfügen.' }
         };
         const sourceMeta = (serverModuleSources && typeof serverModuleSources === 'object' && normalizedKey in serverModuleSources) ? serverModuleSources[normalizedKey] : localFallback[normalizedKey];
         if (!sourceMeta) {
@@ -2047,7 +2148,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'project-switch-recent', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'project-switch-recent', 'copy-log', 'switch-mode', 'export-all-data', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete', 'template-add', 'template-update', 'template-delete'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -2086,6 +2187,24 @@
           return setResult('ℹ️ Bitte einen Eintrag aus der Liste direkt anklicken.');
         }
         if (actionValue === 'copy-log') { return copyLogToClipboard(); }
+        if (actionValue === 'export-all-data') {
+          const archive = readTemplateArchiveState();
+          const exportData = {
+            exported_at: new Date().toISOString(),
+            project_path: getStoredProjectPath(),
+            recent_projects: readRecentProjectList(),
+            template_archive: archive.templates,
+            gms_profile: gmsPlugin && typeof gmsPlugin.exportPayload === 'function' ? gmsPlugin.exportPayload() : null,
+            todo_list: Array.isArray(window.__todoState) ? window.__todoState : []
+          };
+          const payload = JSON.stringify(exportData, null, 2);
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(payload);
+            appendDebugLog('✅ Gesamt-Daten-Export erstellt und kopiert (' + getTimeStamp() + ').');
+            return setResult('✅ Gesamt-Daten-Export kopiert. Nächster Schritt: In Datei sichern.');
+          }
+          return setResult('⚠️ Export erstellt, aber Kopieren ist im Browser blockiert. Bitte manuell sichern.');
+        }
         if (actionValue === 'switch-mode') { return toggleMode(); }
         if (actionValue === 'window-hide') {
           if (!activeModuleKey || !moduleSlots[activeModuleKey]) {
@@ -2165,6 +2284,53 @@
           mainNode.appendChild(nextStepNode);
           detached.document.body.appendChild(mainNode);
           return setResult('✅ Einzelfenster geöffnet für ' + sourceMeta.label + '.');
+        }
+        if (actionValue === 'template-add' || actionValue === 'template-update' || actionValue === 'template-delete') {
+          const titleNode = document.getElementById('template-title-input');
+          const categoryNode = document.getElementById('template-category-input');
+          const contentNode = document.getElementById('template-content-input');
+          const feedbackNode = document.getElementById('template-result');
+          const archive = readTemplateArchiveState();
+          const selectedIndex = Number.isInteger(archive.selectedIndex) ? archive.selectedIndex : -1;
+          const title = titleNode && typeof titleNode.value === 'string' ? titleNode.value.trim() : '';
+          const category = categoryNode && typeof categoryNode.value === 'string' ? categoryNode.value.trim() : '';
+          const content = contentNode && typeof contentNode.value === 'string' ? contentNode.value.trim() : '';
+          if (actionValue !== 'template-delete' && (title.length < 2 || content.length < 2)) {
+            if (feedbackNode) {
+              feedbackNode.textContent = '⚠️ Bitte Titel und Textinhalt mit mindestens 2 Zeichen eintragen.';
+            }
+            return true;
+          }
+          if (actionValue === 'template-add') {
+            archive.templates.push({ title: title.slice(0, 80), category: category.slice(0, 40), content: content });
+            archive.selectedIndex = archive.templates.length - 1;
+          }
+          if (actionValue === 'template-update') {
+            if (selectedIndex < 0 || !archive.templates[selectedIndex]) {
+              if (feedbackNode) { feedbackNode.textContent = '⚠️ Bitte zuerst ein Template über einen Button auswählen.'; }
+              return true;
+            }
+            archive.templates[selectedIndex] = { title: title.slice(0, 80), category: category.slice(0, 40), content: content };
+          }
+          if (actionValue === 'template-delete') {
+            if (selectedIndex < 0 || !archive.templates[selectedIndex]) {
+              if (feedbackNode) { feedbackNode.textContent = '⚠️ Bitte zuerst ein Template für das Löschen auswählen.'; }
+              return true;
+            }
+            archive.templates.splice(selectedIndex, 1);
+            archive.selectedIndex = -1;
+          }
+          if (!writeTemplateArchiveState(archive)) {
+            if (feedbackNode) { feedbackNode.textContent = '⚠️ Speichern fehlgeschlagen. Bitte erneut versuchen.'; }
+            return true;
+          }
+          if (titleNode && actionValue !== 'template-update') { titleNode.value = ''; }
+          if (categoryNode && actionValue !== 'template-update') { categoryNode.value = ''; }
+          if (contentNode && actionValue !== 'template-update') { contentNode.value = ''; }
+          renderTemplateArchive();
+          appendDebugLog('✅ Template-Archiv aktualisiert: Aktion ' + actionValue + ' (' + getTimeStamp() + ').');
+          if (feedbackNode) { feedbackNode.textContent = '✅ Aktion abgeschlossen: ' + actionValue + '.'; }
+          return true;
         }
         if (actionValue === 'todo-add' || actionValue === 'todo-toggle' || actionValue === 'todo-delete') {
           const todoInput = document.getElementById('todo-input');
@@ -2404,7 +2570,7 @@
         if (!(target instanceof HTMLElement)) {
           return;
         }
-        const clickableNode = target.closest('[data-action], [data-module-nav], [data-todo-index]');
+        const clickableNode = target.closest('[data-action], [data-module-nav], [data-todo-index], [data-template-index]');
         if (!(clickableNode instanceof HTMLElement)) {
           return;
         }
@@ -2420,6 +2586,32 @@
         if (typeof moduleTarget === 'string' && moduleTarget.length > 0 && moduleSelector) {
           moduleSelector.value = moduleTarget;
           openModule(moduleTarget);
+          return;
+        }
+        if (clickableNode.hasAttribute('data-template-index')) {
+          const templateIndex = Number(clickableNode.getAttribute('data-template-index'));
+          const archive = readTemplateArchiveState();
+          if (!Number.isInteger(templateIndex) || templateIndex < 0 || !archive.templates[templateIndex]) {
+            setResult('⚠️ Template nicht gefunden. Bitte Liste aktualisieren.');
+            return;
+          }
+          archive.selectedIndex = templateIndex;
+          writeTemplateArchiveState(archive);
+          const selected = archive.templates[templateIndex];
+          const titleNode = document.getElementById('template-title-input');
+          const categoryNode = document.getElementById('template-category-input');
+          const contentNode = document.getElementById('template-content-input');
+          if (titleNode) { titleNode.value = selected.title; }
+          if (categoryNode) { categoryNode.value = selected.category; }
+          if (contentNode) { contentNode.value = selected.content; }
+          renderTemplateArchive();
+          appendDebugLog('ℹ️ Template genutzt: ' + selected.title + ' (' + getTimeStamp() + ').');
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(selected.content);
+            setResult('✅ Template kopiert: ' + selected.title + '.');
+          } else {
+            setResult('⚠️ Template ausgewählt. Kopieren im Browser nicht erlaubt.');
+          }
           return;
         }
         if (clickableNode.hasAttribute('data-todo-index')) {
@@ -2533,6 +2725,7 @@
       setPluginStatus('dashboard');
       renderModuleSidebarOptions('dashboard', getModuleSourceMeta('dashboard'));
       renderSidebarModuleHints();
+      renderTemplateArchive();
       renderModulePreview('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
       setCardState(projectCardStateNode, 'ready', 'Bereit');

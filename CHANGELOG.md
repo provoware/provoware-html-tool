@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: Template-Archiv + Exportzentrum-Button + A11y-Hilfe
+### Scope-Kontrolle
+- Problem: Wiederkehrende Textfragmente/Befehle konnten im Dashboard nicht strukturiert gespeichert, organisiert und direkt genutzt werden.
+- Ziel: Genau drei kleine Punkte liefern: neues Template-Untermodul, automatische Klick-Kopie mit Protokoll, und ein Gesamt-Daten-Export als Dashboard-Button.
+- Dateien: `templates/dashboard_musterseite.html`, `config/module_sources.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) UI+Logik Template-Archiv, 2) Modulquelle ergänzen, 3) Pflichtdoku/Versionsstand aktualisieren.
+- Abnahme: Template speichern/bearbeiten/löschen funktioniert, Template-Klick kopiert in Zwischenablage mit Logeintrag, Gesamt-Export meldet Erfolg mit Next Step.
+
+### Umsetzung (3 Punkte)
+1. Neues Untermodul **Template-Archiv** mit Eingabevalidierung für Titel/Kategorie/Inhalt sowie Bearbeiten/Löschen/Organisieren über auswählbare Buttons.
+2. Template-Buttons kopieren den Inhalt automatisch in die Zwischenablage und schreiben einen nachvollziehbaren Protokolleintrag.
+3. Neuer Dashboard-Topbar-Button **Gesamt-Daten-Export** exportiert alle Kerninformationen gesammelt als JSON in die Zwischenablage.
+
+### Warum
+- Teams brauchen wiederverwendbare Textbausteine mit schneller Bedienung ohne Umwege.
+- Klar sichtbare Buttons und direkte Rückmeldungen verbessern Laienfreundlichkeit und Tastaturfluss.
+- Ein zentraler Export erleichtert Übergaben und Backups.
+
+### Wirkung
+- Höhere Release-Reife durch strukturiertes Template-Management im Dashboard.
+- Bessere Barrierefreiheit durch klare Hilfehinweise und Statusmeldungen mit Next Steps.
+- Schnellere Dokumentations-/Support-Prozesse dank Gesamt-Daten-Export.
+
 ## [2026-02-23] – Iteration: Next-Step-Limit + Bündelung + Validierungs-Smoke-Test
 ### Scope-Kontrolle
 - Problem: Die Next-Step-Liste konnte zu lang werden und war für Einsteiger schwer zu überblicken.

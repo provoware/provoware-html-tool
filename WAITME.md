@@ -1,3 +1,24 @@
+# WAITME – Kurzstatus
+
+Stand: 2026-02-23 (Template-Archiv + Gesamt-Export)
+
+## Aktueller Stand (einfach erklärt)
+- Neues Untermodul „Template-Archiv" speichert wiederverwendbare Textbausteine als Buttons.
+- Klick auf einen Template-Button kopiert den Inhalt automatisch in die Zwischenablage und schreibt einen Protokolleintrag.
+- In der Topbar gibt es jetzt „Gesamt-Daten-Export" für einen kompakten JSON-Gesamtexport.
+
+## Top-Blocker
+- Keine kritischen Blocker aus dieser Iteration.
+
+## Betriebsrisiken
+- Bei Browsern ohne Zwischenablage-Rechte muss Kopieren manuell erfolgen (Hinweis im Statustext vorhanden).
+
+## Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`
+
 # WAITME – Kurzstatus für Menschen
 
 Stand: 2026-02-23 (Next-Step-Liste gekürzt und klarer gemacht)
