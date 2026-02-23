@@ -35,5 +35,6 @@
   "summary_more_hints_expanded": "Zusätzliche Hinweise (vollständig eingeblendet):",
   "summary_more_hints_next_step": "Nächster Schritt: Für alle zusätzlichen Hinweise 'cat {{STATUS_SUMMARY_FILE}}' ausführen oder './start.sh --check --show-all-next-steps' nutzen.",
   "summary_more_hints_status_tip": "Hinweis: Vollständige Details stehen im Startprotokoll. Tipp: Mit './start.sh --check --show-all-next-steps' können alle Hinweise direkt angezeigt werden.",
-  "summary_priority_title": "Empfohlene Reihenfolge (Priorität):"
+  "summary_priority_title": "Empfohlene Reihenfolge (Priorität):",
+  "help_priority_mode": "Prioritätsmodus optional setzen: PROVOWARE_PRIORITY_MODE=numbered (Standard) oder p0p1."
 }

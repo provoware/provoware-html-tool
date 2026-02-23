@@ -172,6 +172,11 @@ if ARGS.profile == "full":
         print_step("➡️", "Nächster Schritt: Hilfeausgabe in start.sh ergänzen.")
         sys.exit(1)
 
+    if "PROVOWARE_PRIORITY_MODE" not in (help_result.stdout + help_result.stderr):
+        print_step("❌", "Smoke-Test fehlgeschlagen: Hilfeeintrag für PROVOWARE_PRIORITY_MODE fehlt.")
+        print_step("➡️", "Nächster Schritt: Hilfeausgabe in start.sh ergänzen.")
+        sys.exit(1)
+
 if ARGS.profile == "full":
     print_step("✅", "Smoke-Test (full) erweitert: PROVOWARE_SHOW_ALL_NEXT_STEPS Input-Validierung")
     show_all_result = subprocess.run(
@@ -189,6 +194,26 @@ if ARGS.profile == "full":
 
     if "Ungültiger Wert für PROVOWARE_SHOW_ALL_NEXT_STEPS" not in (show_all_result.stdout + show_all_result.stderr):
         print_step("❌", "Smoke-Test fehlgeschlagen: Fehlermeldung für PROVOWARE_SHOW_ALL_NEXT_STEPS fehlt.")
+        print_step("➡️", "Nächster Schritt: Fehlermeldung in einfacher Sprache ergänzen.")
+        sys.exit(1)
+
+if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: PROVOWARE_PRIORITY_MODE Input-Validierung")
+    priority_mode_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--check"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+        env={**os.environ, "PROVOWARE_PRIORITY_MODE": "invalid"},
+    )
+
+    if priority_mode_result.returncode == 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Ungültiger PROVOWARE_PRIORITY_MODE wurde nicht abgefangen.")
+        print_step("➡️", "Nächster Schritt: Input-Validierung in start.sh für PROVOWARE_PRIORITY_MODE prüfen.")
+        sys.exit(1)
+
+    if "Ungültiger Wert für PROVOWARE_PRIORITY_MODE" not in (priority_mode_result.stdout + priority_mode_result.stderr):
+        print_step("❌", "Smoke-Test fehlgeschlagen: Fehlermeldung für PROVOWARE_PRIORITY_MODE fehlt.")
         print_step("➡️", "Nächster Schritt: Fehlermeldung in einfacher Sprache ergänzen.")
         sys.exit(1)
 
@@ -211,6 +236,19 @@ if ARGS.profile == "full":
     if "Check-Modus aktiv" not in check_result.stdout:
         print_step("❌", "Smoke-Test fehlgeschlagen: erwartete Erfolgsausgabe fehlt.")
         print_step("➡️", "Nächster Schritt: Ausgabe von './start.sh --check' prüfen.")
+        sys.exit(1)
+
+    priority_check = subprocess.run(
+        ["bash", str(START_SCRIPT), "--weakness-report"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+        env={**os.environ, "PROVOWARE_PRIORITY_MODE": "p0p1"},
+    )
+
+    if priority_check.returncode != 0 or "(P0):" not in priority_check.stdout:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Prioritätsmodus p0p1 zeigt keine P0/P1-Kennzeichnung.")
+        print_step("➡️", "Nächster Schritt: Prioritätsausgabe in system/start_core.sh prüfen.")
         sys.exit(1)
 
     print_step("✅", "Smoke-Test (full) erweitert: ./start.sh --dashboard-template")

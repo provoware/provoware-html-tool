@@ -1,3 +1,9 @@
+## Update 2026-02-23 (Prioritätsmodus P0/P1 + UX-Gate-Absicherung + Hilfe)
+
+- Neu: Optionaler Prioritätsmodus `PROVOWARE_PRIORITY_MODE` (`numbered` oder `p0p1`) ergänzt. Bei `p0p1` werden die ersten zwei Next Steps als **P0** und weitere als **P1** gekennzeichnet.
+- Hilfe verbessert: `--help` erklärt den neuen Prioritätsmodus in einfacher Sprache mit Beispielbefehl.
+- Mini-UX-Check erweitert: Dashboard-Template muss jetzt den Text „Empfohlene Reihenfolge (Priorität)“ enthalten; Smoke-Test prüft zusätzlich Validierung und Ausgabe des Prioritätsmodus.
+
 ## Update 2026-02-23 (CLI-Alias + zentrale Hilfetexte + Prioritätsabschnitt)
 
 - Neu: Optionaler Kurzschalter `--show-all-next-steps` ergänzt. Damit können gebündelte Hinweise direkt angezeigt werden, ohne Umgebungsvariable.
