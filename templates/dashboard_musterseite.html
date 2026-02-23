@@ -126,7 +126,7 @@
       top: .5rem;
     }
     .shell {
-      width: min(1440px, calc(100% - 1.5rem));
+      width: min(1680px, calc(100% - 1rem));
       margin: max(.9rem, env(safe-area-inset-top)) auto .9rem;
       border-radius: 14px;
       border: 1px solid rgba(127, 168, 255, 0.35);
@@ -134,7 +134,7 @@
       box-shadow: 0 18px 48px var(--shadow);
       overflow: hidden;
       display: grid;
-      grid-template-columns: 280px minmax(0, 1fr) 320px;
+      grid-template-columns: minmax(220px, 16vw) minmax(0, 1fr) minmax(240px, 18vw);
       grid-template-rows: auto minmax(0, 1fr) 52px;
       grid-template-areas:
         "top top top"
@@ -149,12 +149,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 1.1rem;
+      padding: 0 .75rem;
       background: linear-gradient(90deg, rgba(8, 24, 53, 0.9), rgba(8, 14, 30, 0.95));
       border-bottom: 1px solid rgba(127, 168, 255, 0.32);
       gap: .6rem;
       flex-wrap: wrap;
-      min-height: 64px;
+      min-height: 52px;
     }
     .topbar-log {
       min-width: 280px;
@@ -285,6 +285,20 @@
       box-shadow: inset 0 0 0 1px var(--focus);
       font-weight: 700;
     }
+    .module-toggle-button {
+      text-align: left;
+      min-height: 42px;
+    }
+    .module-toggle-button[data-enabled="true"] {
+      border-color: #8bf2ac;
+      background: rgba(13, 50, 26, 0.88);
+      color: #d9ffe7;
+    }
+    .module-toggle-button[data-enabled="false"] {
+      border-color: #ffb487;
+      background: rgba(56, 24, 14, 0.88);
+      color: #ffe8da;
+    }
     .card-grid {
       display: grid;
       gap: .85rem;
@@ -304,12 +318,43 @@
     .module-panel.active { display: block; }
     .main-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(var(--grid-cols, 3), minmax(0, 1fr));
+      grid-template-rows: repeat(var(--grid-rows, 3), minmax(0, 1fr));
       grid-auto-rows: minmax(0, 1fr);
       gap: .6rem;
       margin-bottom: .6rem;
       min-height: clamp(540px, 66vh, 760px);
+    }
+    .quick-archive-grid {
+      display: grid;
+      gap: .6rem;
+      grid-template-columns: minmax(180px, 220px) 1fr;
+      margin-top: .6rem;
+    }
+    .quick-archive-masks {
+      border: 1px solid rgba(127, 168, 255, 0.3);
+      border-radius: 10px;
+      padding: .5rem;
+      display: grid;
+      gap: .35rem;
+      max-height: 300px;
+      overflow: auto;
+      background: rgba(8, 22, 47, 0.64);
+    }
+    .quick-archive-entry {
+      border: 1px solid rgba(127, 168, 255, 0.3);
+      border-radius: 10px;
+      padding: .6rem;
+      background: rgba(8, 22, 47, 0.75);
+      display: grid;
+      gap: .45rem;
+    }
+    .quick-archive-history {
+      margin: 0;
+      padding-left: 1.1rem;
+      max-height: 220px;
+      overflow: auto;
+      color: var(--muted);
     }
     .main-grid[data-maximized="true"] {
       grid-template-columns: 1fr;
@@ -649,8 +694,8 @@
   <a href="#bereich-aufgaben" class="skip-link">Direkt zum Arbeitsbereich springen</a>
   <main class="shell" role="main" aria-live="polite">
     <header class="topbar" aria-label="Obere Statusleiste">
-      <span>🧩 ModulTool</span>
-      <h1 class="headline">ModulTool</h1>
+      <span>🧩 Provoware -Modul-Tool-2026</span>
+      <h1 class="headline">Dashboard · Provoware -Modul-Tool-2026 <small id="dashboard-version">v2026.02.23</small></h1>
       <span class="status-pill" id="sync-status" role="status" aria-live="polite">✅ Alle Änderungen gespeichert</span>
       <section class="topbar-log" aria-label="Echtzeit-Protokollkopf">
         <strong>Live-Protokoll (letzte 10 Ereignisse)</strong>
@@ -675,6 +720,7 @@
       <ul class="nav-list" aria-label="Arbeitsmodule">
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="gms-suite">🧩 Genres-Archiv + Zufall + Liste</button></li>
         <li class="nav-item"><button type="button" class="nav-button" data-module-nav="debug-dev">🛠️ Debugging & Entwickleroptionen</button></li>
+        <li class="nav-item"><button type="button" class="nav-button" data-module-nav="quick-archive">🗃️ Schnell-Speicher-Archiv</button></li>
       </ul>
       <p class="nav-group-title">Organisation</p>
       <ul class="nav-list" aria-label="Organisation und Überblick">
@@ -689,6 +735,7 @@
           <li class="plugin-status-item"><span>Genres-Archiv + Zufall + Liste</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
           <li class="plugin-status-item"><span>Debugging & Entwickleroptionen</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
           <li class="plugin-status-item"><span>Template-Archiv</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
+          <li class="plugin-status-item"><span>Schnell-Speicher-Archiv</span><span class="plugin-pill plugin-pill-offline">Wartet</span></li>
         </ul>
       </section>
     </aside>
@@ -722,12 +769,20 @@
           <h2 id="modul-starter-title">Modul-Starter</h2>
           <p class="card-state" id="module-card-state" data-state="ready" role="status" aria-live="polite">Status: Bereit</p>
           <label for="module-switcher"><strong>Modul wählen:</strong></label>
-          <select id="module-switcher" aria-describedby="module-help shortcut-help">
+          <select id="module-switcher" aria-describedby="module-toggle-help module-help shortcut-help">
             <option value="">Bitte Modul auswählen</option>
             <option value="gms-suite">Genres-Archiv + Zufall + Liste</option>
             <option value="debug-dev">Debugging & Entwickleroptionen</option>
             <option value="template-archive">Template-Archiv</option>
+            <option value="quick-archive">Schnell-Speicher-Archiv</option>
           </select>
+          <p id="module-toggle-help" class="subline">Aktive Module sind grün markiert, deaktivierte Module orange. So sehen Sie den Zustand nicht nur über Text, sondern auch klar mit Kontrast.</p>
+          <div class="actions" aria-label="Untermodul aktivieren oder deaktivieren">
+            <button type="button" class="module-toggle-button" data-module-toggle="gms-suite" data-enabled="true">Aktiv: Genres-Archiv + Zufall + Liste</button>
+            <button type="button" class="module-toggle-button" data-module-toggle="debug-dev" data-enabled="true">Aktiv: Debugging & Entwickleroptionen</button>
+            <button type="button" class="module-toggle-button" data-module-toggle="template-archive" data-enabled="true">Aktiv: Template-Archiv</button>
+            <button type="button" class="module-toggle-button" data-module-toggle="quick-archive" data-enabled="true">Aktiv: Schnell-Speicher-Archiv</button>
+          </div>
           <div class="actions">
             <button type="button" data-action="open-module" aria-keyshortcuts="Alt+O" aria-describedby="module-help shortcut-help">Modul öffnen</button>
           </div>
@@ -839,6 +894,26 @@
           <p class="result" id="template-result" role="status" aria-live="polite">Noch kein Template gespeichert.</p>
           <p class="subline" id="template-help-text">Hinweis: Beim Klick auf ein Template wird es protokolliert und automatisch in die Zwischenablage kopiert.</p>
           <ul id="template-list" class="module-option-list" aria-label="Gespeicherte Templates als Buttons"></ul>
+        </article>
+        <article class="tool-card tool-card-secondary module-panel" data-accent="c" id="quick-archive-view" aria-labelledby="quick-archive-title">
+          <p class="card-tag">Untermodul: Schnell-Speicher-Archiv</p>
+          <h2 id="quick-archive-title">Schnell-Speicher-Archiv</h2><div class="module-window-actions" aria-label="Fensteroptionen im Untermodul"><button type="button" data-action="window-hide" aria-label="Untermodul ausblenden" title="Untermodul ausblenden">✕</button><button type="button" data-action="window-maximize" aria-label="Untermodul maximieren oder wiederherstellen" title="Untermodul maximieren oder wiederherstellen">⤢</button><button type="button" data-action="window-detach" aria-label="Untermodul als Einzelfenster öffnen" title="Untermodul als Einzelfenster öffnen">↗</button></div>
+          <p class="subline">Erste Maske: <strong>Eingabe Fachtermini</strong>. Der Titel wird als Dateiname genutzt (Dateiname = Textname ohne Sonderzeichen). Die Einträge werden chronologisch gespeichert.</p>
+          <label for="quick-archive-title-input"><strong>Titel:</strong></label>
+          <input id="quick-archive-title-input" type="text" value="Eingabe Fachtermini" autocomplete="off">
+          <label for="quick-archive-path-input"><strong>Projektordnerpfad (optional):</strong></label>
+          <input id="quick-archive-path-input" type="text" placeholder="Leer lassen für Standardordner ./data/quick_archive">
+          <label for="quick-archive-text-input"><strong>Eingabefeld:</strong></label>
+          <input id="quick-archive-text-input" type="text" placeholder="z. B. neuer Fachbegriff, Idee oder Zwischenrecherche-Ergebnis">
+          <div class="actions"><button type="button" data-action="quick-archive-save">Eintrag speichern</button><button type="button" data-action="quick-archive-new-mask">Neue Maske anlegen</button></div>
+          <p class="result" id="quick-archive-result" role="status" aria-live="polite">Noch kein Eintrag gespeichert.</p>
+          <div class="quick-archive-grid">
+            <section class="quick-archive-masks" id="quick-archive-mask-list" aria-label="Vorhandene Masken"></section>
+            <section class="quick-archive-entry" aria-label="Chronologischer Verlauf">
+              <strong>Chronologisch gespeicherte Einträge</strong>
+              <ol id="quick-archive-history" class="quick-archive-history"></ol>
+            </section>
+          </div>
         </article>
 <article class="tool-card tool-card-primary module-panel" data-accent="a" id="project-routine-view" aria-labelledby="projekt-routine-title">
           <p class="card-tag">Start-Routine Projektordner</p>
@@ -993,7 +1068,12 @@
       const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
       const RECENT_PROJECT_STORAGE_KEY = 'provoware-recent-projects';
       const TEMPLATE_ARCHIVE_STORAGE_KEY = 'provoware-template-archive';
-      const APP_VERSION = '13.2';
+      const QUICK_ARCHIVE_STORAGE_KEY = 'provoware-quick-archive';
+      const MODULE_TOGGLE_STORAGE_KEY = 'provoware-module-toggle-state';
+      const APP_VERSION = '2026.02.23';
+      const moduleToggleNodes = Array.from(document.querySelectorAll('[data-module-toggle]'));
+      const moduleEnabledState = {};
+      const quickArchiveFallbackPath = './data/quick_archive';
       const shortcutEntries = [{ key: 'Alt+S', title: 'Speichern', detail: 'Speichert Änderungen im aktiven Modul.' }, { key: 'Alt+R', title: 'Erneut versuchen', detail: 'Startet die letzte Aktion neu.' }, { key: 'Alt+P', title: 'Reparatur', detail: 'Öffnet die Reparatur-Hilfe mit Befehlen.' }, { key: 'Alt+L', title: 'Protokoll', detail: 'Zeigt den nächsten Log-Schritt.' }, { key: 'Alt+O', title: 'Modul öffnen', detail: 'Öffnet das gewählte Modul.' }, { key: 'F1 / ?', title: 'Shortcut-Übersicht', detail: 'Öffnet das Overlay mit Filter.' }];
       let lastDialogTrigger = null;
       const serverProjectPath = '__PROJECT_PATH__';
@@ -1838,7 +1918,8 @@
           'gms-suite': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
           'debug-dev': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
           'todo': 'Optionen direkt im Untermodul über Symbolleiste: Ausblenden, Maximieren, Einzelfenster.',
-          'template-archive': 'Optionen direkt im Untermodul über Symbolleiste: Speichern, bearbeiten, als Button kopieren.'
+          'template-archive': 'Optionen direkt im Untermodul über Symbolleiste: Speichern, bearbeiten, als Button kopieren.',
+          'quick-archive': 'Optionen direkt im Untermodul über Symbolleiste: Eintrag speichern, neue Maske anlegen, Verlauf prüfen.'
         };
         const helpText = optionsByModule[moduleKey] || 'Bitte Modul wählen und über die Symbolleiste steuern.';
         inspectorHelpNode.textContent = 'Hilfe: ' + helpText;
@@ -1882,6 +1963,9 @@
         if (!pluginStatusListNode || typeof selectedModule !== 'string' || selectedModule.trim().length === 0) {
           return false;
         }
+        if (moduleEnabledState[selectedModule] === false) {
+          return setResult('⚠️ Modul ist deaktiviert. Bitte zuerst im Modul-Starter aktivieren.');
+        }
         const sourceMeta = getModuleSourceMeta(selectedModule);
         const activeLabel = sourceMeta ? sourceMeta.label.trim().toLowerCase() : '';
         const pluginRows = Array.from(pluginStatusListNode.querySelectorAll('.plugin-status-item'));
@@ -1913,7 +1997,8 @@
         const localFallback = {
           'gms-suite': { label: 'Genres-Archiv + Zufall + Liste', data_source: 'data/project_context.json', detail: 'Gebündeltes Modul für Archiv, Zufallsgenerator und Listenpflege im selben Bereich.', next_step: 'Einträge speichern oder Zufall erzeugen.' },
           'debug-dev': { label: 'Debugging & Entwickleroptionen', data_source: 'logs/status_summary.txt', detail: 'Zeigt Live-Protokoll, Fehlerhilfe und nächste technische Schritte.', next_step: 'Bei Fehlern zuerst Log lesen und dann Reparatur starten.' },
-          'template-archive': { label: 'Template-Archiv', data_source: 'data/template_archive.json', detail: 'Verwaltet wiederverwendbare Textbausteine inklusive automatischem Kopieren und Protokoll.', next_step: 'Template auswählen und direkt in Zielwerkzeug einfügen.' }
+          'template-archive': { label: 'Template-Archiv', data_source: 'data/template_archive.json', detail: 'Verwaltet wiederverwendbare Textbausteine inklusive automatischem Kopieren und Protokoll.', next_step: 'Template auswählen und direkt in Zielwerkzeug einfügen.' },
+          'quick-archive': { label: 'Schnell-Speicher-Archiv', data_source: 'data/quick_archive', detail: 'Speichert kurze Ideen, Fachtermini und Recherche-Ergebnisse chronologisch pro Maske.', next_step: 'Titel prüfen, Eintrag speichern und bei Bedarf neue Maske anlegen.' }
         };
         const sourceMeta = (serverModuleSources && typeof serverModuleSources === 'object' && normalizedKey in serverModuleSources) ? serverModuleSources[normalizedKey] : localFallback[normalizedKey];
         if (!sourceMeta) {
@@ -1936,6 +2021,9 @@
         const previewNode = document.getElementById('module-source-preview');
         if (!(previewNode instanceof HTMLElement)) {
           return false;
+        }
+        if (moduleEnabledState[selectedModule] === false) {
+          return setResult('⚠️ Modul ist deaktiviert. Bitte zuerst im Modul-Starter aktivieren.');
         }
         const sourceMeta = getModuleSourceMeta(selectedModule);
         if (!sourceMeta) {
@@ -1967,6 +2055,7 @@
         const label = slot.querySelector('.grid-slot-label');
         if (label) { label.remove(); }
         activePanel.classList.add('active');
+        activePanel.setAttribute('data-maximized','false');
         slot.appendChild(activePanel);
         activeModuleKey = moduleKey;
         setMaximizedModule('');
@@ -1979,18 +2068,33 @@
       function setMaximizedModule(moduleKey) {
         const normalized = typeof moduleKey === 'string' ? moduleKey.trim() : '';
         const hasValidSlot = normalized && moduleSlots[normalized];
+        const currentPanel = normalized ? document.getElementById(normalized + '-view') : null;
+        const isAlreadyMaximized = currentPanel instanceof HTMLElement && currentPanel.getAttribute('data-maximized') === 'true';
+        const shouldMaximize = !!hasValidSlot && !isAlreadyMaximized;
         if (moduleGridNode instanceof HTMLElement) {
-          moduleGridNode.setAttribute('data-maximized', hasValidSlot ? 'true' : 'false');
+          moduleGridNode.setAttribute('data-maximized', shouldMaximize ? 'true' : 'false');
+        }
+        modulePanelNodes.forEach(function (panel) {
+          if (panel instanceof HTMLElement) {
+            panel.setAttribute('data-maximized', 'false');
+          }
+        });
+        if (shouldMaximize && currentPanel instanceof HTMLElement) {
+          currentPanel.setAttribute('data-maximized', 'true');
         }
         moduleGridCells.forEach(function (cell) {
           const slotIndex = Number(cell.getAttribute('data-slot-index'));
-          const targetSlot = hasValidSlot ? Number(moduleSlots[normalized]) : null;
-          const isTarget = hasValidSlot && slotIndex === targetSlot;
+          const targetSlot = shouldMaximize ? Number(moduleSlots[normalized]) : null;
+          const isTarget = shouldMaximize && slotIndex === targetSlot;
           cell.classList.toggle('is-maximized-slot', !!isTarget);
-          cell.classList.toggle('is-hidden-slot', !!hasValidSlot && !isTarget);
+          cell.classList.toggle('is-hidden-slot', !!shouldMaximize && !isTarget);
         });
+        return shouldMaximize;
       }
       function openModule(selectedModule) {
+        if (moduleEnabledState[selectedModule] === false) {
+          return setResult('⚠️ Modul ist deaktiviert. Bitte zuerst im Modul-Starter aktivieren.');
+        }
         const sourceMeta = getModuleSourceMeta(selectedModule);
         if (typeof selectedModule !== 'string' || !sourceMeta) {
           setDebugDetails('Modulstart fehlgeschlagen', 'Bitte zuerst ein Modul auswählen und dann erneut „Modul öffnen“ drücken.');
@@ -2148,7 +2252,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'project-switch-recent', 'copy-log', 'switch-mode', 'export-all-data', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete', 'template-add', 'template-update', 'template-delete'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'project-switch-recent', 'copy-log', 'switch-mode', 'export-all-data', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete', 'template-add', 'template-update', 'template-delete', 'quick-archive-save', 'quick-archive-new-mask', 'module-toggle'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -2230,7 +2334,7 @@
             return setResult('⚠️ Kein aktives Untermodul im Grid. Bitte zuerst ein Modul öffnen.');
           }
           setMaximizedModule(activeModuleKey);
-          return setResult('✅ Aktives Untermodul maximiert und auf den gesamten Grid-Bereich ausgedehnt.');
+          return setResult('✅ Maximiert/Wiederhergestellt abgeschlossen. Untermodul wurde dynamisch auf Bildschirmgröße angepasst.');
         }
         if (actionValue === 'window-reset') {
           modulePanelNodes.forEach(function (panel) {
@@ -2384,6 +2488,52 @@
           });
           return true;
         }
+
+        if (actionValue === 'module-toggle') {
+          return setResult('ℹ️ Modul-Umschaltung wird über den Modul-Button gesteuert.');
+        }
+        if (actionValue === 'quick-archive-save' || actionValue === 'quick-archive-new-mask') {
+          const titleNode = document.getElementById('quick-archive-title-input');
+          const pathNode = document.getElementById('quick-archive-path-input');
+          const textNode = document.getElementById('quick-archive-text-input');
+          const resultNodeLocal = document.getElementById('quick-archive-result');
+          const state = readQuickArchiveState();
+          const title = titleNode && typeof titleNode.value === 'string' ? titleNode.value.trim() : '';
+          const normalizedTitle = normalizeArchiveTitle(title || 'Eingabe Fachtermini');
+          const pathValue = pathNode && typeof pathNode.value === 'string' && pathNode.value.trim().length > 0 ? pathNode.value.trim() : quickArchiveFallbackPath;
+          if (actionValue === 'quick-archive-new-mask') {
+            if (!normalizedTitle) {
+              if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Bitte erst einen Titel eingeben.'; }
+              return true;
+            }
+            if (!state.masks[normalizedTitle]) {
+              state.masks[normalizedTitle] = { title: title || 'Eingabe Fachtermini', path: pathValue, entries: [] };
+            }
+            state.selectedMask = normalizedTitle;
+            writeQuickArchiveState(state);
+            renderQuickArchive();
+            if (resultNodeLocal) { resultNodeLocal.textContent = '✅ Neue Maske angelegt: ' + (title || 'Eingabe Fachtermini') + '.'; }
+            return true;
+          }
+          const textValue = textNode && typeof textNode.value === 'string' ? textNode.value.trim() : '';
+          if (textValue.length < 2) {
+            if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Bitte mindestens 2 Zeichen eingeben.'; }
+            return true;
+          }
+          if (!state.masks[normalizedTitle]) {
+            state.masks[normalizedTitle] = { title: title || 'Eingabe Fachtermini', path: pathValue, entries: [] };
+          }
+          state.selectedMask = normalizedTitle;
+          state.masks[normalizedTitle].title = title || 'Eingabe Fachtermini';
+          state.masks[normalizedTitle].path = pathValue;
+          state.masks[normalizedTitle].entries.push({ text: textValue, time: getTimeStamp() });
+          writeQuickArchiveState(state);
+          if (textNode) { textNode.value = ''; }
+          renderQuickArchive();
+          if (resultNodeLocal) { resultNodeLocal.textContent = '✅ Eintrag gespeichert in ' + (title || 'Eingabe Fachtermini') + ' (' + normalizedTitle + '.txt).'; }
+          return true;
+        }
+
         if (actionValue === 'save') {
           const message = '✅ Gespeichert um ' + getTimeStamp() + '.';
           updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
@@ -2431,6 +2581,129 @@
         }
         return false;
       }
+
+      function detectGridByScreen() {
+        const width = window.innerWidth || 1280;
+        const height = window.innerHeight || 720;
+        if (width < 900 || height < 620) {
+          return { cols: 1, rows: 9 };
+        }
+        if (width < 1320 || height < 760) {
+          return { cols: 2, rows: 5 };
+        }
+        return { cols: 3, rows: 3 };
+      }
+      function applyDynamicGridByScreen() {
+        if (!(moduleGridNode instanceof HTMLElement)) {
+          return false;
+        }
+        const layout = detectGridByScreen();
+        moduleGridNode.style.setProperty('--grid-cols', String(layout.cols));
+        moduleGridNode.style.setProperty('--grid-rows', String(layout.rows));
+        return true;
+      }
+      function normalizeArchiveTitle(rawValue) {
+        const source = typeof rawValue === 'string' ? rawValue.trim() : '';
+        if (!source) {
+          return '';
+        }
+        return source.toLowerCase().replace(/[^a-z0-9äöüß\-_\s]/gi, '').replace(/\s+/g, '_').slice(0, 60);
+      }
+      function readQuickArchiveState() {
+        const fallback = {
+          selectedMask: 'eingabe_fachtermini',
+          masks: {
+            eingabe_fachtermini: { title: 'Eingabe Fachtermini', path: quickArchiveFallbackPath, entries: [] }
+          }
+        };
+        const raw = window.localStorage.getItem(QUICK_ARCHIVE_STORAGE_KEY);
+        if (typeof raw !== 'string' || raw.trim().length === 0) {
+          return fallback;
+        }
+        try {
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object' || !parsed.masks || typeof parsed.masks !== 'object') {
+            return fallback;
+          }
+          return parsed;
+        } catch (error) {
+          return fallback;
+        }
+      }
+      function writeQuickArchiveState(state) {
+        if (!state || typeof state !== 'object' || !state.masks || typeof state.masks !== 'object') {
+          return false;
+        }
+        window.localStorage.setItem(QUICK_ARCHIVE_STORAGE_KEY, JSON.stringify(state));
+        return true;
+      }
+      function renderQuickArchive() {
+        const state = readQuickArchiveState();
+        const maskListNode = document.getElementById('quick-archive-mask-list');
+        const historyNode = document.getElementById('quick-archive-history');
+        const titleInput = document.getElementById('quick-archive-title-input');
+        const pathInput = document.getElementById('quick-archive-path-input');
+        if (!(maskListNode instanceof HTMLElement) || !(historyNode instanceof HTMLElement)) {
+          return false;
+        }
+        maskListNode.innerHTML = '';
+        Object.keys(state.masks).forEach(function (key) {
+          const item = state.masks[key];
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'recent-projects-button';
+          button.setAttribute('data-quick-archive-mask', key);
+          button.textContent = (state.selectedMask === key ? '✅ ' : '📁 ') + item.title;
+          maskListNode.appendChild(button);
+        });
+        const selected = state.masks[state.selectedMask] || state.masks[Object.keys(state.masks)[0]];
+        if (titleInput && selected) { titleInput.value = selected.title || ''; }
+        if (pathInput && selected) { pathInput.value = selected.path || ''; }
+        historyNode.innerHTML = '';
+        const entries = selected && Array.isArray(selected.entries) ? selected.entries.slice().reverse() : [];
+        entries.forEach(function (entry) {
+          const li = document.createElement('li');
+          li.textContent = '[' + entry.time + '] ' + entry.text;
+          historyNode.appendChild(li);
+        });
+        return true;
+      }
+      function toggleModuleEnabled(moduleKey, explicitState) {
+        const key = typeof moduleKey === 'string' ? moduleKey.trim() : '';
+        if (!key) {
+          return false;
+        }
+        moduleEnabledState[key] = typeof explicitState === 'boolean' ? explicitState : !moduleEnabledState[key];
+        window.localStorage.setItem(MODULE_TOGGLE_STORAGE_KEY, JSON.stringify(moduleEnabledState));
+        const toggleNode = moduleToggleNodes.find(function (node) { return node.getAttribute('data-module-toggle') === key; });
+        if (toggleNode instanceof HTMLElement) {
+          const isEnabled = !!moduleEnabledState[key];
+          toggleNode.setAttribute('data-enabled', isEnabled ? 'true' : 'false');
+          const labels = {
+            'gms-suite': 'Genres-Archiv + Zufall + Liste',
+            'debug-dev': 'Debugging & Entwickleroptionen',
+            'template-archive': 'Template-Archiv',
+            'quick-archive': 'Schnell-Speicher-Archiv'
+          };
+          toggleNode.textContent = (isEnabled ? 'Aktiv: ' : 'Deaktiviert: ') + (labels[key] || key);
+        }
+        if (!moduleEnabledState[key] && activeModuleKey === key) {
+          executeAction('window-hide');
+        }
+        return true;
+      }
+      function initModuleToggleState() {
+        let stored = {};
+        try {
+          stored = JSON.parse(window.localStorage.getItem(MODULE_TOGGLE_STORAGE_KEY) || '{}');
+        } catch (error) {
+          stored = {};
+        }
+        ['gms-suite', 'debug-dev', 'template-archive', 'quick-archive'].forEach(function (key) {
+          toggleModuleEnabled(key, stored[key] !== false);
+        });
+      }
+
       function renderShortcutList(filterValue) {
         if (!shortcutListNode || !shortcutFilterStatusNode) {
           return false;
@@ -2588,6 +2861,23 @@
           openModule(moduleTarget);
           return;
         }
+        if (clickableNode.hasAttribute('data-module-toggle')) {
+          const moduleKey = clickableNode.getAttribute('data-module-toggle');
+          toggleModuleEnabled(moduleKey || '');
+          setResult('✅ Modulstatus geändert.');
+          return;
+        }
+        if (clickableNode.hasAttribute('data-quick-archive-mask')) {
+          const maskKey = clickableNode.getAttribute('data-quick-archive-mask');
+          const state = readQuickArchiveState();
+          if (maskKey && state.masks[maskKey]) {
+            state.selectedMask = maskKey;
+            writeQuickArchiveState(state);
+            renderQuickArchive();
+            setResult('✅ Maske geladen: ' + state.masks[maskKey].title + '.');
+          }
+          return;
+        }
         if (clickableNode.hasAttribute('data-template-index')) {
           const templateIndex = Number(clickableNode.getAttribute('data-template-index'));
           const archive = readTemplateArchiveState();
@@ -2651,6 +2941,7 @@
           }
         }
       });
+      window.addEventListener('resize', function () { applyDynamicGridByScreen(); });
       document.addEventListener('change', function (event) {
         const target = event.target;
         if (!(target instanceof HTMLElement)) {
@@ -2726,6 +3017,9 @@
       renderModuleSidebarOptions('dashboard', getModuleSourceMeta('dashboard'));
       renderSidebarModuleHints();
       renderTemplateArchive();
+      renderQuickArchive();
+      initModuleToggleState();
+      applyDynamicGridByScreen();
       renderModulePreview('dashboard');
       updateSyncStatus('✅ Alle Änderungen gespeichert (' + getTimeStamp() + ')');
       setCardState(projectCardStateNode, 'ready', 'Bereit');

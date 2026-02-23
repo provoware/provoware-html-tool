@@ -1,3 +1,10 @@
+## Update 2026-02-23 (Maximieren-Toggle + Schnell-Speicher-Archiv + Modul-Kontrast)
+
+- Maximieren ist jetzt als Umschalten umgesetzt: Ein zweiter Klick auf "⤢" stellt die Ansicht wieder her (kein Sackgassen-Zustand mehr).
+- Bildschirmgröße wird automatisch erkannt; das Grid passt Spalten/Zeilen dynamisch an (1x9, 2x5, 3x3), damit alles auf einem Bildschirm vollständig sichtbar bleibt.
+- Neu: Untermodul **"Schnell-Speicher-Archiv"** mit erster Maske "Eingabe Fachtermini". Titel wird als Dateiname vorbereitet, Einträge werden chronologisch gespeichert; neue Masken können im selben Stil angelegt werden.
+- Untermodul-Deaktivierung ergänzt: Modul-Buttons zeigen aktiv/deaktiviert mit Kontrastfarbe + Textlabel für barrierearme Orientierung.
+
 ## Update 2026-02-23 (Template-Archiv + Klick-Kopie + Gesamt-Export)
 
 - Neu: Untermodul **"Template-Archiv"** für Profile wie Coden, Content, Textfragmente, Prompting und individuelle Befehle.

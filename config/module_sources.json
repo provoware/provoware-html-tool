@@ -52,5 +52,11 @@
     "data_source": "data/template_archive.json",
     "detail": "Speichert Profile und Textfragmente als klickbare Buttons mit Protokoll und Zwischenablage.",
     "next_step": "bash start.sh --ux-check-auto"
+  },
+  "quick-archive": {
+    "label": "Schnell-Speicher-Archiv",
+    "data_source": "data/quick_archive",
+    "detail": "Speichert Fachtermini, Ideen und Zwischenrecherche-Ergebnisse chronologisch pro Maske.",
+    "next_step": "bash start.sh --ux-check-auto"
   }
 }

@@ -1,3 +1,14 @@
+DONE 2026-02-23
+- [x] Maximieren-Fehler behoben: Maximieren/Wiederherstellen per Toggle für Untermodule.
+- [x] Auto-Bildschirm-Erkennung ergänzt: Grid passt sich automatisch an Fenstergröße an.
+- [x] Neues Untermodul "Schnell-Speicher-Archiv" inkl. "Eingabe Fachtermini", neue Masken und chronologische Speicherung hinzugefügt.
+- [x] Untermodule können deaktiviert werden; Status hat Kontrastfarbe + Textlabel.
+
+NEXT 2026-02-23
+- [ ] Persistente Dateiausgabe im Zielordner für Schnell-Speicher-Archiv an Start-Routine koppeln (inkl. Datei-Existenz-Check).
+- [ ] E2E-Testfall für Modul-Deaktivierung + Maximieren-Toggle ergänzen.
+- [ ] Header-Kompaktmodus weiter minimieren für ultrakleine Displays (<360px).
+
 DONE: Neues Untermodul „Template-Archiv" ergänzt (Titel, Kategorie, Textinhalt; speichern, aktualisieren, löschen) (2026-02-23)
 DONE: Template-Buttons protokollieren Nutzung und kopieren den Inhalt automatisch in die Zwischenablage (2026-02-23)
 DONE: Dashboard-Button „Gesamt-Daten-Export" ergänzt (JSON-Export inkl. Projektpfad, letzte Projekte, Templates, To-Dos, GMS) (2026-02-23)
