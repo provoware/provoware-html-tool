@@ -1,3 +1,23 @@
+# WAITME – Kurzstatus für Menschen
+
+Stand: 2026-02-23 (Next-Step-Liste gekürzt und klarer gemacht)
+
+## Aktueller Stand (einfach erklärt)
+- Die Startausgabe bleibt jetzt kurz: Standardmäßig werden maximal 8 nächste Schritte gezeigt.
+- Wenn mehr Hinweise anfallen, landen sie gesammelt unter „Weitere Hinweise" im Statusbericht.
+- Falsche Eingaben beim Limit (PROVOWARE_NEXT_STEPS_LIMIT) werden sofort mit klarer Lösung abgefangen.
+
+## Top-Blocker
+- Keine kritischen Blocker in dieser Mini-Iteration.
+
+## Betriebsrisiken
+- Bei sehr vielen Hinweisen muss man für alle Details den Statusbericht lesen (`cat logs/status_summary.txt`).
+
+## Nächste sinnvolle Befehle
+- `bash start.sh --check`
+- `bash start.sh --full-gates`
+- `PROVOWARE_NEXT_STEPS_LIMIT=12 bash start.sh --check`
+
 # WAITME – Kurzstatus
 
 Stand: 2026-02-23 (Start-Status verständlicher gemacht)

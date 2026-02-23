@@ -1,3 +1,8 @@
+DONE: Next-Step-Limit ist jetzt über PROVOWARE_NEXT_STEPS_LIMIT (1-20, Standard 8) validiert und begrenzt die sichtbare Liste robust (2026-02-23)
+DONE: Zusätzliche Next Steps werden als „Weitere Hinweise“ gebündelt ausgegeben, damit Statusausgaben kurz und laienfreundlich bleiben (2026-02-23)
+DONE: Smoke-Test (Profil full) prüft den Fehlerpfad für ungültiges PROVOWARE_NEXT_STEPS_LIMIT automatisch (2026-02-23)
+NEXT: Optionalen Schalter ergänzen, um gebündelte Hinweise direkt im Terminal vollständig auszuklappen (2026-02-24)
+
 DONE: Start-Statuslisten sind jetzt duplikatfrei (Geprüft/Fehlt/Gelöst/Nächster Schritt), damit Hinweise kurz und eindeutig bleiben (2026-02-23)
 DONE: Next Steps werden im Statusbericht nummeriert ausgegeben (Schritt 1..n) für bessere Orientierung und Screenreader-Lesbarkeit (2026-02-23)
 DONE: Smoke-Test (Profil full) prüft nummerierte Next Steps im logs/status_summary.txt automatisch (2026-02-23)
