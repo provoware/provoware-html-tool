@@ -1,4 +1,14 @@
 DONE 2026-02-23
+- [x] Optionaler Schalter `PROVOWARE_SHOW_ALL_NEXT_STEPS` (0/1) ergänzt, inklusive Input-Validierung mit klarer Fehlermeldung.
+- [x] Start-Zusammenfassung kann gebündelte Hinweise jetzt auf Wunsch vollständig direkt ausgeben (besser für Hilfe/Support ohne Extra-Schritt).
+- [x] Smoke-Test (Profil full) prüft den Fehlerpfad für ungültiges `PROVOWARE_SHOW_ALL_NEXT_STEPS` automatisch.
+
+NEXT 2026-02-24
+- [ ] Optionalen Kurzschalter `--show-all-next-steps` ergänzen (Alias ohne Umgebungsvariable, gleicher Effekt).
+- [ ] UX-Hinweistext in `config/messages.json` auslagern, damit Hilfetexte zentral konfigurierbar bleiben.
+- [ ] Statusbericht um kleinen Abschnitt „Empfohlene Reihenfolge (Priorität)" für sehr viele Hinweise erweitern.
+
+DONE 2026-02-23
 - [x] Maximieren-Fehler behoben: Maximieren/Wiederherstellen per Toggle für Untermodule.
 - [x] Auto-Bildschirm-Erkennung ergänzt: Grid passt sich automatisch an Fenstergröße an.
 - [x] Neues Untermodul "Schnell-Speicher-Archiv" inkl. "Eingabe Fachtermini", neue Masken und chronologische Speicherung hinzugefügt.

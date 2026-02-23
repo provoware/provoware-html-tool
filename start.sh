@@ -29,6 +29,7 @@ MISSING_ITEMS=()
 FIXED_ITEMS=()
 NEXT_STEPS=()
 NEXT_STEP_LIMIT="${PROVOWARE_NEXT_STEPS_LIMIT:-8}"
+SHOW_ALL_NEXT_STEPS="${PROVOWARE_SHOW_ALL_NEXT_STEPS:-0}"
 NEXT_STEPS_OVERFLOW=0
 HIDDEN_NEXT_STEPS=()
 DEFAULT_TEXT_JSON='{
@@ -339,6 +340,7 @@ $(get_text "help_usage")
   Offline-Paket bauen:            ./start.sh --offline-pack
   Automatischer Mini-UX-Check:    ./start.sh --ux-check-auto
   Release-Check:                  ./start.sh --release-check
+  Alle gebündelten Hinweise:      PROVOWARE_SHOW_ALL_NEXT_STEPS=1 ./start.sh --check
   Debug-Protokoll aktivieren:     ./start.sh --debug
   Hilfe anzeigen:                 ./start.sh --help
 
@@ -759,6 +761,17 @@ validate_next_step_limit() {
 	fi
 
 	record_checked "PROVOWARE_NEXT_STEPS_LIMIT=${NEXT_STEP_LIMIT}"
+	return 0
+}
+
+validate_show_all_next_steps() {
+	if [[ "$SHOW_ALL_NEXT_STEPS" != "0" && "$SHOW_ALL_NEXT_STEPS" != "1" ]]; then
+		print_error_with_actions "Ungültiger Wert für PROVOWARE_SHOW_ALL_NEXT_STEPS: '${SHOW_ALL_NEXT_STEPS}'. Erlaubt sind nur 0 oder 1."
+		record_next_step "Beispiel: PROVOWARE_SHOW_ALL_NEXT_STEPS=1 ./start.sh --check"
+		return 1
+	fi
+
+	record_checked "PROVOWARE_SHOW_ALL_NEXT_STEPS=${SHOW_ALL_NEXT_STEPS}"
 	return 0
 }
 
@@ -1594,6 +1607,7 @@ main() {
 	ensure_writable_log
 	validate_args "$@"
 	validate_next_step_limit
+	validate_show_all_next_steps
 	run_debug_hint
 
 	case "$MODE" in

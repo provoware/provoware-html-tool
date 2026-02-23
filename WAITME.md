@@ -1,3 +1,23 @@
+# WAITME – Kurzstatus
+
+Stand: 2026-02-23 (gebündelte Hinweise optional vollständig anzeigen)
+
+## Aktueller Stand (einfach erklärt)
+- Die Start-Routine kann zusätzliche Hinweise jetzt auf Wunsch direkt vollständig anzeigen.
+- Neuer Schalter: `PROVOWARE_SHOW_ALL_NEXT_STEPS=1` (zeigt alle versteckten Hinweise sofort an).
+- Falsche Werte werden klar abgefangen (nur `0` oder `1` sind erlaubt), inklusive konkretem Beispielbefehl.
+
+## Top-Blocker
+- Kein kritischer Blocker aus dieser Mini-Iteration.
+
+## Betriebsrisiken
+- Sehr lange Hinweislisten können die Konsole überladen; Standard bleibt deshalb bewusst kurz.
+
+## Nächste sinnvolle Befehle
+- `bash start.sh --check`
+- `PROVOWARE_SHOW_ALL_NEXT_STEPS=1 bash start.sh --check`
+- `python tools/smoke_test.py --profile full`
+
 ## Update 2026-02-23 (einfach erklärt)
 - Maximieren klappt jetzt auch beim zweiten Klick (Toggle = umschalten).
 - Das Dashboard erkennt die Bildschirmgröße und passt das Raster automatisch an.
