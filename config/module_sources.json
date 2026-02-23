@@ -46,5 +46,11 @@
     "data_source": "logs/status_summary.txt",
     "detail": "Stellt Live-Protokoll und klare Next Steps für Fehlersuche bereit.",
     "next_step": "bash start.sh --repair"
+  },
+  "template-archive": {
+    "label": "Template-Archiv",
+    "data_source": "data/template_archive.json",
+    "detail": "Speichert Profile und Textfragmente als klickbare Buttons mit Protokoll und Zwischenablage.",
+    "next_step": "bash start.sh --ux-check-auto"
   }
 }

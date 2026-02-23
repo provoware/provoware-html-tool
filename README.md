@@ -1,3 +1,9 @@
+## Update 2026-02-23 (Template-Archiv + Klick-Kopie + Gesamt-Export)
+
+- Neu: Untermodul **"Template-Archiv"** für Profile wie Coden, Content, Textfragmente, Prompting und individuelle Befehle.
+- Neu: Gespeicherte Templates erscheinen als klare Buttons; Klick protokolliert die Nutzung und kopiert den Inhalt automatisch in die Zwischenablage.
+- Neu: Dashboard-Button **"Gesamt-Daten-Export"** erstellt einen Gesamtauszug (Projektpfad, letzte Projekte, Templates, To-Dos, GMS-Profil) und kopiert ihn direkt.
+
 ## Update 2026-02-23 (Next-Step-Limit + gebündelte Hinweise + Input-Check)
 
 - Neu: `PROVOWARE_NEXT_STEPS_LIMIT` begrenzt die ausgegebenen Next Steps standardmäßig auf 8 (Bereich 1-20), damit die Statusliste für Laien und Screenreader kurz bleibt.

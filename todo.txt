@@ -1,3 +1,8 @@
+DONE: Neues Untermodul „Template-Archiv" ergänzt (Titel, Kategorie, Textinhalt; speichern, aktualisieren, löschen) (2026-02-23)
+DONE: Template-Buttons protokollieren Nutzung und kopieren den Inhalt automatisch in die Zwischenablage (2026-02-23)
+DONE: Dashboard-Button „Gesamt-Daten-Export" ergänzt (JSON-Export inkl. Projektpfad, letzte Projekte, Templates, To-Dos, GMS) (2026-02-23)
+NEXT: Optional Template-Sortierung per Drag&Drop ergänzen (mit Tastatur-Alternative und ARIA-Ansage) (2026-02-24)
+
 DONE: Next-Step-Limit ist jetzt über PROVOWARE_NEXT_STEPS_LIMIT (1-20, Standard 8) validiert und begrenzt die sichtbare Liste robust (2026-02-23)
 DONE: Zusätzliche Next Steps werden als „Weitere Hinweise“ gebündelt ausgegeben, damit Statusausgaben kurz und laienfreundlich bleiben (2026-02-23)
 DONE: Smoke-Test (Profil full) prüft den Fehlerpfad für ungültiges PROVOWARE_NEXT_STEPS_LIMIT automatisch (2026-02-23)
