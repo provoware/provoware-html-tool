@@ -1,3 +1,9 @@
+## Update 2026-02-23 (Schnell-Speicher-Archiv Fix + Validierung + Hilfe)
+
+- Fix Schnell-Speicher-Modul: Titel-Eingabe wird jetzt streng validiert (mindestens 3 Zeichen), damit keine unklaren Masken entstehen.
+- Robustheit verbessert: Pfad wird jetzt bereinigt (ungültige Zeichen entfernt) und Speichervorgänge prüfen den Erfolg mit klarer Next-Step-Fehlermeldung.
+- Hilfe/A11y erweitert: Neues Hilfeelement erklärt den Titel verständlich, plus klarer Next-Step-Text direkt im Modulbereich.
+
 ## Update 2026-02-23 (Prioritätsmodus p0-only + Fokus-Absicherung + Hilfetexte)
 
 - Neu: `PROVOWARE_PRIORITY_MODE=p0-only` zeigt nur die zwei kritischsten P0-Schritte; weitere P1-Schritte werden bewusst ausgeblendet und klar erklärt.

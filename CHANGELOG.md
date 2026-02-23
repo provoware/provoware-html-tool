@@ -1,3 +1,21 @@
+## [2026-02-23] – Iteration: Schnell-Speicher-Modul fixen + A11y-Hilfe + Output-Check (3 Punkte)
+### Scope-Kontrolle
+- Problem: Das Schnell-Speicher-Archiv akzeptierte zu kurze Titel/Pfade und prüfte Speichervorgänge nicht robust.
+- Ziel: Genau 3 kleine Punkte liefern: Input-Validierung verschärfen, Speichern mit Output-Check absichern, Hilfeelement im Modul verbessern.
+- Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) UI+Logik-Validierung im Schnell-Speicher-Modul, 2) Nutzerhilfe/Next-Step-Texte, 3) Pflichtdoku+Versionierung.
+- Abnahmekriterium: Zu kurzer Titel zeigt eine klare Fehlermeldung; erfolgreiche Speicherung bleibt möglich; Gate-Lauf bleibt grün.
+
+### Umsetzung (3 Punkte)
+1. **Input-Validierung**: Titel im Schnell-Speicher-Modul braucht jetzt mindestens 3 Zeichen; Pfad wird mit Bereinigung validiert.
+2. **Output-Check**: Speichern/Maskenwechsel prüft Rückgabe von `writeQuickArchiveState`; bei Fehlern kommen klare Next Steps in einfacher Sprache.
+3. **Hilfe/A11y**: Direktes Hilfeelement beim Titel + zusätzlicher Next-Step-Hinweis im Modul ergänzt.
+
+### Wirkung
+- Weniger fehlerhafte Schnell-Speicher-Einträge.
+- Klarere Nutzerführung bei Fehlern ohne technische Hürden.
+- Höhere Release-Reife durch robustere Speicherprüfung.
+
 ## [2026-02-23] – Iteration: p0-only Priorität + Fokus-UX-Check (3 Punkte)
 ### Scope-Kontrolle
 - Problem: Offene Punkte betrafen einen reinen P0-Ansichtsmodus und eine klare Fokusprüfung für den Prioritätsbereich.

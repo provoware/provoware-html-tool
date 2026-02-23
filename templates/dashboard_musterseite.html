@@ -901,12 +901,14 @@
           <p class="subline">Erste Maske: <strong>Eingabe Fachtermini</strong>. Der Titel wird als Dateiname genutzt (Dateiname = Textname ohne Sonderzeichen). Die Einträge werden chronologisch gespeichert.</p>
           <label for="quick-archive-title-input"><strong>Titel:</strong></label>
           <input id="quick-archive-title-input" type="text" value="Eingabe Fachtermini" autocomplete="off">
+          <p class="subline" id="quick-archive-help-title">Hilfe: Titel soll mindestens 3 Zeichen enthalten. Er wird als Dateiname (Dateiname = Speichername ohne Sonderzeichen) vorbereitet.</p>
           <label for="quick-archive-path-input"><strong>Projektordnerpfad (optional):</strong></label>
           <input id="quick-archive-path-input" type="text" placeholder="Leer lassen für Standardordner ./data/quick_archive">
           <label for="quick-archive-text-input"><strong>Eingabefeld:</strong></label>
           <input id="quick-archive-text-input" type="text" placeholder="z. B. neuer Fachbegriff, Idee oder Zwischenrecherche-Ergebnis">
           <div class="actions"><button type="button" data-action="quick-archive-save">Eintrag speichern</button><button type="button" data-action="quick-archive-new-mask">Neue Maske anlegen</button></div>
           <p class="result" id="quick-archive-result" role="status" aria-live="polite">Noch kein Eintrag gespeichert.</p>
+          <p class="subline" id="quick-archive-next-step">Next Step: Titel prüfen, Eintrag speichern, danach Verlauf unten kontrollieren.</p>
           <div class="quick-archive-grid">
             <section class="quick-archive-masks" id="quick-archive-mask-list" aria-label="Vorhandene Masken"></section>
             <section class="quick-archive-entry" aria-label="Chronologischer Verlauf">
@@ -2500,8 +2502,16 @@
           const resultNodeLocal = document.getElementById('quick-archive-result');
           const state = readQuickArchiveState();
           const title = titleNode && typeof titleNode.value === 'string' ? titleNode.value.trim() : '';
+          if (title.length > 0 && title.length < 3) {
+            if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Titel zu kurz. Bitte mindestens 3 Zeichen eingeben.'; }
+            return true;
+          }
           const normalizedTitle = normalizeArchiveTitle(title || 'Eingabe Fachtermini');
-          const pathValue = pathNode && typeof pathNode.value === 'string' && pathNode.value.trim().length > 0 ? pathNode.value.trim() : quickArchiveFallbackPath;
+          const pathValue = normalizeArchivePath(pathNode && typeof pathNode.value === 'string' ? pathNode.value : quickArchiveFallbackPath);
+          if (!pathValue || pathValue.length < 3) {
+            if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Pfad ungültig. Nächster Schritt: Pfad korrigieren oder leer lassen.'; }
+            return true;
+          }
           if (actionValue === 'quick-archive-new-mask') {
             if (!normalizedTitle) {
               if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Bitte erst einen Titel eingeben.'; }
@@ -2511,7 +2521,10 @@
               state.masks[normalizedTitle] = { title: title || 'Eingabe Fachtermini', path: pathValue, entries: [] };
             }
             state.selectedMask = normalizedTitle;
-            writeQuickArchiveState(state);
+            if (!writeQuickArchiveState(state)) {
+              if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Speichern fehlgeschlagen. Nächster Schritt: Erneut versuchen oder Protokoll öffnen.'; }
+              return true;
+            }
             renderQuickArchive();
             if (resultNodeLocal) { resultNodeLocal.textContent = '✅ Neue Maske angelegt: ' + (title || 'Eingabe Fachtermini') + '.'; }
             return true;
@@ -2528,7 +2541,10 @@
           state.masks[normalizedTitle].title = title || 'Eingabe Fachtermini';
           state.masks[normalizedTitle].path = pathValue;
           state.masks[normalizedTitle].entries.push({ text: textValue, time: getTimeStamp() });
-          writeQuickArchiveState(state);
+          if (!writeQuickArchiveState(state)) {
+            if (resultNodeLocal) { resultNodeLocal.textContent = '⚠️ Speichern fehlgeschlagen. Nächster Schritt: Erneut versuchen oder Alt+L für Protokoll.'; }
+            return true;
+          }
           if (textNode) { textNode.value = ''; }
           renderQuickArchive();
           if (resultNodeLocal) { resultNodeLocal.textContent = '✅ Eintrag gespeichert in ' + (title || 'Eingabe Fachtermini') + ' (' + normalizedTitle + '.txt).'; }
@@ -2609,6 +2625,13 @@
           return '';
         }
         return source.toLowerCase().replace(/[^a-z0-9äöüß\-_\s]/gi, '').replace(/\s+/g, '_').slice(0, 60);
+      }
+      function normalizeArchivePath(rawValue) {
+        const source = typeof rawValue === 'string' ? rawValue.trim() : '';
+        if (!source) {
+          return quickArchiveFallbackPath;
+        }
+        return source.replace(/\s+/g, ' ').replace(/[<>"|?*]/g, '').slice(0, 220);
       }
       function readQuickArchiveState() {
         const fallback = {
@@ -2873,7 +2896,10 @@
           const state = readQuickArchiveState();
           if (maskKey && state.masks[maskKey]) {
             state.selectedMask = maskKey;
-            writeQuickArchiveState(state);
+            if (!writeQuickArchiveState(state)) {
+              setResult('⚠️ Maske konnte nicht geladen werden. Nächster Schritt: Erneut versuchen.');
+              return;
+            }
             renderQuickArchive();
             setResult('✅ Maske geladen: ' + state.masks[maskKey].title + '.');
           }
