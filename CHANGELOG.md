@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: p0-only Priorität + Fokus-UX-Check (3 Punkte)
+### Scope-Kontrolle
+- Problem: Offene Punkte betrafen einen reinen P0-Ansichtsmodus und eine klare Fokusprüfung für den Prioritätsbereich.
+- Ziel: Genau 3 kleine Punkte liefern: neuen `p0-only`-Modus, zentrale Hilfetexte ergänzen, Mini-UX-Check um Fokuskriterium erweitern.
+- Dateien: `start.sh`, `system/start_core.sh`, `config/messages.json`, `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Start-/Prioritätslogik, 2) Zusammenfassungsausgabe, 3) Hilfe-/Textkonfiguration, 4) Fokusmarker im Template, 5) Pflichtdoku + Versionierung.
+- Abnahme: `PROVOWARE_PRIORITY_MODE=p0-only bash start.sh --check` zeigt nur P0-Schritte plus Texthinweis; `bash start.sh --ux-check-auto` bleibt grün.
+
+### Was
+1. `PROVOWARE_PRIORITY_MODE` unterstützt jetzt zusätzlich `p0-only` mit robuster Input-Validierung.
+2. Zusammenfassung/Statusbericht blenden im `p0-only`-Modus P1-Schritte aus und zeigen verständliche Hinweise zum Umschalten.
+3. Prioritäts-Hilfeblock im Dashboard ist direkt fokussierbar; der Auto-UX-Check prüft das jetzt aktiv.
+
+### Warum
+- Kritische Schritte sollten in Support-/Hotfix-Situationen ohne Ablenkung sichtbar sein.
+- Laien brauchen klare Hinweise, wenn absichtlich weniger Schritte gezeigt werden.
+- Fokusprüfungen sichern barrierefreie Tastaturbedienung dauerhaft ab.
+
+### Wirkung
+- Klarere Priorisierung für schnelle Reparaturen.
+- Bessere Verständlichkeit im Statusbericht durch Text statt impliziter Logik.
+- Höhere Release-Reife durch automatisch abgesicherten Fokuspfad.
+
 ## [2026-02-23] – Iteration: Prioritätsmodus P0/P1 + UX-Pflichttext + Smoke-Absicherung
 
 ### A) Fundstelle

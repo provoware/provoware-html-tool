@@ -44,7 +44,7 @@ DEFAULT_TEXT_JSON='{
   "help_full_gates": "Voll-Gates: Führt die fünf Pflicht-Gates in fixer Reihenfolge aus und stoppt bei Fehlern mit klaren Next Steps.",
   "help_status_summary": "Statusbericht: Legt logs/status_summary.txt in einfacher Sprache für Screenreader an.",
   "help_show_all_next_steps": "Alle gebündelten Hinweise direkt anzeigen: ./start.sh --check --show-all-next-steps",
-  "help_priority_mode": "Prioritätsmodus optional setzen: PROVOWARE_PRIORITY_MODE=numbered (Standard) oder p0p1.",
+  "help_priority_mode": "Prioritätsmodus optional setzen: PROVOWARE_PRIORITY_MODE=numbered (Standard), p0p1 oder p0-only (nur kritische Schritte).",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
   "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
@@ -71,7 +71,9 @@ DEFAULT_TEXT_JSON='{
   "summary_more_hints_expanded": "Zusätzliche Hinweise (vollständig eingeblendet):",
   "summary_more_hints_next_step": "Nächster Schritt: Für alle zusätzlichen Hinweise cat {{STATUS_SUMMARY_FILE}} ausführen oder ./start.sh --check --show-all-next-steps nutzen.",
   "summary_more_hints_status_tip": "Hinweis: Vollständige Details stehen im Startprotokoll. Tipp: Mit ./start.sh --check --show-all-next-steps können alle Hinweise direkt angezeigt werden.",
-  "summary_priority_title": "Empfohlene Reihenfolge (Priorität):"
+  "summary_priority_title": "Empfohlene Reihenfolge (Priorität):",
+  "summary_priority_p1_hidden": "Modus p0-only aktiv: P1-Hinweise wurden bewusst ausgeblendet.",
+  "summary_priority_mode_hint": "Für alle Hinweise PROVOWARE_PRIORITY_MODE=numbered oder p0p1 verwenden."
 }'
 TEXT_JSON_CACHE=""
 THEME_LIST_CACHE=""
@@ -796,8 +798,8 @@ validate_show_all_next_steps() {
 }
 
 validate_priority_mode() {
-	if [[ "$PRIORITY_MODE" != "numbered" && "$PRIORITY_MODE" != "p0p1" ]]; then
-		print_error_with_actions "Ungültiger Wert für PROVOWARE_PRIORITY_MODE: '${PRIORITY_MODE}'. Erlaubt sind nur 'numbered' oder 'p0p1'."
+	if [[ "$PRIORITY_MODE" != "numbered" && "$PRIORITY_MODE" != "p0p1" && "$PRIORITY_MODE" != "p0-only" ]]; then
+		print_error_with_actions "Ungültiger Wert für PROVOWARE_PRIORITY_MODE: '${PRIORITY_MODE}'. Erlaubt sind nur 'numbered', 'p0p1' oder 'p0-only'."
 		record_next_step "Beispiel: PROVOWARE_PRIORITY_MODE=p0p1 ./start.sh --check"
 		return 1
 	fi
@@ -1477,6 +1479,26 @@ if "Daten sparen" not in content:
 
 if "Empfohlene Reihenfolge (Priorität)" not in content:
     print("fehlender Prioritäts-Hinweis im Template")
+    raise SystemExit(1)
+
+priority_section_match = re.search(r'<section[^>]*id="hilfe-next-steps"[^>]*>', content)
+if not priority_section_match:
+    print("Prioritätsbereich für Fokus-Test fehlt")
+    raise SystemExit(1)
+
+priority_section_tag = priority_section_match.group(0)
+if 'tabindex="-1"' not in priority_section_tag:
+    print("Prioritätsbereich ist nicht direkt fokussierbar (tabindex=-1 fehlt)")
+    raise SystemExit(1)
+
+priority_block_match = re.search(r'<section[^>]*id="hilfe-next-steps"[^>]*>(.*?)</section>', content, flags=re.DOTALL)
+if not priority_block_match:
+    print("Prioritätsbereich-Inhalt fehlt")
+    raise SystemExit(1)
+
+priority_block = priority_block_match.group(1)
+if not re.search(r'<(button|a)\b', priority_block):
+    print("Prioritätsbereich hat kein fokusfähiges Element (button/link)")
     raise SystemExit(1)
 PY
 		print_step "✅" "Mini-UX-Check erfolgreich: Deutsche Hilfetexte, Next Steps und A11y-Marker sind vollständig."
