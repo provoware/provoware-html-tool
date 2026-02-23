@@ -1,5 +1,27 @@
 # WAITME – Kurzstatus
 
+Stand: 2026-02-23 (Prioritätsmodus P0/P1)
+
+## Aktueller Stand (einfach)
+- Startausgabe kann nächste Schritte jetzt optional mit Prioritäten zeigen: P0 (sofort wichtig) und P1 (danach wichtig).
+- Hilfe zeigt den neuen Schalter klar mit Beispiel.
+- UX-Check prüft jetzt zusätzlich den Prioritäts-Hinweis im Dashboard-Template.
+
+## Top-Blocker
+- Kein technischer Blocker offen.
+
+## Betriebsrisiken
+- Wenn `PROVOWARE_PRIORITY_MODE` falsch gesetzt wird, stoppt der Start bewusst mit klarer Fehlhilfe.
+
+## Nächste sinnvolle Befehle
+- `PROVOWARE_PRIORITY_MODE=p0p1 bash start.sh --check`
+- `bash start.sh --ux-check-auto`
+- `python3 tools/smoke_test.py --profile full`
+
+---
+
+# WAITME – Kurzstatus
+
 Stand: 2026-02-23 (CLI-Alias + Prioritätsabschnitt)
 
 ## Aktueller Stand (einfach erklärt)

@@ -1,3 +1,25 @@
+## [2026-02-23] – Iteration: Prioritätsmodus P0/P1 + UX-Pflichttext + Smoke-Absicherung
+
+### A) Fundstelle
+- Problem: Der Statusbericht zeigt Priorität bisher nur als Nummern, wodurch kritische Schritte nicht sofort erkennbar sind.
+- Risiko: Ohne klare Priorität werden Reparaturen in falscher Reihenfolge ausgeführt.
+- Erwartung: Klare P0/P1-Kennzeichnung und abgesicherte Hilfe-/UX-Prüfung im Gate.
+
+### B) Scope
+- Ziel: Prioritäten klarer machen und den UX-Gate um einen Pflichttext plus Tests erweitern.
+- Dateien: `start.sh`, `system/start_core.sh`, `templates/dashboard_musterseite.html`, `tools/smoke_test.py`.
+- Patch-Block je Datei: 1) neue Modus-Validierung + Hilfe, 2) P0/P1-Ausgabe in Konsole/Statusdatei, 3) Prioritäts-Hilfe im Template, 4) Smoke-Test für Validierung/Hilfe/Ausgabe.
+- Abnahmekriterium: `PROVOWARE_PRIORITY_MODE=p0p1 bash start.sh --check` zeigt `(P0)` in Next Steps; `bash start.sh --ux-check-auto` bleibt grün.
+
+### C) Umsetzung (3 Punkte)
+1. `start.sh` um `PROVOWARE_PRIORITY_MODE` (Input-Validierung + Hilfe) erweitert.
+2. `system/start_core.sh` gibt Next Steps optional mit P0/P1-Label in Konsole und `logs/status_summary.txt` aus.
+3. Mini-UX-/Smoke-Absicherung erweitert: Pflichttext im Template + neue Smoke-Prüfungen.
+
+### Wirkung
+- Kritische Schritte sind für Laien schneller erkennbar.
+- A11y-/Hilfeanforderung bleibt durch UX- und Smoke-Gates dauerhaft abgesichert.
+
 ## [2026-02-23] – Iteration: CLI-Alias + zentrale Hilfetexte + Prioritätsabschnitt
 ### Scope-Kontrolle
 - Problem: Für „alle Hinweise anzeigen“ war bisher nur eine Umgebungsvariable vorhanden, und Teile der Statushilfe standen nicht zentral in der Textkonfiguration.

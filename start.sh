@@ -30,6 +30,7 @@ FIXED_ITEMS=()
 NEXT_STEPS=()
 NEXT_STEP_LIMIT="${PROVOWARE_NEXT_STEPS_LIMIT:-8}"
 SHOW_ALL_NEXT_STEPS="${PROVOWARE_SHOW_ALL_NEXT_STEPS:-0}"
+PRIORITY_MODE="${PROVOWARE_PRIORITY_MODE:-numbered}"
 NEXT_STEPS_OVERFLOW=0
 HIDDEN_NEXT_STEPS=()
 DEFAULT_TEXT_JSON='{
@@ -43,6 +44,7 @@ DEFAULT_TEXT_JSON='{
   "help_full_gates": "Voll-Gates: Führt die fünf Pflicht-Gates in fixer Reihenfolge aus und stoppt bei Fehlern mit klaren Next Steps.",
   "help_status_summary": "Statusbericht: Legt logs/status_summary.txt in einfacher Sprache für Screenreader an.",
   "help_show_all_next_steps": "Alle gebündelten Hinweise direkt anzeigen: ./start.sh --check --show-all-next-steps",
+  "help_priority_mode": "Prioritätsmodus optional setzen: PROVOWARE_PRIORITY_MODE=numbered (Standard) oder p0p1.",
   "error_retry": "Erneut versuchen: Befehl mit denselben Optionen erneut starten.",
   "error_repair": "Reparatur starten: ./start.sh --repair",
   "error_log": "Protokoll öffnen: cat {{LOG_FILE}}",
@@ -347,6 +349,7 @@ $(get_text "help_usage")
   Automatischer Mini-UX-Check:    ./start.sh --ux-check-auto
   Release-Check:                  ./start.sh --release-check
   $(get_text "help_show_all_next_steps")
+  $(get_text "help_priority_mode")
   Debug-Protokoll aktivieren:     ./start.sh --debug
   Hilfe anzeigen:                 ./start.sh --help
 
@@ -789,6 +792,17 @@ validate_show_all_next_steps() {
 	fi
 
 	record_checked "PROVOWARE_SHOW_ALL_NEXT_STEPS=${SHOW_ALL_NEXT_STEPS}"
+	return 0
+}
+
+validate_priority_mode() {
+	if [[ "$PRIORITY_MODE" != "numbered" && "$PRIORITY_MODE" != "p0p1" ]]; then
+		print_error_with_actions "Ungültiger Wert für PROVOWARE_PRIORITY_MODE: '${PRIORITY_MODE}'. Erlaubt sind nur 'numbered' oder 'p0p1'."
+		record_next_step "Beispiel: PROVOWARE_PRIORITY_MODE=p0p1 ./start.sh --check"
+		return 1
+	fi
+
+	record_checked "PROVOWARE_PRIORITY_MODE=${PRIORITY_MODE}"
 	return 0
 }
 
@@ -1460,6 +1474,10 @@ if "focus-visible" not in content:
 if "Daten sparen" not in content:
     print("fehlender Hinweis für reduzierte Bewegung")
     raise SystemExit(1)
+
+if "Empfohlene Reihenfolge (Priorität)" not in content:
+    print("fehlender Prioritäts-Hinweis im Template")
+    raise SystemExit(1)
 PY
 		print_step "✅" "Mini-UX-Check erfolgreich: Deutsche Hilfetexte, Next Steps und A11y-Marker sind vollständig."
 		record_checked "Mini-UX-Check"
@@ -1625,6 +1643,7 @@ main() {
 	validate_args "$@"
 	validate_next_step_limit
 	validate_show_all_next_steps
+	validate_priority_mode
 	run_debug_hint
 
 	case "$MODE" in

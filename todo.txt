@@ -1,4 +1,14 @@
 DONE 2026-02-23
+- [x] Prioritätsmodus `PROVOWARE_PRIORITY_MODE` (`numbered|p0p1`) ergänzt, inklusive Input-Validierung und klarer Fehlermeldung.
+- [x] Statusausgabe + `logs/status_summary.txt` geben Next Steps bei Bedarf mit P0/P1-Präfix aus.
+- [x] Mini-UX-Check und Smoke-Test um Prioritäts-Hinweis, Hilfeeintrag und Validierungsprüfung erweitert.
+
+NEXT 2026-02-24
+- [ ] Optionalen Modus `p0-only` ergänzen (nur kritische Schritte anzeigen).
+- [ ] Prioritätsregeln pro Modus konfigurierbar in `config/messages.json` dokumentieren.
+- [ ] Mini-UX-Check um festen Fokus-Test für Prioritätsblock erweitern.
+
+DONE 2026-02-23
 - [x] Optionalen Kurzschalter `--show-all-next-steps` ergänzt (gleicher Effekt wie Umgebungsvariable, inkl. Validierung gegen Mehrfachnutzung).
 - [x] Zusammenfassungs- und Hinweistexte für gebündelte Hinweise zentral in `config/messages.json` gepflegt.
 - [x] Statusbericht erweitert um Abschnitt „Empfohlene Reihenfolge (Priorität)“ für klare Abarbeitung.

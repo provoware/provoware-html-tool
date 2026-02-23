@@ -132,9 +132,19 @@ print_summary() {
 		print_step "ℹ️" "$(get_text "summary_priority_title")"
 		local step
 		local step_index=0
+		local priority_label
 		for step in "${NEXT_STEPS[@]}"; do
 			step_index=$((step_index + 1))
-			print_step "➡️" "Nächster Schritt ${step_index}: ${step}"
+			if [[ "${PRIORITY_MODE:-numbered}" == "p0p1" ]]; then
+				if [[ "$step_index" -le 2 ]]; then
+					priority_label="P0"
+				else
+					priority_label="P1"
+				fi
+				print_step "➡️" "Nächster Schritt ${step_index} (${priority_label}): ${step}"
+			else
+				print_step "➡️" "Nächster Schritt ${step_index}: ${step}"
+			fi
 		done
 		if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
 			if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
@@ -171,9 +181,19 @@ write_accessible_status_summary() {
 			printf 'Naechste Schritte:\n'
 			local step
 			local step_index=0
+			local priority_label
 			for step in "${NEXT_STEPS[@]}"; do
 				step_index=$((step_index + 1))
-				printf -- '- Schritt %s: %s\n' "$step_index" "$step"
+				if [[ "${PRIORITY_MODE:-numbered}" == "p0p1" ]]; then
+					if [[ "$step_index" -le 2 ]]; then
+						priority_label="P0"
+					else
+						priority_label="P1"
+					fi
+					printf -- '- Schritt %s (%s): %s\n' "$step_index" "$priority_label" "$step"
+				else
+					printf -- '- Schritt %s: %s\n' "$step_index" "$step"
+				fi
 			done
 			if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
 				if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
