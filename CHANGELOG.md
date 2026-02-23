@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: Start-Status ohne Duplikate + nummerierte Next Steps + Smoke-Gate
+### Scope-Kontrolle
+- Problem: Der Startstatus zeigte wiederholte Hinweise mehrfach, wodurch Laien unnötig lange Listen lesen mussten.
+- Ziel: Genau drei kleine Punkte liefern: Duplikate verhindern, Next Steps nummerieren, und das neue Format automatisch testen.
+- Dateien: `system/start_core.sh`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Kernlogik Statussammlung, 2) Smoke-Test-Absicherung, 3) Pflichtdoku + Versionsstand.
+- Abnahme: Statusbericht enthält bei mehreren Next Steps nummerierte Zeilen („Schritt 1...") und keine doppelten Einträge.
+
+### Was
+1. `system/start_core.sh` erweitert: Statussammler validieren Text, verhindern Duplikate und halten Listen stabil.
+2. Zusammenfassung + `logs/status_summary.txt` zeigen Next Steps jetzt als nummerierte Schritte (besser für Screenreader und Team-Support).
+3. `tools/smoke_test.py` prüft bei Full-Profil, dass nummerierte Next Steps im Statusbericht vorhanden sind.
+
+### Warum
+- Kürzere, eindeutige Listen sind für Einsteiger leichter zu verstehen.
+- Nummerierte Schritte reduzieren Rückfragen bei Support und Fehleranalyse.
+- Das neue A11y-Format muss automatisch gegen Regression geschützt sein.
+
+### Wirkung
+- Klarere Startausgabe mit weniger Wiederholungen.
+- Bessere Bedienbarkeit für Screenreader und Tastatur-orientierte Nutzer.
+- Höhere Release-Sicherheit durch zusätzlichen Smoke-Check.
+
 ## [2026-02-23] – Iteration: Header-Verlauf für letzte Projekte + sichere Pfadpersistenz + Smoke-Marker
 ### Scope-Kontrolle
 - Problem: Der Header-Projektwechsel hatte keine Schnellliste für zuletzt genutzte Pfade, wodurch wiederholte Wechsel unnötig manuell waren.

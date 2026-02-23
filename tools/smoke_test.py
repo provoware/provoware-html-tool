@@ -326,6 +326,13 @@ if ARGS.profile == "full":
         print_step("❌", "Smoke-Test fehlgeschlagen: Statusbericht enthält nicht alle Pflichtzeilen.")
         print_step("➡️", "Nächster Schritt: Statusbericht-Format im Startskript prüfen.")
         sys.exit(1)
+
+    if "Naechste Schritte:" in status_content:
+        numbered_steps = re.findall(r"^- Schritt (\d+): .+$", status_content, flags=re.MULTILINE)
+        if not numbered_steps:
+            print_step("❌", "Smoke-Test fehlgeschlagen: Statusbericht enthält keine nummerierten Next Steps.")
+            print_step("➡️", "Nächster Schritt: Nummerierung im Statusbericht ergänzen und erneut testen.")
+            sys.exit(1)
 content = DASHBOARD_TEMPLATE.read_text(encoding="utf-8")
 required_markers = [
     'class="shell"',
