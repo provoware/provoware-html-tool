@@ -133,7 +133,7 @@
       overflow: hidden;
       display: grid;
       grid-template-columns: 280px minmax(0, 1fr) 320px;
-      grid-template-rows: 64px minmax(0, 1fr) 52px;
+      grid-template-rows: auto minmax(0, 1fr) 52px;
       grid-template-areas:
         "top top top"
         "left main right"
@@ -149,6 +149,7 @@
       border-bottom: 1px solid rgba(127, 168, 255, 0.32);
       gap: .6rem;
       flex-wrap: wrap;
+      min-height: 64px;
     }
     .topbar-log {
       min-width: 280px;
@@ -272,11 +273,16 @@
     .main-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(220px, 1fr));
+      grid-template-rows: repeat(3, minmax(210px, 1fr));
       gap: .6rem;
       margin-bottom: .6rem;
     }
+    .main-grid[data-maximized="true"] {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(680px, 1fr);
+    }
     .main-grid-cell {
-      min-height: 220px;
+      min-height: 210px;
       border: 2px dashed rgba(127, 168, 255, 0.5);
       border-radius: 10px;
       display: grid;
@@ -285,6 +291,14 @@
       color: var(--muted);
       background: rgba(10, 18, 34, 0.45);
       padding: .35rem;
+    }
+    .main-grid-cell.is-maximized-slot {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      min-height: 680px;
+    }
+    .main-grid-cell.is-hidden-slot {
+      display: none;
     }
     .grid-slot-label {
       display: flex;
@@ -302,6 +316,7 @@
     .module-window-actions button { min-height: 42px; padding: .2rem; }
     .module-panel.active { display: block; height: 100%; }
     .main-grid-cell .tool-card { height: 100%; }
+    .main-grid-cell.is-maximized-slot .tool-card { min-height: 100%; }
     .control-bar {
       display: grid;
       grid-template-columns: minmax(220px, 1fr) minmax(180px, 1fr) 220px;
@@ -632,20 +647,7 @@
     <section class="main" aria-labelledby="bereich-aufgaben">
       <p class="subline">Genrearchiv – alle Änderungen gespeichert</p>
       <h2 id="bereich-aufgaben">Werkzeug-Übersicht</h2>
-      <section class="control-bar" aria-label="Steuerleiste">
-        <label>
-          <span class="breadcrumb" id="project-breadcrumb">Projektpfad: noch nicht gesetzt</span>
-          Projekt-Kontext
-          <input id="project-switch-input" type="text" value="" placeholder="/home/name/Projektordner" aria-describedby="project-switch-help">
-        </label>
-        <label for="global-search-input">Globale Suche
-          <input id="global-search-input" type="search" placeholder="Modul, Aktion oder Hilfe suchen" aria-describedby="global-search-status">
-        </label>
-        <div class="actions" style="margin-top:0;">
-          <button type="button" data-action="project-switch" aria-describedby="project-switch-help">Projekt wechseln</button>
-          <p class="subline" id="project-switch-help">Hilfe: Pfad eintragen, dann „Projekt wechseln“ drücken.</p>
-        </div>
-      </section>
+      <p class="subline" id="project-breadcrumb">Projektpfad: noch nicht gesetzt</p>
       <p class="subline" id="global-search-status" role="status" aria-live="polite">Suche bereit: Bitte Begriff eingeben.</p>
       <p class="subline">Startansicht: Leeres 3x3-Haupt-Grid. Aktivierte Untermodule rutschen automatisch auf den nächsten freien Grid-Platz.</p>
       <div class="module-window-actions" aria-label="Globale Fensteroptionen">
@@ -806,6 +808,7 @@
         </ol>
       </section>
       <ul class="settings-list">
+        <li class="settings-item"><strong>Hauptmodul Einstellungen</strong><label for="project-switch-input">Projekt-Kontext</label><input id="project-switch-input" type="text" value="" placeholder="/home/name/Projektordner" aria-describedby="project-switch-help"><label for="global-search-input">Globale Suche</label><input id="global-search-input" type="search" placeholder="Modul, Aktion oder Hilfe suchen" aria-describedby="global-search-status project-switch-help"><div class="actions" style="margin-top:0;"><button type="button" data-action="project-switch" aria-describedby="project-switch-help">Projekt wechseln</button></div><p class="subline" id="project-switch-help">Hilfe: Pfad eintragen, dann „Projekt wechseln“ drücken.</p></li>
         <li class="settings-item">
           <label for="theme-switcher"><strong>Design:</strong></label>
           <select id="theme-switcher" data-theme-switcher aria-describedby="theme-help">
@@ -851,32 +854,8 @@
       <section class="footer-column" aria-label="Schnellfunktionen im Footer"><strong>Footer-Schnellfunktionen</strong><div class="footer-actions"><button type="button" data-action="save">Speichern</button><button type="button" data-action="retry">Erneut versuchen</button><button type="button" data-action="log">Protokoll öffnen</button></div><span id="footer-sync-status">Alle Änderungen gespeichert</span></section>
     </footer>
   </main>
-  <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text" aria-modal="true">
-    <h2 id="error-title">❌ Fehler erkannt</h2>
-    <p id="error-text">Die Aktion konnte nicht abgeschlossen werden. Bitte folgen Sie den nächsten Schritten.</p>
-    <ul>
-      <li>Erneut versuchen</li>
-      <li>Reparatur ausführen mit <code>./start.sh --repair</code></li>
-      <li>Protokoll öffnen mit <code>cat logs/start.log</code></li>
-    </ul>
-    <div class="actions">
-      <button type="button" data-action="retry">Erneut versuchen</button>
-      <button type="button" data-action="repair">Reparatur</button>
-      <button type="button" data-action="log">Protokoll öffnen</button>
-      <button type="button" data-action="close-dialog">Dialog schließen</button>
-    </div>
-  </dialog>
-  <dialog id="shortcut-overlay" class="quick-overlay" aria-labelledby="shortcut-overlay-title" aria-describedby="shortcut-overlay-help" aria-modal="true">
-    <h2 id="shortcut-overlay-title">⌨️ Shortcut-Übersicht</h2>
-    <p id="shortcut-overlay-help">Fachwort: Overlay (überlagerndes Fenster). Tipp: Suchbegriff eingeben, um passende Befehle schneller zu finden.</p>
-    <label for="shortcut-filter"><strong>Suche in Kürzeln:</strong></label>
-    <input id="shortcut-filter" type="search" placeholder="z. B. speichern, reparatur, modul" autocomplete="off">
-    <p id="shortcut-filter-status" class="result" role="status" aria-live="polite">6 Einträge sichtbar.</p>
-    <ul id="shortcut-list" class="shortcut-list"></ul>
-    <div class="actions">
-      <button type="button" data-action="close-shortcuts">Schließen</button>
-    </div>
-  </dialog>
+  <dialog id="error-dialog" aria-labelledby="error-title" aria-describedby="error-text" aria-modal="true"><h2 id="error-title">❌ Fehler erkannt</h2><p id="error-text">Die Aktion konnte nicht abgeschlossen werden. Bitte folgen Sie den nächsten Schritten.</p><ul><li>Erneut versuchen</li><li>Reparatur ausführen mit <code>./start.sh --repair</code></li><li>Protokoll öffnen mit <code>cat logs/start.log</code></li></ul><div class="actions"><button type="button" data-action="retry">Erneut versuchen</button><button type="button" data-action="repair">Reparatur</button><button type="button" data-action="log">Protokoll öffnen</button><button type="button" data-action="close-dialog">Dialog schließen</button></div></dialog>
+  <dialog id="shortcut-overlay" class="quick-overlay" aria-labelledby="shortcut-overlay-title" aria-describedby="shortcut-overlay-help" aria-modal="true"><h2 id="shortcut-overlay-title">⌨️ Shortcut-Übersicht</h2><p id="shortcut-overlay-help">Fachwort: Overlay (überlagerndes Fenster). Tipp: Suchbegriff eingeben, um passende Befehle schneller zu finden.</p><label for="shortcut-filter"><strong>Suche in Kürzeln:</strong></label><input id="shortcut-filter" type="search" placeholder="z. B. speichern, reparatur, modul" autocomplete="off"><p id="shortcut-filter-status" class="result" role="status" aria-live="polite">6 Einträge sichtbar.</p><ul id="shortcut-list" class="shortcut-list"></ul><div class="actions"><button type="button" data-action="close-shortcuts">Schließen</button></div></dialog>
   <dialog id="project-dialog" aria-labelledby="project-title" aria-describedby="project-text" aria-modal="true">
     <h2 id="project-title">📁 Projekt-Routine</h2>
     <p id="project-text">Bitte Projektordner eingeben und bestätigen. Es gibt keinen Standardordner mehr. Die Start-Routine prüft den Ordner beim nächsten Start und erstellt ihn bei Bedarf automatisch.</p>
@@ -1748,11 +1727,26 @@
         activePanel.classList.add('active');
         slot.appendChild(activePanel);
         activeModuleKey = moduleKey;
+        setMaximizedModule('');
         const hasActive = Object.keys(moduleSlots).length > 0;
         if (moduleStageEmptyNode instanceof HTMLElement) {
           moduleStageEmptyNode.hidden = hasActive;
         }
         return true;
+      }
+      function setMaximizedModule(moduleKey) {
+        const normalized = typeof moduleKey === 'string' ? moduleKey.trim() : '';
+        const hasValidSlot = normalized && moduleSlots[normalized];
+        if (moduleGridNode instanceof HTMLElement) {
+          moduleGridNode.setAttribute('data-maximized', hasValidSlot ? 'true' : 'false');
+        }
+        moduleGridCells.forEach(function (cell) {
+          const slotIndex = Number(cell.getAttribute('data-slot-index'));
+          const targetSlot = hasValidSlot ? Number(moduleSlots[normalized]) : null;
+          const isTarget = hasValidSlot && slotIndex === targetSlot;
+          cell.classList.toggle('is-maximized-slot', !!isTarget);
+          cell.classList.toggle('is-hidden-slot', !!hasValidSlot && !isTarget);
+        });
       }
       function openModule(selectedModule) {
         const sourceMeta = getModuleSourceMeta(selectedModule);
@@ -1964,25 +1958,23 @@
             slotNode.innerHTML = '<div class="grid-slot-label">Feld ' + slotIndex + ' (frei)</div>';
           }
           delete moduleSlots[activeModuleKey];
+          setMaximizedModule('');
           activeModuleKey = '';
           return setResult('✅ Untermodul aus dem Grid ausgeblendet.');
         }
         if (actionValue === 'window-maximize') {
-          if (!activeModuleKey) {
+          if (!activeModuleKey || !moduleSlots[activeModuleKey]) {
             return setResult('⚠️ Kein aktives Untermodul im Grid. Bitte zuerst ein Modul öffnen.');
           }
-          const panel = document.getElementById(activeModuleKey + '-view');
-          if (panel instanceof HTMLElement) {
-            panel.style.transform = 'scale(1.02)';
-            panel.style.borderWidth = '3px';
-          }
-          return setResult('✅ Aktives Untermodul im Grid vergrößert.');
+          setMaximizedModule(activeModuleKey);
+          return setResult('✅ Aktives Untermodul maximiert und auf den gesamten Grid-Bereich ausgedehnt.');
         }
         if (actionValue === 'window-reset') {
           modulePanelNodes.forEach(function (panel) {
             panel.style.transform = '';
             panel.style.borderWidth = '';
           });
+          setMaximizedModule('');
           return setResult('✅ Grid-Sicht wiederhergestellt.');
         }
         if (actionValue === 'layout-save') {

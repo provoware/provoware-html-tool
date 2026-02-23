@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: Header frei + Grid-Max + Einstellungs-Integration
+### Scope-Kontrolle
+- Problem: Der Hauptbereich wurde bei viel Header-Inhalt optisch überdeckt; Maximieren nutzte den Grid-Raum nicht vollständig; Kontext/Suche standen im Dashboard-Zentrum unruhig.
+- Ziel: Drei kleine, abgeschlossene Punkte liefern: Header-Freiraum stabilisieren, Untermodul auf gesamten Grid-Bereich maximieren, Kontext/Suche in Hauptmodul-Einstellungen integrieren.
+- Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Layout+JS-Logik, 2) Pflichtdokumentation, 3) Versionsstand.
+- Abnahme: Header überdeckt nichts, „Untermodul maximieren" belegt den gesamten Grid-Max-Bereich, Projekt-Kontext/Globale Suche sind rechts in den Einstellungen bedienbar.
+
+### Was
+1. `.shell` nutzt jetzt eine automatische Header-Höhe (`auto`) und die Topbar hat eine Mindesthöhe statt fixer Zeilenhöhe.
+2. Maximieren blendet Nicht-Ziel-Slots aus und streckt das aktive Untermodul auf den gesamten Grid-Bereich (echte Layout-Maximierung).
+3. Projekt-Kontext + Globale Suche wurden aus der Control-Bar in den rechten Bereich „Hauptmodul Einstellungen" verschoben (bessere Dashboard-Fokussierung).
+
+### Warum
+- Die Lesbarkeit und Fokusführung war bei wachsendem Header eingeschränkt.
+- Nutzer erwarteten bei „maximieren" eine echte Vollausdehnung im Grid.
+- Der zentrale Arbeitsbereich sollte primär Modulfläche bleiben.
+
+### Wirkung
+- Stabileres, barrierefreundlicheres Layout ohne Überdeckung.
+- Klare, nachvollziehbare Maximieren-Funktion mit Textstatus.
+- Weniger visuelle Last im Hauptbereich, Einstellungen sind logisch gebündelt.
+
 ## [2026-02-22] – Iteration: Footer-Quick-Actions + Modulhinweise
 ### Was
 - Dashboard-Footer in drei klar getrennte Bereiche mit bedienbaren Schnellaktionen umgebaut.

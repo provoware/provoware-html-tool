@@ -1,3 +1,20 @@
+## Update 2026-02-23 (kurz und einfach)
+- Der Header ist freigeräumt: Der Hauptbereich wird nicht mehr überdeckt.
+- „Untermodul maximieren" nutzt jetzt die komplette Grid-Fläche (ganzer Rasterbereich).
+- Projekt-Kontext und globale Suche sind jetzt im rechten Block „Hauptmodul Einstellungen" (bessere Ordnung).
+
+### Top-Blocker
+- Tastatur-Shortcut für „Maximieren zurücksetzen" pro Untermodul fehlt noch.
+
+### Betriebsrisiken
+- Sehr viele gleichzeitig geöffnete Module bleiben auf 3x3 begrenzt; Nutzer müssen bei voller Belegung ein Modul ausblenden.
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`
+
 ## Update 2026-02-22 (Footer + Modulhilfe)
 - Der Footer ist jetzt in 3 Bereiche geteilt und hat direkte Schnellknöpfe für Speichern, Erneut versuchen und Protokoll.
 - In der linken Modul-Liste sehen Sie jetzt pro Modul kurze Hinweise (Tooltip = kurzer Über-Hinweis) mit nächstem Schritt.
