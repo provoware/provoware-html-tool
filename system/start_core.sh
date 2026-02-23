@@ -133,9 +133,14 @@ print_summary() {
 		local step
 		local step_index=0
 		local priority_label
+		local hidden_p1_count=0
 		for step in "${NEXT_STEPS[@]}"; do
 			step_index=$((step_index + 1))
-			if [[ "${PRIORITY_MODE:-numbered}" == "p0p1" ]]; then
+			if [[ "${PRIORITY_MODE:-numbered}" == "p0-only" && "$step_index" -gt 2 ]]; then
+				hidden_p1_count=$((hidden_p1_count + 1))
+				continue
+			fi
+			if [[ "${PRIORITY_MODE:-numbered}" == "p0p1" || "${PRIORITY_MODE:-numbered}" == "p0-only" ]]; then
 				if [[ "$step_index" -le 2 ]]; then
 					priority_label="P0"
 				else
@@ -146,6 +151,10 @@ print_summary() {
 				print_step "➡️" "Nächster Schritt ${step_index}: ${step}"
 			fi
 		done
+		if [[ "${PRIORITY_MODE:-numbered}" == "p0-only" && "$hidden_p1_count" -gt 0 ]]; then
+			print_step "ℹ️" "$(get_text "summary_priority_p1_hidden")"
+			print_step "➡️" "$(get_text "summary_priority_mode_hint")"
+		fi
 		if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
 			if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
 				print_step "ℹ️" "$(get_text "summary_more_hints_expanded")"
@@ -182,9 +191,14 @@ write_accessible_status_summary() {
 			local step
 			local step_index=0
 			local priority_label
+			local hidden_p1_count=0
 			for step in "${NEXT_STEPS[@]}"; do
 				step_index=$((step_index + 1))
-				if [[ "${PRIORITY_MODE:-numbered}" == "p0p1" ]]; then
+				if [[ "${PRIORITY_MODE:-numbered}" == "p0-only" && "$step_index" -gt 2 ]]; then
+					hidden_p1_count=$((hidden_p1_count + 1))
+					continue
+				fi
+				if [[ "${PRIORITY_MODE:-numbered}" == "p0p1" || "${PRIORITY_MODE:-numbered}" == "p0-only" ]]; then
 					if [[ "$step_index" -le 2 ]]; then
 						priority_label="P0"
 					else

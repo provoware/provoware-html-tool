@@ -1,10 +1,20 @@
 DONE 2026-02-23
+- [x] Modus `p0-only` für `PROVOWARE_PRIORITY_MODE` ergänzt (zeigt nur kritische P0-Schritte).
+- [x] Hilfetexte zentral in `config/messages.json` für alle Prioritätsmodi erweitert.
+- [x] Mini-UX-Check prüft Prioritätsbereich jetzt inkl. Fokusfähigkeit (`tabindex="-1"`) und fokusfähigem Element.
+
+NEXT 2026-02-24
+- [ ] Optionalen CLI-Schalter `--priority-mode` ergänzen (mit klarer Konfliktprüfung zur Umgebungsvariable).
+- [ ] Smoke-Test (Profil full) um expliziten Verhaltenstest für `p0-only` erweitern.
+- [ ] Prioritätsbereich im Dashboard zusätzlich mit „Zum Prioritätsblock springen“-Button ergänzen (Tastatur zuerst).
+
+DONE 2026-02-23
 - [x] Prioritätsmodus `PROVOWARE_PRIORITY_MODE` (`numbered|p0p1`) ergänzt, inklusive Input-Validierung und klarer Fehlermeldung.
 - [x] Statusausgabe + `logs/status_summary.txt` geben Next Steps bei Bedarf mit P0/P1-Präfix aus.
 - [x] Mini-UX-Check und Smoke-Test um Prioritäts-Hinweis, Hilfeeintrag und Validierungsprüfung erweitert.
 
 NEXT 2026-02-24
-- [ ] Optionalen Modus `p0-only` ergänzen (nur kritische Schritte anzeigen).
+- [x] Optionalen Modus `p0-only` ergänzt (nur kritische Schritte anzeigen).
 - [ ] Prioritätsregeln pro Modus konfigurierbar in `config/messages.json` dokumentieren.
 - [ ] Mini-UX-Check um festen Fokus-Test für Prioritätsblock erweitern.
 

@@ -1,5 +1,27 @@
 # WAITME – Kurzstatus
 
+Stand: 2026-02-23 (p0-only Priorität + Fokus-Absicherung)
+
+## Aktueller Stand (einfach)
+- Es gibt jetzt 3 Prioritätsmodi: `numbered`, `p0p1` und `p0-only` (nur die wichtigsten kritischen Schritte).
+- Im Modus `p0-only` sagt die Startausgabe klar, dass P1-Hinweise ausgeblendet wurden und wie man wieder alle Hinweise sieht.
+- Der Hilfebereich „Schnellhilfe mit Next Steps“ ist jetzt direkt fokussierbar (Fokus = sichtbare Tastaturmarkierung).
+
+## Top-Blocker
+- Kein kritischer Blocker aus dieser Mini-Iteration.
+
+## Betriebsrisiken
+- Wer `p0-only` nutzt, sieht absichtlich nicht alle Hinweise; die Ausgabe nennt deshalb direkt den Umschaltbefehl.
+
+## Nächste sinnvolle Befehle
+- `PROVOWARE_PRIORITY_MODE=p0-only bash start.sh --check`
+- `bash start.sh --ux-check-auto`
+- `python3 tools/smoke_test.py --profile full`
+
+---
+
+# WAITME – Kurzstatus
+
 Stand: 2026-02-23 (Prioritätsmodus P0/P1)
 
 ## Aktueller Stand (einfach)

@@ -1,3 +1,9 @@
+## Update 2026-02-23 (Prioritätsmodus p0-only + Fokus-Absicherung + Hilfetexte)
+
+- Neu: `PROVOWARE_PRIORITY_MODE=p0-only` zeigt nur die zwei kritischsten P0-Schritte; weitere P1-Schritte werden bewusst ausgeblendet und klar erklärt.
+- Hilfe verbessert: `--help` und zentrale Texte (`config/messages.json`) erklären jetzt alle drei Modi (`numbered`, `p0p1`, `p0-only`) in einfacher Sprache.
+- A11y verbessert: Der Bereich „Schnellhilfe mit Next Steps“ ist jetzt direkt fokussierbar (`tabindex="-1"`), und der Mini-UX-Check prüft den Fokuspfad für den Prioritätsblock automatisch.
+
 ## Update 2026-02-23 (Prioritätsmodus P0/P1 + UX-Gate-Absicherung + Hilfe)
 
 - Neu: Optionaler Prioritätsmodus `PROVOWARE_PRIORITY_MODE` (`numbered` oder `p0p1`) ergänzt. Bei `p0p1` werden die ersten zwei Next Steps als **P0** und weitere als **P1** gekennzeichnet.
