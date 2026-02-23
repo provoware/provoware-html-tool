@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: Gleiches 3x3-Grid + Untermodul-Lesbarkeit + Header-Projektwechsel
+### Scope-Kontrolle
+- Problem: 3x3-Felder waren nicht gleich groß, Untermodule wirkten bei Schrift/Button-Größe uneinheitlich und der Projektwechsel war nicht direkt im Header erreichbar; zusätzlich wurde der Header als verdeckend wahrgenommen.
+- Ziel: Genau drei kleine, abgeschlossene Punkte liefern: gleich große 3x3-Felder mit Scroll, lesbarere Untermodul-Bedienung, Projektwechsel im Header mit robust sichtbarer Topbar.
+- Dateien: `templates/dashboard_musterseite.html`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Layout+Bedienbarkeit im Template, 2) Pflichtdoku-Update, 3) Versionsstand.
+- Abnahme: Haupt-Grid zeigt 9 gleich große Felder, Feldinhalt ist scrollbar, Untermodul-Buttons wirken größer, Projektwechsel ist im Header bedienbar und Topbar bleibt sichtbar ohne Überdeckung.
+
+### Was
+1. Hauptbereich: 3x3-Normalgrid auf gleich große Felder mit fixer Mindesthöhe und Scroll pro Feld umgestellt.
+2. Untermodule: konsistente Mindestgrößen für Buttons/Eingaben und skalierte Schrift im Modulbereich gesetzt.
+3. Header: Projektwechsel direkt in die Topbar aufgenommen; Topbar als sticky (haftend) umgesetzt, damit sie stets sichtbar bleibt.
+
+### Warum
+- Gleichmäßige Grid-Felder verbessern Orientierung für Laien deutlich.
+- Größere Bedienelemente erhöhen Barrierefreiheit (leichter zu treffen/lesen).
+- Projektwechsel in der Topbar spart Wege und reduziert Kontextwechsel.
+
+### Wirkung
+- Stabileres, flexibleres Hauptlayout mit besserer Inhaltskontrolle per Scroll.
+- Mehr Bedienkomfort in Untermodulen bei Tastatur und Touch.
+- Klarere, jederzeit erreichbare Steuerung im Header.
+
 ## [2026-02-23] – Iteration: Header frei + Grid-Max + Einstellungs-Integration
 ### Scope-Kontrolle
 - Problem: Der Hauptbereich wurde bei viel Header-Inhalt optisch überdeckt; Maximieren nutzte den Grid-Raum nicht vollständig; Kontext/Suche standen im Dashboard-Zentrum unruhig.

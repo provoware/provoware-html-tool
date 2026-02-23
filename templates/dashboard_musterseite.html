@@ -21,6 +21,8 @@
       --accent-b: #47c2ff;
       --primary: #47c2ff;
       --accent-c: #ffd061;
+      --module-font-size: clamp(1rem, 0.2vw + .98rem, 1.08rem);
+      --module-button-min-height: 48px;
       color-scheme: dark;
     }
     html[data-theme="balanced"] {
@@ -125,7 +127,7 @@
     }
     .shell {
       width: min(1440px, calc(100% - 1.5rem));
-      margin: .9rem auto;
+      margin: max(.9rem, env(safe-area-inset-top)) auto .9rem;
       border-radius: 14px;
       border: 1px solid rgba(127, 168, 255, 0.35);
       background: linear-gradient(180deg, rgba(7, 17, 37, 0.92), rgba(5, 13, 31, 0.95));
@@ -141,6 +143,9 @@
     }
     .topbar {
       grid-area: top;
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -168,9 +173,9 @@
     }
     .topbar-controls {
       display: grid;
-      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
       gap: .35rem;
-      min-width: 250px;
+      min-width: 360px;
     }
     .status-pill {
       font-weight: 700;
@@ -272,17 +277,19 @@
     .module-panel.active { display: block; }
     .main-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      grid-template-rows: repeat(3, minmax(210px, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: minmax(0, 1fr);
       gap: .6rem;
       margin-bottom: .6rem;
+      min-height: clamp(540px, 66vh, 760px);
     }
     .main-grid[data-maximized="true"] {
       grid-template-columns: 1fr;
       grid-template-rows: minmax(680px, 1fr);
     }
     .main-grid-cell {
-      min-height: 210px;
+      min-height: 0;
       border: 2px dashed rgba(127, 168, 255, 0.5);
       border-radius: 10px;
       display: grid;
@@ -291,6 +298,7 @@
       color: var(--muted);
       background: rgba(10, 18, 34, 0.45);
       padding: .35rem;
+      overflow: auto;
     }
     .main-grid-cell.is-maximized-slot {
       grid-column: 1 / -1;
@@ -315,8 +323,11 @@
     }
     .module-window-actions button { min-height: 42px; padding: .2rem; }
     .module-panel.active { display: block; height: 100%; }
-    .main-grid-cell .tool-card { height: 100%; }
-    .main-grid-cell.is-maximized-slot .tool-card { min-height: 100%; }
+    .main-grid-cell .tool-card { height: 100%; min-height: 100%; }
+    .module-panel { font-size: var(--module-font-size); }
+    .module-panel button,
+    .module-panel select,
+    .module-panel input { min-height: var(--module-button-min-height); font-size: 1rem; }
     .control-bar {
       display: grid;
       grid-template-columns: minmax(220px, 1fr) minmax(180px, 1fr) 220px;
@@ -620,6 +631,7 @@
       </section>
       <div class="topbar-controls">
         <button type="button" data-action="copy-log">Gesamtes Protokoll kopieren</button>
+        <button type="button" data-action="project-setup" aria-describedby="project-switch-help">Projekt wechseln</button>
         <button type="button" id="mode-switch" data-action="switch-mode" aria-pressed="false">Modus: Laie</button>
       </div>
     </header>
@@ -650,6 +662,7 @@
       <p class="subline" id="project-breadcrumb">Projektpfad: noch nicht gesetzt</p>
       <p class="subline" id="global-search-status" role="status" aria-live="polite">Suche bereit: Bitte Begriff eingeben.</p>
       <p class="subline">Startansicht: Leeres 3x3-Haupt-Grid. Aktivierte Untermodule rutschen automatisch auf den nächsten freien Grid-Platz.</p>
+      <p class="subline" id="grid-help">Hilfe: Alle 9 Felder sind gleich groß. Inhalte im Feld sind scrollbar (Scroll = blättern), damit nichts abgeschnitten wird.</p>
       <div class="module-window-actions" aria-label="Globale Fensteroptionen">
         <button type="button" data-action="layout-save" aria-label="Layout speichern" title="Layout speichern">💾</button>
         <button type="button" data-action="layout-restore" aria-label="Gespeichertes Layout laden" title="Gespeichertes Layout laden">↺</button>
