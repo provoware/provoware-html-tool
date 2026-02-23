@@ -1,5 +1,26 @@
 # WAITME – Kurzstatus
 
+Stand: 2026-02-23 (Schnell-Speicher-Modul gefixt)
+
+## Aktueller Stand (einfach erklärt)
+- Das Schnell-Speicher-Archiv ist robuster: Zu kurze Titel werden jetzt sauber abgefangen.
+- Beim Speichern wird das Ergebnis aktiv geprüft (Output-Check = Erfolgsprüfung), damit Fehler sofort klar angezeigt werden.
+- Hilfe im Modul wurde verbessert: klare Erklärung am Titel und ein direkter Next Step.
+
+## Top-Blocker
+- Persistente Dateiausgabe des Schnell-Speicher-Archivs in echte Projektdateien ist noch offen.
+
+## Betriebsrisiken
+- Sehr lange oder ungewöhnliche Pfadangaben können weiterhin manuelle Nachkontrolle benötigen.
+
+## Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh --ux-check-auto`
+
+# WAITME – Kurzstatus
+
 Stand: 2026-02-23 (p0-only Priorität + Fokus-Absicherung)
 
 ## Aktueller Stand (einfach)

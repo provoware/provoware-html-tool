@@ -1,4 +1,14 @@
 DONE 2026-02-23
+- [x] Schnell-Speicher-Archiv validiert Titel jetzt mit Mindestlänge (3 Zeichen) und zeigt klare Fehlermeldung.
+- [x] Schnell-Speicher-Archiv bereinigt Pfad-Eingaben und prüft Speichern/Maskenwechsel mit Output-Check.
+- [x] Hilfe im Modul erweitert: Titel-Hilfe + klarer Next-Step-Text für Laien ergänzt.
+
+NEXT 2026-02-24
+- [ ] Schnell-Speicher-Archiv um optionalen „Eintrag löschen“-Button mit Tastatur-Shortcut ergänzen.
+- [ ] Persistente Dateiausgabe für Schnell-Speicher-Archiv an Start-Routine koppeln (Datei-Existenz-Check).
+- [ ] Smoke-Test um expliziten Negativtest „Titel < 3 Zeichen“ erweitern.
+
+DONE 2026-02-23
 - [x] Modus `p0-only` für `PROVOWARE_PRIORITY_MODE` ergänzt (zeigt nur kritische P0-Schritte).
 - [x] Hilfetexte zentral in `config/messages.json` für alle Prioritätsmodi erweitert.
 - [x] Mini-UX-Check prüft Prioritätsbereich jetzt inkl. Fokusfähigkeit (`tabindex="-1"`) und fokusfähigem Element.
