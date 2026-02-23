@@ -1,3 +1,8 @@
+## Update 2026-02-23 (Header-Verlauf Projekte + Schnellwahl + Smoke-Marker)
+- Header zeigt jetzt „Zuletzt genutzt (maximal 5)" als tastaturfreundliche Schnellliste für Projektpfade.
+- Projektpfad-Speicherung validiert Eingabe/Ausgabe und hält Verlauf ohne Duplikate stabil (neueste zuerst).
+- Smoke-Test prüft neue Marker für Verlaufsliste und Schnellwahl-Aktion automatisch.
+
 ## Update 2026-02-23 (3x3-Gleichgröße + Scroll + Header-Project-Switch)
 - Haupt-Grid nutzt jetzt 3x3 mit gleich großen Feldern im Normalmodus; jede Zelle ist scrollbar, damit Inhalte nicht abgeschnitten werden.
 - Untermodule nutzen größere Standard-Bediengrößen (Buttons und Schrift) für bessere Lesbarkeit und Touch-/Tastatur-Bedienung.

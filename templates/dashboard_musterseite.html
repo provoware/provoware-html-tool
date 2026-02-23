@@ -177,6 +177,33 @@
       gap: .35rem;
       min-width: 360px;
     }
+    .recent-projects {
+      min-width: 260px;
+      max-width: 360px;
+      border: 1px solid rgba(127, 168, 255, 0.35);
+      border-radius: 10px;
+      padding: .45rem .6rem;
+      background: rgba(4, 10, 23, 0.7);
+    }
+    .recent-projects-list {
+      margin: .35rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: .25rem;
+    }
+    .recent-projects-button {
+      width: 100%;
+      text-align: left;
+      min-height: 40px;
+      border-radius: 8px;
+      border: 1px solid rgba(127, 168, 255, 0.32);
+      background: rgba(8, 22, 47, 0.82);
+      color: var(--text);
+      padding: .35rem .5rem;
+      font-size: .9rem;
+      overflow-wrap: anywhere;
+    }
     .status-pill {
       font-weight: 700;
       color: #a4ffc8;
@@ -634,6 +661,12 @@
         <button type="button" data-action="project-setup" aria-describedby="project-switch-help">Projekt wechseln</button>
         <button type="button" id="mode-switch" data-action="switch-mode" aria-pressed="false">Modus: Laie</button>
       </div>
+      <section class="recent-projects" aria-label="Zuletzt genutzte Projekte">
+        <strong>Zuletzt genutzt (maximal 5)</strong>
+        <p class="subline" id="recent-project-help">Hilfe: Mit Enter auf einen Eintrag drücken, um den Projektpfad direkt zu wechseln.</p>
+        <ul class="recent-projects-list" id="recent-project-list"></ul>
+        <p class="subline" id="recent-project-status" role="status" aria-live="polite">Noch kein letzter Projektpfad gespeichert.</p>
+      </section>
     </header>
     <aside class="panel left" aria-label="Navigation">
       <h2>Navigation</h2>
@@ -921,6 +954,8 @@
       const projectDialogResultNode = document.getElementById('project-dialog-result');
       const debugLogListNode = document.getElementById('debug-log-list');
       const topbarLogListNode = document.getElementById('topbar-log-list');
+      const recentProjectListNode = document.getElementById('recent-project-list');
+      const recentProjectStatusNode = document.getElementById('recent-project-status');
       const modeSwitchNode = document.getElementById('mode-switch');
       const shellNode = document.querySelector('.shell');
       const pluginStatusListNode = document.getElementById('plugin-status-list');
@@ -933,6 +968,7 @@
       const LAYOUT_STORAGE_KEY = 'provoware-layout-profile';
       const FONT_SCALE_STORAGE_KEY = 'provoware-font-scale';
       const BACKUP_STORAGE_KEY = 'provoware-backup-enabled';
+      const RECENT_PROJECT_STORAGE_KEY = 'provoware-recent-projects';
       const APP_VERSION = '13.2';
       const shortcutEntries = [{ key: 'Alt+S', title: 'Speichern', detail: 'Speichert Änderungen im aktiven Modul.' }, { key: 'Alt+R', title: 'Erneut versuchen', detail: 'Startet die letzte Aktion neu.' }, { key: 'Alt+P', title: 'Reparatur', detail: 'Öffnet die Reparatur-Hilfe mit Befehlen.' }, { key: 'Alt+L', title: 'Protokoll', detail: 'Zeigt den nächsten Log-Schritt.' }, { key: 'Alt+O', title: 'Modul öffnen', detail: 'Öffnet das gewählte Modul.' }, { key: 'F1 / ?', title: 'Shortcut-Übersicht', detail: 'Öffnet das Overlay mit Filter.' }];
       let lastDialogTrigger = null;
@@ -1574,16 +1610,108 @@
         }
         if (hasExtraWhitespaceInPath(pathValue)) {
           setProjectDialogResult('⚠️ Pfad gespeichert. Hinweis: Mehrere Leerzeichen erkannt. Bitte kurz prüfen, ob das so gewünscht ist.');
-        }
-        window.localStorage.setItem('provoware-project-path', normalized);
-        updateProjectStatus(normalized);
-        updateFooterContext(normalized);
-        if (!hasExtraWhitespaceInPath(pathValue)) {
+        } else {
           setProjectDialogResult('✅ Pfad gespeichert. Nächster Schritt: start.sh neu starten, damit die Prüfung und ggf. Erstellung läuft.');
         }
-        setDebugDetails('Projektpfad aktualisiert', 'Führen Sie ./start.sh aus. Die Start-Routine prüft den Ordner und erstellt ihn bei Bedarf.');
-        appendDebugLog('✅ Projektpfad gespeichert: ' + normalized + ' (' + getTimeStamp() + ').');
+        const persisted = persistProjectPath(normalized, 'Dialog');
+        if (!persisted) {
+          return false;
+        }
         setResult('✅ Projektordner im Dashboard aktualisiert.');
+        return true;
+      }
+      function readRecentProjectList() {
+        if (!(window.localStorage && typeof window.localStorage.getItem === 'function')) {
+          return [];
+        }
+        const raw = window.localStorage.getItem(RECENT_PROJECT_STORAGE_KEY);
+        if (typeof raw !== 'string' || raw.trim().length === 0) {
+          return [];
+        }
+        let parsed;
+        try {
+          parsed = JSON.parse(raw);
+        } catch (error) {
+          return [];
+        }
+        if (!Array.isArray(parsed)) {
+          return [];
+        }
+        const unique = [];
+        parsed.forEach(function (entry) {
+          if (typeof entry !== 'string') {
+            return;
+          }
+          const normalized = normalizeProjectPath(entry);
+          if (!validateProjectPath(normalized) || unique.includes(normalized)) {
+            return;
+          }
+          unique.push(normalized);
+        });
+        return unique.slice(0, 5);
+      }
+      function storeRecentProjectList(projectList) {
+        if (!(window.localStorage && typeof window.localStorage.setItem === 'function') || !Array.isArray(projectList)) {
+          return false;
+        }
+        const validated = projectList.filter(function (entry) {
+          return typeof entry === 'string' && validateProjectPath(entry);
+        }).slice(0, 5);
+        window.localStorage.setItem(RECENT_PROJECT_STORAGE_KEY, JSON.stringify(validated));
+        return true;
+      }
+      function renderRecentProjectList() {
+        if (!recentProjectListNode || !recentProjectStatusNode) {
+          return false;
+        }
+        const projectList = readRecentProjectList();
+        recentProjectListNode.innerHTML = '';
+        if (!projectList.length) {
+          recentProjectStatusNode.textContent = 'Noch kein letzter Projektpfad gespeichert.';
+          return true;
+        }
+        projectList.forEach(function (pathValue, index) {
+          const li = document.createElement('li');
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'recent-projects-button';
+          button.setAttribute('data-action', 'project-switch-recent');
+          button.setAttribute('data-project-path', pathValue);
+          button.setAttribute('aria-label', 'Letztes Projekt ' + String(index + 1) + ': ' + pathValue);
+          button.textContent = String(index + 1) + '. ' + pathValue;
+          li.appendChild(button);
+          recentProjectListNode.appendChild(li);
+        });
+        recentProjectStatusNode.textContent = 'Zuletzt genutzt: ' + String(projectList.length) + ' Projektpfad(e) verfügbar.';
+        return true;
+      }
+      function persistProjectPath(pathValue, sourceLabel) {
+        const normalized = normalizeProjectPath(pathValue);
+        if (!validateProjectPath(normalized)) {
+          setDebugDetails('Projektpfad ungültig', 'Bitte einen absoluten Pfad eingeben und erneut versuchen.');
+          return false;
+        }
+        window.localStorage.setItem('provoware-project-path', normalized);
+        const currentList = readRecentProjectList().filter(function (entry) {
+          return entry !== normalized;
+        });
+        currentList.unshift(normalized);
+        storeRecentProjectList(currentList);
+        renderRecentProjectList();
+        updateProjectStatus(normalized);
+        updateFooterContext(normalized);
+        if (projectBreadcrumbNode) {
+          projectBreadcrumbNode.textContent = 'Projektpfad: ' + normalized;
+        }
+        if (projectSwitchInput) {
+          projectSwitchInput.value = normalized;
+        }
+        if (projectPathInput) {
+          projectPathInput.value = normalized;
+        }
+        const sourceText = typeof sourceLabel === 'string' && sourceLabel.trim().length > 0 ? sourceLabel.trim() : 'Unbekannt';
+        appendDebugLog('✅ Projektpfad aktiv: ' + normalized + ' (' + sourceText + ', ' + getTimeStamp() + ').');
+        setDebugDetails('Projektpfad aktualisiert', 'Pfad wurde gespeichert. Nächster Schritt: Bei Bedarf start.sh neu starten.');
         return true;
       }
       function setActiveNavigation(moduleKey) {
@@ -1919,7 +2047,7 @@
         return true;
       }
       function executeAction(actionValue) {
-        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete'];
+        const known = ['save', 'retry', 'repair', 'log', 'error', 'close-dialog', 'open-module', 'project-setup', 'project-save', 'project-close', 'open-shortcuts', 'close-shortcuts', 'project-switch', 'project-switch-recent', 'copy-log', 'switch-mode', 'window-hide', 'window-maximize', 'window-reset', 'window-detach', 'layout-save', 'layout-restore', 'gms-add', 'gms-random', 'gms-copy-random', 'gms-copy-history', 'gms-clear-history', 'gms-export', 'gms-import-demo', 'gms-profile-switch', 'gms-profile-create', 'gms-entry-delete', 'gms-entry-rename', 'gms-entry-pick', 'todo-add', 'todo-toggle', 'todo-delete'];
         if (typeof actionValue !== 'string' || !known.includes(actionValue)) {
           return setResult('⚠️ Unbekannte Aktion. Bitte prüfen Sie den Button.');
         }
@@ -1954,6 +2082,9 @@
         if (actionValue === 'open-shortcuts') { return openShortcutOverlay(); }
         if (actionValue === 'close-shortcuts') { return closeShortcutOverlay(); }
         if (actionValue === 'project-switch') { return applyProjectSwitch(); }
+        if (actionValue === 'project-switch-recent') {
+          return setResult('ℹ️ Bitte einen Eintrag aus der Liste direkt anklicken.');
+        }
         if (actionValue === 'copy-log') { return copyLogToClipboard(); }
         if (actionValue === 'switch-mode') { return toggleMode(); }
         if (actionValue === 'window-hide') {
@@ -2305,6 +2436,17 @@
         if (typeof action !== 'string' || action.length === 0) {
           return;
         }
+        if (action === 'project-switch-recent') {
+          const selectedPath = clickableNode.getAttribute('data-project-path');
+          if (!validateProjectPath(selectedPath)) {
+            setResult('⚠️ Letzter Projektpfad ist ungültig. Nächster Schritt: Manuell im Feld eingeben.');
+            renderRecentProjectList();
+            return;
+          }
+          persistProjectPath(selectedPath, 'Zuletzt genutzt');
+          setResult('✅ Projektpfad aus „Zuletzt genutzt“ aktiviert: ' + selectedPath + '.');
+          return;
+        }
         executeAction(action);
       });
       document.addEventListener('keydown', function (event) {
@@ -2378,6 +2520,8 @@
       if (projectPathInput) {
         projectPathInput.value = getStoredProjectPath();
       }
+      persistProjectPath(getStoredProjectPath(), 'Start');
+      renderRecentProjectList();
       const initialProjectPath = getStoredProjectPath();
       if (projectDialog && typeof projectDialog.showModal === 'function' && !validateProjectPath(initialProjectPath)) {
         projectDialog.showModal();
