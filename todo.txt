@@ -1,3 +1,8 @@
+DONE: Header überdeckt den Hauptbereich nicht mehr; Topbar wächst jetzt dynamisch mit Inhalt und bleibt klar lesbar (2026-02-23)
+DONE: Untermodul-Maximieren dehnt das aktive Modul jetzt auf den gesamten Grid-Max-Bereich aus (inklusive Slot-Ausblendung) (2026-02-23)
+DONE: Projekt-Kontext + Globale Suche aus Hauptbereich in „Hauptmodul Einstellungen" integriert (ruhigeres Dashboard-Zentrum) (2026-02-23)
+NEXT: Grid-Maximierung um Tastatur-Umschalter „Maximieren ein/aus" pro Modul erweitern und in Shortcut-Overlay erklären (2026-02-24)
+
 DONE: Untermodule belegen bei Aktivierung den nächsten freien 3x3-Grid-Platz und bleiben als Untermodule im Raster bedienbar (2026-02-22)
 DONE: Fensteroptionen (Ausblenden/Maximieren/Einzelfenster) als Symbolleiste direkt in den Untermodulen umgesetzt; Schnellhilfe in den rechten Bereich verschoben (2026-02-22)
 DONE: To-Do-Untermodul mit Datumsoption ergänzt und GMS-Eingaben in getrennte Felder (Genres/Moods/Stile) mit Enter-Bestätigung erweitert (2026-02-22)

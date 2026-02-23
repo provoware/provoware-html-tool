@@ -1,3 +1,8 @@
+## Update 2026-02-23 (Header-Freigabe + flexibles Grid-Maximieren)
+- Header überlappt den Hauptbereich nicht mehr: Die obere Zeile wächst jetzt automatisch mit dem Live-Protokoll.
+- Untermodul-Maximieren nutzt jetzt die volle Grid-Fläche (ganzer 3x3-Bereich), statt nur visuell zu skalieren.
+- Projekt-Kontext + Globale Suche wurden aus dem Hauptbereich in „Hauptmodul Einstellungen" rechts verschoben, damit das Dashboard im Zentrum ruhiger und klarer bleibt.
+
 ## Update 2026-02-22 (Footer-Schnellfunktionen + Sidebar-Hinweise)
 - Footer ist jetzt klar 3-spaltig: Status, Datensicherung und Schnellfunktionen (Speichern, Erneut versuchen, Protokoll öffnen).
 - Sidebar-Module zeigen jetzt automatische Kurzdetails als Tooltip + Screenreader-Label mit Next Step.
@@ -39,7 +44,7 @@ cat logs/status_summary.txt     # kurze, barrierearme Zusammenfassung der letzte
 - `bash start.sh --ux-check-auto`
 
 ## Entwicklungsstand
-- Fortschritt: **96%**
+- Fortschritt: **97%**
 - **Abgeschlossen**
   - Start-Routine mit Auto-Check, Auto-Reparatur, Auto-Tests und Auto-Formatierung.
   - Feste Qualitäts-Gates (Syntax, Qualität, Smoke, End-to-End-Start, Mini-UX-Check).
