@@ -1,3 +1,24 @@
+# WAITME – Kurzstatus
+
+Stand: 2026-02-23 (Start-Status verständlicher gemacht)
+
+## Aktueller Stand (einfach erklärt)
+- Die Startausgabe wiederholt gleiche Hinweise nicht mehr mehrfach.
+- Nächste Schritte sind nummeriert (Schritt 1, Schritt 2 …), damit man sie leichter nacheinander abarbeiten kann.
+- Die automatische Prüfung kontrolliert dieses Format jetzt selbstständig.
+
+## Top-Blocker
+- Kein harter Blocker offen.
+
+## Betriebsrisiken
+- In reinen Offline-Umgebungen können Browser-E2E-Tests weiterhin nur eingeschränkt laufen, wenn Playwright-Artefakte fehlen.
+
+## Nächste sinnvolle Befehle
+- `python3 -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python3 tools/smoke_test.py --profile full`
+- `bash start.sh --ux-check-auto`
+
 ## Update 2026-02-23 (3 Punkte, Header-Verlauf)
 - Im Header gibt es jetzt eine Liste „Zuletzt genutzt" mit maximal 5 Projektpfaden. Sie ist per Tastatur bedienbar.
 - Projektpfade werden jetzt zentral geprüft und gespeichert (validiert = geprüft), damit Status und Verlauf zusammenpassen.

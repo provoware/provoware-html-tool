@@ -1,3 +1,8 @@
+DONE: Start-Statuslisten sind jetzt duplikatfrei (Geprüft/Fehlt/Gelöst/Nächster Schritt), damit Hinweise kurz und eindeutig bleiben (2026-02-23)
+DONE: Next Steps werden im Statusbericht nummeriert ausgegeben (Schritt 1..n) für bessere Orientierung und Screenreader-Lesbarkeit (2026-02-23)
+DONE: Smoke-Test (Profil full) prüft nummerierte Next Steps im logs/status_summary.txt automatisch (2026-02-23)
+NEXT: Optional eine Obergrenze für Next Steps (z. B. maximal 8) einführen und Rest als „weitere Hinweise“ bündeln (2026-02-24)
+
 DONE: Header zeigt jetzt „Zuletzt genutzt (maximal 5)" für Projektpfade als tastaturbedienbare Schnellliste (2026-02-23)
 DONE: Projektpfad-Persistenz ist zentral validiert und pflegt den Verlauf ohne Duplikate (neueste zuerst) (2026-02-23)
 DONE: Smoke-Test prüft Pflichtmarker für Header-Verlauf und Schnellwahl-Aktion automatisch (2026-02-23)

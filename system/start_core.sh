@@ -29,20 +29,49 @@ print_command_hint() {
 	return 0
 }
 
+is_valid_record_text() {
+	local value="$1"
+	if [[ -z "$value" ]] || [[ "$value" =~ [[:cntrl:]] ]]; then
+		return 1
+	fi
+	return 0
+}
+
+append_unique_item() {
+	local item="$1"
+	shift
+	local -n target_array="$1"
+
+	if ! is_valid_record_text "$item"; then
+		print_step "⚠️" "Interner Statushinweis wurde verworfen (leer oder ungültige Zeichen)."
+		return 1
+	fi
+
+	local existing
+	for existing in "${target_array[@]}"; do
+		if [[ "$existing" == "$item" ]]; then
+			return 0
+		fi
+	done
+
+	target_array+=("$item")
+	return 0
+}
+
 record_checked() {
-	CHECKED_ITEMS+=("$1")
+	append_unique_item "$1" CHECKED_ITEMS
 }
 
 record_missing() {
-	MISSING_ITEMS+=("$1")
+	append_unique_item "$1" MISSING_ITEMS
 }
 
 record_fixed() {
-	FIXED_ITEMS+=("$1")
+	append_unique_item "$1" FIXED_ITEMS
 }
 
 record_next_step() {
-	NEXT_STEPS+=("$1")
+	append_unique_item "$1" NEXT_STEPS
 }
 
 replace_placeholders() {
@@ -78,8 +107,10 @@ print_summary() {
 	fi
 	if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
 		local step
+		local step_index=0
 		for step in "${NEXT_STEPS[@]}"; do
-			print_step "➡️" "Nächster Schritt: ${step}"
+			step_index=$((step_index + 1))
+			print_step "➡️" "Nächster Schritt ${step_index}: ${step}"
 		done
 	else
 		print_step "➡️" "Nächster Schritt: Bei Bedarf './start.sh --debug' für Details nutzen."
@@ -103,8 +134,10 @@ write_accessible_status_summary() {
 		if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
 			printf 'Naechste Schritte:\n'
 			local step
+			local step_index=0
 			for step in "${NEXT_STEPS[@]}"; do
-				printf -- '- %s\n' "$step"
+				step_index=$((step_index + 1))
+				printf -- '- Schritt %s: %s\n' "$step_index" "$step"
 			done
 		else
 			printf 'Naechster Schritt: Bei Bedarf ./start.sh --debug nutzen.\n'

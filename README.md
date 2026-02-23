@@ -1,3 +1,8 @@
+## Update 2026-02-23 (Start-Status entrümpelt + Next Steps nummeriert + Smoke-Absicherung)
+- Startstatus sammelt „Geprüft/Fehlt/Gelöst/Nächster Schritt“ jetzt ohne Duplikate, damit Hinweise kurz und verständlich bleiben.
+- Next Steps werden zusätzlich nummeriert ausgegeben (Schritt 1, Schritt 2 ...), was Screenreader-Nutzung und Team-Kommunikation verbessert.
+- Smoke-Test prüft den Statusbericht jetzt auf nummerierte Next Steps, damit das A11y-Format dauerhaft abgesichert bleibt.
+
 ## Update 2026-02-23 (Header-Verlauf Projekte + Schnellwahl + Smoke-Marker)
 - Header zeigt jetzt „Zuletzt genutzt (maximal 5)" als tastaturfreundliche Schnellliste für Projektpfade.
 - Projektpfad-Speicherung validiert Eingabe/Ausgabe und hält Verlauf ohne Duplikate stabil (neueste zuerst).
