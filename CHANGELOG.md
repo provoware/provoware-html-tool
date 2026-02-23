@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: Header-Verlauf für letzte Projekte + sichere Pfadpersistenz + Smoke-Marker
+### Scope-Kontrolle
+- Problem: Der Header-Projektwechsel hatte keine Schnellliste für zuletzt genutzte Pfade, wodurch wiederholte Wechsel unnötig manuell waren.
+- Ziel: Genau drei kleine Punkte liefern: A11y-Hilfe-Schnellliste (max. 5), robuste Pfadpersistenz mit Validierung und automatischer Smoke-Marker-Schutz.
+- Dateien: `templates/dashboard_musterseite.html`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Header-UI + Logik, 2) Smoke-Guard, 3) Pflichtdoku + Versionsstand.
+- Abnahme: Header zeigt tastaturbedienbare Liste „Zuletzt genutzt“, ein Klick/Enter wechselt den Pfad, und Smoke-Test schlägt bei fehlenden Markern fehl.
+
+### Was
+1. Header um Bereich „Zuletzt genutzt (maximal 5)" mit klarer Hilfe in einfacher Sprache und Statuszeile erweitert.
+2. Projektpfad-Persistenz zentralisiert: Eingaben werden validiert, Verlauf ohne Duplikate gepflegt und UI-Status konsistent aktualisiert.
+3. `tools/smoke_test.py` um Pflichtmarker für Verlaufsliste und Schnellwahl-Aktion ergänzt.
+
+### Warum
+- Wiederkehrende Projektwechsel sollten mit Tastatur und wenigen Schritten erreichbar sein.
+- Pfadwechsel brauchte eine einheitliche, wartbare Logik mit Input-/Output-Prüfung.
+- Neue Header-Funktionen müssen im Gate automatisch abgesichert sein.
+
+### Wirkung
+- Schnellere, barriereärmere Projektwechsel mit klarer Rückmeldung.
+- Weniger Fehler durch zentral validierte Pfadpersistenz.
+- Höhere Release-Sicherheit durch zusätzliche Smoke-Marker.
+
 ## [2026-02-23] – Iteration: Gleiches 3x3-Grid + Untermodul-Lesbarkeit + Header-Projektwechsel
 ### Scope-Kontrolle
 - Problem: 3x3-Felder waren nicht gleich groß, Untermodule wirkten bei Schrift/Button-Größe uneinheitlich und der Projektwechsel war nicht direkt im Header erreichbar; zusätzlich wurde der Header als verdeckend wahrgenommen.

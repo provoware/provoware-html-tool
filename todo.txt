@@ -1,3 +1,8 @@
+DONE: Header zeigt jetzt „Zuletzt genutzt (maximal 5)" für Projektpfade als tastaturbedienbare Schnellliste (2026-02-23)
+DONE: Projektpfad-Persistenz ist zentral validiert und pflegt den Verlauf ohne Duplikate (neueste zuerst) (2026-02-23)
+DONE: Smoke-Test prüft Pflichtmarker für Header-Verlauf und Schnellwahl-Aktion automatisch (2026-02-23)
+NEXT: Zuletzt-genutzte Projekte optional um „letzte Nutzung Uhrzeit" als Klartext ergänzen (2026-02-24)
+
 DONE: 3x3-Hauptgrid-Felder sind im Normalmodus jetzt gleich groß; jede Zelle ist scrollbar, damit Inhalte sichtbar bleiben (2026-02-23)
 DONE: Untermodule nutzen größere, einheitliche Button-/Eingabehöhen und besser lesbare Schriftgröße für Laien und A11y (2026-02-23)
 DONE: Projektwechsel ist zusätzlich direkt im Header erreichbar; Topbar bleibt sticky sichtbar und verdeckt den Hauptbereich nicht (2026-02-23)

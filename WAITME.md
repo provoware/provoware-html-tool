@@ -1,3 +1,20 @@
+## Update 2026-02-23 (3 Punkte, Header-Verlauf)
+- Im Header gibt es jetzt eine Liste „Zuletzt genutzt" mit maximal 5 Projektpfaden. Sie ist per Tastatur bedienbar.
+- Projektpfade werden jetzt zentral geprüft und gespeichert (validiert = geprüft), damit Status und Verlauf zusammenpassen.
+- Die automatische Prüfung (Smoke-Test = kurzer Funktionstest) überwacht die neuen Header-Marker.
+
+### Top-Blocker
+- Uhrzeit der letzten Nutzung fehlt noch in der Verlaufsliste.
+
+### Betriebsrisiken
+- Sehr lange Pfade bleiben bedienbar, brauchen aber mehr Zeilenhöhe im Header.
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`
+
 ## Update 2026-02-23 (3 Punkte, kurz)
 - Das 3x3-Hauptgrid hat jetzt gleich große Felder. Jedes Feld kann scrollen (scrollen = blättern), damit Inhalte nie abgeschnitten sind.
 - Untermodule haben größere Knöpfe und besser lesbare Standardschrift für leichteres Bedienen.
