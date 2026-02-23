@@ -1,3 +1,15 @@
+## Update 2026-02-23 (einfach erklärt)
+- Maximieren klappt jetzt auch beim zweiten Klick (Toggle = umschalten).
+- Das Dashboard erkennt die Bildschirmgröße und passt das Raster automatisch an.
+- Neues Modul "Schnell-Speicher-Archiv" speichert Fachbegriffe/Ideen chronologisch; neue Masken sind schnell anlegbar.
+- Modul-Status ist klar sichtbar: Aktiv (grün + Text), Deaktiviert (orange + Text).
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`
+
 # WAITME – Kurzstatus
 
 Stand: 2026-02-23 (Template-Archiv + Gesamt-Export)

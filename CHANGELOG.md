@@ -1,3 +1,19 @@
+## 2026-02-23 – Maximieren stabil + dynamische Bildschirm-Anpassung + Schnell-Speicher-Archiv
+
+### Was
+- Toggle-Fix für Untermodul-Maximieren eingebaut (zweiter Klick stellt zurück).
+- Dynamisches Grid nach Bildschirmgröße aktiviert.
+- Neues Untermodul "Schnell-Speicher-Archiv" ergänzt (Masken + chronologische Einträge).
+- Modul-Aktivstatus/Deaktivstatus über kontrastreiche Buttons + Text ergänzt.
+
+### Warum
+- Vorher war erneutes Maximieren nicht möglich und reduzierte Bedienbarkeit.
+- Nutzer wollten vollständige Ansicht auf einem Bildschirm mit automatischer Anpassung.
+- Es fehlte ein schneller Bereich für Fachtermini, Ideen und Zwischenrecherche.
+
+### Wirkung
+- Höhere Laienfreundlichkeit, klarerer Zustand je Modul, bessere Tastatur-/Kontrast-Nutzung und robusteres Dashboard-Verhalten.
+
 ## [2026-02-23] – Iteration: Template-Archiv + Exportzentrum-Button + A11y-Hilfe
 ### Scope-Kontrolle
 - Problem: Wiederkehrende Textfragmente/Befehle konnten im Dashboard nicht strukturiert gespeichert, organisiert und direkt genutzt werden.
