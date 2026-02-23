@@ -142,6 +142,26 @@ if ARGS.profile == "full":
         sys.exit(1)
 
 if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: PROVOWARE_SHOW_ALL_NEXT_STEPS Input-Validierung")
+    show_all_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--check"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+        env={**os.environ, "PROVOWARE_SHOW_ALL_NEXT_STEPS": "2"},
+    )
+
+    if show_all_result.returncode == 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Ungültiger PROVOWARE_SHOW_ALL_NEXT_STEPS wurde nicht abgefangen.")
+        print_step("➡️", "Nächster Schritt: Input-Validierung in start.sh für PROVOWARE_SHOW_ALL_NEXT_STEPS prüfen.")
+        sys.exit(1)
+
+    if "Ungültiger Wert für PROVOWARE_SHOW_ALL_NEXT_STEPS" not in (show_all_result.stdout + show_all_result.stderr):
+        print_step("❌", "Smoke-Test fehlgeschlagen: Fehlermeldung für PROVOWARE_SHOW_ALL_NEXT_STEPS fehlt.")
+        print_step("➡️", "Nächster Schritt: Fehlermeldung in einfacher Sprache ergänzen.")
+        sys.exit(1)
+
+if ARGS.profile == "full":
     print_step("✅", "Smoke-Test (full) gestartet: ./start.sh --check")
     check_result = subprocess.run(
         ["bash", str(START_SCRIPT), "--check"],

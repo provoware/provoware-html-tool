@@ -1,3 +1,23 @@
+## [2026-02-23] – Iteration: Show-All-Option + Hilfehinweis + Smoke-Validierung
+### Scope-Kontrolle
+- Problem: Bei vielen Next Steps mussten Nutzer für volle Details immer extra den Statusbericht öffnen.
+- Ziel: Genau drei kleine Punkte liefern: optionales Vollanzeigen, klarer Hilfehinweis mit Befehl und automatische Validierungsprüfung.
+- Dateien: `start.sh`, `system/start_core.sh`, `tools/smoke_test.py`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) neuer Input-Check und Hilfebefehl, 2) gebündelte Hinweise optional vollständig ausgeben, 3) Smoke-Test für Fehlerpfad, 4) Pflichtdoku und Versionsstand aktualisieren.
+- Abnahmekriterium: Ungültiges `PROVOWARE_SHOW_ALL_NEXT_STEPS` bricht mit Klartext ab, gültiger Wert `1` zeigt zusätzliche Hinweise direkt in Konsole und Statusbericht.
+
+### Umsetzung (3 Punkte)
+1. `start.sh` ergänzt `PROVOWARE_SHOW_ALL_NEXT_STEPS` (0/1) mit robuster Input-Validierung und klarer Fehlermeldung.
+2. `system/start_core.sh` zeigt gebündelte Hinweise optional vollständig direkt in der Ausgabe und nennt einen klaren Vollbefehl als Next Step.
+3. `tools/smoke_test.py` prüft im Full-Profil den Fehlerpfad für ungültige `PROVOWARE_SHOW_ALL_NEXT_STEPS`-Werte.
+
+### Warum
+- Laien bekommen wahlweise eine kurze oder vollständige Anleitung ohne manuelles Nachschlagen.
+
+### Wirkung
+- Bessere Barrierefreiheit durch klaren Textpfad und weniger Kontextwechsel.
+- Höhere Release-Sicherheit durch zusätzlichen automatischen Validierungstest.
+
 ## 2026-02-23 – Maximieren stabil + dynamische Bildschirm-Anpassung + Schnell-Speicher-Archiv
 
 ### Was

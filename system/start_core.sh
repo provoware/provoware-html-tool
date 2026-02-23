@@ -135,8 +135,16 @@ print_summary() {
 			print_step "➡️" "Nächster Schritt ${step_index}: ${step}"
 		done
 		if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
-			print_step "ℹ️" "Weitere Hinweise wurden gebündelt, damit die Liste kurz bleibt."
-			print_step "➡️" "Nächster Schritt: Für alle zusätzlichen Hinweise 'cat ${STATUS_SUMMARY_FILE:-logs/status_summary.txt}' ausführen."
+			if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
+				print_step "ℹ️" "Zusätzliche Hinweise (vollständig eingeblendet):"
+				local hidden_step
+				for hidden_step in "${HIDDEN_NEXT_STEPS[@]}"; do
+					print_step "➡️" "Weitere Hinweise: ${hidden_step}"
+				done
+			else
+				print_step "ℹ️" "Weitere Hinweise wurden gebündelt, damit die Liste kurz bleibt."
+				print_step "➡️" "Nächster Schritt: Für alle zusätzlichen Hinweise 'cat ${STATUS_SUMMARY_FILE:-logs/status_summary.txt}' ausführen oder 'PROVOWARE_SHOW_ALL_NEXT_STEPS=1 ./start.sh --check' nutzen."
+			fi
 		fi
 	else
 		print_step "➡️" "Nächster Schritt: Bei Bedarf './start.sh --debug' für Details nutzen."
@@ -166,12 +174,21 @@ write_accessible_status_summary() {
 				printf -- '- Schritt %s: %s\n' "$step_index" "$step"
 			done
 			if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
-				printf 'Weitere Hinweise (gebuendelt):\n'
+				if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
+					printf 'Weitere Hinweise (vollstaendig):\n'
+				else
+					printf 'Weitere Hinweise (gebuendelt):\n'
+				fi
 				local hidden_step
 				for hidden_step in "${HIDDEN_NEXT_STEPS[@]}"; do
 					printf -- '- %s\n' "$hidden_step"
 				done
-				printf 'Hinweis: Vollstaendige Details stehen im Startprotokoll.\n'
+				if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
+					printf 'Hinweis: Vollstaendige Hinweise wurden direkt ausgegeben.\n'
+				else
+					printf 'Hinweis: Vollstaendige Details stehen im Startprotokoll.\n'
+					printf 'Tipp: Mit PROVOWARE_SHOW_ALL_NEXT_STEPS=1 koennen alle Hinweise direkt angezeigt werden.\n'
+				fi
 			fi
 		else
 			printf 'Naechster Schritt: Bei Bedarf ./start.sh --debug nutzen.\n'

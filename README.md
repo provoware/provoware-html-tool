@@ -1,3 +1,9 @@
+## Update 2026-02-23 (Option: alle gebündelten Hinweise direkt anzeigen)
+
+- Neu: `PROVOWARE_SHOW_ALL_NEXT_STEPS` (nur `0` oder `1`) wurde ergänzt. Damit lassen sich alle zusätzlichen Next Steps direkt in der Startausgabe anzeigen.
+- Hilfe verbessert: Wenn Hinweise gebündelt sind, zeigt die Ausgabe jetzt einen klaren Next Step mit vollem Befehl (`PROVOWARE_SHOW_ALL_NEXT_STEPS=1 ./start.sh --check`).
+- Smoke-Test (Profil full) prüft jetzt zusätzlich die Input-Validierung für ungültige `PROVOWARE_SHOW_ALL_NEXT_STEPS`-Werte.
+
 ## Update 2026-02-23 (Maximieren-Toggle + Schnell-Speicher-Archiv + Modul-Kontrast)
 
 - Maximieren ist jetzt als Umschalten umgesetzt: Ein zweiter Klick auf "⤢" stellt die Ansicht wieder her (kein Sackgassen-Zustand mehr).
