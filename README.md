@@ -1,3 +1,8 @@
+## Update 2026-02-23 (3x3-Gleichgröße + Scroll + Header-Project-Switch)
+- Haupt-Grid nutzt jetzt 3x3 mit gleich großen Feldern im Normalmodus; jede Zelle ist scrollbar, damit Inhalte nicht abgeschnitten werden.
+- Untermodule nutzen größere Standard-Bediengrößen (Buttons und Schrift) für bessere Lesbarkeit und Touch-/Tastatur-Bedienung.
+- Projektwechsel ist zusätzlich direkt im Header erreichbar; die Topbar ist sticky (haftend) und verdeckt Inhalte nicht mehr.
+
 ## Update 2026-02-23 (Header-Freigabe + flexibles Grid-Maximieren)
 - Header überlappt den Hauptbereich nicht mehr: Die obere Zeile wächst jetzt automatisch mit dem Live-Protokoll.
 - Untermodul-Maximieren nutzt jetzt die volle Grid-Fläche (ganzer 3x3-Bereich), statt nur visuell zu skalieren.

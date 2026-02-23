@@ -1,3 +1,20 @@
+## Update 2026-02-23 (3 Punkte, kurz)
+- Das 3x3-Hauptgrid hat jetzt gleich große Felder. Jedes Feld kann scrollen (scrollen = blättern), damit Inhalte nie abgeschnitten sind.
+- Untermodule haben größere Knöpfe und besser lesbare Standardschrift für leichteres Bedienen.
+- Projektwechsel ist zusätzlich oben im Header. Die Topbar bleibt sichtbar (sticky = haftend), ohne den Hauptbereich zu verdecken.
+
+### Top-Blocker
+- Zuletzt-genutzte Projekte im Header sind noch nicht als Schnellliste vorhanden.
+
+### Betriebsrisiken
+- Bei sehr vielen offenen Inhalten pro Feld kann häufiges Scrollen nötig sein; funktional bleibt alles bedienbar.
+
+### Nächste sinnvolle Befehle
+- `python -m compileall -q .`
+- `bash tools/run_quality_checks.sh`
+- `python tools/smoke_test.py`
+- `bash start.sh`
+
 ## Update 2026-02-23 (kurz und einfach)
 - Der Header ist freigeräumt: Der Hauptbereich wird nicht mehr überdeckt.
 - „Untermodul maximieren" nutzt jetzt die komplette Grid-Fläche (ganzer Rasterbereich).

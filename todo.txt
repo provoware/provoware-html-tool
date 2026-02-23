@@ -1,3 +1,8 @@
+DONE: 3x3-Hauptgrid-Felder sind im Normalmodus jetzt gleich groß; jede Zelle ist scrollbar, damit Inhalte sichtbar bleiben (2026-02-23)
+DONE: Untermodule nutzen größere, einheitliche Button-/Eingabehöhen und besser lesbare Schriftgröße für Laien und A11y (2026-02-23)
+DONE: Projektwechsel ist zusätzlich direkt im Header erreichbar; Topbar bleibt sticky sichtbar und verdeckt den Hauptbereich nicht (2026-02-23)
+NEXT: Header-Projektwechsel um optionale „Zuletzt genutzte Projekte“-Liste ergänzen (max. 5 Einträge, tastaturbedienbar, mit klaren Labels) (2026-02-24)
+
 DONE: Header überdeckt den Hauptbereich nicht mehr; Topbar wächst jetzt dynamisch mit Inhalt und bleibt klar lesbar (2026-02-23)
 DONE: Untermodul-Maximieren dehnt das aktive Modul jetzt auf den gesamten Grid-Max-Bereich aus (inklusive Slot-Ausblendung) (2026-02-23)
 DONE: Projekt-Kontext + Globale Suche aus Hauptbereich in „Hauptmodul Einstellungen" integriert (ruhigeres Dashboard-Zentrum) (2026-02-23)
