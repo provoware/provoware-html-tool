@@ -71,7 +71,29 @@ record_fixed() {
 }
 
 record_next_step() {
-	append_unique_item "$1" NEXT_STEPS
+	local step_text="$1"
+	if ! is_valid_record_text "$step_text"; then
+		print_step "⚠️" "Interner Next-Step-Hinweis wurde verworfen (leer oder ungültige Zeichen)."
+		return 1
+	fi
+
+	if [[ ! "${NEXT_STEP_LIMIT:-}" =~ ^[0-9]+$ ]] || [[ "${NEXT_STEP_LIMIT:-0}" -lt 1 ]]; then
+		NEXT_STEP_LIMIT=8
+	fi
+
+	if append_unique_item "$step_text" NEXT_STEPS; then
+		if [[ ${#NEXT_STEPS[@]} -gt "$NEXT_STEP_LIMIT" ]]; then
+			local overflow_index=$((NEXT_STEP_LIMIT))
+			local overflow_item="${NEXT_STEPS[$overflow_index]}"
+			NEXT_STEPS=("${NEXT_STEPS[@]:0:$NEXT_STEP_LIMIT}")
+			if [[ -n "$overflow_item" ]]; then
+				append_unique_item "$overflow_item" HIDDEN_NEXT_STEPS || true
+			fi
+			NEXT_STEPS_OVERFLOW=1
+		fi
+		return 0
+	fi
+	return 1
 }
 
 replace_placeholders() {
@@ -112,6 +134,10 @@ print_summary() {
 			step_index=$((step_index + 1))
 			print_step "➡️" "Nächster Schritt ${step_index}: ${step}"
 		done
+		if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
+			print_step "ℹ️" "Weitere Hinweise wurden gebündelt, damit die Liste kurz bleibt."
+			print_step "➡️" "Nächster Schritt: Für alle zusätzlichen Hinweise 'cat ${STATUS_SUMMARY_FILE:-logs/status_summary.txt}' ausführen."
+		fi
 	else
 		print_step "➡️" "Nächster Schritt: Bei Bedarf './start.sh --debug' für Details nutzen."
 	fi
@@ -139,6 +165,14 @@ write_accessible_status_summary() {
 				step_index=$((step_index + 1))
 				printf -- '- Schritt %s: %s\n' "$step_index" "$step"
 			done
+			if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
+				printf 'Weitere Hinweise (gebuendelt):\n'
+				local hidden_step
+				for hidden_step in "${HIDDEN_NEXT_STEPS[@]}"; do
+					printf -- '- %s\n' "$hidden_step"
+				done
+				printf 'Hinweis: Vollstaendige Details stehen im Startprotokoll.\n'
+			fi
 		else
 			printf 'Naechster Schritt: Bei Bedarf ./start.sh --debug nutzen.\n'
 		fi

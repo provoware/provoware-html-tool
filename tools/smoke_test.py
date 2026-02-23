@@ -122,6 +122,26 @@ if not BROWSER_E2E_CHECK.exists():
     sys.exit(1)
 
 if ARGS.profile == "full":
+    print_step("✅", "Smoke-Test (full) erweitert: PROVOWARE_NEXT_STEPS_LIMIT Input-Validierung")
+    next_limit_result = subprocess.run(
+        ["bash", str(START_SCRIPT), "--check"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+        env={**os.environ, "PROVOWARE_NEXT_STEPS_LIMIT": "0"},
+    )
+
+    if next_limit_result.returncode == 0:
+        print_step("❌", "Smoke-Test fehlgeschlagen: Ungültiger PROVOWARE_NEXT_STEPS_LIMIT wurde nicht abgefangen.")
+        print_step("➡️", "Nächster Schritt: Input-Validierung in start.sh für PROVOWARE_NEXT_STEPS_LIMIT prüfen.")
+        sys.exit(1)
+
+    if "Ungültiger Wert für PROVOWARE_NEXT_STEPS_LIMIT" not in (next_limit_result.stdout + next_limit_result.stderr):
+        print_step("❌", "Smoke-Test fehlgeschlagen: Fehlermeldung für PROVOWARE_NEXT_STEPS_LIMIT fehlt.")
+        print_step("➡️", "Nächster Schritt: Fehlermeldung in einfacher Sprache ergänzen.")
+        sys.exit(1)
+
+if ARGS.profile == "full":
     print_step("✅", "Smoke-Test (full) gestartet: ./start.sh --check")
     check_result = subprocess.run(
         ["bash", str(START_SCRIPT), "--check"],

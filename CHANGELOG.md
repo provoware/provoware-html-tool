@@ -1,3 +1,22 @@
+## [2026-02-23] – Iteration: Next-Step-Limit + Bündelung + Validierungs-Smoke-Test
+### Scope-Kontrolle
+- Problem: Die Next-Step-Liste konnte zu lang werden und war für Einsteiger schwer zu überblicken.
+- Ziel: Genau drei kleine Punkte liefern: Limitierung, gebündelte Zusatzhinweise und automatische Validierungsprüfung.
+- Dateien: `start.sh`, `system/start_core.sh`, `tools/smoke_test.py`, `README.md`, `todo.txt`, `WAITME.md`, `CHANGELOG.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) Limit-Input-Check, 2) Next-Step-Bündelung + Statusbericht, 3) Smoke-Test für ungültigen Limit-Wert, 4) Pflichtdoku/Versionen aktualisiert.
+- Abnahme: Ungültiges `PROVOWARE_NEXT_STEPS_LIMIT` bricht mit Klartext ab; Next Steps sind begrenzt; zusätzliche Hinweise bleiben im Statusbericht auffindbar.
+
+### Umsetzung (3 Punkte)
+1. `start.sh` validiert jetzt `PROVOWARE_NEXT_STEPS_LIMIT` (1 bis 20) mit klaren Next Steps bei Fehlern.
+2. `system/start_core.sh` begrenzt die sichtbare Next-Step-Liste und bündelt weitere Hinweise als eigenen Abschnitt.
+3. `tools/smoke_test.py` prüft im Full-Profil den Fehlerpfad für ungültige Limitwerte.
+
+### Warum
+- Kürzere Listen sind besser für Barrierefreiheit (z. B. Screenreader) und schneller verständlich.
+
+### Wirkung
+- Bessere Lesbarkeit, klare Eingabevalidierung und stabilere Qualitätssicherung.
+
 ## [2026-02-23] – Iteration: Start-Status ohne Duplikate + nummerierte Next Steps + Smoke-Gate
 ### Scope-Kontrolle
 - Problem: Der Startstatus zeigte wiederholte Hinweise mehrfach, wodurch Laien unnötig lange Listen lesen mussten.

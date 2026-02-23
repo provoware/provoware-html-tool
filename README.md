@@ -1,3 +1,9 @@
+## Update 2026-02-23 (Next-Step-Limit + gebündelte Hinweise + Input-Check)
+
+- Neu: `PROVOWARE_NEXT_STEPS_LIMIT` begrenzt die ausgegebenen Next Steps standardmäßig auf 8 (Bereich 1-20), damit die Statusliste für Laien und Screenreader kurz bleibt.
+- Neue Hilfeausgabe: Zusätzliche Hinweise werden als „Weitere Hinweise (gebündelt)" gesammelt und im Statusbericht ergänzend ausgegeben.
+- Smoke-Test (Profil full) prüft jetzt die Input-Validierung für ungültige `PROVOWARE_NEXT_STEPS_LIMIT`-Werte.
+
 ## Update 2026-02-23 (Start-Status entrümpelt + Next Steps nummeriert + Smoke-Absicherung)
 - Startstatus sammelt „Geprüft/Fehlt/Gelöst/Nächster Schritt“ jetzt ohne Duplikate, damit Hinweise kurz und verständlich bleiben.
 - Next Steps werden zusätzlich nummeriert ausgegeben (Schritt 1, Schritt 2 ...), was Screenreader-Nutzung und Team-Kommunikation verbessert.

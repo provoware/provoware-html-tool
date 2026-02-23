@@ -28,6 +28,9 @@ CHECKED_ITEMS=()
 MISSING_ITEMS=()
 FIXED_ITEMS=()
 NEXT_STEPS=()
+NEXT_STEP_LIMIT="${PROVOWARE_NEXT_STEPS_LIMIT:-8}"
+NEXT_STEPS_OVERFLOW=0
+HIDDEN_NEXT_STEPS=()
 DEFAULT_TEXT_JSON='{
   "help_title": "Provoware Start-Routine",
   "help_usage": "Verwendung:",
@@ -745,6 +748,17 @@ validate_offline_artifact_mode() {
 	fi
 
 	record_checked "OFFLINE_ARTIFACT_MODE=${mode}"
+	return 0
+}
+
+validate_next_step_limit() {
+	if [[ ! "$NEXT_STEP_LIMIT" =~ ^[0-9]+$ ]] || [[ "$NEXT_STEP_LIMIT" -lt 1 ]] || [[ "$NEXT_STEP_LIMIT" -gt 20 ]]; then
+		print_error_with_actions "Ungültiger Wert für PROVOWARE_NEXT_STEPS_LIMIT: '${NEXT_STEP_LIMIT}'. Erlaubt sind nur ganze Zahlen von 1 bis 20."
+		record_next_step "Beispiel: PROVOWARE_NEXT_STEPS_LIMIT=8 ./start.sh --check"
+		return 1
+	fi
+
+	record_checked "PROVOWARE_NEXT_STEPS_LIMIT=${NEXT_STEP_LIMIT}"
 	return 0
 }
 
@@ -1579,6 +1593,7 @@ run_safe_mode() {
 main() {
 	ensure_writable_log
 	validate_args "$@"
+	validate_next_step_limit
 	run_debug_hint
 
 	case "$MODE" in
