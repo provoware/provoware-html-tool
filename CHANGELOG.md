@@ -1,3 +1,26 @@
+## [2026-02-23] – Iteration: CLI-Alias + zentrale Hilfetexte + Prioritätsabschnitt
+### Scope-Kontrolle
+- Problem: Für „alle Hinweise anzeigen“ war bisher nur eine Umgebungsvariable vorhanden, und Teile der Statushilfe standen nicht zentral in der Textkonfiguration.
+- Ziel: Genau drei kleine Punkte liefern: CLI-Alias ergänzen, Hilfetexte zentralisieren und die Zusammenfassung um einen klaren Prioritätsabschnitt erweitern.
+- Dateien: `start.sh`, `system/start_core.sh`, `tools/smoke_test.py`, `config/messages.json`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) neues CLI-Argument + Validierung in `start.sh`, 2) priorisierte Ausgabe + Textplatzhalter in `system/start_core.sh`, 3) zentral gepflegte neue Hilfetexte in `config/messages.json`, 4) Smoke-Test für CLI-Alias/Hilfe, 5) Pflichtdoku + Versionen aktualisiert.
+- Abnahmekriterium: `./start.sh --check --show-all-next-steps` läuft erfolgreich, `--help` zeigt den neuen Schalter, und die Zusammenfassung enthält „Empfohlene Reihenfolge (Priorität)“.
+
+### Umsetzung (3 Punkte)
+1. `start.sh` erweitert um den optionalen Schalter `--show-all-next-steps` (inklusive Input-Validierung gegen Mehrfachnutzung).
+2. `system/start_core.sh` zeigt einen klaren Prioritätsabschnitt und nutzt zentral konfigurierbare Texte (inklusive `{{STATUS_SUMMARY_FILE}}`-Platzhalter).
+3. `tools/smoke_test.py` prüft den neuen CLI-Schalter sowie den Hilfeeintrag automatisch im Full-Profil.
+
+### Warum
+- Ein kurzer Schalter ist laienfreundlicher als eine zusätzliche Umgebungsvariable.
+- Zentrale Texte reduzieren Wartungsaufwand und halten Fehlermeldungen einheitlich.
+- Der Prioritätsabschnitt verhindert Überforderung bei vielen Hinweisen.
+
+### Wirkung
+- Bessere Bedienbarkeit (Tastatur/CLI) und klarere Next Steps.
+- Höhere Konsistenz durch zentrale Textpflege.
+- Mehr Release-Sicherheit durch zusätzliche automatische Smoke-Checks.
+
 ## [2026-02-23] – Iteration: Show-All-Option + Hilfehinweis + Smoke-Validierung
 ### Scope-Kontrolle
 - Problem: Bei vielen Next Steps mussten Nutzer für volle Details immer extra den Statusbericht öffnen.

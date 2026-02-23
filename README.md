@@ -1,3 +1,9 @@
+## Update 2026-02-23 (CLI-Alias + zentrale Hilfetexte + Prioritätsabschnitt)
+
+- Neu: Optionaler Kurzschalter `--show-all-next-steps` ergänzt. Damit können gebündelte Hinweise direkt angezeigt werden, ohne Umgebungsvariable.
+- Hilfe/Texte vereinheitlicht: Neue Zusammenfassungs- und Hinweistexte liegen zentral in `config/messages.json` (einfach wartbar, klare Sprache).
+- Statusausgabe verbessert: Abschnitt **„Empfohlene Reihenfolge (Priorität)”** zeigt die nächsten Schritte klar und nummeriert.
+
 ## Update 2026-02-23 (Option: alle gebündelten Hinweise direkt anzeigen)
 
 - Neu: `PROVOWARE_SHOW_ALL_NEXT_STEPS` (nur `0` oder `1`) wurde ergänzt. Damit lassen sich alle zusätzlichen Next Steps direkt in der Startausgabe anzeigen.

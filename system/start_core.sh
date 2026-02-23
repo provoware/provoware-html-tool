@@ -100,6 +100,7 @@ replace_placeholders() {
 	local template="$1"
 	template="${template//\{\{LOG_FILE\}\}/$LOG_FILE}"
 	template="${template//\{\{LIMIT\}\}/$LINE_LIMIT}"
+	template="${template//\{\{STATUS_SUMMARY_FILE\}\}/${STATUS_SUMMARY_FILE:-logs/status_summary.txt}}"
 	printf '%s' "$template"
 }
 
@@ -128,6 +129,7 @@ print_summary() {
 		print_step "⚠️" "Es sind noch offene Punkte vorhanden. Für Release-Reife jetzt './start.sh --release-check' nutzen."
 	fi
 	if [[ ${#NEXT_STEPS[@]} -gt 0 ]]; then
+		print_step "ℹ️" "$(get_text "summary_priority_title")"
 		local step
 		local step_index=0
 		for step in "${NEXT_STEPS[@]}"; do
@@ -136,14 +138,14 @@ print_summary() {
 		done
 		if [[ "${NEXT_STEPS_OVERFLOW:-0}" -eq 1 ]] || [[ ${#HIDDEN_NEXT_STEPS[@]} -gt 0 ]]; then
 			if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
-				print_step "ℹ️" "Zusätzliche Hinweise (vollständig eingeblendet):"
+				print_step "ℹ️" "$(get_text "summary_more_hints_expanded")"
 				local hidden_step
 				for hidden_step in "${HIDDEN_NEXT_STEPS[@]}"; do
 					print_step "➡️" "Weitere Hinweise: ${hidden_step}"
 				done
 			else
-				print_step "ℹ️" "Weitere Hinweise wurden gebündelt, damit die Liste kurz bleibt."
-				print_step "➡️" "Nächster Schritt: Für alle zusätzlichen Hinweise 'cat ${STATUS_SUMMARY_FILE:-logs/status_summary.txt}' ausführen oder 'PROVOWARE_SHOW_ALL_NEXT_STEPS=1 ./start.sh --check' nutzen."
+				print_step "ℹ️" "$(get_text "summary_more_hints_collapsed")"
+				print_step "➡️" "$(replace_placeholders "$(get_text "summary_more_hints_next_step")")"
 			fi
 		fi
 	else
@@ -186,8 +188,7 @@ write_accessible_status_summary() {
 				if [[ "${SHOW_ALL_NEXT_STEPS:-0}" == "1" ]]; then
 					printf 'Hinweis: Vollstaendige Hinweise wurden direkt ausgegeben.\n'
 				else
-					printf 'Hinweis: Vollstaendige Details stehen im Startprotokoll.\n'
-					printf 'Tipp: Mit PROVOWARE_SHOW_ALL_NEXT_STEPS=1 koennen alle Hinweise direkt angezeigt werden.\n'
+					printf '%s\n' "$(replace_placeholders "$(get_text "summary_more_hints_status_tip")")"
 				fi
 			fi
 		else
