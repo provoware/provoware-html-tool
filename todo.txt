@@ -1,4 +1,14 @@
 DONE 2026-02-23
+- [x] Neuer Modus `--release-plan` ergänzt, der genau 3 priorisierte Release-Optimierungen ausgibt.
+- [x] Release-Plan speichert Ergebnisse robust in `logs/release_action_plan.txt` mit Output-Check.
+- [x] Hilfe-/A11y-Text für den Release-Plan in einfacher Sprache ergänzt.
+
+NEXT 2026-02-24
+- [ ] Optionalen Schalter `--release-plan-json` ergänzen (maschinenlesbar für CI-Berichte).
+- [ ] Release-Plan um explizite P0-Regel für fehlende Pflicht-Gates erweitern.
+- [ ] Manual-UX-Check als kurzen, geführten Dialog mit Bestätigungsfragen ergänzen.
+
+DONE 2026-02-23
 - [x] Schnell-Speicher-Archiv validiert Titel jetzt mit Mindestlänge (3 Zeichen) und zeigt klare Fehlermeldung.
 - [x] Schnell-Speicher-Archiv bereinigt Pfad-Eingaben und prüft Speichern/Maskenwechsel mit Output-Check.
 - [x] Hilfe im Modul erweitert: Titel-Hilfe + klarer Next-Step-Text für Laien ergänzt.

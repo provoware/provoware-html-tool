@@ -15,6 +15,7 @@ GUI_PORT_MIN=20000
 GUI_PORT_MAX=60999
 GUI_PORT_RANDOM_ATTEMPTS=25
 STATUS_SUMMARY_FILE=""
+RELEASE_PLAN_FILE=""
 DEPENDENCY_CONFIG_FILE="${PROJECT_ROOT}/config/dependency_map.json"
 TEXT_CONFIG_FILE="${PROJECT_ROOT}/config/messages.json"
 THEME_CONFIG_FILE="${PROJECT_ROOT}/config/themes.json"
@@ -350,6 +351,7 @@ $(get_text "help_usage")
   Offline-Paket bauen:            ./start.sh --offline-pack
   Automatischer Mini-UX-Check:    ./start.sh --ux-check-auto
   Release-Check:                  ./start.sh --release-check
+  Release-Plan (Top 3):           ./start.sh --release-plan
   $(get_text "help_show_all_next_steps")
   $(get_text "help_priority_mode")
   Debug-Protokoll aktivieren:     ./start.sh --debug
@@ -373,7 +375,76 @@ ensure_writable_log() {
 	: >"$LOG_FILE"
 	STATUS_SUMMARY_FILE="${LOG_DIR}/status_summary.txt"
 	: >"$STATUS_SUMMARY_FILE"
+	RELEASE_PLAN_FILE="${LOG_DIR}/release_action_plan.txt"
+	: >"$RELEASE_PLAN_FILE"
 	record_checked "Log-Verzeichnis"
+}
+
+append_release_plan_line() {
+	local line="$1"
+	printf '%s\n' "$line" >>"$RELEASE_PLAN_FILE"
+}
+
+run_release_plan_mode() {
+	print_step "✅" "Release-Plan aktiv: Top-3-Optimierungen werden automatisch ermittelt."
+	local -a plan_items=()
+
+	if ! validate_theme_config >/dev/null 2>&1; then
+		plan_items+=("P0: Theme-Konfiguration reparieren (Kontrast/Fokus). Befehl: python3 -m json.tool config/themes.json")
+	fi
+
+	if ! python3 "$PROJECT_ROOT/tools/visual_baseline_check.py" >/dev/null 2>&1; then
+		plan_items+=("P1: Visual-Baseline freigeben oder korrigieren. Befehl: python3 tools/visual_baseline_check.py")
+	fi
+
+	local missing_artifacts=0
+	local browser
+	for browser in chromium firefox webkit; do
+		if [[ ! -f "$PROJECT_ROOT/logs/artifacts/dashboard-dialog-e2e-${browser}.png" ]]; then
+			missing_artifacts=1
+			break
+		fi
+	done
+	if [[ "$missing_artifacts" -eq 1 ]]; then
+		plan_items+=("P1: Multi-Browser-Artefakte nachziehen. Befehl: python3 tools/browser_e2e_test.py --browser chromium")
+	fi
+
+	if ! check_line_limit >/dev/null 2>&1; then
+		plan_items+=("P2: Zeilenlimit bereinigen (kleine, wartbare Dateien). Befehl: bash tools/run_quality_checks.sh")
+	fi
+
+	if [[ "${#plan_items[@]}" -lt 3 ]]; then
+		plan_items+=("P2: Vollautomatische Freigabeprobe laufen lassen. Befehl: bash start.sh --autopilot")
+	fi
+	if [[ "${#plan_items[@]}" -lt 3 ]]; then
+		plan_items+=("P2: Finale Gate-Reihenfolge ausführen. Befehl: bash start.sh --full-gates")
+	fi
+	if [[ "${#plan_items[@]}" -lt 3 ]]; then
+		plan_items+=("P2: Hilfe- und Fehltexte auf einfache Sprache prüfen. Befehl: bash start.sh --help")
+	fi
+
+	append_release_plan_line "Release-Plan (Top 3)"
+	append_release_plan_line "===================="
+	print_step "ℹ️" "Empfehlung in einfacher Sprache: erst P0, dann P1, dann P2 umsetzen."
+
+	local idx=1
+	while [[ "$idx" -le 3 ]]; do
+		append_release_plan_line "${idx}. ${plan_items[$((idx - 1))]}"
+		print_step "➡️" "${idx}. ${plan_items[$((idx - 1))]}"
+		idx=$((idx + 1))
+	done
+
+	if [[ ! -s "$RELEASE_PLAN_FILE" ]]; then
+		print_error_with_actions "Release-Plan konnte nicht geschrieben werden."
+		record_missing "Release-Plan Datei"
+		record_next_step "Schreibrechte für logs/ prüfen und './start.sh --release-plan' erneut starten"
+		return 1
+	fi
+
+	record_checked "Release-Plan (Top 3)"
+	record_next_step "Top-3-Punkte nacheinander abarbeiten und danach './start.sh --release-check' ausführen"
+	print_step "✅" "Release-Plan gespeichert: ${RELEASE_PLAN_FILE}"
+	return 0
 }
 
 validate_args() {
@@ -418,6 +489,10 @@ validate_args() {
 			;;
 		--release-check)
 			MODE="release-check"
+			mode_count=$((mode_count + 1))
+			;;
+		--release-plan)
+			MODE="release-plan"
 			mode_count=$((mode_count + 1))
 			;;
 		--full-gates)
@@ -1707,6 +1782,9 @@ main() {
 		;;
 	release-check)
 		run_release_check
+		;;
+	release-plan)
+		run_release_plan_mode
 		;;
 	doctor)
 		run_doctor_mode

@@ -1,3 +1,21 @@
+## [2026-02-23] – Iteration: Release-Plan-Automatik + Priorisierte Next Steps + Hilfe-Text (3 Punkte)
+### Scope-Kontrolle
+- Problem: Es fehlte ein direkter, laienfreundlicher Überblick, **was vor Release noch konkret zu optimieren ist**.
+- Ziel: Genau 3 kleine Punkte liefern: automatischen Top-3-Release-Plan, klare Prioritätsreihenfolge und verständliche Hilfeausgabe.
+- Dateien: `start.sh`, `README.md`, `CHANGELOG.md`, `todo.txt`, `WAITME.md`, `data/version_registry.json`.
+- Patch-Block je Datei: 1) neuer Modus `--release-plan`, 2) README-Releasefortschritt + Befehl, 3) Doku/Status/Versionen aktualisiert.
+- Abnahmekriterium: `bash start.sh --release-plan` läuft mit Exitcode 0, zeigt drei priorisierte Schritte und schreibt `logs/release_action_plan.txt`.
+
+### Umsetzung (3 Punkte)
+1. **Release-Plan-Automatik:** Neuer Startmodus `--release-plan` erzeugt drei priorisierte Optimierungspunkte mit vollständigen Befehlen.
+2. **Output-Check:** Die Ausgabe wird in `logs/release_action_plan.txt` geschrieben und auf erfolgreiche Erstellung geprüft.
+3. **Hilfe/A11y:** Plantexte sind in einfacher Sprache mit klarer Reihenfolge für Laien (inklusive Next-Step-Hinweis).
+
+### Wirkung
+- Schnellere Release-Entscheidung, weil offene Punkte sofort sichtbar sind.
+- Weniger Suchaufwand durch feste Top-3-Liste mit copy/paste-fähigen Befehlen.
+- Höhere Barrierefreiheit durch klare Textpriorisierung statt impliziter Statuslogik.
+
 ## [2026-02-23] – Iteration: Schnell-Speicher-Modul fixen + A11y-Hilfe + Output-Check (3 Punkte)
 ### Scope-Kontrolle
 - Problem: Das Schnell-Speicher-Archiv akzeptierte zu kurze Titel/Pfade und prüfte Speichervorgänge nicht robust.
