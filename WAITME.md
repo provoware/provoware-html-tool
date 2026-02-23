@@ -1,5 +1,27 @@
 # WAITME – Kurzstatus
 
+Stand: 2026-02-23 (Release-Plan Top 3 automatisch)
+
+## Aktueller Stand (einfach erklärt)
+- Neu ist `bash start.sh --release-plan`.
+- Der Befehl zeigt automatisch die **3 wichtigsten offenen Release-Punkte** in klarer Reihenfolge.
+- Zusätzlich wird ein Textbericht gespeichert: `logs/release_action_plan.txt`.
+
+## Top-Blocker
+- Visual-Baseline muss noch final freigegeben oder korrigiert werden.
+- Multi-Browser-Artefakte (Chromium/Firefox/WebKit) sind noch nicht vollständig.
+
+## Betriebsrisiken
+- Ohne aktuelle Visual-Artefakte kann eine UI-Änderung unbemerkt bleiben.
+
+## Nächste sinnvolle Befehle
+- `bash start.sh --release-plan`
+- `python3 tools/visual_baseline_check.py`
+- `python3 tools/browser_e2e_test.py --browser chromium`
+- `bash start.sh --release-check`
+
+# WAITME – Kurzstatus
+
 Stand: 2026-02-23 (Schnell-Speicher-Modul gefixt)
 
 ## Aktueller Stand (einfach erklärt)

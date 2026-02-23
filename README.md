@@ -1,3 +1,14 @@
+## Update 2026-02-23 (Release-Plan Top 3 + klare Priorität + Hilfebefehl)
+
+### Release-Fortschritt
+- **Fortschritt:** 94%
+- **Abgeschlossen:** Autonomer Release-Plan mit genau drei priorisierten Next Steps (`--release-plan`) ist integriert.
+- **Offen:** Visual-Baseline freigeben und Multi-Browser-Artefakte vollständig erzeugen.
+
+- Neu: `bash start.sh --release-plan` erstellt automatisch einen Top-3-Plan für Release-Optimierungen (mit Priorität und vollständigen Befehlen).
+- Hilfe/A11y: Der Plan nutzt einfache deutsche Sprache und klare Reihenfolge (erst P0/P1/P2), damit auch Laien direkt weiterarbeiten können.
+- Output-Check: Plan wird zusätzlich in `logs/release_action_plan.txt` geschrieben und auf Erfolg geprüft.
+
 ## Update 2026-02-23 (Schnell-Speicher-Archiv Fix + Validierung + Hilfe)
 
 - Fix Schnell-Speicher-Modul: Titel-Eingabe wird jetzt streng validiert (mindestens 3 Zeichen), damit keine unklaren Masken entstehen.
