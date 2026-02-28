@@ -12,6 +12,7 @@ DONE
 - [x] Theme-Auswahl (Hell/Dunkel/Kontrast+) im Dashboard ergänzt.
 - [x] Entwickler-Infodatei mit Ordner-/Dateistruktur und Befehlen ergänzt.
 - [x] Entwicklerdoku in README verlinkt.
+- [x] README neu strukturiert (klare Kapitel, A11y, Start-/Debug-Flow, Laienhilfe).
 
 NEXT (Priorität)
 - [ ] P1: Plugin-Loader minimal umsetzen (Manifest lesen, Fehler isolieren).

@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 5
+Iteration: 6
 
 ## Gemacht
 
@@ -13,6 +13,8 @@ Iteration: 5
 - Dashboard-Modelllogik mit Input-/Output-Validierung und automatischen Tests ergänzt.
 - Start-Routine-Pflichtpfade und Doku/TODO auf Dashboard-Stand erweitert.
 - Neue Entwickler-Infodatei mit Ordner-/Dateistruktur, Standards und Befehlen ergänzt.
+- README neu strukturiert: klare Kapitel, Laienbegriffe, A11y-Standard,
+  robuste Start- und Debug-Anleitung.
 
 ## Next Step
 
