@@ -97,6 +97,7 @@ Manifest-Dateien:
 - `config/manifests/global.manifest.json`
 - `config/manifests/kernel.manifest.json`
 - `config/manifests/registry.manifest.json`
+- `config/manifests/plugins.manifest.json`
 
 ## 8) Wichtige Befehle
 
@@ -108,6 +109,7 @@ node tools/help_cli.js test
 node tools/help_cli.js logs
 node tools/help_cli.js backups store
 node tools/help_cli.js repair data/store.json data/store.backup.json
+node -e 'console.log(require("./system-core/plugin_loader").runPluginLoaderHealthCheck({manifestPath:"config/manifests/plugins.manifest.json",projectRoot:process.cwd()}).message)'
 ```
 
 ## 9) Debugging und Logging

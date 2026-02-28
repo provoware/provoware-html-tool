@@ -13,3 +13,6 @@
 
 - Debug-Modus fuer Start-Routine mit Log-Datei ergaenzt.
 - Fehlerausgabe zeigt jetzt immer naechsten Schritt inkl. Protokoll-Pfad.
+- Plugin-Loader minimal ergänzt: Manifest lesen, Plugin isoliert laden, Fehler klar melden.
+- Start-Routine um Plugin-Loader-Health-Check erweitert (fester Schritt vor Systemtest).
+- Neue Tests und Dummy-Manifest fuer Plugin-Loader-Fehlerfall ergänzt.

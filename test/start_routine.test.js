@@ -37,6 +37,17 @@ test("Dashboard-Dateien sind als Pflichtpfade vorhanden", () => {
   assert.equal(result.missing.length, 0);
 });
 
+test("Plugin-Loader-Dateien sind als Pflichtpfade vorhanden", () => {
+  const result = validateProjectStructure([
+    "config/manifests/plugins.manifest.json",
+    "system-core/plugin_loader.js",
+    "system-module/plugins_accessibility.js",
+    "test/plugin_loader.test.js",
+  ]);
+
+  assert.equal(result.ok, true);
+  assert.equal(result.missing.length, 0);
+});
 test("getDebugMode ist false ohne Umgebungswert", () => {
   const previousValue = process.env.START_DEBUG;
   delete process.env.START_DEBUG;

@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 7
+Iteration: 8
 
 ## Gemacht
 
@@ -17,7 +17,8 @@ Iteration: 7
   robuste Start- und Debug-Anleitung.
 
 - Start-Routine-Fehlerausgabe um Debug-Modus und Log-Datei erweitert.
+- Plugin-Loader minimal umgesetzt (Manifest, isoliertes Laden, Health-Check).
 
 ## Next Step
 
-- Option B: Plugin-Loader minimal umsetzen (Manifest lesen, Fehler isolieren).
+- Option C: Storage-Service weiter absichern (Schema-Check und Backup-Hook ausbauen).

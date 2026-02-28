@@ -16,6 +16,7 @@ Sie zeigt die Ordnerstruktur, wichtige Dateien und den empfohlenen Ablauf.
 provoware-html-tool/
 ├─ system-core/
 │  ├─ json_store.js
+│  ├─ plugin_loader.js
 │  ├─ registry_service.js
 │  └─ self_repair.js
 ├─ system-module/
@@ -26,7 +27,8 @@ provoware-html-tool/
 │  └─ manifests/
 │     ├─ global.manifest.json
 │     ├─ kernel.manifest.json
-│     └─ registry.manifest.json
+│     ├─ registry.manifest.json
+│     └─ plugins.manifest.json
 ├─ data/
 │  ├─ registry.json
 │  └─ store.json
@@ -41,6 +43,7 @@ provoware-html-tool/
 ├─ test/
 │  ├─ dashboard_model.test.js
 │  ├─ json_store.test.js
+│  ├─ plugin_loader.test.js
 │  ├─ registry_service.test.js
 │  └─ start_routine.test.js
 ├─ docs/
@@ -115,8 +118,8 @@ node tools/help_cli.js repair data/store.json data/store.backup.json
 
 ## 6) Was kann noch optimiert werden?
 
-1. **Plugin-Loader minimal bauen**
-   - Manifest lesen, Fehler isolieren, Kern schützen.
+1. **Plugin-Loader weiter ausbauen**
+   - Mehrere Plugins, Abhaengigkeiten und deaktivierte Gruppen sauber steuern.
 2. **Debug-Modus verbessern**
    - Fehlertext für Laien + technische Details im Log.
 3. **Schema-Checks ausbauen**

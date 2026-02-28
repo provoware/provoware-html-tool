@@ -94,3 +94,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Externer Logger mit JSON-Ausgabe.
 **Risiko/Side-Effects:** Log-Datei waechst bei vielen Fehlern.
 **Verknuepft:** Patch-ID local-005
+
+## FIX-20260228-006: Plugin-Loader-Health-Check
+
+**Kategorie:** Plugin/Boot
+**Symptom (fuer Laien):** Plugins konnten fehlen und Startfehler waren schwer zuzuordnen.
+**Technische Ursache:** Es gab keinen zentralen Plugin-Manifest-Check vor dem Systemtest.
+**Trigger:** Plugin-Datei fehlt oder Plugin liefert ungueltiges Ergebnis.
+**Fix (kurz):** Plugin-Manifest eingefuehrt, Loader mit isolierter Fehlerbehandlung und Health-Check eingebaut.
+**Geaenderte Dateien/Marker:** system-core/plugin_loader.js, config/manifests/plugins.manifest.json, tools/start_routine.js
+**Tests/Checks:** npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Plugin-Manifest und Plugin-Ausgabe vor Systemtest pruefen.
+**Alternative(n):** Dynamischer Loader mit VM-Sandbox.
+**Risiko/Side-Effects:** Mehr Strukturdateien im Projekt.
+**Verknuepft:** Patch-ID local-006
