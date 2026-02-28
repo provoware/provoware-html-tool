@@ -50,3 +50,19 @@ halten und mit Tests absichern.
 **Alternative(n):** Komplett in Bash mit Functions.
 **Risiko/Side-Effects:** `start.sh` hängt von Node-Laufzeit ab.
 **Verknüpft:** Patch-ID local-002
+
+## FIX-20260228-003: Registry-Versionierung-mit-Manifest
+
+**Kategorie:** JSON/Boot
+**Symptom (für Laien):** Registry-Stand war nicht klar und schwer wiederherstellbar.
+**Technische Ursache:** Es gab keinen festen Standard für Registry-Prüfung und Versionen.
+**Trigger:** Bei mehreren Änderungen fehlte ein sauberer Versionszeiger.
+**Fix (kurz):** Registry-Manifest eingeführt, Write-Pfad validiert,
+Versionen als `registry_vXXXX.json` plus `registry.current.json` ergänzt.
+**Geänderte Dateien/Marker:** system-core/registry_service.js,
+config/manifests/\*.json, tools/start_routine.js
+**Tests/Checks:** npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer Manifest-Check vor Registry-Write.
+**Alternative(n):** Datenbank mit Migrationen.
+**Risiko/Side-Effects:** Mehr Dateien im data/registry_versions-Ordner.
+**Verknüpft:** Patch-ID local-003

@@ -1,0 +1,7 @@
+{
+  "manifestType": "registry-standard",
+  "version": "1.0.0",
+  "requiredEntryFields": ["id", "kind", "version", "entry"],
+  "allowedKinds": ["kernel", "module", "plugin"],
+  "requiredRootFields": ["version", "updatedAt", "entries"]
+}

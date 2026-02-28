@@ -2,6 +2,9 @@
 
 ## Aktive Standards
 
+- Kernel nur bei klar begründetem Risiko-Fix ändern.
+- Registry immer per Manifest validieren vor jedem Write.
+- Registry-Schreiben immer versioniert (`registry_vXXXX.json`).
 - JSON-Schreiben nur atomar (tmp + rename).
 - Vor jedem UI-Release: Tastaturtest (Tab/Enter/Escape).
 - Hilfe-Texte in einfacher Sprache, Fachwörter kurz erklärt.

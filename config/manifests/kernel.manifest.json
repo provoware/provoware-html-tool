@@ -1,0 +1,12 @@
+{
+  "manifestType": "kernel-policy",
+  "version": "1.0.0",
+  "kernelRole": "Stabiler Kern, Features in Modulen und Plugins",
+  "updateRule": "Kernel-Update nur mit begruendeter Ausnahme",
+  "allowedKernelChanges": [
+    "sicherheitsfix",
+    "datenverlust-vermeidung",
+    "absturz-vermeidung",
+    "kritische-schnittstelle"
+  ]
+}
