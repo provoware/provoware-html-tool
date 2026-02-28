@@ -15,9 +15,10 @@ DONE
 - [x] README neu strukturiert (klare Kapitel, A11y, Start-/Debug-Flow, Laienhilfe).
 
 NEXT (Priorität)
-- [ ] P1: Plugin-Loader minimal umsetzen (Manifest lesen, Fehler isolieren).
+- [x] P1: Plugin-Loader minimal umgesetzt (Manifest lesen, Fehler isolieren).
 - [ ] P1: Debug-Modus für Registry-Fehler mit Detail-Ausgabe ausbauen.
 - [ ] P1: Backup-Auswahl als UI-Dialog ergänzen.
+- [ ] P1: Storage-Service robust weiter ausbauen (Schema-Validierung + Backup-Hook).
 
 - [x] Start-Routine-Fehler mit Log-Pfad + optionalem Debug-Modus verbessert.
 
