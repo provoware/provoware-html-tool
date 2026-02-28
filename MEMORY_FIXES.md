@@ -80,3 +80,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Session-Speicher ohne Persistenz.
 **Risiko/Side-Effects:** Funktioniert nur in Browsern mit File-System-Access.
 **Verknüpft:** Patch-ID local-004
+
+## FIX-20260228-005: Start-Debug-und-Log-Hinweis
+
+**Kategorie:** Debugging/Logging
+**Symptom (fuer Laien):** Bei Startfehlern war der naechste Schritt nicht immer klar.
+**Technische Ursache:** Fehler wurden nur auf der Konsole gezeigt, ohne festen Log-Pfad.
+**Trigger:** `start.sh` oder `tools/start_routine.js` bricht mit Fehler ab.
+**Fix (kurz):** Startfehler werden in `data/logs/start_routine.log` geschrieben; Ausgabe nennt immer den naechsten Schritt.
+**Geaenderte Dateien/Marker:** tools/start_routine.js, test/start_routine.test.js
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Startfehler mit Log-Pfad und klarer Aktion ausgeben.
+**Alternative(n):** Externer Logger mit JSON-Ausgabe.
+**Risiko/Side-Effects:** Log-Datei waechst bei vielen Fehlern.
+**Verknuepft:** Patch-ID local-005

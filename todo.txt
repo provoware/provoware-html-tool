@@ -19,6 +19,8 @@ NEXT (Priorität)
 - [ ] P1: Debug-Modus für Registry-Fehler mit Detail-Ausgabe ausbauen.
 - [ ] P1: Backup-Auswahl als UI-Dialog ergänzen.
 
+- [x] Start-Routine-Fehler mit Log-Pfad + optionalem Debug-Modus verbessert.
+
 Laienvorschläge
 1) Erst `bash start.sh` ausführen.
 2) Bei Startproblemen im Dashboard: Projektordner erneut wählen.

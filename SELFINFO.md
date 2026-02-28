@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 6
+Iteration: 7
 
 ## Gemacht
 
@@ -15,6 +15,8 @@ Iteration: 6
 - Neue Entwickler-Infodatei mit Ordner-/Dateistruktur, Standards und Befehlen ergänzt.
 - README neu strukturiert: klare Kapitel, Laienbegriffe, A11y-Standard,
   robuste Start- und Debug-Anleitung.
+
+- Start-Routine-Fehlerausgabe um Debug-Modus und Log-Datei erweitert.
 
 ## Next Step
 
