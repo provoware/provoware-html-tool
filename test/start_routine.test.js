@@ -1,6 +1,12 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
-const { validateProjectStructure } = require("../tools/start_routine");
+const fs = require("node:fs");
+const path = require("node:path");
+const {
+  formatStartError,
+  getDebugMode,
+  validateProjectStructure,
+} = require("../tools/start_routine");
 
 test("validateProjectStructure meldet fehlende Pfade", () => {
   const result = validateProjectStructure([
@@ -29,4 +35,24 @@ test("Dashboard-Dateien sind als Pflichtpfade vorhanden", () => {
 
   assert.equal(result.ok, true);
   assert.equal(result.missing.length, 0);
+});
+
+test("getDebugMode ist false ohne Umgebungswert", () => {
+  const previousValue = process.env.START_DEBUG;
+  delete process.env.START_DEBUG;
+  assert.equal(getDebugMode(), false);
+  process.env.START_DEBUG = previousValue;
+});
+
+test("formatStartError liefert naechsten Schritt mit Log-Pfad", () => {
+  const previousValue = process.env.START_DEBUG;
+  delete process.env.START_DEBUG;
+
+  const text = formatStartError(new Error("Beispiel-Fehler"));
+  assert.match(text, /Naechster Schritt: Protokoll oeffnen/);
+
+  const logPath = path.join(process.cwd(), "data", "logs", "start_routine.log");
+  assert.equal(fs.existsSync(logPath), true);
+
+  process.env.START_DEBUG = previousValue;
 });

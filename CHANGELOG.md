@@ -10,3 +10,6 @@
 - Entwickler-Infodatei `docs/ENTWICKLERDOKU.md` mit kompletter Ordner-/Dateistruktur und Befehlen ergänzt.
 
 - README strukturell überarbeitet (Wartbarkeit/Robustheit/A11y/Laienhinweise klar gegliedert).
+
+- Debug-Modus fuer Start-Routine mit Log-Datei ergaenzt.
+- Fehlerausgabe zeigt jetzt immer naechsten Schritt inkl. Protokoll-Pfad.

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require("node:fs");
+const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 const { runRegistryHealthCheck } = require("../system-core/registry_service");
 
@@ -28,10 +29,63 @@ function runCommand(command, args) {
     shell: false,
   });
 
-  return {
+  const output = {
     ok: result.status === 0,
     code: result.status,
+    signal: result.signal || null,
   };
+
+  if (typeof output.ok !== "boolean") {
+    throw new Error(
+      "Befehls-Ergebnis ist ungueltig. Protokoll oeffnen und erneut versuchen.",
+    );
+  }
+
+  return output;
+}
+
+function getDebugMode() {
+  const debugRaw = process.env.START_DEBUG || "";
+  return debugRaw === "1" || debugRaw.toLowerCase() === "true";
+}
+
+function writeStartLog(error) {
+  if (!(error instanceof Error)) {
+    throw new Error(
+      "Fehlerobjekt fehlt. Bitte Eingabe pruefen und erneut versuchen.",
+    );
+  }
+
+  const logDir = path.join(process.cwd(), "data", "logs");
+  fs.mkdirSync(logDir, { recursive: true });
+  const logPath = path.join(logDir, "start_routine.log");
+  const details = [
+    `Zeit: ${new Date().toISOString()}`,
+    `Meldung: ${error.message}`,
+    error.stack ? `Stack: ${error.stack}` : "Stack: nicht vorhanden",
+    "---",
+  ].join("\n");
+  fs.appendFileSync(logPath, `${details}\n`, "utf8");
+  return logPath;
+}
+
+function formatStartError(error) {
+  if (!(error instanceof Error)) {
+    throw new Error(
+      "Fehlerobjekt fehlt. Bitte Eingabe pruefen und erneut versuchen.",
+    );
+  }
+
+  const logPath = writeStartLog(error);
+  if (!getDebugMode()) {
+    return `${error.message} Naechster Schritt: Protokoll oeffnen (${logPath}).`;
+  }
+
+  return [
+    error.message,
+    `Debug-Details: ${error.stack || "kein Stack verfuegbar"}`,
+    `Naechster Schritt: Protokoll oeffnen (${logPath}).`,
+  ].join("\n");
 }
 
 function validateProjectStructure(requiredPaths) {
@@ -138,13 +192,16 @@ if (require.main === module) {
   try {
     runStartRoutine();
   } catch (error) {
-    console.error(error.message);
+    console.error(formatStartError(error));
     process.exit(1);
   }
 }
 
 module.exports = {
+  formatStartError,
+  getDebugMode,
   runCommand,
   runStartRoutine,
   validateProjectStructure,
+  writeStartLog,
 };
