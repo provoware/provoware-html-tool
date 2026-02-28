@@ -83,6 +83,10 @@ function runStartRoutine() {
     "system-core/json_store.js",
     "system-core/registry_service.js",
     "test/json_store.test.js",
+    "templates/dashboard.html",
+    "templates/dashboard.js",
+    "system-module/dashboard_model.js",
+    "test/dashboard_model.test.js",
   ]);
 
   if (!structure.ok) {

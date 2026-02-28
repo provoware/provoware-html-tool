@@ -8,5 +8,11 @@
     "what": "Dieses Panel hilft bei Systemtests, Logs und Selbst-Reparatur.",
     "data": "Beim Test werden nur Protokolle geschrieben, keine Nutzdaten gelöscht.",
     "undo": "Sie können mit Backup-Auswahl auf einen alten gültigen Stand zurückgehen."
+  },
+  "dashboard": {
+    "what": "Das Dashboard zeigt wichtige Bereiche in klaren Zonen.",
+    "data": "Der Projektordner wird als Handle in IndexedDB gespeichert und beim Neustart erneut geprüft.",
+    "undo": "Sie können die Zonensortierung per Drag&Drop oder Pfeil-Buttons jederzeit rückgängig machen.",
+    "debug": "Debug-Modus zeigt technische Details in einfacher Sprache mit nächsten Schritten."
   }
 }

@@ -66,3 +66,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Datenbank mit Migrationen.
 **Risiko/Side-Effects:** Mehr Dateien im data/registry_versions-Ordner.
 **Verknüpft:** Patch-ID local-003
+
+## FIX-20260228-004: Dashboard-Start-mit-Auto-Reconnect
+
+**Kategorie:** UI/FS-Access
+**Symptom (für Laien):** Nach Neustart musste der Projektordner immer neu gewählt werden.
+**Technische Ursache:** Es gab keinen gespeicherten Directory-Handle und keine Wiederanfrage der Berechtigung.
+**Trigger:** Browser neu gestartet oder Seite neu geladen.
+**Fix (kurz):** Handle in IndexedDB speichern, Berechtigung beim Start erneut anfragen, Ordnerstruktur automatisch prüfen/erstellen.
+**Geänderte Dateien/Marker:** templates/dashboard.html, templates/dashboard.js, system-module/dashboard_model.js
+**Tests/Checks:** npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer Auto-Reconnect + Permission-Check für Ordner-Workflows einbauen.
+**Alternative(n):** Nur Session-Speicher ohne Persistenz.
+**Risiko/Side-Effects:** Funktioniert nur in Browsern mit File-System-Access.
+**Verknüpft:** Patch-ID local-004

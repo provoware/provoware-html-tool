@@ -1,15 +1,17 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 3
+Iteration: 4
 
 ## Gemacht
 
-- Neuer Registry-Service für validierte Registry-Einträge ergänzt.
-- Versionierte Registry-Writes mit `registry.current.json` eingeführt.
-- Start-Routine um Registry-Health-Check und Manifest-Pflichtprüfung erweitert.
-- Globale und individuelle Manifeste für Kernel/Registry ergänzt.
-- README und TODO mit klaren Befehlen und Laienhinweisen aktualisiert.
+- Prompt aus der Anforderung analysiert und als optimierte, ausführbare Version dokumentiert.
+- Modernes Dashboard als neue Vorlage ergänzt (`templates/dashboard.*`).
+- Projektordner-Start mit Berechtigungsabfrage, IndexedDB-Handle und Auto-Reconnect ergänzt.
+- Projektstruktur-Prüfung/Erstellung im Dashboard-Startfluss ergänzt.
+- Zonen (Favoriten, Schnellzugriff, Module) als vertikal verschiebbare Bereiche ergänzt.
+- Dashboard-Modelllogik mit Input-/Output-Validierung und automatischen Tests ergänzt.
+- Start-Routine-Pflichtpfade und Doku/TODO auf Dashboard-Stand erweitert.
 
 ## Next Step
 
