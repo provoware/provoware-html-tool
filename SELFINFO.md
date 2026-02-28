@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 4
+Iteration: 5
 
 ## Gemacht
 
@@ -12,6 +12,7 @@ Iteration: 4
 - Zonen (Favoriten, Schnellzugriff, Module) als vertikal verschiebbare Bereiche ergänzt.
 - Dashboard-Modelllogik mit Input-/Output-Validierung und automatischen Tests ergänzt.
 - Start-Routine-Pflichtpfade und Doku/TODO auf Dashboard-Stand erweitert.
+- Neue Entwickler-Infodatei mit Ordner-/Dateistruktur, Standards und Befehlen ergänzt.
 
 ## Next Step
 

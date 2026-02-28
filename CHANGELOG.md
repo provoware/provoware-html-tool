@@ -7,3 +7,4 @@
 - README/TODO auf Kernel-Policy, Registry-Flow und klare Befehle aktualisiert.
 - Neues Dashboard mit Ordnerwahl, Auto-Reconnect und verschiebbaren Zonen ergänzt.
 - Start-Routine und Tests auf neue Dashboard-Pflichtdateien erweitert.
+- Entwickler-Infodatei `docs/ENTWICKLERDOKU.md` mit kompletter Ordner-/Dateistruktur und Befehlen ergänzt.

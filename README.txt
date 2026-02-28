@@ -44,6 +44,9 @@ Manifest-Dateien:
 - `config/manifests/kernel.manifest.json`
 - `config/manifests/registry.manifest.json`
 
+## Entwicklerdoku
+- Ausführliche Struktur und Entwicklerablauf: `docs/ENTWICKLERDOKU.md`
+
 ## Nützliche Befehle
 ```bash
 bash start.sh
