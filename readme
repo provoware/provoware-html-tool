@@ -1,0 +1,29 @@
+# Provoware HTML Tool (Neustart)
+
+Dieses Projekt wurde **komplett neu angelegt**.
+Alte Daten wurden entfernt.
+
+## Aktueller Stand
+- Basis-Dokumente erstellt.
+- Architekturregeln definiert.
+- Nächste Umsetzungsschritte in `todo.txt` geplant.
+
+## Geplante Struktur
+```text
+system/      -> Kernlogik
+config/      -> Einstellungen
+data/        -> variable Daten
+tools/       -> Prüf- und Hilfsskripte
+templates/   -> UI-Vorlagen
+```
+
+## Start für Einsteiger
+1. `bash start.sh` (wird im nächsten Schritt erstellt)
+2. Ausgabe lesen
+3. bei Fehlern: „Reparatur starten“ oder „Protokoll öffnen“
+
+## Qualitätsziele
+- Vollautomatische Prüfungen
+- Vollautomatische Abhängigkeitsauflösung
+- Codeformatierung und Tests in einem Lauf
+- Barrierefreiheit mit starken Kontrasten und Theme-Auswahl
