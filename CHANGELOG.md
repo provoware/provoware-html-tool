@@ -2,6 +2,6 @@
 
 ## 2026-02-28
 
-- Modularer JSON-Store mit atomarem Schreiben und Backup-Datei ergänzt.
-- Self-Repair mit Backup-Auswahl als CLI-Befehl ergänzt.
-- Hilfe-Panel um Systemtest- und Log-Hinweise erweitert.
+- Start-Routine in `tools/start_routine.js` zentralisiert.
+- Automatische Strukturprüfung + Systemtest in den Startablauf ergänzt.
+- README/TODO mit klaren nächsten Schritten und Laienhinweisen aktualisiert.
