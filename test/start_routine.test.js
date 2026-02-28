@@ -18,3 +18,15 @@ test("validateProjectStructure ist ok wenn alle Pfade vorhanden sind", () => {
   assert.equal(result.ok, true);
   assert.equal(result.missing.length, 0);
 });
+
+test("Dashboard-Dateien sind als Pflichtpfade vorhanden", () => {
+  const result = validateProjectStructure([
+    "templates/dashboard.html",
+    "templates/dashboard.js",
+    "system-module/dashboard_model.js",
+    "test/dashboard_model.test.js",
+  ]);
+
+  assert.equal(result.ok, true);
+  assert.equal(result.missing.length, 0);
+});
