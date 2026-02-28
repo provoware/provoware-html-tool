@@ -5,19 +5,17 @@ DONE
 - [x] Projekt vollständig zurückgesetzt (alte Daten gelöscht).
 - [x] Neue Basisdateien angelegt: `agents.md`, `readme`, `todo.txt`.
 - [x] Grundregeln für Barrierefreiheit, Qualität und Wartbarkeit dokumentiert.
+- [x] P0: Ordnerstruktur `system-core/`, `system-module/`, `config/`, `data/`, `tools/`, `templates/`, `test/`, `dummys/` angelegt.
+- [x] P0: `start.sh` mit Auto-Check, Auto-Install, Auto-Format, Auto-Test erstellt.
+- [x] P0: JSON-Store atomar + Self-Repair (Backup-Auswahl via CLI) umgesetzt.
+- [x] P1: Hilfe-Panel erweitert (Systemtest ausführen, Logs anzeigen).
 
 NEXT (Priorität)
-- [ ] P0: Ordnerstruktur `system/`, `config/`, `data/`, `tools/`, `templates/` anlegen.
-  Abnahme: Alle Ordner vorhanden, leerer Start ohne Fehler möglich.
-- [ ] P0: `start.sh` erstellen mit Auto-Check, Auto-Install, Auto-Format, Auto-Test.
-  Abnahme: Ein Befehl läuft durch und gibt klare Nutzerhinweise aus.
-- [ ] P0: Logging-/Debug-Modus in einfacher Sprache ergänzen.
-  Abnahme: Fehler zeigen Ursache + konkrete Lösung.
-- [ ] P1: Theme-System (Hell/Dunkel/Kontrast+) mit Textlabels bauen.
-  Abnahme: Wechsel funktioniert, Kontrast-Prüfung dokumentiert.
-- [ ] P1: Smoke-Test und Quality-Checks als Standard-Skripte einführen.
-  Abnahme: Alle Checks liefern Exitcode 0.
+- [ ] P1: Schema-Validierung für JSON-Store ergänzen.
+- [ ] P1: Backup-Auswahl als UI-Dialog statt nur CLI.
+- [ ] P1: Hilfe-Panel an echten API-Endpunkt anbinden.
 
 Laienvorschläge
-1) Starte immer mit einem Befehl (`bash start.sh`), so bleibt alles einfach.
-2) Nutze den Kontrastmodus, wenn Schrift schwer lesbar ist.
+1) Starte immer mit `bash start.sh`.
+2) Nutze Kontrast+, wenn Texte schwer lesbar sind.
+3) Bei Fehlern zuerst `node tools/help_cli.js test`, dann `node tools/help_cli.js logs`.
