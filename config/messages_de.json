@@ -1,0 +1,12 @@
+{
+  "errors": {
+    "retry": "Erneut versuchen",
+    "repair": "Reparatur starten",
+    "openLog": "Protokoll öffnen"
+  },
+  "help": {
+    "what": "Dieses Panel hilft bei Systemtests, Logs und Selbst-Reparatur.",
+    "data": "Beim Test werden nur Protokolle geschrieben, keine Nutzdaten gelöscht.",
+    "undo": "Sie können mit Backup-Auswahl auf einen alten gültigen Stand zurückgehen."
+  }
+}
