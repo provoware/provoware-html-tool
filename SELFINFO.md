@@ -1,15 +1,16 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 2
+Iteration: 3
 
 ## Gemacht
 
-- Start-Routine aus `start.sh` in `tools/start_routine.js` ausgelagert.
-- Auto-Prüfung für Pflichtdateien ergänzt (klarer Fehlertext + nächster Schritt).
-- Systemtest fest in den Startablauf integriert.
-- README und todo.txt mit nächstem Plan und Laienvorschlägen aktualisiert.
+- Neuer Registry-Service für validierte Registry-Einträge ergänzt.
+- Versionierte Registry-Writes mit `registry.current.json` eingeführt.
+- Start-Routine um Registry-Health-Check und Manifest-Pflichtprüfung erweitert.
+- Globale und individuelle Manifeste für Kernel/Registry ergänzt.
+- README und TODO mit klaren Befehlen und Laienhinweisen aktualisiert.
 
 ## Next Step
 
-- Option C: Storage-Service weiter absichern (Schema-Validierung + Versionierung).
+- Option B: Plugin-Loader minimal umsetzen (Manifest lesen, Fehler isolieren).

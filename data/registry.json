@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "updatedAt": "2026-02-28T00:00:00.000Z",
+  "entries": [
+    {
+      "id": "kernel-core",
+      "kind": "kernel",
+      "version": "1.0.0",
+      "entry": {
+        "description": "Stabiler Kern fuer Laden, Validierung und Versionierung"
+      }
+    }
+  ]
+}

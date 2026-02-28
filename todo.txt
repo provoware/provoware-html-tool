@@ -2,27 +2,22 @@
 Datum: 2026-02-28
 
 DONE
-- [x] Projekt vollständig zurückgesetzt (alte Daten gelöscht).
-- [x] Neue Basisdateien angelegt: `agents.md`, `readme`, `todo.txt`.
-- [x] Grundregeln für Barrierefreiheit, Qualität und Wartbarkeit dokumentiert.
-- [x] P0: Ordnerstruktur `system-core/`, `system-module/`, `config/`, `data/`, `tools/`, `templates/`, `test/`, `dummys/` angelegt.
-- [x] P0: `start.sh` mit Auto-Check, Auto-Install, Auto-Format, Auto-Test erstellt.
-- [x] P0: JSON-Store atomar + Self-Repair (Backup-Auswahl via CLI) umgesetzt.
-- [x] P1: Hilfe-Panel erweitert (Systemtest ausführen, Logs anzeigen).
-- [x] P1: Start-Routine in `tools/start_routine.js` ausgelagert
-      (bessere Wartbarkeit, klarere Schritte, strukturierte Fehlertexte).
-- [x] P1: Neue Tests für Projektstruktur-Prüfung ergänzt.
+- [x] Start-Routine in `tools/start_routine.js` zentralisiert.
+- [x] Automatische Strukturprüfung + Auto-Install + Auto-Tests aktiv.
+- [x] Registry-Service mit Manifest-Validierung ergänzt.
+- [x] Robuste Registry-Versionierung (`registry_vXXXX.json`) ergänzt.
+- [x] Globale + individuelle Manifeste erstellt.
+- [x] README mit Struktur, Befehlen und Registry-Ablauf verbessert.
 
 NEXT (Priorität)
-- [ ] P1: Schema-Validierung für JSON-Store ergänzen.
-- [ ] P1: Backup-Auswahl als UI-Dialog statt nur CLI.
-- [ ] P1: Hilfe-Panel an echten API-Endpunkt anbinden.
+- [ ] P1: Plugin-Loader minimal umsetzen (Manifest lesen, Fehler isolieren).
 - [ ] P1: Theme-Wechsel im Template sichtbar integrieren
       (Hell/Dunkel/Kontrast+) inkl. Tastaturtest.
+- [ ] P1: Debug-Modus für Registry-Fehler mit Detail-Ausgabe ausbauen.
+- [ ] P1: Backup-Auswahl später als UI-Dialog ergänzen.
 
 Laienvorschläge
-1) Starte immer mit `bash start.sh`.
-2) Nutze Kontrast+, wenn Texte schwer lesbar sind.
-3) Bei Fehlern zuerst `node tools/help_cli.js test`, dann
-   `node tools/help_cli.js logs`.
-4) Wenn Tests fehlschlagen: Meldung lesen und „Erneut versuchen“.
+1) Erst `bash start.sh` ausführen.
+2) Wenn ein Test fehlschlägt: Meldung lesen und erneut versuchen.
+3) Bei kaputten Daten: Backup nutzen und Protokoll öffnen.
+4) Für bessere Lesbarkeit Kontrast+ Theme nutzen.

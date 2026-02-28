@@ -2,6 +2,6 @@
 
 ## 2026-02-28
 
-- Start-Routine in `tools/start_routine.js` zentralisiert.
-- Automatische Strukturprüfung + Systemtest in den Startablauf ergänzt.
-- README/TODO mit klaren nächsten Schritten und Laienhinweisen aktualisiert.
+- Registry-Service mit Manifest-Validierung und robustem Versionieren ergänzt.
+- Start-Routine um Manifest- und Registry-Health-Check erweitert.
+- README/TODO auf Kernel-Policy, Registry-Flow und klare Befehle aktualisiert.
