@@ -23,10 +23,30 @@ Stand: 2026-02-28
 **Symptom (für Laien):** Daten konnten nach Absturz beschädigt sein.
 **Technische Ursache:** Direktes Überschreiben ohne sichere Zwischenstufe.
 **Trigger:** Schreibvorgang bricht mitten im Speichern ab.
-**Fix (kurz):** Schreiben über tmp-Datei, dann atomar umbenennen; Backup mit Auswahl ergänzt.
-**Geänderte Dateien/Marker:** system-core/json_store.js, system-core/self_repair.js
+**Fix (kurz):** Schreiben über tmp-Datei, dann atomar umbenennen;
+Backup mit Auswahl ergänzt.
+**Geänderte Dateien/Marker:** system-core/json_store.js,
+system-core/self_repair.js
 **Tests/Checks:** node --test, bash start.sh
-**Prävention (künftig):** Ab jetzt immer atomar schreiben und Backup-Liste vor Reparatur zeigen.
+**Prävention (künftig):** Ab jetzt immer atomar schreiben und
+Backup-Liste vor Reparatur zeigen.
 **Alternative(n):** SQLite mit Transaktionen.
 **Risiko/Side-Effects:** Mehr Dateien im data-Ordner.
 **Verknüpft:** Patch-ID local-001
+
+## FIX-20260228-002: Start-Routine-zentralisiert
+
+**Kategorie:** Update/Docs
+**Symptom (für Laien):** Startablauf war schwer erweiterbar.
+**Technische Ursache:** Logik lag direkt in `start.sh` ohne klare Module.
+**Trigger:** Neue Checks und Systemtest sollten ergänzt werden.
+**Fix (kurz):** Startlogik nach `tools/start_routine.js` verschoben,
+inklusive Strukturprüfung und klarer Fehlertexte.
+**Geänderte Dateien/Marker:** start.sh, tools/start_routine.js,
+test/start_routine.test.js
+**Tests/Checks:** npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer Startlogik zentral in `tools/`
+halten und mit Tests absichern.
+**Alternative(n):** Komplett in Bash mit Functions.
+**Risiko/Side-Effects:** `start.sh` hängt von Node-Laufzeit ab.
+**Verknüpft:** Patch-ID local-002

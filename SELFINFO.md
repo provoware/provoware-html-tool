@@ -1,13 +1,14 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 1
+Iteration: 2
 
 ## Gemacht
 
-- Atomarer JSON-Store + Self-Repair-Grundfunktionen umgesetzt.
-- Hilfe-Panel (A11y + Theme-Auswahl) ergänzt.
-- Start-Routine `start.sh` mit Auto-Check, Auto-Install, Format, Tests ergänzt.
+- Start-Routine aus `start.sh` in `tools/start_routine.js` ausgelagert.
+- Auto-Prüfung für Pflichtdateien ergänzt (klarer Fehlertext + nächster Schritt).
+- Systemtest fest in den Startablauf integriert.
+- README und todo.txt mit nächstem Plan und Laienvorschlägen aktualisiert.
 
 ## Next Step
 

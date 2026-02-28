@@ -1,24 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "[1/5] Voraussetzungen prüfen"
-command -v node >/dev/null || {
+if ! command -v node >/dev/null; then
   echo "Node.js fehlt. Bitte installieren und erneut versuchen."
+  echo "Nächster Schritt: Reparatur starten oder Protokoll öffnen."
   exit 1
-}
-
-if [ ! -d node_modules ]; then
-  echo "[2/5] Abhängigkeiten installieren"
-  npm install
-else
-  echo "[2/5] Abhängigkeiten bereits vorhanden"
 fi
 
-echo "[3/5] Code formatieren"
-npm run format
-
-echo "[4/5] Tests ausführen"
-npm test
-
-echo "[5/5] Fertig: geprüft und gelöst"
-echo "Nächster Schritt: Hilfe-Panel in templates/help-panel.html öffnen."
+node tools/start_routine.js
