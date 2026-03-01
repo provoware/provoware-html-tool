@@ -16,6 +16,8 @@ const {
   resolveRandomProfile,
   formatUsageTimestamp,
   resolvePreviewShortcutTarget,
+  buildPreviewStatusMessage,
+  buildFocusTargetStatusMessage,
 } = require("../templates/quick_store_module");
 
 test("Quick-Store-Pfade sind pro Bereich getrennt", () => {
@@ -184,4 +186,21 @@ test("resolvePreviewShortcutTarget akzeptiert nur Alt-Kuerzel", () => {
   assert.equal(resolvePreviewShortcutTarget("t", true), "title");
   assert.equal(resolvePreviewShortcutTarget("I", true), "content");
   assert.equal(resolvePreviewShortcutTarget("t", false), "");
+});
+
+test("buildPreviewStatusMessage zeigt Alt-Shortcuts im Status", () => {
+  const message = buildPreviewStatusMessage("Titel-Feld");
+  assert.match(message, /Alt\+T/);
+  assert.match(message, /Alt\+I/);
+  assert.match(message, /Titel-Feld/);
+});
+
+test("buildFocusTargetStatusMessage liefert Enter- und Speichertext", () => {
+  const enterMessage = buildFocusTargetStatusMessage("enter");
+  const saveMessage = buildFocusTargetStatusMessage("saved");
+
+  assert.match(enterMessage, /mit Enter bestaetigt/);
+  assert.match(enterMessage, /Alt\+T oder Alt\+I/);
+  assert.match(saveMessage, /Fokusziel gespeichert/);
+  assert.match(saveMessage, /Alt\+T oder Alt\+I/);
 });

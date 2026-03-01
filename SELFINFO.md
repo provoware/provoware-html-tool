@@ -1,3 +1,11 @@
+## Iteration 73 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Alt-Shortcut-Hinweis im Lesemodus-Status + automatischer Shortcut-Konfliktcheck in Start-Routine).
+- Ergebnis: Lesemodus-Statusmeldungen nennen jetzt Alt+T/Alt+I sichtbar fuer Fokuswechsel und Enter-Bestaetigung.
+- Ergebnis: Start-Routine meldet Shortcut-Konflikte je Betriebssystem mit klarer naechster Aktion.
+- Mini-Optimierung: Start-Hinweis nennt bei Konflikt immer den Rueckweg ueber Protokoll oeffnen.
+- Naechster Schritt: Konfliktwarnungen im Abschlussbericht gesammelt und kuerzer ausgeben.
+
 ## Iteration 72 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Profil-Chip mit letzter Nutzung + sichere Fokusziel-Shortcuts).

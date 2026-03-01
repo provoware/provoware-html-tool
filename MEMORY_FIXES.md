@@ -836,3 +836,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Ruecksprung auf Vorschau-Knopf (verworfen, weniger hilfreich fuer direkte Bearbeitung).
 **Risiko/Side-Effects:** Niedrig, da nur Lyrics-Teilbereich geaendert.
 **Verknuepft:** PATCH-068
+
+## FIX-20260303-073: Shortcut-Konflikthinweis-im-Startcheck
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Tastaturkuerzel wirken je Betriebssystem unterschiedlich und das war vor dem Start nicht sichtbar.
+**Technische Ursache:** Die Start-Routine pruefte Shortcuts bisher nicht auf bekannte OS-Besonderheiten.
+**Trigger:** Lesemodus nutzt Alt+T/Alt+I fuer Fokusziel und kann auf manchen Tastaturen Sonderzeichen ausloesen.
+**Fix (kurz):** Neuer Shortcut-Konfliktcheck in `tools/start_routine.js` meldet Hinweise mit naechstem Schritt; Statuslog im Lesemodus nennt Alt+T/Alt+I sichtbar.
+**Geaenderte Dateien/Marker:** tools/start_routine.js, templates/quick_store_module.js, test/start_routine.test.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei neuen Shortcuts einen Startcheck-Hinweis und eine sichtbare In-App-Hilfe zusammen ausliefern.
+**Alternative(n):** Nur Doku-Hinweis ohne Startcheck (verworfen, zu spaet sichtbar).
+**Risiko/Side-Effects:** Niedrig, da nur Hinweislogik erweitert wurde.
+**Verknuepft:** PATCH-073

@@ -16,6 +16,7 @@ const {
   validateOpenMiniPoints,
   validateProjectStructure,
   writeDependencyState,
+  runShortcutConflictCheck,
 } = require("../tools/start_routine");
 
 test("validateProjectStructure meldet fehlende Pfade", () => {
@@ -332,4 +333,26 @@ test("validateOpenMiniPoints meldet Abweichung", () => {
 
   assert.equal(result.ok, false);
   assert.equal(result.count, 3);
+});
+
+test("runShortcutConflictCheck meldet Hinweis auf macOS", () => {
+  const result = runShortcutConflictCheck({
+    platform: "darwin",
+    shortcuts: ["Alt+T", "Alt+I"],
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.warnings.length, 1);
+  assert.match(result.message, /Alt\+I/);
+});
+
+test("runShortcutConflictCheck meldet keine Konflikte auf Linux", () => {
+  const result = runShortcutConflictCheck({
+    platform: "linux",
+    shortcuts: ["Alt+T", "Alt+I"],
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.warnings.length, 0);
+  assert.match(result.message, /ohne kritische Konflikte/);
 });

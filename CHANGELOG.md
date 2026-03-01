@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 73
+
+- Zwei offene Mini-Punkte abgeschlossen: Lesemodus-Statusmeldungen zeigen jetzt sichtbar **Alt+T/Alt+I** als Fokusziel-Hilfe bei Vorschau und Enter-Bestaetigung.
+- Start-Routine hat jetzt einen automatischen Shortcut-Konfliktcheck fuer Browser/OS-Tasten und meldet Hinweise mit naechstem Schritt in einfacher Sprache.
+- Risiko: niedrig, weil nur Statusmeldungen, Start-Check und gezielte Unit-Tests erweitert wurden.
+
 ## 2026-03-03 – Iteration 72
 
 - Zwei offene Mini-Punkte abgeschlossen: Profil-Status-Chip zeigt jetzt die letzte Nutzung als Zeitstempel in einfacher Sprache.

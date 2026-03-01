@@ -1,3 +1,10 @@
+## Iteration 73 – Startcheck + Songtext-Hilfe erweitert
+
+- **Lesemodus-Statushilfe:** Die Live-Statuszeile nennt jetzt immer Alt+T/Alt+I, damit der Fokuswechsel ohne Maus klar bleibt.
+- **Start-Routine-Tooldetail:** Neuer Shortcut-Konfliktcheck meldet moegliche OS-Besonderheiten (z. B. Alt+I auf macOS) mit direktem naechstem Schritt.
+- **Validierung (Eingabepruefung):** Der neue Check prueft Shortcut-Eintraege auf gueltigen Text, bevor Hinweise gebaut werden.
+- **Laiennutzen:** Nutzer sehen sofort, ob sie einfach weiterarbeiten koennen oder zuerst den Shortcut pruefen sollten.
+
 ## Iteration 71 – Tool-Umfang erweitert
 
 - **Songtext-Profilstatus:** Das Tool zeigt jetzt ein klares Statusfeld fuer das aktive Zufallsprofil im Lyrics-Bereich.

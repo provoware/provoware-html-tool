@@ -1,3 +1,11 @@
+## Update Iteration 73 (2026-03-03)
+
+Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
+
+- Lesemodus-Status nennt jetzt Alt+T/Alt+I sichtbar direkt bei Vorschau, Speichern und Enter-Bestaetigung.
+- Die Start-Routine prueft jetzt automatisch Shortcut-Konflikte je Betriebssystem und meldet klare naechste Schritte.
+- Naechster Schritt: Konfliktwarnungen am Ende der Start-Routine gesammelt als Kurzblock anzeigen.
+
 ## Update Iteration 72 (2026-03-03)
 
 Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
@@ -84,7 +92,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 84 %
-- **Erledigt:** 120 Punkte
+- **Erledigt:** 122 Punkte
 - **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

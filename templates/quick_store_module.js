@@ -257,6 +257,33 @@
     return "";
   }
 
+  function buildPreviewStatusMessage(targetLabel) {
+    const safeTarget =
+      typeof targetLabel === "string" && targetLabel.trim()
+        ? targetLabel.trim()
+        : "Titel-Feld";
+    return (
+      `Lesemodus aktualisiert. Fokusziel: ${safeTarget}. ` +
+      "Tastaturhilfe: Alt+T fuer Titel, Alt+I fuer Inhaltsfeld. " +
+      "Naechster Schritt: Songtext pruefen oder weiter bearbeiten."
+    );
+  }
+
+  function buildFocusTargetStatusMessage(mode) {
+    const normalizedMode =
+      typeof mode === "string" && mode.trim() ? mode.trim() : "saved";
+    if (normalizedMode === "enter") {
+      return (
+        "Fokusziel mit Enter bestaetigt. Tastaturhilfe: Alt+T oder Alt+I. " +
+        "Naechster Schritt: Lesemodus oeffnen und Rueckweg pruefen."
+      );
+    }
+    return (
+      "Fokusziel gespeichert. Tastaturhilfe: Alt+T oder Alt+I. " +
+      "Naechster Schritt: Lesemodus schliessen und Fokus pruefen."
+    );
+  }
+
   function buildRandomLyricsSnippet(
     profile = "standard",
     randomFn = Math.random,
@@ -776,9 +803,7 @@ Zeile 2: ...`;
           previewFocusTargetSelect.value === "content"
             ? "Inhaltsfeld"
             : "Titel-Feld";
-        setStatus(
-          `Lesemodus aktualisiert. Fokusziel: ${selectedTarget}. Naechster Schritt: Songtext pruefen oder weiter bearbeiten.`,
-        );
+        setStatus(buildPreviewStatusMessage(selectedTarget));
       } catch (error) {
         const details =
           error instanceof Error ? error.message : "Unbekannter Fehler";
@@ -909,9 +934,7 @@ Zeile 2: ...`;
           error instanceof Error ? error.message : "Unbekannter Fehler";
         setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
       });
-      setStatus(
-        "Fokusziel gespeichert. Naechster Schritt: Lesemodus schliessen und Fokus pruefen.",
-      );
+      setStatus(buildFocusTargetStatusMessage("saved"));
     });
     previewFocusTargetSelect.addEventListener("keydown", (event) => {
       if (event.key !== "Enter") {
@@ -924,9 +947,7 @@ Zeile 2: ...`;
           error instanceof Error ? error.message : "Unbekannter Fehler";
         setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
       });
-      setStatus(
-        "Fokusziel mit Enter bestaetigt. Naechster Schritt: Lesemodus oeffnen und Rueckweg pruefen.",
-      );
+      setStatus(buildFocusTargetStatusMessage("enter"));
     });
     previewButton.addEventListener("click", onLyricsPreview);
     lyricsBackButton.addEventListener("click", onLyricsBack);
@@ -965,6 +986,8 @@ Zeile 2: ...`;
     resolveRandomProfile,
     formatUsageTimestamp,
     resolvePreviewShortcutTarget,
+    buildPreviewStatusMessage,
+    buildFocusTargetStatusMessage,
   };
 
   if (typeof module !== "undefined" && module.exports) {
