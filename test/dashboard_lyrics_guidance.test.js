@@ -320,3 +320,28 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   );
   assert.match(dashboardJs, /Ganzwortsuche aktiv/);
 });
+
+test("Dashboard-Layout bietet 800x600-Basis und seitliche Aufklapp-Buttons", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+  const dashboardCss = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.css"),
+    "utf8",
+  );
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="left-rail-edge-toggle"/);
+  assert.match(dashboardHtml, /id="right-rail-edge-toggle"/);
+  assert.match(dashboardCss, /--app-base-width:\s*800px/);
+  assert.match(dashboardCss, /--app-base-height:\s*600px/);
+  assert.match(
+    dashboardCss,
+    /\.module-grid\s*{[\s\S]*grid-template-columns:\s*repeat\(3/,
+  );
+  assert.match(dashboardJs, /function getResponsiveRailWidth/);
+});

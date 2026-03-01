@@ -45,6 +45,8 @@
   const splitterRight = document.getElementById("splitter-right");
   const leftRailToggle = document.getElementById("left-rail-toggle");
   const rightRailToggle = document.getElementById("right-rail-toggle");
+  const leftRailEdgeToggle = document.getElementById("left-rail-edge-toggle");
+  const rightRailEdgeToggle = document.getElementById("right-rail-edge-toggle");
   const favoritesRail = document.getElementById("favorites-rail");
   const favoritesRailToggle = document.getElementById("favorites-rail-toggle");
   const favoritesActions = document.getElementById("favorites-actions");
@@ -345,19 +347,21 @@
     return true;
   }
 
+  function getResponsiveRailWidth(width, ratio) {
+    const viewport = Math.max(window.innerWidth || 800, 800);
+    const responsive = Math.round(viewport * ratio);
+    return clampNumber(Math.max(width, responsive), 220, 340);
+  }
+
   function applyLayoutState() {
     if (!layoutRoot || !leftRail || !rightRail) {
       return false;
     }
 
-    layoutRoot.style.setProperty(
-      "--left-rail-width",
-      `${layoutState.leftWidth}px`,
-    );
-    layoutRoot.style.setProperty(
-      "--right-rail-width",
-      `${layoutState.rightWidth}px`,
-    );
+    const leftRailWidth = getResponsiveRailWidth(layoutState.leftWidth, 0.22);
+    const rightRailWidth = getResponsiveRailWidth(layoutState.rightWidth, 0.24);
+    layoutRoot.style.setProperty("--left-rail-width", `${leftRailWidth}px`);
+    layoutRoot.style.setProperty("--right-rail-width", `${rightRailWidth}px`);
 
     leftRail.hidden = layoutState.leftCollapsed;
     rightRail.hidden = layoutState.rightCollapsed;
@@ -370,6 +374,26 @@
     rightRailToggle.textContent = layoutState.rightCollapsed
       ? "Zeitbar rechts aufklappen"
       : "Zeitbar rechts einklappen";
+
+    if (leftRailEdgeToggle) {
+      leftRailEdgeToggle.textContent = layoutState.leftCollapsed
+        ? "⟩ Links"
+        : "⟨ Links";
+      leftRailEdgeToggle.setAttribute(
+        "aria-expanded",
+        String(!layoutState.leftCollapsed),
+      );
+    }
+
+    if (rightRailEdgeToggle) {
+      rightRailEdgeToggle.textContent = layoutState.rightCollapsed
+        ? "Rechts ⟨"
+        : "Rechts ⟩";
+      rightRailEdgeToggle.setAttribute(
+        "aria-expanded",
+        String(!layoutState.rightCollapsed),
+      );
+    }
 
     layoutRoot.dataset.leftCollapsed = String(layoutState.leftCollapsed);
     layoutRoot.dataset.rightCollapsed = String(layoutState.rightCollapsed);
@@ -536,6 +560,14 @@
       setStatus(
         "Zeitbar rechts umgeschaltet. Naechster Schritt: Layout pruefen.",
       );
+    });
+
+    leftRailEdgeToggle?.addEventListener("click", () => {
+      leftRailToggle.click();
+    });
+
+    rightRailEdgeToggle?.addEventListener("click", () => {
+      rightRailToggle.click();
     });
 
     favoritesRailToggle?.addEventListener("click", () => {
