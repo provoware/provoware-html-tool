@@ -27,6 +27,20 @@ function assertText(value, name) {
   }
 }
 
+function assertRunOutput(output) {
+  if (!output || typeof output !== "object") {
+    throw new Error(
+      "Befehls-Ergebnis fehlt. Protokoll oeffnen und erneut versuchen.",
+    );
+  }
+
+  if (typeof output.ok !== "boolean" || typeof output.code !== "number") {
+    throw new Error(
+      "Befehls-Ergebnis ist ungueltig. Protokoll oeffnen und erneut versuchen.",
+    );
+  }
+}
+
 function runCommand(command, args) {
   assertText(command, "Befehl");
   assertArray(args, "Argumente");
@@ -38,15 +52,11 @@ function runCommand(command, args) {
 
   const output = {
     ok: result.status === 0,
-    code: result.status,
+    code: result.status ?? 1,
     signal: result.signal || null,
   };
 
-  if (typeof output.ok !== "boolean") {
-    throw new Error(
-      "Befehls-Ergebnis ist ungueltig. Protokoll oeffnen und erneut versuchen.",
-    );
-  }
+  assertRunOutput(output);
 
   return output;
 }
@@ -105,13 +115,32 @@ function validateProjectStructure(requiredPaths) {
   };
 }
 
+function ensureRequiredDirectories() {
+  const directories = [
+    path.join(process.cwd(), "data"),
+    path.join(process.cwd(), "data", "logs"),
+  ];
+
+  directories.forEach((directory) => {
+    assertText(directory, "Verzeichnis");
+    fs.mkdirSync(directory, { recursive: true });
+    if (!fs.existsSync(directory)) {
+      throw new Error(
+        `Verzeichnis fehlt: ${directory}. Reparatur starten und erneut versuchen.`,
+      );
+    }
+  });
+
+  console.log("[2/11] Datenordner geprueft");
+}
+
 function installDependencies() {
   if (fs.existsSync("node_modules")) {
-    console.log("[2/10] Abhaengigkeiten vorhanden");
+    console.log("[3/11] Abhaengigkeiten vorhanden");
     return { ok: true };
   }
 
-  console.log("[2/10] Abhaengigkeiten fehlen. Installation startet");
+  console.log("[3/11] Abhaengigkeiten fehlen. Installation startet");
   const install = runCommand("npm", ["install"]);
 
   if (!install.ok) {
@@ -140,7 +169,7 @@ function runRegistryCheck() {
     throw new Error(`${result.message}${details}`);
   }
 
-  console.log(`[5/10] ${result.message}`);
+  console.log(`[7/11] ${result.message}`);
 }
 function runPluginLoaderCheck() {
   const result = runPluginLoaderHealthCheck({
@@ -159,18 +188,28 @@ function runPluginLoaderCheck() {
     );
   }
 
-  console.log(`[6/10] ${result.message}`);
+  console.log(`[8/11] ${result.message}`);
+}
+
+function verifyFormatting() {
+  console.log("[5/11] Format pruefen");
+  const formatCheck = runCommand("npm", ["run", "format:check"]);
+  if (!formatCheck.ok) {
+    throw new Error(
+      "Format-Pruefung fehlgeschlagen. Protokoll oeffnen und erneut versuchen.",
+    );
+  }
 }
 
 function runDashboardAutoStart() {
   const result = startDashboardMainModule({
     dashboardPath: path.join(process.cwd(), "templates", "dashboard.html"),
   });
-  console.log(`[9/10] ${result.message}`);
+  console.log(`[11/11] ${result.message}`);
 }
 
 function runStartRoutine() {
-  console.log("[1/10] Projektstruktur pruefen");
+  console.log("[1/11] Projektstruktur pruefen");
   const structure = validateProjectStructure([
     "package.json",
     "config/messages_de.json",
@@ -202,9 +241,10 @@ function runStartRoutine() {
     );
   }
 
+  ensureRequiredDirectories();
   installDependencies();
 
-  console.log("[3/10] Code formatieren");
+  console.log("[4/11] Code formatieren");
   const format = runCommand("npm", ["run", "format"]);
   if (!format.ok) {
     throw new Error(
@@ -212,7 +252,9 @@ function runStartRoutine() {
     );
   }
 
-  console.log("[4/10] Unit-Tests ausfuehren");
+  verifyFormatting();
+
+  console.log("[6/11] Unit-Tests ausfuehren");
   const tests = runCommand("npm", ["test"]);
   if (!tests.ok) {
     throw new Error(
@@ -223,16 +265,16 @@ function runStartRoutine() {
   runRegistryCheck();
   runPluginLoaderCheck();
 
-  console.log("[7/10] Release-Readiness pruefen");
+  console.log("[9/11] Release-Readiness pruefen");
   const release = runReleaseReadinessCheck({ rootPath: process.cwd() });
   if (!release.ok) {
     throw new Error(
       "Release-Readiness fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
     );
   }
-  console.log(`[7/10] ${release.message}`);
+  console.log(`[9/11] ${release.message}`);
 
-  console.log("[8/10] Systemtest ausfuehren");
+  console.log("[10/11] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -242,7 +284,7 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[10/10] Fertig");
+  console.log("[11/11] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -270,4 +312,7 @@ module.exports = {
   runStartRoutine,
   validateProjectStructure,
   writeStartLog,
+  assertRunOutput,
+  ensureRequiredDirectories,
+  verifyFormatting,
 };

@@ -248,3 +248,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Ticketliste außerhalb des Repos.
 **Risiko/Side-Effects:** Mehr Planungsaufgaben im TODO sichtbar.
 **Verknüpft:** Patch-ID local-016
+
+## FIX-20260301-011: Start-Routine-Formatnachweis-und-Ordner-Selbstheilung
+
+**Kategorie:** Update/FS-Access/Tests
+**Symptom (für Laien):** Start lief nicht stabil, wenn Logs-Ordner fehlte oder Formatierung unbemerkt fehlerhaft war.
+**Technische Ursache:** Es gab keine feste Erstellung der Datenordner und keinen separaten Format-Validierungsschritt.
+**Trigger:** Neuer Rechner, bereinigtes Repo oder manuelle Dateiaenderungen.
+**Fix (kurz):** Start-Routine legt benoetigte Ordner automatisch an und fuehrt nach `format` immer `format:check` aus.
+**Geänderte Dateien/Marker:** tools/start_routine.js, package.json, test/start_routine.test.js
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer nach automatischer Formatierung einen expliziten Format-Check laufen lassen.
+**Alternative(n):** Nur manuelle Sichtpruefung (abgelehnt, zu unsicher).
+**Risiko/Side-Effects:** Start hat einen kurzen Zusatzschritt fuer Pruefung.
+**Verknüpft:** Patch-ID local-017

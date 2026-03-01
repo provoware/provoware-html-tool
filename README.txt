@@ -248,3 +248,7 @@ Warum das wichtig ist:
 - Fokus sichtbar für Tastaturbedienung,
 - konsistente Abstände und Textgrößen,
 - modulare Blöcke: leichter erweiterbar und wartbar.
+
+
+Zusatzbefehl fuer sichere Format-Pruefung:
+- `npm run format:check`

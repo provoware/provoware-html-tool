@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-03-01 – Start-Routine robuster und effizienter
+
+- Start-Routine erstellt jetzt fehlende Datenordner automatisch (`data/`, `data/logs/`) und validiert den Erfolg direkt.
+- Nach dem Formatieren folgt jetzt eine automatische Format-Pruefung (`npm run format:check`) fuer klaren Qualitaetsnachweis.
+- Befehls-Ergebnisse werden strenger validiert, damit Fehler frueh und laienfreundlich erkannt werden.
+- Risiko: niedrig, da nur Startablauf, Script-Konfiguration und Tests erweitert wurden.
+
 ## 2026-03-01 – README Tool-Module-Liste und Modul-Backlog erweitert
 
 - README um eine aktuelle, klar strukturierte Liste der vorhandenen Tool-Module ergänzt.
