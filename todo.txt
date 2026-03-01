@@ -212,5 +212,8 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Modul-Control-Leiste um Pin-Knopf mit gleichem Tooltip-Standard erweitern.
 - [x] Naechster Mini-Punkt: Fokusmodus (100%-Ansicht) mit Layout-Snapshot/Restore testen und absichern.
 
-- [ ] Naechster Mini-Punkt: Fokusmodus-Hinweise im Inspector-Tab sichtbar machen.
-- [ ] Naechster Mini-Punkt: Modul-Anheften zusaetzlich in layout.json persistieren.
+- [x] Naechster Mini-Punkt: Fokusmodus-Hinweise im Inspector-Tab sichtbar machen.
+- [x] Naechster Mini-Punkt: Modul-Anheften zusaetzlich in layout.json persistieren.
+
+- [ ] Naechster Mini-Punkt: Rechte Sidebar als ausklappbare Favoritenleiste mit Schnellaktionen aufbauen.
+- [ ] Naechster Mini-Punkt: Modulbereich unten fuer modulspezifische Optionen reservieren und sichtbar machen.

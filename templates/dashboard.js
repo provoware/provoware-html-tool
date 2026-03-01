@@ -42,6 +42,13 @@
   const layoutReset = document.getElementById("layout-reset");
   const focusModeToggle = document.getElementById("focus-mode-toggle");
   const focusModeRestore = document.getElementById("focus-mode-restore");
+  const footerDebugOutput = document.getElementById("footer-debug-output");
+  const footerLogList = document.getElementById("footer-log-list");
+  const systemMeta = document.getElementById("system-meta");
+  const kasiNoteInput = document.getElementById("kasi-note-input");
+  const kasiNotePaste = document.getElementById("kasi-note-paste");
+  const kasiNoteSave = document.getElementById("kasi-note-save");
+  const toolExport = document.getElementById("tool-export");
 
   function formatText(template, values) {
     if (typeof template !== "string" || !template.trim()) {
@@ -86,6 +93,7 @@
     { id: "quick", title: "⚡ Schnellzugriff" },
     { id: "modules", title: "📦 Module" },
   ];
+  let moduleLayoutState = {};
 
   const dashboardModel = window.DashboardModel || {};
   const normalizeLayoutWithModel =
@@ -211,6 +219,7 @@
       version: "v001",
       updatedAt: new Date().toISOString(),
       layout: safeLayout,
+      modules: moduleLayoutState,
     });
 
     return { ok: true, message: "Layout gespeichert." };
@@ -226,6 +235,8 @@
     }
 
     layoutState = normalizeLayoutWithModel(loaded.value?.layout);
+    const modules = loaded.value?.modules;
+    moduleLayoutState = modules && typeof modules === "object" ? modules : {};
     applyLayoutState();
     return true;
   }
@@ -271,6 +282,10 @@
     setStatus(
       "Fokusmodus aktiv. Naechster Schritt: Mit Escape oder Knopf beenden.",
     );
+    if (helpWhat) {
+      helpWhat.textContent =
+        "Fokusmodus ist aktiv. Rueckweg: Button Fokusmodus beenden oder Escape.";
+    }
     return true;
   }
 
@@ -280,6 +295,10 @@
     applyLayoutState();
     applyFocusModeState(false);
     setStatus("Fokusmodus beendet. Naechster Schritt: Layout weiter nutzen.");
+    if (helpWhat) {
+      helpWhat.textContent =
+        "Fokusmodus beendet. Naechster Schritt: Modulflaeche im Raster nutzen.";
+    }
     return true;
   }
 
@@ -366,6 +385,7 @@
       "Status fehlt. Naechster Schritt: Erneut versuchen.",
     );
     status.textContent = safe;
+    addLogEntry(safe);
     return safe;
   }
 
@@ -380,9 +400,112 @@
     return safe;
   }
 
+  function addLogEntry(message) {
+    if (!footerLogList || typeof message !== "string" || !message.trim()) {
+      return false;
+    }
+    const entry = document.createElement("li");
+    const timestamp = new Date().toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    entry.textContent = `[${timestamp}] ${message}`;
+    footerLogList.prepend(entry);
+    while (footerLogList.children.length > 12) {
+      footerLogList.removeChild(footerLogList.lastChild);
+    }
+    return true;
+  }
+
+  function buildNoteLine(rawText) {
+    if (typeof rawText !== "string" || !rawText.trim()) {
+      throw new Error(
+        "Notiz fehlt. Naechster Schritt: Text eingeben und erneut versuchen.",
+      );
+    }
+    const stamp = new Date().toISOString();
+    return `[${stamp}] ${rawText.trim()}`;
+  }
+
+  async function saveKasiNote() {
+    if (
+      !window.ProjectFileWriter?.appendProjectTextFile ||
+      !selectedProjectDir
+    ) {
+      setStatus(
+        "Projektordner oder Dateischreiber fehlt. Naechster Schritt: Ordner waehlen und erneut versuchen.",
+      );
+      return false;
+    }
+
+    const line = buildNoteLine(kasiNoteInput?.value || "");
+    await window.ProjectFileWriter.appendProjectTextFile(
+      selectedProjectDir,
+      "data/KASI_NOTIZ.txt",
+      line,
+    );
+    kasiNoteInput.value = "";
+    setStatus(
+      "Notiz gespeichert. Naechster Schritt: Erneut versuchen oder neue Notiz erfassen.",
+    );
+    addLogEntry("KASI_NOTIZ gespeichert");
+    return true;
+  }
+
+  async function exportToolState() {
+    const payload = {
+      exportedAt: new Date().toISOString(),
+      layoutState,
+      modules: Array.from(
+        document.querySelectorAll(".module-card h3"),
+        (node) => node.textContent || "",
+      ),
+      status: status?.textContent || "",
+    };
+
+    await writeProjectJson("data/tool_export.json", payload);
+    setStatus(
+      "Gesamt-Export gespeichert. Naechster Schritt: Datei data/tool_export.json pruefen.",
+    );
+    addLogEntry("Gesamt-Export geschrieben");
+    return true;
+  }
+
+  function registerZoomControls() {
+    const root = document.documentElement;
+    root.style.setProperty("--ui-font-scale", "1");
+    root.style.setProperty("--ui-area-scale", "1");
+    document.addEventListener(
+      "wheel",
+      (event) => {
+        if (!event.ctrlKey) {
+          return;
+        }
+        event.preventDefault();
+        const target = event.target;
+        const overText =
+          target instanceof HTMLElement &&
+          !!target.closest("p, span, h1, h2, h3, h4, label, button, li, a");
+        const variable = overText ? "--ui-font-scale" : "--ui-area-scale";
+        const current = Number.parseFloat(
+          getComputedStyle(root).getPropertyValue(variable),
+        );
+        const next = Math.min(
+          1.5,
+          Math.max(0.8, current + (event.deltaY < 0 ? 0.05 : -0.05)),
+        );
+        root.style.setProperty(variable, String(next));
+      },
+      { passive: false },
+    );
+  }
+
   function setDebug(message) {
     const safe = ensureMessage(message, "Debug-Text fehlt.");
     debugOutput.textContent = safe;
+    if (footerDebugOutput) {
+      footerDebugOutput.textContent = safe;
+    }
     return safe;
   }
 
@@ -628,6 +751,9 @@
       }
       await saveHandle(handle);
       selectedProjectDir = handle;
+      if (systemMeta) {
+        systemMeta.textContent = `Version: Iteration 78 | Projektpfad: verbunden (${HANDLE_KEY})`;
+      }
       const folders = await ensureStructure(handle);
       await loadLayoutState();
       setStatus(`Projekt verbunden. Struktur ok (${folders.length} Ordner).`);
@@ -666,6 +792,9 @@
         );
       }
       selectedProjectDir = handle;
+      if (systemMeta) {
+        systemMeta.textContent = `Version: Iteration 78 | Projektpfad: verbunden (${HANDLE_KEY})`;
+      }
       const folders = await ensureStructure(handle);
       await loadLayoutState();
       setStatus(`Auto-Reconnect ok. ${folders.length} Ordner sind bereit.`);
@@ -995,7 +1124,19 @@
     emptyState: document.getElementById("empty-state"),
     scale: document.getElementById("grid-scale"),
     align: document.getElementById("grid-align"),
+    slotCount: 9,
+    initialModuleState: moduleLayoutState,
     setStatus,
+    onModuleStateChange: (modules) => {
+      moduleLayoutState = modules.reduce((acc, entry) => {
+        acc[entry.id] = {
+          pinned: Boolean(entry.pinned),
+        };
+        return acc;
+      }, {});
+      persistLayoutState().catch(() => {});
+      setDebug(`Debug: ${modules.length} Module im Raster aktiv.`);
+    },
   });
 
   [
@@ -1078,6 +1219,7 @@
   });
 
   registerKeyboardShortcuts();
+  registerZoomControls();
   registerLayoutControls();
   applyFocusModeState(false);
   renderZones();

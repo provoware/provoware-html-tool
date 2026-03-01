@@ -49,6 +49,27 @@
     return directory.getFileHandle(parsed.fileName, { create: true });
   }
 
+  async function appendProjectTextFile(rootHandle, relativePath, textLine) {
+    assertDirectoryHandle(rootHandle);
+    parseRelativePath(relativePath);
+    const safeLine = assertText(textLine, "Notiztext");
+
+    const fileHandle = await resolveProjectFileHandle(rootHandle, relativePath);
+    let existing = "";
+    try {
+      const file = await fileHandle.getFile();
+      existing = await file.text();
+    } catch {
+      existing = "";
+    }
+
+    const writer = await fileHandle.createWritable();
+    const prefix = existing && !existing.endsWith("\n") ? "\n" : "";
+    await writer.write(`${existing}${prefix}${safeLine}\n`);
+    await writer.close();
+    return true;
+  }
+
   async function writeProjectJsonFile(rootHandle, relativePath, payload) {
     assertDirectoryHandle(rootHandle);
     parseRelativePath(relativePath);
@@ -69,6 +90,7 @@
     parseRelativePath,
     resolveProjectFileHandle,
     writeProjectJsonFile,
+    appendProjectTextFile,
   };
 
   if (typeof module !== "undefined" && module.exports) {

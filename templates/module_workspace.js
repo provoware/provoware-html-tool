@@ -76,6 +76,18 @@
     const scale = options.scale;
     const align = options.align;
     const setStatus = options.setStatus;
+    const onModuleStateChange =
+      typeof options.onModuleStateChange === "function"
+        ? options.onModuleStateChange
+        : () => {};
+    const slotCount = Number.isInteger(options.slotCount)
+      ? Math.max(1, options.slotCount)
+      : 9;
+    const initialModuleState =
+      options.initialModuleState &&
+      typeof options.initialModuleState === "object"
+        ? options.initialModuleState
+        : {};
 
     assertNode(catalog, "Modulkatalog");
     assertNode(grid, "Modulflaeche");
@@ -98,18 +110,32 @@
         .sort((left, right) => Number(right.pinned) - Number(left.pinned));
       grid.innerHTML = "";
 
+      emptyState.hidden = true;
       if (visibleModules.length === 0) {
-        grid.appendChild(emptyState);
-        emptyState.hidden = false;
-        return;
+        emptyState.textContent =
+          "Raster ist leer. Naechster Schritt: links ein Modul aktivieren.";
       }
 
-      emptyState.hidden = true;
-      visibleModules.forEach((entry, index) => {
+      for (let index = 0; index < slotCount; index += 1) {
+        const entry = visibleModules[index];
+        const slot = document.createElement("article");
+        slot.className = "module-slot";
+        slot.setAttribute("role", "listitem");
+        slot.dataset.slotIndex = String(index + 1);
+        if (!entry) {
+          const slotLabel = document.createElement("p");
+          slotLabel.className = "module-slot-label";
+          slotLabel.textContent = `Rasterplatz ${index + 1} ist leer`;
+          slot.append(slotLabel);
+          grid.appendChild(slot);
+          continue;
+        }
+
         const card = document.createElement("article");
         card.className = "module-card";
         card.dataset.moduleProfile = entry.id;
-        card.setAttribute("role", "listitem");
+        card.setAttribute("role", "group");
+        card.tabIndex = 0;
         if (maximizedId === entry.id) {
           card.classList.add("is-maximized");
         }
@@ -126,6 +152,18 @@
 
         const actions = document.createElement("div");
         actions.className = "module-card-actions";
+
+        const toggleMaximize = () => {
+          maximizedId = maximizedId === entry.id ? null : entry.id;
+          renderActiveModules();
+          if (maximizedId) {
+            setStatus("Modul maximiert. Naechster Schritt: Funktionen nutzen.");
+            return;
+          }
+          setStatus(
+            "Maximierung beendet. Naechster Schritt: Raster weiter nutzen.",
+          );
+        };
 
         const pin = document.createElement("button");
         pin.type = "button";
@@ -147,17 +185,7 @@
         maximize.textContent = maximizeActive ? "Normalgroesse" : "Maximieren";
         maximize.title = getControlHint("maximize", maximizeActive);
         maximize.setAttribute("aria-label", maximize.title);
-        maximize.addEventListener("click", () => {
-          maximizedId = maximizedId === entry.id ? null : entry.id;
-          renderActiveModules();
-          if (maximizedId) {
-            setStatus("Modul maximiert. Naechster Schritt: Funktionen nutzen.");
-            return;
-          }
-          setStatus(
-            "Maximierung beendet. Naechster Schritt: Raster weiter nutzen.",
-          );
-        });
+        maximize.addEventListener("click", toggleMaximize);
 
         const minimize = document.createElement("button");
         minimize.type = "button";
@@ -195,6 +223,18 @@
 
         actions.append(pin, maximize, minimize, hide);
         card.append(order, title, actions);
+        card.addEventListener("click", (event) => {
+          if (event.target && event.target.tagName === "BUTTON") {
+            return;
+          }
+          toggleMaximize();
+        });
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggleMaximize();
+          }
+        });
 
         if (!entry.minimized) {
           const what = document.createElement("p");
@@ -206,8 +246,18 @@
           card.append(what, data, undo);
         }
 
-        grid.appendChild(card);
-      });
+        slot.appendChild(card);
+        grid.appendChild(slot);
+      }
+
+      onModuleStateChange(
+        visibleModules.map((entry) => ({
+          id: entry.id,
+          title: entry.title,
+          pinned: Boolean(entry.pinned),
+          maximized: maximizedId === entry.id,
+        })),
+      );
     }
 
     function addModule(moduleId) {
@@ -218,12 +268,13 @@
       }
 
       const position = moduleModel.filter((entry) => !entry.hidden).length + 1;
+      const persisted = initialModuleState[moduleId] || {};
       moduleModel.push({
         ...source,
         position,
         minimized: false,
         hidden: false,
-        pinned: false,
+        pinned: Boolean(persisted.pinned),
       });
       renderActiveModules();
       setStatus(
