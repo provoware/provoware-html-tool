@@ -130,5 +130,39 @@ test("Support-Verlauf nutzt Tastatur-Hinweis je Treffer", () => {
     dashboardJs,
     /Tastatur-Hinweis: Tab waehlt Eintrag, Enter oeffnet Aktion, Escape schliesst Dialog\./,
   );
+  assert.match(
+    dashboardJs,
+    /Tastatur-Hinweis kurz: Tab waehlt, Enter startet, Escape schliesst\./,
+  );
   assert.match(dashboardJs, /backupCompareDetailWrap\.open = false/);
+});
+
+test("Backup-Detailmodus zeigt zuletzt geoeffneten Zustand", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="backup-detail-state"/);
+  assert.match(
+    dashboardJs,
+    /Zuletzt geoeffneter Zustand: Detailmodus ist geoeffnet\./,
+  );
+  assert.match(
+    dashboardJs,
+    /Zuletzt geoeffneter Zustand: Detailmodus ist eingeklappt\./,
+  );
+});
+
+test("Boot-Live-Ansage wird in Debug-Protokoll gespiegelt", () => {
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardJs, /Debug: Boot-Live-Ansage aktualisiert/);
 });

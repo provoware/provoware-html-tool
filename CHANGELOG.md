@@ -1,3 +1,9 @@
+## Iteration 93 - Drei TODO-Punkte abgeschlossen
+
+- Boot-Live-Ansage schreibt bei Fokuszielwechsel jetzt auch einen klaren Debug-Text.
+- Support-Verlauf kuerzt den Tastatur-Hinweis automatisch, wenn Detailtexte sehr lang sind.
+- Versions-Detailmodus zeigt einen zusaetzlichen Satz zum zuletzt geoeffneten Zustand.
+
 ## Iteration 92 - Zwei TODO-Punkte abgeschlossen
 
 - Support-Verlauf zeigt jetzt pro Treffer einen klaren Tastatur-Hinweis (Tab/Enter/Escape).

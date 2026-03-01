@@ -1,3 +1,12 @@
+## Iteration 93 (2026-03-01)
+
+- Ziel: Drei offene TODO-Punkte in einem kleinen UI/A11y-Patch abschliessen.
+- Ergebnis: Boot-Live-Ansage wird bei Fokuszielwechsel im Debug-Protokoll gespiegelt.
+- Ergebnis: Support-Treffer kuerzen den Tastatur-Hinweis automatisch bei langen Detailtexten.
+- Ergebnis: Backup-Detailmodus zeigt den zuletzt geoeffneten Zustand mit klarer naechster Aktion.
+- Checks: `npm run format`, `node --test`, `bash start.sh` ausgefuehrt.
+- Nächster Schritt: Detailzustand pro Projekt in layout.json persistieren.
+
 ## Iteration 92 (2026-03-01)
 
 - Ziel: Zwei offene TODO-Punkte sauber abschliessen und A11y-Hinweise je Eintrag verbessern.

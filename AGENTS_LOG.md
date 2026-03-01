@@ -1,3 +1,12 @@
+PATCHSPEC-2026-03-01-093
+1) Ziel: Drei offene Mini-Punkte in Dashboard-Hilfe abschliessen (Boot-Debuglog, kurzer Support-Hinweis, Detailzustand).
+2) Scope IN: templates/dashboard.js, templates/dashboard.html, test/dashboard_lyrics_guidance.test.js, README.txt, docs/HILFE.md, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt.
+3) Scope OUT: Keine Aenderung an Kernspeicher, keine neuen Abhaengigkeiten, kein Layout-Refactor.
+4) Dateien/Marker: boot-focus-live, support-history-list, backup-compare-detail, backup-detail-state.
+5) Risiko: niedrig (Textlogik + Debugausgabe + Detailhinweis).
+6) Akzeptanzkriterien: Debug-Text bei Fokuszielwechsel sichtbar, Support-Hinweis kuerzt bei langen Details, Detailzustandstext wird angezeigt und aktualisiert.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehler Commit verwerfen und letzten stabilen Stand nutzen.
+
 2026-03-01 | PATCH-060 | Zwei offene Punkte abgeschlossen: Start-Check fuer genau zwei offene Mini-Punkte + Schnellspeicher-Modul mit JSON-Speicherung | tools/start_routine.js, test/start_routine.test.js, system-module/quick_store_model.js, templates/quick_store_module.js, templates/dashboard.html, templates/dashboard.js, test/quick_store_model.test.js, Doku-Updates
 # AGENTS_LOG
 

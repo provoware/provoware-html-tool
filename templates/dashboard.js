@@ -130,6 +130,8 @@
   ];
   let moduleLayoutState = {};
   let favoritesRailOpen = false;
+  let lastBootFocusDebugText = "";
+  let lastBackupDetailStateText = "";
 
   const dashboardModel = window.DashboardModel || {};
   const normalizeLayoutWithModel =
@@ -723,9 +725,42 @@
     if (bootFocusLive) {
       const focusLabel =
         layoutState.bootFocusTarget === "help" ? "Hilfe-Panel" : "Erstes Modul";
-      bootFocusLive.textContent = `Fokusziel aktuell: ${focusLabel}.`;
+      const liveMessage = `Fokusziel aktuell: ${focusLabel}.`;
+      bootFocusLive.textContent = liveMessage;
+      const debugText = `Debug: Boot-Live-Ansage aktualisiert (${liveMessage})`;
+      if (debugText !== lastBootFocusDebugText) {
+        setDebug(debugText);
+        lastBootFocusDebugText = debugText;
+      }
     }
     return gate.gateOpen;
+  }
+
+  function buildSupportKeyboardHint(detailsText) {
+    const safeDetails =
+      typeof detailsText === "string" ? detailsText.trim() : "";
+    if (safeDetails.length > 110) {
+      return "Tastatur-Hinweis kurz: Tab waehlt, Enter startet, Escape schliesst.";
+    }
+    return "Tastatur-Hinweis: Tab waehlt Eintrag, Enter oeffnet Aktion, Escape schliesst Dialog.";
+  }
+
+  function updateBackupDetailStateText(isOpen) {
+    const detailState = document.getElementById("backup-detail-state");
+    if (!(detailState instanceof HTMLElement)) {
+      return false;
+    }
+
+    const safeOpen = isOpen === true;
+    const text = safeOpen
+      ? "Zuletzt geoeffneter Zustand: Detailmodus ist geoeffnet. Naechster Schritt: Inhalte pruefen oder schliessen."
+      : "Zuletzt geoeffneter Zustand: Detailmodus ist eingeklappt. Naechster Schritt: Bei Bedarf oeffnen.";
+    if (text === lastBackupDetailStateText) {
+      return true;
+    }
+    detailState.textContent = text;
+    lastBackupDetailStateText = text;
+    return true;
   }
 
   function registerBootGate() {
@@ -1270,7 +1305,8 @@
         typeof entry.createdAt === "string" ? entry.createdAt : "ohne Zeit";
       const label = typeof entry.kind === "string" ? entry.kind : "eintrag";
       const details = typeof entry.details === "string" ? entry.details : "";
-      line.textContent = `${label} | ${when} | ${details} | Tastatur-Hinweis: Tab waehlt Eintrag, Enter oeffnet Aktion, Escape schliesst Dialog.`;
+      const keyboardHint = buildSupportKeyboardHint(details);
+      line.textContent = `${label} | ${when} | ${details} | ${keyboardHint}`;
       supportHistoryList.appendChild(line);
     });
 
@@ -1378,6 +1414,7 @@
           "Detailmodus leer. Naechster Schritt: Andere Version waehlen.";
         backupCompareDetailWrap.hidden = false;
         backupCompareDetailWrap.open = false;
+        updateBackupDetailStateText(backupCompareDetailWrap.open);
       }
       return true;
     } catch (error) {
@@ -1388,6 +1425,7 @@
           "Detailmodus fehlt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.";
         backupCompareDetailWrap.hidden = false;
         backupCompareDetailWrap.open = false;
+        updateBackupDetailStateText(backupCompareDetailWrap.open);
       }
       return false;
     }
@@ -1662,6 +1700,11 @@
   if (backupVersionSelect) {
     backupVersionSelect.addEventListener("change", updateVersionCompare);
   }
+  if (backupCompareDetailWrap) {
+    backupCompareDetailWrap.addEventListener("toggle", () => {
+      updateBackupDetailStateText(backupCompareDetailWrap.open);
+    });
+  }
   if (supportHistoryApply) {
     supportHistoryApply.addEventListener("click", refreshSupportHistory);
   }
@@ -1692,6 +1735,7 @@
       setStatus(
         "Boot-Fokusziel gespeichert. Naechster Schritt: Weiter klicken und Fokus pruefen.",
       );
+      syncBootGate();
     });
   }
   if (helpSafeModeReset) {
