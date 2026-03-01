@@ -311,6 +311,41 @@ a:focus-visible {
 
 .kanban-items li {
   margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.kanban-move-btn {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--fg);
+  padding: 0.25rem 0.5rem;
+}
+
+.kanban-move-dialog {
+  width: min(92vw, 500px);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--fg);
+  padding: var(--space-3);
+}
+
+.kanban-move-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.kanban-move-form {
+  display: grid;
+  gap: 0.55rem;
+}
+
+#kanban-move-target {
+  min-height: 44px;
 }
 
 .kanban-items[data-focused="true"] {
