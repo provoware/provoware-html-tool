@@ -357,3 +357,9 @@ Praktischer Einsatz:
 - Das Dashboard folgt jetzt strikter Struktur: oben Header, mittig 3-Spalten-Shell, unten Footer.
 - Der Hauptbereich nutzt ein quadratisches 3x3-Raster fuer Module; Sidebars bleiben fuer kleine Aktionen und Modulaufrufe.
 - Hilfebereich ermoeglicht Filter auf Support-Verlauf und der Restore-Dialog zeigt optional JSON-Schluessellisten im Detailmodus.
+
+
+## Erweiterung Iteration 89
+- Startzustand ist jetzt absichtlich leer, ausser einem Auto-Start-Modul: **Notizen**.
+- Die bisher grossen Bereichskacheln wurden in der linken Sidebar als Button-Links zusammengefuehrt.
+- Beide Zeitbars (links/rechts) sind klar benannt und bleiben per Knopf ein- und aufklappbar.

@@ -466,3 +466,9 @@ Iteration: 39
 - Hauptziel: Zerrissenes Dashboard-Layout stabilisieren und Fokusfluss nach Boot-Gate fuer A11y verbessern.
 - Ergebnis: Fokusziel ist einstellbar und persistent; Hilfe hat Support-Filter; Restore hat Detailmodus.
 - Next Step: Boot-Gate-Hinweis mit aktivem Fokusziel direkt im Text anzeigen.
+
+## Iteration 89
+
+- Version: v0.89-layout-notes-start
+- Ergebnis: Sidebar-Button-Links, Notizmodul-Autostart, umbenannte Zeitbars mit Klappfunktion.
+- Next Step: Boot-Gate-Hinweis zeigt das aktive Fokusziel direkt neben dem Weiter-Knopf.

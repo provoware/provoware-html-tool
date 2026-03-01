@@ -8,6 +8,7 @@ const {
   createLayoutSnapshot,
   getGridColumnCount,
   getModuleRegistry,
+  getDefaultModuleStart,
   moveZone,
   normalizeLayoutState,
   reorderZones,
@@ -128,10 +129,15 @@ test("resolveFavoritesAction meldet fehlendes letztes Modul", () => {
 test("getModuleRegistry liefert alle implementierten Module", () => {
   const modules = getModuleRegistry();
   assert.equal(Array.isArray(modules), true);
-  assert.equal(modules.length >= 4, true);
+  assert.equal(modules.length >= 5, true);
   assert.match(modules.map((entry) => entry.title).join(", "), /Support/);
+  assert.match(modules.map((entry) => entry.title).join(", "), /Notizen/);
 });
 
+test("getDefaultModuleStart liefert genau das Notizmodul", () => {
+  const defaults = getDefaultModuleStart();
+  assert.deepEqual(defaults, ["notes"]);
+});
 test("buildBootGateHint liefert Gate-Hinweis fuer offen und gesperrt", () => {
   const open = buildBootGateHint(true);
   const closed = buildBootGateHint(false);

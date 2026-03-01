@@ -32,10 +32,10 @@
       </p>
       <div class="layout-controls" aria-label="Layout-Steuerung">
         <button type="button" id="left-rail-toggle">
-          Navigation ausblenden
+          Zeitbar links einklappen
         </button>
         <button type="button" id="right-rail-toggle">
-          Einstellungen ausblenden
+          Zeitbar rechts einklappen
         </button>
         <button type="button" id="favorites-rail-toggle">
           Favoritenleiste einblenden
@@ -51,9 +51,13 @@
         ausblenden. Rueckweg: "Layout-Reset" setzt alles zurueck.
       </p>
       <section class="layout layout-shell" aria-label="Dashboard Inhalte">
-        <aside id="left-rail" class="col left-rail" aria-label="Linke Spalte">
+        <aside
+          id="left-rail"
+          class="col left-rail timebar"
+          aria-label="Zeitbar links"
+        >
           <article class="panel" aria-labelledby="calendar-title">
-            <h2 id="calendar-title">Heute</h2>
+            <h2 id="calendar-title">Zeitbar links</h2>
             <label for="todo-date">Kalendertag waehlen</label>
             <input
               id="todo-date"
@@ -68,6 +72,22 @@
           <article class="panel" aria-labelledby="notes-title">
             <h3 id="notes-title">Notizen</h3>
             <div class="blank-area" aria-label="Leerer Notizbereich"></div>
+          </article>
+          <article class="panel" aria-labelledby="sidebar-links-title">
+            <h3 id="sidebar-links-title">Bereiche als Button-Links</h3>
+            <p class="field-tip" id="sidebar-links-help">
+              Was macht das? Sie springen direkt in einen Bereich. Rueckweg:
+              denselben Link erneut nutzen oder mit Shift+Tab zurueckgehen.
+            </p>
+            <nav
+              class="module-catalog sidebar-links"
+              aria-labelledby="sidebar-links-title"
+            >
+              <a href="#workspace-title">Notizmodul Mitte</a>
+              <a href="#kanban-preview-title">Kanban</a>
+              <a href="#footer-log-title">Logging</a>
+              <a href="#footer-debug-title">Debugging</a>
+            </nav>
           </article>
           <article class="panel" aria-labelledby="left-catalog-title">
             <h3 id="left-catalog-title">Module im Projekt</h3>
@@ -90,7 +110,7 @@
             ></div>
           </article>
           <article class="panel" aria-labelledby="quick-store-title">
-            <h3 id="quick-store-title">Schnellspeicher</h3>
+            <h3 id="quick-store-title">Liederbereich und Notizen</h3>
             <p class="field-tip" id="quick-store-help">
               Was macht das? Speichert kurze Notizen sofort in einer Datei.
               Rueckweg: Eingaben leeren oder neuen Eintrag speichern.
@@ -526,7 +546,7 @@
           </article>
 
           <article class="panel" aria-labelledby="workspace-title">
-            <h2 id="workspace-title">Modulfläche</h2>
+            <h2 id="workspace-title">Notizmodul startet automatisch (Mitte)</h2>
             <p id="workspace-help"></p>
             <article
               class="dashboard-top"
@@ -560,7 +580,7 @@
               data-align="center"
             >
               <p id="empty-state" class="empty-state" role="status">
-                Noch kein Modul aktiv.
+                Start: Notizmodul wird automatisch geladen.
               </p>
             </div>
             <h3 id="catalog-title">Modulhilfe</h3>
@@ -645,11 +665,11 @@
         ></button>
         <aside
           id="right-rail"
-          class="col right-rail"
-          aria-label="Rechte Spalte"
+          class="col right-rail timebar"
+          aria-label="Zeitbar rechts"
         >
           <article class="panel" aria-labelledby="overview-title">
-            <h3 id="overview-title">Team-Status</h3>
+            <h3 id="overview-title">Zeitbar rechts</h3>
             <ul class="guide-list" aria-label="Teamliste mit Textstatus">
               <li>M. Mustermann: Online</li>
               <li>S. Weber: Online</li>

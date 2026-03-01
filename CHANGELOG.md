@@ -559,3 +559,9 @@
 
 - Drei offene Mini-Punkte abgeschlossen: Boot-Fokusziel-Einstellung, filterbarer Support-Verlauf und optionaler Versions-Detailmodus.
 - Dashboard-Mitte bleibt als stabiles 3x3-Quadrat, Seitenleisten bleiben getrennt als kleine Aktionsflaechen.
+
+## 2026-03-03 – Sidebar-Links und Notiz-Autostart
+
+- Dashboard startet jetzt mit genau einem Modul (`Notizen`) in der Mitte.
+- Linke Bereiche wurden als Button-Links in der Sidebar angeordnet; linke/rechte Zeitbar bleiben ein- und aufklappbar.
+- 3x3-Modulraster bleibt als mittige Hauptflaeche und ist visuell klar umrahmt.
