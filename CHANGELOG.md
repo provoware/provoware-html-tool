@@ -1,3 +1,10 @@
+## 2026-03-01 – Kontrastmessung je Theme automatisiert
+
+- Release-Readiness berechnet jetzt den Kontrast pro Theme automatisch fuer Haupttext und Topbar (WCAG-AA Ziel: mindestens 4.5).
+- Bei zu niedrigem Kontrast gibt der Check eine klare Fehlermeldung mit naechstem Schritt aus.
+- Tests decken die neue Kontrastberechnung und alle 5 Themes mit 10 Pruefpunkten ab.
+- Risiko: niedrig, da nur Readiness-Check und Tests erweitert wurden.
+
 ## 2026-03-01 – Sichtbarkeit fuer Sehschwaeche und 5 Themes
 
 - Dashboard bietet jetzt 5 Themes (Hell, Dunkel, Kontrast+, Rötlich, Camouflage) fuer bessere Lesbarkeit je Situation.

@@ -23,3 +23,8 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Neue Themes fuer Sehschwaeche: Rötlich und Camouflage als zusaetzliche Wahl.
 - Release-Check deckt jetzt 5 Themes vollstaendig ab.
 - Laienhilfe erweitert: kurzer Leitfaden fuer Theme-Wahl und naechste Schritte bei Unsicherheit.
+
+## Iteration 41 Update
+- Release-Readiness misst jetzt Kontrast je Theme automatisch fuer Haupttext und Topbar.
+- Der Check nutzt den WCAG-AA Zielwert 4.5 und meldet bei Abweichung klare naechste Schritte.
+- Naechster Ausbau: Backup-Auswahl-Dialog mit JSON-Store-Backup-Hook verbinden und E2E pruefen.

@@ -1,5 +1,5 @@
-Iteration 40 (2026-03-01): 5-Theme-Sichtbarkeit fuer Sehschwaeche umgesetzt (Rötlich + Camouflage), Release-Check erweitert, README/Hilfe/todo synchronisiert.
-Naechster Schritt: Kontrastmessung je Theme automatisieren und im Start-Check melden.
+Iteration 41 (2026-03-01): Kontrastmessung je Theme automatisiert, Release-Check prueft jetzt WCAG-AA Zielwert (4.5) fuer Haupttext und Topbar.
+Naechster Schritt: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.
 
 # SELFINFO
 
