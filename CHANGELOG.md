@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-03-01 – Enter/Escape-Hilfe und Check erweitert
+
+- Gefuehrte Dashboard-Hilfe erklaert jetzt klar: Enter startet Aktionen, Escape ist der Rueckweg.
+- Release-Readiness prueft jetzt automatisch auch den Enter-Hinweis im Dashboard.
+- Risiko: niedrig, da nur Hilfetext + automatischer Tastatur-Check erweitert wurden.
+
 ## 2026-03-01 – Keyboard-A11y-Check in Release-Readiness
 
 - Dashboard unterstuetzt jetzt Escape als klaren Rueckweg: offene Debug-Ansicht wird per Taste geschlossen.

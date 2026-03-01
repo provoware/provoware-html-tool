@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 23
+Iteration: 24
 
 ## Gemacht
 
@@ -58,6 +58,8 @@ Iteration: 23
 - Dashboard-Tastaturpfad verbessert: Escape schliesst die Debug-Ansicht als klaren Rueckweg.
 - Release-Readiness-Check prueft jetzt auch Tastatur-Hinweis und Escape-Handler automatisch.
 - Hilfe-Doku mit klarem Debug-Fehlerschritt fuer Startprobleme aktualisiert.
+- Gefuehrte Dashboard-Hilfe um klaren Enter/Escape-Hinweis erweitert (Aktion + Rueckweg).
+- Release-Readiness prueft den Enter-Hinweis jetzt automatisch mit.
 
 ## Next Step
 

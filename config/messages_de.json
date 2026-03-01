@@ -32,7 +32,8 @@
       "1) Projektordner waehlen und Berechtigung bestaetigen.",
       "2) Auto-Reconnect pruefen fuer den naechsten Start.",
       "3) Module schrittweise aktivieren und Reihenfolge festlegen.",
-      "4) Bei Problemen: Erneut versuchen, Reparatur starten oder Protokoll oeffnen."
+      "4) Mit Enter Aktionen ausfuehren und mit Escape den Rueckweg nutzen.",
+      "5) Bei Problemen: Erneut versuchen, Reparatur starten oder Protokoll oeffnen."
     ]
   }
 }

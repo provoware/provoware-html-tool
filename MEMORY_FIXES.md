@@ -276,3 +276,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Freitext ohne Regeln (abgelehnt, zu fehleranfällig).
 **Risiko/Side-Effects:** Neue Datei und Tests erhoehen nur minimal die Laufzeit.
 **Verknüpft:** Patch-ID local-018
+
+## FIX-20260301-019: Enter-Escape-Hinweis-gegen-Tastaturluecke
+
+**Kategorie:** UI/A11y/Tests
+**Symptom (fuer Laien):** Hilfe nannte Escape, aber Enter als Starttaste war nicht klar genug beschrieben.
+**Technische Ursache:** Der gefuehrte Guide hatte keinen expliziten Enter/Escape-Schritt und der Release-Check pruefte Enter nicht.
+**Trigger:** Neue Nutzer arbeiten nur mit Tastatur und suchen den naechsten Schritt.
+**Fix (kurz):** Guide um Enter/Escape-Schritt erweitert und Release-Readiness um Enter-Textpruefung ergaenzt.
+**Geänderte Dateien/Marker:** config/messages_de.json (dashboardCompact.guideSteps), tools/release_readiness_check.js, docs/HILFE.md
+**Tests/Checks:** npm test
+**Prävention (künftig):** Ab jetzt immer Enter + Escape gemeinsam als Aktion + Rueckweg in Hilfeschritten nennen und automatisch pruefen.
+**Alternative(n):** Nur Hinweis im Handbuch (abgelehnt, zu spaet sichtbar).
+**Risiko/Side-Effects:** Ein zusaetzlicher Guide-Schritt, keine Logik-Aenderung.
+**Verknüpft:** Patch-ID local-019
