@@ -6,9 +6,9 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 67 %
-- **Erledigt:** 52 Punkte
-- **Offen:** 26 Punkte
+- **Fortschritt:** 66 %
+- **Erledigt:** 53 Punkte
+- **Offen:** 27 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -29,6 +29,22 @@ Stand: automatisch aus `todo.txt` gezaehlt.
 - Start-Routine synchronisiert den Fortschritt im README jetzt automatisch aus `todo.txt` (Prozent, erledigt, offen).
 - Hilfe-Panel zeigt weiterhin einen kurzen 3-Schritt-Leitfaden direkt im Bereich "Hilfe und Diagnose".
 - Naechster Schritt: Backup-Auswahl-Dialog direkt mit dem Backup-Hook verbinden.
+
+## Kann man einzelne offene Punkte schon release-fertig abschliessen?
+
+Ja. Ein einzelner offener Punkt darf release-fertig sein, wenn er komplett
+und sicher abgeschlossen ist.
+
+Kurz-Check pro Punkt:
+1. Funktion fertig und pruefbar
+2. Fehlerfall mit klaren Buttons vorhanden
+   (Erneut versuchen, Reparatur starten, Protokoll oeffnen)
+3. Test oder Check laeuft gruen
+4. `bash start.sh` laeuft ohne Abbruch
+5. Doku ist kurz aktualisiert (README, CHANGELOG, todo)
+
+Wichtig: Andere offene Punkte duerfen bleiben, wenn sie nicht Teil des
+gleichen Risikobereichs sind.
 
 ## Offene Punkte (oben, kurz)
 

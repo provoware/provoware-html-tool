@@ -1,7 +1,14 @@
 # SELFINFO
 
 Stand: 2026-03-01
-Iteration: 36
+Iteration: 37
+
+## Iteration 37 – Release-Fertig je Einzelpunkt
+
+- Entscheidungsregel dokumentiert: Einzelne offene Punkte duerfen
+  release-fertig abgeschlossen werden, wenn alle Pflichtchecks gruen sind.
+- README um 5-Punkte-Kurzcheck in einfacher Sprache erweitert.
+- Naechster Schritt bleibt unveraendert: Backup-Dialog mit Backup-Hook verbinden.
 
 ## Iteration 36 – Strategie-Update
 

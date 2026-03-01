@@ -1,3 +1,9 @@
+## 2026-03-01 – Release-Fertig pro Einzelpunkt klar definiert
+
+- README um einen kurzen Laien-Check erweitert, wann ein einzelner offener Punkt schon release-fertig ist.
+- Der Check nennt klar: Funktion, Fehlerpfad, gruene Tests, `bash start.sh` und Doku-Update.
+- Risiko: niedrig, da nur Doku fuer Entscheidungslogik praezisiert wurde.
+
 ## 2026-03-01 (Iteration 36)
 
 - Strategie fuer die weitere Entwicklung geschaerft: Mini-Patches, feste
