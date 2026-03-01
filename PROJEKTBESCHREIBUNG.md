@@ -206,3 +206,12 @@ Praktischer Einsatz:
 1. Neue UI-Komponente erstellt? Nur Token-Werte verwenden.
 2. Keine eigenen Pixelwerte ohne Grund.
 3. Bei Abweichung: erst Token erweitern, dann Komponente bauen.
+
+
+## Iteration 65 – Lesemodus-Kopieren und Songtext-Kurzguide
+- Zwei offene Punkte wurden vollstaendig abgeschlossen: **Kopieren-Knopf im Lesemodus** und **einklappbarer Songtext-Kurzguide mit Tastaturfokus**.
+- Tool-Umfang:
+  - `templates/dashboard.html` zeigt jetzt den Guide-Knopf + Guide-Inhalt und den Kopieren-Knopf im Lesemodus.
+  - `templates/quick_store_module.js` steuert Kopieren (mit Validierung), Statusmeldungen und Fokusfuehrung fuer den Kurzguide.
+  - `test/quick_store_module.test.js` prueft den Kopierpfad inkl. Fehlerfall.
+- Laiennutzen: Text kann direkt uebernommen werden, und Hilfe ist ohne Seitenwechsel sichtbar.

@@ -752,3 +752,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Einzelwerte je Karte hart codieren (verworfen wegen Wartbarkeit).
 **Risiko/Side-Effects:** Gering, da nur Stil-Tokens und Checks erweitert wurden.
 **Verknuepft:** Iteration 66
+
+## FIX-20260303-003: Lyrics-Copy-Guide-Flow
+
+**Kategorie:** UI/A11y
+**Symptom (für Laien):** Im Lesemodus konnte Text nicht direkt uebernommen werden, und Hilfe war nicht einklappbar.
+**Technische Ursache:** Es gab keinen Clipboard-Pfad und keine eigene Guide-Toggle-Logik mit Fokusziel.
+**Trigger:** Nutzer oeffnet Lesemodus und will Text in ein anderes Modul uebernehmen.
+**Fix (kurz):** Kopieren-Knopf mit Validierung + Statusmeldung ergaenzt, dazu einklappbaren Kurzguide mit `aria-expanded` und Fokusziel eingebaut.
+**Geänderte Dateien/Marker:** templates/dashboard.html, templates/quick_store_module.js, templates/dashboard.js
+**Tests/Checks:** node --test test/quick_store_module.test.js; node --test; bash start.sh
+**Prävention (künftig):** Ab jetzt immer bei Lesemodus-Funktionen direkten Copy-Pfad plus Rueckweg-Hilfe anbieten.
+**Alternative(n):** Nur manuelles Markieren/Kopieren (nicht empfohlen).
+**Risiko/Side-Effects:** Clipboard kann browserabhaengig blockiert sein, daher klare Fehlermeldung mit manuellem Rueckweg.
+**Verknüpft:** Iteration-65

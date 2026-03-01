@@ -124,6 +124,22 @@
     );
   }
 
+  function copyPreviewToClipboard(previewText, clipboard) {
+    if (typeof previewText !== "string" || !previewText.trim()) {
+      throw new Error(
+        "Songtext zum Kopieren fehlt. Naechster Schritt: Lesemodus oeffnen und erneut versuchen.",
+      );
+    }
+
+    if (!clipboard || typeof clipboard.writeText !== "function") {
+      throw new Error(
+        "Kopieren ist hier nicht verfuegbar. Naechster Schritt: Text markieren und manuell kopieren.",
+      );
+    }
+
+    return clipboard.writeText(previewText.trim());
+  }
+
   function buildLyricsPreview(title, content) {
     const safeTitle =
       typeof title === "string" && title.trim()
@@ -202,6 +218,23 @@
       options.closePreviewButton,
       "Lyrics-Vorschau-Schliessen",
     );
+    const copyPreviewButton = assertElement(
+      options.copyPreviewButton,
+      "Lyrics-Kopieren",
+    );
+    const guideWrap = assertElement(options.guideWrap, "Lyrics-Kurzguide");
+    const guideToggleButton = assertElement(
+      options.guideToggleButton,
+      "Lyrics-Guide-Knopf",
+    );
+    const guideContent = assertElement(
+      options.guideContent,
+      "Lyrics-Guide-Inhalt",
+    );
+    const guideFocusTarget = assertElement(
+      options.guideFocusTarget,
+      "Lyrics-Guide-Fokusziel",
+    );
     const lyricsClearButton = assertElement(
       options.lyricsClearButton,
       "Lyrics-Leeren",
@@ -226,6 +259,11 @@
     function renderLyricsEditor() {
       const isLyrics = model.getActiveArea() === "lyrics";
       lyricsEditor.hidden = !isLyrics;
+      guideWrap.hidden = !isLyrics;
+      if (!isLyrics) {
+        guideContent.hidden = true;
+        guideToggleButton.setAttribute("aria-expanded", "false");
+      }
       return isLyrics;
     }
 
@@ -469,6 +507,45 @@
       return onLyricsBack();
     }
 
+    async function onCopyPreview() {
+      try {
+        await copyPreviewToClipboard(
+          previewContent.textContent,
+          globalObject.navigator?.clipboard,
+        );
+        setStatus(
+          "Songtext kopiert. Naechster Schritt: In Zielmodul einfuegen oder Lesemodus schliessen.",
+        );
+        return true;
+      } catch (error) {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+        return false;
+      }
+    }
+
+    function onGuideToggle() {
+      const isOpen = !guideContent.hidden;
+      guideContent.hidden = isOpen;
+      guideToggleButton.setAttribute("aria-expanded", String(!isOpen));
+      guideToggleButton.textContent = isOpen
+        ? "Songtext-Kurzguide einblenden"
+        : "Songtext-Kurzguide ausblenden";
+      if (!isOpen) {
+        guideFocusTarget.focus();
+        setStatus(
+          "Kurzguide geoeffnet. Naechster Schritt: Schritt lesen und dann Vorlage einfuegen.",
+        );
+      } else {
+        guideToggleButton.focus();
+        setStatus(
+          "Kurzguide geschlossen. Naechster Schritt: Songtext weiter bearbeiten.",
+        );
+      }
+      return true;
+    }
+
     saveButton.addEventListener("click", onSave);
     clearButton.addEventListener("click", onClear);
     areaSelect.addEventListener("change", onAreaChange);
@@ -499,6 +576,8 @@
     previewButton.addEventListener("click", onLyricsPreview);
     lyricsBackButton.addEventListener("click", onLyricsBack);
     closePreviewButton.addEventListener("click", onClosePreview);
+    copyPreviewButton.addEventListener("click", onCopyPreview);
+    guideToggleButton.addEventListener("click", onGuideToggle);
     lyricsClearButton.addEventListener("click", onClear);
     contentInput.addEventListener("keydown", onLyricsEscape);
 
@@ -522,6 +601,7 @@
     getStorePathForArea,
     insertTemplateIntoContent,
     normalizeAreaPayload,
+    copyPreviewToClipboard,
   };
 
   if (typeof module !== "undefined" && module.exports) {

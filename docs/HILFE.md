@@ -117,8 +117,12 @@ Es werden nur Designwerte gelesen, keine Projektdaten geaendert.
 
 Wie mache ich rueckgaengig?
 Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh` erneut starten.
+
 ## Theme-Kontrast (Iteration 66)
 
 - Was macht das? Rail-Rahmen, Statusbanner und Kartenfarben bleiben in allen 5 Themes gut lesbar.
 - Was passiert mit Daten? Es werden nur Design-Tokens geaendert, keine Nutzdaten.
 - Wie mache ich rueckgaengig? Im Theme-Feld auf ein anderes Thema wechseln oder CSS-Token zurücksetzen.
+
+- Neu: Im Lesemodus gibt es jetzt den Knopf **Songtext kopieren** mit klarer Erfolgsmeldung.
+- Neu: Die Songtext-Hilfe ist als **einklappbarer Kurzguide** direkt im Lyrics-Bereich verfuegbar und setzt den Tastaturfokus auf den Hilfetext.

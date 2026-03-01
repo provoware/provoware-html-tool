@@ -8,6 +8,8 @@
 - Neu (2026-03-02): Songtext-Editor sitzt direkt im Bereich Songideen mit Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klaren Rueckweg-Knoepfen.
 - Neu (2026-03-02): Songtext-Editor hat jetzt auch Bridge/Sonstiges-Vorlagen und einen Lesemodus, der den Entwurf als klare Vorschau zeigt.
 - Neu (2026-03-02): Lesemodus hat jetzt einen eigenen "Vorschau schliessen"-Knopf mit Escape-Hinweis und klarer Rueckweg-Meldung.
+- Neu (2026-03-03): Lesemodus hat jetzt den Knopf "Songtext kopieren" mit klarer Statusmeldung und Rueckweg.
+- Neu (2026-03-03): Songtext-Hilfe ist als einklappbarer Kurzguide mit Tastaturfokus direkt im Lyrics-Bereich sichtbar.
 - Neu (2026-03-02): Vorlagen zeigen jetzt kurze Inline-Hilfe je Abschnitt (Intro/Refrain/Bridge/Sonstiges) fuer schnellere Orientierung.
 
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Wiki-Modul ist jetzt als eigenes Panel mit Kategorie, Titel, Inhalt und Speicherung in `data/wiki_notes.json` verfuegbar.
@@ -51,7 +53,9 @@
 ## Iteration 64 Kurzstatus
 - Abgeschlossen: Lesemodus hat jetzt einen klaren "Vorschau schliessen"-Knopf mit Escape-Hinweis.
 - Abgeschlossen: Inline-Hilfe erklaert jetzt jeden Songtext-Baustein kurz und laienklar.
-- Naechster Schritt: Lesemodus um Kopieren-Knopf mit Statusmeldung erweitern.
+- Abgeschlossen: Lesemodus bietet jetzt einen Kopieren-Knopf mit klarer Statusmeldung.
+- Abgeschlossen: Songtext-Hilfe ist als einklappbarer Kurzguide mit Tastaturfokus direkt im Modul erreichbar.
+- Naechster Schritt: Kurzguide um feste Zwei-Schritt-Liste und Shortcut-Hinweis erweitern.
 
 ## Entwicklungsfortschritt
 

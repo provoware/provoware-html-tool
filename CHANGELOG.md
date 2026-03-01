@@ -404,3 +404,9 @@
 - Neues globales Token-Set (`config/ui_design_tokens.json`) definiert jetzt zentral Spacing, Radius, Font, Shadow und Button-Hoehen fuer alle Module und Plugins.
 - Dashboard-CSS nutzt die neuen Tokens sichtbar (Button-Hoehen, Schriftfamilie, Neon-Rails, Statusbanner), damit Themes konsistent bleiben.
 - Zwei offene TODO-Punkte geschlossen: UI-Fix aus Layout-Manifest (Rails/Banner) und Boot-View mit klaren 4 Phasen + Ampeltexten.
+
+## 2026-03-03 – Songtext-Lesemodus: Kopieren + Kurzguide
+
+- Zwei offene Mini-Punkte abgeschlossen: Lesemodus hat jetzt einen Kopieren-Knopf mit klarer Statusmeldung; Songtext-Hilfe ist als einklappbarer Kurzguide mit Tastaturfokus umgesetzt.
+- Mini-Optimierung Hilfe/UX: Kurzguide arbeitet mit einfachem Ein-/Ausblenden, Fokusziel und Rueckweg in einfacher Sprache.
+- Risiko: niedrig, da nur Songtext-Panel, Modul-Logik und gezielte Tests erweitert wurden.
