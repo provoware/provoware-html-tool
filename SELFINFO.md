@@ -1,3 +1,10 @@
+## Iteration 58 (2026-03-01)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Kanban-Persistenz + Daten-Inventur-Check).
+- Ergebnis: Zentraler Datei-Schreiber fuer JSON aktiv, Start-Routine-Inventurcheck laeuft automatisiert.
+- Mini-Optimierung: AGENTS.md um feste Zwei-Punkte-Regel erweitert.
+- Naechster Schritt: Wiki-Modul-Grundgeruest mit Validierung bauen und in Start-Routine aufnehmen.
+
 ## Iteration 57 (2026-03-01)
 
 - Hauptziel (C) umgesetzt: JSON-Store unterstuetzt jetzt versionierte Writes (versioniertes Speichern) mit fortlaufender Nummer und sicherem Recovery-Pfad.

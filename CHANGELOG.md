@@ -1,3 +1,10 @@
+## 2026-03-01 – Zwei offene Punkte abgeschlossen: Kanban-Persistenz + Daten-Inventur-Check
+
+- Offener Punkt 1 abgeschlossen: Kanban speichert Kartenverschiebungen jetzt ueber einen zentralen Projekt-Datei-Schreiber mit Pfad-Validierung.
+- Offener Punkt 2 abgeschlossen: Daten-Inventur laeuft als automatischer Platzhalter-Scan in der Start-Routine und meldet klare naechste Schritte.
+- Mini-Optimierung Hilfe/UX: neue Regel in `AGENTS.md`, dass pro Iteration zwei offene Punkte vollstaendig abgeschlossen werden.
+- Risiko: niedrig, weil nur ein neuer Writer, ein kleiner Dashboard-Hook und gezielte Tests dazugekommen sind.
+
 ## 2026-03-01 – Option C: JSON-Store mit Versionierung + Recovery gehaertet
 
 - `atomicWriteJson` kann jetzt optional versioniert speichern (`*_versions/*_v0001.json`) und prueft den Output inklusive Versionspfad.

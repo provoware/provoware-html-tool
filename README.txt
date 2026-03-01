@@ -23,9 +23,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 77 %
-- **Erledigt:** 82 Punkte
-- **Offen:** 25 Punkte
+- **Fortschritt:** 78 %
+- **Erledigt:** 84 Punkte
+- **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -434,3 +434,8 @@ Was wurde verbessert:
 
 Naechster Schritt:
 - Optionales Drag-and-Drop als Zusatz anbieten, aber nie als einzigen Weg.
+
+
+## Patch 058 (2026-03-01)
+- Zwei offene Punkte abgeschlossen: Kanban-Persistenz zentralisiert und Daten-Inventur-Check automatisiert.
+- Naechster Schritt: Wiki-Modul-Grundgeruest mit Eingabepruefung umsetzen.

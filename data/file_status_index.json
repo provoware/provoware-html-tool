@@ -15,16 +15,16 @@
   },
   {
     "file": "templates/dashboard.html",
-    "version": "v003",
+    "version": "v004",
     "status": "ready",
-    "updatedAt": "2026-03-01T14:00:00.000Z",
+    "updatedAt": "2026-03-01T20:00:00.000Z",
     "owner": "codex"
   },
   {
     "file": "templates/dashboard.js",
-    "version": "v004",
+    "version": "v005",
     "status": "ready",
-    "updatedAt": "2026-03-01T14:00:00.000Z",
+    "updatedAt": "2026-03-01T20:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -74,6 +74,13 @@
     "version": "v001",
     "status": "ready",
     "updatedAt": "2026-03-01T18:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "system-module/project_file_writer.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-01T20:00:00.000Z",
     "owner": "codex"
   }
 ]

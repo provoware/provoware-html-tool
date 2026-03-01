@@ -1,3 +1,17 @@
+## FIX-20260301-058: Zentraler Projekt-Datei-Schreiber fuer Kanban
+
+**Kategorie:** FS-Access
+**Symptom (fuer Laien):** Karte wurde verschoben, aber Speichern war fehleranfaellig bei tieferen Pfaden.
+**Technische Ursache:** Direkter Dateizugriff in Dashboard ohne zentralen Pfad-Resolver.
+**Trigger:** Speicherung auf `data/kanban_board.json` mit Browser-Directory-Handle.
+**Fix (kurz):** Neues Modul `project_file_writer` eingefuehrt und Dashboard auf zentrale Write-Funktion umgestellt.
+**Geaenderte Dateien/Marker:** `system-module/project_file_writer.js`, `templates/dashboard.js`, `templates/dashboard.html`.
+**Tests/Checks:** `test/project_file_writer.test.js`, `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer Projekt-Dateischreiben ueber zentrale Helper statt Direktzugriff.
+**Alternative(n):** Direkter Zugriff pro Modul (abgelehnt wegen Wartbarkeit).
+**Risiko/Side-Effects:** Niedrig; API ist klein und nur fuer JSON-Objekte.
+**Verknuepft:** PATCH-058
+
 ## FIX-20260301-057: JsonStore-Versionierung-mit-Recovery
 
 **Kategorie:** JSON/Backup/Recovery
