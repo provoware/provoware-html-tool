@@ -70,3 +70,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Der Backup-Dialog ist jetzt mit einem Ende-zu-Ende-Test abgesichert: vom Backup-Hook-Log bis zur echten Wiederherstellung.
 - Vorteil fuer Laien: Fehler werden frueher erkannt, bevor ein Restore im Alltag scheitert.
 - Tool-Umfang erweitert: automatischer Integrations-Test fuer Backup/Restore ist Teil der Standard-Qualitaet.
+
+
+## Iteration 49 – Prompt-Absicherung
+- Das Restore-Tool prueft die Sicherheitsbestaetigung jetzt ueber eine zentrale Funktion.
+- Vorteil: Gleiches Verhalten in UI und Tests, dadurch weniger Risiko bei kritischem Datei-Schreiben.
+- Tool-Umfang: `templates/backup_restore.js` bietet eine klare Pruef-API fuer Prompt-Eingaben.

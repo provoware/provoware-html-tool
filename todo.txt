@@ -137,4 +137,6 @@ Laienvorschläge
 
 - [x] P1: Naechster Mini-Punkt: Restore-Flow fuer store/registry automatische Zielerkennung + Sicherheitsabfrage umsetzen.
 
-- [ ] P1: Naechster Mini-Punkt: Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen.
+- [x] P1: Naechster Mini-Punkt: Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen.
+
+- [ ] P1: Naechster Mini-Punkt: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.

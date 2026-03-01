@@ -404,8 +404,12 @@
         `${safetyHint} Eingeben: ${plan.targetFileName}`,
         "",
       );
-      const normalizedConfirmation = (confirmation || "").trim();
-      if (normalizedConfirmation !== plan.targetFileName) {
+      const hasValidConfirmation =
+        window.BackupRestore.isRestoreConfirmationValid(
+          confirmation,
+          plan.targetFileName,
+        );
+      if (!hasValidConfirmation) {
         setStatus(
           "Sicherheitsabfrage abgebrochen. Naechster Schritt: Erneut versuchen oder Zurueck.",
         );

@@ -11,7 +11,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 74 %
-- **Erledigt:** 68 Punkte
+- **Erledigt:** 69 Punkte
 - **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -406,3 +406,8 @@ Update Iteration 44:
 ## Status – aktuelle Iteration
 - Neu: Backup-Dialog Ende-zu-Ende-Test ist automatisiert abgeschlossen (Hook-Log -> Restore-Plan -> Restore).
 - Naechster Schritt: Prompt-Sicherheitsabfrage im Dialog automatisiert pruefen.
+
+
+## Iteration 49 Kurzstand
+- Prompt-Sicherheitsabfrage im Backup-Dialog ist jetzt automatisch getestet (korrekte Bestaetigung erlaubt, falsche Eingabe blockiert).
+- Naechster Schritt: Boot-View mit klaren Startphasen und Ampel-Texten stabilisieren.
