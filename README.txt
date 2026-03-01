@@ -116,3 +116,10 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Support-Suche markiert jetzt nur noch **ganze Woerter**. Das reduziert visuelles Rauschen bei kurzen Suchbegriffen.
 - Backup-Dialog erklaert beim Detailzustand klar: Der Zustand wird pro Projekt gespeichert und bei Restore wieder geladen.
 - Naechster Schritt: Optionalen Teilwort-Modus in der Suche ergaenzen.
+
+
+## Iteration 96 – Optionale Teilwortsuche + klarer Footer-Rueckweg
+- Hilfe-Panel zeigt jetzt einen Footer-Hinweis mit aktuellem Modus und Tastatur-Rueckweg (Tab + Leertaste).
+- Support-Suche hat einen optionalen Teilwortmodus (enthaelt); Standard bleibt ganze Woerter fuer stabile Treffer.
+- Backup-Detailhinweis enthaelt eine kurze Beispielzeile fuer Einsteiger.
+- Naechster Schritt: Teilwortmodus mit Mindestlaenge 3 gegen ungenaue Treffer absichern.

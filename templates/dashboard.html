@@ -752,11 +752,27 @@
                 />
                 Boot-Debug im Verlauf zeigen (optional ausblendbar)
               </label>
+              <label for="support-history-partial-toggle">
+                <input id="support-history-partial-toggle" type="checkbox" />
+                Teilwortsuche aktivieren (optional)
+              </label>
               <p class="field-tip" id="support-history-boot-debug-help">
                 Fuer Einsteiger: Schalter aus = ruhigere Liste. Rueckweg:
                 Schalter wieder aktivieren.
               </p>
+              <p class="field-tip">
+                Teilwortsuche (enthaelt): Findet auch Ausschnitte. Standard
+                bleibt ganze Woerter.
+              </p>
               <ul id="support-history-list" class="todo-list" role="list"></ul>
+              <p
+                id="support-history-footer-hint"
+                class="field-tip"
+                aria-live="polite"
+              >
+                Ganzwortsuche aktiv, Boot-Debug sichtbar. Rueckweg: Mit Tab zu
+                den Schaltern wechseln und mit Leertaste umstellen.
+              </p>
             </fieldset>
             <dialog
               id="backup-dialog"
@@ -826,7 +842,9 @@
                 >
                   Zuletzt geoeffneter Zustand: Detailmodus ist eingeklappt.
                   Naechster Schritt: Bei Bedarf oeffnen. Dieser Zustand wird pro
-                  Projekt gespeichert und bei Restore wieder geladen.
+                  Projekt gespeichert und bei Restore wieder geladen. Beispiel:
+                  Wenn Detailmodus zuletzt eingeklappt war, startet er auch nach
+                  Restore eingeklappt.
                 </p>
               </details>
               <ol id="backup-checklist" class="backup-checklist" role="list">

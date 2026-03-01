@@ -163,6 +163,7 @@ function normalizeLayoutState(input) {
   const bootFocusTarget = normalizeBootFocusTarget(source.bootFocusTarget);
   const backupDetailOpen = source.backupDetailOpen === true;
   const showBootDebugInSupport = source.showBootDebugInSupport !== false;
+  const supportHistoryPartialMode = source.supportHistoryPartialMode === true;
 
   return {
     leftWidth,
@@ -172,6 +173,7 @@ function normalizeLayoutState(input) {
     bootFocusTarget,
     backupDetailOpen,
     showBootDebugInSupport,
+    supportHistoryPartialMode,
   };
 }
 
@@ -185,6 +187,7 @@ function createLayoutSnapshot(layoutState) {
     bootFocusTarget: normalized.bootFocusTarget,
     backupDetailOpen: normalized.backupDetailOpen,
     showBootDebugInSupport: normalized.showBootDebugInSupport,
+    supportHistoryPartialMode: normalized.supportHistoryPartialMode,
   };
 }
 
@@ -203,6 +206,7 @@ function applyLayoutSnapshot(layoutState, snapshot) {
     bootFocusTarget: safeSnapshot.bootFocusTarget,
     backupDetailOpen: safeSnapshot.backupDetailOpen,
     showBootDebugInSupport: safeSnapshot.showBootDebugInSupport,
+    supportHistoryPartialMode: safeSnapshot.supportHistoryPartialMode,
   };
 }
 

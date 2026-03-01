@@ -520,3 +520,9 @@ Iteration: 39
 - Version: v0.95-help-toggle-word-search
 - Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Boot-Debug-Schalter, ganze-Wort-Markierung, Restore-Kurzsatz).
 - Next Step: Optionalen Teilwort-Modus fuer die Suche als zweiten Modus anbieten.
+
+## Iteration 96
+
+- Version: v0.96-support-partial-mode
+- Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Footer-Hinweis, optionaler Teilwortmodus, Backup-Beispielsatz).
+- Next Step: Teilwortmodus mit Mindestlaenge 3 und kurzem Hinweistext absichern.

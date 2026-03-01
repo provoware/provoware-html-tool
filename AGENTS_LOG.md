@@ -9,6 +9,16 @@ PATCHSPEC-2026-03-01-094
 
 2026-03-01 | PATCH-094 | Drei offene Mini-Punkte abgeschlossen: Backup-Detailzustand persistent, Suchwort-Markierung im Support-Verlauf, Boot-Debug als Hilfe-Eintrag | system-module/dashboard_model.js, templates/dashboard.js, templates/dashboard.css, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, README.txt, docs/HILFE.md, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt
 
+
+PATCHSPEC-2026-03-01-095
+1) Ziel: Drei offene Mini-Punkte aus todo.txt abschliessen (Boot-Debug-Status im Footer, optionaler Teilwortmodus in Support-Suche, Backup-Detailhinweis mit Beispiel).
+2) Scope IN: templates/dashboard.html, templates/dashboard.js, system-module/dashboard_model.js, relevante Tests und Pflicht-Doku.
+3) Scope OUT: Keine neuen Abhaengigkeiten, kein Datenformatwechsel ausser einem optionalen Bool-Feld im Layoutzustand.
+4) Dateien/Marker: support-history-partial-toggle, support-history-footer-hint, backup-detail-state, layout.supportHistoryPartialMode.
+5) Risiko: mittel (Suchlogik + gespeicherter Layoutzustand), reduziert durch feste Token-Grenzen und Tests.
+6) Akzeptanzkriterien: Teilwortmodus ist optional schaltbar (Standard bleibt ganze Woerter), Boot-Debug-Status wird im Footer mit Tastatur-Rueckweg genannt, Backup-Hinweis enthaelt eine kurze Beispielzeile.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern einzelne Dateien rueckgaengig machen und Checks erneut laufen lassen.
+
 PATCHSPEC-2026-03-01-093
 1) Ziel: Drei offene Mini-Punkte in Dashboard-Hilfe abschliessen (Boot-Debuglog, kurzer Support-Hinweis, Detailzustand).
 2) Scope IN: templates/dashboard.js, templates/dashboard.html, test/dashboard_lyrics_guidance.test.js, README.txt, docs/HILFE.md, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt.
@@ -151,3 +161,5 @@ PATCHSPEC-2026-03-01-091
 - Pflichtchecks laufen: npm run format, node --test, bash start.sh.
 7. Checks + Rollback
 - Checks wie oben; bei Fehler: letzte Aenderung rueckgaengig per `git checkout -- <datei>` und erneut laufen lassen.
+
+2026-03-01 | PATCH-095 | Drei offene Mini-Punkte abgeschlossen: Footer-Hinweis fuer Boot-Debug-Status, optionaler Teilwortmodus in Support-Suche, Backup-Detailhinweis mit Beispielzeile | templates/dashboard.html, templates/dashboard.js, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt

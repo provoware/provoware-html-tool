@@ -597,3 +597,9 @@
 - Support-Verlauf hat einen neuen Schalter, um `boot-debug` bei Bedarf auszublenden (ruhiger fuer Einsteiger).
 - Suchmarkierung nutzt jetzt ganze Woerter statt Teilstrings; Treffer wirken klarer und stabiler.
 - Backup-Detailhinweis erklaert jetzt direkt, dass der Zustand pro Projekt gespeichert und beim Restore geladen wird.
+
+## 2026-03-01 – Support-Suche mit optionalem Teilwortmodus + Footer-Status
+
+- Drei offene Mini-Punkte abgeschlossen: Boot-Debug-Status steht jetzt als Footer-Hinweis mit Tastatur-Rueckweg im Hilfe-Panel, Support-Suche hat einen optionalen Teilwortmodus, und der Backup-Detailhinweis enthaelt eine Einsteiger-Beispielzeile.
+- Layoutzustand speichert zusaetzlich `supportHistoryPartialMode`, damit der Suchmodus pro Projekt stabil bleibt.
+- Risiko: mittel bei Suchlogik, reduziert durch Modell-Validierung, Unit-Tests und Release-Gates.
