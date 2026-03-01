@@ -49,7 +49,7 @@ function readLog(logPath) {
 }
 
 function buildHelpPanelModel() {
-  return {
+  const model = {
     title: "Hilfe und Diagnose",
     actions: [
       "Systemtest ausführen",
@@ -62,7 +62,18 @@ function buildHelpPanelModel() {
       "Logs zeigen technische Details und einfache Lösungsvorschläge.",
       "Backup-Auswahl stellt alte, gültige Daten wieder her.",
     ],
+    quickGuide: [
+      "1) bash start.sh ausfuehren.",
+      "2) Ergebnis lesen und naechsten Schritt waehlen.",
+      "3) Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
+    ],
   };
+
+  if (!Array.isArray(model.quickGuide) || model.quickGuide.length !== 3) {
+    throw new Error("Hilfe-Leitfaden ungueltig. Bitte Reparatur starten.");
+  }
+
+  return model;
 }
 
 module.exports = {

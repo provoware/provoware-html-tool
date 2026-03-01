@@ -104,5 +104,7 @@ Laienvorschläge
 
 - [x] P1: Platzhalter an `templates/dashboard.html:40` (TODO-Marker) aufloesen oder mit klarer Ursache dokumentieren.
 
-- [ ] P1: Mini-Optimierung Hilfe: Mini-Leitfaden aus README als kurzer Dashboard-Hinweis im Help-Panel spiegeln.
+- [x] P1: Mini-Optimierung Hilfe: Mini-Leitfaden aus README als kurzer Dashboard-Hinweis im Help-Panel spiegeln.
 - [ ] P1: Platzhalter-Scan erweitern: Marker nur als echte Kommentar-Aufgabe (`TODO:` etc.) zaehlen.
+
+- [ ] P1: Mini-Optimierung Hilfe: Help-Panel um klaren Tastaturhinweis fuer Theme-Wechsel ergaenzen.

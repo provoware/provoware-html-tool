@@ -346,3 +346,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Optional zusaetzlich als separaten npm Script-Check nutzen.
 **Risiko/Side-Effects:** Gering; kann Start absichtlich blockieren, wenn Marker offen sind (gewollt).
 **Verknuepft:** PATCH-029
+
+## FIX-20260301-001: Hilfe-Panel-Leitfaden im UI sichtbar
+
+**Kategorie:** UI/A11y
+**Symptom (für Laien):** Hilfe war vorhanden, aber der schnelle 3-Schritt-Start war nicht direkt im Hilfe-Panel sichtbar.
+**Technische Ursache:** README und Help-Panel waren inhaltlich nicht voll synchron.
+**Trigger:** Neue Nutzer starten im Hilfe-Panel statt im README.
+**Fix (kurz):** Mini-Leitfaden als Liste im Help-Panel ergänzt und im Modell auf 3 gültige Schritte validiert.
+**Geänderte Dateien/Marker:** `system-module/help_panel.js`, `templates/help-panel.html`, `templates/help-panel.js`
+**Tests/Checks:** `node --test test/help_panel.test.js`, `bash start.sh`
+**Prävention (künftig):** Ab jetzt immer zentrale 3-Schritt-Leitfäden in README und Hilfe-UI gleichzeitig pflegen.
+**Alternative(n):** Leitfaden nur im README lassen (abgelehnt, da schlechter sichtbar).
+**Risiko/Side-Effects:** Niedrig, da nur Hilfetext und Validierung ergänzt wurden.
+**Verknüpft:** Patch-ID iter33-help-panel-guide

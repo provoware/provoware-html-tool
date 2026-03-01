@@ -1,3 +1,10 @@
+## 2026-03-01 – Hilfe-Panel mit 3-Schritt-Mini-Leitfaden
+
+- Hilfe-Panel zeigt jetzt den 3-Schritt-Leitfaden direkt im UI (starten, Ergebnis lesen, naechster Schritt).
+- Help-Panel-Modell validiert den Leitfaden strikt auf genau 3 gueltige Schritte.
+- Neuer Test prueft den Leitfaden-Inhalt automatisch.
+- Risiko: niedrig, da nur Help-Panel + ein gezielter Test erweitert wurden.
+
 ## 2026-03-01 – Start-Check klarer: 3-Schritt-Leitfaden + TODO-Scan-Fix
 
 - README.txt erweitert: neuer Mini-Leitfaden mit genau 3 Schritten fuer den Pflicht-Abschluss-Check (`bash start.sh`, Ergebnis lesen, Hilfe-Befehle nutzen).

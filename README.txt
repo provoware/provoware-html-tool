@@ -12,6 +12,12 @@
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 
+## Iteration-Update (2026-03-01)
+
+- Hilfe-Panel zeigt jetzt einen kurzen 3-Schritt-Leitfaden direkt im Bereich "Hilfe und Diagnose".
+- Ziel: schneller Start fuer Laien mit klaren naechsten Schritten und Rueckweg bei Fehlern.
+- Naechster Schritt: Backup-Auswahl-Dialog direkt mit dem Backup-Hook verbinden.
+
 ## Offene Punkte (oben, kurz)
 
 1. Backup-Dialog im Dashboard
