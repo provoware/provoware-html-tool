@@ -6,9 +6,26 @@
     research: "data/quick_store_research.json",
   };
   const RANDOM_LYRICS_PARTS = {
-    genres: ["Synthwave", "Indie", "Pop", "Folk"],
-    moods: ["hoffnungsvoll", "nachtaktiv", "mutig", "ruhig"],
-    styles: ["metaphorisch", "direkt", "bildreich", "minimal"],
+    standard: {
+      genres: ["Synthwave", "Indie", "Pop", "Folk"],
+      moods: ["hoffnungsvoll", "nachtaktiv", "mutig", "ruhig"],
+      styles: ["metaphorisch", "direkt", "bildreich", "minimal"],
+    },
+    techno: {
+      genres: ["Techno", "Acid", "Electro", "Hardgroove"],
+      moods: ["treibend", "dunkel", "fokussiert", "euphorisch"],
+      styles: ["rhythmisch", "dicht", "minimal", "direkt"],
+    },
+    hoerspiel: {
+      genres: ["Hoerspiel", "Krimi", "SciFi", "Abenteuer"],
+      moods: ["spannend", "mystisch", "warm", "neugierig"],
+      styles: ["dialoglastig", "szenisch", "erzaehlerisch", "ruhig"],
+    },
+    chill: {
+      genres: ["Chill", "LoFi", "Ambient", "Downtempo"],
+      moods: ["gelassen", "leicht", "traeumerisch", "sanft"],
+      styles: ["flaechig", "atmosphaerisch", "weich", "reduziert"],
+    },
   };
 
   function assertElement(element, name) {
@@ -153,11 +170,33 @@
     return entries[index];
   }
 
-  function buildRandomLyricsSnippet(randomFn = Math.random) {
-    const genre = pickRandomEntry(RANDOM_LYRICS_PARTS.genres, randomFn);
-    const mood = pickRandomEntry(RANDOM_LYRICS_PARTS.moods, randomFn);
-    const style = pickRandomEntry(RANDOM_LYRICS_PARTS.styles, randomFn);
-    const snippet = `[Impuls]\nGenre: ${genre}\nStimmung: ${mood}\nStil: ${style}\nZeile 1: ...\nZeile 2: ...`;
+  function resolveRandomProfile(profile) {
+    const key = typeof profile === "string" ? profile.trim().toLowerCase() : "";
+    const selectedKey = key || "standard";
+    const selected = RANDOM_LYRICS_PARTS[selectedKey];
+    if (!selected) {
+      throw new Error(
+        "Zufallsprofil ist ungueltig. Bitte Profil waehlen und erneut versuchen.",
+      );
+    }
+    return { key: selectedKey, ...selected };
+  }
+
+  function buildRandomLyricsSnippet(
+    profile = "standard",
+    randomFn = Math.random,
+  ) {
+    const selectedProfile = resolveRandomProfile(profile);
+    const genre = pickRandomEntry(selectedProfile.genres, randomFn);
+    const mood = pickRandomEntry(selectedProfile.moods, randomFn);
+    const style = pickRandomEntry(selectedProfile.styles, randomFn);
+    const snippet = `[Impuls]
+Profil: ${selectedProfile.key}
+Genre: ${genre}
+Stimmung: ${mood}
+Stil: ${style}
+Zeile 1: ...
+Zeile 2: ...`;
     if (typeof snippet !== "string" || snippet.trim().length === 0) {
       throw new Error(
         "Zufallsinhalt ist leer. Erneut versuchen oder Protokoll oeffnen.",
@@ -236,6 +275,10 @@
     );
     const bridgeButton = assertElement(options.bridgeButton, "Bridge-Vorlage");
     const miscButton = assertElement(options.miscButton, "Sonstiges-Vorlage");
+    const randomProfileSelect = assertElement(
+      options.randomProfileSelect,
+      "Zufallsprofil-Auswahl",
+    );
     const randomButton = assertElement(
       options.randomButton,
       "Zufallsgenerator-Vorlage",
@@ -263,6 +306,10 @@
     const closePreviewButton = assertElement(
       options.closePreviewButton,
       "Lyrics-Vorschau-Schliessen",
+    );
+    const previewFocusTargetSelect = assertElement(
+      options.previewFocusTargetSelect,
+      "Lyrics-Fokusziel-Auswahl",
     );
     const copyPreviewButton = assertElement(
       options.copyPreviewButton,
@@ -494,7 +541,15 @@
       }
     }
 
-    function closeLyricsPreview(focusTarget = titleInput) {
+    function resolvePreviewFocusTarget() {
+      const selectedTarget = previewFocusTargetSelect.value;
+      if (selectedTarget === "content") {
+        return contentInput;
+      }
+      return titleInput;
+    }
+
+    function closeLyricsPreview(focusTarget = resolvePreviewFocusTarget()) {
       previewPanel.hidden = true;
       previewPanel.setAttribute("aria-hidden", "true");
       copyHelp.hidden = true;
@@ -506,7 +561,10 @@
 
     function onLyricsRandomTemplate() {
       try {
-        const randomSnippet = buildRandomLyricsSnippet(options.randomFn);
+        const randomSnippet = buildRandomLyricsSnippet(
+          randomProfileSelect.value,
+          options.randomFn,
+        );
         const nextValue = insertTemplateIntoContent(
           contentInput,
           randomSnippet,
@@ -518,7 +576,7 @@
         }
         contentInput.focus();
         setStatus(
-          "Zufallsinhalt eingefuegt. Naechster Schritt: Zeilen anpassen oder Lesemodus pruefen.",
+          `Zufallsinhalt (${randomProfileSelect.value}) eingefuegt. Naechster Schritt: Zeilen anpassen oder Lesemodus pruefen.`,
         );
       } catch (error) {
         const details =
@@ -679,6 +737,7 @@
     normalizeAreaPayload,
     copyPreviewToClipboard,
     buildRandomLyricsSnippet,
+    resolveRandomProfile,
   };
 
   if (typeof module !== "undefined" && module.exports) {

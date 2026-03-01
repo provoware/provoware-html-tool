@@ -189,5 +189,8 @@ Laienvorschläge
 - [ ] P1: Undo/Redo + globale Toasts + permanenter Speicherstatus-Chip sichtbar machen.
 - [ ] P1: Layout-State in data/layout.json versioniert speichern und Safe-Layout-Mode (Auto-Reparatur) einbauen.
 
-- [ ] Naechster Mini-Punkt: Songtext-Zufallsinhalt um Profilauswahl erweitern.
-- [ ] Naechster Mini-Punkt: Lesemodus-Fokus nach Schliessen optional auf Inhaltsfeld umschaltbar machen.
+- [x] Naechster Mini-Punkt: Songtext-Zufallsinhalt um Profilauswahl erweitern.
+- [x] Naechster Mini-Punkt: Lesemodus-Fokus nach Schliessen optional auf Inhaltsfeld umschaltbar machen.
+
+- [ ] Naechster Mini-Punkt: Zufallsprofil-Auswahl als letzte Wahl pro Projekt merken.
+- [ ] Naechster Mini-Punkt: Lesemodus-Fokusziel als Tastatur-Shortcut (T/I) umschaltbar machen.

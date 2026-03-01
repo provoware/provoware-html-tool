@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 69
+
+- Songtext-Zufallsinhalt hat jetzt Profilfilter (Standard/Techno/Hoerspiel/Chill) mit Validierung und klarer Statusmeldung.
+- Lesemodus hat jetzt ein waehlbares Fokusziel nach dem Schliessen (Titel oder Inhaltsfeld) fuer bessere Tastaturfuehrung.
+- Hilfe-Update: Kurztext fuer Zufallsprofil und Fokusziel in `docs/HILFE.md` ergaenzt.
+
 ## 2026-03-01 – Songtext-Hinweise fuer Kopieren + Kurzguide erweitert
 
 - Lesemodus-Knopf zeigt jetzt direkt den Tastaturhinweis **Enter/Space** fuer das Kopieren.

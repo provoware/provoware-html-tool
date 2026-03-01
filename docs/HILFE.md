@@ -130,3 +130,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Neu: Die Songtext-Hilfe ist als **einklappbarer Kurzguide** direkt im Lyrics-Bereich verfuegbar und setzt den Tastaturfokus auf den Hilfetext.
 
 - Songtext-Lesemodus: Wenn der Kopieren-Knopf fehlschlaegt, erscheint eine sichtbare Kopierhilfe mit Strg+C/Cmd+C als Rueckweg.
+
+## Songtext-Editor: Zufallsprofil + Fokusziel (Iteration 69)
+
+- Neu: Der Zufallsinhalt hat jetzt eine Profilwahl (Standard, Techno, Hoerspiel, Chill).
+- Neu: Nach dem Schliessen der Vorschau koennen Sie das Fokusziel waehlen (Titel oder Inhalt).
+- Rueckweg: Bei Fehlern zuerst erneut versuchen, dann Reparatur starten, danach Protokoll oeffnen.

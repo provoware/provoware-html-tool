@@ -23,21 +23,24 @@ test("Dashboard-Songtext-Kurzguide nennt Speichern plus Rueckweg", () => {
   assert.match(dashboardHtml, /id="lyrics-guide-steps"/);
 });
 
-test("Dashboard-Songtextbereich bietet 1-Klick-Zufallsinhalt", () => {
+test("Dashboard-Songtextbereich bietet Profilfilter und 1-Klick-Zufallsinhalt", () => {
   const dashboardHtml = fs.readFileSync(
     path.join(process.cwd(), "templates", "dashboard.html"),
     "utf8",
   );
 
+  assert.match(dashboardHtml, /id="lyrics-random-profile"/);
+  assert.match(dashboardHtml, /<option value="techno">Techno<\/option>/);
   assert.match(dashboardHtml, /id="lyrics-template-random"/);
   assert.match(dashboardHtml, /Zufallsinhalt einfuegen \(1 Klick\)/);
 });
 
-test("Dashboard-Lesemodus nennt Ruecksprung zum Titel-Feld", () => {
+test("Dashboard-Lesemodus bietet Fokusziel-Auswahl", () => {
   const dashboardHtml = fs.readFileSync(
     path.join(process.cwd(), "templates", "dashboard.html"),
     "utf8",
   );
 
-  assert.match(dashboardHtml, /Fokus auf das Titel-Feld/);
+  assert.match(dashboardHtml, /id="lyrics-preview-focus-target"/);
+  assert.match(dashboardHtml, /value="content">Inhaltsfeld/);
 });

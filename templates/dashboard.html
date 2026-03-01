@@ -139,6 +139,16 @@
                 </div>
               </div>
               <div class="todo-actions" aria-label="Songtext-Vorlagen">
+                <label for="lyrics-random-profile">Zufallsprofil</label>
+                <select
+                  id="lyrics-random-profile"
+                  aria-label="Zufallsprofil fuer Songideen"
+                >
+                  <option value="standard">Standard</option>
+                  <option value="techno">Techno</option>
+                  <option value="hoerspiel">Hoerspiel</option>
+                  <option value="chill">Chill</option>
+                </select>
                 <button type="button" id="lyrics-template-intro">
                   Intro-Vorlage einfuegen
                 </button>
@@ -169,8 +179,18 @@
                 <p class="field-tip" id="lyrics-preview-help">
                   Was macht das? Zeigt Ihren Songtext als reine Leseflaeche.
                   Rueckweg: Vorschau schliessen oder Escape nutzen. Danach
-                  springt der Fokus auf das Titel-Feld.
+                  springt der Fokus auf Titel oder Inhalt (auswaehlbar).
                 </p>
+                <label for="lyrics-preview-focus-target">
+                  Fokusziel nach "Vorschau schliessen"
+                </label>
+                <select
+                  id="lyrics-preview-focus-target"
+                  aria-label="Fokusziel nach Lesemodus"
+                >
+                  <option value="title">Titel-Feld</option>
+                  <option value="content">Inhaltsfeld</option>
+                </select>
                 <p
                   id="lyrics-preview-content"
                   aria-describedby="lyrics-preview-help"

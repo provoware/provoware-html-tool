@@ -1,3 +1,11 @@
+## Iteration 69 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Zufallsprofil im Songtext-Editor + optionales Fokusziel nach Vorschau).
+- Ergebnis: Zufallsinhalt nutzt jetzt Profilfilter (Standard/Techno/Hoerspiel/Chill) mit Eingabepruefung.
+- Ergebnis: Lesemodus-Schliessen setzt Fokus jetzt optional auf Titel oder Inhaltsfeld.
+- Mini-Optimierung: Hilfe im Songtextbereich nennt neue Profilwahl und den Rueckweg klar.
+- Naechster Schritt: Profil- und Fokusauswahl pro Projekt speichern.
+
 ## Iteration 67 (2026-03-01)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Kopieren-Knopf mit Enter/Space-Hinweis + Kurzguide um Speichern/Rueckweg erweitern).

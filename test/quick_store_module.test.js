@@ -11,6 +11,7 @@ const {
   normalizeAreaPayload,
   copyPreviewToClipboard,
   buildRandomLyricsSnippet,
+  resolveRandomProfile,
 } = require("../templates/quick_store_module");
 
 test("Quick-Store-Pfade sind pro Bereich getrennt", () => {
@@ -106,14 +107,30 @@ test("copyPreviewToClipboard meldet manuellen Rueckweg ohne Clipboard", () => {
 
 test("buildRandomLyricsSnippet erstellt gueltigen Zufallsblock", () => {
   const fixedRandom = () => 0;
-  const snippet = buildRandomLyricsSnippet(fixedRandom);
+  const snippet = buildRandomLyricsSnippet("techno", fixedRandom);
 
   assert.match(snippet, /^\[Impuls\]/);
+  assert.match(snippet, /Profil: techno/);
   assert.match(snippet, /Genre:/);
   assert.match(snippet, /Stimmung:/);
   assert.match(snippet, /Stil:/);
 });
 
 test("buildRandomLyricsSnippet validiert Zufallsfunktion", () => {
-  assert.throws(() => buildRandomLyricsSnippet(null), /Zufallsfunktion fehlt/);
+  assert.throws(
+    () => buildRandomLyricsSnippet("standard", null),
+    /Zufallsfunktion fehlt/,
+  );
+});
+
+test("resolveRandomProfile validiert ungueltiges Profil", () => {
+  assert.throws(
+    () => resolveRandomProfile("metal"),
+    /Zufallsprofil ist ungueltig/,
+  );
+});
+
+test("buildRandomLyricsSnippet nutzt Standardprofil bei leerem Profil", () => {
+  const snippet = buildRandomLyricsSnippet("", () => 0);
+  assert.match(snippet, /Profil: standard/);
 });
