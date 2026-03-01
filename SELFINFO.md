@@ -1,3 +1,10 @@
+## Iteration 59 (2026-03-01)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Wiki-Modul + Wiki-Grundgeruest mit Validierung).
+- Ergebnis: Neues Wiki-Modell, Wiki-UI und persistente Datei `data/wiki_notes.json` integriert und getestet.
+- Mini-Optimierung: Wiki-Hilfetext mit klarem Rueckweg direkt im Dialogbereich.
+- Naechster Schritt: AGENTS-Regel "genau zwei offene Punkte" als automatischen Start-Routine-Check ergaenzen.
+
 ## Iteration 58 (2026-03-01)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Kanban-Persistenz + Daten-Inventur-Check).

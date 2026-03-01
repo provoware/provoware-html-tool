@@ -1,3 +1,17 @@
+## FIX-20260301-059: Wiki-Eintraege pro Kategorie robust speichern
+
+**Kategorie:** UI/JSON
+**Symptom (fuer Laien):** Wiki-Notizen konnten vorher nicht zentral erfasst werden.
+**Technische Ursache:** Es gab kein eigenes Modell mit Eingabepruefung und keinen festen Dateipfad.
+**Trigger:** Neue Wissensnotiz im Dashboard sollte dauerhaft gespeichert werden.
+**Fix (kurz):** `wiki_module_model` + `wiki_module` eingefuehrt, Validierung fuer Kategorie/Titel/Inhalt, Schreiben in `data/wiki_notes.json`.
+**Geaenderte Dateien/Marker:** `system-module/wiki_module_model.js`, `templates/wiki_module.js`, `templates/dashboard.html`, `templates/dashboard.js`.
+**Tests/Checks:** `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer erst Modell mit Input/Output-Validierung bauen, dann UI anbinden.
+**Alternative(n):** Eintrag in bestehendem Todo-Store (verworfen wegen Mischzustand).
+**Risiko/Side-Effects:** Niedrig, neues Modul ist isoliert.
+**Verknuepft:** PATCH-059
+
 ## FIX-20260301-058: Zentraler Projekt-Datei-Schreiber fuer Kanban
 
 **Kategorie:** FS-Access

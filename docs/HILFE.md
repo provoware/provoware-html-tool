@@ -77,3 +77,9 @@ Naechster Schritt bei Unsicherheit: **Protokoll oeffnen**, dann **Erneut versuch
 
 Wenn eine JSON-Datei kaputt ist, kann die letzte gueltige Version wiederhergestellt werden.
 Naechster Schritt: Erst erneut versuchen, dann Reparatur starten, danach bei Bedarf Protokoll oeffnen.
+
+## Wiki-Modul (neu)
+
+- Was macht das? Speichert kurze Wissensnotizen pro Kategorie.
+- Was passiert mit Daten? Eintraege landen in `data/wiki_notes.json`.
+- Rueckweg: Eintrag aendern und erneut auf "Wiki speichern" klicken.

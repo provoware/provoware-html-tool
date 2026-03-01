@@ -1,3 +1,9 @@
+## 2026-03-01 – PATCH-059
+
+- Zwei offene TODO-Punkte abgeschlossen: Wiki-Modul mit Kategorie-Speicher und Grundgeruest mit Validierung (Eingabepruefung) eingefuehrt.
+- Neues UI-Hilfeelement: Wiki-Panel mit klarer Aktion und Rueckweg fuer Laien.
+- Risiko: niedrig, da neues Modul getrennt eingebunden und mit Modelltests abgesichert.
+
 ## 2026-03-01 – Zwei offene Punkte abgeschlossen: Kanban-Persistenz + Daten-Inventur-Check
 
 - Offener Punkt 1 abgeschlossen: Kanban speichert Kartenverschiebungen jetzt ueber einen zentralen Projekt-Datei-Schreiber mit Pfad-Validierung.
