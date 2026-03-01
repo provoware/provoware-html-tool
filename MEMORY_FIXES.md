@@ -304,3 +304,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Immer `npm ci` ausfuehren (strenger, aber langsamer).
 **Risiko/Side-Effects:** Niedrig, da nur Install-Entscheidung in der Start-Routine erweitert wurde.
 **Verknüpft:** Patch-ID local-020
+
+## FIX-20260301-021: Iterations-Doku-Drift zwischen Regeln und Einstieg
+
+**Kategorie:** Docs/Workflow
+**Symptom (fuer Laien):** Regeln und README liefen auseinander, dadurch war der aktuelle Stand nicht immer gleich klar sichtbar.
+**Technische Ursache:** README-Update pro Iteration war nicht als Pflicht in AGENTS fest verankert.
+**Trigger:** Iterationen mit Regel-Updates, aber ohne gleichzeitige README-Pflege.
+**Fix (kurz):** AGENTS-Doku-Pflicht um README-Update erweitert und README um feste Iterations-Checkliste ergaenzt.
+**Geänderte Dateien/Marker:** AGENTS.md (Schritt 4 + 16.8), README.txt (Iterations-Doku), CHANGELOG.md, SELFINFO.md, todo.txt
+**Tests/Checks:** npm test
+**Prävention (künftig):** Ab jetzt immer AGENTS- und README-Status im selben Patch aktualisieren.
+**Alternative(n):** Nur Team-Absprache ohne feste Regel (abgelehnt, zu fehleranfällig).
+**Risiko/Side-Effects:** Niedrig, betrifft nur Dokumentation und Ablaufklarheit.
+**Verknüpft:** Patch-ID local-021

@@ -1,3 +1,9 @@
+## 2026-03-01 – Doku-Pflicht pro Iteration erweitert
+
+- AGENTS.md erweitert: README.txt muss pro Iteration kurz mit aktualisiert werden (Status, Fortschritt, naechster Schritt).
+- README um klare Pflichtliste fuer Iterations-Doku erweitert (CHANGELOG, SELFINFO, README, TODO).
+- Risiko: niedrig, da nur Dokumentationsregeln ergaenzt wurden.
+
 # CHANGELOG
 
 ## 2026-03-01 – Start-Routine mit Abhaengigkeits-Sync verstaerkt

@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 25
+Iteration: 26
 
 ## Gemacht
 
@@ -67,6 +67,8 @@ Iteration: 25
 - Start-Routine erkennt jetzt veraltete Abhaengigkeiten ueber Fingerprint (package-lock/package) und installiert bei Bedarf automatisch neu.
 - Abhaengigkeits-Status wird in `data/dependency_state.json` gespeichert und bei jedem Start validiert.
 - Hilfe um klare Laien-Schritte bei Paketfehlern erweitert (erneut versuchen, Protokoll oeffnen, Reparatur starten).
+
+- Doku-Regel ergaenzt: README.txt wird pro Iteration verpflichtend mit aktualisiert (Status + naechster Schritt).
 
 ## Next Step
 
