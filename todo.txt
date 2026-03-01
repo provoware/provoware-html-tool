@@ -28,6 +28,7 @@ NEXT (Priorität)
 - [x] P1: Plugin-Loader minimal umgesetzt (Manifest lesen, Fehler isolieren).
 - [x] P1: Debug-Modus für Registry-Fehler mit Detail-Ausgabe ausbauen.
 - [x] P1: Dashboard-Haupt-Kern-Modul ergänzt und in Start-Routine autogestartet.
+- [x] P1: AGENTS.md um Pflichtpunkt „pro Iteration Mini-Optimierung für Hilfe/UX/A11y/Kontrast" erweitert.
 - [ ] P1: Backup-Auswahl als UI-Dialog ergänzen.
 - [x] P1: Storage-Service robust weiter ausbauen (Schema-Validierung + Backup-Hook).
 - [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden.
@@ -46,3 +47,4 @@ Laienvorschläge
 
 8) Bei Unsicherheit: erst "Naechster Schritt" klicken, dann Aktion ausfuehren.
 9) Bei Fehlern immer zuerst "Protokoll oeffnen" nutzen, dann reparieren.
+- [ ] P1: Start-Routine um automatische A11y-/Kontrast-Checks je Theme erweitern.

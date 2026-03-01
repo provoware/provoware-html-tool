@@ -285,6 +285,58 @@ Reihenfolge im Iterationsablauf: 1) SELFINFO.md + PROJECT_INFO.md lesen
 3) PatchSpec → Patch → Checks → Doku
 4) MEMORY_FIXES.md aktualisieren (falls neu)
 5) PROJECT_INFO.md + SELFINFO.md als letztes aktualisieren 
+
+16) Pflichtpunkt je Iteration: Mini-Optimierung für Hilfe + UX/A11y
+16.1 Ziel (immer aktiv)
+In jeder Iteration wird mindestens ein kleiner, sichtbarer Teil von Hilfe,
+Hilfselementen, Beschreibungen oder Tooltips verbessert.
+
+16.2 Was pro Iteration mindestens verbessert werden muss (1 Punkt reicht)
+- Ein Hilfe-Text in einfacher Sprache (max. 2 kurze Sätze).
+- Ein Tooltip mit klarer Aktion + Rückweg.
+- Eine Fehlermeldung nach der Schablone aus Abschnitt 6.2.
+- Ein UI-Detail für Tastatur/Fokus/Kontrast.
+
+16.3 Design- und Layout-Standards (einheitlich)
+- Einheitliche Abstände über Tokens (z. B. 4/8/12/16/24).
+- Einheitliche Button-Standards: gleiche Höhe, gleiche Radius-Werte,
+  klarer Fokus-Ring, Mindestgröße 44x44 px.
+- Einheitliche Typografie-Scale (z. B. 14/16/20/24) mit guter Lesbarkeit.
+- Nie nur Farbe als Statussignal: immer Text/Icon ergänzen.
+
+16.4 Farben, Kontrast, Themes
+- Standardmäßig mindestens 3 Themes anbieten: Hell, Dunkel, Kontrast+.
+- Kontrastziel mindestens WCAG AA (Text/Bedienflächen).
+- Fokuszustand in jedem Theme klar sichtbar.
+- Farbwerte zentral halten (Design-Tokens/Variablen), nicht verteilt.
+
+16.5 Interaktivität für Laien (Best Practices)
+- Primäraktion pro Bereich klar markieren (nur 1 Hauptbutton).
+- Jede Aktion hat klaren nächsten Schritt (z. B. erneut versuchen,
+  Protokoll öffnen, Reparatur starten).
+- Sofortiges Feedback nach Klick (Status, Fortschritt, Ergebnis).
+- Komplexe Aktionen in kleine, geführte Schritte teilen.
+
+16.6 Flexibilität, Skalierbarkeit, kleine Bildschirme
+- Responsive Layout zuerst mobil denken (kleine Breite zuerst).
+- Flexible Container/Grid nutzen (auto-fit/minmax), keine festen Pixelbreiten.
+- Inhaltsblöcke dürfen umbrechen; keine abgeschnittenen Buttons/Texte.
+- Für kleine Displays: Prioritäten zeigen, Nebensachen einklappbar machen.
+- Komponenten modular halten (System/Core, Config, variable Daten klar trennen).
+
+16.7 Automatische Qualitätschecks (Start-Routine)
+- Start-Routine prüft pro Iteration automatisch:
+  - Formatierung
+  - Tests
+  - A11y-Basics (Fokus, Tastaturpfad, Labels)
+  - Kontrast-Checks je Theme (mindestens Kernseiten)
+- Bei Fehlern: klare Laienmeldung + nächster Schritt ausgeben.
+- Logs mit Technikdetails im Protokoll, Kurzfassung im Terminal/UI.
+
+16.8 Doku-Pflicht
+- In CHANGELOG.md 1 kurze Zeile zur UX/Hilfe-Mini-Optimierung ergänzen.
+- In todo.txt den erledigten Mini-Punkt abhaken und nächsten Mini-Punkt planen.
+
 14) Nächster Schritt (Pflichtauswahl) 
 Entscheide für die nächste Iteration genau ein Ziel: 
 A) Boot‑View stabilisieren (Phasen, Ampel, Details, Weiter‑Gate)
