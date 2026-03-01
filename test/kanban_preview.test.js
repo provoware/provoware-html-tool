@@ -8,6 +8,7 @@ const {
   renderKanbanColumns,
   bindKanbanKeyboardA11y,
   moveKanbanItem,
+  saveKanbanData,
 } = require("../templates/kanban_preview");
 
 test("normalizeKanbanPayload validiert Spalten", () => {
@@ -160,4 +161,31 @@ test("moveKanbanItem verschiebt eine Karte in eine andere Spalte", () => {
   assert.equal(result.columns[1].items.length, 1);
   assert.equal(result.columns[1].items[0].text, "Karte A");
   assert.equal(typeof result.updatedAt, "string");
+});
+
+test("saveKanbanData validiert Schema und Ergebnis", async () => {
+  let savedPayload = null;
+  const result = await saveKanbanData(
+    async (payload) => {
+      savedPayload = payload;
+      return true;
+    },
+    {
+      version: 1,
+      columns: [{ id: "idea", title: "Idee", items: [{ text: "A" }] }],
+    },
+  );
+
+  assert.equal(result.version, 1);
+  assert.equal(savedPayload.columns[0].id, "idea");
+});
+
+test("saveKanbanData meldet Fehler bei fehlendem Speicher", async () => {
+  await assert.rejects(
+    saveKanbanData(null, {
+      version: 1,
+      columns: [{ id: "idea", title: "Idee", items: [{ text: "A" }] }],
+    }),
+    /Kanban-Speicher fehlt/,
+  );
 });

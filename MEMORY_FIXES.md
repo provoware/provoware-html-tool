@@ -584,3 +584,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Kanban im HTML lassen und nur Text tauschen (abgelehnt: nicht wartbar).
 **Risiko/Side-Effects:** Bei fehlender JSON-Datei zeigt das UI jetzt klaren Fehler mit naechstem Schritt statt stiller Dummyanzeige.
 **Verknuepft:** Patch-ID PATCH-053
+
+## FIX-20260301-007: Kanban-Verschiebung-persistent-mit-Speicher-Validierung
+
+**Kategorie:** UI/JSON
+**Symptom (fuer Laien):** Nach Neustart war die verschobene Karte wieder an alter Stelle.
+**Technische Ursache:** Karten wurden nur im Arbeitsspeicher verschoben, aber nicht in `data/kanban_board.json` gespeichert.
+**Trigger:** Karte im Kanban-Dialog verschieben und Seite neu laden.
+**Fix (kurz):** Save-Pfad in Kanban-Modul eingebaut, vor Write Schema geprueft, Ergebnis auf Erfolg validiert.
+**Geaenderte Dateien/Marker:** templates/kanban_preview.js, templates/dashboard.js, test/kanban_preview.test.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei UI-Zustandsaenderung pruefen: wird nur angezeigt oder auch dauerhaft gespeichert?
+**Alternative(n):** Nur LocalStorage nutzen (abgelehnt, da Projektdatei als Quelle gewuenscht).
+**Risiko/Side-Effects:** File-Write braucht gueltigen Projektordner-Handle.
+**Verknuepft:** Patch-ID PATCH-055

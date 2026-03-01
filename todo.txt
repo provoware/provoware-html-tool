@@ -149,3 +149,6 @@ Laienvorschläge
 - [x] P1: Naechster Mini-Punkt: Referenzbild-Checkliste als festen Ablauf in todo/README verankern.
 
 - [x] P1: Naechster Mini-Punkt: Kanban-Schnellansicht mit echten Moduldaten verbinden.
+
+- [x] P1: Kartenverschiebung dauerhaft in `data/kanban_board.json` speichern (inkl. Schema-Check/Validierung).
+- [ ] P1: Optionales Drag-and-Drop fuer Kanban als Zusatz einbauen, Dialog bleibt Standard fuer Tastatur/A11y.

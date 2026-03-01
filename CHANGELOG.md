@@ -316,3 +316,10 @@
 - Todo-Modul speichert aktive und archivierte Aufgaben jetzt optional in `data/store.json`, sobald ein Projektordner verbunden ist.
 - Beim Start werden gespeicherte Aufgaben wieder geladen; bei Speicherfehlern gibt es klare Meldungen mit naechstem Schritt.
 - Risiko: niedrig, da nur Todo-Modul, Modell und zugehoeriger Test erweitert wurden.
+
+## 2026-03-01 – Kanban-Verschiebung jetzt dauerhaft in JSON gespeichert
+
+- Kartenverschiebung speichert den neuen Zustand jetzt direkt in `data/kanban_board.json`, damit nach Neustart dieselbe Reihenfolge sichtbar bleibt.
+- Vor dem Speichern wird das Kanban-Schema geprueft (Version, Spalten, Karten), damit keine kaputten Daten geschrieben werden.
+- Mini-Optimierung Hilfe/UX: Erfolgsstatus nennt jetzt klar "verschoben und gespeichert" als naechsten sicheren Zustand.
+- Risiko: mittel, weil der Browserpfad jetzt Datei-Write nutzt, aber mit Validierung und Tests abgesichert.

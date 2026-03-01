@@ -214,6 +214,32 @@
     return created;
   }
 
+  async function writeProjectJson(relativePath, payload) {
+    if (!selectedProjectDir) {
+      throw new Error(
+        "Projektordner fehlt. Erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+    if (typeof relativePath !== "string" || !relativePath.trim()) {
+      throw new Error(
+        "Dateipfad fehlt. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      throw new Error(
+        "Kanban-Daten ungueltig. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+
+    const fileHandle = await selectedProjectDir.getFileHandle(relativePath, {
+      create: true,
+    });
+    const writer = await fileHandle.createWritable();
+    await writer.write(`${JSON.stringify(payload, null, 2)}\n`);
+    await writer.close();
+    return true;
+  }
+
   function renderZones() {
     zones.innerHTML = "";
     zoneModel.forEach((zone, index) => {
@@ -573,6 +599,10 @@
       root: kanbanPreview,
       setStatus: setKanbanStatus,
       sourcePath: "../data/kanban_board.json",
+      saveImpl: async (payload) => {
+        await writeProjectJson("data/kanban_board.json", payload);
+        return true;
+      },
     });
     kanban.load().then((result) => {
       if (result.ok) {

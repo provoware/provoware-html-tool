@@ -100,3 +100,13 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Layout-Vorgabe: kompakter Kopfbereich, KPI-Karten und Kanban-Viererspalte als feste Orientierung im Dashboard.
 - Farb-/Kontrastvorgabe: Neon-Optik nur als Hintergrundeffekt, Text bleibt kontraststark ueber die bestehenden Theme-Tokens.
 - Interaktionsvorgabe: jede neue Sektion hat einen kurzen Hilfetext mit Aktion und Rueckweg.
+
+## Iteration 55 – Tool-Umfang erweitert (Kanban-Persistenz)
+
+Neu im Umfang:
+- `templates/kanban_preview.js` kann Karten jetzt nicht nur verschieben, sondern auch ueber eine Save-Schnittstelle sicher speichern.
+- `templates/dashboard.js` stellt den Datei-Write ueber den gewaehlt-en Projektordner bereit.
+
+Vorteil fuer Laien:
+- Nach Neustart bleibt die zuletzt gespeicherte Kanban-Reihenfolge erhalten.
+- Bei Fehlern wird weiterhin ein klarer naechster Schritt genannt (erneut versuchen, reparieren, Protokoll oeffnen).

@@ -53,7 +53,15 @@
       };
     });
 
+    const version = Number.isInteger(payload.version) ? payload.version : 1;
+    if (version < 1) {
+      throw new Error(
+        "Kanban-Version ungueltig. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+
     return {
+      version,
       updatedAt: typeof payload.updatedAt === "string" ? payload.updatedAt : "",
       columns: normalizedColumns,
     };
@@ -184,6 +192,22 @@
       updatedAt: new Date().toISOString(),
       columns: nextColumns,
     };
+  }
+
+  async function saveKanbanData(saveImpl, payload) {
+    if (typeof saveImpl !== "function") {
+      throw new Error(
+        "Kanban-Speicher fehlt. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+    const safePayload = normalizeKanbanPayload(payload);
+    const result = await saveImpl(safePayload);
+    if (result !== true) {
+      throw new Error(
+        "Kanban-Speichern fehlgeschlagen. Erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+    return safePayload;
   }
 
   function createMoveDialog(root) {
@@ -342,7 +366,7 @@
       setStatus("Dialog offen. Naechster Schritt: Zielspalte waehlen.");
     }
 
-    function onDialogClose(event) {
+    async function onDialogClose(event) {
       if (event.target?.returnValue !== "confirm" || !pendingMove) {
         setStatus("Abgebrochen. Naechster Schritt: Erneut versuchen.");
         return;
@@ -350,16 +374,17 @@
 
       try {
         const targetId = assertText(dialog.targetSelect.value, "Zielspalte");
-        currentPayload = moveKanbanItem(
+        const movedPayload = moveKanbanItem(
           currentPayload,
           pendingMove.sourceColumnId,
           pendingMove.itemIndex,
           targetId,
         );
+        currentPayload = await saveKanbanData(options.saveImpl, movedPayload);
         renderKanbanColumns(root, currentPayload);
         bindKanbanKeyboardA11y(root, status);
         setStatus(
-          "Karte verschoben. Naechster Schritt: Pfeiltasten oder Tab fuer Kontrolle nutzen.",
+          "Karte verschoben und gespeichert. Naechster Schritt: Pfeiltasten oder Tab fuer Kontrolle nutzen.",
         );
       } catch (error) {
         const details =
@@ -404,6 +429,7 @@
     renderKanbanColumns,
     bindKanbanKeyboardA11y,
     moveKanbanItem,
+    saveKanbanData,
     createKanbanPreview,
   };
 

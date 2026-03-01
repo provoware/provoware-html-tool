@@ -188,3 +188,10 @@ Iteration: 39
 - Next Step: Empfehlung 2 umsetzen (Todo-Filter heute/offen/archiv + Tastatur-Shortcuts).
 
 - Help-Panel-Mini-Leitfaden um Schritt 4 erweitert: Referenzbild-Abgleich alle 5 Iterationen als sichtbarer Pflicht-Hinweis.
+
+## Iteration 55 – Kanban-Stand speichern (fertig)
+
+- Hauptziel: Kanban-Kartenverschiebung persistent gespeichert.
+- Ergebnis: Nach Verschieben wird validiertes JSON direkt nach `data/kanban_board.json` geschrieben.
+- Mini-Optimierung: Erfolgsstatus nennt jetzt "verschoben und gespeichert" fuer klare Rueckmeldung.
+- Next Step: Option B (Plugin-Loader minimal) oder optionaler Kanban-Drag-and-Drop als Zusatzpfad planen.
