@@ -374,3 +374,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Externes Script nur fuer Doku-Updates.
 **Risiko/Side-Effects:** Niedrig; betrifft nur den Fortschrittsblock im README.
 **Verknüpft:** Iteration-34
+
+## FIX-20260301-010: Info-Dateien-Sync-fuer-Strategie
+
+**Kategorie:** Docs/Prozess
+**Symptom (fuer Laien):** Projektstand war schwer erfassbar, weil Strategie-Hinweise nicht in allen Info-Dateien gleich standen.
+**Technische Ursache:** Iterative Doku wuchs, aber wurde nicht immer als gemeinsamer Block synchronisiert.
+**Trigger:** Auftrag, Vorgehen und Strategie optimal auf den Projektstand auszurichten.
+**Fix (kurz):** Einheitlichen Strategie-Block in SELFINFO, README, PROJECT_INFO, CHANGELOG und TODO nachgezogen sowie Folgefrage in QUESTIONS_TODO dokumentiert.
+**Geaenderte Dateien/Marker:** SELFINFO.md, README.txt, PROJECT_INFO.md, CHANGELOG.md, todo.txt, QUESTIONS_TODO.md, AGENTS_LOG.md
+**Tests/Checks:** bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer nach jedem Abschluss-Check einen kompakten Strategie-Sync in allen Info-Dateien in derselben Iteration ausfuehren.
+**Alternative(n):** Nur CHANGELOG pflegen (abgelehnt, zu wenig sichtbar fuer Laien).
+**Risiko/Side-Effects:** Kein Laufzeitrisiko, nur bessere Transparenz und Planung.
+**Verknuepft:** Patch-ID PATCH-036

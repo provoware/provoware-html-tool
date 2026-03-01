@@ -26,3 +26,28 @@
 - Start-Routine erhielt einen automatischen Platzhalter-Scan fuer `TODO`, `FIXME`, `PLACEHOLDER`, `DUMMY` in Kernordnern.
 - Fehlerfall zeigt Laienmeldung mit Fundstelle (Datei + Zeile) und klaren Folgeaktionen.
 - Risiko: niedrig, da nur Prueflogik und ein Unit-Test erweitert wurden.
+
+## Iteration 36: Vorgehen und Strategie
+
+### Zielbild (kurz)
+
+- Stabiler Start ohne Crash.
+- Vollautomatischer Abschluss-Check ueber `bash start.sh`.
+- Kleine, reviewbare Patches statt grosser Sammelaenderungen.
+
+### Patch-Reihenfolge (Pflicht)
+
+1. PatchSpec schreiben (Scope IN/OUT + Akzeptanz).
+2. Nur betroffene Dateien aendern.
+3. `bash start.sh` als Freigabe ausfuehren.
+4. Doku synchronisieren (`README.txt`, `todo.txt`, `CHANGELOG.md`, `SELFINFO.md`).
+
+### Naechste technische Prioritaet
+
+- **B:** Plugin-Loader weiter absichern (Manifest lesen, isolieren, Fehler melden).
+- **C:** Storage-Service robust machen (Schema-Pruefung, versioniertes Schreiben, Backup-Hook).
+
+### Laien-Standard
+
+- Fehlertext immer mit den 3 Aktionen: Erneut versuchen, Reparatur starten, Protokoll oeffnen.
+- Fachwoerter kurz erklaeren, z. B. Validierung (Eingabepruefung).

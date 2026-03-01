@@ -1,3 +1,12 @@
+## 2026-03-01 (Iteration 36)
+
+- Strategie fuer die weitere Entwicklung geschaerft: Mini-Patches, feste
+  Patch-Reihenfolge und harte Priorisierung auf Plugin-Loader + Storage-Service.
+- Alle zentralen Info-Dateien auf denselben Stand gebracht
+  (Fortschritt, Risiken, naechste Schritte).
+- UX/Hilfe-Mini-Optimierung: klare Laienformulierung der naechsten Kernziele in
+  README und PROJECT_INFO.
+
 - 2026-03-01: Start-Routine synchronisiert jetzt den README-Fortschritt automatisch aus `todo.txt` (Prozent, erledigt, offen) fuer konsistente Statusanzeige.
 
 ## 2026-03-01 – Hilfe-Panel mit 3-Schritt-Mini-Leitfaden
