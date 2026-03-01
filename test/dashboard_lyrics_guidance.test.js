@@ -67,3 +67,15 @@ test("Dashboard-Lesemodus hat Inline-Hilfe fuer Fokusziel", () => {
   assert.match(dashboardHtml, /id="lyrics-preview-focus-inline-help"/);
   assert.match(dashboardHtml, /Fokusziel beim Oeffnen: Titel-Feld\./);
 });
+
+test("Dashboard-Songtextbereich bietet Kategorie-Auswahl fuer Zufallsinhalt", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="lyrics-random-genre-toggle"/);
+  assert.match(dashboardHtml, /id="lyrics-random-mood-toggle"/);
+  assert.match(dashboardHtml, /id="lyrics-random-style-toggle"/);
+  assert.match(dashboardHtml, /id="lyrics-random-category-help"/);
+});

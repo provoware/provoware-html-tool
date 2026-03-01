@@ -1,3 +1,10 @@
+## Iteration 80 – Zufallskategorien im Songtext-Editor
+
+- **Tool-Umfang erweitert:** Der Songtext-Zufall kann jetzt einzelne Kategorien aktivieren/deaktivieren (Genre, Stimmung, Stil).
+- **Laienhilfe direkt im Modul:** Das Tool erklaert klar, welche Kategorien aktiv sind und was der naechste Schritt ist.
+- **Sicheres Verhalten:** Wenn alle Kategorien deaktiviert werden, setzt das Tool automatisch auf den sicheren Standard zurueck.
+- **Wartbarkeit:** Kategorie-Logik und Validierung laufen zentral in `quick_store_module.js` und sind mit Tests abgesichert.
+
 ## Iteration 75 – Abschlussbericht + Lesemodus-Hilfe
 
 - Der Lesemodus zeigt beim Schliessen jetzt eine klare Tastaturhilfe: Enter bestaetigt, Alt+T/Alt+I wechselt das Fokusziel.

@@ -7,6 +7,11 @@
   };
   const LYRICS_PREFERENCES_PATH = "data/quick_store_lyrics_preferences.json";
   const PREVIEW_FOCUS_TARGETS = ["title", "content"];
+  const RANDOM_CATEGORY_DEFAULTS = {
+    includeGenre: true,
+    includeMood: true,
+    includeStyle: true,
+  };
   const RANDOM_LYRICS_PARTS = {
     standard: {
       genres: ["Synthwave", "Indie", "Pop", "Folk"],
@@ -184,12 +189,52 @@
     return { key: selectedKey, ...selected };
   }
 
+  function normalizeRandomCategorySelection(payload) {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      return { ...RANDOM_CATEGORY_DEFAULTS };
+    }
+
+    const includeGenre = payload.includeGenre !== false;
+    const includeMood = payload.includeMood !== false;
+    const includeStyle = payload.includeStyle !== false;
+
+    if (!includeGenre && !includeMood && !includeStyle) {
+      return { ...RANDOM_CATEGORY_DEFAULTS };
+    }
+
+    return {
+      includeGenre,
+      includeMood,
+      includeStyle,
+    };
+  }
+
+  function buildRandomCategoryStatusMessage(selection) {
+    const normalized = normalizeRandomCategorySelection(selection);
+    const active = [];
+    if (normalized.includeGenre) {
+      active.push("Genre");
+    }
+    if (normalized.includeMood) {
+      active.push("Stimmung");
+    }
+    if (normalized.includeStyle) {
+      active.push("Stil");
+    }
+
+    return (
+      `Aktive Zufallskategorien: ${active.join(", ")}. ` +
+      "Naechster Schritt: Zufallsinhalt einfuegen oder Auswahl anpassen."
+    );
+  }
+
   function normalizeLyricsPreferences(payload) {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
       return {
         randomProfile: "standard",
         previewFocusTarget: "title",
         lastRandomProfileAt: "",
+        ...RANDOM_CATEGORY_DEFAULTS,
       };
     }
 
@@ -213,6 +258,7 @@
       randomProfile: resolvedProfile,
       previewFocusTarget: resolvedFocusTarget,
       lastRandomProfileAt,
+      ...normalizeRandomCategorySelection(payload),
     };
   }
 
@@ -224,6 +270,9 @@
       randomProfile: normalized.randomProfile,
       previewFocusTarget: normalized.previewFocusTarget,
       lastRandomProfileAt: normalized.lastRandomProfileAt,
+      includeGenre: normalized.includeGenre,
+      includeMood: normalized.includeMood,
+      includeStyle: normalized.includeStyle,
     };
   }
 
@@ -295,18 +344,26 @@
   function buildRandomLyricsSnippet(
     profile = "standard",
     randomFn = Math.random,
+    categorySelection = RANDOM_CATEGORY_DEFAULTS,
   ) {
     const selectedProfile = resolveRandomProfile(profile);
-    const genre = pickRandomEntry(selectedProfile.genres, randomFn);
-    const mood = pickRandomEntry(selectedProfile.moods, randomFn);
-    const style = pickRandomEntry(selectedProfile.styles, randomFn);
-    const snippet = `[Impuls]
-Profil: ${selectedProfile.key}
-Genre: ${genre}
-Stimmung: ${mood}
-Stil: ${style}
-Zeile 1: ...
-Zeile 2: ...`;
+    const selectedCategories =
+      normalizeRandomCategorySelection(categorySelection);
+    const lines = ["[Impuls]", `Profil: ${selectedProfile.key}`];
+
+    if (selectedCategories.includeGenre) {
+      lines.push(`Genre: ${pickRandomEntry(selectedProfile.genres, randomFn)}`);
+    }
+    if (selectedCategories.includeMood) {
+      lines.push(
+        `Stimmung: ${pickRandomEntry(selectedProfile.moods, randomFn)}`,
+      );
+    }
+    if (selectedCategories.includeStyle) {
+      lines.push(`Stil: ${pickRandomEntry(selectedProfile.styles, randomFn)}`);
+    }
+
+    const snippet = `${lines.join("\n")}\nZeile 1: ...\nZeile 2: ...`;
     if (typeof snippet !== "string" || snippet.trim().length === 0) {
       throw new Error(
         "Zufallsinhalt ist leer. Erneut versuchen oder Protokoll oeffnen.",
@@ -388,6 +445,22 @@ Zeile 2: ...`;
     const randomProfileSelect = assertElement(
       options.randomProfileSelect,
       "Zufallsprofil-Auswahl",
+    );
+    const randomGenreToggle = assertElement(
+      options.randomGenreToggle,
+      "Zufall-Genre",
+    );
+    const randomMoodToggle = assertElement(
+      options.randomMoodToggle,
+      "Zufall-Stimmung",
+    );
+    const randomStyleToggle = assertElement(
+      options.randomStyleToggle,
+      "Zufall-Stil",
+    );
+    const randomCategoryHelp = assertElement(
+      options.randomCategoryHelp,
+      "Zufall-Kategorie-Hilfe",
     );
     const randomButton = assertElement(
       options.randomButton,
@@ -501,11 +574,30 @@ Zeile 2: ...`;
       return true;
     }
 
+    function getRandomCategorySelection() {
+      return normalizeRandomCategorySelection({
+        includeGenre: randomGenreToggle.checked,
+        includeMood: randomMoodToggle.checked,
+        includeStyle: randomStyleToggle.checked,
+      });
+    }
+
+    function applyRandomCategorySelection(selection) {
+      const normalized = normalizeRandomCategorySelection(selection);
+      randomGenreToggle.checked = normalized.includeGenre;
+      randomMoodToggle.checked = normalized.includeMood;
+      randomStyleToggle.checked = normalized.includeStyle;
+      randomCategoryHelp.textContent =
+        buildRandomCategoryStatusMessage(normalized);
+      return normalized;
+    }
+
     async function persistLyricsPreferences() {
       const payload = buildLyricsPreferencesPayload({
         randomProfile: randomProfileSelect.value,
         previewFocusTarget: previewFocusTargetSelect.value,
         lastRandomProfileAt,
+        ...getRandomCategorySelection(),
       });
       const ok = await saveJson(LYRICS_PREFERENCES_PATH, payload);
       if (!ok) {
@@ -579,10 +671,12 @@ Zeile 2: ...`;
         randomProfileSelect.value = normalized.randomProfile;
         previewFocusTargetSelect.value = normalized.previewFocusTarget;
         lastRandomProfileAt = normalized.lastRandomProfileAt;
+        applyRandomCategorySelection(normalized);
       }
 
       updateRandomProfileChip();
       updatePreviewFocusInlineHelp();
+      applyRandomCategorySelection(RANDOM_CATEGORY_DEFAULTS);
 
       const areaLoad = await loadFromAreaFiles();
       if (areaLoad.loaded) {
@@ -730,6 +824,7 @@ Zeile 2: ...`;
         const randomSnippet = buildRandomLyricsSnippet(
           randomProfileSelect.value,
           options.randomFn,
+          getRandomCategorySelection(),
         );
         const nextValue = insertTemplateIntoContent(
           contentInput,
@@ -933,6 +1028,22 @@ Zeile 2: ...`;
           "Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.",
       );
     });
+
+    [randomGenreToggle, randomMoodToggle, randomStyleToggle].forEach(
+      (toggle) => {
+        toggle.addEventListener("change", () => {
+          const selection = applyRandomCategorySelection(
+            getRandomCategorySelection(),
+          );
+          persistLyricsPreferences().catch((error) => {
+            const details =
+              error instanceof Error ? error.message : "Unbekannter Fehler";
+            setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+          });
+          setStatus(buildRandomCategoryStatusMessage(selection));
+        });
+      },
+    );
     previewFocusTargetSelect.addEventListener("change", () => {
       updatePreviewFocusInlineHelp();
       persistLyricsPreferences().catch((error) => {
@@ -967,6 +1078,7 @@ Zeile 2: ...`;
     renderLyricsEditor();
     updateRandomProfileChip();
     updatePreviewFocusInlineHelp();
+    applyRandomCategorySelection(RANDOM_CATEGORY_DEFAULTS);
     loadPersistedState();
     render();
 
@@ -990,6 +1102,8 @@ Zeile 2: ...`;
     buildLyricsPreferencesPayload,
     normalizeLyricsPreferences,
     resolveRandomProfile,
+    normalizeRandomCategorySelection,
+    buildRandomCategoryStatusMessage,
     formatUsageTimestamp,
     resolvePreviewShortcutTarget,
     buildPreviewStatusMessage,

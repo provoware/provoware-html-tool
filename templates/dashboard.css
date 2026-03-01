@@ -440,6 +440,27 @@ a:focus-visible {
   border-color: var(--focus);
   font-weight: 700;
 }
+
+.compact-fieldset {
+  margin: 0.3rem 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 0.4rem 0.55rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.compact-fieldset legend {
+  padding: 0 0.3rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.compact-fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
 .guide-list {
   margin: 0.2rem 0 0;
   padding-left: 1.1rem;

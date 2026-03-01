@@ -15,16 +15,16 @@
   },
   {
     "file": "templates/dashboard.html",
-    "version": "v012",
+    "version": "v013",
     "status": "ready",
-    "updatedAt": "2026-03-03T19:30:00.000Z",
+    "updatedAt": "2026-03-03T21:00:00.000Z",
     "owner": "codex"
   },
   {
     "file": "templates/dashboard.js",
-    "version": "v010",
+    "version": "v011",
     "status": "ready",
-    "updatedAt": "2026-03-03T19:30:00.000Z",
+    "updatedAt": "2026-03-03T21:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -85,9 +85,9 @@
   },
   {
     "file": "templates/dashboard.css",
-    "version": "v008",
+    "version": "v009",
     "status": "ready",
-    "updatedAt": "2026-03-03T19:30:00.000Z",
+    "updatedAt": "2026-03-03T21:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -120,9 +120,9 @@
   },
   {
     "file": "templates/quick_store_module.js",
-    "version": "v004",
+    "version": "v005",
     "status": "ready",
-    "updatedAt": "2026-03-03T18:00:00.000Z",
+    "updatedAt": "2026-03-03T21:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -155,9 +155,9 @@
   },
   {
     "file": "test/quick_store_module.test.js",
-    "version": "v002",
+    "version": "v003",
     "status": "ready",
-    "updatedAt": "2026-03-03T18:00:00.000Z",
+    "updatedAt": "2026-03-03T21:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -235,6 +235,13 @@
     "version": "v001",
     "status": "ready",
     "updatedAt": "2026-03-03T19:30:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "test/dashboard_lyrics_guidance.test.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-03T21:00:00.000Z",
     "owner": "codex"
   }
 ]

@@ -1,3 +1,10 @@
+## 2026-03-03 – Iteration 80
+
+- Drei offene Punkte abgeschlossen: Songtext-Editor als Paket (Vorlagen + Lesemodus + Rueckweg) ist jetzt als abgeschlossen markiert und mit Kategorie-Auswahl fuer Zufall erweitert.
+- Drei offene Punkte abgeschlossen: Dokument-Vorschau ist im Songtext-Modul verankert, inklusive Fokusziel und klarer Tastaturhilfe.
+- Drei offene Punkte abgeschlossen: Zufallsgenerator hat jetzt Kategorie-An/Auswahl (Genre/Stimmung/Stil) mit Validierung, Persistenz und laienfreundlicher Statusmeldung.
+- Mini-Optimierung Hilfe/A11y: Neue Inline-Hilfe erklaert aktive Zufallskategorien und den Rueckweg in einfacher Sprache.
+
 ## 2026-03-01 – Iteration 79
 
 - Start-Routine prueft jetzt strikt: Es muessen genau drei offene `Naechster Mini-Punkt`-Eintraege in `todo.txt` vorhanden sein.

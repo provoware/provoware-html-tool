@@ -1067,6 +1067,12 @@
       bridgeButton: document.getElementById("lyrics-template-bridge"),
       miscButton: document.getElementById("lyrics-template-misc"),
       randomProfileSelect: document.getElementById("lyrics-random-profile"),
+      randomGenreToggle: document.getElementById("lyrics-random-genre-toggle"),
+      randomMoodToggle: document.getElementById("lyrics-random-mood-toggle"),
+      randomStyleToggle: document.getElementById("lyrics-random-style-toggle"),
+      randomCategoryHelp: document.getElementById(
+        "lyrics-random-category-help",
+      ),
       randomButton: document.getElementById("lyrics-template-random"),
       randomProfileChip: document.getElementById("lyrics-random-profile-chip"),
       previewButton: document.getElementById("lyrics-open-preview"),

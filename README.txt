@@ -1,3 +1,8 @@
+Update Iteration 80:
+- Songtext-Zufall kann jetzt pro Kategorie gesteuert werden: Genre, Stimmung, Stil an/aus.
+- Auswahl bleibt erhalten, weil die Einstellungen gespeichert und wieder geladen werden.
+- Hilfe im Modul zeigt jetzt klare Rueckweg-Schritte in einfacher Sprache.
+
 
 Update Iteration 78:
 - 3x3 Modulraster startet leer, Module werden links aktiviert und koennen per Klick maximiert/minimiert werden.
@@ -113,9 +118,9 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 86 %
-- **Erledigt:** 132 Punkte
-- **Offen:** 22 Punkte
+- **Fortschritt:** 88 %
+- **Erledigt:** 136 Punkte
+- **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

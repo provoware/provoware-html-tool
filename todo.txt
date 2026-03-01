@@ -87,10 +87,10 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Songtext-Kurzguide um Schritt "Speichern + Rueckweg" in einfacher Sprache erweitern.
 - [x] Naechster Mini-Punkt: Songtext-Editor mit Zufallsgenerator-Inhalt (1 Klick) verbinden.
 - [x] Naechster Mini-Punkt: Lesemodus um klaren Ruecksprung-Fokus auf Titel-Feld erweitern.
-- [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
+- [x] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
 - [x] P1: Interoperabilitaet Songtext-Editor ↔ Zufallsgenerator umsetzen (Inhalt einfuegen).
-- [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.
-- [ ] P1: Zufallsgenerator-Modul implementieren (Genres/Roots/Stil, Schnellwahl, Kategorie-An/Auswahl).
+- [x] P1: Dokument-Vorschau im Songtext-Modul integrieren.
+- [x] P1: Zufallsgenerator-Modul implementieren (Genres/Roots/Stil, Schnellwahl, Kategorie-An/Auswahl).
 - [ ] P1: Content-Planungs-Modul implementieren (Monatskalender + Jahresuebersicht + Kapazitaeten).
 - [x] P1: Aufgaben-Workflow mit Kalenderdatum, abhakbarer Liste und Archivbereich im Dashboard integriert.
 - [ ] P1: Template-Verwaltungs-Modul implementieren (Textfragmente, Kategorien, Import/Export, Copy-Buttons).
@@ -222,3 +222,5 @@ Laienvorschläge
 - [ ] Naechster Mini-Punkt: Modulbereich unten fuer modulspezifische Optionen reservieren und sichtbar machen. | Code: Unteren Modulbereich im Workspace als feste Region einführen | Tests: Layout-Persistenz + Resize-Test ergänzen und ausführen | Doku: PROJEKTBESCHREIBUNG + README um Bereichslogik ergänzen | Risiko: niedrig (isolierte Template-Anpassung mit bekannten Daten) | Naechster Schritt: Region in module_workspace aktivieren und mit Beispieldaten prüfen.
 
 - [ ] Naechster Mini-Punkt: TODO-Vorlage-Check in Start-Routine strikt halten und Fehlermeldung fuer Laien verfeinern. | Code: TODO-Template-Validierung zentral in Start-Routine sichern | Tests: Unit-Test fuer fehlende Pflichtfelder gruen laufen lassen | Doku: CHANGELOG + README mit Pflichtfeld-Regel aktualisieren | Risiko: niedrig (nur Validierungslogik, kein Produktivdatenpfad) | Naechster Schritt: Start-Routine lokal starten und neue Meldung pruefen.
+
+- [x] P1: Mini-Optimierung Hilfe/A11y: Zufallskategorien im Songtextbereich mit klarer Rueckweg-Hilfe und speicherbarer Auswahl ergaenzt.

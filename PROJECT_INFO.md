@@ -1,3 +1,9 @@
+## Statusupdate 2026-03-03 – Iteration 80
+
+- Zufallsgenerator im Songtext-Editor hat jetzt Kategorie-An/Auswahl (`includeGenre`, `includeMood`, `includeStyle`) mit Fallback auf sicheren Standard.
+- Neue Persistenzregel: Kategorie-Auswahl wird zusammen mit Profil/Fokusziel in `data/quick_store_lyrics_preferences.json` gespeichert.
+- UI-Standard erweitert: Kategorie-Status wird als klare Inline-Hilfe mit naechstem Schritt ausgegeben.
+
 ## Statusupdate 2026-03-03 – Iteration 76
 
 - Modul-Control-Leiste nutzt jetzt einen einheitlichen Tooltip-Standard mit Rueckweg-Hinweisen (`Groesser anzeigen`, `Kurz einklappen`, `Ausblenden`).
