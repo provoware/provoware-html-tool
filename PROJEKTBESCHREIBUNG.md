@@ -87,3 +87,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Das Help-Panel zeigt jetzt im Mini-Leitfaden einen klaren 4. Schritt: Referenzbild alle 5 Iterationen mit dem Dashboard vergleichen.
 - Vorteil fuer Laien: der Pflicht-Rhythmus ist direkt im UI sichtbar und wird nicht vergessen.
 - Tool-Umfang: `system-module/help_panel.js` validiert nun 4 Leitfaden-Schritte mit klarer Fehlerreaktion.
+
+
+## Iteration 52 – Referenzbild-Analyse + konkrete Tool-Vorgaben
+- Layout-Vorgabe: kompakter Kopfbereich, KPI-Karten und Kanban-Viererspalte als feste Orientierung im Dashboard.
+- Farb-/Kontrastvorgabe: Neon-Optik nur als Hintergrundeffekt, Text bleibt kontraststark ueber die bestehenden Theme-Tokens.
+- Interaktionsvorgabe: jede neue Sektion hat einen kurzen Hilfetext mit Aktion und Rueckweg.

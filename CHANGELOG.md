@@ -1,3 +1,10 @@
+## 2026-03-01 – Referenzbild-Analyse als Dashboard-Vorgabe umgesetzt
+
+- Das Dashboard hat jetzt einen neuen Vorlage-Bereich mit Neon-Stil, KPI-Karten und Kanban-Schnellansicht, damit Layout und Struktur klar am Referenzbild ausgerichtet sind.
+- Die rechte Spalte nutzt nun sichtbare Team- und Kalendertexte statt leerer Platzhalter, damit Status nicht nur ueber Farbe vermittelt wird.
+- Mini-Optimierung Hilfe/UX: jeder neue Bereich nennt Aktion + Rueckweg in einfacher Sprache.
+- Risiko: niedrig, da nur UI-Template/CSS und Doku erweitert wurden.
+
 ## 2026-03-01 – Prompt-Sicherheitsabfrage automatisch geprueft
 
 - Backup-Restore nutzt jetzt eine zentrale Prueffunktion fuer die Prompt-Bestaetigung (Dateiname muss exakt passen).

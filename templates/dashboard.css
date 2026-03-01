@@ -215,6 +215,13 @@ a:focus-visible {
   padding: var(--space-3);
 }
 
+.neon-panel {
+  background:
+    radial-gradient(circle at top right, rgba(255, 153, 0, 0.2), transparent 45%),
+    radial-gradient(circle at bottom left, rgba(0, 220, 255, 0.15), transparent 55%),
+    var(--panel);
+}
+
 .panel h2,
 .panel h3 {
   margin: 0 0 0.4rem;
@@ -244,6 +251,54 @@ a:focus-visible {
 
 .guide-list li {
   font-size: 0.9rem;
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.45rem;
+  margin-top: 0.55rem;
+}
+
+.snapshot-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem;
+  background: color-mix(in srgb, var(--panel-soft) 70%, transparent);
+}
+
+.snapshot-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.snapshot-value {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.kanban-preview {
+  margin-top: 0.55rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.45rem;
+}
+
+.kanban-col {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  min-height: 95px;
+  padding: 0.5rem;
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  background: color-mix(in srgb, var(--panel) 80%, var(--panel-soft));
+}
+
+.kanban-col h3,
+.kanban-col p {
+  margin: 0;
 }
 
 

@@ -1,5 +1,9 @@
 # Provoware HTML Tool
 
+- Neu (2026-03-01): Referenzbild professionell analysiert und als feste UI-Vorgabe umgesetzt (Neon-Karten, KPI-Bereich, Kanban-Schnellansicht, Team/Kalendertext).
+- Neu (2026-03-01): A11y-Plus in der neuen Vorlage: klare Textstatus statt nur Farben, 44px-Bedienelemente und sichtbare Tastaturwege.
+- Neu (2026-03-01): Naechster Schritt aus der Analyse: Kanban-Karten als echte Datenquelle statt statischer Beispielwerte anbinden.
+
 - Neu (2026-03-01): Alle 5 Iterationen ist jetzt eine Pflicht-Analyse des Vorgabebilds vorgesehen, damit Layout und Designstil konsistent am Beispiel bleiben.
 - Neu (2026-03-01): Das Help-Panel erinnert jetzt direkt im Mini-Leitfaden an den 5-Iterationen-Referenzbild-Abgleich.
 - Neu (2026-03-01): Pro Iteration werden Platzhalter/Teilcode-Stellen systematisch gesucht, dokumentiert und als TODO-Folgeschritte geplant.
@@ -11,9 +15,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 75 %
-- **Erledigt:** 71 Punkte
-- **Offen:** 24 Punkte
+- **Fortschritt:** 76 %
+- **Erledigt:** 73 Punkte
+- **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

@@ -150,6 +150,62 @@
             <ul id="guide-list" class="guide-list"></ul>
           </article>
 
+          <article class="panel neon-panel" aria-labelledby="snapshot-title">
+            <h2 id="snapshot-title">Projekt-Schnellbild (Vorlage)</h2>
+            <p class="field-tip">
+              Was macht das? Dieser Bereich zeigt den Stil der Bildvorlage mit
+              klaren Zahlen und Text. Rueckweg: Zahlen pruefen und danach normal
+              weiterarbeiten.
+            </p>
+            <div class="snapshot-grid" role="list" aria-label="Projektzahlen">
+              <article class="snapshot-card" role="listitem">
+                <h3>Projekte</h3>
+                <p class="snapshot-value">24 aktiv</p>
+              </article>
+              <article class="snapshot-card" role="listitem">
+                <h3>In Progress</h3>
+                <p class="snapshot-value">7 Aufgaben</p>
+              </article>
+              <article class="snapshot-card" role="listitem">
+                <h3>Abschluss</h3>
+                <p class="snapshot-value">16 erledigt</p>
+              </article>
+              <article class="snapshot-card" role="listitem">
+                <h3>Deadline</h3>
+                <p class="snapshot-value">3 offen</p>
+              </article>
+            </div>
+          </article>
+
+          <article
+            class="panel neon-panel"
+            aria-labelledby="kanban-preview-title"
+          >
+            <h2 id="kanban-preview-title">Kanban-Schnellansicht</h2>
+            <p class="field-tip">
+              Bedienung: Tab waehlt Spalten. Enter oeffnet die Aktion. Escape
+              beendet geoeffnete Dialoge.
+            </p>
+            <div class="kanban-preview" role="list" aria-label="Kanban Spalten">
+              <article class="kanban-col" role="listitem">
+                <h3>Idee</h3>
+                <p>Website Relaunch</p>
+              </article>
+              <article class="kanban-col" role="listitem">
+                <h3>Planung</h3>
+                <p>Marketing Kampagne</p>
+              </article>
+              <article class="kanban-col" role="listitem">
+                <h3>Umsetzung</h3>
+                <p>App Update</p>
+              </article>
+              <article class="kanban-col" role="listitem">
+                <h3>Review</h3>
+                <p>API Integration</p>
+              </article>
+            </div>
+          </article>
+
           <article class="panel" aria-labelledby="workspace-title">
             <h2 id="workspace-title">Modulfläche</h2>
             <p id="workspace-help"></p>
@@ -200,12 +256,20 @@
 
         <aside class="col" aria-label="Rechte Spalte">
           <article class="panel" aria-labelledby="overview-title">
-            <h3 id="overview-title">Übersicht</h3>
-            <div class="blank-area" aria-label="Leerer Übersichtsbereich"></div>
+            <h3 id="overview-title">Team-Status</h3>
+            <ul class="guide-list" aria-label="Teamliste mit Textstatus">
+              <li>M. Mustermann: Online</li>
+              <li>S. Weber: Online</li>
+              <li>L. Fischer: Pause</li>
+              <li>A. Keller: Online</li>
+            </ul>
           </article>
           <article class="panel" aria-labelledby="quick-title">
-            <h3 id="quick-title">Schnellzugriff</h3>
-            <div class="blank-area" aria-label="Leerer Schnellzugriff"></div>
+            <h3 id="quick-title">Kalenderblick</h3>
+            <p>
+              April 2024: Fokus liegt auf Woche 2. Naechster Schritt: Aufgabe
+              aus "Idee" in "Planung" schieben.
+            </p>
           </article>
           <article class="panel" aria-labelledby="help-title">
             <h3 id="help-title">Hilfe</h3>

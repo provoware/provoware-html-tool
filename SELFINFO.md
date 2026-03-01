@@ -1,3 +1,9 @@
+## Iteration 52 (2026-03-01)
+
+- Hauptziel abgeschlossen: Referenzbild professionell analysiert und als klare UI-Vorgabe direkt im Dashboard umgesetzt.
+- Mini-Optimierung: Team/Kalender sind jetzt mit Textstatus sichtbar statt als leere Platzhalter.
+- Next Step (A): Kanban-Schnellansicht im naechsten Patch an echte Moduldaten anbinden.
+
 ## Iteration 50 (2026-03-01)
 
 - Hauptziel abgeschlossen: Offener Punkt "Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten" ist vollstaendig umgesetzt.
