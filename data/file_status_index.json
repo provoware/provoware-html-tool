@@ -54,5 +54,19 @@
     "status": "ready",
     "updatedAt": "2026-03-01T14:00:00.000Z",
     "owner": "codex"
+  },
+  {
+    "file": "system-core/plugin_loader.js",
+    "version": "v002",
+    "status": "ready",
+    "updatedAt": "2026-03-01T16:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "templates/kanban_preview.js",
+    "version": "v002",
+    "status": "ready",
+    "updatedAt": "2026-03-01T16:00:00.000Z",
+    "owner": "codex"
   }
 ]

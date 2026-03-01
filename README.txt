@@ -1,3 +1,6 @@
+- Neu (2026-03-01): Option B wurde priorisiert und abgeschlossen: Plugin-Loader prueft jetzt Manifest-Typ, Version, Plugin-ID-Format und sichere Projektpfade.
+- Neu (2026-03-01): Kanban hat jetzt optionales Drag-and-Drop als kleinen Zusatzpfad; der Dialog bleibt der barrierefreie Standard-Rueckweg.
+- Neu (2026-03-01): Datenbereinigung erledigt: `dummys/unsafe-plugin-manifest.json` ist jetzt im gleichen Manifest-Standard wie die anderen Dummy-Dateien.
 - Neu (2026-03-01): Kanban-Karten haben jetzt einen Verschieben-Dialog mit Enter/Escape-Rueckweg und klarer Statusmeldung fuer Laien.
 - Neu (2026-03-01): Kanban-Schnellansicht nutzt jetzt echte Daten aus `data/kanban_board.json` und ist per Pfeiltasten links/rechts barrierefrei bedienbar.
 # Provoware HTML Tool
@@ -17,8 +20,8 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 76 %
-- **Erledigt:** 78 Punkte
+- **Fortschritt:** 77 %
+- **Erledigt:** 81 Punkte
 - **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

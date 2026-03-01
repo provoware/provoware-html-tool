@@ -135,6 +135,8 @@ test("renderKanbanColumns und Keyboard-A11y nutzen Fokusdaten", () => {
 
   assert.equal(focusCount, 2);
   const lists = root.querySelectorAll(".kanban-items");
+  assert.equal(lists[0].dataset.columnId, "idea");
+  assert.equal(lists[0].children[0].draggable, true);
   assert.equal(lists[0].tabIndex, 0);
   assert.equal(lists[1].tabIndex, -1);
 

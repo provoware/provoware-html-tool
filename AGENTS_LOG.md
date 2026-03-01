@@ -37,3 +37,4 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-01 | PATCH-054 | Offenen TODO-Punkt abgeschlossen: Kanban-Dialog fuer Kartenverschiebung (Enter/Escape, Statushilfe, Validierung) | templates/kanban_preview.js, templates/dashboard.css, test/kanban_preview.test.js, Doku-Updates
 
 2026-03-01 | PATCH-055 | Kanban-Kartenverschiebung dauerhaft in data/kanban_board.json speichern (Schema-Check + Validierung) | templates/kanban_preview.js, templates/dashboard.js, test/kanban_preview.test.js, Doku-Updates
+2026-03-01 | PATCH-056 | Option B priorisiert: Plugin-Loader minimal absichern + Drag-and-Drop als kleiner Zusatzpatch, Dummy-Daten bereinigt | system-core/plugin_loader.js, templates/kanban_preview.js, test/plugin_loader.test.js, test/kanban_preview.test.js, dummys/unsafe-plugin-manifest.json, Doku-Updates

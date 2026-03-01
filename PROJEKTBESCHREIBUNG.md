@@ -1,3 +1,9 @@
+## Iteration 56 – Kernfortschritt
+
+- Plugin-Loader (Plugin-Lader) wurde minimal gehaertet: Manifest-Typ, Version (Semver = Versionsformat x.y.z), Plugin-ID und Modulpfad werden vor dem Laden strikt geprueft.
+- Kanban hat jetzt optionales Drag-and-Drop (Ziehen und Ablegen) als Zusatz. Rueckweg bleibt immer der Dialog mit Enter/Escape.
+- Dummy-Daten wurden bereinigt: das unsichere Test-Manifest nutzt jetzt dieselbe Grundstruktur wie normale Plugin-Manifeste.
+
 - Update 2026-03-01: Kanban-Schnellansicht hat jetzt pro Karte einen Verschieben-Dialog mit Enter/Escape-Rueckweg, Fokusfuehrung und klaren Statushinweisen.
 ## Iteration 53 – Kanban produktiv angebunden
 

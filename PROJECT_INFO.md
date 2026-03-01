@@ -1,3 +1,9 @@
+## Update 2026-03-01 (Iteration 56)
+
+- Kernschritt B ist stabil abgeschlossen: Plugin-Loader ist minimal gehaertet und faengt unsichere Manifest-/Pfadfaelle frueh ab.
+- Kanban hat nun optionales Drag-and-Drop als kleinen Zusatzweg; fuer A11y bleibt der Dialog der Standard.
+- Naechster Schritt bleibt C: Storage-Service robust weiter absichern.
+
 ## Iteration 52 – Referenzbild-Vorgaben aktiv
 
 - Analyse-Ergebnis aus der Bildvorlage direkt in `templates/dashboard.html` und `templates/dashboard.css` umgesetzt.

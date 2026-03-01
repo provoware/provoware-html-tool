@@ -3,6 +3,7 @@ const assert = require("node:assert/strict");
 const path = require("node:path");
 const {
   runPluginLoaderHealthCheck,
+  resolvePluginPath,
   validatePluginManifest,
 } = require("../system-core/plugin_loader");
 
@@ -15,6 +16,8 @@ const manifestPath = path.join(
 
 test("validatePluginManifest akzeptiert gueltige Plugin-Liste", () => {
   const result = validatePluginManifest({
+    manifestType: "plugin-loader",
+    version: "1.0.0",
     plugins: [
       {
         id: "plugin-a11y-assist",
@@ -55,10 +58,61 @@ test("runPluginLoaderHealthCheck meldet fehlende Plugin-Datei klar", () => {
   assert.match(result.pluginResults[0].message, /Reparatur starten/);
 });
 
+test("validatePluginManifest lehnt falschen Manifest-Typ ab", () => {
+  assert.throws(
+    () =>
+      validatePluginManifest({
+        manifestType: "wrong-type",
+        version: "1.0.0",
+        plugins: [],
+      }),
+    /Manifest-Typ ungueltig/,
+  );
+});
+
+test("validatePluginManifest lehnt ungueltige Version ab", () => {
+  assert.throws(
+    () =>
+      validatePluginManifest({
+        manifestType: "plugin-loader",
+        version: "1.0",
+        plugins: [],
+      }),
+    /Manifest-Version ungueltig/,
+  );
+});
+
+test("validatePluginManifest lehnt absolute Modulpfade ab", () => {
+  assert.throws(
+    () =>
+      validatePluginManifest({
+        manifestType: "plugin-loader",
+        version: "1.0.0",
+        plugins: [
+          {
+            id: "plugin-a11y-assist",
+            enabled: true,
+            modulePath: "/tmp/plugin.js",
+          },
+        ],
+      }),
+    /absoluten Modulpfad/,
+  );
+});
+
+test("resolvePluginPath blockiert direkte Elternpfade", () => {
+  assert.throws(
+    () => resolvePluginPath(process.cwd(), "../outside/not-allowed.js"),
+    /Plugin-Pfad ist ungueltig/,
+  );
+});
+
 test("validatePluginManifest lehnt doppelte Plugin-ID ab", () => {
   assert.throws(
     () =>
       validatePluginManifest({
+        manifestType: "plugin-loader",
+        version: "1.0.0",
         plugins: [
           {
             id: "plugin-a11y-assist",
@@ -96,7 +150,7 @@ test("runPluginLoaderHealthCheck blockiert Pfade ausserhalb vom Projekt", () => 
   assert.equal(unsafeResult.ok, false);
   assert.match(
     unsafeResult.pluginResults[0].message,
-    /ausserhalb des Projekts/,
+    /Plugin-Pfad ist ungueltig|ausserhalb des Projekts/,
   );
   assert.match(unsafeResult.pluginResults[0].message, /Erneut versuchen/);
 });

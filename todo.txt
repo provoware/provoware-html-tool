@@ -151,4 +151,8 @@ Laienvorschläge
 - [x] P1: Naechster Mini-Punkt: Kanban-Schnellansicht mit echten Moduldaten verbinden.
 
 - [x] P1: Kartenverschiebung dauerhaft in `data/kanban_board.json` speichern (inkl. Schema-Check/Validierung).
-- [ ] P1: Optionales Drag-and-Drop fuer Kanban als Zusatz einbauen, Dialog bleibt Standard fuer Tastatur/A11y.
+- [x] P1: Optionales Drag-and-Drop fuer Kanban als Zusatz eingebaut, Dialog bleibt Standard fuer Tastatur/A11y.
+
+- [x] P1: Option B priorisiert und abgeschlossen: Plugin-Loader minimal absichern (Manifest-Check + sicherer Pfadschutz).
+- [x] P1: Ueberfluessige Dummy-Daten bereinigt: unsafe Plugin-Manifest auf Standardfelder vereinheitlicht.
+- [ ] P1: Naechster Mini-Punkt: Uebrige ueberfluessige Test-/Datenreste systematisch inventarisieren und loeschen (ohne Core-Risiko).

@@ -1,3 +1,17 @@
+## FIX-20260301-056: Plugin-Loader-Hardening-und-DnD-Zusatz
+
+**Kategorie:** Plugin/UI/A11y
+**Symptom (fuer Laien):** Unsichere Plugin-Pfade oder fehlerhafte Manifestfelder konnten den Start pruefbar stoeren; Kanban hatte nur den Dialogweg.
+**Technische Ursache:** Manifestvalidierung war zu locker und der optionale Mausweg fehlte.
+**Trigger:** Priorisierung von Option B plus Wunsch nach getrenntem Drag-and-Drop-Patch.
+**Fix (kurz):** Manifest-Typ/Version/ID/Pfad strenger validiert, Elternpfadzugriff blockiert und optionales Drag-and-Drop mit Statusmeldung ergaenzt.
+**Geaenderte Dateien/Marker:** system-core/plugin_loader.js, templates/kanban_preview.js, test/plugin_loader.test.js, test/kanban_preview.test.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Plugin-Manifest + Pfad vor dem Laden hart validieren und bei neuen UI-Aktionen einen barrierefreien Rueckweg behalten.
+**Alternative(n):** Nur Dialog ohne Drag-and-Drop (weiter moeglich, aber weniger flexibel).
+**Risiko/Side-Effects:** Niedrig, da Fehler frueher abgefangen werden; leichter Mehraufwand in Tests.
+**Verknuepft:** PATCH-056
+
 ## FIX-20260301-054: Kanban-Kartenverschiebung mit Dialog-Rueckweg
 
 **Kategorie:** UI/A11y
