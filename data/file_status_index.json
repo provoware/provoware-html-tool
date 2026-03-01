@@ -1,0 +1,16 @@
+[
+  {
+    "file": "system-core/backup_hook_log.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-01T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "system-core/registry_service.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-01T00:00:00.000Z",
+    "owner": "codex"
+  }
+]

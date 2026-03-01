@@ -46,6 +46,8 @@
   const helpBackup = document.getElementById("help-backup");
   const backupDialog = document.getElementById("backup-dialog");
   const backupDialogClose = document.getElementById("backup-dialog-close");
+  const backupSelect = document.getElementById("backup-select");
+  const backupRestore = document.getElementById("backup-restore");
 
   const ensureMessage =
     window.DashboardHelp?.ensureMessage || ((m, f) => m || f);
@@ -308,12 +310,84 @@
     );
   });
 
+  async function loadBackupEvents() {
+    try {
+      const response = await fetch("../data/backup_events.json", {
+        cache: "no-store",
+      });
+      if (!response.ok) {
+        return [];
+      }
+      const events = await response.json();
+      if (!Array.isArray(events)) {
+        throw new Error("Backup-Log ist ungueltig.");
+      }
+      return events;
+    } catch {
+      return [];
+    }
+  }
+
+  function renderBackupOptions(events) {
+    if (!backupSelect) {
+      setStatus("Backup-Auswahl fehlt. Naechster Schritt: Reparatur starten.");
+      return false;
+    }
+
+    backupSelect.innerHTML = "";
+    const safeEvents = Array.isArray(events) ? events : [];
+    if (safeEvents.length === 0) {
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = "Keine Backup-Datei gefunden";
+      backupSelect.appendChild(option);
+      return false;
+    }
+
+    safeEvents.forEach((event, index) => {
+      if (!event || typeof event.backupPath !== "string") {
+        return;
+      }
+      const option = document.createElement("option");
+      option.value = event.backupPath;
+      const when = typeof event.createdAt === "string" ? event.createdAt : "";
+      option.textContent = `${index + 1}) ${event.backupPath} ${when}`.trim();
+      backupSelect.appendChild(option);
+    });
+
+    return backupSelect.options.length > 0;
+  }
+
+  async function restoreSelectedBackup() {
+    if (!backupSelect) {
+      setStatus("Backup-Auswahl fehlt. Naechster Schritt: Reparatur starten.");
+      return false;
+    }
+
+    const value = backupSelect.value || "";
+    if (!value) {
+      setStatus(
+        "Kein Backup gewaehlt. Naechster Schritt: Erneut versuchen oder Zurueck.",
+      );
+      return false;
+    }
+
+    setStatus(
+      "Backup-Wiederherstellung vorbereitet. Naechster Schritt: Reparatur starten.",
+    );
+    setDebug(`Backup-Pfad gewaehlt: ${value}`);
+    return true;
+  }
+
   function openBackupDialog() {
     if (!backupDialog || typeof backupDialog.showModal !== "function") {
       setStatus("Backup-Dialog fehlt. Naechster Schritt: Reparatur starten.");
       return false;
     }
     backupDialog.showModal();
+    loadBackupEvents().then((events) => {
+      renderBackupOptions(events);
+    });
     setStatus(
       "Backup-Auswahl geoeffnet. Naechster Schritt: 5-Punkte-Check lesen.",
     );
@@ -339,11 +413,18 @@
   helpRepair.addEventListener("click", () => onHelpAction("repair"));
   helpLog.addEventListener("click", () => onHelpAction("log"));
   helpBackup.addEventListener("click", openBackupDialog);
-  backupDialogClose.addEventListener("click", closeBackupDialog);
-  backupDialog.addEventListener("cancel", (event) => {
-    event.preventDefault();
-    closeBackupDialog();
-  });
+  if (backupDialogClose) {
+    backupDialogClose.addEventListener("click", closeBackupDialog);
+  }
+  if (backupRestore) {
+    backupRestore.addEventListener("click", restoreSelectedBackup);
+  }
+  if (backupDialog) {
+    backupDialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      closeBackupDialog();
+    });
+  }
 
   debugButton.addEventListener("click", () => {
     debugOutput.hidden = !debugOutput.hidden;
@@ -370,6 +451,8 @@
     [themeTooltip, "Theme-Hinweis"],
     [helpBackup, "Backup-Knopf"],
     [backupDialog, "Backup-Dialog"],
+    [backupSelect, "Backup-Auswahl"],
+    [backupRestore, "Backup-Wiederherstellen"],
     [backupDialogClose, "Backup-Dialog-Zurueck"],
   ].forEach(([element, name]) => validateElement(element, name));
 

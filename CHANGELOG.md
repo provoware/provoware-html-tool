@@ -1,3 +1,9 @@
+## 2026-03-01 – Backup-Auswahl mit Hook-Log verbunden
+
+- Backup-Dialog zeigt jetzt echte Backup-Dateien aus `data/backup_events.json` und bietet den Knopf "Backup wiederherstellen" mit klarem Rueckweg.
+- Registry-Write nutzt jetzt den JSON-Store-Backup-Hook und schreibt Ereignisse nach `data/backup_events.json` fuer den UI-Dialog.
+- Risiko: niedrig, weil nur Backup-Dialog, Hook-Log und betroffene Tests erweitert wurden.
+
 ## 2026-03-01 – Kontrastmessung je Theme automatisiert
 
 - Release-Readiness berechnet jetzt den Kontrast pro Theme automatisch fuer Haupttext und Topbar (WCAG-AA Ziel: mindestens 4.5).

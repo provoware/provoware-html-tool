@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { atomicWriteJson, readJson } = require("./json_store");
+const { createBackupEventHook } = require("./backup_hook_log");
 
 function assertText(value, name) {
   if (typeof value !== "string" || value.trim() === "") {
@@ -136,6 +137,10 @@ function writeRegistryWithVersion(options) {
   const manifest = loadRegistryManifest(options.manifestPath);
   validateRegistry(options.registry, manifest);
 
+  const backupLogPath =
+    options.backupLogPath || path.join(options.dataDir, "backup_events.json");
+  const onBackupCreated = createBackupEventHook(backupLogPath);
+
   const versionInfo = createRegistryVersion(options.dataDir, options.registry);
   const currentPath = path.join(options.dataDir, "registry.current.json");
   const registryPath = path.join(options.dataDir, "registry.json");
@@ -146,13 +151,16 @@ function writeRegistryWithVersion(options) {
     updatedAt: new Date().toISOString(),
   });
 
-  const writeResult = atomicWriteJson(registryPath, options.registry);
+  const writeResult = atomicWriteJson(registryPath, options.registry, {
+    onBackupCreated,
+  });
 
   return {
     ok: true,
     registryPath: writeResult.filePath,
     versionPath: versionInfo.versionPath,
     versionNumber: versionInfo.versionNumber,
+    backupLogPath,
   };
 }
 

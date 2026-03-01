@@ -1,3 +1,6 @@
+Iteration 42 (2026-03-01): Backup-Auswahl mit JSON-Store-Backup-Hook verbunden (Event-Log + Dialog-Auswahl + Wiederherstellen-Schritt).
+Naechster Schritt: Echte Wiederherstellung aus Dialog direkt mit Dateizugriff koppeln und Ende-zu-Ende pruefen.
+
 Iteration 41 (2026-03-01): Kontrastmessung je Theme automatisiert, Release-Check prueft jetzt WCAG-AA Zielwert (4.5) fuer Haupttext und Topbar.
 Naechster Schritt: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.
 

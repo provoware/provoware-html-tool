@@ -28,3 +28,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Release-Readiness misst jetzt Kontrast je Theme automatisch fuer Haupttext und Topbar.
 - Der Check nutzt den WCAG-AA Zielwert 4.5 und meldet bei Abweichung klare naechste Schritte.
 - Naechster Ausbau: Backup-Auswahl-Dialog mit JSON-Store-Backup-Hook verbinden und E2E pruefen.
+
+## Iteration 42 – Backup-Workflow erweitert
+- Neues Kernmodul `system-core/backup_hook_log.js` sammelt Backup-Ereignisse zentral.
+- `writeRegistryWithVersion` uebergibt jetzt einen Backup-Hook und schreibt Ereignisse in `data/backup_events.json`.
+- Dashboard-Dialog zeigt diese Ereignisse als Auswahl und bietet einen klaren Knopf `Backup wiederherstellen`.
+- Vorteil fuer Laien: klare Auswahl, klare Aktion, klarer Rueckweg (Zurueck oder Escape).
