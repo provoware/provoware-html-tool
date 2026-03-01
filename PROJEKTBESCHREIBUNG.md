@@ -116,3 +116,9 @@ Neu im Umfang:
 Vorteil fuer Laien:
 - Nach Neustart bleibt die zuletzt gespeicherte Kanban-Reihenfolge erhalten.
 - Bei Fehlern wird weiterhin ein klarer naechster Schritt genannt (erneut versuchen, reparieren, Protokoll oeffnen).
+
+
+## Iteration 57 Update
+- Storage-Service wurde gehaertet: versionierte Speicherstaende pro Datei sind jetzt optional direkt im JSON-Store verfuegbar.
+- Recovery kann die letzte gueltige Version automatisch finden und in die Ziel-Datei zurueckschreiben.
+- Vorteil fuer Laien: Bei Datenfehlern gibt es einen klaren Rueckweg ohne manuelles Dateisuchen.

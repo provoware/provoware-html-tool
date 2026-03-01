@@ -1,3 +1,17 @@
+## FIX-20260301-057: JsonStore-Versionierung-mit-Recovery
+
+**Kategorie:** JSON/Backup/Recovery
+**Symptom (für Laien):** Nach einem Datenfehler war unklar, welche Version zuletzt gueltig war.
+**Technische Ursache:** Der zentrale JSON-Store schrieb nur die aktuelle Datei + ein Backup, aber keine Versionsreihe.
+**Trigger:** Mehrere Speicherungen hintereinander und danach defekte oder ueberschriebene Zieldatei.
+**Fix (kurz):** Optionale Versionierungsfunktion im JSON-Store eingebaut und Recovery auf "letzte gueltige Version" ergaenzt.
+**Geänderte Dateien/Marker:** `system-core/json_store.js`, `test/json_store.test.js`
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`
+**Prävention (künftig):** Ab jetzt immer bei Storage-Pfaden pruefen, ob versionierte Writes fuer Recovery sinnvoll sind.
+**Alternative(n):** Versionierung nur in einzelnen Modulen (abgelehnt, weil inkonsistent).
+**Risiko/Side-Effects:** Niedrig; Version-Dateien wachsen mit jeder Speicherung.
+**Verknüpft:** PATCH-057
+
 ## FIX-20260301-056: Plugin-Loader-Hardening-und-DnD-Zusatz
 
 **Kategorie:** Plugin/UI/A11y

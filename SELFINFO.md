@@ -1,3 +1,9 @@
+## Iteration 57 (2026-03-01)
+
+- Hauptziel (C) umgesetzt: JSON-Store unterstuetzt jetzt versionierte Writes (versioniertes Speichern) mit fortlaufender Nummer und sicherem Recovery-Pfad.
+- Mini-Optimierung: Storage-Fehlermeldungen sind laienklar und nennen immer den naechsten Schritt.
+- Next Step: Daten-Inventur-Patch vorbereiten (ueberfluessige data/- und dummys/-Reste risikofrei auflisten und in `todo.txt` dokumentieren).
+
 ## Iteration 56 (2026-03-01)
 
 - Hauptziel (B) abgeschlossen: Plugin-Loader ist minimal gehaertet (Manifest-Typ/Version, Plugin-ID-Format, Pfadschutz gegen absolute und Elternpfade).

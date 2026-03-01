@@ -2,11 +2,17 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
-const { atomicWriteJson, readJson } = require("../system-core/json_store");
+const {
+  atomicWriteJson,
+  findLatestVersionPath,
+  readJson,
+  recoverJsonFromLatestVersion,
+} = require("../system-core/json_store");
 const { listBackups, repairFromBackup } = require("../system-core/self_repair");
 
 const tmp = path.join(process.cwd(), "dummys", "tmp-tests");
 const filePath = path.join(tmp, "store.json");
+const versionedPath = path.join(tmp, "versioned_store.json");
 
 test("atomicWriteJson schreibt Datei und erstellt Backup", () => {
   fs.mkdirSync(tmp, { recursive: true });
@@ -91,4 +97,47 @@ test("atomicWriteJson ruft Backup-Hook bei Backup-Erstellung auf", () => {
   assert.equal(events[0].filePath, filePath);
   assert.equal(events[0].backupPath.endsWith("store.backup.json"), true);
   assert.equal(result.backupPath.endsWith("store.backup.json"), true);
+});
+
+test("atomicWriteJson erzeugt versionierte Dateien bei aktiviertem Modus", () => {
+  fs.rmSync(path.join(tmp, "versioned_store_versions"), {
+    recursive: true,
+    force: true,
+  });
+  atomicWriteJson(
+    versionedPath,
+    { value: 1 },
+    { versioning: { enabled: true } },
+  );
+  const result = atomicWriteJson(
+    versionedPath,
+    { value: 2 },
+    { versioning: { enabled: true } },
+  );
+
+  assert.equal(result.versionNumber, "0002");
+  assert.equal(result.versionPath.endsWith("versioned_store_v0002.json"), true);
+  assert.equal(fs.existsSync(result.versionPath), true);
+});
+
+test("recoverJsonFromLatestVersion stellt neueste Version wieder her", () => {
+  atomicWriteJson(
+    versionedPath,
+    { value: 3 },
+    { versioning: { enabled: true } },
+  );
+  atomicWriteJson(
+    versionedPath,
+    { value: 4 },
+    { versioning: { enabled: true } },
+  );
+
+  fs.writeFileSync(versionedPath, "{}\n", "utf8");
+  const recover = recoverJsonFromLatestVersion(versionedPath);
+  const data = readJson(versionedPath);
+  const latestVersion = findLatestVersionPath(versionedPath);
+
+  assert.equal(recover.ok, true);
+  assert.equal(data.value, 4);
+  assert.equal(recover.sourceVersionPath, latestVersion);
 });

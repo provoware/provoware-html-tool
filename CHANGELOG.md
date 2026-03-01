@@ -1,3 +1,10 @@
+## 2026-03-01 – Option C: JSON-Store mit Versionierung + Recovery gehaertet
+
+- `atomicWriteJson` kann jetzt optional versioniert speichern (`*_versions/*_v0001.json`) und prueft den Output inklusive Versionspfad.
+- Neuer Recovery-Pfad: `recoverJsonFromLatestVersion` stellt die letzte gueltige Version wieder her und erstellt dabei wie gewohnt ein Backup.
+- Mini-Optimierung Hilfe/UX: neue Fehlertexte im Recovery-Pfad nennen klare naechste Schritte (erneut versuchen, Reparatur starten, Protokoll oeffnen).
+- Risiko: niedrig, da nur Storage-Kern und zugehoerige Tests erweitert wurden.
+
 ## 2026-03-01 – Plugin-Loader minimal abgesichert + Drag-and-Drop als Zusatz-Patch
 
 - Option B priorisiert: Plugin-Loader prueft jetzt Manifest-Typ, Semver-Version, Plugin-ID-Format und blockiert absolute oder unsichere Modulpfade frueh.

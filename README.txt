@@ -1,3 +1,6 @@
+- Neu (2026-03-01): Option C umgesetzt. JSON-Store kann jetzt optional versioniert speichern und bei Fehlern aus der letzten gueltigen Version wiederherstellen.
+- Neu (2026-03-01): Storage-Recovery meldet klare Laien-Schritte: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.
+
 - Neu (2026-03-01): Option B wurde priorisiert und abgeschlossen: Plugin-Loader prueft jetzt Manifest-Typ, Version, Plugin-ID-Format und sichere Projektpfade.
 - Neu (2026-03-01): Kanban hat jetzt optionales Drag-and-Drop als kleinen Zusatzpfad; der Dialog bleibt der barrierefreie Standard-Rueckweg.
 - Neu (2026-03-01): Datenbereinigung erledigt: `dummys/unsafe-plugin-manifest.json` ist jetzt im gleichen Manifest-Standard wie die anderen Dummy-Dateien.
@@ -21,8 +24,8 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 77 %
-- **Erledigt:** 81 Punkte
-- **Offen:** 24 Punkte
+- **Erledigt:** 82 Punkte
+- **Offen:** 25 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

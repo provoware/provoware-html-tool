@@ -1,3 +1,9 @@
+## 2026-03-01 – Storage-Standard erweitert (Option C)
+
+- JSON-Store unterstuetzt jetzt optional versionierte Writes (`*_versions/*_v0001.json`).
+- Wiederherstellung kann direkt aus der letzten gueltigen Version erfolgen (`recoverJsonFromLatestVersion`).
+- Standard bleibt: vor jedem Schreiben Eingabe pruefen, nach jedem Schreiben Output pruefen.
+
 ## Update 2026-03-01 (Iteration 56)
 
 - Kernschritt B ist stabil abgeschlossen: Plugin-Loader ist minimal gehaertet und faengt unsichere Manifest-/Pfadfaelle frueh ab.
