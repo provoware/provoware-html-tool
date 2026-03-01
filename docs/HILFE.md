@@ -1,3 +1,9 @@
+## Neu in Iteration 92
+
+- **Support-Verlauf:** Jeder Treffer zeigt einen kurzen Tastatur-Hinweis (Tab/Enter/Escape).
+- **Versionsvergleich:** Der Detailmodus bleibt ruhig und startet standardmaessig eingeklappt.
+- **Naechster Schritt bei Fehlern:** Immer zuerst _Erneut versuchen_, dann _Reparatur starten_, dann _Protokoll oeffnen_.
+
 ## Neu in Iteration 86
 
 - **Safe-Mode zuruecksetzen:** Im Hilfe-Panel gibt es den Knopf **Safe-Mode zuruecksetzen**.

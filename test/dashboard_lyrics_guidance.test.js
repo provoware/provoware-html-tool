@@ -110,3 +110,25 @@ test("Dashboard-Hilfe zeigt Safe-Mode-Status und Versions-Restore", () => {
   assert.match(dashboardHtml, /id="support-history-meta"/);
   assert.match(dashboardHtml, /Enter startet die Suche sofort\./);
 });
+
+test("Backup-Detailmodus startet eingeklappt", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /<details id="backup-compare-detail" hidden>/);
+});
+
+test("Support-Verlauf nutzt Tastatur-Hinweis je Treffer", () => {
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(
+    dashboardJs,
+    /Tastatur-Hinweis: Tab waehlt Eintrag, Enter oeffnet Aktion, Escape schliesst Dialog\./,
+  );
+  assert.match(dashboardJs, /backupCompareDetailWrap\.open = false/);
+});

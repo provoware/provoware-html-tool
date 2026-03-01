@@ -1,3 +1,10 @@
+## Iteration 92 (2026-03-01)
+
+- Ziel: Zwei offene TODO-Punkte sauber abschliessen und A11y-Hinweise je Eintrag verbessern.
+- Ergebnis: Support-Trefferliste zeigt Tastatur-Hinweis je Eintrag; Versions-Detailmodus startet nach Vergleich eingeklappt.
+- Checks: `npm run format`, `node --test`, `bash start.sh` ausgefuehrt.
+- Nächster Schritt: Debug-Protokoll fuer Boot-Live-Ansage ergaenzen.
+
 ## Iteration 88 (2026-03-01)
 
 - Ziel: Release-Doku vereinheitlichen und klar fuer naechste Code-Iteration vorbereiten.

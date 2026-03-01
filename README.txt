@@ -6,6 +6,12 @@ hoher Barrierefreiheit (A11y = Bedienbarkeit fuer alle) und stabiler
 Start-Routine. Die Start-Routine prueft automatisch Abhaengigkeiten,
 Formatierung, Tests und Release-Bereitschaft.
 
+## Release-Status (Iteration 92)
+- Zwei offene Mini-Punkte aus `todo.txt` abgeschlossen (Detailmodus startet eingeklappt, Support-Treffer mit Tastatur-Hinweis je Eintrag).
+- Hilfe/UX verbessert: Supportliste nennt Tab/Enter/Escape direkt im Listentext.
+- Versionsvergleich bleibt klar: Detailmodus wird sichtbar, aber startet immer eingeklappt.
+- Naechster Schritt: Dritten offenen Mini-Punkt (Debug-Protokoll bei Fokuszielwechsel) abschliessen.
+
 ## Release-Status (Iteration 87)
 - Dokumentation wurde fuer Release-Finalisierung neu geordnet.
 - AGENTS.md wurde auf klare, kleine und reviewbare Release-Regeln

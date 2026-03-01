@@ -1,3 +1,8 @@
+## Iteration 92 - Zwei TODO-Punkte abgeschlossen
+
+- Support-Verlauf zeigt jetzt pro Treffer einen klaren Tastatur-Hinweis (Tab/Enter/Escape).
+- Versions-Detailmodus bleibt nach Vergleich standardmaessig eingeklappt (`open=false`) und ist damit ruhiger lesbar.
+
 ## Iteration 88 - Release-Doku neu geordnet
 
 - Boot-Gate-Hinweis nennt jetzt das aktive Fokusziel (Modul/Hilfe) klar im Text.
