@@ -1,3 +1,12 @@
+## Iteration 86 – Status
+
+- Hauptziel: Drei offene Mini-Punkte releasefertig abgeschlossen.
+- Ergebnis: Hilfe-Panel bietet Safe-Mode-Reset mit Sicherheitsabfrage und klarer Rueckmeldung.
+- Ergebnis: Restore-Dialog zeigt Versionsvergleich (aktuell vs. gewaehlt) in einfacher Sprache.
+- Ergebnis: Boot-Gate setzt Fokus auf erstes Modul und gibt einen Screenreader-Hinweis.
+- Mini-Optimierung: Neue Inline-Hilfe im Restore-Dialog erklaert Vergleich und Rueckweg.
+- Naechster Schritt: Vergleich um Zeitstempel erweitern und Fokusziel einstellbar machen.
+
 ## Iteration 85 – Status
 
 - Hauptziel: Drei offene Mini-Punkte releasefertig abgeschlossen.

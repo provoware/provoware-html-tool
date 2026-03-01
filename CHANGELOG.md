@@ -1,3 +1,9 @@
+## Iteration 86 - Safe-Mode-Reset, Versionsvergleich, Boot-Fokus
+
+- Hilfe-Panel hat jetzt einen Safe-Mode-Reset-Knopf mit Sicherheitsabfrage und klarer Rueckmeldung fuer den naechsten Schritt.
+- Restore-Dialog zeigt jetzt vor dem Restore einen Versionsvergleich in einfacher Sprache (Felder + Dateigroesse).
+- Nach Boot-Gate-Freigabe springt der Fokus automatisch auf das erste aktive Modul und meldet den Schritt fuer Screenreader.
+
 ## Iteration 85 - Boot-Gate/Hilfe, Safe-Mode-Status, Versions-Restore
 
 - Boot-Gate-Hinweis und Hilfe-Text laufen jetzt aus einem Modell und werden mit aria-live klar angesagt.

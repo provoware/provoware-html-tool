@@ -163,6 +163,52 @@ function runSafeModeOneClickRepair(options = {}) {
   };
 }
 
+function createDefaultPluginManifest() {
+  return {
+    manifestType: "plugin-loader",
+    version: "1.0.0",
+    plugins: [
+      {
+        id: "plugin-a11y-assist",
+        enabled: true,
+        modulePath: "system-module/plugins_accessibility.js",
+      },
+    ],
+  };
+}
+
+function runSafeModeReset(options = {}) {
+  assertObject(options, "Safe-Mode-Reset-Optionen");
+  assertText(options.projectRoot, "Projektpfad");
+
+  const manifestPath = path.join(
+    options.projectRoot,
+    "config",
+    "manifests",
+    "plugins.manifest.json",
+  );
+  const defaultManifest = createDefaultPluginManifest();
+  validatePluginManifest(defaultManifest);
+
+  fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
+  fs.writeFileSync(
+    manifestPath,
+    `${JSON.stringify(defaultManifest, null, 2)}
+`,
+    "utf8",
+  );
+
+  const checkManifest = readJson(manifestPath);
+  validatePluginManifest(checkManifest);
+
+  return {
+    ok: true,
+    manifestPath,
+    message:
+      "Safe-Mode wurde beendet. Naechster Schritt: Start erneut versuchen.",
+  };
+}
+
 function runPluginLoaderHealthCheck(options) {
   assertObject(options, "Plugin-Optionen");
   assertText(options.manifestPath, "Manifest-Pfad");
@@ -252,6 +298,8 @@ module.exports = {
   createSafeModeRepairPlan,
   runPluginLoaderHealthCheck,
   runSafeModeOneClickRepair,
+  runSafeModeReset,
   resolvePluginPath,
   validatePluginManifest,
+  createDefaultPluginManifest,
 };

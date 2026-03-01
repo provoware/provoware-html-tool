@@ -230,10 +230,101 @@
     };
   }
 
+  function createVersionCompareSummary(compareInput) {
+    assertObject(compareInput, "Versionsvergleich");
+    const currentKeys = Number(compareInput.currentKeys || 0);
+    const versionKeys = Number(compareInput.versionKeys || 0);
+    const currentBytes = Number(compareInput.currentBytes || 0);
+    const versionBytes = Number(compareInput.versionBytes || 0);
+
+    if (
+      Number.isNaN(currentKeys) ||
+      Number.isNaN(versionKeys) ||
+      Number.isNaN(currentBytes) ||
+      Number.isNaN(versionBytes)
+    ) {
+      throw new Error(
+        "Versionsvergleich ist ungueltig. Bitte erneut versuchen.",
+      );
+    }
+
+    const keyDiff = versionKeys - currentKeys;
+    const byteDiff = versionBytes - currentBytes;
+    const keyTrend =
+      keyDiff === 0 ? "gleich viele" : keyDiff > 0 ? "mehr" : "weniger";
+    const byteTrend =
+      byteDiff === 0 ? "gleich gross" : byteDiff > 0 ? "groesser" : "kleiner";
+
+    return {
+      ok: true,
+      keyDiff,
+      byteDiff,
+      text:
+        `Vergleich: Die gewaehlte Version hat ${Math.abs(keyDiff)} ${keyTrend} Felder und ist ${Math.abs(byteDiff)} Bytes ${byteTrend}. ` +
+        "Naechster Schritt: Version wiederherstellen oder Zurueck.",
+    };
+  }
+
+  async function compareVersionWithCurrentFromDirectory(
+    projectDirectoryHandle,
+    targetFileName,
+    versionFileName,
+  ) {
+    assertObject(projectDirectoryHandle, "Projektordner");
+    assertText(targetFileName, "Ziel-Dateiname");
+    assertText(versionFileName, "Versions-Dateiname");
+
+    const dataDirectoryHandle = await getDataDirectoryHandle(
+      projectDirectoryHandle,
+    );
+    const baseName = targetFileName.replace(/\.json$/, "");
+    const versionDirectory = await dataDirectoryHandle.getDirectoryHandle(
+      `${baseName}_versions`,
+      { create: false },
+    );
+    const targetHandle = await dataDirectoryHandle.getFileHandle(
+      targetFileName,
+      {
+        create: false,
+      },
+    );
+    const versionHandle = await versionDirectory.getFileHandle(
+      versionFileName,
+      {
+        create: false,
+      },
+    );
+
+    const currentRaw = await readHandleText(targetHandle);
+    const versionRaw = await readHandleText(versionHandle);
+    const currentParsed = JSON.parse(currentRaw);
+    const versionParsed = JSON.parse(versionRaw);
+
+    if (!currentParsed || typeof currentParsed !== "object") {
+      throw new Error(
+        "Aktuelle Datei ist ungueltig. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+    if (!versionParsed || typeof versionParsed !== "object") {
+      throw new Error(
+        "Version ist ungueltig. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+
+    return createVersionCompareSummary({
+      currentKeys: Object.keys(currentParsed).length,
+      versionKeys: Object.keys(versionParsed).length,
+      currentBytes: currentRaw.length,
+      versionBytes: versionRaw.length,
+    });
+  }
+
   const api = {
     buildRestorePlan,
     inferTargetPathFromBackupPath,
     isRestoreConfirmationValid,
+    compareVersionWithCurrentFromDirectory,
+    createVersionCompareSummary,
     listVersionFilesFromDirectory,
     restoreBackupFromDirectory,
     restoreVersionFromDirectory,

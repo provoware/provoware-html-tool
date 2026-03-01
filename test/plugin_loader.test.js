@@ -6,6 +6,8 @@ const {
   createSafeModeRepairPlan,
   runPluginLoaderHealthCheck,
   runSafeModeOneClickRepair,
+  runSafeModeReset,
+  createDefaultPluginManifest,
   resolvePluginPath,
   validatePluginManifest,
 } = require("../system-core/plugin_loader");
@@ -170,4 +172,35 @@ test("runSafeModeOneClickRepair schreibt Safe-Mode-Manifest", () => {
   assert.equal(manifest.mode, "safe");
   assert.equal(Array.isArray(manifest.plugins), true);
   assert.equal(manifest.plugins.length, 0);
+});
+
+test("createDefaultPluginManifest liefert gueltigen Standard", () => {
+  const manifest = createDefaultPluginManifest();
+  const result = validatePluginManifest(manifest);
+
+  assert.equal(result.ok, true);
+  assert.equal(result.pluginCount, 1);
+  assert.equal(manifest.plugins[0].id, "plugin-a11y-assist");
+});
+
+test("runSafeModeReset schreibt Standard-Manifest", () => {
+  const tmpRoot = path.join(process.cwd(), "dummys", "tmp-plugin-reset");
+  fs.rmSync(tmpRoot, { recursive: true, force: true });
+  fs.mkdirSync(path.join(tmpRoot, "config", "manifests"), {
+    recursive: true,
+  });
+
+  runSafeModeOneClickRepair({ projectRoot: tmpRoot });
+  const result = runSafeModeReset({ projectRoot: tmpRoot });
+  const manifest = JSON.parse(
+    fs.readFileSync(
+      path.join(tmpRoot, "config", "manifests", "plugins.manifest.json"),
+      "utf8",
+    ),
+  );
+
+  assert.equal(result.ok, true);
+  assert.equal(Array.isArray(manifest.plugins), true);
+  assert.equal(manifest.plugins.length, 1);
+  assert.equal(manifest.plugins[0].enabled, true);
 });
