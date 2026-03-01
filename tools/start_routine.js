@@ -405,6 +405,17 @@ function scanPlaceholderMarkers(rootPath, options = {}) {
   };
 }
 
+function validateOpenMiniPoints(todoContent) {
+  assertText(todoContent, "TODO-Inhalt");
+  const openMiniPoints =
+    todoContent.match(/^- \[ \] Naechster Mini-Punkt:/gim) || [];
+
+  return {
+    ok: openMiniPoints.length === 2,
+    count: openMiniPoints.length,
+  };
+}
+
 function calculateTodoProgress(todoContent) {
   assertText(todoContent, "TODO-Inhalt");
   const doneMatches = todoContent.match(/^- \[x\] /gim) || [];
@@ -478,12 +489,15 @@ function runStartRoutine() {
     "templates/boot_status.js",
     "templates/kanban_preview.js",
     "templates/module_workspace.js",
+    "templates/quick_store_module.js",
     "system-module/dashboard_model.js",
+    "system-module/quick_store_model.js",
     "system-module/plugins_accessibility.js",
     "test/dashboard_model.test.js",
     "test/dashboard_core.test.js",
     "test/kanban_preview.test.js",
     "test/plugin_loader.test.js",
+    "test/quick_store_model.test.js",
     "tools/release_readiness_check.js",
     "test/release_readiness_check.test.js",
   ]);
@@ -539,13 +553,24 @@ function runStartRoutine() {
   }
   console.log("[10/12] Platzhalter-Scan ohne offene Marker");
 
-  console.log("[11/12] README-Fortschritt aus TODO synchronisieren");
+  const todoPath = path.join(process.cwd(), "todo.txt");
+  const todoContent = fs.readFileSync(todoPath, "utf8");
+  const miniPointCheck = validateOpenMiniPoints(todoContent);
+  if (!miniPointCheck.ok) {
+    throw new Error(
+      `TODO-Regel verletzt: Es muessen genau zwei offene Naechster Mini-Punkt-Eintraege vorhanden sein. Aktuell: ${miniPointCheck.count}. ` +
+        "Naechster Schritt: TODO anpassen und erneut versuchen.",
+    );
+  }
+  console.log("[11/13] TODO-Regel geprueft: genau zwei offene Mini-Punkte");
+
+  console.log("[12/13] README-Fortschritt aus TODO synchronisieren");
   const progress = syncReadmeProgressFromTodo(process.cwd());
   console.log(
-    `[11/12] Fortschritt: ${progress.percent} % (${progress.done} erledigt, ${progress.open} offen)`,
+    `[12/13] Fortschritt: ${progress.percent} % (${progress.done} erledigt, ${progress.open} offen)`,
   );
 
-  console.log("[12/12] Systemtest ausfuehren");
+  console.log("[13/13] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -555,7 +580,7 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[13/13] Fertig");
+  console.log("[14/14] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -593,4 +618,5 @@ module.exports = {
   writeDependencyState,
   calculateTodoProgress,
   syncReadmeProgressFromTodo,
+  validateOpenMiniPoints,
 };

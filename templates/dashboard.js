@@ -597,6 +597,19 @@
     });
   }
 
+  if (window.createQuickStoreModule) {
+    window.createQuickStoreModule({
+      titleInput: document.getElementById("quick-store-title-input"),
+      contentInput: document.getElementById("quick-store-content"),
+      saveButton: document.getElementById("quick-store-save"),
+      clearButton: document.getElementById("quick-store-clear"),
+      list: document.getElementById("quick-store-list"),
+      setStatus,
+      setDebug,
+      saveJson: writeProjectJson,
+    });
+  }
+
   if (window.KanbanPreview && kanbanPreview) {
     const kanban = window.KanbanPreview.createKanbanPreview({
       root: kanbanPreview,

@@ -1,3 +1,17 @@
+## FIX-20260301-060: TODO-Mini-Punkte-Regel automatisiert
+
+**Kategorie:** Update/Docs
+**Symptom (für Laien):** Iterationen hatten unklare Anzahl an Mini-Punkten.
+**Technische Ursache:** Es gab keinen automatischen Check fuer genau zwei offene Mini-Punkte.
+**Trigger:** `todo.txt` enthielt zu viele oder zu wenige `Naechster Mini-Punkt`-Zeilen.
+**Fix (kurz):** Start-Routine prueft `todo.txt` und bricht bei Abweichung mit klarer Meldung ab.
+**Geänderte Dateien/Marker:** tools/start_routine.js, test/start_routine.test.js
+**Tests/Checks:** node --test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer genau zwei offene `Naechster Mini-Punkt`-Eintraege pflegen.
+**Alternative(n):** Nur Warnung anzeigen (verworfen, da Regel sonst oft uebergangen wird).
+**Risiko/Side-Effects:** Niedrig, kann bei falscher Pflege von `todo.txt` den Start blockieren.
+**Verknüpft:** PATCH-060
+
 ## FIX-20260301-059: Wiki-Eintraege pro Kategorie robust speichern
 
 **Kategorie:** UI/JSON

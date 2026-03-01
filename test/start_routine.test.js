@@ -13,6 +13,7 @@ const {
   scanPlaceholderMarkers,
   syncReadmeProgressFromTodo,
   calculateTodoProgress,
+  validateOpenMiniPoints,
   validateProjectStructure,
   writeDependencyState,
 } = require("../tools/start_routine");
@@ -305,4 +306,30 @@ test("scanPlaceholderMarkers ignoriert TODO in normalen String-Zeilen", () => {
   assert.equal(result.findings.length, 0);
 
   fs.rmSync(dummyPath, { force: true });
+});
+
+test("validateOpenMiniPoints akzeptiert genau zwei offene Mini-Punkte", () => {
+  const result = validateOpenMiniPoints(
+    [
+      "- [ ] Naechster Mini-Punkt: A",
+      "- [ ] Naechster Mini-Punkt: B",
+      "- [x] Naechster Mini-Punkt: C",
+    ].join("\n"),
+  );
+
+  assert.equal(result.ok, true);
+  assert.equal(result.count, 2);
+});
+
+test("validateOpenMiniPoints meldet Abweichung", () => {
+  const result = validateOpenMiniPoints(
+    [
+      "- [ ] Naechster Mini-Punkt: A",
+      "- [ ] Naechster Mini-Punkt: B",
+      "- [ ] Naechster Mini-Punkt: C",
+    ].join("\n"),
+  );
+
+  assert.equal(result.ok, false);
+  assert.equal(result.count, 3);
 });

@@ -1,3 +1,10 @@
+## Update Iteration 60 – Schnellspeicher + Mini-Punkte-Regel
+
+- Das Dashboard hat jetzt einen Schnellspeicher fuer kurze Ideen.
+- Eingaben werden vor dem Speichern geprueft (Validierung = Eingabepruefung).
+- Die Start-Routine stoppt jetzt, wenn in `todo.txt` nicht genau zwei offene Mini-Punkte stehen.
+- Vorteil fuer Laien: klarer Status, klarer Rueckweg und weniger Planungschaos pro Iteration.
+
 ## Iteration 59 – Wiki-Modul erweitert
 - Neues Wiki-Panel im Dashboard: Kategorie, Titel, Inhalt, Speichern und Aktualisieren.
 - Wissensdaten werden sauber getrennt in `data/wiki_notes.json` gehalten.
