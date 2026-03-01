@@ -476,3 +476,9 @@ Iteration: 39
 - Iteration: Drei offene Mini-Punkte abgeschlossen (Boot-Fokus-Hinweis, Support-Freitextsuche, Versions-Detailgruppen).
 - Version: UI-Hilfe/Restore-Flow verbessert ohne neue Abhaengigkeiten.
 - Next Step: Support-Suche mit Trefferzahl + Enter-Shortcut erweitern.
+
+## Iteration 91
+
+- Hauptziel: Zwei offene Mini-Punkte abgeschlossen (Boot-Live-Ansage + Support-Trefferzahl mit Enter-Shortcut).
+- Version: v0.91-boot-live-support-hitcount
+- Next Step: Versions-Detailgruppen standardmaessig eingeklappt starten.

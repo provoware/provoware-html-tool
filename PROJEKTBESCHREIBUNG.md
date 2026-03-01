@@ -367,3 +367,8 @@ Praktischer Einsatz:
 - Boot-Gate-Hinweis nutzt jetzt das gespeicherte Fokusziel als Klartextzusatz (Modul/Hilfe).
 - Support-Verlauf hat neben dem Typ-Filter eine Freitextsuche fuer Typ/Datum/Details mit UND-Logik.
 - Backup-Detailmodus liefert gruppierte Schluessel (`Neu`, `Entfernt`, `Gleich`) statt einer unsortierten Liste.
+
+## Erweiterung Iteration 91
+- Boot-Bereich hat jetzt eine zusaetzliche Live-Statuszeile (`aria-live="polite"`), damit Fokuszielwechsel nicht nur visuell, sondern auch als Textsignal ankommt.
+- Support-Verlauf zeigt eine laufende Trefferzahl und erlaubt Enter als direkten Suchstart (Tastatur zuerst).
+- Rueckweg bleibt klar: Bei 0 Treffern zeigt der Verlauf weiterhin den naechsten Schritt (Filter aendern oder erneut versuchen).

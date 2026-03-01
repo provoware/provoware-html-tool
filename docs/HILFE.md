@@ -231,3 +231,10 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Support-Verlauf: Sie koennen jetzt per Freitext nach Typ, Datum oder Detail suchen.
 - Filterregel ist einfach: Dropdown + Suchtext arbeiten als UND-Regel.
 - Versionsvergleich im Backup-Dialog zeigt Detailgruppen: `Neu`, `Entfernt`, `Gleich`.
+
+## Neu: Boot-Live-Ansage und Support-Trefferzahl
+
+- Boot-Fokusziel wird jetzt doppelt gezeigt: im Gate-Hinweis und als kurze Live-Ansage (aria-live) fuer Screenreader.
+- Im Support-Verlauf zeigt ein Zusatztext die aktuelle Trefferzahl.
+- Tipp: Im Suchfeld einfach `Enter` druecken, dann wird der Filter sofort ausgefuehrt.
+- Wenn kein Treffer da ist: Filter wechseln oder Suchtext vereinfachen und erneut versuchen.

@@ -33,6 +33,7 @@
   const bootContinue = document.getElementById("boot-continue");
   const bootGateHint = document.getElementById("boot-gate-hint");
   const bootFocusTarget = document.getElementById("boot-focus-target");
+  const bootFocusLive = document.getElementById("boot-focus-live");
   const safeModeStatus = document.getElementById("safe-mode-status");
   const kanbanPreview = document.getElementById("kanban-preview");
   const kanbanStatus = document.getElementById("kanban-status");
@@ -56,6 +57,7 @@
   );
   const supportHistoryApply = document.getElementById("support-history-apply");
   const supportHistoryQuery = document.getElementById("support-history-query");
+  const supportHistoryMeta = document.getElementById("support-history-meta");
   const supportHistoryList = document.getElementById("support-history-list");
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
@@ -718,6 +720,11 @@
     if (helpWhat) {
       helpWhat.textContent = gate.help;
     }
+    if (bootFocusLive) {
+      const focusLabel =
+        layoutState.bootFocusTarget === "help" ? "Hilfe-Panel" : "Erstes Modul";
+      bootFocusLive.textContent = `Fokusziel aktuell: ${focusLabel}.`;
+    }
     return gate.gateOpen;
   }
 
@@ -1245,6 +1252,10 @@
       );
     });
 
+    if (supportHistoryMeta) {
+      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. Tipp: Enter startet die Suche sofort.`;
+    }
+
     if (filtered.length === 0) {
       const empty = document.createElement("li");
       empty.textContent =
@@ -1657,6 +1668,12 @@
   }
   if (supportHistoryQuery) {
     supportHistoryQuery.addEventListener("input", refreshSupportHistory);
+    supportHistoryQuery.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        refreshSupportHistory();
+      }
+    });
   }
   if (bootFocusTarget) {
     bootFocusTarget.addEventListener("change", () => {
@@ -1849,8 +1866,10 @@
     [bootContinue, "Boot-Weiter-Knopf"],
     [bootGateHint, "Boot-Gate-Hinweis"],
     [bootFocusTarget, "Boot-Fokusziel-Auswahl"],
+    [bootFocusLive, "Boot-Fokusziel-Live-Status"],
     [supportHistoryFilter, "Support-Verlauf-Filter"],
     [supportHistoryQuery, "Support-Verlauf-Suche"],
+    [supportHistoryMeta, "Support-Verlauf-Treffer"],
     [supportHistoryList, "Support-Verlauf-Liste"],
   ].forEach(([element, name]) => validateElement(element, name));
 
