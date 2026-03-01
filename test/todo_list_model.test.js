@@ -23,6 +23,17 @@ test("Todo-Modell archiviert erledigte Aufgabe", () => {
   assert.equal(model.listArchive().length, 1);
 });
 
+test("Todo-Modell listet alle offenen Aufgaben", () => {
+  const model = createTodoModel();
+  model.addTodo({ text: "Offen 1", date: "2026-03-03" });
+  model.addTodo({ text: "Offen 2", date: "2026-03-04" });
+
+  const open = model.listActive();
+
+  assert.equal(open.length, 2);
+  assert.equal(open[0].text, "Offen 1");
+});
+
 test("Todo-Modell validiert Datum", () => {
   const model = createTodoModel();
   assert.throws(() =>

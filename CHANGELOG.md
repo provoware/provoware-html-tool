@@ -1,3 +1,9 @@
+## 2026-03-01 – Todo-Filter mit Tastatur-Shortcuts releasefertig
+
+- Aufgabenbereich hat jetzt einen klaren Filter (Kalendertag, Heute, Offen, Archiv) fuer schnelle Orientierung.
+- Filter ist per Tastatur nutzbar: Enter bestaetigt, Escape setzt auf Kalendertag zurueck.
+- Mini-Optimierung Hilfe/UX: neue Kurz-Hilfe direkt am Filter erklaert Aktion und Rueckweg in einfacher Sprache.
+
 ## 2026-03-01 – Iteration 44
 
 - Todo-Listen-Modul mit Kalenderdatum, abhakbarer Liste und Archivbereich im Dashboard eingebaut.

@@ -65,3 +65,9 @@ Naechster Schritt bei Unsicherheit: **Protokoll oeffnen**, dann **Erneut versuch
 - Die Start-Routine prueft jetzt den Kontrast (Farbabstand) automatisch fuer alle 5 Themes.
 - Geprueft werden Haupttext und Topbar. Zielwert ist mindestens **4.5** (WCAG AA).
 - Bei Fehlern bekommen Sie klare naechste Schritte: **Erneut versuchen**, **Reparatur starten**, **Protokoll oeffnen**.
+
+## Aufgaben-Filter (neu)
+
+- Was macht das? Der Filter zeigt Aufgaben fuer Kalendertag, Heute, Offen oder Archiv.
+- Was passiert mit Daten? Es wird nur angezeigt, nichts wird dabei geloescht.
+- Rueckweg: Mit Escape springt der Filter zurueck auf Kalendertag.

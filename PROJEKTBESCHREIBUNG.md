@@ -52,3 +52,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Vorteil: Nach Neustart bleiben Aufgaben erhalten, wenn ein Projektordner aktiv verbunden ist.
 - Technikdetail: `todo_list_model` liefert jetzt `exportState` und `importState` mit Eingabepruefung (Validierung).
 - Fehlerfall: Bei defektem Speicher zeigt das System eine klare Laienmeldung und verweist auf Reparatur oder Protokoll.
+
+## Iteration 46 – Erweiterung Aufgabenmodul
+- Neuer Filter im Aufgabenmodul: `Kalendertag`, `Heute`, `Offen`, `Archiv`.
+- Ziel: Laien sehen schneller den richtigen Aufgabenstatus ohne Suchen.
+- A11y-Plus: Filter ist per Tastatur steuerbar und hat klaren Rueckweg mit Escape.
+- Tool-Umfang: `templates/todo_module.js` steuert Filterlogik, `system-module/todo_list_model.js` liefert offene Aufgaben mit Input/Output-Pruefung.

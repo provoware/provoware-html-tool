@@ -61,9 +61,22 @@
                 Datum auf heute
               </button>
             </div>
+            <label for="todo-filter">Filter</label>
+            <select
+              id="todo-filter"
+              aria-describedby="todo-help todo-filter-help"
+            >
+              <option value="date">Kalendertag</option>
+              <option value="today">Heute</option>
+              <option value="open">Offen</option>
+              <option value="archive">Archiv</option>
+            </select>
             <p id="todo-help" class="field-tip">
               Was passiert mit Daten? Erledigte Aufgaben gehen ins Archiv.
               Rueckweg: Aufgabe bleibt editierbar bis zum Abhaken.
+            </p>
+            <p id="todo-filter-help" class="field-tip">
+              Enter bestaetigt den Filter. Escape setzt zurueck auf Kalendertag.
             </p>
             <ul id="todo-active-list" class="todo-list" role="list"></ul>
             <h4 id="todo-archive-title">Archiv (erledigt)</h4>

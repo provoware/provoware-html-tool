@@ -105,6 +105,12 @@
       return result;
     }
 
+    function listActive() {
+      const copy = [...state.active];
+      assertArray(copy, "Aktive Liste");
+      return copy;
+    }
+
     function listArchive() {
       const copy = [...state.archive];
       assertArray(copy, "Archivliste");
@@ -131,6 +137,7 @@
       addTodo,
       completeTodo,
       listByDate,
+      listActive,
       listArchive,
       exportState,
       importState,
