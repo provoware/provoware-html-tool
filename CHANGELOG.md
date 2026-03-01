@@ -1,11 +1,18 @@
+# CHANGELOG
+
+## 2026-03-01 – README Tool-Module-Liste und Modul-Backlog erweitert
+
+- README um eine aktuelle, klar strukturierte Liste der vorhandenen Tool-Module ergänzt.
+- README um eine konkrete Backlog-Liste geplanter Module erweitert (Archiv, Wiki, Schnellspeicher, Songtext, Zufall, Planung, Templates, Logging, Einstellungen).
+- TODO um umsetzbare P1-Implementierungspunkte für alle angeforderten Untermodule erweitert.
+- Risiko: niedrig, da nur Dokumentation und Planungsdatei aktualisiert wurden.
+
 ## 2026-03-01 – Release-Readiness-Check in Start-Routine
 
 - Neue Prüfung `tools/release_readiness_check.js` ergänzt: prüft A11y-Basis (aria-live, Hilfe-Aktionen) und alle 3 Themes (Hell/Dunkel/Kontrast+).
 - Start-Routine um festen Schritt „Release-Readiness prüfen" erweitert und bei Fehler mit klarer Reparaturmeldung abgebrochen.
 - Tests für den neuen Check ergänzt (`test/release_readiness_check.test.js`).
 - Risiko: niedrig, da nur Start-Prüffluss und Tests erweitert wurden.
-
-# CHANGELOG
 
 ## 2026-03-01 – Modulare Hilfe und moderne Dashboard-Gruppierung
 

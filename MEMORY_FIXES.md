@@ -234,3 +234,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur manuelle Sichtprüfung (abgelehnt, zu fehleranfällig).
 **Risiko/Side-Effects:** Bei fehlenden Pflichtbausteinen bricht Start früher ab (gewollt).
 **Verknüpft:** Patch-ID local-015
+
+## FIX-20260301-010: Modul-Backlog-zentralisiert
+
+**Kategorie:** Docs/UX
+**Symptom (für Laien):** Neue Modulideen waren verteilt und dadurch schwer planbar.
+**Technische Ursache:** Es gab keine zentrale, aktuelle Liste aller Tool-Module in README/TODO.
+**Trigger:** Viele neue Modulwünsche in einer Iteration.
+**Fix (kurz):** README um Tool-Module-Liste erweitert und TODO in konkrete P1-Module aufgeteilt.
+**Geänderte Dateien/Marker:** README.txt (Tool-Module), todo.txt (Neue Modul-Implementierung planen), CHANGELOG.md
+**Tests/Checks:** npm test
+**Prävention (künftig):** Ab jetzt immer neue Modulwünsche zuerst zentral in README + TODO strukturieren.
+**Alternative(n):** Nur Ticketliste außerhalb des Repos.
+**Risiko/Side-Effects:** Mehr Planungsaufgaben im TODO sichtbar.
+**Verknüpft:** Patch-ID local-016

@@ -41,6 +41,61 @@ Vorteile:
 - Änderungen leichter prüfen
 - Bessere Wartbarkeit
 
+## Tool-Module (aktuelle Liste)
+
+Stand: 2026-03-01
+
+### Bereits vorhanden
+
+1. **Dashboard-Kernmodul** (`system-core/dashboard_core.js`)
+   - Startet die Hauptoberflaeche robust.
+2. **Plugin-Loader** (`system-core/plugin_loader.js`)
+   - Laedt Plugin-Manifeste sicher und isoliert.
+3. **Registry-Service** (`system-core/registry_service.js`)
+   - Prueft Registry-Daten mit Manifest-Regeln.
+4. **JSON-Store** (`system-core/json_store.js`)
+   - Speichert Daten atomar und mit Validierung
+     (Eingabepruefung).
+5. **Self-Repair** (`system-core/self_repair.js`)
+   - Hilft bei Reparatur und Backup-Wiederherstellung.
+6. **Start-Routine** (`tools/start_routine.js`)
+   - Fuehrt Auto-Checks, Auto-Formatierung und Auto-Tests aus.
+7. **Release-Readiness-Check** (`tools/release_readiness_check.js`)
+   - Prueft A11y-Basis, Themes und Hilfe-Aktionen.
+8. **Hilfe-CLI** (`tools/help_cli.js`)
+   - Zeigt Logs, Backups und Reparaturbefehle in einfacher Sprache.
+9. **Hilfe-Panel** (`system-module/help_panel.js`, `templates/help-panel.*`)
+   - Gibt klare naechste Schritte fuer Laien.
+
+### Geplante Tool-Module (Backlog)
+
+1. **Janger-Archiv-Modul**
+   - Archive, Roots und Stil anlegen, bearbeiten, sortieren
+     (Alphabetlisten), importieren und exportieren.
+2. **Wiki-Modul**
+   - Wissen nach Kategorien speichern und schnell wiederfinden.
+3. **Schnellspeicher-Modul**
+   - Titel + Eingabe direkt in feste Datei anhaengen.
+   - Weitere Schnellspeicher-Bereiche mit eigenen Dateien anlegen.
+4. **Songtext-Editor-Modul**
+   - Vorlagen fuer Intro, Refrain, Bridge und Sonstiges.
+   - Bereich fuer Zufallsvorschlaege direkt im Dokument.
+   - Live-Vorschau fuer den aktuellen Songtext.
+5. **Zufallsgenerator-Modul**
+   - Generiert Vorschlaege aus Genres, Roots und Stil.
+   - Mit Schnellwahltasten und Kategorie-Anwahl/Abwahl.
+6. **Content-Planungs-Modul**
+   - Monatskalender, Jahresuebersicht und Tageskapazitaeten mit Farben.
+   - Aufgaben in Echtzeit eintragen und visuell darstellen.
+7. **Template-Verwaltungs-Modul**
+   - Textfragmente nach Titel und Kategorie speichern.
+   - Import/Export und Kopieren in die Zwischenablage per Button.
+8. **Debug- und Logging-Profi-Modul**
+   - Detaillierte Ereignisinfos plus Loesungsvorschlaege in einfacher
+     Sprache.
+9. **Einstellungs- und Hilfe-Modul**
+   - Version, Tool-Sprache, Standards und Manifeste zentral verwalten.
+
 ## Start (vollautomatisch)
 
 Empfohlener Start:

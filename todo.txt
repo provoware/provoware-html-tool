@@ -52,3 +52,22 @@ Laienvorschläge
 - [x] P1: Release-Readiness-Check in Start-Routine integrieren (A11y + Theme + Hilfe-Aktionen).
 - [ ] P1: E2E-Tastaturtest fuer Dashboard (Tab/Enter/Escape) automatisieren.
 - [ ] P1: Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen.
+
+## 2026-03-01 – Neue Modul-Implementierung planen
+
+- [ ] P1: Janger-Archiv-Modul implementieren (Anlegen, Editieren, Sortieren, Import/Export).
+- [ ] P1: Wiki-Modul implementieren (kategoriebezogene Wissensspeicherung).
+- [ ] P1: Schnellspeicher-Modul implementieren (Titel + Eingabe an feste Datei anhaengen).
+- [ ] P1: Mehrfach-Schnellspeicherbereiche mit eigenen Dateien anlegen (UI + Persistenz).
+- [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
+- [ ] P1: Interoperabilitaet Songtext-Editor ↔ Zufallsgenerator umsetzen (Inhalt einfuegen).
+- [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.
+- [ ] P1: Zufallsgenerator-Modul implementieren (Genres/Roots/Stil, Schnellwahl, Kategorie-An/Auswahl).
+- [ ] P1: Content-Planungs-Modul implementieren (Monatskalender + Jahresuebersicht + Kapazitaeten).
+- [ ] P1: Aufgaben-Workflow mit Echtzeit-Eintrag in Kalender integrieren.
+- [ ] P1: Template-Verwaltungs-Modul implementieren (Textfragmente, Kategorien, Import/Export, Copy-Buttons).
+- [ ] P1: Debug-/Logging-Profi-Modul ausbauen (laienfreundliche Ereignisse + Loesungen).
+- [ ] P1: Einstellungs- und Hilfebereich als eigenes Modul ausbauen (Version, Sprache, Standards, Manifeste).
+- [ ] P1: E2E-Tests fuer neue Module vorbereiten (A11y, Input/Output-Validierung, Import/Export).
+- [ ] P1: Start-Routine fuer neue Modul-Checks erweitern (auto install, format, tests, feedback).
+
