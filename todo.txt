@@ -1,3 +1,5 @@
+- [ ] Naechster Mini-Punkt: Daten-Inventur-Patch fuer data/- und dummys/-Reste erstellen (Liste + risikofreie Entfernen-Kandidaten).
+- [x] Option C abgeschlossen: JSON-Store auf versionierte Writes + Recovery-Pfad gehaertet.
 - [ ] Naechster Mini-Punkt: Kanban-Kartenverschiebung in data/kanban_board.json persistieren.
 - [x] Kanban-Schnellansicht an echte JSON-Daten anbinden (statt statischer Beispieltexte).
 - [x] Keyboard-A11y fuer Kanban erweitern (Spaltenwechsel links/rechts + sichtbarer Fokusfuehrung).

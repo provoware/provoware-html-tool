@@ -72,3 +72,8 @@ Naechster Schritt bei Unsicherheit: **Protokoll oeffnen**, dann **Erneut versuch
 - Was macht das? Der Filter zeigt Aufgaben fuer Kalendertag, Heute, Offen oder Archiv.
 - Was passiert mit Daten? Es wird nur angezeigt, nichts wird dabei geloescht.
 - Rueckweg: Mit Escape springt der Filter zurueck auf Kalendertag.
+
+## Storage-Recovery (neu)
+
+Wenn eine JSON-Datei kaputt ist, kann die letzte gueltige Version wiederhergestellt werden.
+Naechster Schritt: Erst erneut versuchen, dann Reparatur starten, danach bei Bedarf Protokoll oeffnen.

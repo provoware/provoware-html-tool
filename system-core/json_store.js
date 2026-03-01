@@ -91,6 +91,142 @@ function readJson(filePath) {
   return output;
 }
 
+function nextVersionNumber(versionDir, versionPrefix) {
+  assertNonEmptyString(versionDir, "Versionsordner");
+  assertNonEmptyString(versionPrefix, "Versionsprefix");
+
+  if (!fs.existsSync(versionDir)) {
+    return 1;
+  }
+
+  const names = fs
+    .readdirSync(versionDir)
+    .filter(
+      (item) => item.startsWith(`${versionPrefix}_v`) && item.endsWith(".json"),
+    )
+    .sort();
+
+  if (names.length === 0) {
+    return 1;
+  }
+
+  const lastName = names[names.length - 1];
+  const rawNumber = lastName
+    .replace(`${versionPrefix}_v`, "")
+    .replace(".json", "");
+  const number = Number(rawNumber);
+
+  if (!Number.isFinite(number)) {
+    throw new Error(
+      "Version konnte nicht gelesen werden. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
+  return number + 1;
+}
+
+function createVersionWritePlan(filePath, options = {}) {
+  assertNonEmptyString(filePath, "Dateipfad");
+  assertObject(options, "Versionierungsoptionen");
+
+  const dir = path.dirname(filePath);
+  const baseName = path.basename(filePath, ".json");
+  const versionPrefix = options.versionPrefix || baseName;
+  assertNonEmptyString(versionPrefix, "Versionierungs-Prefix");
+
+  const versionDirName = options.versionDirName || `${baseName}_versions`;
+  assertNonEmptyString(versionDirName, "Versionsordner-Name");
+
+  const versionDir = path.join(dir, versionDirName);
+  fs.mkdirSync(versionDir, { recursive: true });
+
+  const nextNumber = String(
+    nextVersionNumber(versionDir, versionPrefix),
+  ).padStart(4, "0");
+
+  return {
+    versionNumber: nextNumber,
+    versionPath: path.join(versionDir, `${versionPrefix}_v${nextNumber}.json`),
+  };
+}
+
+function writeVersionedSnapshot(filePath, payload, options = {}) {
+  assertNonEmptyString(filePath, "Dateipfad");
+  assertObject(payload, "JSON-Daten");
+  assertObject(options, "Versionierungsoptionen");
+
+  const plan = createVersionWritePlan(filePath, options);
+  const content = `${JSON.stringify(payload, null, 2)}\n`;
+  fs.writeFileSync(plan.versionPath, content, "utf8");
+
+  if (!fs.existsSync(plan.versionPath)) {
+    throw new Error(
+      "Versionierte Datei fehlt nach dem Schreiben. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
+  return {
+    versionPath: plan.versionPath,
+    versionNumber: plan.versionNumber,
+  };
+}
+
+function findLatestVersionPath(filePath, options = {}) {
+  const plan = createVersionWritePlan(filePath, options);
+  const versionDir = path.dirname(plan.versionPath);
+  const versionPrefix = path
+    .basename(plan.versionPath)
+    .replace(/_v\d+\.json$/, "");
+
+  if (!fs.existsSync(versionDir)) {
+    return null;
+  }
+
+  const files = fs
+    .readdirSync(versionDir)
+    .filter(
+      (item) => item.startsWith(`${versionPrefix}_v`) && item.endsWith(".json"),
+    )
+    .sort();
+
+  if (files.length === 0) {
+    return null;
+  }
+
+  return path.join(versionDir, files[files.length - 1]);
+}
+
+function recoverJsonFromLatestVersion(filePath, options = {}) {
+  assertNonEmptyString(filePath, "Dateipfad");
+  assertObject(options, "Optionen");
+
+  const versionPath = findLatestVersionPath(filePath, options);
+  if (!versionPath) {
+    throw new Error(
+      "Keine Version fuer Wiederherstellung gefunden. Erneut versuchen oder Protokoll oeffnen.",
+    );
+  }
+
+  const payload = readJson(versionPath);
+  const writeResult = atomicWriteJson(filePath, payload, {
+    schema: options.schema || null,
+    onBackupCreated: options.onBackupCreated || null,
+  });
+
+  if (!writeResult || writeResult.filePath !== filePath) {
+    throw new Error(
+      "Wiederherstellung fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
+  return {
+    ok: true,
+    filePath,
+    sourceVersionPath: versionPath,
+    backupPath: writeResult.backupPath,
+  };
+}
+
 function atomicWriteJson(filePath, payload, options = {}) {
   assertNonEmptyString(filePath, "Dateipfad");
   assertObject(payload, "JSON-Daten");
@@ -98,9 +234,13 @@ function atomicWriteJson(filePath, payload, options = {}) {
 
   const schema = options.schema || null;
   const onBackupCreated = options.onBackupCreated || null;
+  const versioning = options.versioning || null;
   validateSchema(payload, schema);
   if (onBackupCreated !== null) {
     assertFunction(onBackupCreated, "Backup-Hook");
+  }
+  if (versioning !== null) {
+    assertObject(versioning, "Versionierungsoptionen");
   }
 
   const dir = path.dirname(filePath);
@@ -117,6 +257,11 @@ function atomicWriteJson(filePath, payload, options = {}) {
     }
   }
 
+  const versionResult =
+    versioning && versioning.enabled === true
+      ? writeVersionedSnapshot(filePath, payload, versioning)
+      : null;
+
   const content = `${JSON.stringify(payload, null, 2)}\n`;
   fs.writeFileSync(tmpPath, content, "utf8");
   fs.renameSync(tmpPath, filePath);
@@ -128,6 +273,8 @@ function atomicWriteJson(filePath, payload, options = {}) {
   const output = {
     filePath,
     backupPath: fs.existsSync(backupPath) ? backupPath : null,
+    versionPath: versionResult ? versionResult.versionPath : null,
+    versionNumber: versionResult ? versionResult.versionNumber : null,
   };
 
   if (typeof output.filePath !== "string") {
@@ -135,10 +282,19 @@ function atomicWriteJson(filePath, payload, options = {}) {
       "Ausgabe ungueltig. Protokoll oeffnen und erneut versuchen.",
     );
   }
+
+  if (versionResult && !output.versionPath) {
+    throw new Error(
+      "Versionierung unvollstaendig. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
   return output;
 }
 
 module.exports = {
   atomicWriteJson,
+  findLatestVersionPath,
   readJson,
+  recoverJsonFromLatestVersion,
 };
