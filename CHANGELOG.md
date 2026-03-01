@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-03-01 – Kompaktes Dashboard ohne Platzhalter
+
+- Dashboard-Layout auf kompakte Abstände, bessere Schrift/Button-Verhältnisse und klare Rasterstruktur optimiert.
+- Pseudo-Inhalte (Beispiel-Listen/Kalenderdaten) entfernt; ungenutzte Bereiche bleiben jetzt bewusst leer.
+- UI-Texte für das kompakte Dashboard nach `config/messages_de.json` ausgelagert und zur Laufzeit geladen.
+- Risiko: niedrig, da Änderungen auf Dashboard-Template, Styles und Textquellen begrenzt sind.
+
 ## 2026-03-01 – Dashboard-Layout optisch an Referenz angepasst
 
 - Dashboard-Template auf ein klares 3-Spalten-Layout mit Topbar, Kalender, Workspace und Quick-Links umgestellt.

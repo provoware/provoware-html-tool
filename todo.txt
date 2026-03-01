@@ -2,6 +2,8 @@
 Datum: 2026-02-28
 
 DONE
+- [x] Dashboard kompakter gemacht, Pseudotexte entfernt und leere Bereiche klar als freie Flächen belassen.
+- [x] Dashboard-Kurztexte zentral in `config/messages_de.json` ausgelagert.
 - [x] Dashboard-Layout optisch an Referenzbild angenaehert (3-Spalten, Topbar, Kartenstruktur).
 - [x] A11y-Feinschliff im Dashboard-Template (sichtbarer Fokus, 44px Buttons, Kontrast+ konsistent).
 - [x] README für Laien überarbeitet (offene Punkte oben, klare Befehle, bessere Sichtbarkeit).

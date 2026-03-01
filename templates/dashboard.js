@@ -20,6 +20,9 @@
   const chooseFolder = document.getElementById("choose-folder");
   const reconnect = document.getElementById("reconnect-folder");
   const themeSelect = document.getElementById("theme-select");
+  const controlWhat = document.getElementById("control-what");
+  const workspaceHelp = document.getElementById("workspace-help");
+  const helpWhat = document.getElementById("help-what");
 
   let dragSourceId = null;
   let zoneModel = [
@@ -28,20 +31,39 @@
     { id: "modules", title: "📦 Module" },
   ];
 
-  function setStatus(message) {
-    if (typeof message !== "string" || message.trim() === "") {
-      throw new Error("Status-Text fehlt. Bitte erneut versuchen.");
+  function ensureMessage(message, fallback) {
+    if (typeof message === "string" && message.trim() !== "") {
+      return message;
     }
-    status.textContent = message;
-    return status.textContent;
+    return fallback;
+  }
+
+  async function loadMessages() {
+    try {
+      const response = await fetch("../config/messages_de.json");
+      if (!response.ok) {
+        throw new Error("Textdatei nicht erreichbar");
+      }
+      const json = await response.json();
+      return json.dashboardCompact || {};
+    } catch {
+      return {};
+    }
+  }
+
+  function setStatus(message) {
+    const safe = ensureMessage(
+      message,
+      "Status fehlt. Naechster Schritt: Erneut versuchen.",
+    );
+    status.textContent = safe;
+    return safe;
   }
 
   function setDebug(message) {
-    if (typeof message !== "string") {
-      throw new Error("Debug-Text ist ungueltig. Bitte erneut versuchen.");
-    }
-    debugOutput.textContent = message;
-    return debugOutput.textContent;
+    const safe = ensureMessage(message, "Debug-Text fehlt.");
+    debugOutput.textContent = safe;
+    return safe;
   }
 
   function openDb() {
@@ -103,7 +125,6 @@
 
   function renderZones() {
     zones.innerHTML = "";
-
     zoneModel.forEach((zone, index) => {
       const article = document.createElement("article");
       article.className = "card";
@@ -170,25 +191,19 @@
           "Browser unterstuetzt keinen Ordnerzugriff. Erneut versuchen.",
         );
       }
-
       const handle = await window.showDirectoryPicker({ mode: "readwrite" });
       const permission = await handle.requestPermission({ mode: "readwrite" });
       if (permission !== "granted") {
         throw new Error("Berechtigung fehlt. Erneut versuchen.");
       }
-
       await saveHandle(handle);
       const folders = await ensureStructure(handle);
-      setStatus(
-        `Projekt verbunden. Struktur ok (${folders.length} Ordner geprueft).`,
-      );
+      setStatus(`Projekt verbunden. Struktur ok (${folders.length} Ordner).`);
       setDebug(
-        "Debug: Projektordner gespeichert. Tipp: Bei Problem 'Protokoll oeffnen'.",
+        "Debug: Projektordner gespeichert. Bei Problem Protokoll oeffnen.",
       );
     } catch (error) {
-      setStatus(
-        `${error.message} Naechster Schritt: Reparatur starten oder Protokoll oeffnen.`,
-      );
+      setStatus(`${error.message} Naechster Schritt: Reparatur starten.`);
     }
   }
 
@@ -200,14 +215,12 @@
           "Kein gespeicherter Ordner gefunden. Erneut versuchen.",
         );
       }
-
       const permission = await handle.requestPermission({ mode: "readwrite" });
       if (permission !== "granted") {
         throw new Error(
           "Berechtigung abgelehnt. Bitte Projektordner erneut waehlen.",
         );
       }
-
       const folders = await ensureStructure(handle);
       setStatus(`Auto-Reconnect ok. ${folders.length} Ordner sind bereit.`);
     } catch (error) {
@@ -237,6 +250,22 @@
     scale: document.getElementById("grid-scale"),
     align: document.getElementById("grid-align"),
     setStatus,
+  });
+
+  loadMessages().then((ui) => {
+    controlWhat.textContent = ensureMessage(
+      ui.controlWhat,
+      "Startet Zugriff und prueft den Projektordner.",
+    );
+    workspaceHelp.textContent = ensureMessage(
+      ui.workspaceHelp,
+      "Die Flaeche startet leer. Module erscheinen erst nach Aktivierung.",
+    );
+    helpWhat.textContent = ensureMessage(
+      ui.helpWhat,
+      "Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
+    );
+    status.textContent = ensureMessage(ui.readyStatus, status.textContent);
   });
 
   renderZones();

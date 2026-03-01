@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 15
+Iteration: 16
 
 ## Gemacht
 
@@ -32,6 +32,10 @@ Iteration: 15
 - A11y-Details im Layout ausgebaut: sichtbarer Fokus, Kontrast+ konsistent, 44px-Bedienelemente und klare Tastaturhinweise.
 
 - Hauptbereich als leere, zentrierte Modul-Rasterflaeche umgebaut: Aktivierung in Auswahl-Reihenfolge, inklusive Maximieren/Minimieren/Ausblenden pro Modul.
+
+- Dashboard kompakt gemacht: weniger Abstände, bessere Größenverhältnisse und klarere Anordnung.
+- Pseudotexte in Seitenbereichen entfernt; ungenutzte Bereiche bleiben leer und flexibel.
+- Dashboard-Kurztexte zentral in `config/messages_de.json` ausgelagert und dynamisch geladen.
 
 ## Next Step
 

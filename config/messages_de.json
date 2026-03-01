@@ -21,5 +21,11 @@
     "what": "Das Mockup zeigt die aktuelle Start- und Dashboard-Logik als schnelle Vorschau.",
     "data": "Es ist nur eine Ansicht und schreibt keine Projektdaten.",
     "undo": "Sie können das Mockup jederzeit schließen, ohne Änderungen am Projektstand."
+  },
+  "dashboardCompact": {
+    "controlWhat": "Was macht das? Startet den Projektzugriff mit Validierung (Eingabepruefung).",
+    "workspaceHelp": "Die Modulfläche startet leer. Nicht genutzte Bereiche bleiben bewusst frei.",
+    "helpWhat": "Was kann ich tun? Erneut versuchen, Reparatur starten oder Protokoll öffnen.",
+    "readyStatus": "Bereit. Nächster Schritt: Verbindung prüfen."
   }
 }
