@@ -358,6 +358,7 @@ a:focus-visible {
 }
 
 .left-rail,
+.favorites-rail,
 .right-rail {
   border: 2px solid color-mix(in srgb, var(--accent) 72%, #66d8ff);
   border-radius: var(--radius-lg);
@@ -866,4 +867,20 @@ a:focus-visible {
   .tool-footer {
     grid-template-columns: 1fr;
   }
+}
+
+
+#module-options-region {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+#module-options-region h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+#module-options-region p {
+  margin: 0;
 }

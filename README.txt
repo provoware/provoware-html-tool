@@ -1,3 +1,11 @@
+
+
+Update Iteration 81:
+- Rechte Favoritenleiste ist jetzt ausklappbar (Knopf oder Alt+F).
+- Unten im Modulbereich erscheinen jetzt modulspezifische Optionen mit Rueckweg-Hinweis.
+- Start-Routine blockiert offene Mini-Punkte mit leeren Pflichtfeldern und gibt klare Hilfe zum Nachbessern.
+- Naechster Schritt: Favoritenaktionen mit echten Modulbefehlen verbinden.
+
 Update Iteration 80:
 - Songtext-Zufall kann jetzt pro Kategorie gesteuert werden: Genre, Stimmung, Stil an/aus.
 - Auswahl bleibt erhalten, weil die Einstellungen gespeichert und wieder geladen werden.
@@ -119,7 +127,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 88 %
-- **Erledigt:** 136 Punkte
+- **Erledigt:** 139 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

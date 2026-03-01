@@ -299,3 +299,10 @@ Praktischer Einsatz:
 - Footer ist in 3 Bereiche geteilt: Debugging, Logging, System-Infos mit Schnellnotiz `data/KASI_NOTIZ.txt`.
 - Schnellnotiz arbeitet als Append-Speicher (anhaengen statt ueberschreiben) und nutzt Zeitstempel fuer Nachvollziehbarkeit.
 - Gesamt-Export schreibt den aktuellen Werkzeugzustand nach `data/tool_export.json`.
+
+## Iteration 81 – Favoritenleiste + Moduloptionen + stricter TODO-Check
+
+- **Favoritenleiste:** Rechte Zusatzleiste ist ausklappbar und per `Alt+F` steuerbar.
+- **Moduloptionen unten:** Unterhalb der Modulflaeche gibt es jetzt einen festen Bereich fuer modulbezogene Aktionen.
+- **Tool-Qualitaet:** `tools/start_routine.js` prueft offene TODO-Mini-Punkte jetzt strikter (Pflichtfelder muessen vorhanden und gefuellt sein).
+- **Nutzen fuer Laien:** Jede neue Meldung zeigt direkt den naechsten Schritt.

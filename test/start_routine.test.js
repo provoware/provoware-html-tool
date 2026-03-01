@@ -403,3 +403,17 @@ test("buildShortcutConflictSummary meldet konfliktfreien Abschluss", () => {
   const summary = buildShortcutConflictSummary({ warnings: [] });
   assert.match(summary, /keine Konfliktwarnung offen/);
 });
+
+test("validateMiniPointTemplate meldet leere Pflichtwerte", () => {
+  const result = validateMiniPointTemplate(
+    [
+      "- [ ] Naechster Mini-Punkt: A | Code: fertig | Tests:  | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: pruefen",
+      "- [ ] Naechster Mini-Punkt: B | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: pruefen",
+      "- [ ] Naechster Mini-Punkt: C | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: merge",
+    ].join("\n"),
+  );
+
+  assert.equal(result.ok, false);
+  assert.equal(result.missingFields[0].index, 1);
+  assert.equal(result.missingFields[0].field, "Tests:");
+});

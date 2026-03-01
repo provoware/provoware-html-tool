@@ -37,6 +37,9 @@
         <button type="button" id="right-rail-toggle">
           Einstellungen ausblenden
         </button>
+        <button type="button" id="favorites-rail-toggle">
+          Favoritenleiste einblenden
+        </button>
         <button type="button" id="layout-reset">Layout-Reset</button>
         <button type="button" id="focus-mode-toggle">Fokusmodus starten</button>
         <button type="button" id="focus-mode-restore" hidden>
@@ -523,6 +526,18 @@
             ></div>
           </article>
 
+          <article class="panel" aria-labelledby="module-options-title">
+            <h2 id="module-options-title">Moduloptionen unten</h2>
+            <p class="field-tip" id="module-options-help">
+              Noch kein Modul gewaehlt. Naechster Schritt: Modul im Raster
+              anklicken.
+            </p>
+            <section
+              id="module-options-region"
+              aria-label="Modulspezifische Optionen"
+            ></section>
+          </article>
+
           <article class="panel" aria-labelledby="zones-title">
             <h2 id="zones-title">Modul-Reihenfolge</h2>
             <p class="zone-help">
@@ -532,6 +547,35 @@
             <div id="zones" class="col" role="list"></div>
           </article>
         </section>
+
+        <aside
+          id="favorites-rail"
+          class="col favorites-rail"
+          aria-label="Favoriten-Schnellleiste"
+          hidden
+        >
+          <article class="panel" aria-labelledby="favorites-title">
+            <h3 id="favorites-title">Favoriten-Schnellaktionen</h3>
+            <p class="field-tip" id="favorites-help">
+              Was macht das? Diese Leiste bietet schnelle Aktionen fuer aktive
+              Module. Rueckweg: Alt+F oder Knopf erneut druecken.
+            </p>
+            <div class="module-catalog" id="favorites-actions" role="list">
+              <button
+                type="button"
+                aria-label="Zuletzt genutztes Modul oeffnen"
+              >
+                Letztes Modul oeffnen
+              </button>
+              <button type="button" aria-label="Alle Module anzeigen">
+                Alle Module anzeigen
+              </button>
+              <button type="button" aria-label="Hilfe fuer Fokusmodus anzeigen">
+                Fokus-Hilfe zeigen
+              </button>
+            </div>
+          </article>
+        </aside>
 
         <button
           type="button"

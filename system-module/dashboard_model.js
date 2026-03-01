@@ -170,11 +170,38 @@ function getGridColumnCount(viewportWidth) {
   return 4;
 }
 
+function resolveSidebarShortcut(eventLike, sidebarOpen) {
+  const openNow = Boolean(sidebarOpen);
+  const event = eventLike && typeof eventLike === "object" ? eventLike : {};
+  const key = typeof event.key === "string" ? event.key.toLowerCase() : "";
+  const altKey = event.altKey === true;
+
+  if (key !== "f" || !altKey) {
+    return {
+      handled: false,
+      nextOpen: openNow,
+      status: "",
+    };
+  }
+
+  const nextOpen = !openNow;
+  const status = nextOpen
+    ? "Favoritenleiste geoeffnet. Naechster Schritt: Schnellaktion waehlen."
+    : "Favoritenleiste geschlossen. Naechster Schritt: Mit Alt+F erneut oeffnen.";
+
+  return {
+    handled: true,
+    nextOpen,
+    status,
+  };
+}
+
 module.exports = {
   applyLayoutSnapshot,
   buildQuickAccess,
   createLayoutSnapshot,
   getGridColumnCount,
+  resolveSidebarShortcut,
   moveZone,
   normalizeLayoutState,
   reorderZones,
@@ -186,6 +213,7 @@ if (typeof window !== "undefined") {
     buildQuickAccess,
     createLayoutSnapshot,
     getGridColumnCount,
+    resolveSidebarShortcut,
     moveZone,
     normalizeLayoutState,
     reorderZones,

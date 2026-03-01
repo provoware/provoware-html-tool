@@ -79,3 +79,15 @@ test("Dashboard-Songtextbereich bietet Kategorie-Auswahl fuer Zufallsinhalt", ()
   assert.match(dashboardHtml, /id="lyrics-random-style-toggle"/);
   assert.match(dashboardHtml, /id="lyrics-random-category-help"/);
 });
+
+test("Dashboard bietet Favoritenleiste und unteren Modulbereich", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="favorites-rail-toggle"/);
+  assert.match(dashboardHtml, /id="favorites-rail"/);
+  assert.match(dashboardHtml, /id="module-options-region"/);
+  assert.match(dashboardHtml, /id="module-options-help"/);
+});

@@ -8,6 +8,7 @@ const {
   moveZone,
   normalizeLayoutState,
   reorderZones,
+  resolveSidebarShortcut,
 } = require("../system-module/dashboard_model");
 
 test("buildQuickAccess kombiniert gepinnt + genutzt ohne Duplikate", () => {
@@ -82,4 +83,19 @@ test("createLayoutSnapshot und applyLayoutSnapshot arbeiten mit sicheren Werten"
   );
 
   assert.deepEqual(restored, snapshot);
+});
+
+test("resolveSidebarShortcut schaltet Favoritenleiste per Alt+F", () => {
+  const result = resolveSidebarShortcut({ key: "f", altKey: true }, false);
+
+  assert.equal(result.handled, true);
+  assert.equal(result.nextOpen, true);
+  assert.match(result.status, /Favoritenleiste geoeffnet/);
+});
+
+test("resolveSidebarShortcut ignoriert andere Tasten", () => {
+  const result = resolveSidebarShortcut({ key: "x", altKey: true }, true);
+
+  assert.equal(result.handled, false);
+  assert.equal(result.nextOpen, true);
 });
