@@ -8,7 +8,8 @@
     "format:check": "npx prettier --check \"{system-core,system-module,tools,test,templates,config,data,docs}/**/*.{js,json,md,html}\" \"CHANGELOG.md\" \"SELFINFO.md\" \"PROJECT_INFO.md\" \"MEMORY_FIXES.md\" \"QUESTIONS_TODO.md\"",
     "test": "node --test",
     "system:test": "node tools/help_cli.js test",
-    "release:check": "node tools/release_readiness_check.js"
+    "release:check": "node tools/release_readiness_check.js",
+    "qa": "npm run format:check && npm test && npm run release:check"
   },
   "devDependencies": {
     "prettier": "^3.3.3"

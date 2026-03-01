@@ -308,7 +308,10 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   );
   assert.match(dashboardJs, /event\.key === "Escape"/);
   assert.match(dashboardJs, /supportHistoryEmptyQueryHint/);
+  assert.match(dashboardJs, /supportBootDebugEnhancedHint/);
+  assert.match(dashboardJs, /supportHistoryEmptyHelpExpanded/);
   assert.match(dashboardCss, /\.support-empty-toggle/);
+  assert.match(dashboardCss, /\.support-boot-debug-help/);
   assert.match(dashboardJs, /shouldAutoCompactSupportFooter/);
   assert.match(dashboardJs, /Auto-Kurzmodus aktiv unter 640px/);
   assert.match(

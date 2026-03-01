@@ -2,6 +2,7 @@
   const DB_NAME = "provoware-dashboard";
   const STORE_NAME = "handles";
   const HANDLE_KEY = "project-root";
+  const SUPPORT_EMPTY_HELP_SESSION_KEY = "support-empty-help-expanded";
   const REQUIRED_FOLDERS = [
     "system-core",
     "system-module",
@@ -90,6 +91,9 @@
   const supportHistoryEmptyToggle = document.getElementById(
     "support-history-empty-toggle",
   );
+  const supportHistoryBootDebugHelp = document.getElementById(
+    "support-history-boot-debug-help",
+  );
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -157,6 +161,8 @@
     showBootDebugInSupport: true,
     supportHistoryPartialMode: false,
     supportHistoryFooterCompact: true,
+    supportHistorySortShortTokens: false,
+    supportHistoryEmptyHelpExpanded: false,
   };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
@@ -235,6 +241,36 @@
   let activeModules = [];
   let lastModuleTitle = "";
   let moduleWorkspace = null;
+
+  function readSupportEmptyHelpSessionState() {
+    if (!window.sessionStorage) {
+      return null;
+    }
+
+    const raw = window.sessionStorage.getItem(SUPPORT_EMPTY_HELP_SESSION_KEY);
+    if (raw === "true") {
+      return true;
+    }
+
+    if (raw === "false") {
+      return false;
+    }
+
+    return null;
+  }
+
+  function writeSupportEmptyHelpSessionState(isExpanded) {
+    if (!window.sessionStorage || typeof isExpanded !== "boolean") {
+      return false;
+    }
+
+    window.sessionStorage.setItem(
+      SUPPORT_EMPTY_HELP_SESSION_KEY,
+      isExpanded ? "true" : "false",
+    );
+
+    return true;
+  }
 
   function clampNumber(value, min, max) {
     if (typeof value !== "number" || Number.isNaN(value)) {
@@ -1583,14 +1619,9 @@
     if (supportHistoryEmptyHelp) {
       const showEmptyHelp = filtered.length === 0;
       supportHistoryEmptyHelp.hidden = !showEmptyHelp;
-      if (showEmptyHelp && supportHistoryEmptyToggle) {
-        supportHistoryEmptyToggle.setAttribute("aria-expanded", "true");
-        const listElement = document.getElementById(
-          "support-history-empty-help-list",
-        );
-        if (listElement) {
-          listElement.hidden = false;
-        }
+      if (showEmptyHelp) {
+        const isExpanded = layoutState.supportHistoryEmptyHelpExpanded === true;
+        toggleSupportEmptyHelp(isExpanded, { persist: false, announce: false });
       }
     }
 
@@ -1739,7 +1770,7 @@
     );
   }
 
-  function toggleSupportEmptyHelp(shouldExpand) {
+  function toggleSupportEmptyHelp(shouldExpand, options = {}) {
     if (!supportHistoryEmptyToggle) {
       return false;
     }
@@ -1749,6 +1780,8 @@
     if (!(listElement instanceof HTMLElement)) {
       return false;
     }
+    const persist = options.persist !== false;
+    const announce = options.announce !== false;
     const nextExpanded =
       typeof shouldExpand === "boolean"
         ? shouldExpand
@@ -1758,13 +1791,28 @@
       nextExpanded ? "true" : "false",
     );
     listElement.hidden = !nextExpanded;
-    announceLiveRegionText(
-      supportHistoryLive,
-      nextExpanded
-        ? "0-Treffer-Hilfe ist aufgeklappt."
-        : "0-Treffer-Hilfe ist eingeklappt. Enter klappt wieder auf.",
-      "lastSupportEmptyHelpText",
-    );
+    layoutState = normalizeLayoutWithModel({
+      ...layoutState,
+      supportHistoryEmptyHelpExpanded: nextExpanded,
+    });
+    if (persist) {
+      writeSupportEmptyHelpSessionState(nextExpanded);
+      persistLayoutState().catch(() => {
+        setStatus(
+          "0-Treffer-Hilfe konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+        );
+      });
+    }
+
+    if (announce) {
+      announceLiveRegionText(
+        supportHistoryLive,
+        nextExpanded
+          ? "0-Treffer-Hilfe ist aufgeklappt."
+          : "0-Treffer-Hilfe ist eingeklappt. Enter klappt wieder auf.",
+        "lastSupportEmptyHelpText",
+      );
+    }
     return true;
   }
 
@@ -2169,6 +2217,18 @@
       });
     });
   }
+  const supportEmptyHelpSessionState = readSupportEmptyHelpSessionState();
+  if (typeof supportEmptyHelpSessionState === "boolean") {
+    layoutState = normalizeLayoutWithModel({
+      ...layoutState,
+      supportHistoryEmptyHelpExpanded: supportEmptyHelpSessionState,
+    });
+    toggleSupportEmptyHelp(supportEmptyHelpSessionState, {
+      persist: false,
+      announce: false,
+    });
+  }
+
   if (supportHistoryApply) {
     supportHistoryApply.addEventListener("click", refreshSupportHistory);
   }
@@ -2476,6 +2536,7 @@
     [supportHistorySortShortToggle, "Support-Verlauf-Sortier-Schalter"],
     [supportHistoryLive, "Support-Verlauf-Live-Ansage"],
     [supportHistoryEmptyHelp, "Support-Verlauf-0-Treffer-Hilfe"],
+    [supportHistoryBootDebugHelp, "Support-Verlauf-Boot-Debug-Hilfe"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(
@@ -2527,6 +2588,12 @@
       ui.themeTooltipChanged,
       "Thema gewechselt zu {theme}. Rueckweg: Altes Thema erneut waehlen.",
     );
+    if (supportHistoryBootDebugHelp) {
+      supportHistoryBootDebugHelp.lastElementChild.textContent = ensureMessage(
+        ui.supportBootDebugEnhancedHint,
+        "Boot-Debug-Hilfe: Bei Problemen Schalter kurz aktivieren, Fehler lesen, dann wieder deaktivieren.",
+      );
+    }
     const stepCount = window.DashboardHelp.renderGuideSteps(
       guideList,
       ui.guideSteps,

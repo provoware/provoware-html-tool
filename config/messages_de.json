@@ -42,6 +42,7 @@
     "supportFilterTooltipBootDebug": "Tooltip: Boot-Debug im Verlauf ein- oder ausblenden. Naechster Schritt: Schalter mit Leertaste umstellen.",
     "supportFilterTooltipPartial": "Tooltip: Teilwortsuche ein- oder ausblenden. Naechster Schritt: Suchbegriff eingeben und Enter druecken.",
     "supportFilterTooltipFooter": "Tooltip: Footer-Hinweis kurz oder lang schalten. Naechster Schritt: Bei kleiner Breite erst Fenster vergroessern.",
-    "supportHistoryEmptyQueryHint": "Hinweis: Kein Suchwort gesetzt. Naechster Schritt: Suchfeld fuellen und Enter druecken."
+    "supportHistoryEmptyQueryHint": "Hinweis: Kein Suchwort gesetzt. Naechster Schritt in 2 Klicks: 1) Suchfeld fuellen, 2) Filter anwenden.",
+    "supportBootDebugEnhancedHint": "🔍 Boot-Debug-Hilfe: Bei Problemen Schalter kurz aktivieren, Fehler lesen, dann wieder deaktivieren."
   }
 }

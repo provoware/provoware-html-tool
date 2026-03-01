@@ -169,8 +169,16 @@ body {
   font-family: var(--font-family-sans);
   line-height: 1.4;
   background:
-    radial-gradient(circle at 10% 5%, rgba(67, 182, 255, 0.18), transparent 28%),
-    radial-gradient(circle at 90% 85%, rgba(255, 124, 0, 0.18), transparent 26%),
+    radial-gradient(
+      circle at 10% 5%,
+      rgba(67, 182, 255, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 85%,
+      rgba(255, 124, 0, 0.18),
+      transparent 26%
+    ),
     var(--bg);
   color: var(--fg);
 }
@@ -214,7 +222,6 @@ body {
   gap: 0.5rem;
 }
 
-
 .brand {
   display: grid;
   gap: 0.1rem;
@@ -237,7 +244,6 @@ body {
 .menu,
 .icons,
 .system-actions,
-
 .dashboard-top {
   margin-top: 0.45rem;
   border: 1px solid var(--line);
@@ -323,7 +329,6 @@ a:focus-visible {
 .layout[data-left-collapsed="true"][data-right-collapsed="true"] {
   grid-template-columns: 1fr;
 }
-
 
 .layout[data-focus-mode="true"] {
   grid-template-columns: 1fr;
@@ -420,7 +425,11 @@ a:focus-visible {
 .panel {
   transform: scale(var(--ui-area-scale));
   transform-origin: top left;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 90%, #101f3d), var(--panel));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--panel) 90%, #101f3d),
+    var(--panel)
+  );
   border: 1px solid color-mix(in srgb, var(--line) 72%, #4fd1ff);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -429,8 +438,16 @@ a:focus-visible {
 
 .neon-panel {
   background:
-    radial-gradient(circle at top right, rgba(255, 153, 0, 0.2), transparent 45%),
-    radial-gradient(circle at bottom left, rgba(0, 220, 255, 0.15), transparent 55%),
+    radial-gradient(
+      circle at top right,
+      rgba(255, 153, 0, 0.2),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(0, 220, 255, 0.15),
+      transparent 55%
+    ),
     var(--panel);
 }
 
@@ -453,7 +470,6 @@ a:focus-visible {
   background: color-mix(in srgb, var(--panel-soft) 55%, transparent);
   font-size: 0.85rem;
 }
-
 
 .lyrics-profile-chip {
   border-style: solid;
@@ -730,7 +746,6 @@ a:focus-visible {
   color: var(--warn);
 }
 
-
 .boot-status {
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -768,7 +783,6 @@ a:focus-visible {
 #backup-compare-detail {
   margin: 0.35rem 0;
 }
-
 
 .support-mode-badge {
   display: inline-block;
@@ -820,6 +834,25 @@ a:focus-visible {
     display: grid;
     gap: 0.2rem;
   }
+}
+
+.support-boot-debug-help {
+  display: flex;
+  gap: 0.45rem;
+  align-items: flex-start;
+  border-inline-start: 4px solid var(--focus);
+  padding-inline-start: 0.5rem;
+}
+
+.support-boot-debug-help-icon {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+[data-theme="contrast"] .support-boot-debug-help {
+  background: #000;
+  color: #fff;
+  border-inline-start-color: #00ff84;
 }
 
 .sr-only {
@@ -919,7 +952,6 @@ a:focus-visible {
   margin-top: 0.35rem;
 }
 
-
 .module-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, minmax(0, 1fr));
@@ -974,7 +1006,6 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 }
-
 
 #module-options-region {
   margin-top: 0.5rem;

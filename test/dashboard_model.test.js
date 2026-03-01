@@ -66,6 +66,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     supportHistoryPartialMode: false,
     supportHistoryFooterCompact: true,
     supportHistorySortShortTokens: false,
+    supportHistoryEmptyHelpExpanded: false,
   });
 });
 
@@ -228,4 +229,16 @@ test("normalizeLayoutState setzt Kurzbegriff-Sortierung sicher", () => {
     supportHistorySortShortTokens: "ja",
   });
   assert.equal(disabled.supportHistorySortShortTokens, false);
+});
+
+test("normalizeLayoutState setzt 0-Treffer-Hilfe-Zustand sicher", () => {
+  const expanded = normalizeLayoutState({
+    supportHistoryEmptyHelpExpanded: true,
+  });
+  assert.equal(expanded.supportHistoryEmptyHelpExpanded, true);
+
+  const collapsed = normalizeLayoutState({
+    supportHistoryEmptyHelpExpanded: "ja",
+  });
+  assert.equal(collapsed.supportHistoryEmptyHelpExpanded, false);
 });

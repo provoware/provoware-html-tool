@@ -1,3 +1,8 @@
+## Iteration 105 (2026-03-01) - Support-Workflow-Feinschliff
+- [x] Naechster Mini-Punkt: 0-Treffer-Hilfe merkt sich den Aufklapp-Zustand pro Sitzung und Layout-Snapshot fuer robusten Rueckweg. | Code: templates/dashboard.js + system-module/dashboard_model.js + test/dashboard_model.test.js | Tests: npm run format + npm test + npm run qa + bash start.sh gruen | Doku: todo aktualisiert | Risiko: mittel (UI-Status + Persistenz), reduziert durch Modelltests und Fallback auf eingeklappt.
+- [x] Naechster Mini-Punkt: Such-Meta bei leerem Filter auf 2-Klick-Laienplan in einfacher Sprache aktualisiert. | Code: config/messages_de.json + templates/dashboard.js | Tests: npm run format + npm test | Doku: todo aktualisiert | Risiko: niedrig (Hinweistext), reduziert durch Fallback-Texte.
+- [x] Naechster Mini-Punkt: Boot-Debug-Hilfe mit farbunabhaengigem Icon + Kontrast-Panel sichtbar aufgewertet. | Code: templates/dashboard.html + templates/dashboard.css + templates/dashboard.js + test/dashboard_lyrics_guidance.test.js | Tests: npm run format + npm test | Doku: todo aktualisiert | Risiko: niedrig (A11y-Darstellung), reduziert durch CSS/Template-Checks.
+
 ## Iteration 104 (2026-03-01) - Layout-Exaktheitsanalyse
 - [x] Naechster Mini-Punkt: Verbindliche Layoutvorlage (`LAYOUT.png`) automatisiert gegen Dashboard-Struktur geprueft und Exaktheitsquote in Release-Check aufgenommen. | Code: tools/release_readiness_check.js + test/release_readiness_check.test.js | Tests: npm run format + npm test + node tools/release_readiness_check.js + bash start.sh gruen | Doku: todo aktualisiert | Risiko: niedrig (nur Prueflogik + Tests) | Naechster Schritt: bei echten UI-Abweichungen die Checkliste um visuelle Pixel-Toleranz erweitern.
 
