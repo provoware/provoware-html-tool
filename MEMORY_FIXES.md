@@ -556,3 +556,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Prompt-Pruefung nur E2E testen (abgelehnt, zu fragil).
 **Risiko/Side-Effects:** Niedrig; nur Vergleichslogik wurde zentralisiert.
 **Verknuepft:** PATCH-049
+
+## FIX-20260301-053: Kanban-Dummytexte-durch-echte-Daten
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Kanban zeigt nur Beispieltexte und ist nicht produktiv nutzbar.
+**Technische Ursache:** Spalten waren statisch direkt im HTML verdrahtet und hatten keine Datenanbindung.
+**Trigger:** Dashboard laden ohne dynamisches Kanban-Modul.
+**Fix (kurz):** Kanban-Modul eingefuehrt, JSON-Daten aus `data/kanban_board.json` geladen, Tastaturpfad mit links/rechts + Fokuszustand aktiviert.
+**Geaenderte Dateien/Marker:** `templates/kanban_preview.js`, `templates/dashboard.html`, `templates/dashboard.js`, `templates/dashboard.css`, `data/kanban_board.json`.
+**Tests/Checks:** `node --test`, `bash start.sh`, neuer Test `test/kanban_preview.test.js`.
+**Praevention (kuenftig):** Ab jetzt immer UI-Schnellansichten erst als Datenmodul bauen, nie als statischen Blindtext.
+**Alternative(n):** Kanban im HTML lassen und nur Text tauschen (abgelehnt: nicht wartbar).
+**Risiko/Side-Effects:** Bei fehlender JSON-Datei zeigt das UI jetzt klaren Fehler mit naechstem Schritt statt stiller Dummyanzeige.
+**Verknuepft:** Patch-ID PATCH-053

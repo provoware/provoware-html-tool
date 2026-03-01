@@ -183,27 +183,23 @@
           >
             <h2 id="kanban-preview-title">Kanban-Schnellansicht</h2>
             <p class="field-tip">
-              Bedienung: Tab waehlt Spalten. Enter oeffnet die Aktion. Escape
-              beendet geoeffnete Dialoge.
+              Bedienung: Tab waehlt Spalten. Pfeil links/rechts wechselt
+              Spalten. Escape beendet geoeffnete Dialoge.
             </p>
-            <div class="kanban-preview" role="list" aria-label="Kanban Spalten">
-              <article class="kanban-col" role="listitem">
-                <h3>Idee</h3>
-                <p>Website Relaunch</p>
-              </article>
-              <article class="kanban-col" role="listitem">
-                <h3>Planung</h3>
-                <p>Marketing Kampagne</p>
-              </article>
-              <article class="kanban-col" role="listitem">
-                <h3>Umsetzung</h3>
-                <p>App Update</p>
-              </article>
-              <article class="kanban-col" role="listitem">
-                <h3>Review</h3>
-                <p>API Integration</p>
-              </article>
-            </div>
+            <p class="field-tip" id="kanban-tip">
+              Was macht das? Die Spalten laden echte Daten aus
+              <code>data/kanban_board.json</code>. Rueckweg: Mit Tab den
+              naechsten Bereich waehlen.
+            </p>
+            <p id="kanban-status" class="field-tip" aria-live="polite">
+              Kanban wird geladen.
+            </p>
+            <div
+              id="kanban-preview"
+              class="kanban-preview"
+              role="list"
+              aria-label="Kanban Spalten"
+            ></div>
           </article>
 
           <article class="panel" aria-labelledby="workspace-title">
@@ -346,6 +342,7 @@
     <script src="todo_module.js"></script>
     <script src="backup_restore.js"></script>
     <script src="boot_status.js"></script>
+    <script src="kanban_preview.js"></script>
     <script src="dashboard.js"></script>
   </body>
 </html>

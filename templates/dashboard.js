@@ -30,6 +30,8 @@
   const showLaienTip = document.getElementById("show-laien-tip");
   const bootStatus = document.getElementById("boot-status");
   const bootSummary = document.getElementById("boot-summary");
+  const kanbanPreview = document.getElementById("kanban-preview");
+  const kanbanStatus = document.getElementById("kanban-status");
 
   function formatText(template, values) {
     if (typeof template !== "string" || !template.trim()) {
@@ -88,6 +90,17 @@
       "Status fehlt. Naechster Schritt: Erneut versuchen.",
     );
     status.textContent = safe;
+    return safe;
+  }
+
+  function setKanbanStatus(message) {
+    const safe = ensureMessage(
+      message,
+      "Kanban-Status fehlt. Naechster Schritt: Erneut versuchen.",
+    );
+    if (kanbanStatus) {
+      kanbanStatus.textContent = safe;
+    }
     return safe;
   }
 
@@ -555,6 +568,25 @@
     });
   }
 
+  if (window.KanbanPreview && kanbanPreview) {
+    const kanban = window.KanbanPreview.createKanbanPreview({
+      root: kanbanPreview,
+      setStatus: setKanbanStatus,
+      sourcePath: "../data/kanban_board.json",
+    });
+    kanban.load().then((result) => {
+      if (result.ok) {
+        setDebug(
+          `Debug: Kanban geladen (${result.count} Spalten, ${result.keyboardCount} Fokusbereiche).`,
+        );
+      }
+    });
+  } else {
+    setKanbanStatus(
+      "Kanban-Modul fehlt. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
   window.createModuleWorkspace({
     catalog: document.getElementById("module-catalog"),
     grid: document.getElementById("active-modules"),
@@ -576,6 +608,8 @@
     [backupTargetSelect, "Ziel-Datei-Auswahl"],
     [backupRestore, "Backup-Wiederherstellen"],
     [backupDialogClose, "Backup-Dialog-Zurueck"],
+    [kanbanPreview, "Kanban-Bereich"],
+    [kanbanStatus, "Kanban-Status"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(

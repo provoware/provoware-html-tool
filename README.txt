@@ -1,3 +1,4 @@
+- Neu (2026-03-01): Kanban-Schnellansicht nutzt jetzt echte Daten aus `data/kanban_board.json` und ist per Pfeiltasten links/rechts barrierefrei bedienbar.
 # Provoware HTML Tool
 
 - Neu (2026-03-01): Referenzbild professionell analysiert und als feste UI-Vorgabe umgesetzt (Neon-Karten, KPI-Bereich, Kanban-Schnellansicht, Team/Kalendertext).
@@ -16,8 +17,8 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 76 %
-- **Erledigt:** 73 Punkte
-- **Offen:** 23 Punkte
+- **Erledigt:** 75 Punkte
+- **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
