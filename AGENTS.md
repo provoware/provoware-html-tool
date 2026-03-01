@@ -94,6 +94,7 @@ Storage/JSON‑Änderung: - JSON Syntax ok - Schema‑Validierung ok (wenn vorha
 Schritt 4 – Doku minimal aktualisieren (nur relevant) 
 CHANGELOG.md: 1–3 Zeilen (was, warum, Risiko)
 SELFINFO.md: Version/Iteration + Next Step
+README.txt: pro Iteration kurz auf aktuellen Stand bringen (Fortschritt, offene Punkte, neuer naechster Schritt).
 Wenn UI‑Text geändert: messages_de.json + kurzer Eintrag in docs/HILFE.md 
 Schritt 5 – Iterations‑Summary (maximal transparent) 
 Jede Iteration endet mit diesen Blöcken: 
@@ -335,6 +336,7 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 
 16.8 Doku-Pflicht
 - In CHANGELOG.md 1 kurze Zeile zur UX/Hilfe-Mini-Optimierung ergänzen.
+- README.txt in jeder Iteration kurz aktualisieren (Fortschritt/Status + naechster Schritt).
 - In todo.txt den erledigten Mini-Punkt abhaken und nächsten Mini-Punkt planen.
 
 14) Nächster Schritt (Pflichtauswahl) 

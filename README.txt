@@ -203,6 +203,16 @@ Log-Ziele:
 - einfache Erklärung für Laien
 - technische Details für Entwicklung
 
+## Iterations-Doku (Pflicht je Runde)
+
+In jeder Iteration werden diese 4 Dateien kurz gepflegt:
+1. `CHANGELOG.md` (was wurde geaendert?)
+2. `SELFINFO.md` (aktuelle Iteration + naechster Schritt)
+3. `README.txt` (Fortschritt, offene Punkte, klare Befehle)
+4. `todo.txt` (erledigt abhaken, naechsten Mini-Punkt planen)
+
+Warum? So bleiben Status, Hilfe und Einstieg immer synchron.
+
 ## Wichtige Dateien
 
 - Entwicklerdoku: `docs/ENTWICKLERDOKU.md`
