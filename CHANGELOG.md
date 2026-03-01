@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 66
+
+- Zwei offene TODO-Punkte abgeschlossen: Rail-Rahmen + Statusbanner wurden in allen 5 Themes auf AA-Kontrast feinjustiert, inklusive harter Kontrastchecks fuer Banner, Rail und Kartenprofile.
+- Zentrale Kartenfarb-Profile als Design-Tokens pro Modul eingefuehrt (`project`, `sales`, `analytics`, `support`), damit kuenftige Layout-Aenderungen ohne CSS-Streuung moeglich bleiben.
+- Referenzbild-Soll/Ist erneut hart geprueft: Drei-Spalten-Raster, Neon-Rahmen und Statusbanner wurden visuell angeglichen; Risiko niedrig, weil IDs und Bedienlogik gleich blieben.
+
 ## 2026-03-02 – Iteration 65
 
 - Referenzbild-Datei aus dem Projekt entfernt und das Dashboard visuell auf dunkles Neon-Layout mit klarer Drei-Spalten-Struktur umgestellt.

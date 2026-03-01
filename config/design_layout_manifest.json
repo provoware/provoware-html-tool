@@ -3,7 +3,7 @@
     "name": "dashboard-layout-neon-v1",
     "source": "Beispielbild 2026-03-02",
     "goal": "Drei-Spalten-Aufbau mit linker Navigation, Kartenmitte und rechter Einstellungsleiste in barrierearmer Form.",
-    "updatedAt": "2026-03-02"
+    "updatedAt": "2026-03-03"
   },
   "layout": {
     "shell": {
@@ -57,6 +57,28 @@
     "statusRule": "Status nie nur mit Farbe, immer mit Text",
     "tokenSource": "config/ui_design_tokens.json",
     "pluginReadyRule": "Plugins muessen Spacing/Radius/Font/Shadow/Button-Hoehen aus dem globalen Token-Set nutzen."
+    "cardProfiles": [
+      {
+        "id": "project",
+        "tokenPrefix": "module-project",
+        "purpose": "Projektmanagement-Karten"
+      },
+      {
+        "id": "sales",
+        "tokenPrefix": "module-sales",
+        "purpose": "Vertrieb-und-CRM-Karten"
+      },
+      {
+        "id": "analytics",
+        "tokenPrefix": "module-analytics",
+        "purpose": "Analyse-und-Bericht-Karten"
+      },
+      {
+        "id": "support",
+        "tokenPrefix": "module-support",
+        "purpose": "Support-Karten"
+      }
+    ]
   },
   "themes": [
     {

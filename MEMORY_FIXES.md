@@ -739,16 +739,16 @@ config/manifests/\*.json, tools/start_routine.js
 **Risiko/Side-Effects:** Niedrig, da nur Lyrics-Preview-Flow betroffen.
 **Verknuepft:** patch-064
 
-## FIX-20260303-001: Globale UI-Tokens als Plugin-Schutz
+## FIX-20260303-001: Theme-Kontrast fuer Rail/Banner/Karten
 
-**Kategorie:** UI
-**Symptom (für Laien):** Plugins sahen unterschiedlich aus und wirkten wie Fremdteile.
-**Technische Ursache:** Designwerte lagen verteilt im CSS statt als zentrale Quelle.
-**Trigger:** Neue Module brachten eigene Abstaende/Radius/Buttons mit.
-**Fix (kurz):** `config/ui_design_tokens.json` eingefuehrt, Release-Check erweitert, CSS auf Token-Variablen ausgerichtet.
-**Geänderte Dateien/Marker:** config/ui_design_tokens.json, tools/release_readiness_check.js, templates/dashboard.css.
-**Tests/Checks:** node --test test/ui_design_tokens.test.js + node --test test/release_readiness_check.test.js + bash start.sh.
-**Prävention (künftig):** Ab jetzt immer zuerst Token nutzen und erst danach komponentenspezifische Styles ergänzen.
-**Alternative(n):** Reine CSS-Variablen ohne JSON-Quelle (abgelehnt, da weniger pruefbar).
-**Risiko/Side-Effects:** Niedrig, da nur Designschicht.
-**Verknüpft:** PATCH-066
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Einige Rahmen und Banner wirkten je Theme unterschiedlich stark und teils zu schwach.
+**Technische Ursache:** Kontrast-Checks deckten nur Haupttext + Topbar ab, nicht Rail/Banner/Karten.
+**Trigger:** Theme-Wechsel auf warm/camo mit Referenzbild-Abgleich.
+**Fix (kurz):** Zentrale Tokens fuer Rail/Banner/Kartenprofile eingefuehrt und Release-Check auf diese Flaechen erweitert.
+**Geaenderte Dateien/Marker:** templates/dashboard.css, tools/release_readiness_check.js, templates/module_workspace.js.
+**Tests/Checks:** node --test, npm run format, bash start.sh, Screenshot-Abgleich.
+**Praevention (kuenftig):** Ab jetzt immer Kontrast fuer Text + Banner + Rail + Kartenprofile je Theme automatisiert pruefen.
+**Alternative(n):** Einzelwerte je Karte hart codieren (verworfen wegen Wartbarkeit).
+**Risiko/Side-Effects:** Gering, da nur Stil-Tokens und Checks erweitert wurden.
+**Verknuepft:** Iteration 66

@@ -1,3 +1,8 @@
+## Iteration 66 – Erweiterter Tool-Umfang
+- Neues Design-Token-Set fuer Rail, Statusbanner und modulbezogene Kartenprofile in allen 5 Themes.
+- Release-Check misst jetzt zusaetzlich Kontrast fuer Banner, Rail und vier Modulprofile (AA-Zielwert).
+- Nutzen fuer Laien: stabilere Lesbarkeit in jedem Theme und klarer Rueckweg bei Boot-Fehlern.
+
 ## Iteration 62 – Songtext-Editor und getrennte Bereichsdateien
 
 - Der Songtext-Editor sitzt jetzt direkt im Lyrics-Bereich (Songideen) und bietet Intro-/Refrain-Vorlagen.

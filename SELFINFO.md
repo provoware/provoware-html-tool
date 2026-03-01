@@ -1,3 +1,9 @@
+## Iteration 66 (2026-03-03)
+
+- Hauptziel: Rail-Rahmen + Statusbanner in 5 Themes mit gleich starker Kontrastpruefung abgeschlossen.
+- Mini-Optimierung: Boot-Status-Fallback nennt jetzt alle drei naechsten Schritte (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
+- Next Step: Offene Platzhalter-Fragen aus `todo.txt` in `QUESTIONS_TODO.md` priorisieren.
+
 ## Iteration 65 (2026-03-02)
 
 - Ziel: Zwei offene Punkte abschliessen (Referenzbild-Abweichungsliste + automatische Folgepunkte im TODO).

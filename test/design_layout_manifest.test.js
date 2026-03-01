@@ -2,6 +2,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
   readDesignLayoutManifest,
+  validateCardProfiles,
   validateDesignLayoutManifest,
   validateThemeList,
 } = require("../system-module/design_layout_manifest");
@@ -34,4 +35,15 @@ test("readDesignLayoutManifest liest die Projektdatei erfolgreich", () => {
     result.manifest.visual.tokenSource,
     "config/ui_design_tokens.json",
   );
+});
+
+test("validateCardProfiles akzeptiert vier zentrale Kartenprofile", () => {
+  const result = validateCardProfiles([
+    { id: "project", tokenPrefix: "module-project", purpose: "Projekt" },
+    { id: "sales", tokenPrefix: "module-sales", purpose: "Vertrieb" },
+    { id: "analytics", tokenPrefix: "module-analytics", purpose: "Analyse" },
+    { id: "support", tokenPrefix: "module-support", purpose: "Support" },
+  ]);
+
+  assert.equal(result.ok, true);
 });
