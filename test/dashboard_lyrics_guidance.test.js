@@ -183,6 +183,8 @@ test("Support-Verlauf markiert Suchwort mit Text-Hervorhebung", () => {
   assert.match(dashboardCss, /#support-history-list mark/);
   assert.match(dashboardJs, /highlightQueryText/);
   assert.match(dashboardJs, /appendHighlightedText/);
+  assert.match(dashboardJs, /splitSearchTokens/);
+  assert.match(dashboardJs, /queryTokens\.every/);
 });
 
 test("Boot-Debug erscheint als eigener Hilfe-Eintrag", () => {
@@ -193,4 +195,34 @@ test("Boot-Debug erscheint als eigener Hilfe-Eintrag", () => {
 
   assert.match(dashboardJs, /kind: "boot-debug"/);
   assert.match(dashboardJs, /details: lastBootFocusDebugText/);
+});
+
+test("Boot-Debug-Schalter ist im Hilfe-Panel verfuegbar", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="support-history-boot-debug-toggle"/);
+  assert.match(dashboardJs, /showBootDebugInSupport/);
+  assert.match(
+    dashboardJs,
+    /Boot-Debug-Schalter konnte nicht gespeichert werden\./,
+  );
+});
+
+test("Restore-Hinweis erklaert gespeicherten Detailzustand", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(
+    dashboardHtml,
+    /Dieser Zustand wird pro\s+Projekt gespeichert und bei Restore wieder geladen\./,
+  );
 });

@@ -591,3 +591,9 @@
 - Dashboard speichert den Backup-Detailzustand (`backupDetailOpen`) pro Projektlayout und stellt ihn robust wieder her.
 - Support-Verlauf hat jetzt Suchwort-Markierung per `<mark>` (Text + Kontrast), nicht nur Farbhinweis.
 - Boot-Live-Debug wird als eigener Hilfe-Eintrag (`boot-debug`) im Verlauf gespiegelt.
+
+## 2026-03-01 – Hilfe-Panel ruhiger + Suchrobustheit
+
+- Support-Verlauf hat einen neuen Schalter, um `boot-debug` bei Bedarf auszublenden (ruhiger fuer Einsteiger).
+- Suchmarkierung nutzt jetzt ganze Woerter statt Teilstrings; Treffer wirken klarer und stabiler.
+- Backup-Detailhinweis erklaert jetzt direkt, dass der Zustand pro Projekt gespeichert und beim Restore geladen wird.

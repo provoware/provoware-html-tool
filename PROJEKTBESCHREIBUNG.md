@@ -390,3 +390,9 @@ Praktischer Einsatz:
 - Layoutmodell und Dashboard-Script nutzen jetzt dasselbe Feld `backupDetailOpen`; dadurch ist der Detailzustand stabil zwischen Sitzungen.
 - Die Verlaufssuche rendert markierte Treffer als echte Textknoten (keine HTML-Injektion), das verbessert Wartbarkeit und Sicherheit.
 - Debug-Hinweise aus dem Boot-Prozess werden im Hilfe-Verlauf direkt sichtbar und erleichtern die Fehlersuche fuer Laien.
+
+## Iteration 95 – Hilfe-Panel Schalter + Wortsuche
+- Das Dashboard speichert jetzt zusaetzlich `showBootDebugInSupport` im Layoutzustand.
+- Der neue Hilfe-Schalter blendet den technischen `boot-debug`-Eintrag optional aus, damit die Verlaufsliste fuer Einsteiger ruhiger ist.
+- Die Suchlogik wurde robust gemacht: Tokenisierung + Normalisierung + ganze-Wort-Vergleich (Validierung = Eingabepruefung) fuer weniger Fehlmarkierungen.
+- Der Restore-Dialog nennt den gespeicherten Detailzustand klar als projektweiten Zustand.

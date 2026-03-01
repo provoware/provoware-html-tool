@@ -59,6 +59,9 @@
   const supportHistoryQuery = document.getElementById("support-history-query");
   const supportHistoryMeta = document.getElementById("support-history-meta");
   const supportHistoryList = document.getElementById("support-history-list");
+  const supportHistoryBootDebugToggle = document.getElementById(
+    "support-history-boot-debug-toggle",
+  );
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -123,6 +126,7 @@
     rightCollapsed: false,
     bootFocusTarget: "module",
     backupDetailOpen: false,
+    showBootDebugInSupport: true,
   };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
@@ -226,6 +230,7 @@
       rightCollapsed: Boolean(source.rightCollapsed),
       bootFocusTarget: source.bootFocusTarget === "help" ? "help" : "module",
       backupDetailOpen: source.backupDetailOpen === true,
+      showBootDebugInSupport: source.showBootDebugInSupport !== false,
     };
   }
 
@@ -310,6 +315,10 @@
     if (bootFocusTarget) {
       bootFocusTarget.value =
         layoutState.bootFocusTarget === "help" ? "help" : "module";
+    }
+    if (supportHistoryBootDebugToggle) {
+      supportHistoryBootDebugToggle.checked =
+        layoutState.showBootDebugInSupport === true;
     }
     if (backupCompareDetailWrap) {
       backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
@@ -1258,6 +1267,40 @@
     return backupSelect.options.length > 0;
   }
 
+  function normalizeSearchToken(token) {
+    const safeToken = typeof token === "string" ? token.trim() : "";
+    if (!safeToken) {
+      return "";
+    }
+    return safeToken
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9_-]+/g, "");
+  }
+
+  function splitSearchTokens(queryText) {
+    const safeQuery = typeof queryText === "string" ? queryText.trim() : "";
+    if (!safeQuery) {
+      return [];
+    }
+
+    const tokens = safeQuery
+      .split(/\s+/)
+      .map(normalizeSearchToken)
+      .filter((entry) => entry.length >= 2);
+    return Array.from(new Set(tokens));
+  }
+
+  function buildNormalizedWordList(sourceText) {
+    const safeSource = typeof sourceText === "string" ? sourceText : "";
+    const matches = safeSource.match(/[A-Za-z0-9_-]+/g);
+    if (!Array.isArray(matches)) {
+      return [];
+    }
+    return matches.map(normalizeSearchToken).filter(Boolean);
+  }
+
   function normalizeSupportHistoryEvents(events) {
     const safeEvents = Array.isArray(events) ? events : [];
     return safeEvents.filter((event) => event && typeof event === "object");
@@ -1265,32 +1308,34 @@
 
   function highlightQueryText(sourceText, queryText) {
     const safeSource = typeof sourceText === "string" ? sourceText : "";
-    const safeQuery = typeof queryText === "string" ? queryText.trim() : "";
-    if (!safeQuery) {
+    const tokens = splitSearchTokens(queryText);
+    if (tokens.length === 0) {
       return [{ text: safeSource, mark: false }];
     }
 
-    const lowerSource = safeSource.toLowerCase();
-    const lowerQuery = safeQuery.toLowerCase();
+    const wordRegex = /[A-Za-z0-9_-]+/g;
     const chunks = [];
     let cursor = 0;
+    let match = wordRegex.exec(safeSource);
 
-    while (cursor < safeSource.length) {
-      const index = lowerSource.indexOf(lowerQuery, cursor);
-      if (index < 0) {
-        chunks.push({ text: safeSource.slice(cursor), mark: false });
-        break;
+    while (match) {
+      const [word] = match;
+      const start = match.index;
+      const end = start + word.length;
+
+      if (start > cursor) {
+        chunks.push({ text: safeSource.slice(cursor, start), mark: false });
       }
 
-      if (index > cursor) {
-        chunks.push({ text: safeSource.slice(cursor, index), mark: false });
-      }
+      const normalizedWord = normalizeSearchToken(word);
+      const shouldMark = tokens.includes(normalizedWord);
+      chunks.push({ text: safeSource.slice(start, end), mark: shouldMark });
+      cursor = end;
+      match = wordRegex.exec(safeSource);
+    }
 
-      chunks.push({
-        text: safeSource.slice(index, index + safeQuery.length),
-        mark: true,
-      });
-      cursor = index + safeQuery.length;
+    if (cursor < safeSource.length) {
+      chunks.push({ text: safeSource.slice(cursor), mark: false });
     }
 
     return chunks.length > 0 ? chunks : [{ text: safeSource, mark: false }];
@@ -1318,8 +1363,8 @@
     supportHistoryList.innerHTML = "";
     const safeFilter = typeof filterKey === "string" ? filterKey : "all";
     const normalized = normalizeSupportHistoryEvents(events);
-    const safeQuery =
-      typeof queryText === "string" ? queryText.trim().toLowerCase() : "";
+    const safeQuery = typeof queryText === "string" ? queryText.trim() : "";
+    const queryTokens = splitSearchTokens(safeQuery);
     const bootDebugEntry =
       typeof lastBootFocusDebugText === "string" &&
       lastBootFocusDebugText.trim()
@@ -1329,9 +1374,11 @@
             details: lastBootFocusDebugText,
           }
         : null;
-    const normalizedWithBoot = bootDebugEntry
-      ? [bootDebugEntry, ...normalized]
-      : normalized;
+    const shouldShowBootDebug = layoutState.showBootDebugInSupport === true;
+    const normalizedWithBoot =
+      shouldShowBootDebug && bootDebugEntry
+        ? [bootDebugEntry, ...normalized]
+        : normalized;
 
     const filtered = normalizedWithBoot.filter((entry) => {
       if (safeFilter === "safe-mode" && entry.kind !== "safe-mode-reset") {
@@ -1342,19 +1389,15 @@
         return true;
       }
 
-      const kind =
-        typeof entry.kind === "string" ? entry.kind.toLowerCase() : "";
-      const createdAt =
-        typeof entry.createdAt === "string"
-          ? entry.createdAt.toLowerCase()
-          : "";
-      const details =
-        typeof entry.details === "string" ? entry.details.toLowerCase() : "";
-      return (
-        kind.includes(safeQuery) ||
-        createdAt.includes(safeQuery) ||
-        details.includes(safeQuery)
-      );
+      if (queryTokens.length === 0) {
+        return true;
+      }
+
+      const kindWords = buildNormalizedWordList(entry.kind);
+      const createdAtWords = buildNormalizedWordList(entry.createdAt);
+      const detailsWords = buildNormalizedWordList(entry.details);
+      const haystack = [...kindWords, ...createdAtWords, ...detailsWords];
+      return queryTokens.every((token) => haystack.includes(token));
     });
 
     if (supportHistoryMeta) {
@@ -1792,6 +1835,23 @@
   }
   if (supportHistoryFilter) {
     supportHistoryFilter.addEventListener("change", refreshSupportHistory);
+  }
+  if (supportHistoryBootDebugToggle) {
+    supportHistoryBootDebugToggle.checked =
+      layoutState.showBootDebugInSupport === true;
+    supportHistoryBootDebugToggle.addEventListener("change", () => {
+      layoutState = normalizeLayoutWithModel({
+        ...layoutState,
+        showBootDebugInSupport: supportHistoryBootDebugToggle.checked === true,
+      });
+      persistLayoutState()
+        .then(() => refreshSupportHistory())
+        .catch(() => {
+          setStatus(
+            "Boot-Debug-Schalter konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+          );
+        });
+    });
   }
   if (supportHistoryQuery) {
     supportHistoryQuery.addEventListener("input", refreshSupportHistory);
