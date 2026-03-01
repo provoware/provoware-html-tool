@@ -209,5 +209,8 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Modul-Control-Leiste Tooltips auf einheitliche Kurzform mit Rueckweg-Hinweis bringen.
 - [x] Naechster Mini-Punkt: Start-Routine-Abschlussbericht um kurze Zusammenfassung fuer A11y-Checks erweitern.
 
-- [ ] Naechster Mini-Punkt: Modul-Control-Leiste um Pin-Knopf mit gleichem Tooltip-Standard erweitern.
-- [ ] Naechster Mini-Punkt: Fokusmodus (100%-Ansicht) mit Layout-Snapshot/Restore testen und absichern.
+- [x] Naechster Mini-Punkt: Modul-Control-Leiste um Pin-Knopf mit gleichem Tooltip-Standard erweitern.
+- [x] Naechster Mini-Punkt: Fokusmodus (100%-Ansicht) mit Layout-Snapshot/Restore testen und absichern.
+
+- [ ] Naechster Mini-Punkt: Fokusmodus-Hinweise im Inspector-Tab sichtbar machen.
+- [ ] Naechster Mini-Punkt: Modul-Anheften zusaetzlich in layout.json persistieren.

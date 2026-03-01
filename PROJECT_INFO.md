@@ -152,3 +152,5 @@ PATCH-059: Wiki-Modul (Kategorie/Titel/Inhalt) als getrenntes System-Modul einge
 - Ampel bleibt immer textgestuetzt (Gruen/Gelb/Rot + naechster Schritt), damit Status nicht nur ueber Farbe laeuft.
 
 - 2026-03-03 (Iteration 67): Lyrics-Kurzguide zeigt jetzt Enter/Space/Escape-Schritte, und der Lesemodus blendet eine manuelle Kopierhilfe bei Clipboard-Fehlern ein.
+
+- Neuer UI-Standard: Globale Modi (z. B. Fokusmodus) nutzen immer Snapshot/Restore mit Escape-Rueckweg.

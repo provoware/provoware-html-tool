@@ -123,6 +123,31 @@ function normalizeLayoutState(input) {
   };
 }
 
+function createLayoutSnapshot(layoutState) {
+  const normalized = normalizeLayoutState(layoutState);
+  return {
+    leftWidth: normalized.leftWidth,
+    rightWidth: normalized.rightWidth,
+    leftCollapsed: normalized.leftCollapsed,
+    rightCollapsed: normalized.rightCollapsed,
+  };
+}
+
+function applyLayoutSnapshot(layoutState, snapshot) {
+  const base = normalizeLayoutState(layoutState);
+  if (!snapshot || typeof snapshot !== "object") {
+    return base;
+  }
+
+  const safeSnapshot = normalizeLayoutState(snapshot);
+  return {
+    leftWidth: safeSnapshot.leftWidth,
+    rightWidth: safeSnapshot.rightWidth,
+    leftCollapsed: safeSnapshot.leftCollapsed,
+    rightCollapsed: safeSnapshot.rightCollapsed,
+  };
+}
+
 function getGridColumnCount(viewportWidth) {
   if (!Number.isFinite(viewportWidth) || viewportWidth < 1) {
     throw new Error(
@@ -146,9 +171,23 @@ function getGridColumnCount(viewportWidth) {
 }
 
 module.exports = {
+  applyLayoutSnapshot,
   buildQuickAccess,
+  createLayoutSnapshot,
   getGridColumnCount,
   moveZone,
   normalizeLayoutState,
   reorderZones,
 };
+
+if (typeof window !== "undefined") {
+  window.DashboardModel = {
+    applyLayoutSnapshot,
+    buildQuickAccess,
+    createLayoutSnapshot,
+    getGridColumnCount,
+    moveZone,
+    normalizeLayoutState,
+    reorderZones,
+  };
+}
