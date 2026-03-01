@@ -161,6 +161,7 @@ function normalizeLayoutState(input) {
   const leftCollapsed = Boolean(source.leftCollapsed);
   const rightCollapsed = Boolean(source.rightCollapsed);
   const bootFocusTarget = normalizeBootFocusTarget(source.bootFocusTarget);
+  const backupDetailOpen = source.backupDetailOpen === true;
 
   return {
     leftWidth,
@@ -168,6 +169,7 @@ function normalizeLayoutState(input) {
     leftCollapsed,
     rightCollapsed,
     bootFocusTarget,
+    backupDetailOpen,
   };
 }
 
@@ -179,6 +181,7 @@ function createLayoutSnapshot(layoutState) {
     leftCollapsed: normalized.leftCollapsed,
     rightCollapsed: normalized.rightCollapsed,
     bootFocusTarget: normalized.bootFocusTarget,
+    backupDetailOpen: normalized.backupDetailOpen,
   };
 }
 
@@ -195,6 +198,7 @@ function applyLayoutSnapshot(layoutState, snapshot) {
     leftCollapsed: safeSnapshot.leftCollapsed,
     rightCollapsed: safeSnapshot.rightCollapsed,
     bootFocusTarget: safeSnapshot.bootFocusTarget,
+    backupDetailOpen: safeSnapshot.backupDetailOpen,
   };
 }
 

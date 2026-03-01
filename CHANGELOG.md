@@ -585,3 +585,9 @@
 
 - Zwei offene Mini-Punkte abgeschlossen: Boot-Fokusziel wird per `aria-live` als Klartext gemeldet; Support-Suche zeigt Trefferzahl und Enter-Shortcut.
 - Mini-Optimierung Hilfe/UX: Suchmetatext erklaert den direkten naechsten Schritt fuer Tastaturnutzer.
+
+## 2026-03-01
+
+- Dashboard speichert den Backup-Detailzustand (`backupDetailOpen`) pro Projektlayout und stellt ihn robust wieder her.
+- Support-Verlauf hat jetzt Suchwort-Markierung per `<mark>` (Text + Kontrast), nicht nur Farbhinweis.
+- Boot-Live-Debug wird als eigener Hilfe-Eintrag (`boot-debug`) im Verlauf gespiegelt.

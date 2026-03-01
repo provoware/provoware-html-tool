@@ -769,6 +769,15 @@ a:focus-visible {
   margin: 0.35rem 0;
 }
 
+#support-history-list mark {
+  background: var(--warn-soft);
+  color: var(--ink);
+  border: 1px solid var(--warn);
+  border-radius: 4px;
+  padding: 0 0.1rem;
+  font-weight: 700;
+}
+
 [data-state="ok"] {
   color: var(--ok);
   font-weight: 700;

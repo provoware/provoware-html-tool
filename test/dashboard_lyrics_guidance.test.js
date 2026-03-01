@@ -134,7 +134,10 @@ test("Support-Verlauf nutzt Tastatur-Hinweis je Treffer", () => {
     dashboardJs,
     /Tastatur-Hinweis kurz: Tab waehlt, Enter startet, Escape schliesst\./,
   );
-  assert.match(dashboardJs, /backupCompareDetailWrap\.open = false/);
+  assert.match(
+    dashboardJs,
+    /backupCompareDetailWrap\.open = layoutState\.backupDetailOpen === true/,
+  );
 });
 
 test("Backup-Detailmodus zeigt zuletzt geoeffneten Zustand", () => {
@@ -165,4 +168,29 @@ test("Boot-Live-Ansage wird in Debug-Protokoll gespiegelt", () => {
   );
 
   assert.match(dashboardJs, /Debug: Boot-Live-Ansage aktualisiert/);
+});
+
+test("Support-Verlauf markiert Suchwort mit Text-Hervorhebung", () => {
+  const dashboardCss = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.css"),
+    "utf8",
+  );
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardCss, /#support-history-list mark/);
+  assert.match(dashboardJs, /highlightQueryText/);
+  assert.match(dashboardJs, /appendHighlightedText/);
+});
+
+test("Boot-Debug erscheint als eigener Hilfe-Eintrag", () => {
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardJs, /kind: "boot-debug"/);
+  assert.match(dashboardJs, /details: lastBootFocusDebugText/);
 });

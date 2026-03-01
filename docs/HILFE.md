@@ -250,3 +250,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Im Support-Verlauf zeigt ein Zusatztext die aktuelle Trefferzahl.
 - Tipp: Im Suchfeld einfach `Enter` druecken, dann wird der Filter sofort ausgefuehrt.
 - Wenn kein Treffer da ist: Filter wechseln oder Suchtext vereinfachen und erneut versuchen.
+
+## Neu in Iteration 94
+
+- Support-Verlauf markiert Suchwoerter jetzt als Textmarkierung (`<mark>` mit Rahmen), damit Treffer klar sichtbar sind und nicht nur ueber Farbe laufen.
+- Der letzte Boot-Debugtext wird zusaetzlich als Verlaufseintrag `boot-debug` gezeigt.
+- Der Backup-Detailmodus merkt sich den letzten Zustand pro Projekt (`backupDetailOpen`).

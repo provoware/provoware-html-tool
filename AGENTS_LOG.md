@@ -1,3 +1,14 @@
+PATCHSPEC-2026-03-01-094
+1) Ziel: Drei offene Mini-Punkte aus todo.txt abschliessen (Backup-Detailzustand speichern, Suchwort-Markierung, Boot-Debug als Hilfe-Eintrag).
+2) Scope IN: templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, passende Tests und Pflicht-Doku.
+3) Scope OUT: Keine neuen Abhaengigkeiten, kein Umbau von Registry/Backup-Format, kein grosses Layout-Refactor.
+4) Dateien/Marker: data/layout.json->layout.backupDetailOpen, support-history-list Highlight, Boot-Debug-Eintrag im Hilfe-Panel.
+5) Risiko: mittel (UI-Text + Persistenz), reduziert durch Validierung und Release-Gates.
+6) Akzeptanzkriterien: Detailzustand bleibt pro Projekt erhalten, Suchwort wird als Textmarkierung sichtbar (nicht nur Farbe), letzter Boot-Debug steht als eigener Hilfe-Eintrag.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt per git checkout -- <datei> zurueck.
+
+2026-03-01 | PATCH-094 | Drei offene Mini-Punkte abgeschlossen: Backup-Detailzustand persistent, Suchwort-Markierung im Support-Verlauf, Boot-Debug als Hilfe-Eintrag | system-module/dashboard_model.js, templates/dashboard.js, templates/dashboard.css, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, README.txt, docs/HILFE.md, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt
+
 PATCHSPEC-2026-03-01-093
 1) Ziel: Drei offene Mini-Punkte in Dashboard-Hilfe abschliessen (Boot-Debuglog, kurzer Support-Hinweis, Detailzustand).
 2) Scope IN: templates/dashboard.js, templates/dashboard.html, test/dashboard_lyrics_guidance.test.js, README.txt, docs/HILFE.md, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt.

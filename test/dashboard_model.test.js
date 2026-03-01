@@ -61,6 +61,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     leftCollapsed: true,
     rightCollapsed: false,
     bootFocusTarget: "module",
+    backupDetailOpen: false,
   });
 });
 
@@ -77,6 +78,7 @@ test("createLayoutSnapshot und applyLayoutSnapshot arbeiten mit sicheren Werten"
     rightWidth: 300,
     leftCollapsed: false,
     rightCollapsed: true,
+    backupDetailOpen: true,
   });
 
   const restored = applyLayoutSnapshot(
@@ -180,4 +182,12 @@ test("resolveBootFocusTarget liefert Fokusziel und Status", () => {
   assert.match(helpTarget.status, /Hilfe/);
   assert.equal(moduleTarget.target, "module");
   assert.match(moduleTarget.status, /ersten Modul/);
+});
+
+test("normalizeLayoutState setzt Backup-Detailzustand sicher", () => {
+  const opened = normalizeLayoutState({ backupDetailOpen: true });
+  assert.equal(opened.backupDetailOpen, true);
+
+  const closed = normalizeLayoutState({ backupDetailOpen: "ja" });
+  assert.equal(closed.backupDetailOpen, false);
 });
