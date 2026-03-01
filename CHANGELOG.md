@@ -72,3 +72,10 @@
 - Dashboard-Hauptbereich startet jetzt leer und zeigt aktivierte Module als gleichgroße, flexible Raster-Karten in Auswahl-Reihenfolge.
 - Jedes Modul-Panel bietet klare Infos plus Knöpfe für Maximieren, Minimieren und Ausblenden.
 - Risiko: niedrig, da Änderung auf Dashboard-Template und Styles begrenzt ist.
+
+## 2026-03-01 – AGENTS-Regel für iterative Hilfe-/UX-Optimierung
+
+- AGENTS.md um neuen Pflichtpunkt erweitert: pro Iteration mindestens eine kleine Verbesserung an Hilfe, Tooltip, A11y oder Kontrast.
+- Einheitliche Standards für Abstände, Buttons, Themes, Kontrast und responsive Verhalten ergänzt.
+- Risiko: niedrig, da nur Prozess- und Qualitätsregeln dokumentiert wurden.
+

@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 17
+Iteration: 18
 
 ## Gemacht
 
@@ -40,6 +40,8 @@ Iteration: 17
 - Gefuehrte Hilfe als eigenes Dashboard-Panel ergaenzt (klare Einsteiger-Schritte).
 - Hilfe-Aktionen vereinheitlicht: Erneut versuchen, Reparatur starten, Protokoll oeffnen.
 - Topbar um Naechster Schritt und Laien-Tipp erweitert.
+
+- AGENTS.md mit neuem Pflichtpunkt erweitert: pro Iteration eine Mini-Optimierung für Hilfe/Tooltip/A11y/Kontrast plus Standards für Buttons, Abstände, Themes und kleine Bildschirme.
 
 ## Next Step
 
