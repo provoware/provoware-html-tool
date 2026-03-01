@@ -7,7 +7,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 68 %
-- **Erledigt:** 57 Punkte
+- **Erledigt:** 58 Punkte
 - **Offen:** 27 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -35,6 +35,12 @@ Stand: automatisch aus `todo.txt` gezaehlt.
 - Sichtbarkeit fuer Sehschwaeche verbessert: zwei neue Themes **Rötlich** und **Camouflage** sind in der Theme-Auswahl verfuegbar.
 - Release-Readiness prueft jetzt alle 5 Themes statt nur 3.
 - Hilfe und Doku enthalten jetzt einen kurzen Sehschwaeche-Leitfaden mit klaren Schritten.
+
+## Update 2026-03-01 (Iteration 41)
+
+- Release-Readiness misst jetzt den Kontrast je Theme automatisch (Haupttext + Topbar).
+- Mindestziel ist WCAG AA (mindestens 4.5), damit Lesbarkeit in allen 5 Themes klar bleibt.
+- Naechster Schritt: Backup-Auswahl-Dialog direkt an den JSON-Store-Backup-Hook anbinden.
 
 ## Kann man einzelne offene Punkte schon release-fertig abschliessen?
 

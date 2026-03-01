@@ -1,6 +1,8 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
+  checkThemeContrast,
+  getContrastRatio,
   parseJsonText,
   runReleaseReadinessCheck,
 } = require("../tools/release_readiness_check");
@@ -42,4 +44,25 @@ test("runReleaseReadinessCheck prueft A11y und Themes", () => {
       `Check fehlt: ${message}`,
     );
   }
+});
+
+test("getContrastRatio liefert hohen Kontrast fuer Schwarz auf Weiss", () => {
+  const ratio = getContrastRatio("#000000", "#ffffff");
+  assert.equal(Math.round(ratio), 21);
+});
+
+test("checkThemeContrast liefert 10 Theme-Kontrastchecks", () => {
+  const cssText = [
+    ":root { --bg: #ffffff; --fg: #111111; --topbar: #123456; --topbar-fg: #ffffff; }",
+    '[data-theme="dark"] { --bg: #101010; --fg: #ffffff; --topbar: #222222; --topbar-fg: #ffffff; }',
+    '[data-theme="contrast"] { --bg: #000000; --fg: #ffffff; --topbar: #000000; --topbar-fg: #ffffff; }',
+    '[data-theme="warm"] { --bg: #fff4ef; --fg: #2d1b1a; --topbar: #7b2f27; --topbar-fg: #fff4ef; }',
+    '[data-theme="camo"] { --bg: #edf1e4; --fg: #1f2a1d; --topbar: #405437; --topbar-fg: #f4f7ee; }',
+  ].join("\n");
+  const checks = checkThemeContrast(cssText, 4.5);
+  assert.equal(checks.length, 10);
+  assert.equal(
+    checks.every((item) => item.ok),
+    true,
+  );
 });

@@ -78,6 +78,122 @@ function checkMessageTriplet(messages, sectionName) {
   ];
 }
 
+function parseHexColor(colorText) {
+  assertText(colorText, "Farbwert");
+  const clean = colorText.trim();
+  const match = clean.match(/^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/);
+  if (!match) {
+    throw new Error(
+      `Farbwert '${colorText}' ist ungueltig. Reparatur starten oder Protokoll oeffnen.`,
+    );
+  }
+
+  const hex =
+    match[1].length === 3
+      ? match[1]
+          .split("")
+          .map((char) => `${char}${char}`)
+          .join("")
+      : match[1];
+
+  return {
+    r: Number.parseInt(hex.slice(0, 2), 16),
+    g: Number.parseInt(hex.slice(2, 4), 16),
+    b: Number.parseInt(hex.slice(4, 6), 16),
+  };
+}
+
+function getRelativeLuminance(rgb) {
+  const channels = [rgb.r, rgb.g, rgb.b].map((value) => {
+    const normalized = value / 255;
+    if (normalized <= 0.03928) {
+      return normalized / 12.92;
+    }
+    return ((normalized + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function getContrastRatio(foregroundColor, backgroundColor) {
+  const fg = parseHexColor(foregroundColor);
+  const bg = parseHexColor(backgroundColor);
+  const fgLum = getRelativeLuminance(fg);
+  const bgLum = getRelativeLuminance(bg);
+  const light = Math.max(fgLum, bgLum);
+  const dark = Math.min(fgLum, bgLum);
+  return (light + 0.05) / (dark + 0.05);
+}
+
+function getThemeVariables(dashboardCss) {
+  const rootMatch = dashboardCss.match(/:root\s*\{([\s\S]*?)\}/);
+  if (!rootMatch) {
+    return { light: {} };
+  }
+
+  const parseBlockVariables = (blockText) => {
+    const parsed = {};
+    const variablePattern = /--([a-z-]+):\s*([^;]+);/g;
+    let match = variablePattern.exec(blockText);
+    while (match) {
+      parsed[match[1]] = match[2].trim();
+      match = variablePattern.exec(blockText);
+    }
+    return parsed;
+  };
+
+  const baseVariables = parseBlockVariables(rootMatch[1]);
+  const themeVariables = { light: baseVariables };
+  const themes = ["dark", "contrast", "warm", "camo"];
+
+  themes.forEach((themeName) => {
+    const sectionMatch = dashboardCss.match(
+      new RegExp(`\\[data-theme=\"${themeName}\"\\]\\s*\\{([\\s\\S]*?)\\}`),
+    );
+    if (!sectionMatch) {
+      themeVariables[themeName] = { ...baseVariables };
+      return;
+    }
+
+    themeVariables[themeName] = {
+      ...baseVariables,
+      ...parseBlockVariables(sectionMatch[1]),
+    };
+  });
+
+  return themeVariables;
+}
+
+function checkThemeContrast(dashboardCss, minContrastRatio = 4.5) {
+  const themeVariables = getThemeVariables(dashboardCss);
+  const targets = [
+    { key: "fg", backgroundKey: "bg", label: "Haupttext" },
+    { key: "topbar-fg", backgroundKey: "topbar", label: "Topbar" },
+  ];
+
+  return Object.entries(themeVariables).flatMap(([themeName, variables]) => {
+    return targets.map((target) => {
+      const foregroundColor = variables[target.key];
+      const backgroundColor = variables[target.backgroundKey];
+      if (!foregroundColor || !backgroundColor) {
+        return {
+          ok: false,
+          message:
+            `Kontrastwert fehlt (${themeName}, ${target.label}). ` +
+            "Reparatur starten oder Protokoll oeffnen.",
+        };
+      }
+
+      const ratio = getContrastRatio(foregroundColor, backgroundColor);
+      return {
+        ok: ratio >= minContrastRatio,
+        message:
+          `Kontrast ${themeName}/${target.label}: ${ratio.toFixed(2)} ` +
+          `(mindestens ${minContrastRatio.toFixed(1)})`,
+      };
+    });
+  });
+}
+
 function runReleaseReadinessCheck(options = {}) {
   const rootPath = options.rootPath || process.cwd();
   assertText(rootPath, "Projektpfad");
@@ -251,6 +367,7 @@ function runReleaseReadinessCheck(options = {}) {
   checks.push(
     checkIncludes(todoText, "CHANGELOG", "todo enthaelt CHANGELOG-Updatepunkt"),
   );
+  checks.push(...checkThemeContrast(dashboardCss));
 
   const failed = checks.filter((item) => !item.ok).map((item) => item.message);
   return {
@@ -280,6 +397,8 @@ if (require.main === module) {
 
 module.exports = {
   checkIncludes,
+  checkThemeContrast,
+  getContrastRatio,
   parseJsonText,
   readUtf8,
   runReleaseReadinessCheck,

@@ -59,3 +59,9 @@
 3. Immer mit Tastatur pruefen: Tab, Enter, Escape.
 
 Naechster Schritt bei Unsicherheit: **Protokoll oeffnen**, dann **Erneut versuchen**.
+
+## Kontrast-Auto-Check je Theme (neu)
+
+- Die Start-Routine prueft jetzt den Kontrast (Farbabstand) automatisch fuer alle 5 Themes.
+- Geprueft werden Haupttext und Topbar. Zielwert ist mindestens **4.5** (WCAG AA).
+- Bei Fehlern bekommen Sie klare naechste Schritte: **Erneut versuchen**, **Reparatur starten**, **Protokoll oeffnen**.

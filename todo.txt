@@ -123,4 +123,5 @@ Laienvorschläge
 
 - [x] P1: Theme-Auswahl fuer Sehschwaeche erweitert (Rötlich + Camouflage) und Release-Check auf 5 Themes angehoben.
 - [x] P1: Mini-Optimierung Hilfe: Sehschwaeche-3-Punkte-Check in README und docs/HILFE ergaenzt.
-- [ ] P1: Kontrast-Messung je Theme automatisiert mit Schwellenwert im Start-Check protokollieren.
+- [x] P1: Kontrast-Messung je Theme automatisiert mit Schwellenwert im Start-Check protokollieren.
+- [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.

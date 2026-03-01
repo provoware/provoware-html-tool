@@ -430,3 +430,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Kontrast+ verbessern (abgelehnt, zu wenig Auswahl fuer lange Nutzung).
 **Risiko/Side-Effects:** Niedrig; nur Styles, Auswahloptionen und Doku angepasst.
 **Verknuepft:** PATCH-040
+
+## FIX-20260301-041: Theme-Kontrast im Release-Check automatisiert
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Ein Theme wirkt schoen, aber Text ist zu schwer lesbar.
+**Technische Ursache:** Kontrast wurde bisher nur ueber feste String-Checks validiert, nicht berechnet.
+**Trigger:** Neue Theme-Farben werden eingepflegt oder bestehende Farben geaendert.
+**Fix (kurz):** Kontrastberechnung (WCAG) fuer `--fg/--bg` und `--topbar-fg/--topbar` in allen 5 Themes eingebaut.
+**Geaenderte Dateien/Marker:** `tools/release_readiness_check.js`, `test/release_readiness_check.test.js`.
+**Tests/Checks:** `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer jede Theme-Aenderung ueber den automatischen Kontrast-Check laufen lassen.
+**Alternative(n):** Externes A11y-Tool im Browser nutzen.
+**Risiko/Side-Effects:** Bei ungueltigen Farbformaten wird der Release-Check bewusst frueh abbrechen.
+**Verknuepft:** PATCH-041
