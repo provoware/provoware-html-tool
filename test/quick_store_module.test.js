@@ -5,6 +5,7 @@ const {
   buildAreaPayload,
   buildLyricsPreview,
   buildLyricsTemplate,
+  buildTemplateHelp,
   getStorePathForArea,
   insertTemplateIntoContent,
   normalizeAreaPayload,
@@ -53,6 +54,16 @@ test("buildLyricsTemplate liefert Bridge und Sonstiges", () => {
   assert.match(buildLyricsTemplate("sonstiges"), /^\[Sonstiges\]/);
 });
 
+test("buildTemplateHelp liefert kurze Hilfetexte", () => {
+  assert.match(buildTemplateHelp("intro"), /^Intro:/);
+  assert.match(buildTemplateHelp("refrain"), /^Refrain:/);
+  assert.match(buildTemplateHelp("bridge"), /^Bridge:/);
+  assert.match(buildTemplateHelp("sonstiges"), /^Sonstiges:/);
+});
+
+test("buildTemplateHelp validiert ungueltigen Typ", () => {
+  assert.throws(() => buildTemplateHelp("x"), /Vorlagen-Hilfe ist ungueltig/);
+});
 test("buildLyricsPreview erstellt Lesemodusdaten", () => {
   const preview = buildLyricsPreview("Titel", "Zeile 1\n\nZeile 2");
 

@@ -710,3 +710,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Externe Editor-Seite (verworfen, zu hoher Wechselaufwand fuer Laien).
 **Risiko/Side-Effects:** Niedrig, da nur das Quick-Store-Panel erweitert wurde.
 **Verknuepft:** Iteration-63
+
+## FIX-20260302-001: Lyrics-Preview-Rueckweg
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Lesemodus im Songtext blieb offen und hatte keinen klaren Schliessen-Knopf.
+**Technische Ursache:** Vorschau hatte nur einen Oeffnen-Flow, aber keinen dedizierten Close-Handler.
+**Trigger:** Nutzer oeffnet Lesemodus und will per Tastatur schnell zurueck.
+**Fix (kurz):** Close-Button plus Escape-Logik eingebaut; Vorschau setzt `aria-hidden` wieder auf `true`.
+**Geaenderte Dateien/Marker:** `templates/dashboard.html`, `templates/quick_store_module.js`, `templates/dashboard.js`
+**Tests/Checks:** `node --test`, `bash start.sh`
+**Praevention (kuenftig):** Ab jetzt immer fuer jedes Overlay/Panel einen sichtbaren Schliessen-Knopf + Escape-Rueckweg mit Statusmeldung einbauen.
+**Alternative(n):** Automatisches Schliessen bei Bereichswechsel ohne extra Knopf.
+**Risiko/Side-Effects:** Niedrig, da nur Lyrics-Preview-Flow betroffen.
+**Verknuepft:** patch-064

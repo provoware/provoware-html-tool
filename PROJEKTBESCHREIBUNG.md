@@ -168,3 +168,9 @@ Vorteil fuer Laien:
   1) Lesemodus mit eigenem Schliessen-Knopf + Escape-Hinweis.
   2) Pro Vorlage ein kurzer Inline-Hinweis (Was macht das? Was passiert mit Daten? Rueckweg).
 
+
+
+## Iteration 64 Update
+- Songtext-Lesemodus besitzt jetzt einen klaren Schliessen-Knopf mit Escape-Hinweis fuer barrierefreien Rueckweg.
+- Vorlagenhilfe ist direkt im Modul sichtbar und erklaert Intro/Refrain/Bridge/Sonstiges in einfacher Sprache.
+- Testumfang wurde um Hilfetext-Validierung erweitert, damit Input/Output der Hilfelogik stabil bleibt.

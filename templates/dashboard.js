@@ -659,6 +659,7 @@
       previewTitle: document.getElementById("lyrics-preview-title"),
       previewContent: document.getElementById("lyrics-preview-content"),
       lyricsBackButton: document.getElementById("lyrics-back-to-inbox"),
+      closePreviewButton: document.getElementById("lyrics-close-preview"),
       lyricsClearButton: document.getElementById("lyrics-clear-draft"),
       setStatus,
       setDebug,

@@ -100,3 +100,9 @@ Naechster Schritt: Erst erneut versuchen, dann Reparatur starten, danach bei Bed
 - Neu: Im Bereich **Songideen** gibt es jetzt auch **Bridge** und **Sonstiges** als Vorlagen.
 - Neu: Mit **Lesemodus oeffnen** sehen Sie den aktuellen Songtext sauber formatiert mit Zeilenanzahl.
 - Rueckweg: Weiter unten im gleichen Bereich direkt weiter bearbeiten oder Inhalt leeren.
+
+## Songtext-Editor: Rueckweg + Inline-Hilfe (Iteration 64)
+
+- Neu: Im Lesemodus gibt es jetzt den Knopf **Vorschau schliessen (Escape)** als klaren Rueckweg.
+- Neu: Unter den Vorlagen sehen Sie eine kurze Inline-Hilfe, was Intro, Refrain, Bridge und Sonstiges bedeuten.
+- Naechster Schritt: Lesemodus um Kopieren-Knopf erweitern.
