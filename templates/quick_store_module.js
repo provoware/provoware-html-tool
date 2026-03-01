@@ -186,7 +186,11 @@
 
   function normalizeLyricsPreferences(payload) {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
-      return { randomProfile: "standard", previewFocusTarget: "title" };
+      return {
+        randomProfile: "standard",
+        previewFocusTarget: "title",
+        lastRandomProfileAt: "",
+      };
     }
 
     const randomProfile =
@@ -199,10 +203,16 @@
     const resolvedFocusTarget = PREVIEW_FOCUS_TARGETS.includes(focusTarget)
       ? focusTarget
       : "title";
+    const lastRandomProfileAt =
+      typeof payload.lastRandomProfileAt === "string" &&
+      !Number.isNaN(Date.parse(payload.lastRandomProfileAt))
+        ? payload.lastRandomProfileAt
+        : "";
 
     return {
       randomProfile: resolvedProfile,
       previewFocusTarget: resolvedFocusTarget,
+      lastRandomProfileAt,
     };
   }
 
@@ -213,7 +223,38 @@
       updatedAt: new Date().toISOString(),
       randomProfile: normalized.randomProfile,
       previewFocusTarget: normalized.previewFocusTarget,
+      lastRandomProfileAt: normalized.lastRandomProfileAt,
     };
+  }
+
+  function formatUsageTimestamp(isoValue) {
+    if (typeof isoValue !== "string" || !isoValue.trim()) {
+      return "noch keine";
+    }
+    const date = new Date(isoValue);
+    if (Number.isNaN(date.getTime())) {
+      return "noch keine";
+    }
+    const year = String(date.getFullYear());
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hour = String(date.getHours()).padStart(2, "0");
+    const minute = String(date.getMinutes()).padStart(2, "0");
+    return `${day}.${month}.${year}, ${hour}:${minute} Uhr`;
+  }
+
+  function resolvePreviewShortcutTarget(key, useAlt) {
+    const normalizedKey = typeof key === "string" ? key.toLowerCase() : "";
+    if (!useAlt) {
+      return "";
+    }
+    if (normalizedKey === "t") {
+      return "title";
+    }
+    if (normalizedKey === "i") {
+      return "content";
+    }
+    return "";
   }
 
   function buildRandomLyricsSnippet(
@@ -371,6 +412,7 @@ Zeile 2: ...`;
     const setDebug = options.setDebug;
     const saveJson = assertElement(options.saveJson, "Dateischreiber");
     const readJson = assertFunction(options.readJson, "Dateileser");
+    let lastRandomProfileAt = "";
 
     function renderAreaOptions() {
       areaSelect.innerHTML = "";
@@ -407,7 +449,10 @@ Zeile 2: ...`;
       };
       const selected = randomProfileSelect.value;
       const profileLabel = labels[selected] || labels.standard;
-      options.randomProfileChip.textContent = `Aktives Profil: ${profileLabel}. Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.`;
+      const usageText = formatUsageTimestamp(lastRandomProfileAt);
+      options.randomProfileChip.textContent =
+        `Aktives Profil: ${profileLabel}. Letzte Nutzung: ${usageText}. ` +
+        "Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.";
       return true;
     }
 
@@ -425,6 +470,7 @@ Zeile 2: ...`;
       const payload = buildLyricsPreferencesPayload({
         randomProfile: randomProfileSelect.value,
         previewFocusTarget: previewFocusTargetSelect.value,
+        lastRandomProfileAt,
       });
       const ok = await saveJson(LYRICS_PREFERENCES_PATH, payload);
       if (!ok) {
@@ -497,6 +543,7 @@ Zeile 2: ...`;
         const normalized = normalizeLyricsPreferences(preferences.value);
         randomProfileSelect.value = normalized.randomProfile;
         previewFocusTargetSelect.value = normalized.previewFocusTarget;
+        lastRandomProfileAt = normalized.lastRandomProfileAt;
       }
 
       updateRandomProfileChip();
@@ -658,6 +705,8 @@ Zeile 2: ...`;
             "Zufallsinhalt konnte nicht eingefuegt werden. Erneut versuchen.",
           );
         }
+        lastRandomProfileAt = new Date().toISOString();
+        updateRandomProfileChip();
         contentInput.focus();
         persistLyricsPreferences().catch((error) => {
           const details =
@@ -741,19 +790,23 @@ Zeile 2: ...`;
       if (model.getActiveArea() !== "lyrics") {
         return false;
       }
-      if (event.key === "t" || event.key === "T") {
+      const shortcutTarget = resolvePreviewShortcutTarget(
+        event.key,
+        event.altKey,
+      );
+      if (shortcutTarget === "title") {
         event.preventDefault();
         setPreviewFocusTarget("title");
         setStatus(
-          "Fokusziel ist jetzt Titel-Feld. Naechster Schritt: Lesemodus pruefen oder mit I auf Inhalt wechseln.",
+          "Fokusziel ist jetzt Titel-Feld. Naechster Schritt: Alt+I fuer Inhaltsfeld oder Lesemodus pruefen.",
         );
         return true;
       }
-      if (event.key === "i" || event.key === "I") {
+      if (shortcutTarget === "content") {
         event.preventDefault();
         setPreviewFocusTarget("content");
         setStatus(
-          "Fokusziel ist jetzt Inhaltsfeld. Naechster Schritt: Lesemodus pruefen oder mit T auf Titel wechseln.",
+          "Fokusziel ist jetzt Inhaltsfeld. Naechster Schritt: Alt+T fuer Titel oder Lesemodus pruefen.",
         );
         return true;
       }
@@ -837,6 +890,7 @@ Zeile 2: ...`;
     );
     randomButton.addEventListener("click", onLyricsRandomTemplate);
     randomProfileSelect.addEventListener("change", () => {
+      lastRandomProfileAt = new Date().toISOString();
       updateRandomProfileChip();
       persistLyricsPreferences().catch((error) => {
         const details =
@@ -844,7 +898,8 @@ Zeile 2: ...`;
         setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
       });
       setStatus(
-        `Zufallsprofil auf ${randomProfileSelect.value} gesetzt. Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.`,
+        `Zufallsprofil auf ${randomProfileSelect.value} gesetzt. ` +
+          "Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.",
       );
     });
     previewFocusTargetSelect.addEventListener("change", () => {
@@ -856,6 +911,21 @@ Zeile 2: ...`;
       });
       setStatus(
         "Fokusziel gespeichert. Naechster Schritt: Lesemodus schliessen und Fokus pruefen.",
+      );
+    });
+    previewFocusTargetSelect.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter") {
+        return;
+      }
+      event.preventDefault();
+      updatePreviewFocusInlineHelp();
+      persistLyricsPreferences().catch((error) => {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+      });
+      setStatus(
+        "Fokusziel mit Enter bestaetigt. Naechster Schritt: Lesemodus oeffnen und Rueckweg pruefen.",
       );
     });
     previewButton.addEventListener("click", onLyricsPreview);
@@ -893,6 +963,8 @@ Zeile 2: ...`;
     buildLyricsPreferencesPayload,
     normalizeLyricsPreferences,
     resolveRandomProfile,
+    formatUsageTimestamp,
+    resolvePreviewShortcutTarget,
   };
 
   if (typeof module !== "undefined" && module.exports) {

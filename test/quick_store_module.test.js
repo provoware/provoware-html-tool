@@ -14,6 +14,8 @@ const {
   buildLyricsPreferencesPayload,
   normalizeLyricsPreferences,
   resolveRandomProfile,
+  formatUsageTimestamp,
+  resolvePreviewShortcutTarget,
 } = require("../templates/quick_store_module");
 
 test("Quick-Store-Pfade sind pro Bereich getrennt", () => {
@@ -141,6 +143,7 @@ test("normalizeLyricsPreferences setzt sichere Standardwerte", () => {
   const normalized = normalizeLyricsPreferences(null);
   assert.equal(normalized.randomProfile, "standard");
   assert.equal(normalized.previewFocusTarget, "title");
+  assert.equal(normalized.lastRandomProfileAt, "");
 });
 
 test("normalizeLyricsPreferences akzeptiert gueltige Werte", () => {
@@ -150,15 +153,35 @@ test("normalizeLyricsPreferences akzeptiert gueltige Werte", () => {
   });
   assert.equal(normalized.randomProfile, "chill");
   assert.equal(normalized.previewFocusTarget, "content");
+  assert.equal(normalized.lastRandomProfileAt, "");
 });
 
 test("buildLyricsPreferencesPayload erzeugt valide Struktur", () => {
   const payload = buildLyricsPreferencesPayload({
     randomProfile: "techno",
     previewFocusTarget: "content",
+    lastRandomProfileAt: "2026-03-03T10:11:12.000Z",
   });
   assert.equal(payload.version, 1);
   assert.equal(payload.randomProfile, "techno");
   assert.equal(payload.previewFocusTarget, "content");
+  assert.equal(payload.lastRandomProfileAt, "2026-03-03T10:11:12.000Z");
   assert.match(payload.updatedAt, /\d{4}-\d{2}-\d{2}T/);
+});
+
+test("formatUsageTimestamp liefert laienfreundliches Datum", () => {
+  const value = formatUsageTimestamp("2026-03-03T10:11:12.000Z");
+  assert.match(value, /03\.03\.2026/);
+  assert.match(value, /Uhr$/);
+});
+
+test("formatUsageTimestamp nutzt Fallback bei leerem Wert", () => {
+  assert.equal(formatUsageTimestamp(""), "noch keine");
+  assert.equal(formatUsageTimestamp("ungueltig"), "noch keine");
+});
+
+test("resolvePreviewShortcutTarget akzeptiert nur Alt-Kuerzel", () => {
+  assert.equal(resolvePreviewShortcutTarget("t", true), "title");
+  assert.equal(resolvePreviewShortcutTarget("I", true), "content");
+  assert.equal(resolvePreviewShortcutTarget("t", false), "");
 });

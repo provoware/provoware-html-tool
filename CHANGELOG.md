@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 72
+
+- Zwei offene Mini-Punkte abgeschlossen: Profil-Status-Chip zeigt jetzt die letzte Nutzung als Zeitstempel in einfacher Sprache.
+- Lesemodus-Fokusziel kann jetzt sicher per **Alt+T** (Titel) und **Alt+I** (Inhalt) umgeschaltet werden; Enter im Auswahlfeld bestaetigt die Wahl mit Statusmeldung.
+- Risiko: niedrig, weil nur Lyrics-UI, Shortcut-Logik und gezielte Tests angepasst wurden.
+
 ## 2026-03-03 – Iteration 71
 
 - Songtext zeigt jetzt ein sichtbares Profil-Statusfeld mit Kontrast-Rahmen und Live-Text zum aktiven Zufallsprofil.

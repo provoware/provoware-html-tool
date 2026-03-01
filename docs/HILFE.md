@@ -148,3 +148,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Neu: Der Zufallsinhalt hat jetzt eine Profilwahl (Standard, Techno, Hoerspiel, Chill).
 - Neu: Nach dem Schliessen der Vorschau koennen Sie das Fokusziel waehlen (Titel oder Inhalt).
 - Rueckweg: Bei Fehlern zuerst erneut versuchen, dann Reparatur starten, danach Protokoll oeffnen.
+
+## Neu in Iteration 72: sichere Songtext-Shortcuts
+
+- Das Fokusziel im Lesemodus nutzt jetzt **Alt+T** (Titel) und **Alt+I** (Inhalt).
+- Warum so? So werden normale Texteingaben nicht aus Versehen als Shortcut erkannt.
+- Der Profil-Chip zeigt jetzt auch die **letzte Nutzung** als Zeitstempel.

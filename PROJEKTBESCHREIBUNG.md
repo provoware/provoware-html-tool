@@ -251,3 +251,10 @@ Praktischer Einsatz:
 - Der Songtext-Zufallsgenerator kann jetzt Profile nutzen (Standard, Techno, Hoerspiel, Chill), damit Vorschlaege besser zum Projektstil passen.
 - Der Lesemodus bietet jetzt ein waehlbares Fokusziel nach dem Schliessen, damit Tastaturarbeit ohne Umwege weitergeht.
 - Beide Funktionen arbeiten mit Eingabepruefung (Validierung), klaren Fehlermeldungen und naechstem Schritt.
+
+
+## Iteration 72 – Tool-Umfang erweitert
+
+- Songtext-Modul hat jetzt sichere Tastenkombinationen (Alt+T, Alt+I) fuer Fokuswechsel.
+- Profile im Zufallsmodus zeigen eine letzte Nutzung, damit Teams den letzten Stand schneller erkennen.
+- Enter im Fokusziel-Feld bestaetigt die Auswahl mit direkter Statusmeldung.
