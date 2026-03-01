@@ -1,3 +1,11 @@
+## Iteration 70 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Zufallsprofil merken + Fokusziel-Shortcut T/I).
+- Ergebnis: Songtext-Einstellungen werden jetzt als eigene Datei gespeichert und beim Laden validiert wiederhergestellt.
+- Ergebnis: Im Lyrics-Bereich schalten T und I das Fokusziel fuer den Lesemodus direkt um.
+- Mini-Optimierung: Inline-Hilfe im Lesemodus erklaert T/I plus Rueckweg ueber die Auswahl.
+- Naechster Schritt: Aktives Zufallsprofil als sichtbaren Status-Chip mit Kontrasttext zeigen.
+
 ## Iteration 69 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Zufallsprofil im Songtext-Editor + optionales Fokusziel nach Vorschau).

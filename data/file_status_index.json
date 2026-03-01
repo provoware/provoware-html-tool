@@ -15,9 +15,9 @@
   },
   {
     "file": "templates/dashboard.html",
-    "version": "v010",
+    "version": "v011",
     "status": "ready",
-    "updatedAt": "2026-03-03T00:00:00.000Z",
+    "updatedAt": "2026-03-03T18:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -120,9 +120,9 @@
   },
   {
     "file": "templates/quick_store_module.js",
-    "version": "v003",
+    "version": "v004",
     "status": "ready",
-    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "updatedAt": "2026-03-03T18:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -155,9 +155,9 @@
   },
   {
     "file": "test/quick_store_module.test.js",
-    "version": "v001",
+    "version": "v002",
     "status": "ready",
-    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "updatedAt": "2026-03-03T18:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -211,9 +211,16 @@
   },
   {
     "file": "docs/HILFE.md",
-    "version": "v003",
+    "version": "v004",
     "status": "ready",
-    "updatedAt": "2026-03-03T00:00:00.000Z",
+    "updatedAt": "2026-03-03T18:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "data/quick_store_lyrics_preferences.json",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-03T18:00:00.000Z",
     "owner": "codex"
   }
 ]

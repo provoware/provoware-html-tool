@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 70
+
+- Songtext merkt jetzt Ihr letztes Zufallsprofil pro Projekt in `data/quick_store_lyrics_preferences.json` und laedt es beim Start automatisch.
+- Lesemodus-Fokusziel kann jetzt mit Tastaturkuerzeln umgeschaltet werden: **T** fuer Titel, **I** fuer Inhaltsfeld.
+- Hilfe-Update: Inline-Hinweis im Lesemodus erklaert die T/I-Steuerung mit Rueckweg ueber die Auswahlliste.
+
 ## 2026-03-03 – Iteration 69
 
 - Songtext-Zufallsinhalt hat jetzt Profilfilter (Standard/Techno/Hoerspiel/Chill) mit Validierung und klarer Statusmeldung.
