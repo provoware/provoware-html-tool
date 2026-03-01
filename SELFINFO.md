@@ -1,3 +1,11 @@
+## Iteration 65 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Lesemodus-Kopieren + Songtext-Kurzguide mit Tastaturfokus).
+- Ergebnis: Lesemodus hat jetzt den Knopf "Songtext kopieren" mit klarer Statusmeldung und Rueckweg-Hinweis.
+- Ergebnis: Songtext-Hilfe ist einklappbar, fokusierbar und direkt im Lyrics-Bereich erreichbar.
+- Mini-Optimierung: Kurzguide mit Ein-/Ausblenden und Fokusziel in einfacher Sprache.
+- Naechster Schritt: Kurzguide um feste Zwei-Schritt-Liste plus Enter/Space-Hinweis erweitern.
+
 ## Iteration 66 (2026-03-03)
 
 - Hauptziel: Rail-Rahmen + Statusbanner in 5 Themes mit gleich starker Kontrastpruefung abgeschlossen.

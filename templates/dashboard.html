@@ -101,6 +101,26 @@
                 Inline-Hilfe: Intro startet ruhig, Refrain wiederholt den
                 Kernsatz, Bridge verbindet Teile, Sonstiges sammelt Extras.
               </p>
+              <div class="card" id="lyrics-short-guide" hidden>
+                <button
+                  type="button"
+                  id="lyrics-guide-toggle"
+                  aria-expanded="false"
+                  aria-controls="lyrics-guide-content"
+                >
+                  Songtext-Kurzguide einblenden
+                </button>
+                <div id="lyrics-guide-content" hidden>
+                  <p class="field-tip" id="lyrics-guide-focus" tabindex="-1">
+                    Was macht das? Der Kurzguide zeigt in zwei Schritten, wie
+                    Sie einen Songtext starten.
+                  </p>
+                  <p class="field-tip">
+                    Was passiert mit Daten? Nur Ihr Entwurf im Eingabefeld wird
+                    genutzt. Rueckweg: Guide wieder ausblenden.
+                  </p>
+                </div>
+              </div>
               <div class="todo-actions" aria-label="Songtext-Vorlagen">
                 <button type="button" id="lyrics-template-intro">
                   Intro-Vorlage einfuegen
@@ -135,6 +155,9 @@
                   aria-describedby="lyrics-preview-help"
                 ></p>
                 <div class="todo-actions" aria-label="Lesemodus-Rueckweg">
+                  <button type="button" id="lyrics-copy-preview">
+                    Songtext kopieren
+                  </button>
                   <button type="button" id="lyrics-close-preview">
                     Vorschau schliessen (Escape)
                   </button>

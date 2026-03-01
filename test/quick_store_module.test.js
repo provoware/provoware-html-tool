@@ -9,6 +9,7 @@ const {
   getStorePathForArea,
   insertTemplateIntoContent,
   normalizeAreaPayload,
+  copyPreviewToClipboard,
 } = require("../templates/quick_store_module");
 
 test("Quick-Store-Pfade sind pro Bereich getrennt", () => {
@@ -74,4 +75,23 @@ test("buildLyricsPreview erstellt Lesemodusdaten", () => {
 
 test("buildLyricsPreview validiert leeren Inhalt", () => {
   assert.throws(() => buildLyricsPreview("Titel", "   "), /Songtext ist leer/);
+});
+
+test("copyPreviewToClipboard schreibt bereinigten Text", async () => {
+  let written = "";
+  const clipboard = {
+    writeText: async (value) => {
+      written = value;
+    },
+  };
+
+  await copyPreviewToClipboard("  Zeile 1\nZeile 2  ", clipboard);
+  assert.equal(written, "Zeile 1\nZeile 2");
+});
+
+test("copyPreviewToClipboard validiert fehlenden Text", () => {
+  assert.throws(
+    () => copyPreviewToClipboard("   ", { writeText: async () => {} }),
+    /Songtext zum Kopieren fehlt/,
+  );
 });
