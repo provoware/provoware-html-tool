@@ -206,3 +206,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Platzhalter nur ausblenden (abgelehnt, nicht wartbar).
 **Risiko/Side-Effects:** Leere Bereiche koennen ohne echte Daten zunaechst schlicht wirken.
 **Verknuepft:** Patch-ID local-013
+
+## FIX-20260301-008: Modulare-Hilfe-und-feste-Fehleraktionen
+
+**Kategorie:** UI/A11y/Docs
+**Symptom (fuer Laien):** Hilfe war verteilt und der naechste Schritt nicht immer sofort klar.
+**Technische Ursache:** Kein zentraler Hilfeblock mit einheitlichen Aktionen.
+**Trigger:** Wunsch nach maximal klarer Laienfuehrung im Dashboard.
+**Fix (kurz):** Gefuehrte Hilfe als eigenes Panel, Topbar-Hilfen und feste 3 Fehleraktionen eingebaut.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, config/messages_de.json, README.txt, docs/HILFE.md, todo.txt
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Hilfeschritte zentral halten und Fehlerwege mit festen 3 Aktionen abbilden.
+**Alternative(n):** Nur Tooltips statt Hilfebereich (abgelehnt, zu versteckt).
+**Risiko/Side-Effects:** Mehr sichtbare Hilfetexte im Dashboard.
+**Verknuepft:** Patch-ID local-014

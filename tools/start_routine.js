@@ -182,6 +182,7 @@ function runStartRoutine() {
     "test/json_store.test.js",
     "templates/dashboard.html",
     "templates/dashboard.js",
+    "templates/dashboard_help.js",
     "templates/module_workspace.js",
     "system-module/dashboard_model.js",
     "system-module/plugins_accessibility.js",

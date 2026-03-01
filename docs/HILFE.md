@@ -18,6 +18,10 @@
 - **Kompakt-Modus:** Beispieltexte wurden entfernt. Leere Bereiche bleiben sichtbar frei und sind für echte Inhalte reserviert.
 - **Texte zentral:** Kurztexte liegen versioniert in `config/messages_de.json` unter `dashboardCompact`.
 
+- **Geführte Hilfe (neu):** Im Dashboard gibt es jetzt eine eigene Schrittliste mit klarer Reihenfolge für Einsteiger.
+- **Feste Hilfe-Knöpfe (neu):** Rechts im Hilfebereich stehen immer dieselben 3 Aktionen bereit: „Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“.
+- **Nächster Schritt / Laien-Tipp (neu):** In der Topbar können Sie sich den nächsten sinnvollen Schritt oder einen einfachen Bedienhinweis direkt anzeigen lassen.
+
 ## Plugin-Loader
 
 - **Was macht das?** Der Plugin-Loader prueft vor dem Systemtest, ob aktive Plugins vorhanden und startbar sind.

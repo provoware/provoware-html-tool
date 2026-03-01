@@ -9,6 +9,10 @@
   <body data-theme="light">
     <main class="wrap">
       <header class="topbar" aria-label="Hauptnavigation">
+        <div class="brand" aria-label="Produktstatus">
+          <p class="eyebrow">Provoware Tool</p>
+          <h1>Modulares Dashboard</h1>
+        </div>
         <nav class="menu" aria-label="Menü">
           <a href="#" aria-current="page">Dashboard</a>
           <a href="#">Module</a>
@@ -16,6 +20,8 @@
           <a href="#">Einstellungen</a>
         </nav>
         <div class="icons" aria-label="Schnellaktionen">
+          <button type="button" id="show-next-step">Nächster Schritt</button>
+          <button type="button" id="show-laien-tip">Laien-Tipp</button>
           <button type="button" id="toggle-debug">Debug-Modus</button>
         </div>
       </header>
@@ -58,6 +64,12 @@
               Bereit. Nächster Schritt: Verbindung prüfen.
             </p>
             <pre id="debug-output" class="debug" hidden></pre>
+          </article>
+
+          <article class="panel" aria-labelledby="guide-title">
+            <h2 id="guide-title">Geführte Hilfe</h2>
+            <p id="guide-intro"></p>
+            <ul id="guide-list" class="guide-list"></ul>
           </article>
 
           <article class="panel" aria-labelledby="workspace-title">
@@ -120,12 +132,18 @@
           <article class="panel" aria-labelledby="help-title">
             <h3 id="help-title">Hilfe</h3>
             <p id="help-what"></p>
+            <div class="help-actions" aria-label="Hilfe-Aktionen">
+              <button type="button" id="help-retry">Erneut versuchen</button>
+              <button type="button" id="help-repair">Reparatur starten</button>
+              <button type="button" id="help-log">Protokoll öffnen</button>
+            </div>
           </article>
         </aside>
       </section>
     </main>
 
     <script src="module_workspace.js"></script>
+    <script src="dashboard_help.js"></script>
     <script src="dashboard.js"></script>
   </body>
 </html>

@@ -75,12 +75,33 @@ body {
   gap: 0.5rem;
 }
 
+
+.brand {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 210px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
 .menu,
 .icons,
 .system-actions,
 .module-toolbar,
 .module-catalog,
-.module-card-actions {
+.module-card-actions,
+.help-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
@@ -150,6 +171,17 @@ a:focus-visible {
 .panel p {
   margin: 0.4rem 0;
   font-size: 0.92rem;
+}
+
+.guide-list {
+  margin: 0.2rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.guide-list li {
+  font-size: 0.9rem;
 }
 
 .blank-area {
@@ -231,6 +263,7 @@ a:focus-visible {
 
 .status-ok {
   color: var(--ok);
+  font-weight: 700;
 }
 
 .status-warn {
