@@ -339,6 +339,33 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 - README.txt in jeder Iteration kurz aktualisieren (Fortschritt/Status + naechster Schritt).
 - In todo.txt den erledigten Mini-Punkt abhaken und nächsten Mini-Punkt planen.
 
+17) Referenzbild-Analyse + Platzhalter-Scan (Pflicht)
+17.1 Rhythmus fuer Referenzbild
+- In jeder 5. Iteration muss das Vorgabe-Bild im Projektordner geprueft werden
+  (Iteration 5, 10, 15, ...).
+- Ziel: UI an optische, grafische und Layout-Aspekte moeglichst nah und
+  konsistent am Beispielbild halten.
+- Die Analyse muss mindestens enthalten:
+  - Layout-Raster (Abstaende, Karten, Spalten)
+  - Typografie (Groessen, Gewicht, Lesbarkeit)
+  - Farben/Kontrast in allen Themes (Hell, Dunkel, Kontrast+)
+  - Interaktionsmuster (Buttons, Fokus, Rueckweg)
+
+17.2 Dokumentation der Referenzbild-Analyse
+- Ergebnis in `todo.txt` als eigener Punkt mit Status, Datum und naechstem
+  Schritt eintragen.
+- Kurzfassung in `CHANGELOG.md` und `README.txt` ergaenzen.
+- Wenn die Abweichung hoch ist: neuen P1-Punkt fuer naechste Iteration planen.
+
+17.3 Platzhalter- und Teilcode-Disziplin
+- In jeder Iteration aktiv nach Platzhaltern oder unvollstaendigen Codeteilen
+  suchen (z. B. TODO/FIXME, Dummy-Text, harte Platzhalterdaten).
+- Gefundene Stellen muessen:
+  1) direkt im Code kurz kommentiert werden (warum offen),
+  2) in `todo.txt` als neue Aufgabe registriert werden,
+  3) bei Risiko in `QUESTIONS_TODO.md` als offene Entscheidung markiert werden.
+- Patch gilt erst als fertig, wenn neue Platzhalterfunde im TODO sichtbar sind.
+
 14) Nächster Schritt (Pflichtauswahl) 
 Entscheide für die nächste Iteration genau ein Ziel: 
 A) Boot‑View stabilisieren (Phasen, Ampel, Details, Weiter‑Gate)
