@@ -423,3 +423,9 @@
 - Zwei offene Mini-Punkte abgeschlossen: Lesemodus hat jetzt einen Kopieren-Knopf mit klarer Statusmeldung; Songtext-Hilfe ist als einklappbarer Kurzguide mit Tastaturfokus umgesetzt.
 - Mini-Optimierung Hilfe/UX: Kurzguide arbeitet mit einfachem Ein-/Ausblenden, Fokusziel und Rueckweg in einfacher Sprache.
 - Risiko: niedrig, da nur Songtext-Panel, Modul-Logik und gezielte Tests erweitert wurden.
+
+## 2026-03-03 – Songtext-Zufallsinhalt + Fokus-Ruecksprung
+
+- Drei offene Punkte abgeschlossen: 1-Klick-Zufallsinhalt im Songtext-Editor, Interoperabilitaet zum Zufallsgenerator (Inhalt direkt einfuegen) und klarer Fokus-Ruecksprung auf das Titel-Feld nach Lesemodus.
+- Mini-Optimierung Hilfe/UX: Lesemodus-Hilfe nennt den Ruecksprung explizit in einfacher Sprache.
+- Risiko: niedrig, da nur Songtext-UI, Modul-Logik und gezielte Tests erweitert wurden.

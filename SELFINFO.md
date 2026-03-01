@@ -303,3 +303,10 @@ Iteration: 39
 - Status: Zwei offene Mini-Punkte aus `todo.txt` vollstaendig abgeschlossen (Guide-Schrittliste + Kopierfehler-Hilfe).
 - Ergebnis: Lyrics-Kurzguide ist klarer fuer Tastatur (Enter/Space/Escape), Lesemodus zeigt manuellen Kopierweg sichtbar an.
 - Next Step: Die zwei neuen Mini-Punkte in `todo.txt` fuer den Lyrics-Flow umsetzen.
+
+## Iteration 68 (2026-03-03)
+
+- Hauptziel: Songtext-Editor per 1-Klick-Zufallsinhalt mit Zufallsgenerator verbunden.
+- Zusaetzlich abgeschlossen: Interoperabilitaetspunkt im TODO und Fokus-Ruecksprung im Lesemodus.
+- Checks: `npm run format`, `node --test`, `bash start.sh`.
+- Next Step: Option A weiter in kleinen Schritten (Boot-View-Weiter-Gate + Detailanzeige).

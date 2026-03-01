@@ -794,3 +794,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Tooltip statt Label (verworfen, weil weniger sichtbar bei Screenreader-Flow).
 **Risiko/Side-Effects:** Niedrig, nur UI-Texte und ein gezielter Test.
 **Verknüpft:** PATCH-067
+
+## FIX-20260303-068: Songtext-Zufallsimpuls-mit-Fokus-Rueckweg
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Es gab keinen 1-Klick-Start fuer Songideen und nach dem Lesemodus war der Fokusweg unklar.
+**Technische Ursache:** Zufallsimpuls fehlte im Lyrics-Editor; Vorschau-Schliessen fokussierte nicht das wichtigste Eingabefeld.
+**Trigger:** Nutzer startet Songideen ohne Vorlage und arbeitet nur mit Tastatur.
+**Fix (kurz):** Zufallsimpuls-Button integriert, Generatorblock eingebaut und Lesemodus-Ruecksprung auf Titel-Feld gesetzt.
+**Geaenderte Dateien/Marker:** templates/quick_store_module.js, templates/dashboard.html, templates/dashboard.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei neuen Dialog-/Vorschaupfaden den Ziel-Fokus nach dem Schliessen explizit definieren und testen.
+**Alternative(n):** Ruecksprung auf Vorschau-Knopf (verworfen, weniger hilfreich fuer direkte Bearbeitung).
+**Risiko/Side-Effects:** Niedrig, da nur Lyrics-Teilbereich geaendert.
+**Verknuepft:** PATCH-068

@@ -5,6 +5,11 @@
     lyrics: "data/quick_store_lyrics.json",
     research: "data/quick_store_research.json",
   };
+  const RANDOM_LYRICS_PARTS = {
+    genres: ["Synthwave", "Indie", "Pop", "Folk"],
+    moods: ["hoffnungsvoll", "nachtaktiv", "mutig", "ruhig"],
+    styles: ["metaphorisch", "direkt", "bildreich", "minimal"],
+  };
 
   function assertElement(element, name) {
     if (!element) {
@@ -124,6 +129,43 @@
     );
   }
 
+  function pickRandomEntry(entries, randomFn) {
+    if (!Array.isArray(entries) || entries.length === 0) {
+      throw new Error(
+        "Zufallsliste ist leer. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+    if (typeof randomFn !== "function") {
+      throw new Error(
+        "Zufallsfunktion fehlt. Erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+    const value = randomFn();
+    if (typeof value !== "number" || Number.isNaN(value)) {
+      throw new Error(
+        "Zufallswert ist ungueltig. Erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+    const index = Math.min(
+      entries.length - 1,
+      Math.max(0, Math.floor(value * entries.length)),
+    );
+    return entries[index];
+  }
+
+  function buildRandomLyricsSnippet(randomFn = Math.random) {
+    const genre = pickRandomEntry(RANDOM_LYRICS_PARTS.genres, randomFn);
+    const mood = pickRandomEntry(RANDOM_LYRICS_PARTS.moods, randomFn);
+    const style = pickRandomEntry(RANDOM_LYRICS_PARTS.styles, randomFn);
+    const snippet = `[Impuls]\nGenre: ${genre}\nStimmung: ${mood}\nStil: ${style}\nZeile 1: ...\nZeile 2: ...`;
+    if (typeof snippet !== "string" || snippet.trim().length === 0) {
+      throw new Error(
+        "Zufallsinhalt ist leer. Erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+    return snippet;
+  }
+
   function copyPreviewToClipboard(previewText, clipboard) {
     if (typeof previewText !== "string" || !previewText.trim()) {
       throw new Error(
@@ -194,6 +236,10 @@
     );
     const bridgeButton = assertElement(options.bridgeButton, "Bridge-Vorlage");
     const miscButton = assertElement(options.miscButton, "Sonstiges-Vorlage");
+    const randomButton = assertElement(
+      options.randomButton,
+      "Zufallsgenerator-Vorlage",
+    );
     const previewButton = assertElement(
       options.previewButton,
       "Lyrics-Vorschau",
@@ -448,12 +494,36 @@
       }
     }
 
-    function closeLyricsPreview(focusTarget) {
+    function closeLyricsPreview(focusTarget = titleInput) {
       previewPanel.hidden = true;
       previewPanel.setAttribute("aria-hidden", "true");
       copyHelp.hidden = true;
       if (focusTarget && typeof focusTarget.focus === "function") {
         focusTarget.focus();
+      }
+      return true;
+    }
+
+    function onLyricsRandomTemplate() {
+      try {
+        const randomSnippet = buildRandomLyricsSnippet(options.randomFn);
+        const nextValue = insertTemplateIntoContent(
+          contentInput,
+          randomSnippet,
+        );
+        if (typeof nextValue !== "string" || nextValue.trim().length === 0) {
+          throw new Error(
+            "Zufallsinhalt konnte nicht eingefuegt werden. Erneut versuchen.",
+          );
+        }
+        contentInput.focus();
+        setStatus(
+          "Zufallsinhalt eingefuegt. Naechster Schritt: Zeilen anpassen oder Lesemodus pruefen.",
+        );
+      } catch (error) {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
       }
       return true;
     }
@@ -471,7 +541,7 @@
     }
 
     function onClosePreview() {
-      closeLyricsPreview(previewButton);
+      closeLyricsPreview();
       setStatus(
         "Vorschau geschlossen. Naechster Schritt: Text anpassen oder erneut Lesemodus oeffnen.",
       );
@@ -578,6 +648,7 @@
         "sonstiges",
       ),
     );
+    randomButton.addEventListener("click", onLyricsRandomTemplate);
     previewButton.addEventListener("click", onLyricsPreview);
     lyricsBackButton.addEventListener("click", onLyricsBack);
     closePreviewButton.addEventListener("click", onClosePreview);
@@ -607,6 +678,7 @@
     insertTemplateIntoContent,
     normalizeAreaPayload,
     copyPreviewToClipboard,
+    buildRandomLyricsSnippet,
   };
 
   if (typeof module !== "undefined" && module.exports) {

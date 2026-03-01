@@ -10,6 +10,7 @@ const {
   insertTemplateIntoContent,
   normalizeAreaPayload,
   copyPreviewToClipboard,
+  buildRandomLyricsSnippet,
 } = require("../templates/quick_store_module");
 
 test("Quick-Store-Pfade sind pro Bereich getrennt", () => {
@@ -101,4 +102,18 @@ test("copyPreviewToClipboard meldet manuellen Rueckweg ohne Clipboard", () => {
     () => copyPreviewToClipboard("Zeile 1", null),
     /manuell kopieren/,
   );
+});
+
+test("buildRandomLyricsSnippet erstellt gueltigen Zufallsblock", () => {
+  const fixedRandom = () => 0;
+  const snippet = buildRandomLyricsSnippet(fixedRandom);
+
+  assert.match(snippet, /^\[Impuls\]/);
+  assert.match(snippet, /Genre:/);
+  assert.match(snippet, /Stimmung:/);
+  assert.match(snippet, /Stil:/);
+});
+
+test("buildRandomLyricsSnippet validiert Zufallsfunktion", () => {
+  assert.throws(() => buildRandomLyricsSnippet(null), /Zufallsfunktion fehlt/);
 });

@@ -225,3 +225,8 @@ Praktischer Einsatz:
 - Der Songtext-Kurzguide zeigt jetzt eine klare Schrittliste fuer Tastaturbedienung (Enter/Space/Escape).
 - Der Lesemodus hat eine sichtbare Kopierhilfe fuer Faelle, in denen Clipboard blockiert ist.
 - Nutzen fuer Laien: Jeder Fehler hat direkten Rueckweg ohne Techniksuche.
+
+## Iteration 68 – Erweiterung Songtext-Editor
+- Neuer 1-Klick-Zufallsimpuls erzeugt direkt nutzbaren Songtext-Startblock.
+- Fokusfluss verbessert: Lesemodus schliessen fuehrt sicher zur Titel-Eingabe zurueck.
+- Tool-Umfang: Quick-Store deckt jetzt Vorlagen + Zufallsimpuls + Lesemodus inkl. Rueckweg im selben Modul ab.
