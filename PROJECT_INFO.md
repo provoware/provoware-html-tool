@@ -1,3 +1,9 @@
+## Iteration 65 – Layout-Manifest und Referenzbild-Umbau
+
+- Neues Maschinen-Manifest: `config/design_layout_manifest.json` beschreibt Layout, Themes, A11y-Regeln und Interaktionen.
+- Dashboard-Layout auf dunklen Drei-Spalten-Aufbau mit Statusbanner und Rail-Trennung aktualisiert.
+- Dokumentiert in `docs/DESIGN_LAYOUT_MANIFEST.md` mit Soll/Ist und Prioritaetenliste.
+
 ## Iteration 62 – Patchstatus
 
 - Hauptziel 1 abgeschlossen: Songtext-Editor ist direkt im Lyrics-Bereich integriert (Intro/Refrain-Vorlagen, Enter/Escape-Hilfe, Rueckweg-Knoepfe).

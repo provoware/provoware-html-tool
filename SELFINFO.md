@@ -1,3 +1,11 @@
+## Iteration 65 (2026-03-02)
+
+- Ziel: Zwei offene Punkte abschliessen (Referenzbild-Abweichungsliste + automatische Folgepunkte im TODO).
+- Ergebnis: Referenzbild-Datei entfernt, Dashboard auf naeheres Drei-Spalten-Neonlayout umgestellt.
+- Ergebnis: Detailliertes Design-Layout-Manifest als JSON + Doku inkl. Soll/Ist erstellt.
+- Mini-Optimierung: Neues Statusbanner in einfacher Sprache im Dashboard sichtbar.
+- Naechster Schritt: Kartenfarbprofile je Modul als zentrale Tokens angleichen.
+
 ## Iteration 64 (2026-03-02)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Lesemodus-Schliessen mit Escape-Hinweis + Inline-Hilfe je Songtext-Vorlage).

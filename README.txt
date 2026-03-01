@@ -16,6 +16,8 @@
 - Neu (2026-03-01): Datenbereinigung erledigt: `dummys/unsafe-plugin-manifest.json` ist jetzt im gleichen Manifest-Standard wie die anderen Dummy-Dateien.
 - Neu (2026-03-01): Kanban-Karten haben jetzt einen Verschieben-Dialog mit Enter/Escape-Rueckweg und klarer Statusmeldung fuer Laien.
 - Neu (2026-03-01): Kanban-Schnellansicht nutzt jetzt echte Daten aus `data/kanban_board.json` und ist per Pfeiltasten links/rechts barrierefrei bedienbar.
+- Neu (2026-03-02): Referenzbild-Datei wurde entfernt; das Dashboard hat jetzt ein naeheres Drei-Spalten-Neonlayout mit Statusbanner und Rail-Struktur.
+- Neu (2026-03-02): `config/design_layout_manifest.json` + `docs/DESIGN_LAYOUT_MANIFEST.md` dokumentieren das Soll/Ist-Layout detailliert.
 # Provoware HTML Tool
 
 - Neu (2026-03-01): Referenzbild professionell analysiert und als feste UI-Vorgabe umgesetzt (Neon-Karten, KPI-Bereich, Kanban-Schnellansicht, Team/Kalendertext).
@@ -48,9 +50,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 84 %
-- **Erledigt:** 98 Punkte
-- **Offen:** 19 Punkte
+- **Fortschritt:** 85 %
+- **Erledigt:** 100 Punkte
+- **Offen:** 18 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

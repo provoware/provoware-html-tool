@@ -107,12 +107,14 @@ Laienvorschläge
 
 - [x] P1: AGENTS.md erweitert: releasefertige Patch-Regel + Datei-/Fortschrittsstatus ueber Dateiname oder `data/file_status_index.json` klar festgelegt.
 - [x] P1: Referenzbild-Checkliste als festen Ablauf nutzen (Layout-Raster, Typografie, Farben/Kontrast, Interaktionsmuster).
-- [ ] P1: Pro Referenzbild-Analyse eine Abweichungsliste (Soll/Ist) erstellen und direkt priorisieren.
-- [ ] P1: Bei hoher Abweichung automatisch Folgepunkte im TODO anlegen (mindestens 1 klarer UI-Fix mit Akzeptanzkriterien).
+- [x] P1: Pro Referenzbild-Analyse eine Abweichungsliste (Soll/Ist) erstellen und direkt priorisieren.
+- [x] P1: Bei hoher Abweichung automatisch Folgepunkte im TODO anlegen (mindestens 1 klarer UI-Fix mit Akzeptanzkriterien).
 - [x] P1: Platzhalter-Scan je Iteration durchfuehren (TODO/FIXME/Dummy/Placeholder) und Funde in TODO registrieren.
 - [ ] P1: Platzhalter-Funde im Code mit kurzer Ursache + naechstem Schritt kommentieren.
 - [ ] P1: Offene Platzhalter mit Risiko in QUESTIONS_TODO.md als Entscheidungsfrage aufnehmen.
 - [x] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
+
+- [ ] P1: UI-Fix aus Layout-Manifest umsetzen: Linke/rechte Rail mit klaren Neon-Rahmen + Statusbanner final auf alle Themes angleichen (Akzeptanz: AA-Kontrast in 5 Themes, Tastaturfokus sichtbar, Screenshot aktualisiert).
 
 - [ ] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
 

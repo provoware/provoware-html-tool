@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "name": "dashboard-layout-neon-v1",
+    "source": "Beispielbild 2026-03-02",
+    "goal": "Drei-Spalten-Aufbau mit linker Navigation, Kartenmitte und rechter Einstellungsleiste in barrierearmer Form.",
+    "updatedAt": "2026-03-02"
+  },
+  "layout": {
+    "shell": {
+      "type": "three-column",
+      "columns": ["leftRail", "centerStage", "rightRail"],
+      "topBar": true,
+      "statusBanner": true,
+      "footerBar": true
+    },
+    "leftRail": {
+      "width": "220-280px",
+      "purpose": "Navigation und schnelle Suche",
+      "blocks": ["brand", "navigationLinks", "search", "accountAction"]
+    },
+    "centerStage": {
+      "purpose": "Hauptaktionen als Kartenraster",
+      "grid": "3x3 Karten mit 16px Abstand",
+      "cards": [
+        "Genreverwaltung",
+        "Archiv",
+        "Dashboard",
+        "Zufallsgenerator",
+        "Text-Templates",
+        "Debug-Log",
+        "Import/Export",
+        "Platzhalter A",
+        "Platzhalter B"
+      ]
+    },
+    "rightRail": {
+      "width": "220-300px",
+      "purpose": "Einstellungen, Hilfe und Nutzungsstatus",
+      "blocks": [
+        "themeSelect",
+        "languageSelect",
+        "quickHelp",
+        "usageStats",
+        "feedback"
+      ]
+    }
+  },
+  "visual": {
+    "style": "neon-dark",
+    "spacingTokenPx": [4, 8, 12, 16, 24],
+    "typographyScalePx": [14, 16, 20, 24],
+    "radiusPx": 12,
+    "buttonMinSizePx": [44, 44],
+    "focusRing": "3px solid, hoher Kontrast",
+    "statusRule": "Status nie nur mit Farbe, immer mit Text"
+  },
+  "themes": [
+    { "id": "light", "label": "Hell", "contrastTarget": "WCAG AA" },
+    { "id": "dark", "label": "Dunkel", "contrastTarget": "WCAG AA" },
+    { "id": "contrast", "label": "Kontrast+", "contrastTarget": "WCAG AA+" },
+    { "id": "warm", "label": "Roetlich", "contrastTarget": "WCAG AA" },
+    { "id": "camo", "label": "Camouflage", "contrastTarget": "WCAG AA" }
+  ],
+  "a11y": {
+    "keyboard": ["Tab", "Shift+Tab", "Enter", "Space", "Escape"],
+    "requiredLabels": ["aria-label", "aria-labelledby"],
+    "fallbackActions": [
+      "Erneut versuchen",
+      "Reparatur starten",
+      "Protokoll oeffnen"
+    ],
+    "helpPattern": [
+      "Was macht das?",
+      "Was passiert mit den Daten?",
+      "Wie mache ich rueckgaengig?"
+    ]
+  }
+}
