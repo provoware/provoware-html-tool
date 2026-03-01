@@ -66,7 +66,7 @@ Laienvorschläge
 - [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.
 - [ ] P1: Zufallsgenerator-Modul implementieren (Genres/Roots/Stil, Schnellwahl, Kategorie-An/Auswahl).
 - [ ] P1: Content-Planungs-Modul implementieren (Monatskalender + Jahresuebersicht + Kapazitaeten).
-- [ ] P1: Aufgaben-Workflow mit Echtzeit-Eintrag in Kalender integrieren.
+- [x] P1: Aufgaben-Workflow mit Kalenderdatum, abhakbarer Liste und Archivbereich im Dashboard integriert.
 - [ ] P1: Template-Verwaltungs-Modul implementieren (Textfragmente, Kategorien, Import/Export, Copy-Buttons).
 - [ ] P1: Debug-/Logging-Profi-Modul ausbauen (laienfreundliche Ereignisse + Loesungen).
 - [ ] P1: Einstellungs- und Hilfebereich als eigenes Modul ausbauen (Version, Sprache, Standards, Manifeste).
@@ -129,3 +129,6 @@ Laienvorschläge
 - [x] P1: Echte Wiederherstellung aus Backup-Dialog direkt mit Dateisystemzugriff koppeln (showDirectoryPicker + repair-Hook).
 
 - [ ] P1: Restore-Flow fuer store/registry automatische Zielerkennung mit Sicherheitsabfrage erweitern.
+
+- [x] P1: Ziel-Datei-Auswahl im Backup-Dialog eingebaut (nicht nur Dateiname-Ableitung).
+- [ ] P1: Nächster Mini-Punkt: Todo-Liste optional in `data/store.json` persistieren und im Start wiederherstellen.

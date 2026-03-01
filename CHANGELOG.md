@@ -1,3 +1,9 @@
+## 2026-03-01 – Iteration 44
+
+- Todo-Listen-Modul mit Kalenderdatum, abhakbarer Liste und Archivbereich im Dashboard eingebaut.
+- Backup-Dialog zeigt jetzt eine klare Ziel-Datei-Auswahl statt automatischer Dateiname-Ableitung.
+- Mini-Optimierung Hilfe: Tooltips fuer Kalender/Ziel-Datei mit Rueckweg-Hinweis in einfacher Sprache ergaenzt.
+
 ## 2026-03-01 – Backup-Wiederherstellung jetzt direkt mit Projektordner
 
 - Backup-Dialog stellt ausgewaehlte Backup-Dateien jetzt wirklich wieder her (Dateisystem-API mit Projektordner + JSON-Pruefung).

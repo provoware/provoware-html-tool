@@ -47,6 +47,7 @@
   const backupDialog = document.getElementById("backup-dialog");
   const backupDialogClose = document.getElementById("backup-dialog-close");
   const backupSelect = document.getElementById("backup-select");
+  const backupTargetSelect = document.getElementById("backup-target-select");
   const backupRestore = document.getElementById("backup-restore");
 
   const ensureMessage =
@@ -54,6 +55,7 @@
   const validateElement = window.DashboardHelp?.validateElement;
 
   let dragSourceId = null;
+  let selectedProjectDir = null;
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
     { id: "quick", title: "⚡ Schnellzugriff" },
@@ -254,6 +256,7 @@
         throw new Error("Berechtigung fehlt. Erneut versuchen.");
       }
       await saveHandle(handle);
+      selectedProjectDir = handle;
       const folders = await ensureStructure(handle);
       setStatus(`Projekt verbunden. Struktur ok (${folders.length} Ordner).`);
       setDebug(
@@ -278,6 +281,7 @@
           "Berechtigung abgelehnt. Bitte Projektordner erneut waehlen.",
         );
       }
+      selectedProjectDir = handle;
       const folders = await ensureStructure(handle);
       setStatus(`Auto-Reconnect ok. ${folders.length} Ordner sind bereit.`);
     } catch (error) {
@@ -386,9 +390,13 @@
       return false;
     }
 
-    const targetPath = backupPath.includes("registry")
-      ? "data/registry.json"
-      : "data/store.json";
+    const targetPath = backupTargetSelect?.value || "";
+    if (!targetPath) {
+      setStatus(
+        "Ziel-Datei fehlt. Naechster Schritt: Ziel-Datei waehlen und erneut versuchen.",
+      );
+      return false;
+    }
 
     try {
       const plan = window.BackupRestore.buildRestorePlan(
@@ -477,6 +485,18 @@
   chooseFolder.addEventListener("click", chooseProjectFolder);
   reconnect.addEventListener("click", reconnectProjectFolder);
 
+  if (window.createTodoModule) {
+    window.createTodoModule({
+      dateInput: document.getElementById("todo-date"),
+      textInput: document.getElementById("todo-input"),
+      addButton: document.getElementById("todo-add"),
+      resetButton: document.getElementById("todo-reset-date"),
+      activeList: document.getElementById("todo-active-list"),
+      archiveList: document.getElementById("todo-archive-list"),
+      setStatus,
+    });
+  }
+
   window.createModuleWorkspace({
     catalog: document.getElementById("module-catalog"),
     grid: document.getElementById("active-modules"),
@@ -495,6 +515,7 @@
     [helpBackup, "Backup-Knopf"],
     [backupDialog, "Backup-Dialog"],
     [backupSelect, "Backup-Auswahl"],
+    [backupTargetSelect, "Ziel-Datei-Auswahl"],
     [backupRestore, "Backup-Wiederherstellen"],
     [backupDialogClose, "Backup-Dialog-Zurueck"],
   ].forEach(([element, name]) => validateElement(element, name));

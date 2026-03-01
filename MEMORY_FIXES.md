@@ -472,3 +472,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Restore ueber Backend/CLI statt Browser-Dateisystem.
 **Risiko/Side-Effects:** Browser ohne File-System-API brauchen den bestehenden Reparaturweg.
 **Verknüpft:** PATCH-043
+
+## FIX-20260301-044: Ziel-Datei im Restore-Dialog explizit waehlen
+
+**Kategorie:** UI/Backup
+**Symptom (fuer Laien):** Es war unklar, welche Datei bei Wiederherstellung wirklich ueberschrieben wird.
+**Technische Ursache:** Ziel-Datei wurde aus dem Backup-Dateinamen abgeleitet statt im Dialog gewaehlt.
+**Trigger:** Backup-Datei auswaehlen und auf "Backup wiederherstellen" klicken.
+**Fix (kurz):** Neuer Ziel-Datei-Select im Dialog + Validierung vor Restore; Todo-Modul mit Kalender und Archiv als sichtbare UX-Verbesserung.
+**Geaenderte Dateien/Marker:** `templates/dashboard.html`, `templates/dashboard.js`, `templates/backup_restore.js`, `templates/todo_module.js`, `system-module/todo_list_model.js`.
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer kritische Zielpfade im Dialog explizit waehlbar machen und vor Ausfuehrung validieren.
+**Alternative(n):** Automatische Zielerkennung mit Sicherheitsfrage (spaeter moeglich).
+**Risiko/Side-Effects:** Niedrig; ein zusaetzlicher Auswahlschritt im Dialog.
+**Verknuepft:** PATCH-044

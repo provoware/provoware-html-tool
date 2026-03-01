@@ -1,3 +1,6 @@
+Iteration 44 (2026-03-01): Todo-Listen-Modul mit Kalender + Archiv umgesetzt und Backup-Ziel-Datei im Dialog explizit waehlbar gemacht.
+Naechster Schritt: Todo-Daten optional persistent speichern und Filter (heute/offen/archiv) erweitern.
+
 Iteration 43 (2026-03-01): Backup-Wiederherstellung im Dashboard nutzt jetzt echten Projektordner-Zugriff und schreibt Zieldateien direkt mit JSON-Validierung.
 Naechster Schritt: Wiederherstellung fuer mehrere Zieltypen weiter haerten und Boot-View-Statusbereich stabilisieren.
 

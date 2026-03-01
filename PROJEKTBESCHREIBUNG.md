@@ -40,3 +40,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Backup-Wiederherstellung arbeitet jetzt direkt mit Projektordner-Handle und schreibt die Ziel-JSON wirklich zurueck.
 - Neue Restore-Logik ist in `templates/backup_restore.js` gekapselt (klare Input-/Output-Pruefung).
 - Fehlerweg bleibt laienfreundlich mit klaren naechsten Schritten und Debug-Hinweis.
+
+
+## Iteration 44 – To-Do-Listen-Modul
+- Neues Frontend-Modul mit Kalenderdatum, Eingabefeld, Abhak-Button und Archivliste.
+- Ziel-Datei fuer Backup-Restore ist jetzt direkt im Dialog auswaehlbar (mehr Kontrolle, weniger Risiko).
+- A11y-Details: klare Labels, 44px Buttons, Tastaturbedienung ueber Standard-Controls.

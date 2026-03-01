@@ -64,3 +64,8 @@
 - Plugin-Manifest darf keine doppelte `id` enthalten.
 - Plugin-Modulpfade muessen innerhalb des Projektordners liegen.
 - Fehlertexte bleiben laienklar mit naechstem Schritt (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
+
+## Iteration 44
+
+- Todo-Liste mit Kalender und Archiv im Dashboard integriert.
+- Backup-Restore-Zieldatei ist jetzt im Dialog explizit auswaehlbar.
