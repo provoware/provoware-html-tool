@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 12
+Iteration: 13
 
 ## Gemacht
 
@@ -25,6 +25,8 @@ Iteration: 12
 - Start-Routine startet das Dashboard jetzt automatisch am Ende (mit Headless-Fallback).
 
 - Neues Mockup `templates/dashboard_mockup.html` mit aktueller Start- und Dashboard-Logik ergänzt.
+
+- README weiter verbessert: offene Punkte oben, klare Laienanleitung mit Befehlen und stärker sichtbare Struktur.
 
 ## Next Step
 

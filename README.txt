@@ -1,140 +1,155 @@
 # Provoware HTML Tool
 
-Kurzfassung:
-Dieses Projekt ist ein HTML-Werkzeug mit klarem Aufbau.
-Es setzt auf Stabilität, einfache Bedienung und automatische Prüfungen.
+## Offene Punkte (oben, kurz)
 
-## 1) Ziel
+1. Backup-Dialog im Dashboard
+2. Backup-Hook mit Dialog verbinden
+
+## Kurzüberblick
+
+Dieses Projekt ist ein HTML-Werkzeug mit klarer Ordnung.
+Es ist für Laien gedacht: verständlich, barrierefrei und stabil.
+
+## Ziel
 
 Das Projekt soll:
-- für Laien verständlich sein,
+- leicht bedienbar sein,
 - robust laufen,
-- gut wartbar sein,
-- und mit einem Befehl automatisch prüfen.
+- klar wartbar bleiben,
+- vollautomatisch prüfen.
 
 Wichtige Begriffe:
-- **Kernel (Kern):** die stabile Grundlogik.
-- **Validierung (Eingabeprüfung):** Daten werden vor Nutzung geprüft.
-- **Versionierung (Versionen mit Historie):** ältere Zustände bleiben erhalten.
-- **Barrierefreiheit (A11y):** Bedienung für möglichst alle Menschen,
-  z. B. per Tastatur und mit gutem Kontrast.
+- **Kernel (Kern):** stabile Grundlogik.
+- **Validierung (Eingabeprüfung):** Daten vor Nutzung prüfen.
+- **Versionierung (Historie):** alte Stände bleiben erhalten.
+- **A11y (Barrierefreiheit):** gute Nutzung für alle Menschen.
 
-## 2) Projektstruktur
+## Projektstruktur
 
-Die Ordner sind klar getrennt:
+Die Ordner sind getrennt und klar benannt:
 - `system-core/` → Kernlogik
 - `system-module/` → feste Module
-- `config/` → Einstellungen, Texte, Manifeste
+- `config/` → Einstellungen und Manifeste
 - `data/` → variable Daten und Versionen
-- `tools/` → Start-, Prüf- und Diagnose-Werkzeuge
+- `tools/` → Prüf- und Diagnose-Helfer
 - `templates/` → UI-Vorlagen
 - `test/` → automatische Tests
-- `dummys/` → Dummys für Reparatur/Selbsttest
+- `dummys/` → Dummys für Tests und Reparatur
 
-Warum das wichtig ist:
-- Änderungen sind schneller auffindbar.
-- Fehler sind leichter isolierbar.
-- Reviews bleiben klein und klar.
+Vorteile:
+- Fehler schneller finden
+- Änderungen leichter prüfen
+- Bessere Wartbarkeit
 
-## 3) Schnellstart (empfohlen)
+## Start (vollautomatisch)
+
+Empfohlener Start:
 
 ```bash
 bash start.sh
 ```
 
-Die Start-Routine arbeitet vollautomatisch und gibt klares Feedback.
-
-## 4) Was `start.sh` automatisch macht
-
+`start.sh` übernimmt automatisch:
 1. Voraussetzungen prüfen
 2. Fehlende Abhängigkeiten installieren
 3. Code formatieren
 4. Tests ausführen
 5. Registry prüfen
 6. Systemtest ausführen
-7. Nächsten sinnvollen Schritt ausgeben
+7. Nächsten Schritt anzeigen
 
-Wenn ein Fehler auftritt, folge den Hinweisen im Terminal.
-Empfohlen sind immer klare nächste Schritte wie:
+Bei Fehlern zeigt das System klare Aktionen:
 - **Erneut versuchen**
 - **Reparatur starten**
 - **Protokoll öffnen**
 
-## 5) Qualität und Robustheit
+## Laienanleitung mit Befehlen
 
-Das Projekt folgt diesen Grundregeln:
+### Schritt 1: Alles automatisch starten
+
+```bash
+bash start.sh
+```
+
+### Schritt 2: Tests manuell prüfen
+
+```bash
+npm test
+```
+
+### Schritt 3: Codeformat manuell ausführen
+
+```bash
+npm run format
+```
+
+### Schritt 4: Hilfe und Logs öffnen
+
+```bash
+node tools/help_cli.js test
+node tools/help_cli.js logs
+```
+
+### Schritt 5: Backup und Reparatur nutzen
+
+```bash
+node tools/help_cli.js backups store
+node tools/help_cli.js repair data/store.json data/store.backup.json
+```
+
+### Schritt 6: Plugin-Loader schnell prüfen
+
+```bash
+node -e 'console.log(require("./system-core/plugin_loader").runPluginLoaderHealthCheck({manifestPath:"config/manifests/plugins.manifest.json",projectRoot:process.cwd()}).message)'
+```
+
+## Qualitätsstandard
+
 - Jede Funktion prüft Input (Eingabe).
 - Jede Funktion prüft Output (Ergebnis).
-- Fehlertexte sind verständlich und lösungsorientiert.
-- JSON-Schreiben erfolgt robust (atomar und versioniert).
-- Kernbereiche werden per Manifest validiert.
+- Fehlertexte sind klar und geben den nächsten Schritt.
+- JSON-Schreiben bleibt robust und versioniert.
+- Kernbereiche werden mit Manifesten validiert.
 
-## 6) Barrierefreiheit (A11y)
+## Barrierefreiheit und Sichtbarkeit
 
-Der UI-Ansatz ist „Tastatur zuerst“:
-- Tab/Shift+Tab in logischer Reihenfolge
-- Enter/Space zum Auslösen von Aktionen
-- Escape zum Schließen von Dialogen
-- Fokus klar sichtbar
-- Status nie nur über Farbe, immer auch über Text
+- Tastatur zuerst: Tab, Enter/Space, Escape.
+- Fokus sichtbar und nicht verdeckt.
+- Status nie nur über Farbe, immer auch über Text.
+- Hoher Kontrast in allen Themes.
 
-Themes:
+Verfügbare Themes:
 - Hell
 - Dunkel
 - Kontrast+
 
-Tipp für viele Nutzende:
-Nutze **Kontrast+**, wenn Text schwer lesbar ist.
+Tipp:
+Nutze **Kontrast+** bei Leseschwierigkeiten.
 
-## 7) Registry und Versionierung
-
-Registry-Dateien:
-- `data/registry.json` → aktueller Zustand
-- `data/registry.current.json` → Zeiger auf aktive Version
-- `data/registry_versions/registry_vXXXX.json` → ältere Stände
-
-Manifest-Dateien:
-- `config/manifests/global.manifest.json`
-- `config/manifests/kernel.manifest.json`
-- `config/manifests/registry.manifest.json`
-- `config/manifests/plugins.manifest.json`
-
-## 8) Wichtige Befehle
-
-```bash
-bash start.sh
-npm test
-npm run format
-node tools/help_cli.js test
-node tools/help_cli.js logs
-node tools/help_cli.js backups store
-node tools/help_cli.js repair data/store.json data/store.backup.json
-node -e 'console.log(require("./system-core/plugin_loader").runPluginLoaderHealthCheck({manifestPath:"config/manifests/plugins.manifest.json",projectRoot:process.cwd()}).message)'
-```
-
-## 9) Debugging und Logging
+## Debugging und Logging
 
 Wenn etwas nicht klappt:
 1. `bash start.sh`
 2. `npm test`
 3. `node tools/help_cli.js logs`
-4. Danach gezielt reparieren und erneut versuchen.
+4. Reparieren und erneut prüfen
 
-Protokolle sollen zwei Ebenen liefern:
-- einfache Erklärung für Laien,
-- technische Details für Entwicklung/Analyse.
+Log-Ziele:
+- einfache Erklärung für Laien
+- technische Details für Entwicklung
 
-## 10) Doku
+## Wichtige Dateien
 
 - Entwicklerdoku: `docs/ENTWICKLERDOKU.md`
 - Hilfe: `docs/HILFE.md`
 - Offene Fragen: `QUESTIONS_TODO.md`
 - Verlauf: `CHANGELOG.md`
+- Laufende Aufgaben: `todo.txt`
 
-## 11) Laienvorschläge (konkret)
+## Weiterführende Laienvorschläge
 
-1. Starte immer mit `bash start.sh`.
-2. Lies Fehlermeldungen komplett (inkl. nächster Schritt).
-3. Nutze bei Anzeigeproblemen das Theme „Kontrast+“.
-4. Öffne bei unklaren Fehlern zuerst das Protokoll.
-5. Nutze Backup und starte dann den Test erneut.
+1. Immer zuerst `bash start.sh` nutzen.
+2. Fehlermeldung komplett lesen.
+3. Erst Logs öffnen, dann reparieren.
+4. Für Lesbarkeit Theme „Kontrast+“ wählen.
+5. Nach jeder Reparatur sofort neu testen.

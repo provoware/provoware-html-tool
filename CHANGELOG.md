@@ -40,3 +40,9 @@
 - Neues Mockup `templates/dashboard_mockup.html` ergänzt: zeigt Start-Routine (9 Schritte), Theme-Auswahl und Dashboard-Zonen in einfacher Sprache.
 - Mockup nutzt klare A11y-Bausteine (Fokus sichtbar, `aria-live`, große Buttons) und feste naechste Schritte bei Fehlern.
 - Risiko: niedrig, da nur neue Mockup-Datei plus Doku-Update.
+
+## 2026-03-01 – README klarer für Laien
+
+- README neu gegliedert: offene Punkte oben, klare Kapitel und bessere Sichtbarkeit.
+- Laienanleitung mit vollständigen Befehlen ergänzt (Start, Test, Format, Logs, Backup, Reparatur).
+- Risiko: niedrig, da nur Dokumentation angepasst wurde.
