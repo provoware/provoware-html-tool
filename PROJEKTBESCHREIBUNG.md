@@ -1,3 +1,10 @@
+## Iteration 62 – Songtext-Editor und getrennte Bereichsdateien
+
+- Der Songtext-Editor sitzt jetzt direkt im Lyrics-Bereich (Songideen) und bietet Intro-/Refrain-Vorlagen.
+- Tastaturhilfe ist sichtbar: Enter aktiviert Vorlagen, Escape ist der schnelle Rueckweg zu Allgemein.
+- Schnellspeicher ist wartbarer: jeder Bereich hat jetzt eine eigene Datei fuer bessere Recovery (Wiederherstellung).
+- Legacy-Migration bleibt aktiv: alte Sammeldatei wird beim ersten Laden automatisch in drei Dateien aufgeteilt.
+
 ## Update Iteration 60 – Schnellspeicher + Mini-Punkte-Regel
 
 - Das Dashboard hat jetzt einen Schnellspeicher fuer kurze Ideen.

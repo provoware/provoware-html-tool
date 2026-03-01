@@ -1,3 +1,9 @@
+## Iteration 62 – Patchstatus
+
+- Hauptziel 1 abgeschlossen: Songtext-Editor ist direkt im Lyrics-Bereich integriert (Intro/Refrain-Vorlagen, Enter/Escape-Hilfe, Rueckweg-Knoepfe).
+- Hauptziel 2 abgeschlossen: Schnellspeicher speichert nun physisch pro Bereich in getrennten Dateien (`quick_store_inbox/lyrics/research.json`).
+- Status: releasebereit nach gruenem `node --test` und erfolgreichem `bash start.sh`.
+
 ## Iteration 60 – Patchstatus
 
 - Hauptziel 1 abgeschlossen: Start-Routine prueft AGENTS-Regel "genau zwei offene Mini-Punkte" direkt gegen `todo.txt`.

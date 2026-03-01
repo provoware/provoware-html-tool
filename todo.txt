@@ -70,8 +70,10 @@ Laienvorschläge
 - [x] P1: Schnellspeicher-Modul implementieren (Titel + Eingabe an feste Datei anhaengen).
 - [x] P1: Mehrfach-Schnellspeicherbereiche mit eigenen Dateien anlegen (UI + Persistenz).
 - [x] Naechster Mini-Punkt: Schnellspeicher um Bereichsauswahl mit eigener Datei erweitern.
-- [ ] Naechster Mini-Punkt: Songtext-Editor mit Intro/Refrain-Vorlage und Tastaturhilfe starten.
-- [ ] Naechster Mini-Punkt: Schnellspeicher-Eintraege pro Bereich auf getrennte Dateien aufteilen.
+- [x] Naechster Mini-Punkt: Songtext-Editor mit Intro/Refrain-Vorlage und Tastaturhilfe starten.
+- [x] Naechster Mini-Punkt: Schnellspeicher-Eintraege pro Bereich auf getrennte Dateien aufteilen.
+- [ ] Naechster Mini-Punkt: Songtext-Editor um Bridge/Sonstiges-Vorlagen erweitern.
+- [ ] Naechster Mini-Punkt: Songtext-Dokumentvorschau als einfachen Lesemodus vorbereiten.
 - [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
 - [ ] P1: Interoperabilitaet Songtext-Editor ↔ Zufallsgenerator umsetzen (Inhalt einfuegen).
 - [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.
