@@ -5,6 +5,7 @@ const {
   getContrastRatio,
   parseJsonText,
   runReleaseReadinessCheck,
+  summarizeA11yChecks,
 } = require("../tools/release_readiness_check");
 
 test("parseJsonText verarbeitet gueltiges JSON", () => {
@@ -71,4 +72,17 @@ test("checkThemeContrast liefert 40 Theme-Kontrastchecks", () => {
     checks.every((item) => item.ok),
     true,
   );
+});
+
+test("summarizeA11yChecks liefert Kurzbericht", () => {
+  const summary = summarizeA11yChecks([
+    { ok: true, message: "Statusbereich mit aria-live vorhanden" },
+    { ok: false, message: "Kontrast light/Haupttext: 3.50 (mindestens 4.5)" },
+    { ok: true, message: "Andere Pruefung ohne Bezug" },
+  ]);
+
+  assert.equal(summary.total, 2);
+  assert.equal(summary.passed, 1);
+  assert.equal(summary.failed, 1);
+  assert.match(summary.message, /A11y-Kurzbericht/);
 });

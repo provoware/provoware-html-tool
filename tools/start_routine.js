@@ -10,6 +10,7 @@ const { runPluginLoaderHealthCheck } = require("../system-core/plugin_loader");
 const { startDashboardMainModule } = require("../system-core/dashboard_core");
 const {
   runReleaseReadinessCheck,
+  summarizeA11yChecks,
 } = require("../tools/release_readiness_check");
 
 function assertArray(value, name) {
@@ -614,6 +615,8 @@ function runStartRoutine() {
   }
   console.log(`[10/13] ${release.message}`);
 
+  const a11ySummary = summarizeA11yChecks(release.checks);
+
   console.log("[11/13] Platzhalter-Scan pruefen");
   const placeholderCheck = scanPlaceholderMarkers(process.cwd());
   if (!placeholderCheck.ok) {
@@ -653,10 +656,13 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[15/15] Shortcut-Abschlussbericht");
-  console.log(`[15/15] ${buildShortcutConflictSummary(shortcutCheck)}`);
+  console.log("[15/16] A11y-Abschlussbericht");
+  console.log(`[15/16] ${a11ySummary.message}`);
 
-  console.log("[16/16] Fertig");
+  console.log("[16/17] Shortcut-Abschlussbericht");
+  console.log(`[16/17] ${buildShortcutConflictSummary(shortcutCheck)}`);
+
+  console.log("[17/17] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );

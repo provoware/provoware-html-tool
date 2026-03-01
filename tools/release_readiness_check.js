@@ -214,6 +214,46 @@ function checkUiTokenFile(rootPath) {
   }));
 }
 
+function summarizeA11yChecks(checks) {
+  if (!Array.isArray(checks)) {
+    throw new Error(
+      "A11y-Pruefliste fehlt. Bitte Protokoll oeffnen und erneut versuchen.",
+    );
+  }
+
+  const keywords = [
+    "A11y",
+    "aria",
+    "Tastatur",
+    "Escape",
+    "Enter",
+    "Fokus",
+    "Kontrast",
+    "Theme",
+    "44px",
+  ];
+
+  const relevant = checks.filter((item) => {
+    if (!item || typeof item.message !== "string") {
+      return false;
+    }
+
+    return keywords.some((keyword) => item.message.includes(keyword));
+  });
+  const passed = relevant.filter((item) => item.ok).length;
+  const failed = relevant.length - passed;
+
+  return {
+    total: relevant.length,
+    passed,
+    failed,
+    message:
+      failed === 0
+        ? `A11y-Kurzbericht: ${passed}/${relevant.length} Checks ok.`
+        : `A11y-Kurzbericht: ${failed} von ${relevant.length} Checks offen.`,
+  };
+}
+
 function runReleaseReadinessCheck(options = {}) {
   const rootPath = options.rootPath || process.cwd();
   assertText(rootPath, "Projektpfad");
@@ -486,4 +526,5 @@ module.exports = {
   parseJsonText,
   readUtf8,
   runReleaseReadinessCheck,
+  summarizeA11yChecks,
 };

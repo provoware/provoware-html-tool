@@ -1,4 +1,22 @@
 (function exposeModuleWorkspace() {
+  const CONTROL_TOOLTIPS = {
+    maximize: {
+      short: "Groesser anzeigen",
+      fallback: "Normalgroesse waehlen",
+      undo: "Rueckweg: Gleichen Knopf erneut druecken.",
+    },
+    minimize: {
+      short: "Kurz einklappen",
+      fallback: "Wieder aufklappen",
+      undo: "Rueckweg: Gleichen Knopf erneut druecken.",
+    },
+    hide: {
+      short: "Ausblenden",
+      fallback: "Ausblenden",
+      undo: "Rueckweg: Modul im Katalog erneut aktivieren.",
+    },
+  };
+
   const MODULE_CATALOG = [
     {
       id: "project",
@@ -34,6 +52,16 @@
     if (!node || typeof node.appendChild !== "function") {
       throw new Error(`${name} fehlt. Bitte Protokoll oeffnen.`);
     }
+  }
+
+  function getControlHint(actionKey, isActive) {
+    if (!CONTROL_TOOLTIPS[actionKey]) {
+      throw new Error("Steuerung fehlt. Bitte Protokoll oeffnen.");
+    }
+
+    const source = CONTROL_TOOLTIPS[actionKey];
+    const shortText = isActive ? source.fallback : source.short;
+    return `${shortText}. ${source.undo}`;
   }
 
   function buildWorkspace(options) {
@@ -91,8 +119,10 @@
 
         const maximize = document.createElement("button");
         maximize.type = "button";
-        maximize.textContent =
-          maximizedId === entry.id ? "Normalgroesse" : "Maximieren";
+        const maximizeActive = maximizedId === entry.id;
+        maximize.textContent = maximizeActive ? "Normalgroesse" : "Maximieren";
+        maximize.title = getControlHint("maximize", maximizeActive);
+        maximize.setAttribute("aria-label", maximize.title);
         maximize.addEventListener("click", () => {
           maximizedId = maximizedId === entry.id ? null : entry.id;
           renderActiveModules();
@@ -107,7 +137,10 @@
 
         const minimize = document.createElement("button");
         minimize.type = "button";
-        minimize.textContent = entry.minimized ? "Aufklappen" : "Minimieren";
+        const minimizeActive = entry.minimized;
+        minimize.textContent = minimizeActive ? "Aufklappen" : "Minimieren";
+        minimize.title = getControlHint("minimize", minimizeActive);
+        minimize.setAttribute("aria-label", minimize.title);
         minimize.addEventListener("click", () => {
           entry.minimized = !entry.minimized;
           if (entry.minimized && maximizedId === entry.id) {
@@ -122,6 +155,8 @@
         const hide = document.createElement("button");
         hide.type = "button";
         hide.textContent = "Ausblenden";
+        hide.title = getControlHint("hide", false);
+        hide.setAttribute("aria-label", hide.title);
         hide.addEventListener("click", () => {
           entry.hidden = true;
           entry.minimized = false;
@@ -198,4 +233,5 @@
   }
 
   window.createModuleWorkspace = buildWorkspace;
+  window.getModuleWorkspaceControlHint = getControlHint;
 })();
