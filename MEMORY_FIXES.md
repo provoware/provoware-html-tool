@@ -402,3 +402,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Blockliste fuer einzelne Pfade (abgelehnt, zu fehleranfaellig).
 **Risiko/Side-Effects:** Niedrig; strengere Validierung kann fehlerhafte Altmanifeste frueher stoppen (gewollt).
 **Verknuepft:** PATCH-037
+
+## FIX-20260301-039: Backup-Dialog-Readiness sichtbar
+
+**Kategorie:** UI/A11y/Docs
+**Symptom (für Laien):** Es war unklar, wann ein einzelner Punkt wirklich release-fertig ist.
+**Technische Ursache:** Der 5-Punkte-Check war nur in README und nicht direkt bei der Backup-Aktion sichtbar.
+**Trigger:** Nutzer oeffnet Hilfe-Aktionen im Dashboard und sucht Freigabe-Regeln.
+**Fix (kurz):** Backup-Dialog mit Inline-Check eingefuegt und Release-Readiness um Doku-Regel erweitert.
+**Geänderte Dateien/Marker:** templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, tools/release_readiness_check.js
+**Tests/Checks:** node --test test/release_readiness_check.test.js, bash start.sh
+**Prävention (künftig):** Ab jetzt immer Freigabe-Check direkt an der relevanten UI-Aktion anzeigen.
+**Alternative(n):** Nur README-Text ohne Dialoghilfe (schlechter fuer schnelle Bedienung).
+**Risiko/Side-Effects:** Niedrig, da nur statische Checks und Dialog-UI erweitert wurden.
+**Verknüpft:** PATCH-039

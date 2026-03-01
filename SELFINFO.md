@@ -1,7 +1,13 @@
 # SELFINFO
 
 Stand: 2026-03-01
-Iteration: 37
+Iteration: 39
+
+## Iteration 39 – Backup-Dialog mit 5-Punkte-Check + Doku-Readiness
+
+- Backup-Dialog im Dashboard zeigt jetzt den 5-Punkte-Release-Check direkt im Dialog als Inline-Hilfe.
+- Release-Readiness-Check prueft jetzt zusaetzlich die Doku-Regel fuer README, CHANGELOG und todo.
+- Naechster Schritt bleibt: Backup-Dialog an den JSON-Store-Backup-Hook anbinden.
 
 ## Iteration 37 – Release-Fertig je Einzelpunkt
 
