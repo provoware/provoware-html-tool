@@ -1,3 +1,7 @@
+## Iteration 108 (2026-03-01) - GUI-Fehleranalyse + robuste Theme-Kontraste
+- [x] Naechster Mini-Punkt: CSS-Variablenfehler in Support-Badges behoben (`--ink`, `--line-strong`, `--warn-soft`) und pro Theme kontraststarke Defaults gesetzt. | Code: templates/dashboard.css | Tests: npm test + npm run release:check | Doku: todo aktualisiert | Risiko: niedrig (nur Design-Tokens), reduziert durch bestehende UI-Token- und Release-Checks.
+- [x] Naechster Mini-Punkt: Laufzeit-404 fuer `data/backup_events.json` durch robuste Startdatei beseitigt, damit Dashboard ohne Konsolenfehler startet. | Code: data/backup_events.json | Tests: npm test + lokaler HTTP-Start + Playwright-Screenshot | Doku: todo aktualisiert | Risiko: niedrig (neue Daten-Initialdatei), reduziert durch End-to-End-Seitenaufruf.
+
 ## Iteration 107 (2026-03-01) - Laienfuehrung + Kontrast-Hinweise
 - [x] Naechster Mini-Punkt: Theme-Hilfe mit live aktualisiertem A11y-Hinweis pro Farbthema in der Systemsteuerung ergaenzt. | Code: templates/dashboard.html + templates/dashboard.js + config/messages_de.json | Tests: npm run format + node --test | Doku: todo aktualisiert | Risiko: niedrig (nur Hinweistexte + Statusausgabe), reduziert durch Regex-Tests.
 - [x] Naechster Mini-Punkt: Laien-Tipp-Knopf auf rotierende, zentral gepflegte Schritt-fuer-Schritt-Hinweise umgestellt. | Code: templates/dashboard.js + config/messages_de.json | Tests: npm run format + node --test | Doku: todo aktualisiert | Risiko: niedrig (Textrotation), reduziert durch Fallback-Hinweis.
