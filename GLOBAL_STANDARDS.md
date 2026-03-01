@@ -7,7 +7,7 @@ Ziel: **kleine Dateien, kleine Funktionen, kleine PRs** → schneller reviewbar,
 
 ## 1) Größenlimits (Default)
 ### 1.1 Dateien (Quellcode)
-- **Max 250 Zeilen pro Datei** (Leerzeilen/Kommentare zählen nicht).
+- **Max 400 Zeilen pro Datei** (Leerzeilen/Kommentare zählen nicht).
 - Wenn mehr nötig ist → Datei splitten (Service/Module/Helper).
 
 **Ausnahmen:**
@@ -16,7 +16,7 @@ Ziel: **kleine Dateien, kleine Funktionen, kleine PRs** → schneller reviewbar,
 - Große Datenlisten (JSON), wenn sie nicht manuell gepflegt werden
 
 ### 1.2 Funktionen
-- **Max 60 Zeilen pro Funktion** (Leerzeilen/Kommentare zählen nicht).
+- **Max 80 Zeilen pro Funktion** (Leerzeilen/Kommentare zählen nicht).
 - Bei Überschreitung: extrahieren in Helper/Service.
 
 ### 1.3 Zeilenlänge
@@ -44,8 +44,8 @@ Ziel: **kleine Dateien, kleine Funktionen, kleine PRs** → schneller reviewbar,
 ```js
 module.exports = {
   rules: {
-    "max-lines": ["error", { "max": 250, "skipBlankLines": true, "skipComments": true }],
-    "max-lines-per-function": ["error", { "max": 60, "skipBlankLines": true, "skipComments": true }],
+    "max-lines": ["error", { "max": 400, "skipBlankLines": true, "skipComments": true }],
+    "max-lines-per-function": ["error", { "max": 80, "skipBlankLines": true, "skipComments": true }],
     "max-len": ["error", {
       "code": 80,
       "ignoreUrls": true,
