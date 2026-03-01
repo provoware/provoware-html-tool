@@ -153,3 +153,43 @@ Log-Ziele:
 3. Erst Logs öffnen, dann reparieren.
 4. Für Lesbarkeit Theme „Kontrast+“ wählen.
 5. Nach jeder Reparatur sofort neu testen.
+
+
+## Modernes, modulares Layout (neu)
+
+Das Dashboard wurde klar gruppiert:
+- **Topbar:** schnelle Aktionen (Nächster Schritt, Laien-Tipp, Debug).
+- **Geführte Hilfe:** Schrittliste mit einfacher Sprache.
+- **Systemsteuerung:** Theme, Ordnerwahl, Auto-Reconnect.
+- **Modulfläche:** aktive Module getrennt vom Katalog.
+- **Hilfe-Aktionen:** feste Buttons für *Erneut versuchen*, *Reparatur starten* und *Protokoll öffnen*.
+
+Warum das wichtig ist:
+- weniger Suchaufwand,
+- klarere Reihenfolge,
+- bessere Bedienung für Einsteiger,
+- konsistente Fehlerwege mit nächstem Schritt.
+
+## Laienbedienung maximal perfektionieren (Best Practices)
+
+1. Immer in Schritten arbeiten: wählen → prüfen → dann weiter.
+2. Nie nur auf Farbe verlassen, immer auch den Text lesen.
+3. Bei Fehlern immer dieselben 3 Aktionen nutzen:
+   - Erneut versuchen
+   - Reparatur starten
+   - Protokoll öffnen
+4. Theme passend wählen:
+   - Hell = Standard
+   - Dunkel = augenschonend
+   - Kontrast+ = maximale Lesbarkeit
+5. Debug nur einschalten, wenn etwas unklar ist.
+6. Nach Änderungen immer automatisch testen lassen.
+
+## Design- und Layout-Verbesserungen (konkret)
+
+- klare Kartenstruktur mit eindeutigen Überschriften,
+- geführte Hilfeliste direkt im Zentrum,
+- gleiches Button-Verhalten in allen Bereichen,
+- Fokus sichtbar für Tastaturbedienung,
+- konsistente Abstände und Textgrößen,
+- modulare Blöcke: leichter erweiterbar und wartbar.

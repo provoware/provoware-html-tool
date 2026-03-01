@@ -23,6 +23,17 @@
   const controlWhat = document.getElementById("control-what");
   const workspaceHelp = document.getElementById("workspace-help");
   const helpWhat = document.getElementById("help-what");
+  const guideIntro = document.getElementById("guide-intro");
+  const guideList = document.getElementById("guide-list");
+  const showNextStep = document.getElementById("show-next-step");
+  const showLaienTip = document.getElementById("show-laien-tip");
+  const helpRetry = document.getElementById("help-retry");
+  const helpRepair = document.getElementById("help-repair");
+  const helpLog = document.getElementById("help-log");
+
+  const ensureMessage =
+    window.DashboardHelp?.ensureMessage || ((m, f) => m || f);
+  const validateElement = window.DashboardHelp?.validateElement;
 
   let dragSourceId = null;
   let zoneModel = [
@@ -30,13 +41,6 @@
     { id: "quick", title: "⚡ Schnellzugriff" },
     { id: "modules", title: "📦 Module" },
   ];
-
-  function ensureMessage(message, fallback) {
-    if (typeof message === "string" && message.trim() !== "") {
-      return message;
-    }
-    return fallback;
-  }
 
   async function loadMessages() {
     try {
@@ -235,6 +239,25 @@
     );
   });
 
+  showNextStep.addEventListener("click", () => {
+    setStatus("Naechster Schritt: Projektordner waehlen und Struktur pruefen.");
+  });
+
+  showLaienTip.addEventListener("click", () => {
+    setStatus(
+      "Laien-Tipp: Erst lesen, dann klicken. Bei Fehlern erneut versuchen.",
+    );
+  });
+
+  function onHelpAction(actionKey) {
+    const actionMessage = window.DashboardHelp?.getHelpActionMessage(actionKey);
+    setStatus(`${actionMessage} Naechster Schritt: Meldung lesen.`);
+  }
+
+  helpRetry.addEventListener("click", () => onHelpAction("retry"));
+  helpRepair.addEventListener("click", () => onHelpAction("repair"));
+  helpLog.addEventListener("click", () => onHelpAction("log"));
+
   debugButton.addEventListener("click", () => {
     debugOutput.hidden = !debugOutput.hidden;
     setStatus("Debug-Ansicht umgeschaltet. Naechster Schritt: Meldung lesen.");
@@ -252,6 +275,13 @@
     setStatus,
   });
 
+  [
+    [zones, "Zonenbereich"],
+    [status, "Statusfeld"],
+    [debugButton, "Debug-Knopf"],
+    [guideList, "Hilfe-Liste"],
+  ].forEach(([element, name]) => validateElement(element, name));
+
   loadMessages().then((ui) => {
     controlWhat.textContent = ensureMessage(
       ui.controlWhat,
@@ -265,7 +295,16 @@
       ui.helpWhat,
       "Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
     );
+    guideIntro.textContent = ensureMessage(
+      ui.guideIntro,
+      "Diese Liste fuehrt in klaren Schritten durch den Start.",
+    );
+    const stepCount = window.DashboardHelp.renderGuideSteps(
+      guideList,
+      ui.guideSteps,
+    );
     status.textContent = ensureMessage(ui.readyStatus, status.textContent);
+    setDebug(`Debug: Hilfe mit ${stepCount} Schritten geladen.`);
   });
 
   renderZones();

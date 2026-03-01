@@ -29,6 +29,7 @@ test("Dashboard-Dateien sind als Pflichtpfade vorhanden", () => {
   const result = validateProjectStructure([
     "templates/dashboard.html",
     "templates/dashboard.js",
+    "templates/dashboard_help.js",
     "templates/module_workspace.js",
     "system-module/dashboard_model.js",
     "test/dashboard_model.test.js",

@@ -21,6 +21,9 @@ DONE
 - [x] README neu strukturiert (klare Kapitel, A11y, Start-/Debug-Flow, Laienhilfe).
 
 NEXT (Priorität)
+- [x] P1: Dashboard-Hilfe modularisiert (eigene gefuehrte Schritte + feste Hilfe-Aktionen).
+- [x] P1: Topbar um Laien-Hilfen erweitert (Naechster Schritt + Laien-Tipp).
+- [x] P1: Beschreibungstexte im Dashboard fuer Laien klarer und einheitlicher gemacht.
 - [x] P1: Hauptbereich als zentrierte, flexible Modul-Rasterflaeche mit Aktivierungsreihenfolge und Panel-Steuerung (Maximieren/Minimieren/Ausblenden) umgesetzt.
 - [x] P1: Plugin-Loader minimal umgesetzt (Manifest lesen, Fehler isolieren).
 - [x] P1: Debug-Modus für Registry-Fehler mit Detail-Ausgabe ausbauen.
@@ -40,3 +43,6 @@ Laienvorschläge
 6) Bei Speicherfehlern: Eingabefelder prüfen (Pflichtfelder + Datentyp) und erneut versuchen.
 
 7) Neue Module zuerst ueber "Module hinzufuegen" aktivieren, dann bei Bedarf maximieren.
+
+8) Bei Unsicherheit: erst "Naechster Schritt" klicken, dann Aktion ausfuehren.
+9) Bei Fehlern immer zuerst "Protokoll oeffnen" nutzen, dann reparieren.

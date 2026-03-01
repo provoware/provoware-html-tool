@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-03-01 – Modulare Hilfe und moderne Dashboard-Gruppierung
+
+- Dashboard-Topbar erweitert: schnelle Laienaktionen fuer naechsten Schritt und direkten Bedien-Tipp.
+- Neue gefuehrte Hilfe als eigener Panel-Baustein mit klarer Schrittliste in einfacher Sprache.
+- Hilfebereich vereinheitlicht: feste Aktionen "Erneut versuchen", "Reparatur starten", "Protokoll oeffnen".
+- Risiko: niedrig, da nur Dashboard-Template, Styles, UI-Texte und Doku angepasst wurden.
+
 ## 2026-03-01 – Kompaktes Dashboard ohne Platzhalter
 
 - Dashboard-Layout auf kompakte Abstände, bessere Schrift/Button-Verhältnisse und klare Rasterstruktur optimiert.

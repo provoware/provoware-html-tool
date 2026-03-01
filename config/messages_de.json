@@ -26,6 +26,13 @@
     "controlWhat": "Was macht das? Startet den Projektzugriff mit Validierung (Eingabepruefung).",
     "workspaceHelp": "Die Modulfläche startet leer. Nicht genutzte Bereiche bleiben bewusst frei.",
     "helpWhat": "Was kann ich tun? Erneut versuchen, Reparatur starten oder Protokoll öffnen.",
-    "readyStatus": "Bereit. Nächster Schritt: Verbindung prüfen."
+    "readyStatus": "Bereit. Nächster Schritt: Verbindung prüfen.",
+    "guideIntro": "Was macht das? Die Hilfe zeigt klare Schritte. Was passiert mit Daten? Nur Auswahl und Status werden gelesen. Rueckgaengig? Thema und Reihenfolge jederzeit aendern.",
+    "guideSteps": [
+      "1) Projektordner waehlen und Berechtigung bestaetigen.",
+      "2) Auto-Reconnect pruefen fuer den naechsten Start.",
+      "3) Module schrittweise aktivieren und Reihenfolge festlegen.",
+      "4) Bei Problemen: Erneut versuchen, Reparatur starten oder Protokoll oeffnen."
+    ]
   }
 }

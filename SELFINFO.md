@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 16
+Iteration: 17
 
 ## Gemacht
 
@@ -36,6 +36,10 @@ Iteration: 16
 - Dashboard kompakt gemacht: weniger Abstände, bessere Größenverhältnisse und klarere Anordnung.
 - Pseudotexte in Seitenbereichen entfernt; ungenutzte Bereiche bleiben leer und flexibel.
 - Dashboard-Kurztexte zentral in `config/messages_de.json` ausgelagert und dynamisch geladen.
+
+- Gefuehrte Hilfe als eigenes Dashboard-Panel ergaenzt (klare Einsteiger-Schritte).
+- Hilfe-Aktionen vereinheitlicht: Erneut versuchen, Reparatur starten, Protokoll oeffnen.
+- Topbar um Naechster Schritt und Laien-Tipp erweitert.
 
 ## Next Step
 
