@@ -1,11 +1,11 @@
-## Iteration 100 (2026-03-01)
+## Iteration 101 (2026-03-01)
 
 - Ziel: Drei offene TODO-Punkte fuer Hilfe/UX/A11y in kleinem Patch abschliessen.
-- Ergebnis: Sortier-Schalter erklaert jetzt klar den Scope (nur ignorierte Kurzbegriffe unter 3 Zeichen) mit Beispiel.
-- Ergebnis: Neue Hilfsfunktion `announceLiveRegionText` vermeidet doppelte Live-Ansagen bei identischem Text.
-- Ergebnis: Badge-Kurzform (`TW/GW`) zeigt Tooltip mit ausgeschriebenem Suchmodus fuer Maus und Touch.
-- Mini-Optimierung: Hilfetexte sind einheitlich und nennen klaren Rueckweg.
-- Naechster Schritt: Tooltip-Texte zentral in `config/messages_de.json` pflegen.
+- Ergebnis: Tooltip-Texte fuer Suchmodus-Badge (`TW/GW`) sind jetzt zentral in `config/messages_de.json` hinterlegt (mit Fallback im Dashboard).
+- Ergebnis: Support-Meta nennt bei Teilwortsuche den aktiven Filter klar als Text (`Alle Ereignisse` oder `Nur Safe-Mode`).
+- Ergebnis: Neuer Hilfeblock "Wenn nichts gefunden wird" zeigt drei Rueckwege (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
+- Mini-Optimierung: Der 0-Treffer-Hilfeblock wird nur bei 0 Treffern eingeblendet und reduziert so Rauschen.
+- Naechster Schritt: Weitere Hilfe-Texte (Filter/Leitfaden) ebenfalls in config zentralisieren.
 
 ## Iteration 98 (2026-03-01)
 

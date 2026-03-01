@@ -287,3 +287,12 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Screenreader-Hilfe wurde ruhiger: identische Live-Texte werden nicht doppelt vorgelesen.
 - Das Suchmodus-Badge in Kurzform (`TW`/`GW`) hat nun einen Tooltip mit ausgeschriebenem Modus fuer Maus und Touch.
 - Naechster Schritt bei Unsicherheit: Filter setzen -> Enter druecken -> Hinweistext unter dem Schalter lesen.
+
+## Update Iteration 101 – Wenn nichts gefunden wird
+
+- Tooltip-Texte fuer das Suchmodus-Badge kommen jetzt zentral aus `config/messages_de.json` (mit sicherem Fallback im Code).
+- Bei Teilwortsuche zeigt die Treffer-Meta jetzt den aktiven Filter als Klartext (`Alle Ereignisse` oder `Nur Safe-Mode`).
+- Neuer Hilfeblock im Support-Verlauf mit 3 Rueckwegen:
+  1. Erneut versuchen (Filter auf alle setzen).
+  2. Reparatur starten (Safe-Mode zuruecksetzen).
+  3. Protokoll oeffnen (letzten Fehler lesen).

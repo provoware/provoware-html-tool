@@ -1,3 +1,9 @@
+## 2026-03-01 – Support-Hilfe mit klaren Rueckwegen (Iteration 101)
+
+- Wartbarkeit: Tooltip-Texte fuer Suchmodus-Badge (`TW/GW`) in `config/messages_de.json` zentralisiert, JS-Fallback bleibt aktiv.
+- Hilfe/UX: Teilwort-Meta nennt jetzt zusaetzlich den aktiven Filter als Klartext (`Alle Ereignisse`/`Nur Safe-Mode`).
+- A11y/Laienhilfe: Neuer Block "Wenn nichts gefunden wird" zeigt drei klare naechste Schritte im Hilfe-Panel.
+
 ## 2026-03-01 – Support-Hilfe klarer und ruhiger (Iteration 100)
 
 - Support-Verlauf: Sortier-Schalter hat jetzt einen klaren Hilfetext mit Beispiel (`"ab", "xy"`) und erklaert den Scope (nur ignorierte Kurzbegriffe).
