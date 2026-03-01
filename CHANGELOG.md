@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-03-01 – README-Fortschritt und Dashboard-Layout optimiert
+
+- README zeigt jetzt oben den Entwicklungsfortschritt in Prozent sowie die Menge offener und erledigter Punkte.
+- Dashboard-Layout optimiert: einheitliche Abstandstokens, Skip-Link fuer Tastatur, engere 3-Spalten-Balance und mobile Vollbreite fuer Buttons.
+- Risiko: niedrig, da nur Doku und UI-Template/CSS erweitert wurden.
+
 ## 2026-03-01 – Enter/Escape-Hilfe und Check erweitert
 
 - Gefuehrte Dashboard-Hilfe erklaert jetzt klar: Enter startet Aktionen, Escape ist der Rueckweg.
