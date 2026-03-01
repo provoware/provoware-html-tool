@@ -402,3 +402,8 @@ Praktischer Einsatz:
 - Support-Verlauf hat jetzt zwei Suchmodi: Standard Ganzwort und optional Teilwort (enthaelt).
 - Der gewaehlte Suchmodus wird pro Projekt in `data/layout.json` gespeichert (`supportHistoryPartialMode`).
 - Hilfe/UX-Mini-Optimierung: Footer zeigt klaren Rueckweg fuer Tastatur (Tab zu Schaltern, Leertaste zum Umschalten).
+
+## Iteration 97 – Support-Hilfe wartbarer gemacht
+- Der Layoutzustand speichert jetzt zusaetzlich `supportHistoryFooterCompact`, damit der Footer-Hinweis konsistent pro Projekt bleibt.
+- Die Support-Suche nutzt eine zentrale Query-Normalisierung mit Mindestlaenge je Modus (Ganzwort: 2, Teilwort: 3).
+- Ergebnis fuer UX/A11y: Trefferzeilen zeigen den aktiven Suchmodus als Text-Badge mit Kontrast statt nur versteckter Logik.

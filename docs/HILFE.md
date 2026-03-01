@@ -263,3 +263,10 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Empfehlung fuer Einsteiger: Schalter deaktivieren, dann bleibt die Liste kuerzer.
 - Rueckweg: Schalter wieder aktivieren.
 - Die Suchmarkierung arbeitet jetzt mit ganzen Woertern. Beispiel: Suche nach `safe` markiert `safe-mode`, aber nicht mitten in langen Fremdwoertern.
+
+## Update 2026-03-01 – Suchmodus klarer und ruhiger
+
+- Neuer Schalter: **"Footer-Hinweis kurz anzeigen"**. Damit wird der Rueckweg-Text kuerzer, wenn Sie weniger Lesetext wollen.
+- Teilwortsuche hat jetzt eine Mindestlaenge von 3 Zeichen. Kurze Suchteile werden ignoriert, damit weniger Rauschen entsteht.
+- Jede Trefferzeile zeigt jetzt ein Badge mit dem aktiven Suchmodus (`Suchmodus: Ganzwort` oder `Suchmodus: Teilwort`).
+- Rueckweg bei unerwarteten Treffern: Suchmodus wechseln, Suchtext pruefen und erneut versuchen.

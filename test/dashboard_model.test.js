@@ -64,6 +64,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     backupDetailOpen: false,
     showBootDebugInSupport: true,
     supportHistoryPartialMode: false,
+    supportHistoryFooterCompact: true,
   });
 });
 
@@ -208,4 +209,12 @@ test("normalizeLayoutState setzt Teilwortmodus sicher", () => {
 
   const disabled = normalizeLayoutState({ supportHistoryPartialMode: "ja" });
   assert.equal(disabled.supportHistoryPartialMode, false);
+});
+
+test("normalizeLayoutState setzt Footer-Kurzmodus sicher", () => {
+  const compact = normalizeLayoutState({ supportHistoryFooterCompact: true });
+  assert.equal(compact.supportHistoryFooterCompact, true);
+
+  const expanded = normalizeLayoutState({ supportHistoryFooterCompact: false });
+  assert.equal(expanded.supportHistoryFooterCompact, false);
 });

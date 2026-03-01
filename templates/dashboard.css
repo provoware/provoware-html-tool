@@ -769,6 +769,19 @@ a:focus-visible {
   margin: 0.35rem 0;
 }
 
+
+.support-mode-badge {
+  display: inline-block;
+  margin-right: 0.25rem;
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--panel-soft);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 #support-history-list mark {
   background: var(--warn-soft);
   color: var(--ink);

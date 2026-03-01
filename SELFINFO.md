@@ -526,3 +526,9 @@ Iteration: 39
 - Version: v0.96-support-partial-mode
 - Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Footer-Hinweis, optionaler Teilwortmodus, Backup-Beispielsatz).
 - Next Step: Teilwortmodus mit Mindestlaenge 3 und kurzem Hinweistext absichern.
+
+## Iteration 97
+
+- Version: v0.97-support-maintainability
+- Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Footer kurz/lang, Teilwort Mindestlaenge 3, Suchmodus-Badge pro Treffer).
+- Next Step: Ignorierte Kurz-Tokens im Support-Metatext als kleine Liste anzeigen.

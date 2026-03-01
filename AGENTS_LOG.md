@@ -163,3 +163,13 @@ PATCHSPEC-2026-03-01-091
 - Checks wie oben; bei Fehler: letzte Aenderung rueckgaengig per `git checkout -- <datei>` und erneut laufen lassen.
 
 2026-03-01 | PATCH-095 | Drei offene Mini-Punkte abgeschlossen: Footer-Hinweis fuer Boot-Debug-Status, optionaler Teilwortmodus in Support-Suche, Backup-Detailhinweis mit Beispielzeile | templates/dashboard.html, templates/dashboard.js, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, todo.txt
+
+PATCHSPEC-2026-03-01-096
+1) Ziel: Drei offene Mini-Punkte abschliessen (Footer-Hinweis kurz/lang, Teilwort-Mindestlaenge 3, Suchmodus-Badge pro Treffer) und Wartbarkeit der Support-Filterlogik verbessern.
+2) Scope IN: templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, test/dashboard_lyrics_guidance.test.js, test/dashboard_model.test.js sowie Pflicht-Doku-Dateien.
+3) Scope OUT: Keine neuen Abhaengigkeiten, kein Eingriff in Backup-/Store-Datenformat.
+4) Dateien/Marker: support-history-footer-toggle, normalizeSupportQueryTokens, support-mode-badge, supportHistoryFooterCompact.
+5) Risiko: mittel (Suchlogik und UI-Texte), reduziert durch Unit-Tests und Release-Gates.
+6) Akzeptanzkriterien: Footer-Hinweis via Schalter kurz/lang, Teilwortsuche ignoriert Tokens unter 3 Zeichen mit Klartext-Hinweis, Trefferliste zeigt Suchmodus-Badge mit hohem Kontrast.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzte Aenderung mit git restore gezielt ruecknehmen.
+2026-03-01 | PATCH-097 | Drei offene Mini-Punkte abgeschlossen: Support-Footer kurz/lang schaltbar, Teilwortsuche mit Mindestlaenge 3, Suchmodus-Badge je Treffer inkl. Wartbarkeits-Refactor der Query-Normalisierung | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md, AGENTS_LOG.md

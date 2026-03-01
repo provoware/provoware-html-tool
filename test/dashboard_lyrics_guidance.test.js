@@ -243,7 +243,11 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
 
   assert.match(dashboardHtml, /id="support-history-partial-toggle"/);
   assert.match(dashboardHtml, /id="support-history-footer-hint"/);
+  assert.match(dashboardHtml, /id="support-history-footer-toggle"/);
   assert.match(dashboardJs, /supportHistoryPartialMode/);
-  assert.match(dashboardJs, /Teilwort \(enthaelt\)/);
+  assert.match(dashboardJs, /supportHistoryFooterCompact/);
+  assert.match(dashboardJs, /min\. 3 Zeichen/);
+  assert.match(dashboardJs, /kurzer Suchbegriff ignoriert/);
+  assert.match(dashboardJs, /support-mode-badge/);
   assert.match(dashboardJs, /Ganzwortsuche aktiv/);
 });

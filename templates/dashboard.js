@@ -65,6 +65,9 @@
   const supportHistoryPartialToggle = document.getElementById(
     "support-history-partial-toggle",
   );
+  const supportHistoryFooterToggle = document.getElementById(
+    "support-history-footer-toggle",
+  );
   const supportHistoryFooterHint = document.getElementById(
     "support-history-footer-hint",
   );
@@ -134,6 +137,7 @@
     backupDetailOpen: false,
     showBootDebugInSupport: true,
     supportHistoryPartialMode: false,
+    supportHistoryFooterCompact: true,
   };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
@@ -239,6 +243,7 @@
       backupDetailOpen: source.backupDetailOpen === true,
       showBootDebugInSupport: source.showBootDebugInSupport !== false,
       supportHistoryPartialMode: source.supportHistoryPartialMode === true,
+      supportHistoryFooterCompact: source.supportHistoryFooterCompact !== false,
     };
   }
 
@@ -331,6 +336,10 @@
     if (supportHistoryPartialToggle) {
       supportHistoryPartialToggle.checked =
         layoutState.supportHistoryPartialMode === true;
+    }
+    if (supportHistoryFooterToggle) {
+      supportHistoryFooterToggle.checked =
+        layoutState.supportHistoryFooterCompact !== false;
     }
     if (backupCompareDetailWrap) {
       backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
@@ -1291,21 +1300,44 @@
       .replace(/[^a-z0-9_-]+/g, "");
   }
 
-  function splitSearchTokens(queryText) {
+  function splitSearchTokens(queryText, minLength = 2) {
     const safeQuery = typeof queryText === "string" ? queryText.trim() : "";
     if (!safeQuery) {
       return [];
     }
 
+    const safeMinLength =
+      Number.isInteger(minLength) && minLength > 0 ? minLength : 2;
     const tokens = safeQuery
       .split(/\s+/)
       .map(normalizeSearchToken)
-      .filter((entry) => entry.length >= 2);
+      .filter((entry) => entry.length >= safeMinLength);
     return Array.from(new Set(tokens));
   }
 
   function isSupportPartialModeEnabled() {
     return layoutState.supportHistoryPartialMode === true;
+  }
+
+  function isSupportFooterCompactEnabled() {
+    return layoutState.supportHistoryFooterCompact !== false;
+  }
+
+  function normalizeSupportQueryTokens(queryText) {
+    const usePartialMode = isSupportPartialModeEnabled();
+    const minLength = usePartialMode ? 3 : 2;
+    const tokens = splitSearchTokens(queryText, minLength);
+    const rawTokens = splitSearchTokens(queryText, 1);
+    const ignoredShortTokens = usePartialMode
+      ? rawTokens.filter((token) => token.length < 3)
+      : [];
+
+    return {
+      tokens,
+      ignoredShortTokens,
+      usePartialMode,
+      minLength,
+    };
   }
 
   function buildNormalizedWordList(sourceText) {
@@ -1324,7 +1356,7 @@
 
   function highlightQueryText(sourceText, queryText) {
     const safeSource = typeof sourceText === "string" ? sourceText : "";
-    const tokens = splitSearchTokens(queryText);
+    const { tokens } = normalizeSupportQueryTokens(queryText);
     if (tokens.length === 0) {
       return [{ text: safeSource, mark: false }];
     }
@@ -1380,7 +1412,8 @@
     const safeFilter = typeof filterKey === "string" ? filterKey : "all";
     const normalized = normalizeSupportHistoryEvents(events);
     const safeQuery = typeof queryText === "string" ? queryText.trim() : "";
-    const queryTokens = splitSearchTokens(safeQuery);
+    const queryContext = normalizeSupportQueryTokens(safeQuery);
+    const queryTokens = queryContext.tokens;
     const bootDebugEntry =
       typeof lastBootFocusDebugText === "string" &&
       lastBootFocusDebugText.trim()
@@ -1422,10 +1455,15 @@
     });
 
     if (supportHistoryMeta) {
-      const modeText = isSupportPartialModeEnabled()
-        ? "Modus: Teilwort (enthaelt)."
+      const modeText = queryContext.usePartialMode
+        ? "Modus: Teilwort (enthaelt, min. 3 Zeichen)."
         : "Modus: Ganze Woerter (Standard).";
-      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText} Tipp: Enter startet die Suche sofort.`;
+      const shortHint =
+        queryContext.usePartialMode &&
+        queryContext.ignoredShortTokens.length > 0
+          ? ` Hinweis: ${queryContext.ignoredShortTokens.length} kurzer Suchbegriff ignoriert (unter 3 Zeichen).`
+          : "";
+      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText}${shortHint} Tipp: Enter startet die Suche sofort.`;
     }
 
     if (filtered.length === 0) {
@@ -1434,14 +1472,16 @@
         "Kein Verlauf fuer den Filter. Naechster Schritt: Anderen Filter waehlen oder erneut versuchen.";
       supportHistoryList.appendChild(empty);
       if (supportHistoryFooterHint) {
-        const modeLabel = isSupportPartialModeEnabled()
+        const modeLabel = queryContext.usePartialMode
           ? "Teilwortsuche aktiv"
           : "Ganzwortsuche aktiv";
         const bootLabel =
           layoutState.showBootDebugInSupport === true
             ? "Boot-Debug sichtbar"
             : "Boot-Debug ausgeblendet";
-        supportHistoryFooterHint.textContent = `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
+        supportHistoryFooterHint.textContent = isSupportFooterCompactEnabled()
+          ? `${modeLabel}, ${bootLabel}. Rueckweg: Schalter mit Tab erreichen.`
+          : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
       }
       return true;
     }
@@ -1453,6 +1493,13 @@
       const label = typeof entry.kind === "string" ? entry.kind : "eintrag";
       const details = typeof entry.details === "string" ? entry.details : "";
       const keyboardHint = buildSupportKeyboardHint(details);
+      const modeBadge = document.createElement("strong");
+      modeBadge.className = "support-mode-badge";
+      modeBadge.textContent = queryContext.usePartialMode
+        ? "Suchmodus: Teilwort"
+        : "Suchmodus: Ganzwort";
+      line.appendChild(modeBadge);
+      line.appendChild(document.createTextNode(" "));
 
       appendHighlightedText(line, `${label} | ${when} | `, safeQuery);
       appendHighlightedText(line, details, safeQuery);
@@ -1461,14 +1508,16 @@
     });
 
     if (supportHistoryFooterHint) {
-      const modeLabel = isSupportPartialModeEnabled()
+      const modeLabel = queryContext.usePartialMode
         ? "Teilwortsuche aktiv"
         : "Ganzwortsuche aktiv";
       const bootLabel =
         layoutState.showBootDebugInSupport === true
           ? "Boot-Debug sichtbar"
           : "Boot-Debug ausgeblendet";
-      supportHistoryFooterHint.textContent = `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
+      supportHistoryFooterHint.textContent = isSupportFooterCompactEnabled()
+        ? `${modeLabel}, ${bootLabel}. Rueckweg: Schalter mit Tab erreichen.`
+        : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
     }
 
     return true;
@@ -1916,6 +1965,24 @@
         });
     });
   }
+  if (supportHistoryFooterToggle) {
+    supportHistoryFooterToggle.checked =
+      layoutState.supportHistoryFooterCompact !== false;
+    supportHistoryFooterToggle.addEventListener("change", () => {
+      layoutState = normalizeLayoutWithModel({
+        ...layoutState,
+        supportHistoryFooterCompact:
+          supportHistoryFooterToggle.checked === true,
+      });
+      persistLayoutState()
+        .then(() => refreshSupportHistory())
+        .catch(() => {
+          setStatus(
+            "Footer-Hinweis konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+          );
+        });
+    });
+  }
   if (supportHistoryQuery) {
     supportHistoryQuery.addEventListener("input", refreshSupportHistory);
     supportHistoryQuery.addEventListener("keydown", (event) => {
@@ -2121,6 +2188,7 @@
     [supportHistoryFilter, "Support-Verlauf-Filter"],
     [supportHistoryQuery, "Support-Verlauf-Suche"],
     [supportHistoryMeta, "Support-Verlauf-Treffer"],
+    [supportHistoryFooterToggle, "Support-Verlauf-Footer-Schalter"],
     [supportHistoryList, "Support-Verlauf-Liste"],
     [supportHistoryFooterHint, "Support-Verlauf-Footer-Hinweis"],
   ].forEach(([element, name]) => validateElement(element, name));

@@ -603,3 +603,9 @@
 - Drei offene Mini-Punkte abgeschlossen: Boot-Debug-Status steht jetzt als Footer-Hinweis mit Tastatur-Rueckweg im Hilfe-Panel, Support-Suche hat einen optionalen Teilwortmodus, und der Backup-Detailhinweis enthaelt eine Einsteiger-Beispielzeile.
 - Layoutzustand speichert zusaetzlich `supportHistoryPartialMode`, damit der Suchmodus pro Projekt stabil bleibt.
 - Risiko: mittel bei Suchlogik, reduziert durch Modell-Validierung, Unit-Tests und Release-Gates.
+
+## 2026-03-01 – Support-Suche wartbarer: Footer-Modus + Mindestlaenge + Badge
+
+- Drei offene Mini-Punkte abgeschlossen: Footer-Hinweis ist kurz/lang schaltbar (`supportHistoryFooterCompact`), Teilwortsuche arbeitet mit Mindestlaenge 3, und jede Trefferzeile zeigt ein Suchmodus-Badge.
+- Suchlogik wurde in klare Hilfsfunktion getrennt (`normalizeSupportQueryTokens`), damit Eingabepruefung und Modusregeln zentral bleiben.
+- Risiko: mittel bei Suchlogik, reduziert durch neue Tests, Modell-Validierung und Release-Gates.

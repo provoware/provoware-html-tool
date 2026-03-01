@@ -164,6 +164,8 @@ function normalizeLayoutState(input) {
   const backupDetailOpen = source.backupDetailOpen === true;
   const showBootDebugInSupport = source.showBootDebugInSupport !== false;
   const supportHistoryPartialMode = source.supportHistoryPartialMode === true;
+  const supportHistoryFooterCompact =
+    source.supportHistoryFooterCompact !== false;
 
   return {
     leftWidth,
@@ -174,6 +176,7 @@ function normalizeLayoutState(input) {
     backupDetailOpen,
     showBootDebugInSupport,
     supportHistoryPartialMode,
+    supportHistoryFooterCompact,
   };
 }
 
@@ -188,6 +191,7 @@ function createLayoutSnapshot(layoutState) {
     backupDetailOpen: normalized.backupDetailOpen,
     showBootDebugInSupport: normalized.showBootDebugInSupport,
     supportHistoryPartialMode: normalized.supportHistoryPartialMode,
+    supportHistoryFooterCompact: normalized.supportHistoryFooterCompact,
   };
 }
 
@@ -207,6 +211,7 @@ function applyLayoutSnapshot(layoutState, snapshot) {
     backupDetailOpen: safeSnapshot.backupDetailOpen,
     showBootDebugInSupport: safeSnapshot.showBootDebugInSupport,
     supportHistoryPartialMode: safeSnapshot.supportHistoryPartialMode,
+    supportHistoryFooterCompact: safeSnapshot.supportHistoryFooterCompact,
   };
 }
 
