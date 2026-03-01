@@ -4,9 +4,39 @@
   const showLog = document.getElementById("show-log");
   const status = document.getElementById("status");
   const logBox = document.getElementById("log-box");
+  const quickGuideList = document.getElementById("quick-guide-list");
+
+  const quickGuide = [
+    "bash start.sh ausfuehren.",
+    "Ergebnis lesen und naechsten Schritt waehlen.",
+    "Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
+  ];
+
+  function renderQuickGuide(steps) {
+    if (!Array.isArray(steps) || steps.length !== 3) {
+      setStatus("Leitfaden ungueltig. Reparatur starten.");
+      return false;
+    }
+
+    quickGuideList.innerHTML = "";
+    for (const step of steps) {
+      if (typeof step !== "string" || step.trim() === "") {
+        setStatus("Leitfaden ungueltig. Erneut versuchen.");
+        return false;
+      }
+      const item = document.createElement("li");
+      item.textContent = step;
+      quickGuideList.appendChild(item);
+    }
+    return true;
+  }
 
   function setStatus(text) {
     status.textContent = text;
+  }
+
+  if (!renderQuickGuide(quickGuide)) {
+    return;
   }
 
   theme.addEventListener("change", () => {

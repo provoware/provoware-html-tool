@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 32
+Iteration: 33
 
 ## Gemacht
 
@@ -84,6 +84,8 @@ Iteration: 32
 
 - AGENTS.md erweitert: klare Releasefertig-Definition pro Patch (Implementierung, Fehlerpfad, Test, Doku, Startcheck).
 - AGENTS.md erweitert: Datei-/Fortschrittsstatus muss sichtbar sein (Dateiname oder `data/file_status_index.json`).
+
+- Hilfe-Panel um einen kurzen 3-Schritt-Mini-Leitfaden aus README erweitert und im Modell validiert.
 
 ## Next Step
 
