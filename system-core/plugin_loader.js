@@ -109,6 +109,60 @@ function resolvePluginPath(projectRoot, modulePath) {
   return absolutePluginPath;
 }
 
+function createSafeModeRepairPlan(options = {}) {
+  assertObject(options, "Safe-Mode-Optionen");
+  assertText(options.projectRoot, "Projektpfad");
+
+  const defaultManifestPath = path.join(
+    options.projectRoot,
+    "config",
+    "manifests",
+    "plugins.manifest.json",
+  );
+  const manifestPath = options.manifestPath || defaultManifestPath;
+  assertText(manifestPath, "Manifest-Pfad");
+
+  const safeModeManifest = {
+    manifestType: "plugin-loader",
+    version: "1.0.0",
+    plugins: [],
+    mode: "safe",
+    note: "Safe-Mode aktiv. Naechster Schritt: Plugin-Fehler pruefen und einzeln wieder aktivieren.",
+  };
+
+  return {
+    ok: true,
+    manifestPath,
+    safeModeManifest,
+    message:
+      "Safe-Mode vorbereitet. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+  };
+}
+
+function runSafeModeOneClickRepair(options = {}) {
+  const plan = createSafeModeRepairPlan(options);
+  fs.mkdirSync(path.dirname(plan.manifestPath), { recursive: true });
+  fs.writeFileSync(
+    plan.manifestPath,
+    `${JSON.stringify(plan.safeModeManifest, null, 2)}
+`,
+    "utf8",
+  );
+
+  if (!fs.existsSync(plan.manifestPath)) {
+    throw new Error(
+      "Safe-Mode-Reparatur konnte Manifest nicht schreiben. Protokoll oeffnen.",
+    );
+  }
+
+  return {
+    ok: true,
+    manifestPath: plan.manifestPath,
+    message:
+      "Safe-Mode-Reparatur abgeschlossen. Naechster Schritt: Start erneut versuchen.",
+  };
+}
+
 function runPluginLoaderHealthCheck(options) {
   assertObject(options, "Plugin-Optionen");
   assertText(options.manifestPath, "Manifest-Pfad");
@@ -195,7 +249,9 @@ function runPluginLoaderHealthCheck(options) {
 }
 
 module.exports = {
+  createSafeModeRepairPlan,
   runPluginLoaderHealthCheck,
+  runSafeModeOneClickRepair,
   resolvePluginPath,
   validatePluginManifest,
 };

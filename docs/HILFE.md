@@ -186,3 +186,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
   - **Fokus-Hilfe zeigen**: Erklaert den Rueckweg mit Escape.
 - Moduloptionen unten: Je Modul stehen jetzt zwei direkte Aktionen bereit (z. B. Planung anzeigen, Leads anzeigen).
 - Bei Start-Fehlern in TODO-Vorlagen wird die betroffene Zeile direkt angezeigt.
+
+## Safe-Mode bei Plugin-Fehlern
+
+- Was passiert? Wenn das Plugin-Manifest kaputt ist, kann ein Safe-Mode (Notfallmodus) mit leerer Plugin-Liste geschrieben werden.
+- Warum hilft das? Der Core startet wieder, obwohl Plugins defekt sind.
+- Rueckweg: Danach Plugins einzeln wieder aktivieren und erneut pruefen.

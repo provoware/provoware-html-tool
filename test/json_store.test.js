@@ -6,6 +6,7 @@ const {
   atomicWriteJson,
   findLatestVersionPath,
   readJson,
+  recoverJsonFromCurrentPointer,
   recoverJsonFromLatestVersion,
 } = require("../system-core/json_store");
 const { listBackups, repairFromBackup } = require("../system-core/self_repair");
@@ -140,4 +141,35 @@ test("recoverJsonFromLatestVersion stellt neueste Version wieder her", () => {
   assert.equal(recover.ok, true);
   assert.equal(data.value, 4);
   assert.equal(recover.sourceVersionPath, latestVersion);
+});
+
+test("atomicWriteJson schreibt current-Pointer bei Versionierung", () => {
+  fs.mkdirSync(tmp, { recursive: true });
+  const result = atomicWriteJson(
+    versionedPath,
+    { value: 10 },
+    { versioning: { enabled: true } },
+  );
+
+  assert.equal(
+    result.currentPointerPath.endsWith("versioned_store.current.json"),
+    true,
+  );
+  assert.equal(fs.existsSync(result.currentPointerPath), true);
+});
+
+test("recoverJsonFromCurrentPointer nutzt Pointer oder faellt auf letzte Version zurueck", () => {
+  atomicWriteJson(
+    versionedPath,
+    { value: 21 },
+    { versioning: { enabled: true } },
+  );
+  fs.writeFileSync(versionedPath, "{}\n", "utf8");
+
+  const recover = recoverJsonFromCurrentPointer(versionedPath);
+  const data = readJson(versionedPath);
+
+  assert.equal(recover.ok, true);
+  assert.equal(typeof recover.sourceVersionPath, "string");
+  assert.equal(data.value, 21);
 });

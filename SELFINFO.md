@@ -1,3 +1,12 @@
+## Iteration 84 – Status
+
+- Hauptziel: Drei offene A/B/C-Mini-Punkte in einem releasefertigen Patch abgeschlossen.
+- Ergebnis: Boot-Gate blockiert Weiter bis alle Phasen gruen sind und gibt klare Hilfe mit Rueckweg.
+- Ergebnis: Plugin-Loader hat Safe-Mode-Ein-Klick-Reparatur fuer defekte Manifeste.
+- Ergebnis: JSON-Store schreibt current-Pointer und kann aus Pointer oder letzter Version wiederherstellen.
+- Mini-Optimierung: Boot-Bereich hat jetzt sichtbaren Weiter-Hinweis in einfacher Sprache.
+- Naechster Schritt: Safe-Mode-Status und Versions-Restore im UI sichtbar machen.
+
 ## Iteration 83 – Status
 
 - Hauptziel: Dashboard mit linker/rechter Sidebar, 3x3-Modulraster und 3-Panel-Footer auf den geforderten UI-Stand gebracht.

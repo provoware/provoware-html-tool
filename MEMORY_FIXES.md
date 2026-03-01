@@ -1,3 +1,17 @@
+## FIX-20260301-084: Boot-Gate + Safe-Mode + Current-Pointer
+
+**Kategorie:** Boot/Plugin/JSON
+**Symptom (fuer Laien):** Weiter war frueh klickbar, Pluginfehler stoppten den Start, Wiederherstellung war nicht zielgenau genug.
+**Technische Ursache:** Kein Gate auf Boot-Phasen, kein Safe-Mode-Writepfad, kein current-Pointer fuer versionierte JSON-Dateien.
+**Trigger:** Gelbe/rote Boot-Phasen, kaputtes Plugin-Manifest, beschaedigte Store-Datei.
+**Fix (kurz):** Boot-Gate mit Pflichtphasen, Ein-Klick-Safe-Mode-Reparatur und current-Pointer mit Pointer-Recovery eingebaut.
+**Geaenderte Dateien/Marker:** templates/boot_status.js, templates/dashboard.js, system-core/plugin_loader.js, system-core/json_store.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Pflichtphasen vor Weiteraktion pruefen und versionierte Writes mit Pointer absichern.
+**Alternative(n):** Nur letzte Version ohne Pointer nutzen (geringere Zielgenauigkeit).
+**Risiko/Side-Effects:** Zusatzausgabe `*.current.json`, strengeres Startverhalten.
+**Verknuepft:** PATCH-20260301-084
+
 ## FIX-20260303-001: Lyrics-Praeferenzen sicher speichern
 
 **Kategorie:** UI/JSON

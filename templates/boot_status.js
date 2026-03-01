@@ -70,9 +70,31 @@
       return setPhaseState(node, state, detail);
     }
 
+    function getPhaseState(phaseId) {
+      const node = phaseMap.get(phaseId);
+      if (!node) {
+        return "warn";
+      }
+      return node.dataset.state || "warn";
+    }
+
+    function areAllPhasesOk() {
+      if (phaseMap.size === 0) {
+        return false;
+      }
+      for (const node of phaseMap.values()) {
+        if ((node.dataset.state || "warn") !== "ok") {
+          return false;
+        }
+      }
+      return true;
+    }
+
     return {
       setPhase,
       setSummary,
+      getPhaseState,
+      areAllPhasesOk,
       hasPhase: (phaseId) => phaseMap.has(phaseId),
       size: () => phaseMap.size,
     };

@@ -1,3 +1,10 @@
+## 2026-03-01 – Iteration 84
+
+- Drei offene Mini-Punkte abgeschlossen: Boot-Weiter-Gate blockiert jetzt den Weiter-Knopf, bis alle Boot-Phasen gruen sind.
+- Drei offene Mini-Punkte abgeschlossen: Plugin-Loader hat jetzt Safe-Mode-Ein-Klick-Reparatur fuer defekte Manifest-Lagen.
+- Drei offene Mini-Punkte abgeschlossen: JSON-Store schreibt bei Versionierung einen current-Pointer und kann daraus wiederherstellen.
+- UX/A11y-Mini-Optimierung: Neuer Gate-Hinweis mit klarer Aktion und Rueckweg im Boot-Status.
+
 ## 2026-03-01 – Dashboard-Layout mit Sidebar-Suche, 3x3-Grid und Notiz-Fallback
 
 - Linke Sidebar zeigt Modulsuche + Modul-Liste aus zentraler Registry und aktiviert Module ohne Reload.
