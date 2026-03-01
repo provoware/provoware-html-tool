@@ -722,9 +722,21 @@
                 <option value="all">Alle Ereignisse</option>
                 <option value="safe-mode">Nur Safe-Mode</option>
               </select>
+              <label for="support-history-query"
+                >Freitextsuche (Typ/Datum)</label
+              >
+              <input
+                id="support-history-query"
+                type="search"
+                placeholder="z. B. safe-mode oder 2026-03"
+                aria-label="Support-Verlauf Freitextsuche"
+              />
               <button type="button" id="support-history-apply">
                 Filter anwenden
               </button>
+              <p class="field-tip">
+                UND-Regel: Erst Filter waehlen, dann Freitext pruefen.
+              </p>
               <ul id="support-history-list" class="todo-list" role="list"></ul>
             </fieldset>
             <dialog

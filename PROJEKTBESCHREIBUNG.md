@@ -363,3 +363,7 @@ Praktischer Einsatz:
 - Startzustand ist jetzt absichtlich leer, ausser einem Auto-Start-Modul: **Notizen**.
 - Die bisher grossen Bereichskacheln wurden in der linken Sidebar als Button-Links zusammengefuehrt.
 - Beide Zeitbars (links/rechts) sind klar benannt und bleiben per Knopf ein- und aufklappbar.
+
+- Boot-Gate-Hinweis nutzt jetzt das gespeicherte Fokusziel als Klartextzusatz (Modul/Hilfe).
+- Support-Verlauf hat neben dem Typ-Filter eine Freitextsuche fuer Typ/Datum/Details mit UND-Logik.
+- Backup-Detailmodus liefert gruppierte Schluessel (`Neu`, `Entfernt`, `Gleich`) statt einer unsortierten Liste.

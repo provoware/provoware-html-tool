@@ -472,3 +472,7 @@ Iteration: 39
 - Version: v0.89-layout-notes-start
 - Ergebnis: Sidebar-Button-Links, Notizmodul-Autostart, umbenannte Zeitbars mit Klappfunktion.
 - Next Step: Boot-Gate-Hinweis zeigt das aktive Fokusziel direkt neben dem Weiter-Knopf.
+
+- Iteration: Drei offene Mini-Punkte abgeschlossen (Boot-Fokus-Hinweis, Support-Freitextsuche, Versions-Detailgruppen).
+- Version: UI-Hilfe/Restore-Flow verbessert ohne neue Abhaengigkeiten.
+- Next Step: Support-Suche mit Trefferzahl + Enter-Shortcut erweitern.

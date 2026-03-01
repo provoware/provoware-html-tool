@@ -103,4 +103,6 @@ test("Dashboard-Hilfe zeigt Safe-Mode-Status und Versions-Restore", () => {
   assert.match(dashboardHtml, /id="backup-version-compare"/);
   assert.match(dashboardHtml, /id="backup-restore-version"/);
   assert.match(dashboardHtml, /id="help-safe-mode-reset"/);
+  assert.match(dashboardHtml, /id="support-history-query"/);
+  assert.match(dashboardHtml, /Freitextsuche \(Typ\/Datum\)/);
 });

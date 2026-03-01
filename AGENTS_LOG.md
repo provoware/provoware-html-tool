@@ -93,3 +93,14 @@ PATCHSPEC-2026-03-01-089
 6) Akzeptanzkriterien: Linke Sidebar zeigt nur Button-Links, Dashboard startet mit genau einem Notiz-Modul, 3x3-Raster bleibt mittig mit Liedbereich/Footer und beide Zeitleisten sind ein-/aufklappbar.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzten Commit per git revert zuruecknehmen.
 2026-03-03 | PATCH-089 | Sidebar als Button-Links, Notizmodul-Autostart, linke/rechte Zeitbar klar klappbar benannt | templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, templates/module_workspace.js, system-module/dashboard_model.js, test/dashboard_model.test.js, Doku-Updates
+
+
+PATCHSPEC-2026-03-01-090
+1) Ziel: Drei offene Mini-Punkte abschliessen (Boot-Gate zeigt Fokusziel, Support-Verlauf mit Freitextsuche, Versions-Detailmodus mit Feldgruppen).
+2) Scope IN: templates/dashboard.html, templates/dashboard.js, system-module/dashboard_model.js, templates/backup_restore.js, passende Tests und Pflicht-Doku.
+3) Scope OUT: Keine neuen Abhaengigkeiten, kein Eingriff in Registry/Store-Datenformat.
+4) Dateien/Marker: boot-gate-hint-focus-target, support-history-query, backup-compare-groups.
+5) Risiko: mittel (Filter-/Textlogik), reduziert durch Unit-Tests + Release-Gates.
+6) Akzeptanzkriterien: Gate-Hinweis nennt Modul/Hilfe, Support-Verlauf filtert mit Typ+Datum-Freitext, Detailmodus zeigt Gruppen neu/entfernt/gleich.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzten Commit via git revert rueckgaengig machen.
+2026-03-01 | PATCH-090 | Drei offene Mini-Punkte abgeschlossen: Boot-Gate-Fokusziel im Hint, Support-Freitextsuche (Typ/Datum, UND-Regel), Versions-Detailgruppen Neu/Entfernt/Gleich | system-module/dashboard_model.js, templates/dashboard.html, templates/dashboard.js, templates/backup_restore.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, test/backup_restore.test.js, todo.txt, README.txt, CHANGELOG.md, docs/HILFE.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, AGENTS_LOG.md

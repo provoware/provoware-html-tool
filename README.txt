@@ -85,3 +85,10 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Das Dashboard startet mit genau einem Modul: **Notizen** in der Mitte (3x3-Raster bleibt als Hauptflaeche).
 - Linke und rechte Zeitbar sind als ein-/aufklappbare Bereiche benannt, damit die Bedienung klar bleibt.
 - Naechster Schritt: Boot-Gate-Hinweis auf aktives Fokusziel erweitern.
+
+
+## Update 2026-03-01 (3 Mini-Punkte abgeschlossen)
+- Boot-Gate-Hinweis zeigt jetzt das aktive Fokusziel (Modul oder Hilfe) direkt im Klartext.
+- Support-Verlauf hat eine Freitextsuche fuer Typ/Datum. Regel: erst Dropdown-Filter, dann Suchtext (UND-Verknuepfung).
+- Versionsvergleich im Backup-Dialog zeigt Detailgruppen: Neu, Entfernt, Gleich.
+- Naechster Schritt: Trefferzahl in der Support-Suche und optionalen Screenreader-Kurztext fuer Gate-Wechsel nachziehen.

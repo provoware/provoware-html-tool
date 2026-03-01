@@ -259,6 +259,25 @@
     return `Zeit: Aktuell ${currentTime}, Version ${versionTime}.`;
   }
 
+  function buildGroupedKeyDetails(currentKeyList, versionKeyList) {
+    const currentSet = new Set(currentKeyList);
+    const versionSet = new Set(versionKeyList);
+
+    const neu = versionKeyList.filter((key) => !currentSet.has(key));
+    const entfernt = currentKeyList.filter((key) => !versionSet.has(key));
+    const gleich = currentKeyList.filter((key) => versionSet.has(key));
+
+    const toList = (label, values) =>
+      `${label}: ${values.length > 0 ? values.join(", ") : "(leer)"}.`;
+
+    return (
+      `${toList("Neu", neu)} ` +
+      `${toList("Entfernt", entfernt)} ` +
+      `${toList("Gleich", gleich)} ` +
+      "Naechster Schritt: Unterschiede pruefen und Entscheidung treffen."
+    );
+  }
+
   function createVersionCompareSummary(compareInput) {
     assertObject(compareInput, "Versionsvergleich");
     const currentKeys = Number(compareInput.currentKeys || 0);
@@ -362,10 +381,7 @@
       currentBytes: currentRaw.length,
       versionBytes: versionRaw.length,
       timeSummary: describeTimestampDifference(currentParsed, versionParsed),
-      detailText:
-        `Aktuell: ${currentKeyList.join(", ") || "(leer)"}. ` +
-        `Version: ${versionKeyList.join(", ") || "(leer)"}. ` +
-        "Naechster Schritt: Unterschiede pruefen und Entscheidung treffen.",
+      detailText: buildGroupedKeyDetails(currentKeyList, versionKeyList),
     });
   }
 

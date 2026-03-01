@@ -1,5 +1,9 @@
 ## Iteration 88 - Release-Doku neu geordnet
 
+- Boot-Gate-Hinweis nennt jetzt das aktive Fokusziel (Modul/Hilfe) klar im Text.
+- Support-Verlauf hat jetzt Freitextsuche (Typ/Datum) mit einfacher UND-Regel zum Filter.
+- Versions-Detailmodus gruppiert JSON-Schluessel in Neu/Entfernt/Gleich fuer klaren Vergleich.
+
 - README wurde als klare Release-Startseite neu aufgebaut (Ziel, Struktur, Schnellstart, Pflichtbefehle, Laienhilfe).
 - AGENTS.md wurde als kompakte V3-Regelbasis fuer Releasefinalisierung neu strukturiert.
 - todo.txt erhielt einen neuen Iterationsblock fuer die drei abgeschlossenen Doku-Mini-Punkte.
