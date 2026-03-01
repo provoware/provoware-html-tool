@@ -71,3 +71,8 @@
 
 - Todo-Liste mit Kalender und Archiv im Dashboard integriert.
 - Backup-Restore-Zieldatei ist jetzt im Dialog explizit auswaehlbar.
+
+## 2026-03-01 – Neuer Standard Boot-Status
+
+- Dashboard-Bootstatus nutzt jetzt 4 feste Phasen (UI, Ordner, Module, Backup) mit Ampel + Klartext.
+- Ampel bleibt immer textgestuetzt (Gruen/Gelb/Rot + naechster Schritt), damit Status nicht nur ueber Farbe laeuft.

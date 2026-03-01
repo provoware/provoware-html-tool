@@ -59,6 +59,7 @@ Laienvorschläge
 
 - [x] P1: Genres/Moods/Stile-Archiv-Kern implementiert (CSV-Import, Duplikatpruefung, Favoriten-Sternchen, Logging).
 - [ ] P1: Wiki-Modul implementieren (kategoriebezogene Wissensspeicherung).
+- [ ] P1: Naechster Mini-Punkt: Wiki-Modul Grundgeruest mit Eingabepruefung (Validierung) vorbereiten.
 - [ ] P1: Schnellspeicher-Modul implementieren (Titel + Eingabe an feste Datei anhaengen).
 - [ ] P1: Mehrfach-Schnellspeicherbereiche mit eigenen Dateien anlegen (UI + Persistenz).
 - [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
@@ -139,4 +140,4 @@ Laienvorschläge
 
 - [x] P1: Naechster Mini-Punkt: Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen.
 
-- [ ] P1: Naechster Mini-Punkt: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
+- [x] P1: Naechster Mini-Punkt: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.

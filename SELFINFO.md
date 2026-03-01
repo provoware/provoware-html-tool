@@ -1,3 +1,9 @@
+## Iteration 50 (2026-03-01)
+
+- Hauptziel abgeschlossen: Offener Punkt "Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten" ist vollstaendig umgesetzt.
+- Mini-Optimierung: Boot-Status zeigt Ampel nie nur ueber Farbe, sondern immer mit Text und naechstem Schritt.
+- Next Step (C): Wiki-Modul als naechstes Teilziel mit klarer Eingabepruefung vorbereiten.
+
 ## Iteration 49 (2026-03-01)
 
 - Hauptziel abgeschlossen: Offener Punkt "Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen" ist jetzt vollstaendig umgesetzt.

@@ -219,6 +219,31 @@ function runReleaseReadinessCheck(options = {}) {
     ),
     checkIncludes(
       dashboardHtml,
+      'id="boot-status"',
+      "Boot-Statusbereich ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'data-boot-phase="ui"',
+      "Boot-Phase UI ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'data-boot-phase="folder"',
+      "Boot-Phase Ordner ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'data-boot-phase="modules"',
+      "Boot-Phase Module ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'data-boot-phase="backup"',
+      "Boot-Phase Backup ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
       'id="toggle-debug"',
       "Debug-Knopf fuer Hilfe vorhanden",
     ),
@@ -251,6 +276,11 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardHtml,
       'src="backup_restore.js"',
       "Backup-Restore-Skript ist eingebunden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'src="boot_status.js"',
+      "Boot-Status-Skript ist eingebunden",
     ),
     checkIncludes(
       dashboardHtml,

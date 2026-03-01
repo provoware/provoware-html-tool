@@ -22,6 +22,7 @@
 - **Geführte Hilfe (neu):** Im Dashboard gibt es jetzt eine eigene Schrittliste mit klarer Reihenfolge für Einsteiger. Neu dabei: Enter startet Aktionen, Escape ist der schnelle Rueckweg.
 - **Feste Hilfe-Knöpfe (neu):** Rechts im Hilfebereich stehen immer dieselben 3 Aktionen bereit: „Erneut versuchen“, „Reparatur starten“, „Protokoll öffnen“.
 - **Nächster Schritt / Laien-Tipp (neu):** In der Topbar können Sie sich den nächsten sinnvollen Schritt oder einen einfachen Bedienhinweis direkt anzeigen lassen.
+- **Boot-Status (neu):** Vier Phasen zeigen den Start mit Ampel und Text (Gruen/Gelb/Rot). Rueckweg: Bei Rot zuerst "Erneut versuchen", dann "Reparatur starten".
 
 ## Plugin-Loader
 

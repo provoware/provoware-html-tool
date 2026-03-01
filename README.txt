@@ -5,13 +5,13 @@
 
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Iteration-Update 2026-03-01
-- Offener Punkt abgeschlossen: Todo-Filter (heute/offen/archiv) mit Escape-Rueckweg ist releasefertig.
-- Naechster Schritt: Boot-View-Statusbereich mit klaren Phasen und Ampel-Texten stabilisieren.
+- Offener Punkt abgeschlossen: Boot-View-Statusbereich ist jetzt mit 4 klaren Phasen und Ampel-Texten stabil umgesetzt.
+- Naechster Schritt: Wiki-Modul als naechstes Teilziel mit Grundgeruest und Validierung starten.
 
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 74 %
-- **Erledigt:** 69 Punkte
+- **Erledigt:** 70 Punkte
 - **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -71,7 +71,7 @@ gleichen Risikobereichs sind.
 ## Offene Punkte (oben, kurz)
 
 1. E2E-Wiederherstellung im Backup-Dialog weiter haerten
-2. Boot-View-Statusbereich mit klaren Phasen bauen
+2. Wiki-Modul als neues Teilziel mit klarer Eingabepruefung starten
 
 ## Kurzüberblick
 

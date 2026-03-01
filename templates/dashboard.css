@@ -361,6 +361,41 @@ a:focus-visible {
   color: var(--warn);
 }
 
+
+.boot-status {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.6rem;
+  background: var(--panel-soft);
+}
+
+.boot-status h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.boot-list {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+[data-state="ok"] {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+[data-state="warn"] {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+[data-state="fail"] {
+  color: #b00020;
+  font-weight: 700;
+}
+
 .debug {
   white-space: pre-wrap;
   margin-top: 0.5rem;

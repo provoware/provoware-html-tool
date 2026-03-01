@@ -28,6 +28,8 @@
   const guideList = document.getElementById("guide-list");
   const showNextStep = document.getElementById("show-next-step");
   const showLaienTip = document.getElementById("show-laien-tip");
+  const bootStatus = document.getElementById("boot-status");
+  const bootSummary = document.getElementById("boot-summary");
 
   function formatText(template, values) {
     if (typeof template !== "string" || !template.trim()) {
@@ -53,6 +55,11 @@
   const ensureMessage =
     window.DashboardHelp?.ensureMessage || ((m, f) => m || f);
   const validateElement = window.DashboardHelp?.validateElement;
+
+  const bootController = window.BootStatus?.createBootStatusController({
+    root: bootStatus,
+    summary: bootSummary,
+  });
 
   let dragSourceId = null;
   let selectedProjectDir = null;
@@ -88,6 +95,18 @@
     const safe = ensureMessage(message, "Debug-Text fehlt.");
     debugOutput.textContent = safe;
     return safe;
+  }
+
+  function updateBootPhase(phaseId, state, detail, summaryText) {
+    if (!bootController) {
+      return false;
+    }
+
+    bootController.setPhase(phaseId, state, detail);
+    if (summaryText) {
+      bootController.setSummary(state, summaryText);
+    }
+    return true;
   }
 
   function registerKeyboardShortcuts() {
@@ -259,11 +278,23 @@
       selectedProjectDir = handle;
       const folders = await ensureStructure(handle);
       setStatus(`Projekt verbunden. Struktur ok (${folders.length} Ordner).`);
+      updateBootPhase(
+        "folder",
+        "ok",
+        `Projektordner verbunden (${folders.length} Ordner).`,
+        "Gruen: Ordnerverbindung ist bereit.",
+      );
       setDebug(
         "Debug: Projektordner gespeichert. Bei Problem Protokoll oeffnen.",
       );
     } catch (error) {
       setStatus(`${error.message} Naechster Schritt: Reparatur starten.`);
+      updateBootPhase(
+        "folder",
+        "fail",
+        "Projektordner fehlt oder ist gesperrt.",
+        "Rot: Ordnerverbindung fehlt. Naechster Schritt: Reparatur starten.",
+      );
     }
   }
 
@@ -284,8 +315,20 @@
       selectedProjectDir = handle;
       const folders = await ensureStructure(handle);
       setStatus(`Auto-Reconnect ok. ${folders.length} Ordner sind bereit.`);
+      updateBootPhase(
+        "folder",
+        "ok",
+        `Auto-Reconnect bereit (${folders.length} Ordner).`,
+        "Gruen: Ordnerverbindung ist bereit.",
+      );
     } catch (error) {
       setStatus(`${error.message} Naechster Schritt: Erneut versuchen.`);
+      updateBootPhase(
+        "folder",
+        "warn",
+        "Ordner noch nicht verbunden. Erneut versuchen.",
+        "Gelb: Start laeuft. Ordner noch offen.",
+      );
     }
   }
 
@@ -535,6 +578,23 @@
     [backupDialogClose, "Backup-Dialog-Zurueck"],
   ].forEach(([element, name]) => validateElement(element, name));
 
+  updateBootPhase(
+    "ui",
+    "ok",
+    "Oberflaeche geladen. Enter fuer Knopf, Escape zum Schliessen.",
+    "Gelb: Start laeuft. Pruefe die vier Phasen.",
+  );
+  updateBootPhase(
+    "modules",
+    "ok",
+    "Module sind vorbereitet. Naechster Schritt: Modul aktivieren.",
+  );
+  updateBootPhase(
+    "backup",
+    "ok",
+    "Backup-Dialog ist bereit. Naechster Schritt: Backup pruefen.",
+  );
+
   loadMessages().then((ui) => {
     controlWhat.textContent = ensureMessage(
       ui.controlWhat,
@@ -566,6 +626,12 @@
     );
     status.textContent = ensureMessage(ui.readyStatus, status.textContent);
     setDebug(`Debug: Hilfe mit ${stepCount} Schritten geladen.`);
+    updateBootPhase(
+      "ui",
+      "ok",
+      "Texte geladen. Status ist lesbar und bereit.",
+      "Gruen: Start bereit. Sie koennen direkt arbeiten.",
+    );
   });
 
   registerKeyboardShortcuts();

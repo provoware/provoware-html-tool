@@ -35,6 +35,8 @@ test("runReleaseReadinessCheck prueft A11y und Themes", () => {
     "Textbereich 'dashboard.undo' ist gesetzt",
     "5-Punkte-Check im Backup-Dialog ist vorhanden",
     "Backup-Restore-Skript ist eingebunden",
+    "Boot-Statusbereich ist vorhanden",
+    "Boot-Status-Skript ist eingebunden",
     "README dokumentiert Doku-Pflicht im Release-Check",
   ];
 
