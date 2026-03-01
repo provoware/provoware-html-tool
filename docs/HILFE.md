@@ -107,6 +107,16 @@ Naechster Schritt: Erst erneut versuchen, dann Reparatur starten, danach bei Bed
 - Neu: Unter den Vorlagen sehen Sie eine kurze Inline-Hilfe, was Intro, Refrain, Bridge und Sonstiges bedeuten.
 - Naechster Schritt: Lesemodus um Kopieren-Knopf erweitern.
 
+## Neu: Einheitliches Design fuer alle Plugins (2026-03-03)
+
+Was macht das?
+Alle Plugins nutzen jetzt ein gemeinsames UI-Token-Set fuer Abstand, Schrift, Schatten und Button-Hoehen.
+
+Was passiert mit den Daten?
+Es werden nur Designwerte gelesen, keine Projektdaten geaendert.
+
+Wie mache ich rueckgaengig?
+Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh` erneut starten.
 ## Theme-Kontrast (Iteration 66)
 
 - Was macht das? Rail-Rahmen, Statusbanner und Kartenfarben bleiben in allen 5 Themes gut lesbar.

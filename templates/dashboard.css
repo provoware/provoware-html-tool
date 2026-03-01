@@ -4,6 +4,18 @@
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 24px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --font-family-sans: Arial, sans-serif;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --btn-height-default: 44px;
+  --btn-height-compact: 40px;
+  --btn-height-large: 48px;
   --bg: #060b18;
   --fg: #eef4ff;
   --panel: #0c162b;
@@ -15,7 +27,8 @@
   --ok: #188a4a;
   --warn: #995d15;
   --shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
-  --radius: 12px;
+  --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.24);
+  --radius: var(--radius-lg);
   --focus: #ffd24d;
   --rail-frame: #59c7ff;
   --rail-bg: #0d1b31;
@@ -150,7 +163,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family-sans);
   line-height: 1.4;
   background:
     radial-gradient(circle at 10% 5%, rgba(67, 182, 255, 0.18), transparent 28%),
@@ -171,10 +184,10 @@ body {
   left: var(--space-2);
   z-index: 10;
   border: 2px solid var(--focus);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: var(--panel);
   color: var(--fg);
-  min-height: 44px;
+  min-height: var(--btn-height-default);
   padding: var(--space-2) var(--space-3);
   text-decoration: none;
 }
@@ -235,9 +248,9 @@ body {
 .panel select,
 .panel input,
 .panel textarea {
-  min-height: 44px;
+  min-height: var(--btn-height-default);
   border: 2px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: var(--panel);
   color: var(--fg);
   padding: 0 0.6rem;
@@ -273,6 +286,10 @@ a:focus-visible {
 
 .layout-banner {
   margin: var(--space-2) 0 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--topbar) 80%, transparent);
+  color: var(--topbar-fg);
   border: 2px solid var(--banner-border);
   border-radius: 10px;
   background: var(--banner-bg);
@@ -284,13 +301,18 @@ a:focus-visible {
 
 .layout-shell {
   border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
-  border-radius: 14px;
+  border-radius: var(--radius-xl);
   padding: var(--space-2);
   background: color-mix(in srgb, var(--bg) 68%, #040913);
 }
 
 .left-rail,
 .right-rail {
+  border: 2px solid color-mix(in srgb, var(--accent) 72%, #66d8ff);
+  border-radius: var(--radius-lg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 38%, transparent);
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
   border: 2px solid var(--rail-frame);
   border-radius: 12px;
   padding: var(--space-2);
@@ -337,7 +359,7 @@ a:focus-visible {
   margin: 0.35rem 0 0;
   padding: 0.35rem 0.5rem;
   border: 1px dashed var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--panel-soft) 55%, transparent);
   font-size: 0.85rem;
 }
@@ -362,7 +384,7 @@ a:focus-visible {
 
 .snapshot-card {
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 0.55rem;
   background: color-mix(in srgb, var(--panel-soft) 70%, transparent);
 }
@@ -387,7 +409,7 @@ a:focus-visible {
 
 .kanban-col {
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   min-height: 95px;
   padding: 0.5rem;
   display: grid;
@@ -418,7 +440,7 @@ a:focus-visible {
 }
 
 .kanban-move-btn {
-  min-height: 44px;
+  min-height: var(--btn-height-default);
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
@@ -445,7 +467,7 @@ a:focus-visible {
 }
 
 #kanban-move-target {
-  min-height: 44px;
+  min-height: var(--btn-height-default);
 }
 
 .kanban-items[data-focused="true"] {
@@ -456,7 +478,7 @@ a:focus-visible {
 
 #backup-select {
   width: 100%;
-  min-height: 44px;
+  min-height: var(--btn-height-default);
   margin-top: 0.45rem;
 }
 
@@ -484,7 +506,7 @@ a:focus-visible {
 .blank-area {
   min-height: 90px;
   border: 1px dashed var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--panel-soft) 70%, transparent);
 }
 
@@ -493,7 +515,7 @@ a:focus-visible {
   min-height: 180px;
   padding: var(--space-2);
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: var(--panel-soft);
   display: grid;
   gap: 0.55rem;
@@ -521,7 +543,7 @@ a:focus-visible {
   margin: auto;
   padding: 0.7rem;
   border: 1px dashed var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .module-card {
@@ -686,6 +708,6 @@ a:focus-visible {
 
 #backup-target-select {
   width: 100%;
-  min-height: 44px;
+  min-height: var(--btn-height-default);
   margin-top: 0.35rem;
 }

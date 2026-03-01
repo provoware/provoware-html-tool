@@ -31,6 +31,10 @@ test("readDesignLayoutManifest liest die Projektdatei erfolgreich", () => {
   assert.equal(result.ok, true);
   assert.equal(result.manifest.meta.name, "dashboard-layout-neon-v1");
   assert.equal(result.manifest.layout.shell.type, "three-column");
+  assert.equal(
+    result.manifest.visual.tokenSource,
+    "config/ui_design_tokens.json",
+  );
 });
 
 test("validateCardProfiles akzeptiert vier zentrale Kartenprofile", () => {

@@ -11,7 +11,9 @@
       "columns": ["leftRail", "centerStage", "rightRail"],
       "topBar": true,
       "statusBanner": true,
-      "footerBar": true
+      "footerBar": true,
+      "defaultView": "Ein Bildschirm, alles sichtbar",
+      "zones": "Linke Navigation | Haupt-Workspace | Rechter Inspector"
     },
     "leftRail": {
       "width": "220-280px",
@@ -53,6 +55,8 @@
     "buttonMinSizePx": [44, 44],
     "focusRing": "3px solid, hoher Kontrast",
     "statusRule": "Status nie nur mit Farbe, immer mit Text",
+    "tokenSource": "config/ui_design_tokens.json",
+    "pluginReadyRule": "Plugins muessen Spacing/Radius/Font/Shadow/Button-Hoehen aus dem globalen Token-Set nutzen."
     "cardProfiles": [
       {
         "id": "project",

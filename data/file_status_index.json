@@ -15,9 +15,9 @@
   },
   {
     "file": "templates/dashboard.html",
-    "version": "v009",
+    "version": "v010",
     "status": "ready",
-    "updatedAt": "2026-03-02T12:00:00.000Z",
+    "updatedAt": "2026-03-03T00:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -186,6 +186,34 @@
     "version": "v001",
     "status": "ready",
     "updatedAt": "2026-03-02T12:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "config/ui_design_tokens.json",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-03T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "system-module/ui_design_tokens.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-03T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "test/ui_design_tokens.test.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-03T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "docs/HILFE.md",
+    "version": "v003",
+    "status": "ready",
+    "updatedAt": "2026-03-03T00:00:00.000Z",
     "owner": "codex"
   }
 ]
