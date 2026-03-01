@@ -249,6 +249,11 @@ function runReleaseReadinessCheck(options = {}) {
     ),
     checkIncludes(
       dashboardHtml,
+      'src="backup_restore.js"',
+      "Backup-Restore-Skript ist eingebunden",
+    ),
+    checkIncludes(
+      dashboardHtml,
       'id="backup-checklist"',
       "5-Punkte-Check im Backup-Dialog ist vorhanden",
     ),

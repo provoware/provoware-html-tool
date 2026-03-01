@@ -7,7 +7,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 70 %
-- **Erledigt:** 60 Punkte
+- **Erledigt:** 61 Punkte
 - **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -42,6 +42,12 @@ Stand: automatisch aus `todo.txt` gezaehlt.
 - Mindestziel ist WCAG AA (mindestens 4.5), damit Lesbarkeit in allen 5 Themes klar bleibt.
 - Naechster Schritt: Backup-Auswahl-Dialog direkt an den JSON-Store-Backup-Hook anbinden.
 
+## Update 2026-03-01 (Iteration 43)
+
+- Backup-Wiederherstellung im Dialog arbeitet jetzt direkt mit dem gewaehlten Projektordner (Dateisystemzugriff) und schreibt die Ziel-Datei wirklich neu.
+- Die Restore-Logik ist als eigenes Skript ausgelagert (`templates/backup_restore.js`) fuer bessere Wartbarkeit.
+- Bei Fehlern sehen Sie klare naechste Schritte: Erneut versuchen, Reparatur starten, Protokoll oeffnen.
+
 ## Kann man einzelne offene Punkte schon release-fertig abschliessen?
 
 Ja. Ein einzelner offener Punkt darf release-fertig sein, wenn er komplett
@@ -60,8 +66,8 @@ gleichen Risikobereichs sind.
 
 ## Offene Punkte (oben, kurz)
 
-1. Backup-Dialog im Dashboard
-2. Backup-Hook mit Dialog verbinden
+1. E2E-Wiederherstellung im Backup-Dialog weiter haerten
+2. Boot-View-Statusbereich mit klaren Phasen bauen
 
 ## Kurzüberblick
 

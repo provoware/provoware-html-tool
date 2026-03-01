@@ -34,6 +34,7 @@ test("runReleaseReadinessCheck prueft A11y und Themes", () => {
     "Textbereich 'dashboard.data' ist gesetzt",
     "Textbereich 'dashboard.undo' ist gesetzt",
     "5-Punkte-Check im Backup-Dialog ist vorhanden",
+    "Backup-Restore-Skript ist eingebunden",
     "README dokumentiert Doku-Pflicht im Release-Check",
   ];
 
