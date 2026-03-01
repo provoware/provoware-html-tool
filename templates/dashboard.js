@@ -87,6 +87,9 @@
   const supportHistoryEmptyHelp = document.getElementById(
     "support-history-empty-help",
   );
+  const supportHistoryEmptyToggle = document.getElementById(
+    "support-history-empty-toggle",
+  );
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -1569,14 +1572,26 @@
         queryContext.usePartialMode && shortTokenList.length > 0
           ? ` Hinweis: Kurze Suchbegriffe ignoriert (unter 3 Zeichen): ${shortTokenList.join(", ")}.${queryContext.ignoredShortTokens.length > 3 ? " (+weitere)" : ""}`
           : "";
-      const emptyQueryHint = hasSearchQuery
-        ? ""
-        : " Hinweis: Kein Suchwort gesetzt. Naechster Schritt: Suchfeld fuellen und Enter druecken.";
+      const emptyQueryHintText = ensureMessage(
+        dashboardCompactMessages.supportHistoryEmptyQueryHint,
+        "Hinweis: Kein Suchwort gesetzt. Naechster Schritt: Suchfeld fuellen und Enter druecken.",
+      );
+      const emptyQueryHint = hasSearchQuery ? "" : ` ${emptyQueryHintText}`;
       supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText}${shortHint}${emptyQueryHint} Tipp: Enter startet die Suche sofort.`;
     }
 
     if (supportHistoryEmptyHelp) {
-      supportHistoryEmptyHelp.hidden = filtered.length !== 0;
+      const showEmptyHelp = filtered.length === 0;
+      supportHistoryEmptyHelp.hidden = !showEmptyHelp;
+      if (showEmptyHelp && supportHistoryEmptyToggle) {
+        supportHistoryEmptyToggle.setAttribute("aria-expanded", "true");
+        const listElement = document.getElementById(
+          "support-history-empty-help-list",
+        );
+        if (listElement) {
+          listElement.hidden = false;
+        }
+      }
     }
 
     if (filtered.length === 0) {
@@ -1722,6 +1737,35 @@
         : "Auto-Kurzmodus ist aus. Naechster Schritt: Footer-Hinweis bei Bedarf manuell umschalten.",
       "lastAnnouncedText",
     );
+  }
+
+  function toggleSupportEmptyHelp(shouldExpand) {
+    if (!supportHistoryEmptyToggle) {
+      return false;
+    }
+    const listElement = document.getElementById(
+      "support-history-empty-help-list",
+    );
+    if (!(listElement instanceof HTMLElement)) {
+      return false;
+    }
+    const nextExpanded =
+      typeof shouldExpand === "boolean"
+        ? shouldExpand
+        : supportHistoryEmptyToggle.getAttribute("aria-expanded") !== "true";
+    supportHistoryEmptyToggle.setAttribute(
+      "aria-expanded",
+      nextExpanded ? "true" : "false",
+    );
+    listElement.hidden = !nextExpanded;
+    announceLiveRegionText(
+      supportHistoryLive,
+      nextExpanded
+        ? "0-Treffer-Hilfe ist aufgeklappt."
+        : "0-Treffer-Hilfe ist eingeklappt. Enter klappt wieder auf.",
+      "lastSupportEmptyHelpText",
+    );
+    return true;
   }
 
   async function refreshSupportHistory() {
@@ -2130,6 +2174,19 @@
   }
   if (supportHistoryFilter) {
     supportHistoryFilter.addEventListener("change", refreshSupportHistory);
+  }
+  if (supportHistoryEmptyToggle) {
+    supportHistoryEmptyToggle.addEventListener("click", () => {
+      toggleSupportEmptyHelp();
+    });
+
+    supportHistoryEmptyToggle.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        toggleSupportEmptyHelp(false);
+        supportHistoryEmptyToggle.focus();
+      }
+    });
   }
   if (supportHistoryBootDebugToggle) {
     supportHistoryBootDebugToggle.checked =

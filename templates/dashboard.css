@@ -1042,3 +1042,21 @@ a:focus-visible {
   width: min(100%, 980px);
   border-width: 2px;
 }
+
+.support-empty-toggle {
+  min-height: var(--btn-height-default);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--panel-soft) 65%, transparent);
+  color: var(--fg);
+  font: inherit;
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+}
+
+.support-empty-toggle:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
