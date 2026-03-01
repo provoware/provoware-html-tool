@@ -14,5 +14,10 @@
     "data": "Der Projektordner wird als Handle in IndexedDB gespeichert und beim Neustart erneut geprüft.",
     "undo": "Sie können die Zonensortierung per Drag&Drop oder Pfeil-Buttons jederzeit rückgängig machen.",
     "debug": "Debug-Modus zeigt technische Details in einfacher Sprache mit nächsten Schritten."
+  },
+  "mockup": {
+    "what": "Das Mockup zeigt die aktuelle Start- und Dashboard-Logik als schnelle Vorschau.",
+    "data": "Es ist nur eine Ansicht und schreibt keine Projektdaten.",
+    "undo": "Sie können das Mockup jederzeit schließen, ohne Änderungen am Projektstand."
   }
 }

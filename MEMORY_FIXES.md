@@ -150,3 +150,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Dashboard nur als manueller Link in Hilfe anzeigen.
 **Risiko/Side-Effects:** In Headless-Umgebungen wird nur Hinweis statt Browserstart gezeigt.
 **Verknuepft:** Patch-ID local-009
+
+## FIX-20260301-004: Dashboard-Mockup-fuer-Aktuellen-Flow
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Es gab keine schnelle visuelle Uebersicht, wie Start-Routine und Dashboard-Logik zusammenarbeiten.
+**Technische Ursache:** Nur das produktive Dashboard war vorhanden, aber kein leicht lesbares Mockup fuer Review und Abstimmung.
+**Trigger:** Wunsch nach schneller Mockup-Ansicht im Projektordner.
+**Fix (kurz):** Neues `templates/dashboard_mockup.html` mit 9 Start-Schritten, Theme-Umschaltung, klaren Fehleraktionen und Tastaturhinweisen erstellt.
+**Geaenderte Dateien/Marker:** templates/dashboard_mockup.html, CHANGELOG.md, SELFINFO.md, todo.txt
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei neuen UI-Flows ein kompaktes Mockup fuer schnelle Laien-Pruefung mitliefern.
+**Alternative(n):** Mockup nur als Bilddatei statt klickbarer HTML-Datei.
+**Risiko/Side-Effects:** Zusaetzliche Template-Datei muss bei UI-Aenderungen mitgedacht werden.
+**Verknuepft:** Patch-ID local-010

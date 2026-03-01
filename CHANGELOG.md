@@ -34,3 +34,9 @@
 - Neues Kernmodul `system-core/dashboard_core.js` startet das Dashboard am Ende der Start-Routine automatisch.
 - Start-Routine hat jetzt 9 klare Schritte inklusive Dashboard-Autostart mit Headless-Fallback.
 - Risiko: niedrig, weil nur Startfluss + neue Tests ergänzt wurden.
+
+## 2026-03-01 – Dashboard-Mockup zur aktuellen Logik
+
+- Neues Mockup `templates/dashboard_mockup.html` ergänzt: zeigt Start-Routine (9 Schritte), Theme-Auswahl und Dashboard-Zonen in einfacher Sprache.
+- Mockup nutzt klare A11y-Bausteine (Fokus sichtbar, `aria-live`, große Buttons) und feste naechste Schritte bei Fehlern.
+- Risiko: niedrig, da nur neue Mockup-Datei plus Doku-Update.

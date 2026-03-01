@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 11
+Iteration: 12
 
 ## Gemacht
 
@@ -24,6 +24,8 @@ Iteration: 11
 - Dashboard-Haupt-Kern-Modul als neues Core-Modul ergänzt.
 - Start-Routine startet das Dashboard jetzt automatisch am Ende (mit Headless-Fallback).
 
+- Neues Mockup `templates/dashboard_mockup.html` mit aktueller Start- und Dashboard-Logik ergänzt.
+
 ## Next Step
 
-- Option C fortgesetzt: Backup-Auswahl als UI-Dialog auf neuen Backup-Hook aufsetzen.
+- Option A als naechstes: Boot-View stabilisieren (Phasen, Ampel, Details, Weiter-Gate).
