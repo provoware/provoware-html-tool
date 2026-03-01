@@ -122,6 +122,7 @@
     leftCollapsed: false,
     rightCollapsed: false,
     bootFocusTarget: "module",
+    backupDetailOpen: false,
   };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
@@ -223,6 +224,8 @@
       rightWidth: clampNumber(source.rightWidth, 220, 340),
       leftCollapsed: Boolean(source.leftCollapsed),
       rightCollapsed: Boolean(source.rightCollapsed),
+      bootFocusTarget: source.bootFocusTarget === "help" ? "help" : "module",
+      backupDetailOpen: source.backupDetailOpen === true,
     };
   }
 
@@ -307,6 +310,10 @@
     if (bootFocusTarget) {
       bootFocusTarget.value =
         layoutState.bootFocusTarget === "help" ? "help" : "module";
+    }
+    if (backupCompareDetailWrap) {
+      backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
+      updateBackupDetailStateText(backupCompareDetailWrap.open);
     }
     updateGridColumns();
     return true;
@@ -692,6 +699,9 @@
     debugOutput.textContent = safe;
     if (footerDebugOutput) {
       footerDebugOutput.textContent = safe;
+    }
+    if (supportHistoryList && supportHistoryFilter) {
+      refreshSupportHistory().catch(() => false);
     }
     return safe;
   }
@@ -1253,6 +1263,53 @@
     return safeEvents.filter((event) => event && typeof event === "object");
   }
 
+  function highlightQueryText(sourceText, queryText) {
+    const safeSource = typeof sourceText === "string" ? sourceText : "";
+    const safeQuery = typeof queryText === "string" ? queryText.trim() : "";
+    if (!safeQuery) {
+      return [{ text: safeSource, mark: false }];
+    }
+
+    const lowerSource = safeSource.toLowerCase();
+    const lowerQuery = safeQuery.toLowerCase();
+    const chunks = [];
+    let cursor = 0;
+
+    while (cursor < safeSource.length) {
+      const index = lowerSource.indexOf(lowerQuery, cursor);
+      if (index < 0) {
+        chunks.push({ text: safeSource.slice(cursor), mark: false });
+        break;
+      }
+
+      if (index > cursor) {
+        chunks.push({ text: safeSource.slice(cursor, index), mark: false });
+      }
+
+      chunks.push({
+        text: safeSource.slice(index, index + safeQuery.length),
+        mark: true,
+      });
+      cursor = index + safeQuery.length;
+    }
+
+    return chunks.length > 0 ? chunks : [{ text: safeSource, mark: false }];
+  }
+
+  function appendHighlightedText(root, text, queryText) {
+    if (!(root instanceof HTMLElement)) {
+      return false;
+    }
+
+    const chunks = highlightQueryText(text, queryText);
+    chunks.forEach((chunk) => {
+      const node = document.createElement(chunk.mark ? "mark" : "span");
+      node.textContent = chunk.text;
+      root.appendChild(node);
+    });
+    return true;
+  }
+
   function renderSupportHistory(events, filterKey, queryText) {
     if (!supportHistoryList) {
       return false;
@@ -1263,7 +1320,20 @@
     const normalized = normalizeSupportHistoryEvents(events);
     const safeQuery =
       typeof queryText === "string" ? queryText.trim().toLowerCase() : "";
-    const filtered = normalized.filter((entry) => {
+    const bootDebugEntry =
+      typeof lastBootFocusDebugText === "string" &&
+      lastBootFocusDebugText.trim()
+        ? {
+            kind: "boot-debug",
+            createdAt: new Date().toISOString(),
+            details: lastBootFocusDebugText,
+          }
+        : null;
+    const normalizedWithBoot = bootDebugEntry
+      ? [bootDebugEntry, ...normalized]
+      : normalized;
+
+    const filtered = normalizedWithBoot.filter((entry) => {
       if (safeFilter === "safe-mode" && entry.kind !== "safe-mode-reset") {
         return false;
       }
@@ -1306,7 +1376,10 @@
       const label = typeof entry.kind === "string" ? entry.kind : "eintrag";
       const details = typeof entry.details === "string" ? entry.details : "";
       const keyboardHint = buildSupportKeyboardHint(details);
-      line.textContent = `${label} | ${when} | ${details} | ${keyboardHint}`;
+
+      appendHighlightedText(line, `${label} | ${when} | `, safeQuery);
+      appendHighlightedText(line, details, safeQuery);
+      appendHighlightedText(line, ` | ${keyboardHint}`, safeQuery);
       supportHistoryList.appendChild(line);
     });
 
@@ -1413,7 +1486,7 @@
           summary?.detailText ||
           "Detailmodus leer. Naechster Schritt: Andere Version waehlen.";
         backupCompareDetailWrap.hidden = false;
-        backupCompareDetailWrap.open = false;
+        backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
         updateBackupDetailStateText(backupCompareDetailWrap.open);
       }
       return true;
@@ -1424,7 +1497,7 @@
         backupCompareDetail.textContent =
           "Detailmodus fehlt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.";
         backupCompareDetailWrap.hidden = false;
-        backupCompareDetailWrap.open = false;
+        backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
         updateBackupDetailStateText(backupCompareDetailWrap.open);
       }
       return false;
@@ -1703,6 +1776,15 @@
   if (backupCompareDetailWrap) {
     backupCompareDetailWrap.addEventListener("toggle", () => {
       updateBackupDetailStateText(backupCompareDetailWrap.open);
+      layoutState = normalizeLayoutWithModel({
+        ...layoutState,
+        backupDetailOpen: backupCompareDetailWrap.open === true,
+      });
+      persistLayoutState().catch(() => {
+        setStatus(
+          "Detailzustand konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+        );
+      });
     });
   }
   if (supportHistoryApply) {

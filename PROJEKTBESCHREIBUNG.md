@@ -385,3 +385,8 @@ Praktischer Einsatz:
 - Boot-Bereich hat jetzt eine zusaetzliche Live-Statuszeile (`aria-live="polite"`), damit Fokuszielwechsel nicht nur visuell, sondern auch als Textsignal ankommt.
 - Support-Verlauf zeigt eine laufende Trefferzahl und erlaubt Enter als direkten Suchstart (Tastatur zuerst).
 - Rueckweg bleibt klar: Bei 0 Treffern zeigt der Verlauf weiterhin den naechsten Schritt (Filter aendern oder erneut versuchen).
+
+## Iteration 94 – Konsistenz und Wartbarkeit
+- Layoutmodell und Dashboard-Script nutzen jetzt dasselbe Feld `backupDetailOpen`; dadurch ist der Detailzustand stabil zwischen Sitzungen.
+- Die Verlaufssuche rendert markierte Treffer als echte Textknoten (keine HTML-Injektion), das verbessert Wartbarkeit und Sicherheit.
+- Debug-Hinweise aus dem Boot-Prozess werden im Hilfe-Verlauf direkt sichtbar und erleichtern die Fehlersuche fuer Laien.

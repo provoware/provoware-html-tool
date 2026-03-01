@@ -498,3 +498,9 @@ Iteration: 39
 - Hauptziel: Zwei offene Mini-Punkte abgeschlossen (Boot-Live-Ansage + Support-Trefferzahl mit Enter-Shortcut).
 - Version: v0.91-boot-live-support-hitcount
 - Next Step: Versions-Detailgruppen standardmaessig eingeklappt starten.
+
+## Iteration 94
+
+- Version: v0.94
+- Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Detailzustand speichern, Suchmarkierung, Boot-Debug im Hilfe-Verlauf).
+- Next Step: Boot-Debug-Eintrag optional ausblendbar machen und Zustand speichern.

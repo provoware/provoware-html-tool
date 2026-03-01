@@ -104,3 +104,9 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Support-Suche zeigt jetzt die Trefferzahl und reagiert auf Enter im Suchfeld fuer schnellere Tastaturbedienung.
 - Mini-Optimierung Hilfe/UX: Suchfeld beschreibt den naechsten Schritt klar mit Treffer-Hinweis.
 - Naechster Schritt: Versions-Detailgruppen im Backup-Dialog standardmaessig eingeklappt starten.
+
+## Update 2026-03-01 (3 Mini-Punkte abgeschlossen – Iteration 94)
+- Backup-Detailzustand wird jetzt pro Projekt in `data/layout.json` als `backupDetailOpen` gespeichert und beim Oeffnen wiederhergestellt.
+- Support-Verlauf markiert Suchwoerter als sichtbaren Text mit `<mark>` plus Rahmen, damit Status nicht nur ueber Farbe sichtbar ist.
+- Letzter Boot-Debugtext erscheint zusaetzlich als Hilfe-Eintrag (`boot-debug`) im Support-Verlauf.
+- Naechster Schritt: Boot-Debug-Eintrag optional per Schalter ausblendbar machen.
