@@ -230,6 +230,15 @@
   chooseFolder.addEventListener("click", chooseProjectFolder);
   reconnect.addEventListener("click", reconnectProjectFolder);
 
+  window.createModuleWorkspace({
+    catalog: document.getElementById("module-catalog"),
+    grid: document.getElementById("active-modules"),
+    emptyState: document.getElementById("empty-state"),
+    scale: document.getElementById("grid-scale"),
+    align: document.getElementById("grid-align"),
+    setStatus,
+  });
+
   renderZones();
   reconnectProjectFolder();
 })();

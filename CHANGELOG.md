@@ -52,3 +52,9 @@
 - README neu gegliedert: offene Punkte oben, klare Kapitel und bessere Sichtbarkeit.
 - Laienanleitung mit vollständigen Befehlen ergänzt (Start, Test, Format, Logs, Backup, Reparatur).
 - Risiko: niedrig, da nur Dokumentation angepasst wurde.
+
+## 2026-03-01 – Zentrierte modulare Hauptflaeche
+
+- Dashboard-Hauptbereich startet jetzt leer und zeigt aktivierte Module als gleichgroße, flexible Raster-Karten in Auswahl-Reihenfolge.
+- Jedes Modul-Panel bietet klare Infos plus Knöpfe für Maximieren, Minimieren und Ausblenden.
+- Risiko: niedrig, da Änderung auf Dashboard-Template und Styles begrenzt ist.

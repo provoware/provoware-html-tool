@@ -74,12 +74,44 @@
             <pre id="debug-output" class="debug" hidden></pre>
           </article>
           <article class="panel" aria-labelledby="workspace-title">
-            <h2 id="workspace-title">Module Workspace</h2>
-            <div class="module-tiles" aria-hidden="true">
-              <div class="tile tile-blue">Email Campaign</div>
-              <div class="tile tile-cyan">CRM Tool</div>
-              <div class="tile tile-orange">Analytics Hub</div>
+            <h2 id="workspace-title">Modulfläche (zentriert und flexibel)</h2>
+            <p>
+              Die Fläche startet leer. Aktivierte Module erscheinen in Ihrer
+              Auswahl-Reihenfolge.
+            </p>
+            <div class="module-toolbar">
+              <label for="grid-scale">Rastergröße</label>
+              <select id="grid-scale" aria-label="Rastergröße wählen">
+                <option value="small">Kompakt</option>
+                <option value="medium" selected>Standard</option>
+                <option value="large">Groß</option>
+              </select>
+              <label for="grid-align">Position</label>
+              <select id="grid-align" aria-label="Position im Bereich wählen">
+                <option value="start">Oben</option>
+                <option value="center" selected>Mitte</option>
+                <option value="end">Unten</option>
+              </select>
             </div>
+            <div
+              id="active-modules"
+              class="module-grid"
+              role="list"
+              aria-label="Aktive Module"
+              data-scale="medium"
+              data-align="center"
+            >
+              <p id="empty-state" class="empty-state" role="status">
+                Noch kein Modul aktiv. Wählen Sie unten ein Modul aus.
+              </p>
+            </div>
+            <h3 id="catalog-title">Module hinzufügen</h3>
+            <div
+              id="module-catalog"
+              class="module-catalog"
+              role="list"
+              aria-labelledby="catalog-title"
+            ></div>
           </article>
           <article class="panel" aria-labelledby="zones-title">
             <h2 id="zones-title">Modul-Reihenfolge</h2>
@@ -118,6 +150,7 @@
         </aside>
       </section>
     </main>
+    <script src="module_workspace.js"></script>
     <script src="dashboard.js"></script>
   </body>
 </html>
