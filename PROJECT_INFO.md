@@ -14,3 +14,4 @@
 - Registry-Debug nur bei START_DEBUG=1 mit Detailursachen anzeigen.
 - JSON-Store validiert Pflichtfelder und Typen vor jedem Schreiben (Schema-Check).
 - JSON-Store bietet `onBackupCreated` als Backup-Hook fuer Folgeaktionen.
+- Start-Routine versucht am Ende immer den Dashboard-Autostart (bei Headless mit Hinweis statt Abbruch).

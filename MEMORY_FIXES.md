@@ -136,3 +136,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Vollstaendiger JSON-Schema-Validator als zusaetzliche Abhaengigkeit.
 **Risiko/Side-Effects:** Strengere Validation kann alte, ungueltige Daten sofort blockieren.
 **Verknuepft:** Patch-ID local-008
+
+## FIX-20260301-003: Dashboard-Autostart-mit-Headless-Fallback
+
+**Kategorie:** UI/Boot
+**Symptom (fuer Laien):** Nach erfolgreichem Start wurde das Dashboard nicht automatisch geoeffnet.
+**Technische Ursache:** Es gab kein Kernmodul fuer den Dashboard-Start im Ende der Start-Routine.
+**Trigger:** `bash start.sh` lief erfolgreich durch, aber UI blieb manuell zu oeffnen.
+**Fix (kurz):** Neues Core-Modul `dashboard_core` erstellt, Plattform-Startbefehl validiert und in Schritt 8/9 der Start-Routine eingebunden.
+**Geaenderte Dateien/Marker:** system-core/dashboard_core.js, tools/start_routine.js, test/dashboard_core.test.js
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Boot-Ende mit eigenem Core-Modul und Headless-Fallback testen.
+**Alternative(n):** Dashboard nur als manueller Link in Hilfe anzeigen.
+**Risiko/Side-Effects:** In Headless-Umgebungen wird nur Hinweis statt Browserstart gezeigt.
+**Verknuepft:** Patch-ID local-009

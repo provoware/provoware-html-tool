@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 10
+Iteration: 11
 
 ## Gemacht
 
@@ -20,6 +20,9 @@ Iteration: 10
 - Plugin-Loader minimal umgesetzt (Manifest, isoliertes Laden, Health-Check).
 - Registry-Health-Check mit optionalen Debug-Details erweitert.
 - Storage-Service erweitert: JSON-Schema-Validierung vor Write und Backup-Hook fuer Folgeschritte.
+
+- Dashboard-Haupt-Kern-Modul als neues Core-Modul ergänzt.
+- Start-Routine startet das Dashboard jetzt automatisch am Ende (mit Headless-Fallback).
 
 ## Next Step
 

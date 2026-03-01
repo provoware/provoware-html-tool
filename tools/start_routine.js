@@ -6,6 +6,7 @@ const {
   runRegistryHealthCheckWithOptions,
 } = require("../system-core/registry_service");
 const { runPluginLoaderHealthCheck } = require("../system-core/plugin_loader");
+const { startDashboardMainModule } = require("../system-core/dashboard_core");
 
 function assertArray(value, name) {
   if (!Array.isArray(value) || value.length === 0) {
@@ -103,11 +104,11 @@ function validateProjectStructure(requiredPaths) {
 
 function installDependencies() {
   if (fs.existsSync("node_modules")) {
-    console.log("[2/8] Abhaengigkeiten vorhanden");
+    console.log("[2/9] Abhaengigkeiten vorhanden");
     return { ok: true };
   }
 
-  console.log("[2/8] Abhaengigkeiten fehlen. Installation startet");
+  console.log("[2/9] Abhaengigkeiten fehlen. Installation startet");
   const install = runCommand("npm", ["install"]);
 
   if (!install.ok) {
@@ -136,7 +137,7 @@ function runRegistryCheck() {
     throw new Error(`${result.message}${details}`);
   }
 
-  console.log(`[5/8] ${result.message}`);
+  console.log(`[5/9] ${result.message}`);
 }
 function runPluginLoaderCheck() {
   const result = runPluginLoaderHealthCheck({
@@ -155,11 +156,18 @@ function runPluginLoaderCheck() {
     );
   }
 
-  console.log(`[6/8] ${result.message}`);
+  console.log(`[6/9] ${result.message}`);
+}
+
+function runDashboardAutoStart() {
+  const result = startDashboardMainModule({
+    dashboardPath: path.join(process.cwd(), "templates", "dashboard.html"),
+  });
+  console.log(`[8/9] ${result.message}`);
 }
 
 function runStartRoutine() {
-  console.log("[1/8] Projektstruktur pruefen");
+  console.log("[1/9] Projektstruktur pruefen");
   const structure = validateProjectStructure([
     "package.json",
     "config/messages_de.json",
@@ -170,12 +178,14 @@ function runStartRoutine() {
     "system-core/json_store.js",
     "system-core/registry_service.js",
     "system-core/plugin_loader.js",
+    "system-core/dashboard_core.js",
     "test/json_store.test.js",
     "templates/dashboard.html",
     "templates/dashboard.js",
     "system-module/dashboard_model.js",
     "system-module/plugins_accessibility.js",
     "test/dashboard_model.test.js",
+    "test/dashboard_core.test.js",
     "test/plugin_loader.test.js",
   ]);
 
@@ -187,7 +197,7 @@ function runStartRoutine() {
 
   installDependencies();
 
-  console.log("[3/8] Code formatieren");
+  console.log("[3/9] Code formatieren");
   const format = runCommand("npm", ["run", "format"]);
   if (!format.ok) {
     throw new Error(
@@ -195,7 +205,7 @@ function runStartRoutine() {
     );
   }
 
-  console.log("[4/8] Unit-Tests ausfuehren");
+  console.log("[4/9] Unit-Tests ausfuehren");
   const tests = runCommand("npm", ["test"]);
   if (!tests.ok) {
     throw new Error(
@@ -206,7 +216,7 @@ function runStartRoutine() {
   runRegistryCheck();
   runPluginLoaderCheck();
 
-  console.log("[7/8] Systemtest ausfuehren");
+  console.log("[7/9] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -214,7 +224,9 @@ function runStartRoutine() {
     );
   }
 
-  console.log("[8/8] Fertig");
+  runDashboardAutoStart();
+
+  console.log("[9/9] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -238,6 +250,7 @@ module.exports = {
   formatStartError,
   getDebugMode,
   runCommand,
+  runDashboardAutoStart,
   runStartRoutine,
   validateProjectStructure,
   writeStartLog,
