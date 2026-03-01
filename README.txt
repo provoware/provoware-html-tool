@@ -123,3 +123,9 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Support-Suche hat einen optionalen Teilwortmodus (enthaelt); Standard bleibt ganze Woerter fuer stabile Treffer.
 - Backup-Detailhinweis enthaelt eine kurze Beispielzeile fuer Einsteiger.
 - Naechster Schritt: Teilwortmodus mit Mindestlaenge 3 gegen ungenaue Treffer absichern.
+
+## Iteration 97 – Wartbarkeit der Support-Suche verbessert
+- Drei offene Mini-Punkte abgeschlossen: Footer-Hinweis ist jetzt kurz/lang schaltbar und wird pro Projekt gespeichert.
+- Teilwortsuche nutzt jetzt Mindestlaenge 3; zu kurze Suchteile werden bewusst ignoriert und im Metatext klar erklaert.
+- Trefferzeilen zeigen jetzt ein Suchmodus-Badge (Ganzwort/Teilwort) mit hohem Kontrast fuer alle Themes.
+- Naechster Schritt: Ignorierte Kurz-Tokens als klare Liste im Metabereich anzeigen.
