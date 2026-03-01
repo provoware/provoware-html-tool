@@ -306,3 +306,10 @@ Praktischer Einsatz:
 - **Moduloptionen unten:** Unterhalb der Modulflaeche gibt es jetzt einen festen Bereich fuer modulbezogene Aktionen.
 - **Tool-Qualitaet:** `tools/start_routine.js` prueft offene TODO-Mini-Punkte jetzt strikter (Pflichtfelder muessen vorhanden und gefuellt sein).
 - **Nutzen fuer Laien:** Jede neue Meldung zeigt direkt den naechsten Schritt.
+
+## Iteration 82 – Favoriten- und Moduloptionen
+- Favoritenleiste arbeitet jetzt mit echten Aktionen statt Dummy-Status.
+- Aktion "Letztes Modul oeffnen" nutzt den letzten aktiven Modulkontext aus dem Workspace.
+- Aktion "Alle Module anzeigen" listet aktive Module in der Statuszeile auf.
+- Untere Moduloptionen sind kontextsensitiv und zeigen je Modul zwei direkte Folgeaktionen.
+- Start-Routine zeigt bei TODO-Vorlagenfehlern jetzt eine Zeilenhilfe fuer schnellere Reparatur.

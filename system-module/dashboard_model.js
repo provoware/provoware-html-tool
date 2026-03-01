@@ -196,11 +196,71 @@ function resolveSidebarShortcut(eventLike, sidebarOpen) {
   };
 }
 
+function resolveFavoritesAction(actionKey, context = {}) {
+  assertText(actionKey, "Favoriten-Aktion");
+  const safeContext = context && typeof context === "object" ? context : {};
+  const activeModules = Array.isArray(safeContext.activeModules)
+    ? safeContext.activeModules.filter(
+        (entry) => entry && typeof entry.title === "string",
+      )
+    : [];
+  const lastModule =
+    typeof safeContext.lastModuleTitle === "string"
+      ? safeContext.lastModuleTitle
+      : "";
+
+  if (actionKey === "open-last-module") {
+    if (lastModule.trim()) {
+      return {
+        handled: true,
+        status: `${lastModule} geoeffnet. Naechster Schritt: Modulinhalt pruefen.`,
+      };
+    }
+
+    return {
+      handled: true,
+      status:
+        "Noch kein letztes Modul vorhanden. Naechster Schritt: Modul anklicken und erneut versuchen.",
+    };
+  }
+
+  if (actionKey === "show-all-modules") {
+    if (activeModules.length === 0) {
+      return {
+        handled: true,
+        status:
+          "Keine aktiven Module sichtbar. Naechster Schritt: Links ein Modul aktivieren.",
+      };
+    }
+
+    const moduleNames = activeModules.map((entry) => entry.title).join(", ");
+    return {
+      handled: true,
+      status: `Aktive Module: ${moduleNames}. Naechster Schritt: Gewuenschtes Modul waehlen.`,
+    };
+  }
+
+  if (actionKey === "show-focus-help") {
+    return {
+      handled: true,
+      status:
+        "Fokus-Hilfe: Erst Fokusmodus starten, dann Escape fuer Rueckweg nutzen. Naechster Schritt: Fokusmodus oben aktivieren.",
+    };
+  }
+
+  return {
+    handled: false,
+    status:
+      "Aktion nicht bekannt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+  };
+}
+
 module.exports = {
   applyLayoutSnapshot,
   buildQuickAccess,
   createLayoutSnapshot,
   getGridColumnCount,
+  resolveFavoritesAction,
   resolveSidebarShortcut,
   moveZone,
   normalizeLayoutState,
@@ -213,6 +273,7 @@ if (typeof window !== "undefined") {
     buildQuickAccess,
     createLayoutSnapshot,
     getGridColumnCount,
+    resolveFavoritesAction,
     resolveSidebarShortcut,
     moveZone,
     normalizeLayoutState,

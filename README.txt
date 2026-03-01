@@ -1,3 +1,9 @@
+Update Iteration 82:
+- Favoriten-Schnellaktionen steuern jetzt echte Modulkontexte (letztes Modul, aktive Module, Fokus-Hilfe).
+- Moduloptionen unten zeigen je Modul passende Aktionen mit klarem Rueckweg.
+- Start-Routine nennt bei TODO-Vorlagenfehlern jetzt die fehlerhafte Zeile direkt.
+- Naechster Schritt: Boot-Weiter-Gate, Plugin-Safe-Mode und versionierte Storage-Writes abschliessen.
+
 
 
 Update Iteration 81:
@@ -127,7 +133,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 88 %
-- **Erledigt:** 139 Punkte
+- **Erledigt:** 142 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

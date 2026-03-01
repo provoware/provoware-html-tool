@@ -678,11 +678,18 @@ function runStartRoutine() {
   const templateCheck = validateMiniPointTemplate(todoContent);
   if (!templateCheck.ok) {
     const firstMissing = templateCheck.missingFields[0];
+    const todoLines = todoContent.split("\n");
+    const openLines = todoLines.filter((line) =>
+      /^- \[ \] Naechster Mini-Punkt:/i.test(line),
+    );
+    const faultyLine =
+      openLines[firstMissing.index - 1] || "(kein Eintrag gefunden)";
     throw new Error(
       "TODO-Vorlage verletzt: Bei jedem offenen Naechster Mini-Punkt muessen die Pflichtfelder " +
         "Code, Tests, Doku, Risiko und Naechster Schritt mit Inhalt gefuellt sein. " +
-        `Fehlend bei Eintrag ${firstMissing.index}: ${firstMissing.field} ` +
-        "Naechster Schritt: TODO anpassen, speichern und erneut versuchen.",
+        `Fehlend bei Eintrag ${firstMissing.index}: ${firstMissing.field}. ` +
+        `Zeilenhilfe: ${faultyLine.trim()} ` +
+        "Naechster Schritt: TODO anpassen, speichern und erneut versuchen oder Protokoll oeffnen.",
     );
   }
   console.log("[12/14] TODO-Vorlage geprueft: Pflichtfelder sind gesetzt");

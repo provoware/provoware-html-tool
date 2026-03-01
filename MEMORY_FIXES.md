@@ -906,3 +906,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Warnung statt Fehler (verworfen, weil Release-Qualitaet sinkt).
 **Risiko/Side-Effects:** Niedrig, da nur Validierung und UI-Hilfe erweitert wurde.
 **Verknuepft:** PATCH-081
+
+## FIX-20260301-082: Favoriten-Aktionen-und-TODO-Zeilenhilfe
+
+**Kategorie:** UI/A11y/Start
+**Symptom (fuer Laien):** Favoritenbuttons zeigten nur Platzhalter und TODO-Fehlertexte waren schwer zu finden.
+**Technische Ursache:** Favoriten-Handler nutzte keine Aktions-IDs; TODO-Fehler gab nur Feldnamen ohne Zeilenkontext aus.
+**Trigger:** Drei offene Mini-Punkte fuer echte Favoritenbefehle, Kontextoptionen und Zeilenhilfe.
+**Fix (kurz):** Zentrale Favoriten-Aktionslogik im Dashboard-Modell eingefuehrt, Moduloptionen je Profil erweitert und TODO-Fehler um direkte Zeilenhilfe ergaenzt.
+**Geaenderte Dateien/Marker:** system-module/dashboard_model.js, templates/dashboard.js, templates/dashboard.html, templates/module_workspace.js, tools/start_routine.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer UI-Schnellaktionen mit stabilen action-keys und reproduzierbarer Statusmeldung bauen.
+**Alternative(n):** Nur Textaenderung ohne echte Aktionslogik (verworfen, kein echter Mehrwert).
+**Risiko/Side-Effects:** Mittel, weil mehrere UI-Handler zusammenspielen; durch Tests abgesichert.
+**Verknuepft:** PATCH-082

@@ -1,3 +1,9 @@
+## Iteration 82 – Status
+
+- Hauptziel: Drei offene Mini-Punkte releasefertig abgeschlossen (Favoritenaktionen, Kontextoptionen, TODO-Zeilenhilfe).
+- Ergebnis: Code + Tests + Doku aktualisiert, Start-Routine liefert klarere Laienmeldung mit Zeilenhilfe.
+- Nächster Schritt: A/B/C-Optionen fuer naechste Iteration priorisieren (A + B + C als neue offene Mini-Punkte gesetzt).
+
 ## Iteration 81 (2026-03-01)
 
 - Ziel: Genau drei offene Mini-Punkte vollstaendig abschliessen (Favoritenleiste, unterer Modulbereich, TODO-Vorlage strikt).
