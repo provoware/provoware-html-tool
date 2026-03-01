@@ -1,3 +1,10 @@
+## Iteration 56 (2026-03-01)
+
+- Hauptziel (B) abgeschlossen: Plugin-Loader ist minimal gehaertet (Manifest-Typ/Version, Plugin-ID-Format, Pfadschutz gegen absolute und Elternpfade).
+- Mini-Optimierung: Kanban bietet jetzt optionales Drag-and-Drop als getrennten Zusatzpfad; Dialog bleibt als klarer A11y-Standard erhalten.
+- Datenbereinigung: `dummys/unsafe-plugin-manifest.json` auf einheitliches Manifestformat gebracht.
+- Next Step (C): Storage-Service weiter haerten (versionierte Writes + Backup-Hook-Checks).
+
 ## Iteration 53 (2026-03-01)
 
 - Hauptziel abgeschlossen: Kanban-Karten sind jetzt per Dialog verschiebbar (mit Enter/Escape-Rueckweg und Statushilfe).

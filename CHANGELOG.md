@@ -1,3 +1,10 @@
+## 2026-03-01 – Plugin-Loader minimal abgesichert + Drag-and-Drop als Zusatz-Patch
+
+- Option B priorisiert: Plugin-Loader prueft jetzt Manifest-Typ, Semver-Version, Plugin-ID-Format und blockiert absolute oder unsichere Modulpfade frueh.
+- Drag-and-Drop fuer Kanban ist jetzt als kleiner, getrennter Zusatzpfad aktiv; der bestehende Dialog bleibt Standard-Rueckweg fuer Tastatur und Barrierefreiheit.
+- Ueberfluessige Daten bereinigt: unsicheres Dummy-Manifest auf gueltige Manifest-Struktur vereinheitlicht.
+- Risiko: niedrig bis mittel, weil nur Plugin-Loader, Kanban-Vorschau, Dummy-Daten und Tests angepasst wurden.
+
 ## 2026-03-01 – Kanban-Dialog fuer Kartenverschiebung (Enter/Escape + Rueckweg)
 
 - Offener TODO-Punkt abgeschlossen: Jede Kanban-Karte hat jetzt einen "Verschieben"-Button mit Dialog.

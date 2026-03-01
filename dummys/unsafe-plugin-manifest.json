@@ -1,4 +1,6 @@
 {
+  "manifestType": "plugin-loader",
+  "version": "1.0.0",
   "plugins": [
     {
       "id": "plugin-unsafe-path",

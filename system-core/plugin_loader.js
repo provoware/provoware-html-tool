@@ -28,13 +28,40 @@ function assertArray(value, name) {
 
 function validatePluginManifest(manifest) {
   assertObject(manifest, "Plugin-Manifest");
+  assertText(manifest.manifestType, "Manifest-Typ");
+  assertText(manifest.version, "Manifest-Version");
   assertArray(manifest.plugins, "Plugin-Liste");
+
+  if (manifest.manifestType !== "plugin-loader") {
+    throw new Error(
+      "Manifest-Typ ungueltig. Bitte Eingabe pruefen und erneut versuchen.",
+    );
+  }
+
+  if (!/^\d+\.\d+\.\d+$/.test(manifest.version)) {
+    throw new Error(
+      "Manifest-Version ungueltig. Bitte Eingabe pruefen und erneut versuchen.",
+    );
+  }
+
   const knownIds = new Set();
 
   manifest.plugins.forEach((plugin, index) => {
     assertObject(plugin, `Plugin ${index + 1}`);
     assertText(plugin.id, `Plugin ${index + 1} ID`);
     assertText(plugin.modulePath, `Plugin ${index + 1} Modulpfad`);
+
+    if (!/^[a-z0-9-]+$/i.test(plugin.id)) {
+      throw new Error(
+        `Plugin-ID ${plugin.id} ist ungueltig. Eingabe pruefen und erneut versuchen.`,
+      );
+    }
+
+    if (path.isAbsolute(plugin.modulePath)) {
+      throw new Error(
+        `Plugin ${plugin.id} hat absoluten Modulpfad. Reparatur starten oder Protokoll oeffnen.`,
+      );
+    }
 
     if (knownIds.has(plugin.id)) {
       throw new Error(
@@ -61,7 +88,13 @@ function resolvePluginPath(projectRoot, modulePath) {
   assertText(modulePath, "Plugin-Modulpfad");
 
   const absoluteProjectRoot = path.resolve(projectRoot);
-  const absolutePluginPath = path.resolve(absoluteProjectRoot, modulePath);
+  const safeModulePath = path.normalize(modulePath);
+  if (safeModulePath.startsWith(`..${path.sep}`) || safeModulePath === "..") {
+    throw new Error(
+      "Plugin-Pfad ist ungueltig. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+  const absolutePluginPath = path.resolve(absoluteProjectRoot, safeModulePath);
   const rootWithSeparator = `${absoluteProjectRoot}${path.sep}`;
 
   if (
@@ -163,5 +196,6 @@ function runPluginLoaderHealthCheck(options) {
 
 module.exports = {
   runPluginLoaderHealthCheck,
+  resolvePluginPath,
   validatePluginManifest,
 };
