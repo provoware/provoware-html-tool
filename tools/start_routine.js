@@ -298,6 +298,60 @@ function verifyFormatting() {
   }
 }
 
+function scanPlaceholderMarkers(rootPath, options = {}) {
+  assertText(rootPath, "Projektpfad");
+  const markers = Array.isArray(options.markers)
+    ? options.markers
+    : ["TODO", "FIXME", "PLACEHOLDER", "DUMMY"];
+  const directories = Array.isArray(options.directories)
+    ? options.directories
+    : ["system-core", "system-module", "templates", "tools", "config"];
+
+  const findings = [];
+  const markerPattern = new RegExp(`\\b(${markers.join("|")})\\b`, "i");
+
+  directories.forEach((relativeDirectory) => {
+    assertText(relativeDirectory, "Scan-Verzeichnis");
+    const absoluteDirectory = path.join(rootPath, relativeDirectory);
+    if (!fs.existsSync(absoluteDirectory)) {
+      return;
+    }
+
+    const entries = fs.readdirSync(absoluteDirectory, {
+      withFileTypes: true,
+    });
+
+    entries.forEach((entry) => {
+      if (!entry.isFile()) {
+        return;
+      }
+
+      const absoluteFilePath = path.join(absoluteDirectory, entry.name);
+      const relativePath = path.relative(rootPath, absoluteFilePath);
+      const lines = fs.readFileSync(absoluteFilePath, "utf8").split("\n");
+
+      lines.forEach((line, index) => {
+        const match = line.match(markerPattern);
+        if (!match) {
+          return;
+        }
+
+        findings.push({
+          marker: match[1].toUpperCase(),
+          filePath: relativePath,
+          line: index + 1,
+          text: line.trim(),
+        });
+      });
+    });
+  });
+
+  return {
+    ok: findings.length === 0,
+    findings,
+  };
+}
+
 function runDashboardAutoStart() {
   const result = startDashboardMainModule({
     dashboardPath: path.join(process.cwd(), "templates", "dashboard.html"),
@@ -306,7 +360,7 @@ function runDashboardAutoStart() {
 }
 
 function runStartRoutine() {
-  console.log("[1/11] Projektstruktur pruefen");
+  console.log("[1/12] Projektstruktur pruefen");
   const structure = validateProjectStructure([
     "package.json",
     "config/messages_de.json",
@@ -341,7 +395,7 @@ function runStartRoutine() {
   ensureRequiredDirectories();
   installDependencies();
 
-  console.log("[4/11] Code formatieren");
+  console.log("[4/12] Code formatieren");
   const format = runCommand("npm", ["run", "format"]);
   if (!format.ok) {
     throw new Error(
@@ -351,7 +405,7 @@ function runStartRoutine() {
 
   verifyFormatting();
 
-  console.log("[6/11] Unit-Tests ausfuehren");
+  console.log("[6/12] Unit-Tests ausfuehren");
   const tests = runCommand("npm", ["test"]);
   if (!tests.ok) {
     throw new Error(
@@ -362,16 +416,28 @@ function runStartRoutine() {
   runRegistryCheck();
   runPluginLoaderCheck();
 
-  console.log("[9/11] Release-Readiness pruefen");
+  console.log("[9/12] Release-Readiness pruefen");
   const release = runReleaseReadinessCheck({ rootPath: process.cwd() });
   if (!release.ok) {
     throw new Error(
       "Release-Readiness fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
     );
   }
-  console.log(`[9/11] ${release.message}`);
+  console.log(`[9/12] ${release.message}`);
 
-  console.log("[10/11] Systemtest ausfuehren");
+  console.log("[10/12] Platzhalter-Scan pruefen");
+  const placeholderCheck = scanPlaceholderMarkers(process.cwd());
+  if (!placeholderCheck.ok) {
+    const first = placeholderCheck.findings[0];
+    throw new Error(
+      `Platzhalter gefunden (${placeholderCheck.findings.length}). ` +
+        `Bitte TODO aktualisieren und Stelle beheben: ${first.filePath}:${first.line} ` +
+        `(${first.marker}). Naechster Schritt: Protokoll oeffnen oder Reparatur starten.`,
+    );
+  }
+  console.log("[10/12] Platzhalter-Scan ohne offene Marker");
+
+  console.log("[11/12] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -381,7 +447,7 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[11/11] Fertig");
+  console.log("[12/12] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -415,5 +481,6 @@ module.exports = {
   createFingerprint,
   readDependencyState,
   resolveDependencySyncPlan,
+  scanPlaceholderMarkers,
   writeDependencyState,
 };

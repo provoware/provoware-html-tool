@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 28
+Iteration: 29
 
 ## Gemacht
 
@@ -74,6 +74,8 @@ Iteration: 28
 
 - Release-Readiness-Check erweitert: validiert jetzt auch 44px-Klickziele, sichtbaren Fokus und zentrale Hilfe-Triplets (`what/data/undo`) in `messages_de.json`.
 - Dashboard-Mockup beim Theme-Feld mit Tooltip + `aria-describedby` auf gleiche Laienfuehrung wie Haupt-Dashboard angehoben.
+
+- Start-Routine um automatischen Platzhalter-Scan erweitert (TODO/FIXME/PLACEHOLDER/DUMMY) mit klarer Datei-/Zeilenmeldung und naechstem Schritt.
 
 ## Next Step
 

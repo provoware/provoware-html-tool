@@ -278,3 +278,7 @@ Zusatzbefehl fuer sichere Format-Pruefung:
 - `npm run format:check`
 
 - Neues Update: Release-Check prueft jetzt auch zentrale Hilfe-Texte und 44px/Fokus-Basics automatisch; Mockup erhielt denselben Theme-Tipp mit Rueckweg.
+
+
+Update 2026-03-01 (Iteration 29): Die Start-Routine hat jetzt einen Pflicht-Check fuer Platzhalter-Scan (TODO/FIXME/PLACEHOLDER/DUMMY) mit klarer Fundstelle und naechstem Schritt.
+Naechster Schritt: Option A weiterfuehren und Boot-View (Phasen/Ampel/Details) stabilisieren.
