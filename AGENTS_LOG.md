@@ -6,3 +6,4 @@
 2026-03-01 | PATCH-028 | Release-Check erweitert + Mockup-Theme-Tipp mit Screenreader-Hinweis | tools/release_readiness_check.js, test/release_readiness_check.test.js, templates/dashboard_mockup.html, Doku-Updates
 
 2026-03-01 | PATCH-029 | Start-Routine Platzhalter-Scan als Pflichtcheck + Unit-Test | tools/start_routine.js, test/start_routine.test.js, Doku-Updates
+- 2026-03-01 | Patch-ID: ITER-030 | Ziel: Iterations-Pipeline um neuen Pflichtschritt erweitern | Dateien: AGENTS.md, CHANGELOG.md, SELFINFO.md, README.txt, todo.txt

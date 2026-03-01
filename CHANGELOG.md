@@ -1,3 +1,9 @@
+## 2026-03-01 – Iterations-Pipeline um Pflichtschritt erweitert
+
+- AGENTS.md erweitert: Die Iterations-Pipeline hat jetzt einen zusaetzlichen Schritt "Autonomer Abschluss-Check" nach der Doku.
+- Der neue Schritt fordert einen erfolgreichen Lauf von `bash start.sh` mit klarer Laien-Rueckmeldung bei Fehlern.
+- Risiko: niedrig, da nur Prozessregel und Reihenfolge in der Projektdokumentation angepasst wurden.
+
 ## 2026-03-01 – AGENTS-Regel fuer Referenzbild + Platzhalter-Scan
 
 - AGENTS.md erweitert: Jede 5. Iteration muss das Vorgabe-Bild im Projektordner analysieren und UI/Layout gezielt am Beispielbild ausrichten.

@@ -66,7 +66,8 @@ Prettier (Auszug): json { "printWidth": 80 }
 Diese Regeln werden zusätzlich in GLOBAL_STANDARDS.md gepflegt (Kurzbegründung + Ausnahmen).
 Jede Iteration prüft: Verstößt der Patch gegen ein Limit? Wenn ja: splitten. 
 2) Iterations‑Pipeline (ultra‑effizient) 
-Ergebnis pro Iteration: Plan → Patch → Checks → Doku → PR‑Summary (immer in dieser Reihenfolge) 
+Ergebnis pro Iteration: Plan → Patch → Checks → Doku →
+Autocheck → PR‑Summary (immer in dieser Reihenfolge) 
 Schritt 0 – Status lesen (Pflicht) 
 SELFINFO.md lesen (Regeln, Version, offene Punkte)
 QUESTIONS_TODO.md lesen (offene Entscheidungen, nicht vermischen) 
@@ -96,7 +97,14 @@ CHANGELOG.md: 1–3 Zeilen (was, warum, Risiko)
 SELFINFO.md: Version/Iteration + Next Step
 README.txt: pro Iteration kurz auf aktuellen Stand bringen (Fortschritt, offene Punkte, neuer naechster Schritt).
 Wenn UI‑Text geändert: messages_de.json + kurzer Eintrag in docs/HILFE.md 
-Schritt 5 – Iterations‑Summary (maximal transparent) 
+Schritt 5 – Autonomer Abschluss-Check (Pflicht, neu)
+`bash start.sh` muss ohne Abbruch laufen und alle Pflichtchecks zeigen.
+Bei Fehlern: klare Laienmeldung + naechster Schritt (Erneut versuchen,
+Reparatur starten, Protokoll oeffnen).
+Automatisch pruefen: Formatierung, Tests, A11y-Basics,
+Abhaengigkeiten und Kontrast je Theme.
+Nur wenn alles gruen ist, darf die Iteration als fertig gelten.
+Schritt 6 – Iterations‑Summary (maximal transparent) 
 Jede Iteration endet mit diesen Blöcken: 
 1) Änderung (kurz): 3–7 Bulletpoints
 2) Dateien/Anker: Liste der berührten Stellen
