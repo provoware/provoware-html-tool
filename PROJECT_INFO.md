@@ -51,3 +51,9 @@
 
 - Fehlertext immer mit den 3 Aktionen: Erneut versuchen, Reparatur starten, Protokoll oeffnen.
 - Fachwoerter kurz erklaeren, z. B. Validierung (Eingabepruefung).
+
+## 2026-03-01 – Neuer Sicherheitsstandard Plugin-Loader
+
+- Plugin-Manifest darf keine doppelte `id` enthalten.
+- Plugin-Modulpfade muessen innerhalb des Projektordners liegen.
+- Fehlertexte bleiben laienklar mit naechstem Schritt (Erneut versuchen, Reparatur starten, Protokoll oeffnen).

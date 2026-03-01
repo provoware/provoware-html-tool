@@ -7,8 +7,8 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 67 %
-- **Erledigt:** 51 Punkte
-- **Offen:** 25 Punkte
+- **Erledigt:** 52 Punkte
+- **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -339,3 +339,6 @@ Update 2026-03-01 (Iteration 29): Die Start-Routine hat jetzt einen Pflicht-Chec
 Naechster Schritt: Option A weiterfuehren und Boot-View (Phasen/Ampel/Details) stabilisieren.
 
 Update 2026-03-01 (Iteration 32): AGENTS.md praezisiert jetzt releasefertige Patches (Implementierung + Fehlerpfad + Test + Doku + Startcheck) und fordert sichtbaren Dateistatus per Name oder `data/file_status_index.json`.
+
+Update 2026-03-01 (Iteration 37): Plugin-Loader wurde weiter gehaertet: doppelte IDs werden blockiert und Modulpfade ausserhalb des Projektordners werden mit klarer Meldung abgewiesen.
+Naechster Schritt: Option C weiterfuehren und Backup-Auswahl-Dialog an den JSON-Store-Backup-Hook anbinden.

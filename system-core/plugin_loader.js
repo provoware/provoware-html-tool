@@ -29,11 +29,19 @@ function assertArray(value, name) {
 function validatePluginManifest(manifest) {
   assertObject(manifest, "Plugin-Manifest");
   assertArray(manifest.plugins, "Plugin-Liste");
+  const knownIds = new Set();
 
   manifest.plugins.forEach((plugin, index) => {
     assertObject(plugin, `Plugin ${index + 1}`);
     assertText(plugin.id, `Plugin ${index + 1} ID`);
     assertText(plugin.modulePath, `Plugin ${index + 1} Modulpfad`);
+
+    if (knownIds.has(plugin.id)) {
+      throw new Error(
+        `Plugin-ID ${plugin.id} ist doppelt. Eingabe pruefen und erneut versuchen.`,
+      );
+    }
+    knownIds.add(plugin.id);
 
     if (typeof plugin.enabled !== "boolean") {
       throw new Error(
@@ -46,6 +54,26 @@ function validatePluginManifest(manifest) {
     ok: true,
     pluginCount: manifest.plugins.length,
   };
+}
+
+function resolvePluginPath(projectRoot, modulePath) {
+  assertText(projectRoot, "Projektpfad");
+  assertText(modulePath, "Plugin-Modulpfad");
+
+  const absoluteProjectRoot = path.resolve(projectRoot);
+  const absolutePluginPath = path.resolve(absoluteProjectRoot, modulePath);
+  const rootWithSeparator = `${absoluteProjectRoot}${path.sep}`;
+
+  if (
+    absolutePluginPath !== absoluteProjectRoot &&
+    !absolutePluginPath.startsWith(rootWithSeparator)
+  ) {
+    throw new Error(
+      "Plugin-Pfad liegt ausserhalb des Projekts. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
+  return absolutePluginPath;
 }
 
 function runPluginLoaderHealthCheck(options) {
@@ -65,7 +93,16 @@ function runPluginLoaderHealthCheck(options) {
       };
     }
 
-    const absolutePath = path.join(options.projectRoot, plugin.modulePath);
+    let absolutePath = "";
+    try {
+      absolutePath = resolvePluginPath(options.projectRoot, plugin.modulePath);
+    } catch (error) {
+      return {
+        id: plugin.id,
+        ok: false,
+        message: `${error.message} Naechster Schritt: Erneut versuchen oder Reparatur starten.`,
+      };
+    }
 
     if (!fs.existsSync(absolutePath)) {
       return {

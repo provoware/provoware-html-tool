@@ -388,3 +388,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur CHANGELOG pflegen (abgelehnt, zu wenig sichtbar fuer Laien).
 **Risiko/Side-Effects:** Kein Laufzeitrisiko, nur bessere Transparenz und Planung.
 **Verknuepft:** Patch-ID PATCH-036
+
+## FIX-20260301-011: Plugin-Loader-Pfadschutz-und-ID-Guard
+
+**Kategorie:** Plugin/Security
+**Symptom (fuer Laien):** Plugins konnten bei falscher Konfiguration verwirrende Fehler zeigen oder aus unsicheren Pfaden geladen werden.
+**Technische Ursache:** Es gab keinen Check auf doppelte Plugin-IDs und keinen harten Projektgrenzen-Check fuer `modulePath`.
+**Trigger:** Duplizierte IDs im Manifest oder relativer Pfad wie `../...` im Modulpfad.
+**Fix (kurz):** Manifest validiert IDs eindeutig; Loader erlaubt nur Modulpfade innerhalb des Projektordners.
+**Geaenderte Dateien/Marker:** `system-core/plugin_loader.js`, `test/plugin_loader.test.js`, `dummys/unsafe-plugin-manifest.json`
+**Tests/Checks:** `npm test -- test/plugin_loader.test.js`, `bash start.sh`
+**Praevention (kuenftig):** Ab jetzt immer ID-Eindeutigkeit und Projektgrenzen fuer Dateipfade in Loadern pruefen.
+**Alternative(n):** Blockliste fuer einzelne Pfade (abgelehnt, zu fehleranfaellig).
+**Risiko/Side-Effects:** Niedrig; strengere Validierung kann fehlerhafte Altmanifeste frueher stoppen (gewollt).
+**Verknuepft:** PATCH-037
