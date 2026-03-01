@@ -29,3 +29,29 @@ test("Todo-Modell validiert Datum", () => {
     model.addTodo({ text: "Fehlerfall", date: "01.03.2026" }),
   );
 });
+
+test("Todo-Modell exportiert und importiert Aufgaben", () => {
+  const source = createTodoModel();
+  source.addTodo({ text: "Persistenz testen", date: "2026-03-02" });
+  const added = source.addTodo({ text: "Archiv testen", date: "2026-03-02" });
+  source.completeTodo(added.todo.id);
+
+  const exported = source.exportState();
+  assert.equal(Array.isArray(exported.active), true);
+  assert.equal(Array.isArray(exported.archive), true);
+
+  const target = createTodoModel();
+  const imported = target.importState(exported);
+
+  assert.equal(imported.ok, true);
+  assert.equal(target.listByDate("2026-03-02").length, 1);
+  assert.equal(target.listArchive().length, 1);
+});
+
+test("Todo-Modell lehnt ungueltigen Import ab", () => {
+  const model = createTodoModel();
+  assert.throws(
+    () => model.importState({ active: "nein", archive: [] }),
+    /ungueltig/,
+  );
+});

@@ -7,7 +7,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 71 %
-- **Erledigt:** 63 Punkte
+- **Erledigt:** 64 Punkte
 - **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -387,3 +387,8 @@ Update Iteration 44:
 - Todo-Listen-Modul (Kalender + Archiv) ist im Dashboard aktiv.
 - Backup-Wiederherstellung nutzt jetzt eine klare Ziel-Datei-Auswahl im Dialog.
 - Naechster Schritt: Persistente Todo-Speicherung vorbereiten.
+
+## Iteration 45 Update
+- Todo-Eintraege bleiben jetzt nach Neustart erhalten, wenn ein Projektordner verbunden ist.
+- Speicherung erfolgt optional in `data/store.json` (aktive + archivierte Aufgaben).
+- Naechster Schritt: Filter (heute/offen/archiv) und Shortcuts fuer schnellere Bedienung.

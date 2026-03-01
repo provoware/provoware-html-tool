@@ -494,6 +494,8 @@
       activeList: document.getElementById("todo-active-list"),
       archiveList: document.getElementById("todo-archive-list"),
       setStatus,
+      setDebug,
+      getProjectDir: () => selectedProjectDir,
     });
   }
 

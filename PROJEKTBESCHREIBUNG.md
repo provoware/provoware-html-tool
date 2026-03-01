@@ -46,3 +46,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Neues Frontend-Modul mit Kalenderdatum, Eingabefeld, Abhak-Button und Archivliste.
 - Ziel-Datei fuer Backup-Restore ist jetzt direkt im Dialog auswaehlbar (mehr Kontrolle, weniger Risiko).
 - A11y-Details: klare Labels, 44px Buttons, Tastaturbedienung ueber Standard-Controls.
+
+## Iteration 45 – Todo-Speicher (optional persistent)
+- Umfang: Aufgaben werden im Browser weiter lokal geführt und optional in `data/store.json` gespeichert.
+- Vorteil: Nach Neustart bleiben Aufgaben erhalten, wenn ein Projektordner aktiv verbunden ist.
+- Technikdetail: `todo_list_model` liefert jetzt `exportState` und `importState` mit Eingabepruefung (Validierung).
+- Fehlerfall: Bei defektem Speicher zeigt das System eine klare Laienmeldung und verweist auf Reparatur oder Protokoll.
