@@ -58,3 +58,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Ziel: Laien sehen schneller den richtigen Aufgabenstatus ohne Suchen.
 - A11y-Plus: Filter ist per Tastatur steuerbar und hat klaren Rueckweg mit Escape.
 - Tool-Umfang: `templates/todo_module.js` steuert Filterlogik, `system-module/todo_list_model.js` liefert offene Aufgaben mit Input/Output-Pruefung.
+
+
+## Iteration 47 – Restore-Sicherheit
+- Restore-Tool erkennt die Ziel-Datei automatisch aus dem Backup-Namen.
+- Nur erlaubte Ziele (`store.json`, `registry.json`) werden angenommen.
+- Vor dem Schreiben bestaetigt der Nutzer den Dateinamen als Sicherheitsabfrage.

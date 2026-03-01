@@ -514,3 +514,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Suchfeld (abgelehnt, fuer Laien weniger klar).
 **Risiko/Side-Effects:** Mehr UI-Elemente im Aufgabenbereich, aber mit Hilfetext abgefedert.
 **Verknüpft:** Patch-ID PATCH-046
+
+## FIX-20260301-001: Restore-Ziel vertauscht
+
+**Kategorie:** Backup/UI
+**Symptom (fuer Laien):** Falsche Ziel-Datei konnte ausgewaehlt werden.
+**Technische Ursache:** Restore-Plan hatte keine harte Paar-Pruefung zwischen Backup und Ziel.
+**Trigger:** Backup `store.backup.json` mit Ziel `registry.json` kombiniert.
+**Fix (kurz):** Auto-Zielerkennung aus Backup-Name + erlaubte Ziel-Liste + Sicherheitsabfrage vor Schreibvorgang.
+**Geaenderte Dateien/Marker:** `templates/backup_restore.js`, `templates/dashboard.js`, `test/backup_restore.test.js`
+**Tests/Checks:** `node --test`, `bash start.sh`
+**Praevention (kuenftig):** Ab jetzt immer Restore-Paare vor dem Schreiben hart validieren und Nutzerbestaetigung verlangen.
+**Alternative(n):** Dialog mit doppeltem Dropdown ohne Auto-Ziel.
+**Risiko/Side-Effects:** Prompt kann im sehr restriktiven Browser blockiert sein.
+**Verknuepft:** PATCH-047

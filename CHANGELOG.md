@@ -1,3 +1,9 @@
+## 2026-03-01 – Restore-Flow mit Auto-Ziel + Sicherheitsabfrage
+
+- Backup-Restore erkennt Ziel-Datei jetzt automatisch aus dem Backup-Namen (`store`/`registry`) und blockiert unpassende Kombinationen.
+- Vor dem Schreiben gibt es eine klare Sicherheitsabfrage: Dateiname muss bestaetigt werden.
+- Mini-Optimierung Hilfe/UX: Sicherheits-Hinweis nennt Aktion und Rueckweg in einfacher Sprache.
+
 ## 2026-03-01 – Todo-Filter mit Tastatur-Shortcuts releasefertig
 
 - Aufgabenbereich hat jetzt einen klaren Filter (Kalendertag, Heute, Offen, Archiv) fuer schnelle Orientierung.

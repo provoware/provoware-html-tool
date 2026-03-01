@@ -22,9 +22,9 @@
   },
   {
     "file": "templates/dashboard.js",
-    "version": "v002",
+    "version": "v003",
     "status": "ready",
-    "updatedAt": "2026-03-01T12:00:00.000Z",
+    "updatedAt": "2026-03-01T13:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -39,6 +39,13 @@
     "version": "v002",
     "status": "ready",
     "updatedAt": "2026-03-01T12:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "templates/backup_restore.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-01T13:00:00.000Z",
     "owner": "codex"
   }
 ]
