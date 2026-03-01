@@ -4,10 +4,14 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {
   assertRunOutput,
+  createFingerprint,
   ensureRequiredDirectories,
   formatStartError,
   getDebugMode,
+  readDependencyState,
+  resolveDependencySyncPlan,
   validateProjectStructure,
+  writeDependencyState,
 } = require("../tools/start_routine");
 
 test("validateProjectStructure meldet fehlende Pfade", () => {
@@ -107,4 +111,55 @@ test("ensureRequiredDirectories erzeugt data und logs", () => {
 
   assert.equal(fs.existsSync(dataDir), true);
   assert.equal(fs.existsSync(logsDir), true);
+});
+
+test("resolveDependencySyncPlan fordert Installation ohne node_modules", () => {
+  const plan = resolveDependencySyncPlan({
+    hasNodeModules: false,
+    previousFingerprint: "abc",
+    currentFingerprint: "abc",
+  });
+
+  assert.equal(plan.shouldInstall, true);
+  assert.equal(plan.reason, "Abhaengigkeiten fehlen");
+});
+
+test("resolveDependencySyncPlan fordert Installation bei Fingerprint-Aenderung", () => {
+  const plan = resolveDependencySyncPlan({
+    hasNodeModules: true,
+    previousFingerprint: "alt",
+    currentFingerprint: "neu",
+  });
+
+  assert.equal(plan.shouldInstall, true);
+  assert.equal(plan.reason, "Abhaengigkeiten sind veraltet");
+});
+
+test("resolveDependencySyncPlan erkennt aktuelle Abhaengigkeiten", () => {
+  const plan = resolveDependencySyncPlan({
+    hasNodeModules: true,
+    previousFingerprint: "gleich",
+    currentFingerprint: "gleich",
+  });
+
+  assert.equal(plan.shouldInstall, false);
+  assert.equal(plan.reason, "Abhaengigkeiten aktuell");
+});
+
+test("writeDependencyState und readDependencyState arbeiten zusammen", () => {
+  const dataDir = path.join(process.cwd(), "data");
+  const statePath = path.join(dataDir, "dependency_state.test.json");
+  const fingerprint = createFingerprint("test-inhalt");
+
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+
+  writeDependencyState(statePath, fingerprint);
+  const state = readDependencyState(statePath);
+
+  assert.equal(state.fingerprint, fingerprint);
+  assert.match(state.updatedAt, /\d{4}-\d{2}-\d{2}T/);
+
+  fs.rmSync(statePath, { force: true });
 });

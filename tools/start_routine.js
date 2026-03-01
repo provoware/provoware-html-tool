@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require("node:fs");
 const path = require("node:path");
+const crypto = require("node:crypto");
 const { spawnSync } = require("node:child_process");
 const {
   runRegistryHealthCheckWithOptions,
@@ -134,20 +135,116 @@ function ensureRequiredDirectories() {
   console.log("[2/11] Datenordner geprueft");
 }
 
+function createFingerprint(text) {
+  assertText(text, "Fingerprint-Quelle");
+  return crypto.createHash("sha256").update(text).digest("hex");
+}
+
+function readDependencyState(statePath) {
+  assertText(statePath, "Status-Datei");
+  if (!fs.existsSync(statePath)) {
+    return null;
+  }
+
+  const raw = fs.readFileSync(statePath, "utf8");
+  const parsed = JSON.parse(raw);
+  if (!parsed || typeof parsed.fingerprint !== "string") {
+    throw new Error(
+      "Abhaengigkeits-Status ist ungueltig. Protokoll oeffnen und Reparatur starten.",
+    );
+  }
+
+  return parsed;
+}
+
+function writeDependencyState(statePath, fingerprint) {
+  assertText(statePath, "Status-Datei");
+  assertText(fingerprint, "Fingerprint");
+  fs.writeFileSync(
+    statePath,
+    JSON.stringify(
+      {
+        fingerprint,
+        updatedAt: new Date().toISOString(),
+      },
+      null,
+      2,
+    ),
+    "utf8",
+  );
+
+  if (!fs.existsSync(statePath)) {
+    throw new Error(
+      "Abhaengigkeits-Status konnte nicht gespeichert werden. Erneut versuchen.",
+    );
+  }
+}
+
+function resolveDependencySyncPlan({
+  hasNodeModules,
+  previousFingerprint,
+  currentFingerprint,
+}) {
+  if (typeof hasNodeModules !== "boolean") {
+    throw new Error(
+      "Abhaengigkeits-Status fehlt. Bitte Eingabe pruefen und erneut versuchen.",
+    );
+  }
+
+  assertText(currentFingerprint, "Aktueller Fingerprint");
+  if (!hasNodeModules) {
+    return {
+      shouldInstall: true,
+      reason: "Abhaengigkeiten fehlen",
+    };
+  }
+
+  if (!previousFingerprint) {
+    return {
+      shouldInstall: true,
+      reason: "Abhaengigkeits-Status fehlt",
+    };
+  }
+
+  return {
+    shouldInstall: previousFingerprint !== currentFingerprint,
+    reason:
+      previousFingerprint !== currentFingerprint
+        ? "Abhaengigkeiten sind veraltet"
+        : "Abhaengigkeiten aktuell",
+  };
+}
+
 function installDependencies() {
-  if (fs.existsSync("node_modules")) {
-    console.log("[3/11] Abhaengigkeiten vorhanden");
+  const lockPath = path.join(process.cwd(), "package-lock.json");
+  const packagePath = path.join(process.cwd(), "package.json");
+  const lockSource = fs.existsSync(lockPath)
+    ? fs.readFileSync(lockPath, "utf8")
+    : fs.readFileSync(packagePath, "utf8");
+  const currentFingerprint = createFingerprint(lockSource);
+  const statePath = path.join(process.cwd(), "data", "dependency_state.json");
+  const previousState = readDependencyState(statePath);
+  const plan = resolveDependencySyncPlan({
+    hasNodeModules: fs.existsSync("node_modules"),
+    previousFingerprint: previousState?.fingerprint || "",
+    currentFingerprint,
+  });
+
+  if (!plan.shouldInstall) {
+    console.log("[3/11] Abhaengigkeiten aktuell");
     return { ok: true };
   }
 
-  console.log("[3/11] Abhaengigkeiten fehlen. Installation startet");
-  const install = runCommand("npm", ["install"]);
+  console.log(`[3/11] ${plan.reason}. Installation startet`);
+  const install = runCommand("npm", ["install", "--no-audit", "--no-fund"]);
 
   if (!install.ok) {
     throw new Error(
       "Installieren fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
     );
   }
+
+  writeDependencyState(statePath, currentFingerprint);
 
   return { ok: true };
 }
@@ -315,4 +412,8 @@ module.exports = {
   assertRunOutput,
   ensureRequiredDirectories,
   verifyFormatting,
+  createFingerprint,
+  readDependencyState,
+  resolveDependencySyncPlan,
+  writeDependencyState,
 };

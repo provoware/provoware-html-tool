@@ -290,3 +290,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Hinweis im Handbuch (abgelehnt, zu spaet sichtbar).
 **Risiko/Side-Effects:** Ein zusaetzlicher Guide-Schritt, keine Logik-Aenderung.
 **Verknüpft:** Patch-ID local-019
+
+## FIX-20260301-020: Lockfile-Fingerprint-fuer-Abhaengigkeits-Sync
+
+**Kategorie:** Update/Tests
+**Symptom (fuer Laien):** Start wirkt erfolgreich, spaeter treten aber Paketfehler auf.
+**Technische Ursache:** Es wurde nur geprueft, ob `node_modules` existiert, nicht ob Paketstaende veraltet sind.
+**Trigger:** `package-lock.json` oder `package.json` wurde geaendert.
+**Fix (kurz):** Start-Routine vergleicht einen Fingerprint (Hash) vom Lockfile/Paketstand und installiert bei Abweichung automatisch neu.
+**Geänderte Dateien/Marker:** tools/start_routine.js, test/start_routine.test.js
+**Tests/Checks:** npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer Paketstand gegen Lockfile-Fingerprint pruefen, nicht nur Ordner-Existenz.
+**Alternative(n):** Immer `npm ci` ausfuehren (strenger, aber langsamer).
+**Risiko/Side-Effects:** Niedrig, da nur Install-Entscheidung in der Start-Routine erweitert wurde.
+**Verknüpft:** Patch-ID local-020
