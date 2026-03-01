@@ -14,6 +14,7 @@
 - **Wie mache ich rückgängig?** Sie können die Reihenfolge sofort per Pfeil-Buttons oder Drag&Drop wieder ändern und das Theme jederzeit zurück auf Hell setzen.
 - **Fachwort kurz erklärt:** _Auto-Reconnect_ bedeutet automatische Wiederverbindung beim nächsten Start.
 - **Barrierefreiheit:** Fokus ist sichtbar, Buttons sind groß (mindestens 44px) und es gibt Kontrast+ als Theme.
+- **Modulflaeche:** Der Hauptbereich startet leer. Aktivierte Module erscheinen als gleichgroße Raster-Karten in Auswahl-Reihenfolge und haben Knöpfe für Maximieren, Minimieren und Ausblenden.
 
 ## Plugin-Loader
 

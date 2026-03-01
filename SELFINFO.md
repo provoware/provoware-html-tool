@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 14
+Iteration: 15
 
 ## Gemacht
 
@@ -30,6 +30,8 @@ Iteration: 14
 
 - Dashboard-Layout in `templates/dashboard.html` visuell an die Referenz angenaehert (Topbar, 3-Spalten, Modul-Kacheln, Quick-Links).
 - A11y-Details im Layout ausgebaut: sichtbarer Fokus, Kontrast+ konsistent, 44px-Bedienelemente und klare Tastaturhinweise.
+
+- Hauptbereich als leere, zentrierte Modul-Rasterflaeche umgebaut: Aktivierung in Auswahl-Reihenfolge, inklusive Maximieren/Minimieren/Ausblenden pro Modul.
 
 ## Next Step
 

@@ -178,3 +178,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Farben anpassen ohne Strukturwechsel (abgelehnt, nicht ausreichend).
 **Risiko/Side-Effects:** Reines Template-Update, JS-Logik bleibt unveraendert.
 **Verknuepft:** Patch-ID local-011
+
+## FIX-20260301-006: Flexible-Modulraster-im-Hauptbereich
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Der Hauptbereich war statisch und bot keine klare Modulsteuerung.
+**Technische Ursache:** Es gab nur feste Beispiel-Kacheln ohne Modulzustand.
+**Trigger:** Wunsch nach leer startender Modulflache mit Panel-Steuerung.
+**Fix (kurz):** Modul-Workspace als eigenes Template-Skript ergänzt: Auswahl-Reihenfolge, Maximieren, Minimieren, Ausblenden, flexible Rastergröße und Position.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, templates/module_workspace.js, templates/dashboard.css, templates/dashboard.js
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer interaktive UI-Zustaende in eigenes Modul auslagern und leeren Initialzustand testen.
+**Alternative(n):** Vollstaendig in dashboard.js belassen (abgelehnt wegen Dateigroesse/Wartbarkeit).
+**Risiko/Side-Effects:** Zusätzliche Template-JS-Datei muss beim Laden enthalten sein.
+**Verknuepft:** Patch-ID local-012
