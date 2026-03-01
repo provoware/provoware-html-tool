@@ -500,3 +500,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur SessionStorage (verworfen, da nicht projektordnerbasiert).
 **Risiko/Side-Effects:** Niedrig; ohne Projektordner bleibt Verhalten wie vorher (nur im Speicher).
 **Verknuepft:** PATCH-045
+
+## FIX-20260301-012: Todo-Filter-ohne-Umwege
+
+**Kategorie:** UI/A11y
+**Symptom (für Laien):** Offene Aufgaben waren bei vielen Tagen schwer zu finden.
+**Technische Ursache:** Es gab nur einen Tagesblick ohne schnellen Listenfilter.
+**Trigger:** Mehrere offene Aufgaben ueber verschiedene Tage.
+**Fix (kurz):** Filteroptionen (Kalendertag/Heute/Offen/Archiv) + Escape-Rueckweg eingebaut.
+**Geänderte Dateien/Marker:** templates/dashboard.html, templates/todo_module.js, system-module/todo_list_model.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer bei Listenmodulen einen klaren Filter + Tastatur-Rueckweg mitplanen.
+**Alternative(n):** Nur Suchfeld (abgelehnt, fuer Laien weniger klar).
+**Risiko/Side-Effects:** Mehr UI-Elemente im Aufgabenbereich, aber mit Hilfetext abgefedert.
+**Verknüpft:** Patch-ID PATCH-046

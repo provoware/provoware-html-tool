@@ -4,10 +4,14 @@
 - Neu (2026-03-01): Pro Iteration werden Platzhalter/Teilcode-Stellen systematisch gesucht, dokumentiert und als TODO-Folgeschritte geplant.
 
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
+## Iteration-Update 2026-03-01
+- Offener Punkt abgeschlossen: Todo-Filter (heute/offen/archiv) mit Escape-Rueckweg ist releasefertig.
+- Naechster Schritt: Restore-Flow fuer store/registry mit Sicherheitsabfrage erweitern.
+
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 71 %
-- **Erledigt:** 64 Punkte
+- **Erledigt:** 65 Punkte
 - **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

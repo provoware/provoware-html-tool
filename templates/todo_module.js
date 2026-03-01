@@ -101,6 +101,7 @@
     const textInput = assertElement(options.textInput, "Aufgabenfeld");
     const addButton = assertElement(options.addButton, "Speicher-Knopf");
     const resetButton = assertElement(options.resetButton, "Heute-Knopf");
+    const filterInput = assertElement(options.filterInput, "Filter-Auswahl");
     const activeList = assertElement(options.activeList, "Aktive Liste");
     const archiveList = assertElement(options.archiveList, "Archivliste");
     const setStatus = assertElement(options.setStatus, "Statusfunktion");
@@ -160,14 +161,31 @@
       }
     }
 
-    function renderActive() {
+    function getFilteredActiveTodos() {
+      const mode = filterInput.value;
       const date = dateInput.value;
-      const activeTodos = model.listByDate(date);
+      if (mode === "today") {
+        return model.listByDate(todayIso());
+      }
+      if (mode === "archive") {
+        return [];
+      }
+      return mode === "open" ? model.listActive() : model.listByDate(date);
+    }
+
+    function getArchiveHint(mode) {
+      return mode === "archive"
+        ? "Archiv gefiltert. Naechster Schritt: Aufgabe in der Liste pruefen."
+        : "Archiv zeigt erledigte Aufgaben. Filter kann auf Archiv wechseln.";
+    }
+
+    function renderActive() {
+      const activeTodos = getFilteredActiveTodos();
       activeList.innerHTML = "";
       if (activeTodos.length === 0) {
         const item = document.createElement("li");
         item.textContent =
-          "Keine Aufgabe fuer den Tag. Neue Aufgabe speichern.";
+          "Keine Aufgabe im aktuellen Filter. Erneut versuchen oder Filter wechseln.";
         activeList.appendChild(item);
         return;
       }
@@ -195,12 +213,19 @@
     }
 
     function renderArchive() {
+      const mode = filterInput.value;
       const archiveTodos = model.listArchive();
       archiveList.innerHTML = "";
+      if (mode !== "archive") {
+        const item = document.createElement("li");
+        item.textContent = getArchiveHint(mode);
+        archiveList.appendChild(item);
+        return;
+      }
       if (archiveTodos.length === 0) {
         const item = document.createElement("li");
         item.textContent =
-          "Archiv ist leer. Erledigte Aufgaben erscheinen hier.";
+          "Archiv ist leer. Erneut versuchen oder neue Aufgabe abschliessen.";
         archiveList.appendChild(item);
         return;
       }
@@ -235,8 +260,35 @@
       }
     }
 
+    function onFilterChange() {
+      const mode = filterInput.value;
+      renderAll();
+      if (mode === "today") {
+        setStatus(
+          "Filter zeigt heute. Naechster Schritt: Aufgabe speichern oder abhaken.",
+        );
+        return;
+      }
+      if (mode === "open") {
+        setStatus(
+          "Filter zeigt alle offenen Aufgaben. Naechster Schritt: Aufgabe abhaken.",
+        );
+        return;
+      }
+      if (mode === "archive") {
+        setStatus(
+          "Filter zeigt Archiv. Naechster Schritt: Protokoll oeffnen oder zurueck auf offen.",
+        );
+        return;
+      }
+      setStatus(
+        "Filter zeigt gewaehlten Kalendertag. Naechster Schritt: Datum pruefen.",
+      );
+    }
+
     function onResetDate() {
       dateInput.value = todayIso();
+      filterInput.value = "date";
       renderAll();
       setStatus(
         "Datum auf heute gesetzt. Naechster Schritt: Neue Aufgabe speichern.",
@@ -246,7 +298,15 @@
     addButton.addEventListener("click", onAdd);
     resetButton.addEventListener("click", onResetDate);
     dateInput.addEventListener("change", renderAll);
+    filterInput.addEventListener("change", onFilterChange);
+    filterInput.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        filterInput.value = "date";
+        onFilterChange();
+      }
+    });
     dateInput.value = todayIso();
+    filterInput.value = "date";
     restoreState().finally(() => {
       renderAll();
     });

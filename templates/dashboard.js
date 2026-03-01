@@ -491,6 +491,7 @@
       textInput: document.getElementById("todo-input"),
       addButton: document.getElementById("todo-add"),
       resetButton: document.getElementById("todo-reset-date"),
+      filterInput: document.getElementById("todo-filter"),
       activeList: document.getElementById("todo-active-list"),
       archiveList: document.getElementById("todo-archive-list"),
       setStatus,

@@ -23,3 +23,5 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-01 | PATCH-043 | Backup-Dialog mit echter Wiederherstellung via Projektordner-Handle verbunden | templates/backup_restore.js, templates/dashboard.js, templates/dashboard.html, tools/release_readiness_check.js, test/backup_restore.test.js, test/release_readiness_check.test.js
 - PATCH-044 | Todo-Liste + klare Ziel-Datei-Auswahl fuer Restore | templates/dashboard.html, templates/dashboard.js, templates/todo_module.js, system-module/todo_list_model.js, test/todo_list_model.test.js
 2026-03-01 | PATCH-045 | Todo-Eintraege optional persistent in data/store.json speichern und beim Start laden | templates/todo_module.js,system-module/todo_list_model.js,templates/dashboard.js,test/todo_list_model.test.js,data/store.json,Doku-Updates
+
+2026-03-01 | PATCH-046 | Todo-Filter (heute/offen/archiv) mit Enter/Escape + Inline-Hilfe releasefertig | templates/dashboard.html, templates/dashboard.js, templates/todo_module.js, system-module/todo_list_model.js, test/todo_list_model.test.js, Doku-Updates
