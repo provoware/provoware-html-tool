@@ -766,3 +766,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur manuelles Markieren/Kopieren (nicht empfohlen).
 **Risiko/Side-Effects:** Clipboard kann browserabhaengig blockiert sein, daher klare Fehlermeldung mit manuellem Rueckweg.
 **Verknüpft:** Iteration-65
+
+## FIX-20260303-004: Lyrics-Kurzguide-und-Kopierhilfe
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Bei Songtexten war unklar, wie Enter/Space genutzt wird; bei Clipboard-Sperre fehlte eine sichtbare Hilfe.
+**Technische Ursache:** Guide hatte keine Schrittliste und Lesemodus zeigte keinen eigenen Hilfetext fuer den Fehlerpfad.
+**Trigger:** Nutzer nutzt Vorlagen nur per Tastatur oder Browser blockiert `clipboard.writeText`.
+**Fix (kurz):** Kurzguide um 2-Schritt-Liste erweitert und Lesemodus um einblendbare Kopierhilfe mit manuellem Rueckweg ergaenzt.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, templates/quick_store_module.js, templates/dashboard.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei Copy-Aktionen einen sichtbaren manuellen Rueckweg im gleichen Dialog anbieten.
+**Alternative(n):** Nur Statusmeldung ohne Inline-Hilfe (verworfen).
+**Risiko/Side-Effects:** Niedrig, da nur Lyrics-Bereich betroffen.
+**Verknuepft:** PATCH-067

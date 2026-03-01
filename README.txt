@@ -59,9 +59,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 86 %
-- **Erledigt:** 102 Punkte
-- **Offen:** 16 Punkte
+- **Fortschritt:** 82 %
+- **Erledigt:** 107 Punkte
+- **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
