@@ -142,7 +142,32 @@
               <button type="button" id="help-retry">Erneut versuchen</button>
               <button type="button" id="help-repair">Reparatur starten</button>
               <button type="button" id="help-log">Protokoll öffnen</button>
+              <button type="button" id="help-backup">Backup auswählen</button>
             </div>
+            <dialog
+              id="backup-dialog"
+              aria-labelledby="backup-dialog-title"
+              aria-describedby="backup-dialog-help"
+            >
+              <h4 id="backup-dialog-title">Backup-Auswahl</h4>
+              <p id="backup-dialog-help" class="field-tip">
+                Was macht das? Sie sehen hier den 5-Punkte-Check direkt im
+                Dialog. So sehen Sie sofort, wann ein Punkt release-fertig ist.
+              </p>
+              <ol id="backup-checklist" class="backup-checklist" role="list">
+                <li>Funktion ist fertig und pruefbar.</li>
+                <li>
+                  Fehlerweg ist klar: Erneut versuchen, Reparatur starten,
+                  Protokoll oeffnen.
+                </li>
+                <li>Test oder Check laeuft grün.</li>
+                <li>`bash start.sh` laeuft ohne Abbruch.</li>
+                <li>Doku ist aktualisiert: README, CHANGELOG und todo.</li>
+              </ol>
+              <div class="help-actions" aria-label="Backup-Dialog Aktionen">
+                <button type="button" id="backup-dialog-close">Zurueck</button>
+              </div>
+            </dialog>
           </article>
         </aside>
       </section>

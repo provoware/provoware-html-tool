@@ -6,9 +6,9 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 66 %
-- **Erledigt:** 53 Punkte
-- **Offen:** 27 Punkte
+- **Fortschritt:** 68 %
+- **Erledigt:** 55 Punkte
+- **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -26,8 +26,8 @@ Stand: automatisch aus `todo.txt` gezaehlt.
 
 ## Iteration-Update (2026-03-01)
 
-- Start-Routine synchronisiert den Fortschritt im README jetzt automatisch aus `todo.txt` (Prozent, erledigt, offen).
-- Hilfe-Panel zeigt weiterhin einen kurzen 3-Schritt-Leitfaden direkt im Bereich "Hilfe und Diagnose".
+- Backup-Dialog zeigt jetzt den 5-Punkte-Release-Check direkt als Inline-Hilfe.
+- Release-Readiness prueft jetzt auch die Doku-Regel (README/CHANGELOG/todo).
 - Naechster Schritt: Backup-Auswahl-Dialog direkt mit dem Backup-Hook verbinden.
 
 ## Kann man einzelne offene Punkte schon release-fertig abschliessen?

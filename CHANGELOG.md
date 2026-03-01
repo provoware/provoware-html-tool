@@ -1,3 +1,9 @@
+## 2026-03-01 – Backup-Dialog Inline-Check + Doku-Regel im Release-Check
+
+- Dashboard zeigt im Backup-Dialog jetzt den 5-Punkte-Release-Check als direkte Inline-Hilfe fuer schnelle Freigabeentscheidung.
+- Release-Readiness prueft jetzt automatisiert auch die Doku-Regel: README, CHANGELOG und todo muessen aktualisierbar und auffindbar sein.
+- Risiko: niedrig, da UI-Dialog + statische Readiness-Pruefung erweitert wurden.
+
 ## 2026-03-01 – Release-Fertig pro Einzelpunkt klar definiert
 
 - README um einen kurzen Laien-Check erweitert, wann ein einzelner offener Punkt schon release-fertig ist.

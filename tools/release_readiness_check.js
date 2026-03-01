@@ -91,6 +91,9 @@ function runReleaseReadinessCheck(options = {}) {
   );
   const messagesRaw = readUtf8(path.join(rootPath, "config/messages_de.json"));
   const messages = parseJsonText(messagesRaw, "messages_de.json");
+  const readmeText = readUtf8(path.join(rootPath, "README.txt"));
+  const changelogText = readUtf8(path.join(rootPath, "CHANGELOG.md"));
+  const todoText = readUtf8(path.join(rootPath, "todo.txt"));
 
   const checks = [
     checkIncludes(
@@ -117,6 +120,26 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardHtml,
       'id="help-log"',
       "Button 'Protokoll oeffnen' vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'id="help-backup"',
+      "Button 'Backup auswählen' vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'id="backup-dialog"',
+      "Backup-Dialog ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'id="backup-checklist"',
+      "5-Punkte-Check im Backup-Dialog ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      "README, CHANGELOG und todo",
+      "Backup-Hilfe zeigt Doku-Pflicht im 5-Punkte-Check",
     ),
     checkIncludes(
       dashboardHtml,
@@ -188,6 +211,26 @@ function runReleaseReadinessCheck(options = {}) {
 
   checks.push(...checkMessageTriplet(messages?.help, "help"));
   checks.push(...checkMessageTriplet(messages?.dashboard, "dashboard"));
+
+  checks.push(
+    checkIncludes(
+      readmeText,
+      "Doku ist kurz aktualisiert (README, CHANGELOG, todo)",
+      "README dokumentiert Doku-Pflicht im Release-Check",
+    ),
+  );
+  checks.push(
+    checkIncludes(changelogText, "README", "CHANGELOG enthaelt README-Bezug"),
+  );
+  checks.push(
+    checkIncludes(changelogText, "todo", "CHANGELOG enthaelt todo-Bezug"),
+  );
+  checks.push(
+    checkIncludes(todoText, "README", "todo enthaelt README-Updatepunkt"),
+  );
+  checks.push(
+    checkIncludes(todoText, "CHANGELOG", "todo enthaelt CHANGELOG-Updatepunkt"),
+  );
 
   const failed = checks.filter((item) => !item.ok).map((item) => item.message);
   return {

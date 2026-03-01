@@ -31,6 +31,8 @@ test("runReleaseReadinessCheck prueft A11y und Themes", () => {
     "Textbereich 'dashboard.what' ist gesetzt",
     "Textbereich 'dashboard.data' ist gesetzt",
     "Textbereich 'dashboard.undo' ist gesetzt",
+    "5-Punkte-Check im Backup-Dialog ist vorhanden",
+    "README dokumentiert Doku-Pflicht im Release-Check",
   ];
 
   for (const message of requiredMessages) {

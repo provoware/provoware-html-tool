@@ -43,6 +43,9 @@
   const helpRetry = document.getElementById("help-retry");
   const helpRepair = document.getElementById("help-repair");
   const helpLog = document.getElementById("help-log");
+  const helpBackup = document.getElementById("help-backup");
+  const backupDialog = document.getElementById("backup-dialog");
+  const backupDialogClose = document.getElementById("backup-dialog-close");
 
   const ensureMessage =
     window.DashboardHelp?.ensureMessage || ((m, f) => m || f);
@@ -93,6 +96,11 @@
       }
 
       if (event.key !== "Escape") {
+        return true;
+      }
+
+      if (backupDialog?.open) {
+        closeBackupDialog();
         return true;
       }
 
@@ -300,6 +308,28 @@
     );
   });
 
+  function openBackupDialog() {
+    if (!backupDialog || typeof backupDialog.showModal !== "function") {
+      setStatus("Backup-Dialog fehlt. Naechster Schritt: Reparatur starten.");
+      return false;
+    }
+    backupDialog.showModal();
+    setStatus(
+      "Backup-Auswahl geoeffnet. Naechster Schritt: 5-Punkte-Check lesen.",
+    );
+    return true;
+  }
+
+  function closeBackupDialog() {
+    if (!backupDialog || typeof backupDialog.close !== "function") {
+      setStatus("Backup-Dialog fehlt. Naechster Schritt: Reparatur starten.");
+      return false;
+    }
+    backupDialog.close();
+    setStatus("Dialog geschlossen. Naechster Schritt: Erneut versuchen.");
+    return true;
+  }
+
   function onHelpAction(actionKey) {
     const actionMessage = window.DashboardHelp?.getHelpActionMessage(actionKey);
     setStatus(`${actionMessage} Naechster Schritt: Meldung lesen.`);
@@ -308,6 +338,12 @@
   helpRetry.addEventListener("click", () => onHelpAction("retry"));
   helpRepair.addEventListener("click", () => onHelpAction("repair"));
   helpLog.addEventListener("click", () => onHelpAction("log"));
+  helpBackup.addEventListener("click", openBackupDialog);
+  backupDialogClose.addEventListener("click", closeBackupDialog);
+  backupDialog.addEventListener("cancel", (event) => {
+    event.preventDefault();
+    closeBackupDialog();
+  });
 
   debugButton.addEventListener("click", () => {
     debugOutput.hidden = !debugOutput.hidden;
@@ -332,6 +368,9 @@
     [debugButton, "Debug-Knopf"],
     [guideList, "Hilfe-Liste"],
     [themeTooltip, "Theme-Hinweis"],
+    [helpBackup, "Backup-Knopf"],
+    [backupDialog, "Backup-Dialog"],
+    [backupDialogClose, "Backup-Dialog-Zurueck"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   loadMessages().then((ui) => {

@@ -408,3 +408,14 @@ Frage: Welche Option A/B/C ist als nächstes dran?
 - Konkrete Lösungsvorschläge anzeigen.
 
 15) Gib als letztes ier zwei verbessernde oder optimierende empfehlungen für die nächsten schritte nummeriert aus.
+
+
+## 18) Entwicklungs-Effizienz (neu)
+- PatchSpec immer zuerst als 7-Punkte-Block notieren (Ziel, Scope IN/OUT, Dateien, Risiko, Akzeptanz, Checks, Rollback).
+- Pro Iteration maximal 1 Hauptziel + 1 Mini-Optimierung, damit Review schnell bleibt.
+- Pflicht-Kurzbefehle je Iteration:
+  - `npm run format`
+  - `node --test`
+  - `bash start.sh`
+- Bei UI-Dialogen immer Inline-Hilfe direkt im Dialog zeigen (nicht nur in README).
+- Release-Readiness muss Doku-Pflicht pruefen: README, CHANGELOG, todo.
