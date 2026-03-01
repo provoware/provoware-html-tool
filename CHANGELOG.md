@@ -115,6 +115,13 @@
 
 # CHANGELOG
 
+## 2026-03-01 – Boot-View-Statusbereich stabilisiert
+
+- Dashboard zeigt jetzt einen klaren Boot-Statusbereich mit 4 Phasen und Ampel-Texten (Gruen/Gelb/Rot) fuer Laien.
+- Neue Boot-Status-Logik ist als eigenes Modul ausgelagert (`templates/boot_status.js`) mit Input-/Output-Pruefung.
+- Start- und Release-Checks wurden erweitert (Dateipflicht + Boot-Status im Release-Readiness-Check).
+- Risiko: niedrig, da nur Dashboard-Statuspfad, Checks und Doku erweitert wurden.
+
 ## 2026-03-01 – Platzhalter-Scan praeziser + Help-Panel Tastaturhinweis
 
 - Start-Routine-Scan durchsucht jetzt auch Unterordner und zaehlt Marker nur in echten Kommentar-/Aufgabenzeilen, damit normale Code-Strings keine Fehlalarme ausloesen.

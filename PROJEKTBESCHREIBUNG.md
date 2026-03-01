@@ -76,3 +76,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Das Restore-Tool prueft die Sicherheitsbestaetigung jetzt ueber eine zentrale Funktion.
 - Vorteil: Gleiches Verhalten in UI und Tests, dadurch weniger Risiko bei kritischem Datei-Schreiben.
 - Tool-Umfang: `templates/backup_restore.js` bietet eine klare Pruef-API fuer Prompt-Eingaben.
+
+
+## Iteration 50 – Boot-View-Ampelstatus
+- Der Startbereich zeigt jetzt 4 feste Boot-Phasen mit Ampel und Text fuer klare Orientierung.
+- Das neue Tool `templates/boot_status.js` kapselt die Statuslogik modular fuer bessere Wartbarkeit.
+- Zusatznutzen: Bei Ordnerfehlern wird die passende Phase rot markiert und ein klarer naechster Schritt genannt.

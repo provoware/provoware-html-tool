@@ -39,6 +39,7 @@ test("Dashboard-Dateien sind als Pflichtpfade vorhanden", () => {
     "templates/dashboard.html",
     "templates/dashboard.js",
     "templates/dashboard_help.js",
+    "templates/boot_status.js",
     "templates/module_workspace.js",
     "system-module/dashboard_model.js",
     "test/dashboard_model.test.js",
