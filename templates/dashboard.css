@@ -43,6 +43,10 @@
   --module-analytics-border: #ffd24d;
   --module-support-bg: #122b24;
   --module-support-border: #5be8b4;
+  --app-base-width: 800px;
+  --app-base-height: 600px;
+  --app-max-width: 1920px;
+  --app-max-height: 1080px;
 }
 
 [data-theme="dark"] {
@@ -184,7 +188,10 @@ body {
 }
 
 .wrap {
-  max-width: 1440px;
+  width: min(100%, var(--app-max-width));
+  min-width: min(100%, var(--app-base-width));
+  min-height: min(calc(100dvh - (var(--space-2) * 2)), var(--app-base-height));
+  max-height: var(--app-max-height);
   margin: var(--space-2) auto var(--space-3);
   padding: 0 var(--space-2);
   display: grid;
@@ -305,14 +312,15 @@ a:focus-visible {
 }
 
 .layout {
-  --left-rail-width: 260px;
-  --right-rail-width: 280px;
+  --left-rail-width: clamp(220px, 22vw, 320px);
+  --right-rail-width: clamp(220px, 24vw, 340px);
   margin-top: var(--space-2);
+  position: relative;
   display: grid;
   grid-template-columns:
     minmax(220px, var(--left-rail-width))
     14px
-    1fr
+    minmax(420px, 1fr)
     14px
     minmax(220px, var(--right-rail-width));
   gap: var(--space-2);
@@ -378,6 +386,28 @@ a:focus-visible {
   border-radius: var(--radius-xl);
   padding: var(--space-2);
   background: color-mix(in srgb, var(--bg) 68%, #040913);
+  min-height: min(70dvh, 920px);
+}
+
+.rail-edge-toggle {
+  position: absolute;
+  top: calc(50% - 24px);
+  z-index: 2;
+  min-height: var(--btn-height-default);
+  min-width: 44px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--topbar) 74%, var(--panel));
+  color: var(--topbar-fg);
+  font-weight: 700;
+}
+
+.rail-edge-toggle-left {
+  left: calc(var(--space-2) * -1);
+}
+
+.rail-edge-toggle-right {
+  right: calc(var(--space-2) * -1);
 }
 
 .left-rail,
@@ -896,7 +926,8 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .layout-splitter {
+  .layout-splitter,
+  .rail-edge-toggle {
     display: none;
   }
 }
@@ -954,9 +985,8 @@ a:focus-visible {
 
 .module-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  aspect-ratio: 1 / 1;
-  min-height: min(62vh, 720px);
+  grid-template-rows: repeat(3, minmax(120px, 1fr));
+  min-height: clamp(360px, 62dvh, 860px);
 }
 
 .module-slot {
@@ -1025,12 +1055,18 @@ a:focus-visible {
 @media (max-width: 1100px) {
   .module-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(110px, 1fr));
   }
 }
 
 @media (max-width: 700px) {
+  .wrap {
+    min-height: auto;
+  }
+
   .module-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: repeat(9, minmax(100px, auto));
   }
 }
 
@@ -1090,4 +1126,17 @@ a:focus-visible {
 .support-empty-toggle:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;
+}
+
+
+@media (orientation: portrait) and (min-width: 900px) {
+  .wrap {
+    width: min(96vw, var(--app-max-width));
+    min-height: min(94dvh, 1600px);
+    max-height: none;
+  }
+
+  .layout {
+    grid-template-columns: minmax(230px, 20vw) 12px 1fr 12px minmax(230px, 22vw);
+  }
 }
