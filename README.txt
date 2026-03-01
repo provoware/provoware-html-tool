@@ -1,3 +1,12 @@
+## Update Iteration 72 (2026-03-03)
+
+Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
+
+- Profil-Status-Chip zeigt jetzt "Letzte Nutzung" mit Zeitstempel.
+- Fokusziel-Shortcut ist jetzt absichtlich sicher: Alt+T/Alt+I statt einzelner Buchstaben.
+- Enter im Fokusziel-Feld bestaetigt die Auswahl mit direkter Rueckmeldung.
+- Naechster Schritt: Shortcut-Konflikte im Startcheck automatisch sichtbar machen.
+
 ## Update Iteration 71 (2026-03-03)
 
 Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
@@ -75,7 +84,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 84 %
-- **Erledigt:** 118 Punkte
+- **Erledigt:** 120 Punkte
 - **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

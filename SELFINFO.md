@@ -1,3 +1,11 @@
+## Iteration 72 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Profil-Chip mit letzter Nutzung + sichere Fokusziel-Shortcuts).
+- Ergebnis: Songtext-Profil-Chip zeigt jetzt die letzte Nutzung mit laienfreundlichem Zeitstempel.
+- Ergebnis: Lesemodus-Fokusziel nutzt jetzt Alt+T/Alt+I und bestaetigt Enter direkt im Auswahlfeld.
+- Mini-Optimierung: Statusmeldungen nennen den naechsten Schritt klar in einfacher Sprache.
+- Naechster Schritt: Shortcut-Konfliktcheck in Start-Routine ergaenzen.
+
 ## Iteration 71 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Profil-Status-Chip + Inline-Hilfe fuer Fokusziel beim Lesemodus-Start).

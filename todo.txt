@@ -198,5 +198,7 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Zufallsprofil im Songtextbereich als sichtbaren Status-Chip mit Kontrasttext anzeigen.
 - [x] Naechster Mini-Punkt: Lesemodus-Fokusziel beim Oeffnen als kurze Inline-Hilfe ankuendigen (Titel/Inhalt) und per Enter bestaetigen.
 
-- [ ] Naechster Mini-Punkt: Songtext-Status-Chip um Profil-Hinweis mit letzter Nutzung (Zeitstempel) erweitern.
-- [ ] Naechster Mini-Punkt: Lesemodus-Fokusziel-Auswahl mit Enter-Shortcut direkt bestaetigen und Statusmeldung verfeinern.
+- [x] Naechster Mini-Punkt: Songtext-Status-Chip um Profil-Hinweis mit letzter Nutzung (Zeitstempel) erweitern.
+- [x] Naechster Mini-Punkt: Lesemodus-Fokusziel-Auswahl mit Enter-Shortcut direkt bestaetigen und Statusmeldung verfeinern.
+- [ ] Naechster Mini-Punkt: Lesemodus-Hilfe um Alt+T/Alt+I sichtbar im Statuslog ergaenzen.
+- [ ] Naechster Mini-Punkt: Shortcut-Konfliktcheck fuer Browser/OS-Tasten in start.sh automatisiert melden.

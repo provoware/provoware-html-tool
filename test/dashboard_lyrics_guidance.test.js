@@ -43,8 +43,8 @@ test("Dashboard-Lesemodus bietet Fokusziel-Auswahl", () => {
 
   assert.match(dashboardHtml, /id="lyrics-preview-focus-target"/);
   assert.match(dashboardHtml, /value="content">Inhaltsfeld/);
-  assert.match(dashboardHtml, /Taste T setzt Titel-Feld/);
-  assert.match(dashboardHtml, /Taste I setzt\s+Inhaltsfeld/);
+  assert.match(dashboardHtml, /Alt\+T setzt Titel-Feld/);
+  assert.match(dashboardHtml, /Alt\+I setzt\s+Inhaltsfeld/);
 });
 
 test("Dashboard-Songtextbereich zeigt Profil-Status-Chip", () => {
@@ -55,6 +55,7 @@ test("Dashboard-Songtextbereich zeigt Profil-Status-Chip", () => {
 
   assert.match(dashboardHtml, /id="lyrics-random-profile-chip"/);
   assert.match(dashboardHtml, /Aktives Profil: Standard\./);
+  assert.match(dashboardHtml, /Letzte Nutzung: noch keine\./);
 });
 
 test("Dashboard-Lesemodus hat Inline-Hilfe fuer Fokusziel", () => {
