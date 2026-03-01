@@ -52,6 +52,9 @@ function runReleaseReadinessCheck(options = {}) {
     path.join(rootPath, "templates/dashboard.html"),
   );
   const dashboardCss = readUtf8(path.join(rootPath, "templates/dashboard.css"));
+  const dashboardScript = readUtf8(
+    path.join(rootPath, "templates/dashboard.js"),
+  );
   const messagesRaw = readUtf8(path.join(rootPath, "config/messages_de.json"));
   const messages = parseJsonText(messagesRaw, "messages_de.json");
 
@@ -60,6 +63,11 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardHtml,
       'id="status" aria-live="polite"',
       "Statusbereich mit aria-live vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'id="toggle-debug"',
+      "Debug-Knopf fuer Hilfe vorhanden",
     ),
     checkIncludes(
       dashboardHtml,
@@ -90,6 +98,21 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardCss,
       '[data-theme="contrast"]',
       "Theme Kontrast+ in CSS vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      "Escape zum",
+      "Tastatur-Hinweis fuer Escape vorhanden",
+    ),
+    checkIncludes(
+      dashboardScript,
+      "registerKeyboardShortcuts",
+      "Tastatur-Handler ist im Script vorhanden",
+    ),
+    checkIncludes(
+      dashboardScript,
+      'event.key !== "Escape"',
+      "Escape-Logik fuer Tastatur ist vorhanden",
     ),
   ];
 

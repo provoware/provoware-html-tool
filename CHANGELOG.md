@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-03-01 – Keyboard-A11y-Check in Release-Readiness
+
+- Dashboard unterstuetzt jetzt Escape als klaren Rueckweg: offene Debug-Ansicht wird per Taste geschlossen.
+- Release-Readiness prueft automatisch Tastatur-Hinweis und Escape-Handler im Dashboard-Script.
+- Risiko: niedrig, da nur Tastaturpfad + automatischer Check erweitert wurden.
+
 ## 2026-03-01 – Start-Routine robuster und effizienter
 
 - Start-Routine erstellt jetzt fehlende Datenordner automatisch (`data/`, `data/logs/`) und validiert den Erfolg direkt.
