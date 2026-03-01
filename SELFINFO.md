@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 33
+Iteration: 34
 
 ## Gemacht
 
@@ -86,6 +86,8 @@ Iteration: 33
 - AGENTS.md erweitert: Datei-/Fortschrittsstatus muss sichtbar sein (Dateiname oder `data/file_status_index.json`).
 
 - Hilfe-Panel um einen kurzen 3-Schritt-Mini-Leitfaden aus README erweitert und im Modell validiert.
+
+- README-Fortschritt wird jetzt in der Start-Routine automatisch aus `todo.txt` synchronisiert (Prozent, erledigt, offen).
 
 ## Next Step
 

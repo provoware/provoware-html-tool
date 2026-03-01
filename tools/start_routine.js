@@ -355,6 +355,52 @@ function scanPlaceholderMarkers(rootPath, options = {}) {
   };
 }
 
+function calculateTodoProgress(todoContent) {
+  assertText(todoContent, "TODO-Inhalt");
+  const doneMatches = todoContent.match(/^- \[x\] /gim) || [];
+  const openMatches = todoContent.match(/^- \[ \] /gim) || [];
+  const done = doneMatches.length;
+  const open = openMatches.length;
+  const total = done + open;
+  const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+
+  return {
+    done,
+    open,
+    total,
+    percent,
+  };
+}
+
+function syncReadmeProgressFromTodo(rootPath) {
+  assertText(rootPath, "Projektpfad");
+  const todoPath = path.join(rootPath, "todo.txt");
+  const readmePath = path.join(rootPath, "README.txt");
+  const todoContent = fs.readFileSync(todoPath, "utf8");
+  const readmeContent = fs.readFileSync(readmePath, "utf8");
+  const progress = calculateTodoProgress(todoContent);
+  const progressBlock = [
+    "## Entwicklungsfortschritt",
+    "",
+    `- **Fortschritt:** ${progress.percent} %`,
+    `- **Erledigt:** ${progress.done} Punkte`,
+    `- **Offen:** ${progress.open} Punkte`,
+    "",
+    "Stand: automatisch aus `todo.txt` gezaehlt.",
+  ].join("\n");
+
+  const updatedReadme = readmeContent.replace(
+    /## Entwicklungsfortschritt\n[\s\S]*?Stand: automatisch aus `todo\.txt` gezaehlt\./,
+    progressBlock,
+  );
+
+  if (updatedReadme !== readmeContent) {
+    fs.writeFileSync(readmePath, updatedReadme, "utf8");
+  }
+
+  return progress;
+}
+
 function runDashboardAutoStart() {
   const result = startDashboardMainModule({
     dashboardPath: path.join(process.cwd(), "templates", "dashboard.html"),
@@ -440,7 +486,13 @@ function runStartRoutine() {
   }
   console.log("[10/12] Platzhalter-Scan ohne offene Marker");
 
-  console.log("[11/12] Systemtest ausfuehren");
+  console.log("[11/12] README-Fortschritt aus TODO synchronisieren");
+  const progress = syncReadmeProgressFromTodo(process.cwd());
+  console.log(
+    `[11/12] Fortschritt: ${progress.percent} % (${progress.done} erledigt, ${progress.open} offen)`,
+  );
+
+  console.log("[12/12] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -450,7 +502,7 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[12/12] Fertig");
+  console.log("[13/13] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -486,4 +538,6 @@ module.exports = {
   resolveDependencySyncPlan,
   scanPlaceholderMarkers,
   writeDependencyState,
+  calculateTodoProgress,
+  syncReadmeProgressFromTodo,
 };

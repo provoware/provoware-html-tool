@@ -360,3 +360,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Leitfaden nur im README lassen (abgelehnt, da schlechter sichtbar).
 **Risiko/Side-Effects:** Niedrig, da nur Hilfetext und Validierung ergänzt wurden.
 **Verknüpft:** Patch-ID iter33-help-panel-guide
+
+## FIX-20260301-001: README-Fortschritt automatisch aus TODO
+
+**Kategorie:** Docs/Start
+**Symptom (für Laien):** Die Prozentzahl im README war manchmal nicht aktuell.
+**Technische Ursache:** Fortschritt wurde manuell gepflegt und nicht bei jedem Start neu berechnet.
+**Trigger:** TODO-Punkte aendern sich, README bleibt unveraendert.
+**Fix (kurz):** Start-Routine berechnet erledigt/offen/prozent aus `todo.txt` und schreibt den README-Fortschrittsblock automatisch.
+**Geänderte Dateien/Marker:** `tools/start_routine.js`, `test/start_routine.test.js`, `README.txt`.
+**Tests/Checks:** `npm test`, `bash start.sh`.
+**Prävention (künftig):** Ab jetzt immer den README-Fortschritt aus `todo.txt` ableiten, nie manuell zaehlen.
+**Alternative(n):** Externes Script nur fuer Doku-Updates.
+**Risiko/Side-Effects:** Niedrig; betrifft nur den Fortschrittsblock im README.
+**Verknüpft:** Iteration-34

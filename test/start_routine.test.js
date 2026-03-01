@@ -11,6 +11,8 @@ const {
   readDependencyState,
   resolveDependencySyncPlan,
   scanPlaceholderMarkers,
+  syncReadmeProgressFromTodo,
+  calculateTodoProgress,
   validateProjectStructure,
   writeDependencyState,
 } = require("../tools/start_routine");
@@ -210,4 +212,51 @@ test("scanPlaceholderMarkers ignoriert normale Woerter wie todo-title", () => {
   assert.equal(result.findings.length, 0);
 
   fs.rmSync(dummyPath, { force: true });
+});
+
+test("calculateTodoProgress zaehlt erledigt/offen und Prozent", () => {
+  const progress = calculateTodoProgress("- [x] A\n- [ ] B\n- [x] C\n");
+
+  assert.equal(progress.done, 2);
+  assert.equal(progress.open, 1);
+  assert.equal(progress.total, 3);
+  assert.equal(progress.percent, 67);
+});
+
+test("syncReadmeProgressFromTodo aktualisiert den Fortschrittsblock", () => {
+  const tempRoot = fs.mkdtempSync(
+    path.join(process.cwd(), "dummys", "tmp-sync-"),
+  );
+  const todoPath = path.join(tempRoot, "todo.txt");
+  const readmePath = path.join(tempRoot, "README.txt");
+
+  fs.writeFileSync(todoPath, "- [x] Fertig\n- [ ] Offen\n", "utf8");
+  fs.writeFileSync(
+    readmePath,
+    [
+      "# Beispiel",
+      "",
+      "## Entwicklungsfortschritt",
+      "",
+      "- **Fortschritt:** 0 %",
+      "- **Erledigt:** 0 Punkte",
+      "- **Offen:** 0 Punkte",
+      "",
+      "Stand: automatisch aus `todo.txt` gezaehlt.",
+      "",
+      "## Rest",
+    ].join("\n"),
+    "utf8",
+  );
+
+  const progress = syncReadmeProgressFromTodo(tempRoot);
+  const updatedReadme = fs.readFileSync(readmePath, "utf8");
+
+  assert.equal(progress.done, 1);
+  assert.equal(progress.open, 1);
+  assert.equal(progress.percent, 50);
+  assert.match(updatedReadme, /- \*\*Fortschritt:\*\* 50 %/);
+  assert.match(updatedReadme, /- \*\*Erledigt:\*\* 1 Punkte/);
+
+  fs.rmSync(tempRoot, { recursive: true, force: true });
 });
