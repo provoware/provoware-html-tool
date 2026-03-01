@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 13
+Iteration: 14
 
 ## Gemacht
 
@@ -27,6 +27,9 @@ Iteration: 13
 - Neues Mockup `templates/dashboard_mockup.html` mit aktueller Start- und Dashboard-Logik ergänzt.
 
 - README weiter verbessert: offene Punkte oben, klare Laienanleitung mit Befehlen und stärker sichtbare Struktur.
+
+- Dashboard-Layout in `templates/dashboard.html` visuell an die Referenz angenaehert (Topbar, 3-Spalten, Modul-Kacheln, Quick-Links).
+- A11y-Details im Layout ausgebaut: sichtbarer Fokus, Kontrast+ konsistent, 44px-Bedienelemente und klare Tastaturhinweise.
 
 ## Next Step
 

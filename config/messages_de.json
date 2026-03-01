@@ -10,10 +10,11 @@
     "undo": "Sie können mit Backup-Auswahl auf einen alten gültigen Stand zurückgehen."
   },
   "dashboard": {
-    "what": "Das Dashboard zeigt wichtige Bereiche in klaren Zonen.",
+    "what": "Das Dashboard zeigt ein klares 3-Spalten-Layout mit Navigation, Modulen und Schnellbereichen.",
     "data": "Der Projektordner wird als Handle in IndexedDB gespeichert und beim Neustart erneut geprüft.",
     "undo": "Sie können die Zonensortierung per Drag&Drop oder Pfeil-Buttons jederzeit rückgängig machen.",
-    "debug": "Debug-Modus zeigt technische Details in einfacher Sprache mit nächsten Schritten."
+    "debug": "Debug-Modus zeigt technische Details in einfacher Sprache mit nächsten Schritten.",
+    "a11y": "Alle Hauptaktionen sind per Tastatur bedienbar, mit sichtbarem Fokus und hoher Kontrastoption."
   },
   "mockup": {
     "what": "Das Mockup zeigt die aktuelle Start- und Dashboard-Logik als schnelle Vorschau.",

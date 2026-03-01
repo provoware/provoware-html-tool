@@ -8,11 +8,12 @@
 
 ## Dashboard
 
-- **Was macht das?** Das Dashboard zeigt feste Zonen (Favoriten, Schnellzugriff, Module), die Sie vertikal verschieben koennen.
+- **Was macht das?** Das Dashboard zeigt jetzt ein klares 3-Spalten-Layout mit Navigation, Kalender, Modulen und Schnellbereichen.
 - **Autostart:** Am Ende von `bash start.sh` wird das Dashboard automatisch gestartet (wenn Grafikmodus verfuegbar ist).
 - **Was passiert mit den Daten?** Der gewählte Projektordner wird als Handle in IndexedDB gespeichert und beim Neustart erneut verbunden.
-- **Wie mache ich rückgängig?** Sie können die Reihenfolge sofort per Pfeil-Buttons oder Drag&Drop wieder ändern.
+- **Wie mache ich rückgängig?** Sie können die Reihenfolge sofort per Pfeil-Buttons oder Drag&Drop wieder ändern und das Theme jederzeit zurück auf Hell setzen.
 - **Fachwort kurz erklärt:** _Auto-Reconnect_ bedeutet automatische Wiederverbindung beim nächsten Start.
+- **Barrierefreiheit:** Fokus ist sichtbar, Buttons sind groß (mindestens 44px) und es gibt Kontrast+ als Theme.
 
 ## Plugin-Loader
 

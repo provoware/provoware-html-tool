@@ -4,115 +4,118 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Provoware Dashboard</title>
-    <style>
-      :root {
-        --bg: #ffffff;
-        --fg: #0f172a;
-        --surface: #e2e8f0;
-        --accent: #005fcc;
-        --space-xs: 0.5rem;
-        --space-sm: 0.75rem;
-        --space-md: 1rem;
-        --space-lg: 1.5rem;
-        --field-height: 44px;
-        --radius: 10px;
-      }
-      [data-theme="dark"] {
-        --bg: #0f172a;
-        --fg: #f8fafc;
-        --surface: #1e293b;
-        --accent: #60a5fa;
-      }
-      [data-theme="contrast"] {
-        --bg: #000000;
-        --fg: #ffff00;
-        --surface: #111111;
-        --accent: #00ffff;
-      }
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--fg);
-        font-family: Arial, sans-serif;
-      }
-      .wrap {
-        max-width: 860px;
-        margin: var(--space-lg) auto;
-        padding: var(--space-md);
-      }
-      .card {
-        background: var(--surface);
-        border: 2px solid var(--accent);
-        border-radius: var(--radius);
-        padding: var(--space-md);
-        margin-bottom: var(--space-md);
-      }
-      button,
-      select,
-      input {
-        min-height: var(--field-height);
-        padding: 0 var(--space-sm);
-        border: 2px solid var(--accent);
-        border-radius: 8px;
-        background: var(--bg);
-        color: var(--fg);
-      }
-      button:focus-visible,
-      select:focus-visible {
-        outline: 3px solid var(--accent);
-        outline-offset: 2px;
-      }
-      .zones {
-        display: grid;
-        gap: var(--space-sm);
-      }
-      .zone-header {
-        display: flex;
-        gap: var(--space-xs);
-        justify-content: space-between;
-        align-items: center;
-      }
-      .hint {
-        font-size: 0.95rem;
-      }
-      .actions {
-        display: flex;
-        gap: var(--space-xs);
-      }
-      .debug {
-        white-space: pre-wrap;
-        margin-top: var(--space-sm);
-      }
-    </style>
+    <link rel="stylesheet" href="dashboard.css" />
   </head>
   <body data-theme="light">
     <main class="wrap">
-      <h1>Modernes Dashboard</h1>
-      <p class="hint">
-        Dieses Dashboard zeigt wichtige Bereiche klar und in einfacher Sprache.
-      </p>
-
-      <section class="card" aria-labelledby="start-title">
-        <h2 id="start-title">Projektstart</h2>
-        <label for="theme-select">Farbthema</label>
-        <select id="theme-select" aria-label="Farbthema wählen">
-          <option value="light">Hell</option>
-          <option value="dark">Dunkel</option>
-          <option value="contrast">Kontrast+</option>
-        </select>
-        <div class="actions">
-          <button id="choose-folder">Projektordner wählen</button>
-          <button id="reconnect-folder">Auto-Reconnect prüfen</button>
+      <header class="topbar" aria-label="Hauptnavigation">
+        <nav class="menu" aria-label="Menü">
+          <a href="#" aria-current="page">Dashboard</a>
+          <a href="#">Module</a><a href="#">Kalender</a>
+          <a href="#">Einstellungen</a>
+        </nav>
+        <div class="icons" aria-label="Schnellaktionen">
+          <button type="button" id="toggle-debug">Debug-Modus</button>
         </div>
-        <p id="status" aria-live="polite">Bereit.</p>
-        <button id="toggle-debug">Debug-Modus anzeigen</button>
-        <pre id="debug-output" class="debug" hidden></pre>
-      </section>
-
-      <section class="card" aria-labelledby="zones-title">
-        <h2 id="zones-title">Dashboard-Zonen</h2>
-        <p class="hint">Drag&Drop oder Pfeil-Buttons nutzen.</p>
-        <div id="zones" class="zones"></div>
+      </header>
+      <section class="layout" aria-label="Dashboard Inhalte">
+        <aside class="col" aria-label="Linke Spalte">
+          <article class="panel" aria-labelledby="calendar-title">
+            <h2 id="calendar-title">Heute</h2>
+            <div class="calendar-grid" aria-label="Kalender April 2024">
+              <span>1</span><span>2</span><span>3</span><span>4</span>
+              <span>5</span><span>6</span><span>7</span><span>8</span>
+              <span>9</span><span>10</span><span>11</span><span>12</span>
+              <span>13</span><span>14</span><span aria-current="date">15</span>
+              <span>16</span><span>17</span><span>18</span><span>19</span>
+              <span>20</span><span>21</span>
+            </div>
+          </article>
+          <article class="panel" aria-labelledby="notes-title">
+            <h3 id="notes-title">Notizen</h3>
+            <ul>
+              <li>Meeting um 15 Uhr</li>
+              <li>Call mit Team planen</li>
+            </ul>
+          </article>
+          <article class="panel" aria-labelledby="todo-title">
+            <h3 id="todo-title">To-Do Liste</h3>
+            <ul>
+              <li>Report abschließen</li>
+              <li>Website aktualisieren</li>
+              <li>E-Mails senden</li>
+            </ul>
+          </article>
+        </aside>
+        <section class="col" aria-label="Mitte">
+          <article class="panel" aria-labelledby="control-title">
+            <h2 id="control-title">Systemsteuerung</h2>
+            <p>
+              Was macht das? Startet den Projektzugriff mit Prüfung (Validierung
+              = Eingabeprüfung).
+            </p>
+            <label for="theme-select">Farbthema wählen</label>
+            <select id="theme-select" aria-label="Farbthema wählen">
+              <option value="light">Hell</option>
+              <option value="dark">Dunkel</option>
+              <option value="contrast">Kontrast+</option>
+            </select>
+            <div class="system-actions">
+              <button id="choose-folder" type="button">
+                Projektordner wählen
+              </button>
+              <button id="reconnect-folder" type="button">
+                Auto-Reconnect prüfen
+              </button>
+            </div>
+            <p id="status" aria-live="polite" class="status-ok">
+              Bereit. Nächster Schritt: Verbindung prüfen.
+            </p>
+            <pre id="debug-output" class="debug" hidden></pre>
+          </article>
+          <article class="panel" aria-labelledby="workspace-title">
+            <h2 id="workspace-title">Module Workspace</h2>
+            <div class="module-tiles" aria-hidden="true">
+              <div class="tile tile-blue">Email Campaign</div>
+              <div class="tile tile-cyan">CRM Tool</div>
+              <div class="tile tile-orange">Analytics Hub</div>
+            </div>
+          </article>
+          <article class="panel" aria-labelledby="zones-title">
+            <h2 id="zones-title">Modul-Reihenfolge</h2>
+            <p class="zone-help">
+              Bedienung: Tab/Shift+Tab für Fokus, Enter für Knopf, Escape zum
+              Schließen von Dialogen.
+            </p>
+            <div id="zones" class="col" role="list"></div>
+          </article>
+        </section>
+        <aside class="col" aria-label="Rechte Spalte">
+          <article class="panel" aria-labelledby="overview-title">
+            <h3 id="overview-title">Übersicht</h3>
+            <ul>
+              <li>Budget: 8.750</li>
+              <li>Aufgaben: 5/10</li>
+              <li>Offene Fälle: 320</li>
+            </ul>
+          </article>
+          <article class="panel" aria-labelledby="quick-title">
+            <h3 id="quick-title">Quick Links</h3>
+            <ul>
+              <li>Reports</li>
+              <li>Team Chat</li>
+            </ul>
+          </article>
+          <article class="panel" aria-labelledby="error-help-title">
+            <h3 id="error-help-title">Fehlerhilfe</h3>
+            <p class="status-warn">Was kann ich tun?</p>
+            <div class="system-actions">
+              <button type="button">Erneut versuchen</button>
+              <button type="button">Reparatur starten</button>
+              <button type="button">Protokoll öffnen</button>
+            </div>
+          </article>
+        </aside>
       </section>
     </main>
     <script src="dashboard.js"></script>

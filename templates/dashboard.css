@@ -1,0 +1,194 @@
+      :root {
+        --bg: #eff4f8;
+        --fg: #122235;
+        --panel: #fff;
+        --panel-soft: #dfe7ee;
+        --topbar: #1c3d57;
+        --topbar-fg: #f3f8ff;
+        --line: #9fb3c4;
+        --accent: #2a82be;
+        --ok: #188a4a;
+        --warn: #995d15;
+        --shadow: 0 8px 18px rgba(12, 28, 44, 0.14);
+        --radius: 12px;
+        --focus: #ffd64d;
+      }
+      [data-theme="dark"] {
+        --bg: #0f1925;
+        --fg: #e9f0f6;
+        --panel: #16283a;
+        --panel-soft: #1d354a;
+        --topbar: #10273a;
+        --topbar-fg: #f8fcff;
+        --line: #4b6479;
+        --accent: #5aaef1;
+        --ok: #51da8d;
+        --warn: #f2ac59;
+        --shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+        --focus: #ffed89;
+      }
+      [data-theme="contrast"] {
+        --bg: #000;
+        --fg: #fff;
+        --panel: #111;
+        --panel-soft: #1a1a1a;
+        --topbar: #000;
+        --topbar-fg: #fff;
+        --line: #fff;
+        --accent: #00ffff;
+        --ok: #7cfc00;
+        --warn: #ffb347;
+        --shadow: none;
+        --focus: #fff700;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      .wrap {
+        max-width: 1240px;
+        margin: 1rem auto 1.5rem;
+        padding: 0 1rem;
+      }
+      .topbar {
+        background: var(--topbar);
+        color: var(--topbar-fg);
+        border: 1px solid color-mix(in srgb, var(--line) 45%, transparent);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 0.65rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.6rem;
+      }
+      .menu,
+      .icons {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+      }
+      .menu a,
+      .icons button,
+      .panel button,
+      .panel select,
+      .panel input {
+        min-height: 44px;
+        border: 2px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        color: var(--fg);
+        padding: 0 0.7rem;
+        font-size: 0.97rem;
+      }
+      .menu a {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+      }
+      .menu a[aria-current="page"] {
+        border-color: var(--accent);
+      }
+      button:focus-visible,
+      select:focus-visible,
+      input:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
+      }
+      .layout {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: 250px 1fr 260px;
+        gap: 1rem;
+      }
+      .col {
+        display: grid;
+        gap: 1rem;
+        align-content: start;
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 0.9rem;
+      }
+      .panel h2,
+      .panel h3 {
+        margin: 0 0 0.6rem;
+      }
+      .panel ul {
+        margin: 0;
+        padding-left: 1.1rem;
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.22rem;
+        font-size: 0.86rem;
+      }
+      .calendar-grid span {
+        border-radius: 6px;
+        text-align: center;
+        padding: 0.2rem 0;
+      }
+      .calendar-grid span[aria-current="date"] {
+        background: var(--accent);
+        color: #fff;
+      }
+      .system-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .module-tiles {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(120px, 1fr));
+        gap: 0.8rem;
+      }
+      .tile {
+        color: #fff;
+        border-radius: 10px;
+        padding: 0.9rem;
+        min-height: 92px;
+        font-weight: 700;
+      }
+      .tile-blue {
+        background: linear-gradient(135deg, #2368a6, #1f4e7f);
+      }
+      .tile-cyan {
+        background: linear-gradient(135deg, #2d9db0, #23788a);
+      }
+      .tile-orange {
+        background: linear-gradient(135deg, #d4942b, #c06d1f);
+      }
+      .zone-help {
+        margin: 0.55rem 0 0;
+        font-size: 0.92rem;
+      }
+      .status-ok {
+        color: var(--ok);
+      }
+      .status-warn {
+        color: var(--warn);
+      }
+      .debug {
+        white-space: pre-wrap;
+        margin-top: 0.6rem;
+        border: 1px solid var(--line);
+        background: var(--panel-soft);
+        border-radius: 8px;
+        padding: 0.6rem;
+      }
+      @media (max-width: 1030px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+    
