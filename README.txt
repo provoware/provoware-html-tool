@@ -17,9 +17,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 77 %
-- **Erledigt:** 77 Punkte
-- **Offen:** 23 Punkte
+- **Fortschritt:** 76 %
+- **Erledigt:** 78 Punkte
+- **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -418,3 +418,13 @@ Update Iteration 44:
 ## Iteration 49 Kurzstand
 - Prompt-Sicherheitsabfrage im Backup-Dialog ist jetzt automatisch getestet (korrekte Bestaetigung erlaubt, falsche Eingabe blockiert).
 - Naechster Schritt: Boot-View mit klaren Startphasen und Ampel-Texten stabilisieren.
+
+## Update 2026-03-01 (Iteration 55): Kanban-Zustand bleibt nach Neustart erhalten
+
+Was wurde verbessert:
+- Karten werden nach dem Verschieben direkt in `data/kanban_board.json` gespeichert.
+- Vor dem Speichern laeuft Validierung (Eingabepruefung), damit nur gueltige JSON-Daten geschrieben werden.
+- Der Dialog bleibt der barrierefreie Standard (Tastatur zuerst, Enter/Escape, klarer Rueckweg).
+
+Naechster Schritt:
+- Optionales Drag-and-Drop als Zusatz anbieten, aber nie als einzigen Weg.

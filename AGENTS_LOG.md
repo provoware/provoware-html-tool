@@ -35,3 +35,5 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 
 2026-03-01 | PATCH-053 | Kanban-Schnellansicht an echte JSON-Daten gebunden + Keyboard-A11y (Pfeil links/rechts, Fokusring) | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, templates/kanban_preview.js, data/kanban_board.json, tools/start_routine.js, test/kanban_preview.test.js, test/start_routine.test.js, Doku-Updates
 2026-03-01 | PATCH-054 | Offenen TODO-Punkt abgeschlossen: Kanban-Dialog fuer Kartenverschiebung (Enter/Escape, Statushilfe, Validierung) | templates/kanban_preview.js, templates/dashboard.css, test/kanban_preview.test.js, Doku-Updates
+
+2026-03-01 | PATCH-055 | Kanban-Kartenverschiebung dauerhaft in data/kanban_board.json speichern (Schema-Check + Validierung) | templates/kanban_preview.js, templates/dashboard.js, test/kanban_preview.test.js, Doku-Updates
