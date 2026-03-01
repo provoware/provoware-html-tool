@@ -169,3 +169,9 @@
 - Start-Routine prueft jetzt automatisch auf offene Marker (`TODO`, `FIXME`, `PLACEHOLDER`, `DUMMY`) in Kernordnern.
 - Bei Fund stoppt der Ablauf mit klarer Meldung inkl. Datei/Zeile und naechstem Schritt (Protokoll oder Reparatur).
 - Risiko: niedrig, da nur Start-Pruefpfad und ein gezielter Unit-Test erweitert wurden.
+
+## 2026-03-01 – AGENTS: Releasefertige Patch-Regel + Dateistatus
+
+- AGENTS.md um klare Releasefertig-Definition erweitert: nur fertige Patches mit Fehlerpfad, Test, Doku und gruenem `bash start.sh`.
+- Neue Regel fuer Fortschrittsstatus: Dateistand ueber Dateinamen (z. B. `_v002`, `_ready`) oder zentrales `data/file_status_index.json` sichtbar halten.
+- Risiko: niedrig, da nur Prozessregeln dokumentiert wurden.

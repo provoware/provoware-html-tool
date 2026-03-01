@@ -243,6 +243,27 @@ Maximal ein Feature pro PR
 Keine Misch‑PR (UI+Storage+Refactor) ohne Not
 Wenn PR zu groß wird → splitten 
 
+10.4 Releasefertige Patch-Regel (Pflicht)
+- Jeder Patch muss funktionsfertig sein (kein halber Zwischenstand).
+- "Fertig" bedeutet: Implementierung + Fehlerpfad + Test + Doku + Startcheck.
+- Wenn etwas absichtlich offen bleibt, muss es direkt in `todo.txt` stehen
+  (mit Grund, Risiko und naechstem Schritt).
+- Ein PR ohne gruenen Abschluss-Check (`bash start.sh`) gilt als nicht releasefertig.
+
+10.5 Datei- und Fortschrittsstatus sichtbar halten
+- Dateinamen sollen den Status klar zeigen (z. B. `_draft`, `_ready`, `_v002`).
+- Fuer variable Daten wird ein zentrales Status-JSON genutzt:
+  `data/file_status_index.json`.
+- Das JSON fuehrt pro Datei mindestens:
+  - `file`
+  - `version`
+  - `status` (`draft|review|ready|deprecated`)
+  - `updatedAt`
+  - `owner`
+- Vor Release muss der Status aller geaenderten Kern-Dateien auf `ready` stehen.
+- Wenn Umbenennen riskant ist, bleibt der Dateiname stabil und nur das JSON
+  traegt Version + Status.
+
 11) „Offene Fragen“ (nicht im Patch diskutieren) 
 Alle neuen Fragen gehen in: - QUESTIONS_TODO.md 
 Template: md - [ ] (2026-02-28) Frage: … | Kontext: … | Entscheidung nötig bis: … 
