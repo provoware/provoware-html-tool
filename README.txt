@@ -1,3 +1,6 @@
+- Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Wiki-Modul ist jetzt als eigenes Panel mit Kategorie, Titel, Inhalt und Speicherung in `data/wiki_notes.json` verfuegbar.
+- Neu (2026-03-01): Mini-Optimierung Hilfe/UX: Wiki-Panel erklaert in einfacher Sprache Aktion, Datenwirkung und Rueckweg.
+
 - Neu (2026-03-01): Option C umgesetzt. JSON-Store kann jetzt optional versioniert speichern und bei Fehlern aus der letzten gueltigen Version wiederherstellen.
 - Neu (2026-03-01): Storage-Recovery meldet klare Laien-Schritte: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.
 
@@ -23,9 +26,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 78 %
-- **Erledigt:** 84 Punkte
-- **Offen:** 24 Punkte
+- **Fortschritt:** 80 %
+- **Erledigt:** 86 Punkte
+- **Offen:** 22 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

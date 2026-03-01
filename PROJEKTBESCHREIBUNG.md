@@ -1,3 +1,9 @@
+## Iteration 59 – Wiki-Modul erweitert
+- Neues Wiki-Panel im Dashboard: Kategorie, Titel, Inhalt, Speichern und Aktualisieren.
+- Wissensdaten werden sauber getrennt in `data/wiki_notes.json` gehalten.
+- Validierung (Eingabepruefung) verhindert leere oder ungueltige Kategorien.
+- Testabdeckung fuer Speichern, Aktualisieren, Import/Export und Fehlerfall ist vorhanden.
+
 ## Patch 058 – Tool-Umfang erweitert
 
 - Neues Tool-Modul: `project_file_writer` fuer sichere JSON-Dateiwrites im Projektordner.

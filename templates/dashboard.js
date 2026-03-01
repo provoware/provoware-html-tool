@@ -567,6 +567,21 @@
   chooseFolder.addEventListener("click", chooseProjectFolder);
   reconnect.addEventListener("click", reconnectProjectFolder);
 
+  if (window.createWikiModule) {
+    window.createWikiModule({
+      categoryInput: document.getElementById("wiki-category"),
+      titleInput: document.getElementById("wiki-title-input"),
+      contentInput: document.getElementById("wiki-content"),
+      saveButton: document.getElementById("wiki-save"),
+      reloadButton: document.getElementById("wiki-reload"),
+      list: document.getElementById("wiki-list"),
+      setStatus,
+      setDebug,
+      getProjectDir: () => selectedProjectDir,
+      saveJson: writeProjectJson,
+    });
+  }
+
   if (window.createTodoModule) {
     window.createTodoModule({
       dateInput: document.getElementById("todo-date"),

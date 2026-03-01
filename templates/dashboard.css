@@ -165,7 +165,8 @@ body {
 .icons button,
 .panel button,
 .panel select,
-.panel input {
+.panel input,
+.panel textarea {
   min-height: 44px;
   border: 2px solid var(--line);
   border-radius: 10px;
@@ -189,6 +190,7 @@ body {
 button:focus-visible,
 select:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
 a:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 2px;

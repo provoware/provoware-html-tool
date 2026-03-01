@@ -1,3 +1,5 @@
+PATCH-059: Wiki-Modul (Kategorie/Titel/Inhalt) als getrenntes System-Modul eingefuehrt, inklusive Validierung und JSON-Speicherpfad `data/wiki_notes.json`.
+
 ## Update 2026-03-01 – Patch 058
 
 - System/Tool-Trennung verbessert: neuer Helper `system-module/project_file_writer.js` kapselt Datei-Schreiblogik.

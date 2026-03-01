@@ -46,6 +46,38 @@
             <h3 id="notes-title">Notizen</h3>
             <div class="blank-area" aria-label="Leerer Notizbereich"></div>
           </article>
+          <article class="panel" aria-labelledby="wiki-title">
+            <h3 id="wiki-title">Wiki-Modul</h3>
+            <p class="field-tip" id="wiki-help">
+              Was macht das? Speichert kurze Wissensnotizen pro Kategorie.
+              Rueckweg: Eintrag anpassen und erneut speichern.
+            </p>
+            <label for="wiki-category">Kategorie</label>
+            <select id="wiki-category" aria-describedby="wiki-help">
+              <option value="prozess">Prozess</option>
+              <option value="tool">Tool</option>
+              <option value="a11y">A11y</option>
+            </select>
+            <label for="wiki-title-input">Titel</label>
+            <input
+              id="wiki-title-input"
+              type="text"
+              maxlength="120"
+              placeholder="z. B. Startcheck"
+            />
+            <label for="wiki-content">Inhalt</label>
+            <textarea
+              id="wiki-content"
+              rows="4"
+              maxlength="2000"
+              placeholder="Kurze, klare Notiz speichern"
+            ></textarea>
+            <div class="todo-actions" aria-label="Wiki-Aktionen">
+              <button type="button" id="wiki-save">Wiki speichern</button>
+              <button type="button" id="wiki-reload">Wiki aktualisieren</button>
+            </div>
+            <ul id="wiki-list" class="todo-list" role="list"></ul>
+          </article>
           <article class="panel" aria-labelledby="todo-title">
             <h3 id="todo-title">Aufgaben</h3>
             <label for="todo-input">Neue Aufgabe</label>
@@ -339,7 +371,9 @@
     <script src="module_workspace.js"></script>
     <script src="dashboard_help.js"></script>
     <script src="../system-module/todo_list_model.js"></script>
+    <script src="../system-module/wiki_module_model.js"></script>
     <script src="todo_module.js"></script>
+    <script src="wiki_module.js"></script>
     <script src="backup_restore.js"></script>
     <script src="boot_status.js"></script>
     <script src="kanban_preview.js"></script>
