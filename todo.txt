@@ -1,3 +1,8 @@
+## Iteration 88 (2026-03-01) - Doku-Releasefinalisierung
+- [x] Naechster Mini-Punkt: README-Struktur fuer Releasefinalisierung neu geordnet (Ziel, Struktur, Schnellstart, Pflichtbefehle, Laienvorschlaege). | Code: README.txt | Tests: npm run format + node --test + bash start.sh geplant/ausgefuehrt | Doku: README selbst aktualisiert | Risiko: niedrig (nur Doku) | Naechster Schritt: offene Funktionspunkte aus todo abarbeiten.
+- [x] Naechster Mini-Punkt: AGENTS.md als kompakte Release-Richtlinie V3 neu strukturiert (PatchSpec, Gates, A11y, Doku-Pflicht). | Code: AGENTS.md | Tests: npm run format + node --test + bash start.sh geplant/ausgefuehrt | Doku: AGENTS selbst aktualisiert | Risiko: niedrig (nur Prozessdoku) | Naechster Schritt: Regeln in naechster Code-Iteration strikt anwenden.
+- [x] Naechster Mini-Punkt: todo.txt um Iterationsblock fuer Doku-Fortschritt ergaenzt und offene 3 Kernpunkte unveraendert sichtbar gelassen. | Code: todo.txt | Tests: node --test + bash start.sh geplant/ausgefuehrt | Doku: todo gepflegt | Risiko: niedrig (Planungsdatei) | Naechster Schritt: drei offenen Kernpunkte implementieren.
+
 - [x] Naechster Mini-Punkt abgeschlossen: Daten-Inventur-Patch fuer data/- und dummys/-Reste als Start-Routine-Check eingebaut.
 - [x] Option C abgeschlossen: JSON-Store auf versionierte Writes + Recovery-Pfad gehaertet.
 - [x] Naechster Mini-Punkt abgeschlossen: Kanban-Kartenverschiebung persistiert ueber zentralen Projekt-Datei-Schreiber.

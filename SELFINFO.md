@@ -1,3 +1,9 @@
+## Iteration 88 (2026-03-01)
+
+- Ziel: Release-Doku vereinheitlichen und klar fuer naechste Code-Iteration vorbereiten.
+- Status: README + AGENTS + todo aktualisiert, Checks laufen ueber Start-Routine.
+- Next Step: Die drei offenen Kern-Mini-Punkte aus `todo.txt` als Code+Tests+Doku abschliessen.
+
 ## Iteration 86 – Status
 
 - Hauptziel: Drei offene Mini-Punkte releasefertig abgeschlossen.

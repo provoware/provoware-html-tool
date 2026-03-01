@@ -1,424 +1,94 @@
-# AGENTS.md
+# AGENTS.md – Releasefinalisierung (V3)
+Stand: 2026-03-01
 
-## Projektziel
-Dieses Projekt startet **neu** mit klaren, einheitlichen Regeln.
-Ziel ist: barrierefrei, verständlich, wartbar und voll automatisiert.
+## 1) Mission
+Jede Iteration liefert einen kleinen, vollstaendigen und startbaren Patch:
+Plan -> Umsetzung -> Checks -> Doku -> Commit -> PR.
 
-## Arbeitsregeln
-1. **Einfache Sprache** nutzen.
-2. Fachwörter kurz erklären, z. B. *Validierung (Eingabeprüfung)*.
-3. Jede Funktion prüft:
-   - Eingabe (Input)
-   - Ergebnis (Output)
-4. Fehlertexte immer mit nächstem Schritt:
-   - „Erneut versuchen“
-   - „Reparatur starten“
-   - „Protokoll öffnen“
-5. Pro Iteration immer **genau drei offene Punkte** aus `todo.txt` vollstaendig abschliessen.
-   - Alle drei Punkte muessen Code + Tests + Doku enthalten.
-   - Erst danach neue offene Punkte anlegen.
-5.AGENTS.md – Modultool (Profi‑Version V2) 
-Stand: 2026-02-28 • Zweck: maximale Patch‑Genauigkeit, Codesparsamkeit, Robustheit, Laien‑Perfektion
-Einsatz: Codex + GitHub (iterative Optimierung, klare PRs, reproduzierbare Ergebnisse) 
+## 2) Pflichtprinzipien
+1. Einfache Sprache verwenden.
+2. Fachwort kurz erklaeren, z. B. Validierung (Eingabepruefung).
+3. Jede Funktion prueft Input und Output.
+4. Fehlertexte enthalten immer den naechsten Schritt:
+   - Erneut versuchen
+   - Reparatur starten
+   - Protokoll oeffnen
+5. Pro Iteration genau drei offene Punkte aus `todo.txt` abschliessen
+   (inkl. Code + Tests + Doku).
 
-0) Mission (ein Satz) 
-Jede Iteration liefert einen vollständigen, kleinen, exakt begrenzten Patch, der startbar, geprüft, dokumentiert und laienverständlich ist – ohne unnötige Datei‑Berührungen. 
+## 3) Scope und Patch-Groesse
+- Nur betroffene Dateien aendern.
+- Kein Mega-Refactor.
+- Ein PR = ein Hauptziel + eine Mini-Optimierung fuer Hilfe/UX/A11y.
+- Diff klein halten und nur dort formatieren, wo geaendert wurde.
 
-1) Nicht verhandelbare Kernregeln 
-1.1 Minimal‑Patch statt Mega‑Refactor 
-❌ Keine „Großaufraum“-Rewrites.
-✅ Nur zielrelevante Änderungen, kleinstmögliche Diff‑Fläche.
-✅ Wenn zwei Fixes denselben Bereich betreffen → bündeln (ein Patch, ein Testlauf).
-✅ Wenn Fixes verschiedene Bereiche betreffen → trennen (klein halten, Fehler lokalisierbar). 
-1.2 Nur betroffene Dateien anfassen 
-Eine Datei wird nur geändert, wenn mindestens einer zutrifft: 
-sie enthält den Bug
-sie ist direkter Einstiegspunkt (z. B. Loader) für den Fix
-sie ist die zentrale Stelle für einen Standard (z. B. Validator/Logger)
-❌ Keine „präventiven“ Änderungen in fremden Modulen. 
-1.3 Code‑Sparsamkeit (DRY + Wiederverwendung) 
-Neue Logik wird nur erstellt, wenn es keinen passenden Helper/Service gibt.
-Gleiche Fehlerbehandlung → zentraler Handler.
-UI‑Strings → zentral (z. B. messages_de.json), nicht überall verteilt. 
-1.4 Robustheit über Komfort 
-Jeder neue Feature‑Pfad braucht: 
-Validierung vor Schreiben
-verständliche Fehlermeldung
-Rückweg (Abbrechen/Zurück)
-Backup/Recovery‑Hook, wenn Daten betroffen sind 
+## 4) PatchSpec (Pflicht vor Code)
+Vor jeder Aenderung als 7-Punkte-Block notieren:
+1. Ziel
+2. Scope IN
+3. Scope OUT
+4. Dateien/Marker
+5. Risiko
+6. Akzeptanzkriterien
+7. Checks + Rollback
 
+## 5) Release-Gates (Pflicht)
+Folgende Befehle pro Iteration ausfuehren:
+- `npm run format`
+- `node --test`
+- `bash start.sh`
 
-1.5 Global Standards (Qualitäts‑Guardrails, „je kleiner desto besser“) 
-Diese Standards sind dafür da, dass Code klein, reviewbar, wartbar bleibt und ein Agent nicht „alles in eine Datei kippt“.
-Umsetzung bevorzugt über Lint‑Regeln (ESLint) + Formatter + Review‑Limits. 
-1.5.1 Harte Größenlimits (Default) 
-Datei‑Größe (Quellcode): - Max 250 Zeilen pro Datei (ohne Leerzeilen/Kommentare zählen)
-Ausnahme: generierte Build‑Artefakte oder Vendor‑Code. 
-Funktion‑Größe: - Max 60 Zeilen pro Funktion (ohne Leerzeilen/Kommentare zählen) 
-Zeilenlänge: - 80 Zeichen Standard (JS/HTML/CSS/MD), Ausnahmen: URLs, lange Strings 
-Verschachtelung & Komplexität: - Max 4 Block‑Tiefe (if/for/while/switch)
-- Cyclomatic Complexity: max 10 pro Funktion (bei Überschreitung splitten) 
-1.5.2 PR/Review‑Limits (für GitHub) 
-Ein Ziel pro PR (kein Misch‑PR)
-< 400 LOC pro Review‑Einheit (falls größer: splitten oder „stacked PRs“)
-PR muss in < 30–60 Minuten reviewbar sein (Daumenregel) 
-1.5.3 Konfig‑Snippets (kopierfertig) 
-ESLint (Auszug): js // .eslintrc.cjs (Auszug) module.exports = { rules: { "max-lines": ["error", { "max": 250, "skipBlankLines": true, "skipComments": true }], "max-lines-per-function": ["error", { "max": 60, "skipBlankLines": true, "skipComments": true }], "max-len": ["error", { "code": 80, "ignoreUrls": true, "ignoreStrings": true, "ignoreTemplateLiterals": true }], "max-depth": ["error", 4], "complexity": ["error", 10] } }; 
-Prettier (Auszug): json { "printWidth": 80 } 
-1.5.4 Dokumentation & Umsetzung im Projekt 
-Diese Regeln werden zusätzlich in GLOBAL_STANDARDS.md gepflegt (Kurzbegründung + Ausnahmen).
-Jede Iteration prüft: Verstößt der Patch gegen ein Limit? Wenn ja: splitten. 
-2) Iterations‑Pipeline (ultra‑effizient) 
-Ergebnis pro Iteration: Plan → Patch → Checks → Doku →
-Autocheck → PR‑Summary (immer in dieser Reihenfolge) 
-Schritt 0 – Status lesen (Pflicht) 
-SELFINFO.md lesen (Regeln, Version, offene Punkte)
-QUESTIONS_TODO.md lesen (offene Entscheidungen, nicht vermischen) 
-Schritt 1 – PatchSpec erstellen (vor Code!) 
-PatchSpec ist Pflicht und enthält: 
-Ziel (1 Satz):
-Scope IN: (was wird geändert)
-Scope OUT: (was wird nicht angefasst)
-Betroffene Dateien + exakte Stelle: 
-Zeilenbereich ODER Marker/Anker (z. B. // BEGIN: boot-status)
-Risiko: niedrig/mittel/hoch + 1 Begründung
-Akzeptanzkriterien (Fertig wenn): 3–7 Checkboxen
-Checks/Tests: nur betroffene, mit kurzem Ablauf
-Rollback‑Plan: „Wie komme ich zurück?“ 
-Schritt 2 – Patch bauen (kleinstmöglicher Diff) 
-Nur die im PatchSpec gelisteten Dateien ändern.
-Keine Formatierung außerhalb des geänderten Blocks.
-Keine ungenutzten Imports, keine toten Variablen.
-Jede neue Funktion: ein Zweck, kurzer Name, klarer Input/Output. 
-Schritt 3 – Checks ausführen (nur betroffen) 
-Minimum‑Checks je Kategorie: 
-Core‑Änderung (Loader/Boot/Registry): - Start ohne Crash - Boot‑Flow bis Dashboard - Registry laden/validieren - 1 Recovery‑Pfad (z. B. kaputtes JSON simulieren) 
-UI‑Änderung: - Tastatur: Tab/Enter/Escape - Fokus sichtbar (nicht verdeckt) - Screenreader‑freundliche Labels (mindestens aria-label/aria-labelledby wo nötig) 
-Storage/JSON‑Änderung: - JSON Syntax ok - Schema‑Validierung ok (wenn vorhanden) - Write‑Pfad: Backup/Versionierung korrekt 
-Schritt 4 – Doku minimal aktualisieren (nur relevant) 
-CHANGELOG.md: 1–3 Zeilen (was, warum, Risiko)
-SELFINFO.md: Version/Iteration + Next Step
-README.txt: pro Iteration kurz auf aktuellen Stand bringen (Fortschritt, offene Punkte, neuer naechster Schritt).
-Wenn UI‑Text geändert: messages_de.json + kurzer Eintrag in docs/HILFE.md 
-Schritt 5 – Autonomer Abschluss-Check (Pflicht, neu)
-`bash start.sh` muss ohne Abbruch laufen und alle Pflichtchecks zeigen.
-Bei Fehlern: klare Laienmeldung + naechster Schritt (Erneut versuchen,
-Reparatur starten, Protokoll oeffnen).
-Automatisch pruefen: Formatierung, Tests, A11y-Basics,
-Abhaengigkeiten und Kontrast je Theme.
-Nur wenn alles gruen ist, darf die Iteration als fertig gelten.
-Schritt 6 – Iterations‑Summary (maximal transparent) 
-Jede Iteration endet mit diesen Blöcken: 
-1) Änderung (kurz): 3–7 Bulletpoints
-2) Dateien/Anker: Liste der berührten Stellen
-3) Checks: was wurde geprüft
-4) Nächster Schritt: 1 Satz
-5) Empfehlung: 2 Optionen + „Mein Pick“ 
- Einheitliche Struktur:
-   - `system-core/` Kernlogik
-   - `system-module/` Kernlogik Module
-   - `config/` Einstellungen
-   - `data/` variable Daten
-   - `tools/` Prüfungen und Hilfen
-   - `templates/` UI-Vorlagen
-   - `test/` Test und Testdateien
-   - `dummys/` Dummys für Selfrepair oder andere Aspekte
+Release ist nur fertig, wenn `bash start.sh` ohne Abbruch laeuft.
 
-## Barrierefreiheit (A11y)
-- Tastatur zuerst (Fokus gut sichtbar).
-- Status nie nur über Farbe, immer auch über Text.
-- Hoher Kontrast in allen Farbthemen.
-- Mehrere Themes anbieten (Hell, Dunkel, andere Farbe).
+## 6) A11y- und UX-Mindeststandard
+- Tastatur zuerst (Tab/Enter/Escape).
+- Fokus immer klar sichtbar.
+- Status nie nur mit Farbe, immer auch mit Text.
+- Hoher Kontrast in allen Themes.
+- Pro Iteration mindestens eine Mini-Verbesserung in Hilfe/Tooltip/
+  Fehlermeldung/Fokus.
 
-## Start-Routine
-`start.sh` soll vollautomatisch:
-- Voraussetzungen prüfen
-- fehlende Abhängigkeiten automatisch installieren
-- Code formatieren
-- Tests ausführen
-- klare Rückmeldung geben: geprüft, gelöst, nächster Schritt
+## 7) Start-Routine und Automatik
+`start.sh` muss vollautomatisch:
+- Voraussetzungen pruefen
+- Abhaengigkeiten installieren
+- Formatierung ausfuehren
+- Tests ausfuehren
+- A11y- und Release-Kurzcheck ausgeben
+- Laien-Rueckmeldung mit naechstem Schritt liefern
 
-3) Bündelungs‑Logik (damit Patches „vollständig“ sind) 
-3.1 Bündeln (in einem Patch), wenn: 
-Mehrere Fixes sind innerhalb derselben Funktion oder derselben Datei/Section
-Ein Fix würde ohne den anderen einen Folgefehler erzeugen
-Doku‑/Text‑Update gehört direkt zur selben UI‑Änderung 
-3.2 Trennen (mehrere Patches), wenn: 
-Es sind verschiedene Module/Plugins betroffen
-Risiko hoch und Debugging wäre sonst schwer
-Mehrere unabhängige Features (sonst „halbe Sachen“ in einem Mega‑Patch) 
-3.3 „Keine halben Sachen“ – konkrete Definition 
-Ein Patch gilt nicht als fertig, wenn: - Feature zwar klickbar, aber nicht validiert - Fehlerfall nicht abgefangen - Meldung unverständlich - Doku fehlt (mindestens 1 Satz Hilfe) - Startflow bricht oder Warnungen ignoriert werden 
+## 8) Doku-Pflicht je Iteration
+Mindestens diese Dateien aktualisieren, wenn relevant:
+- `README.txt` (Fortschritt + naechster Schritt)
+- `CHANGELOG.md` (1–3 Zeilen)
+- `todo.txt` (erledigt markieren + neue 3 offene Punkte pflegen)
+- `PROJEKTBESCHREIBUNG.md` (kurze Erweiterung)
+- `SELFINFO.md` (Iteration/Version/Next Step)
 
-4) Patch‑Genauigkeit (exakte Stellen statt „ungefähr“) 
-4.1 Marker‑Standard (empfohlen) 
-Für große Dateien müssen relevante Bereiche markiert werden: js // BEGIN: <topic> // END: <topic> Beispiel: js // BEGIN: boot-status // END: boot-status 
-4.2 „Nur diese Zeilen“ – Patch‑Regel 
-Änderungen dürfen nur innerhalb des markierten Blocks erfolgen, außer PatchSpec erlaubt es explizit. 
-4.3 Diff‑Hygiene 
-Keine Zeilenumbrüche massenhaft ändern.
-Keine Umbenennungs‑Orgie ohne Not.
-Keine „auf einmal alles neu“. 
+## 9) Dateistruktur (einheitlich)
+- `system-core/` Kernlogik
+- `system-module/` Modul-Logik
+- `config/` Konfiguration
+- `data/` variable Daten
+- `tools/` Pruefungen und Hilfen
+- `templates/` UI-Vorlagen
+- `test/` Tests
+- `dummys/` Dummys
 
-5) Qualität & Robustheit (DoD‑Gates) 
-5.1 Definition of Done (Patch) 
-☐ Start ohne Crash
-☐ Neue Funktion erfüllt Akzeptanzkriterien
-☐ Fehlerfälle verständlich + Buttons vorhanden
-☐ JSON validiert (falls JSON betroffen)
-☐ Tastaturbedienbar (Tab/Enter/Escape)
-☐ Fokus sichtbar (nicht verdeckt)
-☐ Doku minimal aktualisiert (Changelog + Help)
-☐ Keine unnötigen Dateien geändert 
-5.2 Release‑Gate (Meilenstein) 
-☐ Boot 5‑Phasen stabil
-☐ Safe‑Mode erreichbar
-☐ Backup/Restore ok
-☐ Diagnose‑Export ok (200 Einträge + Zusammenfassung)
-☐ Plugin‑Loader isoliert Fehler (Plugin kann nicht Core crashen) 
+## 10) Logging und Debugging
+- Nutzertext kurz und klar.
+- Technikdetails ins Protokoll.
+- Immer konkrete Loesung anbieten.
 
-6) Laien‑Text‑Standard (UI, Fehler, Hilfe) 
-6.1 UI‑Text‑Policy 
-UI‑Texte liegen zentral in: messages_de.json
-Jede neue UI‑Funktion bekommt: 
-1 Satz „Was macht das?“
-1 Satz „Was passiert mit den Daten?“
-1 Satz „Wie mache ich rückgängig?“ 
-6.2 Fehlermeldung‑Schablone (immer gleich) 
-Was ist passiert? (1 Satz)
-Warum? (1 Satz)
-Was kann ich tun? (Buttons)
-Details anzeigen (optional, einklappbar) 
-Beispiel: - „Projekt konnte nicht geladen werden.“ - „Die Datei registry.json ist beschädigt.“ - Buttons: „Reparieren“, „Backup wiederherstellen“, „Abbrechen“ - Details: Parser‑Fehler, Position, Datei‑Pfad 
+## 11) Platzhalter-Disziplin
+Bei TODO/FIXME/Dummy-Fund gilt:
+1. Kurz im Code kommentieren (warum offen)
+2. In `todo.txt` als Aufgabe eintragen
+3. Bei Risiko in `QUESTIONS_TODO.md` aufnehmen
 
-7) JSON/Schema‑Disziplin (Fehlerfreiheit) 
-7.1 Vor jedem Schreiben 
-JSON Syntax prüfen
-Schema prüfen (wenn vorhanden)
-Backup/Versionierung auslösen (wenn Daten betroffen) 
-7.2 Versionierte Writes (web‑robust) 
-Statt Überschreiben: - data_v0007.json schreiben - current.json zeigt auf „current“ - Recovery wählt letzte gültige Version 
-
-8) A11y‑Minimum (WCAG 2.2‑Praxisregeln) 
-Jede UI‑Änderung muss mindestens erfüllen: - Tab/Shift+Tab: logische Reihenfolge - Enter/Space: aktivieren - Escape: schließen (Overlay/Dialog) - Fokus sichtbar - Dragging hat Alternative (Buttons/Dialog) - Target‑Size: große Buttons oder Abstand 
-
-9) Codex‑Auftragsformat (für perfekte PR‑Patches) 
-Dieser Prompt wird 1:1 an Codex gegeben. 
-## Codex Task
-**Ziel:** …
-**Kontext:** …
-**Scope IN:** …
-**Scope OUT:** …
-**PatchSpec (Datei + Marker/Zeilen):**
-- …
-**Akzeptanz (Fertig wenn):**
-- [ ]
-**Checks (nur betroffen):**
-- …
-**Doku‑Updates (minimal):**
-- …
-**Ausgabeformat:**
-1) Unified Diff Patch
-2) Kurze Summary
-3) Next Step + Empfehlung
- 
-
-10) GitHub‑Workflow (klein, sauber, reviewbar) 
-10.1 Issue‑Format (ein Feature = ein Issue) 
-Problem (1 Satz)
-Erwartetes Verhalten
-Ist‑Zustand
-Scope IN/OUT
-Akzeptanzkriterien
-Risiko (niedrig/mittel/hoch) 
-10.2 Branch‑/PR‑Format 
-Branch: fix/<kurz> oder feat/<kurz>
-PR‑Titel: [core] … / [plugin:<id>] … / [docs] …
-PR‑Body Pflicht: 
-Was geändert?
-Warum?
-Dateien/Marker
-Checks
-Screenshots (nur wenn UI relevant)
-Next Step + Empfehlung 
-10.3 Review‑Regel (Qualität) 
-Maximal ein Feature pro PR
-Keine Misch‑PR (UI+Storage+Refactor) ohne Not
-Wenn PR zu groß wird → splitten 
-
-10.4 Releasefertige Patch-Regel (Pflicht)
-- Jeder Patch muss funktionsfertig sein (kein halber Zwischenstand).
-- "Fertig" bedeutet: Implementierung + Fehlerpfad + Test + Doku + Startcheck.
-- Wenn etwas absichtlich offen bleibt, muss es direkt in `todo.txt` stehen
-  (mit Grund, Risiko und naechstem Schritt).
-- Ein PR ohne gruenen Abschluss-Check (`bash start.sh`) gilt als nicht releasefertig.
-
-10.5 Datei- und Fortschrittsstatus sichtbar halten
-- Dateinamen sollen den Status klar zeigen (z. B. `_draft`, `_ready`, `_v002`).
-- Fuer variable Daten wird ein zentrales Status-JSON genutzt:
-  `data/file_status_index.json`.
-- Das JSON fuehrt pro Datei mindestens:
-  - `file`
-  - `version`
-  - `status` (`draft|review|ready|deprecated`)
-  - `updatedAt`
-  - `owner`
-- Vor Release muss der Status aller geaenderten Kern-Dateien auf `ready` stehen.
-- Wenn Umbenennen riskant ist, bleibt der Dateiname stabil und nur das JSON
-  traegt Version + Status.
-
-11) „Offene Fragen“ (nicht im Patch diskutieren) 
-Alle neuen Fragen gehen in: - QUESTIONS_TODO.md 
-Template: md - [ ] (2026-02-28) Frage: … | Kontext: … | Entscheidung nötig bis: … 
-
-12) Minimal‑Projektdateien (nur bei Bedarf anlegen) 
-SELFINFO.md – Status/Version/Next Step
-CHANGELOG.md – kurze Historie
-QUESTIONS_TODO.md – offene Fragen
-AGENTS_LOG.md – 1 Zeile pro Patch (Patch‑ID, Ziel, Dateien) 
-
-13) Beispiel‑Iteration (perfekt & klein) 
-Patch: „Diagnose‑Export: Header + Export‑ID“
-- Dateien: core/diagnose_export.js (Marker: // BEGIN: export-header)
-- Akzeptanz: - Export enthält Header (3–6 Zeilen) - Export enthält Export‑ID - Export enthält max. 200 Einträge - Checks: - Export erzeugen → Datei ansehen - Fehlerfall: kein Log vorhanden → verständliche Meldung - Doku: - 1 Changelog‑Zeile - 1 Help‑Satz („Diagnosebericht erstellen“) 
-
-
-15) Erinnerungsoptimierung (Pflichtdatei + Lernsystem) 
-15.1 Zweck 
-Wir führen eine Erinnerungsoptimierungsdatei, damit wiederkehrende Fehler nicht erneut Zeit fressen.
-Sie sammelt gelöste Probleme inkl. Ursache, Fix‑Muster, Tests und „Was man künftig sofort tun sollte“. 
-Datei: MEMORY_FIXES.md
-Regel: am Anfang jeder Iteration lesen, am Ende aktualisieren (wenn neue Erkenntnis entstanden ist)
-Ziel: Robustheit, Codequalität, Effizienz, Vereinheitlichung, Laien‑Erklärungen systematisch verbessern. 
-15.2 Eintrag‑Template (kopierfertig) 
-## FIX-<YYYYMMDD>-<NNN>: <Kurzname>
-**Kategorie:** (JSON/Boot/Plugin/FS-Access/UI/A11y/Export/Backup/Update/Docs)
-**Symptom (für Laien):** …
-**Technische Ursache:** …
-**Trigger:** (Wie tritt es auf?)
-**Fix (kurz):** …
-**Geänderte Dateien/Marker:** …
-**Tests/Checks:** …
-**Prävention (künftig):** …
-**Alternative(n):** …
-**Risiko/Side-Effects:** …
-**Verknüpft:** (Issue/PR/Patch-ID/Export-ID)
- 
-15.3 Minimalregeln 
-Pro Iteration maximal 1–3 neue Fix‑Einträge, nur wenn wirklich neu.
-Keine Romane: kurz, wiederverwendbar.
-Jeder Eintrag endet mit einer Präventionsregel („Ab jetzt immer …“).
-Wenn ein Fix einen neuen Standard erzeugt (z. B. JSON‑Write‑Policy), muss er zusätzlich in: 
-PROJECT_INFO.md (Regel/Status)
-und ggf. docs/HILFE.md (Laienhinweis) übernommen werden. 
-15.4 Speicherort & Reihenfolge 
-MEMORY_FIXES.md liegt im Projektbasisordner (Root), damit es immer sofort erreichbar ist.
-Reihenfolge im Iterationsablauf: 1) SELFINFO.md + PROJECT_INFO.md lesen
-2) MEMORY_FIXES.md lesen
-3) PatchSpec → Patch → Checks → Doku
-4) MEMORY_FIXES.md aktualisieren (falls neu)
-5) PROJECT_INFO.md + SELFINFO.md als letztes aktualisieren 
-
-16) Pflichtpunkt je Iteration: Mini-Optimierung für Hilfe + UX/A11y
-16.1 Ziel (immer aktiv)
-In jeder Iteration wird mindestens ein kleiner, sichtbarer Teil von Hilfe,
-Hilfselementen, Beschreibungen oder Tooltips verbessert.
-
-16.2 Was pro Iteration mindestens verbessert werden muss (2 Punkte reichen)
-- Ein Hilfe-Text in einfacher Sprache (max. 2 kurze Sätze).
-- Ein Tooltip mit klarer Aktion + Rückweg.
-- Eine Fehlermeldung nach der Schablone aus Abschnitt 6.2.
-- Ein UI-Detail für Tastatur/Fokus/Kontrast.
-
-16.3 Design- und Layout-Standards (einheitlich)
-- Einheitliche Abstände über Tokens (z. B. 4/8/12/16/24).
-- Einheitliche Button-Standards: gleiche Höhe, gleiche Radius-Werte,
-  klarer Fokus-Ring, Mindestgröße 44x44 px.
-- Einheitliche Typografie-Scale (z. B. 14/16/20/24) mit guter Lesbarkeit.
-- Nie nur Farbe als Statussignal: immer Text/Icon ergänzen.
-
-16.4 Farben, Kontrast, Themes
-- Standardmäßig mindestens 4 Themes anbieten: Hell, Dunkel, rötlich, comouflage.
-- Kontrastziel mindestens WCAG AA (Text/Bedienflächen).
-- Fokuszustand in jedem Theme klar sichtbar.
-- Farbwerte zentral halten (Design-Tokens/Variablen), nicht verteilt.
-
-16.5 Interaktivität für Laien (Best Practices)
-- Primäraktion pro Bereich klar markieren (nur 1 Hauptbutton).
-- Jede Aktion hat klaren nächsten Schritt (z. B. erneut versuchen,
-  Protokoll öffnen, Reparatur starten).
-- Sofortiges Feedback nach Klick (Status, Fortschritt, Ergebnis).
-- Komplexe Aktionen in kleine, geführte Schritte teilen.
-
-16.6 Flexibilität, Skalierbarkeit, kleine Bildschirme
-- Responsive Layout zuerst mobil denken (kleine Breite zuerst).
-- Flexible Container/Grid nutzen (auto-fit/minmax), keine festen Pixelbreiten.
-- Inhaltsblöcke dürfen umbrechen; keine abgeschnittenen Buttons/Texte.
-- Für kleine Displays: Prioritäten zeigen, Nebensachen einklappbar machen.
-- Komponenten modular halten (System/Core, Config, variable Daten klar trennen).
-
-16.7 Automatische Qualitätschecks (Start-Routine)
-- Start-Routine prüft pro Iteration automatisch:
-  - Formatierung
-  - Tests
-  - A11y-Basics (Fokus, Tastaturpfad, Labels)
-  - Kontrast-Checks je Theme (mindestens Kernseiten)
-- Bei Fehlern: klare Laienmeldung + nächster Schritt ausgeben.
-- Logs mit Technikdetails im Protokoll, Kurzfassung im Terminal/UI.
-
-16.8 Doku-Pflicht
-- In CHANGELOG.md 1 kurze Zeile zur UX/Hilfe-Mini-Optimierung ergänzen.
-- README.txt in jeder Iteration kurz aktualisieren (Fortschritt/Status + naechster Schritt).
-- In todo.txt den erledigten Mini-Punkt abhaken und nächsten Mini-Punkt planen.
-- Erstelle und erweitere in jeder iteration die PROJEKTBESCHREIBUNG.md mit zusätzlichen hilfreichen und weiterführenden Informationen und Tooldetails / Tool-Umfang
-17) Referenzbild-Analyse + Platzhalter-Scan (Pflicht)
-17.1 Rhythmus fuer Referenzbild
-- In jeder 3. Iteration muss das Vorgabe-Bild im Projektordner geprueft werden
-  (Iteration 3, 6, 9, ...).
-- Ziel: UI an optische, grafische und Layout-Aspekte moeglichst nah und
-  konsistent am Beispielbild halten.
-- Die Analyse muss mindestens enthalten:
-  - Layout-Raster (Abstaende, Karten, Spalten)
-  - Typografie (Groessen, Gewicht, Lesbarkeit)
-  - Farben/Kontrast in allen Themes (Hell, Dunkel, Kontrast+)
-  - Interaktionsmuster (Buttons, Fokus, Rueckweg)
-
-17.2 Dokumentation der Referenzbild-Analyse
-- Ergebnis in `todo.txt` als eigener Punkt mit Status, Datum und naechstem
-  Schritt eintragen.
-- Kurzfassung in `CHANGELOG.md` und `README.txt` ergaenzen.
-- Wenn die Abweichung hoch ist: neuen P1-Punkt fuer naechste Iteration planen.
-
-17.3 Platzhalter- und Teilcode-Disziplin
-- In jeder Iteration aktiv nach Platzhaltern oder unvollstaendigen Codeteilen
-  suchen (z. B. TODO/FIXME, Dummy-Text, harte Platzhalterdaten).
-- Gefundene Stellen muessen:
-  1) direkt im Code kurz kommentiert werden (warum offen),
-  2) in `todo.txt` als neue Aufgabe registriert werden,
-  3) bei Risiko in `QUESTIONS_TODO.md` als offene Entscheidung markiert werden.
-- Patch gilt erst als fertig, wenn neue Platzhalterfunde im TODO sichtbar sind.
-
-14) Nächster Schritt (Pflichtauswahl) 
-Entscheide für die nächste Iteration genau drei Ziele: 
-A) Boot‑View stabilisieren (Phasen, Ampel, Details, Weiter‑Gate)
-B) Plugin‑Loader minimal (Manifest lesen, isoliertes Laden, Fehler abfangen)
-C) Storage‑Service robust (versionierte Writes, JSON‑Validator, Backup‑Hook) 
-Frage: Welche Optionen A/B/C sind als nächstes dran?
-
-## Debugging/Logging
-- Einfache Meldungen für Laien.
-- Detaillierte Ursachen im Protokoll.
-- Konkrete Lösungsvorschläge anzeigen.
-
-15) Gib als letztes ier zwei verbessernde oder optimierende empfehlungen für die nächsten schritte nummeriert aus.
-
-
-## 18) Entwicklungs-Effizienz (neu)
-- PatchSpec immer zuerst als 7-Punkte-Block notieren (Ziel, Scope IN/OUT, Dateien, Risiko, Akzeptanz, Checks, Rollback).
-- Pro Iteration maximal 1 Hauptziel + 1 Mini-Optimierung, damit Review schnell bleibt.
-- Pflicht-Kurzbefehle je Iteration:
-  - `npm run format`
-  - `node --test`
-  - `bash start.sh`
-- Bei UI-Dialogen immer Inline-Hilfe direkt im Dialog zeigen (nicht nur in README).
-- Release-Readiness muss Doku-Pflicht pruefen: README, CHANGELOG, todo.
+## 12) Abschlussformat der Iteration
+1. Aenderung (3–7 Punkte)
+2. Dateien/Anker
+3. Checks
+4. Naechster Schritt (1 Satz)
+5. Zwei Empfehlungen + Mein Pick
