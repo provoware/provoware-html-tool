@@ -77,36 +77,47 @@
     ],
   };
 
-  const MODULE_CATALOG = [
-    {
-      id: "project",
-      title: "Projektmanagement",
-      what: "Plant Aufgaben und Reihenfolgen.",
-      data: "Speichert nur Modulstatus im Dashboard.",
-      undo: "Sie koennen das Modul ausblenden oder minimieren.",
-    },
-    {
-      id: "sales",
-      title: "Vertrieb & CRM",
-      what: "Zeigt Leads und Kundentermine.",
-      data: "Liest nur verknuepfte CRM-Daten.",
-      undo: "Sie koennen jederzeit auf Standardansicht zurueckgehen.",
-    },
-    {
-      id: "analytics",
-      title: "Analyse & Berichte",
-      what: "Erstellt Kennzahlen im Team-Format.",
-      data: "Greift nur auf freigegebene Berichtsdaten zu.",
-      undo: "Berichte koennen neu erzeugt werden.",
-    },
-    {
-      id: "support",
-      title: "Support",
-      what: "Bietet Ticket- und Fehleruebersicht.",
-      data: "Zeigt nur vorhandene Support-Eintraege.",
-      undo: "Blenden Sie das Modul aus, wenn es nicht noetig ist.",
-    },
-  ];
+  function getModuleCatalog() {
+    const modelCatalog =
+      window.DashboardModel &&
+      typeof window.DashboardModel.getModuleRegistry === "function"
+        ? window.DashboardModel.getModuleRegistry()
+        : null;
+    const fallback = [
+      {
+        id: "project",
+        title: "Projektmanagement",
+        what: "Plant Aufgaben und Reihenfolgen.",
+        data: "Speichert nur Modulstatus im Dashboard.",
+        undo: "Sie koennen das Modul ausblenden oder minimieren.",
+      },
+      {
+        id: "sales",
+        title: "Vertrieb & CRM",
+        what: "Zeigt Leads und Kundentermine.",
+        data: "Liest nur verknuepfte CRM-Daten.",
+        undo: "Sie koennen jederzeit auf Standardansicht zurueckgehen.",
+      },
+      {
+        id: "analytics",
+        title: "Analyse & Berichte",
+        what: "Erstellt Kennzahlen im Team-Format.",
+        data: "Greift nur auf freigegebene Berichtsdaten zu.",
+        undo: "Berichte koennen neu erzeugt werden.",
+      },
+      {
+        id: "support",
+        title: "Support",
+        what: "Bietet Ticket- und Fehleruebersicht.",
+        data: "Zeigt nur vorhandene Support-Eintraege.",
+        undo: "Blenden Sie das Modul aus, wenn es nicht noetig ist.",
+      },
+    ];
+    if (!Array.isArray(modelCatalog) || modelCatalog.length === 0) {
+      return fallback;
+    }
+    return modelCatalog;
+  }
 
   function assertNode(node, name) {
     if (!node || typeof node.appendChild !== "function") {
@@ -154,7 +165,7 @@
     let maximizedId = null;
 
     function getCatalogModule(moduleId) {
-      const match = MODULE_CATALOG.find((entry) => entry.id === moduleId);
+      const match = getModuleCatalog().find((entry) => entry.id === moduleId);
       if (!match) {
         throw new Error("Modul nicht gefunden. Bitte erneut versuchen.");
       }
@@ -457,14 +468,26 @@
 
     function renderCatalog() {
       catalog.innerHTML = "";
-      MODULE_CATALOG.forEach((moduleEntry) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.textContent = `${moduleEntry.title} aktivieren`;
-        button.setAttribute("aria-label", `${moduleEntry.title} aktivieren`);
-        button.addEventListener("click", () => addModule(moduleEntry.id));
-        catalog.appendChild(button);
-      });
+      const query = String(catalog.dataset.query || "").toLowerCase();
+      getModuleCatalog()
+        .filter((moduleEntry) =>
+          query ? moduleEntry.title.toLowerCase().includes(query) : true,
+        )
+        .forEach((moduleEntry) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = `${moduleEntry.title} aktivieren`;
+          button.setAttribute("aria-label", `${moduleEntry.title} aktivieren`);
+          button.addEventListener("click", () => addModule(moduleEntry.id));
+          catalog.appendChild(button);
+        });
+      if (catalog.children.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "field-tip";
+        empty.textContent =
+          "Keine Module zur Suche gefunden. Naechster Schritt: Suche leeren.";
+        catalog.appendChild(empty);
+      }
     }
 
     scale.addEventListener("change", () => {
@@ -476,6 +499,13 @@
       grid.dataset.align = align.value;
       setStatus("Position geaendert. Naechster Schritt: Ausrichtung pruefen.");
     });
+
+    if (options.searchInput) {
+      options.searchInput.addEventListener("input", () => {
+        catalog.dataset.query = options.searchInput.value || "";
+        renderCatalog();
+      });
+    }
 
     renderCatalog();
     renderActiveModules();

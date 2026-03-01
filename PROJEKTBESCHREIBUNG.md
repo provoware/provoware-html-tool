@@ -313,3 +313,11 @@ Praktischer Einsatz:
 - Aktion "Alle Module anzeigen" listet aktive Module in der Statuszeile auf.
 - Untere Moduloptionen sind kontextsensitiv und zeigen je Modul zwei direkte Folgeaktionen.
 - Start-Routine zeigt bei TODO-Vorlagenfehlern jetzt eine Zeilenhilfe fuer schnellere Reparatur.
+
+
+## Dashboard-Update: Sidebar-Suche und 3x3-Modulraster
+- **Linke Sidebar:** Suchfeld + Modul-Liste aus zentraler Registry (`system-module/dashboard_model.js`).
+- **Center:** Dashboard-Top zeigt Version, Pfadstatus und Live-Statusmeldung.
+- **Grid:** 3x3 als Desktop-Standard, responsive 2/1 Spalten fuer kleine Breiten.
+- **Footer:** Debugging, Logging, Notiz mit Dateispeicher (`.modultool/quicknote.txt`) und lokalem Fallback.
+- **Rechte Sidebar:** Template-Knoepfe mit Clipboard-Fallback fuer Browser ohne Clipboard-Rechte.

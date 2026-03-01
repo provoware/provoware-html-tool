@@ -52,6 +52,10 @@
   const kasiNotePaste = document.getElementById("kasi-note-paste");
   const kasiNoteSave = document.getElementById("kasi-note-save");
   const toolExport = document.getElementById("tool-export");
+  const moduleSearch = document.getElementById("module-search");
+  const globalVersion = document.getElementById("global-version");
+  const globalPath = document.getElementById("global-path");
+  const globalStatus = document.getElementById("global-status");
 
   function formatText(template, values) {
     if (typeof template !== "string" || !template.trim()) {
@@ -431,8 +435,26 @@
       "Status fehlt. Naechster Schritt: Erneut versuchen.",
     );
     status.textContent = safe;
+    updateGlobalTop(safe);
     addLogEntry(safe);
     return safe;
+  }
+
+  function updateGlobalTop(statusText) {
+    if (globalVersion) {
+      globalVersion.textContent = "Version: 0.1.0";
+    }
+    if (globalPath) {
+      const connected = selectedProjectDir ? "verbunden" : "nicht verbunden";
+      globalPath.textContent = `Pfad: ${connected}`;
+    }
+    if (globalStatus) {
+      const safe =
+        typeof statusText === "string" && statusText.trim()
+          ? statusText
+          : "wartet auf Aktion";
+      globalStatus.textContent = `Status: ${safe}`;
+    }
   }
 
   function setKanbanStatus(message) {
@@ -473,29 +495,64 @@
     return `[${stamp}] ${rawText.trim()}`;
   }
 
-  async function saveKasiNote() {
-    if (
-      !window.ProjectFileWriter?.appendProjectTextFile ||
-      !selectedProjectDir
-    ) {
-      setStatus(
-        "Projektordner oder Dateischreiber fehlt. Naechster Schritt: Ordner waehlen und erneut versuchen.",
-      );
+  function loadKasiNoteFallback() {
+    const raw = window.localStorage.getItem("quicknote-text") || "";
+    if (kasiNoteInput && typeof raw === "string") {
+      kasiNoteInput.value = raw;
+    }
+  }
+
+  async function tryLoadProjectNote() {
+    if (!selectedProjectDir) {
       return false;
     }
 
-    const line = buildNoteLine(kasiNoteInput?.value || "");
-    await window.ProjectFileWriter.appendProjectTextFile(
-      selectedProjectDir,
-      "data/KASI_NOTIZ.txt",
-      line,
-    );
-    kasiNoteInput.value = "";
-    setStatus(
-      "Notiz gespeichert. Naechster Schritt: Erneut versuchen oder neue Notiz erfassen.",
-    );
-    addLogEntry("KASI_NOTIZ gespeichert");
-    return true;
+    const loaded = await readProjectText(".modultool/quicknote.txt");
+    if (loaded.ok && kasiNoteInput) {
+      kasiNoteInput.value = loaded.value;
+      return true;
+    }
+    return false;
+  }
+
+  async function saveKasiNote() {
+    const content = String(kasiNoteInput?.value || "").trim();
+    window.localStorage.setItem("quicknote-text", content);
+
+    if (!content) {
+      setStatus(
+        "Leere Notiz gespeichert. Naechster Schritt: Text eingeben oder leer lassen.",
+      );
+      return true;
+    }
+
+    if (
+      !window.ProjectFileWriter?.writeProjectTextFile ||
+      !selectedProjectDir
+    ) {
+      setStatus(
+        "Notiz lokal gespeichert. Neutraler Hinweis: Projektordner fehlt. Naechster Schritt: Ordner waehlen und erneut speichern.",
+      );
+      return true;
+    }
+
+    try {
+      await window.ProjectFileWriter.writeProjectTextFile(
+        selectedProjectDir,
+        ".modultool/quicknote.txt",
+        content,
+      );
+      setStatus(
+        "Notiz gespeichert. Naechster Schritt: Erneut versuchen oder neue Notiz erfassen.",
+      );
+      addLogEntry("Quicknote gespeichert");
+      return true;
+    } catch {
+      setStatus(
+        "Neutraler Hinweis: Notiz lokal gespeichert, Projektordner ohne Berechtigung. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+      );
+      return true;
+    }
   }
 
   async function exportToolState() {
@@ -774,6 +831,29 @@
     }
   }
 
+  async function readProjectText(relativePath) {
+    if (typeof relativePath !== "string" || !relativePath.trim()) {
+      return { ok: false, value: "" };
+    }
+    if (!selectedProjectDir || !selectedProjectDir.getFileHandle) {
+      return { ok: false, value: "" };
+    }
+
+    try {
+      const pathParts = relativePath.split("/").filter(Boolean);
+      const fileName = pathParts.pop();
+      let currentDir = selectedProjectDir;
+      for (const segment of pathParts) {
+        currentDir = await currentDir.getDirectoryHandle(segment);
+      }
+      const fileHandle = await currentDir.getFileHandle(fileName);
+      const raw = await (await fileHandle.getFile()).text();
+      return { ok: true, value: raw };
+    } catch {
+      return { ok: false, value: "" };
+    }
+  }
+
   function renderZones() {
     zones.innerHTML = "";
     zoneModel.forEach((zone, index) => {
@@ -854,6 +934,8 @@
       }
       const folders = await ensureStructure(handle);
       await loadLayoutState();
+      await tryLoadProjectNote();
+      await tryLoadProjectNote();
       setStatus(`Projekt verbunden. Struktur ok (${folders.length} Ordner).`);
       updateBootPhase(
         "folder",
@@ -895,6 +977,7 @@
       }
       const folders = await ensureStructure(handle);
       await loadLayoutState();
+      await tryLoadProjectNote();
       setStatus(`Auto-Reconnect ok. ${folders.length} Ordner sind bereit.`);
       updateBootPhase(
         "folder",
@@ -1228,6 +1311,7 @@
     emptyState: document.getElementById("empty-state"),
     scale: document.getElementById("grid-scale"),
     align: document.getElementById("grid-align"),
+    searchInput: moduleSearch,
     slotCount: 9,
     initialModuleState: moduleLayoutState,
     setStatus,

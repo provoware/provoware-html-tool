@@ -69,6 +69,26 @@
             <h3 id="notes-title">Notizen</h3>
             <div class="blank-area" aria-label="Leerer Notizbereich"></div>
           </article>
+          <article class="panel" aria-labelledby="left-catalog-title">
+            <h3 id="left-catalog-title">Module im Projekt</h3>
+            <p class="field-tip" id="left-catalog-help">
+              Was macht das? Suche und aktiviere hier Module fuer das Raster.
+              Rueckweg: Suchfeld leeren.
+            </p>
+            <label for="module-search">Modul suchen</label>
+            <input
+              id="module-search"
+              type="search"
+              placeholder="z. B. Wiki"
+              aria-describedby="left-catalog-help"
+            />
+            <div
+              id="module-catalog"
+              class="module-catalog"
+              role="list"
+              aria-labelledby="left-catalog-title"
+            ></div>
+          </article>
           <article class="panel" aria-labelledby="quick-store-title">
             <h3 id="quick-store-title">Schnellspeicher</h3>
             <p class="field-tip" id="quick-store-help">
@@ -491,6 +511,15 @@
           <article class="panel" aria-labelledby="workspace-title">
             <h2 id="workspace-title">Modulfläche</h2>
             <p id="workspace-help"></p>
+            <article
+              class="dashboard-top"
+              aria-labelledby="dashboard-top-title"
+            >
+              <h3 id="dashboard-top-title">Dashboard-Top</h3>
+              <p id="global-version">Version: Platzhalter</p>
+              <p id="global-path">Pfad: nicht verbunden</p>
+              <p id="global-status">Status: wartet auf Aktion</p>
+            </article>
             <div class="module-toolbar">
               <label for="grid-scale">Rastergröße</label>
               <select id="grid-scale" aria-label="Rastergröße wählen">
@@ -517,13 +546,18 @@
                 Noch kein Modul aktiv.
               </p>
             </div>
-            <h3 id="catalog-title">Module hinzufügen</h3>
+            <h3 id="catalog-title">Modulhilfe</h3>
             <div
-              id="module-catalog"
+              id="module-catalog-copy"
               class="module-catalog"
               role="list"
               aria-labelledby="catalog-title"
-            ></div>
+            >
+              <p class="field-tip">
+                Module aktivieren Sie links in der Sidebar. Hier bleibt die
+                Hilfe sichtbar.
+              </p>
+            </div>
           </article>
 
           <article class="panel" aria-labelledby="module-options-title">
@@ -613,6 +647,24 @@
               aus "Idee" in "Planung" schieben.
             </p>
           </article>
+          <article class="panel" aria-labelledby="template-copy-title">
+            <h3 id="template-copy-title">Template-Buttons</h3>
+            <p class="field-tip" id="template-copy-help">
+              Was macht das? Fuegt Vorlagen in die Zwischenablage ein. Rueckweg:
+              Anderen Knopf waehlen oder Text selbst schreiben.
+            </p>
+            <div class="help-actions" aria-label="Template-Aktionen">
+              <button type="button" data-template-copy="Bug gefunden: ...">
+                Bug-Template kopieren
+              </button>
+              <button
+                type="button"
+                data-template-copy="Idee: Ziel, Nutzen, naechster Schritt"
+              >
+                Ideen-Template kopieren
+              </button>
+            </div>
+          </article>
           <article class="panel" aria-labelledby="help-title">
             <h3 id="help-title">Hilfe</h3>
             <p id="help-what"></p>
@@ -694,7 +746,7 @@
           <ul id="footer-log-list" class="todo-list" role="list"></ul>
         </section>
         <section class="footer-card" aria-labelledby="footer-system-title">
-          <h2 id="footer-system-title">Tool-System-Infos</h2>
+          <h2 id="footer-system-title">Notiz</h2>
           <p class="field-tip" id="system-meta">
             Version und Projektpfad werden nach Verbindung angezeigt.
           </p>
