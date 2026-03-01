@@ -37,6 +37,18 @@
     ],
     "themeTooltipDefault": "Tipp: Bei schlechter Lesbarkeit Kontrast+ waehlen. Rueckweg: Einfach vorheriges Thema erneut waehlen.",
     "themeTooltipChanged": "Thema gewechselt zu {theme}. Rueckweg: Im Feld wieder das alte Thema waehlen.",
+    "themeA11yGuidance": {
+      "light": "Hell: Alltagsthema mit ruhigem Hintergrund. Gut bei normalem Raumlicht.",
+      "dark": "Dunkel: Geringe Blendung bei laengerer Arbeit. Tipp: Fuer kleine Schrift Kontrast+ testen.",
+      "contrast": "Kontrast+: Maximale Lesbarkeit (hoher Helligkeitsunterschied). Empfohlen bei Sehstress oder Unschaerfe.",
+      "warm": "Roetlich: Weiches Farbbild fuer entspanntes Lesen. Bei Unsicherheit zu Kontrast+ wechseln.",
+      "camo": "Camouflage: Gruen-neutrales Thema fuer lange Sitzungen. Bei schlechter Lesbarkeit auf Kontrast+ umstellen."
+    },
+    "laienTips": [
+      "Laien-Tipp 1/3: Erst den kurzen Hilfetext lesen, dann genau eine Aktion klicken.",
+      "Laien-Tipp 2/3: Bei Unsicherheit Kontrast+ aktivieren, danach Schritt erneut pruefen.",
+      "Laien-Tipp 3/3: Wenn etwas unklar bleibt: Protokoll oeffnen und den naechsten Schritt wörtlich befolgen."
+    ],
     "supportModeTooltipPartial": "Tooltip: Teilwortsuche (enthaelt) ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis.",
     "supportModeTooltipWhole": "Tooltip: Ganzwortsuche ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis.",
     "supportFilterTooltipBootDebug": "Tooltip: Boot-Debug im Verlauf ein- oder ausblenden. Naechster Schritt: Schalter mit Leertaste umstellen.",

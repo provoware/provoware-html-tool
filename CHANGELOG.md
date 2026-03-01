@@ -1,3 +1,9 @@
+## 2026-03-01 – Iteration 107: Laienhilfe und Kontrastfuehrung weiter verbessert
+
+- Systemsteuerung zeigt jetzt einen zusaetzlichen Live-Hinweis pro aktivem Farbthema (inkl. Empfehlung fuer Kontrast+ bei Lesestress).
+- Laien-Tipp-Knopf nutzt nun drei rotierende Klartext-Hinweise aus zentraler Konfiguration statt nur einem statischen Satz.
+- Debug-Knopf setzt `aria-pressed`, damit Screenreader den Ein/Aus-Zustand direkt ansagen.
+
 ## 2026-03-01 – Support-Hilfe mit klaren Rueckwegen (Iteration 101)
 
 - Wartbarkeit: Tooltip-Texte fuer Suchmodus-Badge (`TW/GW`) in `config/messages_de.json` zentralisiert, JS-Fallback bleibt aktiv.

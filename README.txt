@@ -6,6 +6,12 @@ hoher Barrierefreiheit (A11y = Bedienbarkeit fuer alle) und stabiler
 Start-Routine. Die Start-Routine prueft automatisch Abhaengigkeiten,
 Formatierung, Tests und Release-Bereitschaft.
 
+## Release-Status (Iteration 107)
+- Drei Mini-Punkte abgeschlossen: Theme-Hilfe mit A11y-Kontrasthinweisen pro Theme, rotierende Laien-Tipps und `aria-pressed` fuer den Debug-Schalter.
+- Hilfe/UX verbessert: Kontrast-Empfehlung wird bei Theme-Wechsel als Live-Hinweis aktualisiert.
+- Wartbarkeit verbessert: Laien-Tipps liegen zentral in `config/messages_de.json` und haben JS-Fallback.
+- Naechster Schritt: Theme-Auswahl optional um automatische Kontrast-Pruefung pro Nutzereinstellung erweitern.
+
 ## Release-Status (Iteration 101)
 - Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Tooltip-Texte zentral, Teilwort-Meta mit Filter-Klartext, Hilfe bei 0 Treffern).
 - Wartbarkeit verbessert: Tooltip-Texte fuer `TW/GW` liegen jetzt zentral in `config/messages_de.json` mit JS-Fallback.

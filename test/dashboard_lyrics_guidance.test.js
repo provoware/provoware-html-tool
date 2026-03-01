@@ -345,3 +345,40 @@ test("Dashboard-Layout bietet 800x600-Basis und seitliche Aufklapp-Buttons", () 
   );
   assert.match(dashboardJs, /function getResponsiveRailWidth/);
 });
+
+test("Systemsteuerung zeigt Theme-A11y-Hinweis fuer bessere Kontraste", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="theme-a11y-hint"/);
+  assert.match(dashboardHtml, /Kontrast\+ bietet die staerkste Lesbarkeit/);
+});
+
+test("Debug-Knopf pflegt aria-pressed fuer Screenreader", () => {
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(
+    dashboardJs,
+    /debugButton\.setAttribute\("aria-pressed", String\(!debugOutput\.hidden\)\)/,
+  );
+});
+
+test("Laien-Tipp nutzt rotierende Klartext-Hinweise aus Konfiguration", () => {
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+  const messagesJson = fs.readFileSync(
+    path.join(process.cwd(), "config", "messages_de.json"),
+    "utf8",
+  );
+
+  assert.match(dashboardJs, /function getNextLaienTip\(/);
+  assert.match(messagesJson, /"laienTips"\s*:\s*\[/);
+  assert.match(messagesJson, /Laien-Tipp 1\/3/);
+});
