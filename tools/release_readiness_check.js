@@ -105,6 +105,11 @@ function runReleaseReadinessCheck(options = {}) {
       "Tastatur-Hinweis fuer Escape vorhanden",
     ),
     checkIncludes(
+      dashboardHtml,
+      "Enter für Knopf",
+      "Tastatur-Hinweis fuer Enter vorhanden",
+    ),
+    checkIncludes(
       dashboardScript,
       "registerKeyboardShortcuts",
       "Tastatur-Handler ist im Script vorhanden",

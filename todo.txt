@@ -76,4 +76,4 @@ Laienvorschläge
 - [x] P1: Mini-Optimierung Hilfe: Startfehler-Hinweis in docs/HILFE.md um klaren Debug-Schritt erweitert.
 
 - [ ] P1: Mini-Optimierung Hilfe: Sternchen-Hinweis fuer Favoriten im Hilfebereich der neuen Archiv-Funktion ergaenzen.
-- [ ] P1: Mini-Optimierung A11y: Enter/Escape-Hinweis im Dashboard-Guide mit automatischem Check erweitern.
+- [x] P1: Mini-Optimierung A11y: Enter/Escape-Hinweis im Dashboard-Guide mit automatischem Check erweitern.
