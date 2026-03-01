@@ -6,16 +6,16 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 67 %
-- **Erledigt:** 35 Punkte
-- **Offen:** 17 Punkte
+- **Fortschritt:** 65 %
+- **Erledigt:** 48 Punkte
+- **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 
 ## Iteration-Update (2026-03-01)
 
-- Hilfe-Panel zeigt jetzt einen kurzen 3-Schritt-Leitfaden direkt im Bereich "Hilfe und Diagnose".
-- Ziel: schneller Start fuer Laien mit klaren naechsten Schritten und Rueckweg bei Fehlern.
+- Start-Routine synchronisiert den Fortschritt im README jetzt automatisch aus `todo.txt` (Prozent, erledigt, offen).
+- Hilfe-Panel zeigt weiterhin einen kurzen 3-Schritt-Leitfaden direkt im Bereich "Hilfe und Diagnose".
 - Naechster Schritt: Backup-Auswahl-Dialog direkt mit dem Backup-Hook verbinden.
 
 ## Offene Punkte (oben, kurz)
@@ -137,6 +137,14 @@ Bei Fehlern zeigt das System klare Aktionen:
 - **Erneut versuchen**
 - **Reparatur starten**
 - **Protokoll öffnen**
+
+### Fortschritt bei Bedarf sofort neu synchronisieren
+
+```bash
+node -e 'require("./tools/start_routine").syncReadmeProgressFromTodo(process.cwd())'
+```
+
+Damit wird nur der Fortschrittsblock in `README.txt` mit `todo.txt` abgeglichen.
 
 ## Mini-Leitfaden: Abschluss-Check (3 klare Schritte)
 

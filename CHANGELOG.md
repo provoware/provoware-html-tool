@@ -1,3 +1,5 @@
+- 2026-03-01: Start-Routine synchronisiert jetzt den README-Fortschritt automatisch aus `todo.txt` (Prozent, erledigt, offen) fuer konsistente Statusanzeige.
+
 ## 2026-03-01 – Hilfe-Panel mit 3-Schritt-Mini-Leitfaden
 
 - Hilfe-Panel zeigt jetzt den 3-Schritt-Leitfaden direkt im UI (starten, Ergebnis lesen, naechster Schritt).
