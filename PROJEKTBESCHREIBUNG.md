@@ -174,3 +174,10 @@ Vorteil fuer Laien:
 - Songtext-Lesemodus besitzt jetzt einen klaren Schliessen-Knopf mit Escape-Hinweis fuer barrierefreien Rueckweg.
 - Vorlagenhilfe ist direkt im Modul sichtbar und erklaert Intro/Refrain/Bridge/Sonstiges in einfacher Sprache.
 - Testumfang wurde um Hilfetext-Validierung erweitert, damit Input/Output der Hilfelogik stabil bleibt.
+
+
+## Iteration 65 – Referenzbild-Loeschung + Design-Layout-Manifest
+- Die Bilddatei `Beispiel_Design_Layout_Muster_Bildvorlage _als_Vorlage.png` wurde aus dem Projekt entfernt.
+- Das Dashboard wurde visuell naeher an die Vorlage gebracht: dunkles Neon-Fundament, sichtbare Rail-Rahmen und Statusbanner.
+- Neues Tool-Detail: `config/design_layout_manifest.json` beschreibt Aufbau, Designregeln, A11y-Mindestregeln und Theme-Ziele maschinenlesbar.
+- Zusatzdoku: `docs/DESIGN_LAYOUT_MANIFEST.md` enthaelt professionelle Soll/Ist-Analyse und priorisierte Folgepunkte.

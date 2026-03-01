@@ -1,3 +1,9 @@
+## 2026-03-02 – Iteration 65
+
+- Referenzbild-Datei aus dem Projekt entfernt und das Dashboard visuell auf dunkles Neon-Layout mit klarer Drei-Spalten-Struktur umgestellt.
+- Neues `design_layout_manifest` als JSON + Doku eingefuehrt (inkl. Soll/Ist-Abweichungsliste und Folgepriorisierung).
+- Risiko: niedrig, weil bestehende IDs/Bedienlogik im Dashboard erhalten blieben und nur Layout/Manifest erweitert wurden.
+
 ## 2026-03-02 – Iteration 64
 
 - Songtext-Lesemodus hat jetzt einen eigenen Schliessen-Knopf mit Escape-Hinweis und Statusmeldung.

@@ -1,3 +1,17 @@
+## FIX-20260302-065: Referenzbild ohne Datei, aber mit stabilem Layout-Manifest
+
+**Kategorie:** UI/A11y/Docs
+**Symptom (fuer Laien):** Das Team wollte das Beispielbild loeschen, aber Designvorgaben trotzdem exakt behalten.
+**Technische Ursache:** Es gab keine zentrale, maschinenlesbare Layout-Spezifikation.
+**Trigger:** Wunsch nach Referenzbild-Loeschung und gleichzeitiger professioneller Layout-Angleichung.
+**Fix (kurz):** Bilddatei entfernt, Dashboard-CSS auf Rail-Layout + Statusbanner angepasst, `design_layout_manifest.json` und Doku eingefuehrt.
+**Geaenderte Dateien/Marker:** `templates/dashboard.html`, `templates/dashboard.css`, `config/design_layout_manifest.json`, `docs/DESIGN_LAYOUT_MANIFEST.md`.
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer Layout-Regeln zuerst als Manifest pflegen, dann UI anpassen.
+**Alternative(n):** Reines PNG behalten (verworfen: nicht maschinenlesbar).
+**Risiko/Side-Effects:** Niedrig, da IDs/Funktionalitaet im Dashboard unveraendert blieb.
+**Verknuepft:** PATCH-065
+
 ## FIX-20260302-001: Quick-Store pro Bereich physisch trennen
 
 **Kategorie:** Storage/Recovery

@@ -4,19 +4,19 @@
   --space-3: 12px;
   --space-4: 16px;
   --space-5: 24px;
-  --bg: #eff4f8;
-  --fg: #122235;
-  --panel: #fff;
-  --panel-soft: #dfe7ee;
-  --topbar: #1c3d57;
-  --topbar-fg: #f3f8ff;
-  --line: #9fb3c4;
-  --accent: #2a82be;
+  --bg: #060b18;
+  --fg: #eef4ff;
+  --panel: #0c162b;
+  --panel-soft: #13213e;
+  --topbar: #081127;
+  --topbar-fg: #f5f8ff;
+  --line: #2a4a78;
+  --accent: #43b6ff;
   --ok: #188a4a;
   --warn: #995d15;
-  --shadow: 0 8px 18px rgba(12, 28, 44, 0.14);
+  --shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
   --radius: 12px;
-  --focus: #ffd64d;
+  --focus: #ffd24d;
 }
 
 [data-theme="dark"] {
@@ -87,7 +87,10 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   line-height: 1.4;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 10% 5%, rgba(67, 182, 255, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 85%, rgba(255, 124, 0, 0.18), transparent 26%),
+    var(--bg);
   color: var(--fg);
 }
 
@@ -199,8 +202,38 @@ a:focus-visible {
 .layout {
   margin-top: var(--space-2);
   display: grid;
-  grid-template-columns: minmax(200px, 240px) 1fr minmax(200px, 240px);
+  grid-template-columns: minmax(220px, 280px) 1fr minmax(220px, 300px);
   gap: var(--space-2);
+}
+
+.layout-banner {
+  margin: var(--space-2) 0 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--topbar) 80%, transparent);
+  color: var(--topbar-fg);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.layout-shell {
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  border-radius: 14px;
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--bg) 68%, #040913);
+}
+
+.left-rail,
+.right-rail {
+  border: 2px solid color-mix(in srgb, var(--accent) 55%, #ff4d4d);
+  border-radius: 12px;
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+}
+
+.center-stage {
+  gap: var(--space-3);
 }
 
 .col {
@@ -210,8 +243,8 @@ a:focus-visible {
 }
 
 .panel {
-  background: var(--panel);
-  border: 1px solid var(--line);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--panel) 90%, #101f3d), var(--panel));
+  border: 1px solid color-mix(in srgb, var(--line) 72%, #4fd1ff);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: var(--space-3);
