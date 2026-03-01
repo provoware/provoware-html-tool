@@ -20,3 +20,10 @@
 - **Was passiert mit den Daten?** Es werden nur Manifest- und Moduldateien gelesen, keine Daten werden geschrieben.
 - **Wie mache ich rueckgaengig?** Setzen Sie das Plugin im Manifest auf `"enabled": false` und starten Sie `bash start.sh` erneut.
 - **Fachwort kurz erklaert:** _Health-Check_ bedeutet kurzer Funktions-Test vor dem echten Start.
+
+## Dashboard-Mockup
+
+- **Was macht das?** `templates/dashboard_mockup.html` zeigt die aktuelle Logik (9 Start-Schritte, Theme-Auswahl, Zonen) als schnelle Vorschau.
+- **Was passiert mit den Daten?** Es ist eine reine Mockup-Ansicht, es werden keine Projektdateien geschrieben.
+- **Wie mache ich rückgängig?** Einfach Fenster schließen, dann bleibt Ihr Projekt unverändert.
+- **Fachwort kurz erklärt:** _Mockup_ bedeutet eine frühe Vorschau der Oberfläche vor weiterem Ausbau.

@@ -2,6 +2,7 @@
 Datum: 2026-02-28
 
 DONE
+- [x] Mockup `templates/dashboard_mockup.html` mit aktueller Start- und Dashboard-Logik ergänzt.
 - [x] Start-Routine in `tools/start_routine.js` zentralisiert.
 - [x] Automatische Strukturprüfung + Auto-Install + Auto-Tests aktiv.
 - [x] Registry-Service mit Manifest-Validierung ergänzt.

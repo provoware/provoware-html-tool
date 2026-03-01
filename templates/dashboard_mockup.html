@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Provoware Mockup – Aktuelle Logik</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #0f172a;
+        --surface: #e2e8f0;
+        --accent: #005fcc;
+        --ok: #0b7a2a;
+        --warn: #9a3412;
+        --gap: 0.8rem;
+      }
+      [data-theme="dark"] {
+        --bg: #0f172a;
+        --fg: #f8fafc;
+        --surface: #1e293b;
+        --accent: #60a5fa;
+        --ok: #4ade80;
+        --warn: #fb923c;
+      }
+      [data-theme="contrast"] {
+        --bg: #000;
+        --fg: #fff700;
+        --surface: #111;
+        --accent: #00ffff;
+        --ok: #7cfc00;
+        --warn: #ffb347;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      main {
+        max-width: 900px;
+        margin: 1.4rem auto;
+        padding: 0 1rem;
+      }
+      .card {
+        background: var(--surface);
+        border: 2px solid var(--accent);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      button,
+      select {
+        min-height: 44px;
+        border: 2px solid var(--accent);
+        background: var(--bg);
+        color: var(--fg);
+        border-radius: 8px;
+        padding: 0 0.8rem;
+      }
+      button:focus-visible,
+      select:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap);
+        align-items: center;
+      }
+      .steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 0.5rem;
+      }
+      .step {
+        border-left: 6px solid var(--accent);
+        padding: 0.5rem 0.7rem;
+        background: var(--bg);
+      }
+      .ok {
+        color: var(--ok);
+      }
+      .warn {
+        color: var(--warn);
+      }
+      .sr {
+        position: absolute;
+        left: -9999px;
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <main>
+      <h1>Mockup: Dashboard mit aktueller Logik</h1>
+      <p>
+        Dieses Mockup zeigt die bestehenden Schritte aus der Start-Routine und
+        dem Dashboard in einfacher Form.
+      </p>
+
+      <section class="card" aria-labelledby="theme-title">
+        <h2 id="theme-title">Aussehen und Lesbarkeit</h2>
+        <div class="row">
+          <label for="theme">Theme</label>
+          <select id="theme" aria-label="Theme auswaehlen">
+            <option value="light">Hell</option>
+            <option value="dark">Dunkel</option>
+            <option value="contrast">Kontrast+</option>
+          </select>
+          <button id="retry">Erneut versuchen</button>
+          <button id="repair">Reparatur starten</button>
+          <button id="log">Protokoll oeffnen</button>
+        </div>
+        <p id="status" aria-live="polite">
+          Bereit. Naechster Schritt: Start pruefen.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="steps-title">
+        <h2 id="steps-title">Start-Routine (9 Schritte)</h2>
+        <ol class="steps" id="steps"></ol>
+      </section>
+
+      <section class="card" aria-labelledby="zones-title">
+        <h2 id="zones-title">Dashboard-Zonen (mit Tastatur)</h2>
+        <p>
+          Hier wird die Reihenfolge simuliert. Enter aktiviert einen Knopf.
+          Escape beendet die Fokus-Reihe.
+        </p>
+        <div class="row" id="zones"></div>
+      </section>
+    </main>
+
+    <script>
+      (function mockup() {
+        const stepsNode = document.getElementById("steps");
+        const zonesNode = document.getElementById("zones");
+        const themeNode = document.getElementById("theme");
+        const statusNode = document.getElementById("status");
+        const bodyNode = document.body;
+
+        const steps = [
+          "Projektstruktur pruefen",
+          "Abhaengigkeiten automatisch installieren",
+          "Code formatieren",
+          "Tests ausfuehren",
+          "Registry pruefen",
+          "Plugin-Loader pruefen",
+          "Systemtest ausfuehren",
+          "Dashboard autostarten",
+          "Rueckmeldung mit naechstem Schritt geben",
+        ];
+        const zones = ["Favoriten", "Schnellzugriff", "Module"];
+
+        function setStatus(message) {
+          if (typeof message !== "string" || message.trim() === "") {
+            throw new Error("Status fehlt. Erneut versuchen.");
+          }
+          statusNode.textContent = message;
+          return statusNode.textContent.length > 0;
+        }
+
+        function renderSteps(items) {
+          if (!Array.isArray(items) || items.length === 0) {
+            throw new Error("Schritte fehlen. Reparatur starten.");
+          }
+          stepsNode.innerHTML = "";
+          items.forEach((text, index) => {
+            const li = document.createElement("li");
+            li.className = "step";
+            li.innerHTML =
+              `<strong>${index + 1}/9:</strong> ` +
+              `<span>${text}</span> ` +
+              `<span class="ok">(ok)</span>`;
+            stepsNode.appendChild(li);
+          });
+          return stepsNode.children.length === items.length;
+        }
+
+        function renderZones(items) {
+          if (!Array.isArray(items) || items.length === 0) {
+            throw new Error("Zonen fehlen. Protokoll oeffnen.");
+          }
+          zonesNode.innerHTML = "";
+          items.forEach((zone) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.textContent = zone;
+            button.addEventListener("click", () => {
+              setStatus(
+                `Zone aktiv: ${zone}. Naechster Schritt: Reihenfolge pruefen.`,
+              );
+            });
+            zonesNode.appendChild(button);
+          });
+          return zonesNode.children.length === items.length;
+        }
+
+        function applyTheme(theme) {
+          const allowed = ["light", "dark", "contrast"];
+          if (!allowed.includes(theme)) {
+            throw new Error("Theme ungueltig. Erneut versuchen.");
+          }
+          bodyNode.dataset.theme = theme;
+          return bodyNode.dataset.theme === theme;
+        }
+
+        document.getElementById("retry").addEventListener("click", () => {
+          setStatus("Neustart bereit. Naechster Schritt: Erneut versuchen.");
+        });
+        document.getElementById("repair").addEventListener("click", () => {
+          setStatus(
+            "Reparaturhilfe bereit. Naechster Schritt: Reparatur starten.",
+          );
+        });
+        document.getElementById("log").addEventListener("click", () => {
+          setStatus("Log-Hinweis aktiv. Naechster Schritt: Protokoll oeffnen.");
+        });
+
+        themeNode.addEventListener("change", () => {
+          const ok = applyTheme(themeNode.value);
+          setStatus(
+            ok
+              ? "Theme gesetzt. Naechster Schritt: Lesbarkeit pruefen."
+              : "Theme-Fehler.",
+          );
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setStatus("Escape erkannt. Naechster Schritt: Fokus neu setzen.");
+          }
+        });
+
+        renderSteps(steps);
+        renderZones(zones);
+      })();
+    </script>
+  </body>
+</html>
