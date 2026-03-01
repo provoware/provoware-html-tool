@@ -192,3 +192,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Vollstaendig in dashboard.js belassen (abgelehnt wegen Dateigroesse/Wartbarkeit).
 **Risiko/Side-Effects:** Zusätzliche Template-JS-Datei muss beim Laden enthalten sein.
 **Verknuepft:** Patch-ID local-012
+
+## FIX-20260301-007: Kompaktes-Dashboard-ohne-Platzhalter
+
+**Kategorie:** UI/A11y/Docs
+**Symptom (fuer Laien):** Viele Beispieltexte wirkten unruhig und verdeckten den echten Arbeitsbereich.
+**Technische Ursache:** Statische Demo-Inhalte waren direkt im HTML verteilt.
+**Trigger:** Wunsch nach maximal kompakter, uebersichtlicher und modularer Ansicht.
+**Fix (kurz):** Demo-Listen entfernt, leere Bereiche als freie Flaechen belassen, Abstaende/Font/Button-Verhaeltnisse verdichtet und Kurztexte zentral in `config/messages_de.json` ausgelagert.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, config/messages_de.json
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer UI-Kurztexte zentral halten und Platzhalter vor Release entfernen.
+**Alternative(n):** Platzhalter nur ausblenden (abgelehnt, nicht wartbar).
+**Risiko/Side-Effects:** Leere Bereiche koennen ohne echte Daten zunaechst schlicht wirken.
+**Verknuepft:** Patch-ID local-013

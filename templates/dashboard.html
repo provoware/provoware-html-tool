@@ -11,49 +11,35 @@
       <header class="topbar" aria-label="Hauptnavigation">
         <nav class="menu" aria-label="Menü">
           <a href="#" aria-current="page">Dashboard</a>
-          <a href="#">Module</a><a href="#">Kalender</a>
+          <a href="#">Module</a>
+          <a href="#">Kalender</a>
           <a href="#">Einstellungen</a>
         </nav>
         <div class="icons" aria-label="Schnellaktionen">
           <button type="button" id="toggle-debug">Debug-Modus</button>
         </div>
       </header>
+
       <section class="layout" aria-label="Dashboard Inhalte">
         <aside class="col" aria-label="Linke Spalte">
           <article class="panel" aria-labelledby="calendar-title">
             <h2 id="calendar-title">Heute</h2>
-            <div class="calendar-grid" aria-label="Kalender April 2024">
-              <span>1</span><span>2</span><span>3</span><span>4</span>
-              <span>5</span><span>6</span><span>7</span><span>8</span>
-              <span>9</span><span>10</span><span>11</span><span>12</span>
-              <span>13</span><span>14</span><span aria-current="date">15</span>
-              <span>16</span><span>17</span><span>18</span><span>19</span>
-              <span>20</span><span>21</span>
-            </div>
+            <div class="blank-area" aria-label="Leerer Kalenderbereich"></div>
           </article>
           <article class="panel" aria-labelledby="notes-title">
             <h3 id="notes-title">Notizen</h3>
-            <ul>
-              <li>Meeting um 15 Uhr</li>
-              <li>Call mit Team planen</li>
-            </ul>
+            <div class="blank-area" aria-label="Leerer Notizbereich"></div>
           </article>
           <article class="panel" aria-labelledby="todo-title">
-            <h3 id="todo-title">To-Do Liste</h3>
-            <ul>
-              <li>Report abschließen</li>
-              <li>Website aktualisieren</li>
-              <li>E-Mails senden</li>
-            </ul>
+            <h3 id="todo-title">Aufgaben</h3>
+            <div class="blank-area" aria-label="Leerer Aufgabenbereich"></div>
           </article>
         </aside>
+
         <section class="col" aria-label="Mitte">
           <article class="panel" aria-labelledby="control-title">
             <h2 id="control-title">Systemsteuerung</h2>
-            <p>
-              Was macht das? Startet den Projektzugriff mit Prüfung (Validierung
-              = Eingabeprüfung).
-            </p>
+            <p id="control-what"></p>
             <label for="theme-select">Farbthema wählen</label>
             <select id="theme-select" aria-label="Farbthema wählen">
               <option value="light">Hell</option>
@@ -73,12 +59,10 @@
             </p>
             <pre id="debug-output" class="debug" hidden></pre>
           </article>
+
           <article class="panel" aria-labelledby="workspace-title">
-            <h2 id="workspace-title">Modulfläche (zentriert und flexibel)</h2>
-            <p>
-              Die Fläche startet leer. Aktivierte Module erscheinen in Ihrer
-              Auswahl-Reihenfolge.
-            </p>
+            <h2 id="workspace-title">Modulfläche</h2>
+            <p id="workspace-help"></p>
             <div class="module-toolbar">
               <label for="grid-scale">Rastergröße</label>
               <select id="grid-scale" aria-label="Rastergröße wählen">
@@ -102,7 +86,7 @@
               data-align="center"
             >
               <p id="empty-state" class="empty-state" role="status">
-                Noch kein Modul aktiv. Wählen Sie unten ein Modul aus.
+                Noch kein Modul aktiv.
               </p>
             </div>
             <h3 id="catalog-title">Module hinzufügen</h3>
@@ -113,6 +97,7 @@
               aria-labelledby="catalog-title"
             ></div>
           </article>
+
           <article class="panel" aria-labelledby="zones-title">
             <h2 id="zones-title">Modul-Reihenfolge</h2>
             <p class="zone-help">
@@ -122,34 +107,24 @@
             <div id="zones" class="col" role="list"></div>
           </article>
         </section>
+
         <aside class="col" aria-label="Rechte Spalte">
           <article class="panel" aria-labelledby="overview-title">
             <h3 id="overview-title">Übersicht</h3>
-            <ul>
-              <li>Budget: 8.750</li>
-              <li>Aufgaben: 5/10</li>
-              <li>Offene Fälle: 320</li>
-            </ul>
+            <div class="blank-area" aria-label="Leerer Übersichtsbereich"></div>
           </article>
           <article class="panel" aria-labelledby="quick-title">
-            <h3 id="quick-title">Quick Links</h3>
-            <ul>
-              <li>Reports</li>
-              <li>Team Chat</li>
-            </ul>
+            <h3 id="quick-title">Schnellzugriff</h3>
+            <div class="blank-area" aria-label="Leerer Schnellzugriff"></div>
           </article>
-          <article class="panel" aria-labelledby="error-help-title">
-            <h3 id="error-help-title">Fehlerhilfe</h3>
-            <p class="status-warn">Was kann ich tun?</p>
-            <div class="system-actions">
-              <button type="button">Erneut versuchen</button>
-              <button type="button">Reparatur starten</button>
-              <button type="button">Protokoll öffnen</button>
-            </div>
+          <article class="panel" aria-labelledby="help-title">
+            <h3 id="help-title">Hilfe</h3>
+            <p id="help-what"></p>
           </article>
         </aside>
       </section>
     </main>
+
     <script src="module_workspace.js"></script>
     <script src="dashboard.js"></script>
   </body>
