@@ -1,7 +1,20 @@
 # SELFINFO
 
-Stand: 2026-02-28
-Iteration: 35
+Stand: 2026-03-01
+Iteration: 36
+
+## Iteration 36 – Strategie-Update
+
+- Entwicklungsstrategie auf den aktuellen Stand verdichtet: zuerst sichere
+  Kernpfade (Plugin-Loader + Storage), danach modulare Features.
+- Einheitliche Reihenfolge je Patch festgelegt: PatchSpec, Mini-Patch,
+  `bash start.sh`, Doku-Update, Abschluss-Notiz.
+- Informationsdateien synchronisiert: README, PROJECT_INFO, CHANGELOG,
+  todo, MEMORY_FIXES, QUESTIONS_TODO und AGENTS_LOG.
+- Naechste zwei Pflichtziele fuer die Folgeiteration gesetzt:
+  **B (Plugin-Loader minimal)** und **C (Storage-Service robust)**.
+- Laienfokus verstaerkt: jeder Fehlerweg bleibt bei
+  „Erneut versuchen / Reparatur starten / Protokoll oeffnen".
 
 ## Gemacht
 

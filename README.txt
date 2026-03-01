@@ -6,12 +6,23 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 68 %
-- **Erledigt:** 50 Punkte
-- **Offen:** 24 Punkte
+- **Fortschritt:** 67 %
+- **Erledigt:** 51 Punkte
+- **Offen:** 25 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
+
+
+## Strategie-Update (2026-03-01, Iteration 36)
+
+- Wir arbeiten jetzt in kurzen, klar getrennten Mini-Patches (ein Ziel je Patch).
+- Reihenfolge bleibt immer gleich: PatchSpec -> Implementierung -> `bash start.sh` -> Doku.
+- Naechste Kernziele sind fest priorisiert: **B Plugin-Loader** und
+  **C Storage-Service** (mit Validierung (Eingabepruefung), Backup-Hook und
+  klaren Fehlerwegen).
+- Alle Info-Dateien wurden in dieser Iteration synchronisiert, damit
+  Fortschritt, Risiken und naechste Schritte fuer Laien sofort sichtbar sind.
 
 ## Iteration-Update (2026-03-01)
 
