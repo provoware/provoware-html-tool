@@ -273,3 +273,5 @@ Warum das wichtig ist:
 
 Zusatzbefehl fuer sichere Format-Pruefung:
 - `npm run format:check`
+
+- Neues Update: Release-Check prueft jetzt auch zentrale Hilfe-Texte und 44px/Fokus-Basics automatisch; Mockup erhielt denselben Theme-Tipp mit Rueckweg.

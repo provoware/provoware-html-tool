@@ -44,6 +44,40 @@ function checkIncludes(haystack, needle, message) {
   };
 }
 
+function checkMessageText(value, message) {
+  assertText(message, "Pruefmeldung");
+  return {
+    ok: typeof value === "string" && value.trim() !== "",
+    message,
+  };
+}
+
+function checkMessageTriplet(messages, sectionName) {
+  if (!messages || typeof messages !== "object") {
+    return [
+      {
+        ok: false,
+        message: `Textbereich '${sectionName}' fehlt`,
+      },
+    ];
+  }
+
+  return [
+    checkMessageText(
+      messages.what,
+      `Textbereich '${sectionName}.what' ist gesetzt`,
+    ),
+    checkMessageText(
+      messages.data,
+      `Textbereich '${sectionName}.data' ist gesetzt`,
+    ),
+    checkMessageText(
+      messages.undo,
+      `Textbereich '${sectionName}.undo' ist gesetzt`,
+    ),
+  ];
+}
+
 function runReleaseReadinessCheck(options = {}) {
   const rootPath = options.rootPath || process.cwd();
   assertText(rootPath, "Projektpfad");
@@ -129,16 +163,31 @@ function runReleaseReadinessCheck(options = {}) {
       'event.key !== "Escape"',
       "Escape-Logik fuer Tastatur ist vorhanden",
     ),
+    checkIncludes(
+      dashboardCss,
+      "min-height: 44px",
+      "Mindestgroesse fuer Klickziele (44px) ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardCss,
+      "focus-visible",
+      "Sichtbarer Fokusstil ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'role="status"',
+      "Status-Text fuer Screenreader ist vorhanden",
+    ),
   ];
 
   const errorKeys = ["retry", "repair", "openLog"];
   for (const key of errorKeys) {
     const value = messages?.errors?.[key];
-    checks.push({
-      ok: typeof value === "string" && value.trim() !== "",
-      message: `Fehlertext '${key}' ist gesetzt`,
-    });
+    checks.push(checkMessageText(value, `Fehlertext '${key}' ist gesetzt`));
   }
+
+  checks.push(...checkMessageTriplet(messages?.help, "help"));
+  checks.push(...checkMessageTriplet(messages?.dashboard, "dashboard"));
 
   const failed = checks.filter((item) => !item.ok).map((item) => item.message);
   return {
