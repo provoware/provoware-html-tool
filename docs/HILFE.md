@@ -1,3 +1,11 @@
+## Neu in Iteration 86
+
+- **Safe-Mode zuruecksetzen:** Im Hilfe-Panel gibt es den Knopf **Safe-Mode zuruecksetzen**.
+  Er fragt vorher nach und setzt dann das Plugin-Manifest auf den Standard.
+- **Versionsvergleich vor Restore:** Im Backup-Dialog zeigt das Tool vor dem Restore einen kurzen Vergleich an.
+  Sie sehen sofort, ob die gewaehlte Version mehr/weniger Felder hat und groesser/kleiner ist.
+- **Boot-Fokus:** Wenn das Boot-Gate freigegeben ist, springt der Fokus automatisch auf das erste Modul.
+
 ## Kurz-Hilfe Iteration 75
 
 - Lesemodus schliessen: Beim Schliessen zeigt das Tool jetzt Enter + Alt+T/Alt+I als direkte Tastaturhilfe.

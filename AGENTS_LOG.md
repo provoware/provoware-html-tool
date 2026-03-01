@@ -70,3 +70,4 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 - PATCH-20260301-084 | Ziel: Boot-Gate + Safe-Mode-Reparatur + Current-Pointer-Recovery | Dateien: templates/dashboard.html, templates/dashboard.js, templates/boot_status.js, system-core/plugin_loader.js, system-core/self_repair.js, system-core/json_store.js, test/*, Doku-Dateien
 
 - PATCH-085 | Ziel: Boot-Gate-Hilfe + Safe-Mode-Panel + Versions-Restore | Dateien: system-module/dashboard_model.js, templates/dashboard.js, templates/dashboard.html, templates/backup_restore.js, test/dashboard_model.test.js, test/backup_restore.test.js, test/dashboard_lyrics_guidance.test.js
+- 2026-03-01 | Patch-ID iter-86-safe-reset-compare-focus | Ziel: 3 offene Mini-Punkte (Safe-Mode-Reset, Versionsvergleich, Boot-Fokus) | Dateien: templates/dashboard.js, templates/dashboard.html, templates/backup_restore.js, system-core/plugin_loader.js, test/*, docs/*

@@ -1,3 +1,9 @@
+## Update Iteration 86 – Hilfe und Wiederherstellung
+
+- Das Hilfe-Panel hat einen Safe-Mode-Reset-Knopf. Er beendet den Safe-Mode mit Sicherheitsabfrage und setzt das Plugin-Manifest auf den Standard zurueck.
+- Der Restore-Dialog zeigt jetzt vor dem Wiederherstellen einen einfachen Vergleich: Anzahl Felder und Dateigroesse. Das hilft Laien vor dem Klick.
+- Das Boot-Gate setzt nach Freigabe den Fokus automatisch auf das erste Modul. So ist die Tastatur-Navigation direkt am richtigen Startpunkt.
+
 ## Iteration 84 – Tool-Umfang erweitert
 
 - Boot-Status hat jetzt ein Weiter-Gate: der Start bleibt gesperrt, bis alle Pflichtphasen erfolgreich sind.

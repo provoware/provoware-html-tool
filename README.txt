@@ -1,3 +1,9 @@
+
+## Iteration 86 (2026-03-01)
+- Drei offene Mini-Punkte sind vollstaendig abgeschlossen: Safe-Mode-Reset im Hilfe-Panel, Versionsvergleich im Restore-Dialog, Boot-Fokus nach Gate-Freigabe.
+- Start-Routine bleibt vollautomatisch (Abhaengigkeiten, Formatierung, Tests, Release-Checks) und gibt klare naechste Schritte aus.
+- Naechster Schritt: Vergleich um Zeitstempel erweitern und Boot-Fokusziel als Einstellung speicherbar machen.
+
 ## Iteration 84 (2026-03-01)
 - Boot-Weiter-Gate ist jetzt aktiv: Weiter ist erst frei, wenn alle vier Boot-Phasen auf Gruen stehen.
 - Plugin-Loader kann jetzt bei Manifest-Fehlern in den Safe-Mode reparieren (ein Klick, klare Rueckmeldung).
@@ -139,7 +145,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 89 %
-- **Erledigt:** 151 Punkte
+- **Erledigt:** 154 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

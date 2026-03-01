@@ -75,12 +75,16 @@
   const helpRepair = document.getElementById("help-repair");
   const helpLog = document.getElementById("help-log");
   const helpBackup = document.getElementById("help-backup");
+  const helpSafeModeReset = document.getElementById("help-safe-mode-reset");
   const backupDialog = document.getElementById("backup-dialog");
   const backupDialogClose = document.getElementById("backup-dialog-close");
   const backupSelect = document.getElementById("backup-select");
   const backupTargetSelect = document.getElementById("backup-target-select");
   const backupVersionSelect = document.getElementById("backup-version-select");
   const backupVersionHelp = document.getElementById("backup-version-help");
+  const backupVersionCompare = document.getElementById(
+    "backup-version-compare",
+  );
   const backupRestoreVersion = document.getElementById(
     "backup-restore-version",
   );
@@ -708,6 +712,16 @@
         "Start-Gate freigegeben. Naechster Schritt: Modul waehlen und weiterarbeiten.",
       );
       setDebug("Debug: Boot-Gate geoeffnet und freigegeben.");
+      const firstModule = document.querySelector(
+        "#active-modules .module-card",
+      );
+      if (firstModule instanceof HTMLElement) {
+        firstModule.focus();
+        if (helpWhat) {
+          helpWhat.textContent =
+            "Boot ist frei. Fokus ist jetzt auf dem ersten Modul.";
+        }
+      }
     });
 
     return true;
@@ -1176,6 +1190,7 @@
         backupVersionHelp.textContent =
           "Versionen fehlen. Naechster Schritt: Ziel-Datei waehlen oder Projekt verbinden.";
       }
+      updateVersionCompare();
       return false;
     }
 
@@ -1193,6 +1208,7 @@
         backupVersionHelp.textContent =
           "Keine Version fuer Ziel-Datei. Naechster Schritt: Normales Backup nutzen.";
       }
+      updateVersionCompare();
       return false;
     }
 
@@ -1206,7 +1222,106 @@
       backupVersionHelp.textContent =
         "Version geladen. Naechster Schritt: Version wiederherstellen oder Zurueck.";
     }
+    await updateVersionCompare();
     return true;
+  }
+
+  async function updateVersionCompare() {
+    if (!backupVersionCompare || !backupVersionSelect || !backupTargetSelect) {
+      return false;
+    }
+
+    const versionFileName = backupVersionSelect.value || "";
+    const targetPath = backupTargetSelect.value || "";
+    const targetFileName = targetPath.split("/").pop() || "";
+
+    if (!versionFileName || !targetFileName) {
+      backupVersionCompare.textContent =
+        "Vergleich wird nach Versionswahl angezeigt.";
+      return false;
+    }
+
+    if (!selectedProjectDir || !window.BackupRestore) {
+      backupVersionCompare.textContent =
+        "Vergleich nicht moeglich. Naechster Schritt: Projekt verbinden.";
+      return false;
+    }
+
+    try {
+      const summary =
+        await window.BackupRestore.compareVersionWithCurrentFromDirectory(
+          selectedProjectDir,
+          targetFileName,
+          versionFileName,
+        );
+      backupVersionCompare.textContent =
+        summary?.text ||
+        "Vergleich geladen. Naechster Schritt: Version wiederherstellen oder Zurueck.";
+      return true;
+    } catch (error) {
+      backupVersionCompare.textContent =
+        "Vergleich fehlgeschlagen. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.";
+      return false;
+    }
+  }
+
+  async function resetSafeMode() {
+    if (!selectedProjectDir) {
+      setStatus(
+        "Projektordner fehlt. Naechster Schritt: Projektordner waehlen und erneut versuchen.",
+      );
+      return false;
+    }
+
+    const confirmText =
+      "Safe-Mode wird beendet und Standard-Plugins werden gesetzt. Weiter?";
+    if (!window.confirm(confirmText)) {
+      setStatus(
+        "Safe-Mode-Reset abgebrochen. Naechster Schritt: Erneut versuchen.",
+      );
+      return false;
+    }
+
+    try {
+      const configDir = await selectedProjectDir.getDirectoryHandle("config", {
+        create: false,
+      });
+      const manifestDir = await configDir.getDirectoryHandle("manifests", {
+        create: false,
+      });
+      const manifestHandle = await manifestDir.getFileHandle(
+        "plugins.manifest.json",
+        { create: true },
+      );
+
+      const defaultManifest = {
+        manifestType: "plugin-loader",
+        version: "1.0.0",
+        plugins: [
+          {
+            id: "plugin-a11y-assist",
+            enabled: true,
+            modulePath: "system-module/plugins_accessibility.js",
+          },
+        ],
+      };
+
+      const writable = await manifestHandle.createWritable();
+      await writable.write(`${JSON.stringify(defaultManifest, null, 2)}\n`);
+      await writable.close();
+
+      updateSafeModeStatus({ isSafeMode: false });
+      setStatus(
+        "Safe-Mode-Reset abgeschlossen. Naechster Schritt: Start erneut versuchen.",
+      );
+      setDebug("Debug: Safe-Mode-Manifest auf Standard gesetzt.");
+      return true;
+    } catch (error) {
+      setStatus(
+        "Safe-Mode-Reset fehlgeschlagen. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+      );
+      return false;
+    }
   }
 
   async function restoreSelectedVersion() {
@@ -1382,6 +1497,18 @@
   }
   if (backupRestore) {
     backupRestore.addEventListener("click", restoreSelectedBackup);
+  }
+  if (backupRestoreVersion) {
+    backupRestoreVersion.addEventListener("click", restoreSelectedVersion);
+  }
+  if (backupTargetSelect) {
+    backupTargetSelect.addEventListener("change", loadVersionOptions);
+  }
+  if (backupVersionSelect) {
+    backupVersionSelect.addEventListener("change", updateVersionCompare);
+  }
+  if (helpSafeModeReset) {
+    helpSafeModeReset.addEventListener("click", resetSafeMode);
   }
   if (backupDialog) {
     backupDialog.addEventListener("cancel", (event) => {

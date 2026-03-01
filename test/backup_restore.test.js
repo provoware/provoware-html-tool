@@ -7,6 +7,8 @@ const {
   listVersionFilesFromDirectory,
   restoreBackupFromDirectory,
   restoreVersionFromDirectory,
+  compareVersionWithCurrentFromDirectory,
+  createVersionCompareSummary,
 } = require("../templates/backup_restore");
 
 function createFileHandle(initialContent = "") {
@@ -241,4 +243,59 @@ test("restoreVersionFromDirectory schreibt gewaehlte Version", async () => {
 
   assert.equal(result.ok, true);
   assert.match(fileMap["store.json"].read(), /"x": 3/);
+});
+
+test("createVersionCompareSummary gibt klare Vergleichshilfe", () => {
+  const result = createVersionCompareSummary({
+    currentKeys: 4,
+    versionKeys: 6,
+    currentBytes: 120,
+    versionBytes: 140,
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.keyDiff, 2);
+  assert.match(result.text, /Naechster Schritt/);
+});
+
+test("compareVersionWithCurrentFromDirectory vergleicht aktuelle Datei", async () => {
+  const fileMap = {
+    "store.json": createFileHandle('{"a":1,"b":2}\n'),
+  };
+  const versionMap = {
+    "store_v0002.json": createFileHandle('{"a":1,"b":2,"c":3}\n'),
+  };
+
+  const directoryHandle = {
+    async getDirectoryHandle(name) {
+      if (name !== "data") {
+        throw new Error("Ungueltiger Unterordner");
+      }
+      return {
+        async getDirectoryHandle(versionName) {
+          if (versionName !== "store_versions") {
+            throw new Error("Version-Ordner fehlt");
+          }
+          return {
+            async getFileHandle(fileName) {
+              return versionMap[fileName];
+            },
+          };
+        },
+        async getFileHandle(fileName) {
+          return fileMap[fileName];
+        },
+      };
+    },
+  };
+
+  const result = await compareVersionWithCurrentFromDirectory(
+    directoryHandle,
+    "store.json",
+    "store_v0002.json",
+  );
+
+  assert.equal(result.ok, true);
+  assert.equal(result.keyDiff, 1);
+  assert.match(result.text, /Version/);
 });

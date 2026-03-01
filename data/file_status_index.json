@@ -15,16 +15,16 @@
   },
   {
     "file": "templates/dashboard.html",
-    "version": "v013",
+    "version": "v014",
     "status": "ready",
-    "updatedAt": "2026-03-03T21:00:00.000Z",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
     "owner": "codex"
   },
   {
     "file": "templates/dashboard.js",
-    "version": "v011",
+    "version": "v012",
     "status": "ready",
-    "updatedAt": "2026-03-03T21:00:00.000Z",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
     "owner": "codex"
   },
   {
@@ -43,9 +43,9 @@
   },
   {
     "file": "templates/backup_restore.js",
-    "version": "v001",
+    "version": "v002",
     "status": "ready",
-    "updatedAt": "2026-03-01T13:00:00.000Z",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
     "owner": "codex"
   },
   {
@@ -57,9 +57,9 @@
   },
   {
     "file": "system-core/plugin_loader.js",
-    "version": "v002",
+    "version": "v003",
     "status": "ready",
-    "updatedAt": "2026-03-01T16:00:00.000Z",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
     "owner": "codex"
   },
   {
@@ -211,9 +211,9 @@
   },
   {
     "file": "docs/HILFE.md",
-    "version": "v004",
+    "version": "v005",
     "status": "ready",
-    "updatedAt": "2026-03-03T18:00:00.000Z",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
     "owner": "codex"
   },
   {
@@ -239,9 +239,16 @@
   },
   {
     "file": "test/dashboard_lyrics_guidance.test.js",
+    "version": "v002",
+    "status": "ready",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "test/backup_restore.test.js",
     "version": "v001",
     "status": "ready",
-    "updatedAt": "2026-03-03T21:00:00.000Z",
+    "updatedAt": "2026-03-01T16:30:00.000Z",
     "owner": "codex"
   }
 ]

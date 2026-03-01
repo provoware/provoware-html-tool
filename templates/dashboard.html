@@ -679,6 +679,9 @@
             <p id="help-what"></p>
             <p id="safe-mode-status" class="field-tip" aria-live="polite"></p>
             <div class="help-actions" aria-label="Hilfe-Aktionen">
+              <button type="button" id="help-safe-mode-reset">
+                Safe-Mode zuruecksetzen
+              </button>
               <button type="button" id="help-retry">Erneut versuchen</button>
               <button type="button" id="help-repair">Reparatur starten</button>
               <button type="button" id="help-log">Protokoll öffnen</button>
@@ -732,6 +735,13 @@
               <p class="field-tip" id="backup-version-help" aria-live="polite">
                 Versionen werden nach Ziel-Datei geladen. Rueckweg: leer lassen
                 und normales Backup nutzen.
+              </p>
+              <p
+                class="field-tip"
+                id="backup-version-compare"
+                aria-live="polite"
+              >
+                Vergleich wird nach Versionswahl angezeigt.
               </p>
               <ol id="backup-checklist" class="backup-checklist" role="list">
                 <li>Funktion ist fertig und pruefbar.</li>
