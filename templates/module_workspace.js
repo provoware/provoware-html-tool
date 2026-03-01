@@ -15,6 +15,11 @@
       fallback: "Ausblenden",
       undo: "Rueckweg: Modul im Katalog erneut aktivieren.",
     },
+    pin: {
+      short: "Oben anheften",
+      fallback: "Anheftung loesen",
+      undo: "Rueckweg: Gleichen Knopf erneut druecken.",
+    },
   };
 
   const MODULE_CATALOG = [
@@ -88,7 +93,9 @@
     }
 
     function renderActiveModules() {
-      const visibleModules = moduleModel.filter((entry) => !entry.hidden);
+      const visibleModules = moduleModel
+        .filter((entry) => !entry.hidden)
+        .sort((left, right) => Number(right.pinned) - Number(left.pinned));
       grid.innerHTML = "";
 
       if (visibleModules.length === 0) {
@@ -106,6 +113,9 @@
         if (maximizedId === entry.id) {
           card.classList.add("is-maximized");
         }
+        if (entry.pinned) {
+          card.classList.add("is-pinned");
+        }
 
         const order = document.createElement("p");
         order.className = "module-order";
@@ -116,6 +126,20 @@
 
         const actions = document.createElement("div");
         actions.className = "module-card-actions";
+
+        const pin = document.createElement("button");
+        pin.type = "button";
+        const pinActive = entry.pinned === true;
+        pin.textContent = pinActive ? "Loesen" : "Anheften";
+        pin.title = getControlHint("pin", pinActive);
+        pin.setAttribute("aria-label", pin.title);
+        pin.addEventListener("click", () => {
+          entry.pinned = !pinActive;
+          renderActiveModules();
+          setStatus(
+            "Anheftung aktualisiert. Naechster Schritt: Reihenfolge pruefen.",
+          );
+        });
 
         const maximize = document.createElement("button");
         maximize.type = "button";
@@ -169,7 +193,7 @@
           );
         });
 
-        actions.append(maximize, minimize, hide);
+        actions.append(pin, maximize, minimize, hide);
         card.append(order, title, actions);
 
         if (!entry.minimized) {
@@ -199,6 +223,7 @@
         position,
         minimized: false,
         hidden: false,
+        pinned: false,
       });
       renderActiveModules();
       setStatus(

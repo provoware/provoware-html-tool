@@ -40,6 +40,8 @@
   const leftRailToggle = document.getElementById("left-rail-toggle");
   const rightRailToggle = document.getElementById("right-rail-toggle");
   const layoutReset = document.getElementById("layout-reset");
+  const focusModeToggle = document.getElementById("focus-mode-toggle");
+  const focusModeRestore = document.getElementById("focus-mode-restore");
 
   function formatText(template, values) {
     if (typeof template !== "string" || !template.trim()) {
@@ -85,6 +87,18 @@
     { id: "modules", title: "📦 Module" },
   ];
 
+  const dashboardModel = window.DashboardModel || {};
+  const normalizeLayoutWithModel =
+    dashboardModel.normalizeLayoutState || normalizeLayoutStateLocal;
+  const getGridColumnsWithModel =
+    dashboardModel.getGridColumnCount || getGridColumnCountLocal;
+  const createLayoutSnapshot =
+    dashboardModel.createLayoutSnapshot || createLayoutSnapshotLocal;
+  const applyLayoutSnapshot =
+    dashboardModel.applyLayoutSnapshot || applyLayoutSnapshotLocal;
+
+  let focusSnapshot = null;
+
   function clampNumber(value, min, max) {
     if (typeof value !== "number" || Number.isNaN(value)) {
       return min;
@@ -101,7 +115,7 @@
     return value;
   }
 
-  function normalizeLayoutState(input) {
+  function normalizeLayoutStateLocal(input) {
     const source = input && typeof input === "object" ? input : {};
     return {
       leftWidth: clampNumber(source.leftWidth, 220, 340),
@@ -111,7 +125,7 @@
     };
   }
 
-  function getGridColumnCount(viewportWidth) {
+  function getGridColumnCountLocal(viewportWidth) {
     if (!Number.isFinite(viewportWidth) || viewportWidth < 1) {
       return 1;
     }
@@ -131,13 +145,24 @@
     return 4;
   }
 
+  function createLayoutSnapshotLocal(layoutStateInput) {
+    return normalizeLayoutStateLocal(layoutStateInput);
+  }
+
+  function applyLayoutSnapshotLocal(layoutStateInput, snapshot) {
+    if (!snapshot || typeof snapshot !== "object") {
+      return normalizeLayoutStateLocal(layoutStateInput);
+    }
+    return normalizeLayoutStateLocal(snapshot);
+  }
+
   function updateGridColumns() {
     const grid = document.getElementById("active-modules");
     if (!grid) {
       return false;
     }
 
-    const columns = getGridColumnCount(window.innerWidth || 1);
+    const columns = getGridColumnsWithModel(window.innerWidth || 1);
     grid.style.setProperty("--grid-columns", String(columns));
     return true;
   }
@@ -175,7 +200,7 @@
   }
 
   async function persistLayoutState() {
-    const safeLayout = normalizeLayoutState(layoutState);
+    const safeLayout = normalizeLayoutWithModel(layoutState);
     layoutState = safeLayout;
 
     if (!selectedProjectDir) {
@@ -192,7 +217,7 @@
   }
 
   async function loadLayoutState() {
-    const fallback = normalizeLayoutState(layoutState);
+    const fallback = normalizeLayoutWithModel(layoutState);
     const loaded = await readProjectJson("data/layout.json");
     if (!loaded.ok) {
       layoutState = fallback;
@@ -200,7 +225,7 @@
       return false;
     }
 
-    layoutState = normalizeLayoutState(loaded.value?.layout);
+    layoutState = normalizeLayoutWithModel(loaded.value?.layout);
     applyLayoutState();
     return true;
   }
@@ -229,6 +254,35 @@
     });
   }
 
+  function applyFocusModeState(isActive) {
+    if (!layoutRoot || !focusModeToggle || !focusModeRestore) {
+      return false;
+    }
+
+    layoutRoot.dataset.focusMode = String(Boolean(isActive));
+    focusModeToggle.hidden = Boolean(isActive);
+    focusModeRestore.hidden = !isActive;
+    return true;
+  }
+
+  function startFocusMode() {
+    focusSnapshot = createLayoutSnapshot(layoutState);
+    applyFocusModeState(true);
+    setStatus(
+      "Fokusmodus aktiv. Naechster Schritt: Mit Escape oder Knopf beenden.",
+    );
+    return true;
+  }
+
+  function stopFocusMode() {
+    layoutState = applyLayoutSnapshot(layoutState, focusSnapshot);
+    focusSnapshot = null;
+    applyLayoutState();
+    applyFocusModeState(false);
+    setStatus("Fokusmodus beendet. Naechster Schritt: Layout weiter nutzen.");
+    return true;
+  }
+
   function registerLayoutControls() {
     leftRailToggle.addEventListener("click", () => {
       layoutState.leftCollapsed = !layoutState.leftCollapsed;
@@ -249,7 +303,10 @@
     });
 
     layoutReset.addEventListener("click", () => {
-      layoutState = normalizeLayoutState({ leftWidth: 260, rightWidth: 280 });
+      layoutState = normalizeLayoutWithModel({
+        leftWidth: 260,
+        rightWidth: 280,
+      });
       applyLayoutState();
       persistLayoutState().catch(() => {
         setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
@@ -261,6 +318,9 @@
 
     splitterLeft.addEventListener("click", () => changeRailWidth("left", 20));
     splitterRight.addEventListener("click", () => changeRailWidth("right", 20));
+
+    focusModeToggle.addEventListener("click", startFocusMode);
+    focusModeRestore.addEventListener("click", stopFocusMode);
 
     [splitterLeft, splitterRight].forEach((splitter) => {
       splitter.addEventListener("keydown", (event) => {
@@ -353,6 +413,11 @@
 
       if (backupDialog?.open) {
         closeBackupDialog();
+        return true;
+      }
+
+      if (layoutRoot?.dataset.focusMode === "true") {
+        stopFocusMode();
         return true;
       }
 
@@ -950,6 +1015,8 @@
     [leftRailToggle, "Layout-Nav-Knopf"],
     [rightRailToggle, "Layout-Einstellungen-Knopf"],
     [layoutReset, "Layout-Reset-Knopf"],
+    [focusModeToggle, "Fokusmodus-Start-Knopf"],
+    [focusModeRestore, "Fokusmodus-Ende-Knopf"],
     [splitterLeft, "Layout-Splitter links"],
     [splitterRight, "Layout-Splitter rechts"],
   ].forEach(([element, name]) => validateElement(element, name));
@@ -1012,6 +1079,7 @@
 
   registerKeyboardShortcuts();
   registerLayoutControls();
+  applyFocusModeState(false);
   renderZones();
   reconnectProjectFolder();
 })();

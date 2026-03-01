@@ -1,7 +1,9 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
+  applyLayoutSnapshot,
   buildQuickAccess,
+  createLayoutSnapshot,
   getGridColumnCount,
   moveZone,
   normalizeLayoutState,
@@ -59,4 +61,25 @@ test("getGridColumnCount waehlt 1 bis 4 Spalten je Breite", () => {
   assert.equal(getGridColumnCount(700), 2);
   assert.equal(getGridColumnCount(1100), 3);
   assert.equal(getGridColumnCount(1500), 4);
+});
+
+test("createLayoutSnapshot und applyLayoutSnapshot arbeiten mit sicheren Werten", () => {
+  const snapshot = createLayoutSnapshot({
+    leftWidth: 250,
+    rightWidth: 300,
+    leftCollapsed: false,
+    rightCollapsed: true,
+  });
+
+  const restored = applyLayoutSnapshot(
+    {
+      leftWidth: 260,
+      rightWidth: 280,
+      leftCollapsed: false,
+      rightCollapsed: false,
+    },
+    snapshot,
+  );
+
+  assert.deepEqual(restored, snapshot);
 });

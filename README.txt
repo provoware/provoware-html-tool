@@ -108,7 +108,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 86 %
-- **Erledigt:** 128 Punkte
+- **Erledigt:** 130 Punkte
 - **Offen:** 21 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -542,3 +542,10 @@ Naechster Schritt: Layout-Splitter + Collapse + Persistenz in `data/layout.json`
 - Neu: Layout-Persistenz in `data/layout.json` (pro Projekt) sowie responsive Modul-Grid mit 1-4 Spalten.
 - Hilfe fuer Laien: Direkt ueber der Steuerung steht jetzt kurz, was die Knopfe tun und wie der Rueckweg geht.
 
+
+
+Update 2026-03-03:
+- Neue Wartbarkeits-Verbesserung: Fokusmodus starten/beenden ueber eigene Knoepfe und Escape.
+- Modulsteuerung hat jetzt einen Pin-Knopf mit klarer Rueckweg-Hilfe.
+- Doku ist kurz aktualisiert (README, CHANGELOG, todo).
+- Naechster Schritt: Inspector-Tabs fuer Fokus-/Pin-Status ausbauen.

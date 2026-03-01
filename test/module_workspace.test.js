@@ -25,9 +25,11 @@ test("Modul-Control-Hinweise sind einheitlich und mit Rueckweg", () => {
   const maximizeHint = getHint("maximize", false);
   const normalizeHint = getHint("maximize", true);
   const hideHint = getHint("hide", false);
+  const pinHint = getHint("pin", false);
 
   assert.match(maximizeHint, /Groesser anzeigen/);
   assert.match(normalizeHint, /Normalgroesse waehlen/);
   assert.match(maximizeHint, /Rueckweg/);
   assert.match(hideHint, /Katalog erneut aktivieren/);
+  assert.match(pinHint, /Oben anheften/);
 });

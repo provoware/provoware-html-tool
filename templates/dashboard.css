@@ -303,6 +303,24 @@ a:focus-visible {
   grid-template-columns: 1fr;
 }
 
+
+.layout[data-focus-mode="true"] {
+  grid-template-columns: 1fr;
+}
+
+.layout[data-focus-mode="true"] .left-rail,
+.layout[data-focus-mode="true"] .right-rail,
+.layout[data-focus-mode="true"] .layout-splitter {
+  display: none;
+}
+
+.layout[data-focus-mode="true"] .center-stage {
+  min-height: 80vh;
+}
+
+.module-card.is-pinned {
+  box-shadow: inset 0 0 0 2px var(--focus);
+}
 .layout-controls {
   margin-top: var(--space-2);
   display: flex;

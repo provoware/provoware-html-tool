@@ -1,3 +1,11 @@
+## Iteration 77 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Pin-Knopf + Fokusmodus mit Snapshot/Restore).
+- Ergebnis: Modulsteuerung hat jetzt den Pin-Knopf im gleichen Tooltip-Standard mit Rueckweg-Hinweis.
+- Ergebnis: Fokusmodus als globaler Zustand ist eingebaut (Start/Restore/ESC) und nutzt Layout-Snapshot fuer sicheren Rueckweg.
+- Mini-Optimierung: Dashboard nutzt zentrale Layout-Helfer aus `system-module/dashboard_model.js` fuer bessere Wartbarkeit.
+- Naechster Schritt: Pin-Status in `data/layout.json` persistieren und Inspector-Hinweise ausbauen.
+
 ## Iteration 76 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Modul-Control-Tooltips vereinheitlichen + A11y-Abschlussbericht in Start-Routine).

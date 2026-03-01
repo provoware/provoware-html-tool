@@ -1,3 +1,9 @@
+## 2026-03-03 – Wartbarkeit: Modell-Helfer + Fokusmodus
+
+- Dashboard nutzt jetzt zentrale Layout-Helfer aus `system-module/dashboard_model.js` (weniger doppelte Logik, leichter zu warten).
+- Modulsteuerung hat jetzt Pin-Knopf mit einheitlichem Tooltip-Standard und Rueckweg-Hinweis.
+- Fokusmodus (100%-Ansicht) ist als globaler Zustand mit Escape + Restore-Knopf abgesichert.
+
 ## 2026-03-03 – Iteration 76
 
 - Zwei offene Mini-Punkte abgeschlossen: Modul-Control-Leiste verwendet jetzt einheitliche Tooltip-Kurztexte mit Rueckweg-Hinweis fuer Maximieren, Minimieren und Ausblenden.
