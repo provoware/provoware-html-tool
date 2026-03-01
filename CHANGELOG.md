@@ -1,3 +1,9 @@
+## 2026-03-01 – Iteration 79
+
+- Start-Routine prueft jetzt strikt: Es muessen genau drei offene `Naechster Mini-Punkt`-Eintraege in `todo.txt` vorhanden sein.
+- Neue TODO-Vorlagenpruefung erzwingt Pflichtfelder pro offenem Mini-Punkt: Code, Tests, Doku, Risiko, Naechster Schritt.
+- `todo.txt` hat jetzt eine feste Vorlage und drei offene Mini-Punkte mit vollstaendigen Pflichtfeldern fuer releasefertige Planung.
+
 ## 2026-03-01 – Iteration 78
 
 - Fokusmodus zeigt jetzt klare Hilfe im rechten Hilfebereich mit Rueckweg (Escape oder Button).

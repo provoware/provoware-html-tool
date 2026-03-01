@@ -412,8 +412,39 @@ function validateOpenMiniPoints(todoContent) {
     todoContent.match(/^- \[ \] Naechster Mini-Punkt:/gim) || [];
 
   return {
-    ok: openMiniPoints.length === 2,
+    ok: openMiniPoints.length === 3,
     count: openMiniPoints.length,
+  };
+}
+
+function validateMiniPointTemplate(todoContent) {
+  assertText(todoContent, "TODO-Inhalt");
+  const missingFields = [];
+  const openMiniPointLines = todoContent
+    .split("\n")
+    .filter((line) => /^- \[ \] Naechster Mini-Punkt:/i.test(line));
+  const requiredFields = [
+    "Code:",
+    "Tests:",
+    "Doku:",
+    "Risiko:",
+    "Naechster Schritt:",
+  ];
+
+  openMiniPointLines.forEach((line, index) => {
+    requiredFields.forEach((field) => {
+      if (!line.includes(field)) {
+        missingFields.push({
+          index: index + 1,
+          field,
+        });
+      }
+    });
+  });
+
+  return {
+    ok: missingFields.length === 0,
+    missingFields,
   };
 }
 
@@ -634,11 +665,23 @@ function runStartRoutine() {
   const miniPointCheck = validateOpenMiniPoints(todoContent);
   if (!miniPointCheck.ok) {
     throw new Error(
-      `TODO-Regel verletzt: Es muessen genau zwei offene Naechster Mini-Punkt-Eintraege vorhanden sein. Aktuell: ${miniPointCheck.count}. ` +
+      `TODO-Regel verletzt: Es muessen genau drei offene Naechster Mini-Punkt-Eintraege vorhanden sein. Aktuell: ${miniPointCheck.count}. ` +
         "Naechster Schritt: TODO anpassen und erneut versuchen.",
     );
   }
-  console.log("[12/14] TODO-Regel geprueft: genau zwei offene Mini-Punkte");
+  console.log("[12/14] TODO-Regel geprueft: genau drei offene Mini-Punkte");
+
+  const templateCheck = validateMiniPointTemplate(todoContent);
+  if (!templateCheck.ok) {
+    const firstMissing = templateCheck.missingFields[0];
+    throw new Error(
+      "TODO-Vorlage verletzt: Bei jedem offenen Naechster Mini-Punkt muessen die Pflichtfelder " +
+        "Code, Tests, Doku, Risiko und Naechster Schritt gesetzt sein. " +
+        `Fehlend bei Eintrag ${firstMissing.index}: ${firstMissing.field} ` +
+        "Naechster Schritt: TODO anpassen und erneut versuchen.",
+    );
+  }
+  console.log("[12/14] TODO-Vorlage geprueft: Pflichtfelder sind gesetzt");
 
   console.log("[13/14] README-Fortschritt aus TODO synchronisieren");
   const progress = syncReadmeProgressFromTodo(process.cwd());
@@ -701,6 +744,7 @@ module.exports = {
   calculateTodoProgress,
   syncReadmeProgressFromTodo,
   validateOpenMiniPoints,
+  validateMiniPointTemplate,
   runShortcutConflictCheck,
   buildShortcutConflictSummary,
 };

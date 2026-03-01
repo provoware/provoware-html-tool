@@ -7,6 +7,9 @@
 # TODO – Neustart
 Datum: 2026-02-28
 
+Vorlage fuer offene Naechster Mini-Punkt-Eintraege (Pflichtfelder):
+Beispiel: Naechster Mini-Punkt: <Titel> | Code: <Aenderung> | Tests: <Testlauf/Ergebnis> | Doku: <Dateien aktualisiert> | Risiko: <niedrig/mittel/hoch + Grund> | Naechster Schritt: <klare Aktion>
+
 DONE
 - [x] Dashboard kompakter gemacht, Pseudotexte entfernt und leere Bereiche klar als freie Flächen belassen.
 - [x] Dashboard-Kurztexte zentral in `config/messages_de.json` ausgelagert.
@@ -215,5 +218,7 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Fokusmodus-Hinweise im Inspector-Tab sichtbar machen.
 - [x] Naechster Mini-Punkt: Modul-Anheften zusaetzlich in layout.json persistieren.
 
-- [ ] Naechster Mini-Punkt: Rechte Sidebar als ausklappbare Favoritenleiste mit Schnellaktionen aufbauen.
-- [ ] Naechster Mini-Punkt: Modulbereich unten fuer modulspezifische Optionen reservieren und sichtbar machen.
+- [ ] Naechster Mini-Punkt: Rechte Sidebar als ausklappbare Favoritenleiste mit Schnellaktionen aufbauen. | Code: Sidebar-Komponente + Toggle-Hook in Dashboard-Layout verbinden | Tests: Sidebar-Render + Keyboard-Shortcut-Test ergänzen und ausführen | Doku: README + docs/HILFE um Sidebar-Nutzung ergänzen | Risiko: mittel (Layout-Umbau kann Fokus-Reihenfolge verschieben) | Naechster Schritt: Sidebar-Grundgerüst implementieren und Fokuspfad prüfen.
+- [ ] Naechster Mini-Punkt: Modulbereich unten fuer modulspezifische Optionen reservieren und sichtbar machen. | Code: Unteren Modulbereich im Workspace als feste Region einführen | Tests: Layout-Persistenz + Resize-Test ergänzen und ausführen | Doku: PROJEKTBESCHREIBUNG + README um Bereichslogik ergänzen | Risiko: niedrig (isolierte Template-Anpassung mit bekannten Daten) | Naechster Schritt: Region in module_workspace aktivieren und mit Beispieldaten prüfen.
+
+- [ ] Naechster Mini-Punkt: TODO-Vorlage-Check in Start-Routine strikt halten und Fehlermeldung fuer Laien verfeinern. | Code: TODO-Template-Validierung zentral in Start-Routine sichern | Tests: Unit-Test fuer fehlende Pflichtfelder gruen laufen lassen | Doku: CHANGELOG + README mit Pflichtfeld-Regel aktualisieren | Risiko: niedrig (nur Validierungslogik, kein Produktivdatenpfad) | Naechster Schritt: Start-Routine lokal starten und neue Meldung pruefen.
