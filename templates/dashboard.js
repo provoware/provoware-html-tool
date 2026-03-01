@@ -32,6 +32,7 @@
   const bootSummary = document.getElementById("boot-summary");
   const bootContinue = document.getElementById("boot-continue");
   const bootGateHint = document.getElementById("boot-gate-hint");
+  const safeModeStatus = document.getElementById("safe-mode-status");
   const kanbanPreview = document.getElementById("kanban-preview");
   const kanbanStatus = document.getElementById("kanban-status");
   const layoutRoot = document.querySelector(".layout");
@@ -78,6 +79,11 @@
   const backupDialogClose = document.getElementById("backup-dialog-close");
   const backupSelect = document.getElementById("backup-select");
   const backupTargetSelect = document.getElementById("backup-target-select");
+  const backupVersionSelect = document.getElementById("backup-version-select");
+  const backupVersionHelp = document.getElementById("backup-version-help");
+  const backupRestoreVersion = document.getElementById(
+    "backup-restore-version",
+  );
   const backupRestore = document.getElementById("backup-restore");
 
   const ensureMessage =
@@ -131,6 +137,39 @@
       status:
         "Aktion gestartet. Naechster Schritt: Ergebnis pruefen oder Protokoll oeffnen.",
     }));
+  const buildBootGateHint =
+    dashboardModel.buildBootGateHint ||
+    ((allPhasesOk) => ({
+      gateOpen: allPhasesOk === true,
+      hint:
+        allPhasesOk === true
+          ? "Weiter ist frei. Naechster Schritt: Mit Weiter direkt ins Dashboard."
+          : "Weiter ist gesperrt. Naechster Schritt: Erst alle Phasen auf Gruen bringen.",
+      help:
+        allPhasesOk === true
+          ? "Boot ist bereit. Rueckweg: Bei Bedarf Phase pruefen und dann Weiter nutzen."
+          : "Boot ist noch nicht fertig. Naechster Schritt: Phase pruefen, dann erneut versuchen.",
+    }));
+  const buildSafeModeStatus =
+    dashboardModel.buildSafeModeStatus ||
+    ((input) => {
+      const safe = input && typeof input === "object" ? input : {};
+      const enabled = safe.isSafeMode === true;
+      const reason =
+        typeof safe.reason === "string" && safe.reason.trim()
+          ? safe.reason.trim()
+          : "kein Fehlergrund gemeldet";
+      if (enabled) {
+        return {
+          isSafeMode: true,
+          text: `Safe-Mode aktiv. Grund: ${reason}. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.`,
+        };
+      }
+      return {
+        isSafeMode: false,
+        text: "Safe-Mode aus. Naechster Schritt: Normal weiterarbeiten oder bei Fehlern Protokoll oeffnen.",
+      };
+    });
 
   let focusSnapshot = null;
   let activeModules = [];
@@ -431,6 +470,17 @@
     }
   }
 
+  function updateSafeModeStatus(state) {
+    if (!safeModeStatus) {
+      return false;
+    }
+
+    const model = buildSafeModeStatus(state);
+    safeModeStatus.textContent = model.text;
+    safeModeStatus.dataset.state = model.isSafeMode ? "warn" : "ok";
+    return model.isSafeMode;
+  }
+
   function setStatus(message) {
     const safe = ensureMessage(
       message,
@@ -631,17 +681,13 @@
       return false;
     }
 
-    const open = bootController.areAllPhasesOk();
-    bootContinue.disabled = !open;
-    if (open) {
-      bootGateHint.textContent =
-        "Weiter ist frei. Naechster Schritt: Mit Weiter direkt ins Dashboard.";
-      return true;
+    const gate = buildBootGateHint(bootController.areAllPhasesOk());
+    bootContinue.disabled = !gate.gateOpen;
+    bootGateHint.textContent = gate.hint;
+    if (helpWhat) {
+      helpWhat.textContent = gate.help;
     }
-
-    bootGateHint.textContent =
-      "Weiter ist gesperrt. Naechster Schritt: Erst alle Phasen auf Gruen bringen.";
-    return false;
+    return gate.gateOpen;
   }
 
   function registerBootGate() {
@@ -1112,6 +1158,110 @@
     return backupSelect.options.length > 0;
   }
 
+  async function loadVersionOptions() {
+    if (!backupVersionSelect) {
+      return false;
+    }
+
+    backupVersionSelect.innerHTML = "";
+    const targetPath = backupTargetSelect?.value || "";
+    const targetFileName = targetPath.split("/").pop() || "";
+
+    if (!targetFileName || !selectedProjectDir || !window.BackupRestore) {
+      const emptyOption = document.createElement("option");
+      emptyOption.value = "";
+      emptyOption.textContent = "Keine Version gefunden";
+      backupVersionSelect.appendChild(emptyOption);
+      if (backupVersionHelp) {
+        backupVersionHelp.textContent =
+          "Versionen fehlen. Naechster Schritt: Ziel-Datei waehlen oder Projekt verbinden.";
+      }
+      return false;
+    }
+
+    const versions = await window.BackupRestore.listVersionFilesFromDirectory(
+      selectedProjectDir,
+      targetFileName,
+    );
+
+    if (!Array.isArray(versions) || versions.length === 0) {
+      const emptyOption = document.createElement("option");
+      emptyOption.value = "";
+      emptyOption.textContent = "Keine Version gefunden";
+      backupVersionSelect.appendChild(emptyOption);
+      if (backupVersionHelp) {
+        backupVersionHelp.textContent =
+          "Keine Version fuer Ziel-Datei. Naechster Schritt: Normales Backup nutzen.";
+      }
+      return false;
+    }
+
+    versions.forEach((entry, index) => {
+      const option = document.createElement("option");
+      option.value = entry;
+      option.textContent = `${index + 1}) ${entry}`;
+      backupVersionSelect.appendChild(option);
+    });
+    if (backupVersionHelp) {
+      backupVersionHelp.textContent =
+        "Version geladen. Naechster Schritt: Version wiederherstellen oder Zurueck.";
+    }
+    return true;
+  }
+
+  async function restoreSelectedVersion() {
+    if (!backupVersionSelect || !backupTargetSelect) {
+      setStatus(
+        "Versions-Auswahl fehlt. Naechster Schritt: Reparatur starten.",
+      );
+      return false;
+    }
+
+    const versionFileName = backupVersionSelect.value || "";
+    if (!versionFileName) {
+      setStatus(
+        "Keine Version gewaehlt. Naechster Schritt: Version waehlen oder Backup nutzen.",
+      );
+      return false;
+    }
+
+    if (!selectedProjectDir || !window.BackupRestore) {
+      setStatus(
+        "Projekt oder Restore-Tool fehlt. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+      );
+      return false;
+    }
+
+    const targetPath = backupTargetSelect.value || "";
+    const targetFileName = targetPath.split("/").pop() || "";
+    try {
+      const result = await window.BackupRestore.restoreVersionFromDirectory(
+        selectedProjectDir,
+        targetFileName,
+        versionFileName,
+      );
+      if (!result || result.ok !== true) {
+        throw new Error("Version-Restore ungueltig.");
+      }
+
+      setStatus(
+        `Version wiederhergestellt (${result.versionFileName}). Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.`,
+      );
+      setDebug(
+        `Version-Restore erfolgreich: ${result.versionFileName} -> ${result.targetFileName}`,
+      );
+      return true;
+    } catch (error) {
+      const details =
+        error instanceof Error ? error.message : "Unbekannter Fehler";
+      setStatus(
+        "Version-Wiederherstellung fehlgeschlagen. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+      );
+      setDebug(`Version-Restore-Fehler: ${details}`);
+      return false;
+    }
+  }
+
   async function restoreSelectedBackup() {
     if (!backupSelect) {
       setStatus("Backup-Auswahl fehlt. Naechster Schritt: Reparatur starten.");
@@ -1200,6 +1350,7 @@
     backupDialog.showModal();
     loadBackupEvents().then((events) => {
       renderBackupOptions(events);
+      loadVersionOptions();
     });
     setStatus(
       "Backup-Auswahl geoeffnet. Naechster Schritt: 5-Punkte-Check lesen.",
@@ -1421,6 +1572,10 @@
   );
 
   syncBootGate();
+  updateSafeModeStatus({
+    isSafeMode: false,
+    reason: "kein Fehlergrund gemeldet",
+  });
 
   loadMessages().then((ui) => {
     controlWhat.textContent = ensureMessage(

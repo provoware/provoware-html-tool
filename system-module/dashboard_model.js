@@ -290,6 +290,44 @@ function resolveFavoritesAction(actionKey, context = {}) {
   };
 }
 
+function buildBootGateHint(allPhasesOk) {
+  const open = allPhasesOk === true;
+  if (open) {
+    return {
+      gateOpen: true,
+      hint: "Weiter ist frei. Naechster Schritt: Mit Weiter direkt ins Dashboard.",
+      help: "Boot ist bereit. Rueckweg: Bei Bedarf Phase pruefen und dann Weiter nutzen.",
+    };
+  }
+
+  return {
+    gateOpen: false,
+    hint: "Weiter ist gesperrt. Naechster Schritt: Erst alle Phasen auf Gruen bringen.",
+    help: "Boot ist noch nicht fertig. Naechster Schritt: Phase pruefen, dann erneut versuchen.",
+  };
+}
+
+function buildSafeModeStatus(input = {}) {
+  const source = input && typeof input === "object" ? input : {};
+  const isSafeMode = source.isSafeMode === true;
+  const reason =
+    typeof source.reason === "string" && source.reason.trim()
+      ? source.reason.trim()
+      : "kein Fehlergrund gemeldet";
+
+  if (isSafeMode) {
+    return {
+      isSafeMode: true,
+      text: `Safe-Mode aktiv. Grund: ${reason}. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.`,
+    };
+  }
+
+  return {
+    isSafeMode: false,
+    text: "Safe-Mode aus. Naechster Schritt: Normal weiterarbeiten oder bei Fehlern Protokoll oeffnen.",
+  };
+}
+
 module.exports = {
   applyLayoutSnapshot,
   buildQuickAccess,
@@ -297,6 +335,8 @@ module.exports = {
   getModuleRegistry,
   getGridColumnCount,
   resolveFavoritesAction,
+  buildBootGateHint,
+  buildSafeModeStatus,
   resolveSidebarShortcut,
   moveZone,
   normalizeLayoutState,
@@ -311,6 +351,8 @@ if (typeof window !== "undefined") {
     getModuleRegistry,
     getGridColumnCount,
     resolveFavoritesAction,
+    buildBootGateHint,
+    buildSafeModeStatus,
     resolveSidebarShortcut,
     moveZone,
     normalizeLayoutState,

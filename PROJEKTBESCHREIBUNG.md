@@ -327,3 +327,9 @@ Praktischer Einsatz:
 - **Grid:** 3x3 als Desktop-Standard, responsive 2/1 Spalten fuer kleine Breiten.
 - **Footer:** Debugging, Logging, Notiz mit Dateispeicher (`.modultool/quicknote.txt`) und lokalem Fallback.
 - **Rechte Sidebar:** Template-Knoepfe mit Clipboard-Fallback fuer Browser ohne Clipboard-Rechte.
+
+
+## Iteration 85 – Weiteres Tool-Detail
+- Boot-Gate-Status wird zentral im Modell erzeugt (offen/gesperrt + Hilfetext).
+- Safe-Mode-Status kommt als eigener Panel-Text mit klaren Aktionen (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
+- Backup-Wiederherstellung hat jetzt zwei Wege: klassische Backup-Datei oder Version aus dem Versionsordner zur Ziel-Datei.

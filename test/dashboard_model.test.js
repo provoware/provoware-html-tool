@@ -2,7 +2,9 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
   applyLayoutSnapshot,
+  buildBootGateHint,
   buildQuickAccess,
+  buildSafeModeStatus,
   createLayoutSnapshot,
   getGridColumnCount,
   getModuleRegistry,
@@ -126,4 +128,28 @@ test("getModuleRegistry liefert alle implementierten Module", () => {
   assert.equal(Array.isArray(modules), true);
   assert.equal(modules.length >= 4, true);
   assert.match(modules.map((entry) => entry.title).join(", "), /Support/);
+});
+
+test("buildBootGateHint liefert Gate-Hinweis fuer offen und gesperrt", () => {
+  const open = buildBootGateHint(true);
+  const closed = buildBootGateHint(false);
+
+  assert.equal(open.gateOpen, true);
+  assert.match(open.hint, /Weiter ist frei/);
+  assert.equal(closed.gateOpen, false);
+  assert.match(closed.help, /Boot ist noch nicht fertig/);
+});
+
+test("buildSafeModeStatus liefert klare Safe-Mode-Texte", () => {
+  const active = buildSafeModeStatus({
+    isSafeMode: true,
+    reason: "Manifest defekt",
+  });
+  const inactive = buildSafeModeStatus({ isSafeMode: false });
+
+  assert.equal(active.isSafeMode, true);
+  assert.match(active.text, /Safe-Mode aktiv/);
+  assert.match(active.text, /Manifest defekt/);
+  assert.equal(inactive.isSafeMode, false);
+  assert.match(inactive.text, /Safe-Mode aus/);
 });

@@ -91,3 +91,14 @@ test("Dashboard bietet Favoritenleiste und unteren Modulbereich", () => {
   assert.match(dashboardHtml, /id="module-options-region"/);
   assert.match(dashboardHtml, /id="module-options-help"/);
 });
+
+test("Dashboard-Hilfe zeigt Safe-Mode-Status und Versions-Restore", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="safe-mode-status"/);
+  assert.match(dashboardHtml, /id="backup-version-select"/);
+  assert.match(dashboardHtml, /id="backup-restore-version"/);
+});

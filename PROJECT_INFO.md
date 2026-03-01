@@ -1,3 +1,9 @@
+## Iteration 85
+
+- Standard erweitert: Boot-Gate-Hinweis und Panel-Hilfe kommen aus einer Modellquelle.
+- Restore-Standard erweitert: Backup-Dialog darf auch Versionen aus \*\_versions lesen und schreiben.
+- Naechster Standardkandidat: Safe-Mode-Reset mit Sicherheitsabfrage.
+
 ## Statusupdate 2026-03-03 – Iteration 80
 
 - Zufallsgenerator im Songtext-Editor hat jetzt Kategorie-An/Auswahl (`includeGenre`, `includeMood`, `includeStyle`) mit Fallback auf sicheren Standard.
