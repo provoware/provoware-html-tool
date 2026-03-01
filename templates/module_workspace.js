@@ -76,6 +76,8 @@
     const scale = options.scale;
     const align = options.align;
     const setStatus = options.setStatus;
+    const moduleOptionsRoot = options.moduleOptionsRoot;
+    const moduleOptionsHelp = options.moduleOptionsHelp;
     const onModuleStateChange =
       typeof options.onModuleStateChange === "function"
         ? options.onModuleStateChange
@@ -102,6 +104,73 @@
         throw new Error("Modul nicht gefunden. Bitte erneut versuchen.");
       }
       return match;
+    }
+
+    function clearModuleOptions() {
+      if (moduleOptionsRoot) {
+        moduleOptionsRoot.innerHTML = "";
+      }
+      if (moduleOptionsHelp) {
+        moduleOptionsHelp.textContent =
+          "Noch kein Modul gewaehlt. Naechster Schritt: Modul im Raster aktivieren.";
+      }
+    }
+
+    function renderModuleOptions(entry) {
+      if (!moduleOptionsRoot || !moduleOptionsHelp) {
+        return false;
+      }
+
+      if (!entry || typeof entry !== "object") {
+        clearModuleOptions();
+        return false;
+      }
+
+      moduleOptionsRoot.innerHTML = "";
+      moduleOptionsHelp.textContent = `Optionen fuer ${entry.title}. Rueckweg: Anderes Modul anklicken.`;
+
+      const heading = document.createElement("h4");
+      heading.textContent = `${entry.title} Optionen`;
+
+      const info = document.createElement("p");
+      info.textContent = `Was macht das? ${entry.what}`;
+
+      const nextStep = document.createElement("p");
+      nextStep.textContent =
+        "Naechster Schritt: Aktion waehlen, dann Modulstatus pruefen.";
+
+      const actions = document.createElement("div");
+      actions.className = "module-card-actions";
+
+      const focusButton = document.createElement("button");
+      focusButton.type = "button";
+      focusButton.textContent = "Fokusmodus starten";
+      focusButton.setAttribute(
+        "aria-label",
+        "Fokusmodus starten. Rueckweg: Escape oder Fokusmodus beenden",
+      );
+      focusButton.addEventListener("click", () => {
+        setStatus(
+          `Fokusmodus-Hinweis fuer ${entry.title} geoeffnet. Naechster Schritt: Fokusmodus oben starten.`,
+        );
+      });
+
+      const hideButton = document.createElement("button");
+      hideButton.type = "button";
+      hideButton.textContent = "Modul ausblenden";
+      hideButton.setAttribute(
+        "aria-label",
+        "Modul ausblenden. Rueckweg: Modul im Katalog erneut aktivieren",
+      );
+      hideButton.addEventListener("click", () => {
+        setStatus(
+          `Ausblenden fuer ${entry.title} vorbereitet. Naechster Schritt: Im Modul selbst Ausblenden klicken.`,
+        );
+      });
+
+      actions.append(focusButton, hideButton);
+      moduleOptionsRoot.append(heading, info, nextStep, actions);
+      return true;
     }
 
     function renderActiveModules() {
@@ -228,11 +297,13 @@
             return;
           }
           toggleMaximize();
+          renderModuleOptions(entry);
         });
         card.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             toggleMaximize();
+            renderModuleOptions(entry);
           }
         });
 
@@ -277,6 +348,7 @@
         pinned: Boolean(persisted.pinned),
       });
       renderActiveModules();
+      renderModuleOptions(moduleModel[moduleModel.length - 1]);
       setStatus(
         `Modul aktiv: ${source.title}. Naechster Schritt: Bei Bedarf maximieren.`,
       );
@@ -306,6 +378,7 @@
 
     renderCatalog();
     renderActiveModules();
+    clearModuleOptions();
   }
 
   window.createModuleWorkspace = buildWorkspace;

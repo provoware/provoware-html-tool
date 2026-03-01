@@ -892,3 +892,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur visuelle Icons ohne Tooltip (verworfen wegen Laienverstaendnis).
 **Risiko/Side-Effects:** Niedrig, da nur Texte, Labels und Berichtsausgabe erweitert wurden.
 **Verknuepft:** PATCH-076
+
+## FIX-20260301-081: TODO-Pflichtfelder-strikt-und-UI-Hilfen
+
+**Kategorie:** UI/A11y/Start-Routine
+**Symptom (fuer Laien):** Offene TODO-Punkte konnten formal korrekt aussehen, obwohl Felder leer waren.
+**Technische Ursache:** Vorlagenpruefung testete nur auf Feldnamen, nicht auf Feldinhalt.
+**Trigger:** Iteration 81 mit strengem TODO-Template-Check.
+**Fix (kurz):** `validateMiniPointTemplate` prueft jetzt Pflichtfelder auf "vorhanden + nicht leer"; Dashboard erhielt zusaetzlich Favoritenleiste + unteren Modulbereich mit Rueckweg-Hinweisen.
+**Geaenderte Dateien/Marker:** tools/start_routine.js, templates/dashboard.html, templates/dashboard.js, templates/module_workspace.js, system-module/dashboard_model.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Vorlagenfelder semantisch pruefen (nicht nur String-Suche).
+**Alternative(n):** Nur Warnung statt Fehler (verworfen, weil Release-Qualitaet sinkt).
+**Risiko/Side-Effects:** Niedrig, da nur Validierung und UI-Hilfe erweitert wurde.
+**Verknuepft:** PATCH-081

@@ -1,3 +1,12 @@
+## Iteration 81 (2026-03-01)
+
+- Ziel: Genau drei offene Mini-Punkte vollstaendig abschliessen (Favoritenleiste, unterer Modulbereich, TODO-Vorlage strikt).
+- Ergebnis: Dashboard hat jetzt eine ausklappbare Favoritenleiste mit Alt+F und Schnellaktionen.
+- Ergebnis: Modulbereich unten zeigt modulspezifische Optionen direkt im Workspace und erklaert den Rueckweg.
+- Ergebnis: Start-Routine akzeptiert TODO-Pflichtfelder nur noch mit Inhalt und gibt klarere Hilfe.
+- Mini-Optimierung: Neue Hilfe-Texte fuer Favoritenleiste und Moduloptionen in einfacher Sprache.
+- Naechster Schritt: Favoritenaktionen auf echte Modulfunktionen und Statusmeldungen erweitern.
+
 ## Iteration 80 (2026-03-03)
 
 - Ziel: Genau drei offene Punkte abschliessen (Songtext-Editor, Dokument-Vorschau, Zufallsgenerator).

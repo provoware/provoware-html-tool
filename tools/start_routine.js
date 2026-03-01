@@ -433,7 +433,11 @@ function validateMiniPointTemplate(todoContent) {
 
   openMiniPointLines.forEach((line, index) => {
     requiredFields.forEach((field) => {
-      if (!line.includes(field)) {
+      const escapedField = field.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&");
+      const fieldPattern = new RegExp(`${escapedField}\\s*([^|]+)`);
+      const match = line.match(fieldPattern);
+
+      if (!match || typeof match[1] !== "string" || match[1].trim() === "") {
         missingFields.push({
           index: index + 1,
           field,
@@ -666,7 +670,7 @@ function runStartRoutine() {
   if (!miniPointCheck.ok) {
     throw new Error(
       `TODO-Regel verletzt: Es muessen genau drei offene Naechster Mini-Punkt-Eintraege vorhanden sein. Aktuell: ${miniPointCheck.count}. ` +
-        "Naechster Schritt: TODO anpassen und erneut versuchen.",
+        "Naechster Schritt: TODO anpassen, speichern und erneut versuchen.",
     );
   }
   console.log("[12/14] TODO-Regel geprueft: genau drei offene Mini-Punkte");
@@ -676,9 +680,9 @@ function runStartRoutine() {
     const firstMissing = templateCheck.missingFields[0];
     throw new Error(
       "TODO-Vorlage verletzt: Bei jedem offenen Naechster Mini-Punkt muessen die Pflichtfelder " +
-        "Code, Tests, Doku, Risiko und Naechster Schritt gesetzt sein. " +
+        "Code, Tests, Doku, Risiko und Naechster Schritt mit Inhalt gefuellt sein. " +
         `Fehlend bei Eintrag ${firstMissing.index}: ${firstMissing.field} ` +
-        "Naechster Schritt: TODO anpassen und erneut versuchen.",
+        "Naechster Schritt: TODO anpassen, speichern und erneut versuchen.",
     );
   }
   console.log("[12/14] TODO-Vorlage geprueft: Pflichtfelder sind gesetzt");

@@ -171,3 +171,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Neu: Die drei Steuerknoepfe haben jetzt kurze, einheitliche Tooltips mit Rueckweg.
 - Beispiel: "Groesser anzeigen. Rueckweg: Gleichen Knopf erneut druecken."
 - Vorteil: Aktionen sind fuer Laien schneller verstaendlich und auch mit Screenreader klarer.
+
+## Neu: Favoritenleiste und Moduloptionen
+
+- **Favoritenleiste oeffnen:** Klicken Sie auf **"Favoritenleiste einblenden"** oder druecken Sie **Alt+F**.
+- **Rueckweg:** Nutzen Sie den gleichen Knopf oder erneut **Alt+F**.
+- **Moduloptionen unten:** Klicken Sie ein Modul im Raster an. Unten sehen Sie dann passende Aktionen mit kurzem Hilfe-Text.

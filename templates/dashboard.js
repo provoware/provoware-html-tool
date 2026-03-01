@@ -39,6 +39,9 @@
   const splitterRight = document.getElementById("splitter-right");
   const leftRailToggle = document.getElementById("left-rail-toggle");
   const rightRailToggle = document.getElementById("right-rail-toggle");
+  const favoritesRail = document.getElementById("favorites-rail");
+  const favoritesRailToggle = document.getElementById("favorites-rail-toggle");
+  const favoritesActions = document.getElementById("favorites-actions");
   const layoutReset = document.getElementById("layout-reset");
   const focusModeToggle = document.getElementById("focus-mode-toggle");
   const focusModeRestore = document.getElementById("focus-mode-restore");
@@ -94,6 +97,7 @@
     { id: "modules", title: "📦 Module" },
   ];
   let moduleLayoutState = {};
+  let favoritesRailOpen = false;
 
   const dashboardModel = window.DashboardModel || {};
   const normalizeLayoutWithModel =
@@ -104,6 +108,16 @@
     dashboardModel.createLayoutSnapshot || createLayoutSnapshotLocal;
   const applyLayoutSnapshot =
     dashboardModel.applyLayoutSnapshot || applyLayoutSnapshotLocal;
+  const resolveSidebarShortcut =
+    dashboardModel.resolveSidebarShortcut ||
+    ((eventLike, isOpen) => ({
+      handled:
+        eventLike?.altKey === true &&
+        String(eventLike?.key || "").toLowerCase() === "f",
+      nextOpen: !Boolean(isOpen),
+      status:
+        "Favoritenleiste umgeschaltet. Naechster Schritt: Aktion waehlen.",
+    }));
 
   let focusSnapshot = null;
 
@@ -203,6 +217,14 @@
 
     layoutRoot.dataset.leftCollapsed = String(layoutState.leftCollapsed);
     layoutRoot.dataset.rightCollapsed = String(layoutState.rightCollapsed);
+    if (favoritesRail) {
+      favoritesRail.hidden = !favoritesRailOpen || layoutState.rightCollapsed;
+    }
+    if (favoritesRailToggle) {
+      favoritesRailToggle.textContent = favoritesRailOpen
+        ? "Favoritenleiste ausblenden"
+        : "Favoritenleiste einblenden";
+    }
     updateGridColumns();
     return true;
   }
@@ -313,6 +335,9 @@
     });
 
     rightRailToggle.addEventListener("click", () => {
+      if (layoutState.rightCollapsed) {
+        favoritesRailOpen = false;
+      }
       layoutState.rightCollapsed = !layoutState.rightCollapsed;
       applyLayoutState();
       persistLayoutState().catch(() => {
@@ -321,7 +346,18 @@
       setStatus("Einstellungen angepasst. Naechster Schritt: Layout pruefen.");
     });
 
+    favoritesRailToggle?.addEventListener("click", () => {
+      favoritesRailOpen = !favoritesRailOpen;
+      applyLayoutState();
+      setStatus(
+        favoritesRailOpen
+          ? "Favoritenleiste geoeffnet. Naechster Schritt: Schnellaktion waehlen."
+          : "Favoritenleiste geschlossen. Naechster Schritt: Alt+F nutzt den Rueckweg.",
+      );
+    });
+
     layoutReset.addEventListener("click", () => {
+      favoritesRailOpen = false;
       layoutState = normalizeLayoutWithModel({
         leftWidth: 260,
         rightWidth: 280,
@@ -530,6 +566,15 @@
         return false;
       }
 
+      const sidebarShortcut = resolveSidebarShortcut(event, favoritesRailOpen);
+      if (sidebarShortcut.handled) {
+        event.preventDefault();
+        favoritesRailOpen = sidebarShortcut.nextOpen;
+        applyLayoutState();
+        setStatus(sidebarShortcut.status);
+        return true;
+      }
+
       if (event.key !== "Escape") {
         return true;
       }
@@ -556,6 +601,24 @@
         "Escape gedrueckt. Naechster Schritt: Bereich mit Tab waehlen.",
       );
       return true;
+    });
+
+    return true;
+  }
+
+  function registerFavoritesActions() {
+    if (!favoritesActions) {
+      return false;
+    }
+
+    favoritesActions.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!target || target.tagName !== "BUTTON") {
+        return;
+      }
+
+      const label = target.textContent?.trim() || "Aktion";
+      setStatus(`${label} gestartet. Naechster Schritt: Ergebnis pruefen.`);
     });
 
     return true;
@@ -1133,6 +1196,8 @@
     slotCount: 9,
     initialModuleState: moduleLayoutState,
     setStatus,
+    moduleOptionsRoot: document.getElementById("module-options-region"),
+    moduleOptionsHelp: document.getElementById("module-options-help"),
     onModuleStateChange: (modules) => {
       moduleLayoutState = modules.reduce((acc, entry) => {
         acc[entry.id] = {
@@ -1161,6 +1226,8 @@
     [kanbanStatus, "Kanban-Status"],
     [leftRailToggle, "Layout-Nav-Knopf"],
     [rightRailToggle, "Layout-Einstellungen-Knopf"],
+    [favoritesRailToggle, "Favoritenleisten-Knopf"],
+    [favoritesRail, "Favoritenleiste"],
     [layoutReset, "Layout-Reset-Knopf"],
     [focusModeToggle, "Fokusmodus-Start-Knopf"],
     [focusModeRestore, "Fokusmodus-Ende-Knopf"],
@@ -1225,6 +1292,7 @@
   });
 
   registerKeyboardShortcuts();
+  registerFavoritesActions();
   registerZoomControls();
   registerLayoutControls();
   applyFocusModeState(false);

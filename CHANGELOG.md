@@ -1,3 +1,10 @@
+## Iteration 81 (2026-03-01)
+
+- Sidebar als ausklappbare Favoritenleiste mit Alt+F und klaren Rueckweg-Hinweisen ergaenzt.
+- Unterer Modulbereich zeigt jetzt modulbezogene Optionen direkt im Workspace.
+- Start-Routine prueft TODO-Pflichtfelder jetzt strikt auf "vorhanden + nicht leer" und nennt den naechsten Schritt klar.
+- UX/A11y-Mini-Optimierung: Neue Hilfetexte fuer Favoritenleiste und Moduloptionen in einfacher Sprache.
+
 ## 2026-03-03 – Iteration 80
 
 - Drei offene Punkte abgeschlossen: Songtext-Editor als Paket (Vorlagen + Lesemodus + Rueckweg) ist jetzt als abgeschlossen markiert und mit Kategorie-Auswahl fuer Zufall erweitert.
