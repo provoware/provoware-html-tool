@@ -80,8 +80,10 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Songtext-Hilfe als einklappbaren Kurzguide mit Tastaturfokus ergaenzen.
 - [x] Naechster Mini-Punkt: Songtext-Kurzguide um Schrittliste mit Enter/Space-Hinweis erweitern.
 - [x] Naechster Mini-Punkt: Lesemodus-Status um Kopierfehler-Hilfe (manuell kopieren) sichtbarer machen.
-- [ ] Naechster Mini-Punkt: Songtext-Lesemodus um Enter/Space-Hinweis direkt am Kopieren-Knopf ergaenzen.
-- [ ] Naechster Mini-Punkt: Songtext-Kurzguide um Schritt "Speichern + Rueckweg" in einfacher Sprache erweitern.
+- [x] Naechster Mini-Punkt: Songtext-Lesemodus um Enter/Space-Hinweis direkt am Kopieren-Knopf ergaenzen.
+- [x] Naechster Mini-Punkt: Songtext-Kurzguide um Schritt "Speichern + Rueckweg" in einfacher Sprache erweitern.
+- [ ] Naechster Mini-Punkt: Songtext-Editor mit Zufallsgenerator-Inhalt (1 Klick) verbinden.
+- [ ] Naechster Mini-Punkt: Lesemodus um klaren Ruecksprung-Fokus auf Titel-Feld erweitern.
 - [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
 - [ ] P1: Interoperabilitaet Songtext-Editor ↔ Zufallsgenerator umsetzen (Inhalt einfuegen).
 - [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.

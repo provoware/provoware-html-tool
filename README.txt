@@ -10,6 +10,7 @@
 - Neu (2026-03-02): Lesemodus hat jetzt einen eigenen "Vorschau schliessen"-Knopf mit Escape-Hinweis und klarer Rueckweg-Meldung.
 - Neu (2026-03-03): Lesemodus hat jetzt den Knopf "Songtext kopieren" mit klarer Statusmeldung und Rueckweg.
 - Neu (2026-03-03): Songtext-Hilfe ist als einklappbarer Kurzguide mit Tastaturfokus direkt im Lyrics-Bereich sichtbar.
+- Neu (2026-03-01): Zwei weitere offene Punkte sind erledigt: Kopieren-Knopf zeigt jetzt Enter/Space und der Kurzguide erklaert Speichern plus Rueckweg in 3 Schritten.
 - Neu (2026-03-02): Vorlagen zeigen jetzt kurze Inline-Hilfe je Abschnitt (Intro/Refrain/Bridge/Sonstiges) fuer schnellere Orientierung.
 
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Wiki-Modul ist jetzt als eigenes Panel mit Kategorie, Titel, Inhalt und Speicherung in `data/wiki_notes.json` verfuegbar.
@@ -60,7 +61,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 82 %
-- **Erledigt:** 107 Punkte
+- **Erledigt:** 109 Punkte
 - **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

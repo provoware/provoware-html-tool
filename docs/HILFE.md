@@ -125,6 +125,8 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Wie mache ich rueckgaengig? Im Theme-Feld auf ein anderes Thema wechseln oder CSS-Token zurücksetzen.
 
 - Neu: Im Lesemodus gibt es jetzt den Knopf **Songtext kopieren** mit klarer Erfolgsmeldung.
+- Neu: Der Kopieren-Knopf zeigt jetzt direkt **Enter/Space** als Tastaturweg, damit die Aktion ohne Maus klar ist.
+- Neu: Der Kurzguide hat jetzt den Schritt **Speichern + Rueckweg**, damit Ihr Entwurf sicher bleibt.
 - Neu: Die Songtext-Hilfe ist als **einklappbarer Kurzguide** direkt im Lyrics-Bereich verfuegbar und setzt den Tastaturfokus auf den Hilfetext.
 
 - Songtext-Lesemodus: Wenn der Kopieren-Knopf fehlschlaegt, erscheint eine sichtbare Kopierhilfe mit Strg+C/Cmd+C als Rueckweg.

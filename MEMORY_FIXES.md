@@ -780,3 +780,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Statusmeldung ohne Inline-Hilfe (verworfen).
 **Risiko/Side-Effects:** Niedrig, da nur Lyrics-Bereich betroffen.
 **Verknuepft:** PATCH-067
+
+## FIX-20260301-067: Songtext-Kurzguide-mit-Rueckweg
+
+**Kategorie:** UI/A11y
+**Symptom (für Laien):** Im Songtext-Bereich war nicht klar, dass Speichern ein eigener Schritt mit Rueckweg ist.
+**Technische Ursache:** Kurzguide hatte nur zwei Schritte und der Kopieren-Knopf nannte keinen Tastaturweg direkt im Label.
+**Trigger:** Nutzer arbeitet ohne Maus im Lesemodus und will sichere Reihenfolge.
+**Fix (kurz):** Kopieren-Knopf auf "Songtext kopieren (Enter/Space)" erweitert und Kurzguide auf drei Schritte inkl. Speichern + Rueckweg angehoben.
+**Geänderte Dateien/Marker:** `templates/dashboard.html` (Lyrics-Kurzguide + Lesemodus-Knopf), `test/dashboard_lyrics_guidance.test.js`.
+**Tests/Checks:** node --test dashboard_lyrics_guidance + Volltestlauf + start.sh.
+**Prävention (künftig):** Ab jetzt immer bei neuen Buttons den Tastaturweg direkt im sichtbaren Label nennen, wenn er zentral fuer den Ablauf ist.
+**Alternative(n):** Nur Tooltip statt Label (verworfen, weil weniger sichtbar bei Screenreader-Flow).
+**Risiko/Side-Effects:** Niedrig, nur UI-Texte und ein gezielter Test.
+**Verknüpft:** PATCH-067

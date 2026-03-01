@@ -115,13 +115,21 @@
                     Was macht das? Der Kurzguide zeigt in zwei Schritten, wie
                     Sie einen Songtext starten.
                   </p>
-                  <ol class="guide-list" aria-label="Songtext-Kurzschritte">
+                  <ol
+                    class="guide-list"
+                    id="lyrics-guide-steps"
+                    aria-label="Songtext-Kurzschritte"
+                  >
                     <li>
                       Enter oder Space auf einer Vorlage fuegt Text direkt ein.
                     </li>
                     <li>
-                      Escape bringt Sie aus der Vorschau oder zurueck zu
+                      Speichern sichert den Entwurf. Rueckweg: Zurueck zu
                       Allgemein.
+                    </li>
+                    <li>
+                      Escape schliesst die Vorschau. Danach weiter bearbeiten
+                      oder Lesemodus verlassen.
                     </li>
                   </ol>
                   <p class="field-tip">
@@ -170,7 +178,7 @@
                 </p>
                 <div class="todo-actions" aria-label="Lesemodus-Rueckweg">
                   <button type="button" id="lyrics-copy-preview">
-                    Songtext kopieren
+                    Songtext kopieren (Enter/Space)
                   </button>
                   <button type="button" id="lyrics-close-preview">
                     Vorschau schliessen (Escape)

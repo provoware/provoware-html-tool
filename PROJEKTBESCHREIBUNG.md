@@ -1,3 +1,8 @@
+## Iteration 67 – Songtext-Hilfe weiter vereinfacht
+- Lesemodus-Knopf zeigt jetzt direkt den Tastaturweg **Enter/Space** fuer Kopieren.
+- Kurzguide hat jetzt 3 klare Schritte mit Speichern und Rueckweg in einfacher Sprache.
+- Tool-Nutzen: Einsteiger sehen sofort Aktion, Datenwirkung und sicheren Rueckweg ohne Suchen.
+
 ## Iteration 66 – Erweiterter Tool-Umfang
 - Neues Design-Token-Set fuer Rail, Statusbanner und modulbezogene Kartenprofile in allen 5 Themes.
 - Release-Check misst jetzt zusaetzlich Kontrast fuer Banner, Rail und vier Modulprofile (AA-Zielwert).

@@ -1,3 +1,11 @@
+## Iteration 67 (2026-03-01)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Kopieren-Knopf mit Enter/Space-Hinweis + Kurzguide um Speichern/Rueckweg erweitern).
+- Ergebnis: Lesemodus-Knopf nennt jetzt klar Enter/Space direkt im Buttontext.
+- Ergebnis: Songtext-Kurzguide hat jetzt einen klaren Schritt fuer Speichern plus Rueckweg in einfacher Sprache.
+- Mini-Optimierung: Kurzguide hat feste Schrittliste mit eigener ID fuer stabile A11y-Tests.
+- Naechster Schritt: Songtext-Editor mit Zufallsgenerator-Inhalt verbinden.
+
 ## Iteration 65 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Lesemodus-Kopieren + Songtext-Kurzguide mit Tastaturfokus).
