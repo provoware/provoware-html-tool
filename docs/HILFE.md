@@ -35,3 +35,10 @@
 - **Was passiert mit den Daten?** Es ist eine reine Mockup-Ansicht, es werden keine Projektdateien geschrieben.
 - **Wie mache ich rückgängig?** Einfach Fenster schließen, dann bleibt Ihr Projekt unverändert.
 - **Fachwort kurz erklärt:** _Mockup_ bedeutet eine frühe Vorschau der Oberfläche vor weiterem Ausbau.
+
+## Start-Routine (neu verbessert)
+
+- **Was macht das?** `bash start.sh` erstellt fehlende Datenordner automatisch und startet danach Pruefung, Formatierung, Tests und Systemtest.
+- **Was passiert mit den Daten?** Es werden nur benoetigte Arbeitsordner erstellt (`data/`, `data/logs/`) und Logeintraege geschrieben.
+- **Wie mache ich rueckgaengig?** Ueberfluessige Logdateien koennen geloescht werden; der Code bleibt unveraendert.
+- **Naechster Schritt bei Fehlern:** Erst `START_DEBUG=1 bash start.sh` ausfuehren, danach `data/logs/start_routine.log` oeffnen.

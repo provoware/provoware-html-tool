@@ -3,6 +3,8 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 const {
+  assertRunOutput,
+  ensureRequiredDirectories,
   formatStartError,
   getDebugMode,
   validateProjectStructure,
@@ -81,4 +83,28 @@ test("formatStartError liefert naechsten Schritt mit Log-Pfad", () => {
   assert.equal(fs.existsSync(logPath), true);
 
   process.env.START_DEBUG = previousValue;
+});
+
+test("assertRunOutput wirft Fehler bei ungueltigem Ergebnis", () => {
+  assert.throws(() => assertRunOutput(null), /Befehls-Ergebnis fehlt/);
+});
+
+test("assertRunOutput akzeptiert gueltiges Ergebnis", () => {
+  assert.doesNotThrow(() => {
+    assertRunOutput({ ok: true, code: 0, signal: null });
+  });
+});
+
+test("ensureRequiredDirectories erzeugt data und logs", () => {
+  const dataDir = path.join(process.cwd(), "data");
+  const logsDir = path.join(dataDir, "logs");
+
+  if (fs.existsSync(logsDir)) {
+    fs.rmSync(logsDir, { recursive: true, force: true });
+  }
+
+  ensureRequiredDirectories();
+
+  assert.equal(fs.existsSync(dataDir), true);
+  assert.equal(fs.existsSync(logsDir), true);
 });

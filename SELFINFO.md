@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 20
+Iteration: 21
 
 ## Gemacht
 
@@ -48,6 +48,8 @@ Iteration: 20
 
 - README um aktuelle Tool-Module-Liste erweitert und geplanter Modul-Backlog klar dokumentiert.
 - TODO um konkrete Implementierungsaufgaben fuer angeforderte Untermodule erweitert.
+
+- Start-Routine robuster gemacht: Datenordner-Autoanlage, Format-Check nach Formatierung und striktere Befehls-Output-Validierung.
 
 ## Next Step
 

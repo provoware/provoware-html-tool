@@ -16,3 +16,6 @@
 - JSON-Store bietet `onBackupCreated` als Backup-Hook fuer Folgeaktionen.
 - Start-Routine versucht am Ende immer den Dashboard-Autostart (bei Headless mit Hinweis statt Abbruch).
 - Vor dem Systemtest immer Release-Readiness pruefen (A11y-Basis + 3 Themes + Hilfe-Aktionen).
+
+- Start-Routine prueft Format jetzt doppelt: schreiben (`format`) und danach validieren (`format:check`).
+- Start-Routine erstellt fehlende Datenordner (`data`, `data/logs`) automatisch vor den Checks.
