@@ -1,3 +1,4 @@
+- Neu (2026-03-01): Kanban-Karten haben jetzt einen Verschieben-Dialog mit Enter/Escape-Rueckweg und klarer Statusmeldung fuer Laien.
 - Neu (2026-03-01): Kanban-Schnellansicht nutzt jetzt echte Daten aus `data/kanban_board.json` und ist per Pfeiltasten links/rechts barrierefrei bedienbar.
 # Provoware HTML Tool
 
@@ -16,9 +17,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 76 %
-- **Erledigt:** 75 Punkte
-- **Offen:** 24 Punkte
+- **Fortschritt:** 77 %
+- **Erledigt:** 77 Punkte
+- **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

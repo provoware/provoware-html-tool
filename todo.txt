@@ -1,6 +1,7 @@
+- [ ] Naechster Mini-Punkt: Kanban-Kartenverschiebung in data/kanban_board.json persistieren.
 - [x] Kanban-Schnellansicht an echte JSON-Daten anbinden (statt statischer Beispieltexte).
 - [x] Keyboard-A11y fuer Kanban erweitern (Spaltenwechsel links/rechts + sichtbarer Fokusfuehrung).
-- [ ] Naechster Mini-Punkt: Kanban-Dialog fuer Kartenverschiebung mit Enter/Escape-Rueckweg und Statusmeldung bauen.
+- [x] Naechster Mini-Punkt: Kanban-Dialog fuer Kartenverschiebung mit Enter/Escape-Rueckweg und Statusmeldung bauen.
 # TODO – Neustart
 Datum: 2026-02-28
 
@@ -147,4 +148,4 @@ Laienvorschläge
 
 - [x] P1: Naechster Mini-Punkt: Referenzbild-Checkliste als festen Ablauf in todo/README verankern.
 
-- [ ] P1: Naechster Mini-Punkt: Kanban-Schnellansicht mit echten Moduldaten verbinden.
+- [x] P1: Naechster Mini-Punkt: Kanban-Schnellansicht mit echten Moduldaten verbinden.

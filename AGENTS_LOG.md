@@ -34,3 +34,4 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-01 | PATCH-052 | Referenzbild professionell analysiert und als Dashboard-Vorgabe umgesetzt (KPI/Kanban/Team/Kalender + A11y-Textstatus) | templates/dashboard.html, templates/dashboard.css, README.txt, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, PROJEKTBESCHREIBUNG.md, MEMORY_FIXES.md, todo.txt
 
 2026-03-01 | PATCH-053 | Kanban-Schnellansicht an echte JSON-Daten gebunden + Keyboard-A11y (Pfeil links/rechts, Fokusring) | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, templates/kanban_preview.js, data/kanban_board.json, tools/start_routine.js, test/kanban_preview.test.js, test/start_routine.test.js, Doku-Updates
+2026-03-01 | PATCH-054 | Offenen TODO-Punkt abgeschlossen: Kanban-Dialog fuer Kartenverschiebung (Enter/Escape, Statushilfe, Validierung) | templates/kanban_preview.js, templates/dashboard.css, test/kanban_preview.test.js, Doku-Updates

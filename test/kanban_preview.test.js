@@ -7,6 +7,7 @@ const {
   fetchKanbanData,
   renderKanbanColumns,
   bindKanbanKeyboardA11y,
+  moveKanbanItem,
 } = require("../templates/kanban_preview");
 
 test("normalizeKanbanPayload validiert Spalten", () => {
@@ -143,4 +144,20 @@ test("renderKanbanColumns und Keyboard-A11y nutzen Fokusdaten", () => {
   assert.equal(statusMessages.length > 0, true);
 
   delete global.document;
+});
+
+test("moveKanbanItem verschiebt eine Karte in eine andere Spalte", () => {
+  const payload = {
+    columns: [
+      { id: "idea", title: "Idee", items: [{ text: "Karte A" }] },
+      { id: "review", title: "Review", items: [] },
+    ],
+  };
+
+  const result = moveKanbanItem(payload, "idea", 0, "review");
+
+  assert.equal(result.columns[0].items.length, 0);
+  assert.equal(result.columns[1].items.length, 1);
+  assert.equal(result.columns[1].items[0].text, "Karte A");
+  assert.equal(typeof result.updatedAt, "string");
 });

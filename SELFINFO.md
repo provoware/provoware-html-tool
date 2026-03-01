@@ -1,8 +1,8 @@
 ## Iteration 53 (2026-03-01)
 
-- Hauptziel abgeschlossen: Kanban-Schnellansicht ist jetzt an echte JSON-Daten gebunden und laeuft ohne statische Platzhalter.
-- Mini-Optimierung: Keyboard-A11y fuer Kanban erweitert (Pfeil links/rechts + sichtbarer Fokusrahmen).
-- Next Step (A): Kanban-Karten als naechstes per Dialog verschiebbar machen (mit Rueckweg und Backup-Hinweis).
+- Hauptziel abgeschlossen: Kanban-Karten sind jetzt per Dialog verschiebbar (mit Enter/Escape-Rueckweg und Statushilfe).
+- Mini-Optimierung: Jede Karte hat einen klaren Verschieben-Button (44px, Fokus sichtbar, einfacher Hilfe-Text).
+- Next Step (C): Kartenverschiebung als naechstes dauerhaft in data/kanban_board.json speichern und Startcheck dafuer erweitern.
 
 ## Iteration 52 (2026-03-01)
 

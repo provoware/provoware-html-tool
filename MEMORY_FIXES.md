@@ -1,3 +1,17 @@
+## FIX-20260301-054: Kanban-Kartenverschiebung mit Dialog-Rueckweg
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Karten konnten nur gelesen werden, aber nicht direkt im Dashboard verschoben werden.
+**Technische Ursache:** Es fehlte ein Dialog-Flow mit validierter Zielspalte und klarer Tastatursteuerung.
+**Trigger:** Klick auf eine Karte mit Wunsch "in andere Spalte".
+**Fix (kurz):** Verschieben-Button + Dialog + Eingabepruefung (Validierung) ueber `moveKanbanItem` eingebaut.
+**Geaenderte Dateien/Marker:** templates/kanban_preview.js, templates/dashboard.css, test/kanban_preview.test.js
+**Tests/Checks:** node --test test/kanban_preview.test.js, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei neuen Listenkarten eine direkte Tastatur-Aktion mit Rueckweg einplanen.
+**Alternative(n):** Drag-and-Drop only (verworfen wegen Tastaturbarriere).
+**Risiko/Side-Effects:** Karte wird aktuell nur im UI verschoben und noch nicht in JSON gespeichert.
+**Verknuepft:** PATCH-054
+
 ## FIX-20260301-052: Referenzbild-vorlage ohne A11y-Verlust
 
 **Kategorie:** UI/A11y

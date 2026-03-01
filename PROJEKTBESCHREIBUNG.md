@@ -1,3 +1,4 @@
+- Update 2026-03-01: Kanban-Schnellansicht hat jetzt pro Karte einen Verschieben-Dialog mit Enter/Escape-Rueckweg, Fokusfuehrung und klaren Statushinweisen.
 ## Iteration 53 – Kanban produktiv angebunden
 
 - Neue Datei `data/kanban_board.json` ist jetzt die echte Datenquelle fuer die Kanban-Schnellansicht im Dashboard.

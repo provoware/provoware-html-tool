@@ -113,9 +113,21 @@
       list.setAttribute("aria-labelledby", header.id);
       list.dataset.columnIndex = String(columnIndex);
 
-      column.items.forEach((item) => {
+      column.items.forEach((item, itemIndex) => {
         const li = document.createElement("li");
-        li.textContent = item.text;
+        const text = document.createElement("span");
+        text.textContent = item.text;
+        const moveButton = document.createElement("button");
+        moveButton.type = "button";
+        moveButton.className = "kanban-move-btn";
+        moveButton.dataset.columnId = column.id;
+        moveButton.dataset.itemIndex = String(itemIndex);
+        moveButton.textContent = "Verschieben";
+        moveButton.setAttribute(
+          "aria-label",
+          `Karte verschieben: ${item.text}`,
+        );
+        li.append(text, moveButton);
         list.appendChild(li);
       });
 
@@ -131,6 +143,80 @@
     });
 
     return safePayload.columns.length;
+  }
+
+  function moveKanbanItem(payload, sourceColumnId, itemIndex, targetColumnId) {
+    const safePayload = normalizeKanbanPayload(payload);
+    const safeSourceId = assertText(sourceColumnId, "Quellspalte");
+    const safeTargetId = assertText(targetColumnId, "Zielspalte");
+    if (!Number.isInteger(itemIndex) || itemIndex < 0) {
+      throw new Error(
+        "Kartenposition ungueltig. Erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+
+    const sourceIndex = safePayload.columns.findIndex(
+      (column) => column.id === safeSourceId,
+    );
+    const targetIndex = safePayload.columns.findIndex(
+      (column) => column.id === safeTargetId,
+    );
+    if (sourceIndex < 0 || targetIndex < 0) {
+      throw new Error(
+        "Kanban-Spalte fehlt. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+
+    const sourceColumn = safePayload.columns[sourceIndex];
+    if (itemIndex >= sourceColumn.items.length) {
+      throw new Error("Karte fehlt. Erneut versuchen oder Protokoll oeffnen.");
+    }
+
+    const nextColumns = safePayload.columns.map((column) => ({
+      ...column,
+      items: [...column.items],
+    }));
+    const [movedCard] = nextColumns[sourceIndex].items.splice(itemIndex, 1);
+    nextColumns[targetIndex].items.push(movedCard);
+
+    return {
+      ...safePayload,
+      updatedAt: new Date().toISOString(),
+      columns: nextColumns,
+    };
+  }
+
+  function createMoveDialog(root) {
+    const host = assertElement(root, "Kanban-Bereich").closest("article");
+    if (!host) {
+      throw new Error(
+        "Kanban-Dialog fehlt. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+
+    const dialog = document.createElement("dialog");
+    dialog.className = "kanban-move-dialog";
+    dialog.innerHTML = `
+      <form method="dialog" class="kanban-move-form">
+        <h3 id="kanban-move-title">Karte verschieben</h3>
+        <p id="kanban-move-help" class="field-tip">Was passiert? Die Karte wechselt die Spalte. Rueckweg: Escape oder Abbrechen.</p>
+        <p class="field-tip" id="kanban-move-card"></p>
+        <label for="kanban-move-target">Zielspalte</label>
+        <select id="kanban-move-target"></select>
+        <div class="dialog-actions">
+          <button type="submit" value="confirm" id="kanban-move-confirm">Speichern</button>
+          <button type="submit" value="cancel">Abbrechen</button>
+        </div>
+      </form>
+    `;
+    host.appendChild(dialog);
+
+    return {
+      root: dialog,
+      cardLabel: dialog.querySelector("#kanban-move-card"),
+      targetSelect: dialog.querySelector("#kanban-move-target"),
+      confirmButton: dialog.querySelector("#kanban-move-confirm"),
+    };
   }
 
   function bindKanbanKeyboardA11y(root, setStatus) {
@@ -203,6 +289,89 @@
     const status =
       typeof options.setStatus === "function" ? options.setStatus : () => true;
     const sourcePath = options.sourcePath || "../data/kanban_board.json";
+    const dialog = createMoveDialog(root);
+    let currentPayload = null;
+    let pendingMove = null;
+
+    function fillDialogOptions(sourceColumnId, cardText) {
+      dialog.targetSelect.innerHTML = "";
+      currentPayload.columns.forEach((column) => {
+        const option = document.createElement("option");
+        option.value = column.id;
+        option.textContent = column.title;
+        if (column.id === sourceColumnId) {
+          option.disabled = true;
+        }
+        dialog.targetSelect.appendChild(option);
+      });
+
+      dialog.cardLabel.textContent = `Karte: ${cardText}`;
+      dialog.confirmButton.disabled = dialog.targetSelect.options.length <= 1;
+    }
+
+    function onMoveButtonClick(event) {
+      const button = event.target?.closest(".kanban-move-btn");
+      if (!button || !currentPayload) {
+        return;
+      }
+
+      const sourceColumnId = assertText(button.dataset.columnId, "Quellspalte");
+      const itemIndex = Number.parseInt(button.dataset.itemIndex || "-1", 10);
+      if (!Number.isInteger(itemIndex) || itemIndex < 0) {
+        setStatus(
+          "Kartenindex fehlt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+        );
+        return;
+      }
+
+      const sourceColumn = currentPayload.columns.find(
+        (column) => column.id === sourceColumnId,
+      );
+      const card = sourceColumn?.items[itemIndex];
+      if (!sourceColumn || !card) {
+        setStatus(
+          "Karte fehlt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+        );
+        return;
+      }
+
+      pendingMove = { sourceColumnId, itemIndex };
+      fillDialogOptions(sourceColumnId, card.text);
+      dialog.root.showModal();
+      dialog.targetSelect.focus();
+      setStatus("Dialog offen. Naechster Schritt: Zielspalte waehlen.");
+    }
+
+    function onDialogClose(event) {
+      if (event.target?.returnValue !== "confirm" || !pendingMove) {
+        setStatus("Abgebrochen. Naechster Schritt: Erneut versuchen.");
+        return;
+      }
+
+      try {
+        const targetId = assertText(dialog.targetSelect.value, "Zielspalte");
+        currentPayload = moveKanbanItem(
+          currentPayload,
+          pendingMove.sourceColumnId,
+          pendingMove.itemIndex,
+          targetId,
+        );
+        renderKanbanColumns(root, currentPayload);
+        bindKanbanKeyboardA11y(root, status);
+        setStatus(
+          "Karte verschoben. Naechster Schritt: Pfeiltasten oder Tab fuer Kontrolle nutzen.",
+        );
+      } catch (error) {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Reparatur starten.`);
+      } finally {
+        pendingMove = null;
+      }
+    }
+
+    root.addEventListener("click", onMoveButtonClick);
+    dialog.root.addEventListener("close", onDialogClose);
 
     async function load() {
       try {
@@ -210,7 +379,8 @@
           options.fetchImpl || globalObject.fetch,
           sourcePath,
         );
-        const count = renderKanbanColumns(root, payload);
+        currentPayload = payload;
+        const count = renderKanbanColumns(root, currentPayload);
         const keyboardCount = bindKanbanKeyboardA11y(root, status);
         status(
           `Kanban geladen (${count} Spalten, ${keyboardCount} Fokusbereiche). Naechster Schritt: Pfeiltasten testen.`,
@@ -233,6 +403,7 @@
     fetchKanbanData,
     renderKanbanColumns,
     bindKanbanKeyboardA11y,
+    moveKanbanItem,
     createKanbanPreview,
   };
 

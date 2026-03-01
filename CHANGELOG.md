@@ -1,3 +1,10 @@
+## 2026-03-01 – Kanban-Dialog fuer Kartenverschiebung (Enter/Escape + Rueckweg)
+
+- Offener TODO-Punkt abgeschlossen: Jede Kanban-Karte hat jetzt einen "Verschieben"-Button mit Dialog.
+- Dialog ist tastaturfreundlich: Enter speichert, Escape/Abbrechen bricht ab, Status zeigt den naechsten Schritt.
+- Neue Validierung fuer Kartenverschiebung ergaenzt (`moveKanbanItem`) und per Test abgesichert.
+- Risiko: niedrig, da nur Kanban-Bereich und zugehoerige Tests betroffen sind.
+
 ## 2026-03-01 – Kanban-Schnellansicht mit echten JSON-Daten + Keyboard-A11y
 
 - Kanban-Schnellansicht liest jetzt echte Daten aus `data/kanban_board.json` statt statischer Beispieltexte.
