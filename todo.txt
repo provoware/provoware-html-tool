@@ -90,7 +90,7 @@ Laienvorschläge
 ## 2026-03-01 – Neuer Pflichtplan: Referenzbild + Platzhalter
 
 - [x] P1: AGENTS.md erweitert: releasefertige Patch-Regel + Datei-/Fortschrittsstatus ueber Dateiname oder `data/file_status_index.json` klar festgelegt.
-- [ ] P1: Referenzbild-Checkliste als festen Ablauf nutzen (Layout-Raster, Typografie, Farben/Kontrast, Interaktionsmuster).
+- [x] P1: Referenzbild-Checkliste als festen Ablauf nutzen (Layout-Raster, Typografie, Farben/Kontrast, Interaktionsmuster).
 - [ ] P1: Pro Referenzbild-Analyse eine Abweichungsliste (Soll/Ist) erstellen und direkt priorisieren.
 - [ ] P1: Bei hoher Abweichung automatisch Folgepunkte im TODO anlegen (mindestens 1 klarer UI-Fix mit Akzeptanzkriterien).
 - [x] P1: Platzhalter-Scan je Iteration durchfuehren (TODO/FIXME/Dummy/Placeholder) und Funde in TODO registrieren.
@@ -142,4 +142,6 @@ Laienvorschläge
 
 - [x] P1: Naechster Mini-Punkt: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
 
-- [ ] P1: Naechster Mini-Punkt: Referenzbild-Checkliste als festen Ablauf in todo/README verankern.
+- [x] P1: Naechster Mini-Punkt: Referenzbild-Checkliste als festen Ablauf in todo/README verankern.
+
+- [ ] P1: Naechster Mini-Punkt: Kanban-Schnellansicht mit echten Moduldaten verbinden.

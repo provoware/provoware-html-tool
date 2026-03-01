@@ -1,3 +1,17 @@
+## FIX-20260301-052: Referenzbild-vorlage ohne A11y-Verlust
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Dashboard sah modern aus, aber wichtige Bereiche waren zu leer und nicht klar am Beispielbild orientiert.
+**Technische Ursache:** Es fehlte eine feste Uebersetzung der Bildanalyse in konkrete UI-Bloecke.
+**Trigger:** Wunsch nach professioneller Bildanalyse mit direkter Umsetzung im Tool.
+**Fix (kurz):** KPI-Schnellbild, Kanban-Schnellansicht und Textstatus fuer Team/Kalender in Dashboard-Template + CSS eingebaut.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, templates/dashboard.css
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Bildanalyse in konkrete, testbare UI-Bloecke mit Textstatus uebersetzen.
+**Alternative(n):** Nur Doku-Vorgaben ohne UI-Aenderung (verworfen).
+**Risiko/Side-Effects:** Niedrig, da nur Darstellung erweitert.
+**Verknuepft:** PATCH-052
+
 # MEMORY_FIXES.md – Erinnerungsoptimierung (Fix‑Wissensbasis)
 
 Stand: 2026-02-28

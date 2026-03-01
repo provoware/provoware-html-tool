@@ -1,3 +1,9 @@
+## Iteration 52 – Referenzbild-Vorgaben aktiv
+
+- Analyse-Ergebnis aus der Bildvorlage direkt in `templates/dashboard.html` und `templates/dashboard.css` umgesetzt.
+- Neue Vorgabe-Bloecke: KPI-Schnellbild, Kanban-Schnellansicht, Team-Status, Kalenderblick.
+- A11y-Regel eingehalten: Status wird ueber Text erklaert, nicht nur ueber Farbe.
+
 - Backup-Dialog-E2E-Test nutzt jetzt echten Hook-Log -> Restore-Fluss fuer robuste Freigabe.
 
 ## Update 2026-03-01 (Iteration 40)
