@@ -1,3 +1,17 @@
+## FIX-20260302-001: Quick-Store pro Bereich physisch trennen
+
+**Kategorie:** Storage/Recovery
+**Symptom (fuer Laien):** Songideen und allgemeine Notizen liegen gemischt in einer Datei und sind schwer getrennt wiederherstellbar.
+**Technische Ursache:** Persistenz schrieb bisher alle Bereiche gesammelt in `quick_store_entries.json`.
+**Trigger:** Bereichswechsel mit spaeterem Restore pro Bereich.
+**Fix (kurz):** Drei Bereichsdateien eingefuehrt (`quick_store_inbox/lyrics/research.json`) und Legacy-Migration aus der Sammeldatei eingebaut.
+**Geaenderte Dateien/Marker:** `templates/quick_store_module.js`, `tools/start_routine.js`, `data/quick_store_*.json`.
+**Tests/Checks:** `node --test`, `bash start.sh`, gezielter Helper-Test fuer Bereichspfad und Vorlagen-Einbau.
+**Praevention (kuenftig):** Ab jetzt immer Bereichsdaten physisch trennen, wenn Recovery pro Bereich gefordert ist.
+**Alternative(n):** Eine Datei mit mehreren Buckets behalten (abgelehnt wegen Recovery-Komplexitaet).
+**Risiko/Side-Effects:** Niedrig, da Legacy-Datei weiter lesbar bleibt.
+**Verknuepft:** Iteration-62
+
 ## FIX-20260301-060: TODO-Mini-Punkte-Regel automatisiert
 
 **Kategorie:** Update/Docs

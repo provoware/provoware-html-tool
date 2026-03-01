@@ -1,3 +1,11 @@
+## Iteration 62 (2026-03-02)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Songtext-Editor auf Lyrics-Bereich + getrennte Quick-Store-Dateien je Bereich).
+- Ergebnis: Lyrics-Bereich hat jetzt einen integrierten Songtext-Editor mit Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klaren Rueckweg-Knoepfen.
+- Ergebnis: Schnellspeicher speichert nun physisch getrennt in `data/quick_store_inbox.json`, `data/quick_store_lyrics.json` und `data/quick_store_research.json` (inkl. Legacy-Migration).
+- Mini-Optimierung: Hilfe-Texte wurden fuer Songideen in einfacher Sprache erweitert.
+- Naechster Schritt: Songtext-Editor um Bridge/Sonstiges-Vorlagen und Vorschau erweitern.
+
 ## Iteration 61 (2026-03-01)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Mehrfach-Schnellspeicher + Bereichsauswahl mit eigener Datei).

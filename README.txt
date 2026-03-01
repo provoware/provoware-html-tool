@@ -1,6 +1,6 @@
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Start-Routine erzwingt jetzt genau zwei offene `Naechster Mini-Punkt`-Eintraege in `todo.txt`.
-- Neu (2026-03-01): Neues Schnellspeicher-Panel im Dashboard (Titel + Inhalt) speichert direkt in `data/quick_store_entries.json`.
-- Neu (2026-03-01): Mini-Optimierung Hilfe/UX: Schnellspeicher zeigt klaren Rueckweg (Eingabe leeren oder neu speichern).
+- Neu (2026-03-01): Schnellspeicher speichert jetzt getrennt je Bereich in `data/quick_store_inbox.json`, `data/quick_store_lyrics.json` und `data/quick_store_research.json`.
+- Neu (2026-03-02): Songtext-Editor sitzt direkt im Bereich Songideen mit Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klaren Rueckweg-Knoepfen.
 
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Wiki-Modul ist jetzt als eigenes Panel mit Kategorie, Titel, Inhalt und Speicherung in `data/wiki_notes.json` verfuegbar.
 - Neu (2026-03-01): Mini-Optimierung Hilfe/UX: Wiki-Panel erklaert in einfacher Sprache Aktion, Datenwirkung und Rueckweg.
@@ -29,14 +29,14 @@
 - Naechster Schritt: Wiki-Modul als naechstes Teilziel mit Grundgeruest und Validierung starten.
 
 ## Iteration 61 Kurzstatus
-- Abgeschlossen: Mehrfach-Schnellspeicherbereiche mit eigener Datei.
-- Abgeschlossen: Mini-Punkt Bereichsauswahl im Schnellspeicher.
-- Naechster Schritt: Songtext-Editor mit Intro/Refrain-Vorlage.
+- Abgeschlossen: Songtext-Editor im Bereich Songideen mit Intro/Refrain-Vorlagen und Enter/Escape-Hilfe.
+- Abgeschlossen: Schnellspeicher ist physisch auf drei Bereichsdateien aufgeteilt (inbox/lyrics/research).
+- Naechster Schritt: Songtext-Editor um Bridge/Sonstiges-Vorlagen erweitern.
 
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 81 %
-- **Erledigt:** 90 Punkte
+- **Erledigt:** 92 Punkte
 - **Offen:** 21 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -171,7 +171,7 @@ Stand: 2026-03-01
    - Wissen nach Kategorien speichern und schnell wiederfinden.
 3. **Schnellspeicher-Modul**
    - Titel + Eingabe direkt in feste Datei anhaengen.
-   - Weitere Schnellspeicher-Bereiche mit eigenen Dateien anlegen.
+   - Getrennte Bereichsdateien sind umgesetzt (inbox/lyrics/research) fuer bessere Recovery.
 4. **Songtext-Editor-Modul**
    - Vorlagen fuer Intro, Refrain, Bridge und Sonstiges.
    - Bereich fuer Zufallsvorschlaege direkt im Dokument.

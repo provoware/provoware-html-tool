@@ -81,6 +81,36 @@
                 Eingabe leeren
               </button>
             </div>
+            <article
+              id="lyrics-editor"
+              class="card"
+              aria-labelledby="lyrics-editor-title"
+              hidden
+            >
+              <h4 id="lyrics-editor-title">
+                Songtext-Editor (Bereich Songideen)
+              </h4>
+              <p class="field-tip" id="lyrics-editor-help">
+                Hilfe: Intro/Refrain per Knopf einfuegen. Enter aktiviert den
+                Knopf. Escape springt zurueck zu Allgemein.
+              </p>
+              <div class="todo-actions" aria-label="Songtext-Vorlagen">
+                <button type="button" id="lyrics-template-intro">
+                  Intro-Vorlage einfuegen
+                </button>
+                <button type="button" id="lyrics-template-refrain">
+                  Refrain-Vorlage einfuegen
+                </button>
+              </div>
+              <div class="todo-actions" aria-label="Songtext-Rueckweg">
+                <button type="button" id="lyrics-back-to-inbox">
+                  Zurueck zu Allgemein
+                </button>
+                <button type="button" id="lyrics-clear-draft">
+                  Songtext zuruecksetzen
+                </button>
+              </div>
+            </article>
             <ul id="quick-store-list" class="todo-list" role="list"></ul>
           </article>
           <article class="panel" aria-labelledby="wiki-title">

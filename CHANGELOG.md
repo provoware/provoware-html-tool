@@ -1,3 +1,9 @@
+## 2026-03-02 - PATCH-062
+
+- Songtext-Editor im Bereich Songideen erweitert: Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klare Rueckweg-Knoepfe.
+- Schnellspeicher speichert jetzt physisch getrennt in `quick_store_inbox.json`, `quick_store_lyrics.json` und `quick_store_research.json`.
+- Risiko: niedrig, da Legacy-Migration aus `data/quick_store_entries.json` aktiv bleibt und neue Helper-Tests bestehen.
+
 ## 2026-03-01 - PATCH-061
 
 - Schnellspeicher auf drei Bereiche erweitert und je Bereich validiert gespeichert.
@@ -174,6 +180,12 @@
 - Risiko: niedrig, da nur Dokumentationsregeln ergaenzt wurden.
 
 # CHANGELOG
+
+## 2026-03-02 – Songtext-Editor auf Lyrics-Bereich + getrennte Quick-Store-Dateien
+
+- Songtext-Editor ist direkt im Bereich Songideen aktiv und bietet Intro/Refrain-Vorlagen sowie Enter/Escape-Hilfe mit klaren Rueckweg-Knoepfen.
+- Schnellspeicher speichert jetzt physisch getrennt in `quick_store_inbox.json`, `quick_store_lyrics.json` und `quick_store_research.json`.
+- Risiko: niedrig, da Quick-Store-Migration aus der alten Sammeldatei erhalten bleibt und gezielte Tests die Hilfslogik pruefen.
 
 ## 2026-03-01 – Mini-Hilfe fuer Referenzbild-Rhythmus im Help-Panel
 

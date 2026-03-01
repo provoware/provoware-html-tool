@@ -6,6 +6,11 @@
 
 # Hilfe
 
+- Neu: **Songtext-Editor im Bereich Songideen** mit Intro/Refrain-Vorlagen.
+- Enter aktiviert die Vorlagen-Knoepfe, Escape springt direkt als Rueckweg zu **Allgemein**.
+- Daten liegen jetzt getrennt in `data/quick_store_inbox.json`,
+  `data/quick_store_lyrics.json` und `data/quick_store_research.json`.
+
 ## Hilfe-Panel
 
 - **Was macht das?** Das Panel zeigt Systemtest und Log-Hinweise.

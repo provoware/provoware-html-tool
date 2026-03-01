@@ -15,16 +15,16 @@
   },
   {
     "file": "templates/dashboard.html",
-    "version": "v007",
+    "version": "v008",
     "status": "ready",
-    "updatedAt": "2026-03-01T23:40:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
     "owner": "codex"
   },
   {
     "file": "templates/dashboard.js",
-    "version": "v008",
+    "version": "v009",
     "status": "ready",
-    "updatedAt": "2026-03-01T23:40:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
     "owner": "codex"
   },
   {
@@ -106,30 +106,58 @@
   },
   {
     "file": "tools/start_routine.js",
-    "version": "v001",
+    "version": "v002",
     "status": "ready",
-    "updatedAt": "2026-03-01T23:40:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
     "owner": "codex"
   },
   {
     "file": "system-module/quick_store_model.js",
     "version": "v002",
     "status": "ready",
-    "updatedAt": "2026-03-01T23:40:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
     "owner": "codex"
   },
   {
     "file": "templates/quick_store_module.js",
-    "version": "v002",
+    "version": "v003",
     "status": "ready",
-    "updatedAt": "2026-03-01T23:40:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
     "owner": "codex"
   },
   {
     "file": "data/quick_store_entries.json",
+    "version": "v002",
+    "status": "deprecated",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "data/quick_store_inbox.json",
     "version": "v001",
     "status": "ready",
-    "updatedAt": "2026-03-01T23:40:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "data/quick_store_lyrics.json",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "data/quick_store_research.json",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "owner": "codex"
+  },
+  {
+    "file": "test/quick_store_module.test.js",
+    "version": "v001",
+    "status": "ready",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
     "owner": "codex"
   }
 ]
