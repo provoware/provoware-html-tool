@@ -141,3 +141,9 @@ Vorteil fuer Laien:
 - Storage-Service wurde gehaertet: versionierte Speicherstaende pro Datei sind jetzt optional direkt im JSON-Store verfuegbar.
 - Recovery kann die letzte gueltige Version automatisch finden und in die Ziel-Datei zurueckschreiben.
 - Vorteil fuer Laien: Bei Datenfehlern gibt es einen klaren Rueckweg ohne manuelles Dateisuchen.
+
+## Iteration 61 - Tool-Umfang Schnellspeicher
+- Das Tool hat jetzt drei Bereiche: Allgemein, Songideen und Recherche.
+- Jeder Bereich hat eigene Eintraege in derselben JSON-Datei (`data/quick_store_entries.json`).
+- Vorteil fuer Laien: Sie koennen Ideen sauber trennen und spaeter schneller finden.
+- Technisch: Validierung (Eingabepruefung) prueft Bereich, Titel und Inhalt vor dem Speichern.

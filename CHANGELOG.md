@@ -1,3 +1,9 @@
+## 2026-03-01 - PATCH-061
+
+- Schnellspeicher auf drei Bereiche erweitert und je Bereich validiert gespeichert.
+- Persistenz erweitert: Datei wird beim Start gelesen und nach jedem Speichern aktualisiert.
+- UX/A11y: Bereichsauswahl mit klarer Hilfe im Panel und Rueckweg-Hinweis.
+
 ## 2026-03-01 – Zwei weitere Punkte abgeschlossen (Mini-Punkte-Regel + Schnellspeicher)
 
 - Start-Routine prueft jetzt automatisch die AGENTS-Regel: In `todo.txt` muessen genau zwei offene `Naechster Mini-Punkt`-Eintraege stehen.

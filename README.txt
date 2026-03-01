@@ -28,11 +28,16 @@
 - Offener Punkt abgeschlossen: Boot-View-Statusbereich ist jetzt mit 4 klaren Phasen und Ampel-Texten stabil umgesetzt.
 - Naechster Schritt: Wiki-Modul als naechstes Teilziel mit Grundgeruest und Validierung starten.
 
+## Iteration 61 Kurzstatus
+- Abgeschlossen: Mehrfach-Schnellspeicherbereiche mit eigener Datei.
+- Abgeschlossen: Mini-Punkt Bereichsauswahl im Schnellspeicher.
+- Naechster Schritt: Songtext-Editor mit Intro/Refrain-Vorlage.
+
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 80 %
-- **Erledigt:** 88 Punkte
-- **Offen:** 22 Punkte
+- **Fortschritt:** 81 %
+- **Erledigt:** 90 Punkte
+- **Offen:** 21 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

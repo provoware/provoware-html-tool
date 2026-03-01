@@ -1,3 +1,10 @@
+## Iteration 61 (2026-03-01)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Mehrfach-Schnellspeicher + Bereichsauswahl mit eigener Datei).
+- Ergebnis: Schnellspeicher trennt jetzt drei Bereiche (Allgemein, Songideen, Recherche) und speichert/liest alles zentral aus `data/quick_store_entries.json`.
+- Mini-Optimierung: Bereichswechsel ist direkt im Panel erklaert und per Tastatur sofort nutzbar.
+- Naechster Schritt: Songtext-Editor mit Intro/Refrain-Vorlage und Tastaturhilfe starten.
+
 ## Iteration 60 (2026-03-01)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Mini-Punkte-Regel im Start-Check + Schnellspeicher-Modul).
