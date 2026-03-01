@@ -208,6 +208,10 @@ test("Boot-Debug-Schalter ist im Hilfe-Panel verfuegbar", () => {
   );
 
   assert.match(dashboardHtml, /id="support-history-boot-debug-toggle"/);
+  assert.match(
+    dashboardHtml,
+    /id="support-history-boot-debug-toggle"[\s\S]*aria-describedby="support-history-boot-debug-help"/,
+  );
   assert.match(dashboardJs, /showBootDebugInSupport/);
   assert.match(
     dashboardJs,
@@ -292,6 +296,19 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardJs, /className = "sr-only"/);
   assert.match(dashboardCss, /\.sr-only/);
   assert.match(dashboardCss, /#support-history-empty-help-list/);
+  assert.match(dashboardHtml, /id="support-history-empty-toggle"/);
+  assert.match(
+    dashboardHtml,
+    /aria-controls="support-history-empty-help-list"/,
+  );
+  assert.match(dashboardJs, /toggleSupportEmptyHelp/);
+  assert.match(
+    dashboardJs,
+    /supportHistoryEmptyToggle\.addEventListener\("keydown"/,
+  );
+  assert.match(dashboardJs, /event\.key === "Escape"/);
+  assert.match(dashboardJs, /supportHistoryEmptyQueryHint/);
+  assert.match(dashboardCss, /\.support-empty-toggle/);
   assert.match(dashboardJs, /shouldAutoCompactSupportFooter/);
   assert.match(dashboardJs, /Auto-Kurzmodus aktiv unter 640px/);
   assert.match(

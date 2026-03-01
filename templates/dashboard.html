@@ -753,6 +753,7 @@
                   id="support-history-boot-debug-toggle"
                   type="checkbox"
                   checked
+                  aria-describedby="support-history-boot-debug-help"
                 />
                 Boot-Debug im Verlauf zeigen (optional ausblendbar)
               </label>
@@ -795,8 +796,17 @@
                 id="support-history-empty-help"
                 class="field-tip"
                 aria-live="polite"
+                hidden
               >
-                <strong>Wenn nichts gefunden wird:</strong>
+                <button
+                  type="button"
+                  id="support-history-empty-toggle"
+                  class="support-empty-toggle"
+                  aria-expanded="true"
+                  aria-controls="support-history-empty-help-list"
+                >
+                  Wenn nichts gefunden wird (auf-/zuklappen)
+                </button>
                 <ol id="support-history-empty-help-list">
                   <li>
                     Erneut versuchen: Filter auf "Alle Ereignisse" stellen.
