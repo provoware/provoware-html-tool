@@ -16,3 +16,5 @@
 2026-03-01 | PATCH-038 | Doku-Entscheidung: Einzelne offene Punkte koennen release-fertig sein (5-Punkte-Check) | README.txt, CHANGELOG.md, SELFINFO.md, todo.txt
 
 2026-03-01 | PATCH-039 | Backup-Dialog zeigt 5-Punkte-Inline-Check, Release-Readiness prueft Doku-Regel | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, tools/release_readiness_check.js, test/release_readiness_check.test.js, Doku-Updates
+
+PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | Dateien: templates/dashboard.html, templates/dashboard.css, tools/release_readiness_check.js, README.txt, docs/HILFE.md, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, PROJEKTBESCHREIBUNG.md, todo.txt, MEMORY_FIXES.md

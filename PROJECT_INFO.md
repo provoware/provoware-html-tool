@@ -1,3 +1,9 @@
+## Update 2026-03-01 (Iteration 40)
+
+- A11y/Sichtbarkeit: Theme-System erweitert auf 5 Themes (inkl. Rötlich/Camouflage).
+- Qualitaetscheck: Release-Readiness prueft jetzt Theme-Vollstaendigkeit in HTML/CSS.
+- Doku: README, docs/HILFE und todo wurden auf denselben Stand synchronisiert.
+
 # PROJECT_INFO
 
 ## Aktive Standards

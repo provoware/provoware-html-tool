@@ -13,7 +13,7 @@
 - **Was passiert mit den Daten?** Der gewählte Projektordner wird als Handle in IndexedDB gespeichert und beim Neustart erneut verbunden.
 - **Wie mache ich rückgängig?** Sie können die Reihenfolge sofort per Pfeil-Buttons oder Drag&Drop wieder ändern und das Theme jederzeit zurück auf Hell setzen.
 - **Fachwort kurz erklärt:** _Auto-Reconnect_ bedeutet automatische Wiederverbindung beim nächsten Start.
-- **Barrierefreiheit:** Fokus ist sichtbar, Buttons sind groß (mindestens 44px) und es gibt Kontrast+ als Theme.
+- **Barrierefreiheit:** Fokus ist sichtbar, Buttons sind groß (mindestens 44px) und es gibt 5 Themes: Hell, Dunkel, Kontrast+, Rötlich und Camouflage.
 - **Escape als Rueckweg (neu):** Mit Escape schliessen Sie die offene Debug-Ansicht schnell per Tastatur.
 - **Modulflaeche:** Der Hauptbereich startet leer. Aktivierte Module erscheinen als gleichgroße Raster-Karten in Auswahl-Reihenfolge und haben Knöpfe für Maximieren, Minimieren und Ausblenden.
 - **Kompakt-Modus:** Beispieltexte wurden entfernt. Leere Bereiche bleiben sichtbar frei und sind für echte Inhalte reserviert.
@@ -51,3 +51,11 @@
 - Komma-Eingaben werden einzeln gespeichert, z. B. `Techno, Chill, Hoerspiel`.
 - Favorit markieren: Sternchen nutzen, z. B. `*Techno*`.
 - Bei Fehlern: erst erneut versuchen, dann Protokoll oeffnen, danach Reparatur starten.
+
+## Sehschwache: schneller 3-Punkte-Check (neu)
+
+1. Theme direkt auf **Kontrast+** stellen.
+2. Wenn Farben zu hart sind: **Rötlich** oder **Camouflage** testen.
+3. Immer mit Tastatur pruefen: Tab, Enter, Escape.
+
+Naechster Schritt bei Unsicherheit: **Protokoll oeffnen**, dann **Erneut versuchen**.

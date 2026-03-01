@@ -7,8 +7,8 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 68 %
-- **Erledigt:** 55 Punkte
-- **Offen:** 26 Punkte
+- **Erledigt:** 57 Punkte
+- **Offen:** 27 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -29,6 +29,12 @@ Stand: automatisch aus `todo.txt` gezaehlt.
 - Backup-Dialog zeigt jetzt den 5-Punkte-Release-Check direkt als Inline-Hilfe.
 - Release-Readiness prueft jetzt auch die Doku-Regel (README/CHANGELOG/todo).
 - Naechster Schritt: Backup-Auswahl-Dialog direkt mit dem Backup-Hook verbinden.
+
+## Update 2026-03-01 (Iteration 40)
+
+- Sichtbarkeit fuer Sehschwaeche verbessert: zwei neue Themes **Rötlich** und **Camouflage** sind in der Theme-Auswahl verfuegbar.
+- Release-Readiness prueft jetzt alle 5 Themes statt nur 3.
+- Hilfe und Doku enthalten jetzt einen kurzen Sehschwaeche-Leitfaden mit klaren Schritten.
 
 ## Kann man einzelne offene Punkte schon release-fertig abschliessen?
 
@@ -259,9 +265,14 @@ Verfügbare Themes:
 - Hell
 - Dunkel
 - Kontrast+
+- Rötlich
+- Camouflage
 
-Tipp:
-Nutze **Kontrast+** bei Leseschwierigkeiten.
+Tipp fuer Sehschwaeche:
+1) Starte mit **Kontrast+**.
+2) Nutze bei langen Sitzungen **Rötlich** oder **Camouflage**.
+3) Zoom im Browser auf 110-125% stellen.
+4) Bei Unsicherheit zuerst Status-Text lesen, dann klicken.
 
 ## Debugging und Logging
 

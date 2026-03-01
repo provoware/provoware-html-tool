@@ -148,6 +148,16 @@ function runReleaseReadinessCheck(options = {}) {
     ),
     checkIncludes(
       dashboardHtml,
+      '<option value="warm">Rötlich</option>',
+      "Theme Roetlich in HTML vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      '<option value="camo">Camouflage</option>',
+      "Theme Camouflage in HTML vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
       'id="theme-tooltip"',
       "Theme-Hinweis mit Rueckweg ist vorhanden",
     ),
@@ -165,6 +175,16 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardCss,
       '[data-theme="contrast"]',
       "Theme Kontrast+ in CSS vorhanden",
+    ),
+    checkIncludes(
+      dashboardCss,
+      '[data-theme="warm"]',
+      "Theme Roetlich in CSS vorhanden",
+    ),
+    checkIncludes(
+      dashboardCss,
+      '[data-theme="camo"]',
+      "Theme Camouflage in CSS vorhanden",
     ),
     checkIncludes(
       dashboardHtml,
