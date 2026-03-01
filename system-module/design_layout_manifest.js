@@ -32,6 +32,33 @@ function validateThemeList(themes) {
   return { ok: true, message: "Theme-Liste gueltig." };
 }
 
+function validateCardProfiles(cardProfiles) {
+  if (!Array.isArray(cardProfiles) || cardProfiles.length < 4) {
+    return {
+      ok: false,
+      message: "Kartenprofile fehlen. Naechster Schritt: Reparatur starten.",
+    };
+  }
+
+  const invalidProfile = cardProfiles.find(
+    (profile) =>
+      !profile ||
+      !isNonEmptyString(profile.id) ||
+      !isNonEmptyString(profile.tokenPrefix) ||
+      !isNonEmptyString(profile.purpose),
+  );
+
+  if (invalidProfile) {
+    return {
+      ok: false,
+      message:
+        "Kartenprofil unvollstaendig. Naechster Schritt: Protokoll oeffnen.",
+    };
+  }
+
+  return { ok: true, message: "Kartenprofile gueltig." };
+}
+
 function validateDesignLayoutManifest(input) {
   if (!input || typeof input !== "object") {
     return {
@@ -45,8 +72,17 @@ function validateDesignLayoutManifest(input) {
   const hasLayout = isNonEmptyString(input.layout?.shell?.type);
   const hasStatusRule = isNonEmptyString(input.visual?.statusRule);
   const themeValidation = validateThemeList(input.themes);
+  const cardProfileValidation = validateCardProfiles(
+    input.visual?.cardProfiles,
+  );
 
-  if (!hasMeta || !hasLayout || !hasStatusRule || !themeValidation.ok) {
+  if (
+    !hasMeta ||
+    !hasLayout ||
+    !hasStatusRule ||
+    !themeValidation.ok ||
+    !cardProfileValidation.ok
+  ) {
     return {
       ok: false,
       message:
@@ -104,4 +140,5 @@ module.exports = {
   validateDesignLayoutManifest,
   readDesignLayoutManifest,
   validateThemeList,
+  validateCardProfiles,
 };

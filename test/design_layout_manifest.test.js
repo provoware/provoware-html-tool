@@ -2,6 +2,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
   readDesignLayoutManifest,
+  validateCardProfiles,
   validateDesignLayoutManifest,
   validateThemeList,
 } = require("../system-module/design_layout_manifest");
@@ -30,4 +31,15 @@ test("readDesignLayoutManifest liest die Projektdatei erfolgreich", () => {
   assert.equal(result.ok, true);
   assert.equal(result.manifest.meta.name, "dashboard-layout-neon-v1");
   assert.equal(result.manifest.layout.shell.type, "three-column");
+});
+
+test("validateCardProfiles akzeptiert vier zentrale Kartenprofile", () => {
+  const result = validateCardProfiles([
+    { id: "project", tokenPrefix: "module-project", purpose: "Projekt" },
+    { id: "sales", tokenPrefix: "module-sales", purpose: "Vertrieb" },
+    { id: "analytics", tokenPrefix: "module-analytics", purpose: "Analyse" },
+    { id: "support", tokenPrefix: "module-support", purpose: "Support" },
+  ]);
+
+  assert.equal(result.ok, true);
 });

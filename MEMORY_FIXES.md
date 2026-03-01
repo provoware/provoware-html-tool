@@ -738,3 +738,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Automatisches Schliessen bei Bereichswechsel ohne extra Knopf.
 **Risiko/Side-Effects:** Niedrig, da nur Lyrics-Preview-Flow betroffen.
 **Verknuepft:** patch-064
+
+## FIX-20260303-001: Theme-Kontrast fuer Rail/Banner/Karten
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Einige Rahmen und Banner wirkten je Theme unterschiedlich stark und teils zu schwach.
+**Technische Ursache:** Kontrast-Checks deckten nur Haupttext + Topbar ab, nicht Rail/Banner/Karten.
+**Trigger:** Theme-Wechsel auf warm/camo mit Referenzbild-Abgleich.
+**Fix (kurz):** Zentrale Tokens fuer Rail/Banner/Kartenprofile eingefuehrt und Release-Check auf diese Flaechen erweitert.
+**Geaenderte Dateien/Marker:** templates/dashboard.css, tools/release_readiness_check.js, templates/module_workspace.js.
+**Tests/Checks:** node --test, npm run format, bash start.sh, Screenshot-Abgleich.
+**Praevention (kuenftig):** Ab jetzt immer Kontrast fuer Text + Banner + Rail + Kartenprofile je Theme automatisiert pruefen.
+**Alternative(n):** Einzelwerte je Karte hart codieren (verworfen wegen Wartbarkeit).
+**Risiko/Side-Effects:** Gering, da nur Stil-Tokens und Checks erweitert wurden.
+**Verknuepft:** Iteration 66
