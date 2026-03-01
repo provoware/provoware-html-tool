@@ -6,6 +6,8 @@ const {
   parseJsonText,
   runReleaseReadinessCheck,
   summarizeA11yChecks,
+  readPngDimensions,
+  checkLayoutTemplateCompliance,
 } = require("../tools/release_readiness_check");
 
 test("parseJsonText verarbeitet gueltiges JSON", () => {
@@ -68,6 +70,36 @@ test("checkThemeContrast liefert 40 Theme-Kontrastchecks", () => {
   ].join("\n");
   const checks = checkThemeContrast(cssText, 4.5);
   assert.equal(checks.length, 40);
+  assert.equal(
+    checks.every((item) => item.ok),
+    true,
+  );
+});
+
+test("readPngDimensions liest Breite und Hoehe aus LAYOUT.png", () => {
+  const result = readPngDimensions(`${process.cwd()}/LAYOUT.png`);
+  assert.equal(result.width, 1536);
+  assert.equal(result.height, 1024);
+});
+
+test("checkLayoutTemplateCompliance meldet hohe Layout-Exaktheit", () => {
+  const dashboardHtml = require("node:fs").readFileSync(
+    `${process.cwd()}/templates/dashboard.html`,
+    "utf8",
+  );
+
+  const checks = checkLayoutTemplateCompliance({
+    rootPath: process.cwd(),
+    dashboardHtml,
+  });
+
+  assert.equal(Array.isArray(checks), true);
+  assert.equal(
+    checks.some((item) =>
+      item.message.includes("Layout-Exaktheit laut Auto-Pruefung:"),
+    ),
+    true,
+  );
   assert.equal(
     checks.every((item) => item.ok),
     true,

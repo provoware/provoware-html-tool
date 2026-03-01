@@ -214,6 +214,102 @@ function checkUiTokenFile(rootPath) {
   }));
 }
 
+function readPngDimensions(filePath) {
+  assertText(filePath, "Bildpfad");
+  const buffer = fs.readFileSync(filePath);
+  const pngSignature = "89504e470d0a1a0a";
+  const header = buffer.subarray(0, 8).toString("hex");
+
+  if (header !== pngSignature) {
+    throw new Error(
+      `Bilddatei ist kein gueltiges PNG: ${filePath}. Bitte reparieren und erneut versuchen.`,
+    );
+  }
+
+  if (buffer.length < 24) {
+    throw new Error(
+      `PNG-Datei ist zu kurz: ${filePath}. Bitte reparieren und erneut versuchen.`,
+    );
+  }
+
+  return {
+    width: buffer.readUInt32BE(16),
+    height: buffer.readUInt32BE(20),
+  };
+}
+
+function checkLayoutTemplateCompliance({ rootPath, dashboardHtml }) {
+  assertText(rootPath, "Projektpfad");
+  assertText(dashboardHtml, "Dashboard-HTML");
+
+  const templatePath = path.join(rootPath, "LAYOUT.png");
+  const manifestRaw = readUtf8(
+    path.join(rootPath, "config/design_layout_manifest.json"),
+  );
+  const manifest = parseJsonText(manifestRaw, "design_layout_manifest.json");
+  const templateSize = readPngDimensions(templatePath);
+  const zoneChecks = [
+    {
+      key: 'class="topbar"',
+      message: "Layoutvorlage: Topbar im Dashboard vorhanden",
+    },
+    {
+      key: 'id="left-rail"',
+      message: "Layoutvorlage: Linke Rail vorhanden",
+    },
+    {
+      key: 'id="center-stage"',
+      message: "Layoutvorlage: Mitte (Center Stage) vorhanden",
+    },
+    {
+      key: 'id="right-rail"',
+      message: "Layoutvorlage: Rechte Rail vorhanden",
+    },
+    {
+      key: 'class="tool-footer"',
+      message: "Layoutvorlage: Footer-Bereich vorhanden",
+    },
+    {
+      key: 'class="layout-banner"',
+      message: "Layoutvorlage: Statusbanner vorhanden",
+    },
+  ];
+
+  const checks = zoneChecks.map((zoneCheck) =>
+    checkIncludes(dashboardHtml, zoneCheck.key, zoneCheck.message),
+  );
+
+  checks.push({
+    ok: manifest?.layout?.shell?.type === "three-column",
+    message: "Layout-Manifest: Shell-Typ ist three-column",
+  });
+  checks.push({
+    ok: manifest?.layout?.shell?.topBar === true,
+    message: "Layout-Manifest: Topbar ist als Pflicht gesetzt",
+  });
+  checks.push({
+    ok: manifest?.layout?.shell?.footerBar === true,
+    message: "Layout-Manifest: Footerbar ist als Pflicht gesetzt",
+  });
+  checks.push({
+    ok: manifest?.layout?.shell?.statusBanner === true,
+    message: "Layout-Manifest: Statusbanner ist als Pflicht gesetzt",
+  });
+  checks.push({
+    ok: templateSize.width >= 1000 && templateSize.height >= 500,
+    message: `Layoutvorlage: PNG-Dimensionen erkannt (${templateSize.width}x${templateSize.height})`,
+  });
+
+  const matchedZones = checks.filter((item) => item.ok).length;
+  const accuracyPercent = Math.round((matchedZones / checks.length) * 100);
+  checks.push({
+    ok: accuracyPercent >= 95,
+    message: `Layout-Exaktheit laut Auto-Pruefung: ${accuracyPercent}% (Soll mindestens 95%)`,
+  });
+
+  return checks;
+}
+
 function summarizeA11yChecks(checks) {
   if (!Array.isArray(checks)) {
     throw new Error(
@@ -492,6 +588,12 @@ function runReleaseReadinessCheck(options = {}) {
     checkIncludes(todoText, "CHANGELOG", "todo enthaelt CHANGELOG-Updatepunkt"),
   );
   checks.push(...checkThemeContrast(dashboardCss));
+  checks.push(
+    ...checkLayoutTemplateCompliance({
+      rootPath,
+      dashboardHtml,
+    }),
+  );
 
   const failed = checks.filter((item) => !item.ok).map((item) => item.message);
   return {
@@ -521,9 +623,11 @@ if (require.main === module) {
 
 module.exports = {
   checkIncludes,
+  checkLayoutTemplateCompliance,
   checkThemeContrast,
   getContrastRatio,
   parseJsonText,
+  readPngDimensions,
   readUtf8,
   runReleaseReadinessCheck,
   summarizeA11yChecks,

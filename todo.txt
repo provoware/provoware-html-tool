@@ -1,3 +1,6 @@
+## Iteration 104 (2026-03-01) - Layout-Exaktheitsanalyse
+- [x] Naechster Mini-Punkt: Verbindliche Layoutvorlage (`LAYOUT.png`) automatisiert gegen Dashboard-Struktur geprueft und Exaktheitsquote in Release-Check aufgenommen. | Code: tools/release_readiness_check.js + test/release_readiness_check.test.js | Tests: npm run format + npm test + node tools/release_readiness_check.js + bash start.sh gruen | Doku: todo aktualisiert | Risiko: niedrig (nur Prueflogik + Tests) | Naechster Schritt: bei echten UI-Abweichungen die Checkliste um visuelle Pixel-Toleranz erweitern.
+
 ## Iteration 88 (2026-03-01) - Doku-Releasefinalisierung
 - [x] Naechster Mini-Punkt: README-Struktur fuer Releasefinalisierung neu geordnet (Ziel, Struktur, Schnellstart, Pflichtbefehle, Laienvorschlaege). | Code: README.txt | Tests: npm run format + node --test + bash start.sh geplant/ausgefuehrt | Doku: README selbst aktualisiert | Risiko: niedrig (nur Doku) | Naechster Schritt: offene Funktionspunkte aus todo abarbeiten.
 - [x] Naechster Mini-Punkt: AGENTS.md als kompakte Release-Richtlinie V3 neu strukturiert (PatchSpec, Gates, A11y, Doku-Pflicht). | Code: AGENTS.md | Tests: npm run format + node --test + bash start.sh geplant/ausgefuehrt | Doku: AGENTS selbst aktualisiert | Risiko: niedrig (nur Prozessdoku) | Naechster Schritt: Regeln in naechster Code-Iteration strikt anwenden.
