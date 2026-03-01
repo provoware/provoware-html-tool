@@ -1,3 +1,9 @@
+## Statusupdate 2026-03-03 – Iteration 73
+
+- Start-Routine hat jetzt den Standard `runShortcutConflictCheck` fuer bekannte Browser/OS-Shortcut-Konflikte.
+- Songtext-Lesemodus zeigt Shortcut-Hilfe (Alt+T/Alt+I) jetzt direkt in den Live-Statusmeldungen fuer Vorschau, Speichern und Enter-Bestaetigung.
+- Naechster Schritt: Konflikthinweise im Abschlussbericht kompakter zusammenfassen.
+
 ## Statusupdate 2026-03-03 – Iteration 70
 
 - Neuer Datenpfad: `data/quick_store_lyrics_preferences.json` speichert `randomProfile` und `previewFocusTarget` versioniert als einfache Projektpraeferenz.

@@ -1,3 +1,9 @@
+## Neu in Iteration 73: sichtbare Shortcut-Hilfe und Konfliktcheck
+
+- Im Lesemodus zeigt die Statuszeile jetzt immer **Alt+T** (Titel) und **Alt+I** (Inhalt) als direkte Tastaturhilfe.
+- Die Start-Routine meldet jetzt automatisch moegliche Shortcut-Konflikte je Betriebssystem.
+- Naechster Schritt: Bei einem Hinweis erst Shortcut pruefen, dann Protokoll oeffnen.
+
 ## Songtext: Profil-Status und Fokushilfe (Iteration 71)
 
 - Das Feld **Aktives Profil** zeigt immer das gewaehlte Zufallsprofil (z. B. Standard oder Techno).

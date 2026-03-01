@@ -416,6 +416,52 @@ function validateOpenMiniPoints(todoContent) {
   };
 }
 
+function runShortcutConflictCheck(options = {}) {
+  const platform =
+    typeof options.platform === "string" ? options.platform : process.platform;
+  const entries = Array.isArray(options.shortcuts)
+    ? options.shortcuts
+    : ["Alt+T", "Alt+I", "Enter", "Escape"];
+
+  const shortcutRules = {
+    darwin: {
+      "Alt+I": "Kann auf manchen Tastaturen Sonderzeichen ausloesen.",
+    },
+  };
+
+  const warnings = [];
+
+  entries.forEach((shortcut) => {
+    assertText(shortcut, "Shortcut");
+    const platformRules = shortcutRules[platform] || {};
+    if (platformRules[shortcut]) {
+      warnings.push({
+        shortcut,
+        reason: platformRules[shortcut],
+      });
+    }
+  });
+
+  if (warnings.length > 0) {
+    const warningText = warnings
+      .map((entry) => `${entry.shortcut}: ${entry.reason}`)
+      .join(" | ");
+    return {
+      ok: true,
+      warnings,
+      message:
+        "Shortcut-Konfliktcheck mit Hinweis. Naechster Schritt: " +
+        `Shortcut pruefen oder Protokoll oeffnen. Details: ${warningText}`,
+    };
+  }
+
+  return {
+    ok: true,
+    warnings,
+    message: "Shortcut-Konfliktcheck ohne kritische Konflikte.",
+  };
+}
+
 function calculateTodoProgress(todoContent) {
   assertText(todoContent, "TODO-Inhalt");
   const doneMatches = todoContent.match(/^- \[x\] /gim) || [];
@@ -535,16 +581,20 @@ function runStartRoutine() {
   runRegistryCheck();
   runPluginLoaderCheck();
 
-  console.log("[9/12] Release-Readiness pruefen");
+  console.log("[9/13] Shortcut-Konfliktcheck pruefen");
+  const shortcutCheck = runShortcutConflictCheck();
+  console.log(`[9/13] ${shortcutCheck.message}`);
+
+  console.log("[10/13] Release-Readiness pruefen");
   const release = runReleaseReadinessCheck({ rootPath: process.cwd() });
   if (!release.ok) {
     throw new Error(
       "Release-Readiness fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
     );
   }
-  console.log(`[9/12] ${release.message}`);
+  console.log(`[10/13] ${release.message}`);
 
-  console.log("[10/12] Platzhalter-Scan pruefen");
+  console.log("[11/13] Platzhalter-Scan pruefen");
   const placeholderCheck = scanPlaceholderMarkers(process.cwd());
   if (!placeholderCheck.ok) {
     const first = placeholderCheck.findings[0];
@@ -554,7 +604,7 @@ function runStartRoutine() {
         `(${first.marker}). Naechster Schritt: Protokoll oeffnen oder Reparatur starten.`,
     );
   }
-  console.log("[10/12] Platzhalter-Scan ohne offene Marker");
+  console.log("[11/13] Platzhalter-Scan ohne offene Marker");
 
   const todoPath = path.join(process.cwd(), "todo.txt");
   const todoContent = fs.readFileSync(todoPath, "utf8");
@@ -565,15 +615,15 @@ function runStartRoutine() {
         "Naechster Schritt: TODO anpassen und erneut versuchen.",
     );
   }
-  console.log("[11/13] TODO-Regel geprueft: genau zwei offene Mini-Punkte");
+  console.log("[12/14] TODO-Regel geprueft: genau zwei offene Mini-Punkte");
 
-  console.log("[12/13] README-Fortschritt aus TODO synchronisieren");
+  console.log("[13/14] README-Fortschritt aus TODO synchronisieren");
   const progress = syncReadmeProgressFromTodo(process.cwd());
   console.log(
-    `[12/13] Fortschritt: ${progress.percent} % (${progress.done} erledigt, ${progress.open} offen)`,
+    `[13/14] Fortschritt: ${progress.percent} % (${progress.done} erledigt, ${progress.open} offen)`,
   );
 
-  console.log("[13/13] Systemtest ausfuehren");
+  console.log("[14/14] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -583,7 +633,7 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[14/14] Fertig");
+  console.log("[15/15] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -622,4 +672,5 @@ module.exports = {
   calculateTodoProgress,
   syncReadmeProgressFromTodo,
   validateOpenMiniPoints,
+  runShortcutConflictCheck,
 };
