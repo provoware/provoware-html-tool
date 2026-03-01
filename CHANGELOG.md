@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-03-01 – Dashboard-Layout optisch an Referenz angepasst
+
+- Dashboard-Template auf ein klares 3-Spalten-Layout mit Topbar, Kalender, Workspace und Quick-Links umgestellt.
+- A11y verbessert: sichtbarer Fokus, große Bedienelemente, klare Tastaturhinweise und Kontrast+ Theme konsistent eingebaut.
+- Risiko: niedrig, da nur Template-Layout und begleitende UI-Texte aktualisiert wurden.
+
 ## 2026-02-28
 
 - Registry-Service mit Manifest-Validierung und robustem Versionieren ergänzt.

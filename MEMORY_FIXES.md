@@ -164,3 +164,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Mockup nur als Bilddatei statt klickbarer HTML-Datei.
 **Risiko/Side-Effects:** Zusaetzliche Template-Datei muss bei UI-Aenderungen mitgedacht werden.
 **Verknuepft:** Patch-ID local-010
+
+## FIX-20260301-005: Dashboard-Referenzlayout-mit-A11y-Grundstruktur
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Dashboard wirkte funktional, aber optisch nicht nah genug am Zielbild.
+**Technische Ursache:** Vorheriges Template hatte einfache Einspalten-Struktur und zu wenig visuelle Gruppierung.
+**Trigger:** Wunsch nach professioneller Layout-Angleichung an Referenzbild.
+**Fix (kurz):** `templates/dashboard.html` auf Topbar + 3-Spalten-Layout mit Kalender, Workspace, Quick-Links und klaren Karten umgestellt.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, config/messages_de.json, docs/HILFE.md
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei UI-Redesign zuerst Raster (Layout-Grid) und A11y-Mindestwerte festlegen.
+**Alternative(n):** Nur Farben anpassen ohne Strukturwechsel (abgelehnt, nicht ausreichend).
+**Risiko/Side-Effects:** Reines Template-Update, JS-Logik bleibt unveraendert.
+**Verknuepft:** Patch-ID local-011
