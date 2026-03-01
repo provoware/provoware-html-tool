@@ -1,3 +1,11 @@
+
+## 2026-03-01 – AGENTS-Regel fuer Referenzbild + Platzhalter-Scan
+
+- AGENTS.md erweitert: Jede 5. Iteration muss das Vorgabe-Bild im Projektordner analysieren und UI/Layout gezielt am Beispielbild ausrichten.
+- AGENTS.md erweitert: Platzhalter und unvollstaendige Codeteile muessen pro Iteration erkannt, kommentiert und als TODO-Punkte registriert werden.
+- TODO um einen konkreten 8-Punkte-Plan fuer Referenzbild-Abgleich und Platzhalter-Disziplin ergaenzt.
+- Risiko: niedrig, da nur Prozess- und Planungsregeln aktualisiert wurden.
+
 ## 2026-03-01 – Doku-Pflicht pro Iteration erweitert
 
 - AGENTS.md erweitert: README.txt muss pro Iteration kurz mit aktualisiert werden (Status, Fortschritt, naechster Schritt).

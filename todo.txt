@@ -84,3 +84,15 @@ Laienvorschläge
 - [x] P1: Mini-Optimierung UX: Theme-Hinweis auch im Mockup gespiegelt und per Tastatur/Screenreader ansagbar gemacht.
 
 - [ ] P1: Mini-Optimierung A11y: Release-Check validiert zentrale Was/Data/Undo-Hilfetexte automatisch.
+
+
+## 2026-03-01 – Neuer Pflichtplan: Referenzbild + Platzhalter
+
+- [ ] P1: Iterationszaehler in Start-/Doku-Flow sichtbar machen, damit jede 5. Iteration die Referenzbild-Analyse automatisch startet.
+- [ ] P1: Referenzbild-Checkliste als festen Ablauf nutzen (Layout-Raster, Typografie, Farben/Kontrast, Interaktionsmuster).
+- [ ] P1: Pro Referenzbild-Analyse eine Abweichungsliste (Soll/Ist) erstellen und direkt priorisieren.
+- [ ] P1: Bei hoher Abweichung automatisch Folgepunkte im TODO anlegen (mindestens 1 klarer UI-Fix mit Akzeptanzkriterien).
+- [ ] P1: Platzhalter-Scan je Iteration durchfuehren (TODO/FIXME/Dummy/Placeholder) und Funde in TODO registrieren.
+- [ ] P1: Platzhalter-Funde im Code mit kurzer Ursache + naechstem Schritt kommentieren.
+- [ ] P1: Offene Platzhalter mit Risiko in QUESTIONS_TODO.md als Entscheidungsfrage aufnehmen.
+- [ ] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
