@@ -203,5 +203,8 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Lesemodus-Hilfe um Alt+T/Alt+I sichtbar im Statuslog ergaenzen.
 - [x] Naechster Mini-Punkt: Shortcut-Konfliktcheck fuer Browser/OS-Tasten in start.sh automatisiert melden.
 
-- [ ] Naechster Mini-Punkt: Lesemodus-Statusmeldung um Hinweis auf Enter/Alt-Shortcut beim Schliessen erweitern.
-- [ ] Naechster Mini-Punkt: Start-Routine gibt Shortcut-Konfliktwarnungen gesammelt im Abschlussbericht aus.
+- [x] Naechster Mini-Punkt: Lesemodus-Statusmeldung um Hinweis auf Enter/Alt-Shortcut beim Schliessen erweitern.
+- [x] Naechster Mini-Punkt: Start-Routine gibt Shortcut-Konfliktwarnungen gesammelt im Abschlussbericht aus.
+
+- [ ] Naechster Mini-Punkt: Modul-Control-Leiste Tooltips auf einheitliche Kurzform mit Rueckweg-Hinweis bringen.
+- [ ] Naechster Mini-Punkt: Start-Routine-Abschlussbericht um kurze Zusammenfassung fuer A11y-Checks erweitern.

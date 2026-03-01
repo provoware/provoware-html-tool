@@ -17,6 +17,7 @@ const {
   validateProjectStructure,
   writeDependencyState,
   runShortcutConflictCheck,
+  buildShortcutConflictSummary,
 } = require("../tools/start_routine");
 
 test("validateProjectStructure meldet fehlende Pfade", () => {
@@ -355,4 +356,24 @@ test("runShortcutConflictCheck meldet keine Konflikte auf Linux", () => {
   assert.equal(result.ok, true);
   assert.equal(result.warnings.length, 0);
   assert.match(result.message, /ohne kritische Konflikte/);
+});
+
+test("buildShortcutConflictSummary fasst Warnungen gesammelt zusammen", () => {
+  const summary = buildShortcutConflictSummary({
+    warnings: [
+      {
+        shortcut: "Alt+I",
+        reason: "Kann auf manchen Tastaturen Sonderzeichen ausloesen.",
+      },
+    ],
+  });
+
+  assert.match(summary, /Shortcut-Abschlussbericht/);
+  assert.match(summary, /Alt\+I/);
+  assert.match(summary, /Naechster Schritt/);
+});
+
+test("buildShortcutConflictSummary meldet konfliktfreien Abschluss", () => {
+  const summary = buildShortcutConflictSummary({ warnings: [] });
+  assert.match(summary, /keine Konfliktwarnung offen/);
 });

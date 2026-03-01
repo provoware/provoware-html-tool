@@ -462,6 +462,26 @@ function runShortcutConflictCheck(options = {}) {
   };
 }
 
+function buildShortcutConflictSummary(shortcutCheck) {
+  if (!shortcutCheck || !Array.isArray(shortcutCheck.warnings)) {
+    throw new Error(
+      "Shortcut-Zusammenfassung fehlt. Naechster Schritt: Protokoll oeffnen und erneut versuchen.",
+    );
+  }
+
+  if (shortcutCheck.warnings.length === 0) {
+    return "Shortcut-Abschlussbericht: keine Konfliktwarnung offen.";
+  }
+
+  const details = shortcutCheck.warnings
+    .map((entry) => `${entry.shortcut} (${entry.reason})`)
+    .join("; ");
+  return (
+    "Shortcut-Abschlussbericht: Konfliktwarnungen gefunden -> " +
+    `${details}. Naechster Schritt: Shortcut pruefen oder Protokoll oeffnen.`
+  );
+}
+
 function calculateTodoProgress(todoContent) {
   assertText(todoContent, "TODO-Inhalt");
   const doneMatches = todoContent.match(/^- \[x\] /gim) || [];
@@ -633,7 +653,10 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[15/15] Fertig");
+  console.log("[15/15] Shortcut-Abschlussbericht");
+  console.log(`[15/15] ${buildShortcutConflictSummary(shortcutCheck)}`);
+
+  console.log("[16/16] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );
@@ -673,4 +696,5 @@ module.exports = {
   syncReadmeProgressFromTodo,
   validateOpenMiniPoints,
   runShortcutConflictCheck,
+  buildShortcutConflictSummary,
 };

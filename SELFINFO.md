@@ -1,3 +1,11 @@
+## Iteration 75 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Lesemodus-Schliessen mit Enter/Alt-Hinweis + Shortcut-Konfliktwarnungen gesammelt im Start-Abschlussbericht).
+- Ergebnis: Lesemodus-Status beim Schliessen nennt jetzt Enter sowie Alt+T/Alt+I mit klarem Rueckweg in einfacher Sprache.
+- Ergebnis: Start-Routine erzeugt jetzt einen separaten Shortcut-Abschlussbericht, der Konflikte gesammelt anzeigt.
+- Mini-Optimierung: Tastaturhilfe im Schliessen-Text fuer Laien klarer gemacht.
+- Naechster Schritt: Modul-Control-Leiste mit einheitlichen Tooltips finalisieren.
+
 ## Iteration 74 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Drei-Zonen-Layout mit Splitter/Collapse + responsive 1-4 Spalten im Workspace-Grid).

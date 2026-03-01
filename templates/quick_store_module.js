@@ -284,6 +284,14 @@
     );
   }
 
+  function buildClosePreviewStatusMessage() {
+    return (
+      "Vorschau geschlossen. Tastaturhilfe: Enter im Fokusziel-Feld bestaetigt, " +
+      "Alt+T oder Alt+I wechselt das Fokusziel. " +
+      "Naechster Schritt: Text anpassen oder erneut Lesemodus oeffnen."
+    );
+  }
+
   function buildRandomLyricsSnippet(
     profile = "standard",
     randomFn = Math.random,
@@ -781,9 +789,7 @@ Zeile 2: ...`;
 
     function onClosePreview() {
       closeLyricsPreview();
-      setStatus(
-        "Vorschau geschlossen. Naechster Schritt: Text anpassen oder erneut Lesemodus oeffnen.",
-      );
+      setStatus(buildClosePreviewStatusMessage());
       return true;
     }
 
@@ -988,6 +994,7 @@ Zeile 2: ...`;
     resolvePreviewShortcutTarget,
     buildPreviewStatusMessage,
     buildFocusTargetStatusMessage,
+    buildClosePreviewStatusMessage,
   };
 
   if (typeof module !== "undefined" && module.exports) {

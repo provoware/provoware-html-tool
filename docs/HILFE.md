@@ -1,3 +1,8 @@
+## Kurz-Hilfe Iteration 75
+
+- Lesemodus schliessen: Beim Schliessen zeigt das Tool jetzt Enter + Alt+T/Alt+I als direkte Tastaturhilfe.
+- Start-Routine: Lies am Ende den "Shortcut-Abschlussbericht". Dort stehen Konflikte gesammelt mit naechstem Schritt.
+
 ## Neu in Iteration 73: sichtbare Shortcut-Hilfe und Konfliktcheck
 
 - Im Lesemodus zeigt die Statuszeile jetzt immer **Alt+T** (Titel) und **Alt+I** (Inhalt) als direkte Tastaturhilfe.
