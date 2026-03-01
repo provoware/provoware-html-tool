@@ -370,8 +370,8 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 
 17) Referenzbild-Analyse + Platzhalter-Scan (Pflicht)
 17.1 Rhythmus fuer Referenzbild
-- In jeder 5. Iteration muss das Vorgabe-Bild im Projektordner geprueft werden
-  (Iteration 5, 10, 15, ...).
+- In jeder 3. Iteration muss das Vorgabe-Bild im Projektordner geprueft werden
+  (Iteration 3, 6, 9, ...).
 - Ziel: UI an optische, grafische und Layout-Aspekte moeglichst nah und
   konsistent am Beispielbild halten.
 - Die Analyse muss mindestens enthalten:
@@ -396,7 +396,7 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 - Patch gilt erst als fertig, wenn neue Platzhalterfunde im TODO sichtbar sind.
 
 14) Nächster Schritt (Pflichtauswahl) 
-Entscheide für die nächste Iteration genau ein Ziel: 
+Entscheide für die nächste Iteration genau zwei Ziele: 
 A) Boot‑View stabilisieren (Phasen, Ampel, Details, Weiter‑Gate)
 B) Plugin‑Loader minimal (Manifest lesen, isoliertes Laden, Fehler abfangen)
 C) Storage‑Service robust (versionierte Writes, JSON‑Validator, Backup‑Hook) 
@@ -406,3 +406,5 @@ Frage: Welche Option A/B/C ist als nächstes dran?
 - Einfache Meldungen für Laien.
 - Detaillierte Ursachen im Protokoll.
 - Konkrete Lösungsvorschläge anzeigen.
+
+15) Gib als letztes ier zwei verbessernde oder optimierende empfehlungen für die nächsten schritte nummeriert aus.
