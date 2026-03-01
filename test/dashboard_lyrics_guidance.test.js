@@ -105,4 +105,8 @@ test("Dashboard-Hilfe zeigt Safe-Mode-Status und Versions-Restore", () => {
   assert.match(dashboardHtml, /id="help-safe-mode-reset"/);
   assert.match(dashboardHtml, /id="support-history-query"/);
   assert.match(dashboardHtml, /Freitextsuche \(Typ\/Datum\)/);
+  assert.match(dashboardHtml, /id="boot-focus-live"/);
+  assert.match(dashboardHtml, /Fokusziel aktuell: Erstes Modul\./);
+  assert.match(dashboardHtml, /id="support-history-meta"/);
+  assert.match(dashboardHtml, /Enter startet die Suche sofort\./);
 });

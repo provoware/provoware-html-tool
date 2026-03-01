@@ -569,3 +569,8 @@
 - Dashboard startet jetzt mit genau einem Modul (`Notizen`) in der Mitte.
 - Linke Bereiche wurden als Button-Links in der Sidebar angeordnet; linke/rechte Zeitbar bleiben ein- und aufklappbar.
 - 3x3-Modulraster bleibt als mittige Hauptflaeche und ist visuell klar umrahmt.
+
+## 2026-03-01 – Boot-Live-Ansage und Support-Trefferzahl
+
+- Zwei offene Mini-Punkte abgeschlossen: Boot-Fokusziel wird per `aria-live` als Klartext gemeldet; Support-Suche zeigt Trefferzahl und Enter-Shortcut.
+- Mini-Optimierung Hilfe/UX: Suchmetatext erklaert den direkten naechsten Schritt fuer Tastaturnutzer.

@@ -104,3 +104,13 @@ PATCHSPEC-2026-03-01-090
 6) Akzeptanzkriterien: Gate-Hinweis nennt Modul/Hilfe, Support-Verlauf filtert mit Typ+Datum-Freitext, Detailmodus zeigt Gruppen neu/entfernt/gleich.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzten Commit via git revert rueckgaengig machen.
 2026-03-01 | PATCH-090 | Drei offene Mini-Punkte abgeschlossen: Boot-Gate-Fokusziel im Hint, Support-Freitextsuche (Typ/Datum, UND-Regel), Versions-Detailgruppen Neu/Entfernt/Gleich | system-module/dashboard_model.js, templates/dashboard.html, templates/dashboard.js, templates/backup_restore.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, test/backup_restore.test.js, todo.txt, README.txt, CHANGELOG.md, docs/HILFE.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, AGENTS_LOG.md
+
+PATCHSPEC-2026-03-01-091
+1) Ziel: Zwei offene Mini-Punkte abschliessen (Boot-Fokusziel mit aria-live-Ansage + Support-Suche mit Trefferzahl und Enter-Shortcut).
+2) Scope IN: templates/dashboard.html, templates/dashboard.js, test/dashboard_lyrics_guidance.test.js, README.txt, CHANGELOG.md, todo.txt, PROJEKTBESCHREIBUNG.md, SELFINFO.md.
+3) Scope OUT: Keine Aenderung am Backup-Datenformat, keine neuen Abhaengigkeiten.
+4) Dateien/Marker: boot-focus-live, support-history-meta, support-history-query-enter.
+5) Risiko: niedrig bis mittel (UI-Text und Event-Handling), reduziert durch Tests und Release-Gates.
+6) Akzeptanzkriterien: Fokuszielwechsel meldet klaren Text per aria-live; Support-Suche zeigt Trefferzahl und Enter startet Filter sofort.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzten Commit via git revert rueckgaengig machen.
+2026-03-01 | PATCH-091 | Zwei offene Mini-Punkte abgeschlossen: Boot-Fokusziel mit aria-live-Ansage + Support-Suche mit Trefferzahl und Enter-Shortcut | templates/dashboard.html, templates/dashboard.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md

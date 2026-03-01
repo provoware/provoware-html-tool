@@ -92,3 +92,9 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Support-Verlauf hat eine Freitextsuche fuer Typ/Datum. Regel: erst Dropdown-Filter, dann Suchtext (UND-Verknuepfung).
 - Versionsvergleich im Backup-Dialog zeigt Detailgruppen: Neu, Entfernt, Gleich.
 - Naechster Schritt: Trefferzahl in der Support-Suche und optionalen Screenreader-Kurztext fuer Gate-Wechsel nachziehen.
+
+## Update 2026-03-01 (2 Mini-Punkte abgeschlossen)
+- Boot-Gate hat jetzt zusaetzlich eine aria-live-Ansage: Fokusziel wird als Text direkt vorgelesen (Erstes Modul oder Hilfe-Panel).
+- Support-Suche zeigt jetzt die Trefferzahl und reagiert auf Enter im Suchfeld fuer schnellere Tastaturbedienung.
+- Mini-Optimierung Hilfe/UX: Suchfeld beschreibt den naechsten Schritt klar mit Treffer-Hinweis.
+- Naechster Schritt: Versions-Detailgruppen im Backup-Dialog standardmaessig eingeklappt starten.

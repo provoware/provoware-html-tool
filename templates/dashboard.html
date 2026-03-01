@@ -482,6 +482,9 @@
                   Weiter ist gesperrt. Naechster Schritt: Erst alle Phasen auf
                   Gruen bringen.
                 </p>
+                <p id="boot-focus-live" class="field-tip" aria-live="polite">
+                  Fokusziel aktuell: Erstes Modul.
+                </p>
               </div>
             </section>
             <pre id="debug-output" class="debug" hidden></pre>
@@ -730,12 +733,16 @@
                 type="search"
                 placeholder="z. B. safe-mode oder 2026-03"
                 aria-label="Support-Verlauf Freitextsuche"
+                aria-describedby="support-history-meta"
               />
               <button type="button" id="support-history-apply">
                 Filter anwenden
               </button>
               <p class="field-tip">
                 UND-Regel: Erst Filter waehlen, dann Freitext pruefen.
+              </p>
+              <p id="support-history-meta" class="field-tip" aria-live="polite">
+                Treffer: 0. Tipp: Enter startet die Suche sofort.
               </p>
               <ul id="support-history-list" class="todo-list" role="list"></ul>
             </fieldset>
