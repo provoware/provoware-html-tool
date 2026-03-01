@@ -396,3 +396,9 @@ Praktischer Einsatz:
 - Der neue Hilfe-Schalter blendet den technischen `boot-debug`-Eintrag optional aus, damit die Verlaufsliste fuer Einsteiger ruhiger ist.
 - Die Suchlogik wurde robust gemacht: Tokenisierung + Normalisierung + ganze-Wort-Vergleich (Validierung = Eingabepruefung) fuer weniger Fehlmarkierungen.
 - Der Restore-Dialog nennt den gespeicherten Detailzustand klar als projektweiten Zustand.
+
+
+## Iteration 96
+- Support-Verlauf hat jetzt zwei Suchmodi: Standard Ganzwort und optional Teilwort (enthaelt).
+- Der gewaehlte Suchmodus wird pro Projekt in `data/layout.json` gespeichert (`supportHistoryPartialMode`).
+- Hilfe/UX-Mini-Optimierung: Footer zeigt klaren Rueckweg fuer Tastatur (Tab zu Schaltern, Leertaste zum Umschalten).

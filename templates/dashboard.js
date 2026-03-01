@@ -62,6 +62,12 @@
   const supportHistoryBootDebugToggle = document.getElementById(
     "support-history-boot-debug-toggle",
   );
+  const supportHistoryPartialToggle = document.getElementById(
+    "support-history-partial-toggle",
+  );
+  const supportHistoryFooterHint = document.getElementById(
+    "support-history-footer-hint",
+  );
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -127,6 +133,7 @@
     bootFocusTarget: "module",
     backupDetailOpen: false,
     showBootDebugInSupport: true,
+    supportHistoryPartialMode: false,
   };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
@@ -231,6 +238,7 @@
       bootFocusTarget: source.bootFocusTarget === "help" ? "help" : "module",
       backupDetailOpen: source.backupDetailOpen === true,
       showBootDebugInSupport: source.showBootDebugInSupport !== false,
+      supportHistoryPartialMode: source.supportHistoryPartialMode === true,
     };
   }
 
@@ -319,6 +327,10 @@
     if (supportHistoryBootDebugToggle) {
       supportHistoryBootDebugToggle.checked =
         layoutState.showBootDebugInSupport === true;
+    }
+    if (supportHistoryPartialToggle) {
+      supportHistoryPartialToggle.checked =
+        layoutState.supportHistoryPartialMode === true;
     }
     if (backupCompareDetailWrap) {
       backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
@@ -1292,6 +1304,10 @@
     return Array.from(new Set(tokens));
   }
 
+  function isSupportPartialModeEnabled() {
+    return layoutState.supportHistoryPartialMode === true;
+  }
+
   function buildNormalizedWordList(sourceText) {
     const safeSource = typeof sourceText === "string" ? sourceText : "";
     const matches = safeSource.match(/[A-Za-z0-9_-]+/g);
@@ -1397,11 +1413,19 @@
       const createdAtWords = buildNormalizedWordList(entry.createdAt);
       const detailsWords = buildNormalizedWordList(entry.details);
       const haystack = [...kindWords, ...createdAtWords, ...detailsWords];
-      return queryTokens.every((token) => haystack.includes(token));
+      const usePartialMode = isSupportPartialModeEnabled();
+      return queryTokens.every((token) =>
+        usePartialMode
+          ? haystack.some((word) => word.includes(token))
+          : haystack.includes(token),
+      );
     });
 
     if (supportHistoryMeta) {
-      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. Tipp: Enter startet die Suche sofort.`;
+      const modeText = isSupportPartialModeEnabled()
+        ? "Modus: Teilwort (enthaelt)."
+        : "Modus: Ganze Woerter (Standard).";
+      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText} Tipp: Enter startet die Suche sofort.`;
     }
 
     if (filtered.length === 0) {
@@ -1409,6 +1433,16 @@
       empty.textContent =
         "Kein Verlauf fuer den Filter. Naechster Schritt: Anderen Filter waehlen oder erneut versuchen.";
       supportHistoryList.appendChild(empty);
+      if (supportHistoryFooterHint) {
+        const modeLabel = isSupportPartialModeEnabled()
+          ? "Teilwortsuche aktiv"
+          : "Ganzwortsuche aktiv";
+        const bootLabel =
+          layoutState.showBootDebugInSupport === true
+            ? "Boot-Debug sichtbar"
+            : "Boot-Debug ausgeblendet";
+        supportHistoryFooterHint.textContent = `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
+      }
       return true;
     }
 
@@ -1425,6 +1459,17 @@
       appendHighlightedText(line, ` | ${keyboardHint}`, safeQuery);
       supportHistoryList.appendChild(line);
     });
+
+    if (supportHistoryFooterHint) {
+      const modeLabel = isSupportPartialModeEnabled()
+        ? "Teilwortsuche aktiv"
+        : "Ganzwortsuche aktiv";
+      const bootLabel =
+        layoutState.showBootDebugInSupport === true
+          ? "Boot-Debug sichtbar"
+          : "Boot-Debug ausgeblendet";
+      supportHistoryFooterHint.textContent = `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
+    }
 
     return true;
   }
@@ -1853,6 +1898,24 @@
         });
     });
   }
+
+  if (supportHistoryPartialToggle) {
+    supportHistoryPartialToggle.checked =
+      layoutState.supportHistoryPartialMode === true;
+    supportHistoryPartialToggle.addEventListener("change", () => {
+      layoutState = normalizeLayoutWithModel({
+        ...layoutState,
+        supportHistoryPartialMode: supportHistoryPartialToggle.checked === true,
+      });
+      persistLayoutState()
+        .then(() => refreshSupportHistory())
+        .catch(() => {
+          setStatus(
+            "Suchmodus konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+          );
+        });
+    });
+  }
   if (supportHistoryQuery) {
     supportHistoryQuery.addEventListener("input", refreshSupportHistory);
     supportHistoryQuery.addEventListener("keydown", (event) => {
@@ -2059,6 +2122,7 @@
     [supportHistoryQuery, "Support-Verlauf-Suche"],
     [supportHistoryMeta, "Support-Verlauf-Treffer"],
     [supportHistoryList, "Support-Verlauf-Liste"],
+    [supportHistoryFooterHint, "Support-Verlauf-Footer-Hinweis"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(

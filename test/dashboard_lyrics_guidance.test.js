@@ -225,4 +225,25 @@ test("Restore-Hinweis erklaert gespeicherten Detailzustand", () => {
     dashboardHtml,
     /Dieser Zustand wird pro\s+Projekt gespeichert und bei Restore wieder geladen\./,
   );
+  assert.match(
+    dashboardHtml,
+    /Beispiel:\s+Wenn Detailmodus zuletzt eingeklappt\s+war, startet er auch nach\s+Restore eingeklappt\./,
+  );
+});
+
+test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+  const dashboardJs = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.js"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="support-history-partial-toggle"/);
+  assert.match(dashboardHtml, /id="support-history-footer-hint"/);
+  assert.match(dashboardJs, /supportHistoryPartialMode/);
+  assert.match(dashboardJs, /Teilwort \(enthaelt\)/);
+  assert.match(dashboardJs, /Ganzwortsuche aktiv/);
 });

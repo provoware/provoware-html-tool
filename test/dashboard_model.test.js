@@ -63,6 +63,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     bootFocusTarget: "module",
     backupDetailOpen: false,
     showBootDebugInSupport: true,
+    supportHistoryPartialMode: false,
   });
 });
 
@@ -199,4 +200,12 @@ test("normalizeLayoutState setzt Boot-Debug-Schalter sicher", () => {
 
   const hidden = normalizeLayoutState({ showBootDebugInSupport: false });
   assert.equal(hidden.showBootDebugInSupport, false);
+});
+
+test("normalizeLayoutState setzt Teilwortmodus sicher", () => {
+  const enabled = normalizeLayoutState({ supportHistoryPartialMode: true });
+  assert.equal(enabled.supportHistoryPartialMode, true);
+
+  const disabled = normalizeLayoutState({ supportHistoryPartialMode: "ja" });
+  assert.equal(disabled.supportHistoryPartialMode, false);
 });
