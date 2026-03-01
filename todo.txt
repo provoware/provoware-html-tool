@@ -195,5 +195,8 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Zufallsprofil-Auswahl als letzte Wahl pro Projekt merken.
 - [x] Naechster Mini-Punkt: Lesemodus-Fokusziel als Tastatur-Shortcut (T/I) umschaltbar machen.
 
-- [ ] Naechster Mini-Punkt: Zufallsprofil im Songtextbereich als sichtbaren Status-Chip mit Kontrasttext anzeigen.
-- [ ] Naechster Mini-Punkt: Lesemodus-Fokusziel beim Oeffnen als kurze Inline-Hilfe ankündigen (Titel/Inhalt) und per Enter bestaetigen.
+- [x] Naechster Mini-Punkt: Zufallsprofil im Songtextbereich als sichtbaren Status-Chip mit Kontrasttext anzeigen.
+- [x] Naechster Mini-Punkt: Lesemodus-Fokusziel beim Oeffnen als kurze Inline-Hilfe ankuendigen (Titel/Inhalt) und per Enter bestaetigen.
+
+- [ ] Naechster Mini-Punkt: Songtext-Status-Chip um Profil-Hinweis mit letzter Nutzung (Zeitstempel) erweitern.
+- [ ] Naechster Mini-Punkt: Lesemodus-Fokusziel-Auswahl mit Enter-Shortcut direkt bestaetigen und Statusmeldung verfeinern.

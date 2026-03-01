@@ -1,3 +1,9 @@
+## Songtext: Profil-Status und Fokushilfe (Iteration 71)
+
+- Das Feld **Aktives Profil** zeigt immer das gewaehlte Zufallsprofil (z. B. Standard oder Techno).
+- Beim Oeffnen vom **Lesemodus** sehen Sie direkt das aktuelle Fokusziel (Titel oder Inhalt).
+- Naechster Schritt: Mit Enter im Fokusziel-Feld bestaetigen oder mit T/I schnell wechseln.
+
 ## Neu: Songtext-Praeferenzen
 
 - Das letzte Zufallsprofil wird jetzt im Projekt gespeichert und beim Start wieder geladen.

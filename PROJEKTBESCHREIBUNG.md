@@ -1,3 +1,10 @@
+## Iteration 71 – Tool-Umfang erweitert
+
+- **Songtext-Profilstatus:** Das Tool zeigt jetzt ein klares Statusfeld fuer das aktive Zufallsprofil im Lyrics-Bereich.
+- **Lesemodus-Start-Hilfe:** Beim Oeffnen der Vorschau wird das aktive Fokusziel direkt sichtbar erklaert.
+- **A11y-Nutzen:** Beide Hinweise laufen als Live-Status (aria-live), damit Screenreader die Aenderung sofort vorlesen koennen.
+- **Laiennutzen:** Nutzer sehen ohne Fachwissen sofort, welches Profil aktiv ist und wo der Fokus nach der Vorschau landet.
+
 ## Iteration 70 – Erweiterung Songtext-Workflow
 
 Der Songtext-Workflow speichert jetzt die letzte Profilwahl fuer Zufallsinhalte und das bevorzugte Fokusziel nach dem Lesemodus.

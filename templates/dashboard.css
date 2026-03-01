@@ -364,6 +364,13 @@ a:focus-visible {
   font-size: 0.85rem;
 }
 
+
+.lyrics-profile-chip {
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--focus);
+  font-weight: 700;
+}
 .guide-list {
   margin: 0.2rem 0 0;
   padding-left: 1.1rem;

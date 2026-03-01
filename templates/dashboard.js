@@ -656,6 +656,7 @@
       miscButton: document.getElementById("lyrics-template-misc"),
       randomProfileSelect: document.getElementById("lyrics-random-profile"),
       randomButton: document.getElementById("lyrics-template-random"),
+      randomProfileChip: document.getElementById("lyrics-random-profile-chip"),
       previewButton: document.getElementById("lyrics-open-preview"),
       previewPanel: document.getElementById("lyrics-preview-panel"),
       previewTitle: document.getElementById("lyrics-preview-title"),
@@ -664,6 +665,9 @@
       closePreviewButton: document.getElementById("lyrics-close-preview"),
       previewFocusTargetSelect: document.getElementById(
         "lyrics-preview-focus-target",
+      ),
+      previewFocusInlineHelp: document.getElementById(
+        "lyrics-preview-focus-inline-help",
       ),
       copyPreviewButton: document.getElementById("lyrics-copy-preview"),
       copyHelp: document.getElementById("lyrics-copy-help"),

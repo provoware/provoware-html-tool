@@ -1,3 +1,11 @@
+## Iteration 71 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Profil-Status-Chip + Inline-Hilfe fuer Fokusziel beim Lesemodus-Start).
+- Ergebnis: Aktives Zufallsprofil wird als sichtbarer Status-Chip mit Kontrast-Rahmen angezeigt.
+- Ergebnis: Lesemodus zeigt das aktuelle Fokusziel (Titel/Inhalt) als Inline-Hilfe beim Oeffnen und bei Wechsel.
+- Mini-Optimierung: Fokus-Hilfe nennt Enter als naechsten Schritt in einfacher Sprache.
+- Naechster Schritt: Profil-Chip mit letzter Nutzung und Enter-Shortcut-Bestaetigung ausbauen.
+
 ## Iteration 70 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Zufallsprofil merken + Fokusziel-Shortcut T/I).

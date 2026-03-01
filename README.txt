@@ -1,3 +1,11 @@
+## Update Iteration 71 (2026-03-03)
+
+Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
+
+- Songideen-Bereich hat jetzt einen gut sichtbaren Profil-Status-Chip mit Kontrasttext.
+- Lesemodus zeigt beim Oeffnen direkt, ob der Fokus auf Titel oder Inhalt geht.
+- Naechster Schritt: Profil-Chip um Zeitstempel erweitern und Enter-Bestaetigung im Fokusfeld als eigenes Shortcut-Feedback testen.
+
 ## Iteration 70 – Zwei offene Punkte abgeschlossen
 - Punkt 1 erledigt: Zufallsprofil im Songtextbereich wird jetzt pro Projekt gespeichert und beim Start wiederhergestellt.
 - Punkt 2 erledigt: Lesemodus-Fokusziel ist jetzt auch per Tastatur (T/I) umschaltbar.
@@ -66,8 +74,8 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 83 %
-- **Erledigt:** 116 Punkte
+- **Fortschritt:** 84 %
+- **Erledigt:** 118 Punkte
 - **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
