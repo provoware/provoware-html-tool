@@ -18,6 +18,7 @@ const {
   resolvePreviewShortcutTarget,
   buildPreviewStatusMessage,
   buildFocusTargetStatusMessage,
+  buildClosePreviewStatusMessage,
 } = require("../templates/quick_store_module");
 
 test("Quick-Store-Pfade sind pro Bereich getrennt", () => {
@@ -203,4 +204,12 @@ test("buildFocusTargetStatusMessage liefert Enter- und Speichertext", () => {
   assert.match(enterMessage, /Alt\+T oder Alt\+I/);
   assert.match(saveMessage, /Fokusziel gespeichert/);
   assert.match(saveMessage, /Alt\+T oder Alt\+I/);
+});
+
+test("buildClosePreviewStatusMessage nennt Enter- und Alt-Shortcuts", () => {
+  const message = buildClosePreviewStatusMessage();
+  assert.match(message, /Vorschau geschlossen/);
+  assert.match(message, /Enter/);
+  assert.match(message, /Alt\+T/);
+  assert.match(message, /Alt\+I/);
 });

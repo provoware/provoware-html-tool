@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 75
+
+- Zwei offene Mini-Punkte abgeschlossen: Lesemodus-Schliessen nennt jetzt Enter sowie Alt+T/Alt+I als direkte Tastaturhilfe mit naechstem Schritt.
+- Start-Routine gibt Shortcut-Konfliktwarnungen jetzt gesammelt im Abschlussbericht aus (kurzer Kurzblock fuer Laien).
+- Mini-Optimierung Hilfe/UX: Klarerer Rueckweg-Hinweis beim Schliessen des Lesemodus.
+
 ## 2026-03-03 – Iteration 74
 
 - Zwei offene Punkte abgeschlossen: Drei-Zonen-Layout hat jetzt Splitter, Collapse-Knoepfe und Layout-Reset mit projektbezogener Persistenz in `data/layout.json`.

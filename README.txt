@@ -1,3 +1,11 @@
+## Update Iteration 75 (2026-03-03)
+
+Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
+
+- Lesemodus meldet beim Schliessen jetzt Enter + Alt+T/Alt+I als klare Tastaturhilfe mit Rueckweg.
+- Die Start-Routine zeigt Shortcut-Konflikte jetzt gesammelt im Abschlussbericht als Kurzblock.
+- Naechster Schritt: Modul-Control-Leiste final vereinheitlichen und A11y-Abschlussbericht weiter verdichten.
+
 ## Update Iteration 73 (2026-03-03)
 
 Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
@@ -92,7 +100,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 86 %
-- **Erledigt:** 124 Punkte
+- **Erledigt:** 126 Punkte
 - **Offen:** 21 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

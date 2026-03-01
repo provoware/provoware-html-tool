@@ -1,3 +1,9 @@
+## Iteration 75 – Abschlussbericht + Lesemodus-Hilfe
+
+- Der Lesemodus zeigt beim Schliessen jetzt eine klare Tastaturhilfe: Enter bestaetigt, Alt+T/Alt+I wechselt das Fokusziel.
+- Die Start-Routine sammelt Shortcut-Konflikte am Ende in einem eigenen Abschlussblock.
+- Vorteil fuer Laien: Erst den Abschlussblock lesen, dann gezielt "Erneut versuchen" oder "Protokoll oeffnen" waehlen.
+
 ## Iteration 73 – Startcheck + Songtext-Hilfe erweitert
 
 - **Lesemodus-Statushilfe:** Die Live-Statuszeile nennt jetzt immer Alt+T/Alt+I, damit der Fokuswechsel ohne Maus klar bleibt.

@@ -864,3 +864,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur statische CSS-Breiten (verworfen wegen fehlender Flexibilitaet).
 **Risiko/Side-Effects:** Niedrig; nur Layout- und Bedienebene erweitert.
 **Verknuepft:** PATCH-074
+
+## FIX-20260303-075: Shortcut-Abschlussbericht-und-Lesemodus-Rueckweg
+
+**Kategorie:** UI/A11y/Start
+**Symptom (fuer Laien):** Beim Schliessen der Vorschau waren die Tastaturwege nicht vollstaendig sichtbar, und Shortcut-Hinweise im Startlauf gingen in Einzelausgaben unter.
+**Technische Ursache:** Schliessen-Status war zu kurz; Start-Routine hatte keinen gebuendelten Konflikt-Abschlussblock.
+**Trigger:** Zwei offene Mini-Punkte fuer Lesemodus-Hilfe und Abschlussbericht.
+**Fix (kurz):** Eigene Statusfunktion fuer Lesemodus-Schliessen mit Enter+Alt-Hinweis ergänzt und Shortcut-Warnungen als separaten Abschlussbericht gebuendelt.
+**Geänderte Dateien/Marker:** templates/quick_store_module.js, tools/start_routine.js, test/quick_store_module.test.js, test/start_routine.test.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer bei Tastatur-Features einen Abschlussstatus mit Aktion + Rueckweg und im Startlauf eine Sammelzusammenfassung ausgeben.
+**Alternative(n):** Einzelne Warnlogs ohne Sammelblock (verworfen, schwerer lesbar).
+**Risiko/Side-Effects:** Niedrig, nur Textausgaben und Tests erweitert.
+**Verknüpft:** PATCH-075
