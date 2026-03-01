@@ -64,3 +64,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Restore-Tool erkennt die Ziel-Datei automatisch aus dem Backup-Namen.
 - Nur erlaubte Ziele (`store.json`, `registry.json`) werden angenommen.
 - Vor dem Schreiben bestaetigt der Nutzer den Dateinamen als Sicherheitsabfrage.
+
+
+## Iteration 48 – Zusatzinfo
+- Der Backup-Dialog ist jetzt mit einem Ende-zu-Ende-Test abgesichert: vom Backup-Hook-Log bis zur echten Wiederherstellung.
+- Vorteil fuer Laien: Fehler werden frueher erkannt, bevor ein Restore im Alltag scheitert.
+- Tool-Umfang erweitert: automatischer Integrations-Test fuer Backup/Restore ist Teil der Standard-Qualitaet.

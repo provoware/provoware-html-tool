@@ -1,3 +1,9 @@
+## Iteration 48 (2026-03-01)
+
+- Hauptziel abgeschlossen: Offener Punkt 'Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen' ist jetzt per automatischem Test komplett abgedeckt.
+- Mini-Optimierung: Test meldet klaren Fehlerpfad in einfacher Sprache durch eindeutige Assertions.
+- Next Step (A): Sicherheitsabfrage im Backup-Dialog (Prompt-Bestaetigung) ebenfalls automatisiert testen.
+
 ## Iteration 47 (2026-03-01)
 
 - Hauptziel abgeschlossen: Restore-Flow erkennt Ziel-Datei (store/registry) jetzt automatisch aus Backup-Dateinamen.

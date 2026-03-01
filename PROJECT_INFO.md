@@ -1,3 +1,5 @@
+- Backup-Dialog-E2E-Test nutzt jetzt echten Hook-Log -> Restore-Fluss fuer robuste Freigabe.
+
 ## Update 2026-03-01 (Iteration 40)
 
 - A11y/Sichtbarkeit: Theme-System erweitert auf 5 Themes (inkl. Rötlich/Camouflage).

@@ -53,7 +53,7 @@ Laienvorschläge
 - [x] P1: Release-Readiness-Check in Start-Routine integrieren (A11y + Theme + Hilfe-Aktionen).
 - [x] P1: Start-Routine um Datenordner-Autoanlage + Format-Check-Nachweis erweitern.
 - [x] P1: E2E-Tastaturtest fuer Dashboard (Tab/Enter/Escape) als automatischen Release-Check fuer Escape + Tastatur-Handler umgesetzt.
-- [ ] P1: Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen.
+- [x] P1: Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen.
 
 ## 2026-03-01 – Neue Modul-Implementierung planen
 
@@ -136,3 +136,5 @@ Laienvorschläge
 - [x] P1: Nächster Mini-Punkt: Todo-Filter (heute/offen/archiv) + Tastatur-Shortcuts ergänzen.
 
 - [x] P1: Naechster Mini-Punkt: Restore-Flow fuer store/registry automatische Zielerkennung + Sicherheitsabfrage umsetzen.
+
+- [ ] P1: Naechster Mini-Punkt: Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen.
