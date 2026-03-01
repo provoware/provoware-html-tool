@@ -228,6 +228,50 @@
     );
   }
 
+  async function readProjectJson(relativePath) {
+    if (typeof relativePath !== "string" || !relativePath.trim()) {
+      throw new Error(
+        "Datei-Pfad fehlt. Bitte Eingabe pruefen und erneut versuchen.",
+      );
+    }
+
+    if (!selectedProjectDir || !selectedProjectDir.getFileHandle) {
+      return {
+        ok: false,
+        message:
+          "Projektordner fehlt. Naechster Schritt: Ordner waehlen und erneut versuchen.",
+      };
+    }
+
+    try {
+      const pathParts = relativePath.split("/").filter(Boolean);
+      if (pathParts.length < 2) {
+        throw new Error(
+          "Datei-Pfad ist ungueltig. Bitte Eingabe pruefen und erneut versuchen.",
+        );
+      }
+
+      const fileName = pathParts.pop();
+      let currentDir = selectedProjectDir;
+
+      for (const segment of pathParts) {
+        currentDir = await currentDir.getDirectoryHandle(segment);
+      }
+
+      const fileHandle = await currentDir.getFileHandle(fileName);
+      const raw = await (await fileHandle.getFile()).text();
+      const parsed = JSON.parse(raw);
+
+      return { ok: true, value: parsed };
+    } catch {
+      return {
+        ok: false,
+        message:
+          "Datei fehlt oder ist ungueltig. Naechster Schritt: Neu speichern und erneut versuchen.",
+      };
+    }
+  }
+
   function renderZones() {
     zones.innerHTML = "";
     zoneModel.forEach((zone, index) => {
@@ -599,6 +643,7 @@
 
   if (window.createQuickStoreModule) {
     window.createQuickStoreModule({
+      areaSelect: document.getElementById("quick-store-area"),
       titleInput: document.getElementById("quick-store-title-input"),
       contentInput: document.getElementById("quick-store-content"),
       saveButton: document.getElementById("quick-store-save"),
@@ -607,6 +652,7 @@
       setStatus,
       setDebug,
       saveJson: writeProjectJson,
+      readJson: readProjectJson,
     });
   }
 

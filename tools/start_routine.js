@@ -492,6 +492,7 @@ function runStartRoutine() {
     "templates/quick_store_module.js",
     "system-module/dashboard_model.js",
     "system-module/quick_store_model.js",
+    "data/quick_store_entries.json",
     "system-module/plugins_accessibility.js",
     "test/dashboard_model.test.js",
     "test/dashboard_core.test.js",

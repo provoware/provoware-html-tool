@@ -668,3 +668,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur LocalStorage nutzen (abgelehnt, da Projektdatei als Quelle gewuenscht).
 **Risiko/Side-Effects:** File-Write braucht gueltigen Projektordner-Handle.
 **Verknuepft:** Patch-ID PATCH-055
+
+## FIX-20260301-061: Quick-Store-Bereichstrennung
+
+**Kategorie:** UI/JSON
+**Symptom (fuer Laien):** Notizen aus unterschiedlichen Themen waren gemischt.
+**Technische Ursache:** Ein einziger Listenpfad ohne Bereichsmodell.
+**Trigger:** Mehrere Notiztypen wurden nacheinander gespeichert.
+**Fix (kurz):** Bereichsmodell mit `inbox|lyrics|research` eingefuehrt und Persistenz als `areas`-Objekt gespeichert.
+**Geaenderte Dateien/Marker:** `system-module/quick_store_model.js`, `templates/quick_store_module.js`, `templates/dashboard.html`, `templates/dashboard.js`.
+**Tests/Checks:** `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer Bereichsfeld im Modell vor Persistenz validieren.
+**Alternative(n):** Drei Einzeldateien pro Bereich (spaeter moeglich).
+**Risiko/Side-Effects:** Alte Dateien ohne `areas` werden als inbox importiert.
+**Verknuepft:** PATCH-061

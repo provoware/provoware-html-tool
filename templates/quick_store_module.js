@@ -10,6 +10,15 @@
     return element;
   }
 
+  function assertFunction(value, name) {
+    if (typeof value !== "function") {
+      throw new Error(
+        `${name} fehlt. Reparatur starten oder Protokoll oeffnen.`,
+      );
+    }
+    return value;
+  }
+
   window.createQuickStoreModule = function createQuickStoreModule(options) {
     const model = window.QuickStoreModel?.createQuickStoreModel?.();
     if (!model) {
@@ -18,6 +27,7 @@
       );
     }
 
+    const areaSelect = assertElement(options.areaSelect, "Schnell-Bereich");
     const titleInput = assertElement(options.titleInput, "Schnell-Titel");
     const contentInput = assertElement(options.contentInput, "Schnell-Inhalt");
     const saveButton = assertElement(options.saveButton, "Schnell-Speichern");
@@ -26,13 +36,27 @@
     const setStatus = assertElement(options.setStatus, "Statusfunktion");
     const setDebug = options.setDebug;
     const saveJson = assertElement(options.saveJson, "Dateischreiber");
+    const readJson = assertFunction(options.readJson, "Dateileser");
+
+    function renderAreaOptions() {
+      areaSelect.innerHTML = "";
+      model.listAreas().forEach((area) => {
+        const option = document.createElement("option");
+        option.value = area;
+        option.textContent =
+          area === "inbox"
+            ? "Allgemein"
+            : area === "lyrics"
+              ? "Songideen"
+              : "Recherche";
+        areaSelect.appendChild(option);
+      });
+      areaSelect.value = model.getActiveArea();
+      return true;
+    }
 
     async function persist() {
-      const payload = {
-        version: 1,
-        updatedAt: new Date().toISOString(),
-        entries: model.listEntries(),
-      };
+      const payload = model.exportState().state;
       const ok = await saveJson(QUICK_STORE_PATH, payload);
       if (!ok) {
         throw new Error(
@@ -42,6 +66,23 @@
       return true;
     }
 
+    async function loadPersistedState() {
+      const payload = await readJson(QUICK_STORE_PATH);
+      if (!payload.ok) {
+        setStatus(
+          "Schnellspeicher startet leer. Naechster Schritt: Erste Notiz speichern.",
+        );
+        return { ok: true, loaded: false };
+      }
+
+      model.importState(payload.value);
+      render();
+      setStatus(
+        "Schnellspeicher geladen. Naechster Schritt: Bereich waehlen oder Notiz speichern.",
+      );
+      return { ok: true, loaded: true };
+    }
+
     function render() {
       const entries = model.listEntries();
       list.innerHTML = "";
@@ -49,7 +90,7 @@
       if (entries.length === 0) {
         const empty = document.createElement("li");
         empty.textContent =
-          "Noch kein Eintrag. Naechster Schritt: Titel und Inhalt speichern.";
+          "Noch kein Eintrag in diesem Bereich. Naechster Schritt: Titel und Inhalt speichern.";
         list.appendChild(empty);
         return 0;
       }
@@ -73,6 +114,7 @@
         const result = model.addEntry({
           title: titleInput.value,
           content: contentInput.value,
+          area: areaSelect.value,
         });
         await persist();
         const count = render();
@@ -82,7 +124,7 @@
         );
         if (typeof setDebug === "function") {
           setDebug(
-            `Debug: Schnellspeicher hat ${count} Eintraege. Letzter Titel: ${result.entry.title}`,
+            `Debug: Bereich ${result.entry.area} hat ${count} Eintraege. Letzter Titel: ${result.entry.title}`,
           );
         }
       } catch (error) {
@@ -102,9 +144,26 @@
       return true;
     }
 
+    function onAreaChange() {
+      try {
+        model.setActiveArea(areaSelect.value);
+        const count = render();
+        setStatus(
+          `Bereich gewechselt. Naechster Schritt: Notiz speichern oder Eintrag pruefen (${count} sichtbar).`,
+        );
+      } catch (error) {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+      }
+    }
+
     saveButton.addEventListener("click", onSave);
     clearButton.addEventListener("click", onClear);
+    areaSelect.addEventListener("change", onAreaChange);
 
+    renderAreaOptions();
+    loadPersistedState();
     render();
 
     return {

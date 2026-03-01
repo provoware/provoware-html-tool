@@ -1,4 +1,7 @@
 (function exposeQuickStoreModel(globalObject) {
+  const DEFAULT_AREA = "inbox";
+  const ALLOWED_AREAS = ["inbox", "lyrics", "research"];
+
   function assertText(value, label, maxLength) {
     if (typeof value !== "string") {
       throw new Error(`${label} ist ungueltig. Bitte erneut versuchen.`);
@@ -18,6 +21,16 @@
     return safe;
   }
 
+  function assertArea(value) {
+    if (typeof value !== "string" || !ALLOWED_AREAS.includes(value)) {
+      throw new Error(
+        "Bereich ist ungueltig. Bitte Bereich waehlen und erneut versuchen.",
+      );
+    }
+
+    return value;
+  }
+
   function assertArray(value, label) {
     if (!Array.isArray(value)) {
       throw new Error(
@@ -27,8 +40,12 @@
   }
 
   function createQuickStoreModel(seed = []) {
-    assertArray(seed, "Schnellspeicher-Startliste");
-    let entries = [];
+    let activeArea = DEFAULT_AREA;
+    let areaEntries = {
+      inbox: [],
+      lyrics: [],
+      research: [],
+    };
 
     function validateEntry(input) {
       if (!input || typeof input !== "object" || Array.isArray(input)) {
@@ -42,23 +59,51 @@
       const now = new Date().toISOString();
 
       return {
-        id: input.id || `quick-${Date.now()}-${entries.length + 1}`,
+        id: input.id || `quick-${Date.now()}`,
         title,
         content,
+        area: assertArea(input.area || activeArea),
         createdAt: input.createdAt || now,
       };
     }
 
     function importState(state) {
-      assertArray(state, "Schnellspeicher-Liste");
-      entries = state.map((item) => validateEntry(item));
-      return { ok: true, count: entries.length };
+      if (Array.isArray(state)) {
+        areaEntries.inbox = state.map((item) =>
+          validateEntry({ ...item, area: "inbox" }),
+        );
+        return { ok: true, count: areaEntries.inbox.length };
+      }
+
+      if (!state || typeof state !== "object" || Array.isArray(state)) {
+        throw new Error(
+          "Schnellspeicher-Zustand ist ungueltig. Bitte erneut versuchen.",
+        );
+      }
+
+      const safeAreas = state.areas || {};
+      ALLOWED_AREAS.forEach((area) => {
+        const entriesForArea = Array.isArray(safeAreas[area])
+          ? safeAreas[area]
+          : [];
+        areaEntries[area] = entriesForArea.map((item) =>
+          validateEntry({ ...item, area }),
+        );
+      });
+
+      return {
+        ok: true,
+        count: ALLOWED_AREAS.reduce(
+          (sum, area) => sum + areaEntries[area].length,
+          0,
+        ),
+      };
     }
 
     function addEntry(input) {
       const entry = validateEntry(input);
-      entries.unshift(entry);
-      if (!entries.some((item) => item.id === entry.id)) {
+      areaEntries[entry.area].unshift(entry);
+      if (!areaEntries[entry.area].some((item) => item.id === entry.id)) {
         throw new Error(
           "Schnellspeicher konnte nicht gespeichert werden. Erneut versuchen.",
         );
@@ -66,16 +111,50 @@
       return { ok: true, entry };
     }
 
-    function listEntries() {
-      return entries.map((item) => ({ ...item }));
+    function listEntries(area = activeArea) {
+      const safeArea = assertArea(area);
+      return areaEntries[safeArea].map((item) => ({ ...item }));
+    }
+
+    function setActiveArea(area) {
+      activeArea = assertArea(area);
+      return { ok: true, area: activeArea };
+    }
+
+    function getActiveArea() {
+      return activeArea;
+    }
+
+    function exportState() {
+      const areas = {};
+      ALLOWED_AREAS.forEach((area) => {
+        areas[area] = listEntries(area);
+      });
+
+      return {
+        ok: true,
+        state: {
+          version: 1,
+          updatedAt: new Date().toISOString(),
+          areas,
+        },
+      };
+    }
+
+    function listAreas() {
+      return [...ALLOWED_AREAS];
     }
 
     importState(seed);
 
     return {
       addEntry,
+      exportState,
+      getActiveArea,
       importState,
+      listAreas,
       listEntries,
+      setActiveArea,
     };
   }
 
