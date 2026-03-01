@@ -35,6 +35,12 @@
 
 # CHANGELOG
 
+## 2026-03-01 – Platzhalter-Scan praeziser + Help-Panel Tastaturhinweis
+
+- Start-Routine-Scan durchsucht jetzt auch Unterordner und zaehlt Marker nur in echten Kommentar-/Aufgabenzeilen, damit normale Code-Strings keine Fehlalarme ausloesen.
+- Help-Panel-Mini-Leitfaden nennt jetzt klar den Tastaturweg fuer den Theme-Wechsel (Tab + Enter) als einfachen naechsten Schritt.
+- Risiko: niedrig, da nur Start-Scan, Hilfetexte und zugehoerige Tests angepasst wurden.
+
 ## 2026-03-01 – Start-Routine mit Abhaengigkeits-Sync verstaerkt
 
 - Start-Routine erkennt jetzt automatisch veraltete Abhaengigkeiten ueber einen Fingerprint und installiert bei Bedarf neu.

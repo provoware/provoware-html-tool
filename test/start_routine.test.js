@@ -260,3 +260,46 @@ test("syncReadmeProgressFromTodo aktualisiert den Fortschrittsblock", () => {
 
   fs.rmSync(tempRoot, { recursive: true, force: true });
 });
+
+test("scanPlaceholderMarkers erkennt TODO in Unterordnern", () => {
+  const nestedDir = path.join(process.cwd(), "dummys", "nested");
+  const nestedFile = path.join(nestedDir, "scan_marker_nested.tmp.js");
+  fs.mkdirSync(nestedDir, { recursive: true });
+  fs.writeFileSync(nestedFile, "// TODO: nested marker\n", "utf8");
+
+  const result = scanPlaceholderMarkers(process.cwd(), {
+    directories: ["dummys"],
+    markers: ["TODO"],
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.findings.length, 1);
+  assert.equal(
+    result.findings[0].filePath,
+    "dummys/nested/scan_marker_nested.tmp.js",
+  );
+
+  fs.rmSync(path.join(process.cwd(), "dummys", "nested"), {
+    recursive: true,
+    force: true,
+  });
+});
+
+test("scanPlaceholderMarkers ignoriert TODO in normalen String-Zeilen", () => {
+  const dummyPath = path.join(
+    process.cwd(),
+    "dummys",
+    "scan_marker_textline.tmp.js",
+  );
+  fs.writeFileSync(dummyPath, 'const note = "TODO: nur Text";\n', "utf8");
+
+  const result = scanPlaceholderMarkers(process.cwd(), {
+    directories: ["dummys"],
+    markers: ["TODO"],
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.findings.length, 0);
+
+  fs.rmSync(dummyPath, { force: true });
+});

@@ -106,6 +106,6 @@ Laienvorschläge
 
 - [x] P1: Mini-Optimierung Hilfe: Mini-Leitfaden aus README als kurzer Dashboard-Hinweis im Help-Panel spiegeln.
 - [x] P1: README-Fortschritt wird jetzt automatisch aus `todo.txt` synchronisiert (Start-Routine aktualisiert Prozent, erledigt, offen).
-- [ ] P1: Platzhalter-Scan erweitern: Marker nur als echte Kommentar-Aufgabe (`TODO:` etc.) zaehlen.
+- [x] P1: Platzhalter-Scan erweitert: Marker zaehlen nur noch in echten Kommentar-/Aufgabenzeilen (`TODO:` etc.).
 
-- [ ] P1: Mini-Optimierung Hilfe: Help-Panel um klaren Tastaturhinweis fuer Theme-Wechsel ergaenzen.
+- [x] P1: Mini-Optimierung Hilfe: Help-Panel um klaren Tastaturhinweis fuer Theme-Wechsel ergaenzt.

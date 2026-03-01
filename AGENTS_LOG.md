@@ -9,3 +9,4 @@
 - 2026-03-01 | Patch-ID: ITER-030 | Ziel: Iterations-Pipeline um neuen Pflichtschritt erweitern | Dateien: AGENTS.md, CHANGELOG.md, SELFINFO.md, README.txt, todo.txt
 2026-03-01 | PATCH-031 | README-Leitfaden (3 Schritte) + TODO-Scan-Fix ohne Fehlalarm bei todo-title | README.txt, tools/start_routine.js, test/start_routine.test.js, todo.txt, CHANGELOG.md, SELFINFO.md
 2026-03-01 | PATCH-033 | Help-Panel zeigt 3-Schritt-Mini-Leitfaden und validiert Schritte | system-module/help_panel.js, templates/help-panel.html, templates/help-panel.js, test/help_panel.test.js, Doku-Updates
+2026-03-01 | PATCH-035 | Platzhalter-Scan rekursiv + nur Kommentar-Marker, Help-Panel mit Theme-Tastaturhinweis | tools/start_routine.js, test/start_routine.test.js, system-module/help_panel.js, templates/help-panel.js, test/help_panel.test.js, Doku-Updates

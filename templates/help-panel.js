@@ -8,7 +8,7 @@
 
   const quickGuide = [
     "bash start.sh ausfuehren.",
-    "Ergebnis lesen und naechsten Schritt waehlen.",
+    "Mit Tab zum Theme-Feld gehen und mit Enter das Thema wechseln.",
     "Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
   ];
 

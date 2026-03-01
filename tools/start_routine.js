@@ -309,9 +309,66 @@ function scanPlaceholderMarkers(rootPath, options = {}) {
 
   const findings = [];
   const markerPattern = new RegExp(
-    String.raw`(?:^|\s|\/\/|#)(${markers.join("|")})\s*:`,
+    String.raw`\b(${markers.join("|")})\s*:`,
     "i",
   );
+  const allowedExtensions = new Set([
+    ".js",
+    ".cjs",
+    ".mjs",
+    ".json",
+    ".html",
+    ".css",
+    ".md",
+    ".txt",
+    ".sh",
+  ]);
+
+  function shouldScanAsTaskComment(lineText) {
+    if (typeof lineText !== "string") {
+      return false;
+    }
+
+    return [
+      /^\s*\/\//,
+      /^\s*#/,
+      /^\s*\/\*/,
+      /^\s*\*/,
+      /^\s*<!--/,
+      /^\s*- \[ \]/,
+    ].some((pattern) => pattern.test(lineText));
+  }
+
+  function collectFilesRecursively(startDirectory) {
+    const collectedFiles = [];
+    const stack = [startDirectory];
+
+    while (stack.length > 0) {
+      const currentDirectory = stack.pop();
+      const entries = fs.readdirSync(currentDirectory, { withFileTypes: true });
+
+      entries.forEach((entry) => {
+        const entryPath = path.join(currentDirectory, entry.name);
+        if (entry.isDirectory()) {
+          stack.push(entryPath);
+          return;
+        }
+
+        if (!entry.isFile()) {
+          return;
+        }
+
+        const extension = path.extname(entry.name).toLowerCase();
+        if (!allowedExtensions.has(extension)) {
+          return;
+        }
+
+        collectedFiles.push(entryPath);
+      });
+    }
+
+    return collectedFiles;
+  }
 
   directories.forEach((relativeDirectory) => {
     assertText(relativeDirectory, "Scan-Verzeichnis");
@@ -320,22 +377,15 @@ function scanPlaceholderMarkers(rootPath, options = {}) {
       return;
     }
 
-    const entries = fs.readdirSync(absoluteDirectory, {
-      withFileTypes: true,
-    });
+    const files = collectFilesRecursively(absoluteDirectory);
 
-    entries.forEach((entry) => {
-      if (!entry.isFile()) {
-        return;
-      }
-
-      const absoluteFilePath = path.join(absoluteDirectory, entry.name);
+    files.forEach((absoluteFilePath) => {
       const relativePath = path.relative(rootPath, absoluteFilePath);
       const lines = fs.readFileSync(absoluteFilePath, "utf8").split("\n");
 
       lines.forEach((line, index) => {
         const match = line.match(markerPattern);
-        if (!match) {
+        if (!match || !shouldScanAsTaskComment(line)) {
           return;
         }
 
