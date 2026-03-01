@@ -1,3 +1,10 @@
+## 2026-03-01 – Backup-Wiederherstellung jetzt direkt mit Projektordner
+
+- Backup-Dialog stellt ausgewaehlte Backup-Dateien jetzt wirklich wieder her (Dateisystem-API mit Projektordner + JSON-Pruefung).
+- Neues UI-Helfer-Skript `templates/backup_restore.js` trennt Restore-Logik sauber und prueft Input/Output robust.
+- Release-Check prueft jetzt zusaetzlich, dass das Backup-Restore-Skript in der Dashboard-Seite eingebunden ist.
+- Risiko: mittel, weil Datei-Schreiben im Browserpfad neu ist, aber mit Tests und Fehlerweg abgesichert.
+
 ## 2026-03-01 – Backup-Auswahl mit Hook-Log verbunden
 
 - Backup-Dialog zeigt jetzt echte Backup-Dateien aus `data/backup_events.json` und bietet den Knopf "Backup wiederherstellen" mit klarem Rueckweg.

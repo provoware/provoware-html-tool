@@ -126,4 +126,6 @@ Laienvorschläge
 - [x] P1: Kontrast-Messung je Theme automatisiert mit Schwellenwert im Start-Check protokollieren.
 - [x] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.
 
-- [ ] P1: Echte Wiederherstellung aus Backup-Dialog direkt mit Dateisystemzugriff koppeln (showDirectoryPicker + repair-Hook).
+- [x] P1: Echte Wiederherstellung aus Backup-Dialog direkt mit Dateisystemzugriff koppeln (showDirectoryPicker + repair-Hook).
+
+- [ ] P1: Restore-Flow fuer store/registry automatische Zielerkennung mit Sicherheitsabfrage erweitern.

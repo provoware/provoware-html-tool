@@ -364,19 +364,62 @@
       return false;
     }
 
-    const value = backupSelect.value || "";
-    if (!value) {
+    const backupPath = backupSelect.value || "";
+    if (!backupPath) {
       setStatus(
         "Kein Backup gewaehlt. Naechster Schritt: Erneut versuchen oder Zurueck.",
       );
       return false;
     }
 
-    setStatus(
-      "Backup-Wiederherstellung vorbereitet. Naechster Schritt: Reparatur starten.",
-    );
-    setDebug(`Backup-Pfad gewaehlt: ${value}`);
-    return true;
+    if (!selectedProjectDir) {
+      setStatus(
+        "Projektordner fehlt. Naechster Schritt: Projektordner waehlen und erneut versuchen.",
+      );
+      return false;
+    }
+
+    if (!window.BackupRestore) {
+      setStatus(
+        "Backup-Tool fehlt. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+      );
+      return false;
+    }
+
+    const targetPath = backupPath.includes("registry")
+      ? "data/registry.json"
+      : "data/store.json";
+
+    try {
+      const plan = window.BackupRestore.buildRestorePlan(
+        backupPath,
+        targetPath,
+      );
+      const result = await window.BackupRestore.restoreBackupFromDirectory(
+        selectedProjectDir,
+        plan,
+      );
+
+      if (!result || result.ok !== true) {
+        throw new Error("Restore-Ergebnis ungueltig.");
+      }
+
+      setStatus(
+        `Backup wiederhergestellt (${result.targetFileName}). Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.`,
+      );
+      setDebug(
+        `Restore erfolgreich: ${result.backupFileName} -> ${result.targetFileName}`,
+      );
+      return true;
+    } catch (error) {
+      const details =
+        error instanceof Error ? error.message : "Unbekannter Fehler";
+      setStatus(
+        "Backup-Wiederherstellung fehlgeschlagen. Naechster Schritt: Reparatur starten oder Protokoll oeffnen.",
+      );
+      setDebug(`Restore-Fehler: ${details}`);
+      return false;
+    }
   }
 
   function openBackupDialog() {

@@ -458,3 +458,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Direktes Dateisystem-Listing im Browser (aber unzuverlaessig ohne Berechtigung).
 **Risiko/Side-Effects:** Niedrig, da nur Backup-Pfad erweitert.
 **Verknüpft:** PATCH-042
+
+## FIX-20260301-043: Backup-Restore ueber Projektordner
+
+**Kategorie:** Backup
+**Symptom (für Laien):** "Backup wiederherstellen" zeigte nur eine Vorbereitung, aber schrieb keine Datei.
+**Technische Ursache:** Im Dashboard gab es keinen echten Dateisystem-Schreibpfad fuer den Backup-Button.
+**Trigger:** Backup im Dialog auswaehlen und auf "Backup wiederherstellen" klicken.
+**Fix (kurz):** Restore-Logik in `templates/backup_restore.js` ausgelagert und mit Projektordner-Handle, JSON-Pruefung und Write-Verify verbunden.
+**Geänderte Dateien/Marker:** templates/backup_restore.js, templates/dashboard.js (restoreSelectedBackup), templates/dashboard.html (Script + Hilfetext).
+**Tests/Checks:** node --test test/backup_restore.test.js; node --test test/release_readiness_check.test.js; bash start.sh.
+**Prävention (künftig):** Ab jetzt immer jeden UI-Button auf echten Ende-zu-Ende-Schreibpfad plus Validierung pruefen.
+**Alternative(n):** Restore ueber Backend/CLI statt Browser-Dateisystem.
+**Risiko/Side-Effects:** Browser ohne File-System-API brauchen den bestehenden Reparaturweg.
+**Verknüpft:** PATCH-043

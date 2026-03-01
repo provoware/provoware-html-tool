@@ -1,3 +1,6 @@
+Iteration 43 (2026-03-01): Backup-Wiederherstellung im Dashboard nutzt jetzt echten Projektordner-Zugriff und schreibt Zieldateien direkt mit JSON-Validierung.
+Naechster Schritt: Wiederherstellung fuer mehrere Zieltypen weiter haerten und Boot-View-Statusbereich stabilisieren.
+
 Iteration 42 (2026-03-01): Backup-Auswahl mit JSON-Store-Backup-Hook verbunden (Event-Log + Dialog-Auswahl + Wiederherstellen-Schritt).
 Naechster Schritt: Echte Wiederherstellung aus Dialog direkt mit Dateizugriff koppeln und Ende-zu-Ende pruefen.
 
