@@ -30,6 +30,9 @@
   --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.24);
   --radius: var(--radius-lg);
   --focus: #ffd24d;
+  --ink: var(--fg);
+  --line-strong: color-mix(in srgb, var(--line) 85%, #ffffff 15%);
+  --warn-soft: color-mix(in srgb, var(--warn) 24%, transparent);
   --rail-frame: #59c7ff;
   --rail-bg: #0d1b31;
   --banner-bg: #0f2345;
@@ -62,6 +65,9 @@
   --warn: #f2ac59;
   --shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
   --focus: #ffed89;
+  --ink: var(--fg);
+  --line-strong: color-mix(in srgb, var(--line) 82%, #e7f3ff 18%);
+  --warn-soft: color-mix(in srgb, var(--warn) 28%, transparent);
   --rail-frame: #78c9ff;
   --rail-bg: #1a2f44;
   --banner-bg: #1c3a55;
@@ -90,6 +96,9 @@
   --warn: #ffb347;
   --shadow: none;
   --focus: #fff700;
+  --ink: #ffffff;
+  --line-strong: #ffffff;
+  --warn-soft: #6b4c00;
   --rail-frame: #00ffff;
   --rail-bg: #111111;
   --banner-bg: #111111;
@@ -118,6 +127,9 @@
   --warn: #8e3c16;
   --shadow: 0 8px 18px rgba(61, 24, 20, 0.16);
   --focus: #003d9f;
+  --ink: #2d1b1a;
+  --line-strong: color-mix(in srgb, var(--line) 78%, #2d1b1a 22%);
+  --warn-soft: color-mix(in srgb, var(--warn) 25%, #fff8f2 75%);
   --rail-frame: #9e3f28;
   --rail-bg: #fff6f2;
   --banner-bg: #8f3f31;
@@ -146,6 +158,9 @@
   --warn: #78501b;
   --shadow: 0 8px 18px rgba(26, 39, 24, 0.14);
   --focus: #2b4fff;
+  --ink: #1f2a1d;
+  --line-strong: color-mix(in srgb, var(--line) 82%, #1f2a1d 18%);
+  --warn-soft: color-mix(in srgb, var(--warn) 22%, #f4f8ec 78%);
   --rail-frame: #425b36;
   --rail-bg: #f4f8ec;
   --banner-bg: #4a6440;
