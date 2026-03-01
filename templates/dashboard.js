@@ -22,6 +22,7 @@
   const reconnect = document.getElementById("reconnect-folder");
   const themeSelect = document.getElementById("theme-select");
   const themeTooltip = document.getElementById("theme-tooltip");
+  const themeA11yHint = document.getElementById("theme-a11y-hint");
   const controlWhat = document.getElementById("control-what");
   const workspaceHelp = document.getElementById("workspace-help");
   const helpWhat = document.getElementById("help-what");
@@ -176,6 +177,7 @@
   let lastBootFocusDebugText = "";
   let lastBackupDetailStateText = "";
   let dashboardCompactMessages = {};
+  let laienTipIndex = 0;
 
   const dashboardModel = window.DashboardModel || {};
   const normalizeLayoutWithModel =
@@ -1315,6 +1317,36 @@
     }
   }
 
+  function getThemeA11yHint(themeKey) {
+    const hints = dashboardCompactMessages.themeA11yGuidance;
+    if (!hints || typeof hints !== "object") {
+      return "Theme-Hilfe: Kontrast+ bietet die staerkste Lesbarkeit.";
+    }
+
+    const hint = hints[themeKey];
+    return ensureMessage(
+      hint,
+      "Theme-Hilfe: Kontrast+ bietet die staerkste Lesbarkeit.",
+    );
+  }
+
+  function getNextLaienTip() {
+    const tips = Array.isArray(dashboardCompactMessages.laienTips)
+      ? dashboardCompactMessages.laienTips
+      : [];
+
+    if (tips.length === 0) {
+      return "Laien-Tipp: Erst lesen, dann klicken. Bei Fehlern erneut versuchen.";
+    }
+
+    const index = laienTipIndex % tips.length;
+    laienTipIndex += 1;
+    return ensureMessage(
+      tips[index],
+      "Laien-Tipp: Erst lesen, dann klicken. Bei Fehlern erneut versuchen.",
+    );
+  }
+
   themeSelect.addEventListener("change", () => {
     const selectedTheme = themeSelect.options[themeSelect.selectedIndex].text;
     document.body.dataset.theme = themeSelect.value;
@@ -1327,6 +1359,10 @@
       "Thema gewechselt. Rueckweg: Vorheriges Thema wieder waehlen.",
     );
 
+    if (themeA11yHint) {
+      themeA11yHint.textContent = getThemeA11yHint(themeSelect.value);
+    }
+
     setStatus(`Thema aktiv: ${selectedTheme}.`);
   });
 
@@ -1335,9 +1371,7 @@
   });
 
   showLaienTip.addEventListener("click", () => {
-    setStatus(
-      "Laien-Tipp: Erst lesen, dann klicken. Bei Fehlern erneut versuchen.",
-    );
+    setStatus(getNextLaienTip());
   });
 
   async function loadBackupEvents() {
@@ -2396,6 +2430,7 @@
 
   debugButton.addEventListener("click", () => {
     debugOutput.hidden = !debugOutput.hidden;
+    debugButton.setAttribute("aria-pressed", String(!debugOutput.hidden));
     setStatus("Debug-Ansicht umgeschaltet. Naechster Schritt: Meldung lesen.");
   });
 
@@ -2616,6 +2651,9 @@
       ui.themeTooltipDefault,
       "Tipp: Kontrast+ waehlen. Rueckweg: Altes Thema erneut waehlen.",
     );
+    if (themeA11yHint) {
+      themeA11yHint.textContent = getThemeA11yHint(themeSelect.value);
+    }
     themeSelect.dataset.tooltipChanged = ensureMessage(
       ui.themeTooltipChanged,
       "Thema gewechselt zu {theme}. Rueckweg: Altes Thema erneut waehlen.",
@@ -2640,6 +2678,7 @@
     );
   });
 
+  debugButton.setAttribute("aria-pressed", String(!debugOutput.hidden));
   registerBootGate();
   registerKeyboardShortcuts();
   registerFavoritesActions();
