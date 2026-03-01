@@ -140,3 +140,7 @@ Iteration: 39
 - Neue Tests decken beide Fehlerfaelle ab (doppelte ID + unsicherer Pfad).
 - `bash start.sh` lief komplett gruen durch.
 - Naechste zwei Pflichtziele bleiben: **B (Plugin-Loader minimal absichern)** und **C (Storage-Service robust)**.
+
+- Iteration 45: Todo-Persistenz umgesetzt (`data/store.json`) mit Import/Export-Validierung im Modell.
+- Checks: `npm run format`, `node --test`, `bash start.sh` alle erfolgreich.
+- Next Step: Empfehlung 2 umsetzen (Todo-Filter heute/offen/archiv + Tastatur-Shortcuts).

@@ -250,3 +250,9 @@
 - Plugin-Manifest validiert jetzt doppelte Plugin-IDs und stoppt frueh mit klarer Laienmeldung.
 - Plugin-Pfade werden auf Projektgrenzen geprueft, damit keine externen Pfade geladen werden.
 - Risiko: niedrig, da nur Plugin-Validierung, ein Dummy-Manifest und Tests erweitert wurden.
+
+## 2026-03-01 – Todo-Persistenz in data/store.json
+
+- Todo-Modul speichert aktive und archivierte Aufgaben jetzt optional in `data/store.json`, sobald ein Projektordner verbunden ist.
+- Beim Start werden gespeicherte Aufgaben wieder geladen; bei Speicherfehlern gibt es klare Meldungen mit naechstem Schritt.
+- Risiko: niedrig, da nur Todo-Modul, Modell und zugehoeriger Test erweitert wurden.

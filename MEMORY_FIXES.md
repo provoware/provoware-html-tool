@@ -486,3 +486,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Automatische Zielerkennung mit Sicherheitsfrage (spaeter moeglich).
 **Risiko/Side-Effects:** Niedrig; ein zusaetzlicher Auswahlschritt im Dialog.
 **Verknuepft:** PATCH-044
+
+## FIX-20260301-045: Todo-Persistenz mit Modell-Validierung
+
+**Kategorie:** UI/Storage
+**Symptom (fuer Laien):** Aufgaben waren nach Neustart weg.
+**Technische Ursache:** Todo-Liste lebte nur im Arbeitsspeicher, ohne Speichern in Projektdatei.
+**Trigger:** Seite neu laden oder Browser neu starten.
+**Fix (kurz):** Todo-Modul schreibt optional nach `data/store.json` und laedt beim Start; Modell bekam `exportState/importState` mit Strukturpruefung.
+**Geaenderte Dateien/Marker:** `templates/todo_module.js`, `system-module/todo_list_model.js`, `templates/dashboard.js`, `data/store.json`.
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer bei neuen UI-Listen frueh einen optionalen Persistenzpfad + Importvalidierung mitplanen.
+**Alternative(n):** Nur SessionStorage (verworfen, da nicht projektordnerbasiert).
+**Risiko/Side-Effects:** Niedrig; ohne Projektordner bleibt Verhalten wie vorher (nur im Speicher).
+**Verknuepft:** PATCH-045

@@ -25,6 +25,41 @@
     return value;
   }
 
+  function assertTodoEntry(value, name) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+      throw new Error(
+        `${name} ist ungueltig. Reparatur starten oder Protokoll oeffnen.`,
+      );
+    }
+    const id = assertText(value.id, `${name}-ID`);
+    const text = assertText(value.text, `${name}-Text`);
+    const date = assertDateIso(value.date, `${name}-Datum`);
+    const doneAt =
+      value.doneAt === "" ? "" : assertText(value.doneAt, `${name}-Erledigt`);
+    return {
+      id,
+      text,
+      date,
+      doneAt,
+    };
+  }
+
+  function assertStateShape(value) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) {
+      throw new Error(
+        "Todo-Status ist ungueltig. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+    const active = assertArray(value.active, "Aktive Aufgaben").map(
+      (entry, index) => assertTodoEntry(entry, `Aktive Aufgabe ${index + 1}`),
+    );
+    const archive = assertArray(value.archive, "Archivierte Aufgaben").map(
+      (entry, index) =>
+        assertTodoEntry(entry, `Archivierte Aufgabe ${index + 1}`),
+    );
+    return { active, archive };
+  }
+
   function createTodoModel() {
     let seq = 0;
     const state = {
@@ -76,11 +111,29 @@
       return copy;
     }
 
+    function exportState() {
+      const output = {
+        active: state.active.map((entry) => ({ ...entry })),
+        archive: state.archive.map((entry) => ({ ...entry })),
+      };
+      assertStateShape(output);
+      return output;
+    }
+
+    function importState(input) {
+      const safeState = assertStateShape(input);
+      state.active = safeState.active;
+      state.archive = safeState.archive;
+      return { ok: true, count: state.active.length + state.archive.length };
+    }
+
     return {
       addTodo,
       completeTodo,
       listByDate,
       listArchive,
+      exportState,
+      importState,
     };
   }
 

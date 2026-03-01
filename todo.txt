@@ -131,4 +131,6 @@ Laienvorschläge
 - [ ] P1: Restore-Flow fuer store/registry automatische Zielerkennung mit Sicherheitsabfrage erweitern.
 
 - [x] P1: Ziel-Datei-Auswahl im Backup-Dialog eingebaut (nicht nur Dateiname-Ableitung).
-- [ ] P1: Nächster Mini-Punkt: Todo-Liste optional in `data/store.json` persistieren und im Start wiederherstellen.
+- [x] P1: Nächster Mini-Punkt: Todo-Liste optional in `data/store.json` persistieren und im Start wiederherstellen.
+
+- [ ] P1: Nächster Mini-Punkt: Todo-Filter (heute/offen/archiv) + Tastatur-Shortcuts ergänzen.
