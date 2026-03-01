@@ -14,8 +14,8 @@ Ziel ist: barrierefrei, verständlich, wartbar und voll automatisiert.
    - „Erneut versuchen“
    - „Reparatur starten“
    - „Protokoll öffnen“
-5. Pro Iteration immer **genau zwei offene Punkte** aus `todo.txt` vollstaendig abschliessen.
-   - Beide Punkte muessen Code + Tests + Doku enthalten.
+5. Pro Iteration immer **genau drei offene Punkte** aus `todo.txt` vollstaendig abschliessen.
+   - Alle drei Punkte muessen Code + Tests + Doku enthalten.
    - Erst danach neue offene Punkte anlegen.
 5.AGENTS.md – Modultool (Profi‑Version V2) 
 Stand: 2026-02-28 • Zweck: maximale Patch‑Genauigkeit, Codesparsamkeit, Robustheit, Laien‑Perfektion
@@ -399,11 +399,11 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 - Patch gilt erst als fertig, wenn neue Platzhalterfunde im TODO sichtbar sind.
 
 14) Nächster Schritt (Pflichtauswahl) 
-Entscheide für die nächste Iteration genau zwei Ziele: 
+Entscheide für die nächste Iteration genau drei Ziele: 
 A) Boot‑View stabilisieren (Phasen, Ampel, Details, Weiter‑Gate)
 B) Plugin‑Loader minimal (Manifest lesen, isoliertes Laden, Fehler abfangen)
 C) Storage‑Service robust (versionierte Writes, JSON‑Validator, Backup‑Hook) 
-Frage: Welche Option A/B/C ist als nächstes dran?
+Frage: Welche Optionen A/B/C sind als nächstes dran?
 
 ## Debugging/Logging
 - Einfache Meldungen für Laien.

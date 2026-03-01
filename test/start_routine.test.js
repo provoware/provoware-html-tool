@@ -14,6 +14,7 @@ const {
   syncReadmeProgressFromTodo,
   calculateTodoProgress,
   validateOpenMiniPoints,
+  validateMiniPointTemplate,
   validateProjectStructure,
   writeDependencyState,
   runShortcutConflictCheck,
@@ -310,20 +311,7 @@ test("scanPlaceholderMarkers ignoriert TODO in normalen String-Zeilen", () => {
   fs.rmSync(dummyPath, { force: true });
 });
 
-test("validateOpenMiniPoints akzeptiert genau zwei offene Mini-Punkte", () => {
-  const result = validateOpenMiniPoints(
-    [
-      "- [ ] Naechster Mini-Punkt: A",
-      "- [ ] Naechster Mini-Punkt: B",
-      "- [x] Naechster Mini-Punkt: C",
-    ].join("\n"),
-  );
-
-  assert.equal(result.ok, true);
-  assert.equal(result.count, 2);
-});
-
-test("validateOpenMiniPoints meldet Abweichung", () => {
+test("validateOpenMiniPoints akzeptiert genau drei offene Mini-Punkte", () => {
   const result = validateOpenMiniPoints(
     [
       "- [ ] Naechster Mini-Punkt: A",
@@ -332,8 +320,46 @@ test("validateOpenMiniPoints meldet Abweichung", () => {
     ].join("\n"),
   );
 
-  assert.equal(result.ok, false);
+  assert.equal(result.ok, true);
   assert.equal(result.count, 3);
+});
+
+test("validateOpenMiniPoints meldet Abweichung", () => {
+  const result = validateOpenMiniPoints(
+    ["- [ ] Naechster Mini-Punkt: A", "- [ ] Naechster Mini-Punkt: B"].join(
+      "\n",
+    ),
+  );
+
+  assert.equal(result.ok, false);
+  assert.equal(result.count, 2);
+});
+
+test("validateMiniPointTemplate akzeptiert alle Pflichtfelder", () => {
+  const result = validateMiniPointTemplate(
+    [
+      "- [ ] Naechster Mini-Punkt: A | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: pruefen",
+      "- [ ] Naechster Mini-Punkt: B | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: mittel | Naechster Schritt: release",
+      "- [ ] Naechster Mini-Punkt: C | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: merge",
+    ].join("\n"),
+  );
+
+  assert.equal(result.ok, true);
+  assert.equal(result.missingFields.length, 0);
+});
+
+test("validateMiniPointTemplate meldet fehlende Pflichtfelder", () => {
+  const result = validateMiniPointTemplate(
+    [
+      "- [ ] Naechster Mini-Punkt: A | Code: fertig | Tests: gruen",
+      "- [ ] Naechster Mini-Punkt: B | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: pruefen",
+      "- [ ] Naechster Mini-Punkt: C | Code: fertig | Tests: gruen | Doku: aktualisiert | Risiko: niedrig | Naechster Schritt: merge",
+    ].join("\n"),
+  );
+
+  assert.equal(result.ok, false);
+  assert.equal(result.missingFields[0].index, 1);
+  assert.equal(result.missingFields[0].field, "Doku:");
 });
 
 test("runShortcutConflictCheck meldet Hinweis auf macOS", () => {
