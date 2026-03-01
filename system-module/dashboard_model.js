@@ -92,8 +92,63 @@ function buildQuickAccess(pinnedItems, usageItems, limit = 6) {
   return result;
 }
 
+function clampNumber(value, min, max) {
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return min;
+  }
+
+  if (value < min) {
+    return min;
+  }
+
+  if (value > max) {
+    return max;
+  }
+
+  return value;
+}
+
+function normalizeLayoutState(input) {
+  const source = input && typeof input === "object" ? input : {};
+  const leftWidth = clampNumber(source.leftWidth, 220, 340);
+  const rightWidth = clampNumber(source.rightWidth, 220, 340);
+  const leftCollapsed = Boolean(source.leftCollapsed);
+  const rightCollapsed = Boolean(source.rightCollapsed);
+
+  return {
+    leftWidth,
+    rightWidth,
+    leftCollapsed,
+    rightCollapsed,
+  };
+}
+
+function getGridColumnCount(viewportWidth) {
+  if (!Number.isFinite(viewportWidth) || viewportWidth < 1) {
+    throw new Error(
+      "Breite ist ungueltig. Bitte Eingabe pruefen und erneut versuchen.",
+    );
+  }
+
+  if (viewportWidth < 620) {
+    return 1;
+  }
+
+  if (viewportWidth < 960) {
+    return 2;
+  }
+
+  if (viewportWidth < 1280) {
+    return 3;
+  }
+
+  return 4;
+}
+
 module.exports = {
   buildQuickAccess,
+  getGridColumnCount,
   moveZone,
+  normalizeLayoutState,
   reorderZones,
 };

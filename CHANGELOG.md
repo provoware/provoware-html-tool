@@ -1,3 +1,10 @@
+## 2026-03-03 – Iteration 74
+
+- Zwei offene Punkte abgeschlossen: Drei-Zonen-Layout hat jetzt Splitter, Collapse-Knoepfe und Layout-Reset mit projektbezogener Persistenz in `data/layout.json`.
+- Workspace-Grid nutzt jetzt responsive 1-4 Spalten und bleibt damit naeher am zweiten Vorlagenbild (klare Kartenmitte mit stabilen Rails).
+- Mini-Optimierung Hilfe: Neue Inline-Hilfe bei Layout-Steuerung erklaert Aktion und Rueckweg in einfacher Sprache.
+- Risiko: niedrig, weil nur Dashboard-Layout, zugehoerige Modell-Helfer und gezielte Tests erweitert wurden.
+
 ## 2026-03-03 – Iteration 73
 
 - Zwei offene Mini-Punkte abgeschlossen: Lesemodus-Statusmeldungen zeigen jetzt sichtbar **Alt+T/Alt+I** als Fokusziel-Hilfe bei Vorschau und Enter-Bestaetigung.

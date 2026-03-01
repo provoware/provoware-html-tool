@@ -32,6 +32,14 @@
   const bootSummary = document.getElementById("boot-summary");
   const kanbanPreview = document.getElementById("kanban-preview");
   const kanbanStatus = document.getElementById("kanban-status");
+  const layoutRoot = document.querySelector(".layout");
+  const leftRail = document.getElementById("left-rail");
+  const rightRail = document.getElementById("right-rail");
+  const splitterLeft = document.getElementById("splitter-left");
+  const splitterRight = document.getElementById("splitter-right");
+  const leftRailToggle = document.getElementById("left-rail-toggle");
+  const rightRailToggle = document.getElementById("right-rail-toggle");
+  const layoutReset = document.getElementById("layout-reset");
 
   function formatText(template, values) {
     if (typeof template !== "string" || !template.trim()) {
@@ -65,11 +73,219 @@
 
   let dragSourceId = null;
   let selectedProjectDir = null;
+  let layoutState = {
+    leftWidth: 260,
+    rightWidth: 280,
+    leftCollapsed: false,
+    rightCollapsed: false,
+  };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
     { id: "quick", title: "⚡ Schnellzugriff" },
     { id: "modules", title: "📦 Module" },
   ];
+
+  function clampNumber(value, min, max) {
+    if (typeof value !== "number" || Number.isNaN(value)) {
+      return min;
+    }
+
+    if (value < min) {
+      return min;
+    }
+
+    if (value > max) {
+      return max;
+    }
+
+    return value;
+  }
+
+  function normalizeLayoutState(input) {
+    const source = input && typeof input === "object" ? input : {};
+    return {
+      leftWidth: clampNumber(source.leftWidth, 220, 340),
+      rightWidth: clampNumber(source.rightWidth, 220, 340),
+      leftCollapsed: Boolean(source.leftCollapsed),
+      rightCollapsed: Boolean(source.rightCollapsed),
+    };
+  }
+
+  function getGridColumnCount(viewportWidth) {
+    if (!Number.isFinite(viewportWidth) || viewportWidth < 1) {
+      return 1;
+    }
+
+    if (viewportWidth < 620) {
+      return 1;
+    }
+
+    if (viewportWidth < 960) {
+      return 2;
+    }
+
+    if (viewportWidth < 1280) {
+      return 3;
+    }
+
+    return 4;
+  }
+
+  function updateGridColumns() {
+    const grid = document.getElementById("active-modules");
+    if (!grid) {
+      return false;
+    }
+
+    const columns = getGridColumnCount(window.innerWidth || 1);
+    grid.style.setProperty("--grid-columns", String(columns));
+    return true;
+  }
+
+  function applyLayoutState() {
+    if (!layoutRoot || !leftRail || !rightRail) {
+      return false;
+    }
+
+    layoutRoot.style.setProperty(
+      "--left-rail-width",
+      `${layoutState.leftWidth}px`,
+    );
+    layoutRoot.style.setProperty(
+      "--right-rail-width",
+      `${layoutState.rightWidth}px`,
+    );
+
+    leftRail.hidden = layoutState.leftCollapsed;
+    rightRail.hidden = layoutState.rightCollapsed;
+    splitterLeft.hidden = layoutState.leftCollapsed;
+    splitterRight.hidden = layoutState.rightCollapsed;
+
+    leftRailToggle.textContent = layoutState.leftCollapsed
+      ? "Navigation einblenden"
+      : "Navigation ausblenden";
+    rightRailToggle.textContent = layoutState.rightCollapsed
+      ? "Einstellungen einblenden"
+      : "Einstellungen ausblenden";
+
+    layoutRoot.dataset.leftCollapsed = String(layoutState.leftCollapsed);
+    layoutRoot.dataset.rightCollapsed = String(layoutState.rightCollapsed);
+    updateGridColumns();
+    return true;
+  }
+
+  async function persistLayoutState() {
+    const safeLayout = normalizeLayoutState(layoutState);
+    layoutState = safeLayout;
+
+    if (!selectedProjectDir) {
+      return { ok: false, message: "Kein Projektordner verbunden." };
+    }
+
+    await writeProjectJson("data/layout.json", {
+      version: "v001",
+      updatedAt: new Date().toISOString(),
+      layout: safeLayout,
+    });
+
+    return { ok: true, message: "Layout gespeichert." };
+  }
+
+  async function loadLayoutState() {
+    const fallback = normalizeLayoutState(layoutState);
+    const loaded = await readProjectJson("data/layout.json");
+    if (!loaded.ok) {
+      layoutState = fallback;
+      applyLayoutState();
+      return false;
+    }
+
+    layoutState = normalizeLayoutState(loaded.value?.layout);
+    applyLayoutState();
+    return true;
+  }
+
+  function changeRailWidth(side, delta) {
+    const safeDelta = clampNumber(delta, -20, 20);
+    if (side === "left") {
+      layoutState.leftWidth = clampNumber(
+        layoutState.leftWidth + safeDelta,
+        220,
+        340,
+      );
+    }
+
+    if (side === "right") {
+      layoutState.rightWidth = clampNumber(
+        layoutState.rightWidth + safeDelta,
+        220,
+        340,
+      );
+    }
+
+    applyLayoutState();
+    persistLayoutState().catch(() => {
+      setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
+    });
+  }
+
+  function registerLayoutControls() {
+    leftRailToggle.addEventListener("click", () => {
+      layoutState.leftCollapsed = !layoutState.leftCollapsed;
+      applyLayoutState();
+      persistLayoutState().catch(() => {
+        setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
+      });
+      setStatus("Navigation angepasst. Naechster Schritt: Layout pruefen.");
+    });
+
+    rightRailToggle.addEventListener("click", () => {
+      layoutState.rightCollapsed = !layoutState.rightCollapsed;
+      applyLayoutState();
+      persistLayoutState().catch(() => {
+        setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
+      });
+      setStatus("Einstellungen angepasst. Naechster Schritt: Layout pruefen.");
+    });
+
+    layoutReset.addEventListener("click", () => {
+      layoutState = normalizeLayoutState({ leftWidth: 260, rightWidth: 280 });
+      applyLayoutState();
+      persistLayoutState().catch(() => {
+        setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
+      });
+      setStatus(
+        "Layout zurueckgesetzt. Naechster Schritt: Bereich weiter nutzen.",
+      );
+    });
+
+    splitterLeft.addEventListener("click", () => changeRailWidth("left", 20));
+    splitterRight.addEventListener("click", () => changeRailWidth("right", 20));
+
+    [splitterLeft, splitterRight].forEach((splitter) => {
+      splitter.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          changeRailWidth(
+            splitter.id === "splitter-left" ? "left" : "right",
+            -20,
+          );
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          changeRailWidth(
+            splitter.id === "splitter-left" ? "left" : "right",
+            20,
+          );
+        }
+      });
+    });
+
+    window.addEventListener("resize", updateGridColumns);
+    applyLayoutState();
+    return true;
+  }
 
   async function loadMessages() {
     try {
@@ -348,6 +564,7 @@
       await saveHandle(handle);
       selectedProjectDir = handle;
       const folders = await ensureStructure(handle);
+      await loadLayoutState();
       setStatus(`Projekt verbunden. Struktur ok (${folders.length} Ordner).`);
       updateBootPhase(
         "folder",
@@ -385,6 +602,7 @@
       }
       selectedProjectDir = handle;
       const folders = await ensureStructure(handle);
+      await loadLayoutState();
       setStatus(`Auto-Reconnect ok. ${folders.length} Ordner sind bereit.`);
       updateBootPhase(
         "folder",
@@ -729,6 +947,11 @@
     [backupDialogClose, "Backup-Dialog-Zurueck"],
     [kanbanPreview, "Kanban-Bereich"],
     [kanbanStatus, "Kanban-Status"],
+    [leftRailToggle, "Layout-Nav-Knopf"],
+    [rightRailToggle, "Layout-Einstellungen-Knopf"],
+    [layoutReset, "Layout-Reset-Knopf"],
+    [splitterLeft, "Layout-Splitter links"],
+    [splitterRight, "Layout-Splitter rechts"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(
@@ -788,6 +1011,7 @@
   });
 
   registerKeyboardShortcuts();
+  registerLayoutControls();
   renderZones();
   reconnectProjectFolder();
 })();

@@ -30,8 +30,21 @@
       <p class="layout-banner" role="status">
         Genrenarchiv – alle Aenderungen gespeichert
       </p>
+      <div class="layout-controls" aria-label="Layout-Steuerung">
+        <button type="button" id="left-rail-toggle">
+          Navigation ausblenden
+        </button>
+        <button type="button" id="right-rail-toggle">
+          Einstellungen ausblenden
+        </button>
+        <button type="button" id="layout-reset">Layout-Reset</button>
+      </div>
+      <p class="field-tip" id="layout-controls-help">
+        Was macht das? Sie koennen Navigation und Einstellungen ein- oder
+        ausblenden. Rueckweg: "Layout-Reset" setzt alles zurueck.
+      </p>
       <section class="layout layout-shell" aria-label="Dashboard Inhalte">
-        <aside class="col left-rail" aria-label="Linke Spalte">
+        <aside id="left-rail" class="col left-rail" aria-label="Linke Spalte">
           <article class="panel" aria-labelledby="calendar-title">
             <h2 id="calendar-title">Heute</h2>
             <label for="todo-date">Kalendertag waehlen</label>
@@ -318,7 +331,13 @@
           </article>
         </aside>
 
-        <section class="col center-stage" aria-label="Mitte">
+        <button
+          type="button"
+          id="splitter-left"
+          class="layout-splitter"
+          aria-label="Linke Spalte breiter oder schmaler ziehen"
+        ></button>
+        <section id="center-stage" class="col center-stage" aria-label="Mitte">
           <article class="panel" aria-labelledby="control-title">
             <h2 id="control-title">Systemsteuerung</h2>
             <p id="control-what"></p>
@@ -479,7 +498,17 @@
           </article>
         </section>
 
-        <aside class="col right-rail" aria-label="Rechte Spalte">
+        <button
+          type="button"
+          id="splitter-right"
+          class="layout-splitter"
+          aria-label="Rechte Spalte breiter oder schmaler ziehen"
+        ></button>
+        <aside
+          id="right-rail"
+          class="col right-rail"
+          aria-label="Rechte Spalte"
+        >
           <article class="panel" aria-labelledby="overview-title">
             <h3 id="overview-title">Team-Status</h3>
             <ul class="guide-list" aria-label="Teamliste mit Textstatus">

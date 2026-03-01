@@ -9,6 +9,9 @@
     "shell": {
       "type": "three-column",
       "columns": ["leftRail", "centerStage", "rightRail"],
+      "splitters": ["left", "right"],
+      "collapsibleRails": true,
+      "layoutPersistence": "data/layout.json",
       "topBar": true,
       "statusBanner": true,
       "footerBar": true,
@@ -22,7 +25,7 @@
     },
     "centerStage": {
       "purpose": "Hauptaktionen als Kartenraster",
-      "grid": "3x3 Karten mit 16px Abstand",
+      "grid": "responsive 1-4 Spalten mit 8-16px Abstand",
       "cards": [
         "Genreverwaltung",
         "Archiv",

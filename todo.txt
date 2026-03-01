@@ -180,8 +180,8 @@ Laienvorschläge
 ## 2026-03-01 – UI-Token-System und Plugin-Ready Ausbau (neu)
 
 - [x] P1: Globales UI-Design-Token-Set als zentrale Wahrheit eingefuehrt (Spacing, Radius, Font, Shadow, Button-Hoehen).
-- [ ] P1: Drei-Zonen-Layout mit Splitter + Collapse + Persistenz pro Projekt umsetzen (inkl. Layout-Reset).
-- [ ] P1: Workspace-Grid auf responsive Auto-Fit (1-4 Spalten) mit Plug-Slots und Positions-Persistenz erweitern.
+- [x] P1: Drei-Zonen-Layout mit Splitter + Collapse + Persistenz pro Projekt umsetzen (inkl. Layout-Reset).
+- [x] P1: Workspace-Grid auf responsive Auto-Fit (1-4 Spalten) mit Plug-Slots und Positions-Persistenz erweitern.
 - [ ] P1: Einheitliche Modul-Control-Leiste (Maximieren/Restore/Collapse/Pin) mit Tooltips und Shortcuts final vereinheitlichen.
 - [ ] P1: Fokusmodus als 100%-Ansicht mit Layout-Snapshot/Restore pixelgenau absichern.
 - [ ] P1: Inspector auf Tabs (Einstellungen/Hilfe/System) und kontextsensitive Moduloptionen umbauen.

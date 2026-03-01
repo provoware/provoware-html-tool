@@ -91,9 +91,9 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 84 %
-- **Erledigt:** 122 Punkte
-- **Offen:** 23 Punkte
+- **Fortschritt:** 86 %
+- **Erledigt:** 124 Punkte
+- **Offen:** 21 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -519,3 +519,10 @@ Naechster Schritt: Layout-Splitter + Collapse + Persistenz in `data/layout.json`
 - Der 1-Klick-Knopf nutzt das gewaehlte Profil und schreibt es sichtbar in den Impulsblock.
 - Lesemodus bietet jetzt ein waehlbares Fokusziel nach "Vorschau schliessen": Titel-Feld oder Inhaltsfeld.
 - Naechster Schritt: Profil- und Fokuswahl pro Projekt speichern, damit die letzte Wahl automatisch wieder aktiv ist.
+
+## Iteration 74 – Layout-Abweichung zum Vorlagenbild 2 korrigiert
+- Drei-Zonen-Aufbau wurde professionell angeglichen: linke Navigation, Kartenmitte, rechter Inspector mit klaren Rahmen.
+- Neu: Layout-Steuerung mit `Navigation ausblenden`, `Einstellungen ausblenden`, `Layout-Reset` und Splitter (Breite anpassen).
+- Neu: Layout-Persistenz in `data/layout.json` (pro Projekt) sowie responsive Modul-Grid mit 1-4 Spalten.
+- Hilfe fuer Laien: Direkt ueber der Steuerung steht jetzt kurz, was die Knopfe tun und wie der Rueckweg geht.
+

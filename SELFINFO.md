@@ -1,3 +1,11 @@
+## Iteration 74 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Drei-Zonen-Layout mit Splitter/Collapse + responsive 1-4 Spalten im Workspace-Grid).
+- Ergebnis: Dashboard hat jetzt Layout-Steuerung mit Ein-/Ausblenden, Splitter-Steuerung und Layout-Reset. Zustand wird pro Projekt in `data/layout.json` gespeichert.
+- Ergebnis: Modulflaeche passt die Spaltenzahl jetzt automatisch an die Breite an (1-4 Spalten).
+- Mini-Optimierung: Neue Layout-Hilfe direkt ueber den Steuerknoepfen mit klarem Rueckweg.
+- Naechster Schritt: Einheitliche Modul-Control-Leiste mit Tooltips/Shortcuts final vereinheitlichen.
+
 ## Iteration 73 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Alt-Shortcut-Hinweis im Lesemodus-Status + automatischer Shortcut-Konfliktcheck in Start-Routine).

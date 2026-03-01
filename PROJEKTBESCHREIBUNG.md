@@ -265,3 +265,10 @@ Praktischer Einsatz:
 - Songtext-Modul hat jetzt sichere Tastenkombinationen (Alt+T, Alt+I) fuer Fokuswechsel.
 - Profile im Zufallsmodus zeigen eine letzte Nutzung, damit Teams den letzten Stand schneller erkennen.
 - Enter im Fokusziel-Feld bestaetigt die Auswahl mit direkter Statusmeldung.
+
+## Iteration 74 – Tool-Umfang Layout/Design
+- Dashboard nutzt jetzt ein echtes Drei-Zonen-Shell-Layout mit verstellbaren Rails (Splitter + Collapse).
+- Das Layout wird pro Projekt in `data/layout.json` gespeichert und beim Verbinden des Projektordners automatisch geladen.
+- Das Modulraster skaliert jetzt auf 1-4 Spalten fuer kleine und grosse Bildschirme (responsive = passt sich an).
+- Laiennutzen: weniger visuelle Abweichung zum Referenzbild, klarere Anordnung und schneller Rueckweg ueber `Layout-Reset`.
+
