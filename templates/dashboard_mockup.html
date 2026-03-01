@@ -86,6 +86,13 @@
       .warn {
         color: var(--warn);
       }
+      .field-tip {
+        margin: 0.45rem 0 0;
+        border: 1px dashed var(--accent);
+        border-radius: 8px;
+        padding: 0.45rem 0.6rem;
+        background: var(--bg);
+      }
       .sr {
         position: absolute;
         left: -9999px;
@@ -104,7 +111,11 @@
         <h2 id="theme-title">Aussehen und Lesbarkeit</h2>
         <div class="row">
           <label for="theme">Theme</label>
-          <select id="theme" aria-label="Theme auswaehlen">
+          <select
+            id="theme"
+            aria-label="Theme auswaehlen"
+            aria-describedby="theme-tip"
+          >
             <option value="light">Hell</option>
             <option value="dark">Dunkel</option>
             <option value="contrast">Kontrast+</option>
@@ -113,6 +124,10 @@
           <button id="repair">Reparatur starten</button>
           <button id="log">Protokoll oeffnen</button>
         </div>
+        <p id="theme-tip" class="field-tip">
+          Tipp: Kontrast+ hilft bei schlechter Lesbarkeit. Rueckweg: Altes Theme
+          wieder waehlen.
+        </p>
         <p id="status" aria-live="polite">
           Bereit. Naechster Schritt: Start pruefen.
         </p>
@@ -223,7 +238,7 @@
           const ok = applyTheme(themeNode.value);
           setStatus(
             ok
-              ? "Theme gesetzt. Naechster Schritt: Lesbarkeit pruefen."
+              ? `Theme ${themeNode.value} gesetzt. Naechster Schritt: Lesbarkeit pruefen.`
               : "Theme-Fehler.",
           );
         });

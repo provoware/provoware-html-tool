@@ -137,3 +137,9 @@
 - Import/Export und JSON-Logzeilen fuer Archivvorgaenge ergänzt, inklusive klarer Fehlertexte mit naechstem Schritt.
 - Risiko: niedrig, da nur neues Modul, neue Tests und kurze Hilfe-Ergaenzung betroffen sind.
 - 2026-03-01: Theme-Umschalter erhielt einen klaren Tooltip mit Rueckweg-Hinweis und Screenreader-Verknuepfung (aria-describedby) fuer bessere Laienfuehrung und A11y.
+
+## 2026-03-01 – Release-Check robuster + Mockup-Hinweis
+
+- Release-Readiness prueft jetzt zusaetzlich zentrale Hilfe-Texte (`what/data/undo`) sowie Fokus/Klickziel-Basics automatisch.
+- Mockup-Theme-Auswahl erhielt einen klaren Tipp mit Rueckweg und `aria-describedby` fuer Screenreader.
+- Risiko: niedrig, da nur Prueflogik, Test und Mockup-Hilfe erweitert wurden.

@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 27
+Iteration: 28
 
 ## Gemacht
 
@@ -71,6 +71,9 @@ Iteration: 27
 - Doku-Regel ergaenzt: README.txt wird pro Iteration verpflichtend mit aktualisiert (Status + naechster Schritt).
 
 - Theme-Umschalter mit Tooltip in einfacher Sprache erweitert (Aktion + Rueckweg) und per aria-describedby fuer Screenreader verknuepft.
+
+- Release-Readiness-Check erweitert: validiert jetzt auch 44px-Klickziele, sichtbaren Fokus und zentrale Hilfe-Triplets (`what/data/undo`) in `messages_de.json`.
+- Dashboard-Mockup beim Theme-Feld mit Tooltip + `aria-describedby` auf gleiche Laienfuehrung wie Haupt-Dashboard angehoben.
 
 ## Next Step
 

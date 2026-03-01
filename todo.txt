@@ -81,4 +81,6 @@ Laienvorschläge
 - [x] P1: Mini-Optimierung Hilfe: Paketfehler-Schritte (erneut versuchen, Protokoll oeffnen, Reparatur starten) in docs/HILFE.md ergaenzt.
 - [x] P1: Mini-Optimierung Hilfe: Iterations-Doku-Pflicht in README + AGENTS klar und einheitlich ergaenzt.
 - [x] P1: Mini-Optimierung UX: Klaren Tooltip fuer Theme-Umschalter mit Rueckweg-Hinweis planen.
-- [ ] P1: Mini-Optimierung UX: Theme-Hinweis auch im Mockup spiegeln und dort per Tastatur ansagbar machen.
+- [x] P1: Mini-Optimierung UX: Theme-Hinweis auch im Mockup gespiegelt und per Tastatur/Screenreader ansagbar gemacht.
+
+- [ ] P1: Mini-Optimierung A11y: Release-Check validiert zentrale Was/Data/Undo-Hilfetexte automatisch.
