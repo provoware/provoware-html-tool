@@ -419,3 +419,9 @@ Praktischer Einsatz:
 - Der Hilfe-Bereich hat jetzt einen zusaetzlichen Schalter, der ignorierte Kurzbegriffe im Meta-Hinweis alphabetisch sortiert.
 - Bei Breitenwechsel auf kleinen Displays kommt eine eigene Live-Ansage (Screenreader), aber nur wenn sich der Auto-Kurzmodus wirklich aendert.
 - Das Suchmodus-Badge nutzt unter 480px kurze Labels (`TW`/`GW`) fuer Platz, erklaert den Modus aber voll ueber `aria-label`.
+
+## Iteration 100 – Support-Hilfe mit weniger Rauschen
+- Drei offene Mini-Punkte abgeschlossen: klarer Sortier-Hinweis, doppelte Live-Ansage verhindert, Tooltip fuer Badge-Kurzform ergänzt.
+- Die neue Hilfsfunktion `announceLiveRegionText` meldet nur echte Textaenderungen (A11y: weniger doppelte Vorlesung).
+- Im Hilfe-Panel erklaert ein neuer Satz mit Beispiel (`"ab", "xy"`), dass die Sortierung nur ignorierte Kurzbegriffe betrifft.
+- Badge-Kurzform (`TW/GW`) zeigt jetzt ausgeschriebenen Suchmodus als Tooltip fuer Maus und Touch-Hilfe.

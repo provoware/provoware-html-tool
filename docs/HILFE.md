@@ -280,3 +280,10 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 
 - Neu im Support-Verlauf: Schalter **"Ignorierte Kurzbegriffe alphabetisch sortieren"** fuer klarere Meta-Hinweise bei Teilwortsuche.
 - Screenreader-Hilfe: Bei kleinem Fenster meldet eine eigene Live-Region den Wechsel vom Auto-Kurzmodus nur bei echtem Statuswechsel.
+
+## Update Iteration 100 – Klarere Schalterhilfe und ruhige Live-Ansage
+
+- Der Schalter **"Ignorierte Kurzbegriffe alphabetisch sortieren"** hat jetzt einen klaren Hinweis: Es werden nur ignorierte Kurzbegriffe unter 3 Zeichen sortiert (Beispiel: "ab", "xy").
+- Screenreader-Hilfe wurde ruhiger: identische Live-Texte werden nicht doppelt vorgelesen.
+- Das Suchmodus-Badge in Kurzform (`TW`/`GW`) hat nun einen Tooltip mit ausgeschriebenem Modus fuer Maus und Touch.
+- Naechster Schritt bei Unsicherheit: Filter setzen -> Enter druecken -> Hinweistext unter dem Schalter lesen.

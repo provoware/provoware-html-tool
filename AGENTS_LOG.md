@@ -184,3 +184,12 @@ PATCHSPEC-2026-03-01-099
 6) Akzeptanzkriterien: Sortier-Checkbox funktioniert und bleibt pro Projekt gespeichert; aria-live-Ansage kommt nur bei Statuswechsel; Badge zeigt unter 480px Kurztext plus volles aria-label.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` oder letzten Commit revertieren.
 2026-03-01 | PATCH-099 | Drei offene Mini-Punkte abgeschlossen: A-Z-Sortierung ignorierter Kurzbegriffe, aria-live-Wechselansage fuer Auto-Kurzmodus, Badge-Kurzform TW/GW unter 480px mit vollem aria-label | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md, AGENTS_LOG.md
+
+PATCHSPEC-2026-03-01-100
+1) Ziel: Drei offene Mini-Punkte abschliessen (Sortier-Hilfetext klarer, doppelte Live-Ansage vermeiden, Badge-Kurzform mit Tooltip erklaeren) und Hilfe-Text fuer Laien verbessern.
+2) Scope IN: templates/dashboard.html, templates/dashboard.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md.
+3) Scope OUT: Keine neuen Abhaengigkeiten, keine Datenformat-Aenderung, kein groesserer Refactor.
+4) Dateien/Marker: support-history-sort-short-toggle-help, announceLiveRegionText, support-mode-badge-tooltip.
+5) Risiko: niedrig (Text + kleine UI-Logik), reduziert durch String-Tests + Release-Gates.
+6) Akzeptanzkriterien: Sortier-Schalter erklaert klar den Scope inkl. Beispiel; Live-Region schreibt nur bei neuem Text; Badge-Kurzform zeigt Tooltip mit ausgeschriebenem Suchmodus.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` und Checks erneut.
