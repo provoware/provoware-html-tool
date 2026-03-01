@@ -65,6 +65,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     showBootDebugInSupport: true,
     supportHistoryPartialMode: false,
     supportHistoryFooterCompact: true,
+    supportHistorySortShortTokens: false,
   });
 });
 
@@ -217,4 +218,14 @@ test("normalizeLayoutState setzt Footer-Kurzmodus sicher", () => {
 
   const expanded = normalizeLayoutState({ supportHistoryFooterCompact: false });
   assert.equal(expanded.supportHistoryFooterCompact, false);
+});
+
+test("normalizeLayoutState setzt Kurzbegriff-Sortierung sicher", () => {
+  const enabled = normalizeLayoutState({ supportHistorySortShortTokens: true });
+  assert.equal(enabled.supportHistorySortShortTokens, true);
+
+  const disabled = normalizeLayoutState({
+    supportHistorySortShortTokens: "ja",
+  });
+  assert.equal(disabled.supportHistorySortShortTokens, false);
 });

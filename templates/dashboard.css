@@ -795,6 +795,21 @@ a:focus-visible {
   margin-right: 0.25rem;
 }
 
+.support-mode-badge-text {
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 479px) {
+  .support-mode-badge {
+    padding: 0.1rem 0.3rem;
+    font-size: 0.74rem;
+  }
+
+  .support-mode-badge-icon {
+    margin-right: 0.15rem;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

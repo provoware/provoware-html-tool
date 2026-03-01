@@ -136,3 +136,7 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Teilwortsuche nutzt jetzt Mindestlaenge 3; zu kurze Suchteile werden bewusst ignoriert und im Metatext klar erklaert.
 - Trefferzeilen zeigen jetzt ein Suchmodus-Badge (Ganzwort/Teilwort) mit hohem Kontrast fuer alle Themes.
 - Naechster Schritt: Ignorierte Kurz-Tokens als klare Liste im Metabereich anzeigen.
+
+## Iteration 99 – Support-Hilfe weiter verbessert
+- Drei offene Punkte abgeschlossen: optionale A-Z-Sortierung fuer ignorierte Kurzbegriffe, aria-live-Ansage bei Auto-Kurzmodus-Wechsel, Badge-Kurzform unter 480px mit vollem aria-label.
+- Naechster Schritt: Tooltip fuer Badge-Kurzform und noch klarerer Hilfetext fuer Sortier-Schalter.

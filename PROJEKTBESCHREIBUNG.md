@@ -414,3 +414,8 @@ Praktischer Einsatz:
 - Der Layoutzustand speichert jetzt zusaetzlich `supportHistoryFooterCompact`, damit der Footer-Hinweis konsistent pro Projekt bleibt.
 - Die Support-Suche nutzt eine zentrale Query-Normalisierung mit Mindestlaenge je Modus (Ganzwort: 2, Teilwort: 3).
 - Ergebnis fuer UX/A11y: Trefferzeilen zeigen den aktiven Suchmodus als Text-Badge mit Kontrast statt nur versteckter Logik.
+
+## Iteration 99 – A11y-Feinschliff Support-Verlauf
+- Der Hilfe-Bereich hat jetzt einen zusaetzlichen Schalter, der ignorierte Kurzbegriffe im Meta-Hinweis alphabetisch sortiert.
+- Bei Breitenwechsel auf kleinen Displays kommt eine eigene Live-Ansage (Screenreader), aber nur wenn sich der Auto-Kurzmodus wirklich aendert.
+- Das Suchmodus-Badge nutzt unter 480px kurze Labels (`TW`/`GW`) fuer Platz, erklaert den Modus aber voll ueber `aria-label`.
