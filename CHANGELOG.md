@@ -1,3 +1,10 @@
+## 2026-03-01 – Backup-Dialog Ende-zu-Ende Test geschlossen
+
+- Neuer Test deckt den kompletten Pfad ab: Backup-Hook-Log schreiben, Restore-Plan bauen und Wiederherstellung ausfuehren.
+- Offener TODO-Punkt zum UI-Dialog+Hook-Ende-zu-Ende-Test ist damit abgeschlossen.
+- Mini-Optimierung Hilfe/UX: Testname und Assertions geben klare naechste Schritte bei Fehlern.
+- Risiko: niedrig, da nur Testdatei und Statusdoku aktualisiert wurden.
+
 ## 2026-03-01 – Restore-Flow mit Auto-Ziel + Sicherheitsabfrage
 
 - Backup-Restore erkennt Ziel-Datei jetzt automatisch aus dem Backup-Namen (`store`/`registry`) und blockiert unpassende Kombinationen.

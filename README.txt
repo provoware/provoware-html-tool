@@ -11,7 +11,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 74 %
-- **Erledigt:** 67 Punkte
+- **Erledigt:** 68 Punkte
 - **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -401,3 +401,8 @@ Update Iteration 44:
 ## Iteration 47 Kurzstand
 - Restore-Flow erkennt Ziel-Datei jetzt automatisch aus `.backup.json` und verlangt eine Sicherheitsbestaetigung vor dem Schreiben.
 - Fehlerweg bleibt laienfreundlich mit naechstem Schritt: erneut versuchen, Reparatur starten oder Protokoll oeffnen.
+
+
+## Status – aktuelle Iteration
+- Neu: Backup-Dialog Ende-zu-Ende-Test ist automatisiert abgeschlossen (Hook-Log -> Restore-Plan -> Restore).
+- Naechster Schritt: Prompt-Sicherheitsabfrage im Dialog automatisiert pruefen.
