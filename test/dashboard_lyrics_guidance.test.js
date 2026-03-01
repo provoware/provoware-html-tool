@@ -46,3 +46,23 @@ test("Dashboard-Lesemodus bietet Fokusziel-Auswahl", () => {
   assert.match(dashboardHtml, /Taste T setzt Titel-Feld/);
   assert.match(dashboardHtml, /Taste I setzt\s+Inhaltsfeld/);
 });
+
+test("Dashboard-Songtextbereich zeigt Profil-Status-Chip", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="lyrics-random-profile-chip"/);
+  assert.match(dashboardHtml, /Aktives Profil: Standard\./);
+});
+
+test("Dashboard-Lesemodus hat Inline-Hilfe fuer Fokusziel", () => {
+  const dashboardHtml = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.html"),
+    "utf8",
+  );
+
+  assert.match(dashboardHtml, /id="lyrics-preview-focus-inline-help"/);
+  assert.match(dashboardHtml, /Fokusziel beim Oeffnen: Titel-Feld\./);
+});

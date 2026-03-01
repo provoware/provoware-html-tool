@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 71
+
+- Songtext zeigt jetzt ein sichtbares Profil-Statusfeld mit Kontrast-Rahmen und Live-Text zum aktiven Zufallsprofil.
+- Lesemodus zeigt beim Oeffnen eine kurze Inline-Hilfe zum aktuellen Fokusziel (Titel/Inhalt) mit Enter-Hinweis zur Bestaetigung.
+- Risiko: niedrig, weil nur Lyrics-UI, gebundene Quick-Store-Logik und gezielte Tests erweitert wurden.
+
 ## 2026-03-03 – Iteration 70
 
 - Songtext merkt jetzt Ihr letztes Zufallsprofil pro Projekt in `data/quick_store_lyrics_preferences.json` und laedt es beim Start automatisch.

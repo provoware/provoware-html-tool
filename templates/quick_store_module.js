@@ -395,6 +395,32 @@ Zeile 2: ...`;
       return isLyrics;
     }
 
+    function updateRandomProfileChip() {
+      if (!options.randomProfileChip) {
+        return false;
+      }
+      const labels = {
+        standard: "Standard",
+        techno: "Techno",
+        hoerspiel: "Hoerspiel",
+        chill: "Chill",
+      };
+      const selected = randomProfileSelect.value;
+      const profileLabel = labels[selected] || labels.standard;
+      options.randomProfileChip.textContent = `Aktives Profil: ${profileLabel}. Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.`;
+      return true;
+    }
+
+    function updatePreviewFocusInlineHelp() {
+      if (!options.previewFocusInlineHelp) {
+        return false;
+      }
+      const selected = previewFocusTargetSelect.value;
+      const targetLabel = selected === "content" ? "Inhaltsfeld" : "Titel-Feld";
+      options.previewFocusInlineHelp.textContent = `Fokusziel beim Oeffnen: ${targetLabel}. Naechster Schritt: Enter im Auswahlfeld bestaetigt die Wahl.`;
+      return true;
+    }
+
     async function persistLyricsPreferences() {
       const payload = buildLyricsPreferencesPayload({
         randomProfile: randomProfileSelect.value,
@@ -472,6 +498,9 @@ Zeile 2: ...`;
         randomProfileSelect.value = normalized.randomProfile;
         previewFocusTargetSelect.value = normalized.previewFocusTarget;
       }
+
+      updateRandomProfileChip();
+      updatePreviewFocusInlineHelp();
 
       const areaLoad = await loadFromAreaFiles();
       if (areaLoad.loaded) {
@@ -653,6 +682,7 @@ Zeile 2: ...`;
         );
       }
       previewFocusTargetSelect.value = nextTarget;
+      updatePreviewFocusInlineHelp();
       persistLyricsPreferences().catch((error) => {
         const details =
           error instanceof Error ? error.message : "Unbekannter Fehler";
@@ -692,8 +722,13 @@ Zeile 2: ...`;
         previewPanel.hidden = false;
         previewPanel.setAttribute("aria-hidden", "false");
         copyHelp.hidden = true;
+        updatePreviewFocusInlineHelp();
+        const selectedTarget =
+          previewFocusTargetSelect.value === "content"
+            ? "Inhaltsfeld"
+            : "Titel-Feld";
         setStatus(
-          "Lesemodus aktualisiert. Naechster Schritt: Songtext pruefen oder weiter bearbeiten.",
+          `Lesemodus aktualisiert. Fokusziel: ${selectedTarget}. Naechster Schritt: Songtext pruefen oder weiter bearbeiten.`,
         );
       } catch (error) {
         const details =
@@ -802,6 +837,7 @@ Zeile 2: ...`;
     );
     randomButton.addEventListener("click", onLyricsRandomTemplate);
     randomProfileSelect.addEventListener("change", () => {
+      updateRandomProfileChip();
       persistLyricsPreferences().catch((error) => {
         const details =
           error instanceof Error ? error.message : "Unbekannter Fehler";
@@ -812,6 +848,7 @@ Zeile 2: ...`;
       );
     });
     previewFocusTargetSelect.addEventListener("change", () => {
+      updatePreviewFocusInlineHelp();
       persistLyricsPreferences().catch((error) => {
         const details =
           error instanceof Error ? error.message : "Unbekannter Fehler";
@@ -831,6 +868,8 @@ Zeile 2: ...`;
 
     renderAreaOptions();
     renderLyricsEditor();
+    updateRandomProfileChip();
+    updatePreviewFocusInlineHelp();
     loadPersistedState();
     render();
 
