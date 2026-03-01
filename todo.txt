@@ -6,10 +6,8 @@
 - [x] Naechster Mini-Punkt: Kanban-Dialog fuer Kartenverschiebung mit Enter/Escape-Rueckweg und Statusmeldung bauen.
 # TODO – Neustart
 Datum: 2026-02-28
-
 Vorlage fuer offene Naechster Mini-Punkt-Eintraege (Pflichtfelder):
 Beispiel: Naechster Mini-Punkt: <Titel> | Code: <Aenderung> | Tests: <Testlauf/Ergebnis> | Doku: <Dateien aktualisiert> | Risiko: <niedrig/mittel/hoch + Grund> | Naechster Schritt: <klare Aktion>
-
 DONE
 - [x] Dashboard kompakter gemacht, Pseudotexte entfernt und leere Bereiche klar als freie Flächen belassen.
 - [x] Dashboard-Kurztexte zentral in `config/messages_de.json` ausgelagert.
@@ -28,7 +26,6 @@ DONE
 - [x] Entwickler-Infodatei mit Ordner-/Dateistruktur und Befehlen ergänzt.
 - [x] Entwicklerdoku in README verlinkt.
 - [x] README neu strukturiert (klare Kapitel, A11y, Start-/Debug-Flow, Laienhilfe).
-
 NEXT (Priorität)
 - [x] P1: Dashboard-Hilfe modularisiert (eigene gefuehrte Schritte + feste Hilfe-Aktionen).
 - [x] P1: Topbar um Laien-Hilfen erweitert (Naechster Schritt + Laien-Tipp).
@@ -41,9 +38,7 @@ NEXT (Priorität)
 - [ ] P1: Backup-Auswahl als UI-Dialog ergänzen.
 - [x] P1: Storage-Service robust weiter ausbauen (Schema-Validierung + Backup-Hook).
 - [x] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden.
-
 - [x] Start-Routine-Fehler mit Log-Pfad + optionalem Debug-Modus verbessert.
-
 Laienvorschläge
 1) Erst `bash start.sh` ausführen.
 2) Bei Startproblemen im Dashboard: Projektordner erneut wählen.
@@ -51,21 +46,16 @@ Laienvorschläge
 4) Für bessere Lesbarkeit Kontrast+ Theme nutzen.
 5) Bei Datenfehlern: Protokoll öffnen, dann Reparatur starten.
 6) Bei Speicherfehlern: Eingabefelder prüfen (Pflichtfelder + Datentyp) und erneut versuchen.
-
 7) Neue Module zuerst ueber "Module hinzufuegen" aktivieren, dann bei Bedarf maximieren.
-
 8) Bei Unsicherheit: erst "Naechster Schritt" klicken, dann Aktion ausfuehren.
 9) Bei Fehlern immer zuerst "Protokoll oeffnen" nutzen, dann reparieren.
 - [x] P1: Start-Routine um automatische A11y-/Kontrast-Checks je Theme erweitern.
 - [x] P1: Start-Routine mit Lockfile-Fingerprint fuer automatische Abhaengigkeits-Synchronisierung erweitern.
-
 - [x] P1: Release-Readiness-Check in Start-Routine integrieren (A11y + Theme + Hilfe-Aktionen).
 - [x] P1: Start-Routine um Datenordner-Autoanlage + Format-Check-Nachweis erweitern.
 - [x] P1: E2E-Tastaturtest fuer Dashboard (Tab/Enter/Escape) als automatischen Release-Check fuer Escape + Tastatur-Handler umgesetzt.
 - [x] P1: Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen.
-
 ## 2026-03-01 – Neue Modul-Implementierung planen
-
 - [x] P1: Genres/Moods/Stile-Archiv-Kern implementiert (CSV-Import, Duplikatpruefung, Favoriten-Sternchen, Logging).
 - [x] P1: Wiki-Modul implementieren (kategoriebezogene Wissensspeicherung).
 - [x] P1: Naechster Mini-Punkt: Wiki-Modul Grundgeruest mit Eingabepruefung (Validierung) vorbereiten.
@@ -98,22 +88,15 @@ Laienvorschläge
 - [ ] P1: Einstellungs- und Hilfebereich als eigenes Modul ausbauen (Version, Sprache, Standards, Manifeste).
 - [ ] P1: E2E-Tests fuer neue Module vorbereiten (A11y, Input/Output-Validierung, Import/Export).
 - [ ] P1: Start-Routine fuer neue Modul-Checks erweitern (auto install, format, tests, feedback).
-
-
 - [x] P1: Mini-Optimierung Hilfe: Startfehler-Hinweis in docs/HILFE.md um klaren Debug-Schritt erweitert.
-
 - [x] P1: Mini-Optimierung Hilfe: Sternchen-Hinweis fuer Favoriten im Hilfebereich der neuen Archiv-Funktion ergaenzen.
 - [x] P1: Mini-Optimierung A11y: Enter/Escape-Hinweis im Dashboard-Guide mit automatischem Check erweitern.
 - [x] P1: Mini-Optimierung Hilfe: Paketfehler-Schritte (erneut versuchen, Protokoll oeffnen, Reparatur starten) in docs/HILFE.md ergaenzt.
 - [x] P1: Mini-Optimierung Hilfe: Iterations-Doku-Pflicht in README + AGENTS klar und einheitlich ergaenzt.
 - [x] P1: Mini-Optimierung UX: Klaren Tooltip fuer Theme-Umschalter mit Rueckweg-Hinweis planen.
 - [x] P1: Mini-Optimierung UX: Theme-Hinweis auch im Mockup gespiegelt und per Tastatur/Screenreader ansagbar gemacht.
-
 - [x] P1: Mini-Optimierung A11y: Release-Check validiert zentrale Was/Data/Undo-Hilfetexte automatisch.
-
-
 ## 2026-03-01 – Neuer Pflichtplan: Referenzbild + Platzhalter
-
 - [x] P1: AGENTS.md erweitert: releasefertige Patch-Regel + Datei-/Fortschrittsstatus ueber Dateiname oder `data/file_status_index.json` klar festgelegt.
 - [x] P1: Referenzbild-Checkliste als festen Ablauf nutzen (Layout-Raster, Typografie, Farben/Kontrast, Interaktionsmuster).
 - [x] P1: Pro Referenzbild-Analyse eine Abweichungsliste (Soll/Ist) erstellen und direkt priorisieren.
@@ -122,66 +105,42 @@ Laienvorschläge
 - [ ] P1: Platzhalter-Funde im Code mit kurzer Ursache + naechstem Schritt kommentieren.
 - [ ] P1: Offene Platzhalter mit Risiko in QUESTIONS_TODO.md als Entscheidungsfrage aufnehmen.
 - [x] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
-
 - [x] P1: UI-Fix aus Layout-Manifest umsetzen: Linke/rechte Rail mit klaren Neon-Rahmen + Statusbanner final auf alle Themes angleichen (Akzeptanz: AA-Kontrast in 5 Themes, Tastaturfokus sichtbar, Screenshot aktualisiert).
-
 - [x] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
-
 - [x] P1: AGENTS-Iterationspipeline um einen zusaetzlichen Pflichtschritt "Autonomer Abschluss-Check" erweitern.
 - [x] P1: Start-Routine-Ausgabe fuer Abschluss-Check in README als Mini-Leitfaden (3 klare Schritte) ergaenzen.
-
 - [x] P1: Platzhalter an `templates/dashboard.html:40` (TODO-Marker) aufloesen oder mit klarer Ursache dokumentieren.
-
 - [x] P1: Mini-Optimierung Hilfe: Mini-Leitfaden aus README als kurzer Dashboard-Hinweis im Help-Panel spiegeln.
 - [x] P1: README-Fortschritt wird jetzt automatisch aus `todo.txt` synchronisiert (Start-Routine aktualisiert Prozent, erledigt, offen).
 - [x] P1: Platzhalter-Scan erweitert: Marker zaehlen nur noch in echten Kommentar-/Aufgabenzeilen (`TODO:` etc.).
-
 - [x] P1: Mini-Optimierung Hilfe: Help-Panel um klaren Tastaturhinweis fuer Theme-Wechsel ergaenzt.
-
 - [x] P1: Strategie-Update Iteration 36 abgeschlossen (Mini-Patch-Reihenfolge + Priorisierung B/C in allen Info-Dateien synchronisiert).
 - [x] P1: Naechster Mini-Punkt: PatchSpec fuer Plugin-Loader-Hardening (Manifestfehler + isolierter Fehlerpfad) vorbereiten.
-
 - [x] P1: Plugin-Loader-Hardening umgesetzt (duplizierte Plugin-ID blockieren + Pfad ausserhalb Projekt verhindern).
 - [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und mit Start-Routine pruefen.
-
 - [x] P1: Mini-Optimierung Hilfe: Kurzen Release-Fertig-Check fuer Einzelpunkte in README ergaenzt.
 - [x] P1: Den 5-Punkte-Release-Check als Inline-Hilfe im Backup-Dialog anzeigen.
-
 - [x] P1: Doku-Regel im Release-Readiness-Check automatisiert pruefen (README/CHANGELOG/todo).
-
 - [x] P1: Theme-Auswahl fuer Sehschwaeche erweitert (Rötlich + Camouflage) und Release-Check auf 5 Themes angehoben.
 - [x] P1: Mini-Optimierung Hilfe: Sehschwaeche-3-Punkte-Check in README und docs/HILFE ergaenzt.
 - [x] P1: Kontrast-Messung je Theme automatisiert mit Schwellenwert im Start-Check protokollieren.
 - [x] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.
-
 - [x] P1: Echte Wiederherstellung aus Backup-Dialog direkt mit Dateisystemzugriff koppeln (showDirectoryPicker + repair-Hook).
-
 - [x] P1: Restore-Flow fuer store/registry automatische Zielerkennung mit Sicherheitsabfrage erweitern.
-
 - [x] P1: Ziel-Datei-Auswahl im Backup-Dialog eingebaut (nicht nur Dateiname-Ableitung).
 - [x] P1: Nächster Mini-Punkt: Todo-Liste optional in `data/store.json` persistieren und im Start wiederherstellen.
-
 - [x] P1: Nächster Mini-Punkt: Todo-Filter (heute/offen/archiv) + Tastatur-Shortcuts ergänzen.
-
 - [x] P1: Naechster Mini-Punkt: Restore-Flow fuer store/registry automatische Zielerkennung + Sicherheitsabfrage umsetzen.
-
 - [x] P1: Naechster Mini-Punkt: Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen.
-
 - [x] P1: Naechster Mini-Punkt: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
-
 - [x] P1: Naechster Mini-Punkt: Referenzbild-Checkliste als festen Ablauf in todo/README verankern.
-
 - [x] P1: Naechster Mini-Punkt: Kanban-Schnellansicht mit echten Moduldaten verbinden.
-
 - [x] P1: Kartenverschiebung dauerhaft in `data/kanban_board.json` speichern (inkl. Schema-Check/Validierung).
 - [x] P1: Optionales Drag-and-Drop fuer Kanban als Zusatz eingebaut, Dialog bleibt Standard fuer Tastatur/A11y.
-
 - [x] P1: Option B priorisiert und abgeschlossen: Plugin-Loader minimal absichern (Manifest-Check + sicherer Pfadschutz).
 - [x] P1: Ueberfluessige Dummy-Daten bereinigt: unsafe Plugin-Manifest auf Standardfelder vereinheitlicht.
 - [x] P1: Naechster Mini-Punkt: Uebrige ueberfluessige Test-/Datenreste systematisch inventarisieren und loeschen (ohne Core-Risiko).
-
 ## 2026-03-01 – UI-Token-System und Plugin-Ready Ausbau (neu)
-
 - [x] P1: Globales UI-Design-Token-Set als zentrale Wahrheit eingefuehrt (Spacing, Radius, Font, Shadow, Button-Hoehen).
 - [x] P1: Drei-Zonen-Layout mit Splitter + Collapse + Persistenz pro Projekt umsetzen (inkl. Layout-Reset).
 - [x] P1: Workspace-Grid auf responsive Auto-Fit (1-4 Spalten) mit Plug-Slots und Positions-Persistenz erweitern.
@@ -191,44 +150,34 @@ Laienvorschläge
 - [ ] P1: Sidebar-Sektionen (Module/Favoriten/Zuletzt/System) mit Suche + Filterchips + Quick-Actions ausbauen.
 - [ ] P1: Undo/Redo + globale Toasts + permanenter Speicherstatus-Chip sichtbar machen.
 - [ ] P1: Layout-State in data/layout.json versioniert speichern und Safe-Layout-Mode (Auto-Reparatur) einbauen.
-
 - [x] Naechster Mini-Punkt: Songtext-Zufallsinhalt um Profilauswahl erweitern.
 - [x] Naechster Mini-Punkt: Lesemodus-Fokus nach Schliessen optional auf Inhaltsfeld umschaltbar machen.
-
 - [x] Naechster Mini-Punkt: Zufallsprofil-Auswahl als letzte Wahl pro Projekt merken.
 - [x] Naechster Mini-Punkt: Lesemodus-Fokusziel als Tastatur-Shortcut (T/I) umschaltbar machen.
-
 - [x] Naechster Mini-Punkt: Zufallsprofil im Songtextbereich als sichtbaren Status-Chip mit Kontrasttext anzeigen.
 - [x] Naechster Mini-Punkt: Lesemodus-Fokusziel beim Oeffnen als kurze Inline-Hilfe ankuendigen (Titel/Inhalt) und per Enter bestaetigen.
-
 - [x] Naechster Mini-Punkt: Songtext-Status-Chip um Profil-Hinweis mit letzter Nutzung (Zeitstempel) erweitern.
 - [x] Naechster Mini-Punkt: Lesemodus-Fokusziel-Auswahl mit Enter-Shortcut direkt bestaetigen und Statusmeldung verfeinern.
 - [x] Naechster Mini-Punkt: Lesemodus-Hilfe um Alt+T/Alt+I sichtbar im Statuslog ergaenzen.
 - [x] Naechster Mini-Punkt: Shortcut-Konfliktcheck fuer Browser/OS-Tasten in start.sh automatisiert melden.
-
 - [x] Naechster Mini-Punkt: Lesemodus-Statusmeldung um Hinweis auf Enter/Alt-Shortcut beim Schliessen erweitern.
 - [x] Naechster Mini-Punkt: Start-Routine gibt Shortcut-Konfliktwarnungen gesammelt im Abschlussbericht aus.
-
 - [x] Naechster Mini-Punkt: Modul-Control-Leiste Tooltips auf einheitliche Kurzform mit Rueckweg-Hinweis bringen.
 - [x] Naechster Mini-Punkt: Start-Routine-Abschlussbericht um kurze Zusammenfassung fuer A11y-Checks erweitern.
-
 - [x] Naechster Mini-Punkt: Modul-Control-Leiste um Pin-Knopf mit gleichem Tooltip-Standard erweitern.
 - [x] Naechster Mini-Punkt: Fokusmodus (100%-Ansicht) mit Layout-Snapshot/Restore testen und absichern.
-
 - [x] Naechster Mini-Punkt: Fokusmodus-Hinweise im Inspector-Tab sichtbar machen.
 - [x] Naechster Mini-Punkt: Modul-Anheften zusaetzlich in layout.json persistieren.
-
 - [x] Naechster Mini-Punkt: Rechte Sidebar als ausklappbare Favoritenleiste mit Schnellaktionen aufbauen. | Code: Sidebar-Komponente + Toggle-Hook in Dashboard-Layout verbunden | Tests: node --test (Dashboard-HTML + Shortcut-Modell) gruen | Doku: README + docs/HILFE um Sidebar-Nutzung ergaenzt | Risiko: mittel (Layout-Umbau kann Fokus-Reihenfolge verschieben) | Naechster Schritt: Favoritenaktionen mit echten Modulkontexten koppeln.
 - [x] Naechster Mini-Punkt: Modulbereich unten fuer modulspezifische Optionen reservieren und sichtbar machen. | Code: Unteren Modulbereich im Workspace als feste Region eingefuehrt | Tests: node --test (Dashboard-HTML + Workspace-Render) gruen | Doku: PROJEKTBESCHREIBUNG + README um Bereichslogik ergaenzt | Risiko: niedrig (isolierte Template-Anpassung mit bekannten Daten) | Naechster Schritt: Optionen mit Modulaktionen verbinden.
-
 - [x] Naechster Mini-Punkt: TODO-Vorlage-Check in Start-Routine strikt halten und Fehlermeldung fuer Laien verfeinern. | Code: TODO-Template-Validierung auf nicht-leere Pflichtfelder verschaerft | Tests: node --test + bash start.sh gruen | Doku: CHANGELOG + README mit Pflichtfeld-Regel aktualisiert | Risiko: niedrig (nur Validierungslogik, kein Produktivdatenpfad) | Naechster Schritt: Fehlermeldungen im Dashboard-Log zusammenfassen.
-
 - [x] P1: Mini-Optimierung Hilfe/A11y: Zufallskategorien im Songtextbereich mit klarer Rueckweg-Hilfe und speicherbarer Auswahl ergaenzt.
-
 - [x] Naechster Mini-Punkt: Favoriten-Schnellaktionen mit echten Modulbefehlen verbinden. | Code: Favoriten-Buttons in dashboard.js auf Modulzustand und Hilfe-Status angebunden | Tests: node --test (dashboard_model + module_workspace) gruen | Doku: README + docs/HILFE Ablaufhilfe aktualisiert | Risiko: mittel (Fehlbedienung bei falschem Fokus moeglich) | Naechster Schritt: Favoriten um Suche/Filter erweitern.
 - [x] Naechster Mini-Punkt: Unteren Modulbereich um kontextsensitive Optionen pro Modul erweitern. | Code: module_workspace.js um modulbezogene Aktionsdaten je Profil erweitert | Tests: node --test (module_workspace Option-Render) gruen | Doku: PROJEKTBESCHREIBUNG + README mit Beispielen pro Modul aktualisiert | Risiko: niedrig (isolierter UI-Bereich ohne Datenwrites) | Naechster Schritt: Kontextaktionen um Tastatur-Shortcuts ergaenzen.
 - [x] Naechster Mini-Punkt: Start-Routine meldet TODO-Vorlagenfehler mit direkter Zeilenhilfe. | Code: tools/start_routine.js Fehlermeldung um Zeileninhalt + Schnellhilfe erweitert | Tests: node --test (start_routine) gruen | Doku: CHANGELOG + README um neue Fehlerhilfe ergaenzt | Risiko: niedrig (nur Fehlermeldungstext) | Naechster Schritt: Zeilenhilfe zusaetzlich im Dashboard anzeigen.
-
+- [x] Naechster Mini-Punkt: Linke Sidebar auf/zu + Suche + Registry-Liste umgesetzt. | Code: templates/dashboard.html + templates/module_workspace.js + system-module/dashboard_model.js | Tests: node --test (dashboard_model + module_workspace + dashboard html) gruen | Doku: README + CHANGELOG + SELFINFO + PROJEKTBESCHREIBUNG aktualisiert | Risiko: mittel (UI-Interaktion mit bestehendem Layout) | Naechster Schritt: Suchfilter um Tags erweitern.
+- [x] Naechster Mini-Punkt: 3x3-Grid im Center mit Dashboard-Top und globalen Platzhaltern stabilisiert. | Code: templates/dashboard.html + templates/dashboard.css + templates/dashboard.js | Tests: node --test + bash start.sh gruen | Doku: README + CHANGELOG aktualisiert | Risiko: mittel (Responsive-Verhalten und Fokusreihenfolge) | Naechster Schritt: automatische viewport-basierte Compact-Dichte pruefen.
+- [x] Naechster Mini-Punkt: Footer-Notiz mit Projektdatei `.modultool/quicknote.txt` + neutralem Fallback umgesetzt. | Code: templates/dashboard.js + system-module/project_file_writer.js | Tests: node --test (project_file_writer + dashboard_model) gruen | Doku: README + CHANGELOG + PROJEKTBESCHREIBUNG aktualisiert | Risiko: niedrig (isolierter Write-Pfad mit Fallback) | Naechster Schritt: Notiz-Sync zwischen Tabs optional planen.
 - [ ] Naechster Mini-Punkt: Boot-View-Weiter-Gate mit Pflichtphasen blockieren, bis alle Checks gruen sind. | Code: templates/boot_status.js + dashboard.js Gate-Status verbinden | Tests: node --test (boot_status + dashboard_core) gruen laufen lassen | Doku: README + CHANGELOG um Gate-Ablauf ergaenzen | Risiko: mittel (Startfluss kann blockieren) | Naechster Schritt: Fehlermeldung mit Reparaturpfad im Gate anzeigen.
 - [ ] Naechster Mini-Punkt: Plugin-Loader-Safe-Mode bei Manifest-Fehlern mit Ein-Klick-Reparatur anbieten. | Code: system-core/plugin_loader.js + self_repair.js Rueckweg koppeln | Tests: node --test (plugin_loader + self_repair) gruen laufen lassen | Doku: README + docs/HILFE Safe-Mode erklaeren | Risiko: mittel (Fehlerfall-Logik) | Naechster Schritt: Safe-Mode-Status in UI-Panel einblenden.
 - [ ] Naechster Mini-Punkt: Storage-Service versionierte Writes mit current-Pointer und letzter gueltiger Wiederherstellung absichern. | Code: system-core/json_store.js Versionsdateien + Pointer-Write | Tests: node --test (json_store + backup_restore) gruen laufen lassen | Doku: PROJEKTBESCHREIBUNG + CHANGELOG mit Write-Policy aktualisieren | Risiko: hoch (Datenpfad) | Naechster Schritt: Wiederherstellungsdialog auf Versionen erweitern.

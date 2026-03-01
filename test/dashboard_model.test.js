@@ -5,6 +5,7 @@ const {
   buildQuickAccess,
   createLayoutSnapshot,
   getGridColumnCount,
+  getModuleRegistry,
   moveZone,
   normalizeLayoutState,
   reorderZones,
@@ -58,11 +59,11 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
   });
 });
 
-test("getGridColumnCount waehlt 1 bis 4 Spalten je Breite", () => {
+test("getGridColumnCount waehlt 1 bis 3 Spalten je Breite", () => {
   assert.equal(getGridColumnCount(500), 1);
   assert.equal(getGridColumnCount(700), 2);
   assert.equal(getGridColumnCount(1100), 3);
-  assert.equal(getGridColumnCount(1500), 4);
+  assert.equal(getGridColumnCount(1500), 3);
 });
 
 test("createLayoutSnapshot und applyLayoutSnapshot arbeiten mit sicheren Werten", () => {
@@ -118,4 +119,11 @@ test("resolveFavoritesAction meldet fehlendes letztes Modul", () => {
 
   assert.equal(result.handled, true);
   assert.match(result.status, /Noch kein letztes Modul/);
+});
+
+test("getModuleRegistry liefert alle implementierten Module", () => {
+  const modules = getModuleRegistry();
+  assert.equal(Array.isArray(modules), true);
+  assert.equal(modules.length >= 4, true);
+  assert.match(modules.map((entry) => entry.title).join(", "), /Support/);
 });

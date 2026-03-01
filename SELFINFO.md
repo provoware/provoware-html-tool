@@ -1,3 +1,10 @@
+## Iteration 83 – Status
+
+- Hauptziel: Dashboard mit linker/rechter Sidebar, 3x3-Modulraster und 3-Panel-Footer auf den geforderten UI-Stand gebracht.
+- Ergebnis: Modul-Suche links, zentrale Modul-Registry, Dashboard-Top mit globalen Platzhaltern und Notiz-Write-Fallback umgesetzt.
+- Mini-Optimierung: Template-Buttons rechts mit Clipboard-Fallback (setzt Text ins Notizfeld) in einfacher Sprache.
+- Nächster Schritt: A/B/C-Block aus TODO weiterfuehren, zuerst Boot-Weiter-Gate (A).
+
 ## Iteration 82 – Status
 
 - Hauptziel: Drei offene Mini-Punkte releasefertig abgeschlossen (Favoritenaktionen, Kontextoptionen, TODO-Zeilenhilfe).

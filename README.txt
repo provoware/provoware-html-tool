@@ -133,7 +133,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 88 %
-- **Erledigt:** 142 Punkte
+- **Erledigt:** 145 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -574,3 +574,12 @@ Update 2026-03-03:
 - Modulsteuerung hat jetzt einen Pin-Knopf mit klarer Rueckweg-Hilfe.
 - Doku ist kurz aktualisiert (README, CHANGELOG, todo).
 - Naechster Schritt: Inspector-Tabs fuer Fokus-/Pin-Status ausbauen.
+
+
+## Iteration 83 (Dashboard-Layout-Patch)
+- Linke Sidebar ist jetzt auf/zu klappbar, hat eine Suche und listet alle Registry-Module.
+- Klick auf Modul setzt sofort eine Kachel im 3x3-Raster (ohne Reload).
+- Dashboard-Top zeigt globale Infos (Version, Pfad, Status-Platzhalter).
+- Footer bleibt 3-teilig (Debugging/Logging/Notiz) und Notiz nutzt Projektdatei + neutralen localStorage-Fallback.
+- Rechte Sidebar hat Template-Knoepfe mit Copy-to-Clipboard und Fallback in das Notizfeld.
+- Naechster Schritt: Boot-Weiter-Gate aus TODO umsetzen (A).

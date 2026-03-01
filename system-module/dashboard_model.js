@@ -10,6 +10,41 @@ function assertText(value, name) {
   }
 }
 
+const MODULE_REGISTRY = [
+  {
+    id: "project",
+    title: "Projektmanagement",
+    what: "Plant Aufgaben und Reihenfolgen.",
+    data: "Speichert nur Modulstatus im Dashboard.",
+    undo: "Sie koennen das Modul ausblenden oder minimieren.",
+  },
+  {
+    id: "sales",
+    title: "Vertrieb & CRM",
+    what: "Zeigt Leads und Kundentermine.",
+    data: "Liest nur verknuepfte CRM-Daten.",
+    undo: "Sie koennen jederzeit auf Standardansicht zurueckgehen.",
+  },
+  {
+    id: "analytics",
+    title: "Analyse & Berichte",
+    what: "Erstellt Kennzahlen im Team-Format.",
+    data: "Greift nur auf freigegebene Berichtsdaten zu.",
+    undo: "Berichte koennen neu erzeugt werden.",
+  },
+  {
+    id: "support",
+    title: "Support",
+    what: "Bietet Ticket- und Fehleruebersicht.",
+    data: "Zeigt nur vorhandene Support-Eintraege.",
+    undo: "Blenden Sie das Modul aus, wenn es nicht noetig ist.",
+  },
+];
+
+function getModuleRegistry() {
+  return MODULE_REGISTRY.map((entry) => ({ ...entry }));
+}
+
 function reorderZones(zones, sourceIndex, targetIndex) {
   assertList(zones, "Zonen");
   if (!Number.isInteger(sourceIndex) || !Number.isInteger(targetIndex)) {
@@ -167,7 +202,7 @@ function getGridColumnCount(viewportWidth) {
     return 3;
   }
 
-  return 4;
+  return 3;
 }
 
 function resolveSidebarShortcut(eventLike, sidebarOpen) {
@@ -259,6 +294,7 @@ module.exports = {
   applyLayoutSnapshot,
   buildQuickAccess,
   createLayoutSnapshot,
+  getModuleRegistry,
   getGridColumnCount,
   resolveFavoritesAction,
   resolveSidebarShortcut,
@@ -272,6 +308,7 @@ if (typeof window !== "undefined") {
     applyLayoutSnapshot,
     buildQuickAccess,
     createLayoutSnapshot,
+    getModuleRegistry,
     getGridColumnCount,
     resolveFavoritesAction,
     resolveSidebarShortcut,

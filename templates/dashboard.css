@@ -235,6 +235,22 @@ body {
 .menu,
 .icons,
 .system-actions,
+
+.dashboard-top {
+  margin-top: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 0.55rem;
+  background: color-mix(in srgb, var(--panel-soft) 76%, transparent);
+  display: grid;
+  gap: 0.25rem;
+}
+
+.dashboard-top h3,
+.dashboard-top p {
+  margin: 0;
+}
+
 .module-toolbar,
 .module-catalog,
 .module-card-actions,
@@ -883,4 +899,16 @@ a:focus-visible {
 
 #module-options-region p {
   margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
 }

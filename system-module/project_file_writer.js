@@ -70,6 +70,20 @@
     return true;
   }
 
+  async function writeProjectTextFile(rootHandle, relativePath, textContent) {
+    assertDirectoryHandle(rootHandle);
+    parseRelativePath(relativePath);
+    const safeContent =
+      typeof textContent === "string" ? textContent : String(textContent || "");
+
+    const fileHandle = await resolveProjectFileHandle(rootHandle, relativePath);
+    const writer = await fileHandle.createWritable();
+    await writer.write(`${safeContent}
+`);
+    await writer.close();
+    return true;
+  }
+
   async function writeProjectJsonFile(rootHandle, relativePath, payload) {
     assertDirectoryHandle(rootHandle);
     parseRelativePath(relativePath);
@@ -90,6 +104,7 @@
     parseRelativePath,
     resolveProjectFileHandle,
     writeProjectJsonFile,
+    writeProjectTextFile,
     appendProjectTextFile,
   };
 

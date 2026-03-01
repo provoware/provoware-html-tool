@@ -4,6 +4,7 @@ const assert = require("node:assert/strict");
 const {
   parseRelativePath,
   writeProjectJsonFile,
+  writeProjectTextFile,
   appendProjectTextFile,
 } = require("../system-module/project_file_writer");
 
@@ -99,4 +100,37 @@ test("appendProjectTextFile haengt Zeile mit bestehendem Inhalt an", async () =>
   assert.equal(ok, true);
   assert.match(written, /10:00/);
   assert.match(written, /10:05/);
+});
+
+test("writeProjectTextFile schreibt Text mit Zeilenende", async () => {
+  let written = "";
+  const rootHandle = {
+    async getDirectoryHandle() {
+      return {
+        async getFileHandle() {
+          return {
+            async createWritable() {
+              return {
+                async write(content) {
+                  written = content;
+                },
+                async close() {
+                  return true;
+                },
+              };
+            },
+          };
+        },
+      };
+    },
+  };
+
+  const ok = await writeProjectTextFile(
+    rootHandle,
+    ".modultool/quicknote.txt",
+    "Merke: Testnotiz",
+  );
+
+  assert.equal(ok, true);
+  assert.equal(written, "Merke: Testnotiz\n");
 });

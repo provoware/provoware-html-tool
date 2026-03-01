@@ -1,3 +1,9 @@
+## 2026-03-01 – Dashboard-Layout mit Sidebar-Suche, 3x3-Grid und Notiz-Fallback
+
+- Linke Sidebar zeigt Modulsuche + Modul-Liste aus zentraler Registry und aktiviert Module ohne Reload.
+- Center nutzt Dashboard-Top (Version/Pfad/Status) und 3x3-Raster als Standard mit responsivem Verhalten.
+- Footer-Notiz speichert in `.modultool/quicknote.txt` bei vorhandener Berechtigung, sonst neutral in localStorage.
+
 ## Iteration 82 (2026-03-01)
 
 - Drei offene Mini-Punkte abgeschlossen: Favoriten-Schnellaktionen sind jetzt mit echten Modulstatus-Aktionen verbunden.
