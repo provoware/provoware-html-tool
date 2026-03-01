@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { atomicWriteJson, readJson } = require("./json_store");
+const { runSafeModeOneClickRepair } = require("./plugin_loader");
 
 function listBackups(dirPath, baseName) {
   if (typeof dirPath !== "string" || typeof baseName !== "string") {
@@ -20,6 +21,19 @@ function listBackups(dirPath, baseName) {
     .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
 }
 
+function repairPluginManifestToSafeMode(projectRoot, manifestPath) {
+  if (typeof projectRoot !== "string" || !projectRoot.trim()) {
+    throw new Error(
+      "Projektpfad fehlt. Erneut versuchen oder Protokoll oeffnen.",
+    );
+  }
+
+  return runSafeModeOneClickRepair({
+    projectRoot,
+    manifestPath,
+  });
+}
+
 function repairFromBackup(targetPath, backupPath) {
   if (!targetPath || !backupPath) {
     throw new Error("Pfad fehlt. Backup auswählen und erneut versuchen.");
@@ -32,4 +46,5 @@ function repairFromBackup(targetPath, backupPath) {
 module.exports = {
   listBackups,
   repairFromBackup,
+  repairPluginManifestToSafeMode,
 };

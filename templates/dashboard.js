@@ -30,6 +30,8 @@
   const showLaienTip = document.getElementById("show-laien-tip");
   const bootStatus = document.getElementById("boot-status");
   const bootSummary = document.getElementById("boot-summary");
+  const bootContinue = document.getElementById("boot-continue");
+  const bootGateHint = document.getElementById("boot-gate-hint");
   const kanbanPreview = document.getElementById("kanban-preview");
   const kanbanStatus = document.getElementById("kanban-status");
   const layoutRoot = document.querySelector(".layout");
@@ -621,6 +623,47 @@
     if (summaryText) {
       bootController.setSummary(state, summaryText);
     }
+    syncBootGate();
+    return true;
+  }
+  function syncBootGate() {
+    if (!bootController || !bootContinue || !bootGateHint) {
+      return false;
+    }
+
+    const open = bootController.areAllPhasesOk();
+    bootContinue.disabled = !open;
+    if (open) {
+      bootGateHint.textContent =
+        "Weiter ist frei. Naechster Schritt: Mit Weiter direkt ins Dashboard.";
+      return true;
+    }
+
+    bootGateHint.textContent =
+      "Weiter ist gesperrt. Naechster Schritt: Erst alle Phasen auf Gruen bringen.";
+    return false;
+  }
+
+  function registerBootGate() {
+    if (!bootContinue) {
+      return false;
+    }
+
+    bootContinue.addEventListener("click", () => {
+      const ready = syncBootGate();
+      if (!ready) {
+        setStatus(
+          "Start-Gate blockiert. Naechster Schritt: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
+        );
+        return;
+      }
+
+      setStatus(
+        "Start-Gate freigegeben. Naechster Schritt: Modul waehlen und weiterarbeiten.",
+      );
+      setDebug("Debug: Boot-Gate geoeffnet und freigegeben.");
+    });
+
     return true;
   }
 
@@ -1356,6 +1399,8 @@
     [focusModeRestore, "Fokusmodus-Ende-Knopf"],
     [splitterLeft, "Layout-Splitter links"],
     [splitterRight, "Layout-Splitter rechts"],
+    [bootContinue, "Boot-Weiter-Knopf"],
+    [bootGateHint, "Boot-Gate-Hinweis"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(
@@ -1374,6 +1419,8 @@
     "ok",
     "Backup-Dialog ist bereit. Naechster Schritt: Backup pruefen.",
   );
+
+  syncBootGate();
 
   loadMessages().then((ui) => {
     controlWhat.textContent = ensureMessage(
@@ -1414,6 +1461,7 @@
     );
   });
 
+  registerBootGate();
   registerKeyboardShortcuts();
   registerFavoritesActions();
   registerZoomControls();

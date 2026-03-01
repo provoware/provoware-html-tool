@@ -1,8 +1,11 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
 const path = require("node:path");
 const {
+  createSafeModeRepairPlan,
   runPluginLoaderHealthCheck,
+  runSafeModeOneClickRepair,
   resolvePluginPath,
   validatePluginManifest,
 } = require("../system-core/plugin_loader");
@@ -153,4 +156,18 @@ test("runPluginLoaderHealthCheck blockiert Pfade ausserhalb vom Projekt", () => 
     /Plugin-Pfad ist ungueltig|ausserhalb des Projekts/,
   );
   assert.match(unsafeResult.pluginResults[0].message, /Erneut versuchen/);
+});
+
+test("runSafeModeOneClickRepair schreibt Safe-Mode-Manifest", () => {
+  const tmpRoot = path.join(process.cwd(), "dummys", "tmp-plugin-safe");
+  fs.rmSync(tmpRoot, { recursive: true, force: true });
+
+  const plan = createSafeModeRepairPlan({ projectRoot: tmpRoot });
+  const result = runSafeModeOneClickRepair({ projectRoot: tmpRoot });
+  const manifest = JSON.parse(fs.readFileSync(plan.manifestPath, "utf8"));
+
+  assert.equal(result.ok, true);
+  assert.equal(manifest.mode, "safe");
+  assert.equal(Array.isArray(manifest.plugins), true);
+  assert.equal(manifest.plugins.length, 0);
 });

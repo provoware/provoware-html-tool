@@ -1,3 +1,9 @@
+## Iteration 84 – Tool-Umfang erweitert
+
+- Boot-Status hat jetzt ein Weiter-Gate: der Start bleibt gesperrt, bis alle Pflichtphasen erfolgreich sind.
+- Plugin-Loader bietet Safe-Mode-Reparatur (Notfallmodus) mit leerer Pluginliste, damit der Core wieder startet.
+- JSON-Store fuehrt current-Pointer-Dateien (`*.current.json`) fuer versionierte Daten und eine gezielte Wiederherstellung.
+
 ## Iteration 80 – Zufallskategorien im Songtext-Editor
 
 - **Tool-Umfang erweitert:** Der Songtext-Zufall kann jetzt einzelne Kategorien aktivieren/deaktivieren (Genre, Stimmung, Stil).

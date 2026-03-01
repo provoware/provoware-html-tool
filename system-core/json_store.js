@@ -171,6 +171,33 @@ function writeVersionedSnapshot(filePath, payload, options = {}) {
   };
 }
 
+function writeCurrentPointer(filePath, versionPath) {
+  assertNonEmptyString(filePath, "Dateipfad");
+  assertNonEmptyString(versionPath, "Versionspfad");
+
+  const dir = path.dirname(filePath);
+  const baseName = path.basename(filePath, ".json");
+  const pointerPath = path.join(dir, `${baseName}.current.json`);
+  const payload = {
+    current: path.basename(versionPath),
+    updatedAt: new Date().toISOString(),
+  };
+  fs.writeFileSync(
+    pointerPath,
+    `${JSON.stringify(payload, null, 2)}
+`,
+    "utf8",
+  );
+
+  if (!fs.existsSync(pointerPath)) {
+    throw new Error(
+      "Current-Pointer konnte nicht geschrieben werden. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+
+  return pointerPath;
+}
+
 function findLatestVersionPath(filePath, options = {}) {
   const plan = createVersionWritePlan(filePath, options);
   const versionDir = path.dirname(plan.versionPath);
@@ -227,6 +254,45 @@ function recoverJsonFromLatestVersion(filePath, options = {}) {
   };
 }
 
+function recoverJsonFromCurrentPointer(filePath, options = {}) {
+  assertNonEmptyString(filePath, "Dateipfad");
+  assertObject(options, "Optionen");
+
+  const dir = path.dirname(filePath);
+  const baseName = path.basename(filePath, ".json");
+  const pointerPath = path.join(dir, `${baseName}.current.json`);
+  if (!fs.existsSync(pointerPath)) {
+    return recoverJsonFromLatestVersion(filePath, options);
+  }
+
+  const pointer = readJson(pointerPath);
+  const currentName = pointer.current;
+  assertNonEmptyString(currentName, "Current-Pointer");
+
+  const versionOptions = options.versioning || {};
+  const probePlan = createVersionWritePlan(filePath, versionOptions);
+  const versionDir = path.dirname(probePlan.versionPath);
+  const sourceVersionPath = path.join(versionDir, currentName);
+
+  if (!fs.existsSync(sourceVersionPath)) {
+    return recoverJsonFromLatestVersion(filePath, options);
+  }
+
+  const payload = readJson(sourceVersionPath);
+  const writeResult = atomicWriteJson(filePath, payload, {
+    schema: options.schema || null,
+    onBackupCreated: options.onBackupCreated || null,
+    versioning: options.versioning || null,
+  });
+
+  return {
+    ok: true,
+    filePath,
+    sourceVersionPath,
+    backupPath: writeResult.backupPath,
+  };
+}
+
 function atomicWriteJson(filePath, payload, options = {}) {
   assertNonEmptyString(filePath, "Dateipfad");
   assertObject(payload, "JSON-Daten");
@@ -261,6 +327,9 @@ function atomicWriteJson(filePath, payload, options = {}) {
     versioning && versioning.enabled === true
       ? writeVersionedSnapshot(filePath, payload, versioning)
       : null;
+  const currentPointerPath = versionResult
+    ? writeCurrentPointer(filePath, versionResult.versionPath)
+    : null;
 
   const content = `${JSON.stringify(payload, null, 2)}\n`;
   fs.writeFileSync(tmpPath, content, "utf8");
@@ -275,6 +344,7 @@ function atomicWriteJson(filePath, payload, options = {}) {
     backupPath: fs.existsSync(backupPath) ? backupPath : null,
     versionPath: versionResult ? versionResult.versionPath : null,
     versionNumber: versionResult ? versionResult.versionNumber : null,
+    currentPointerPath,
   };
 
   if (typeof output.filePath !== "string") {
@@ -283,7 +353,7 @@ function atomicWriteJson(filePath, payload, options = {}) {
     );
   }
 
-  if (versionResult && !output.versionPath) {
+  if (versionResult && (!output.versionPath || !output.currentPointerPath)) {
     throw new Error(
       "Versionierung unvollstaendig. Reparatur starten oder Protokoll oeffnen.",
     );
@@ -296,5 +366,6 @@ module.exports = {
   atomicWriteJson,
   findLatestVersionPath,
   readJson,
+  recoverJsonFromCurrentPointer,
   recoverJsonFromLatestVersion,
 };

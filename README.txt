@@ -1,3 +1,9 @@
+## Iteration 84 (2026-03-01)
+- Boot-Weiter-Gate ist jetzt aktiv: Weiter ist erst frei, wenn alle vier Boot-Phasen auf Gruen stehen.
+- Plugin-Loader kann jetzt bei Manifest-Fehlern in den Safe-Mode reparieren (ein Klick, klare Rueckmeldung).
+- JSON-Store nutzt jetzt current-Pointer bei Versionierung und kann gezielt auf den letzten gueltigen Stand zurueck.
+- Naechster Schritt: Safe-Mode-Status sichtbar im UI anzeigen und Restore-Dialog um Versionsauswahl erweitern.
+
 Update Iteration 82:
 - Favoriten-Schnellaktionen steuern jetzt echte Modulkontexte (letztes Modul, aktive Module, Fokus-Hilfe).
 - Moduloptionen unten zeigen je Modul passende Aktionen mit klarem Rueckweg.
@@ -132,8 +138,8 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 88 %
-- **Erledigt:** 145 Punkte
+- **Fortschritt:** 89 %
+- **Erledigt:** 148 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
