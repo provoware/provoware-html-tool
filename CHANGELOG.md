@@ -1,4 +1,3 @@
-
 ## 2026-03-01 – AGENTS-Regel fuer Referenzbild + Platzhalter-Scan
 
 - AGENTS.md erweitert: Jede 5. Iteration muss das Vorgabe-Bild im Projektordner analysieren und UI/Layout gezielt am Beispielbild ausrichten.
@@ -151,3 +150,9 @@
 - Release-Readiness prueft jetzt zusaetzlich zentrale Hilfe-Texte (`what/data/undo`) sowie Fokus/Klickziel-Basics automatisch.
 - Mockup-Theme-Auswahl erhielt einen klaren Tipp mit Rueckweg und `aria-describedby` fuer Screenreader.
 - Risiko: niedrig, da nur Prueflogik, Test und Mockup-Hilfe erweitert wurden.
+
+## 2026-03-01 – Start-Routine mit Platzhalter-Scan
+
+- Start-Routine prueft jetzt automatisch auf offene Marker (`TODO`, `FIXME`, `PLACEHOLDER`, `DUMMY`) in Kernordnern.
+- Bei Fund stoppt der Ablauf mit klarer Meldung inkl. Datei/Zeile und naechstem Schritt (Protokoll oder Reparatur).
+- Risiko: niedrig, da nur Start-Pruefpfad und ein gezielter Unit-Test erweitert wurden.

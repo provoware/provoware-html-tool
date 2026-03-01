@@ -332,3 +332,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Statischer Hinweis ohne Dynamik (weniger hilfreich).
 **Risiko/Side-Effects:** Niedrig; nur Text und A11y-Verknuepfung betroffen.
 **Verknuepft:** PATCH-027
+
+## FIX-20260301-004: Platzhalter-Scan im Startlauf
+
+**Kategorie:** Boot/Docs
+**Symptom (fuer Laien):** Start wirkt erfolgreich, obwohl im Code noch offene TODO/FIXME-Marker stehen.
+**Technische Ursache:** Es gab keinen automatischen Suchlauf nach Platzhaltern im Standard-Startpfad.
+**Trigger:** Neue Iteration startet, aber offene Marker bleiben unbemerkt.
+**Fix (kurz):** Start-Routine scannt Kernordner auf `TODO`, `FIXME`, `PLACEHOLDER`, `DUMMY` und stoppt mit Fundstelle.
+**Geaenderte Dateien/Marker:** tools/start_routine.js, test/start_routine.test.js
+**Tests/Checks:** npm test; gezielter Unit-Test mit temp-Datei im dummys-Ordner.
+**Praevention (kuenftig):** Ab jetzt immer Platzhalter-Scan als Pflichtschritt vor Systemtest ausfuehren.
+**Alternative(n):** Optional zusaetzlich als separaten npm Script-Check nutzen.
+**Risiko/Side-Effects:** Gering; kann Start absichtlich blockieren, wenn Marker offen sind (gewollt).
+**Verknuepft:** PATCH-029

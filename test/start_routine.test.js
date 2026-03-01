@@ -10,6 +10,7 @@ const {
   getDebugMode,
   readDependencyState,
   resolveDependencySyncPlan,
+  scanPlaceholderMarkers,
   validateProjectStructure,
   writeDependencyState,
 } = require("../tools/start_routine");
@@ -162,4 +163,28 @@ test("writeDependencyState und readDependencyState arbeiten zusammen", () => {
   assert.match(state.updatedAt, /\d{4}-\d{2}-\d{2}T/);
 
   fs.rmSync(statePath, { force: true });
+});
+
+test("scanPlaceholderMarkers findet bewusst gesetzten TODO-Marker", () => {
+  const result = scanPlaceholderMarkers(process.cwd(), {
+    directories: ["dummys"],
+    markers: ["TODO"],
+  });
+
+  assert.equal(result.ok, true);
+
+  const dummyPath = path.join(process.cwd(), "dummys", "scan_marker.tmp.js");
+  fs.writeFileSync(dummyPath, "// TODO: test marker\n", "utf8");
+
+  const findingResult = scanPlaceholderMarkers(process.cwd(), {
+    directories: ["dummys"],
+    markers: ["TODO"],
+  });
+
+  assert.equal(findingResult.ok, false);
+  assert.equal(findingResult.findings.length, 1);
+  assert.equal(findingResult.findings[0].filePath, "dummys/scan_marker.tmp.js");
+  assert.equal(findingResult.findings[0].line, 1);
+
+  fs.rmSync(dummyPath, { force: true });
 });
