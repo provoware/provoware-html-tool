@@ -444,3 +444,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Externes A11y-Tool im Browser nutzen.
 **Risiko/Side-Effects:** Bei ungueltigen Farbformaten wird der Release-Check bewusst frueh abbrechen.
 **Verknuepft:** PATCH-041
+
+## FIX-20260301-001: Backup-Hook-Log fuer Dialogauswahl
+
+**Kategorie:** Backup/UI
+**Symptom (für Laien):** Im Backup-Dialog war keine echte Datei-Auswahl sichtbar.
+**Technische Ursache:** Backup-Hook lieferte Ereignisse, aber kein zentrales Event-Log für die UI.
+**Trigger:** Backup wird beim Schreiben erzeugt, danach soll der Dialog die Datei direkt anbieten.
+**Fix (kurz):** Neues Modul `backup_hook_log` speichert Backup-Ereignisse in `data/backup_events.json`; Registry-Write nutzt den Hook.
+**Geänderte Dateien/Marker:** `system-core/backup_hook_log.js`, `system-core/registry_service.js`, `templates/dashboard.html`, `templates/dashboard.js`
+**Tests/Checks:** `node --test`, `bash start.sh`, neuer Registry-Test für Backup-Hook-Log.
+**Prävention (künftig):** Ab jetzt immer Hook-Ereignisse zentral speichern, wenn UI daraus Auswahlfelder fuellt.
+**Alternative(n):** Direktes Dateisystem-Listing im Browser (aber unzuverlaessig ohne Berechtigung).
+**Risiko/Side-Effects:** Niedrig, da nur Backup-Pfad erweitert.
+**Verknüpft:** PATCH-042

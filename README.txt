@@ -6,9 +6,9 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 68 %
-- **Erledigt:** 58 Punkte
-- **Offen:** 27 Punkte
+- **Fortschritt:** 70 %
+- **Erledigt:** 60 Punkte
+- **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

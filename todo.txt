@@ -31,7 +31,7 @@ NEXT (Priorität)
 - [x] P1: AGENTS.md um Pflichtpunkt „pro Iteration Mini-Optimierung für Hilfe/UX/A11y/Kontrast" erweitert.
 - [ ] P1: Backup-Auswahl als UI-Dialog ergänzen.
 - [x] P1: Storage-Service robust weiter ausbauen (Schema-Validierung + Backup-Hook).
-- [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden.
+- [x] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden.
 
 - [x] Start-Routine-Fehler mit Log-Pfad + optionalem Debug-Modus verbessert.
 
@@ -124,4 +124,6 @@ Laienvorschläge
 - [x] P1: Theme-Auswahl fuer Sehschwaeche erweitert (Rötlich + Camouflage) und Release-Check auf 5 Themes angehoben.
 - [x] P1: Mini-Optimierung Hilfe: Sehschwaeche-3-Punkte-Check in README und docs/HILFE ergaenzt.
 - [x] P1: Kontrast-Messung je Theme automatisiert mit Schwellenwert im Start-Check protokollieren.
-- [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.
+- [x] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und Ende-zu-Ende pruefen.
+
+- [ ] P1: Echte Wiederherstellung aus Backup-Dialog direkt mit Dateisystemzugriff koppeln (showDirectoryPicker + repair-Hook).

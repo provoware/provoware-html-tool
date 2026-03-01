@@ -19,3 +19,4 @@
 
 PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | Dateien: templates/dashboard.html, templates/dashboard.css, tools/release_readiness_check.js, README.txt, docs/HILFE.md, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, PROJEKTBESCHREIBUNG.md, todo.txt, MEMORY_FIXES.md
 2026-03-01 | PATCH-041 | Release-Readiness mit automatischer Kontrastmessung (5 Themes, WCAG-AA 4.5) erweitert | tools/release_readiness_check.js, test/release_readiness_check.test.js, README.txt, docs/HILFE.md, CHANGELOG.md, SELFINFO.md, todo.txt, PROJEKTBESCHREIBUNG.md
+2026-03-01 | PATCH-042 | Backup-Hook-Log mit Backup-Dialog verbunden | system-core/backup_hook_log.js,system-core/registry_service.js,templates/dashboard.html,templates/dashboard.js,test/registry_service.test.js

@@ -156,6 +156,18 @@
                 Was macht das? Sie sehen hier den 5-Punkte-Check direkt im
                 Dialog. So sehen Sie sofort, wann ein Punkt release-fertig ist.
               </p>
+              <label class="field-label" for="backup-select"
+                >Backup-Datei</label
+              >
+              <select
+                id="backup-select"
+                aria-label="Backup-Datei waehlen"
+              ></select>
+              <p class="field-tip" id="backup-select-help">
+                Was passiert mit Daten? Die ausgewaehlte Backup-Datei wird
+                wiederhergestellt. Rueckweg: Sie koennen den Dialog mit
+                "Zurueck" oder Escape schliessen.
+              </p>
               <ol id="backup-checklist" class="backup-checklist" role="list">
                 <li>Funktion ist fertig und pruefbar.</li>
                 <li>
@@ -167,6 +179,9 @@
                 <li>Doku ist aktualisiert: README, CHANGELOG und todo.</li>
               </ol>
               <div class="help-actions" aria-label="Backup-Dialog Aktionen">
+                <button type="button" id="backup-restore">
+                  Backup wiederherstellen
+                </button>
                 <button type="button" id="backup-dialog-close">Zurueck</button>
               </div>
             </dialog>

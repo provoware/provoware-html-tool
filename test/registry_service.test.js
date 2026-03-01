@@ -114,3 +114,56 @@ test("runRegistryHealthCheckWithOptions versteckt Details ohne Debug", () => {
 
   fs.rmSync(brokenPath, { force: true });
 });
+
+test("writeRegistryWithVersion schreibt Backup-Hook-Ereignis", () => {
+  cleanTestDir();
+  const backupLogPath = path.join(dataDir, "backup_events.json");
+  const registryA = {
+    version: "1.0.0",
+    updatedAt: new Date().toISOString(),
+    entries: [
+      {
+        id: "module-help",
+        kind: "module",
+        version: "1.2.0",
+        entry: { label: "Hilfe" },
+      },
+    ],
+  };
+  const registryB = {
+    version: "1.0.1",
+    updatedAt: new Date().toISOString(),
+    entries: [
+      {
+        id: "module-help",
+        kind: "module",
+        version: "1.3.0",
+        entry: { label: "Hilfe Plus" },
+      },
+    ],
+  };
+
+  writeRegistryWithVersion({
+    dataDir,
+    manifestPath,
+    registry: registryA,
+    backupLogPath,
+  });
+
+  const result = writeRegistryWithVersion({
+    dataDir,
+    manifestPath,
+    registry: registryB,
+    backupLogPath,
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.backupLogPath, backupLogPath);
+  assert.ok(fs.existsSync(backupLogPath));
+
+  const events = JSON.parse(fs.readFileSync(backupLogPath, "utf8"));
+  assert.equal(Array.isArray(events), true);
+  assert.equal(events.length > 0, true);
+  assert.equal(events[0].filePath.endsWith("registry.json"), true);
+  assert.equal(events[0].backupPath.endsWith("registry.backup.json"), true);
+});
