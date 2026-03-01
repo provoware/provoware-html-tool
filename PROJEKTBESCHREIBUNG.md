@@ -1,3 +1,12 @@
+## Iteration 70 – Erweiterung Songtext-Workflow
+
+Der Songtext-Workflow speichert jetzt die letzte Profilwahl fuer Zufallsinhalte und das bevorzugte Fokusziel nach dem Lesemodus.
+
+### Neu hinzugefuegte Tool-Details
+- **Quick-Store-Praeferenzen:** Neue Datei `data/quick_store_lyrics_preferences.json` mit validierter Struktur (`version`, `updatedAt`, `randomProfile`, `previewFocusTarget`).
+- **Autoload beim Start:** Beim Modulstart werden gespeicherte Werte geladen und automatisch in den UI-Feldern gesetzt.
+- **Shortcut-Logik:** Taste **T** waehlt Titel-Fokus, Taste **I** waehlt Inhaltsfokus; beide Wege speichern sofort den neuen Zustand.
+
 ## Iteration 67 – Songtext-Hilfe weiter vereinfacht
 - Lesemodus-Knopf zeigt jetzt direkt den Tastaturweg **Enter/Space** fuer Kopieren.
 - Kurzguide hat jetzt 3 klare Schritte mit Speichern und Rueckweg in einfacher Sprache.

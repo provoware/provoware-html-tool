@@ -43,4 +43,6 @@ test("Dashboard-Lesemodus bietet Fokusziel-Auswahl", () => {
 
   assert.match(dashboardHtml, /id="lyrics-preview-focus-target"/);
   assert.match(dashboardHtml, /value="content">Inhaltsfeld/);
+  assert.match(dashboardHtml, /Taste T setzt Titel-Feld/);
+  assert.match(dashboardHtml, /Taste I setzt\s+Inhaltsfeld/);
 });

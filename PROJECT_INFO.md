@@ -1,3 +1,9 @@
+## Statusupdate 2026-03-03 – Iteration 70
+
+- Neuer Datenpfad: `data/quick_store_lyrics_preferences.json` speichert `randomProfile` und `previewFocusTarget` versioniert als einfache Projektpraeferenz.
+- Tastatur-Standard erweitert: Lyrics-Bereich akzeptiert jetzt T/I als direkte Fokusziel-Umschaltung fuer den Lesemodus.
+- Validierungsregel: Preferences werden vor Nutzung normalisiert (ungueltige Werte fallen auf `standard` + `title` zurueck).
+
 ## Statusupdate 2026-03-03 (Iteration 69)
 
 - Hauptziel: Songtext-Zufallsinhalt wurde um Profilfilter erweitert (Standard/Techno/Hoerspiel/Chill).

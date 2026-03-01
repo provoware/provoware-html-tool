@@ -5,6 +5,8 @@
     lyrics: "data/quick_store_lyrics.json",
     research: "data/quick_store_research.json",
   };
+  const LYRICS_PREFERENCES_PATH = "data/quick_store_lyrics_preferences.json";
+  const PREVIEW_FOCUS_TARGETS = ["title", "content"];
   const RANDOM_LYRICS_PARTS = {
     standard: {
       genres: ["Synthwave", "Indie", "Pop", "Folk"],
@@ -180,6 +182,38 @@
       );
     }
     return { key: selectedKey, ...selected };
+  }
+
+  function normalizeLyricsPreferences(payload) {
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+      return { randomProfile: "standard", previewFocusTarget: "title" };
+    }
+
+    const randomProfile =
+      typeof payload.randomProfile === "string" ? payload.randomProfile : "";
+    const focusTarget =
+      typeof payload.previewFocusTarget === "string"
+        ? payload.previewFocusTarget
+        : "";
+    const resolvedProfile = resolveRandomProfile(randomProfile).key;
+    const resolvedFocusTarget = PREVIEW_FOCUS_TARGETS.includes(focusTarget)
+      ? focusTarget
+      : "title";
+
+    return {
+      randomProfile: resolvedProfile,
+      previewFocusTarget: resolvedFocusTarget,
+    };
+  }
+
+  function buildLyricsPreferencesPayload(payload) {
+    const normalized = normalizeLyricsPreferences(payload);
+    return {
+      version: 1,
+      updatedAt: new Date().toISOString(),
+      randomProfile: normalized.randomProfile,
+      previewFocusTarget: normalized.previewFocusTarget,
+    };
   }
 
   function buildRandomLyricsSnippet(
@@ -361,6 +395,20 @@ Zeile 2: ...`;
       return isLyrics;
     }
 
+    async function persistLyricsPreferences() {
+      const payload = buildLyricsPreferencesPayload({
+        randomProfile: randomProfileSelect.value,
+        previewFocusTarget: previewFocusTargetSelect.value,
+      });
+      const ok = await saveJson(LYRICS_PREFERENCES_PATH, payload);
+      if (!ok) {
+        throw new Error(
+          "Lyrics-Einstellungen konnten nicht gespeichert werden. Erneut versuchen.",
+        );
+      }
+      return true;
+    }
+
     async function persistArea(area) {
       const state = model.exportState().state;
       const entries = Array.isArray(state.areas?.[area])
@@ -418,6 +466,13 @@ Zeile 2: ...`;
     }
 
     async function loadPersistedState() {
+      const preferences = await readJson(LYRICS_PREFERENCES_PATH);
+      if (preferences.ok) {
+        const normalized = normalizeLyricsPreferences(preferences.value);
+        randomProfileSelect.value = normalized.randomProfile;
+        previewFocusTargetSelect.value = normalized.previewFocusTarget;
+      }
+
       const areaLoad = await loadFromAreaFiles();
       if (areaLoad.loaded) {
         render();
@@ -575,6 +630,11 @@ Zeile 2: ...`;
           );
         }
         contentInput.focus();
+        persistLyricsPreferences().catch((error) => {
+          const details =
+            error instanceof Error ? error.message : "Unbekannter Fehler";
+          setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+        });
         setStatus(
           `Zufallsinhalt (${randomProfileSelect.value}) eingefuegt. Naechster Schritt: Zeilen anpassen oder Lesemodus pruefen.`,
         );
@@ -584,6 +644,21 @@ Zeile 2: ...`;
         setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
       }
       return true;
+    }
+
+    function setPreviewFocusTarget(nextTarget) {
+      if (!PREVIEW_FOCUS_TARGETS.includes(nextTarget)) {
+        throw new Error(
+          "Fokusziel ist ungueltig. Erneut versuchen oder Protokoll oeffnen.",
+        );
+      }
+      previewFocusTargetSelect.value = nextTarget;
+      persistLyricsPreferences().catch((error) => {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+      });
+      return nextTarget;
     }
 
     function onLyricsBack() {
@@ -628,7 +703,26 @@ Zeile 2: ...`;
     }
 
     function onLyricsEscape(event) {
-      if (event.key !== "Escape" || model.getActiveArea() !== "lyrics") {
+      if (model.getActiveArea() !== "lyrics") {
+        return false;
+      }
+      if (event.key === "t" || event.key === "T") {
+        event.preventDefault();
+        setPreviewFocusTarget("title");
+        setStatus(
+          "Fokusziel ist jetzt Titel-Feld. Naechster Schritt: Lesemodus pruefen oder mit I auf Inhalt wechseln.",
+        );
+        return true;
+      }
+      if (event.key === "i" || event.key === "I") {
+        event.preventDefault();
+        setPreviewFocusTarget("content");
+        setStatus(
+          "Fokusziel ist jetzt Inhaltsfeld. Naechster Schritt: Lesemodus pruefen oder mit T auf Titel wechseln.",
+        );
+        return true;
+      }
+      if (event.key !== "Escape") {
         return false;
       }
       event.preventDefault();
@@ -707,6 +801,26 @@ Zeile 2: ...`;
       ),
     );
     randomButton.addEventListener("click", onLyricsRandomTemplate);
+    randomProfileSelect.addEventListener("change", () => {
+      persistLyricsPreferences().catch((error) => {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+      });
+      setStatus(
+        `Zufallsprofil auf ${randomProfileSelect.value} gesetzt. Naechster Schritt: Zufallsinhalt einfuegen oder Profil wechseln.`,
+      );
+    });
+    previewFocusTargetSelect.addEventListener("change", () => {
+      persistLyricsPreferences().catch((error) => {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+      });
+      setStatus(
+        "Fokusziel gespeichert. Naechster Schritt: Lesemodus schliessen und Fokus pruefen.",
+      );
+    });
     previewButton.addEventListener("click", onLyricsPreview);
     lyricsBackButton.addEventListener("click", onLyricsBack);
     closePreviewButton.addEventListener("click", onClosePreview);
@@ -737,6 +851,8 @@ Zeile 2: ...`;
     normalizeAreaPayload,
     copyPreviewToClipboard,
     buildRandomLyricsSnippet,
+    buildLyricsPreferencesPayload,
+    normalizeLyricsPreferences,
     resolveRandomProfile,
   };
 

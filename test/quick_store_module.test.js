@@ -11,6 +11,8 @@ const {
   normalizeAreaPayload,
   copyPreviewToClipboard,
   buildRandomLyricsSnippet,
+  buildLyricsPreferencesPayload,
+  normalizeLyricsPreferences,
   resolveRandomProfile,
 } = require("../templates/quick_store_module");
 
@@ -133,4 +135,30 @@ test("resolveRandomProfile validiert ungueltiges Profil", () => {
 test("buildRandomLyricsSnippet nutzt Standardprofil bei leerem Profil", () => {
   const snippet = buildRandomLyricsSnippet("", () => 0);
   assert.match(snippet, /Profil: standard/);
+});
+
+test("normalizeLyricsPreferences setzt sichere Standardwerte", () => {
+  const normalized = normalizeLyricsPreferences(null);
+  assert.equal(normalized.randomProfile, "standard");
+  assert.equal(normalized.previewFocusTarget, "title");
+});
+
+test("normalizeLyricsPreferences akzeptiert gueltige Werte", () => {
+  const normalized = normalizeLyricsPreferences({
+    randomProfile: "chill",
+    previewFocusTarget: "content",
+  });
+  assert.equal(normalized.randomProfile, "chill");
+  assert.equal(normalized.previewFocusTarget, "content");
+});
+
+test("buildLyricsPreferencesPayload erzeugt valide Struktur", () => {
+  const payload = buildLyricsPreferencesPayload({
+    randomProfile: "techno",
+    previewFocusTarget: "content",
+  });
+  assert.equal(payload.version, 1);
+  assert.equal(payload.randomProfile, "techno");
+  assert.equal(payload.previewFocusTarget, "content");
+  assert.match(payload.updatedAt, /\d{4}-\d{2}-\d{2}T/);
 });

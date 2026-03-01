@@ -1,3 +1,9 @@
+## Neu: Songtext-Praeferenzen
+
+- Das letzte Zufallsprofil wird jetzt im Projekt gespeichert und beim Start wieder geladen.
+- Im Lyrics-Bereich koennen Sie mit **T** (Titel) und **I** (Inhalt) das Fokusziel fuer das Schliessen der Vorschau direkt umstellen.
+- Rueckweg: Fokusziel jederzeit wieder ueber die Auswahlliste im Lesemodus aendern.
+
 ## Neu: Schnellspeicher (kurz und klar)
 
 - Was ist neu? Im Dashboard gibt es jetzt ein Panel **Schnellspeicher**.

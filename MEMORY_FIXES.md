@@ -1,3 +1,17 @@
+## FIX-20260303-001: Lyrics-Praeferenzen sicher speichern
+
+**Kategorie:** UI/JSON
+**Symptom (fuer Laien):** Nach Neustart war Zufallsprofil oder Fokusziel wieder auf Standard.
+**Technische Ursache:** Auswahlwerte wurden nur im DOM gehalten, nicht in einer Projektdatei gespeichert.
+**Trigger:** Dashboard neu laden oder Projektordner erneut verbinden.
+**Fix (kurz):** Neue Preferences-Datei eingefuehrt, Werte normalisiert geladen und bei Aenderung sofort gespeichert.
+**Geaenderte Dateien/Marker:** templates/quick_store_module.js, data/quick_store_lyrics_preferences.json
+**Tests/Checks:** node --test (quick_store_module + dashboard_lyrics_guidance), bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer UI-Profile mit Projektbezug als eigene validierte JSON speichern.
+**Alternative(n):** Speicherung in localStorage (verworfen, da nicht projektgebunden).
+**Risiko/Side-Effects:** Niedrig, da Fallback auf sichere Standardwerte aktiv ist.
+**Verknuepft:** PATCH-070
+
 ## FIX-20260303-001: Zufallsprofil und Fokusziel abgesichert
 
 **Kategorie:** UI/A11y

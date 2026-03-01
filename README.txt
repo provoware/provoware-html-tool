@@ -1,3 +1,9 @@
+## Iteration 70 – Zwei offene Punkte abgeschlossen
+- Punkt 1 erledigt: Zufallsprofil im Songtextbereich wird jetzt pro Projekt gespeichert und beim Start wiederhergestellt.
+- Punkt 2 erledigt: Lesemodus-Fokusziel ist jetzt auch per Tastatur (T/I) umschaltbar.
+- Mini-Optimierung Hilfe/UX: Lesemodus zeigt einen kurzen T/I-Hinweis in einfacher Sprache mit Rueckweg.
+- Naechster Schritt: Sichtbaren Status-Chip fuer aktives Zufallsprofil im Lyrics-Bereich einbauen.
+
 ## Iteration 66 – Kontrast und Design-Tokens
 - Rail-Rahmen und Statusbanner sind jetzt pro Theme mit festen Token-Farben definiert und auf WCAG AA geprueft.
 - Modul-Karten nutzen zentrale Profile (`project`, `sales`, `analytics`, `support`) statt verteilter Einzelwerte.
@@ -61,7 +67,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 83 %
-- **Erledigt:** 114 Punkte
+- **Erledigt:** 116 Punkte
 - **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
