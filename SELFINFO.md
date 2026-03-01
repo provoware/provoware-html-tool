@@ -64,6 +64,10 @@ Iteration: 25
 - README zeigt jetzt oben den Fortschritt als Prozent und die Mengen erledigt/offen aus todo.txt.
 - Dashboard-Design weiter optimiert: Skip-Link fuer Tastatur, einheitliche Abstands-Tokens und mobile Vollbreite fuer Buttons.
 
+- Start-Routine erkennt jetzt veraltete Abhaengigkeiten ueber Fingerprint (package-lock/package) und installiert bei Bedarf automatisch neu.
+- Abhaengigkeits-Status wird in `data/dependency_state.json` gespeichert und bei jedem Start validiert.
+- Hilfe um klare Laien-Schritte bei Paketfehlern erweitert (erneut versuchen, Protokoll oeffnen, Reparatur starten).
+
 ## Next Step
 
 - Option A als naechstes: Boot-View stabilisieren (Phasen, Ampel, Details, Weiter-Gate).

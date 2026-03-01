@@ -48,6 +48,7 @@ Laienvorschläge
 8) Bei Unsicherheit: erst "Naechster Schritt" klicken, dann Aktion ausfuehren.
 9) Bei Fehlern immer zuerst "Protokoll oeffnen" nutzen, dann reparieren.
 - [x] P1: Start-Routine um automatische A11y-/Kontrast-Checks je Theme erweitern.
+- [x] P1: Start-Routine mit Lockfile-Fingerprint fuer automatische Abhaengigkeits-Synchronisierung erweitern.
 
 - [x] P1: Release-Readiness-Check in Start-Routine integrieren (A11y + Theme + Hilfe-Aktionen).
 - [x] P1: Start-Routine um Datenordner-Autoanlage + Format-Check-Nachweis erweitern.
@@ -77,4 +78,5 @@ Laienvorschläge
 
 - [x] P1: Mini-Optimierung Hilfe: Sternchen-Hinweis fuer Favoriten im Hilfebereich der neuen Archiv-Funktion ergaenzen.
 - [x] P1: Mini-Optimierung A11y: Enter/Escape-Hinweis im Dashboard-Guide mit automatischem Check erweitern.
-
+- [x] P1: Mini-Optimierung Hilfe: Paketfehler-Schritte (erneut versuchen, Protokoll oeffnen, Reparatur starten) in docs/HILFE.md ergaenzt.
+- [ ] P1: Mini-Optimierung UX: Klaren Tooltip fuer Theme-Umschalter mit Rueckweg-Hinweis planen.

@@ -42,6 +42,8 @@
 - **Was macht das?** `bash start.sh` erstellt fehlende Datenordner automatisch und startet danach Pruefung, Formatierung, Tests und Systemtest.
 - **Was passiert mit den Daten?** Es werden nur benoetigte Arbeitsordner erstellt (`data/`, `data/logs/`) und Logeintraege geschrieben.
 - **Wie mache ich rueckgaengig?** Ueberfluessige Logdateien koennen geloescht werden; der Code bleibt unveraendert.
+- **Abhaengigkeiten automatisch (neu):** Wenn `package-lock.json` geaendert ist, installiert die Start-Routine Pakete automatisch neu.
+- **Naechster Schritt bei Paketfehlern:** Erst erneut versuchen, dann Protokoll oeffnen (`data/logs/start_routine.log`), danach Reparatur starten.
 - **Naechster Schritt bei Fehlern:** Erst `START_DEBUG=1 bash start.sh` ausfuehren, danach `data/logs/start_routine.log` oeffnen und die erste Fehlermeldung direkt pruefen.
 
 ## Genres/Moods/Stile-Archiv (neu)

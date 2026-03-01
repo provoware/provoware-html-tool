@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-03-01 – Start-Routine mit Abhaengigkeits-Sync verstaerkt
+
+- Start-Routine erkennt jetzt automatisch veraltete Abhaengigkeiten ueber einen Fingerprint und installiert bei Bedarf neu.
+- Der Abhaengigkeits-Status wird in `data/dependency_state.json` gespeichert, damit ein reiner `node_modules`-Check keine alten Pakete durchlaesst.
+- Hilfe-Text um klaren Laien-Hinweis fuer Paketfehler und naechste Schritte erweitert.
+- Risiko: niedrig, da nur Start-Routine, zugehoerige Tests und kurze Hilfe-Doku angepasst wurden.
+
 ## 2026-03-01 – README-Fortschritt und Dashboard-Layout optimiert
 
 - README zeigt jetzt oben den Entwicklungsfortschritt in Prozent sowie die Menge offener und erledigter Punkte.
