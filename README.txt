@@ -215,6 +215,9 @@ In jeder Iteration werden diese 4 Dateien kurz gepflegt:
 3. `README.txt` (Fortschritt, offene Punkte, klare Befehle)
 4. `todo.txt` (erledigt abhaken, naechsten Mini-Punkt planen)
 
+Danach folgt Pflichtschritt 5: `bash start.sh` als autonomer Abschluss-Check.
+Nur bei gruenem Lauf gilt die Iteration als fertig.
+
 Warum? So bleiben Status, Hilfe und Einstieg immer synchron.
 
 ## Wichtige Dateien

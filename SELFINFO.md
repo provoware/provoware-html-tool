@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 29
+Iteration: 30
 
 ## Gemacht
 
@@ -76,6 +76,8 @@ Iteration: 29
 - Dashboard-Mockup beim Theme-Feld mit Tooltip + `aria-describedby` auf gleiche Laienfuehrung wie Haupt-Dashboard angehoben.
 
 - Start-Routine um automatischen Platzhalter-Scan erweitert (TODO/FIXME/PLACEHOLDER/DUMMY) mit klarer Datei-/Zeilenmeldung und naechstem Schritt.
+
+- AGENTS-Iterations-Pipeline erweitert: neuer Pflichtschritt "Autonomer Abschluss-Check" nach Doku mit `bash start.sh` als Freigabe.
 
 ## Next Step
 
