@@ -460,3 +460,9 @@ Iteration: 39
 - Hauptziel: Zwei offene Mini-Punkte abgeschlossen (Safe-Mode-Support-Verlauf + 3er-Versionsvergleich).
 - Ergebnis: Reset protokolliert jetzt Support-Events; Restore zeigt Felder/Bytes/Zeit klar und farbunabhaengig.
 - Naechster Schritt: Boot-Fokusziel als Einstellung in `data/layout.json` speichern.
+
+## Iteration 88
+
+- Hauptziel: Zerrissenes Dashboard-Layout stabilisieren und Fokusfluss nach Boot-Gate fuer A11y verbessern.
+- Ergebnis: Fokusziel ist einstellbar und persistent; Hilfe hat Support-Filter; Restore hat Detailmodus.
+- Next Step: Boot-Gate-Hinweis mit aktivem Fokusziel direkt im Text anzeigen.

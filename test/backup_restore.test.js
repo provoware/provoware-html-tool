@@ -308,3 +308,51 @@ test("compareVersionWithCurrentFromDirectory vergleicht aktuelle Datei", async (
   assert.match(result.text, /Dateigroesse/);
   assert.match(result.text, /Zeit: Aktuell/);
 });
+
+test("compareVersionWithCurrentFromDirectory liefert Detail-Schluesselliste", async () => {
+  const targetHandle =
+    createFileHandle(`{"alpha":1,"beta":2,"updatedAt":"2026-03-01"}
+`);
+  const versionHandle =
+    createFileHandle(`{"alpha":1,"gamma":3,"updatedAt":"2026-03-02"}
+`);
+
+  const directoryHandle = {
+    async getDirectoryHandle(name) {
+      if (name !== "data") {
+        throw new Error("Ungueltiger Unterordner");
+      }
+      return {
+        async getDirectoryHandle(versionName) {
+          if (versionName !== "store_versions") {
+            throw new Error("Version-Ordner fehlt");
+          }
+          return {
+            async getFileHandle(fileName) {
+              if (fileName !== "store_v0003.json") {
+                throw new Error("Version fehlt");
+              }
+              return versionHandle;
+            },
+          };
+        },
+        async getFileHandle(fileName) {
+          if (fileName !== "store.json") {
+            throw new Error("Datei fehlt");
+          }
+          return targetHandle;
+        },
+      };
+    },
+  };
+
+  const result = await compareVersionWithCurrentFromDirectory(
+    directoryHandle,
+    "store.json",
+    "store_v0003.json",
+  );
+
+  assert.equal(result.ok, true);
+  assert.match(result.detailText, /Aktuell:/);
+  assert.match(result.detailText, /Version:/);
+});

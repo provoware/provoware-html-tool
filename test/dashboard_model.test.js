@@ -13,6 +13,7 @@ const {
   reorderZones,
   resolveFavoritesAction,
   resolveSidebarShortcut,
+  resolveBootFocusTarget,
 } = require("../system-module/dashboard_model");
 
 test("buildQuickAccess kombiniert gepinnt + genutzt ohne Duplikate", () => {
@@ -58,6 +59,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     rightWidth: 340,
     leftCollapsed: true,
     rightCollapsed: false,
+    bootFocusTarget: "module",
   });
 });
 
@@ -152,4 +154,22 @@ test("buildSafeModeStatus liefert klare Safe-Mode-Texte", () => {
   assert.match(active.text, /Manifest defekt/);
   assert.equal(inactive.isSafeMode, false);
   assert.match(inactive.text, /Safe-Mode aus/);
+});
+
+test("normalizeLayoutState setzt Boot-Fokusziel sicher", () => {
+  const result = normalizeLayoutState({ bootFocusTarget: "help" });
+  assert.equal(result.bootFocusTarget, "help");
+
+  const fallback = normalizeLayoutState({ bootFocusTarget: "abc" });
+  assert.equal(fallback.bootFocusTarget, "module");
+});
+
+test("resolveBootFocusTarget liefert Fokusziel und Status", () => {
+  const helpTarget = resolveBootFocusTarget({ bootFocusTarget: "help" });
+  const moduleTarget = resolveBootFocusTarget({ bootFocusTarget: "module" });
+
+  assert.equal(helpTarget.target, "help");
+  assert.match(helpTarget.status, /Hilfe/);
+  assert.equal(moduleTarget.target, "module");
+  assert.match(moduleTarget.status, /ersten Modul/);
 });

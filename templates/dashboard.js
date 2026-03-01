@@ -32,6 +32,7 @@
   const bootSummary = document.getElementById("boot-summary");
   const bootContinue = document.getElementById("boot-continue");
   const bootGateHint = document.getElementById("boot-gate-hint");
+  const bootFocusTarget = document.getElementById("boot-focus-target");
   const safeModeStatus = document.getElementById("safe-mode-status");
   const kanbanPreview = document.getElementById("kanban-preview");
   const kanbanStatus = document.getElementById("kanban-status");
@@ -50,6 +51,11 @@
   const focusModeRestore = document.getElementById("focus-mode-restore");
   const footerDebugOutput = document.getElementById("footer-debug-output");
   const footerLogList = document.getElementById("footer-log-list");
+  const supportHistoryFilter = document.getElementById(
+    "support-history-filter",
+  );
+  const supportHistoryApply = document.getElementById("support-history-apply");
+  const supportHistoryList = document.getElementById("support-history-list");
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -85,6 +91,12 @@
   const backupVersionCompare = document.getElementById(
     "backup-version-compare",
   );
+  const backupCompareDetailWrap = document.getElementById(
+    "backup-compare-detail",
+  );
+  const backupCompareDetail = document.getElementById(
+    "backup-compare-detail-text",
+  );
   const backupRestoreVersion = document.getElementById(
     "backup-restore-version",
   );
@@ -106,6 +118,7 @@
     rightWidth: 280,
     leftCollapsed: false,
     rightCollapsed: false,
+    bootFocusTarget: "module",
   };
   let zoneModel = [
     { id: "fav", title: "⭐ Favoriten" },
@@ -283,6 +296,10 @@
       favoritesRailToggle.textContent = favoritesRailOpen
         ? "Favoritenleiste ausblenden"
         : "Favoritenleiste einblenden";
+    }
+    if (bootFocusTarget) {
+      bootFocusTarget.value =
+        layoutState.bootFocusTarget === "help" ? "help" : "module";
     }
     updateGridColumns();
     return true;
@@ -708,19 +725,26 @@
         return;
       }
 
-      setStatus(
-        "Start-Gate freigegeben. Naechster Schritt: Modul waehlen und weiterarbeiten.",
-      );
-      setDebug("Debug: Boot-Gate geoeffnet und freigegeben.");
-      const firstModule = document.querySelector(
-        "#active-modules .module-card",
-      );
-      if (firstModule instanceof HTMLElement) {
-        firstModule.focus();
-        if (helpWhat) {
-          helpWhat.textContent =
-            "Boot ist frei. Fokus ist jetzt auf dem ersten Modul.";
+      const focusTargetModel = resolveBootFocusTarget(layoutState);
+      setStatus(focusTargetModel.status);
+      setDebug("Debug: Boot-Gate geoeffnet und Fokusziel angewendet.");
+
+      if (focusTargetModel.target === "help") {
+        const helpPanel = document.getElementById("help-title");
+        if (helpPanel instanceof HTMLElement) {
+          helpPanel.focus();
         }
+      } else {
+        const firstModule = document.querySelector(
+          "#active-modules .module-card",
+        );
+        if (firstModule instanceof HTMLElement) {
+          firstModule.focus();
+        }
+      }
+
+      if (helpWhat) {
+        helpWhat.textContent = focusTargetModel.status;
       }
     });
 
@@ -1172,6 +1196,53 @@
     return backupSelect.options.length > 0;
   }
 
+  function normalizeSupportHistoryEvents(events) {
+    const safeEvents = Array.isArray(events) ? events : [];
+    return safeEvents.filter((event) => event && typeof event === "object");
+  }
+
+  function renderSupportHistory(events, filterKey) {
+    if (!supportHistoryList) {
+      return false;
+    }
+
+    supportHistoryList.innerHTML = "";
+    const safeFilter = typeof filterKey === "string" ? filterKey : "all";
+    const normalized = normalizeSupportHistoryEvents(events);
+    const filtered = normalized.filter((entry) => {
+      if (safeFilter === "safe-mode") {
+        return entry.kind === "safe-mode-reset";
+      }
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      const empty = document.createElement("li");
+      empty.textContent =
+        "Kein Verlauf fuer den Filter. Naechster Schritt: Anderen Filter waehlen oder erneut versuchen.";
+      supportHistoryList.appendChild(empty);
+      return true;
+    }
+
+    filtered.slice(0, 20).forEach((entry) => {
+      const line = document.createElement("li");
+      const when =
+        typeof entry.createdAt === "string" ? entry.createdAt : "ohne Zeit";
+      const label = typeof entry.kind === "string" ? entry.kind : "eintrag";
+      const details = typeof entry.details === "string" ? entry.details : "";
+      line.textContent = `${label} | ${when} | ${details}`;
+      supportHistoryList.appendChild(line);
+    });
+
+    return true;
+  }
+
+  async function refreshSupportHistory() {
+    const events = await loadBackupEvents();
+    const selectedFilter = supportHistoryFilter?.value || "all";
+    return renderSupportHistory(events, selectedFilter);
+  }
+
   async function loadVersionOptions() {
     if (!backupVersionSelect) {
       return false;
@@ -1238,6 +1309,9 @@
     if (!versionFileName || !targetFileName) {
       backupVersionCompare.textContent =
         "Vergleich wird nach Versionswahl angezeigt.";
+      if (backupCompareDetailWrap) {
+        backupCompareDetailWrap.hidden = true;
+      }
       return false;
     }
 
@@ -1257,10 +1331,21 @@
       backupVersionCompare.textContent =
         summary?.text ||
         "Vergleich geladen. Naechster Schritt: Version wiederherstellen oder Zurueck.";
+      if (backupCompareDetail && backupCompareDetailWrap) {
+        backupCompareDetail.textContent =
+          summary?.detailText ||
+          "Detailmodus leer. Naechster Schritt: Andere Version waehlen.";
+        backupCompareDetailWrap.hidden = false;
+      }
       return true;
     } catch (error) {
       backupVersionCompare.textContent =
         "Vergleich fehlgeschlagen. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.";
+      if (backupCompareDetail && backupCompareDetailWrap) {
+        backupCompareDetail.textContent =
+          "Detailmodus fehlt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.";
+        backupCompareDetailWrap.hidden = false;
+      }
       return false;
     }
   }
@@ -1534,6 +1619,29 @@
   if (backupVersionSelect) {
     backupVersionSelect.addEventListener("change", updateVersionCompare);
   }
+  if (supportHistoryApply) {
+    supportHistoryApply.addEventListener("click", refreshSupportHistory);
+  }
+  if (supportHistoryFilter) {
+    supportHistoryFilter.addEventListener("change", refreshSupportHistory);
+  }
+  if (bootFocusTarget) {
+    bootFocusTarget.addEventListener("change", () => {
+      const nextTarget = bootFocusTarget.value === "help" ? "help" : "module";
+      layoutState = normalizeLayoutWithModel({
+        ...layoutState,
+        bootFocusTarget: nextTarget,
+      });
+      persistLayoutState().catch(() => {
+        setStatus(
+          "Boot-Fokusziel konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+        );
+      });
+      setStatus(
+        "Boot-Fokusziel gespeichert. Naechster Schritt: Weiter klicken und Fokus pruefen.",
+      );
+    });
+  }
   if (helpSafeModeReset) {
     helpSafeModeReset.addEventListener("click", resetSafeMode);
   }
@@ -1706,6 +1814,9 @@
     [splitterRight, "Layout-Splitter rechts"],
     [bootContinue, "Boot-Weiter-Knopf"],
     [bootGateHint, "Boot-Gate-Hinweis"],
+    [bootFocusTarget, "Boot-Fokusziel-Auswahl"],
+    [supportHistoryFilter, "Support-Verlauf-Filter"],
+    [supportHistoryList, "Support-Verlauf-Liste"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(

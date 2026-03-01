@@ -554,3 +554,8 @@
 - Drei offene Punkte abgeschlossen: 1-Klick-Zufallsinhalt im Songtext-Editor, Interoperabilitaet zum Zufallsgenerator (Inhalt direkt einfuegen) und klarer Fokus-Ruecksprung auf das Titel-Feld nach Lesemodus.
 - Mini-Optimierung Hilfe/UX: Lesemodus-Hilfe nennt den Ruecksprung explizit in einfacher Sprache.
 - Risiko: niedrig, da nur Songtext-UI, Modul-Logik und gezielte Tests erweitert wurden.
+
+## 2026-03-01 – Layout robust + Fokusziel + Support-Filter
+
+- Drei offene Mini-Punkte abgeschlossen: Boot-Fokusziel-Einstellung, filterbarer Support-Verlauf und optionaler Versions-Detailmodus.
+- Dashboard-Mitte bleibt als stabiles 3x3-Quadrat, Seitenleisten bleiben getrennt als kleine Aktionsflaechen.

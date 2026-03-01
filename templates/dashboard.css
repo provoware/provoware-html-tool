@@ -176,9 +176,11 @@ body {
 }
 
 .wrap {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: var(--space-2) auto var(--space-3);
   padding: 0 var(--space-2);
+  display: grid;
+  gap: var(--space-2);
 }
 
 .skip-link {
@@ -390,6 +392,8 @@ a:focus-visible {
 .center-stage {
   min-width: 0;
   gap: var(--space-3);
+  display: grid;
+  align-content: start;
 }
 
 .layout-splitter {
@@ -746,6 +750,25 @@ a:focus-visible {
   gap: 0.35rem;
 }
 
+.boot-actions {
+  margin-top: 0.55rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+#boot-focus-target {
+  min-height: var(--btn-height-default);
+}
+
+#support-history-list {
+  max-height: 160px;
+  overflow: auto;
+}
+
+#backup-compare-detail {
+  margin: 0.35rem 0;
+}
+
 [data-state="ok"] {
   color: var(--ok);
   font-weight: 700;
@@ -834,15 +857,17 @@ a:focus-visible {
 
 .module-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(150px, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  aspect-ratio: 1 / 1;
+  min-height: min(62vh, 720px);
 }
 
 .module-slot {
-  border: 1px dashed var(--border, #6b7280);
+  border: 1px dashed var(--line);
   border-radius: 12px;
   padding: 0.5rem;
   background: color-mix(in srgb, var(--panel, #fff) 82%, #000 18%);
-  min-height: 150px;
+  min-height: 0;
 }
 
 .module-slot-label {
@@ -869,7 +894,7 @@ a:focus-visible {
 
 .footer-card {
   background: var(--panel, #fff);
-  border: 1px solid var(--border, #6b7280);
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 0.75rem;
 }

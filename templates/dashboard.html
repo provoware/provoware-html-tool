@@ -447,6 +447,14 @@
                 </li>
               </ol>
               <div class="boot-actions">
+                <label for="boot-focus-target">Boot-Fokusziel</label>
+                <select
+                  id="boot-focus-target"
+                  aria-describedby="boot-gate-hint"
+                >
+                  <option value="module">Erstes Modul</option>
+                  <option value="help">Hilfe-Panel</option>
+                </select>
                 <button type="button" id="boot-continue" disabled>
                   Weiter nur wenn alle Phasen gruen sind
                 </button>
@@ -675,7 +683,7 @@
             </div>
           </article>
           <article class="panel" aria-labelledby="help-title">
-            <h3 id="help-title">Hilfe</h3>
+            <h3 id="help-title" tabindex="-1">Hilfe</h3>
             <p id="help-what"></p>
             <p id="safe-mode-status" class="field-tip" aria-live="polite"></p>
             <div class="help-actions" aria-label="Hilfe-Aktionen">
@@ -687,6 +695,18 @@
               <button type="button" id="help-log">Protokoll öffnen</button>
               <button type="button" id="help-backup">Backup auswählen</button>
             </div>
+            <fieldset class="compact-fieldset" aria-label="Support-Verlauf">
+              <legend>Support-Verlauf</legend>
+              <label for="support-history-filter">Filter</label>
+              <select id="support-history-filter">
+                <option value="all">Alle Ereignisse</option>
+                <option value="safe-mode">Nur Safe-Mode</option>
+              </select>
+              <button type="button" id="support-history-apply">
+                Filter anwenden
+              </button>
+              <ul id="support-history-list" class="todo-list" role="list"></ul>
+            </fieldset>
             <dialog
               id="backup-dialog"
               aria-labelledby="backup-dialog-title"
@@ -743,6 +763,12 @@
               >
                 Vergleich wird nach Versionswahl angezeigt.
               </p>
+              <details id="backup-compare-detail" hidden>
+                <summary>Detailmodus (JSON-Schluesselliste)</summary>
+                <p class="field-tip" id="backup-compare-detail-text">
+                  Detailmodus leer. Naechster Schritt: Version waehlen.
+                </p>
+              </details>
               <ol id="backup-checklist" class="backup-checklist" role="list">
                 <li>Funktion ist fertig und pruefbar.</li>
                 <li>
