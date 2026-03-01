@@ -2,7 +2,9 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
-const { runRegistryHealthCheck } = require("../system-core/registry_service");
+const {
+  runRegistryHealthCheckWithOptions,
+} = require("../system-core/registry_service");
 const { runPluginLoaderHealthCheck } = require("../system-core/plugin_loader");
 
 function assertArray(value, name) {
@@ -118,12 +120,22 @@ function installDependencies() {
 }
 
 function runRegistryCheck() {
-  const result = runRegistryHealthCheck();
+  const result = runRegistryHealthCheckWithOptions({
+    debugMode: getDebugMode(),
+    manifestPath: path.join(
+      process.cwd(),
+      "config",
+      "manifests",
+      "registry.manifest.json",
+    ),
+    registryPath: path.join(process.cwd(), "data", "registry.json"),
+  });
+
   if (!result.ok) {
-    throw new Error(
-      "Registry-Check fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
-    );
+    const details = result.details ? ` Details: ${result.details}` : "";
+    throw new Error(`${result.message}${details}`);
   }
+
   console.log(`[5/8] ${result.message}`);
 }
 function runPluginLoaderCheck() {

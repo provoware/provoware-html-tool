@@ -11,3 +11,4 @@
 - Start-Routine läuft zentral über `tools/start_routine.js`.
 - Startfehler immer in data/logs/start_routine.log ablegen (Debug nutzbar mit START_DEBUG=1).
 - Plugin-Loader immer ueber `config/manifests/plugins.manifest.json` pruefen.
+- Registry-Debug nur bei START_DEBUG=1 mit Detailursachen anzeigen.
