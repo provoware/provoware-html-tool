@@ -556,3 +556,9 @@ Iteration: 39
 - Version: v0.99-support-a11y-polish
 - Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (A-Z-Sortierung, aria-live-Wechselansage, Badge-Kurzform <480px).
 - Next Step: Badge-Tooltip und Sortier-Hilfetext fuer Einsteiger weiter schrittweise verbessern.
+
+## Iteration 102
+
+- Version: v0.102-support-filter-tooltips-empty-query
+- Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Filter-Tooltips zentral, 0-Treffer-Hilfe kompakt, leere-Suche-Meta).
+- Next Step: Leere-Suche-Hinweis in Config zentralisieren und als wiederverwendbaren Text nutzen.

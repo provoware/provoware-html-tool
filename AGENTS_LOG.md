@@ -203,3 +203,14 @@ PATCHSPEC-2026-03-01-101
 6) Akzeptanzkriterien: Tooltip-Texte kommen aus config mit Fallback in JS; Teilwort-Meta zeigt Filter als Klartext; Hilfe enthaelt 3 klare Rueckwege bei 0 Treffern.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` und Checks erneut.
 2026-03-01 | PATCH-101 | Drei offene Mini-Punkte abgeschlossen: Suchmodus-Tooltip-Texte zentralisiert, Teilwort-Meta mit Filter-Klartext, 0-Treffer-Hilfeblock mit 3 Rueckwegen | config/messages_de.json, templates/dashboard.js, templates/dashboard.html, test/dashboard_lyrics_guidance.test.js, docs/HILFE.md, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, AGENTS_LOG.md
+
+PATCHSPEC-2026-03-01-102
+1) Ziel: Drei offene Mini-Punkte aus Iteration 101 abschliessen (Filter-Tooltip-Texte zentralisieren, Hilfeblock unter 480px kompakter, klare Meta-Rueckmeldung bei leerer Suche).
+2) Scope IN: config/messages_de.json, templates/dashboard.js, templates/dashboard.html, templates/dashboard.css, test/dashboard_lyrics_guidance.test.js sowie Pflicht-Doku-Dateien.
+3) Scope OUT: Keine neuen Abhaengigkeiten, kein Eingriff in Datenformate, kein grosser Refactor ausser kleine Hilfsfunktion fuer Tooltip-Text.
+4) Dateien/Marker: supportFilterTooltipBootDebug, support-history-empty-help, support-history-meta.
+5) Risiko: niedrig bis mittel (UI-Text und responsive Verhalten), reduziert durch Tests + Release-Gates.
+6) Akzeptanzkriterien: Tooltips fuer Boot-Debug/Teilwort/Footer kommen aus Config mit Fallback; Empty-Hilfe ist unter 480px kompakt und Screenreader-Reihenfolge bleibt klar; Meta meldet bei leerer Suche klar den naechsten Schritt.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` oder letzten Commit revertieren.
+
+2026-03-01 | PATCH-102 | Drei offene Mini-Punkte abgeschlossen: Filter-Tooltip-Texte zentralisiert, 0-Treffer-Hilfe unter 480px kompakter, Support-Meta mit Leer-Suche-Hinweis | config/messages_de.json, templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md, AGENTS_LOG.md

@@ -140,3 +140,10 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 ## Iteration 99 – Support-Hilfe weiter verbessert
 - Drei offene Punkte abgeschlossen: optionale A-Z-Sortierung fuer ignorierte Kurzbegriffe, aria-live-Ansage bei Auto-Kurzmodus-Wechsel, Badge-Kurzform unter 480px mit vollem aria-label.
 - Naechster Schritt: Tooltip fuer Badge-Kurzform und noch klarerer Hilfetext fuer Sortier-Schalter.
+
+
+## Iteration 102 – Support-Hilfe klarer und zentraler
+- Drei offene Mini-Punkte abgeschlossen: Filter-Tooltips (Boot-Debug/Teilwort/Footer) sind jetzt zentral in `config/messages_de.json` gepflegt und als Label-Tooltip aktiv.
+- Der Hilfeblock "Wenn nichts gefunden wird" ist unter 480px kompakter, bleibt aber in gleicher Reihenfolge fuer Screenreader lesbar.
+- Support-Meta zeigt jetzt bei leerer Suche klar: Kein Suchwort gesetzt, naechster Schritt ist Suchfeld fuellen + Enter.
+- Naechster Schritt: Leere-Suche-Hinweistext ebenfalls zentral in Config auslagern.

@@ -631,3 +631,9 @@
 - Support-Verlauf: Neuer Schalter sortiert ignorierte Kurzbegriffe optional alphabetisch (A-Z) im Meta-Hinweis.
 - A11y: Auto-Kurzmodus meldet Statuswechsel jetzt zusaetzlich per eigener aria-live-Region (`support-history-live`).
 - Responsive UX: Suchmodus-Badge kuerzt Text unter 480px auf `TW`/`GW`, behaelt aber volle aria-label-Erklaerung.
+
+## 2026-03-01 – Iteration 102
+
+- Filter-Tooltips fuer Boot-Debug, Teilwort und Footer zentral in `config/messages_de.json` hinterlegt und im Dashboard genutzt.
+- Hilfeblock fuer 0 Treffer unter 480px kompakter gemacht (gleiche A11y-Reihenfolge).
+- Support-Meta nennt bei leerer Suche den klaren naechsten Schritt.

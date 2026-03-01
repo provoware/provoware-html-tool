@@ -430,3 +430,8 @@ Praktischer Einsatz:
 - Tooltip-Texte fuer Suchmodus-Badge (`TW/GW`) liegen jetzt in `config/messages_de.json` und sind damit leichter wartbar.
 - Teilwort-Meta zeigt jetzt den aktiven Filter als Klartext, damit Einsteiger die Trefferquelle schneller verstehen.
 - Neuer Hilfeblock "Wenn nichts gefunden wird" nennt drei direkte Rueckwege: erneut versuchen, Reparatur starten, Protokoll oeffnen.
+
+## Iteration 102 – Kleine UX/A11y-Optimierung
+- Die Support-Filter im Hilfe-Panel nutzen jetzt zentrale Tooltip-Texte aus der Konfiguration.
+- Bei leerer Suche bekommt der Nutzer eine klare Rueckmeldung mit direktem naechsten Schritt.
+- Der 0-Treffer-Hilfeblock ist fuer kleine Displays platzsparender, ohne die Lesereihenfolge zu veraendern.
