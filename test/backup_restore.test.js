@@ -251,19 +251,26 @@ test("createVersionCompareSummary gibt klare Vergleichshilfe", () => {
     versionKeys: 6,
     currentBytes: 120,
     versionBytes: 140,
+    timeSummary: "Zeit: Aktuell 2026-03-01, Version 2026-03-02.",
   });
 
   assert.equal(result.ok, true);
   assert.equal(result.keyDiff, 2);
+  assert.match(result.text, /Dateigroesse/);
+  assert.match(result.text, /Zeit:/);
   assert.match(result.text, /Naechster Schritt/);
 });
 
 test("compareVersionWithCurrentFromDirectory vergleicht aktuelle Datei", async () => {
   const fileMap = {
-    "store.json": createFileHandle('{"a":1,"b":2}\n'),
+    "store.json": createFileHandle(
+      '{"a":1,"b":2,"updatedAt":"2026-03-01T10:00:00.000Z"}\n',
+    ),
   };
   const versionMap = {
-    "store_v0002.json": createFileHandle('{"a":1,"b":2,"c":3}\n'),
+    "store_v0002.json": createFileHandle(
+      '{"a":1,"b":2,"c":3,"updatedAt":"2026-03-02T10:00:00.000Z"}\n',
+    ),
   };
 
   const directoryHandle = {
@@ -297,5 +304,7 @@ test("compareVersionWithCurrentFromDirectory vergleicht aktuelle Datei", async (
 
   assert.equal(result.ok, true);
   assert.equal(result.keyDiff, 1);
-  assert.match(result.text, /Version/);
+  assert.match(result.text, /Felder/);
+  assert.match(result.text, /Dateigroesse/);
+  assert.match(result.text, /Zeit: Aktuell/);
 });

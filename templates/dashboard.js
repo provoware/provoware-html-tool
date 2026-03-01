@@ -1310,11 +1310,38 @@
       await writable.write(`${JSON.stringify(defaultManifest, null, 2)}\n`);
       await writable.close();
 
+      let supportLogSaved = false;
+      if (
+        window.SafeModeSupportLog &&
+        typeof window.SafeModeSupportLog.appendSafeModeSupportEvent ===
+          "function"
+      ) {
+        try {
+          const supportLogResult =
+            await window.SafeModeSupportLog.appendSafeModeSupportEvent(
+              selectedProjectDir,
+              "Safe-Mode-Reset",
+              "Standard-Manifest wurde neu gesetzt.",
+            );
+          supportLogSaved = supportLogResult?.ok === true;
+        } catch {
+          supportLogSaved = false;
+        }
+      }
+
       updateSafeModeStatus({ isSafeMode: false });
+      const statusSuffix = supportLogSaved
+        ? " Support-Verlauf gespeichert."
+        : " Support-Verlauf nicht gespeichert.";
       setStatus(
-        "Safe-Mode-Reset abgeschlossen. Naechster Schritt: Start erneut versuchen.",
+        `Safe-Mode-Reset abgeschlossen.${statusSuffix} Naechster Schritt: Start erneut versuchen.`,
       );
-      setDebug("Debug: Safe-Mode-Manifest auf Standard gesetzt.");
+      setDebug(
+        "Debug: Safe-Mode-Manifest auf Standard gesetzt." +
+          (supportLogSaved
+            ? " Verlauf in data/backup_events.json gespeichert."
+            : " Verlauf konnte nicht geschrieben werden."),
+      );
       return true;
     } catch (error) {
       setStatus(

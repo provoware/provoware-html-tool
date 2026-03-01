@@ -1,3 +1,9 @@
+## Iteration 87 - Support-Verlauf + 3er-Versionsvergleich
+
+- Safe-Mode-Reset schreibt jetzt einen Support-Verlaufseintrag in `data/backup_events.json` und zeigt den Speicherstatus klar an.
+- Restore-Versionsvergleich zeigt jetzt farbunabhaengig drei klare Unterschiede: Felder, Dateigroesse und Zeitstempel.
+- Mini-UX: Statusmeldungen nennen den naechsten Schritt in einfacher Sprache.
+
 ## Iteration 86 - Safe-Mode-Reset, Versionsvergleich, Boot-Fokus
 
 - Hilfe-Panel hat jetzt einen Safe-Mode-Reset-Knopf mit Sicherheitsabfrage und klarer Rueckmeldung fuer den naechsten Schritt.

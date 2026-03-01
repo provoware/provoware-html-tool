@@ -448,3 +448,9 @@ Iteration: 39
 - Zusaetzlich abgeschlossen: Interoperabilitaetspunkt im TODO und Fokus-Ruecksprung im Lesemodus.
 - Checks: `npm run format`, `node --test`, `bash start.sh`.
 - Next Step: Option A weiter in kleinen Schritten (Boot-View-Weiter-Gate + Detailanzeige).
+
+## Iteration 87
+
+- Hauptziel: Zwei offene Mini-Punkte abgeschlossen (Safe-Mode-Support-Verlauf + 3er-Versionsvergleich).
+- Ergebnis: Reset protokolliert jetzt Support-Events; Restore zeigt Felder/Bytes/Zeit klar und farbunabhaengig.
+- Naechster Schritt: Boot-Fokusziel als Einstellung in `data/layout.json` speichern.

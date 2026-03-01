@@ -230,6 +230,35 @@
     };
   }
 
+  function describeTimestampDifference(currentParsed, versionParsed) {
+    assertObject(currentParsed, "Aktuelle Daten");
+    assertObject(versionParsed, "Versions-Daten");
+
+    const currentTime =
+      typeof currentParsed.updatedAt === "string"
+        ? currentParsed.updatedAt
+        : "";
+    const versionTime =
+      typeof versionParsed.updatedAt === "string"
+        ? versionParsed.updatedAt
+        : "";
+
+    if (!currentTime && !versionTime) {
+      return "Zeit: Kein Zeitstempel vorhanden.";
+    }
+    if (!currentTime && versionTime) {
+      return `Zeit: Nur Version hat Zeitstempel (${versionTime}).`;
+    }
+    if (currentTime && !versionTime) {
+      return `Zeit: Nur aktuelle Datei hat Zeitstempel (${currentTime}).`;
+    }
+    if (currentTime === versionTime) {
+      return `Zeit: Gleich (${currentTime}).`;
+    }
+
+    return `Zeit: Aktuell ${currentTime}, Version ${versionTime}.`;
+  }
+
   function createVersionCompareSummary(compareInput) {
     assertObject(compareInput, "Versionsvergleich");
     const currentKeys = Number(compareInput.currentKeys || 0);
@@ -254,13 +283,19 @@
       keyDiff === 0 ? "gleich viele" : keyDiff > 0 ? "mehr" : "weniger";
     const byteTrend =
       byteDiff === 0 ? "gleich gross" : byteDiff > 0 ? "groesser" : "kleiner";
+    const timeSummaryRaw =
+      compareInput.timeSummary || "Zeit: Kein Zeitstempel vorhanden.";
+    assertText(timeSummaryRaw, "Zeitvergleich");
+    const timeSummary = timeSummaryRaw.trim();
 
     return {
       ok: true,
       keyDiff,
       byteDiff,
       text:
-        `Vergleich: Die gewaehlte Version hat ${Math.abs(keyDiff)} ${keyTrend} Felder und ist ${Math.abs(byteDiff)} Bytes ${byteTrend}. ` +
+        `Vergleich: Felder ${Math.abs(keyDiff)} ${keyTrend}. ` +
+        `Dateigroesse ${Math.abs(byteDiff)} Bytes ${byteTrend}. ` +
+        `${timeSummary} ` +
         "Naechster Schritt: Version wiederherstellen oder Zurueck.",
     };
   }
@@ -316,6 +351,7 @@
       versionKeys: Object.keys(versionParsed).length,
       currentBytes: currentRaw.length,
       versionBytes: versionRaw.length,
+      timeSummary: describeTimestampDifference(currentParsed, versionParsed),
     });
   }
 
