@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 18
+Iteration: 19
 
 ## Gemacht
 
@@ -42,6 +42,9 @@ Iteration: 18
 - Topbar um Naechster Schritt und Laien-Tipp erweitert.
 
 - AGENTS.md mit neuem Pflichtpunkt erweitert: pro Iteration eine Mini-Optimierung für Hilfe/Tooltip/A11y/Kontrast plus Standards für Buttons, Abstände, Themes und kleine Bildschirme.
+
+- Start-Routine um Release-Readiness-Check (A11y-Basics + 3 Themes + Hilfe-Aktionen) erweitert.
+- Neue automatische Tests fuer den Release-Readiness-Check ergänzt.
 
 ## Next Step
 

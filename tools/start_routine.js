@@ -7,6 +7,9 @@ const {
 } = require("../system-core/registry_service");
 const { runPluginLoaderHealthCheck } = require("../system-core/plugin_loader");
 const { startDashboardMainModule } = require("../system-core/dashboard_core");
+const {
+  runReleaseReadinessCheck,
+} = require("../tools/release_readiness_check");
 
 function assertArray(value, name) {
   if (!Array.isArray(value) || value.length === 0) {
@@ -104,11 +107,11 @@ function validateProjectStructure(requiredPaths) {
 
 function installDependencies() {
   if (fs.existsSync("node_modules")) {
-    console.log("[2/9] Abhaengigkeiten vorhanden");
+    console.log("[2/10] Abhaengigkeiten vorhanden");
     return { ok: true };
   }
 
-  console.log("[2/9] Abhaengigkeiten fehlen. Installation startet");
+  console.log("[2/10] Abhaengigkeiten fehlen. Installation startet");
   const install = runCommand("npm", ["install"]);
 
   if (!install.ok) {
@@ -137,7 +140,7 @@ function runRegistryCheck() {
     throw new Error(`${result.message}${details}`);
   }
 
-  console.log(`[5/9] ${result.message}`);
+  console.log(`[5/10] ${result.message}`);
 }
 function runPluginLoaderCheck() {
   const result = runPluginLoaderHealthCheck({
@@ -156,18 +159,18 @@ function runPluginLoaderCheck() {
     );
   }
 
-  console.log(`[6/9] ${result.message}`);
+  console.log(`[6/10] ${result.message}`);
 }
 
 function runDashboardAutoStart() {
   const result = startDashboardMainModule({
     dashboardPath: path.join(process.cwd(), "templates", "dashboard.html"),
   });
-  console.log(`[8/9] ${result.message}`);
+  console.log(`[9/10] ${result.message}`);
 }
 
 function runStartRoutine() {
-  console.log("[1/9] Projektstruktur pruefen");
+  console.log("[1/10] Projektstruktur pruefen");
   const structure = validateProjectStructure([
     "package.json",
     "config/messages_de.json",
@@ -189,6 +192,8 @@ function runStartRoutine() {
     "test/dashboard_model.test.js",
     "test/dashboard_core.test.js",
     "test/plugin_loader.test.js",
+    "tools/release_readiness_check.js",
+    "test/release_readiness_check.test.js",
   ]);
 
   if (!structure.ok) {
@@ -199,7 +204,7 @@ function runStartRoutine() {
 
   installDependencies();
 
-  console.log("[3/9] Code formatieren");
+  console.log("[3/10] Code formatieren");
   const format = runCommand("npm", ["run", "format"]);
   if (!format.ok) {
     throw new Error(
@@ -207,7 +212,7 @@ function runStartRoutine() {
     );
   }
 
-  console.log("[4/9] Unit-Tests ausfuehren");
+  console.log("[4/10] Unit-Tests ausfuehren");
   const tests = runCommand("npm", ["test"]);
   if (!tests.ok) {
     throw new Error(
@@ -218,7 +223,16 @@ function runStartRoutine() {
   runRegistryCheck();
   runPluginLoaderCheck();
 
-  console.log("[7/9] Systemtest ausfuehren");
+  console.log("[7/10] Release-Readiness pruefen");
+  const release = runReleaseReadinessCheck({ rootPath: process.cwd() });
+  if (!release.ok) {
+    throw new Error(
+      "Release-Readiness fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
+    );
+  }
+  console.log(`[7/10] ${release.message}`);
+
+  console.log("[8/10] Systemtest ausfuehren");
   const systemTest = runCommand("npm", ["run", "system:test"]);
   if (!systemTest.ok) {
     throw new Error(
@@ -228,7 +242,7 @@ function runStartRoutine() {
 
   runDashboardAutoStart();
 
-  console.log("[9/9] Fertig");
+  console.log("[10/10] Fertig");
   console.log(
     "Geprueft und geloest. Naechster Schritt: Hilfe in docs/HILFE.md oeffnen.",
   );

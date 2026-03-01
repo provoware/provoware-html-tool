@@ -52,6 +52,17 @@ test("Plugin-Loader-Dateien sind als Pflichtpfade vorhanden", () => {
   assert.equal(result.ok, true);
   assert.equal(result.missing.length, 0);
 });
+
+test("Release-Readiness-Dateien sind als Pflichtpfade vorhanden", () => {
+  const result = validateProjectStructure([
+    "tools/release_readiness_check.js",
+    "test/release_readiness_check.test.js",
+  ]);
+
+  assert.equal(result.ok, true);
+  assert.equal(result.missing.length, 0);
+});
+
 test("getDebugMode ist false ohne Umgebungswert", () => {
   const previousValue = process.env.START_DEBUG;
   delete process.env.START_DEBUG;
