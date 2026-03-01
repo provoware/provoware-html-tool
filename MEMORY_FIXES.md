@@ -220,3 +220,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Tooltips statt Hilfebereich (abgelehnt, zu versteckt).
 **Risiko/Side-Effects:** Mehr sichtbare Hilfetexte im Dashboard.
 **Verknuepft:** Patch-ID local-014
+
+## FIX-20260301-009: Release-Readiness-Guard-vor-Systemtest
+
+**Kategorie:** UI/A11y/Update
+**Symptom (für Laien):** Start lief weiter, obwohl wichtige Hilfe- oder Theme-Bausteine fehlen konnten.
+**Technische Ursache:** Es gab keinen festen Vorab-Check für A11y-/Theme-Mindestregeln.
+**Trigger:** Änderungen an Dashboard-HTML/CSS oder Texten ohne direkten Warnschritt.
+**Fix (kurz):** Neuer Release-Readiness-Check prüft aria-live, Hilfe-Aktionen und 3 Themes vor dem Systemtest.
+**Geänderte Dateien/Marker:** tools/release_readiness_check.js, tools/start_routine.js, test/release_readiness_check.test.js, todo.txt
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer vor Systemtest Release-Readiness mit klaren Mindestregeln ausführen.
+**Alternative(n):** Nur manuelle Sichtprüfung (abgelehnt, zu fehleranfällig).
+**Risiko/Side-Effects:** Bei fehlenden Pflichtbausteinen bricht Start früher ab (gewollt).
+**Verknüpft:** Patch-ID local-015

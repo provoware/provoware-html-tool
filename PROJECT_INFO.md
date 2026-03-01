@@ -15,3 +15,4 @@
 - JSON-Store validiert Pflichtfelder und Typen vor jedem Schreiben (Schema-Check).
 - JSON-Store bietet `onBackupCreated` als Backup-Hook fuer Folgeaktionen.
 - Start-Routine versucht am Ende immer den Dashboard-Autostart (bei Headless mit Hinweis statt Abbruch).
+- Vor dem Systemtest immer Release-Readiness pruefen (A11y-Basis + 3 Themes + Hilfe-Aktionen).

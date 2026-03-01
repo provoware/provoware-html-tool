@@ -47,4 +47,8 @@ Laienvorschläge
 
 8) Bei Unsicherheit: erst "Naechster Schritt" klicken, dann Aktion ausfuehren.
 9) Bei Fehlern immer zuerst "Protokoll oeffnen" nutzen, dann reparieren.
-- [ ] P1: Start-Routine um automatische A11y-/Kontrast-Checks je Theme erweitern.
+- [x] P1: Start-Routine um automatische A11y-/Kontrast-Checks je Theme erweitern.
+
+- [x] P1: Release-Readiness-Check in Start-Routine integrieren (A11y + Theme + Hilfe-Aktionen).
+- [ ] P1: E2E-Tastaturtest fuer Dashboard (Tab/Enter/Escape) automatisieren.
+- [ ] P1: Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen.
