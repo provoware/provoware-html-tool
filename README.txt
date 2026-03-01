@@ -78,3 +78,10 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Boot-Fokusziel ist waehlbar (erstes Modul oder Hilfe-Panel) und wird in `data/layout.json` gespeichert.
 - Hilfe-Panel zeigt jetzt filterbaren Support-Verlauf (alle / nur Safe-Mode) und der Versionsvergleich hat einen optionalen Detailmodus.
 - Naechster Schritt: Fokusziel-Hinweis im Boot-Gate dynamisch spiegeln.
+
+
+## Iteration 89 – Notiz-Startmodul und Sidebar-Links
+- Linke Sidebar zeigt Bereiche jetzt als klare Button-Links statt grosser Kacheln.
+- Das Dashboard startet mit genau einem Modul: **Notizen** in der Mitte (3x3-Raster bleibt als Hauptflaeche).
+- Linke und rechte Zeitbar sind als ein-/aufklappbare Bereiche benannt, damit die Bedienung klar bleibt.
+- Naechster Schritt: Boot-Gate-Hinweis auf aktives Fokusziel erweitern.

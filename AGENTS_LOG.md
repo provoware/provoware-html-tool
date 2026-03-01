@@ -83,3 +83,13 @@ PATCHSPEC-2026-03-01-088
 - 2026-03-03 | Patch-ID: iter-87 | Ziel: Safe-Mode-Verlauf + 3er-Versionsvergleich | Dateien: system-module/safe_mode_support_log.js, templates/dashboard.js, templates/backup_restore.js, test/safe_mode_support_log.test.js, test/backup_restore.test.js, Doku-Updates
 
 2026-03-01 | PATCH-088 | Drei offene Mini-Punkte abgeschlossen: Boot-Fokusziel-Einstellung + Support-Verlauf-Filter + Versionsvergleich-Detailmodus, inkl. robustem Layout-Feinschliff | templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, templates/backup_restore.js, system-module/dashboard_model.js, test/dashboard_model.test.js, test/backup_restore.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md
+
+PATCHSPEC-2026-03-01-089
+1) Ziel: Sidebar auf Button-Links umstellen, Startzustand mit nur Notiz-Modul setzen und mittiges 3x3-Raster mit klappbaren Zeitleisten sauber rahmen.
+2) Scope IN: templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, system-module/dashboard_model.js, templates/module_workspace.js, relevante Tests und Pflicht-Doku.
+3) Scope OUT: Keine neuen externen Abhaengigkeiten, keine Aenderung am Backup-Datenformat.
+4) Dateien/Marker: sidebar-links, left-timebar, right-timebar, auto-start-note-module, module-grid-frame.
+5) Risiko: mittel (Layout + Startzustand), reduziert durch Unit-Tests und Release-Gates.
+6) Akzeptanzkriterien: Linke Sidebar zeigt nur Button-Links, Dashboard startet mit genau einem Notiz-Modul, 3x3-Raster bleibt mittig mit Liedbereich/Footer und beide Zeitleisten sind ein-/aufklappbar.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzten Commit per git revert zuruecknehmen.
+2026-03-03 | PATCH-089 | Sidebar als Button-Links, Notizmodul-Autostart, linke/rechte Zeitbar klar klappbar benannt | templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, templates/module_workspace.js, system-module/dashboard_model.js, test/dashboard_model.test.js, Doku-Updates

@@ -135,6 +135,23 @@
     return `${shortText}. ${source.undo}`;
   }
 
+  function normalizeDefaultModuleIds(input) {
+    if (!Array.isArray(input)) {
+      return [];
+    }
+    const seen = new Set();
+    return input
+      .filter((entry) => typeof entry === "string" && entry.trim() !== "")
+      .map((entry) => entry.trim())
+      .filter((entry) => {
+        if (seen.has(entry)) {
+          return false;
+        }
+        seen.add(entry);
+        return true;
+      });
+  }
+
   function buildWorkspace(options) {
     const catalog = options.catalog;
     const grid = options.grid;
@@ -156,6 +173,9 @@
       typeof options.initialModuleState === "object"
         ? options.initialModuleState
         : {};
+    const defaultModuleIds = normalizeDefaultModuleIds(
+      options.defaultModuleIds,
+    );
 
     assertNode(catalog, "Modulkatalog");
     assertNode(grid, "Modulflaeche");
@@ -508,6 +528,11 @@
     }
 
     renderCatalog();
+    defaultModuleIds.forEach((moduleId) => {
+      if (getModuleCatalog().some((entry) => entry.id === moduleId)) {
+        addModule(moduleId);
+      }
+    });
     renderActiveModules();
     clearModuleOptions();
 

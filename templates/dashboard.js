@@ -137,6 +137,8 @@
     dashboardModel.createLayoutSnapshot || createLayoutSnapshotLocal;
   const applyLayoutSnapshot =
     dashboardModel.applyLayoutSnapshot || applyLayoutSnapshotLocal;
+  const getDefaultModuleStart =
+    dashboardModel.getDefaultModuleStart || (() => ["notes"]);
   const resolveSidebarShortcut =
     dashboardModel.resolveSidebarShortcut ||
     ((eventLike, isOpen) => ({
@@ -281,11 +283,11 @@
     splitterRight.hidden = layoutState.rightCollapsed;
 
     leftRailToggle.textContent = layoutState.leftCollapsed
-      ? "Navigation einblenden"
-      : "Navigation ausblenden";
+      ? "Zeitbar links aufklappen"
+      : "Zeitbar links einklappen";
     rightRailToggle.textContent = layoutState.rightCollapsed
-      ? "Einstellungen einblenden"
-      : "Einstellungen ausblenden";
+      ? "Zeitbar rechts aufklappen"
+      : "Zeitbar rechts einklappen";
 
     layoutRoot.dataset.leftCollapsed = String(layoutState.leftCollapsed);
     layoutRoot.dataset.rightCollapsed = String(layoutState.rightCollapsed);
@@ -407,7 +409,9 @@
       persistLayoutState().catch(() => {
         setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
       });
-      setStatus("Navigation angepasst. Naechster Schritt: Layout pruefen.");
+      setStatus(
+        "Zeitbar links umgeschaltet. Naechster Schritt: Layout pruefen.",
+      );
     });
 
     rightRailToggle.addEventListener("click", () => {
@@ -419,7 +423,9 @@
       persistLayoutState().catch(() => {
         setStatus("Layout konnte nicht gespeichert werden. Protokoll oeffnen.");
       });
-      setStatus("Einstellungen angepasst. Naechster Schritt: Layout pruefen.");
+      setStatus(
+        "Zeitbar rechts umgeschaltet. Naechster Schritt: Layout pruefen.",
+      );
     });
 
     favoritesRailToggle?.addEventListener("click", () => {
@@ -1770,6 +1776,7 @@
     searchInput: moduleSearch,
     slotCount: 9,
     initialModuleState: moduleLayoutState,
+    defaultModuleIds: getDefaultModuleStart(),
     setStatus,
     moduleOptionsRoot: document.getElementById("module-options-region"),
     moduleOptionsHelp: document.getElementById("module-options-help"),

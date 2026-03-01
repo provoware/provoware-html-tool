@@ -937,3 +937,43 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+
+.timebar {
+  position: relative;
+}
+
+.timebar::before {
+  content: "Zeitbar";
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.sidebar-links {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sidebar-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--btn-height-default);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.sidebar-links a:hover {
+  border-color: var(--accent);
+}
+
+#active-modules {
+  margin-left: auto;
+  margin-right: auto;
+  width: min(100%, 980px);
+  border-width: 2px;
+}

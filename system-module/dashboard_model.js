@@ -12,6 +12,13 @@ function assertText(value, name) {
 
 const MODULE_REGISTRY = [
   {
+    id: "notes",
+    title: "Notizen",
+    what: "Sammelt kurze Ideen direkt im Hauptbereich.",
+    data: "Speichert nur den sichtbaren Notizstatus im Layout.",
+    undo: "Sie koennen das Modul ausblenden oder erneut aktivieren.",
+  },
+  {
     id: "project",
     title: "Projektmanagement",
     what: "Plant Aufgaben und Reihenfolgen.",
@@ -43,6 +50,10 @@ const MODULE_REGISTRY = [
 
 function getModuleRegistry() {
   return MODULE_REGISTRY.map((entry) => ({ ...entry }));
+}
+
+function getDefaultModuleStart() {
+  return ["notes"];
 }
 
 function reorderZones(zones, sourceIndex, targetIndex) {
@@ -363,6 +374,7 @@ module.exports = {
   buildQuickAccess,
   createLayoutSnapshot,
   getModuleRegistry,
+  getDefaultModuleStart,
   getGridColumnCount,
   resolveFavoritesAction,
   buildBootGateHint,
@@ -380,6 +392,7 @@ if (typeof window !== "undefined") {
     buildQuickAccess,
     createLayoutSnapshot,
     getModuleRegistry,
+    getDefaultModuleStart,
     getGridColumnCount,
     resolveFavoritesAction,
     buildBootGateHint,

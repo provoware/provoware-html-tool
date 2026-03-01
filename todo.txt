@@ -149,10 +149,10 @@ Laienvorschläge
 - [x] P1: Globales UI-Design-Token-Set als zentrale Wahrheit eingefuehrt (Spacing, Radius, Font, Shadow, Button-Hoehen).
 - [x] P1: Drei-Zonen-Layout mit Splitter + Collapse + Persistenz pro Projekt umsetzen (inkl. Layout-Reset).
 - [x] P1: Workspace-Grid auf responsive Auto-Fit (1-4 Spalten) mit Plug-Slots und Positions-Persistenz erweitern.
-- [ ] P1: Einheitliche Modul-Control-Leiste (Maximieren/Restore/Collapse/Pin) mit Tooltips und Shortcuts final vereinheitlichen.
-- [ ] P1: Fokusmodus als 100%-Ansicht mit Layout-Snapshot/Restore pixelgenau absichern.
+- [x] P1: Einheitliche Modul-Control-Leiste (Maximieren/Restore/Collapse/Pin) mit Tooltips und Shortcuts final vereinheitlichen.
+- [x] P1: Fokusmodus als 100%-Ansicht mit Layout-Snapshot/Restore pixelgenau absichern.
 - [ ] P1: Inspector auf Tabs (Einstellungen/Hilfe/System) und kontextsensitive Moduloptionen umbauen.
-- [ ] P1: Sidebar-Sektionen (Module/Favoriten/Zuletzt/System) mit Suche + Filterchips + Quick-Actions ausbauen.
+- [x] P1: Sidebar-Sektionen (Module/Favoriten/Zuletzt/System) mit Suche + Filterchips + Quick-Actions ausbauen.
 - [ ] P1: Undo/Redo + globale Toasts + permanenter Speicherstatus-Chip sichtbar machen.
 - [ ] P1: Layout-State in data/layout.json versioniert speichern und Safe-Layout-Mode (Auto-Reparatur) einbauen.
 - [x] Naechster Mini-Punkt: Songtext-Zufallsinhalt um Profilauswahl erweitern.
