@@ -1,3 +1,9 @@
+## Iteration 67 – Songtext-Hilfe-Details stabilisiert
+
+- Zwei offene Mini-Punkte abgeschlossen: Kopieren-Knopf im Lesemodus nennt jetzt direkt Enter/Space.
+- Kurzguide im Lyrics-Bereich nennt jetzt Speichern + Rueckweg als festen Schritt.
+- Neuer HTML-Texttest sichert die Hinweise automatisch gegen spaetere Regressionen.
+
 ## Iteration 65 – Layout-Manifest und Referenzbild-Umbau
 
 - Neues Maschinen-Manifest: `config/design_layout_manifest.json` beschreibt Layout, Themes, A11y-Regeln und Interaktionen.

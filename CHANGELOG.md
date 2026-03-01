@@ -1,3 +1,10 @@
+## 2026-03-01 – Songtext-Hinweise fuer Kopieren + Kurzguide erweitert
+
+- Lesemodus-Knopf zeigt jetzt direkt den Tastaturhinweis **Enter/Space** fuer das Kopieren.
+- Songtext-Kurzguide fuehrt jetzt in drei Schritten inklusive **Speichern + Rueckweg** in einfacher Sprache.
+- Neuer Test prueft die sichtbaren Hinweise im Dashboard-HTML automatisch.
+- Risiko: niedrig, da nur Songtext-UI-Text und ein gezielter Test erweitert wurden.
+
 ## 2026-03-03 – Iteration 67
 
 - Zwei offene Mini-Punkte abgeschlossen: Songtext-Kurzguide zeigt jetzt eine klare Enter/Space/Escape-Schrittliste direkt im Lyrics-Bereich.
