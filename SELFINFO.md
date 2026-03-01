@@ -1,3 +1,12 @@
+## Iteration 85 – Status
+
+- Hauptziel: Drei offene Mini-Punkte releasefertig abgeschlossen.
+- Ergebnis: Boot-Gate-Hinweis und Hilfetext sind zusammengefuehrt und werden per aria-live angesagt.
+- Ergebnis: Safe-Mode-Status ist im rechten Hilfe-Panel sichtbar mit klaren naechsten Schritten.
+- Ergebnis: Restore-Dialog kann Versionen aus dem current-Pointer-Pfad laden und wiederherstellen.
+- Mini-Optimierung: Backup-Dialog hat neue Inline-Hilfe fuer Versions-Restore mit Rueckweg.
+- Naechster Schritt: Safe-Mode-Reset + Versionsvergleich + Fokussprung nach Gate-Freigabe.
+
 ## Iteration 84 – Status
 
 - Hauptziel: Drei offene A/B/C-Mini-Punkte in einem releasefertigen Patch abgeschlossen.

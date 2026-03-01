@@ -934,3 +934,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Textaenderung ohne echte Aktionslogik (verworfen, kein echter Mehrwert).
 **Risiko/Side-Effects:** Mittel, weil mehrere UI-Handler zusammenspielen; durch Tests abgesichert.
 **Verknuepft:** PATCH-082
+
+## FIX-20260301-001: BootGate-SafeMode-VersionRestore
+
+**Kategorie:** UI/A11y/Backup
+**Symptom (fuer Laien):** Weiter war gesperrt, aber Hilfe war nicht klar. Safe-Mode war unsichtbar. Versionen konnten nicht direkt wiederhergestellt werden.
+**Technische Ursache:** Hinweise waren verteilt, Safe-Mode wurde nicht im Panel gespiegelt, Restore hatte nur Backup-Datei-Pfad.
+**Trigger:** Start mit offenen Boot-Phasen oder Manifest-Fehlern, plus Wunsch nach Versions-Restore.
+**Fix (kurz):** Zentrale Modellfunktionen fuer Boot-Gate und Safe-Mode eingefuehrt, Dialog um Versionsliste + Versions-Restore erweitert.
+**Geaenderte Dateien/Marker:** system-module/dashboard_model.js, templates/dashboard.js, templates/dashboard.html, templates/backup_restore.js
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Gate-Hinweis, Hilfe-Text und Status-Panel aus derselben Modelllogik ableiten.
+**Alternative(n):** Direkte Log-Ausgabe statt Panel-Status.
+**Risiko/Side-Effects:** Mittleres UI-Risiko im Dialogfluss, durch Tests abgesichert.
+**Verknuepft:** Patch Iteration 85

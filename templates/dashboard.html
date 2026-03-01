@@ -677,6 +677,7 @@
           <article class="panel" aria-labelledby="help-title">
             <h3 id="help-title">Hilfe</h3>
             <p id="help-what"></p>
+            <p id="safe-mode-status" class="field-tip" aria-live="polite"></p>
             <div class="help-actions" aria-label="Hilfe-Aktionen">
               <button type="button" id="help-retry">Erneut versuchen</button>
               <button type="button" id="help-repair">Reparatur starten</button>
@@ -721,6 +722,17 @@
                 Was macht das? Sie waehlen die genaue Ziel-Datei selbst.
                 Rueckweg: Einfach andere Ziel-Datei auswaehlen.
               </p>
+              <label class="field-label" for="backup-version-select"
+                >Version aus current-Pointer</label
+              >
+              <select
+                id="backup-version-select"
+                aria-label="Version fuer Wiederherstellung waehlen"
+              ></select>
+              <p class="field-tip" id="backup-version-help" aria-live="polite">
+                Versionen werden nach Ziel-Datei geladen. Rueckweg: leer lassen
+                und normales Backup nutzen.
+              </p>
               <ol id="backup-checklist" class="backup-checklist" role="list">
                 <li>Funktion ist fertig und pruefbar.</li>
                 <li>
@@ -732,6 +744,9 @@
                 <li>Doku ist aktualisiert: README, CHANGELOG und todo.</li>
               </ol>
               <div class="help-actions" aria-label="Backup-Dialog Aktionen">
+                <button type="button" id="backup-restore-version">
+                  Version wiederherstellen
+                </button>
                 <button type="button" id="backup-restore">
                   Backup wiederherstellen
                 </button>

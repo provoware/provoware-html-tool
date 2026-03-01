@@ -4,7 +4,9 @@ const {
   buildRestorePlan,
   inferTargetPathFromBackupPath,
   isRestoreConfirmationValid,
+  listVersionFilesFromDirectory,
   restoreBackupFromDirectory,
+  restoreVersionFromDirectory,
 } = require("../templates/backup_restore");
 
 function createFileHandle(initialContent = "") {
@@ -137,4 +139,106 @@ test("restoreBackupFromDirectory meldet Fehler bei ungueltigem JSON", async () =
       targetFileName: "store.json",
     }),
   );
+});
+
+test("listVersionFilesFromDirectory listet Versionen sortiert", async () => {
+  const fileMap = {
+    "store.json": createFileHandle('{"x":1}\n'),
+  };
+  const versionMap = {
+    "store_v0002.json": createFileHandle('{"x":2}\n'),
+    "store_v0001.json": createFileHandle('{"x":1}\n'),
+  };
+
+  const directoryHandle = {
+    async getDirectoryHandle(name) {
+      if (name !== "data") {
+        throw new Error("Ungueltiger Unterordner");
+      }
+      return {
+        async getDirectoryHandle(versionName) {
+          if (versionName !== "store_versions") {
+            throw new Error("Version-Ordner fehlt");
+          }
+          return {
+            async *entries() {
+              for (const [entryName, handle] of Object.entries(versionMap)) {
+                yield [entryName, { kind: "file", ...handle }];
+              }
+            },
+            async getFileHandle(fileName) {
+              return versionMap[fileName];
+            },
+          };
+        },
+        async getFileHandle(fileName, options = {}) {
+          if (!(fileName in fileMap) && options.create !== true) {
+            throw new Error("Datei fehlt");
+          }
+          if (!(fileName in fileMap) && options.create === true) {
+            fileMap[fileName] = createFileHandle("{}\n");
+          }
+          return fileMap[fileName];
+        },
+      };
+    },
+  };
+
+  const versions = await listVersionFilesFromDirectory(
+    directoryHandle,
+    "store.json",
+  );
+
+  assert.deepEqual(versions, ["store_v0001.json", "store_v0002.json"]);
+});
+
+test("restoreVersionFromDirectory schreibt gewaehlte Version", async () => {
+  const fileMap = {
+    "store.json": createFileHandle('{"x":0}\n'),
+  };
+  const versionMap = {
+    "store_v0003.json": createFileHandle('{"x":3}\n'),
+  };
+
+  const directoryHandle = {
+    async getDirectoryHandle(name) {
+      if (name !== "data") {
+        throw new Error("Ungueltiger Unterordner");
+      }
+      return {
+        async getDirectoryHandle(versionName) {
+          if (versionName !== "store_versions") {
+            throw new Error("Version-Ordner fehlt");
+          }
+          return {
+            async entries() {},
+            async getFileHandle(fileName) {
+              if (!(fileName in versionMap)) {
+                throw new Error("Datei fehlt");
+              }
+              return versionMap[fileName];
+            },
+          };
+        },
+        async getFileHandle(fileName, options = {}) {
+          if (!(fileName in fileMap) && options.create !== true) {
+            throw new Error("Datei fehlt");
+          }
+          if (!(fileName in fileMap) && options.create === true) {
+            fileMap[fileName] = createFileHandle("{}\n");
+          }
+          return fileMap[fileName];
+        },
+      };
+    },
+  };
+
+  const result = await restoreVersionFromDirectory(
+    directoryHandle,
+    "store.json",
+    "store_v0003.json",
+  );
+
+  assert.equal(result.ok, true);
+  assert.match(fileMap["store.json"].read(), /"x": 3/);
 });

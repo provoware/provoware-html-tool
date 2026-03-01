@@ -145,11 +145,98 @@
     };
   }
 
+  async function listVersionFilesFromDirectory(
+    projectDirectoryHandle,
+    targetFileName,
+  ) {
+    assertObject(projectDirectoryHandle, "Projektordner");
+    assertText(targetFileName, "Ziel-Dateiname");
+
+    const dataDirectoryHandle = await getDataDirectoryHandle(
+      projectDirectoryHandle,
+    );
+    const baseName = targetFileName.replace(/\.json$/, "");
+    const versionDirName = `${baseName}_versions`;
+
+    try {
+      const versionDirectory = await dataDirectoryHandle.getDirectoryHandle(
+        versionDirName,
+        { create: false },
+      );
+      const entries = [];
+      for await (const [entryName, handle] of versionDirectory.entries()) {
+        if (handle.kind !== "file" || !entryName.endsWith(".json")) {
+          continue;
+        }
+        entries.push(entryName);
+      }
+      return entries.sort();
+    } catch {
+      return [];
+    }
+  }
+
+  async function restoreVersionFromDirectory(
+    projectDirectoryHandle,
+    targetFileName,
+    versionFileName,
+  ) {
+    assertObject(projectDirectoryHandle, "Projektordner");
+    assertText(targetFileName, "Ziel-Dateiname");
+    assertText(versionFileName, "Versions-Dateiname");
+
+    const dataDirectoryHandle = await getDataDirectoryHandle(
+      projectDirectoryHandle,
+    );
+    const baseName = targetFileName.replace(/\.json$/, "");
+    const versionDirectory = await dataDirectoryHandle.getDirectoryHandle(
+      `${baseName}_versions`,
+      { create: false },
+    );
+
+    const versionHandle = await versionDirectory.getFileHandle(
+      versionFileName,
+      {
+        create: false,
+      },
+    );
+    const targetHandle = await dataDirectoryHandle.getFileHandle(
+      targetFileName,
+      {
+        create: true,
+      },
+    );
+
+    const versionRaw = await readHandleText(versionHandle);
+    const parsed = JSON.parse(versionRaw);
+    if (!parsed || typeof parsed !== "object") {
+      throw new Error(
+        "Versions-Daten sind ungueltig. Reparatur starten oder Protokoll oeffnen.",
+      );
+    }
+
+    await writeHandleText(
+      targetHandle,
+      `${JSON.stringify(parsed, null, 2)}
+`,
+    );
+    const verifyRaw = await readHandleText(targetHandle);
+    JSON.parse(verifyRaw);
+
+    return {
+      ok: true,
+      targetFileName,
+      versionFileName,
+    };
+  }
+
   const api = {
     buildRestorePlan,
     inferTargetPathFromBackupPath,
     isRestoreConfirmationValid,
+    listVersionFilesFromDirectory,
     restoreBackupFromDirectory,
+    restoreVersionFromDirectory,
   };
 
   if (typeof module === "object" && module.exports) {

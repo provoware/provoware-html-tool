@@ -192,3 +192,15 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Was passiert? Wenn das Plugin-Manifest kaputt ist, kann ein Safe-Mode (Notfallmodus) mit leerer Plugin-Liste geschrieben werden.
 - Warum hilft das? Der Core startet wieder, obwohl Plugins defekt sind.
 - Rueckweg: Danach Plugins einzeln wieder aktivieren und erneut pruefen.
+
+## Safe-Mode-Status im Hilfe-Panel
+
+- Was macht das? Der rechte Hilfe-Bereich zeigt jetzt klar, ob Safe-Mode aktiv ist.
+- Was passiert mit Daten? Es wird nur Status gelesen, keine Datei wird dabei geschrieben.
+- Rueckgaengig? Sie koennen normal weiterarbeiten oder Reparatur starten und danach erneut pruefen.
+
+## Version im Restore-Dialog
+
+- Was macht das? Sie koennen statt Backup-Datei auch eine gespeicherte Version direkt zur Ziel-Datei wiederherstellen.
+- Was passiert mit Daten? Die gewaehlt Version ersetzt die Ziel-Datei; vorherige Datei kann weiter als Backup vorliegen.
+- Rueckgaengig? Sie koennen sofort erneut eine andere Version oder ein Backup wiederherstellen.

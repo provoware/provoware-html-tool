@@ -139,7 +139,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 89 %
-- **Erledigt:** 148 Punkte
+- **Erledigt:** 151 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -589,3 +589,9 @@ Update 2026-03-03:
 - Footer bleibt 3-teilig (Debugging/Logging/Notiz) und Notiz nutzt Projektdatei + neutralen localStorage-Fallback.
 - Rechte Sidebar hat Template-Knoepfe mit Copy-to-Clipboard und Fallback in das Notizfeld.
 - Naechster Schritt: Boot-Weiter-Gate aus TODO umsetzen (A).
+
+
+Iteration 85 (Release-Status):
+- Drei offene Mini-Punkte abgeschlossen: Boot-Gate-Hilfe, Safe-Mode-Panelstatus, Versions-Restore im Dialog.
+- Startcheck bleibt gruen mit Format, Tests, A11y-Basics und Theme-Check.
+- Naechster Schritt: Safe-Mode-Reset, Versionsvergleich und Fokussprung nach Gate-Freigabe.

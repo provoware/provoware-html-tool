@@ -1,3 +1,9 @@
+## Iteration 85 - Boot-Gate/Hilfe, Safe-Mode-Status, Versions-Restore
+
+- Boot-Gate-Hinweis und Hilfe-Text laufen jetzt aus einem Modell und werden mit aria-live klar angesagt.
+- Rechtes Hilfe-Panel zeigt Safe-Mode-Status mit naechstem Schritt in einfacher Sprache.
+- Backup-Dialog kann jetzt auch versionierte Dateien aus dem current-Pointer-Pfad wiederherstellen.
+
 ## 2026-03-01 – Iteration 84
 
 - Drei offene Mini-Punkte abgeschlossen: Boot-Weiter-Gate blockiert jetzt den Weiter-Knopf, bis alle Boot-Phasen gruen sind.
