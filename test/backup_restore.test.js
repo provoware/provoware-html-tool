@@ -3,6 +3,7 @@ const assert = require("node:assert/strict");
 const {
   buildRestorePlan,
   inferTargetPathFromBackupPath,
+  isRestoreConfirmationValid,
   restoreBackupFromDirectory,
 } = require("../templates/backup_restore");
 
@@ -92,6 +93,21 @@ test("buildRestorePlan blockiert unpassende Ziel-Datei", () => {
     buildRestorePlan("data/store.backup.json", "data/registry.json"),
   );
 });
+
+test("isRestoreConfirmationValid akzeptiert exakten Dateinamen", () => {
+  assert.equal(isRestoreConfirmationValid("store.json", "store.json"), true);
+  assert.equal(
+    isRestoreConfirmationValid("  registry.json  ", "registry.json"),
+    true,
+  );
+});
+
+test("isRestoreConfirmationValid blockiert falsche oder leere Eingabe", () => {
+  assert.equal(isRestoreConfirmationValid("", "store.json"), false);
+  assert.equal(isRestoreConfirmationValid("store", "store.json"), false);
+  assert.equal(isRestoreConfirmationValid(null, "store.json"), false);
+});
+
 test("restoreBackupFromDirectory schreibt Backup in Zieldatei", async () => {
   const fileMap = {
     "registry.backup.json": createFileHandle('{"ok":true}\n'),

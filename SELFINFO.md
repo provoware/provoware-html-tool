@@ -1,3 +1,9 @@
+## Iteration 49 (2026-03-01)
+
+- Hauptziel abgeschlossen: Offener Punkt "Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen" ist jetzt vollstaendig umgesetzt.
+- Mini-Optimierung: Prompt-Pruefung ist zentral gekapselt und liefert klare Ja/Nein-Ausgabe fuer robuste Rueckwege.
+- Next Step (A): Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
+
 ## Iteration 48 (2026-03-01)
 
 - Hauptziel abgeschlossen: Offener Punkt 'Backup-Auswahl-Dialog als UI inkl. Hook-Ende-zu-Ende testen' ist jetzt per automatischem Test komplett abgedeckt.

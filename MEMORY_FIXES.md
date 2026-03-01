@@ -528,3 +528,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Dialog mit doppeltem Dropdown ohne Auto-Ziel.
 **Risiko/Side-Effects:** Prompt kann im sehr restriktiven Browser blockiert sein.
 **Verknuepft:** PATCH-047
+
+## FIX-20260301-049: Prompt-Sicherheitsabfrage-testbar-gemacht
+
+**Kategorie:** Backup/UI/Test
+**Symptom (fuer Laien):** Die Sicherheitsabfrage vor Restore war vorhanden, aber nicht automatisiert pruefbar.
+**Technische Ursache:** Prompt-Pruefung lag direkt im UI-Code ohne wiederverwendbare Funktion.
+**Trigger:** Backup-Dialog fragt Dateiname ab, aber Tests konnten nur indirekt pruefen.
+**Fix (kurz):** Neue Funktion `isRestoreConfirmationValid` in `templates/backup_restore.js`; Dashboard nutzt diese Funktion; Test deckt gueltig/ungueltig-Faelle ab.
+**Geaenderte Dateien/Marker:** `templates/backup_restore.js`, `templates/dashboard.js`, `test/backup_restore.test.js`
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`
+**Praevention (kuenftig):** Ab jetzt immer Sicherheitsabfragen als eigene pure Funktion bauen und direkt testen.
+**Alternative(n):** Prompt-Pruefung nur E2E testen (abgelehnt, zu fragil).
+**Risiko/Side-Effects:** Niedrig; nur Vergleichslogik wurde zentralisiert.
+**Verknuepft:** PATCH-049

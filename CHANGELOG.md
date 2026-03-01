@@ -1,3 +1,10 @@
+## 2026-03-01 – Prompt-Sicherheitsabfrage automatisch geprueft
+
+- Backup-Restore nutzt jetzt eine zentrale Prueffunktion fuer die Prompt-Bestaetigung (Dateiname muss exakt passen).
+- Neuer automatischer Test deckt positive und negative Prompt-Faelle ab, damit der Sicherheitsweg stabil bleibt.
+- Mini-Optimierung Hilfe/UX: Abbruch bei falscher Eingabe bleibt klar und laienfreundlich mit naechstem Schritt.
+- Risiko: niedrig, da nur Restore-Validierung, Tests und Statusdoku erweitert wurden.
+
 ## 2026-03-01 – Backup-Dialog Ende-zu-Ende Test geschlossen
 
 - Neuer Test deckt den kompletten Pfad ab: Backup-Hook-Log schreiben, Restore-Plan bauen und Wiederherstellung ausfuehren.

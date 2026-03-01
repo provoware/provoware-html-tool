@@ -68,6 +68,14 @@
     }
   }
 
+  function isRestoreConfirmationValid(userInput, expectedFileName) {
+    assertText(expectedFileName, "Erwarteter Dateiname");
+    if (typeof userInput !== "string") {
+      return false;
+    }
+    return userInput.trim() === expectedFileName;
+  }
+
   async function readHandleText(fileHandle) {
     assertObject(fileHandle, "Datei-Handle");
     const file = await fileHandle.getFile();
@@ -140,6 +148,7 @@
   const api = {
     buildRestorePlan,
     inferTargetPathFromBackupPath,
+    isRestoreConfirmationValid,
     restoreBackupFromDirectory,
   };
 
