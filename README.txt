@@ -110,3 +110,9 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
 - Support-Verlauf markiert Suchwoerter als sichtbaren Text mit `<mark>` plus Rahmen, damit Status nicht nur ueber Farbe sichtbar ist.
 - Letzter Boot-Debugtext erscheint zusaetzlich als Hilfe-Eintrag (`boot-debug`) im Support-Verlauf.
 - Naechster Schritt: Boot-Debug-Eintrag optional per Schalter ausblendbar machen.
+
+## Update 2026-03-01 (3 Mini-Punkte abgeschlossen – Iteration 95)
+- Hilfe-Panel hat jetzt einen Schalter **"Boot-Debug im Verlauf zeigen"**. So koennen Einsteiger die Liste ruhiger machen.
+- Support-Suche markiert jetzt nur noch **ganze Woerter**. Das reduziert visuelles Rauschen bei kurzen Suchbegriffen.
+- Backup-Dialog erklaert beim Detailzustand klar: Der Zustand wird pro Projekt gespeichert und bei Restore wieder geladen.
+- Naechster Schritt: Optionalen Teilwort-Modus in der Suche ergaenzen.

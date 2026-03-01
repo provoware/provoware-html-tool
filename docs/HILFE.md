@@ -256,3 +256,10 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Support-Verlauf markiert Suchwoerter jetzt als Textmarkierung (`<mark>` mit Rahmen), damit Treffer klar sichtbar sind und nicht nur ueber Farbe laufen.
 - Der letzte Boot-Debugtext wird zusaetzlich als Verlaufseintrag `boot-debug` gezeigt.
 - Der Backup-Detailmodus merkt sich den letzten Zustand pro Projekt (`backupDetailOpen`).
+
+## Update 2026-03-01 – Ruhigeres Hilfe-Panel
+
+- Im Support-Verlauf gibt es jetzt den Schalter **"Boot-Debug im Verlauf zeigen"**.
+- Empfehlung fuer Einsteiger: Schalter deaktivieren, dann bleibt die Liste kuerzer.
+- Rueckweg: Schalter wieder aktivieren.
+- Die Suchmarkierung arbeitet jetzt mit ganzen Woertern. Beispiel: Suche nach `safe` markiert `safe-mode`, aber nicht mitten in langen Fremdwoertern.

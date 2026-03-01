@@ -744,6 +744,18 @@
               <p id="support-history-meta" class="field-tip" aria-live="polite">
                 Treffer: 0. Tipp: Enter startet die Suche sofort.
               </p>
+              <label for="support-history-boot-debug-toggle">
+                <input
+                  id="support-history-boot-debug-toggle"
+                  type="checkbox"
+                  checked
+                />
+                Boot-Debug im Verlauf zeigen (optional ausblendbar)
+              </label>
+              <p class="field-tip" id="support-history-boot-debug-help">
+                Fuer Einsteiger: Schalter aus = ruhigere Liste. Rueckweg:
+                Schalter wieder aktivieren.
+              </p>
               <ul id="support-history-list" class="todo-list" role="list"></ul>
             </fieldset>
             <dialog
@@ -813,7 +825,8 @@
                   aria-live="polite"
                 >
                   Zuletzt geoeffneter Zustand: Detailmodus ist eingeklappt.
-                  Naechster Schritt: Bei Bedarf oeffnen.
+                  Naechster Schritt: Bei Bedarf oeffnen. Dieser Zustand wird pro
+                  Projekt gespeichert und bei Restore wieder geladen.
                 </p>
               </details>
               <ol id="backup-checklist" class="backup-checklist" role="list">

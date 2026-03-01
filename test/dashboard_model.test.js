@@ -62,6 +62,7 @@ test("normalizeLayoutState begrenzt Breiten und setzt Booleans", () => {
     rightCollapsed: false,
     bootFocusTarget: "module",
     backupDetailOpen: false,
+    showBootDebugInSupport: true,
   });
 });
 
@@ -190,4 +191,12 @@ test("normalizeLayoutState setzt Backup-Detailzustand sicher", () => {
 
   const closed = normalizeLayoutState({ backupDetailOpen: "ja" });
   assert.equal(closed.backupDetailOpen, false);
+});
+
+test("normalizeLayoutState setzt Boot-Debug-Schalter sicher", () => {
+  const shown = normalizeLayoutState({ showBootDebugInSupport: true });
+  assert.equal(shown.showBootDebugInSupport, true);
+
+  const hidden = normalizeLayoutState({ showBootDebugInSupport: false });
+  assert.equal(hidden.showBootDebugInSupport, false);
 });

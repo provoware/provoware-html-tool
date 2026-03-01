@@ -504,3 +504,19 @@ Iteration: 39
 - Version: v0.94
 - Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Detailzustand speichern, Suchmarkierung, Boot-Debug im Hilfe-Verlauf).
 - Next Step: Boot-Debug-Eintrag optional ausblendbar machen und Zustand speichern.
+
+## Iteration 95
+
+### PatchSpec (vor Umsetzung)
+
+1. Ziel: Hilfe-Panel fuer Einsteiger ruhiger machen und Support-Suche robuster machen.
+2. Scope IN: `templates/dashboard.html`, `templates/dashboard.js`, `system-module/dashboard_model.js`, `test/*`, Doku-Dateien.
+3. Scope OUT: Keine Aenderung an Plugin-Loader, Store-Engine oder Registry-Format.
+4. Dateien/Marker: `support-history-boot-debug-toggle`, `showBootDebugInSupport`, `backup-detail-state`, Such-Tokenisierung.
+5. Risiko: Mittel bei Suchlogik (Regex-Randfaelle), niedrig bei UI-Texten.
+6. Akzeptanzkriterien: Schalter blendet boot-debug ein/aus, Suche markiert ganze Woerter, Restore-Hinweis ist sichtbar, Tests gruen.
+7. Checks + Rollback: `npm run format`, `node --test`, `bash start.sh`; Rollback ueber Git-Commit-Revert.
+
+- Version: v0.95-help-toggle-word-search
+- Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Boot-Debug-Schalter, ganze-Wort-Markierung, Restore-Kurzsatz).
+- Next Step: Optionalen Teilwort-Modus fuer die Suche als zweiten Modus anbieten.
