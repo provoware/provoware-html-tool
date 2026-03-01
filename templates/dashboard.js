@@ -70,6 +70,36 @@
     return safe;
   }
 
+  function registerKeyboardShortcuts() {
+    document.addEventListener("keydown", (event) => {
+      if (!event || typeof event.key !== "string") {
+        setStatus(
+          "Tastaturereignis ungueltig. Naechster Schritt: Erneut versuchen.",
+        );
+        return false;
+      }
+
+      if (event.key !== "Escape") {
+        return true;
+      }
+
+      if (!debugOutput.hidden) {
+        debugOutput.hidden = true;
+        setStatus(
+          "Debug-Ansicht geschlossen. Naechster Schritt: Weiterarbeiten.",
+        );
+        return true;
+      }
+
+      setStatus(
+        "Escape gedrueckt. Naechster Schritt: Bereich mit Tab waehlen.",
+      );
+      return true;
+    });
+
+    return true;
+  }
+
   function openDb() {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(DB_NAME, 1);
@@ -307,6 +337,7 @@
     setDebug(`Debug: Hilfe mit ${stepCount} Schritten geladen.`);
   });
 
+  registerKeyboardShortcuts();
   renderZones();
   reconnectProjectFolder();
 })();

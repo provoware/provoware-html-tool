@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 22
+Iteration: 23
 
 ## Gemacht
 
@@ -54,6 +54,10 @@ Iteration: 22
 - Neues Kernmodul fuer Genres/Moods/Stile-Archiv ergänzt: CSV-Import, Duplikatpruefung, Profil-Kategorien, Favoriten-Sternchen und Logging.
 - Neue automatisierte Tests fuer Archiv-Import, Linux-Slug, Favoriten und Log-Ausgabe ergänzt.
 - Hilfe um kurzen Favoriten-Hinweis (`*Eintrag*`) fuer das neue Archiv erweitert.
+
+- Dashboard-Tastaturpfad verbessert: Escape schliesst die Debug-Ansicht als klaren Rueckweg.
+- Release-Readiness-Check prueft jetzt auch Tastatur-Hinweis und Escape-Handler automatisch.
+- Hilfe-Doku mit klarem Debug-Fehlerschritt fuer Startprobleme aktualisiert.
 
 ## Next Step
 
