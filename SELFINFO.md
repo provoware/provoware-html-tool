@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 30
+Iteration: 31
 
 ## Gemacht
 
@@ -78,6 +78,9 @@ Iteration: 30
 - Start-Routine um automatischen Platzhalter-Scan erweitert (TODO/FIXME/PLACEHOLDER/DUMMY) mit klarer Datei-/Zeilenmeldung und naechstem Schritt.
 
 - AGENTS-Iterations-Pipeline erweitert: neuer Pflichtschritt "Autonomer Abschluss-Check" nach Doku mit `bash start.sh` als Freigabe.
+
+- README um Mini-Leitfaden fuer den Pflicht-Abschluss-Check erweitert (3 klare Schritte + Hilfe-Befehle).
+- Platzhalter-Scan verbessert: `todo-title` in HTML loest keinen Fehlalarm mehr aus, nur echte Marker wie `TODO:` werden gemeldet.
 
 ## Next Step
 

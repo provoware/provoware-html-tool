@@ -1,3 +1,10 @@
+## 2026-03-01 – Start-Check klarer: 3-Schritt-Leitfaden + TODO-Scan-Fix
+
+- README.txt erweitert: neuer Mini-Leitfaden mit genau 3 Schritten fuer den Pflicht-Abschluss-Check (`bash start.sh`, Ergebnis lesen, Hilfe-Befehle nutzen).
+- Platzhalter-Scan korrigiert: Marker gelten jetzt nur noch als echte Aufgaben mit Doppelpunkt (`TODO:`), dadurch kein Fehlalarm bei IDs wie `todo-title`.
+- Start-Routine und Test erweitert, damit der Fehlalarm reproduzierbar verhindert bleibt.
+- Risiko: niedrig, da nur Prueflogik + Doku angepasst wurden.
+
 ## 2026-03-01 – Iterations-Pipeline um Pflichtschritt erweitert
 
 - AGENTS.md erweitert: Die Iterations-Pipeline hat jetzt einen zusaetzlichen Schritt "Autonomer Abschluss-Check" nach der Doku.

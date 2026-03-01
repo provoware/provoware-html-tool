@@ -188,3 +188,26 @@ test("scanPlaceholderMarkers findet bewusst gesetzten TODO-Marker", () => {
 
   fs.rmSync(dummyPath, { force: true });
 });
+
+test("scanPlaceholderMarkers ignoriert normale Woerter wie todo-title", () => {
+  const dummyPath = path.join(
+    process.cwd(),
+    "dummys",
+    "scan_marker_ignore.tmp.html",
+  );
+  fs.writeFileSync(
+    dummyPath,
+    '<section aria-labelledby="todo-title"></section>\n',
+    "utf8",
+  );
+
+  const result = scanPlaceholderMarkers(process.cwd(), {
+    directories: ["dummys"],
+    markers: ["TODO"],
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.findings.length, 0);
+
+  fs.rmSync(dummyPath, { force: true });
+});
