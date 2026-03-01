@@ -105,6 +105,25 @@
     );
   }
 
+  function buildTemplateHelp(templateType) {
+    if (templateType === "intro") {
+      return "Intro: ruhiger Einstieg in das Thema.";
+    }
+    if (templateType === "refrain") {
+      return "Refrain: Kernsatz, der sich wiederholen darf.";
+    }
+    if (templateType === "bridge") {
+      return "Bridge: verbindet Teile vor dem Finale.";
+    }
+    if (templateType === "sonstiges") {
+      return "Sonstiges: freie Ideen fuer Reime und Stimmung.";
+    }
+
+    throw new Error(
+      "Vorlagen-Hilfe ist ungueltig. Bitte erneut versuchen oder Protokoll oeffnen.",
+    );
+  }
+
   function buildLyricsPreview(title, content) {
     const safeTitle =
       typeof title === "string" && title.trim()
@@ -178,6 +197,10 @@
     const lyricsBackButton = assertElement(
       options.lyricsBackButton,
       "Lyrics-Zurueck",
+    );
+    const closePreviewButton = assertElement(
+      options.closePreviewButton,
+      "Lyrics-Vorschau-Schliessen",
     );
     const lyricsClearButton = assertElement(
       options.lyricsClearButton,
@@ -366,7 +389,7 @@
       }
     }
 
-    function onLyricsTemplate(templateText, templateLabel) {
+    function onLyricsTemplate(templateText, templateLabel, templateType) {
       try {
         const nextValue = insertTemplateIntoContent(contentInput, templateText);
         if (nextValue.trim().length === 0) {
@@ -375,8 +398,9 @@
           );
         }
         contentInput.focus();
+        const help = buildTemplateHelp(templateType);
         setStatus(
-          `${templateLabel} eingefuegt. Naechster Schritt: Text anpassen oder Notiz speichern.`,
+          `${templateLabel} eingefuegt. ${help} Naechster Schritt: Text anpassen oder Notiz speichern.`,
         );
       } catch (error) {
         const details =
@@ -385,14 +409,31 @@
       }
     }
 
+    function closeLyricsPreview(focusTarget) {
+      previewPanel.hidden = true;
+      previewPanel.setAttribute("aria-hidden", "true");
+      if (focusTarget && typeof focusTarget.focus === "function") {
+        focusTarget.focus();
+      }
+      return true;
+    }
+
     function onLyricsBack() {
+      closeLyricsPreview(areaSelect);
       model.setActiveArea("inbox");
       areaSelect.value = "inbox";
       render();
       renderLyricsEditor();
-      areaSelect.focus();
       setStatus(
         "Rueckweg aktiv: Bereich Allgemein geoeffnet. Naechster Schritt: Notiz speichern oder Songideen spaeter fortsetzen.",
+      );
+      return true;
+    }
+
+    function onClosePreview() {
+      closeLyricsPreview(previewButton);
+      setStatus(
+        "Vorschau geschlossen. Naechster Schritt: Text anpassen oder erneut Lesemodus oeffnen.",
       );
       return true;
     }
@@ -422,6 +463,9 @@
         return false;
       }
       event.preventDefault();
+      if (!previewPanel.hidden) {
+        return onClosePreview();
+      }
       return onLyricsBack();
     }
 
@@ -429,19 +473,32 @@
     clearButton.addEventListener("click", onClear);
     areaSelect.addEventListener("change", onAreaChange);
     introButton.addEventListener("click", () =>
-      onLyricsTemplate(buildLyricsTemplate("intro"), "Intro-Vorlage"),
+      onLyricsTemplate(buildLyricsTemplate("intro"), "Intro-Vorlage", "intro"),
     );
     refrainButton.addEventListener("click", () =>
-      onLyricsTemplate(buildLyricsTemplate("refrain"), "Refrain-Vorlage"),
+      onLyricsTemplate(
+        buildLyricsTemplate("refrain"),
+        "Refrain-Vorlage",
+        "refrain",
+      ),
     );
     bridgeButton.addEventListener("click", () =>
-      onLyricsTemplate(buildLyricsTemplate("bridge"), "Bridge-Vorlage"),
+      onLyricsTemplate(
+        buildLyricsTemplate("bridge"),
+        "Bridge-Vorlage",
+        "bridge",
+      ),
     );
     miscButton.addEventListener("click", () =>
-      onLyricsTemplate(buildLyricsTemplate("sonstiges"), "Sonstiges-Vorlage"),
+      onLyricsTemplate(
+        buildLyricsTemplate("sonstiges"),
+        "Sonstiges-Vorlage",
+        "sonstiges",
+      ),
     );
     previewButton.addEventListener("click", onLyricsPreview);
     lyricsBackButton.addEventListener("click", onLyricsBack);
+    closePreviewButton.addEventListener("click", onClosePreview);
     lyricsClearButton.addEventListener("click", onClear);
     contentInput.addEventListener("keydown", onLyricsEscape);
 
@@ -459,6 +516,7 @@
   const api = {
     AREA_STORE_PATHS,
     buildLyricsPreview,
+    buildTemplateHelp,
     buildLyricsTemplate,
     buildAreaPayload,
     getStorePathForArea,

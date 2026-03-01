@@ -94,6 +94,10 @@
                 Hilfe: Intro/Refrain per Knopf einfuegen. Enter aktiviert den
                 Knopf. Escape springt zurueck zu Allgemein.
               </p>
+              <p class="field-tip" id="lyrics-template-inline-help">
+                Inline-Hilfe: Intro startet ruhig, Refrain wiederholt den
+                Kernsatz, Bridge verbindet Teile, Sonstiges sammelt Extras.
+              </p>
               <div class="todo-actions" aria-label="Songtext-Vorlagen">
                 <button type="button" id="lyrics-template-intro">
                   Intro-Vorlage einfuegen
@@ -121,12 +125,17 @@
                 <h5 id="lyrics-preview-title">Lesemodus</h5>
                 <p class="field-tip" id="lyrics-preview-help">
                   Was macht das? Zeigt Ihren Songtext als reine Leseflaeche.
-                  Rueckweg: Weiter unten den Editor weiter nutzen.
+                  Rueckweg: Vorschau schliessen oder Escape nutzen.
                 </p>
                 <p
                   id="lyrics-preview-content"
                   aria-describedby="lyrics-preview-help"
                 ></p>
+                <div class="todo-actions" aria-label="Lesemodus-Rueckweg">
+                  <button type="button" id="lyrics-close-preview">
+                    Vorschau schliessen (Escape)
+                  </button>
+                </div>
               </article>
               <div class="todo-actions" aria-label="Songtext-Rueckweg">
                 <button type="button" id="lyrics-back-to-inbox">

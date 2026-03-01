@@ -1,3 +1,11 @@
+## Iteration 64 (2026-03-02)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Lesemodus-Schliessen mit Escape-Hinweis + Inline-Hilfe je Songtext-Vorlage).
+- Ergebnis: Lesemodus hat nun einen eigenen "Vorschau schliessen"-Knopf mit Escape-Rueckweg und klarer Statusmeldung.
+- Ergebnis: Songtext-Vorlagen geben jetzt pro Abschnitt eine kurze Laien-Hilfe direkt im Status aus.
+- Mini-Optimierung: Zusätzlicher Inline-Hilfetext unter den Vorlagen im Dashboard fuer schnellere Orientierung.
+- Naechster Schritt: Lesemodus um Kopieren-Knopf mit Statusmeldung erweitern.
+
 ## Iteration 62 (2026-03-02)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Songtext-Editor auf Lyrics-Bereich + getrennte Quick-Store-Dateien je Bereich).

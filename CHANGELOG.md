@@ -1,3 +1,9 @@
+## 2026-03-02 – Iteration 64
+
+- Songtext-Lesemodus hat jetzt einen eigenen Schliessen-Knopf mit Escape-Hinweis und Statusmeldung.
+- Songtext-Vorlagen zeigen kurze Inline-Hilfe je Abschnitt fuer bessere Orientierung in einfacher Sprache.
+- Risiko: niedrig, weil nur Quick-Store-UI, Modul-Logik, Tests und Doku erweitert wurden.
+
 ## 2026-03-02 - PATCH-062
 
 - Songtext-Editor im Bereich Songideen erweitert: Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klare Rueckweg-Knoepfe.
