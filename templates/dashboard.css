@@ -1,4 +1,9 @@
 :root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
   --bg: #eff4f8;
   --fg: #122235;
   --panel: #fff;
@@ -58,8 +63,26 @@ body {
 
 .wrap {
   max-width: 1280px;
-  margin: 0.7rem auto 1rem;
-  padding: 0 0.7rem;
+  margin: var(--space-2) auto var(--space-3);
+  padding: 0 var(--space-2);
+}
+
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: var(--space-2);
+  z-index: 10;
+  border: 2px solid var(--focus);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--fg);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: var(--space-2);
 }
 
 .topbar {
@@ -68,7 +91,7 @@ body {
   border: 1px solid color-mix(in srgb, var(--line) 45%, transparent);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 0.45rem 0.6rem;
+  padding: var(--space-2) var(--space-3);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -142,15 +165,15 @@ a:focus-visible {
 }
 
 .layout {
-  margin-top: 0.65rem;
+  margin-top: var(--space-2);
   display: grid;
-  grid-template-columns: minmax(220px, 250px) 1fr minmax(220px, 250px);
-  gap: 0.65rem;
+  grid-template-columns: minmax(200px, 240px) 1fr minmax(200px, 240px);
+  gap: var(--space-2);
 }
 
 .col {
   display: grid;
-  gap: 0.65rem;
+  gap: var(--space-2);
   align-content: start;
 }
 
@@ -159,7 +182,7 @@ a:focus-visible {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 0.65rem;
+  padding: var(--space-3);
 }
 
 .panel h2,
@@ -192,9 +215,9 @@ a:focus-visible {
 }
 
 .module-grid {
-  margin-top: 0.4rem;
+  margin-top: var(--space-2);
   min-height: 180px;
-  padding: 0.5rem;
+  padding: var(--space-2);
   border: 1px solid var(--line);
   border-radius: 10px;
   background: var(--panel-soft);
@@ -282,5 +305,22 @@ a:focus-visible {
 @media (max-width: 1030px) {
   .layout {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu a,
+  .icons button,
+  .panel button,
+  .panel select,
+  .panel input {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .module-card-actions button,
+  .help-actions button,
+  .system-actions button {
+    flex: 1 1 100%;
   }
 }

@@ -1,5 +1,13 @@
 # Provoware HTML Tool
 
+## Entwicklungsfortschritt
+
+- **Fortschritt:** 67 %
+- **Erledigt:** 35 Punkte
+- **Offen:** 17 Punkte
+
+Stand: automatisch aus `todo.txt` gezaehlt.
+
 ## Offene Punkte (oben, kurz)
 
 1. Backup-Dialog im Dashboard

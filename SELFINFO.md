@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 24
+Iteration: 25
 
 ## Gemacht
 
@@ -60,6 +60,9 @@ Iteration: 24
 - Hilfe-Doku mit klarem Debug-Fehlerschritt fuer Startprobleme aktualisiert.
 - Gefuehrte Dashboard-Hilfe um klaren Enter/Escape-Hinweis erweitert (Aktion + Rueckweg).
 - Release-Readiness prueft den Enter-Hinweis jetzt automatisch mit.
+
+- README zeigt jetzt oben den Fortschritt als Prozent und die Mengen erledigt/offen aus todo.txt.
+- Dashboard-Design weiter optimiert: Skip-Link fuer Tastatur, einheitliche Abstands-Tokens und mobile Vollbreite fuer Buttons.
 
 ## Next Step
 
