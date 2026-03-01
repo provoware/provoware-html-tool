@@ -252,6 +252,10 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardHtml, /id="support-history-sort-short-help"/);
   assert.match(dashboardHtml, /id="support-history-live"/);
   assert.match(dashboardHtml, /id="support-history-empty-help"/);
+  assert.match(dashboardHtml, /id="support-history-empty-help-list"/);
+  assert.match(dashboardHtml, /id="support-history-boot-debug-toggle-label"/);
+  assert.match(dashboardHtml, /id="support-history-partial-toggle-label"/);
+  assert.match(dashboardHtml, /id="support-history-footer-toggle-label"/);
   assert.match(dashboardJs, /supportHistoryPartialMode/);
   assert.match(dashboardJs, /supportHistoryFooterCompact/);
   assert.match(dashboardJs, /supportHistorySortShortTokens/);
@@ -269,10 +273,15 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardJs, /getSupportModeTooltipText/);
   assert.match(dashboardJs, /supportModeTooltipPartial/);
   assert.match(dashboardJs, /supportModeTooltipWhole/);
+  assert.match(dashboardJs, /getSupportFilterTooltipText/);
+  assert.match(dashboardJs, /supportFilterTooltipBootDebug/);
+  assert.match(dashboardJs, /supportFilterTooltipPartial/);
+  assert.match(dashboardJs, /supportFilterTooltipFooter/);
   assert.match(dashboardJs, /Tooltip: Teilwortsuche/);
   assert.match(dashboardJs, /Suchmodus Teilwort aktiv/);
   assert.match(dashboardJs, /min\. 3 Zeichen/);
   assert.match(dashboardJs, /Aktiver Filter:/);
+  assert.match(dashboardJs, /Kein Suchwort gesetzt/);
   assert.match(
     dashboardJs,
     /Kurze Suchbegriffe ignoriert \(unter 3 Zeichen\):/,
@@ -282,6 +291,7 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardJs, /support-mode-badge-icon/);
   assert.match(dashboardJs, /className = "sr-only"/);
   assert.match(dashboardCss, /\.sr-only/);
+  assert.match(dashboardCss, /#support-history-empty-help-list/);
   assert.match(dashboardJs, /shouldAutoCompactSupportFooter/);
   assert.match(dashboardJs, /Auto-Kurzmodus aktiv unter 640px/);
   assert.match(

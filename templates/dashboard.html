@@ -745,7 +745,10 @@
                 Treffer: 0. Modus: Ganze Woerter (Standard). Tipp: Enter startet
                 die Suche sofort.
               </p>
-              <label for="support-history-boot-debug-toggle">
+              <label
+                for="support-history-boot-debug-toggle"
+                id="support-history-boot-debug-toggle-label"
+              >
                 <input
                   id="support-history-boot-debug-toggle"
                   type="checkbox"
@@ -753,11 +756,17 @@
                 />
                 Boot-Debug im Verlauf zeigen (optional ausblendbar)
               </label>
-              <label for="support-history-partial-toggle">
+              <label
+                for="support-history-partial-toggle"
+                id="support-history-partial-toggle-label"
+              >
                 <input id="support-history-partial-toggle" type="checkbox" />
                 Teilwortsuche aktivieren (optional)
               </label>
-              <label for="support-history-footer-toggle">
+              <label
+                for="support-history-footer-toggle"
+                id="support-history-footer-toggle-label"
+              >
                 <input
                   id="support-history-footer-toggle"
                   type="checkbox"
@@ -788,7 +797,7 @@
                 aria-live="polite"
               >
                 <strong>Wenn nichts gefunden wird:</strong>
-                <ol>
+                <ol id="support-history-empty-help-list">
                   <li>
                     Erneut versuchen: Filter auf "Alle Ereignisse" stellen.
                   </li>

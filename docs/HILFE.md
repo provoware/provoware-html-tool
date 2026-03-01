@@ -296,3 +296,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
   1. Erneut versuchen (Filter auf alle setzen).
   2. Reparatur starten (Safe-Mode zuruecksetzen).
   3. Protokoll oeffnen (letzten Fehler lesen).
+
+## Update Iteration 102
+
+- Neue Tooltip-Hilfe: Die drei Support-Schalter (Boot-Debug, Teilwort, Footer) erklaeren jetzt direkt den naechsten Schritt.
+- Mobile unter 480px: Der Block "Wenn nichts gefunden wird" ist kompakter, die drei Rueckwege bleiben gleich.
+- Bei leerem Suchfeld zeigt die Meta-Zeile jetzt einen klaren Hinweis zum Start (Suchwort + Enter).

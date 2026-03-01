@@ -71,6 +71,15 @@
   const supportHistoryFooterHint = document.getElementById(
     "support-history-footer-hint",
   );
+  const supportHistoryBootDebugToggleLabel = document.getElementById(
+    "support-history-boot-debug-toggle-label",
+  );
+  const supportHistoryPartialToggleLabel = document.getElementById(
+    "support-history-partial-toggle-label",
+  );
+  const supportHistoryFooterToggleLabel = document.getElementById(
+    "support-history-footer-toggle-label",
+  );
   const supportHistorySortShortToggle = document.getElementById(
     "support-history-sort-short-toggle",
   );
@@ -348,6 +357,18 @@
     if (supportHistoryFooterToggle) {
       supportHistoryFooterToggle.checked =
         layoutState.supportHistoryFooterCompact !== false;
+    }
+    if (supportHistoryBootDebugToggleLabel) {
+      supportHistoryBootDebugToggleLabel.title =
+        getSupportFilterTooltipText("boot");
+    }
+    if (supportHistoryPartialToggleLabel) {
+      supportHistoryPartialToggleLabel.title =
+        getSupportFilterTooltipText("partial");
+    }
+    if (supportHistoryFooterToggleLabel) {
+      supportHistoryFooterToggleLabel.title =
+        getSupportFilterTooltipText("footer");
     }
     if (backupCompareDetailWrap) {
       backupCompareDetailWrap.open = layoutState.backupDetailOpen === true;
@@ -1377,6 +1398,27 @@
     return ensureMessage(tooltipFromConfig, fallbackText);
   }
 
+  function getSupportFilterTooltipText(tooltipKey) {
+    if (tooltipKey === "boot") {
+      return ensureMessage(
+        dashboardCompactMessages.supportFilterTooltipBootDebug,
+        "Tooltip: Boot-Debug im Verlauf ein- oder ausblenden. Naechster Schritt: Schalter mit Leertaste umstellen.",
+      );
+    }
+
+    if (tooltipKey === "partial") {
+      return ensureMessage(
+        dashboardCompactMessages.supportFilterTooltipPartial,
+        "Tooltip: Teilwortsuche ein- oder ausblenden. Naechster Schritt: Suchbegriff eingeben und Enter druecken.",
+      );
+    }
+
+    return ensureMessage(
+      dashboardCompactMessages.supportFilterTooltipFooter,
+      "Tooltip: Footer-Hinweis kurz oder lang schalten. Naechster Schritt: Bei kleiner Breite erst Fenster vergroessern.",
+    );
+  }
+
   function normalizeSupportQueryTokens(queryText) {
     const usePartialMode = isSupportPartialModeEnabled();
     const minLength = usePartialMode ? 3 : 2;
@@ -1516,6 +1558,7 @@
 
     if (supportHistoryMeta) {
       const filterLabel = getSupportFilterLabel(safeFilter);
+      const hasSearchQuery = safeQuery.length > 0;
       const modeText = queryContext.usePartialMode
         ? `Modus: Teilwort (enthaelt, min. 3 Zeichen). Aktiver Filter: ${filterLabel}.`
         : "Modus: Ganze Woerter (Standard).";
@@ -1526,7 +1569,10 @@
         queryContext.usePartialMode && shortTokenList.length > 0
           ? ` Hinweis: Kurze Suchbegriffe ignoriert (unter 3 Zeichen): ${shortTokenList.join(", ")}.${queryContext.ignoredShortTokens.length > 3 ? " (+weitere)" : ""}`
           : "";
-      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText}${shortHint} Tipp: Enter startet die Suche sofort.`;
+      const emptyQueryHint = hasSearchQuery
+        ? ""
+        : " Hinweis: Kein Suchwort gesetzt. Naechster Schritt: Suchfeld fuellen und Enter druecken.";
+      supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText}${shortHint}${emptyQueryHint} Tipp: Enter startet die Suche sofort.`;
     }
 
     if (supportHistoryEmptyHelp) {
@@ -1555,7 +1601,7 @@
           supportHistoryFooterToggle.disabled = autoCompact;
           supportHistoryFooterToggle.title = autoCompact
             ? "Auto-Kurzmodus aktiv unter 640px. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
-            : "Footer-Hinweis manuell umschalten.";
+            : getSupportFilterTooltipText("footer");
         }
         supportHistoryFooterHint.textContent =
           autoCompact || isSupportFooterCompactEnabled()
@@ -1628,7 +1674,7 @@
         supportHistoryFooterToggle.disabled = autoCompact;
         supportHistoryFooterToggle.title = autoCompact
           ? "Auto-Kurzmodus aktiv unter 640px. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
-          : "Footer-Hinweis manuell umschalten.";
+          : getSupportFilterTooltipText("footer");
       }
       supportHistoryFooterHint.textContent =
         autoCompact || isSupportFooterCompactEnabled()
