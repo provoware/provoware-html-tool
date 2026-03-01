@@ -107,3 +107,11 @@ Iteration: 36
 ## Next Step
 
 - Option A als naechstes: Boot-View stabilisieren (Phasen, Ampel, Details, Weiter-Gate).
+
+## Iteration 37 – Plugin-Loader-Hardening
+
+- Plugin-Manifest validiert jetzt doppelte IDs vor dem Laden (Validierung = Eingabepruefung).
+- Plugin-Loader blockiert Modulpfade ausserhalb des Projektordners fuer mehr Sicherheit.
+- Neue Tests decken beide Fehlerfaelle ab (doppelte ID + unsicherer Pfad).
+- `bash start.sh` lief komplett gruen durch.
+- Naechste zwei Pflichtziele bleiben: **B (Plugin-Loader minimal absichern)** und **C (Storage-Service robust)**.

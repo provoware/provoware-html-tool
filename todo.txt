@@ -112,3 +112,6 @@ Laienvorschläge
 
 - [x] P1: Strategie-Update Iteration 36 abgeschlossen (Mini-Patch-Reihenfolge + Priorisierung B/C in allen Info-Dateien synchronisiert).
 - [ ] P1: Naechster Mini-Punkt: PatchSpec fuer Plugin-Loader-Hardening (Manifestfehler + isolierter Fehlerpfad) vorbereiten.
+
+- [x] P1: Plugin-Loader-Hardening umgesetzt (duplizierte Plugin-ID blockieren + Pfad ausserhalb Projekt verhindern).
+- [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und mit Start-Routine pruefen.

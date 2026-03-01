@@ -199,3 +199,9 @@
 - AGENTS.md um klare Releasefertig-Definition erweitert: nur fertige Patches mit Fehlerpfad, Test, Doku und gruenem `bash start.sh`.
 - Neue Regel fuer Fortschrittsstatus: Dateistand ueber Dateinamen (z. B. `_v002`, `_ready`) oder zentrales `data/file_status_index.json` sichtbar halten.
 - Risiko: niedrig, da nur Prozessregeln dokumentiert wurden.
+
+## 2026-03-01 – Plugin-Loader Hardening (ID + Pfadschutz)
+
+- Plugin-Manifest validiert jetzt doppelte Plugin-IDs und stoppt frueh mit klarer Laienmeldung.
+- Plugin-Pfade werden auf Projektgrenzen geprueft, damit keine externen Pfade geladen werden.
+- Risiko: niedrig, da nur Plugin-Validierung, ein Dummy-Manifest und Tests erweitert wurden.
