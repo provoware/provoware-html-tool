@@ -12,3 +12,5 @@
 - Startfehler immer in data/logs/start_routine.log ablegen (Debug nutzbar mit START_DEBUG=1).
 - Plugin-Loader immer ueber `config/manifests/plugins.manifest.json` pruefen.
 - Registry-Debug nur bei START_DEBUG=1 mit Detailursachen anzeigen.
+- JSON-Store validiert Pflichtfelder und Typen vor jedem Schreiben (Schema-Check).
+- JSON-Store bietet `onBackupCreated` als Backup-Hook fuer Folgeaktionen.

@@ -122,3 +122,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Immer alle Details ausgeben (abgelehnt wegen Laienfokus).
 **Risiko/Side-Effects:** Mehr Fehlerdetails im Debug-Modus, keine Aenderung im Normalmodus.
 **Verknuepft:** Patch-ID local-007
+
+## FIX-20260301-002: Schema-Check-und-Backup-Hook-im-JSON-Store
+
+**Kategorie:** JSON/Backup
+**Symptom (fuer Laien):** Falsche Felder konnten gespeichert werden und Folgeaktionen nach Backup waren schwer automatisierbar.
+**Technische Ursache:** Write-Pfad pruefte nur Objektform, aber nicht Pflichtfelder/Datentypen und bot keinen Hook nach Backup-Erstellung.
+**Trigger:** Speichern mit unvollstaendigen oder falsch typisierten Daten.
+**Fix (kurz):** `atomicWriteJson` um optionale Schema-Pruefung (`requiredKeys`, `types`) und `onBackupCreated`-Hook erweitert.
+**Geaenderte Dateien/Marker:** system-core/json_store.js, test/json_store.test.js
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Schema-Check am Write-Einstieg und Backup-Folgeaktionen ueber Hook anbinden.
+**Alternative(n):** Vollstaendiger JSON-Schema-Validator als zusaetzliche Abhaengigkeit.
+**Risiko/Side-Effects:** Strengere Validation kann alte, ungueltige Daten sofort blockieren.
+**Verknuepft:** Patch-ID local-008

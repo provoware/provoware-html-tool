@@ -18,7 +18,8 @@ NEXT (Priorität)
 - [x] P1: Plugin-Loader minimal umgesetzt (Manifest lesen, Fehler isolieren).
 - [x] P1: Debug-Modus für Registry-Fehler mit Detail-Ausgabe ausbauen.
 - [ ] P1: Backup-Auswahl als UI-Dialog ergänzen.
-- [ ] P1: Storage-Service robust weiter ausbauen (Schema-Validierung + Backup-Hook).
+- [x] P1: Storage-Service robust weiter ausbauen (Schema-Validierung + Backup-Hook).
+- [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden.
 
 - [x] Start-Routine-Fehler mit Log-Pfad + optionalem Debug-Modus verbessert.
 
@@ -28,3 +29,4 @@ Laienvorschläge
 3) Wenn ein Test fehlschlägt: Meldung lesen und erneut versuchen.
 4) Für bessere Lesbarkeit Kontrast+ Theme nutzen.
 5) Bei Datenfehlern: Protokoll öffnen, dann Reparatur starten.
+6) Bei Speicherfehlern: Eingabefelder prüfen (Pflichtfelder + Datentyp) und erneut versuchen.

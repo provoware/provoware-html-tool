@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 9
+Iteration: 10
 
 ## Gemacht
 
@@ -19,7 +19,8 @@ Iteration: 9
 - Start-Routine-Fehlerausgabe um Debug-Modus und Log-Datei erweitert.
 - Plugin-Loader minimal umgesetzt (Manifest, isoliertes Laden, Health-Check).
 - Registry-Health-Check mit optionalen Debug-Details erweitert.
+- Storage-Service erweitert: JSON-Schema-Validierung vor Write und Backup-Hook fuer Folgeschritte.
 
 ## Next Step
 
-- Option C: Storage-Service weiter absichern (Schema-Check und Backup-Hook ausbauen).
+- Option C fortgesetzt: Backup-Auswahl als UI-Dialog auf neuen Backup-Hook aufsetzen.
