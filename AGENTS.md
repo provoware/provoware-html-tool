@@ -321,7 +321,7 @@ Reihenfolge im Iterationsablauf: 1) SELFINFO.md + PROJECT_INFO.md lesen
 In jeder Iteration wird mindestens ein kleiner, sichtbarer Teil von Hilfe,
 Hilfselementen, Beschreibungen oder Tooltips verbessert.
 
-16.2 Was pro Iteration mindestens verbessert werden muss (1 Punkt reicht)
+16.2 Was pro Iteration mindestens verbessert werden muss (2 Punkte reichen)
 - Ein Hilfe-Text in einfacher Sprache (max. 2 kurze Sätze).
 - Ein Tooltip mit klarer Aktion + Rückweg.
 - Eine Fehlermeldung nach der Schablone aus Abschnitt 6.2.
@@ -335,7 +335,7 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 - Nie nur Farbe als Statussignal: immer Text/Icon ergänzen.
 
 16.4 Farben, Kontrast, Themes
-- Standardmäßig mindestens 3 Themes anbieten: Hell, Dunkel, Kontrast+.
+- Standardmäßig mindestens 4 Themes anbieten: Hell, Dunkel, rötlich, comouflage.
 - Kontrastziel mindestens WCAG AA (Text/Bedienflächen).
 - Fokuszustand in jedem Theme klar sichtbar.
 - Farbwerte zentral halten (Design-Tokens/Variablen), nicht verteilt.
@@ -367,7 +367,7 @@ Hilfselementen, Beschreibungen oder Tooltips verbessert.
 - In CHANGELOG.md 1 kurze Zeile zur UX/Hilfe-Mini-Optimierung ergänzen.
 - README.txt in jeder Iteration kurz aktualisieren (Fortschritt/Status + naechster Schritt).
 - In todo.txt den erledigten Mini-Punkt abhaken und nächsten Mini-Punkt planen.
-
+- Erstelle und erweitere in jeder iteration die PROJEKTBESCHREIBUNG.md mit zusätzlichen hilfreichen und weiterführenden Informationen und Tooldetails / Tool-Umfang
 17) Referenzbild-Analyse + Platzhalter-Scan (Pflicht)
 17.1 Rhythmus fuer Referenzbild
 - In jeder 3. Iteration muss das Vorgabe-Bild im Projektordner geprueft werden
