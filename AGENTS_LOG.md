@@ -49,3 +49,4 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-02 | patch-064 | Lesemodus-Schliessen + Inline-Hilfe Songtext | templates/dashboard.html,templates/dashboard.js,templates/quick_store_module.js,test/quick_store_module.test.js,README.txt,docs/HILFE.md,todo.txt,CHANGELOG.md,SELFINFO.md,PROJEKTBESCHREIBUNG.md
 
 2026-03-02 | PATCH-065 | Referenzbild-Datei geloescht, Dashboard-Layout an Vorlage angenaehert und Design-Layout-Manifest mit Validierung eingefuehrt | templates/dashboard.html, templates/dashboard.css, config/design_layout_manifest.json, system-module/design_layout_manifest.js, test/design_layout_manifest.test.js, docs/DESIGN_LAYOUT_MANIFEST.md, todo.txt, Doku-Updates
+- PATCH-066 | Ziel: Theme-Kontrast Rail/Banner + Kartenprofile + Boot-Fallback | Dateien: templates/dashboard.css, templates/module_workspace.js, tools/release_readiness_check.js, templates/boot_status.js, system-module/design_layout_manifest.js

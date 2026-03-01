@@ -106,3 +106,9 @@ Naechster Schritt: Erst erneut versuchen, dann Reparatur starten, danach bei Bed
 - Neu: Im Lesemodus gibt es jetzt den Knopf **Vorschau schliessen (Escape)** als klaren Rueckweg.
 - Neu: Unter den Vorlagen sehen Sie eine kurze Inline-Hilfe, was Intro, Refrain, Bridge und Sonstiges bedeuten.
 - Naechster Schritt: Lesemodus um Kopieren-Knopf erweitern.
+
+## Theme-Kontrast (Iteration 66)
+
+- Was macht das? Rail-Rahmen, Statusbanner und Kartenfarben bleiben in allen 5 Themes gut lesbar.
+- Was passiert mit Daten? Es werden nur Design-Tokens geaendert, keine Nutzdaten.
+- Wie mache ich rueckgaengig? Im Theme-Feld auf ein anderes Thema wechseln oder CSS-Token zurücksetzen.

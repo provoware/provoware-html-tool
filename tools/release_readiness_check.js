@@ -168,6 +168,12 @@ function checkThemeContrast(dashboardCss, minContrastRatio = 4.5) {
   const targets = [
     { key: "fg", backgroundKey: "bg", label: "Haupttext" },
     { key: "topbar-fg", backgroundKey: "topbar", label: "Topbar" },
+    { key: "banner-fg", backgroundKey: "banner-bg", label: "Statusbanner" },
+    { key: "fg", backgroundKey: "rail-bg", label: "Rail" },
+    { key: "fg", backgroundKey: "module-project-bg", label: "Modul Projekt" },
+    { key: "fg", backgroundKey: "module-sales-bg", label: "Modul Vertrieb" },
+    { key: "fg", backgroundKey: "module-analytics-bg", label: "Modul Analyse" },
+    { key: "fg", backgroundKey: "module-support-bg", label: "Modul Support" },
   ];
 
   return Object.entries(themeVariables).flatMap(([themeName, variables]) => {
@@ -204,6 +210,9 @@ function runReleaseReadinessCheck(options = {}) {
   const dashboardCss = readUtf8(path.join(rootPath, "templates/dashboard.css"));
   const dashboardScript = readUtf8(
     path.join(rootPath, "templates/dashboard.js"),
+  );
+  const moduleWorkspaceScript = readUtf8(
+    path.join(rootPath, "templates/module_workspace.js"),
   );
   const messagesRaw = readUtf8(path.join(rootPath, "config/messages_de.json"));
   const messages = parseJsonText(messagesRaw, "messages_de.json");
@@ -336,6 +345,21 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardCss,
       '[data-theme="camo"]',
       "Theme Camouflage in CSS vorhanden",
+    ),
+    checkIncludes(
+      dashboardCss,
+      "--rail-frame",
+      "Rail-Design-Token in CSS vorhanden",
+    ),
+    checkIncludes(
+      dashboardCss,
+      "--banner-bg",
+      "Statusbanner-Token in CSS vorhanden",
+    ),
+    checkIncludes(
+      moduleWorkspaceScript,
+      "card.dataset.moduleProfile = entry.id",
+      "Modulprofil-Attribut fuer Karten ist vorhanden",
     ),
     checkIncludes(
       dashboardHtml,

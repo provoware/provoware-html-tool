@@ -73,6 +73,7 @@
       visibleModules.forEach((entry, index) => {
         const card = document.createElement("article");
         card.className = "module-card";
+        card.dataset.moduleProfile = entry.id;
         card.setAttribute("role", "listitem");
         if (maximizedId === entry.id) {
           card.classList.add("is-maximized");

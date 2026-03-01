@@ -3,7 +3,7 @@
     "name": "dashboard-layout-neon-v1",
     "source": "Beispielbild 2026-03-02",
     "goal": "Drei-Spalten-Aufbau mit linker Navigation, Kartenmitte und rechter Einstellungsleiste in barrierearmer Form.",
-    "updatedAt": "2026-03-02"
+    "updatedAt": "2026-03-03"
   },
   "layout": {
     "shell": {
@@ -52,14 +52,56 @@
     "radiusPx": 12,
     "buttonMinSizePx": [44, 44],
     "focusRing": "3px solid, hoher Kontrast",
-    "statusRule": "Status nie nur mit Farbe, immer mit Text"
+    "statusRule": "Status nie nur mit Farbe, immer mit Text",
+    "cardProfiles": [
+      {
+        "id": "project",
+        "tokenPrefix": "module-project",
+        "purpose": "Projektmanagement-Karten"
+      },
+      {
+        "id": "sales",
+        "tokenPrefix": "module-sales",
+        "purpose": "Vertrieb-und-CRM-Karten"
+      },
+      {
+        "id": "analytics",
+        "tokenPrefix": "module-analytics",
+        "purpose": "Analyse-und-Bericht-Karten"
+      },
+      {
+        "id": "support",
+        "tokenPrefix": "module-support",
+        "purpose": "Support-Karten"
+      }
+    ]
   },
   "themes": [
-    { "id": "light", "label": "Hell", "contrastTarget": "WCAG AA" },
-    { "id": "dark", "label": "Dunkel", "contrastTarget": "WCAG AA" },
-    { "id": "contrast", "label": "Kontrast+", "contrastTarget": "WCAG AA+" },
-    { "id": "warm", "label": "Roetlich", "contrastTarget": "WCAG AA" },
-    { "id": "camo", "label": "Camouflage", "contrastTarget": "WCAG AA" }
+    {
+      "id": "light",
+      "label": "Hell",
+      "contrastTarget": "WCAG AA"
+    },
+    {
+      "id": "dark",
+      "label": "Dunkel",
+      "contrastTarget": "WCAG AA"
+    },
+    {
+      "id": "contrast",
+      "label": "Kontrast+",
+      "contrastTarget": "WCAG AA+"
+    },
+    {
+      "id": "warm",
+      "label": "Roetlich",
+      "contrastTarget": "WCAG AA"
+    },
+    {
+      "id": "camo",
+      "label": "Camouflage",
+      "contrastTarget": "WCAG AA"
+    }
   ],
   "a11y": {
     "keyboard": ["Tab", "Shift+Tab", "Enter", "Space", "Escape"],

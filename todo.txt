@@ -114,9 +114,9 @@ Laienvorschläge
 - [ ] P1: Offene Platzhalter mit Risiko in QUESTIONS_TODO.md als Entscheidungsfrage aufnehmen.
 - [x] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
 
-- [ ] P1: UI-Fix aus Layout-Manifest umsetzen: Linke/rechte Rail mit klaren Neon-Rahmen + Statusbanner final auf alle Themes angleichen (Akzeptanz: AA-Kontrast in 5 Themes, Tastaturfokus sichtbar, Screenshot aktualisiert).
+- [x] P1: UI-Fix aus Layout-Manifest umsetzen: Linke/rechte Rail mit klaren Neon-Rahmen + Statusbanner final auf alle Themes angleichen (Akzeptanz: AA-Kontrast in 5 Themes, Tastaturfokus sichtbar, Screenshot aktualisiert).
 
-- [ ] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
+- [x] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
 
 - [x] P1: AGENTS-Iterationspipeline um einen zusaetzlichen Pflichtschritt "Autonomer Abschluss-Check" erweitern.
 - [x] P1: Start-Routine-Ausgabe fuer Abschluss-Check in README als Mini-Leitfaden (3 klare Schritte) ergaenzen.

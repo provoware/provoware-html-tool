@@ -30,7 +30,7 @@
     const safeState = ["ok", "warn", "fail"].includes(state) ? state : "warn";
     const safeDetail = normalizeText(
       detail,
-      "Naechster Schritt: Erneut versuchen.",
+      "Naechster Schritt: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
     );
 
     node.dataset.state = safeState;
@@ -51,7 +51,7 @@
       const safeState = ["ok", "warn", "fail"].includes(state) ? state : "warn";
       const safeText = normalizeText(
         text,
-        "Startstatus unklar. Naechster Schritt: Erneut versuchen.",
+        "Startstatus unklar. Naechster Schritt: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
       );
 
       summary.dataset.state = safeState;

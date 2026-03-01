@@ -1,3 +1,8 @@
+## Iteration 66 – Kontrast und Design-Tokens
+- Rail-Rahmen und Statusbanner sind jetzt pro Theme mit festen Token-Farben definiert und auf WCAG AA geprueft.
+- Modul-Karten nutzen zentrale Profile (`project`, `sales`, `analytics`, `support`) statt verteilter Einzelwerte.
+- Referenzbild-Abgleich: Raster und Neon-Rahmen wurden auf exakte Wirkung nachgezogen.
+
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Start-Routine erzwingt jetzt genau zwei offene `Naechster Mini-Punkt`-Eintraege in `todo.txt`.
 - Neu (2026-03-01): Schnellspeicher speichert jetzt getrennt je Bereich in `data/quick_store_inbox.json`, `data/quick_store_lyrics.json` und `data/quick_store_research.json`.
 - Neu (2026-03-02): Songtext-Editor sitzt direkt im Bereich Songideen mit Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klaren Rueckweg-Knoepfen.
@@ -50,9 +55,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 85 %
-- **Erledigt:** 100 Punkte
-- **Offen:** 18 Punkte
+- **Fortschritt:** 86 %
+- **Erledigt:** 102 Punkte
+- **Offen:** 16 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
