@@ -28,3 +28,67 @@ test("repairFromBackup stellt Daten wieder her", () => {
   assert.ok(result.filePath.endsWith("store.json"));
   assert.equal(typeof data.v, "number");
 });
+
+test("atomicWriteJson validiert requiredKeys im Schema", () => {
+  assert.throws(
+    () =>
+      atomicWriteJson(
+        filePath,
+        { id: 7 },
+        {
+          schema: { requiredKeys: ["id", "name"] },
+        },
+      ),
+    /Pflichtfeld fehlt: name/,
+  );
+});
+
+test("atomicWriteJson validiert Typen im Schema", () => {
+  assert.throws(
+    () =>
+      atomicWriteJson(
+        filePath,
+        { id: "7", name: "Demo" },
+        {
+          schema: {
+            requiredKeys: ["id", "name"],
+            types: { id: "number", name: "string" },
+          },
+        },
+      ),
+    /Datentyp ungueltig bei id/,
+  );
+});
+
+test("atomicWriteJson ruft Backup-Hook bei Backup-Erstellung auf", () => {
+  const events = [];
+  atomicWriteJson(
+    filePath,
+    { id: 1, name: "Alt" },
+    {
+      schema: {
+        requiredKeys: ["id", "name"],
+        types: { id: "number", name: "string" },
+      },
+    },
+  );
+
+  const result = atomicWriteJson(
+    filePath,
+    { id: 2, name: "Neu" },
+    {
+      schema: {
+        requiredKeys: ["id", "name"],
+        types: { id: "number", name: "string" },
+      },
+      onBackupCreated(payload) {
+        events.push(payload);
+      },
+    },
+  );
+
+  assert.equal(events.length, 1);
+  assert.equal(events[0].filePath, filePath);
+  assert.equal(events[0].backupPath.endsWith("store.backup.json"), true);
+  assert.equal(result.backupPath.endsWith("store.backup.json"), true);
+});

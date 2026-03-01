@@ -22,3 +22,9 @@
 - Registry-Health-Check liefert jetzt im Debug-Modus klare Detailursachen statt nur Sammelfehler.
 - Start-Routine zeigt diese Details nur bei `START_DEBUG=1` an, sonst bleibt die Laienmeldung kurz.
 - Risiko: niedrig, da nur Fehlerpfad und Tests erweitert wurden.
+
+## 2026-03-01 – Storage-Schema und Backup-Hook
+
+- JSON-Store prueft jetzt optional Pflichtfelder und Datentypen vor jedem Write.
+- JSON-Store bietet neuen Backup-Hook (`onBackupCreated`) fuer automatische Folgeaktionen.
+- Risiko: niedrig, da nur Write-Validierung und Tests im Storage-Bereich erweitert wurden.

@@ -13,6 +13,58 @@ function assertObject(value, name) {
   }
 }
 
+function assertFunction(value, name) {
+  if (typeof value !== "function") {
+    throw new Error(`${name} ist keine Funktion. Bitte Eingabe prüfen.`);
+  }
+}
+
+function validateSchema(payload, schema) {
+  if (schema === undefined || schema === null) {
+    return;
+  }
+
+  assertObject(schema, "Schema");
+  if (
+    schema.requiredKeys !== undefined &&
+    !Array.isArray(schema.requiredKeys)
+  ) {
+    throw new Error(
+      "Schema.requiredKeys ist ungueltig. Bitte Eingabe pruefen.",
+    );
+  }
+
+  if (schema.types !== undefined) {
+    assertObject(schema.types, "Schema.types");
+  }
+
+  const requiredKeys = schema.requiredKeys || [];
+  for (const key of requiredKeys) {
+    assertNonEmptyString(key, "Schema-Schluessel");
+    if (!(key in payload)) {
+      throw new Error(
+        `Pflichtfeld fehlt: ${key}. Reparatur starten oder Eingabe pruefen.`,
+      );
+    }
+  }
+
+  const types = schema.types || {};
+  for (const [key, expectedType] of Object.entries(types)) {
+    assertNonEmptyString(expectedType, "Schema-Typ");
+    if (!(key in payload)) {
+      continue;
+    }
+
+    const value = payload[key];
+    const actualType = Array.isArray(value) ? "array" : typeof value;
+    if (actualType !== expectedType) {
+      throw new Error(
+        `Datentyp ungueltig bei ${key}. Erwartet ${expectedType}, gefunden ${actualType}. Bitte Reparatur starten oder Eingabe pruefen.`,
+      );
+    }
+  }
+}
+
 function parseJson(raw, filePath) {
   try {
     return JSON.parse(raw);
@@ -39,9 +91,17 @@ function readJson(filePath) {
   return output;
 }
 
-function atomicWriteJson(filePath, payload) {
+function atomicWriteJson(filePath, payload, options = {}) {
   assertNonEmptyString(filePath, "Dateipfad");
   assertObject(payload, "JSON-Daten");
+  assertObject(options, "Optionen");
+
+  const schema = options.schema || null;
+  const onBackupCreated = options.onBackupCreated || null;
+  validateSchema(payload, schema);
+  if (onBackupCreated !== null) {
+    assertFunction(onBackupCreated, "Backup-Hook");
+  }
 
   const dir = path.dirname(filePath);
   const name = path.basename(filePath, ".json");
@@ -52,6 +112,9 @@ function atomicWriteJson(filePath, payload) {
 
   if (fs.existsSync(filePath)) {
     fs.copyFileSync(filePath, backupPath);
+    if (onBackupCreated) {
+      onBackupCreated({ filePath, backupPath });
+    }
   }
 
   const content = `${JSON.stringify(payload, null, 2)}\n`;
@@ -62,10 +125,17 @@ function atomicWriteJson(filePath, payload) {
     throw new Error("Schreiben fehlgeschlagen. Bitte Reparatur starten.");
   }
 
-  return {
+  const output = {
     filePath,
     backupPath: fs.existsSync(backupPath) ? backupPath : null,
   };
+
+  if (typeof output.filePath !== "string") {
+    throw new Error(
+      "Ausgabe ungueltig. Protokoll oeffnen und erneut versuchen.",
+    );
+  }
+  return output;
 }
 
 module.exports = {
