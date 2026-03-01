@@ -157,35 +157,61 @@ function writeRegistryWithVersion(options) {
 }
 
 function runRegistryHealthCheck() {
-  const manifestPath = path.join(
-    process.cwd(),
-    "config",
-    "manifests",
-    "registry.manifest.json",
-  );
-  const registryPath = path.join(process.cwd(), "data", "registry.json");
+  return runRegistryHealthCheckWithOptions({
+    debugMode: false,
+    manifestPath: path.join(
+      process.cwd(),
+      "config",
+      "manifests",
+      "registry.manifest.json",
+    ),
+    registryPath: path.join(process.cwd(), "data", "registry.json"),
+  });
+}
 
-  const manifest = loadRegistryManifest(manifestPath);
+function runRegistryHealthCheckWithOptions(options) {
+  assertObject(options, "Optionen");
+  assertText(options.manifestPath, "Manifest-Pfad");
+  assertText(options.registryPath, "Registry-Pfad");
 
-  if (!fs.existsSync(registryPath)) {
+  const debugMode = options.debugMode === true;
+
+  try {
+    const manifest = loadRegistryManifest(options.manifestPath);
+
+    if (!fs.existsSync(options.registryPath)) {
+      return {
+        ok: true,
+        message: "Registry fehlt noch. Wird bei erstem Schreiben angelegt.",
+      };
+    }
+
+    const registry = readJson(options.registryPath);
+    const result = validateRegistry(registry, manifest);
+
     return {
       ok: true,
-      message: "Registry fehlt noch. Wird bei erstem Schreiben angelegt.",
+      message: `Registry ist gueltig mit ${result.count} Eintraegen.`,
+    };
+  } catch (error) {
+    const details =
+      error instanceof Error
+        ? error.message
+        : "Unbekannter Fehler. Protokoll oeffnen und erneut versuchen.";
+
+    return {
+      ok: false,
+      message:
+        "Registry-Check fehlgeschlagen. Reparatur starten oder Protokoll oeffnen.",
+      details: debugMode ? details : null,
     };
   }
-
-  const registry = readJson(registryPath);
-  const result = validateRegistry(registry, manifest);
-
-  return {
-    ok: true,
-    message: `Registry ist gueltig mit ${result.count} Eintraegen.`,
-  };
 }
 
 module.exports = {
   loadRegistryManifest,
   runRegistryHealthCheck,
+  runRegistryHealthCheckWithOptions,
   validateRegistry,
   writeRegistryWithVersion,
 };

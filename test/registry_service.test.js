@@ -4,6 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const {
   loadRegistryManifest,
+  runRegistryHealthCheckWithOptions,
   validateRegistry,
   writeRegistryWithVersion,
 } = require("../system-core/registry_service");
@@ -66,4 +67,50 @@ test("writeRegistryWithVersion schreibt Version und current-Zeiger", () => {
   assert.ok(fs.existsSync(result.versionPath));
   assert.ok(fs.existsSync(path.join(dataDir, "registry.current.json")));
   assert.ok(fs.existsSync(path.join(dataDir, "registry.json")));
+});
+
+test("runRegistryHealthCheckWithOptions liefert Debug-Details bei Fehler", () => {
+  const result = runRegistryHealthCheckWithOptions({
+    debugMode: true,
+    manifestPath,
+    registryPath: path.join(process.cwd(), "dummys", "nicht-da.json"),
+  });
+
+  assert.equal(result.ok, true);
+  assert.match(result.message, /Registry fehlt noch/);
+
+  const brokenPath = path.join(process.cwd(), "dummys", "broken-registry.json");
+  fs.writeFileSync(brokenPath, "{ kaputt", "utf8");
+
+  const brokenResult = runRegistryHealthCheckWithOptions({
+    debugMode: true,
+    manifestPath,
+    registryPath: brokenPath,
+  });
+
+  assert.equal(brokenResult.ok, false);
+  assert.match(brokenResult.message, /Registry-Check fehlgeschlagen/);
+  assert.match(brokenResult.details, /JSON/);
+
+  fs.rmSync(brokenPath, { force: true });
+});
+
+test("runRegistryHealthCheckWithOptions versteckt Details ohne Debug", () => {
+  const brokenPath = path.join(
+    process.cwd(),
+    "dummys",
+    "broken-registry-no-debug.json",
+  );
+  fs.writeFileSync(brokenPath, "{ kaputt", "utf8");
+
+  const result = runRegistryHealthCheckWithOptions({
+    debugMode: false,
+    manifestPath,
+    registryPath: brokenPath,
+  });
+
+  assert.equal(result.ok, false);
+  assert.equal(result.details, null);
+
+  fs.rmSync(brokenPath, { force: true });
 });

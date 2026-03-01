@@ -16,3 +16,9 @@
 - Plugin-Loader minimal ergänzt: Manifest lesen, Plugin isoliert laden, Fehler klar melden.
 - Start-Routine um Plugin-Loader-Health-Check erweitert (fester Schritt vor Systemtest).
 - Neue Tests und Dummy-Manifest fuer Plugin-Loader-Fehlerfall ergänzt.
+
+## 2026-03-01 – Registry-Debug im Startablauf
+
+- Registry-Health-Check liefert jetzt im Debug-Modus klare Detailursachen statt nur Sammelfehler.
+- Start-Routine zeigt diese Details nur bei `START_DEBUG=1` an, sonst bleibt die Laienmeldung kurz.
+- Risiko: niedrig, da nur Fehlerpfad und Tests erweitert wurden.

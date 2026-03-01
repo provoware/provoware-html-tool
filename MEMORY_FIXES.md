@@ -108,3 +108,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Dynamischer Loader mit VM-Sandbox.
 **Risiko/Side-Effects:** Mehr Strukturdateien im Projekt.
 **Verknuepft:** Patch-ID local-006
+
+## FIX-20260301-001: Registry-Debug-Details-im-Startlauf
+
+**Kategorie:** Debugging/Boot
+**Symptom (fuer Laien):** Start meldete Registry-Fehler ohne klare Ursache.
+**Technische Ursache:** Health-Check gab nur Sammelmeldung, keine Detailursache zurueck.
+**Trigger:** Defekte `data/registry.json` oder ungueltige Registry-Felder.
+**Fix (kurz):** Optionaler Debug-Modus liefert Details, Standardmodus bleibt kurz und laienfreundlich.
+**Geaenderte Dateien/Marker:** system-core/registry_service.js, tools/start_routine.js, test/registry_service.test.js
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Debug-Detailpfad fuer Health-Checks mit testen.
+**Alternative(n):** Immer alle Details ausgeben (abgelehnt wegen Laienfokus).
+**Risiko/Side-Effects:** Mehr Fehlerdetails im Debug-Modus, keine Aenderung im Normalmodus.
+**Verknuepft:** Patch-ID local-007

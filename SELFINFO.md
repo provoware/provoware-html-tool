@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 8
+Iteration: 9
 
 ## Gemacht
 
@@ -18,6 +18,7 @@ Iteration: 8
 
 - Start-Routine-Fehlerausgabe um Debug-Modus und Log-Datei erweitert.
 - Plugin-Loader minimal umgesetzt (Manifest, isoliertes Laden, Health-Check).
+- Registry-Health-Check mit optionalen Debug-Details erweitert.
 
 ## Next Step
 
