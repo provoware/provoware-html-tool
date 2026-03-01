@@ -596,6 +596,39 @@
           </article>
         </aside>
       </section>
+      <footer class="tool-footer" aria-label="Tool-Fussbereich">
+        <section class="footer-card" aria-labelledby="footer-debug-title">
+          <h2 id="footer-debug-title">Debugging</h2>
+          <p class="field-tip">
+            Technikdetails fuer Fehlersuche in einfacher Sprache.
+          </p>
+          <pre id="footer-debug-output" class="debug"></pre>
+        </section>
+        <section class="footer-card" aria-labelledby="footer-log-title">
+          <h2 id="footer-log-title">Logging</h2>
+          <p class="field-tip">Letzte Aktionen mit naechstem Schritt.</p>
+          <ul id="footer-log-list" class="todo-list" role="list"></ul>
+        </section>
+        <section class="footer-card" aria-labelledby="footer-system-title">
+          <h2 id="footer-system-title">Tool-System-Infos</h2>
+          <p class="field-tip" id="system-meta">
+            Version und Projektpfad werden nach Verbindung angezeigt.
+          </p>
+          <label for="kasi-note-input">KASI_NOTIZ</label>
+          <textarea
+            id="kasi-note-input"
+            rows="3"
+            placeholder="Idee, Problem oder Frage"
+          ></textarea>
+          <div class="todo-actions" aria-label="Notiz-Aktionen">
+            <button type="button" id="kasi-note-paste">
+              Aus Zwischenablage einfuegen
+            </button>
+            <button type="button" id="kasi-note-save">Speichern</button>
+            <button type="button" id="tool-export">Gesamt-Export</button>
+          </div>
+        </section>
+      </footer>
     </main>
 
     <script src="module_workspace.js"></script>

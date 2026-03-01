@@ -1,3 +1,9 @@
+
+Update Iteration 78:
+- 3x3 Modulraster startet leer, Module werden links aktiviert und koennen per Klick maximiert/minimiert werden.
+- Footer hat jetzt drei Bereiche: Debugging, Logging, Tool-System-Infos inkl. KASI_NOTIZ Speichern (Anhaengen mit Zeitstempel).
+- Naechster Schritt: Rechte Sidebar fuer Favoriten/Schnellfunktionen flexibel ausbauen.
+
 ## Update Iteration 76 (2026-03-03)
 
 Fortschritt: Zwei offene Mini-Punkte abgeschlossen.

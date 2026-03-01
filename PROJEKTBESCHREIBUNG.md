@@ -285,3 +285,10 @@ Praktischer Einsatz:
 - Einheitliche Modul-Control-Hinweise (Tooltip + aria-label) erleichtern Maximieren, Minimieren und Ausblenden.
 - Start-Routine meldet jetzt einen kompakten A11y-Kurzbericht, damit Laien sofort sehen, ob Fokus/Enter/Escape/Kontrast im gruenen Bereich sind.
 - Naechster Ausbau: Gleiches Muster fuer Pin-Knopf und Fokusmodus (100%-Ansicht).
+
+
+## Iteration 78 – Toolumfang erweitert
+- Modul-Arbeitsflaeche nutzt ein fixes 3x3-Raster mit gleich grossen Slots und leerem Startzustand.
+- Footer ist in 3 Bereiche geteilt: Debugging, Logging, System-Infos mit Schnellnotiz `data/KASI_NOTIZ.txt`.
+- Schnellnotiz arbeitet als Append-Speicher (anhaengen statt ueberschreiben) und nutzt Zeitstempel fuer Nachvollziehbarkeit.
+- Gesamt-Export schreibt den aktuellen Werkzeugzustand nach `data/tool_export.json`.

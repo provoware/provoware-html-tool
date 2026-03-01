@@ -1,3 +1,11 @@
+## Iteration 78 (2026-03-01)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Fokusmodus-Hinweis im Inspector + Pin-Status in layout.json speichern).
+- Ergebnis: Fokusmodus schreibt jetzt klare Hilfe direkt in den rechten Hilfe-Bereich mit Rueckweg per Escape/Knopf.
+- Ergebnis: Modul-Anheften wird jetzt ueber `data/layout.json` gesichert und beim Aktivieren wiederhergestellt.
+- Mini-Optimierung: Neuer Footer mit Debugging, Logging, System-Info, KASI_NOTIZ-Schnellspeicher und Gesamt-Export.
+- Naechster Schritt: Rechte Sidebar als einklappbare Favoriten-Schnellleiste mit Moduloptionen ausbauen.
+
 ## Iteration 77 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Pin-Knopf + Fokusmodus mit Snapshot/Restore).

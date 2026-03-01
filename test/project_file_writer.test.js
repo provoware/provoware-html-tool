@@ -4,6 +4,7 @@ const assert = require("node:assert/strict");
 const {
   parseRelativePath,
   writeProjectJsonFile,
+  appendProjectTextFile,
 } = require("../system-module/project_file_writer");
 
 test("parseRelativePath validiert Ordner und Dateiname", () => {
@@ -57,4 +58,45 @@ test("writeProjectJsonFile schreibt JSON in verschachtelte Ordner", async () => 
   assert.equal(ok, true);
   assert.equal(writes.length, 1);
   assert.match(writes[0], /"version": 1/);
+});
+
+test("appendProjectTextFile haengt Zeile mit bestehendem Inhalt an", async () => {
+  let written = "";
+  const rootHandle = {
+    async getDirectoryHandle() {
+      return {
+        async getFileHandle() {
+          return {
+            async getFile() {
+              return {
+                async text() {
+                  return "[2026-03-01 10:00] Start";
+                },
+              };
+            },
+            async createWritable() {
+              return {
+                async write(content) {
+                  written = content;
+                },
+                async close() {
+                  return true;
+                },
+              };
+            },
+          };
+        },
+      };
+    },
+  };
+
+  const ok = await appendProjectTextFile(
+    rootHandle,
+    "data/KASI_NOTIZ.txt",
+    "[2026-03-01 10:05] Idee",
+  );
+
+  assert.equal(ok, true);
+  assert.match(written, /10:00/);
+  assert.match(written, /10:05/);
 });

@@ -1,3 +1,9 @@
+## 2026-03-01 – Iteration 78
+
+- Fokusmodus zeigt jetzt klare Hilfe im rechten Hilfebereich mit Rueckweg (Escape oder Button).
+- Modul-Pin wird in `data/layout.json` gespeichert und bei neuer Aktivierung wiederhergestellt.
+- UX-Mini-Optimierung: Footer um Debugging/Logging/System-Infos + KASI_NOTIZ + Gesamt-Export erweitert.
+
 ## 2026-03-03 – Wartbarkeit: Modell-Helfer + Fokusmodus
 
 - Dashboard nutzt jetzt zentrale Layout-Helfer aus `system-module/dashboard_model.js` (weniger doppelte Logik, leichter zu warten).
