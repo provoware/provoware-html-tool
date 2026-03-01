@@ -10,10 +10,11 @@
     "bash start.sh ausfuehren.",
     "Mit Tab zum Theme-Feld gehen und mit Enter das Thema wechseln.",
     "Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
+    "Alle 5 Iterationen das Referenzbild kurz mit dem Dashboard vergleichen.",
   ];
 
   function renderQuickGuide(steps) {
-    if (!Array.isArray(steps) || steps.length !== 3) {
+    if (!Array.isArray(steps) || steps.length !== 4) {
       setStatus("Leitfaden ungueltig. Reparatur starten.");
       return false;
     }

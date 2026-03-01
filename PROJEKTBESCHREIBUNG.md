@@ -82,3 +82,8 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Der Startbereich zeigt jetzt 4 feste Boot-Phasen mit Ampel und Text fuer klare Orientierung.
 - Das neue Tool `templates/boot_status.js` kapselt die Statuslogik modular fuer bessere Wartbarkeit.
 - Zusatznutzen: Bei Ordnerfehlern wird die passende Phase rot markiert und ein klarer naechster Schritt genannt.
+
+## Iteration 51 – Hilfe-Hinweis Referenzbild
+- Das Help-Panel zeigt jetzt im Mini-Leitfaden einen klaren 4. Schritt: Referenzbild alle 5 Iterationen mit dem Dashboard vergleichen.
+- Vorteil fuer Laien: der Pflicht-Rhythmus ist direkt im UI sichtbar und wird nicht vergessen.
+- Tool-Umfang: `system-module/help_panel.js` validiert nun 4 Leitfaden-Schritte mit klarer Fehlerreaktion.

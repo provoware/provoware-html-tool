@@ -29,3 +29,5 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-01 | PATCH-048 | Offenen TODO-Punkt Backup-Dialog E2E-Test vollstaendig abgeschlossen (Hook-Log -> Restore) | test/backup_restore_e2e.test.js, todo.txt, README.txt, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, MEMORY_FIXES.md, PROJEKTBESCHREIBUNG.md
 
 2026-03-01 | PATCH-050 | Boot-View-Statusbereich mit 4 Phasen + Ampeltexten stabilisiert | templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, templates/boot_status.js, tools/release_readiness_check.js, tools/start_routine.js, test/boot_status.test.js, test/release_readiness_check.test.js, test/start_routine.test.js, Doku-Updates
+
+2026-03-01 | PATCH-051 | Offenen TODO-Punkt abgeschlossen: Help-Panel zeigt Referenzbild-Rhythmus (alle 5 Iterationen) inkl. Validierung | templates/help-panel.js, system-module/help_panel.js, test/help_panel.test.js, todo.txt, README.txt, CHANGELOG.md, SELFINFO.md, PROJEKTBESCHREIBUNG.md, MEMORY_FIXES.md
