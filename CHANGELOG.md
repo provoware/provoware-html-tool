@@ -28,3 +28,9 @@
 - JSON-Store prueft jetzt optional Pflichtfelder und Datentypen vor jedem Write.
 - JSON-Store bietet neuen Backup-Hook (`onBackupCreated`) fuer automatische Folgeaktionen.
 - Risiko: niedrig, da nur Write-Validierung und Tests im Storage-Bereich erweitert wurden.
+
+## 2026-03-01 – Dashboard-Haupt-Kern-Modul und Autostart
+
+- Neues Kernmodul `system-core/dashboard_core.js` startet das Dashboard am Ende der Start-Routine automatisch.
+- Start-Routine hat jetzt 9 klare Schritte inklusive Dashboard-Autostart mit Headless-Fallback.
+- Risiko: niedrig, weil nur Startfluss + neue Tests ergänzt wurden.
