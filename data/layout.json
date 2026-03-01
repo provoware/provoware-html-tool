@@ -1,0 +1,10 @@
+{
+  "version": "v001",
+  "updatedAt": "2026-03-03T19:30:00.000Z",
+  "layout": {
+    "leftWidth": 260,
+    "rightWidth": 280,
+    "leftCollapsed": false,
+    "rightCollapsed": false
+  }
+}

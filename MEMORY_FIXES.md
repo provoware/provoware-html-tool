@@ -850,3 +850,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Doku-Hinweis ohne Startcheck (verworfen, zu spaet sichtbar).
 **Risiko/Side-Effects:** Niedrig, da nur Hinweislogik erweitert wurde.
 **Verknuepft:** PATCH-073
+
+## FIX-20260303-074: Layout-Persistenz-und-Splitter-fuer-Drei-Zonen
+
+**Kategorie:** UI/A11y/Export
+**Symptom (fuer Laien):** Die Anordnung wich vom Vorlagenbild ab und sprang nach Reload oft in eine andere Form.
+**Technische Ursache:** Es gab keine gespeicherte Layout-State-Datei fuer Rail-Breiten und Collapse-Zustaende.
+**Trigger:** Vergleich mit Vorlagenbild 2 und Wunsch nach exakter, stabiler Modul-Anordnung.
+**Fix (kurz):** Layout-Steuerung + Splitter + Collapse + Reset eingebaut und Zustand in `data/layout.json` gespeichert.
+**Geaenderte Dateien/Marker:** templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, data/layout.json
+**Tests/Checks:** npm run format, node --test, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer bei Layout-Patches Persistenz und Reset-Weg mitliefern.
+**Alternative(n):** Nur statische CSS-Breiten (verworfen wegen fehlender Flexibilitaet).
+**Risiko/Side-Effects:** Niedrig; nur Layout- und Bedienebene erweitert.
+**Verknuepft:** PATCH-074
