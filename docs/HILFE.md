@@ -270,3 +270,10 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Teilwortsuche hat jetzt eine Mindestlaenge von 3 Zeichen. Kurze Suchteile werden ignoriert, damit weniger Rauschen entsteht.
 - Jede Trefferzeile zeigt jetzt ein Badge mit dem aktiven Suchmodus (`Suchmodus: Ganzwort` oder `Suchmodus: Teilwort`).
 - Rueckweg bei unerwarteten Treffern: Suchmodus wechseln, Suchtext pruefen und erneut versuchen.
+
+## Support-Verlauf (neu erweitert)
+
+- Ignorierte Kurz-Suchbegriffe (unter 3 Zeichen) werden jetzt als Liste angezeigt, z. B. "ab", "xy".
+- Auf kleinen Breiten unter 640px wird der Footer-Hinweis automatisch kuerzer gezeigt.
+- Das Suchmodus-Badge nutzt ein Icon und zusaetzlichen Screenreader-Text, damit Status nicht nur ueber Farbe erkennbar ist.
+- Naechster Schritt bei Unsicherheit: Filter anwenden, dann Enter im Suchfeld druecken.

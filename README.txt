@@ -6,6 +6,13 @@ hoher Barrierefreiheit (A11y = Bedienbarkeit fuer alle) und stabiler
 Start-Routine. Die Start-Routine prueft automatisch Abhaengigkeiten,
 Formatierung, Tests und Release-Bereitschaft.
 
+## Release-Status (Iteration 98)
+- Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Kurz-Token-Liste, Auto-Kurzmodus unter 640px, Support-Badge mit Icon + Screenreader-Text).
+- Hilfe/UX verbessert: Support-Meta zeigt ignorierte kurze Suchbegriffe klar als Liste (max. 3 + Hinweis auf weitere).
+- A11y verbessert: Support-Badge hat jetzt zusaetzlich ein Icon und einen versteckten Screenreader-Text (sr-only = nur vorlesbar).
+- Responsive verbessert: Footer-Hinweis geht bei kleiner Breite automatisch in Kurzmodus mit klarem Rueckweg-Hinweis.
+- Naechster Schritt: Auto-Kurzmodus mit eigener aria-live-Ansage bei Statuswechsel ausbauen.
+
 ## Release-Status (Iteration 93)
 - Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Boot-Live-Ansage im Debug-Protokoll, kurzer Tastatur-Hinweis bei langen Support-Details, Detailmodus mit zuletzt geoeffnetem Zustand).
 - Hilfe/UX verbessert: Supportliste kuerzt den Tastaturhinweis automatisch, wenn der Detailtext sehr lang ist.

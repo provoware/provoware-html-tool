@@ -791,6 +791,22 @@ a:focus-visible {
   font-weight: 700;
 }
 
+.support-mode-badge-icon {
+  margin-right: 0.25rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 [data-state="ok"] {
   color: var(--ok);
   font-weight: 700;

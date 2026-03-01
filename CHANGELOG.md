@@ -1,3 +1,9 @@
+## Iteration 98 - Support-Hinweise und Mobile-A11y verbessert
+
+- Support-Meta listet ignorierte Kurz-Tokens jetzt klar im Text (maximal 3 Eintraege + Hinweis auf weitere).
+- Footer-Hinweis schaltet unter 640px automatisch auf Kurzmodus und erklaert den Rueckweg.
+- Support-Badge nutzt jetzt zusaetzlich Icon plus Screenreader-Text (nicht nur Farbe).
+
 ## Iteration 93 - Drei TODO-Punkte abgeschlossen
 
 - Boot-Live-Ansage schreibt bei Fokuszielwechsel jetzt auch einen klaren Debug-Text.

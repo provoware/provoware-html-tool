@@ -1,3 +1,12 @@
+## Iteration 98 (2026-03-01)
+
+- Ziel: Drei offene TODO-Punkte in einem kleinen Hilfe/A11y/Responsive-Patch abschliessen.
+- Ergebnis: Support-Meta zeigt ignorierte Kurz-Tokens als klare Liste (max. 3 + weitere-Hinweis).
+- Ergebnis: Footer-Hinweis schaltet unter 640px automatisch in den Kurzmodus und sperrt den manuellen Schalter waehrend Auto aktiv ist.
+- Ergebnis: Support-Badge nutzt jetzt Icon + Screenreader-Text (`sr-only`) fuer bessere Vorlesbarkeit.
+- Mini-Optimierung: Hinweistexte nennen immer den naechsten Schritt in einfacher Sprache.
+- Naechster Schritt: Auto-Kurzmodus bei Statuswechsel mit eigener aria-live-Ansage ergaenzen.
+
 ## Iteration 93 (2026-03-01)
 
 - Ziel: Drei offene TODO-Punkte in einem kleinen UI/A11y-Patch abschliessen.
