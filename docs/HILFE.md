@@ -1,3 +1,9 @@
+## Neu in Iteration 93
+
+- **Boot + Debug:** Die Boot-Live-Ansage wird jetzt auch als Debug-Text mitgeschrieben.
+- **Support-Verlauf:** Bei langen Detailtexten wird automatisch ein kuerzerer Tastatur-Hinweis gezeigt.
+- **Versionsvergleich:** Der Detailmodus nennt jetzt den zuletzt geoeffneten Zustand (geoeffnet/eingeklappt).
+
 ## Neu in Iteration 92
 
 - **Support-Verlauf:** Jeder Treffer zeigt einen kurzen Tastatur-Hinweis (Tab/Enter/Escape).

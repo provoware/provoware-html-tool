@@ -1,3 +1,10 @@
+## Iteration 93 – Boot-Debug, Support-Kurztext, Detailstatus
+
+- Beim Boot-Fokusziel-Wechsel wird die Live-Ansage jetzt auch im Debug-Protokoll angezeigt.
+- Der Support-Verlauf kuerzt den Tastatur-Hinweis automatisch, wenn der Detailtext lang ist.
+- Der Versions-Detailmodus zeigt zusaetzlich den zuletzt geoeffneten Zustand (geoeffnet/eingeklappt).
+- Naechster Schritt: Detailzustand pro Projekt dauerhaft speichern.
+
 ## Iteration 92 – Hilfe/UX und Detailmodus
 
 - Im Support-Verlauf traegt jetzt jeder Treffer einen kurzen Tastatur-Hinweis fuer Tab, Enter und Escape.
