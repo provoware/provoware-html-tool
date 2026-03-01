@@ -262,3 +262,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur manuelle Sichtpruefung (abgelehnt, zu unsicher).
 **Risiko/Side-Effects:** Start hat einen kurzen Zusatzschritt fuer Pruefung.
 **Verknüpft:** Patch-ID local-017
+
+## FIX-20260301-018: Genres-Archiv mit CSV und Duplikatpruefung
+
+**Kategorie:** Export/JSON/Docs
+**Symptom (fuer Laien):** Komma-Eingaben landeten nicht sauber einzeln im Archiv und Favoriten waren nicht eindeutig markierbar.
+**Technische Ursache:** Es fehlte ein zentraler Importpfad mit Normalisierung (Linux-Slug), Duplikatcheck und Favoriten-Marker.
+**Trigger:** Mehrere Eintraege in einem Feld, z. B. `*Techno*, House, techno`.
+**Fix (kurz):** Neues Kernmodul fuer Genres/Moods/Stile angelegt: CSV-Split, Profil/Kategorie-Pruefung, Duplikatfilter, Sternchen-Favoriten, Import/Export und JSON-Logging.
+**Geänderte Dateien/Marker:** system-core/genre_mood_style_archive.js, test/genre_mood_style_archive.test.js, docs/HILFE.md
+**Tests/Checks:** npm run format, npm test, bash start.sh
+**Prävention (künftig):** Ab jetzt immer bei Listenimporten zuerst normalisieren, dann Duplikate pruefen, danach loggen.
+**Alternative(n):** Freitext ohne Regeln (abgelehnt, zu fehleranfällig).
+**Risiko/Side-Effects:** Neue Datei und Tests erhoehen nur minimal die Laufzeit.
+**Verknüpft:** Patch-ID local-018

@@ -42,3 +42,9 @@
 - **Was passiert mit den Daten?** Es werden nur benoetigte Arbeitsordner erstellt (`data/`, `data/logs/`) und Logeintraege geschrieben.
 - **Wie mache ich rueckgaengig?** Ueberfluessige Logdateien koennen geloescht werden; der Code bleibt unveraendert.
 - **Naechster Schritt bei Fehlern:** Erst `START_DEBUG=1 bash start.sh` ausfuehren, danach `data/logs/start_routine.log` oeffnen.
+
+## Genres/Moods/Stile-Archiv (neu)
+
+- Komma-Eingaben werden einzeln gespeichert, z. B. `Techno, Chill, Hoerspiel`.
+- Favorit markieren: Sternchen nutzen, z. B. `*Techno*`.
+- Bei Fehlern: erst erneut versuchen, dann Protokoll oeffnen, danach Reparatur starten.

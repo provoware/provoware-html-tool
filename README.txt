@@ -69,9 +69,11 @@ Stand: 2026-03-01
 
 ### Geplante Tool-Module (Backlog)
 
-1. **Janger-Archiv-Modul**
-   - Archive, Roots und Stil anlegen, bearbeiten, sortieren
-     (Alphabetlisten), importieren und exportieren.
+1. **Genres/Moods/Stile-Archiv-Modul**
+   - Eintraege pro Profil (z. B. Techno, Hoerspiele, Chill) anlegen,
+     per Komma trennen, alphabetisch sortieren und importieren/exportieren.
+   - Duplikate werden erkannt, Favoriten sind per Sternchen (`*Eintrag*`) markierbar,
+     und jeder Import wird im Log festgehalten.
 2. **Wiki-Modul**
    - Wissen nach Kategorien speichern und schnell wiederfinden.
 3. **Schnellspeicher-Modul**

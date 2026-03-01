@@ -99,3 +99,9 @@
 - AGENTS.md um neuen Pflichtpunkt erweitert: pro Iteration mindestens eine kleine Verbesserung an Hilfe, Tooltip, A11y oder Kontrast.
 - Einheitliche Standards für Abstände, Buttons, Themes, Kontrast und responsive Verhalten ergänzt.
 - Risiko: niedrig, da nur Prozess- und Qualitätsregeln dokumentiert wurden.
+
+## 2026-03-01 – Genres/Moods/Stile-Archiv-Kern
+
+- Neues Kernmodul `system-core/genre_mood_style_archive.js` ergänzt: CSV-Import, Duplikatpruefung, Profil-Kategorien und Favoriten via Sternchen.
+- Import/Export und JSON-Logzeilen fuer Archivvorgaenge ergänzt, inklusive klarer Fehlertexte mit naechstem Schritt.
+- Risiko: niedrig, da nur neues Modul, neue Tests und kurze Hilfe-Ergaenzung betroffen sind.
