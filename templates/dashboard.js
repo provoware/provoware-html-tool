@@ -391,18 +391,26 @@
     }
 
     const targetPath = backupTargetSelect?.value || "";
-    if (!targetPath) {
-      setStatus(
-        "Ziel-Datei fehlt. Naechster Schritt: Ziel-Datei waehlen und erneut versuchen.",
-      );
-      return false;
-    }
+
+    const safetyHint =
+      "Sicherheitsabfrage: Bitte den Dateinamen (store.json oder registry.json) bestaetigen.";
 
     try {
       const plan = window.BackupRestore.buildRestorePlan(
         backupPath,
         targetPath,
       );
+      const confirmation = window.prompt(
+        `${safetyHint} Eingeben: ${plan.targetFileName}`,
+        "",
+      );
+      const normalizedConfirmation = (confirmation || "").trim();
+      if (normalizedConfirmation !== plan.targetFileName) {
+        setStatus(
+          "Sicherheitsabfrage abgebrochen. Naechster Schritt: Erneut versuchen oder Zurueck.",
+        );
+        return false;
+      }
       const result = await window.BackupRestore.restoreBackupFromDirectory(
         selectedProjectDir,
         plan,

@@ -22,14 +22,50 @@
 
   function buildRestorePlan(selectedBackupPath, selectedTargetPath) {
     const backupFileName = getFileName(selectedBackupPath, "Backup-Pfad");
-    const targetFileName = getFileName(selectedTargetPath, "Ziel-Pfad");
+    const safeTargetPath =
+      selectedTargetPath || inferTargetPathFromBackupPath(selectedBackupPath);
+    const targetFileName = getFileName(safeTargetPath, "Ziel-Pfad");
+
+    validateRestorePair(backupFileName, targetFileName);
 
     return {
       backupPath: selectedBackupPath,
-      targetPath: selectedTargetPath,
+      targetPath: safeTargetPath,
       backupFileName,
       targetFileName,
     };
+  }
+
+  function inferTargetPathFromBackupPath(selectedBackupPath) {
+    const backupFileName = getFileName(selectedBackupPath, "Backup-Pfad");
+    if (!backupFileName.endsWith(".backup.json")) {
+      throw new Error(
+        "Backup-Datei ungueltig. Bitte Backup erneut waehlen oder Reparatur starten.",
+      );
+    }
+
+    const targetFileName = backupFileName.replace(".backup.json", ".json");
+    assertText(targetFileName, "Ziel-Dateiname");
+    return `data/${targetFileName}`;
+  }
+
+  function validateRestorePair(backupFileName, targetFileName) {
+    assertText(backupFileName, "Backup-Dateiname");
+    assertText(targetFileName, "Ziel-Dateiname");
+
+    const allowedTargets = new Set(["store.json", "registry.json"]);
+    if (!allowedTargets.has(targetFileName)) {
+      throw new Error(
+        "Ziel-Datei nicht erlaubt. Bitte store.json oder registry.json waehlen.",
+      );
+    }
+
+    const expectedTarget = backupFileName.replace(".backup.json", ".json");
+    if (expectedTarget !== targetFileName) {
+      throw new Error(
+        "Backup passt nicht zur Ziel-Datei. Bitte Auswahl pruefen und erneut versuchen.",
+      );
+    }
   }
 
   async function readHandleText(fileHandle) {
@@ -103,6 +139,7 @@
 
   const api = {
     buildRestorePlan,
+    inferTargetPathFromBackupPath,
     restoreBackupFromDirectory,
   };
 

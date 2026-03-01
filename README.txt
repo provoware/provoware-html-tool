@@ -6,13 +6,13 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Iteration-Update 2026-03-01
 - Offener Punkt abgeschlossen: Todo-Filter (heute/offen/archiv) mit Escape-Rueckweg ist releasefertig.
-- Naechster Schritt: Restore-Flow fuer store/registry mit Sicherheitsabfrage erweitern.
+- Naechster Schritt: Boot-View-Statusbereich mit klaren Phasen und Ampel-Texten stabilisieren.
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 71 %
-- **Erledigt:** 65 Punkte
-- **Offen:** 26 Punkte
+- **Fortschritt:** 74 %
+- **Erledigt:** 67 Punkte
+- **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -396,3 +396,8 @@ Update Iteration 44:
 - Todo-Eintraege bleiben jetzt nach Neustart erhalten, wenn ein Projektordner verbunden ist.
 - Speicherung erfolgt optional in `data/store.json` (aktive + archivierte Aufgaben).
 - Naechster Schritt: Filter (heute/offen/archiv) und Shortcuts fuer schnellere Bedienung.
+
+
+## Iteration 47 Kurzstand
+- Restore-Flow erkennt Ziel-Datei jetzt automatisch aus `.backup.json` und verlangt eine Sicherheitsbestaetigung vor dem Schreiben.
+- Fehlerweg bleibt laienfreundlich mit naechstem Schritt: erneut versuchen, Reparatur starten oder Protokoll oeffnen.

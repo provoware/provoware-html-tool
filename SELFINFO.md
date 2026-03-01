@@ -1,3 +1,9 @@
+## Iteration 47 (2026-03-01)
+
+- Hauptziel abgeschlossen: Restore-Flow erkennt Ziel-Datei (store/registry) jetzt automatisch aus Backup-Dateinamen.
+- Mini-Optimierung: Sicherheitsabfrage mit klarem Rueckweg (abbrechen oder erneut versuchen) vor dem Restore eingebaut.
+- Next Step (A): Boot-View-Statusbereich mit klaren Phasen, Ampel-Texten und Weiter-Gate stabilisieren.
+
 ## Iteration 46 (2026-03-01)
 
 - Hauptziel abgeschlossen: Todo-Filter (Kalendertag/Heute/Offen/Archiv) mit Tastatur-Shortcuts ist umgesetzt und getestet.

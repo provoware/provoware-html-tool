@@ -2,6 +2,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const {
   buildRestorePlan,
+  inferTargetPathFromBackupPath,
   restoreBackupFromDirectory,
 } = require("../templates/backup_restore");
 
@@ -70,6 +71,27 @@ test("buildRestorePlan validiert Eingabe und liefert Dateinamen", () => {
   assert.equal(plan.targetFileName, "registry.json");
 });
 
+test("inferTargetPathFromBackupPath erkennt store/registry korrekt", () => {
+  assert.equal(
+    inferTargetPathFromBackupPath("data/store.backup.json"),
+    "data/store.json",
+  );
+  assert.equal(
+    inferTargetPathFromBackupPath("data/registry.backup.json"),
+    "data/registry.json",
+  );
+});
+
+test("buildRestorePlan erkennt Ziel automatisch", () => {
+  const plan = buildRestorePlan("data/store.backup.json", "");
+  assert.equal(plan.targetFileName, "store.json");
+});
+
+test("buildRestorePlan blockiert unpassende Ziel-Datei", () => {
+  assert.throws(() =>
+    buildRestorePlan("data/store.backup.json", "data/registry.json"),
+  );
+});
 test("restoreBackupFromDirectory schreibt Backup in Zieldatei", async () => {
   const fileMap = {
     "registry.backup.json": createFileHandle('{"ok":true}\n'),
