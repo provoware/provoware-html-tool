@@ -222,6 +222,7 @@
       options.copyPreviewButton,
       "Lyrics-Kopieren",
     );
+    const copyHelp = assertElement(options.copyHelp, "Lyrics-Kopierhilfe");
     const guideWrap = assertElement(options.guideWrap, "Lyrics-Kurzguide");
     const guideToggleButton = assertElement(
       options.guideToggleButton,
@@ -450,6 +451,7 @@
     function closeLyricsPreview(focusTarget) {
       previewPanel.hidden = true;
       previewPanel.setAttribute("aria-hidden", "true");
+      copyHelp.hidden = true;
       if (focusTarget && typeof focusTarget.focus === "function") {
         focusTarget.focus();
       }
@@ -486,6 +488,7 @@
         previewContent.textContent = preview.text;
         previewPanel.hidden = false;
         previewPanel.setAttribute("aria-hidden", "false");
+        copyHelp.hidden = true;
         setStatus(
           "Lesemodus aktualisiert. Naechster Schritt: Songtext pruefen oder weiter bearbeiten.",
         );
@@ -516,10 +519,12 @@
         setStatus(
           "Songtext kopiert. Naechster Schritt: In Zielmodul einfuegen oder Lesemodus schliessen.",
         );
+        copyHelp.hidden = true;
         return true;
       } catch (error) {
         const details =
           error instanceof Error ? error.message : "Unbekannter Fehler";
+        copyHelp.hidden = false;
         setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
         return false;
       }

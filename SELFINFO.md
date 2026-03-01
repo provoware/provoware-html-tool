@@ -289,3 +289,9 @@ Iteration: 39
 - Globales UI-Token-Set als zentrale Wahrheit angelegt (`config/ui_design_tokens.json`) und in Release-Check eingebunden.
 - Mini-Optimierung Hilfe/UX: Boot-Phasen im Dashboard klar als Phase 1-4 beschriftet.
 - Naechster Schritt: Option A priorisieren (Splitter + Collapse + Persistenz + Layout-Reset).
+
+## Iteration 67 (2026-03-03)
+
+- Status: Zwei offene Mini-Punkte aus `todo.txt` vollstaendig abgeschlossen (Guide-Schrittliste + Kopierfehler-Hilfe).
+- Ergebnis: Lyrics-Kurzguide ist klarer fuer Tastatur (Enter/Space/Escape), Lesemodus zeigt manuellen Kopierweg sichtbar an.
+- Next Step: Die zwei neuen Mini-Punkte in `todo.txt` fuer den Lyrics-Flow umsetzen.

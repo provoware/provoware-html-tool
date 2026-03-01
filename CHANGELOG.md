@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 67
+
+- Zwei offene Mini-Punkte abgeschlossen: Songtext-Kurzguide zeigt jetzt eine klare Enter/Space/Escape-Schrittliste direkt im Lyrics-Bereich.
+- Lesemodus hat jetzt eine sichtbare Kopierfehler-Hilfe mit manuellem Rueckweg (Strg+C/Cmd+C), damit Nutzer trotz Clipboard-Sperre weiterarbeiten koennen.
+- Risiko: niedrig, weil nur Quick-Store-UI, Modul-Hook und Doku erweitert wurden.
+
 ## 2026-03-03 – Iteration 66
 
 - Zwei offene TODO-Punkte abgeschlossen: Rail-Rahmen + Statusbanner wurden in allen 5 Themes auf AA-Kontrast feinjustiert, inklusive harter Kontrastchecks fuer Banner, Rail und Kartenprofile.

@@ -95,3 +95,10 @@ test("copyPreviewToClipboard validiert fehlenden Text", () => {
     /Songtext zum Kopieren fehlt/,
   );
 });
+
+test("copyPreviewToClipboard meldet manuellen Rueckweg ohne Clipboard", () => {
+  assert.throws(
+    () => copyPreviewToClipboard("Zeile 1", null),
+    /manuell kopieren/,
+  );
+});

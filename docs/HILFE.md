@@ -126,3 +126,5 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 
 - Neu: Im Lesemodus gibt es jetzt den Knopf **Songtext kopieren** mit klarer Erfolgsmeldung.
 - Neu: Die Songtext-Hilfe ist als **einklappbarer Kurzguide** direkt im Lyrics-Bereich verfuegbar und setzt den Tastaturfokus auf den Hilfetext.
+
+- Songtext-Lesemodus: Wenn der Kopieren-Knopf fehlschlaegt, erscheint eine sichtbare Kopierhilfe mit Strg+C/Cmd+C als Rueckweg.

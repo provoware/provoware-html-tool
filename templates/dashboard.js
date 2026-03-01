@@ -661,6 +661,7 @@
       lyricsBackButton: document.getElementById("lyrics-back-to-inbox"),
       closePreviewButton: document.getElementById("lyrics-close-preview"),
       copyPreviewButton: document.getElementById("lyrics-copy-preview"),
+      copyHelp: document.getElementById("lyrics-copy-help"),
       guideWrap: document.getElementById("lyrics-short-guide"),
       guideToggleButton: document.getElementById("lyrics-guide-toggle"),
       guideContent: document.getElementById("lyrics-guide-content"),

@@ -215,3 +215,8 @@ Praktischer Einsatz:
   - `templates/quick_store_module.js` steuert Kopieren (mit Validierung), Statusmeldungen und Fokusfuehrung fuer den Kurzguide.
   - `test/quick_store_module.test.js` prueft den Kopierpfad inkl. Fehlerfall.
 - Laiennutzen: Text kann direkt uebernommen werden, und Hilfe ist ohne Seitenwechsel sichtbar.
+
+## Update Iteration 67 – Hilfe/UX fuer Songtext
+- Der Songtext-Kurzguide zeigt jetzt eine klare Schrittliste fuer Tastaturbedienung (Enter/Space/Escape).
+- Der Lesemodus hat eine sichtbare Kopierhilfe fuer Faelle, in denen Clipboard blockiert ist.
+- Nutzen fuer Laien: Jeder Fehler hat direkten Rueckweg ohne Techniksuche.

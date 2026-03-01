@@ -56,7 +56,7 @@
     "focusRing": "3px solid, hoher Kontrast",
     "statusRule": "Status nie nur mit Farbe, immer mit Text",
     "tokenSource": "config/ui_design_tokens.json",
-    "pluginReadyRule": "Plugins muessen Spacing/Radius/Font/Shadow/Button-Hoehen aus dem globalen Token-Set nutzen."
+    "pluginReadyRule": "Plugins muessen Spacing/Radius/Font/Shadow/Button-Hoehen aus dem globalen Token-Set nutzen.",
     "cardProfiles": [
       {
         "id": "project",
