@@ -308,7 +308,10 @@ function scanPlaceholderMarkers(rootPath, options = {}) {
     : ["system-core", "system-module", "templates", "tools", "config"];
 
   const findings = [];
-  const markerPattern = new RegExp(`\\b(${markers.join("|")})\\b`, "i");
+  const markerPattern = new RegExp(
+    String.raw`(?:^|\s|\/\/|#)(${markers.join("|")})\s*:`,
+    "i",
+  );
 
   directories.forEach((relativeDirectory) => {
     assertText(relativeDirectory, "Scan-Verzeichnis");

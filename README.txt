@@ -132,6 +132,32 @@ Bei Fehlern zeigt das System klare Aktionen:
 - **Reparatur starten**
 - **Protokoll öffnen**
 
+## Mini-Leitfaden: Abschluss-Check (3 klare Schritte)
+
+Nach jeder Iteration bitte genau diese 3 Schritte ausfuehren:
+
+1. **Autocheck starten**
+
+```bash
+bash start.sh
+```
+
+2. **Ergebnis lesen und naechsten Schritt waehlen**
+   - Bei Erfolg: Weiter mit dem naechsten offenen Punkt in `todo.txt`.
+   - Bei Fehler: Erst die klare Meldung lesen (z. B. „Erneut versuchen“).
+
+3. **Bei Fehlern gezielt helfen lassen**
+
+```bash
+node tools/help_cli.js logs
+node tools/help_cli.js test
+```
+
+Wenn noetig danach:
+- **Erneut versuchen**: `bash start.sh`
+- **Reparatur starten**: `node tools/help_cli.js repair <datei> <backup>`
+- **Protokoll oeffnen**: `node tools/help_cli.js logs`
+
 ## Laienanleitung mit Befehlen
 
 ### Schritt 1: Alles automatisch starten

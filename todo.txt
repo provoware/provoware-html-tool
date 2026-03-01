@@ -100,6 +100,9 @@ Laienvorschläge
 - [ ] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
 
 - [x] P1: AGENTS-Iterationspipeline um einen zusaetzlichen Pflichtschritt "Autonomer Abschluss-Check" erweitern.
-- [ ] P1: Start-Routine-Ausgabe fuer Abschluss-Check in README als Mini-Leitfaden (3 klare Schritte) ergaenzen.
+- [x] P1: Start-Routine-Ausgabe fuer Abschluss-Check in README als Mini-Leitfaden (3 klare Schritte) ergaenzen.
 
-- [ ] P1: Platzhalter an `templates/dashboard.html:40` (TODO-Marker) aufloesen oder mit klarer Ursache dokumentieren.
+- [x] P1: Platzhalter an `templates/dashboard.html:40` (TODO-Marker) aufloesen oder mit klarer Ursache dokumentieren.
+
+- [ ] P1: Mini-Optimierung Hilfe: Mini-Leitfaden aus README als kurzer Dashboard-Hinweis im Help-Panel spiegeln.
+- [ ] P1: Platzhalter-Scan erweitern: Marker nur als echte Kommentar-Aufgabe (`TODO:` etc.) zaehlen.

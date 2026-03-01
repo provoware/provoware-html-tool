@@ -7,3 +7,4 @@
 
 2026-03-01 | PATCH-029 | Start-Routine Platzhalter-Scan als Pflichtcheck + Unit-Test | tools/start_routine.js, test/start_routine.test.js, Doku-Updates
 - 2026-03-01 | Patch-ID: ITER-030 | Ziel: Iterations-Pipeline um neuen Pflichtschritt erweitern | Dateien: AGENTS.md, CHANGELOG.md, SELFINFO.md, README.txt, todo.txt
+2026-03-01 | PATCH-031 | README-Leitfaden (3 Schritte) + TODO-Scan-Fix ohne Fehlalarm bei todo-title | README.txt, tools/start_routine.js, test/start_routine.test.js, todo.txt, CHANGELOG.md, SELFINFO.md
