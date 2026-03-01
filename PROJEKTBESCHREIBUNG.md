@@ -181,3 +181,23 @@ Vorteil fuer Laien:
 - Das Dashboard wurde visuell naeher an die Vorlage gebracht: dunkles Neon-Fundament, sichtbare Rail-Rahmen und Statusbanner.
 - Neues Tool-Detail: `config/design_layout_manifest.json` beschreibt Aufbau, Designregeln, A11y-Mindestregeln und Theme-Ziele maschinenlesbar.
 - Zusatzdoku: `docs/DESIGN_LAYOUT_MANIFEST.md` enthaelt professionelle Soll/Ist-Analyse und priorisierte Folgepunkte.
+
+## Erweiterung 2026-03-03: Globale UI-Design-Tokens
+
+Neu ist eine zentrale Token-Datei `config/ui_design_tokens.json`.
+Sie ist die globale Wahrheit fuer:
+- Abstaende (Spacing)
+- Rundungen (Radius)
+- Schrift (Font)
+- Schatten (Shadow)
+- Button-Hoehen
+
+Nutzen fuer Plugins:
+- Plugins bleiben optisch im selben System.
+- UI wirkt einheitlich in allen Themes.
+- Release-Check prueft, ob das Token-Set vorhanden ist.
+
+Praktischer Einsatz:
+1. Neue UI-Komponente erstellt? Nur Token-Werte verwenden.
+2. Keine eigenen Pixelwerte ohne Grund.
+3. Bei Abweichung: erst Token erweitern, dann Komponente bauen.

@@ -114,9 +114,9 @@ Laienvorschläge
 - [ ] P1: Offene Platzhalter mit Risiko in QUESTIONS_TODO.md als Entscheidungsfrage aufnehmen.
 - [x] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
 
-- [ ] P1: UI-Fix aus Layout-Manifest umsetzen: Linke/rechte Rail mit klaren Neon-Rahmen + Statusbanner final auf alle Themes angleichen (Akzeptanz: AA-Kontrast in 5 Themes, Tastaturfokus sichtbar, Screenshot aktualisiert).
+- [x] P1: UI-Fix aus Layout-Manifest umsetzen: Linke/rechte Rail mit klaren Neon-Rahmen + Statusbanner final auf alle Themes angleichen (Akzeptanz: AA-Kontrast in 5 Themes, Tastaturfokus sichtbar, Screenshot aktualisiert).
 
-- [ ] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
+- [x] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
 
 - [x] P1: AGENTS-Iterationspipeline um einen zusaetzlichen Pflichtschritt "Autonomer Abschluss-Check" erweitern.
 - [x] P1: Start-Routine-Ausgabe fuer Abschluss-Check in README als Mini-Leitfaden (3 klare Schritte) ergaenzen.
@@ -170,3 +170,15 @@ Laienvorschläge
 - [x] P1: Option B priorisiert und abgeschlossen: Plugin-Loader minimal absichern (Manifest-Check + sicherer Pfadschutz).
 - [x] P1: Ueberfluessige Dummy-Daten bereinigt: unsafe Plugin-Manifest auf Standardfelder vereinheitlicht.
 - [x] P1: Naechster Mini-Punkt: Uebrige ueberfluessige Test-/Datenreste systematisch inventarisieren und loeschen (ohne Core-Risiko).
+
+## 2026-03-01 – UI-Token-System und Plugin-Ready Ausbau (neu)
+
+- [x] P1: Globales UI-Design-Token-Set als zentrale Wahrheit eingefuehrt (Spacing, Radius, Font, Shadow, Button-Hoehen).
+- [ ] P1: Drei-Zonen-Layout mit Splitter + Collapse + Persistenz pro Projekt umsetzen (inkl. Layout-Reset).
+- [ ] P1: Workspace-Grid auf responsive Auto-Fit (1-4 Spalten) mit Plug-Slots und Positions-Persistenz erweitern.
+- [ ] P1: Einheitliche Modul-Control-Leiste (Maximieren/Restore/Collapse/Pin) mit Tooltips und Shortcuts final vereinheitlichen.
+- [ ] P1: Fokusmodus als 100%-Ansicht mit Layout-Snapshot/Restore pixelgenau absichern.
+- [ ] P1: Inspector auf Tabs (Einstellungen/Hilfe/System) und kontextsensitive Moduloptionen umbauen.
+- [ ] P1: Sidebar-Sektionen (Module/Favoriten/Zuletzt/System) mit Suche + Filterchips + Quick-Actions ausbauen.
+- [ ] P1: Undo/Redo + globale Toasts + permanenter Speicherstatus-Chip sichtbar machen.
+- [ ] P1: Layout-State in data/layout.json versioniert speichern und Safe-Layout-Mode (Auto-Reparatur) einbauen.

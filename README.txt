@@ -50,9 +50,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 85 %
-- **Erledigt:** 100 Punkte
-- **Offen:** 18 Punkte
+- **Fortschritt:** 81 %
+- **Erledigt:** 103 Punkte
+- **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -466,3 +466,9 @@ Naechster Schritt:
 ## Patch 058 (2026-03-01)
 - Zwei offene Punkte abgeschlossen: Kanban-Persistenz zentralisiert und Daten-Inventur-Check automatisiert.
 - Naechster Schritt: Wiki-Modul-Grundgeruest mit Eingabepruefung umsetzen.
+
+Update 2026-03-03 (Iteration 66): Globales UI-Design-Token-Set eingefuehrt (`config/ui_design_tokens.json`).
+- Standard fuer Plugins: Abstaende, Radius, Schrift, Schatten und Button-Hoehen kommen nur noch aus dem Token-Set.
+- Sichtbare UI-Verbesserung: Neon-Rails + Statusbanner sind jetzt in allen 5 Themes konsistent.
+- Boot-View zeigt klare Phasen-Texte (Phase 1 UI, Phase 2 Ordner, Phase 3 Module, Phase 4 Backup).
+Naechster Schritt: Layout-Splitter + Collapse + Persistenz in `data/layout.json` als Safe-Layout-Mode umsetzen.

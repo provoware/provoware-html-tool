@@ -268,3 +268,10 @@ Iteration: 39
 - Ergebnis: Neuer Lesemodus zeigt Songtitel, Zeilenanzahl und bereinigten Songtext direkt im gleichen Panel.
 - Mini-Optimierung: Lesemodus-Hilfetext in einfacher Sprache mit Rueckweg-Hinweis ergänzt.
 - Naechster Schritt: Lesemodus mit eigenem Schliessen-Knopf und Escape-Hinweis finalisieren.
+
+## Iteration 66 (2026-03-03)
+
+- Zwei offene TODO-Punkte abgeschlossen: UI-Fix Layout-Manifest (Rails/Banner) und Boot-View-Statusbereich mit klaren Phasen/Ampeltexten.
+- Globales UI-Token-Set als zentrale Wahrheit angelegt (`config/ui_design_tokens.json`) und in Release-Check eingebunden.
+- Mini-Optimierung Hilfe/UX: Boot-Phasen im Dashboard klar als Phase 1-4 beschriftet.
+- Naechster Schritt: Option A priorisieren (Splitter + Collapse + Persistenz + Layout-Reset).

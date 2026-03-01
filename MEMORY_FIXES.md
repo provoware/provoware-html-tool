@@ -738,3 +738,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Automatisches Schliessen bei Bereichswechsel ohne extra Knopf.
 **Risiko/Side-Effects:** Niedrig, da nur Lyrics-Preview-Flow betroffen.
 **Verknuepft:** patch-064
+
+## FIX-20260303-001: Globale UI-Tokens als Plugin-Schutz
+
+**Kategorie:** UI
+**Symptom (für Laien):** Plugins sahen unterschiedlich aus und wirkten wie Fremdteile.
+**Technische Ursache:** Designwerte lagen verteilt im CSS statt als zentrale Quelle.
+**Trigger:** Neue Module brachten eigene Abstaende/Radius/Buttons mit.
+**Fix (kurz):** `config/ui_design_tokens.json` eingefuehrt, Release-Check erweitert, CSS auf Token-Variablen ausgerichtet.
+**Geänderte Dateien/Marker:** config/ui_design_tokens.json, tools/release_readiness_check.js, templates/dashboard.css.
+**Tests/Checks:** node --test test/ui_design_tokens.test.js + node --test test/release_readiness_check.test.js + bash start.sh.
+**Prävention (künftig):** Ab jetzt immer zuerst Token nutzen und erst danach komponentenspezifische Styles ergänzen.
+**Alternative(n):** Reine CSS-Variablen ohne JSON-Quelle (abgelehnt, da weniger pruefbar).
+**Risiko/Side-Effects:** Niedrig, da nur Designschicht.
+**Verknüpft:** PATCH-066

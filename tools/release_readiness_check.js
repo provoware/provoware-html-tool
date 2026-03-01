@@ -194,6 +194,20 @@ function checkThemeContrast(dashboardCss, minContrastRatio = 4.5) {
   });
 }
 
+function checkUiTokenFile(rootPath) {
+  const tokenRaw = readUtf8(
+    path.join(rootPath, "config/ui_design_tokens.json"),
+  );
+  const tokenData = parseJsonText(tokenRaw, "ui_design_tokens.json");
+
+  const requiredKeys = ["spacing", "radius", "font", "shadow", "button"];
+
+  return requiredKeys.map((key) => ({
+    ok: Boolean(tokenData[key]),
+    message: `UI-Token '${key}' ist gesetzt`,
+  }));
+}
+
 function runReleaseReadinessCheck(options = {}) {
   const rootPath = options.rootPath || process.cwd();
   assertText(rootPath, "Projektpfad");
@@ -210,6 +224,7 @@ function runReleaseReadinessCheck(options = {}) {
   const readmeText = readUtf8(path.join(rootPath, "README.txt"));
   const changelogText = readUtf8(path.join(rootPath, "CHANGELOG.md"));
   const todoText = readUtf8(path.join(rootPath, "todo.txt"));
+  const uiTokenChecks = checkUiTokenFile(rootPath);
 
   const checks = [
     checkIncludes(
@@ -221,6 +236,16 @@ function runReleaseReadinessCheck(options = {}) {
       dashboardHtml,
       'id="boot-status"',
       "Boot-Statusbereich ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardCss,
+      "--btn-height-default",
+      "Globale Button-Hoehe ueber Design-Token gesetzt",
+    ),
+    checkIncludes(
+      dashboardCss,
+      "--font-family-sans",
+      "Globale Schriftfamilie ueber Design-Token gesetzt",
     ),
     checkIncludes(
       dashboardHtml,
@@ -359,7 +384,7 @@ function runReleaseReadinessCheck(options = {}) {
     ),
     checkIncludes(
       dashboardCss,
-      "min-height: 44px",
+      "--btn-height-default",
       "Mindestgroesse fuer Klickziele (44px) ist vorhanden",
     ),
     checkIncludes(

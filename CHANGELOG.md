@@ -392,3 +392,9 @@
 - Zwei offene Mini-Punkte abgeschlossen: Songtext-Editor hat jetzt Bridge- und Sonstiges-Vorlagen plus Lesemodus-Vorschau.
 - Warum: Songideen lassen sich schneller strukturieren und direkt lesbar pruefen, ohne den Bereich zu wechseln.
 - Risiko: niedrig, da nur Quick-Store-UI und zugehoerige Tests erweitert wurden.
+
+## 2026-03-03 – UI-Token-Set als globale Wahrheit + offene UI-Punkte geschlossen
+
+- Neues globales Token-Set (`config/ui_design_tokens.json`) definiert jetzt zentral Spacing, Radius, Font, Shadow und Button-Hoehen fuer alle Module und Plugins.
+- Dashboard-CSS nutzt die neuen Tokens sichtbar (Button-Hoehen, Schriftfamilie, Neon-Rails, Statusbanner), damit Themes konsistent bleiben.
+- Zwei offene TODO-Punkte geschlossen: UI-Fix aus Layout-Manifest (Rails/Banner) und Boot-View mit klaren 4 Phasen + Ampeltexten.
