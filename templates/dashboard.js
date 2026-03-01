@@ -1270,7 +1270,7 @@
         typeof entry.createdAt === "string" ? entry.createdAt : "ohne Zeit";
       const label = typeof entry.kind === "string" ? entry.kind : "eintrag";
       const details = typeof entry.details === "string" ? entry.details : "";
-      line.textContent = `${label} | ${when} | ${details}`;
+      line.textContent = `${label} | ${when} | ${details} | Tastatur-Hinweis: Tab waehlt Eintrag, Enter oeffnet Aktion, Escape schliesst Dialog.`;
       supportHistoryList.appendChild(line);
     });
 
@@ -1377,6 +1377,7 @@
           summary?.detailText ||
           "Detailmodus leer. Naechster Schritt: Andere Version waehlen.";
         backupCompareDetailWrap.hidden = false;
+        backupCompareDetailWrap.open = false;
       }
       return true;
     } catch (error) {
@@ -1386,6 +1387,7 @@
         backupCompareDetail.textContent =
           "Detailmodus fehlt. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.";
         backupCompareDetailWrap.hidden = false;
+        backupCompareDetailWrap.open = false;
       }
       return false;
     }

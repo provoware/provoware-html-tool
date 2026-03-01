@@ -114,3 +114,20 @@ PATCHSPEC-2026-03-01-091
 6) Akzeptanzkriterien: Fokuszielwechsel meldet klaren Text per aria-live; Support-Suche zeigt Trefferzahl und Enter startet Filter sofort.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzten Commit via git revert rueckgaengig machen.
 2026-03-01 | PATCH-091 | Zwei offene Mini-Punkte abgeschlossen: Boot-Fokusziel mit aria-live-Ansage + Support-Suche mit Trefferzahl und Enter-Shortcut | templates/dashboard.html, templates/dashboard.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md
+## PatchSpec Iteration 92
+1. Ziel
+- Zwei offene TODO-Punkte abschliessen: (a) Versions-Detailgruppen starten standardmaessig eingeklappt, (b) Support-Trefferliste mit Tastatur-Hinweis je Eintrag erweitern.
+2. Scope IN
+- templates/dashboard.js, templates/dashboard.html (falls Textanker noetig), relevante Tests, Doku-Statusdateien.
+3. Scope OUT
+- Keine neuen Module, kein Refactor ausserhalb Hilfe/Backup-Detail.
+4. Dateien/Marker
+- `updateVersionCompare`, `renderSupportHistory`, Support-Verlauf-Abschnitt, todo/README/CHANGELOG/PROJEKTBESCHREIBUNG/SELFINFO.
+5. Risiko
+- Niedrig bis mittel: UI-Text kann Tests beeinflussen; Detailmodus-Zustand darf nicht unerwartet offen bleiben.
+6. Akzeptanzkriterien
+- Detailmodus wird nach Vergleich sichtbar aber eingeklappt gezeigt.
+- Jeder Support-Listeneintrag enthaelt klaren Tastatur-Hinweis.
+- Pflichtchecks laufen: npm run format, node --test, bash start.sh.
+7. Checks + Rollback
+- Checks wie oben; bei Fehler: letzte Aenderung rueckgaengig per `git checkout -- <datei>` und erneut laufen lassen.

@@ -1,3 +1,9 @@
+## Iteration 92 – Hilfe/UX und Detailmodus
+
+- Im Support-Verlauf traegt jetzt jeder Treffer einen kurzen Tastatur-Hinweis fuer Tab, Enter und Escape.
+- Der Versions-Detailmodus bleibt sichtbar, startet aber immer eingeklappt. Das macht den Dialog uebersichtlicher.
+- Naechster Schritt: Boot-Live-Ansage auch im Debug-Protokoll mitloggen.
+
 ## Iteration 88 – Doku-Optimierung fuer Releasefinalisierung
 - README ist jetzt als klare Einstiegsdoku fuer Laien und Release-Checks aufgebaut.
 - AGENTS.md nutzt jetzt eine kompakte V3-Struktur mit klaren Pflicht-Gates.
