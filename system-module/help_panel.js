@@ -66,10 +66,11 @@ function buildHelpPanelModel() {
       "1) bash start.sh ausfuehren.",
       "2) Mit Tab zum Theme-Feld gehen und mit Enter das Thema wechseln.",
       "3) Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
+      "4) Alle 5 Iterationen Referenzbild und Dashboard kurz vergleichen.",
     ],
   };
 
-  if (!Array.isArray(model.quickGuide) || model.quickGuide.length !== 3) {
+  if (!Array.isArray(model.quickGuide) || model.quickGuide.length !== 4) {
     throw new Error("Hilfe-Leitfaden ungueltig. Bitte Reparatur starten.");
   }
 

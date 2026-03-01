@@ -1,6 +1,7 @@
 # Provoware HTML Tool
 
 - Neu (2026-03-01): Alle 5 Iterationen ist jetzt eine Pflicht-Analyse des Vorgabebilds vorgesehen, damit Layout und Designstil konsistent am Beispiel bleiben.
+- Neu (2026-03-01): Das Help-Panel erinnert jetzt direkt im Mini-Leitfaden an den 5-Iterationen-Referenzbild-Abgleich.
 - Neu (2026-03-01): Pro Iteration werden Platzhalter/Teilcode-Stellen systematisch gesucht, dokumentiert und als TODO-Folgeschritte geplant.
 
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
@@ -10,8 +11,8 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 74 %
-- **Erledigt:** 70 Punkte
+- **Fortschritt:** 75 %
+- **Erledigt:** 71 Punkte
 - **Offen:** 24 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

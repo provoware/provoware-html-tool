@@ -96,7 +96,7 @@ Laienvorschläge
 - [x] P1: Platzhalter-Scan je Iteration durchfuehren (TODO/FIXME/Dummy/Placeholder) und Funde in TODO registrieren.
 - [ ] P1: Platzhalter-Funde im Code mit kurzer Ursache + naechstem Schritt kommentieren.
 - [ ] P1: Offene Platzhalter mit Risiko in QUESTIONS_TODO.md als Entscheidungsfrage aufnehmen.
-- [ ] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
+- [x] P1: Mini-Optimierung Hilfe/UX: Kurzer Leittext im Dashboard, dass alle 5 Iterationen ein visueller Soll/Ist-Abgleich mit Referenzbild erfolgt.
 
 - [ ] P1: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
 
@@ -141,3 +141,5 @@ Laienvorschläge
 - [x] P1: Naechster Mini-Punkt: Backup-Dialog-Sicherheitsabfrage (Prompt) automatisiert testen.
 
 - [x] P1: Naechster Mini-Punkt: Boot-View-Statusbereich mit klaren Phasen + Ampel-Texten fuer Laien stabilisieren.
+
+- [ ] P1: Naechster Mini-Punkt: Referenzbild-Checkliste als festen Ablauf in todo/README verankern.

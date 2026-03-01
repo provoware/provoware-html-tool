@@ -115,6 +115,12 @@
 
 # CHANGELOG
 
+## 2026-03-01 – Mini-Hilfe fuer Referenzbild-Rhythmus im Help-Panel
+
+- Hilfe-Panel-Mini-Leitfaden ergaenzt: Schritt 4 erinnert jetzt klar an den Pflichtabgleich alle 5 Iterationen mit dem Referenzbild.
+- Validierung im Help-Panel-Modell auf 4 Leitfaden-Schritte angepasst, damit Input/Output-Pruefung bestehen bleibt.
+- Risiko: niedrig, da nur Hilfetext, Modell-Validierung und Test angepasst wurden.
+
 ## 2026-03-01 – Boot-View-Statusbereich stabilisiert
 
 - Dashboard zeigt jetzt einen klaren Boot-Statusbereich mit 4 Phasen und Ampel-Texten (Gruen/Gelb/Rot) fuer Laien.
