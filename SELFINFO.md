@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 19
+Iteration: 20
 
 ## Gemacht
 
@@ -45,6 +45,9 @@ Iteration: 19
 
 - Start-Routine um Release-Readiness-Check (A11y-Basics + 3 Themes + Hilfe-Aktionen) erweitert.
 - Neue automatische Tests fuer den Release-Readiness-Check ergänzt.
+
+- README um aktuelle Tool-Module-Liste erweitert und geplanter Modul-Backlog klar dokumentiert.
+- TODO um konkrete Implementierungsaufgaben fuer angeforderte Untermodule erweitert.
 
 ## Next Step
 
