@@ -6,8 +6,8 @@
 - Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 70 %
-- **Erledigt:** 61 Punkte
+- **Fortschritt:** 71 %
+- **Erledigt:** 63 Punkte
 - **Offen:** 26 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -381,3 +381,9 @@ Update 2026-03-01 (Iteration 32): AGENTS.md praezisiert jetzt releasefertige Pat
 
 Update 2026-03-01 (Iteration 37): Plugin-Loader wurde weiter gehaertet: doppelte IDs werden blockiert und Modulpfade ausserhalb des Projektordners werden mit klarer Meldung abgewiesen.
 Naechster Schritt: Option C weiterfuehren und Backup-Auswahl-Dialog an den JSON-Store-Backup-Hook anbinden.
+
+
+Update Iteration 44:
+- Todo-Listen-Modul (Kalender + Archiv) ist im Dashboard aktiv.
+- Backup-Wiederherstellung nutzt jetzt eine klare Ziel-Datei-Auswahl im Dialog.
+- Naechster Schritt: Persistente Todo-Speicherung vorbereiten.

@@ -31,7 +31,16 @@
         <aside class="col" aria-label="Linke Spalte">
           <article class="panel" aria-labelledby="calendar-title">
             <h2 id="calendar-title">Heute</h2>
-            <div class="blank-area" aria-label="Leerer Kalenderbereich"></div>
+            <label for="todo-date">Kalendertag waehlen</label>
+            <input
+              id="todo-date"
+              type="date"
+              aria-describedby="todo-date-help"
+            />
+            <p id="todo-date-help" class="field-tip">
+              Was macht das? Sie waehlen hier den Tag fuer neue Aufgaben.
+              Rueckweg: Datum erneut aendern.
+            </p>
           </article>
           <article class="panel" aria-labelledby="notes-title">
             <h3 id="notes-title">Notizen</h3>
@@ -39,7 +48,31 @@
           </article>
           <article class="panel" aria-labelledby="todo-title">
             <h3 id="todo-title">Aufgaben</h3>
-            <div class="blank-area" aria-label="Leerer Aufgabenbereich"></div>
+            <label for="todo-input">Neue Aufgabe</label>
+            <input
+              id="todo-input"
+              type="text"
+              maxlength="120"
+              placeholder="z. B. Layout pruefen"
+            />
+            <div class="todo-actions" aria-label="Aufgaben-Aktionen">
+              <button type="button" id="todo-add">Aufgabe speichern</button>
+              <button type="button" id="todo-reset-date">
+                Datum auf heute
+              </button>
+            </div>
+            <p id="todo-help" class="field-tip">
+              Was passiert mit Daten? Erledigte Aufgaben gehen ins Archiv.
+              Rueckweg: Aufgabe bleibt editierbar bis zum Abhaken.
+            </p>
+            <ul id="todo-active-list" class="todo-list" role="list"></ul>
+            <h4 id="todo-archive-title">Archiv (erledigt)</h4>
+            <ul
+              id="todo-archive-list"
+              class="todo-list todo-archive"
+              role="list"
+              aria-labelledby="todo-archive-title"
+            ></ul>
           </article>
         </aside>
 
@@ -170,6 +203,20 @@
                 wiederhergestellt. Rueckweg: Sie koennen den Dialog mit
                 "Zurueck" oder Escape schliessen.
               </p>
+              <label class="field-label" for="backup-target-select"
+                >Ziel-Datei</label
+              >
+              <select
+                id="backup-target-select"
+                aria-label="Ziel-Datei fuer Wiederherstellung waehlen"
+              >
+                <option value="data/registry.json">data/registry.json</option>
+                <option value="data/store.json">data/store.json</option>
+              </select>
+              <p class="field-tip" id="backup-target-help">
+                Was macht das? Sie waehlen die genaue Ziel-Datei selbst.
+                Rueckweg: Einfach andere Ziel-Datei auswaehlen.
+              </p>
               <ol id="backup-checklist" class="backup-checklist" role="list">
                 <li>Funktion ist fertig und pruefbar.</li>
                 <li>
@@ -194,6 +241,8 @@
 
     <script src="module_workspace.js"></script>
     <script src="dashboard_help.js"></script>
+    <script src="../system-module/todo_list_model.js"></script>
+    <script src="todo_module.js"></script>
     <script src="backup_restore.js"></script>
     <script src="dashboard.js"></script>
   </body>
