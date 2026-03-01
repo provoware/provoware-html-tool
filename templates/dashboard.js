@@ -654,6 +654,7 @@
       refrainButton: document.getElementById("lyrics-template-refrain"),
       bridgeButton: document.getElementById("lyrics-template-bridge"),
       miscButton: document.getElementById("lyrics-template-misc"),
+      randomButton: document.getElementById("lyrics-template-random"),
       previewButton: document.getElementById("lyrics-open-preview"),
       previewPanel: document.getElementById("lyrics-preview-panel"),
       previewTitle: document.getElementById("lyrics-preview-title"),

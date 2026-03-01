@@ -60,9 +60,9 @@
 
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 82 %
-- **Erledigt:** 109 Punkte
-- **Offen:** 24 Punkte
+- **Fortschritt:** 83 %
+- **Erledigt:** 112 Punkte
+- **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.
@@ -482,3 +482,9 @@ Update 2026-03-03 (Iteration 66): Globales UI-Design-Token-Set eingefuehrt (`con
 - Sichtbare UI-Verbesserung: Neon-Rails + Statusbanner sind jetzt in allen 5 Themes konsistent.
 - Boot-View zeigt klare Phasen-Texte (Phase 1 UI, Phase 2 Ordner, Phase 3 Module, Phase 4 Backup).
 Naechster Schritt: Layout-Splitter + Collapse + Persistenz in `data/layout.json` als Safe-Layout-Mode umsetzen.
+
+## Update 2026-03-03 (Iteration 68): Songtext-Zufallsinhalt mit 1 Klick
+- Songideen-Bereich hat jetzt den Knopf **"Zufallsinhalt einfuegen (1 Klick)"**.
+- Der Knopf fuegt sofort einen Impulsblock mit Genre, Stimmung und Stil ein.
+- Lesemodus-Rueckweg ist klar: Nach Schliessen springt der Fokus auf das Titel-Feld.
+- Naechster Schritt: Zufallsinhalt um Profilfilter erweitern (z. B. Techno/Hoerspiel/Chill).
