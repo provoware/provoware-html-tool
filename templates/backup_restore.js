@@ -288,10 +288,17 @@
     assertText(timeSummaryRaw, "Zeitvergleich");
     const timeSummary = timeSummaryRaw.trim();
 
+    const detailText =
+      typeof compareInput.detailText === "string" &&
+      compareInput.detailText.trim()
+        ? compareInput.detailText.trim()
+        : "Detailmodus leer. Naechster Schritt: Version waehlen.";
+
     return {
       ok: true,
       keyDiff,
       byteDiff,
+      detailText,
       text:
         `Vergleich: Felder ${Math.abs(keyDiff)} ${keyTrend}. ` +
         `Dateigroesse ${Math.abs(byteDiff)} Bytes ${byteTrend}. ` +
@@ -346,12 +353,19 @@
       );
     }
 
+    const currentKeyList = Object.keys(currentParsed).sort();
+    const versionKeyList = Object.keys(versionParsed).sort();
+
     return createVersionCompareSummary({
-      currentKeys: Object.keys(currentParsed).length,
-      versionKeys: Object.keys(versionParsed).length,
+      currentKeys: currentKeyList.length,
+      versionKeys: versionKeyList.length,
       currentBytes: currentRaw.length,
       versionBytes: versionRaw.length,
       timeSummary: describeTimestampDifference(currentParsed, versionParsed),
+      detailText:
+        `Aktuell: ${currentKeyList.join(", ") || "(leer)"}. ` +
+        `Version: ${versionKeyList.join(", ") || "(leer)"}. ` +
+        "Naechster Schritt: Unterschiede pruefen und Entscheidung treffen.",
     });
   }
 

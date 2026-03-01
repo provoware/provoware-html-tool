@@ -218,3 +218,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Wenn Sie Safe-Mode-Reset klicken, wird ein Support-Eintrag gespeichert (`data/backup_events.json`).
 - Im Restore-Dialog sehen Sie jetzt immer drei Unterschiede: Felder, Dateigroesse und Zeit.
 - Naechster Schritt bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.
+
+## Neu in Iteration 88
+
+- **Boot-Fokusziel:** Im Boot-Bereich kann gewaehlt werden, ob nach "Weiter" zuerst das erste Modul oder das Hilfe-Panel Fokus bekommt.
+- **Support-Verlauf:** Im Hilfe-Panel kann nach "Alle Ereignisse" oder "Nur Safe-Mode" gefiltert werden.
+- **Versions-Detailmodus:** Im Restore-Dialog kann ein aufklappbarer Detailtext mit JSON-Schluesseln gelesen werden.

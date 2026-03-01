@@ -149,12 +149,14 @@ function normalizeLayoutState(input) {
   const rightWidth = clampNumber(source.rightWidth, 220, 340);
   const leftCollapsed = Boolean(source.leftCollapsed);
   const rightCollapsed = Boolean(source.rightCollapsed);
+  const bootFocusTarget = normalizeBootFocusTarget(source.bootFocusTarget);
 
   return {
     leftWidth,
     rightWidth,
     leftCollapsed,
     rightCollapsed,
+    bootFocusTarget,
   };
 }
 
@@ -165,6 +167,7 @@ function createLayoutSnapshot(layoutState) {
     rightWidth: normalized.rightWidth,
     leftCollapsed: normalized.leftCollapsed,
     rightCollapsed: normalized.rightCollapsed,
+    bootFocusTarget: normalized.bootFocusTarget,
   };
 }
 
@@ -180,6 +183,7 @@ function applyLayoutSnapshot(layoutState, snapshot) {
     rightWidth: safeSnapshot.rightWidth,
     leftCollapsed: safeSnapshot.leftCollapsed,
     rightCollapsed: safeSnapshot.rightCollapsed,
+    bootFocusTarget: safeSnapshot.bootFocusTarget,
   };
 }
 
@@ -307,6 +311,32 @@ function buildBootGateHint(allPhasesOk) {
   };
 }
 
+function normalizeBootFocusTarget(value) {
+  return value === "help" ? "help" : "module";
+}
+
+function resolveBootFocusTarget(layoutStateInput) {
+  const source =
+    layoutStateInput && typeof layoutStateInput === "object"
+      ? layoutStateInput
+      : {};
+  const focusTarget = normalizeBootFocusTarget(source.bootFocusTarget);
+
+  if (focusTarget === "help") {
+    return {
+      target: "help",
+      status:
+        "Boot ist frei. Fokus ist jetzt auf Hilfe. Naechster Schritt: Aktion waehlen.",
+    };
+  }
+
+  return {
+    target: "module",
+    status:
+      "Boot ist frei. Fokus ist jetzt auf dem ersten Modul. Naechster Schritt: Modul pruefen.",
+  };
+}
+
 function buildSafeModeStatus(input = {}) {
   const source = input && typeof input === "object" ? input : {};
   const isSafeMode = source.isSafeMode === true;
@@ -338,6 +368,7 @@ module.exports = {
   buildBootGateHint,
   buildSafeModeStatus,
   resolveSidebarShortcut,
+  resolveBootFocusTarget,
   moveZone,
   normalizeLayoutState,
   reorderZones,
@@ -354,6 +385,7 @@ if (typeof window !== "undefined") {
     buildBootGateHint,
     buildSafeModeStatus,
     resolveSidebarShortcut,
+    resolveBootFocusTarget,
     moveZone,
     normalizeLayoutState,
     reorderZones,

@@ -351,3 +351,9 @@ Praktischer Einsatz:
 - Safe-Mode-Reset hat jetzt eine lokale Support-Spur: ein Event wird in `data/backup_events.json` gespeichert.
 - Der Versionsvergleich im Restore-Dialog zeigt jetzt drei neutrale Fakten: Feldanzahl, Byte-Groesse und Zeitstempel.
 - Vorteil fuer Laien: Unterschiede sind klar lesbar, ohne auf Farben angewiesen zu sein.
+
+
+## Iteration 88 – Layout- und Hilfe-Robustheit
+- Das Dashboard folgt jetzt strikter Struktur: oben Header, mittig 3-Spalten-Shell, unten Footer.
+- Der Hauptbereich nutzt ein quadratisches 3x3-Raster fuer Module; Sidebars bleiben fuer kleine Aktionen und Modulaufrufe.
+- Hilfebereich ermoeglicht Filter auf Support-Verlauf und der Restore-Dialog zeigt optional JSON-Schluessellisten im Detailmodus.

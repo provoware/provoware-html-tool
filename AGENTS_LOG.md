@@ -63,6 +63,15 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-03 | PATCH-076 | Zwei offene Mini-Punkte abgeschlossen: Modul-Control-Tooltips vereinheitlicht + A11y-Kurzbericht in Start-Routine | templates/module_workspace.js, tools/release_readiness_check.js, tools/start_routine.js, test/module_workspace.test.js, test/release_readiness_check.test.js, todo.txt, README.txt, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, PROJEKTBESCHREIBUNG.md, docs/HILFE.md, AGENTS_LOG.md
 2026-03-03 | PATCH-077 | Zwei offene Mini-Punkte abgeschlossen: Modul-Pin-Knopf + Fokusmodus mit Snapshot/Restore und ESC-Rueckweg, inkl. Wartbarkeits-Refactor ueber dashboard_model | system-module/dashboard_model.js, templates/module_workspace.js, templates/dashboard.js, templates/dashboard.html, templates/dashboard.css, test/dashboard_model.test.js, test/module_workspace.test.js, todo.txt, README.txt, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, MEMORY_FIXES.md, PROJEKTBESCHREIBUNG.md
 
+PATCHSPEC-2026-03-01-088
+1) Ziel: Robustes Dashboard-Layout mit klarer Header/Mitte/Footer-Struktur und drei offene TODO-Punkte abschliessen.
+2) Scope IN: templates/dashboard.css, templates/dashboard.html, templates/dashboard.js, templates/backup_restore.js, system-module/dashboard_model.js, test/*, Doku-Dateien.
+3) Scope OUT: Keine Aenderung an Kernspeicherformaten ausser bestehendem layout.json-Feldbaum.
+4) Dateien/Marker: boot-focus-target, support-history-filter, backup-compare-detail, layout-shell-grid.
+5) Risiko: mittel (UI-Layout + Fokuspfad + Dialogtexte), minimiert durch Unit-Tests und start.sh.
+6) Akzeptanzkriterien: 3x3 Hauptgrid bleibt stabil, Boot-Fokusziel waehlbar, Support-Verlauf filterbar, Versions-Detailmodus optional aufklappbar.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern Commit verwerfen und letzte stabile Version wiederherstellen.
+
 - PATCH-2026-03-01-78 | Ziel: Fokusmodus-Hinweis + Pin-Persistenz + Footer-Notizmodul | Dateien: templates/module_workspace.js, templates/dashboard.js, templates/dashboard.html, templates/dashboard.css, system-module/project_file_writer.js, test/project_file_writer.test.js, todo.txt, README.txt, CHANGELOG.md, SELFINFO.md, PROJEKTBESCHREIBUNG.md
 
 - PATCH-081 | Ziel: Drei offene Mini-Punkte abschliessen (Favoritenleiste, Moduloptionen unten, TODO-Template strikt) | Dateien: templates/dashboard.html, templates/dashboard.js, templates/module_workspace.js, tools/start_routine.js, system-module/dashboard_model.js, test/*, README/CHANGELOG/SELFINFO/todo/docs
@@ -72,3 +81,5 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 - PATCH-085 | Ziel: Boot-Gate-Hilfe + Safe-Mode-Panel + Versions-Restore | Dateien: system-module/dashboard_model.js, templates/dashboard.js, templates/dashboard.html, templates/backup_restore.js, test/dashboard_model.test.js, test/backup_restore.test.js, test/dashboard_lyrics_guidance.test.js
 - 2026-03-01 | Patch-ID iter-86-safe-reset-compare-focus | Ziel: 3 offene Mini-Punkte (Safe-Mode-Reset, Versionsvergleich, Boot-Fokus) | Dateien: templates/dashboard.js, templates/dashboard.html, templates/backup_restore.js, system-core/plugin_loader.js, test/*, docs/*
 - 2026-03-03 | Patch-ID: iter-87 | Ziel: Safe-Mode-Verlauf + 3er-Versionsvergleich | Dateien: system-module/safe_mode_support_log.js, templates/dashboard.js, templates/backup_restore.js, test/safe_mode_support_log.test.js, test/backup_restore.test.js, Doku-Updates
+
+2026-03-01 | PATCH-088 | Drei offene Mini-Punkte abgeschlossen: Boot-Fokusziel-Einstellung + Support-Verlauf-Filter + Versionsvergleich-Detailmodus, inkl. robustem Layout-Feinschliff | templates/dashboard.html, templates/dashboard.css, templates/dashboard.js, templates/backup_restore.js, system-module/dashboard_model.js, test/dashboard_model.test.js, test/backup_restore.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md

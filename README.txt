@@ -72,3 +72,9 @@ Typografie und Fokus-Zustaende. Ziel sind mindestens vier Themes
    fruehe Fehler sofort sichtbar sind.
 2. Bei Problemen zuerst das Protokoll oeffnen und den dort genannten
    naechsten Schritt genau in Reihenfolge durchgehen.
+
+## Iteration 88 – Robustes Layout und klare Fokussteuerung
+- Dashboard-Layout ist jetzt stabil als Header + 3-Spalten-Mitte + Footer aufgebaut, mit quadratischem 3x3-Hauptgrid.
+- Boot-Fokusziel ist waehlbar (erstes Modul oder Hilfe-Panel) und wird in `data/layout.json` gespeichert.
+- Hilfe-Panel zeigt jetzt filterbaren Support-Verlauf (alle / nur Safe-Mode) und der Versionsvergleich hat einen optionalen Detailmodus.
+- Naechster Schritt: Fokusziel-Hinweis im Boot-Gate dynamisch spiegeln.
