@@ -696,3 +696,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Drei Einzeldateien pro Bereich (spaeter moeglich).
 **Risiko/Side-Effects:** Alte Dateien ohne `areas` werden als inbox importiert.
 **Verknuepft:** PATCH-061
+
+## FIX-20260302-002: Songtext-Vorlagen-und-Lesemodus
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Im Songtext-Bereich fehlten wichtige Abschnitte (Bridge/Sonstiges) und es gab keine ruhige Leseflaeche.
+**Technische Ursache:** Es gab nur Intro/Refrain-Buttons und keine zentrale Vorschau-Funktion mit Eingabepruefung.
+**Trigger:** Schreiben laengerer Songideen im Bereich `lyrics`.
+**Fix (kurz):** Zwei neue Vorlagen plus Lesemodus-Datenmodell (`Titel`, `Zeilenanzahl`, bereinigter Text) eingefuehrt.
+**Geaenderte Dateien/Marker:** `templates/quick_store_module.js`, `templates/dashboard.html`, `templates/dashboard.js`, `test/quick_store_module.test.js`.
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer Vorlagen und Lesemodus als zentrale Helper bauen, statt UI-Strings mehrfach zu verteilen.
+**Alternative(n):** Externe Editor-Seite (verworfen, zu hoher Wechselaufwand fuer Laien).
+**Risiko/Side-Effects:** Niedrig, da nur das Quick-Store-Panel erweitert wurde.
+**Verknuepft:** Iteration-63

@@ -1,6 +1,7 @@
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Start-Routine erzwingt jetzt genau zwei offene `Naechster Mini-Punkt`-Eintraege in `todo.txt`.
 - Neu (2026-03-01): Schnellspeicher speichert jetzt getrennt je Bereich in `data/quick_store_inbox.json`, `data/quick_store_lyrics.json` und `data/quick_store_research.json`.
 - Neu (2026-03-02): Songtext-Editor sitzt direkt im Bereich Songideen mit Intro/Refrain-Vorlagen, Enter/Escape-Hilfe und klaren Rueckweg-Knoepfen.
+- Neu (2026-03-02): Songtext-Editor hat jetzt auch Bridge/Sonstiges-Vorlagen und einen Lesemodus, der den Entwurf als klare Vorschau zeigt.
 
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Wiki-Modul ist jetzt als eigenes Panel mit Kategorie, Titel, Inhalt und Speicherung in `data/wiki_notes.json` verfuegbar.
 - Neu (2026-03-01): Mini-Optimierung Hilfe/UX: Wiki-Panel erklaert in einfacher Sprache Aktion, Datenwirkung und Rueckweg.
@@ -33,11 +34,16 @@
 - Abgeschlossen: Schnellspeicher ist physisch auf drei Bereichsdateien aufgeteilt (inbox/lyrics/research).
 - Naechster Schritt: Songtext-Editor um Bridge/Sonstiges-Vorlagen erweitern.
 
+## Iteration 63 Kurzstatus
+- Abgeschlossen: Songtext-Editor kann jetzt Intro, Refrain, Bridge und Sonstiges als Vorlagen einfuegen.
+- Abgeschlossen: Lesemodus zeigt den aktuellen Songtext als klare Vorschau mit Zeilenanzahl.
+- Naechster Schritt: Lesemodus um eigenen Schliessen-Knopf mit Escape-Hinweis erweitern.
+
 ## Entwicklungsfortschritt
 
-- **Fortschritt:** 81 %
-- **Erledigt:** 92 Punkte
-- **Offen:** 21 Punkte
+- **Fortschritt:** 83 %
+- **Erledigt:** 96 Punkte
+- **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
 - Neu in Iteration 35: Platzhalter-Scan erkennt jetzt nur echte Aufgaben-Kommentare und Hilfe zeigt den Tastaturweg fuer Theme-Wechsel.

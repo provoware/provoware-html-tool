@@ -72,8 +72,10 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Schnellspeicher um Bereichsauswahl mit eigener Datei erweitern.
 - [x] Naechster Mini-Punkt: Songtext-Editor mit Intro/Refrain-Vorlage und Tastaturhilfe starten.
 - [x] Naechster Mini-Punkt: Schnellspeicher-Eintraege pro Bereich auf getrennte Dateien aufteilen.
-- [ ] Naechster Mini-Punkt: Songtext-Editor um Bridge/Sonstiges-Vorlagen erweitern.
-- [ ] Naechster Mini-Punkt: Songtext-Dokumentvorschau als einfachen Lesemodus vorbereiten.
+- [x] Naechster Mini-Punkt: Songtext-Editor um Bridge/Sonstiges-Vorlagen erweitern.
+- [x] Naechster Mini-Punkt: Songtext-Dokumentvorschau als einfachen Lesemodus vorbereiten.
+- [ ] Naechster Mini-Punkt: Lesemodus im Songtext-Editor um "Vorschau schliessen"-Knopf mit Escape-Hinweis erweitern.
+- [ ] Naechster Mini-Punkt: Songtext-Vorlagen um kurze Inline-Hilfe je Abschnitt (Intro/Refrain/Bridge/Sonstiges) erweitern.
 - [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
 - [ ] P1: Interoperabilitaet Songtext-Editor ↔ Zufallsgenerator umsetzen (Inhalt einfuegen).
 - [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.
@@ -124,7 +126,7 @@ Laienvorschläge
 - [x] P1: Mini-Optimierung Hilfe: Help-Panel um klaren Tastaturhinweis fuer Theme-Wechsel ergaenzt.
 
 - [x] P1: Strategie-Update Iteration 36 abgeschlossen (Mini-Patch-Reihenfolge + Priorisierung B/C in allen Info-Dateien synchronisiert).
-- [ ] P1: Naechster Mini-Punkt: PatchSpec fuer Plugin-Loader-Hardening (Manifestfehler + isolierter Fehlerpfad) vorbereiten.
+- [x] P1: Naechster Mini-Punkt: PatchSpec fuer Plugin-Loader-Hardening (Manifestfehler + isolierter Fehlerpfad) vorbereiten.
 
 - [x] P1: Plugin-Loader-Hardening umgesetzt (duplizierte Plugin-ID blockieren + Pfad ausserhalb Projekt verhindern).
 - [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und mit Start-Routine pruefen.
@@ -163,4 +165,4 @@ Laienvorschläge
 
 - [x] P1: Option B priorisiert und abgeschlossen: Plugin-Loader minimal absichern (Manifest-Check + sicherer Pfadschutz).
 - [x] P1: Ueberfluessige Dummy-Daten bereinigt: unsafe Plugin-Manifest auf Standardfelder vereinheitlicht.
-- [ ] P1: Naechster Mini-Punkt: Uebrige ueberfluessige Test-/Datenreste systematisch inventarisieren und loeschen (ohne Core-Risiko).
+- [x] P1: Naechster Mini-Punkt: Uebrige ueberfluessige Test-/Datenreste systematisch inventarisieren und loeschen (ohne Core-Risiko).

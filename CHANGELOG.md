@@ -374,3 +374,9 @@
 - Vor dem Speichern wird das Kanban-Schema geprueft (Version, Spalten, Karten), damit keine kaputten Daten geschrieben werden.
 - Mini-Optimierung Hilfe/UX: Erfolgsstatus nennt jetzt klar "verschoben und gespeichert" als naechsten sicheren Zustand.
 - Risiko: mittel, weil der Browserpfad jetzt Datei-Write nutzt, aber mit Validierung und Tests abgesichert.
+
+## 2026-03-02 – Songtext-Editor erweitert
+
+- Zwei offene Mini-Punkte abgeschlossen: Songtext-Editor hat jetzt Bridge- und Sonstiges-Vorlagen plus Lesemodus-Vorschau.
+- Warum: Songideen lassen sich schneller strukturieren und direkt lesbar pruefen, ohne den Bereich zu wechseln.
+- Risiko: niedrig, da nur Quick-Store-UI und zugehoerige Tests erweitert wurden.

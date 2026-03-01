@@ -101,7 +101,33 @@
                 <button type="button" id="lyrics-template-refrain">
                   Refrain-Vorlage einfuegen
                 </button>
+                <button type="button" id="lyrics-template-bridge">
+                  Bridge-Vorlage einfuegen
+                </button>
+                <button type="button" id="lyrics-template-misc">
+                  Sonstiges-Vorlage einfuegen
+                </button>
+                <button type="button" id="lyrics-open-preview">
+                  Lesemodus oeffnen
+                </button>
               </div>
+              <article
+                id="lyrics-preview-panel"
+                class="card"
+                aria-labelledby="lyrics-preview-title"
+                aria-hidden="true"
+                hidden
+              >
+                <h5 id="lyrics-preview-title">Lesemodus</h5>
+                <p class="field-tip" id="lyrics-preview-help">
+                  Was macht das? Zeigt Ihren Songtext als reine Leseflaeche.
+                  Rueckweg: Weiter unten den Editor weiter nutzen.
+                </p>
+                <p
+                  id="lyrics-preview-content"
+                  aria-describedby="lyrics-preview-help"
+                ></p>
+              </article>
               <div class="todo-actions" aria-label="Songtext-Rueckweg">
                 <button type="button" id="lyrics-back-to-inbox">
                   Zurueck zu Allgemein

@@ -94,3 +94,9 @@ Naechster Schritt: Erst erneut versuchen, dann Reparatur starten, danach bei Bed
 - Was macht das? Speichert kurze Wissensnotizen pro Kategorie.
 - Was passiert mit Daten? Eintraege landen in `data/wiki_notes.json`.
 - Rueckweg: Eintrag aendern und erneut auf "Wiki speichern" klicken.
+
+## Songtext-Editor: neue Vorlagen + Lesemodus (Iteration 63)
+
+- Neu: Im Bereich **Songideen** gibt es jetzt auch **Bridge** und **Sonstiges** als Vorlagen.
+- Neu: Mit **Lesemodus oeffnen** sehen Sie den aktuellen Songtext sauber formatiert mit Zeilenanzahl.
+- Rueckweg: Weiter unten im gleichen Bereich direkt weiter bearbeiten oder Inhalt leeren.

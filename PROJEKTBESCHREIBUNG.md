@@ -154,3 +154,17 @@ Vorteil fuer Laien:
 - Jeder Bereich hat eigene Eintraege in derselben JSON-Datei (`data/quick_store_entries.json`).
 - Vorteil fuer Laien: Sie koennen Ideen sauber trennen und spaeter schneller finden.
 - Technisch: Validierung (Eingabepruefung) prueft Bereich, Titel und Inhalt vor dem Speichern.
+
+## Iteration 63 – Songtext-Editor erweitert
+- Zwei offene Punkte wurden vollstaendig abgeschlossen: **Bridge/Sonstiges-Vorlagen** und **Lesemodus-Vorschau**.
+- Tool-Details:
+  - `templates/quick_store_module.js` liefert jetzt zentrale Vorlagen-Builder mit Eingabepruefung.
+  - Der Lesemodus bereinigt Leerzeilen, zaehlt Zeilen und zeigt einen klaren Titel.
+  - Fehlertexte bleiben laienklar mit naechstem Schritt (Erneut versuchen / Protokoll oeffnen).
+- UX/A11y-Nutzen:
+  - Vorlagen sparen Tipparbeit und helfen beim strukturierten Schreiben.
+  - Lesemodus hilft beim schnellen Gegenlesen ohne Wechsel in ein anderes Modul.
+- Naechster sinnvoller Ausbau:
+  1) Lesemodus mit eigenem Schliessen-Knopf + Escape-Hinweis.
+  2) Pro Vorlage ein kurzer Inline-Hinweis (Was macht das? Was passiert mit Daten? Rueckweg).
+

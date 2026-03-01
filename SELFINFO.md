@@ -244,3 +244,11 @@ Iteration: 39
 - Ergebnis: Nach Verschieben wird validiertes JSON direkt nach `data/kanban_board.json` geschrieben.
 - Mini-Optimierung: Erfolgsstatus nennt jetzt "verschoben und gespeichert" fuer klare Rueckmeldung.
 - Next Step: Option B (Plugin-Loader minimal) oder optionaler Kanban-Drag-and-Drop als Zusatzpfad planen.
+
+## Iteration 63 (2026-03-02)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Bridge/Sonstiges-Vorlagen + Songtext-Lesemodus).
+- Ergebnis: Songtext-Editor bietet jetzt vier Vorlagen (Intro, Refrain, Bridge, Sonstiges) mit klaren Statusmeldungen.
+- Ergebnis: Neuer Lesemodus zeigt Songtitel, Zeilenanzahl und bereinigten Songtext direkt im gleichen Panel.
+- Mini-Optimierung: Lesemodus-Hilfetext in einfacher Sprache mit Rueckweg-Hinweis ergänzt.
+- Naechster Schritt: Lesemodus mit eigenem Schliessen-Knopf und Escape-Hinweis finalisieren.

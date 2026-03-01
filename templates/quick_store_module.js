@@ -86,6 +86,55 @@
     return field.value;
   }
 
+  function buildLyricsTemplate(templateType) {
+    if (templateType === "intro") {
+      return "[Intro]\nZeile 1\nZeile 2";
+    }
+    if (templateType === "refrain") {
+      return "[Refrain]\nHook-Zeile 1\nHook-Zeile 2";
+    }
+    if (templateType === "bridge") {
+      return "[Bridge]\nUebergang Zeile 1\nUebergang Zeile 2";
+    }
+    if (templateType === "sonstiges") {
+      return "[Sonstiges]\nIdee\nReim\nStimmung";
+    }
+
+    throw new Error(
+      "Vorlagen-Typ ist ungueltig. Bitte erneut versuchen oder Protokoll oeffnen.",
+    );
+  }
+
+  function buildLyricsPreview(title, content) {
+    const safeTitle =
+      typeof title === "string" && title.trim()
+        ? title.trim()
+        : "Unbenannter Songtext";
+
+    if (typeof content !== "string") {
+      throw new Error(
+        "Songtext-Inhalt ist ungueltig. Bitte erneut versuchen oder Protokoll oeffnen.",
+      );
+    }
+
+    const normalized = content.trim();
+    if (!normalized) {
+      throw new Error(
+        "Songtext ist leer. Naechster Schritt: Vorlage einfuegen oder Text schreiben.",
+      );
+    }
+
+    const lines = normalized
+      .split(/\r?\n/)
+      .filter((line) => line.trim().length);
+
+    return {
+      title: safeTitle,
+      lineCount: lines.length,
+      text: lines.join("\n"),
+    };
+  }
+
   globalObject.createQuickStoreModule = function createQuickStoreModule(
     options,
   ) {
@@ -107,6 +156,24 @@
     const refrainButton = assertElement(
       options.refrainButton,
       "Refrain-Vorlage",
+    );
+    const bridgeButton = assertElement(options.bridgeButton, "Bridge-Vorlage");
+    const miscButton = assertElement(options.miscButton, "Sonstiges-Vorlage");
+    const previewButton = assertElement(
+      options.previewButton,
+      "Lyrics-Vorschau",
+    );
+    const previewPanel = assertElement(
+      options.previewPanel,
+      "Lyrics-Vorschau-Panel",
+    );
+    const previewTitle = assertElement(
+      options.previewTitle,
+      "Lyrics-Vorschau-Titel",
+    );
+    const previewContent = assertElement(
+      options.previewContent,
+      "Lyrics-Vorschau-Inhalt",
     );
     const lyricsBackButton = assertElement(
       options.lyricsBackButton,
@@ -330,6 +397,26 @@
       return true;
     }
 
+    function onLyricsPreview() {
+      try {
+        const preview = buildLyricsPreview(
+          titleInput.value,
+          contentInput.value,
+        );
+        previewTitle.textContent = `${preview.title} (${preview.lineCount} Zeilen)`;
+        previewContent.textContent = preview.text;
+        previewPanel.hidden = false;
+        previewPanel.setAttribute("aria-hidden", "false");
+        setStatus(
+          "Lesemodus aktualisiert. Naechster Schritt: Songtext pruefen oder weiter bearbeiten.",
+        );
+      } catch (error) {
+        const details =
+          error instanceof Error ? error.message : "Unbekannter Fehler";
+        setStatus(`${details} Naechster Schritt: Erneut versuchen.`);
+      }
+    }
+
     function onLyricsEscape(event) {
       if (event.key !== "Escape" || model.getActiveArea() !== "lyrics") {
         return false;
@@ -342,14 +429,18 @@
     clearButton.addEventListener("click", onClear);
     areaSelect.addEventListener("change", onAreaChange);
     introButton.addEventListener("click", () =>
-      onLyricsTemplate("[Intro]\nZeile 1\nZeile 2", "Intro-Vorlage"),
+      onLyricsTemplate(buildLyricsTemplate("intro"), "Intro-Vorlage"),
     );
     refrainButton.addEventListener("click", () =>
-      onLyricsTemplate(
-        "[Refrain]\nHook-Zeile 1\nHook-Zeile 2",
-        "Refrain-Vorlage",
-      ),
+      onLyricsTemplate(buildLyricsTemplate("refrain"), "Refrain-Vorlage"),
     );
+    bridgeButton.addEventListener("click", () =>
+      onLyricsTemplate(buildLyricsTemplate("bridge"), "Bridge-Vorlage"),
+    );
+    miscButton.addEventListener("click", () =>
+      onLyricsTemplate(buildLyricsTemplate("sonstiges"), "Sonstiges-Vorlage"),
+    );
+    previewButton.addEventListener("click", onLyricsPreview);
     lyricsBackButton.addEventListener("click", onLyricsBack);
     lyricsClearButton.addEventListener("click", onClear);
     contentInput.addEventListener("keydown", onLyricsEscape);
@@ -367,6 +458,8 @@
 
   const api = {
     AREA_STORE_PATHS,
+    buildLyricsPreview,
+    buildLyricsTemplate,
     buildAreaPayload,
     getStorePathForArea,
     insertTemplateIntoContent,
