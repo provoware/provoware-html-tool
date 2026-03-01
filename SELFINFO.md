@@ -1,3 +1,12 @@
+## Iteration 100 (2026-03-01)
+
+- Ziel: Drei offene TODO-Punkte fuer Hilfe/UX/A11y in kleinem Patch abschliessen.
+- Ergebnis: Sortier-Schalter erklaert jetzt klar den Scope (nur ignorierte Kurzbegriffe unter 3 Zeichen) mit Beispiel.
+- Ergebnis: Neue Hilfsfunktion `announceLiveRegionText` vermeidet doppelte Live-Ansagen bei identischem Text.
+- Ergebnis: Badge-Kurzform (`TW/GW`) zeigt Tooltip mit ausgeschriebenem Suchmodus fuer Maus und Touch.
+- Mini-Optimierung: Hilfetexte sind einheitlich und nennen klaren Rueckweg.
+- Naechster Schritt: Tooltip-Texte zentral in `config/messages_de.json` pflegen.
+
 ## Iteration 98 (2026-03-01)
 
 - Ziel: Drei offene TODO-Punkte in einem kleinen Hilfe/A11y/Responsive-Patch abschliessen.

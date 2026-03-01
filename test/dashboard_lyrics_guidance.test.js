@@ -249,6 +249,7 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardHtml, /id="support-history-footer-hint"/);
   assert.match(dashboardHtml, /id="support-history-footer-toggle"/);
   assert.match(dashboardHtml, /id="support-history-sort-short-toggle"/);
+  assert.match(dashboardHtml, /id="support-history-sort-short-help"/);
   assert.match(dashboardHtml, /id="support-history-live"/);
   assert.match(dashboardJs, /supportHistoryPartialMode/);
   assert.match(dashboardJs, /supportHistoryFooterCompact/);
@@ -256,11 +257,15 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardJs, /isSortIgnoredShortTokensEnabled/);
   assert.match(dashboardJs, /localeCompare\(right, "de"/);
   assert.match(dashboardJs, /announceSupportFooterAutoCompactChange/);
+  assert.match(dashboardJs, /announceLiveRegionText/);
+  assert.match(dashboardJs, /lastAnnouncedText/);
   assert.match(dashboardJs, /Auto-Kurzmodus ist aktiv/);
   assert.match(dashboardJs, /isVerySmallViewportForSupportBadge/);
   assert.match(dashboardJs, /\? "TW"/);
   assert.match(dashboardJs, /"GW"/);
   assert.match(dashboardJs, /aria-label/);
+  assert.match(dashboardJs, /support-mode-badge-tooltip/);
+  assert.match(dashboardJs, /Tooltip: Teilwortsuche/);
   assert.match(dashboardJs, /Suchmodus Teilwort aktiv/);
   assert.match(dashboardJs, /min\. 3 Zeichen/);
   assert.match(

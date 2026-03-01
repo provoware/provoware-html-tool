@@ -1572,6 +1572,10 @@
           ? "Suchmodus Teilwort aktiv"
           : "Suchmodus Ganzwort aktiv",
       );
+      modeBadge.title = queryContext.usePartialMode
+        ? "Tooltip: Teilwortsuche (enthaelt) ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis."
+        : "Tooltip: Ganzwortsuche ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis.";
+      modeBadge.dataset.tooltip = "support-mode-badge-tooltip";
       modeBadge.append(modeIcon, modeIconLabel, modeText);
       line.appendChild(modeBadge);
       line.appendChild(document.createTextNode(" "));
@@ -1610,6 +1614,25 @@
     return true;
   }
 
+  function announceLiveRegionText(regionElement, nextText, datasetKey) {
+    if (!(regionElement instanceof HTMLElement)) {
+      return false;
+    }
+    const safeText = typeof nextText === "string" ? nextText.trim() : "";
+    if (!safeText) {
+      return false;
+    }
+    const safeKey =
+      typeof datasetKey === "string" && datasetKey ? datasetKey : "lastText";
+    const lastText = regionElement.dataset[safeKey];
+    if (lastText === safeText) {
+      return false;
+    }
+    regionElement.dataset[safeKey] = safeText;
+    regionElement.textContent = safeText;
+    return true;
+  }
+
   function announceSupportFooterAutoCompactChange(autoCompact) {
     if (!(supportHistoryLive instanceof HTMLElement)) {
       return false;
@@ -1621,10 +1644,13 @@
       return false;
     }
     supportHistoryLive.dataset.lastAutoCompact = nextKey;
-    supportHistoryLive.textContent = nextState
-      ? "Auto-Kurzmodus ist aktiv. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
-      : "Auto-Kurzmodus ist aus. Naechster Schritt: Footer-Hinweis bei Bedarf manuell umschalten.";
-    return true;
+    return announceLiveRegionText(
+      supportHistoryLive,
+      nextState
+        ? "Auto-Kurzmodus ist aktiv. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
+        : "Auto-Kurzmodus ist aus. Naechster Schritt: Footer-Hinweis bei Bedarf manuell umschalten.",
+      "lastAnnouncedText",
+    );
   }
 
   async function refreshSupportHistory() {

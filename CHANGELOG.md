@@ -1,3 +1,9 @@
+## 2026-03-01 – Support-Hilfe klarer und ruhiger (Iteration 100)
+
+- Support-Verlauf: Sortier-Schalter hat jetzt einen klaren Hilfetext mit Beispiel (`"ab", "xy"`) und erklaert den Scope (nur ignorierte Kurzbegriffe).
+- A11y-Feinschliff: Live-Region vermeidet doppelte Vorlesung bei identischem Hinweistext ueber neue Hilfsfunktion `announceLiveRegionText`.
+- Hilfe/UX: Badge-Kurzform (`TW/GW`) zeigt jetzt Tooltip mit ausgeschriebenem Suchmodus fuer Maus und Touch-Hilfe.
+
 ## Iteration 98 - Support-Hinweise und Mobile-A11y verbessert
 
 - Support-Meta listet ignorierte Kurz-Tokens jetzt klar im Text (maximal 3 Eintraege + Hinweis auf weitere).
