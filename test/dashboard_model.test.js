@@ -8,6 +8,7 @@ const {
   moveZone,
   normalizeLayoutState,
   reorderZones,
+  resolveFavoritesAction,
   resolveSidebarShortcut,
 } = require("../system-module/dashboard_model");
 
@@ -98,4 +99,23 @@ test("resolveSidebarShortcut ignoriert andere Tasten", () => {
 
   assert.equal(result.handled, false);
   assert.equal(result.nextOpen, true);
+});
+
+test("resolveFavoritesAction liefert Modul-Liste", () => {
+  const result = resolveFavoritesAction("show-all-modules", {
+    activeModules: [{ title: "Projektmanagement" }, { title: "Support" }],
+  });
+
+  assert.equal(result.handled, true);
+  assert.match(result.status, /Aktive Module/);
+  assert.match(result.status, /Projektmanagement/);
+});
+
+test("resolveFavoritesAction meldet fehlendes letztes Modul", () => {
+  const result = resolveFavoritesAction("open-last-module", {
+    lastModuleTitle: "",
+  });
+
+  assert.equal(result.handled, true);
+  assert.match(result.status, /Noch kein letztes Modul/);
 });

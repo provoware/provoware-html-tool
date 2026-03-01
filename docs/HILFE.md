@@ -177,3 +177,12 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - **Favoritenleiste oeffnen:** Klicken Sie auf **"Favoritenleiste einblenden"** oder druecken Sie **Alt+F**.
 - **Rueckweg:** Nutzen Sie den gleichen Knopf oder erneut **Alt+F**.
 - **Moduloptionen unten:** Klicken Sie ein Modul im Raster an. Unten sehen Sie dann passende Aktionen mit kurzem Hilfe-Text.
+
+## Neu in Iteration 82
+
+- Favoriten-Schnellaktionen:
+  - **Letztes Modul oeffnen**: Springt zum zuletzt genutzten Modul.
+  - **Alle Module anzeigen**: Zeigt aktive Module als Klartext im Status.
+  - **Fokus-Hilfe zeigen**: Erklaert den Rueckweg mit Escape.
+- Moduloptionen unten: Je Modul stehen jetzt zwei direkte Aktionen bereit (z. B. Planung anzeigen, Leads anzeigen).
+- Bei Start-Fehlern in TODO-Vorlagen wird die betroffene Zeile direkt angezeigt.

@@ -118,8 +118,18 @@
       status:
         "Favoritenleiste umgeschaltet. Naechster Schritt: Aktion waehlen.",
     }));
+  const resolveFavoritesAction =
+    dashboardModel.resolveFavoritesAction ||
+    ((actionKey) => ({
+      handled: typeof actionKey === "string" && actionKey.trim() !== "",
+      status:
+        "Aktion gestartet. Naechster Schritt: Ergebnis pruefen oder Protokoll oeffnen.",
+    }));
 
   let focusSnapshot = null;
+  let activeModules = [];
+  let lastModuleTitle = "";
+  let moduleWorkspace = null;
 
   function clampNumber(value, min, max) {
     if (typeof value !== "number" || Number.isNaN(value)) {
@@ -617,8 +627,33 @@
         return;
       }
 
-      const label = target.textContent?.trim() || "Aktion";
-      setStatus(`${label} gestartet. Naechster Schritt: Ergebnis pruefen.`);
+      const actionKey = target.dataset.favoriteAction || "";
+      const result = resolveFavoritesAction(actionKey, {
+        activeModules,
+        lastModuleTitle,
+      });
+
+      if (!result.handled) {
+        setStatus(result.status);
+        return;
+      }
+
+      if (actionKey === "open-last-module") {
+        const opened = moduleWorkspace?.openModuleByTitle?.(lastModuleTitle);
+        if (!opened) {
+          setStatus(result.status);
+          return;
+        }
+      }
+
+      if (actionKey === "show-all-modules") {
+        const allTitles = activeModules.map((entry) => entry.title).join(", ");
+        const details = allTitles ? ` Details: ${allTitles}.` : "";
+        setStatus(`${result.status}${details}`);
+        return;
+      }
+
+      setStatus(result.status);
     });
 
     return true;
@@ -1187,7 +1222,7 @@
     );
   }
 
-  window.createModuleWorkspace({
+  moduleWorkspace = window.createModuleWorkspace({
     catalog: document.getElementById("module-catalog"),
     grid: document.getElementById("active-modules"),
     emptyState: document.getElementById("empty-state"),
@@ -1205,6 +1240,10 @@
         };
         return acc;
       }, {});
+      activeModules = modules;
+      if (modules.length > 0 && typeof modules[0].title === "string") {
+        lastModuleTitle = modules[0].title;
+      }
       persistLayoutState().catch(() => {});
       setDebug(`Debug: ${modules.length} Module im Raster aktiv.`);
     },

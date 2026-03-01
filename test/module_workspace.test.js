@@ -33,3 +33,17 @@ test("Modul-Control-Hinweise sind einheitlich und mit Rueckweg", () => {
   assert.match(hideHint, /Katalog erneut aktivieren/);
   assert.match(pinHint, /Oben anheften/);
 });
+
+test("Moduloptionen enthalten kontextsensitive Aktionen", () => {
+  const scriptPath = path.join(
+    process.cwd(),
+    "templates",
+    "module_workspace.js",
+  );
+  const source = fs.readFileSync(scriptPath, "utf8");
+
+  assert.match(source, /Planung anzeigen/);
+  assert.match(source, /Leads anzeigen/);
+  assert.match(source, /Bericht erstellen/);
+  assert.match(source, /Tickets anzeigen/);
+});

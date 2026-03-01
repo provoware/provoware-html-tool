@@ -160,3 +160,9 @@ PATCH-059: Wiki-Modul (Kategorie/Titel/Inhalt) als getrenntes System-Modul einge
 - 2026-03-03 (Iteration 67): Lyrics-Kurzguide zeigt jetzt Enter/Space/Escape-Schritte, und der Lesemodus blendet eine manuelle Kopierhilfe bei Clipboard-Fehlern ein.
 
 - Neuer UI-Standard: Globale Modi (z. B. Fokusmodus) nutzen immer Snapshot/Restore mit Escape-Rueckweg.
+
+## Iteration 82 Update
+
+- Favoriten-Aktionen sind jetzt modellbasiert und nutzen Modulkontext.
+- Moduloptionen unten sind je Profil kontextsensitiv erweitert.
+- Start-Routine liefert TODO-Zeilenhilfe fuer schnelle Reparatur.

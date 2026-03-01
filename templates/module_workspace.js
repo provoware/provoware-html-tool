@@ -22,6 +22,61 @@
     },
   };
 
+  const MODULE_OPTION_ACTIONS = {
+    project: [
+      {
+        id: "project-plan",
+        label: "Planung anzeigen",
+        message:
+          "Projektplanung geoeffnet. Naechster Schritt: Prioritaet festlegen.",
+      },
+      {
+        id: "project-status",
+        label: "Status pruefen",
+        message:
+          "Projektstatus geprueft. Naechster Schritt: Offenen Punkt waehlen.",
+      },
+    ],
+    sales: [
+      {
+        id: "sales-leads",
+        label: "Leads anzeigen",
+        message: "Lead-Liste geoeffnet. Naechster Schritt: Kontakt auswaehlen.",
+      },
+      {
+        id: "sales-follow-up",
+        label: "Rueckruf planen",
+        message: "Rueckruf vorbereitet. Naechster Schritt: Termin bestaetigen.",
+      },
+    ],
+    analytics: [
+      {
+        id: "analytics-report",
+        label: "Bericht erstellen",
+        message: "Bericht gestartet. Naechster Schritt: Zeitraum waehlen.",
+      },
+      {
+        id: "analytics-export",
+        label: "Export vorbereiten",
+        message: "Export vorbereitet. Naechster Schritt: Export-Knopf nutzen.",
+      },
+    ],
+    support: [
+      {
+        id: "support-tickets",
+        label: "Tickets anzeigen",
+        message:
+          "Ticketliste geoeffnet. Naechster Schritt: Ticket priorisieren.",
+      },
+      {
+        id: "support-log",
+        label: "Protokoll oeffnen",
+        message:
+          "Support-Protokoll geoeffnet. Naechster Schritt: Ursache lesen.",
+      },
+    ],
+  };
+
   const MODULE_CATALOG = [
     {
       id: "project",
@@ -141,6 +196,21 @@
 
       const actions = document.createElement("div");
       actions.className = "module-card-actions";
+
+      const contextActions = MODULE_OPTION_ACTIONS[entry.id] || [];
+      contextActions.forEach((actionEntry) => {
+        const actionButton = document.createElement("button");
+        actionButton.type = "button";
+        actionButton.textContent = actionEntry.label;
+        actionButton.setAttribute(
+          "aria-label",
+          `${actionEntry.label}. Rueckweg: Anderes Modul auswaehlen`,
+        );
+        actionButton.addEventListener("click", () => {
+          setStatus(actionEntry.message);
+        });
+        actions.appendChild(actionButton);
+      });
 
       const focusButton = document.createElement("button");
       focusButton.type = "button";
@@ -331,6 +401,37 @@
       );
     }
 
+    function openModuleByTitle(moduleTitle) {
+      if (typeof moduleTitle !== "string" || !moduleTitle.trim()) {
+        return false;
+      }
+
+      const match = moduleModel.find(
+        (entry) => !entry.hidden && entry.title === moduleTitle,
+      );
+      if (!match) {
+        return false;
+      }
+
+      maximizedId = match.id;
+      renderActiveModules();
+      renderModuleOptions(match);
+      setStatus(
+        `Modul geoeffnet: ${match.title}. Naechster Schritt: Funktionen nutzen.`,
+      );
+      return true;
+    }
+
+    function getActiveModules() {
+      return moduleModel
+        .filter((entry) => !entry.hidden)
+        .map((entry) => ({
+          id: entry.id,
+          title: entry.title,
+          pinned: Boolean(entry.pinned),
+        }));
+    }
+
     function addModule(moduleId) {
       const source = getCatalogModule(moduleId);
       if (moduleModel.some((entry) => entry.id === moduleId && !entry.hidden)) {
@@ -379,6 +480,11 @@
     renderCatalog();
     renderActiveModules();
     clearModuleOptions();
+
+    return {
+      openModuleByTitle,
+      getActiveModules,
+    };
   }
 
   window.createModuleWorkspace = buildWorkspace;

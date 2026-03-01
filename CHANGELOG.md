@@ -1,3 +1,10 @@
+## Iteration 82 (2026-03-01)
+
+- Drei offene Mini-Punkte abgeschlossen: Favoriten-Schnellaktionen sind jetzt mit echten Modulstatus-Aktionen verbunden.
+- Untere Moduloptionen zeigen jetzt kontextsensitive Aktionen pro Modul (z. B. Planung, Leads, Bericht, Tickets) mit Rueckweg-Hinweis.
+- Start-Routine meldet TODO-Vorlagenfehler jetzt mit direkter Zeilenhilfe und naechstem Schritt inkl. Protokoll-Hinweis.
+- UX/A11y-Mini-Optimierung: Favoriten-Buttons haben klare Aktionstexte und zentrale Statusmeldungen in einfacher Sprache.
+
 ## Iteration 81 (2026-03-01)
 
 - Sidebar als ausklappbare Favoritenleiste mit Alt+F und klaren Rueckweg-Hinweisen ergaenzt.
