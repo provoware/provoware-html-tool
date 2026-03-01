@@ -115,3 +115,6 @@ Laienvorschläge
 
 - [x] P1: Plugin-Loader-Hardening umgesetzt (duplizierte Plugin-ID blockieren + Pfad ausserhalb Projekt verhindern).
 - [ ] P1: Backup-Auswahl-Dialog direkt an JSON-Store-Backup-Hook anbinden und mit Start-Routine pruefen.
+
+- [x] P1: Mini-Optimierung Hilfe: Kurzen Release-Fertig-Check fuer Einzelpunkte in README ergaenzt.
+- [ ] P1: Den 5-Punkte-Release-Check als Inline-Hilfe im Backup-Dialog anzeigen.

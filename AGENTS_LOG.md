@@ -13,3 +13,4 @@
 2026-03-01 | PATCH-036 | Strategie und Vorgehen auf Projektziel geschärft, alle Info-Dateien synchronisiert | SELFINFO.md, README.txt, PROJECT_INFO.md, CHANGELOG.md, todo.txt, MEMORY_FIXES.md, QUESTIONS_TODO.md
 
 2026-03-01 | PATCH-037 | Plugin-Loader-Hardening: doppelte IDs ablehnen + Pfadschutz gegen externe Modulpfade | system-core/plugin_loader.js, test/plugin_loader.test.js, dummys/unsafe-plugin-manifest.json, Doku-Updates
+2026-03-01 | PATCH-038 | Doku-Entscheidung: Einzelne offene Punkte koennen release-fertig sein (5-Punkte-Check) | README.txt, CHANGELOG.md, SELFINFO.md, todo.txt
