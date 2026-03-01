@@ -215,29 +215,17 @@
   }
 
   async function writeProjectJson(relativePath, payload) {
-    if (!selectedProjectDir) {
+    if (!window.ProjectFileWriter?.writeProjectJsonFile) {
       throw new Error(
-        "Projektordner fehlt. Erneut versuchen oder Protokoll oeffnen.",
-      );
-    }
-    if (typeof relativePath !== "string" || !relativePath.trim()) {
-      throw new Error(
-        "Dateipfad fehlt. Reparatur starten oder Protokoll oeffnen.",
-      );
-    }
-    if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
-      throw new Error(
-        "Kanban-Daten ungueltig. Reparatur starten oder Protokoll oeffnen.",
+        "Datei-Schreiber fehlt. Reparatur starten oder Protokoll oeffnen.",
       );
     }
 
-    const fileHandle = await selectedProjectDir.getFileHandle(relativePath, {
-      create: true,
-    });
-    const writer = await fileHandle.createWritable();
-    await writer.write(`${JSON.stringify(payload, null, 2)}\n`);
-    await writer.close();
-    return true;
+    return window.ProjectFileWriter.writeProjectJsonFile(
+      selectedProjectDir,
+      relativePath,
+      payload,
+    );
   }
 
   function renderZones() {

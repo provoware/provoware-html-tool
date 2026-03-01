@@ -1,3 +1,9 @@
+## Patch 058 – Tool-Umfang erweitert
+
+- Neues Tool-Modul: `project_file_writer` fuer sichere JSON-Dateiwrites im Projektordner.
+- Nutzen fuer Laien: klare Fehlermeldungen mit naechstem Schritt (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
+- Technischer Umfang: Pfad-Validierung (kein `..`), automatische Ordnerauflosung, formatierter JSON-Write mit Ergebnispruefung.
+
 ## Iteration 56 – Kernfortschritt
 
 - Plugin-Loader (Plugin-Lader) wurde minimal gehaertet: Manifest-Typ, Version (Semver = Versionsformat x.y.z), Plugin-ID und Modulpfad werden vor dem Laden strikt geprueft.

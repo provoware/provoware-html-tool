@@ -40,3 +40,4 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 2026-03-01 | PATCH-056 | Option B priorisiert: Plugin-Loader minimal absichern + Drag-and-Drop als kleiner Zusatzpatch, Dummy-Daten bereinigt | system-core/plugin_loader.js, templates/kanban_preview.js, test/plugin_loader.test.js, test/kanban_preview.test.js, dummys/unsafe-plugin-manifest.json, Doku-Updates
 
 2026-03-01 | PATCH-057 | Option C: JSON-Store mit versionierten Writes + Recovery-Pfad gehaertet | system-core/json_store.js, test/json_store.test.js, docs/HILFE.md, README.txt, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, PROJEKTBESCHREIBUNG.md, MEMORY_FIXES.md, todo.txt
+2026-03-01 | PATCH-058 | Zwei offene Punkte abgeschlossen: zentraler Projekt-Datei-Schreiber fuer Kanban + AGENTS-Regel fuer zwei offene Punkte je Iteration | system-module/project_file_writer.js, templates/dashboard.js, templates/dashboard.html, test/project_file_writer.test.js, AGENTS.md, Doku-Updates

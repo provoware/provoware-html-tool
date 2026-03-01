@@ -14,6 +14,9 @@ Ziel ist: barrierefrei, verständlich, wartbar und voll automatisiert.
    - „Erneut versuchen“
    - „Reparatur starten“
    - „Protokoll öffnen“
+5. Pro Iteration immer **genau zwei offene Punkte** aus `todo.txt` vollstaendig abschliessen.
+   - Beide Punkte muessen Code + Tests + Doku enthalten.
+   - Erst danach neue offene Punkte anlegen.
 5.AGENTS.md – Modultool (Profi‑Version V2) 
 Stand: 2026-02-28 • Zweck: maximale Patch‑Genauigkeit, Codesparsamkeit, Robustheit, Laien‑Perfektion
 Einsatz: Codex + GitHub (iterative Optimierung, klare PRs, reproduzierbare Ergebnisse) 

@@ -1,3 +1,9 @@
+## Update 2026-03-01 – Patch 058
+
+- System/Tool-Trennung verbessert: neuer Helper `system-module/project_file_writer.js` kapselt Datei-Schreiblogik.
+- Dashboard nutzt diese zentrale Logik jetzt fuer `data/kanban_board.json` statt direktem Dateizugriff.
+- Qualitaet: neuer Unit-Test `test/project_file_writer.test.js` prueft Pfad-Validierung und Schreib-Output.
+
 ## 2026-03-01 – Storage-Standard erweitert (Option C)
 
 - JSON-Store unterstuetzt jetzt optional versionierte Writes (`*_versions/*_v0001.json`).
