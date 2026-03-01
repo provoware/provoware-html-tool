@@ -14,6 +14,8 @@ const {
   buildLyricsPreferencesPayload,
   normalizeLyricsPreferences,
   resolveRandomProfile,
+  normalizeRandomCategorySelection,
+  buildRandomCategoryStatusMessage,
   formatUsageTimestamp,
   resolvePreviewShortcutTarget,
   buildPreviewStatusMessage,
@@ -212,4 +214,53 @@ test("buildClosePreviewStatusMessage nennt Enter- und Alt-Shortcuts", () => {
   assert.match(message, /Enter/);
   assert.match(message, /Alt\+T/);
   assert.match(message, /Alt\+I/);
+});
+
+test("normalizeRandomCategorySelection nutzt Fallback bei komplett aus", () => {
+  const normalized = normalizeRandomCategorySelection({
+    includeGenre: false,
+    includeMood: false,
+    includeStyle: false,
+  });
+
+  assert.equal(normalized.includeGenre, true);
+  assert.equal(normalized.includeMood, true);
+  assert.equal(normalized.includeStyle, true);
+});
+
+test("buildRandomCategoryStatusMessage zeigt aktive Kategorien", () => {
+  const message = buildRandomCategoryStatusMessage({
+    includeGenre: true,
+    includeMood: false,
+    includeStyle: true,
+  });
+
+  assert.match(message, /Genre, Stil/);
+  assert.match(message, /Naechster Schritt/);
+});
+
+test("buildRandomLyricsSnippet respektiert Kategorie-Auswahl", () => {
+  const snippet = buildRandomLyricsSnippet("standard", () => 0, {
+    includeGenre: false,
+    includeMood: true,
+    includeStyle: false,
+  });
+
+  assert.doesNotMatch(snippet, /Genre:/);
+  assert.match(snippet, /Stimmung:/);
+  assert.doesNotMatch(snippet, /Stil:/);
+});
+
+test("buildLyricsPreferencesPayload speichert Kategorie-Auswahl", () => {
+  const payload = buildLyricsPreferencesPayload({
+    randomProfile: "standard",
+    previewFocusTarget: "title",
+    includeGenre: true,
+    includeMood: false,
+    includeStyle: true,
+  });
+
+  assert.equal(payload.includeGenre, true);
+  assert.equal(payload.includeMood, false);
+  assert.equal(payload.includeStyle, true);
 });

@@ -1,3 +1,12 @@
+## Iteration 80 (2026-03-03)
+
+- Ziel: Genau drei offene Punkte abschliessen (Songtext-Editor, Dokument-Vorschau, Zufallsgenerator).
+- Ergebnis: Songtext-Zufallsgenerator bietet jetzt Kategorie-Auswahl (Genre, Stimmung, Stil) mit Eingabepruefung und sicherem Fallback.
+- Ergebnis: Kategorie-Auswahl wird in den Songtext-Einstellungen gespeichert und beim Start wiederhergestellt.
+- Ergebnis: Dashboard zeigt neue Inline-Hilfe fuer aktive Kategorien mit klarem naechstem Schritt.
+- Mini-Optimierung: Neue Kategorie-Statusmeldung mit Rueckweg-Hinweis fuer Laien.
+- Naechster Schritt: Content-Planungs-Modul (Kalender + Jahresuebersicht) in kleinem Patch starten.
+
 ## Iteration 78 (2026-03-01)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Fokusmodus-Hinweis im Inspector + Pin-Status in layout.json speichern).
