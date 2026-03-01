@@ -425,3 +425,8 @@ Praktischer Einsatz:
 - Die neue Hilfsfunktion `announceLiveRegionText` meldet nur echte Textaenderungen (A11y: weniger doppelte Vorlesung).
 - Im Hilfe-Panel erklaert ein neuer Satz mit Beispiel (`"ab", "xy"`), dass die Sortierung nur ignorierte Kurzbegriffe betrifft.
 - Badge-Kurzform (`TW/GW`) zeigt jetzt ausgeschriebenen Suchmodus als Tooltip fuer Maus und Touch-Hilfe.
+
+## Iteration 101 – Support-Hilfe zentraler und klarer
+- Tooltip-Texte fuer Suchmodus-Badge (`TW/GW`) liegen jetzt in `config/messages_de.json` und sind damit leichter wartbar.
+- Teilwort-Meta zeigt jetzt den aktiven Filter als Klartext, damit Einsteiger die Trefferquelle schneller verstehen.
+- Neuer Hilfeblock "Wenn nichts gefunden wird" nennt drei direkte Rueckwege: erneut versuchen, Reparatur starten, Protokoll oeffnen.

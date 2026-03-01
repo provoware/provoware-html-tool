@@ -108,7 +108,7 @@ test("Dashboard-Hilfe zeigt Safe-Mode-Status und Versions-Restore", () => {
   assert.match(dashboardHtml, /id="boot-focus-live"/);
   assert.match(dashboardHtml, /Fokusziel aktuell: Erstes Modul\./);
   assert.match(dashboardHtml, /id="support-history-meta"/);
-  assert.match(dashboardHtml, /Enter startet die Suche sofort\./);
+  assert.match(dashboardHtml, /Enter startet\s+die Suche sofort\./);
 });
 
 test("Backup-Detailmodus startet eingeklappt", () => {
@@ -251,6 +251,7 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardHtml, /id="support-history-sort-short-toggle"/);
   assert.match(dashboardHtml, /id="support-history-sort-short-help"/);
   assert.match(dashboardHtml, /id="support-history-live"/);
+  assert.match(dashboardHtml, /id="support-history-empty-help"/);
   assert.match(dashboardJs, /supportHistoryPartialMode/);
   assert.match(dashboardJs, /supportHistoryFooterCompact/);
   assert.match(dashboardJs, /supportHistorySortShortTokens/);
@@ -265,9 +266,13 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardJs, /"GW"/);
   assert.match(dashboardJs, /aria-label/);
   assert.match(dashboardJs, /support-mode-badge-tooltip/);
+  assert.match(dashboardJs, /getSupportModeTooltipText/);
+  assert.match(dashboardJs, /supportModeTooltipPartial/);
+  assert.match(dashboardJs, /supportModeTooltipWhole/);
   assert.match(dashboardJs, /Tooltip: Teilwortsuche/);
   assert.match(dashboardJs, /Suchmodus Teilwort aktiv/);
   assert.match(dashboardJs, /min\. 3 Zeichen/);
+  assert.match(dashboardJs, /Aktiver Filter:/);
   assert.match(
     dashboardJs,
     /Kurze Suchbegriffe ignoriert \(unter 3 Zeichen\):/,

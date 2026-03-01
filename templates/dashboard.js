@@ -75,6 +75,9 @@
     "support-history-sort-short-toggle",
   );
   const supportHistoryLive = document.getElementById("support-history-live");
+  const supportHistoryEmptyHelp = document.getElementById(
+    "support-history-empty-help",
+  );
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -152,6 +155,7 @@
   let favoritesRailOpen = false;
   let lastBootFocusDebugText = "";
   let lastBackupDetailStateText = "";
+  let dashboardCompactMessages = {};
 
   const dashboardModel = window.DashboardModel || {};
   const normalizeLayoutWithModel =
@@ -1355,6 +1359,24 @@
     return layoutState.supportHistorySortShortTokens === true;
   }
 
+  function getSupportFilterLabel(filterValue) {
+    if (filterValue === "safe-mode") {
+      return "Nur Safe-Mode";
+    }
+
+    return "Alle Ereignisse";
+  }
+
+  function getSupportModeTooltipText(usePartialMode) {
+    const tooltipFromConfig = usePartialMode
+      ? dashboardCompactMessages.supportModeTooltipPartial
+      : dashboardCompactMessages.supportModeTooltipWhole;
+    const fallbackText = usePartialMode
+      ? "Tooltip: Teilwortsuche (enthaelt) ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis."
+      : "Tooltip: Ganzwortsuche ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis.";
+    return ensureMessage(tooltipFromConfig, fallbackText);
+  }
+
   function normalizeSupportQueryTokens(queryText) {
     const usePartialMode = isSupportPartialModeEnabled();
     const minLength = usePartialMode ? 3 : 2;
@@ -1493,8 +1515,9 @@
     });
 
     if (supportHistoryMeta) {
+      const filterLabel = getSupportFilterLabel(safeFilter);
       const modeText = queryContext.usePartialMode
-        ? "Modus: Teilwort (enthaelt, min. 3 Zeichen)."
+        ? `Modus: Teilwort (enthaelt, min. 3 Zeichen). Aktiver Filter: ${filterLabel}.`
         : "Modus: Ganze Woerter (Standard).";
       const shortTokenList = queryContext.ignoredShortTokens
         .slice(0, 3)
@@ -1504,6 +1527,10 @@
           ? ` Hinweis: Kurze Suchbegriffe ignoriert (unter 3 Zeichen): ${shortTokenList.join(", ")}.${queryContext.ignoredShortTokens.length > 3 ? " (+weitere)" : ""}`
           : "";
       supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText}${shortHint} Tipp: Enter startet die Suche sofort.`;
+    }
+
+    if (supportHistoryEmptyHelp) {
+      supportHistoryEmptyHelp.hidden = filtered.length !== 0;
     }
 
     if (filtered.length === 0) {
@@ -1572,9 +1599,7 @@
           ? "Suchmodus Teilwort aktiv"
           : "Suchmodus Ganzwort aktiv",
       );
-      modeBadge.title = queryContext.usePartialMode
-        ? "Tooltip: Teilwortsuche (enthaelt) ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis."
-        : "Tooltip: Ganzwortsuche ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis.";
+      modeBadge.title = getSupportModeTooltipText(queryContext.usePartialMode);
       modeBadge.dataset.tooltip = "support-mode-badge-tooltip";
       modeBadge.append(modeIcon, modeIconLabel, modeText);
       line.appendChild(modeBadge);
@@ -2347,6 +2372,7 @@
     [supportHistoryFooterHint, "Support-Verlauf-Footer-Hinweis"],
     [supportHistorySortShortToggle, "Support-Verlauf-Sortier-Schalter"],
     [supportHistoryLive, "Support-Verlauf-Live-Ansage"],
+    [supportHistoryEmptyHelp, "Support-Verlauf-0-Treffer-Hilfe"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(
@@ -2373,6 +2399,7 @@
   });
 
   loadMessages().then((ui) => {
+    dashboardCompactMessages = ui && typeof ui === "object" ? ui : {};
     controlWhat.textContent = ensureMessage(
       ui.controlWhat,
       "Startet Zugriff und prueft den Projektordner.",

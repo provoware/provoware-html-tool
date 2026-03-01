@@ -36,6 +36,8 @@
       "5) Bei Problemen: Erneut versuchen, Reparatur starten oder Protokoll oeffnen."
     ],
     "themeTooltipDefault": "Tipp: Bei schlechter Lesbarkeit Kontrast+ waehlen. Rueckweg: Einfach vorheriges Thema erneut waehlen.",
-    "themeTooltipChanged": "Thema gewechselt zu {theme}. Rueckweg: Im Feld wieder das alte Thema waehlen."
+    "themeTooltipChanged": "Thema gewechselt zu {theme}. Rueckweg: Im Feld wieder das alte Thema waehlen.",
+    "supportModeTooltipPartial": "Tooltip: Teilwortsuche (enthaelt) ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis.",
+    "supportModeTooltipWhole": "Tooltip: Ganzwortsuche ist aktiv. Tipp fuer Touch: Kurz halten fuer Hinweis."
   }
 }

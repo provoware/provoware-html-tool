@@ -742,7 +742,8 @@
                 UND-Regel: Erst Filter waehlen, dann Freitext pruefen.
               </p>
               <p id="support-history-meta" class="field-tip" aria-live="polite">
-                Treffer: 0. Tipp: Enter startet die Suche sofort.
+                Treffer: 0. Modus: Ganze Woerter (Standard). Tipp: Enter startet
+                die Suche sofort.
               </p>
               <label for="support-history-boot-debug-toggle">
                 <input
@@ -781,6 +782,24 @@
                 Teilwortsuche (enthaelt): Findet auch Ausschnitte ab 3 Zeichen.
                 Standard bleibt ganze Woerter.
               </p>
+              <div
+                id="support-history-empty-help"
+                class="field-tip"
+                aria-live="polite"
+              >
+                <strong>Wenn nichts gefunden wird:</strong>
+                <ol>
+                  <li>
+                    Erneut versuchen: Filter auf "Alle Ereignisse" stellen.
+                  </li>
+                  <li>
+                    Reparatur starten: Safe-Mode zuruecksetzen ausfuehren.
+                  </li>
+                  <li>
+                    Protokoll oeffnen: Letzten Fehler im Debug-Bereich lesen.
+                  </li>
+                </ol>
+              </div>
               <ul id="support-history-list" class="todo-list" role="list"></ul>
               <p
                 id="support-history-footer-hint"

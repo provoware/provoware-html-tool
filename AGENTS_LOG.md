@@ -193,3 +193,13 @@ PATCHSPEC-2026-03-01-100
 5) Risiko: niedrig (Text + kleine UI-Logik), reduziert durch String-Tests + Release-Gates.
 6) Akzeptanzkriterien: Sortier-Schalter erklaert klar den Scope inkl. Beispiel; Live-Region schreibt nur bei neuem Text; Badge-Kurzform zeigt Tooltip mit ausgeschriebenem Suchmodus.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` und Checks erneut.
+
+PATCHSPEC-2026-03-01-101
+1) Ziel: Drei offene Mini-Punkte abschliessen (Badge-Tooltip-Texte zentralisieren, Teilwort-Meta um aktiven Filter erweitern, Hilfeblock fuer 0 Treffer ergaenzen).
+2) Scope IN: config/messages_de.json, templates/dashboard.js, templates/dashboard.html, test/dashboard_lyrics_guidance.test.js, docs/HILFE.md und Pflicht-Doku-Dateien.
+3) Scope OUT: Keine neuen Abhaengigkeiten, keine Datenformat-Aenderung, kein grosser Refactor.
+4) Dateien/Marker: supportModeTooltipPartial, support-history-meta, support-history-empty-help.
+5) Risiko: niedrig (hauptsaechlich UI-Texte), reduziert durch String-Tests und Release-Gates.
+6) Akzeptanzkriterien: Tooltip-Texte kommen aus config mit Fallback in JS; Teilwort-Meta zeigt Filter als Klartext; Hilfe enthaelt 3 klare Rueckwege bei 0 Treffern.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` und Checks erneut.
+2026-03-01 | PATCH-101 | Drei offene Mini-Punkte abgeschlossen: Suchmodus-Tooltip-Texte zentralisiert, Teilwort-Meta mit Filter-Klartext, 0-Treffer-Hilfeblock mit 3 Rueckwegen | config/messages_de.json, templates/dashboard.js, templates/dashboard.html, test/dashboard_lyrics_guidance.test.js, docs/HILFE.md, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, AGENTS_LOG.md

@@ -6,12 +6,12 @@ hoher Barrierefreiheit (A11y = Bedienbarkeit fuer alle) und stabiler
 Start-Routine. Die Start-Routine prueft automatisch Abhaengigkeiten,
 Formatierung, Tests und Release-Bereitschaft.
 
-## Release-Status (Iteration 100)
-- Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Sortier-Hilfetext, doppelte Live-Ansage vermeiden, Tooltip fuer Badge-Kurzform).
-- Hilfe/UX verbessert: Der Sortier-Schalter erklaert jetzt klar, dass nur ignorierte Kurzbegriffe (unter 3 Zeichen) sortiert werden, inklusive Beispiel.
-- A11y verbessert: Live-Region vermeidet doppelte Vorlesung bei identischem Text (Screenreader liest nur echte Aenderungen).
-- Bedienhilfe verbessert: Badge-Kurzform hat nun Tooltip mit ausgeschriebenem Suchmodus fuer Maus und Touch.
-- Naechster Schritt: Tooltip-Texte zentral in `config/messages_de.json` auslagern.
+## Release-Status (Iteration 101)
+- Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Tooltip-Texte zentral, Teilwort-Meta mit Filter-Klartext, Hilfe bei 0 Treffern).
+- Wartbarkeit verbessert: Tooltip-Texte fuer `TW/GW` liegen jetzt zentral in `config/messages_de.json` mit JS-Fallback.
+- Nutzerhilfe verbessert: Teilwort-Meta nennt jetzt den aktiven Filter als Klartext (`Alle Ereignisse` oder `Nur Safe-Mode`).
+- Hilfe/UX verbessert: Neuer Mini-Block "Wenn nichts gefunden wird" zeigt drei klare Rueckwege (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
+- Naechster Schritt: Tooltip-Texte auch fuer Filter-Schalter in config zentralisieren.
 
 ## Release-Status (Iteration 93)
 - Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Boot-Live-Ansage im Debug-Protokoll, kurzer Tastatur-Hinweis bei langen Support-Details, Detailmodus mit zuletzt geoeffnetem Zustand).
