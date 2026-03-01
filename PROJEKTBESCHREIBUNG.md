@@ -17,3 +17,9 @@ Dieses Tool bietet ein barrierefreies Dashboard mit klaren Schritten fuer Laien.
 - Backup-Dialog zeigt den 5-Punkte-Release-Check direkt als Inline-Hilfe.
 - Doku-Regel wird jetzt automatisch im Release-Readiness-Check geprueft.
 - Naechster Ausbau: Backup-Hook Ende-zu-Ende mit Dialog verbinden.
+
+
+## Iteration 40 Update
+- Neue Themes fuer Sehschwaeche: Rötlich und Camouflage als zusaetzliche Wahl.
+- Release-Check deckt jetzt 5 Themes vollstaendig ab.
+- Laienhilfe erweitert: kurzer Leitfaden fuer Theme-Wahl und naechste Schritte bei Unsicherheit.

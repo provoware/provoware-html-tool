@@ -1,3 +1,10 @@
+## 2026-03-01 – Sichtbarkeit fuer Sehschwaeche und 5 Themes
+
+- Dashboard bietet jetzt 5 Themes (Hell, Dunkel, Kontrast+, Rötlich, Camouflage) fuer bessere Lesbarkeit je Situation.
+- Release-Readiness prueft jetzt auch Rötlich und Camouflage automatisch.
+- README, Hilfe und todo wurden fuer den neuen Sehschwaeche-Leitfaden aktualisiert.
+- Risiko: niedrig, da nur Theme-Auswahl, Theme-CSS und Doku betroffen sind.
+
 ## 2026-03-01 – Backup-Dialog Inline-Check + Doku-Regel im Release-Check
 
 - Dashboard zeigt im Backup-Dialog jetzt den 5-Punkte-Release-Check als direkte Inline-Hilfe fuer schnelle Freigabeentscheidung.

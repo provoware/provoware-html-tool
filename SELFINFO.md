@@ -1,3 +1,6 @@
+Iteration 40 (2026-03-01): 5-Theme-Sichtbarkeit fuer Sehschwaeche umgesetzt (Rötlich + Camouflage), Release-Check erweitert, README/Hilfe/todo synchronisiert.
+Naechster Schritt: Kontrastmessung je Theme automatisieren und im Start-Check melden.
+
 # SELFINFO
 
 Stand: 2026-03-01

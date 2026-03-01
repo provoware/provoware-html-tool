@@ -416,3 +416,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur README-Text ohne Dialoghilfe (schlechter fuer schnelle Bedienung).
 **Risiko/Side-Effects:** Niedrig, da nur statische Checks und Dialog-UI erweitert wurden.
 **Verknüpft:** PATCH-039
+
+## FIX-20260301-040: Sichtbarkeit mit 5-Theme-Standard
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Drei Themes reichten nicht fuer alle Sehbeduerfnisse; manche Nutzer brauchten weichere Kontrastvarianten.
+**Technische Ursache:** Theme-Auswahl und Release-Check waren auf 3 Themes begrenzt.
+**Trigger:** Wunsch nach optimaler Lesbarkeit fuer sehschwache Nutzer und mehr Theme-Flexibilitaet.
+**Fix (kurz):** Zwei neue Themes (`warm`, `camo`) in HTML/CSS ergänzt und Release-Readiness darauf erweitert.
+**Geaenderte Dateien/Marker:** `templates/dashboard.html`, `templates/dashboard.css`, `tools/release_readiness_check.js`, `README.txt`, `docs/HILFE.md`
+**Tests/Checks:** `npm run format`, `node --test`, `bash start.sh`
+**Praevention (kuenftig):** Ab jetzt immer bei Theme-Aenderung HTML, CSS, Release-Check und Doku im gleichen Patch synchronisieren.
+**Alternative(n):** Nur Kontrast+ verbessern (abgelehnt, zu wenig Auswahl fuer lange Nutzung).
+**Risiko/Side-Effects:** Niedrig; nur Styles, Auswahloptionen und Doku angepasst.
+**Verknuepft:** PATCH-040
