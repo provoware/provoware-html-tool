@@ -32,3 +32,5 @@ PATCH-040 | Ziel: Sehschwaeche-Sichtbarkeit verbessern (5 Themes + Doku-Sync) | 
 
 2026-03-01 | PATCH-051 | Offenen TODO-Punkt abgeschlossen: Help-Panel zeigt Referenzbild-Rhythmus (alle 5 Iterationen) inkl. Validierung | templates/help-panel.js, system-module/help_panel.js, test/help_panel.test.js, todo.txt, README.txt, CHANGELOG.md, SELFINFO.md, PROJEKTBESCHREIBUNG.md, MEMORY_FIXES.md
 2026-03-01 | PATCH-052 | Referenzbild professionell analysiert und als Dashboard-Vorgabe umgesetzt (KPI/Kanban/Team/Kalender + A11y-Textstatus) | templates/dashboard.html, templates/dashboard.css, README.txt, CHANGELOG.md, SELFINFO.md, PROJECT_INFO.md, PROJEKTBESCHREIBUNG.md, MEMORY_FIXES.md, todo.txt
+
+2026-03-01 | PATCH-053 | Kanban-Schnellansicht an echte JSON-Daten gebunden + Keyboard-A11y (Pfeil links/rechts, Fokusring) | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, templates/kanban_preview.js, data/kanban_board.json, tools/start_routine.js, test/kanban_preview.test.js, test/start_routine.test.js, Doku-Updates

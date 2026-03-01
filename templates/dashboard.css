@@ -296,12 +296,28 @@ a:focus-visible {
   background: color-mix(in srgb, var(--panel) 80%, var(--panel-soft));
 }
 
-.kanban-col h3,
-.kanban-col p {
+.kanban-col h3 {
   margin: 0;
 }
 
+.kanban-items {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+  min-height: 70px;
+  border-radius: 8px;
+}
 
+.kanban-items li {
+  margin: 0;
+}
+
+.kanban-items[data-focused="true"] {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  background: color-mix(in srgb, var(--panel-soft) 45%, transparent);
+}
 
 #backup-select {
   width: 100%;

@@ -1,3 +1,9 @@
+## Iteration 53 – Kanban produktiv angebunden
+
+- Neue Datei `data/kanban_board.json` ist jetzt die echte Datenquelle fuer die Kanban-Schnellansicht im Dashboard.
+- Neue Moduldatei `templates/kanban_preview.js` trennt Lade-Logik, Validierung (Eingabepruefung), Rendering und Keyboard-A11y sauber voneinander.
+- Barrierefreiheit: Spalten sind mit Tab erreichbar, Pfeil links/rechts wechselt den Fokus, Fokusrahmen ist in allen Themes sichtbar.
+
 # PROJEKTBESCHREIBUNG
 
 ## Ziel

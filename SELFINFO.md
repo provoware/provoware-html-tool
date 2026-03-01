@@ -1,3 +1,9 @@
+## Iteration 53 (2026-03-01)
+
+- Hauptziel abgeschlossen: Kanban-Schnellansicht ist jetzt an echte JSON-Daten gebunden und laeuft ohne statische Platzhalter.
+- Mini-Optimierung: Keyboard-A11y fuer Kanban erweitert (Pfeil links/rechts + sichtbarer Fokusrahmen).
+- Next Step (A): Kanban-Karten als naechstes per Dialog verschiebbar machen (mit Rueckweg und Backup-Hinweis).
+
 ## Iteration 52 (2026-03-01)
 
 - Hauptziel abgeschlossen: Referenzbild professionell analysiert und als klare UI-Vorgabe direkt im Dashboard umgesetzt.

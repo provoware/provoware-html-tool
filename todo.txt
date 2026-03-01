@@ -1,3 +1,6 @@
+- [x] Kanban-Schnellansicht an echte JSON-Daten anbinden (statt statischer Beispieltexte).
+- [x] Keyboard-A11y fuer Kanban erweitern (Spaltenwechsel links/rechts + sichtbarer Fokusfuehrung).
+- [ ] Naechster Mini-Punkt: Kanban-Dialog fuer Kartenverschiebung mit Enter/Escape-Rueckweg und Statusmeldung bauen.
 # TODO – Neustart
 Datum: 2026-02-28
 

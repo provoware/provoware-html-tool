@@ -1,3 +1,10 @@
+## 2026-03-01 – Kanban-Schnellansicht mit echten JSON-Daten + Keyboard-A11y
+
+- Kanban-Schnellansicht liest jetzt echte Daten aus `data/kanban_board.json` statt statischer Beispieltexte.
+- Neue Kanban-Logik ist als eigenes Modul ausgelagert (`templates/kanban_preview.js`) mit Input-/Output-Pruefung und Tastatursteuerung (Pfeil links/rechts + sichtbarer Fokus).
+- Start-Routine und Pflichttests wurden um die neuen Kanban-Dateien erweitert, damit der Check weiter vollautomatisch bleibt.
+- Risiko: niedrig, da nur Kanban-Bereich, zugehoerige UI-Logik und Tests erweitert wurden.
+
 ## 2026-03-01 – Referenzbild-Analyse als Dashboard-Vorgabe umgesetzt
 
 - Das Dashboard hat jetzt einen neuen Vorlage-Bereich mit Neon-Stil, KPI-Karten und Kanban-Schnellansicht, damit Layout und Struktur klar am Referenzbild ausgerichtet sind.

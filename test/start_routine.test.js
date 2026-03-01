@@ -40,11 +40,13 @@ test("Dashboard-Dateien sind als Pflichtpfade vorhanden", () => {
     "templates/dashboard.js",
     "templates/dashboard_help.js",
     "templates/boot_status.js",
+    "templates/kanban_preview.js",
     "templates/module_workspace.js",
     "system-module/dashboard_model.js",
     "test/dashboard_model.test.js",
     "system-core/dashboard_core.js",
     "test/dashboard_core.test.js",
+    "test/kanban_preview.test.js",
   ]);
 
   assert.equal(result.ok, true);
