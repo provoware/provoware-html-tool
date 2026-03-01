@@ -61,7 +61,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 83 %
-- **Erledigt:** 112 Punkte
+- **Erledigt:** 114 Punkte
 - **Offen:** 23 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.
@@ -483,8 +483,8 @@ Update 2026-03-03 (Iteration 66): Globales UI-Design-Token-Set eingefuehrt (`con
 - Boot-View zeigt klare Phasen-Texte (Phase 1 UI, Phase 2 Ordner, Phase 3 Module, Phase 4 Backup).
 Naechster Schritt: Layout-Splitter + Collapse + Persistenz in `data/layout.json` als Safe-Layout-Mode umsetzen.
 
-## Update 2026-03-03 (Iteration 68): Songtext-Zufallsinhalt mit 1 Klick
-- Songideen-Bereich hat jetzt den Knopf **"Zufallsinhalt einfuegen (1 Klick)"**.
-- Der Knopf fuegt sofort einen Impulsblock mit Genre, Stimmung und Stil ein.
-- Lesemodus-Rueckweg ist klar: Nach Schliessen springt der Fokus auf das Titel-Feld.
-- Naechster Schritt: Zufallsinhalt um Profilfilter erweitern (z. B. Techno/Hoerspiel/Chill).
+## Update 2026-03-03 (Iteration 69): Songtext-Zufallsprofil + Fokusziel
+- Songideen-Bereich hat jetzt eine Profilwahl fuer Zufallsinhalt: **Standard, Techno, Hoerspiel, Chill**.
+- Der 1-Klick-Knopf nutzt das gewaehlte Profil und schreibt es sichtbar in den Impulsblock.
+- Lesemodus bietet jetzt ein waehlbares Fokusziel nach "Vorschau schliessen": Titel-Feld oder Inhaltsfeld.
+- Naechster Schritt: Profil- und Fokuswahl pro Projekt speichern, damit die letzte Wahl automatisch wieder aktiv ist.

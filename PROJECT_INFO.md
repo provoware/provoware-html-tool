@@ -1,3 +1,9 @@
+## Statusupdate 2026-03-03 (Iteration 69)
+
+- Hauptziel: Songtext-Zufallsinhalt wurde um Profilfilter erweitert (Standard/Techno/Hoerspiel/Chill).
+- Mini-Optimierung UX/A11y: Lesemodus-Fokusziel ist jetzt waehlbar (Titel/Inhalt) fuer klare Tastaturfuehrung.
+- Naechster Schritt: Auswahlwerte in Projektdaten persistieren.
+
 ## Iteration 67 – Songtext-Hilfe-Details stabilisiert
 
 - Zwei offene Mini-Punkte abgeschlossen: Kopieren-Knopf im Lesemodus nennt jetzt direkt Enter/Space.

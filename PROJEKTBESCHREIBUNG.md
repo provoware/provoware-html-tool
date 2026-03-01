@@ -230,3 +230,8 @@ Praktischer Einsatz:
 - Neuer 1-Klick-Zufallsimpuls erzeugt direkt nutzbaren Songtext-Startblock.
 - Fokusfluss verbessert: Lesemodus schliessen fuehrt sicher zur Titel-Eingabe zurueck.
 - Tool-Umfang: Quick-Store deckt jetzt Vorlagen + Zufallsimpuls + Lesemodus inkl. Rueckweg im selben Modul ab.
+
+## Iteration 69 – Songtext-Profilfilter und Fokusziel
+- Der Songtext-Zufallsgenerator kann jetzt Profile nutzen (Standard, Techno, Hoerspiel, Chill), damit Vorschlaege besser zum Projektstil passen.
+- Der Lesemodus bietet jetzt ein waehlbares Fokusziel nach dem Schliessen, damit Tastaturarbeit ohne Umwege weitergeht.
+- Beide Funktionen arbeiten mit Eingabepruefung (Validierung), klaren Fehlermeldungen und naechstem Schritt.

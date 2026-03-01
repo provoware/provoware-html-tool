@@ -1,3 +1,17 @@
+## FIX-20260303-001: Zufallsprofil und Fokusziel abgesichert
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Zufallsinhalt passte nicht zur gewuenschten Stilrichtung und Fokus sprang immer nur auf den Titel.
+**Technische Ursache:** Zufallsgenerator kannte kein Profil-Mapping; Lesemodus hatte festes Fokusziel.
+**Trigger:** Klick auf "Zufallsinhalt einfuegen" oder "Vorschau schliessen".
+**Fix (kurz):** Profil-Mapping mit Validierung eingefuehrt und Fokusziel-Auswahl (Titel/Inhalt) eingebaut.
+**Geaenderte Dateien/Marker:** `templates/quick_store_module.js`, `templates/dashboard.html`, `templates/dashboard.js`.
+**Tests/Checks:** `node --test test/quick_store_module.test.js test/dashboard_lyrics_guidance.test.js`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer neue UI-Auswahlwerte direkt validieren und per Test auf gueltige Optionen pruefen.
+**Alternative(n):** Profil automatisch aus Bereich ableiten.
+**Risiko/Side-Effects:** Niedrig; nur Songtext-UI betroffen.
+**Verknuepft:** Iteration-69
+
 ## FIX-20260302-065: Referenzbild ohne Datei, aber mit stabilem Layout-Manifest
 
 **Kategorie:** UI/A11y/Docs

@@ -654,6 +654,7 @@
       refrainButton: document.getElementById("lyrics-template-refrain"),
       bridgeButton: document.getElementById("lyrics-template-bridge"),
       miscButton: document.getElementById("lyrics-template-misc"),
+      randomProfileSelect: document.getElementById("lyrics-random-profile"),
       randomButton: document.getElementById("lyrics-template-random"),
       previewButton: document.getElementById("lyrics-open-preview"),
       previewPanel: document.getElementById("lyrics-preview-panel"),
@@ -661,6 +662,9 @@
       previewContent: document.getElementById("lyrics-preview-content"),
       lyricsBackButton: document.getElementById("lyrics-back-to-inbox"),
       closePreviewButton: document.getElementById("lyrics-close-preview"),
+      previewFocusTargetSelect: document.getElementById(
+        "lyrics-preview-focus-target",
+      ),
       copyPreviewButton: document.getElementById("lyrics-copy-preview"),
       copyHelp: document.getElementById("lyrics-copy-help"),
       guideWrap: document.getElementById("lyrics-short-guide"),
