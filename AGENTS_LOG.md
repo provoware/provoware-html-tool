@@ -173,3 +173,14 @@ PATCHSPEC-2026-03-01-096
 6) Akzeptanzkriterien: Footer-Hinweis via Schalter kurz/lang, Teilwortsuche ignoriert Tokens unter 3 Zeichen mit Klartext-Hinweis, Trefferliste zeigt Suchmodus-Badge mit hohem Kontrast.
 7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern letzte Aenderung mit git restore gezielt ruecknehmen.
 2026-03-01 | PATCH-097 | Drei offene Mini-Punkte abgeschlossen: Support-Footer kurz/lang schaltbar, Teilwortsuche mit Mindestlaenge 3, Suchmodus-Badge je Treffer inkl. Wartbarkeits-Refactor der Query-Normalisierung | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md, AGENTS_LOG.md
+
+
+PATCHSPEC-2026-03-01-099
+1) Ziel: Drei offene Mini-Punkte abschliessen (A-Z-Sortierung fuer ignorierte Kurzbegriffe, aria-live bei Auto-Kurzmodus-Wechsel, Badge-Kurztext unter 480px mit voller Erklaerung).
+2) Scope IN: templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js und Pflicht-Doku-Dateien.
+3) Scope OUT: Keine Aenderung am Backup-/Store-Datenformat und keine neuen externen Abhaengigkeiten.
+4) Dateien/Marker: support-history-sort-short-toggle, support-history-live, supportHistorySortShortTokens, isVerySmallViewportForSupportBadge.
+5) Risiko: mittel (responsive A11y + UI-Text), reduziert durch Modell-Validierung, Delta-Check und Release-Gates.
+6) Akzeptanzkriterien: Sortier-Checkbox funktioniert und bleibt pro Projekt gespeichert; aria-live-Ansage kommt nur bei Statuswechsel; Badge zeigt unter 480px Kurztext plus volles aria-label.
+7) Checks + Rollback: npm run format, node --test, bash start.sh; bei Fehlern gezielt `git restore <datei>` oder letzten Commit revertieren.
+2026-03-01 | PATCH-099 | Drei offene Mini-Punkte abgeschlossen: A-Z-Sortierung ignorierter Kurzbegriffe, aria-live-Wechselansage fuer Auto-Kurzmodus, Badge-Kurzform TW/GW unter 480px mit vollem aria-label | templates/dashboard.html, templates/dashboard.js, templates/dashboard.css, system-module/dashboard_model.js, test/dashboard_model.test.js, test/dashboard_lyrics_guidance.test.js, todo.txt, README.txt, CHANGELOG.md, PROJEKTBESCHREIBUNG.md, SELFINFO.md, docs/HILFE.md, AGENTS_LOG.md

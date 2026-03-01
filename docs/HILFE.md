@@ -277,3 +277,6 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Auf kleinen Breiten unter 640px wird der Footer-Hinweis automatisch kuerzer gezeigt.
 - Das Suchmodus-Badge nutzt ein Icon und zusaetzlichen Screenreader-Text, damit Status nicht nur ueber Farbe erkennbar ist.
 - Naechster Schritt bei Unsicherheit: Filter anwenden, dann Enter im Suchfeld druecken.
+
+- Neu im Support-Verlauf: Schalter **"Ignorierte Kurzbegriffe alphabetisch sortieren"** fuer klarere Meta-Hinweise bei Teilwortsuche.
+- Screenreader-Hilfe: Bei kleinem Fenster meldet eine eigene Live-Region den Wechsel vom Auto-Kurzmodus nur bei echtem Statuswechsel.

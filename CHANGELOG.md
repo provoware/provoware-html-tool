@@ -615,3 +615,7 @@
 - Drei offene Mini-Punkte abgeschlossen: Footer-Hinweis ist kurz/lang schaltbar (`supportHistoryFooterCompact`), Teilwortsuche arbeitet mit Mindestlaenge 3, und jede Trefferzeile zeigt ein Suchmodus-Badge.
 - Suchlogik wurde in klare Hilfsfunktion getrennt (`normalizeSupportQueryTokens`), damit Eingabepruefung und Modusregeln zentral bleiben.
 - Risiko: mittel bei Suchlogik, reduziert durch neue Tests, Modell-Validierung und Release-Gates.
+
+- Support-Verlauf: Neuer Schalter sortiert ignorierte Kurzbegriffe optional alphabetisch (A-Z) im Meta-Hinweis.
+- A11y: Auto-Kurzmodus meldet Statuswechsel jetzt zusaetzlich per eigener aria-live-Region (`support-history-live`).
+- Responsive UX: Suchmodus-Badge kuerzt Text unter 480px auf `TW`/`GW`, behaelt aber volle aria-label-Erklaerung.

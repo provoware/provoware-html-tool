@@ -541,3 +541,9 @@ Iteration: 39
 - Version: v0.97-support-maintainability
 - Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (Footer kurz/lang, Teilwort Mindestlaenge 3, Suchmodus-Badge pro Treffer).
 - Next Step: Ignorierte Kurz-Tokens im Support-Metatext als kleine Liste anzeigen.
+
+## Iteration 99
+
+- Version: v0.99-support-a11y-polish
+- Fokus: Drei offene Mini-Punkte aus `todo.txt` abgeschlossen (A-Z-Sortierung, aria-live-Wechselansage, Badge-Kurzform <480px).
+- Next Step: Badge-Tooltip und Sortier-Hilfetext fuer Einsteiger weiter schrittweise verbessern.

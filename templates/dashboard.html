@@ -764,6 +764,10 @@
                 />
                 Footer-Hinweis kurz anzeigen (optional)
               </label>
+              <label for="support-history-sort-short-toggle">
+                <input id="support-history-sort-short-toggle" type="checkbox" />
+                Ignorierte Kurzbegriffe alphabetisch sortieren (optional)
+              </label>
               <p class="field-tip" id="support-history-boot-debug-help">
                 Fuer Einsteiger: Schalter aus = ruhigere Liste. Rueckweg:
                 Schalter wieder aktivieren.
@@ -781,6 +785,11 @@
                 Ganzwortsuche aktiv, Boot-Debug sichtbar. Rueckweg: Mit Tab zu
                 den Schaltern wechseln und mit Leertaste umstellen.
               </p>
+              <p
+                id="support-history-live"
+                class="sr-only"
+                aria-live="polite"
+              ></p>
             </fieldset>
             <dialog
               id="backup-dialog"

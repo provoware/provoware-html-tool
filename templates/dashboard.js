@@ -71,6 +71,10 @@
   const supportHistoryFooterHint = document.getElementById(
     "support-history-footer-hint",
   );
+  const supportHistorySortShortToggle = document.getElementById(
+    "support-history-sort-short-toggle",
+  );
+  const supportHistoryLive = document.getElementById("support-history-live");
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
   const kasiNotePaste = document.getElementById("kasi-note-paste");
@@ -1337,6 +1341,20 @@
     return isSmallViewportForSupportFooter();
   }
 
+  function isVerySmallViewportForSupportBadge() {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    if (typeof window.matchMedia === "function") {
+      return window.matchMedia("(max-width: 479px)").matches;
+    }
+    return Number.isFinite(window.innerWidth) && window.innerWidth < 480;
+  }
+
+  function isSortIgnoredShortTokensEnabled() {
+    return layoutState.supportHistorySortShortTokens === true;
+  }
+
   function normalizeSupportQueryTokens(queryText) {
     const usePartialMode = isSupportPartialModeEnabled();
     const minLength = usePartialMode ? 3 : 2;
@@ -1348,7 +1366,13 @@
 
     return {
       tokens,
-      ignoredShortTokens,
+      ignoredShortTokens: isSortIgnoredShortTokensEnabled()
+        ? ignoredShortTokens
+            .slice()
+            .sort((left, right) =>
+              left.localeCompare(right, "de", { sensitivity: "base" }),
+            )
+        : ignoredShortTokens,
       usePartialMode,
       minLength,
     };
@@ -1496,6 +1520,7 @@
             ? "Boot-Debug sichtbar"
             : "Boot-Debug ausgeblendet";
         const autoCompact = shouldAutoCompactSupportFooter();
+        announceSupportFooterAutoCompactChange(autoCompact);
         supportHistoryFooterHint.dataset.autoCompact = autoCompact
           ? "true"
           : "false";
@@ -1532,9 +1557,21 @@
         ? "Icon fuer Teilwortsuche"
         : "Icon fuer Ganzwortsuche";
       const modeText = document.createElement("span");
-      modeText.textContent = queryContext.usePartialMode
-        ? "Suchmodus: Teilwort"
-        : "Suchmodus: Ganzwort";
+      modeText.className = "support-mode-badge-text";
+      const compactBadge = isVerySmallViewportForSupportBadge();
+      modeText.textContent = compactBadge
+        ? queryContext.usePartialMode
+          ? "TW"
+          : "GW"
+        : queryContext.usePartialMode
+          ? "Suchmodus: Teilwort"
+          : "Suchmodus: Ganzwort";
+      modeBadge.setAttribute(
+        "aria-label",
+        queryContext.usePartialMode
+          ? "Suchmodus Teilwort aktiv"
+          : "Suchmodus Ganzwort aktiv",
+      );
       modeBadge.append(modeIcon, modeIconLabel, modeText);
       line.appendChild(modeBadge);
       line.appendChild(document.createTextNode(" "));
@@ -1554,6 +1591,7 @@
           ? "Boot-Debug sichtbar"
           : "Boot-Debug ausgeblendet";
       const autoCompact = shouldAutoCompactSupportFooter();
+      announceSupportFooterAutoCompactChange(autoCompact);
       supportHistoryFooterHint.dataset.autoCompact = autoCompact
         ? "true"
         : "false";
@@ -1569,6 +1607,23 @@
           : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
     }
 
+    return true;
+  }
+
+  function announceSupportFooterAutoCompactChange(autoCompact) {
+    if (!(supportHistoryLive instanceof HTMLElement)) {
+      return false;
+    }
+    const nextState = autoCompact === true;
+    const lastState = supportHistoryLive.dataset.lastAutoCompact;
+    const nextKey = nextState ? "true" : "false";
+    if (lastState === nextKey) {
+      return false;
+    }
+    supportHistoryLive.dataset.lastAutoCompact = nextKey;
+    supportHistoryLive.textContent = nextState
+      ? "Auto-Kurzmodus ist aktiv. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
+      : "Auto-Kurzmodus ist aus. Naechster Schritt: Footer-Hinweis bei Bedarf manuell umschalten.";
     return true;
   }
 
@@ -2032,6 +2087,25 @@
         });
     });
   }
+  if (supportHistorySortShortToggle) {
+    supportHistorySortShortToggle.checked =
+      layoutState.supportHistorySortShortTokens === true;
+    supportHistorySortShortToggle.addEventListener("change", () => {
+      layoutState = normalizeLayoutWithModel({
+        ...layoutState,
+        supportHistorySortShortTokens:
+          supportHistorySortShortToggle.checked === true,
+      });
+      persistLayoutState()
+        .then(() => refreshSupportHistory())
+        .catch(() => {
+          setStatus(
+            "Sortierung fuer Kurzbegriffe konnte nicht gespeichert werden. Naechster Schritt: Erneut versuchen oder Protokoll oeffnen.",
+          );
+        });
+    });
+  }
+
   if (supportHistoryQuery) {
     supportHistoryQuery.addEventListener("input", refreshSupportHistory);
     supportHistoryQuery.addEventListener("keydown", (event) => {
@@ -2245,6 +2319,8 @@
     [supportHistoryFooterToggle, "Support-Verlauf-Footer-Schalter"],
     [supportHistoryList, "Support-Verlauf-Liste"],
     [supportHistoryFooterHint, "Support-Verlauf-Footer-Hinweis"],
+    [supportHistorySortShortToggle, "Support-Verlauf-Sortier-Schalter"],
+    [supportHistoryLive, "Support-Verlauf-Live-Ansage"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   updateBootPhase(
