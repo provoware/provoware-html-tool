@@ -64,7 +64,7 @@ function buildHelpPanelModel() {
     ],
     quickGuide: [
       "1) bash start.sh ausfuehren.",
-      "2) Ergebnis lesen und naechsten Schritt waehlen.",
+      "2) Mit Tab zum Theme-Feld gehen und mit Enter das Thema wechseln.",
       "3) Bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.",
     ],
   };

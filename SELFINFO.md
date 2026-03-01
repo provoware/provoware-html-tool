@@ -1,10 +1,12 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 34
+Iteration: 35
 
 ## Gemacht
 
+- Platzhalter-Scan praezisiert: nur echte Kommentar-/Aufgabenzeilen, inklusive Unterordner-Scan, mit neuen Tests abgesichert.
+- Help-Panel-Mini-Leitfaden um Tastaturhinweis fuer Theme-Wechsel (Tab + Enter) erweitert.
 - Prompt aus der Anforderung analysiert und als optimierte, ausführbare Version dokumentiert.
 - Modernes Dashboard als neue Vorlage ergänzt (`templates/dashboard.*`).
 - Projektordner-Start mit Berechtigungsabfrage, IndexedDB-Handle und Auto-Reconnect ergänzt.

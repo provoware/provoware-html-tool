@@ -8,4 +8,6 @@ test("buildHelpPanelModel liefert 3 Schritte im Mini-Leitfaden", () => {
   assert.equal(Array.isArray(model.quickGuide), true);
   assert.equal(model.quickGuide.length, 3);
   assert.match(model.quickGuide[0], /start\.sh/);
+  assert.match(model.quickGuide[1], /Tab/);
+  assert.match(model.quickGuide[1], /Enter/);
 });
