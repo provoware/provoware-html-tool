@@ -305,19 +305,21 @@ function resolveFavoritesAction(actionKey, context = {}) {
   };
 }
 
-function buildBootGateHint(allPhasesOk) {
+function buildBootGateHint(allPhasesOk, focusTargetInput) {
   const open = allPhasesOk === true;
+  const focusTarget = normalizeBootFocusTarget(focusTargetInput);
+  const focusLabel = focusTarget === "help" ? "Hilfe" : "Modul";
   if (open) {
     return {
       gateOpen: true,
-      hint: "Weiter ist frei. Naechster Schritt: Mit Weiter direkt ins Dashboard.",
+      hint: `Weiter ist frei. Fokusziel: ${focusLabel}. Naechster Schritt: Mit Weiter direkt ins Dashboard.`,
       help: "Boot ist bereit. Rueckweg: Bei Bedarf Phase pruefen und dann Weiter nutzen.",
     };
   }
 
   return {
     gateOpen: false,
-    hint: "Weiter ist gesperrt. Naechster Schritt: Erst alle Phasen auf Gruen bringen.",
+    hint: `Weiter ist gesperrt. Geplantes Fokusziel: ${focusLabel}. Naechster Schritt: Erst alle Phasen auf Gruen bringen.`,
     help: "Boot ist noch nicht fertig. Naechster Schritt: Phase pruefen, dann erneut versuchen.",
   };
 }

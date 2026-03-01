@@ -353,6 +353,7 @@ test("compareVersionWithCurrentFromDirectory liefert Detail-Schluesselliste", as
   );
 
   assert.equal(result.ok, true);
-  assert.match(result.detailText, /Aktuell:/);
-  assert.match(result.detailText, /Version:/);
+  assert.match(result.detailText, /Neu:/);
+  assert.match(result.detailText, /Entfernt:/);
+  assert.match(result.detailText, /Gleich:/);
 });

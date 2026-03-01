@@ -55,6 +55,7 @@
     "support-history-filter",
   );
   const supportHistoryApply = document.getElementById("support-history-apply");
+  const supportHistoryQuery = document.getElementById("support-history-query");
   const supportHistoryList = document.getElementById("support-history-list");
   const systemMeta = document.getElementById("system-meta");
   const kasiNoteInput = document.getElementById("kasi-note-input");
@@ -708,7 +709,10 @@
       return false;
     }
 
-    const gate = buildBootGateHint(bootController.areAllPhasesOk());
+    const gate = buildBootGateHint(
+      bootController.areAllPhasesOk(),
+      layoutState.bootFocusTarget,
+    );
     bootContinue.disabled = !gate.gateOpen;
     bootGateHint.textContent = gate.hint;
     if (helpWhat) {
@@ -1207,7 +1211,7 @@
     return safeEvents.filter((event) => event && typeof event === "object");
   }
 
-  function renderSupportHistory(events, filterKey) {
+  function renderSupportHistory(events, filterKey, queryText) {
     if (!supportHistoryList) {
       return false;
     }
@@ -1215,11 +1219,30 @@
     supportHistoryList.innerHTML = "";
     const safeFilter = typeof filterKey === "string" ? filterKey : "all";
     const normalized = normalizeSupportHistoryEvents(events);
+    const safeQuery =
+      typeof queryText === "string" ? queryText.trim().toLowerCase() : "";
     const filtered = normalized.filter((entry) => {
-      if (safeFilter === "safe-mode") {
-        return entry.kind === "safe-mode-reset";
+      if (safeFilter === "safe-mode" && entry.kind !== "safe-mode-reset") {
+        return false;
       }
-      return true;
+
+      if (!safeQuery) {
+        return true;
+      }
+
+      const kind =
+        typeof entry.kind === "string" ? entry.kind.toLowerCase() : "";
+      const createdAt =
+        typeof entry.createdAt === "string"
+          ? entry.createdAt.toLowerCase()
+          : "";
+      const details =
+        typeof entry.details === "string" ? entry.details.toLowerCase() : "";
+      return (
+        kind.includes(safeQuery) ||
+        createdAt.includes(safeQuery) ||
+        details.includes(safeQuery)
+      );
     });
 
     if (filtered.length === 0) {
@@ -1246,7 +1269,8 @@
   async function refreshSupportHistory() {
     const events = await loadBackupEvents();
     const selectedFilter = supportHistoryFilter?.value || "all";
-    return renderSupportHistory(events, selectedFilter);
+    const queryText = supportHistoryQuery?.value || "";
+    return renderSupportHistory(events, selectedFilter, queryText);
   }
 
   async function loadVersionOptions() {
@@ -1631,6 +1655,9 @@
   if (supportHistoryFilter) {
     supportHistoryFilter.addEventListener("change", refreshSupportHistory);
   }
+  if (supportHistoryQuery) {
+    supportHistoryQuery.addEventListener("input", refreshSupportHistory);
+  }
   if (bootFocusTarget) {
     bootFocusTarget.addEventListener("change", () => {
       const nextTarget = bootFocusTarget.value === "help" ? "help" : "module";
@@ -1823,6 +1850,7 @@
     [bootGateHint, "Boot-Gate-Hinweis"],
     [bootFocusTarget, "Boot-Fokusziel-Auswahl"],
     [supportHistoryFilter, "Support-Verlauf-Filter"],
+    [supportHistoryQuery, "Support-Verlauf-Suche"],
     [supportHistoryList, "Support-Verlauf-Liste"],
   ].forEach(([element, name]) => validateElement(element, name));
 

@@ -139,13 +139,15 @@ test("getDefaultModuleStart liefert genau das Notizmodul", () => {
   assert.deepEqual(defaults, ["notes"]);
 });
 test("buildBootGateHint liefert Gate-Hinweis fuer offen und gesperrt", () => {
-  const open = buildBootGateHint(true);
-  const closed = buildBootGateHint(false);
+  const open = buildBootGateHint(true, "help");
+  const closed = buildBootGateHint(false, "module");
 
   assert.equal(open.gateOpen, true);
   assert.match(open.hint, /Weiter ist frei/);
+  assert.match(open.hint, /Fokusziel: Hilfe/);
   assert.equal(closed.gateOpen, false);
   assert.match(closed.help, /Boot ist noch nicht fertig/);
+  assert.match(closed.hint, /Geplantes Fokusziel: Modul/);
 });
 
 test("buildSafeModeStatus liefert klare Safe-Mode-Texte", () => {

@@ -224,3 +224,10 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - **Boot-Fokusziel:** Im Boot-Bereich kann gewaehlt werden, ob nach "Weiter" zuerst das erste Modul oder das Hilfe-Panel Fokus bekommt.
 - **Support-Verlauf:** Im Hilfe-Panel kann nach "Alle Ereignisse" oder "Nur Safe-Mode" gefiltert werden.
 - **Versions-Detailmodus:** Im Restore-Dialog kann ein aufklappbarer Detailtext mit JSON-Schluesseln gelesen werden.
+
+## Neu: Fokusziel + Support-Suche + Detailgruppen
+
+- Boot-Gate-Hinweis nennt jetzt immer das geplante Fokusziel (`Modul` oder `Hilfe`).
+- Support-Verlauf: Sie koennen jetzt per Freitext nach Typ, Datum oder Detail suchen.
+- Filterregel ist einfach: Dropdown + Suchtext arbeiten als UND-Regel.
+- Versionsvergleich im Backup-Dialog zeigt Detailgruppen: `Neu`, `Entfernt`, `Gleich`.
