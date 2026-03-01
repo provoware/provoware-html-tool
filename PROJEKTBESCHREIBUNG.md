@@ -1,3 +1,8 @@
+## Iteration 88 – Doku-Optimierung fuer Releasefinalisierung
+- README ist jetzt als klare Einstiegsdoku fuer Laien und Release-Checks aufgebaut.
+- AGENTS.md nutzt jetzt eine kompakte V3-Struktur mit klaren Pflicht-Gates.
+- Tool-Umfang bleibt vollautomatisch: `start.sh` prueft Voraussetzungen, Formatierung, Tests und Release-Bereitschaft.
+
 ## Update Iteration 86 – Hilfe und Wiederherstellung
 
 - Das Hilfe-Panel hat einen Safe-Mode-Reset-Knopf. Er beendet den Safe-Mode mit Sicherheitsabfrage und setzt das Plugin-Manifest auf den Standard zurueck.

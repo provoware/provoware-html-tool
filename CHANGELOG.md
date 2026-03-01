@@ -1,3 +1,9 @@
+## Iteration 88 - Release-Doku neu geordnet
+
+- README wurde als klare Release-Startseite neu aufgebaut (Ziel, Struktur, Schnellstart, Pflichtbefehle, Laienhilfe).
+- AGENTS.md wurde als kompakte V3-Regelbasis fuer Releasefinalisierung neu strukturiert.
+- todo.txt erhielt einen neuen Iterationsblock fuer die drei abgeschlossenen Doku-Mini-Punkte.
+
 ## Iteration 87 - Support-Verlauf + 3er-Versionsvergleich
 
 - Safe-Mode-Reset schreibt jetzt einen Support-Verlaufseintrag in `data/backup_events.json` und zeigt den Speicherstatus klar an.
