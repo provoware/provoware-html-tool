@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 31
+Iteration: 32
 
 ## Gemacht
 
@@ -81,6 +81,9 @@ Iteration: 31
 
 - README um Mini-Leitfaden fuer den Pflicht-Abschluss-Check erweitert (3 klare Schritte + Hilfe-Befehle).
 - Platzhalter-Scan verbessert: `todo-title` in HTML loest keinen Fehlalarm mehr aus, nur echte Marker wie `TODO:` werden gemeldet.
+
+- AGENTS.md erweitert: klare Releasefertig-Definition pro Patch (Implementierung, Fehlerpfad, Test, Doku, Startcheck).
+- AGENTS.md erweitert: Datei-/Fortschrittsstatus muss sichtbar sein (Dateiname oder `data/file_status_index.json`).
 
 ## Next Step
 

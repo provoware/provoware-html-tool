@@ -88,7 +88,7 @@ Laienvorschläge
 
 ## 2026-03-01 – Neuer Pflichtplan: Referenzbild + Platzhalter
 
-- [ ] P1: Iterationszaehler in Start-/Doku-Flow sichtbar machen, damit jede 5. Iteration die Referenzbild-Analyse automatisch startet.
+- [x] P1: AGENTS.md erweitert: releasefertige Patch-Regel + Datei-/Fortschrittsstatus ueber Dateiname oder `data/file_status_index.json` klar festgelegt.
 - [ ] P1: Referenzbild-Checkliste als festen Ablauf nutzen (Layout-Raster, Typografie, Farben/Kontrast, Interaktionsmuster).
 - [ ] P1: Pro Referenzbild-Analyse eine Abweichungsliste (Soll/Ist) erstellen und direkt priorisieren.
 - [ ] P1: Bei hoher Abweichung automatisch Folgepunkte im TODO anlegen (mindestens 1 klarer UI-Fix mit Akzeptanzkriterien).

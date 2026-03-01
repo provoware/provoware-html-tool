@@ -311,3 +311,5 @@ Zusatzbefehl fuer sichere Format-Pruefung:
 
 Update 2026-03-01 (Iteration 29): Die Start-Routine hat jetzt einen Pflicht-Check fuer Platzhalter-Scan (TODO/FIXME/PLACEHOLDER/DUMMY) mit klarer Fundstelle und naechstem Schritt.
 Naechster Schritt: Option A weiterfuehren und Boot-View (Phasen/Ampel/Details) stabilisieren.
+
+Update 2026-03-01 (Iteration 32): AGENTS.md praezisiert jetzt releasefertige Patches (Implementierung + Fehlerpfad + Test + Doku + Startcheck) und fordert sichtbaren Dateistatus per Name oder `data/file_status_index.json`.
