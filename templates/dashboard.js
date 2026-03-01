@@ -1323,6 +1323,20 @@
     return layoutState.supportHistoryFooterCompact !== false;
   }
 
+  function isSmallViewportForSupportFooter() {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    if (typeof window.matchMedia === "function") {
+      return window.matchMedia("(max-width: 639px)").matches;
+    }
+    return Number.isFinite(window.innerWidth) && window.innerWidth < 640;
+  }
+
+  function shouldAutoCompactSupportFooter() {
+    return isSmallViewportForSupportFooter();
+  }
+
   function normalizeSupportQueryTokens(queryText) {
     const usePartialMode = isSupportPartialModeEnabled();
     const minLength = usePartialMode ? 3 : 2;
@@ -1458,10 +1472,12 @@
       const modeText = queryContext.usePartialMode
         ? "Modus: Teilwort (enthaelt, min. 3 Zeichen)."
         : "Modus: Ganze Woerter (Standard).";
+      const shortTokenList = queryContext.ignoredShortTokens
+        .slice(0, 3)
+        .map((token) => `"${token}"`);
       const shortHint =
-        queryContext.usePartialMode &&
-        queryContext.ignoredShortTokens.length > 0
-          ? ` Hinweis: ${queryContext.ignoredShortTokens.length} kurzer Suchbegriff ignoriert (unter 3 Zeichen).`
+        queryContext.usePartialMode && shortTokenList.length > 0
+          ? ` Hinweis: Kurze Suchbegriffe ignoriert (unter 3 Zeichen): ${shortTokenList.join(", ")}.${queryContext.ignoredShortTokens.length > 3 ? " (+weitere)" : ""}`
           : "";
       supportHistoryMeta.textContent = `Treffer: ${filtered.length}. ${modeText}${shortHint} Tipp: Enter startet die Suche sofort.`;
     }
@@ -1479,9 +1495,20 @@
           layoutState.showBootDebugInSupport === true
             ? "Boot-Debug sichtbar"
             : "Boot-Debug ausgeblendet";
-        supportHistoryFooterHint.textContent = isSupportFooterCompactEnabled()
-          ? `${modeLabel}, ${bootLabel}. Rueckweg: Schalter mit Tab erreichen.`
-          : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
+        const autoCompact = shouldAutoCompactSupportFooter();
+        supportHistoryFooterHint.dataset.autoCompact = autoCompact
+          ? "true"
+          : "false";
+        if (supportHistoryFooterToggle) {
+          supportHistoryFooterToggle.disabled = autoCompact;
+          supportHistoryFooterToggle.title = autoCompact
+            ? "Auto-Kurzmodus aktiv unter 640px. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
+            : "Footer-Hinweis manuell umschalten.";
+        }
+        supportHistoryFooterHint.textContent =
+          autoCompact || isSupportFooterCompactEnabled()
+            ? `${modeLabel}, ${bootLabel}. Auto-Kurzmodus bei kleiner Breite aktiv. Rueckweg: Fenster vergroessern oder mit Tab zu den Schaltern.`
+            : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
       }
       return true;
     }
@@ -1495,9 +1522,20 @@
       const keyboardHint = buildSupportKeyboardHint(details);
       const modeBadge = document.createElement("strong");
       modeBadge.className = "support-mode-badge";
-      modeBadge.textContent = queryContext.usePartialMode
+      const modeIcon = document.createElement("span");
+      modeIcon.className = "support-mode-badge-icon";
+      modeIcon.setAttribute("aria-hidden", "true");
+      modeIcon.textContent = queryContext.usePartialMode ? "🔎" : "🔍";
+      const modeIconLabel = document.createElement("span");
+      modeIconLabel.className = "sr-only";
+      modeIconLabel.textContent = queryContext.usePartialMode
+        ? "Icon fuer Teilwortsuche"
+        : "Icon fuer Ganzwortsuche";
+      const modeText = document.createElement("span");
+      modeText.textContent = queryContext.usePartialMode
         ? "Suchmodus: Teilwort"
         : "Suchmodus: Ganzwort";
+      modeBadge.append(modeIcon, modeIconLabel, modeText);
       line.appendChild(modeBadge);
       line.appendChild(document.createTextNode(" "));
 
@@ -1515,9 +1553,20 @@
         layoutState.showBootDebugInSupport === true
           ? "Boot-Debug sichtbar"
           : "Boot-Debug ausgeblendet";
-      supportHistoryFooterHint.textContent = isSupportFooterCompactEnabled()
-        ? `${modeLabel}, ${bootLabel}. Rueckweg: Schalter mit Tab erreichen.`
-        : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
+      const autoCompact = shouldAutoCompactSupportFooter();
+      supportHistoryFooterHint.dataset.autoCompact = autoCompact
+        ? "true"
+        : "false";
+      if (supportHistoryFooterToggle) {
+        supportHistoryFooterToggle.disabled = autoCompact;
+        supportHistoryFooterToggle.title = autoCompact
+          ? "Auto-Kurzmodus aktiv unter 640px. Naechster Schritt: Fenster vergroessern fuer manuelle Wahl."
+          : "Footer-Hinweis manuell umschalten.";
+      }
+      supportHistoryFooterHint.textContent =
+        autoCompact || isSupportFooterCompactEnabled()
+          ? `${modeLabel}, ${bootLabel}. Auto-Kurzmodus bei kleiner Breite aktiv. Rueckweg: Fenster vergroessern oder mit Tab zu den Schaltern.`
+          : `${modeLabel}, ${bootLabel}. Rueckweg: Mit Tab zu den Schaltern wechseln und mit Leertaste umstellen.`;
     }
 
     return true;
@@ -1992,6 +2041,11 @@
       }
     });
   }
+  window.addEventListener("resize", () => {
+    if (supportHistoryFooterHint) {
+      refreshSupportHistory();
+    }
+  });
   if (bootFocusTarget) {
     bootFocusTarget.addEventListener("change", () => {
       const nextTarget = bootFocusTarget.value === "help" ? "help" : "module";

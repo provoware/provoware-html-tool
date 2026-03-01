@@ -240,6 +240,10 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
     path.join(process.cwd(), "templates", "dashboard.js"),
     "utf8",
   );
+  const dashboardCss = fs.readFileSync(
+    path.join(process.cwd(), "templates", "dashboard.css"),
+    "utf8",
+  );
 
   assert.match(dashboardHtml, /id="support-history-partial-toggle"/);
   assert.match(dashboardHtml, /id="support-history-footer-hint"/);
@@ -247,7 +251,20 @@ test("Support-Verlauf bietet optionalen Teilwortmodus und Footer-Hinweis", () =>
   assert.match(dashboardJs, /supportHistoryPartialMode/);
   assert.match(dashboardJs, /supportHistoryFooterCompact/);
   assert.match(dashboardJs, /min\. 3 Zeichen/);
-  assert.match(dashboardJs, /kurzer Suchbegriff ignoriert/);
+  assert.match(
+    dashboardJs,
+    /Kurze Suchbegriffe ignoriert \(unter 3 Zeichen\):/,
+  );
+  assert.match(dashboardJs, /\.slice\(0, 3\)/);
   assert.match(dashboardJs, /support-mode-badge/);
+  assert.match(dashboardJs, /support-mode-badge-icon/);
+  assert.match(dashboardJs, /className = "sr-only"/);
+  assert.match(dashboardCss, /\.sr-only/);
+  assert.match(dashboardJs, /shouldAutoCompactSupportFooter/);
+  assert.match(dashboardJs, /Auto-Kurzmodus aktiv unter 640px/);
+  assert.match(
+    dashboardJs,
+    /supportHistoryFooterToggle\.disabled = autoCompact/,
+  );
   assert.match(dashboardJs, /Ganzwortsuche aktiv/);
 });

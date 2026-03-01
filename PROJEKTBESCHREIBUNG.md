@@ -1,3 +1,10 @@
+## Iteration 98 – Support-Hilfe klarer und mobiler
+
+- Support-Meta nennt ignorierte kurze Suchbegriffe jetzt direkt als Liste (bis 3 Begriffe), statt nur eine Anzahl zu zeigen.
+- Der Footer-Hinweis nutzt unter 640px automatisch die kurze Variante. Das reduziert Textlaenge auf kleinen Displays.
+- Das Support-Badge hat jetzt ein Such-Icon und einen Screenreader-Text. So ist der Status nicht nur farblich sichtbar.
+- Naechster Schritt: Beim Auto-Umschalten eine kurze aria-live-Ansage bei Statuswechsel ergaenzen.
+
 ## Iteration 93 – Boot-Debug, Support-Kurztext, Detailstatus
 
 - Beim Boot-Fokusziel-Wechsel wird die Live-Ansage jetzt auch im Debug-Protokoll angezeigt.
