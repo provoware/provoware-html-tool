@@ -1,5 +1,6 @@
 # Provoware HTML Tool
 
+- Neu (2026-03-01): Theme-Umschalter zeigt jetzt einen klaren Hilfe-Tooltip mit Rueckweg (altes Thema wieder waehlen).
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 67 %

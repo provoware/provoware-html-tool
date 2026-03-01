@@ -136,3 +136,4 @@
 - Neues Kernmodul `system-core/genre_mood_style_archive.js` ergänzt: CSV-Import, Duplikatpruefung, Profil-Kategorien und Favoriten via Sternchen.
 - Import/Export und JSON-Logzeilen fuer Archivvorgaenge ergänzt, inklusive klarer Fehlertexte mit naechstem Schritt.
 - Risiko: niedrig, da nur neues Modul, neue Tests und kurze Hilfe-Ergaenzung betroffen sind.
+- 2026-03-01: Theme-Umschalter erhielt einen klaren Tooltip mit Rueckweg-Hinweis und Screenreader-Verknuepfung (aria-describedby) fuer bessere Laienfuehrung und A11y.

@@ -1,7 +1,7 @@
 # SELFINFO
 
 Stand: 2026-02-28
-Iteration: 26
+Iteration: 27
 
 ## Gemacht
 
@@ -69,6 +69,8 @@ Iteration: 26
 - Hilfe um klare Laien-Schritte bei Paketfehlern erweitert (erneut versuchen, Protokoll oeffnen, Reparatur starten).
 
 - Doku-Regel ergaenzt: README.txt wird pro Iteration verpflichtend mit aktualisiert (Status + naechster Schritt).
+
+- Theme-Umschalter mit Tooltip in einfacher Sprache erweitert (Aktion + Rueckweg) und per aria-describedby fuer Screenreader verknuepft.
 
 ## Next Step
 
