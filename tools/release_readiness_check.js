@@ -90,6 +90,16 @@ function runReleaseReadinessCheck(options = {}) {
       "Theme Hell in HTML vorhanden",
     ),
     checkIncludes(
+      dashboardHtml,
+      'id="theme-tooltip"',
+      "Theme-Hinweis mit Rueckweg ist vorhanden",
+    ),
+    checkIncludes(
+      dashboardHtml,
+      'aria-describedby="theme-tooltip"',
+      "Theme-Auswahl ist mit Hilfetext verknuepft",
+    ),
+    checkIncludes(
       dashboardCss,
       '[data-theme="dark"]',
       "Theme Dunkel in CSS vorhanden",

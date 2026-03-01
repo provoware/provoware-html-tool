@@ -20,6 +20,7 @@
   const chooseFolder = document.getElementById("choose-folder");
   const reconnect = document.getElementById("reconnect-folder");
   const themeSelect = document.getElementById("theme-select");
+  const themeTooltip = document.getElementById("theme-tooltip");
   const controlWhat = document.getElementById("control-what");
   const workspaceHelp = document.getElementById("workspace-help");
   const helpWhat = document.getElementById("help-what");
@@ -27,6 +28,18 @@
   const guideList = document.getElementById("guide-list");
   const showNextStep = document.getElementById("show-next-step");
   const showLaienTip = document.getElementById("show-laien-tip");
+
+  function formatText(template, values) {
+    if (typeof template !== "string" || !template.trim()) {
+      return "";
+    }
+
+    return Object.entries(values).reduce((text, entry) => {
+      const [key, value] = entry;
+      const safeValue = typeof value === "string" ? value : "";
+      return text.replace(`{${key}}`, safeValue);
+    }, template);
+  }
   const helpRetry = document.getElementById("help-retry");
   const helpRepair = document.getElementById("help-repair");
   const helpLog = document.getElementById("help-log");
@@ -263,10 +276,18 @@
   }
 
   themeSelect.addEventListener("change", () => {
+    const selectedTheme = themeSelect.options[themeSelect.selectedIndex].text;
     document.body.dataset.theme = themeSelect.value;
-    setStatus(
-      `Thema aktiv: ${themeSelect.options[themeSelect.selectedIndex].text}.`,
+
+    const tooltipTemplate =
+      themeSelect.dataset.tooltipChanged ||
+      "Thema gewechselt zu {theme}. Rueckweg: Im Feld wieder das alte Thema waehlen.";
+    themeTooltip.textContent = ensureMessage(
+      formatText(tooltipTemplate, { theme: selectedTheme }),
+      "Thema gewechselt. Rueckweg: Vorheriges Thema wieder waehlen.",
     );
+
+    setStatus(`Thema aktiv: ${selectedTheme}.`);
   });
 
   showNextStep.addEventListener("click", () => {
@@ -310,6 +331,7 @@
     [status, "Statusfeld"],
     [debugButton, "Debug-Knopf"],
     [guideList, "Hilfe-Liste"],
+    [themeTooltip, "Theme-Hinweis"],
   ].forEach(([element, name]) => validateElement(element, name));
 
   loadMessages().then((ui) => {
@@ -328,6 +350,14 @@
     guideIntro.textContent = ensureMessage(
       ui.guideIntro,
       "Diese Liste fuehrt in klaren Schritten durch den Start.",
+    );
+    themeTooltip.textContent = ensureMessage(
+      ui.themeTooltipDefault,
+      "Tipp: Kontrast+ waehlen. Rueckweg: Altes Thema erneut waehlen.",
+    );
+    themeSelect.dataset.tooltipChanged = ensureMessage(
+      ui.themeTooltipChanged,
+      "Thema gewechselt zu {theme}. Rueckweg: Altes Thema erneut waehlen.",
     );
     const stepCount = window.DashboardHelp.renderGuideSteps(
       guideList,

@@ -196,6 +196,15 @@ a:focus-visible {
   font-size: 0.92rem;
 }
 
+.field-tip {
+  margin: 0.35rem 0 0;
+  padding: 0.35rem 0.5rem;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel-soft) 55%, transparent);
+  font-size: 0.85rem;
+}
+
 .guide-list {
   margin: 0.2rem 0 0;
   padding-left: 1.1rem;

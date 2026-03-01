@@ -80,4 +80,5 @@ Laienvorschläge
 - [x] P1: Mini-Optimierung A11y: Enter/Escape-Hinweis im Dashboard-Guide mit automatischem Check erweitern.
 - [x] P1: Mini-Optimierung Hilfe: Paketfehler-Schritte (erneut versuchen, Protokoll oeffnen, Reparatur starten) in docs/HILFE.md ergaenzt.
 - [x] P1: Mini-Optimierung Hilfe: Iterations-Doku-Pflicht in README + AGENTS klar und einheitlich ergaenzt.
-- [ ] P1: Mini-Optimierung UX: Klaren Tooltip fuer Theme-Umschalter mit Rueckweg-Hinweis planen.
+- [x] P1: Mini-Optimierung UX: Klaren Tooltip fuer Theme-Umschalter mit Rueckweg-Hinweis planen.
+- [ ] P1: Mini-Optimierung UX: Theme-Hinweis auch im Mockup spiegeln und dort per Tastatur ansagbar machen.

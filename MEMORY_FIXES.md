@@ -318,3 +318,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Nur Team-Absprache ohne feste Regel (abgelehnt, zu fehleranfällig).
 **Risiko/Side-Effects:** Niedrig, betrifft nur Dokumentation und Ablaufklarheit.
 **Verknüpft:** Patch-ID local-021
+
+## FIX-20260301-001: Theme-Hilfe mit Rueckweg
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Beim Theme-Wechsel war unklar, wie man zur alten Ansicht zurueckgeht.
+**Technische Ursache:** Der Theme-Select hatte keinen verknuepften Hilfetext und keine Rueckweg-Ansage.
+**Trigger:** Nutzer wechselt Theme und verliert Orientierung.
+**Fix (kurz):** Tooltip-Text in `messages_de.json` ergänzt, in `dashboard.html` per `aria-describedby` verknuepft und in `dashboard.js` dynamisch aktualisiert.
+**Geaenderte Dateien/Marker:** templates/dashboard.html (theme-select), templates/dashboard.js (theme change), config/messages_de.json (dashboardCompact), templates/dashboard.css (field-tip).
+**Tests/Checks:** `npm test`, `node tools/release_readiness_check.js`, `bash start.sh`.
+**Praevention (kuenftig):** Ab jetzt immer bei neuen Select-Feldern einen kurzen Hilfetext mit Rueckweg hinterlegen.
+**Alternative(n):** Statischer Hinweis ohne Dynamik (weniger hilfreich).
+**Risiko/Side-Effects:** Niedrig; nur Text und A11y-Verknuepfung betroffen.
+**Verknuepft:** PATCH-027

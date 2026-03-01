@@ -48,11 +48,16 @@
             <h2 id="control-title">Systemsteuerung</h2>
             <p id="control-what"></p>
             <label for="theme-select">Farbthema wählen</label>
-            <select id="theme-select" aria-label="Farbthema wählen">
+            <select
+              id="theme-select"
+              aria-label="Farbthema wählen"
+              aria-describedby="theme-tooltip"
+            >
               <option value="light">Hell</option>
               <option value="dark">Dunkel</option>
               <option value="contrast">Kontrast+</option>
             </select>
+            <p id="theme-tooltip" class="field-tip" aria-live="polite"></p>
             <div class="system-actions">
               <button id="choose-folder" type="button">
                 Projektordner wählen
