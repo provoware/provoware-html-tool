@@ -1,3 +1,9 @@
+## Statusupdate 2026-03-03 – Iteration 76
+
+- Modul-Control-Leiste nutzt jetzt einen einheitlichen Tooltip-Standard mit Rueckweg-Hinweisen (`Groesser anzeigen`, `Kurz einklappen`, `Ausblenden`).
+- Die Start-Routine erzeugt jetzt einen A11y-Kurzbericht aus den Release-Checks (gesamt/bestanden/offen).
+- Naechster Schritt: Gleiches Muster auf Pin-Knopf und Fokusmodus ausdehnen.
+
 ## Statusupdate 2026-03-03 – Iteration 73
 
 - Start-Routine hat jetzt den Standard `runShortcutConflictCheck` fuer bekannte Browser/OS-Shortcut-Konflikte.

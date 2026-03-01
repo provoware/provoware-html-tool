@@ -878,3 +878,17 @@ config/manifests/\*.json, tools/start_routine.js
 **Alternative(n):** Einzelne Warnlogs ohne Sammelblock (verworfen, schwerer lesbar).
 **Risiko/Side-Effects:** Niedrig, nur Textausgaben und Tests erweitert.
 **Verknüpft:** PATCH-075
+
+## FIX-20260303-076: Einheitliche-Modul-Tooltips-und-A11y-Kurzbericht
+
+**Kategorie:** UI/A11y
+**Symptom (fuer Laien):** Modul-Knoepfe wirkten uneinheitlich und der Startabschluss zeigte keinen kurzen A11y-Status.
+**Technische Ursache:** Tooltip-Texte waren nicht zentral und es fehlte eine kompakte A11y-Auswertung im Startbericht.
+**Trigger:** Wechsel zwischen Maximieren/Minimieren/Ausblenden im Modulraster.
+**Fix (kurz):** Zentrale Tooltip-Tabelle mit Rueckweg-Hinweis eingefuehrt und A11y-Kurzbericht aus Release-Checks abgeleitet.
+**Geaenderte Dateien/Marker:** templates/module_workspace.js, tools/release_readiness_check.js, tools/start_routine.js
+**Tests/Checks:** node --test test/module_workspace.test.js, node --test test/release_readiness_check.test.js, bash start.sh
+**Praevention (kuenftig):** Ab jetzt immer Steuerknoepfe mit zentralen Kurztexten plus Rueckweg bauen und Abschluss-Checks als Kurzbericht ausgeben.
+**Alternative(n):** Nur visuelle Icons ohne Tooltip (verworfen wegen Laienverstaendnis).
+**Risiko/Side-Effects:** Niedrig, da nur Texte, Labels und Berichtsausgabe erweitert wurden.
+**Verknuepft:** PATCH-076

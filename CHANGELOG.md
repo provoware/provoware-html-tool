@@ -1,3 +1,9 @@
+## 2026-03-03 – Iteration 76
+
+- Zwei offene Mini-Punkte abgeschlossen: Modul-Control-Leiste verwendet jetzt einheitliche Tooltip-Kurztexte mit Rueckweg-Hinweis fuer Maximieren, Minimieren und Ausblenden.
+- Start-Routine erweitert: Abschlussbericht enthaelt jetzt zusaetzlich einen kompakten A11y-Kurzstatus auf Basis der Release-Checks.
+- Mini-Optimierung Hilfe/UX: Steuerungs-Hinweise sind als `title` und `aria-label` fuer Laien konsistent formuliert.
+
 ## 2026-03-03 – Iteration 75
 
 - Zwei offene Mini-Punkte abgeschlossen: Lesemodus-Schliessen nennt jetzt Enter sowie Alt+T/Alt+I als direkte Tastaturhilfe mit naechstem Schritt.

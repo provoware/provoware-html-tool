@@ -165,3 +165,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Das Fokusziel im Lesemodus nutzt jetzt **Alt+T** (Titel) und **Alt+I** (Inhalt).
 - Warum so? So werden normale Texteingaben nicht aus Versehen als Shortcut erkannt.
 - Der Profil-Chip zeigt jetzt auch die **letzte Nutzung** als Zeitstempel.
+
+## Modul-Control-Leiste (Iteration 76)
+
+- Neu: Die drei Steuerknoepfe haben jetzt kurze, einheitliche Tooltips mit Rueckweg.
+- Beispiel: "Groesser anzeigen. Rueckweg: Gleichen Knopf erneut druecken."
+- Vorteil: Aktionen sind fuer Laien schneller verstaendlich und auch mit Screenreader klarer.

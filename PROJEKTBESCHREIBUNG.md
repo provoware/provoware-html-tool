@@ -278,3 +278,10 @@ Praktischer Einsatz:
 - Das Modulraster skaliert jetzt auf 1-4 Spalten fuer kleine und grosse Bildschirme (responsive = passt sich an).
 - Laiennutzen: weniger visuelle Abweichung zum Referenzbild, klarere Anordnung und schneller Rueckweg ueber `Layout-Reset`.
 
+
+
+## Update Iteration 76: Modul-Steuerung + A11y-Kurzbericht
+
+- Einheitliche Modul-Control-Hinweise (Tooltip + aria-label) erleichtern Maximieren, Minimieren und Ausblenden.
+- Start-Routine meldet jetzt einen kompakten A11y-Kurzbericht, damit Laien sofort sehen, ob Fokus/Enter/Escape/Kontrast im gruenen Bereich sind.
+- Naechster Ausbau: Gleiches Muster fuer Pin-Knopf und Fokusmodus (100%-Ansicht).

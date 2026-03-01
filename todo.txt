@@ -206,5 +206,8 @@ Laienvorschläge
 - [x] Naechster Mini-Punkt: Lesemodus-Statusmeldung um Hinweis auf Enter/Alt-Shortcut beim Schliessen erweitern.
 - [x] Naechster Mini-Punkt: Start-Routine gibt Shortcut-Konfliktwarnungen gesammelt im Abschlussbericht aus.
 
-- [ ] Naechster Mini-Punkt: Modul-Control-Leiste Tooltips auf einheitliche Kurzform mit Rueckweg-Hinweis bringen.
-- [ ] Naechster Mini-Punkt: Start-Routine-Abschlussbericht um kurze Zusammenfassung fuer A11y-Checks erweitern.
+- [x] Naechster Mini-Punkt: Modul-Control-Leiste Tooltips auf einheitliche Kurzform mit Rueckweg-Hinweis bringen.
+- [x] Naechster Mini-Punkt: Start-Routine-Abschlussbericht um kurze Zusammenfassung fuer A11y-Checks erweitern.
+
+- [ ] Naechster Mini-Punkt: Modul-Control-Leiste um Pin-Knopf mit gleichem Tooltip-Standard erweitern.
+- [ ] Naechster Mini-Punkt: Fokusmodus (100%-Ansicht) mit Layout-Snapshot/Restore testen und absichern.

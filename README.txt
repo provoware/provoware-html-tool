@@ -1,3 +1,11 @@
+## Update Iteration 76 (2026-03-03)
+
+Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
+
+- Modul-Control-Leiste nutzt jetzt einheitliche Tooltip-Kurztexte mit klarem Rueckweg bei Maximieren, Minimieren und Ausblenden.
+- Die Start-Routine zeigt jetzt einen A11y-Kurzbericht im Abschluss (z. B. Kontrast, Fokus, Tastaturhinweise).
+- Naechster Schritt: Pin-Knopf und Fokusmodus nach demselben Steuerungsstandard absichern.
+
 ## Update Iteration 75 (2026-03-03)
 
 Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
@@ -100,7 +108,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 86 %
-- **Erledigt:** 126 Punkte
+- **Erledigt:** 128 Punkte
 - **Offen:** 21 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

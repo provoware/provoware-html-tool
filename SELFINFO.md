@@ -1,3 +1,11 @@
+## Iteration 76 (2026-03-03)
+
+- Ziel: Zwei offene Punkte vollstaendig abschliessen (Modul-Control-Tooltips vereinheitlichen + A11y-Abschlussbericht in Start-Routine).
+- Ergebnis: Modulsteuerung hat jetzt einheitliche Kurz-Tooltips mit Rueckweg-Hinweis fuer Maximieren, Minimieren und Ausblenden.
+- Ergebnis: Start-Routine gibt nach dem Release-Check jetzt einen A11y-Kurzbericht mit Anzahl bestanden/offen aus.
+- Mini-Optimierung: Tooltip-Texte stehen zusaetzlich als aria-label fuer Screenreader bereit.
+- Naechster Schritt: Pin-Knopf und Fokusmodus auf denselben Steuerungsstandard bringen.
+
 ## Iteration 75 (2026-03-03)
 
 - Ziel: Zwei offene Punkte vollstaendig abschliessen (Lesemodus-Schliessen mit Enter/Alt-Hinweis + Shortcut-Konfliktwarnungen gesammelt im Start-Abschlussbericht).
