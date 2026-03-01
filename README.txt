@@ -112,6 +112,13 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 - Neu (2026-03-02): `config/design_layout_manifest.json` + `docs/DESIGN_LAYOUT_MANIFEST.md` dokumentieren das Soll/Ist-Layout detailliert.
 # Provoware HTML Tool
 
+## Update 2026-03-03 (Iteration 87)
+
+- Zwei offene Punkte abgeschlossen: Safe-Mode-Reset schreibt jetzt einen lokalen Support-Verlauf in `data/backup_events.json`.
+- Zwei offene Punkte abgeschlossen: Versionsvergleich nennt jetzt 3 Unterschiede (Felder, Bytes, Zeit) in einfacher Sprache statt nur einem Sammeltext.
+- Naechster Schritt: Boot-Fokusziel als Einstellung speichern und im Layout sichern.
+
+
 - Neu (2026-03-01): Referenzbild professionell analysiert und als feste UI-Vorgabe umgesetzt (Neon-Karten, KPI-Bereich, Kanban-Schnellansicht, Team/Kalendertext).
 - Neu (2026-03-01): A11y-Plus in der neuen Vorlage: klare Textstatus statt nur Farben, 44px-Bedienelemente und sichtbare Tastaturwege.
 - Neu (2026-03-01): Naechster Schritt aus der Analyse: Kanban-Karten als echte Datenquelle statt statischer Beispielwerte anbinden.
@@ -145,7 +152,7 @@ Fortschritt: Zwei offene Mini-Punkte abgeschlossen.
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 89 %
-- **Erledigt:** 154 Punkte
+- **Erledigt:** 156 Punkte
 - **Offen:** 19 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

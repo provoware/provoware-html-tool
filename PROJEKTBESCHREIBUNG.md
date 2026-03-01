@@ -339,3 +339,10 @@ Praktischer Einsatz:
 - Boot-Gate-Status wird zentral im Modell erzeugt (offen/gesperrt + Hilfetext).
 - Safe-Mode-Status kommt als eigener Panel-Text mit klaren Aktionen (Erneut versuchen, Reparatur starten, Protokoll oeffnen).
 - Backup-Wiederherstellung hat jetzt zwei Wege: klassische Backup-Datei oder Version aus dem Versionsordner zur Ziel-Datei.
+
+
+## Iteration 87 – Zwei fertiggestellte Punkte
+
+- Safe-Mode-Reset hat jetzt eine lokale Support-Spur: ein Event wird in `data/backup_events.json` gespeichert.
+- Der Versionsvergleich im Restore-Dialog zeigt jetzt drei neutrale Fakten: Feldanzahl, Byte-Groesse und Zeitstempel.
+- Vorteil fuer Laien: Unterschiede sind klar lesbar, ohne auf Farben angewiesen zu sein.

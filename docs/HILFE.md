@@ -212,3 +212,9 @@ Alte Werte in `config/ui_design_tokens.json` wieder eintragen und `bash start.sh
 - Was macht das? Sie koennen statt Backup-Datei auch eine gespeicherte Version direkt zur Ziel-Datei wiederherstellen.
 - Was passiert mit Daten? Die gewaehlt Version ersetzt die Ziel-Datei; vorherige Datei kann weiter als Backup vorliegen.
 - Rueckgaengig? Sie koennen sofort erneut eine andere Version oder ein Backup wiederherstellen.
+
+## Neu: Safe-Mode-Verlauf und klarer Versionsvergleich
+
+- Wenn Sie Safe-Mode-Reset klicken, wird ein Support-Eintrag gespeichert (`data/backup_events.json`).
+- Im Restore-Dialog sehen Sie jetzt immer drei Unterschiede: Felder, Dateigroesse und Zeit.
+- Naechster Schritt bei Fehlern: Erneut versuchen, Reparatur starten oder Protokoll oeffnen.
