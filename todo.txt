@@ -66,9 +66,11 @@ Laienvorschläge
 - [x] P1: Genres/Moods/Stile-Archiv-Kern implementiert (CSV-Import, Duplikatpruefung, Favoriten-Sternchen, Logging).
 - [x] P1: Wiki-Modul implementieren (kategoriebezogene Wissensspeicherung).
 - [x] P1: Naechster Mini-Punkt: Wiki-Modul Grundgeruest mit Eingabepruefung (Validierung) vorbereiten.
-- [ ] Naechster Mini-Punkt: AGENTS.md-Regel "immer zwei offene Punkte" in Start-Routine-Check aufnehmen.
-- [ ] P1: Schnellspeicher-Modul implementieren (Titel + Eingabe an feste Datei anhaengen).
+- [x] Naechster Mini-Punkt: AGENTS.md-Regel "immer zwei offene Punkte" in Start-Routine-Check aufnehmen.
+- [x] P1: Schnellspeicher-Modul implementieren (Titel + Eingabe an feste Datei anhaengen).
 - [ ] P1: Mehrfach-Schnellspeicherbereiche mit eigenen Dateien anlegen (UI + Persistenz).
+- [ ] Naechster Mini-Punkt: Schnellspeicher um Bereichsauswahl mit eigener Datei erweitern.
+- [ ] Naechster Mini-Punkt: Songtext-Editor mit Intro/Refrain-Vorlage und Tastaturhilfe starten.
 - [ ] P1: Songtext-Editor-Modul implementieren (Intro/Refrain/Bridge/Sonstiges als Vorlagen).
 - [ ] P1: Interoperabilitaet Songtext-Editor ↔ Zufallsgenerator umsetzen (Inhalt einfuegen).
 - [ ] P1: Dokument-Vorschau im Songtext-Modul integrieren.

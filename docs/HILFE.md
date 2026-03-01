@@ -1,3 +1,9 @@
+## Neu: Schnellspeicher (kurz und klar)
+
+- Was ist neu? Im Dashboard gibt es jetzt ein Panel **Schnellspeicher**.
+- So nutzen: Titel + Inhalt ausfuellen, dann **Notiz speichern** klicken.
+- Rueckweg: Mit **Eingabe leeren** alles zuruecksetzen und neu starten.
+
 # Hilfe
 
 ## Hilfe-Panel

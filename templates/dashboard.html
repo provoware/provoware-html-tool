@@ -46,6 +46,38 @@
             <h3 id="notes-title">Notizen</h3>
             <div class="blank-area" aria-label="Leerer Notizbereich"></div>
           </article>
+          <article class="panel" aria-labelledby="quick-store-title">
+            <h3 id="quick-store-title">Schnellspeicher</h3>
+            <p class="field-tip" id="quick-store-help">
+              Was macht das? Speichert kurze Notizen sofort in einer Datei.
+              Rueckweg: Eingaben leeren oder neuen Eintrag speichern.
+            </p>
+            <label for="quick-store-title-input">Titel</label>
+            <input
+              id="quick-store-title-input"
+              type="text"
+              maxlength="80"
+              placeholder="z. B. Hook-Idee"
+              aria-describedby="quick-store-help"
+            />
+            <label for="quick-store-content">Inhalt</label>
+            <textarea
+              id="quick-store-content"
+              rows="3"
+              maxlength="2000"
+              placeholder="Kurze Notiz speichern"
+              aria-describedby="quick-store-help"
+            ></textarea>
+            <div class="todo-actions" aria-label="Schnellspeicher-Aktionen">
+              <button type="button" id="quick-store-save">
+                Notiz speichern
+              </button>
+              <button type="button" id="quick-store-clear">
+                Eingabe leeren
+              </button>
+            </div>
+            <ul id="quick-store-list" class="todo-list" role="list"></ul>
+          </article>
           <article class="panel" aria-labelledby="wiki-title">
             <h3 id="wiki-title">Wiki-Modul</h3>
             <p class="field-tip" id="wiki-help">
@@ -372,8 +404,10 @@
     <script src="dashboard_help.js"></script>
     <script src="../system-module/todo_list_model.js"></script>
     <script src="../system-module/wiki_module_model.js"></script>
+    <script src="../system-module/quick_store_model.js"></script>
     <script src="todo_module.js"></script>
     <script src="wiki_module.js"></script>
+    <script src="quick_store_module.js"></script>
     <script src="backup_restore.js"></script>
     <script src="boot_status.js"></script>
     <script src="kanban_preview.js"></script>

@@ -1,3 +1,7 @@
+- Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Start-Routine erzwingt jetzt genau zwei offene `Naechster Mini-Punkt`-Eintraege in `todo.txt`.
+- Neu (2026-03-01): Neues Schnellspeicher-Panel im Dashboard (Titel + Inhalt) speichert direkt in `data/quick_store_entries.json`.
+- Neu (2026-03-01): Mini-Optimierung Hilfe/UX: Schnellspeicher zeigt klaren Rueckweg (Eingabe leeren oder neu speichern).
+
 - Neu (2026-03-01): Zwei offene Punkte abgeschlossen: Wiki-Modul ist jetzt als eigenes Panel mit Kategorie, Titel, Inhalt und Speicherung in `data/wiki_notes.json` verfuegbar.
 - Neu (2026-03-01): Mini-Optimierung Hilfe/UX: Wiki-Panel erklaert in einfacher Sprache Aktion, Datenwirkung und Rueckweg.
 
@@ -27,7 +31,7 @@
 ## Entwicklungsfortschritt
 
 - **Fortschritt:** 80 %
-- **Erledigt:** 86 Punkte
+- **Erledigt:** 88 Punkte
 - **Offen:** 22 Punkte
 
 Stand: automatisch aus `todo.txt` gezaehlt.

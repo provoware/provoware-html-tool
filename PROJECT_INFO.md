@@ -1,3 +1,9 @@
+## Iteration 60 – Patchstatus
+
+- Hauptziel 1 abgeschlossen: Start-Routine prueft AGENTS-Regel "genau zwei offene Mini-Punkte" direkt gegen `todo.txt`.
+- Hauptziel 2 abgeschlossen: Schnellspeicher-Modul mit Validierung, UI-Panel und Dateischreiben (`data/quick_store_entries.json`) integriert.
+- Status: releasebereit nach `bash start.sh` und gruenen Tests.
+
 PATCH-059: Wiki-Modul (Kategorie/Titel/Inhalt) als getrenntes System-Modul eingefuehrt, inklusive Validierung und JSON-Speicherpfad `data/wiki_notes.json`.
 
 ## Update 2026-03-01 – Patch 058

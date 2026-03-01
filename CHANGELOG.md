@@ -1,3 +1,9 @@
+## 2026-03-01 – Zwei weitere Punkte abgeschlossen (Mini-Punkte-Regel + Schnellspeicher)
+
+- Start-Routine prueft jetzt automatisch die AGENTS-Regel: In `todo.txt` muessen genau zwei offene `Naechster Mini-Punkt`-Eintraege stehen.
+- Neues Schnellspeicher-Modul ist im Dashboard aktiv (Titel + Inhalt) und speichert in `data/quick_store_entries.json`.
+- Risiko: niedrig, da nur ein neuer Modulpfad und ein klar abgegrenzter Start-Check erweitert wurden.
+
 ## 2026-03-01 – PATCH-059
 
 - Zwei offene TODO-Punkte abgeschlossen: Wiki-Modul mit Kategorie-Speicher und Grundgeruest mit Validierung (Eingabepruefung) eingefuehrt.
