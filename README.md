@@ -3,7 +3,7 @@
 ## Status oben
 - Erledigte Punkte: 15 (siehe `todo.txt`)
 - Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 94%
+- Fortschritt: 95%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -16,6 +16,7 @@
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
+  - Neu für sichere Listen-Ausgabe: `js/services/html-escape.js` (zentrale HTML-Zeichenkodierung)
   - `modules/*` (fachliche Module)
 - **Daten**
   - `data/app-config.json`, `data/themes.json`, `data/ui_texts.json`
@@ -23,7 +24,7 @@
   - `data/laienstart-required-files.json` (konfigurierbare Dateiliste für den Startcheck)
   - `data/profile-archive.json`, `data/templates-archive.json`
 - **Tests und Checks**
-  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`
+  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`
   - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck)
 - **GitHub Workflows (Basis aktiv)**
   - `.github/workflows/ci.yml` (frühe Fehler durch Tests)
@@ -32,6 +33,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Neuer UI-Render-Regressionstest: Eingaben wie `<img onerror=...>` werden als Text ausgegeben (kein ausführbares HTML).
+- Feste Regel eingeführt: dynamische Listen nutzen zentrale Escaping-Hilfe (`js/services/html-escape.js`) statt ad-hoc-Lösungen.
 - Sicherheitslücke im UI reduziert: kritische `innerHTML`-Ausgaben escapen (HTML-Sonderzeichen sicher kodieren), damit eingeschleuste Tags/Skripte nicht ausgeführt werden.
 - Betroffen sind besonders Archiv-, Log-, Selbsttest- und Profil-Ausgaben in `js/ui.js`.
 - Hilfeelemente im Guide-Bereich verbessert: kurzer Bedienhinweis direkt am Index, klare ARIA-Beschriftung.

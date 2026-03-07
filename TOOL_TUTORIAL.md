@@ -93,3 +93,14 @@ Mini-Prüfung:
 2. Auf den Test für Fallback-Quelle und ID-Bereinigung achten.
 
 Kurzregel: Bei Registry-Problem erst diesen gezielten Test prüfen.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### UI-Listen sicher rendern (Regel für neue Listen)
+Wenn neue dynamische Listen gebaut werden, gilt ab jetzt eine feste Regel:
+- Entweder DOM mit `textContent` nutzen
+- oder die zentrale Hilfe `js/services/html-escape.js` verwenden.
+
+Mini-Test dafür:
+1. `node --test tests/services/ui-render-safety.test.js`
+
+Kurzregel: Nutzereingaben immer als Text ausgeben, nie als ungeprüftes HTML einfügen.
