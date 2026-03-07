@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "moduleIds": [
+    "datenbank_baukasten",
+    "todo_kalender_erinnerung"
+  ]
+}

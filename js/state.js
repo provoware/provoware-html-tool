@@ -13,6 +13,8 @@ const createState = () => ({
   selectedProfile: 'HardTechno',
   archiveSortMode: 'alpha',
   randomMix: null,
+  moduleRegistry: { modules: [], summary: '-' },
+  templateDesignStatus: { ok: false, message: '-' },
   debug: { startupReady: false }
 });
 

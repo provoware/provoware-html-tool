@@ -3,6 +3,7 @@ import { loadAllConfig } from './services/config-loader.js';
 import { logEvent } from './services/logger.js';
 import { filesystemAdapter } from './adapters/filesystem-adapter.js';
 import { runStartupCheck } from './services/startup-check.js';
+import { detectTemplateDesignStatus, loadModuleRegistry } from './services/module-registry.js';
 import { applyTheme, bindUiActions, detectLayoutMode, render } from './ui.js';
 import {
   ARCHIVE_PATH,
@@ -203,7 +204,9 @@ const init = async () => {
   applyTheme(loaded.data.themes[themeName] || loaded.data.themes.dunkel);
 
   const initialMode = detectLayoutMode(loaded.data.appConfig);
-  setState({ layoutMode: initialMode, debug: { startupReady: false } });
+  const moduleRegistry = await loadModuleRegistry();
+  const templateDesignStatus = detectTemplateDesignStatus();
+  setState({ layoutMode: initialMode, moduleRegistry, templateDesignStatus, debug: { startupReady: false } });
 
   bindUiActions({
     onSelectDirectory: selectDirectory,
