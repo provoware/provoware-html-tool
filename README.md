@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 18 (siehe `todo.txt`)
+- Erledigte Punkte: 19 (siehe `todo.txt`)
 - Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 90%
+- Fortschritt: 91%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -12,6 +12,7 @@
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
   - `css/app.css` (inkl. farbliche Hilfehinweise, Tastatur- und Drag&Drop-Stati)
+  - Neu: `DESIGN_VORLAGE.md` (tiefe Bildanalyse mit Farb- und Layout-Token als Umsetzungs-Vorlage)
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
   - Neu: `js/modules/plugin-manager.js` (Plugin-Auswahl, Zeichenzähler und einfache Rechtschreibprüfung DE/EN/FR mit Auto-Sprachschätzung)
@@ -39,6 +40,9 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- UI-Redesign: Dashboard jetzt im dunklen Glas-Look nahe der Designvorlage (3 Spalten, starke Kartenhierarchie, weiche Transparenz).
+- Neue Vorlage-Datei `DESIGN_VORLAGE.md`: enthält Tiefenanalyse der Referenz, Token und messbare Abgleichkriterien.
+- `AGENTS.md` erweitert: zusätzliche Design-Ziele und detaillierte Erfolgschecks für Struktur/Farbe/Transparenz/Responsive.
 - Dashboard zeigt den Start jetzt als 4 klare Schritte (Schritt 1/4 bis 4/4) mit Farbstatus für schnelleres Verstehen.
 - Neuer sicherer Logout-Button: speichert offene Editor-Änderungen automatisch und schließt ein Desktop-Backend sauber, wenn vorhanden.
 - Neue Auto-Formatierung für Editor-Inhalte: JSON wird strukturiert formatiert, JS/CSS/HTML werden zeilenweise geglättet.
@@ -106,3 +110,5 @@
 ## Kurze Empfehlungsliste (unten, aktualisiert)
 1. Nutze bei jedem Sitzungsende den neuen Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
 2. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
+5. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
+6. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.

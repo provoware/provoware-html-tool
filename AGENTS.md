@@ -95,3 +95,29 @@ Vor Abschluss jeder Iteration bestätigen:
 - [ ] README.md aktualisiert
 - [ ] TOOL_TUTORIAL.md erweitert
 - [ ] INDEX.md aktualisiert
+
+## Erweiterte Zielvorgaben für Design-Iterationen
+Wenn eine Bildvorlage umgesetzt wird, gelten zusätzlich diese Pflichtziele:
+- Bildvorlage zuerst tief analysieren (Layout, Farbwelt, Transparenz, Hierarchie, Interaktion).
+- Analyse als eigene Datei im Projekt ablegen (z. B. `DESIGN_VORLAGE.md`).
+- Umsetzung immer mit kleinster stabiler Änderung starten (HTML-Struktur nur falls nötig, primär CSS).
+- Funktionale IDs/JS-Anker nicht ohne zwingenden Grund verändern.
+- Exaktheit priorisieren: zuerst große Struktur, dann Farb- und Glasdetails, dann Mikroabstände.
+
+## Detaillierte Erfolgschecks (messbar)
+Nach jeder Design-Iteration müssen diese Checks dokumentiert werden:
+1. **Struktur-Check**: Spalten- und Kartenaufteilung entspricht der Vorlage in Reihenfolge und Gewichtung.
+2. **Farb-Check**: Primäre und sekundäre Farben sind als Token dokumentiert und sichtbar angewendet.
+3. **Transparenz-Check**: Mindestens drei sichtbare Transparenzebenen sind vorhanden.
+4. **Lesbarkeits-Check**: Haupttexte bleiben auf Desktop gut lesbar (hoher Kontrast, keine Überlagerung).
+5. **Interaktions-Check**: Buttons/Fokuszustände sind erkennbar und konsistent.
+6. **Responsive-Check**: Unter 980px kein Layoutbruch, sinnvolle 1-Spalten-Darstellung.
+7. **Stabilitäts-Check**: Bestehende Kern-IDs für JS bleiben funktionsfähig.
+
+## Entwicklungsdisziplin verbessern (Pflichtfragen vor Merge)
+Vor Abschluss jeder Iteration kurz beantworten:
+- Haben wir nur den kleinsten sinnvollen Eingriff gemacht?
+- Haben wir Änderungen klar auf betroffene Dateien begrenzt?
+- Haben wir neue Nebenprobleme in `todo.txt` geparkt statt ungeplant mitzubauen?
+- Haben wir Endvalidierung nur auf direkt Betroffenes begrenzt?
+- Gibt es zwei konkrete Empfehlungen für die nächste Iteration?

@@ -187,3 +187,16 @@ Zusätzlich gibt es **„Logout (sicher)”**:
 - versucht das Backend sicher zu schließen (falls Desktop-Backend aktiv ist)
 
 Kurzregel: erst Startschritte abarbeiten, am Ende immer „Logout (sicher)“ nutzen.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Designvorlage exakt nachbauen (Glas-Layout)
+Wenn du ein neues Layout nach Bildvorlage bauen willst, nutze diese Reihenfolge:
+1. Erst `DESIGN_VORLAGE.md` lesen (Layout, Farben, Transparenz, Checks).
+2. Danach nur `css/app.css` minimal patchen.
+3. Nur wenn nötig `index.html` ergänzen, aber bestehende IDs nicht brechen.
+
+Mini-Check zum Schluss:
+1. `bash scripts/minimal-check.sh`
+2. Browser öffnen und prüfen: 3 Spalten, Glas-Karten, gute Lesbarkeit.
+
+Kurzregel: zuerst Vorlage, dann kleiner CSS-Patch, dann gezielter Check.
