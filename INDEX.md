@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Import-/Export-Konsistenz der direkten Service-Kette
+- Iterationsfokus: Reproduzierbarer Minimal-Check für Kern-Syntax und Service-Schnelltest
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
@@ -87,6 +87,8 @@
 - │     ├─ manifest.json
 - │     ├─ schema.json
 - │     └─ texts.json
+- ├─ scripts
+- │  └─ minimal-check.sh
 - ├─ tests
 - │  ├─ adapters
 - │  │  └─ desktop-filesystem.test.js
@@ -113,6 +115,7 @@
 - └─ wiki_notiz_wissen_start.html
 
 ## Vollständige Dateiliste (ohne `.git`)
+
 1. `.github/workflows/ci.yml`
 2. `.github/workflows/codeql.yml`
 3. `.github/workflows/lint.yml`
@@ -186,13 +189,14 @@
 71. `modules/wiki_notiz_wissen/manifest.json`
 72. `modules/wiki_notiz_wissen/schema.json`
 73. `modules/wiki_notiz_wissen/texts.json`
-74. `tests/adapters/desktop-filesystem.test.js`
-75. `tests/services/import-export-consistency.test.js`
-76. `tests/services/module-registry.test.js`
-77. `tests/services/project-selftest.test.js`
-78. `tests/services/startup-check.test.js`
-79. `tests/services/ui-action-handlers.smoke.test.js`
-80. `tests/start-files/start-import-resolution.test.js`
-81. `todo.txt`
-82. `todo_kalender_erinnerung_start.html`
-83. `wiki_notiz_wissen_start.html`
+74. `scripts/minimal-check.sh`
+75. `tests/adapters/desktop-filesystem.test.js`
+76. `tests/services/import-export-consistency.test.js`
+77. `tests/services/module-registry.test.js`
+78. `tests/services/project-selftest.test.js`
+79. `tests/services/startup-check.test.js`
+80. `tests/services/ui-action-handlers.smoke.test.js`
+81. `tests/start-files/start-import-resolution.test.js`
+82. `todo.txt`
+83. `todo_kalender_erinnerung_start.html`
+84. `wiki_notiz_wissen_start.html`

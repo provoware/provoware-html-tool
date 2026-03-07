@@ -18,6 +18,6 @@
 [ ] 2026-03-07 | Dokumentation | Platzhalter nicht als fertige Integration darstellen | prüfen: README/Tutorial auf Aussagen wie „aktiv“, „vollständig“ gegen Codezustand prüfen | fertig wenn: nur reale Integrationen als erledigt markiert sind
 
 ## Später
-[ ] 2026-03-07 | Qualitätssicherung | kleine automatische Syntax-/Strukturprüfungen ergänzen | prüfen: einfacher lokaler Check-Befehl für Kerndateien vorhanden | fertig wenn: ein reproduzierbarer Minimal-Check dokumentiert ist
+[x] 2026-03-07 | Qualitätssicherung | kleine automatische Syntax-/Strukturprüfungen ergänzen | prüfen: `bash scripts/minimal-check.sh` | fertig wenn: ein reproduzierbarer Minimal-Check dokumentiert ist
 [ ] 2026-03-07 | Altbestand | redundante Altdateien gezielt prüfen | prüfen: Kandidatenliste mit Begründung und Löschkriterium erstellen | fertig wenn: klare Liste ohne Sofortlöschung vorliegt
 [ ] 2026-03-07 | Modulstatus | Modulstatus robuster auswertbar machen (z. B. strukturierte Fehlercodes zusätzlich zu Text) | prüfen: Statusobjekt maschinell nutzbar auswerten | fertig wenn: Auswertung ohne Textparsing möglich ist

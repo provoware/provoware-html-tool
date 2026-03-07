@@ -10,6 +10,17 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Minimal-Check als Ein-Befehl-Start
+Wenn du vor einer Änderung nur das Nötigste prüfen willst:
+1. `bash scripts/minimal-check.sh`
+
+Der Befehl macht zwei direkte Prüfungen:
+- JS-Syntax in `js/` und `tests/`
+- den Service-Schnelltest `tests/services/import-export-consistency.test.js`
+
+Kurzregel: erst Minimal-Check, dann nur bei Bedarf breiter testen.
+
+## Zusatz-Check (weiter nutzbar)
 ### Import-/Export-Schnellcheck für direkte Service-Kette
 Wenn `js/app.js` Services importiert, prüfe zuerst klein und gezielt:
 1. `node --test tests/services/import-export-consistency.test.js`
