@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: kleine Layout-Vereinheitlichung plus neue Archiv-Übersicht für besseres Nutzerhandling
+- Iterationsfokus: AGENTS-Fokussierung + Doku-Bereinigung
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/
