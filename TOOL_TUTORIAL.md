@@ -68,6 +68,7 @@ Kurze Anleitung für sichere kleine Iterationen.
 2. Im Modul-Slot 5 prüfen, ob ein Text wie `2/2 Module vollständig verbunden` angezeigt wird.
 3. Im Modul-Slot 6 prüfen, ob der Vorlagen-Hinweis erscheint.
 4. Erwartung: Es steht klar, dass die Asset-Vorlage nicht aktiv ist, solange nur `css/app.css` und `js/app.js` geladen werden.
+5. Optionaler Fehlerfall: Wenn ein Modulteil fehlt oder defekt ist, zeigt die Meldung direkt den Namen und den ersten konkreten Fehler.
 
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
@@ -104,4 +105,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Modul-Registry und Vorlagen-Status transparent anzeigen
+- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen

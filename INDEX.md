@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Modul-Registry und Vorlagen-Status transparent anzeigen
+- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen
 
 ## Verzeichnisbaum (ohne `.git`)
 
