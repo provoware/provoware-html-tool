@@ -19,5 +19,18 @@
 
 ## Später
 [x] 2026-03-07 | Qualitätssicherung | kleine automatische Syntax-/Strukturprüfungen ergänzen | prüfen: `bash scripts/minimal-check.sh` | fertig wenn: ein reproduzierbarer Minimal-Check dokumentiert ist
-[ ] 2026-03-07 | Altbestand | redundante Altdateien gezielt prüfen | prüfen: Kandidatenliste mit Begründung und Löschkriterium erstellen | fertig wenn: klare Liste ohne Sofortlöschung vorliegt
+[x] 2026-03-07 | Altbestand | redundante Altdateien gezielt prüfen | prüfen: Kandidatenliste mit Begründung und Löschkriterium erstellen | fertig wenn: klare Liste ohne Sofortlöschung vorliegt
+[x] 2026-03-07 | Altbestand-Kandidatenliste | Kandidaten sauber dokumentiert (ohne Löschung) | prüfen: Liste enthält je Kandidat Begründung, Prüfschritt und Fertig-Kriterium | fertig wenn: alle Kandidaten nur als Prüfauftrag markiert sind
+    - Kandidat A: `logging_modul_start.html`, `todo_kalender_erinnerung_start.html`, `backup_funktions_modul_start.html`, `datenbank_baukasten_start.html`, `wiki_notiz_wissen_start.html`
+      - Begründung: möglicher Altbestand, falls `laienstart.html` + `index.html` als alleiniger Startpfad reichen.
+      - Prüfschritt: Nutzungsnachweis (Verlinkung in Doku/Build/Tests) pro Datei gegen tatsächlichen Startbedarf abgleichen.
+      - Löschkriterium: keine aktive Referenz und kein Betriebsfall mit Einzelstart-Anforderung.
+    - Kandidat B: `debugging_modul_start.html`
+      - Begründung: zusätzlicher Einzelfall, falls Debug-Start nur historisch genutzt wird.
+      - Prüfschritt: mit Team klären, ob Datei noch als Support-Einstieg genutzt wird.
+      - Löschkriterium: bestätigtes „nicht mehr benötigt“ im Betriebsablauf.
+    - Kandidat C: `assets/css/base.css` + `assets/js/core.js`
+      - Begründung: aktuell Vorlagen-Stand; mögliches Altmaterial, falls keine künftige Aktivierung geplant ist.
+      - Prüfschritt: Registry-Hinweis (`module-registry`) und Testbezug gegen reale Produktnutzung halten.
+      - Löschkriterium: keine produktive Aktivierung geplant und Test-/Hinweislogik vorher angepasst.
 [x] 2026-03-07 | Modulstatus | Modulstatus robuster auswertbar machen (z. B. strukturierte Fehlercodes zusätzlich zu Text) | prüfen: Statusobjekt maschinell nutzbar auswerten | fertig wenn: Auswertung ohne Textparsing möglich ist

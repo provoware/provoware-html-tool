@@ -43,6 +43,16 @@ Im Bereich **Anleitungen und Toolbeschreibungen** kannst du jetzt schneller arbe
 
 Kurzregel: erst per Tastatur wählen, dann bei Bedarf mit Ziehen sortieren.
 
+## Kleine Erweiterung dieser Iteration (neu)
+### Altbestand sicher prüfen (ohne Schnell-Löschen)
+Wenn eine Datei „alt“ wirkt, lösche sie nicht direkt.
+Nutze erst diese kurze Reihenfolge:
+1. Nutzung suchen (Doku, Tests, Startpfad).
+2. Team-Rückfrage zum echten Betriebsfall.
+3. Erst dann Löschentscheidung dokumentieren.
+
+Kurzregel: erst prüfen, dann entscheiden, zuletzt löschen.
+
 ## Zusatz-Check (weiter nutzbar)
 ### Import-/Export-Schnellcheck für direkte Service-Kette
 Wenn `js/app.js` Services importiert, prüfe zuerst klein und gezielt:
