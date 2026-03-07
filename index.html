@@ -28,6 +28,10 @@
           <div class="header-control-buttons" aria-label="Layout-Steuerung">
             <button id="toggle-left-sidebar" class="btn-small" type="button" aria-pressed="false">Linke Leiste</button>
             <button id="toggle-right-sidebar" class="btn-small" type="button" aria-pressed="false">Rechte Leiste</button>
+            <label class="theme-switch" for="theme-select">Farbtheme
+              <select id="theme-select" aria-label="Farbtheme wählen"></select>
+            </label>
+            <p id="zoom-status" class="zoom-status" aria-live="polite">Schriftgröße: 100%</p>
           </div>
         </div>
       </header>
@@ -179,7 +183,7 @@
           </article>
           <article class="footer-box">
             <h2 class="panel-title">Tipp</h2>
-            <p class="sidebar-summary">Esc beendet Maximieren. Strg + 0 setzt den Zoom zurück.</p>
+            <p class="sidebar-summary">Esc beendet Maximieren. Strg + Mausrad oder Strg + +/- ändert die Schriftgröße. Strg + 0 setzt zurück.</p>
           </article>
         </section>
       </footer>

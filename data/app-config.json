@@ -1,7 +1,7 @@
 {
   "appName": "ProvoWare Dashboard",
   "version": "0.1.0",
-  "defaultTheme": "tool-optik-vorgabe-2026",
+  "defaultTheme": "design-nachtblau",
   "minimumSizes": {
     "wide": {
       "minWidth": 1400,

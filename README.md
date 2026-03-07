@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 23 (siehe `todo.txt`)
+- Erledigte Punkte: 24 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Guide-API vereinheitlicht, Default-Archive erweitert und Zufallsmix mit requested/used ergänzt.
+- Stand dieser Iteration: Barrierefreiheit und Nutzerfreundlichkeit verbessert (Theme-Wahl, Schriftzoom per Strg+Mausrad/Strg+±, robusteres Responsive-Layout).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -12,6 +12,7 @@
   - `index.html` (Hauptoberfläche, wird nach erfolgreichem Start automatisch geöffnet)
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
+- Neu: Header enthält jetzt eine direkte Theme-Auswahl (4 Design-Themes) und eine sichtbare Zoom-Anzeige für die Schriftgröße.
   - `css/app.css` (inkl. farbliche Hilfehinweise, Tastatur- und Drag&Drop-Stati)
   - Neu: Farbtoken für Header und Utility-Karten (kühl-blau/grau, zentral über `:root` steuerbar)
   - Neu: `DESIGN_VORLAGE.md` (tiefe Bildanalyse mit Farb- und Layout-Token als Umsetzungs-Vorlage)
@@ -47,6 +48,10 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Barrierefreiheit verbessert: klarere Fokus-Umrandung, sichtbare Zoom-Rückmeldung und kurze Zoom-Hinweise im Footer.
+- Nutzerfreundlichkeit verbessert: Theme-Auswahl direkt im Header mit vier Design-Themes aus der Vorlage.
+- Schriftgröße ist jetzt stabil per Strg+Mausrad und Strg+Plus/Minus zoombar; Strg+0 setzt zurück.
+- Layout verbessert: mobile Header-Steuerung ist unter 980px besser lesbar und bricht nicht.
 - Guide-API vereinfacht: `navigateIndex` nutzt jetzt nur noch `mode` (statt zusätzlichem `jump`-Boolean), damit die Aufrufe einheitlich bleiben.
 - Default-Archive erweitert: Genres, Moods, Styles sowie Kategorie-Archive enthalten mehr Startwerte für bessere Erstnutzung.
 - Templates-Default-Archiv erweitert: `data/templates-archive.json` startet jetzt mit fünf laienfreundlichen Standardvorlagen.
