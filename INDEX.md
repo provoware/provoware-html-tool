@@ -1,0 +1,26 @@
+# INDEX.md
+
+Stand: aktuell für diese Iteration.
+
+## Verzeichnisbaum (ohne `.git`)
+
+```text
+.
+├── AGENTS.md
+├── INDEX.md
+├── README.md
+├── TOOL_TUTORIAL.md
+└── todo.txt
+```
+
+## Dateiliste (alle Projektdateien, ohne `.git`)
+
+1. `AGENTS.md`
+2. `INDEX.md`
+3. `README.md`
+4. `TOOL_TUTORIAL.md`
+5. `todo.txt`
+
+## Pflegehinweis
+- Diese Datei wird am Ende jeder Iteration aktualisiert.
+- Wenn Dateien hinzukommen, umbenannt oder gelöscht werden, muss zuerst der Verzeichnisbaum und dann die Dateiliste angepasst werden.
