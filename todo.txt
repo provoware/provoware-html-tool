@@ -1,28 +1,12 @@
-# todo.txt
-
 ## Ziel der aktuellen Iteration
-Die nächsten offenen Punkte aus P2/P3 in kleine, direkt umsetzbare Doku-Schritte überführen.
+P2 und P3 sauber abschließen und die nächsten offenen Punkte klein halten.
 
 ## Aktueller Fortschritt
-- Erledigte Punkte gesamt: 4
-- Offene Punkte gesamt: 4
-- Entwicklungsfortschritt: 50%
+- Erledigte Punkte gesamt: 6
+- Offene Punkte gesamt: 2
+- Entwicklungsfortschritt: 75%
 
 ## Priorisierte offene Punkte (geordnet)
-
-### P2 – Umsetzungsphasen klein und sequenziell halten
-- **Problem:** Arbeitspakete sind definiert, aber noch nicht praktisch gestartet.
-- **Patchgrund:** Ohne Startpaket bleibt die Planung stehen.
-- **Nächster Schritt:** Arbeitspaket 1 (`index.html`, `assets/css/base.css`, `assets/js/core.js`) als Minimalstart umsetzen.
-- **Prüfschritt:** Dateien vorhanden, Offline-Start sichtbar.
-- **Fertig-Kriterium:** Dashboard-Skelett lädt lokal ohne Zusatzdienste.
-
-### P3 – Start-Minimum klar gegenüber späteren Dateien abgrenzen
-- **Problem:** Muss-Dateien und spätere Dateien sind noch nicht vollständig getrennt dokumentiert.
-- **Patchgrund:** Klare Abgrenzung senkt Pflege- und Umsetzungsrisiko.
-- **Nächster Schritt:** Für jede Startdatei genau einen Zweck-Satz ergänzen.
-- **Prüfschritt:** Jede Startdatei hat eine klare Kurzbeschreibung.
-- **Fertig-Kriterium:** Keine unklaren oder redundanten Startdateien.
 
 ### P4 – Modulstandard `datenbank_baukasten` als Muster fixieren
 - **Problem:** Muster ist geplant, aber nicht konkret als Datei-Set angelegt.
@@ -39,10 +23,10 @@ Die nächsten offenen Punkte aus P2/P3 in kleine, direkt umsetzbare Doku-Schritt
 - **Fertig-Kriterium:** Dokuumfang bleibt schlank und direkt nutzbar.
 
 ## Diese Iteration erledigt
-1. AGENTS-Struktur gestrafft und Index-Pflicht ergänzt.
-2. `todo.txt` auf nächste offene Punkte neu fokussiert.
-3. `INDEX.md` neu angelegt (Baum + vollständige Dateiliste).
-4. `TOOL_TUTORIAL.md` neu angelegt und um Index-Workflow erweitert.
+1. Arbeitspaket 1 minimal umgesetzt (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
+2. Startdateien mit klaren Ein-Satz-Zwecken in `README.md` dokumentiert.
+3. `TOOL_TUTORIAL.md` um eine kurze Offline-Start-Prüfung erweitert.
+4. `INDEX.md` auf den vollständigen aktuellen Dateistand aktualisiert.
 
 ## Geparkte Folgepunkte (bewusst nicht Teil dieser Iteration)
 - Feingranulare Logging-Strategie für mehrere Logdateien.

@@ -1,9 +1,9 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 4
-- Offene Punkte gesamt: 4
-- Entwicklungsfortschritt: 50%
+- Erledigte Punkte gesamt: 6
+- Offene Punkte gesamt: 2
+- Entwicklungsfortschritt: 75%
 
 ## Aktuelle Toolstruktur und Toolumfang (fehlerfrei umgesetzt)
 - Steuerdateien:
@@ -12,22 +12,24 @@
   - `README.md` (Projektstatus)
   - `TOOL_TUTORIAL.md` (Kurzanleitung)
   - `INDEX.md` (aktueller Verzeichnisbaum + Dateiliste)
+- Startdateien:
+  - `index.html` (offline ladbarer Einstieg mit Dashboard-Skelett)
+  - `assets/css/base.css` (Basislayout und einfache Lesbarkeit)
+  - `assets/js/core.js` (minimaler Startfluss mit Statusanzeige)
 - Umfang dieser Iteration:
-  - Struktur von `AGENTS.md` optimiert.
-  - `todo.txt` auf nächste offene Punkte fokussiert.
-  - Indexpflege eingeführt und dokumentiert.
+  - Arbeitspaket 1 minimal umgesetzt.
+  - Startdateien mit klarer Funktion angelegt.
+  - Doku- und Indexstand auf neuen Zustand aktualisiert.
 
 ## Aktueller Stand
-- Werkzustand hergestellt.
-- Projekt neu initialisiert.
-- Arbeitsregeln präzisiert und strukturiert.
-- Offene Punkte priorisiert und umsetzbar gehalten.
-- Indexdatei für den aktuellen Projektbaum eingeführt.
+- Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
+- Dashboard-Skelett ist als stabile Basis vorhanden.
+- Basis-Statuswechsel im JavaScript-Core ist aktiv.
 
 ## Nächste Schritte (kurz)
-1. Arbeitspaket 1 minimal umsetzen (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
-2. Startdateien mit klaren Ein-Satz-Zwecken dokumentieren.
-3. Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
+1. Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
+2. Startstruktur für Modul-Registrierung auf das Muster-Modul erweitern.
+3. P5 weiter klein halten und nur verhaltensrelevante Doku pflegen.
 
 ## Festgelegter Start-Scope
 - Offline-fähiger Start mit statischem Einstiegspunkt.
@@ -38,9 +40,9 @@
 - Start-Dokumentation nur in `README.md` und `todo.txt`.
 
 ## Empfehlungsliste (kurz)
-- Nächstes Patchziel nur auf Arbeitspaket 1 begrenzen.
-- Nach jedem Patch `INDEX.md` sofort mitziehen, damit nichts veraltet.
-- Für jede neue Datei einen Ein-Satz-Zweck direkt in `README.md` ergänzen.
+- Nächstes Patchziel auf P4 begrenzen, damit das Modulmuster sauber entsteht.
+- In `core.js` eine kleine Modul-Liste erst nach P4 ergänzen, nicht vorher.
+- `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
 
 ## Befehle für Laien (einfach)
 - Status prüfen: `git status`

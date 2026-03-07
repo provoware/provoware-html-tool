@@ -14,3 +14,8 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
 2. Verzeichnisbaum in `INDEX.md` anpassen.
 3. Dateiliste in `INDEX.md` anpassen.
 4. Änderungen kurz in `README.md` und `todo.txt` spiegeln.
+
+## Offline-Start schnell prüfen (neu)
+1. Datei `index.html` direkt im Browser öffnen.
+2. Auf den Statustext achten: „Offline-Start aktiv. Basis geladen.“
+3. Wenn der Text sichtbar ist, ist der Minimalstart erfolgreich.
