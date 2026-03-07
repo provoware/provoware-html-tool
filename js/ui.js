@@ -5,6 +5,7 @@ import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 const byId = (id) => document.getElementById(id);
 let lastA11yAnnouncement = '';
 const defaultTodos = Object.freeze(['Erste Aufgabe prüfen']);
+const TODO_STORAGE_KEY = 'provoware:todo-start-items';
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -106,6 +107,29 @@ const escapeHtml = (value) => String(value || '')
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;');
 
+const readStoredTodos = () => {
+  try {
+    const raw = window.localStorage.getItem(TODO_STORAGE_KEY);
+    const parsed = JSON.parse(raw || '[]');
+    if (!Array.isArray(parsed)) return [...defaultTodos];
+    const todos = parsed
+      .map((entry) => normalizeWhitespace(entry))
+      .filter(Boolean)
+      .slice(0, 30);
+    return todos.length ? todos : [...defaultTodos];
+  } catch {
+    return [...defaultTodos];
+  }
+};
+
+const writeStoredTodos = (todos) => {
+  try {
+    window.localStorage.setItem(TODO_STORAGE_KEY, JSON.stringify(todos));
+  } catch {
+    // Optional: Speichern kann je nach Browser-Einstellung blockiert sein.
+  }
+};
+
 const renderTemplateList = (items = []) => {
   if (!items.length) return '<li>-</li>';
   return items
@@ -191,6 +215,32 @@ const bindWorkspaceControls = () => {
   setSidebarState('toggle-left-sidebar', 'sidebar-left-collapsed');
   setSidebarState('toggle-right-sidebar', 'sidebar-right-collapsed');
 
+  const main = byId('main-content');
+  const hiddenPanelsBar = document.createElement('section');
+  hiddenPanelsBar.id = 'hidden-panels-bar';
+  hiddenPanelsBar.className = 'hidden-panels-bar';
+  hiddenPanelsBar.setAttribute('aria-label', 'Ausgeblendete Module');
+  const dashboard = document.querySelector('.workspace-dashboard');
+  if (main && dashboard) main.insertBefore(hiddenPanelsBar, dashboard.nextSibling);
+
+  const renderHiddenPanelsBar = () => {
+    if (!hiddenPanelsBar) return;
+    const hiddenPanels = [...document.querySelectorAll('.module-panel.is-hidden')];
+    if (!hiddenPanels.length) {
+      hiddenPanelsBar.innerHTML = '';
+      hiddenPanelsBar.classList.remove('is-visible');
+      return;
+    }
+    hiddenPanelsBar.classList.add('is-visible');
+    hiddenPanelsBar.innerHTML = [
+      '<strong>Ausgeblendet:</strong>',
+      ...hiddenPanels.map((panel) => {
+        const title = panel.querySelector('h3')?.textContent?.trim() || 'Modul';
+        return `<button type="button" class="btn-small" data-panel-show="${escapeHtml(panel.dataset.panel || '')}">${escapeHtml(title)} einblenden</button>`;
+      })
+    ].join(' ');
+  };
+
   document.querySelectorAll('.module-panel').forEach((panel) => {
     const controls = panel.querySelector('.module-controls');
     if (!controls) return;
@@ -225,19 +275,32 @@ const bindWorkspaceControls = () => {
       const panel = button.closest('.module-panel');
       if (!panel) return;
       panel.classList.toggle('is-hidden');
+      if (panel.classList.contains('is-hidden')) panel.classList.remove('is-maximized');
+      app.classList.toggle('has-maximized-panel', Boolean(document.querySelector('.module-panel.is-maximized')));
+      renderHiddenPanelsBar();
     });
+  });
+
+  hiddenPanelsBar.addEventListener('click', (event) => {
+    const panelId = event.target.getAttribute('data-panel-show');
+    if (!panelId) return;
+    const panel = document.querySelector(`.module-panel[data-panel="${panelId}"]`);
+    if (!panel) return;
+    panel.classList.remove('is-hidden');
+    renderHiddenPanelsBar();
   });
 
   const todoList = byId('todo-list');
   const todoInput = byId('todo-input');
   const todoAdd = byId('todo-add');
-  const todos = [...defaultTodos];
+  const todos = readStoredTodos();
 
   const renderTodos = () => {
     if (!todoList) return;
     todoList.innerHTML = todos.map((todo, index) => (
       `<li><span>${escapeHtml(todo)}</span><button type="button" class="btn-small" data-todo-delete="${index}">Erledigt</button></li>`
     )).join('');
+    writeStoredTodos(todos);
   };
 
   renderTodos();

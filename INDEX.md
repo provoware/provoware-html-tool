@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Kompakter Footer (4 Bereiche), gleichmäßiges 3x3-Grid und Todo-Startmodul mit einheitlichen Fensterkontrollen
+- Iterationsfokus: Todo-Startmodul robuster (optionaler localStorage) und ausgeblendete Module über Wieder-einblenden-Leiste zurückholbar
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`

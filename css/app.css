@@ -253,6 +253,22 @@ body::before {
   margin: 0 0 4px;
 }
 
+.hidden-panels-bar {
+  display: none;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px dashed rgba(133, 150, 121, 0.6);
+  background: rgba(230, 238, 224, 0.85);
+}
+
+.hidden-panels-bar.is-visible {
+  display: flex;
+}
+
 .dashboard-note {
   margin: 0;
   color: #1f2b20;
