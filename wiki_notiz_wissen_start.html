@@ -10,22 +10,27 @@
       button { padding: 0.5rem 0.8rem; }
       pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
     </style>
+    <script type="application/json" id="start-file-standard">
+      {"modulePath":"./modules/wiki_notiz_wissen/logic.js","expectedExports":["createEmptyKnowledgeStore","createKnowledgeEntry","listKnowledgeEntries"]}
+    </script>
   </head>
   <body>
-    <h1>Wiki-Notiz-Wissen (Einzelstart)</h1>
-    <p>Diese Seite startet nur das Wissensmodul.</p>
+    <main aria-labelledby="page-title">
+      <h1 id="page-title">Wiki-Notiz-Wissen (Einzelstart)</h1>
+      <p>Diese Seite startet nur das Wissensmodul.</p>
 
-    <label for="topic">Thema</label>
-    <input id="topic" type="text" placeholder="z. B. JSON-Basics" maxlength="120" />
+      <label for="topic">Thema</label>
+      <input id="topic" type="text" placeholder="z. B. JSON-Basics" maxlength="120" />
 
-    <label for="content">Inhalt</label>
-    <textarea id="content" rows="5" placeholder="Kurze Notiz..."></textarea>
+      <label for="content">Inhalt</label>
+      <textarea id="content" rows="5" placeholder="Kurze Notiz..."></textarea>
 
-    <button id="save" type="button">Eintrag speichern</button>
-    <button id="export" type="button">Export</button>
-    <button id="import" type="button">Import</button>
-    <input id="import-file" type="file" accept="application/json" hidden />
-    <pre id="out">Noch keine Einträge.</pre>
+      <button id="save" type="button">Eintrag speichern</button>
+      <button id="export" type="button">Export</button>
+      <button id="import" type="button">Import</button>
+      <input id="import-file" type="file" accept="application/json" hidden />
+      <pre id="out" role="status" aria-live="polite">Noch keine Einträge.</pre>
+    </main>
 
     <script type="module">
       import {

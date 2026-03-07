@@ -10,17 +10,22 @@
       button { padding: 0.5rem 0.8rem; margin-left: 0.4rem; }
       pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
     </style>
+    <script type="application/json" id="start-file-standard">
+      {"modulePath":"./modules/todo_kalender_erinnerung/logic.js","expectedExports":["createTodoEntry","summarizeTodoStatus"]}
+    </script>
   </head>
   <body>
-    <h1>Todo-Kalender-Erinnerung (Einzelstart)</h1>
-    <p>Hier läuft nur das Todo-Modul ohne Dashboard.</p>
-    <label for="title">Aufgabe:</label>
-    <input id="title" type="text" placeholder="z. B. Termin prüfen" maxlength="120" />
-    <button id="add" type="button">Aufgabe erzeugen</button>
-    <button id="export" type="button">Export</button>
-    <button id="import" type="button">Import</button>
-    <input id="import-file" type="file" accept="application/json" hidden />
-    <pre id="out">Noch keine Aufgabe.</pre>
+    <main aria-labelledby="page-title">
+      <h1 id="page-title">Todo-Kalender-Erinnerung (Einzelstart)</h1>
+      <p>Hier läuft nur das Todo-Modul ohne Dashboard.</p>
+      <label for="title">Aufgabe:</label>
+      <input id="title" type="text" placeholder="z. B. Termin prüfen" maxlength="120" />
+      <button id="add" type="button">Aufgabe erzeugen</button>
+      <button id="export" type="button">Export</button>
+      <button id="import" type="button">Import</button>
+      <input id="import-file" type="file" accept="application/json" hidden />
+      <pre id="out" role="status" aria-live="polite">Noch keine Aufgabe.</pre>
+    </main>
 
     <script type="module">
       import { createTodoEntry, summarizeTodoStatus } from './modules/todo_kalender_erinnerung/logic.js';

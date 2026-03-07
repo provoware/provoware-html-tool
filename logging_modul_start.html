@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logging-Modul - Einzelstart</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; line-height: 1.4; }
+      input { width: 100%; max-width: 760px; padding: 0.45rem; margin-bottom: 0.6rem; }
+      button { padding: 0.5rem 0.8rem; }
+      pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
+    </style>
+    <script type="application/json" id="start-file-standard">
+      {"modulePath":"./modules/logging_modul/logic.js","expectedExports":["createLogStore","addLogEntry","exportLogEntries"]}
+    </script>
+  </head>
+  <body>
+    <main aria-labelledby="page-title">
+      <h1 id="page-title">Logging-Modul (Einzelstart)</h1>
+      <p>Logeintrag erstellen und Exporttext prüfen.</p>
+      <label for="message">Meldung</label>
+      <input id="message" type="text" value="Testmeldung aus Startdatei" maxlength="140" />
+      <button id="add" type="button">Log hinzufügen</button>
+      <button id="export" type="button">Log exportieren</button>
+      <pre id="out" role="status" aria-live="polite">Bereit.</pre>
+    </main>
+
+    <script type="module">
+      import { createLogStore, addLogEntry, exportLogEntries } from './modules/logging_modul/logic.js';
+
+      const out = document.getElementById('out');
+      let store = createLogStore();
+
+      document.getElementById('add').addEventListener('click', () => {
+        const message = document.getElementById('message').value;
+        store = addLogEntry(store, { eventName: 'STARTFILE_TEST', severity: 'info', message, source: 'start.html' });
+        out.textContent = JSON.stringify(store, null, 2);
+      });
+
+      document.getElementById('export').addEventListener('click', () => {
+        out.textContent = exportLogEntries(store);
+      });
+    </script>
+  </body>
+</html>

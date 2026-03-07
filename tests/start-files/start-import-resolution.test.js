@@ -13,9 +13,34 @@ const getStartFiles = async () => {
     .sort((a, b) => a.localeCompare(b, 'de'));
 };
 
-const getImports = (htmlText) => {
-  const matches = [...htmlText.matchAll(/import\s+(?:[^'";]+?from\s+)?['"]([^'"]+)['"]/g)];
-  return matches.map((entry) => entry[1]).filter((specifier) => specifier.startsWith('./'));
+const getStartConfig = (htmlText, startFile) => {
+  const match = htmlText.match(/<script\s+type=["']application\/json["']\s+id=["']start-file-standard["']>([\s\S]*?)<\/script>/i);
+  assert.ok(match, `Standard-Block fehlt: ${startFile}`);
+
+  let parsed;
+  try {
+    parsed = JSON.parse(match[1]);
+  } catch {
+    assert.fail(`Standard-Block ist kein gültiges JSON: ${startFile}`);
+  }
+
+  assert.equal(typeof parsed.modulePath, 'string', `modulePath fehlt: ${startFile}`);
+  assert.ok(parsed.modulePath.startsWith('./'), `modulePath muss relativ sein: ${startFile}`);
+  assert.ok(Array.isArray(parsed.expectedExports), `expectedExports fehlt: ${startFile}`);
+  assert.ok(parsed.expectedExports.length > 0, `expectedExports ist leer: ${startFile}`);
+  parsed.expectedExports.forEach((item) => {
+    assert.equal(typeof item, 'string', `Exportname ist kein Text: ${startFile}`);
+    assert.ok(item.trim().length > 0, `Leerer Exportname: ${startFile}`);
+  });
+
+  return parsed;
+};
+
+const importFromStartConfig = async (startFile, config) => {
+  const fullPath = path.join(repoRoot, startFile);
+  const absoluteTarget = path.resolve(path.dirname(fullPath), config.modulePath);
+  const moduleUrl = pathToFileURL(absoluteTarget).href;
+  return import(moduleUrl);
 };
 
 test('alle *_start.html Modul-Imports lassen sich auflösen', async () => {
@@ -25,13 +50,28 @@ test('alle *_start.html Modul-Imports lassen sich auflösen', async () => {
   for (const startFile of startFiles) {
     const fullPath = path.join(repoRoot, startFile);
     const htmlText = await readFile(fullPath, 'utf8');
-    const specifiers = getImports(htmlText);
+    const config = getStartConfig(htmlText, startFile);
+    const loaded = await importFromStartConfig(startFile, config);
+    assert.equal(typeof loaded, 'object', `Import fehlgeschlagen: ${startFile} -> ${config.modulePath}`);
+  }
+});
 
-    for (const specifier of specifiers) {
-      const absoluteTarget = path.resolve(path.dirname(fullPath), specifier);
-      const moduleUrl = pathToFileURL(absoluteTarget).href;
-      const loaded = await import(moduleUrl);
-      assert.equal(typeof loaded, 'object', `Import fehlgeschlagen: ${startFile} -> ${specifier}`);
+test('alle *_start.html prüfen erwartete Export-Funktionen', async () => {
+  const startFiles = await getStartFiles();
+  assert.ok(startFiles.length > 0, 'Keine *_start.html Dateien gefunden.');
+
+  for (const startFile of startFiles) {
+    const fullPath = path.join(repoRoot, startFile);
+    const htmlText = await readFile(fullPath, 'utf8');
+    const config = getStartConfig(htmlText, startFile);
+    const loaded = await importFromStartConfig(startFile, config);
+
+    for (const exportName of config.expectedExports) {
+      assert.equal(
+        typeof loaded[exportName],
+        'function',
+        `Export-Funktion fehlt: ${startFile} -> ${exportName}`
+      );
     }
   }
 });
