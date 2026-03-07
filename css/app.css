@@ -1011,3 +1011,189 @@ body::before {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+/* --- Vorlagennahe Glassmorphism-Iteration --- */
+:root {
+  --bg: #0f172a;
+  --bg-panel: rgba(27, 39, 62, 0.62);
+  --bg-panel-soft: rgba(18, 29, 48, 0.78);
+  --text-main: #edf3ff;
+  --text-muted: #c5d3ed;
+  --accent: #3b82f6;
+  --accent-strong: #1d4ed8;
+  --shadow: 0 24px 44px rgba(2, 8, 20, 0.58);
+  --radius: 20px;
+}
+
+body {
+  color: #e8efff;
+  background:
+    radial-gradient(circle at 24% 84%, rgba(174, 211, 255, 0.22), transparent 34%),
+    radial-gradient(circle at 80% 26%, rgba(87, 140, 255, 0.18), transparent 28%),
+    linear-gradient(122deg, #1b2437 0%, #151f30 55%, #0f1729 100%);
+}
+
+body::before {
+  inset: -10%;
+  background:
+    radial-gradient(circle at 35% 88%, rgba(255, 255, 255, 0.14), transparent 36%),
+    radial-gradient(circle at 15% 24%, rgba(166, 197, 255, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0));
+  filter: blur(12px);
+}
+
+.app {
+  border: 1px solid rgba(172, 194, 233, 0.26);
+  background: rgba(15, 25, 40, 0.58);
+  backdrop-filter: blur(12px);
+  grid-template-columns: minmax(250px, 0.84fr) minmax(680px, 1.95fr) minmax(290px, 0.92fr);
+  gap: 12px;
+}
+
+.panel {
+  border: 1px solid rgba(183, 204, 240, 0.3);
+  background: linear-gradient(152deg, rgba(56, 73, 104, 0.64), rgba(17, 27, 43, 0.64));
+  box-shadow: 0 18px 30px rgba(4, 10, 25, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.26);
+  backdrop-filter: blur(8px);
+}
+
+.panel::after {
+  background:
+    radial-gradient(130% 90% at -20% -20%, rgba(206, 224, 255, 0.18), transparent 62%),
+    linear-gradient(146deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+  opacity: 0.76;
+}
+
+.header {
+  background: linear-gradient(98deg, rgba(17, 27, 43, 0.92), rgba(20, 37, 64, 0.86));
+  border-radius: 24px;
+}
+
+.header p,
+.sidebar-summary,
+.sidebar-hint,
+.dashboard-note,
+.dashboard-datetime {
+  color: #d3dff6;
+}
+
+.main,
+.nav,
+.widgets {
+  border-radius: 22px;
+}
+
+.nav {
+  background: linear-gradient(180deg, rgba(156, 171, 192, 0.26), rgba(61, 75, 101, 0.38));
+}
+
+.module-button-grid {
+  grid-template-columns: 1fr;
+}
+
+.module-btn {
+  border-radius: 12px;
+  border: 1px solid rgba(204, 221, 255, 0.24);
+  background: linear-gradient(128deg, rgba(56, 78, 116, 0.68), rgba(25, 35, 56, 0.72));
+  color: #f2f6ff;
+  padding: 10px 12px;
+}
+
+.workspace-dashboard {
+  border-radius: 18px;
+  border: 1px solid rgba(182, 202, 238, 0.35);
+  background: linear-gradient(145deg, rgba(20, 30, 47, 0.75), rgba(48, 62, 90, 0.64));
+}
+
+.settings-group,
+.module-panel,
+.footer-box,
+.status-list > div,
+.log-list li {
+  border-color: rgba(178, 197, 235, 0.32);
+  background: linear-gradient(150deg, rgba(22, 34, 53, 0.8), rgba(13, 22, 36, 0.72));
+  color: #e6eeff;
+}
+
+.startup-steps {
+  list-style: none;
+  padding-left: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.startup-step,
+.startup-steps li {
+  border-radius: 12px;
+  border: 1px solid rgba(170, 193, 235, 0.32);
+  padding: 8px 10px;
+  background: rgba(19, 30, 48, 0.72);
+  color: #dce8ff;
+}
+
+.startup-step--done {
+  background: linear-gradient(138deg, rgba(34, 197, 94, 0.36), rgba(20, 83, 45, 0.5));
+  color: #e8fff1;
+}
+
+.startup-step--current {
+  background: linear-gradient(138deg, rgba(245, 158, 11, 0.38), rgba(120, 53, 15, 0.52));
+  color: #fff5df;
+}
+
+.panel-grid {
+  gap: 12px;
+  grid-template-columns: 1.25fr 1.15fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.module-panel[data-panel='todo'] {
+  grid-row: 1 / span 2;
+}
+
+.module-head h3,
+.panel-title,
+.settings-group h3,
+.footer-box h2 {
+  color: #f3f7ff;
+}
+
+.btn,
+.btn-small {
+  border: 1px solid rgba(170, 194, 238, 0.36);
+  background: linear-gradient(130deg, rgba(46, 64, 97, 0.86), rgba(30, 45, 70, 0.88));
+  color: #f2f7ff;
+}
+
+.btn-accent,
+.btn-primary {
+  background: linear-gradient(130deg, rgba(52, 121, 255, 0.96), rgba(24, 73, 188, 0.96));
+}
+
+input,
+textarea,
+select {
+  border: 1px solid rgba(171, 191, 228, 0.4);
+  border-radius: 10px;
+  background: rgba(10, 18, 30, 0.62);
+  color: #f0f6ff;
+}
+
+.footer {
+  background: linear-gradient(98deg, rgba(11, 20, 36, 0.8), rgba(23, 38, 65, 0.78));
+}
+
+@media (max-width: 980px) {
+  .startup-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .module-panel[data-panel='todo'] {
+    grid-row: auto;
+  }
+}
