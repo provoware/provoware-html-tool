@@ -1,7 +1,7 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 11
+- Erledigte Punkte gesamt: 12
 - Offene Punkte gesamt: 0
 - Entwicklungsfortschritt: 100%
 
@@ -14,20 +14,19 @@
   - `INDEX.md` (aktueller Verzeichnisbaum + Dateiliste)
 - Startdateien:
   - `index.html` (offline ladbarer Einstieg mit Dashboard-Skelett)
-  - `assets/css/base.css` (Basislayout und Formularstil)
+  - `assets/css/base.css` (Layout im Panel-Stil mit Rasterfläche)
   - `assets/js/core.js` (Startfluss, Modul-Check und Todo-Logik)
 - Module:
   - `modules/datenbank_baukasten/*` (Muster-Modul)
   - `modules/todo_kalender_erinnerung/*` (Todo, Kalenderdatum, Erinnerung)
 - Umfang dieser Iteration:
-  - Neues Modul `todo_kalender_erinnerung` mit allen Mindestteilen angelegt.
-  - Dashboard um eine einfache Todo-Liste mit Fälligkeitsdatum und Erinnerungszeit erweitert.
-  - Reminder-Markierung ergänzt (nach Erreichung der Erinnerungszeit).
-  - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
+  - Dashboard visuell am Bildbeispiel ausgerichtet (runde Panels, Verlauf, Rasterfläche).
+  - Todo-Bereich klarer segmentiert (Statusblock, Eingabe, Liste, Footer-Chips).
+  - Nutzerfreundlichkeit verbessert (bessere Leseflächen und klarere optische Reihenfolge).
 
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
-- Modulprofil-Check prüft jetzt zwei Modulprofile konsistent.
+- Modulprofil-Check prüft zwei Modulprofile konsistent.
 - Todo-Eingabe ist direkt im Dashboard nutzbar.
 - Aufgaben zeigen Fälligkeitsdatum und Erinnerungszeit.
 - Erreichte Erinnerungen werden in der Liste markiert.
@@ -45,8 +44,8 @@
 - Start-Dokumentation nur in `README.md` und `todo.txt`.
 
 ## Empfehlungsliste (kurz)
-- Erinnerungsintervall nur ändern, wenn es einen klaren Grund gibt.
-- Bei neuen Formularfeldern einfache Validierung beibehalten.
+- Bei neuen UI-Blöcken zuerst Kontrast prüfen, dann Farben anpassen.
+- Interaktive Bereiche (Formular/Liste) visuell als eigene Segmente halten.
 - Modulprofil-Liste erst dynamisieren, wenn mehr Module da sind.
 - `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
 

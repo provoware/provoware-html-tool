@@ -52,4 +52,4 @@
 ## Pflegehinweis
 - Diese Datei wird am Ende jeder Iteration aktualisiert.
 - Wenn Dateien hinzukommen, umbenannt oder gelöscht werden, muss zuerst der Verzeichnisbaum und dann die Dateiliste angepasst werden.
-- Stand dieser Iteration: neues Modul `todo_kalender_erinnerung` ergänzt.
+- Stand dieser Iteration: Layout und Design der Startansicht angepasst.
