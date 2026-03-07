@@ -22,13 +22,29 @@
     <textarea id="content" rows="5" placeholder="Kurze Notiz..."></textarea>
 
     <button id="save" type="button">Eintrag speichern</button>
+    <button id="export" type="button">Export</button>
+    <button id="import" type="button">Import</button>
+    <input id="import-file" type="file" accept="application/json" hidden />
     <pre id="out">Noch keine Einträge.</pre>
 
     <script type="module">
-      import { createEmptyKnowledgeStore, createKnowledgeEntry, listKnowledgeEntries } from './modules/wiki_notiz_wissen/logic.js';
+      import {
+        createEmptyKnowledgeStore,
+        createKnowledgeEntry,
+        listKnowledgeEntries
+      } from './modules/wiki_notiz_wissen/logic.js';
 
       let store = createEmptyKnowledgeStore();
       const out = document.getElementById('out');
+      const triggerDownload = (filename, text) => {
+        const blob = new Blob([text], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      };
 
       document.getElementById('save').addEventListener('click', () => {
         const topic = document.getElementById('topic').value;
@@ -43,6 +59,29 @@
         store = created.data.store;
         const listed = listKnowledgeEntries(store);
         out.textContent = JSON.stringify(listed.data, null, 2);
+      });
+
+      document.getElementById('export').addEventListener('click', () => {
+        const listed = listKnowledgeEntries(store);
+        triggerDownload('wiki_notiz_wissen_export.json', JSON.stringify(listed.data, null, 2));
+        out.textContent = 'Export erstellt und Download gestartet.';
+      });
+
+      const importFile = document.getElementById('import-file');
+      document.getElementById('import').addEventListener('click', () => importFile.click());
+      importFile.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        try {
+          const text = await file.text();
+          const parsed = JSON.parse(text);
+          store = { entries: Array.isArray(parsed) ? parsed : [] };
+          out.textContent = JSON.stringify(store.entries, null, 2);
+        } catch {
+          out.textContent = 'Import fehlgeschlagen. Bitte gültige JSON-Datei wählen.';
+        } finally {
+          importFile.value = '';
+        }
       });
     </script>
   </body>

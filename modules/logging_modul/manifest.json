@@ -1,0 +1,6 @@
+{
+  "id": "logging_modul",
+  "name": "Loggingmodul",
+  "version": "0.1.0",
+  "description": "Erzeugt strukturierte Log-Einträge mit klaren Ereignisnamen."
+}

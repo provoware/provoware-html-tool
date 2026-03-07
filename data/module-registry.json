@@ -1,7 +1,10 @@
 {
   "version": 1,
   "moduleIds": [
+    "backup_funktions_modul",
     "datenbank_baukasten",
+    "debugging_modul",
+    "logging_modul",
     "todo_kalender_erinnerung",
     "wiki_notiz_wissen"
   ]

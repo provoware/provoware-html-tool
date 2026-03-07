@@ -14,15 +14,52 @@
     <h1>Datenbank-Baukasten (Einzelstart)</h1>
     <p>Diese Startdatei nutzt nur das Modul, ohne Haupttool.</p>
     <button id="run" type="button">Modul laden</button>
+    <button id="export" type="button">Export</button>
+    <button id="import" type="button">Import</button>
+    <input id="import-file" type="file" accept="application/json" hidden />
     <pre id="out">Bereit.</pre>
 
     <script type="module">
       import { createDatenbankBaukastenModule } from './modules/datenbank_baukasten/logic.js';
 
       const out = document.getElementById('out');
+      const triggerDownload = (filename, text) => {
+        const blob = new Blob([text], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      };
+
+      const renderModule = () => createDatenbankBaukastenModule();
+
       document.getElementById('run').addEventListener('click', () => {
-        const moduleData = createDatenbankBaukastenModule();
+        const moduleData = renderModule();
         out.textContent = JSON.stringify(moduleData, null, 2);
+      });
+
+      document.getElementById('export').addEventListener('click', () => {
+        const moduleData = renderModule();
+        triggerDownload('datenbank_baukasten_export.json', JSON.stringify(moduleData, null, 2));
+        out.textContent = 'Export erstellt und Download gestartet.';
+      });
+
+      const importFile = document.getElementById('import-file');
+      document.getElementById('import').addEventListener('click', () => importFile.click());
+      importFile.addEventListener('change', async (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        try {
+          const text = await file.text();
+          const parsed = JSON.parse(text);
+          out.textContent = JSON.stringify(parsed, null, 2);
+        } catch {
+          out.textContent = 'Import fehlgeschlagen. Bitte gültige JSON-Datei wählen.';
+        } finally {
+          importFile.value = '';
+        }
       });
     </script>
   </body>

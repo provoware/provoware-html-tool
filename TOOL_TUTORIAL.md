@@ -10,6 +10,18 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Import/Export pro Startdatei schnell prüfen (neu)
+1. `datenbank_baukasten_start.html` öffnen und **Modul laden** klicken.
+2. Auf **Export** klicken und prüfen, ob eine JSON-Datei geladen wird.
+3. Danach auf **Import** klicken und dieselbe Datei wieder auswählen.
+4. Prüfen, ob JSON wieder unten angezeigt wird.
+5. Die gleichen Schritte kurz in `todo_kalender_erinnerung_start.html` und `wiki_notiz_wissen_start.html` wiederholen.
+
+### Neuer Minimaltest für Startdatei-Importe (neu)
+1. Im Projektordner `node --test tests/start-files/start-import-resolution.test.js` ausführen.
+2. Prüfen, ob der Test „ok“ meldet.
+3. Ziel: Alle `*_start.html`-Dateien können ihre Modul-Imports ohne Fehler laden.
+
 ### Modul-Einzelstart ohne Haupttool kurz prüfen (neu)
 1. Datei `todo_kalender_erinnerung_start.html` im Browser öffnen.
 2. Einen Titel eingeben und **Aufgabe erzeugen** klicken.
