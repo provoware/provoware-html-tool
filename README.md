@@ -1,9 +1,16 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 79
+- Erledigte Punkte: 80
 - Offene Punkte: siehe `todo.txt`
 - Fortschritt: 100% (laufend, siehe `todo.txt`)
+
+## Fokus für mehr Robustheit und Einheitlichkeit (neu)
+- Fehlercodes vereinheitlichen: In allen Services bei Fehlern feste Codes nutzen (z. B. `E_PATH_INVALID`, `E_JSON_PARSE`, `E_NO_WRITE_RIGHT`).
+- Rückgaben vereinheitlichen: Überall das gleiche Antwortformat nutzen (`ok`, `code`, `message`, `data`), auch bei Modul-`logic.js`.
+- Selbsttest entkoppeln: Lesetest und Schreibtest im Ablauf trennen, damit "nur lesen" klar von "defekt" unterscheidbar bleibt.
+- Eingaben härten: Für Pfade, JSON-Importe und Profilnamen je einen kleinen zentralen Vorab-Check nutzen.
+- Mini-Regression beibehalten: Bei Änderungen im Status/Registry-Bereich immer gezielt `tests/services/module-registry.test.js` laufen lassen.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -154,6 +161,8 @@
 - Empfehlung 9: Bei langen Genre-Listen einfach im jeweiligen Bereich scrollen; das Modul bleibt gleich groß und übersichtlich.
 - Empfehlung 10: Im Dashboard 3 nach dem Speichern direkt **Datei öffnen** nutzen, um ohne Umweg im Editor weiterzuarbeiten.
 - Empfehlung 11: Bei mehreren Zeilen auf „Letzte Datei“ achten, um die richtige Zeile schnell wiederzufinden.
+- Empfehlung 12: Bei neuen Fehlerfällen zuerst einen kurzen Fehlercode festlegen und erst dann die Meldungstexte ergänzen.
+- Empfehlung 13: Bei neuen Service-Funktionen immer das Standard-Antwortobjekt (`ok`, `code`, `message`, `data`) verwenden.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
@@ -262,4 +271,7 @@
 - Betroffene Dateien: `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und die direkt betroffene Startdatei-Testausgabe geprüft.
 
-
+- Patchgrund 1: Nutzerfrage nach konkreter Verbesserung von Robustheit und Einheitlichkeit im Projektleitfaden.
+- Patchgrund 2: Laientaugliche Handlungsschritte ergänzt, damit Verbesserungen direkt und klein umsetzbar sind.
+- Betroffene Dateien: `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur direkt betroffene Doku-Blöcke auf Konsistenz und Umsetzbarkeit geprüft.
