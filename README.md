@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 65
+- Erledigte Punkte: 66
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 94% (laufend, siehe `todo.txt`)
+- Fortschritt: 95% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -71,6 +71,8 @@
 - Modernere UI mit ruhigerem Farbsystem, klareren Karten und besserem Kontrast ergänzt.
 - Nutzerführung verbessert durch klarere Fokus- und Hover-Zustände bei Schaltflächen und Eingabefeldern.
 - 3x3 Panel-Grid im Mittelbereich mit Fensterkarten und Maximize-Funktion ergänzt.
+- Grid-Start jetzt vereinfacht: nur ein Todo-Listenmodul aktiv; Modulfenster nutzen einheitlich Maximieren/Minimieren/Ausblenden als Standard.
+- Footer ist jetzt kompakter und in vier gleich große Bereiche aufgeteilt.
 - Linke und rechte Seitenleiste sind jetzt ein- und ausklappbar, damit mehr Platz für Module entsteht.
 - Modul-Registry-Check ergänzt: Das Dashboard zeigt jetzt direkt, wie viele Module vollständig verbunden sind (z. B. 2/2).
 - Vorlagen-Design-Status ergänzt: Das Dashboard zeigt jetzt klar, dass die Asset-Vorlage aktuell nicht eingebunden ist.

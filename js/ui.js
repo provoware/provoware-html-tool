@@ -4,6 +4,7 @@ import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 
 const byId = (id) => document.getElementById(id);
 let lastA11yAnnouncement = '';
+const defaultTodos = Object.freeze(['Erste Aufgabe prüfen']);
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -190,6 +191,16 @@ const bindWorkspaceControls = () => {
   setSidebarState('toggle-left-sidebar', 'sidebar-left-collapsed');
   setSidebarState('toggle-right-sidebar', 'sidebar-right-collapsed');
 
+  document.querySelectorAll('.module-panel').forEach((panel) => {
+    const controls = panel.querySelector('.module-controls');
+    if (!controls) return;
+    controls.innerHTML = [
+      '<button type="button" class="panel-control" data-panel-hide title="Ausblenden">◫</button>',
+      '<button type="button" class="panel-control" data-panel-minimize title="Minimieren">—</button>',
+      '<button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>'
+    ].join('');
+  });
+
   document.querySelectorAll('[data-panel-maximize]').forEach((button) => {
     button.addEventListener('click', () => {
       const panel = button.closest('.module-panel');
@@ -199,6 +210,51 @@ const bindWorkspaceControls = () => {
       if (willMaximize) panel.classList.add('is-maximized');
       app.classList.toggle('has-maximized-panel', willMaximize);
     });
+  });
+
+  document.querySelectorAll('[data-panel-minimize]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.closest('.module-panel');
+      if (!panel) return;
+      panel.classList.toggle('is-minimized');
+    });
+  });
+
+  document.querySelectorAll('[data-panel-hide]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.closest('.module-panel');
+      if (!panel) return;
+      panel.classList.toggle('is-hidden');
+    });
+  });
+
+  const todoList = byId('todo-list');
+  const todoInput = byId('todo-input');
+  const todoAdd = byId('todo-add');
+  const todos = [...defaultTodos];
+
+  const renderTodos = () => {
+    if (!todoList) return;
+    todoList.innerHTML = todos.map((todo, index) => (
+      `<li><span>${escapeHtml(todo)}</span><button type="button" class="btn-small" data-todo-delete="${index}">Erledigt</button></li>`
+    )).join('');
+  };
+
+  renderTodos();
+
+  todoAdd?.addEventListener('click', () => {
+    const value = normalizeWhitespace(todoInput?.value || '');
+    if (!value) return;
+    todos.push(value.slice(0, 120));
+    if (todoInput) todoInput.value = '';
+    renderTodos();
+  });
+
+  todoList?.addEventListener('click', (event) => {
+    const index = Number(event.target.getAttribute('data-todo-delete'));
+    if (!Number.isInteger(index) || index < 0 || index >= todos.length) return;
+    todos.splice(index, 1);
+    renderTodos();
   });
 
   window.addEventListener('keydown', (event) => {

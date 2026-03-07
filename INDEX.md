@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Kompakteres, kontrastreicheres Dashboard mit proportionaler Skalierung per Strg + Mausrad
+- Iterationsfokus: Kompakter Footer (4 Bereiche), gleichmäßiges 3x3-Grid und Todo-Startmodul mit einheitlichen Fensterkontrollen
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`
