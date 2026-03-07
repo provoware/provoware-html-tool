@@ -11,6 +11,14 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Sicherere Ausgabe bei Listen und Logs
+Bei Einträgen aus Archiv, Profilen oder Logs gilt jetzt:
+- Sonderzeichen wie `<` und `>` werden sicher angezeigt.
+- Inhalte werden als Text behandelt, nicht als ausführbarer Code.
+
+Kurzregel: Eingaben dürfen sichtbar sein, aber keine fremden HTML-Bausteine starten.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Platzhalter klar erkennen (kein Live-Feature)
 Wenn du den Design-Status prüfst, gilt:
 - `assets/css/base.css` und `assets/js/core.js` sind aktuell Vorlagen-Dateien.

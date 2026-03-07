@@ -25,6 +25,8 @@ const autoFormatText = (value) => {
   return ensureTerminalPunctuation(capitalized);
 };
 
+const autoFormatHtml = (value) => escapeHtml(autoFormatText(value));
+
 const formatStatusWord = (value) => {
   const normalized = normalizeWhitespace(value);
   return normalized ? normalized.toLowerCase() : '-';
@@ -98,12 +100,23 @@ const buildA11yStatusText = (state, messages = {}) => {
 
 const renderProfileOptions = (archive, selected) => {
   const options = Object.keys(archive?.profiles || {});
-  return options.map((name) => `<option value="${name}" ${name === selected ? 'selected' : ''}>${name}</option>`).join('');
+  return options
+    .map((name) => {
+      const escapedName = escapeHtml(name);
+      return `<option value="${escapedName}" ${name === selected ? 'selected' : ''}>${escapedName}</option>`;
+    })
+    .join('');
 };
 
 const renderCategoryList = (archive, profile, category) => {
   const list = archive?.profiles?.[profile]?.[category] || [];
-  return list.map((item) => `<li><span>${item.value}</span><div><button class="btn-small" data-edit="${category}" data-value="${item.value}">Bearbeiten</button><button class="btn-small" data-delete="${category}" data-value="${item.value}">Löschen</button></div></li>`).join('');
+  return list
+    .map((item) => {
+      const escapedValue = escapeHtml(item.value);
+      const escapedCategory = escapeHtml(category);
+      return `<li><span>${escapedValue}</span><div><button class="btn-small" data-edit="${escapedCategory}" data-value="${escapedValue}">Bearbeiten</button><button class="btn-small" data-delete="${escapedCategory}" data-value="${escapedValue}">Löschen</button></div></li>`;
+    })
+    .join('');
 };
 
 const renderStats = (stats) => {
@@ -176,7 +189,7 @@ const renderSidebarModules = (modules = []) => {
     .map((module) => {
       const status = module.ok ? 'ok' : 'prüfen';
       const label = autoFormatText(module.name || module.id || 'Modul').replace(/[.!?…]+$/, '');
-      return `<button type="button" class="btn module-btn" title="${label}"><span>${label}</span><small>${status}</small></button>`;
+      return `<button type="button" class="btn module-btn" title="${escapeHtml(label)}"><span>${escapeHtml(label)}</span><small>${escapeHtml(status)}</small></button>`;
     })
     .join('');
 };
@@ -595,7 +608,7 @@ export const render = () => {
     const checks = state.selftestResult?.checks || [];
     checksList.innerHTML = checks.map((check) => {
       const visual = statusVisual(check.status);
-      return `<article class="check-item ${statusClass(check.status)}"><strong>${visual.symbol} ${autoFormatText(check.name)}</strong><br><span>${autoFormatText(check.message)}</span></article>`;
+      return `<article class="check-item ${statusClass(check.status)}"><strong>${escapeHtml(visual.symbol)} ${autoFormatHtml(check.name)}</strong><br><span>${autoFormatHtml(check.message)}</span></article>`;
     }).join('');
   }
 
@@ -664,13 +677,13 @@ export const render = () => {
 
   const archiveEvents = byId('archive-events');
   if (archiveEvents) {
-    archiveEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 6).map((item) => `<li><span>${item.timestamp.slice(11, 19)}</span> ${autoFormatText(item.message)}</li>`).join('');
+    archiveEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 6).map((item) => `<li><span>${escapeHtml(item.timestamp.slice(11, 19))}</span> ${autoFormatHtml(item.message)}</li>`).join('');
   }
 
   const archiveOverviewEvents = byId('archive-overview-events');
   if (archiveOverviewEvents) {
     archiveOverviewEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 4)
-      .map((item) => `<li><span class="log-time">${item.timestamp.slice(11, 19)}</span>${autoFormatText(item.message)}</li>`)
+      .map((item) => `<li><span class="log-time">${escapeHtml(item.timestamp.slice(11, 19))}</span>${autoFormatHtml(item.message)}</li>`)
       .join('') || '<li>Keine Archiv-Meldungen.</li>';
   }
 
@@ -678,7 +691,7 @@ export const render = () => {
   if (logList) {
     logList.innerHTML = (state.logs || [])
       .slice(0, 10)
-      .map((item) => `<li><span class="log-time">${item.timestamp.slice(11, 19)}</span><strong>${autoFormatText(item.type)}</strong> ${autoFormatText(item.message)}</li>`)
+      .map((item) => `<li><span class="log-time">${escapeHtml(item.timestamp.slice(11, 19))}</span><strong>${autoFormatHtml(item.type)}</strong> ${autoFormatHtml(item.message)}</li>`)
       .join('');
   }
 

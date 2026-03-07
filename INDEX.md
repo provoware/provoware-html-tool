@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Robustheit der Modul-Registry (Regressionstest für ID-Bereinigung und Fallback-Quelle)
+- Iterationsfokus: Robustheit/Sicherheit der UI-Ausgabe (Escaping für dynamische HTML-Listen)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
