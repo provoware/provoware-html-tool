@@ -12,7 +12,8 @@ const DASHBOARD_NOTE_FILE_EXTENSION = '.txt';
 const withDefaultDashboardRows = (rows = []) => DASHBOARD_NOTE_DEFAULTS.map((title, index) => ({
   title: rows[index]?.title || title,
   input: rows[index]?.input || '',
-  feedback: rows[index]?.feedback || '-'
+  feedback: rows[index]?.feedback || '-',
+  lastSavedPath: rows[index]?.lastSavedPath || ''
 }));
 
 const sanitizeFileName = (title = '') => String(title || '').trim().replace(/[\/:*?"<>|]/g, '_');
@@ -282,9 +283,43 @@ ${normalizedValue}` : normalizedValue;
     const message = exists.data?.exists
       ? `Eintrag angehängt: ${safeFileName}${DASHBOARD_NOTE_FILE_EXTENSION}`
       : `Neue Datei erstellt: ${safeFileName}${DASHBOARD_NOTE_FILE_EXTENSION}`;
-    updateDashboardRowState(setState, getState, rowIndex, { title: normalizedTitle, input: '', feedback: message });
+    updateDashboardRowState(setState, getState, rowIndex, {
+      title: normalizedTitle,
+      input: '',
+      feedback: message,
+      lastSavedPath: filePath
+    });
     logEvent('INFO', exists.data?.exists ? 'DASHBOARD_NOTE_APPENDED' : 'DASHBOARD_NOTE_CREATED', message, { rowIndex, filePath });
     return { ok: true, code: exists.data?.exists ? 'DASHBOARD_NOTE_APPENDED' : 'DASHBOARD_NOTE_CREATED', message, data: { filePath } };
+  },
+  onOpenDashboardNoteLastFileInEditor: async (rowIndex) => {
+    const row = withDefaultDashboardRows(getState().dashboardNotes?.rows || [])[rowIndex];
+    const filePath = normalizeRelativePath(row?.lastSavedPath);
+    if (!filePath) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED', message: 'Noch keine Datei gespeichert.' };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      return result;
+    }
+
+    const loaded = await filesystemAdapter.readText(filePath);
+    if (!loaded.ok) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_READ_FAILED', message: 'Datei konnte nicht geladen werden.', data: loaded.data };
+      logEvent('WARN', result.code, result.message, { rowIndex, filePath });
+      return result;
+    }
+
+    const content = loaded.data?.text || '';
+    setState({
+      filePreviewSelectedPath: filePath,
+      filePreviewContent: content,
+      filePreviewStatus: `Datei geladen: ${filePath}`,
+      editorFilePath: filePath,
+      editorContent: content,
+      editorStatus: `Editor geöffnet: ${filePath}`,
+      editorDirty: false
+    });
+    logEvent('INFO', 'DASHBOARD_NOTE_EDITOR_OPENED', 'Datei wurde im Editor geöffnet.', { rowIndex, filePath });
+    return { ok: true, code: 'DASHBOARD_NOTE_EDITOR_OPENED', message: 'Datei wurde im Editor geöffnet.', data: { filePath } };
   },
   onSaveEditorFile: async () => {
     const state = getState();

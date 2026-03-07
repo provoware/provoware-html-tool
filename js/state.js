@@ -15,9 +15,9 @@ const createState = () => ({
   randomMix: null,
   dashboardNotes: {
     rows: [
-      { title: 'pppoppi details ideen', input: '', feedback: '-' },
-      { title: 'Favoriten Genres', input: '', feedback: '-' },
-      { title: 'Templates-Input-Pool', input: '', feedback: '-' }
+      { title: 'pppoppi details ideen', input: '', feedback: '-', lastSavedPath: '' },
+      { title: 'Favoriten Genres', input: '', feedback: '-', lastSavedPath: '' },
+      { title: 'Templates-Input-Pool', input: '', feedback: '-', lastSavedPath: '' }
     ],
     basePath: 'data/dashboard3-notes'
   },

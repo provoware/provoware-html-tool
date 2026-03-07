@@ -51,6 +51,12 @@ const formatWritePermissionStatus = (permissionStatus) => {
   return formatPermissionStatus(canWrite);
 };
 
+const fileNameFromPath = (path) => {
+  const normalized = String(path || '').trim().replaceAll('\\', '/');
+  if (!normalized) return '';
+  return normalized.split('/').filter(Boolean).pop() || '';
+};
+
 const formatStructureStatus = (selftestResult) => {
   if (!selftestResult) return '-';
   const hasMissingFiles = Boolean(selftestResult.data?.missingFiles?.length);
@@ -243,6 +249,10 @@ export const bindUiActions = (actions) => {
         title: byId(`dashboard-note-title-${rowIndex}`)?.value || '',
         value: byId(`dashboard-note-input-${rowIndex}`)?.value || ''
       });
+    });
+
+    byId(`dashboard-note-open-${rowIndex}`)?.addEventListener('click', async () => {
+      await actions.onOpenDashboardNoteLastFileInEditor(rowIndex);
     });
 
     byId(`dashboard-note-input-${rowIndex}`)?.addEventListener('keydown', async (event) => {
@@ -448,7 +458,11 @@ export const render = () => {
     if (titleField && document.activeElement !== titleField) titleField.value = row.title || '';
     const inputField = byId(`dashboard-note-input-${rowIndex}`);
     if (inputField && document.activeElement !== inputField) inputField.value = row.input || '';
+    const openButton = byId(`dashboard-note-open-${rowIndex}`);
+    if (openButton) openButton.disabled = !row.lastSavedPath;
     setText(`dashboard-note-feedback-${rowIndex}`, row.feedback || '-');
+    const lastFile = fileNameFromPath(row.lastSavedPath);
+    setText(`dashboard-note-file-${rowIndex}`, `Letzte Datei: ${lastFile || '-'}`);
   });
 
   setText('module-registry-summary', state.moduleRegistry?.summary || '-');
