@@ -30,6 +30,19 @@ Der Befehl macht zwei direkte Prüfungen:
 
 Kurzregel: erst Minimal-Check, dann nur bei Bedarf breiter testen.
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Guide-Bedienung: schneller und einfacher
+Im Bereich **Anleitungen und Toolbeschreibungen** kannst du jetzt schneller arbeiten:
+- **Tastatur**: Pfeil hoch/runter wählt den nächsten Abschnitt.
+- **Bestätigen**: Enter oder Leertaste springt direkt zum gewählten Abschnitt.
+- **Ziehen**: Abschnitte per Drag&Drop neu sortieren.
+- **Farben helfen**:
+  - grünlicher Hinweis = Auswahl/ok
+  - gelblicher Text = Eingabe fehlt
+
+Kurzregel: erst per Tastatur wählen, dann bei Bedarf mit Ziehen sortieren.
+
 ## Zusatz-Check (weiter nutzbar)
 ### Import-/Export-Schnellcheck für direkte Service-Kette
 Wenn `js/app.js` Services importiert, prüfe zuerst klein und gezielt:

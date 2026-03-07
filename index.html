@@ -70,10 +70,11 @@
               <section class="guide-tools-panel" aria-label="Anleitungen und Toolbeschreibungen">
                 <div class="guide-tools-index">
                   <h4>Index</h4>
-                  <ol id="guide-tools-index-list"></ol>
+                  <p class="guide-help-note" id="guide-help-note">Tipps: Pfeil hoch/runter wählt. Enter bestätigt. Ziehen verschiebt Reihenfolge.</p>
+                  <ol id="guide-tools-index-list" aria-describedby="guide-help-note"></ol>
                 </div>
                 <div class="guide-tools-content">
-                  <div id="guide-tools-sections" class="guide-tools-sections"></div>
+                  <div id="guide-tools-sections" class="guide-tools-sections" role="listbox" aria-label="Anleitungsabschnitte"></div>
                   <form id="guide-tools-form" class="guide-tools-form">
                     <label for="guide-tools-title">Titel</label>
                     <input id="guide-tools-title" type="text" maxlength="80" placeholder="z. B. Erstes Setup" />

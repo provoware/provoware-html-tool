@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Doku-Abgleich für Platzhalter + robuster auswertbarer Modulstatus (statusCode)
+- Iterationsfokus: Hilfeelemente, intuitive Guide-Führung, Tastatur- und Drag&Drop-Bedienung
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
