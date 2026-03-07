@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 80
+- Erledigte Punkte: 81
 - Offene Punkte: siehe `todo.txt`
 - Fortschritt: 100% (laufend, siehe `todo.txt`)
 
@@ -163,6 +163,7 @@
 - Empfehlung 11: Bei mehreren Zeilen auf „Letzte Datei“ achten, um die richtige Zeile schnell wiederzufinden.
 - Empfehlung 12: Bei neuen Fehlerfällen zuerst einen kurzen Fehlercode festlegen und erst dann die Meldungstexte ergänzen.
 - Empfehlung 13: Bei neuen Service-Funktionen immer das Standard-Antwortobjekt (`ok`, `code`, `message`, `data`) verwenden.
+- Empfehlung 14: Die neue Archiv-Übersicht rechts nutzen, um Profil, Gesamtzahl und letzte Änderung vor Aktionen kurz zu prüfen.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
@@ -275,3 +276,8 @@
 - Patchgrund 2: Laientaugliche Handlungsschritte ergänzt, damit Verbesserungen direkt und klein umsetzbar sind.
 - Betroffene Dateien: `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur direkt betroffene Doku-Blöcke auf Konsistenz und Umsetzbarkeit geprüft.
+
+- Patchgrund 1: Design-/Layout-Wunsch mit kleinem Eingriff umgesetzt, indem Abstände im rechten Bereich über vorhandene Spacing-Tokens vereinheitlicht wurden.
+- Patchgrund 2: Archiv-Übersichtsmodul ergänzt, damit Profilstatus, Gesamtmenge und letzte Änderung jederzeit sichtbar sind.
+- Betroffene Dateien: `index.html`, `css/app.css`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene HTML/CSS/JS-Syntax und direkt betroffene Ausgabe im rechten Seitenbereich geprüft.

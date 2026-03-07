@@ -218,6 +218,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Prüfen: In dieser Zeile ist **Datei öffnen** jetzt aktiv.
 5. Prüfen: Unter dem Feedback steht `Letzte Datei: <Dateiname>.txt`.
 
+### Archiv-Übersicht rechts kurz prüfen (neu)
+1. Seite neu laden.
+2. Rechts im Bereich **Einstellungen & Stabilität** den Block **Archiv-Übersicht** suchen.
+3. Prüfen, ob **Profil**, **Einträge** und **Letzte Änderung** Werte zeigen.
+4. Danach im Archiv einen Eintrag ergänzen oder löschen.
+5. Prüfen, ob sich **Einträge** und **Letzte Änderung** direkt aktualisieren.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
