@@ -9,6 +9,10 @@ const createState = () => ({
   selftestResult: null,
   layoutMode: 'standard',
   logs: [],
+  profileArchive: null,
+  selectedProfile: 'HardTechno',
+  archiveSortMode: 'alpha',
+  randomMix: null,
   debug: { startupReady: false }
 });
 

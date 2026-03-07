@@ -30,6 +30,72 @@
         <h2 class="panel-title" id="startup-title">Startstatus</h2>
         <section id="next-step" class="status-box" aria-label="Nächster Schritt"></section>
         <section id="checks-list" class="checks" aria-label="Prüfergebnisse"></section>
+
+        <section class="archive-module" aria-label="Profil-Archiv">
+          <h3 class="panel-title">Profil-Archiv für Genres, Stimmungen, Stile</h3>
+          <div class="archive-top-row">
+            <label>Profil <select id="profile-select"></select></label>
+            <label>Sortierung
+              <select id="archive-sort">
+                <option value="alpha">Alphabetisch</option>
+                <option value="created">Nach Erstellzeit</option>
+              </select>
+            </label>
+            <p id="archive-stats" class="archive-stats">-</p>
+          </div>
+
+          <div class="archive-input-grid">
+            <label>Genre
+              <input id="input-genres" type="text" placeholder="Genre eingeben" />
+              <button id="save-genres" class="btn-small" type="button">Speichern</button>
+            </label>
+            <label>Stimmung
+              <input id="input-moods" type="text" placeholder="Stimmung eingeben" />
+              <button id="save-moods" class="btn-small" type="button">Speichern</button>
+            </label>
+            <label>Stil
+              <input id="input-styles" type="text" placeholder="Stil eingeben" />
+              <button id="save-styles" class="btn-small" type="button">Speichern</button>
+            </label>
+          </div>
+
+          <section id="archive-list" class="archive-list" aria-label="Archivliste"></section>
+
+          <section class="archive-transfer">
+            <h4>Import / Export (JSON)</h4>
+            <textarea id="archive-transfer" rows="5" placeholder="JSON einfügen oder exportieren"></textarea>
+            <div class="archive-transfer-actions">
+              <button id="archive-export" class="btn-small" type="button">Export</button>
+              <button id="archive-import" class="btn-small" type="button">Import</button>
+            </div>
+          </section>
+
+          <section class="mix-box">
+            <h4>Zufallsmix</h4>
+            <div class="mix-options">
+              <label><input id="mix-include-genres" type="checkbox" checked /> Genres</label>
+              <label><input id="mix-include-moods" type="checkbox" checked /> Stimmungen</label>
+              <label><input id="mix-include-styles" type="checkbox" checked /> Stile</label>
+            </div>
+            <div class="mix-amounts">
+              <label>Genres Menge <input id="mix-amount-genres" type="number" min="1" value="1" /></label>
+              <label>Stimmungen Menge <input id="mix-amount-moods" type="number" min="1" value="1" /></label>
+              <label>Stile Menge <input id="mix-amount-styles" type="number" min="1" value="1" /></label>
+            </div>
+            <div class="mix-quick">
+              <button type="button" class="btn-small" data-mix-quick="1">Schnell 1</button>
+              <button type="button" class="btn-small" data-mix-quick="3">Schnell 3</button>
+              <button type="button" class="btn-small" data-mix-quick="5">Schnell 5</button>
+              <button id="mix-generate" type="button" class="btn-small btn-accent">Mix erzeugen</button>
+            </div>
+            <p id="mix-output" class="mix-output">-</p>
+          </section>
+
+          <section>
+            <h4>Archiv-Ereignisse</h4>
+            <ul id="archive-events" class="archive-events"></ul>
+          </section>
+        </section>
       </main>
 
       <aside class="widgets panel" aria-label="Projektordner-Status">

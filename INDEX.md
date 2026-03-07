@@ -1,6 +1,8 @@
+# INDEX.md
+
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Robuste Statusanzeige mit Symbolen (ok/gelb/rot)
+- Iterationsfokus: Profil-Archiv mit Zufallsmix und JSON-Persistenz
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -19,6 +21,7 @@
 │   └── app.css
 ├── data
 │   ├── app-config.json
+│   ├── profile-archive.json
 │   ├── project-structure.json
 │   ├── themes.json
 │   └── ui_texts.json
@@ -32,6 +35,7 @@
 │   ├── services
 │   │   ├── config-loader.js
 │   │   ├── logger.js
+│   │   ├── profile-archive.js
 │   │   ├── project-selftest.js
 │   │   └── startup-check.js
 │   ├── state.js
@@ -61,28 +65,30 @@
 6. `assets/js/core.js`
 7. `css/app.css`
 8. `data/app-config.json`
-9. `data/project-structure.json`
-10. `data/themes.json`
-11. `data/ui_texts.json`
-12. `index.html`
-13. `js/adapters/browser-filesystem.js`
-14. `js/adapters/desktop-filesystem.js`
-15. `js/adapters/filesystem-adapter.js`
-16. `js/app.js`
-17. `js/services/config-loader.js`
-18. `js/services/logger.js`
-19. `js/services/project-selftest.js`
-20. `js/services/startup-check.js`
-21. `js/state.js`
-22. `js/ui.js`
-23. `modules/datenbank_baukasten/config.json`
-24. `modules/datenbank_baukasten/logic.js`
-25. `modules/datenbank_baukasten/manifest.json`
-26. `modules/datenbank_baukasten/schema.json`
-27. `modules/datenbank_baukasten/texts.json`
-28. `modules/todo_kalender_erinnerung/config.json`
-29. `modules/todo_kalender_erinnerung/logic.js`
-30. `modules/todo_kalender_erinnerung/manifest.json`
-31. `modules/todo_kalender_erinnerung/schema.json`
-32. `modules/todo_kalender_erinnerung/texts.json`
-33. `todo.txt`
+9. `data/profile-archive.json`
+10. `data/project-structure.json`
+11. `data/themes.json`
+12. `data/ui_texts.json`
+13. `index.html`
+14. `js/adapters/browser-filesystem.js`
+15. `js/adapters/desktop-filesystem.js`
+16. `js/adapters/filesystem-adapter.js`
+17. `js/app.js`
+18. `js/services/config-loader.js`
+19. `js/services/logger.js`
+20. `js/services/profile-archive.js`
+21. `js/services/project-selftest.js`
+22. `js/services/startup-check.js`
+23. `js/state.js`
+24. `js/ui.js`
+25. `modules/datenbank_baukasten/config.json`
+26. `modules/datenbank_baukasten/logic.js`
+27. `modules/datenbank_baukasten/manifest.json`
+28. `modules/datenbank_baukasten/schema.json`
+29. `modules/datenbank_baukasten/texts.json`
+30. `modules/todo_kalender_erinnerung/config.json`
+31. `modules/todo_kalender_erinnerung/logic.js`
+32. `modules/todo_kalender_erinnerung/manifest.json`
+33. `modules/todo_kalender_erinnerung/schema.json`
+34. `modules/todo_kalender_erinnerung/texts.json`
+35. `todo.txt`

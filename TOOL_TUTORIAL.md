@@ -10,16 +10,21 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Statussymbole schnell prüfen
-1. Seite neu laden.
-2. **Selbsttest starten** klicken.
-3. In **Prüfergebnisse** prüfen, ob vor jedem Check ein Symbol steht:
-   - `✔` für ok,
-   - `⚠` für gelb,
-   - `✖` für rot.
-4. Im Feld **Gesamtampel** prüfen, ob Symbol und Wort zusammen angezeigt werden (z. B. `⚠ gelb`).
+### Profil-Archiv und Zufallsmix schnell nutzen
+1. Einen Ordner wählen.
+2. Im Bereich **Profil-Archiv** ein Profil wählen (z. B. HardTechno).
+3. In Genre, Stimmung, Stil je einen Eintrag schreiben und mit **Enter** oder **Speichern** bestätigen.
+4. Bei **Statistik** prüfen, ob die Mengen je Bereich steigen.
+5. Bei **Zufallsmix** Bereiche aktiv lassen und Schnellbutton **1**, **3** oder **5** klicken.
+6. Ergebnis im Feld **Mix-Ausgabe** prüfen. Der Text wird automatisch in die Zwischenablage kopiert (wenn erlaubt).
 
-### Auto-Formatierung prüfen
+### Import / Export kurz prüfen
+1. Auf **Export** klicken.
+2. Prüfen, ob JSON im Feld erscheint.
+3. JSON verändern oder wieder einfügen.
+4. Auf **Import** klicken und danach die Liste prüfen.
+
+## Auto-Formatierung prüfen
 1. Seite neu laden.
 2. **Selbsttest starten** klicken.
 3. In **Startstatus**, **Prüfergebnisse** und **Letzte Meldungen** prüfen:
@@ -27,34 +32,11 @@ Kurze Anleitung für sichere kleine Iterationen.
    - Enden bekommen automatisch Punkt, wenn keiner vorhanden ist,
    - lange Texte brechen ohne Layout-Bruch um.
 
-### Design-Feinschliff prüfen
-1. Mehrere Meldungen erzeugen (z. B. Struktur prüfen + Selbsttest).
-2. Im Log prüfen, ob Uhrzeiten ruhig untereinander stehen.
-3. Prüfen, ob lange Meldungen in Karten lesbar bleiben.
-
-## Kleine Erweiterung dieser Iteration (alt)
-### Tool-Optik-Vorgabe schnell prüfen
-1. Seite neu laden.
-2. Auf drei Dinge achten:
-   - Kartenoptik mit weichen Ecken,
-   - leichter Raster-Look in den Flächen,
-   - deutlich hervorgehobener Primärbutton.
-3. Browserbreite auf ca. 1200px und 900px ändern.
-4. Prüfen, ob die Bereiche sauber in die nächste Layoutstufe wechseln.
-
-## Letzten Ordnernamen wiederfinden
-1. Einmal auf **Ordner wählen** klicken und einen Projektordner bestätigen.
-2. Seite neu laden.
-3. Im Bereich **Projektordner-Status** bei **Ordner** den Namen mit Hinweis **(zuletzt gewählt)** prüfen.
-4. So sieht man schneller, welcher Ordner zuletzt aktiv war.
-
-## Struktur aus JSON prüfen
-1. Datei `data/project-structure.json` öffnen.
-2. `requiredDirectories` und `requiredFiles` anpassen.
-3. Im UI auf **Projektstruktur anlegen** klicken.
-4. Danach **Selbsttest starten**.
-
 ## Endprüfung (nur relevant)
 - Syntax prüfen: `node --check js/app.js`
+- Zusatz-Syntax: `node --check js/ui.js`
 - JSON prüfen: `python3 -m json.tool data/project-structure.json > /dev/null`
-- UI-Test manuell: Startseite öffnen und Buttons testen.
+
+## Stand
+- Aktualisiert: 2026-03-07
+- Iterationsfokus: Profil-Archiv mit Zufallsmix und JSON-Persistenz
