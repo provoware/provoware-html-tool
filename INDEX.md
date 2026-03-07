@@ -2,7 +2,7 @@
 
 ## Kompletter aktueller Verzeichnisbaum
 
-- Stand dieser Übersicht: Iteration mit erweitertem Header-Fokus-Token-Muster (2 zusätzliche Header-Buttons), dokumentiertem Mini-Farbtoken-Abgleich und erledigtem letztem Todo-Punkt.
+- Stand dieser Übersicht: Iteration mit Design-Soll-Ist-Abgleich, priorisierten Optimierungspunkten und drei geparkten Design-Folgeaufgaben in `todo.txt`.
 
 ```
 .

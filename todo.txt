@@ -13,6 +13,10 @@
 
 [x] 2026-03-07 | scripts/laienstart.sh + Startkette | Linux-Rechteprüfung, Projektordner-Schreibcheck, freie-Port-Alternative und fehlerfreier GUI-Start als eigene robuste Startroutine ergänzen | prüfen: Dry-Run + Start mit belegtem Port + Start ohne Schreibrechte simulieren | fertig wenn: Start wählt freien Port automatisch, meldet Rechteprobleme klar und startet GUI ohne manuellen Eingriff
 
+[ ] 2026-03-07 | css/app.css | Farbwelt von warm-oliv auf kühl-blau/grau näher an Designvorlage verschieben (nur Token/Verläufe) | prüfen: visueller Vorher/Nachher-Abgleich + Kontrastcheck der Haupttexte | fertig wenn: Grundflächen klar blau/grau wirken und Lesbarkeit stabil bleibt
+[ ] 2026-03-07 | index.html + css/app.css | Header-Mikrostruktur näher an Vorlage bringen (Suchfeld/Hotkey-Chip/Utility-Icons als kleine Leiste, ohne ID-Brüche) | prüfen: Fokuszustände per Tab testen + `node --test tests/services/ui-header-chips.test.js` | fertig wenn: neue Header-Elemente sichtbar, tastaturbedienbar und bestehende Header-Chip-Tests weiter grün
+[ ] 2026-03-07 | index.html + css/app.css | Rechte Spalte visuell in Utility-Karten trennen (Vorlagen/Mini-Notiz/Infos/Hilfe) ohne Logikumbau | prüfen: Struktur-Check im Browser + Responsive-Check unter 980px | fertig wenn: vier klar getrennte Kartenblöcke ohne Layoutbruch
+
 ## Mittel
 [x] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen (in dieser Iteration eingehalten: keine `modules/*/logic.js`-Änderung) | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
 [x] 2026-03-07 | js/adapters/desktop-filesystem.js | Stub-Adapter-Verhalten verständlicher machen (klare Nutzerhinweise im Fehlertext) | prüfen: Rückgabemeldung im UI-Log lesbar und eindeutig | fertig wenn: Meldung sagt klar, was fehlt und was der nächste Schritt ist
