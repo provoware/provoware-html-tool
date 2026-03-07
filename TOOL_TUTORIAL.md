@@ -10,12 +10,11 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Cleanup nach Schreibtest bewusst nutzen
-1. `Selbsttest starten` ausführen (optional mit Schreibtest).
-2. Wenn du danach aufräumen willst, `cleanupAfterSuccess` als **Funktion** übergeben.
-3. Wenn keine Funktion übergeben wird, gibt es bewusst keinen Cleanup-Status.
-4. Ziel: Kein falsches „erledigt“, wenn es gar kein echtes Cleanup gab.
-5. Hinweis: Die Ordnerprüfung bleibt getrennt vom Schreibtest.
+### Desktop-Hinweis besser lesen
+1. Wenn der Desktop-Adapter nicht aktiv ist, zeigt die Meldung jetzt klar den nächsten Schritt.
+2. Achte auf `nextStep` im Ergebnis (kurzer Handlungs-Hinweis).
+3. Ziel: Weniger Rätsel bei Startproblemen im Team.
+4. Konkreter nächster Schritt: Browser-Version öffnen und **Ordner wählen** nutzen.
 
 ## Kurzer Modul-Check
 1. `node --test tests/services/module-registry.test.js` ausführen.

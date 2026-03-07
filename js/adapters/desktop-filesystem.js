@@ -1,8 +1,8 @@
 const notActive = () => ({
   ok: false,
   code: 'DESKTOP_ADAPTER_NOT_ACTIVE',
-  message: 'Desktop-Adapter ist noch nicht aktiv.',
-  data: null
+  message: 'Desktop-Adapter ist noch nicht aktiv. Bitte Browser-Modus mit Ordnerwahl nutzen oder Desktop-Integration ergänzen.',
+  data: { nextStep: 'Nutze zuerst die Browser-Version mit "Ordner wählen".' }
 });
 
 export const desktopFilesystemAdapter = {
@@ -17,5 +17,5 @@ export const desktopFilesystemAdapter = {
   listDirectory: async () => notActive(),
   readText: async () => notActive(),
   writeText: async () => notActive(),
-  runProjectSelftest: async () => notActive()
+  runProjectSelftest: async (_options) => notActive()
 };

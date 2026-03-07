@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Selbsttest-Robustheit bei optionalem Cleanup nach Schreibtest
+- Iterationsfokus: Nutzerfreundliche Desktop-Stub-Hinweise (klare nächste Schritte)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/
@@ -83,6 +83,8 @@
 - │     ├─ modules/wiki_notiz_wissen/schema.json
 - │     └─ modules/wiki_notiz_wissen/texts.json
 - ├─ tests/
+- │  ├─ tests/adapters/
+- │  │  └─ tests/adapters/desktop-filesystem.test.js
 - │  ├─ tests/services/
 - │  │  ├─ tests/services/module-registry.test.js
 - │  │  ├─ tests/services/project-selftest.test.js
@@ -173,11 +175,12 @@
 67. `modules/wiki_notiz_wissen/schema.json`
 68. `modules/wiki_notiz_wissen/texts.json`
 69. `README.md`
-70. `tests/services/module-registry.test.js`
-71. `tests/services/project-selftest.test.js`
-72. `tests/services/ui-action-handlers.smoke.test.js`
-73. `tests/start-files/start-import-resolution.test.js`
-74. `todo.txt`
-75. `todo_kalender_erinnerung_start.html`
-76. `TOOL_TUTORIAL.md`
-77. `wiki_notiz_wissen_start.html`
+70. `tests/adapters/desktop-filesystem.test.js`
+71. `tests/services/module-registry.test.js`
+72. `tests/services/project-selftest.test.js`
+73. `tests/services/ui-action-handlers.smoke.test.js`
+74. `tests/start-files/start-import-resolution.test.js`
+75. `todo.txt`
+76. `todo_kalender_erinnerung_start.html`
+77. `TOOL_TUTORIAL.md`
+78. `wiki_notiz_wissen_start.html`
