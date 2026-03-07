@@ -2,6 +2,8 @@
 
 ## Kompletter aktueller Verzeichnisbaum
 
+- Stand dieser Übersicht: Iteration mit Design-Mini-Feinschliff (Schnellaktionen als farbige Glas-Chips).
+
 ```
 .
 ├─ .github
