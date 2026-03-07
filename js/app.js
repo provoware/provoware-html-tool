@@ -156,6 +156,28 @@ const ensureStructure = async () => {
   await runSelftest(false);
 };
 
+const buildDiagnosisExport = () => {
+  const state = window.appState;
+  return {
+    exportedAt: new Date().toISOString(),
+    app: {
+      title: state.uiTexts?.titles?.appTitle || 'ProvoWare Dashboard',
+      layoutMode: state.layoutMode || 'standard'
+    },
+    directory: {
+      selectedName: state.selectedProjectDirectory?.name || null,
+      rememberedName: state.rememberedProjectDirectoryName || null,
+      permissions: state.permissionStatus || null
+    },
+    selftest: state.selftestResult || null,
+    profile: {
+      selected: state.selectedProfile || DEFAULT_PROFILE,
+      stats: state.profileStats || null
+    },
+    logs: (state.logs || []).slice(0, 20)
+  };
+};
+
 const onResize = () => {
   const mode = detectLayoutMode(window.appState.config || {});
   setState({ layoutMode: mode });
@@ -188,6 +210,12 @@ const init = async () => {
     onRunSelftest: runSelftest,
     onEnsureStructure: ensureStructure,
     onSwitchDirectory: selectDirectory,
+    onExportDiagnosis: async () => {
+      const text = JSON.stringify(buildDiagnosisExport(), null, 2);
+      await copyToClipboardSafe(text);
+      logEvent('INFO', 'DIAGNOSIS_EXPORTED', 'Diagnose wurde als JSON bereitgestellt.');
+      return text;
+    },
     onSelectProfile: (profile) => {
       const archive = window.appState.profileArchive || createDefaultArchive();
       setState({ selectedProfile: profile, profileStats: buildStats(archive, profile) });

@@ -24,6 +24,7 @@
         <button id="action-ensure-structure" class="btn" type="button">Projektstruktur anlegen</button>
         <button id="action-run-write-test" class="btn" type="button">Schreibtest ausführen</button>
         <button id="action-switch-dir" class="btn" type="button">Ordner wechseln</button>
+        <button id="action-export-diagnosis" class="btn" type="button">Diagnose exportieren</button>
       </nav>
 
       <main class="main panel tile-center" aria-live="polite">
@@ -68,6 +69,11 @@
               <button id="archive-export" class="btn-small" type="button">Export</button>
               <button id="archive-import" class="btn-small" type="button">Import</button>
             </div>
+          </section>
+
+          <section class="archive-transfer">
+            <h4>Diagnose-Export (optional)</h4>
+            <textarea id="diagnosis-transfer" rows="5" placeholder="Diagnose-JSON wird hier erzeugt"></textarea>
           </section>
 
           <section class="mix-box">

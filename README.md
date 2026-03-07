@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 46
-- Offene Punkte: 1
-- Fortschritt: 97.9%
+- Erledigte Punkte: 47
+- Offene Punkte: 0
+- Fortschritt: 100%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -53,9 +53,10 @@
 - Status-Visuals wurden in `js/status-visuals.js` ausgelagert, damit weitere UI-Teile dieselbe Ampel-Logik nutzen können.
 - Layout und Kartenoptik wurden näher an die Vorlagenstruktur angepasst (Titelband, linke Leiste, großes Rasterfeld, rechte Statuskachel, Segment-Fußleiste).
 - Standardprofil wird jetzt beim Start und beim Archivladen klar gesetzt, damit kein verstecktes Profil `undefined` entstehen kann.
+- Optionaler Diagnose-Export als JSON ergänzt (inklusive Status, Selbsttest, Profil-Statistik und letzter Meldungen).
 
 ## Offene Punkte
-1. Diagnose-Export als optionales Modul ergänzen.
+- Aktuell keine offenen Pflichtpunkte.
 
 ## Laien-Befehle unten
 - Status prüfen: `git status`
@@ -94,3 +95,7 @@
 - Patchgrund 2: Hilfe für Laien erweitert, damit die neue Anzeige direkt geprüft werden kann.
 - Betroffene Dateien: `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Status-Ausgabe geprüft.
+- Patchgrund 1: Letzten offenen Punkt abgeschlossen: optionaler Diagnose-Export als eigene Aktion ergänzt.
+- Patchgrund 2: Nutzerhilfe erweitert, damit Diagnose-JSON direkt erzeugt und geprüft werden kann.
+- Betroffene Dateien: `index.html`, `js/app.js`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene HTML/JS-Syntax sowie direkt betroffene Ausgabe geprüft.

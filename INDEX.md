@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Nutzerfreundlichkeit bei Rechten (klarer Hinweis für `nur lesen`)
+- Iterationsfokus: Offenen Pflichtpunkt schließen (Diagnose-Export als optionales Modul)
 
 ## Verzeichnisbaum (ohne `.git`)
 

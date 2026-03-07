@@ -44,6 +44,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. JSON verändern oder wieder einfügen.
 4. Auf **Import** klicken und danach die Liste prüfen.
 
+### Diagnose-Export (optional) kurz prüfen (neu)
+1. Einen Ordner wählen und **Selbsttest starten**.
+2. In der Navigation auf **Diagnose exportieren** klicken.
+3. Prüfen, ob im Feld **Diagnose-Export (optional)** JSON erscheint.
+4. Optional: JSON aus der Zwischenablage in eine Datei einfügen und auf Felder `selftest`, `logs`, `profile` prüfen.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -74,8 +80,9 @@ Kurze Anleitung für sichere kleine Iterationen.
 ## Endprüfung (nur relevant)
 - Syntax prüfen: `node --check js/app.js`
 - Zusatz-Syntax: `node --check js/ui.js`
+- Zusatz-Syntax: `node --check js/state.js`
 - JSON prüfen: `python3 -m json.tool data/project-structure.json > /dev/null`
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Nutzerfreundlichkeit bei Rechten (klarer Hinweis für `nur lesen`)
+- Iterationsfokus: Offenen Pflichtpunkt schließen (Diagnose-Export als optionales Modul)
