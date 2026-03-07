@@ -65,6 +65,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 5. Bei **Zufallsmix** Bereiche aktiv lassen und Schnellbutton **1**, **3** oder **5** klicken.
 6. Ergebnis im Feld **Mix-Ausgabe** prüfen. Der Text wird automatisch in die Zwischenablage kopiert (wenn erlaubt).
 
+### Genres-Liste mit Scrollbar kurz prüfen (neu)
+1. Einen Ordner wählen und im Profil-Archiv viele Genre-Einträge anlegen.
+2. Im Bereich **Genres** prüfen, ob eine Scrollbar sichtbar wird.
+3. Prüfen, ob die Modulkachel dabei gleich groß bleibt und nicht nach unten wächst.
+4. Ziel: Lange Listen bleiben übersichtlich, ohne das Gesamtlayout zu verschieben.
+
 ### Import / Export kurz prüfen
 1. Auf **Export** klicken.
 2. Prüfen, ob JSON im Feld erscheint.
