@@ -101,6 +101,12 @@ const renderStats = (stats) => {
   return `Genres: ${stats.genres} | Stimmungen: ${stats.moods} | Stile: ${stats.styles} | Gesamt: ${stats.total}`;
 };
 
+const buildDashboardInfo = (state) => {
+  const moduleSummary = state.moduleRegistry?.summary || '-';
+  const archiveStats = renderStats(state.profileStats);
+  return `Info: Module ${moduleSummary} | Archiv ${archiveStats}`;
+};
+
 const escapeHtml = (value) => String(value || '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -603,7 +609,9 @@ export const render = () => {
     setText(`dashboard-note-file-${rowIndex}`, `Letzte Datei: ${lastFile || '-'}`);
   });
 
-  setText('module-registry-summary', state.moduleRegistry?.summary || '-');
+  const dashboardInfo = buildDashboardInfo(state);
+  setText('dashboard-info-note', dashboardInfo);
+  setText('module-registry-summary', dashboardInfo);
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
   const sidebarModuleList = byId('sidebar-module-list');
   if (sidebarModuleList) {

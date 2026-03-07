@@ -36,6 +36,13 @@ const getStartConfig = (htmlText, startFile) => {
   return parsed;
 };
 
+const assertStartFileA11yStatus = (htmlText, startFile) => {
+  const hasStatusRole = /role=["']status["']/i.test(htmlText);
+  const hasAriaLive = /aria-live=["'][^"']+["']/i.test(htmlText);
+  assert.ok(hasStatusRole, `A11y-Status fehlt (role="status"): ${startFile}`);
+  assert.ok(hasAriaLive, `A11y-Status fehlt (aria-live): ${startFile}`);
+};
+
 const importFromStartConfig = async (startFile, config) => {
   const fullPath = path.join(repoRoot, startFile);
   const absoluteTarget = path.resolve(path.dirname(fullPath), config.modulePath);
@@ -73,5 +80,16 @@ test('alle *_start.html prüfen erwartete Export-Funktionen', async () => {
         `Export-Funktion fehlt: ${startFile} -> ${exportName}`
       );
     }
+  }
+});
+
+test('alle *_start.html haben role="status" und aria-live', async () => {
+  const startFiles = await getStartFiles();
+  assert.ok(startFiles.length > 0, 'Keine *_start.html Dateien gefunden.');
+
+  for (const startFile of startFiles) {
+    const fullPath = path.join(repoRoot, startFile);
+    const htmlText = await readFile(fullPath, 'utf8');
+    assertStartFileA11yStatus(htmlText, startFile);
   }
 });

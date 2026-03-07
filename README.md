@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 72
+- Erledigte Punkte: 73
 - Offene Punkte: siehe `todo.txt`
 - Fortschritt: 99% (laufend, siehe `todo.txt`)
 
@@ -52,7 +52,7 @@
 
 - Tests:
   - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
-  - `tests/start-files/start-import-resolution.test.js` (prüft Import-Auflösung und erwartete Export-Funktionen laut `start-file-standard`)
+  - `tests/start-files/start-import-resolution.test.js` (prüft Import-Auflösung, erwartete Export-Funktionen laut `start-file-standard` und A11y-Baseline mit `role="status"` + `aria-live`)
 
 ## Erledigte Kernpunkte
 - Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.
@@ -116,6 +116,7 @@
 - Skip-Link ergänzt: Mit Tastatur kann direkt zum Hauptinhalt gesprungen werden.
 - Ruhiger Screenreader-Modus ergänzt: Statusmeldungen werden bewusst kompakter gesprochen.
 - Neues Textdatei-Vorschau- und Editor-Modul ergänzt: Dateiliste je Pfad, Vorschau und Speichern im Editor.
+- Dashboard-Info verbessert: Die sichtbare Infolinie zeigt jetzt gebündelt Modulübersicht und Archiv-Statistik.
 
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
@@ -244,3 +245,8 @@
 - Patchgrund 2: Für spätere Automatisierung wurde ein minimaler Node-Test ergänzt, der Modul-Importe aller `*_start.html` auflöst.
 - Betroffene Dateien: `datenbank_baukasten_start.html`, `todo_kalender_erinnerung_start.html`, `wiki_notiz_wissen_start.html`, `modules/backup_funktions_modul/*`, `modules/debugging_modul/*`, `modules/logging_modul/*`, `data/module-registry.json`, `tests/start-files/start-import-resolution.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene HTML/JSON/JS-Syntax, neue Modul-Importauflösung und der neue kleine Startdatei-Test geprüft.
+
+- Patchgrund 1: A11y-Baseline für alle `*_start.html` stabilisieren, damit Statusausgaben dauerhaft `role="status"` und `aria-live` enthalten.
+- Patchgrund 2: Nutzerfeedback im Dashboard bündeln, damit Infos und Archiv-Statistik auf einen Blick sichtbar sind.
+- Betroffene Dateien: `tests/start-files/start-import-resolution.test.js`, `index.html`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene HTML/JS-Syntax und den direkt betroffenen Startdatei-Test geprüft.
