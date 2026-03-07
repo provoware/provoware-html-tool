@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 60
+- Erledigte Punkte: 61
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 89% (laufend, siehe `todo.txt`)
+- Fortschritt: 90% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -86,6 +86,7 @@
 - Neues Templates-Modul ergänzt: persistente Vorlagen mit Kategorie, Bearbeiten/Löschen, Favoriten und Schnellwahl-Kopieren.
 - Kopier-Feedback im Templates-Modul ergänzt: Meldung wird kurz angezeigt und verschwindet automatisch.
 - Kleiner Service-Smoke-Test für Export/Import/Mix ergänzt, damit UI-Änderungen schneller geprüft werden können.
+- Genres-Bereich nutzerfreundlich optimiert: Listen bleiben jetzt in fester Kartenhöhe mit Scrollbar statt Modul-Vergrößerung; zusätzlich klarere Farbflächen und modernere Kartenoptik im Profil-Archiv.
 
 - Neues Wiki-, Notiz- und Wissensmodul als strukturierte Modulbasis ergänzt (CRUD, Suche/Filter, Verknüpfungen, Export).
 - Unsichtbare Live-Statuszeile ergänzt (Screenreader-freundlich): Start, Gesamtstatus und letzte Meldung werden als gesprochene Kurzzusammenfassung bereitgestellt.
@@ -115,6 +116,7 @@
 - Empfehlung 6: Für Wissenseinträge klare Themennamen und kurze Quellenangabe nutzen, damit Suche schneller trifft.
 - Empfehlung 7: Bei Screenreader-Nutzung nach Aktionen kurz warten: die neue Live-Statuszeile liest Start, Gesamtstatus und letzte Meldung automatisch vor.
 - Empfehlung 8: Für Dateivorschau zuerst einen relativen Pfad testen (oder leer lassen), danach bei Bedarf „auch andere Dateien zeigen“ aktivieren.
+- Empfehlung 9: Bei langen Genre-Listen einfach im jeweiligen Bereich scrollen; das Modul bleibt gleich groß und übersichtlich.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
@@ -187,3 +189,8 @@
 - Patchgrund 2: Neues Templates-Modul für persistente Textbausteine/Promptvorlagen mit Favoriten-Schnellwahl und Copy-Feedback.
 - Betroffene Dateien: `js/app.js`, `js/services/diagnosis-export.js`, `js/services/templates-archive.js`, `js/services/ui-action-handlers.js`, `js/ui.js`, `js/state.js`, `index.html`, `css/app.css`, `data/templates-archive.json`, `tests/services/ui-action-handlers.smoke.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax, direkt betroffene Service-Logik und der kleine Smoke-Test ausgeführt.
+
+- Patchgrund 1: Genres-/Archiv-Listen sollen bei vielen Einträgen scrollbar bleiben, statt die Modulhöhe zu vergrößern.
+- Patchgrund 2: Nutzerwunsch nach moderner, laienfreundlicher Optik mit klarerer Bereichstrennung und ruhiger Farbdarstellung im Archiv.
+- Betroffene Dateien: `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene CSS-Syntax und direkt betroffene Archiv-Darstellung geprüft.

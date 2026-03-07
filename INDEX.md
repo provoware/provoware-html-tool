@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Barrierefreiheit (Skip-Link, ruhiger Screenreader-Modus) und neues Textdatei-Vorschau-/Editor-Modul
+- Iterationsfokus: Genres-Modul nutzerfreundlich optimiert (Scrollbar statt Modulwachstum, modernere Archiv-Optik)
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`
