@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration erweitert die Dashboard-Notiz-Konsistenz: Fehler-Helper jetzt auch beim Öffnen letzter Datei + Save-Fehlerfall-Tests (Exists/Read/Write).
 - Diese Iteration zentralisiert die Fehlerbehandlung beim Dashboard-Notizspeichern (weniger Doppelcode, konsistente Warnpfade).
 - Diese Iteration ergänzt 4 Design-Themes im Header sowie Schriftzoom mit Strg+Mausrad/Strg+Plus/Minus.
 - Diese Iteration verbessert die Header-Bedienung unter 980px (besseres 1-Spalten-Verhalten).

@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 25 (siehe `todo.txt`)
+- Erledigte Punkte: 26 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Robustheit und Wartbarkeit im Workspace-Notizspeichern verbessert (zentralisierte Fehlerpfade, gleiches Verhalten).
+- Stand dieser Iteration: Dashboard-Notizpfade weiter vereinheitlicht (Fehler-Helper auch beim Datei-Öffnen) und Save-Fehlerfälle per Test abgesichert.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -60,11 +60,13 @@
 - Hilfe-Optimierung mit kleinstem Eingriff: Im Guide-Modul wurden wiederkehrende Schritte (Index lesen, Eintrag nach oben/unten verschieben) in kleine gemeinsame Helper gebündelt; Verhalten bleibt gleich, Wartung wird einfacher.
 - Neue Mini-Vereinheitlichung: Die Tastatur-Logik im Guide-Index nutzt jetzt ebenfalls einen gemeinsamen Navigations-Helper für Auswahl und Sprung.
 - Neuer enger Regressionstest: `tests/modules/guide-tools-module.test.js` prüft gezielt den Guide-Index-Pfad (Arrow/Enter) plus Reorder-Pfad.
+- Neuer gezielter Fehlerfall-Test: Adapter-Fehler bei Dashboard-Notiz-Save (Exists/Read/Write) sind als Smoke-Regression abgedeckt.
 - Neuer Grenzfall-Test ergänzt: ArrowUp auf Index 0 und ArrowDown am letzten Index bleiben sauber geklammert (kein Überschwingen).
 - Wiki-Modul robuster: Listen-/Leseausgaben arbeiten jetzt mit Kopien, damit externe Mutationen den Store nicht unbemerkt verändern.
 - Genres-Zufallsgenerator robuster: gewünschte Anzahl wird zentral auf einen sinnvollen Bereich geklammert (mindestens 1, höchstens 20).
 - Kleine Robustheits-Refaktorierung: doppelter Startup-Readiness-Block in `js/app.js` wurde in einen gemeinsamen Helper ausgelagert (gleiches Verhalten, weniger Dupplikatcode).
 - Workspace-Robustheit verbessert: Dashboard-Notizen nutzen jetzt einen gemeinsamen Fehler-Helper für konsistente Rückgaben und einheitliches Feedback.
+- Workspace-Robustheit ergänzt: Auch `onOpenDashboardNoteLastFileInEditor` nutzt jetzt den gemeinsamen Fehler-Helper (konsistentes Feedback + Logging).
 - Für Vollmodularität wurden zwei offene, klar messbare Folgeschritte in `todo.txt` ergänzt (UI-Renderer-Split und Action-Handler-Domänentrennung).
 - Priorität A umgesetzt: Farbwelt über CSS-Token geschärft und Header-Mikrostruktur minimal verbessert (ohne JS-Ankeränderung).
 - Rechte Spalte in Utility-Karten gegliedert; unter 980px gezielt auf Layoutbruch geprüft und stabilisiert.

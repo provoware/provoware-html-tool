@@ -230,16 +230,28 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     const row = withDefaultDashboardRows(getState().dashboardNotes?.rows || [])[rowIndex];
     const filePath = normalizeRelativePath(row?.lastSavedPath);
     if (!filePath) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED', message: 'Noch keine Datei gespeichert.' };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED',
+        message: 'Noch keine Datei gespeichert.'
+      });
     }
 
     const loaded = await filesystemAdapter.readText(filePath);
     if (!loaded.ok) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_READ_FAILED', message: 'Datei konnte nicht geladen werden.', data: loaded.data };
-      logEvent('WARN', result.code, result.message, { rowIndex, filePath });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_EDITOR_READ_FAILED',
+        message: 'Datei konnte nicht geladen werden.',
+        data: loaded.data,
+        logData: { rowIndex, filePath }
+      });
     }
 
     const content = loaded.data?.text || '';
