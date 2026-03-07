@@ -249,7 +249,8 @@ const renderSidebarModules = (modules = []) => {
     .map((module) => {
       const status = module.ok ? 'ok' : 'prüfen';
       const label = autoFormatText(module.name || module.id || 'Modul').replace(/[.!?…]+$/, '');
-      return `<button type="button" class="btn module-btn" title="${escapeHtml(label)}"><span>${escapeHtml(label)}</span><small>${escapeHtml(status)}</small></button>`;
+      const moduleId = escapeHtml(module.id || '');
+      return `<button type="button" class="btn module-btn" data-module-focus="${moduleId}" title="${escapeHtml(label)}"><span>${escapeHtml(label)}</span><small>${escapeHtml(status)}</small></button>`;
     })
     .join('');
 };
@@ -416,6 +417,23 @@ const bindWorkspaceControls = () => {
     if (!panel) return;
     panel.classList.remove('is-hidden');
     renderHiddenPanelsBar();
+  });
+
+  const sidebarModuleList = byId('sidebar-module-list');
+  sidebarModuleList?.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-module-focus]');
+    if (!button) return;
+    const moduleId = button.getAttribute('data-module-focus');
+    if (!moduleId) return;
+    const panel = document.querySelector(`.module-panel[data-module-id="${moduleId}"]`);
+    if (!panel) return;
+    panel.classList.remove('is-hidden');
+    panel.classList.remove('is-minimized');
+    renderHiddenPanelsBar();
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
+    panel.classList.add('is-maximized');
+    app.classList.add('has-maximized-panel');
   });
 
   const todoList = byId('todo-list');
