@@ -29,6 +29,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. Im Bereich **Projektordner-Status** bei **Schreiben** prüfen, ob `⚠ nur lesen` angezeigt wird.
 4. Ziel: Der Sonderfall ist klar sichtbar und nicht als kompletter Fehler missverständlich.
 
+### Screenreader-Live-Status kurz prüfen (neu)
+1. Seite neu laden und einen Ordner wählen.
+2. Danach **Selbsttest starten**.
+3. Mit Screenreader (Vorleseprogramm) prüfen, ob eine kurze Statuszeile vorgelesen wird.
+4. Erwartung: Die Meldung enthält **Start**, **Gesamtstatus** und **letzte Meldung** in einfacher Sprache.
+
 ### Profil-Standard kurz prüfen
 1. Seite neu laden.
 2. Ohne Klick auf die Profil-Auswahl direkt einen Eintrag speichern.

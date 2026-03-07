@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 58
+- Erledigte Punkte: 59
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 86% (laufend, siehe `todo.txt`)
+- Fortschritt: 87% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -88,6 +88,7 @@
 - Kleiner Service-Smoke-Test für Export/Import/Mix ergänzt, damit UI-Änderungen schneller geprüft werden können.
 
 - Neues Wiki-, Notiz- und Wissensmodul als strukturierte Modulbasis ergänzt (CRUD, Suche/Filter, Verknüpfungen, Export).
+- Unsichtbare Live-Statuszeile ergänzt (Screenreader-freundlich): Start, Gesamtstatus und letzte Meldung werden als gesprochene Kurzzusammenfassung bereitgestellt.
 
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
@@ -109,6 +110,7 @@
 - Empfehlung 4: Wenn die Fußleiste zu voll wirkt, erst über „Selbsttest starten“ neue klare Log-Einträge erzeugen.
 - Empfehlung 5: Vor dem ersten Speichern kurz prüfen, ob oben im Archiv ein Profil ausgewählt ist.
 - Empfehlung 6: Für Wissenseinträge klare Themennamen und kurze Quellenangabe nutzen, damit Suche schneller trifft.
+- Empfehlung 7: Bei Screenreader-Nutzung nach Aktionen kurz warten: die neue Live-Statuszeile liest Start, Gesamtstatus und letzte Meldung automatisch vor.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.

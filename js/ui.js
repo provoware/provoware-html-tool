@@ -58,6 +58,18 @@ const formatStructureStatus = (selftestResult) => {
     : formatStatusWithSymbol('green', formatStatusWord('ok'));
 };
 
+const buildA11yStatusText = (state, messages = {}) => {
+  const startupReady = state.debug?.startupReady;
+  const startupMessage = startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || '';
+  const overall = formatOverallStatus(state.selftestResult?.overallStatus || 'red');
+  const latestLog = state.logs?.[0]?.message ? autoFormatText(state.logs[0].message) : 'Keine neue Meldung.';
+  return [
+    `Start: ${autoFormatText(startupMessage) || '-'}`,
+    `Gesamtstatus: ${overall}`,
+    `Letzte Meldung: ${latestLog}`
+  ].join(' ');
+};
+
 const renderProfileOptions = (archive, selected) => {
   const options = Object.keys(archive?.profiles || {});
   return options.map((name) => `<option value="${name}" ${name === selected ? 'selected' : ''}>${name}</option>`).join('');
@@ -310,6 +322,8 @@ export const render = () => {
     const nextMessage = startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || '';
     nextStep.innerHTML = `<strong>${messages.actionNext || 'Nächster Schritt'}:</strong> ${autoFormatText(nextMessage)}`;
   }
+
+  setText('a11y-status', buildA11yStatusText(state, messages));
 
   const selectedName = state.selectedProjectDirectory?.name;
   const rememberedName = state.rememberedProjectDirectoryName;
