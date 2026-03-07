@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 54
+- Erledigte Punkte: 55
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 82% (laufend, siehe `todo.txt`)
+- Fortschritt: 83% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -20,7 +20,8 @@
   - `js/services/project-selftest.js`
   - `js/services/logger.js`
   - `js/services/module-registry.js` (Modul- und Vorlagenstatus)
-  - `js/services/profile-archive.js` (neues Profil-Archiv)
+  - `js/services/profile-archive.js` (Profil-Archiv)
+  - `js/services/ui-action-handlers.js` (UI-Aktionen zentral gebündelt)
 - Zentrale Daten:
   - `data/app-config.json`
   - `data/themes.json`
@@ -68,6 +69,8 @@
 
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
+- UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
+
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
 
@@ -141,3 +144,8 @@
 - Patchgrund 2: Nutzerführung verbessert durch ruhigere Kontraste in Karten, Header und Hintergrund.
 - Betroffene Dateien: `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene CSS-Syntax und direkt betroffene UI-Ausgabe geprüft.
+
+- Patchgrund 1: Entwicklungseffizienz verbessert durch kleinere Verantwortungsbereiche in der Aktionsverdrahtung.
+- Patchgrund 2: Modularisierung verbessert durch neuen Service `ui-action-handlers` statt großer Inline-Handler in `app.js`.
+- Betroffene Dateien: `js/app.js`, `js/services/ui-action-handlers.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Aktionsausgabe geprüft.

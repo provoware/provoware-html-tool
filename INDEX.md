@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Sidebar trennt Nutzer-Module von Einstellungen/Tests
+- Iterationsfokus: UI-Aktionsverdrahtung als eigener Service für bessere Wartbarkeit
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -39,6 +39,7 @@
 │   │   ├── module-registry.js
 │   │   ├── profile-archive.js
 │   │   ├── project-selftest.js
+│   │   ├── ui-action-handlers.js
 │   │   └── startup-check.js
 │   ├── state.js
 │   ├── status-visuals.js
@@ -88,13 +89,14 @@
 26. `js/services/profile-archive.js`
 27. `js/services/project-selftest.js`
 28. `js/services/startup-check.js`
-29. `modules/datenbank_baukasten/config.json`
-30. `modules/datenbank_baukasten/logic.js`
-31. `modules/datenbank_baukasten/manifest.json`
-32. `modules/datenbank_baukasten/schema.json`
-33. `modules/datenbank_baukasten/texts.json`
-34. `modules/todo_kalender_erinnerung/config.json`
-35. `modules/todo_kalender_erinnerung/logic.js`
-36. `modules/todo_kalender_erinnerung/manifest.json`
-37. `modules/todo_kalender_erinnerung/schema.json`
-38. `modules/todo_kalender_erinnerung/texts.json`
+29. `js/services/ui-action-handlers.js`
+30. `modules/datenbank_baukasten/config.json`
+31. `modules/datenbank_baukasten/logic.js`
+32. `modules/datenbank_baukasten/manifest.json`
+33. `modules/datenbank_baukasten/schema.json`
+34. `modules/datenbank_baukasten/texts.json`
+35. `modules/todo_kalender_erinnerung/config.json`
+36. `modules/todo_kalender_erinnerung/logic.js`
+37. `modules/todo_kalender_erinnerung/manifest.json`
+38. `modules/todo_kalender_erinnerung/schema.json`
+39. `modules/todo_kalender_erinnerung/texts.json`

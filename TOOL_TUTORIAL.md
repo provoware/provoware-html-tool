@@ -86,6 +86,14 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. Prüfen, ob Header und Karten in gedeckten Grün-Braun-Tönen (Camouflage) erscheinen.
 4. Mit **Tab** auf Buttons gehen und prüfen, ob Lesbarkeit weiter klar bleibt.
 
+
+### UI-Aktionen kurz prüfen (neu)
+1. Seite neu laden und einen Ordner wählen.
+2. Im Profil-Archiv einen Eintrag speichern und direkt danach bearbeiten.
+3. Prüfen, ob Speichern und Bearbeiten wie vorher funktionieren.
+4. Danach auf **Export** und **Diagnose exportieren** klicken.
+5. Ziel: Alle Aktionen laufen unverändert, obwohl die Handler jetzt zentral in einem Service liegen.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -117,8 +125,9 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Syntax prüfen: `node --check js/app.js`
 - Zusatz-Syntax: `node --check js/ui.js`
 - Zusatz-Syntax: `node --check js/state.js`
+- Zusatz-Syntax: `node --check js/services/ui-action-handlers.js`
 - JSON prüfen: `python3 -m json.tool data/project-structure.json > /dev/null`
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Sidebar mit Nutzer-Modulen links und gebündelten Einstellungen rechts
+- Iterationsfokus: UI-Aktionsverdrahtung als eigener Service für klarere Modulgrenzen
