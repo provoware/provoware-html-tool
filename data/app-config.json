@@ -1,14 +1,31 @@
 {
   "appName": "ProvoWare Dashboard",
   "version": "0.1.0",
-  "defaultTheme": "dunkel",
+  "defaultTheme": "tool-optik-vorgabe-2026",
   "minimumSizes": {
-    "wide": { "minWidth": 1400, "minHeight": 820 },
-    "standard": { "minWidth": 1100, "minHeight": 760 },
-    "kompakt": { "minWidth": 900, "minHeight": 680 },
-    "eng": { "minWidth": 0, "minHeight": 620 }
+    "wide": {
+      "minWidth": 1400,
+      "minHeight": 820
+    },
+    "standard": {
+      "minWidth": 1100,
+      "minHeight": 760
+    },
+    "kompakt": {
+      "minWidth": 900,
+      "minHeight": 680
+    },
+    "eng": {
+      "minWidth": 0,
+      "minHeight": 620
+    }
   },
-  "layoutModes": ["wide", "standard", "kompakt", "eng"],
+  "layoutModes": [
+    "wide",
+    "standard",
+    "kompakt",
+    "eng"
+  ],
   "startBehavior": {
     "requireStartupCheck": true,
     "selftestAsFirstStep": true,

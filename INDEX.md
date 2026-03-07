@@ -1,5 +1,6 @@
 ## Stand
 - Aktualisiert: 2026-03-07
+- Iterationsfokus: Tool-Optik-Vorgabe (Design, Layout, Größenwirkung)
 
 ## Verzeichnisbaum (ohne `.git`)
 
