@@ -2,6 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
+- Iterationsfokus: Default-Profile und Templates-Default-Archiv als projektweite Startdaten
 - Iterationsfokus: Diagnose-Service ausgelagert und Templates-Modul ergänzt
 
 ## Verzeichnisbaum (ohne `.git`)

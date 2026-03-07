@@ -128,6 +128,14 @@ Kurze Anleitung für sichere kleine Iterationen.
    - Enden bekommen automatisch Punkt, wenn keiner vorhanden ist,
    - lange Texte brechen ohne Layout-Bruch um.
 
+
+### Default-Profile und Template-Archiv prüfen (neu)
+1. Seite neu laden und einen Ordner wählen.
+2. Im Bereich **Profil-Archiv** das Profil **HardTechno**, **Chill** und **Hörspiele** nacheinander auswählen.
+3. Prüfen, ob in **Genres**, **Stimmungen** und **Stile** bereits mehrere unterschiedliche Starter-Einträge sichtbar sind.
+4. Auf **Export** klicken und im JSON prüfen, ob `templateArchive.categories` vorhanden ist.
+5. Ziel: Das Tool startet sofort mit brauchbaren Defaults für Musik-Profile und Vorlagen-Arbeit.
+
 ## Endprüfung (nur relevant)
 - Syntax prüfen: `node --check js/app.js`
 - Zusatz-Syntax: `node --check js/ui.js`
@@ -140,4 +148,5 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
+- Iterationsfokus: Default-Profile und Templates-Default-Archiv als sofort nutzbare Startbasis
 - Iterationsfokus: Diagnose-Service ausgelagert plus neues Templates-Modul mit Favoriten-Schnellwahl

@@ -76,6 +76,7 @@
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 - UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
+- Default-Profilbestand erweitert: Die drei Profile enthalten jetzt je breite, klar unterscheidbare Genre-/Mood-/Stil-Listen inklusive regionaler und Underground-Beispiele; zusätzlich ist ein professionell kategorisiertes Templates-Default-Archiv mit 9 Bereichen und je 5 Starter-Einträgen integriert.
 - Diagnose-Export aus `js/app.js` in `js/services/diagnosis-export.js` ausgelagert, damit `app.js` schlanker bleibt.
 - Neues Templates-Modul ergänzt: persistente Vorlagen mit Kategorie, Bearbeiten/Löschen, Favoriten und Schnellwahl-Kopieren.
 - Kopier-Feedback im Templates-Modul ergänzt: Meldung wird kurz angezeigt und verschwindet automatisch.
@@ -159,6 +160,11 @@
 - Patchgrund 2: Modularisierung verbessert durch neuen Service `ui-action-handlers` statt großer Inline-Handler in `app.js`.
 - Betroffene Dateien: `js/app.js`, `js/services/ui-action-handlers.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Aktionsausgabe geprüft.
+
+- Patchgrund 1: Nutzerwunsch umgesetzt, damit ein sofort nutzbares Default-Profil mit breitem Spektrum (Genres, Moods, Stile) projektseitig mitgeliefert wird.
+- Patchgrund 2: Neues Templates-Default-Archiv mit 9 Fachbereichen und je 5 professionell strukturierten Einträgen ergänzt, um Iterationen direkt praxisnah zu starten.
+- Betroffene Dateien: `js/services/profile-archive.js`, `data/profile-archive.json`, `data/project-structure.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS/JSON-Syntax und direkt betroffene Datenstruktur geprüft.
 - Patchgrund 1: App-Einstieg weiter entschlacken durch Auslagerung von `buildDiagnosisExport` in einen eigenen Service.
 - Patchgrund 2: Neues Templates-Modul für persistente Textbausteine/Promptvorlagen mit Favoriten-Schnellwahl und Copy-Feedback.
 - Betroffene Dateien: `js/app.js`, `js/services/diagnosis-export.js`, `js/services/templates-archive.js`, `js/services/ui-action-handlers.js`, `js/ui.js`, `js/state.js`, `index.html`, `css/app.css`, `data/templates-archive.json`, `tests/services/ui-action-handlers.smoke.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
