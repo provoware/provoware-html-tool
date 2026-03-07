@@ -18,6 +18,7 @@ import {
 } from './services/profile-archive.js';
 
 const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
+const DEFAULT_PROFILE = 'HardTechno';
 
 const readRememberedDirectoryName = () => {
   try {
@@ -87,9 +88,10 @@ const loadProfileArchive = async () => {
     logEvent('INFO', 'ARCHIVE_CREATED', 'Archivdatei wurde angelegt.');
   }
 
-  const selectedProfile = window.appState.selectedProfile || 'HardTechno';
+  const selectedProfile = window.appState.selectedProfile || DEFAULT_PROFILE;
   setState({
     profileArchive: archive,
+    selectedProfile,
     randomMix: archive.lastMix,
     profileStats: buildStats(archive, selectedProfile)
   });
@@ -101,9 +103,10 @@ const updateArchive = async (mutate, fallbackMessage = 'Archivaktion') => {
   const result = mutate(archive);
 
   addArchiveEvent(archive, result.ok ? 'INFO' : 'WARN', result.message, { code: result.code });
-  const selectedProfile = state.selectedProfile || 'HardTechno';
+  const selectedProfile = state.selectedProfile || DEFAULT_PROFILE;
   setState({
     profileArchive: archive,
+    selectedProfile,
     randomMix: archive.lastMix,
     profileStats: buildStats(archive, selectedProfile)
   });
@@ -166,7 +169,12 @@ const init = async () => {
 
   const loaded = await loadAllConfig();
   applyLoadedData(loaded.data);
-  setState({ rememberedProjectDirectoryName: readRememberedDirectoryName(), profileArchive: createDefaultArchive(), profileStats: buildStats(createDefaultArchive(), 'HardTechno') });
+  setState({
+    rememberedProjectDirectoryName: readRememberedDirectoryName(),
+    selectedProfile: DEFAULT_PROFILE,
+    profileArchive: createDefaultArchive(),
+    profileStats: buildStats(createDefaultArchive(), DEFAULT_PROFILE)
+  });
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
   const themeName = loaded.data.appConfig.defaultTheme;

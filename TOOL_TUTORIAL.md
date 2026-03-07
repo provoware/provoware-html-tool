@@ -10,6 +10,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Profil-Standard kurz prüfen (neu)
+1. Seite neu laden.
+2. Ohne Klick auf die Profil-Auswahl direkt einen Eintrag speichern.
+3. Danach im Profil **HardTechno** prüfen, ob der Eintrag dort sichtbar ist.
+4. Ziel: Es wird kein verstecktes Profil mit dem Namen `undefined` erzeugt.
+
 ### Vorlagen-Layout schnell prüfen
 1. Seite neu laden.
 2. Prüfen, ob oben ein durchgehendes Titelband sichtbar ist.
@@ -66,4 +72,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Design-Angleichung an Vorlagenlayout (Kachelstruktur + Darstellungszonen)
+- Iterationsfokus: Robustheit im Profil-Archiv (klarer Profil-Standard ohne `undefined`-Profil)
