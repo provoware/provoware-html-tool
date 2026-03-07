@@ -6,7 +6,7 @@
 ## Hoch
 [x] 2026-03-07 | js/services/project-selftest.js | Selbsttest logisch trennen: Existenzprüfung und Schreibprüfung nicht vermischen (Ordnerprobe aktuell über Schreibzugriff) | prüfen: Ablauf mit nur Leserechten vs. Schreibrechten vergleichen | fertig wenn: Existenzcheck ohne Schreibtest möglich ist
 [x] 2026-03-07 | js/services/project-selftest.js | `.probe`-Seiteneffekte vermeiden oder sicher löschen | prüfen: nach Selbsttest keine zusätzlichen Probe-Dateien im Projektordner | fertig wenn: Probe-Dateien gar nicht entstehen oder zuverlässig entfernt werden
-[ ] 2026-03-07 | js/services/project-selftest.js | `cleanupAfterSuccess` nur als erledigt markieren, wenn Funktion real existiert und genutzt wird | prüfen: Code enthält echte Cleanup-Implementierung plus Aufrufpfad | fertig wenn: Cleanup nachvollziehbar aktiv oder Punkt bleibt offen
+[x] 2026-03-07 | js/services/project-selftest.js | `cleanupAfterSuccess` nur als erledigt markieren, wenn Funktion real existiert und genutzt wird | prüfen: Code enthält echte Cleanup-Implementierung plus Aufrufpfad | fertig wenn: Cleanup nachvollziehbar aktiv oder Punkt bleibt offen
 [ ] 2026-03-07 | Services (direkt betroffen) | Import-/Export-Konsistenz der direkt betroffenen Services vollständig gegen reale Nutzung prüfen | prüfen: Exporte gegen Importe in `js/app.js` und direkten Services abgleichen | fertig wenn: keine ungenutzten/fehlenden Exporte in der Kette
 [x] 2026-03-07 | README.md | README-Status weiter an realen Projektzustand angleichen, falls an anderen Stellen noch Vollständigkeit suggeriert wird | prüfen: Statusabschnitt und Offene-Punkte-Abschnitt gegen `todo.txt` lesen | fertig wenn: keine falsche „alles fertig“-Aussage mehr
 

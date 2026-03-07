@@ -8,6 +8,18 @@ const deriveOverall = (checks) => {
   return 'green';
 };
 
+const runCleanupAfterWriteTest = async (cleanupAfterSuccess, context) => {
+  if (typeof cleanupAfterSuccess !== 'function') {
+    return null;
+  }
+  try {
+    const result = await cleanupAfterSuccess(context);
+    return { ok: true, data: result ?? null };
+  } catch (error) {
+    return { ok: false, error: String(error) };
+  }
+};
+
 export const runProjectSelftest = async (adapter, options = {}) => {
   const checks = [];
   const structure = options.projectStructure || { requiredDirectories: [], requiredFiles: [], writeTestRules: {} };
@@ -70,6 +82,14 @@ export const runProjectSelftest = async (adapter, options = {}) => {
     const read = write.ok ? await adapter.readText(testFile) : { ok: false };
     if (write.ok && read.ok && read.data.text === token) {
       checks.push(pass('Optionaler Schreibtest', 'WRITE_TEST_OK', 'Schreibtest war erfolgreich.'));
+      const cleanup = await runCleanupAfterWriteTest(options.cleanupAfterSuccess, { adapter, testFile, token });
+      if (cleanup) {
+        if (cleanup.ok) {
+          checks.push(pass('Aufräumen nach Schreibtest', 'WRITE_TEST_CLEANUP_OK', 'Testdatei wurde nach Erfolg bereinigt.', cleanup.data));
+        } else {
+          checks.push(warn('Aufräumen nach Schreibtest', 'WRITE_TEST_CLEANUP_FAILED', 'Aufräumen nach Schreibtest ist fehlgeschlagen.', { error: cleanup.error, testFile }));
+        }
+      }
     } else {
       checks.push(warn('Optionaler Schreibtest', 'WRITE_TEST_FAILED', 'Schreibtest ist fehlgeschlagen.'));
     }

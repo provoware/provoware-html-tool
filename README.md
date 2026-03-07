@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 8 (siehe `todo.txt`)
-- Offene Punkte: 7 (siehe `todo.txt`)
-- Fortschritt: 53%
+- Erledigte Punkte: 9 (siehe `todo.txt`)
+- Offene Punkte: 6 (siehe `todo.txt`)
+- Fortschritt: 60%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -36,9 +36,9 @@
   - `tests/start-files/start-import-resolution.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- Selbsttest trennt jetzt sauber Ordner-Existenzprüfung (`listDirectory`) und optionalen Schreibtest.
-- Keine `.probe`-Datei mehr bei der Ordnerprüfung (keine Nebenartefakte im Projektordner).
-- Neuer direkter Test `tests/services/project-selftest.test.js` für die geänderte Selbsttest-Logik.
+- Selbsttest trennt weiterhin sauber Ordner-Existenzprüfung (`listDirectory`) und optionalen Schreibtest.
+- `cleanupAfterSuccess` wird jetzt nur gewertet, wenn wirklich eine Funktion übergeben wurde.
+- Neuer direkter Testfall deckt den Cleanup-Pfad und den Fall ohne echte Funktion ab.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
 
 ## Laien-Befehle (unten)

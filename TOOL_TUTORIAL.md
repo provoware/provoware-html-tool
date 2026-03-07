@@ -10,12 +10,12 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Selbsttest besser lesen (Ordner vs. Schreiben)
-1. `Selbsttest starten` ausführen.
-2. Prüfen: Ordnerstatus zeigt jetzt nur, ob der Ordner lesbar/verfügbar ist.
-3. Optional: Schreibtest separat aktivieren (`runWriteTest`), wenn du Schreiben prüfen willst.
-4. Ziel: Du siehst klarer, ob nur Schreiben fehlt oder ob der Ordner selbst fehlt.
-5. Hinweis: Es werden keine `.probe`-Dateien mehr für die Ordnerprüfung erzeugt.
+### Cleanup nach Schreibtest bewusst nutzen
+1. `Selbsttest starten` ausführen (optional mit Schreibtest).
+2. Wenn du danach aufräumen willst, `cleanupAfterSuccess` als **Funktion** übergeben.
+3. Wenn keine Funktion übergeben wird, gibt es bewusst keinen Cleanup-Status.
+4. Ziel: Kein falsches „erledigt“, wenn es gar kein echtes Cleanup gab.
+5. Hinweis: Die Ordnerprüfung bleibt getrennt vom Schreibtest.
 
 ## Kurzer Modul-Check
 1. `node --test tests/services/module-registry.test.js` ausführen.

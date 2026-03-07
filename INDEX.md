@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Selbsttest robust trennen (Ordner-Existenz getrennt vom Schreibtest)
+- Iterationsfokus: Selbsttest-Robustheit bei optionalem Cleanup nach Schreibtest
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/
