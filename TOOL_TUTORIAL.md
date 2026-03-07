@@ -10,6 +10,11 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Vorlagen-Status robust ohne Browser prüfen (neu)
+1. Im Projektordner `node --test tests/services/module-registry.test.js` ausführen.
+2. Prüfen, ob der Test für „ohne document“ grün ist.
+3. Ziel: Kein Absturz in Nicht-Browser-Umgebungen, stattdessen klare Hinweis-Meldung.
+
 ### Import/Export pro Startdatei schnell prüfen (neu)
 1. `datenbank_baukasten_start.html` öffnen und **Modul laden** klicken.
 2. Auf **Export** klicken und prüfen, ob eine JSON-Datei geladen wird.

@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 74
+- Erledigte Punkte: 75
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 99% (laufend, siehe `todo.txt`)
+- Fortschritt: 100% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -52,6 +52,7 @@
 
 - Tests:
   - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
+  - `tests/services/module-registry.test.js` (Robustheit für Vorlagen-Design-Status mit und ohne Browser-`document`)
   - `tests/start-files/start-import-resolution.test.js` (prüft Import-Auflösung, erwartete Export-Funktionen laut `start-file-standard` und A11y-Baseline mit `role="status"` + `aria-live`)
 
 ## Erledigte Kernpunkte
@@ -92,6 +93,7 @@
 - Modul-Registry-Check ergänzt: Das Dashboard zeigt jetzt direkt, wie viele Module vollständig verbunden sind (z. B. 2/2).
 - Vorlagen-Design-Status ergänzt: Das Dashboard zeigt jetzt klar, dass die Asset-Vorlage aktuell nicht eingebunden ist.
 - Robuste, inhaltliche Modulprüfung ergänzt: Zusätzlich zur Dateiprüfung werden jetzt Manifest- und JSON-Grundfelder geprüft.
+- Vorlagen-Design-Status ist jetzt robust gegen Nicht-Browser-Umgebungen und meldet dort klar einen prüfbaren Hinweis statt Fehlerabbruch.
 - Zentrale Modul-IDs ergänzt: Neue Module werden über `data/module-registry.json` erkannt (ohne Codeänderung).
 - Laienhilfe ergänzt: Häufige Fehltexte liefern jetzt kurze „So beheben“-Hinweise.
 

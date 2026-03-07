@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Startdatei-A11y-Baseline (`role="status"` + `aria-live`) und klare Dashboard-Ampel (Status + Modul/Archiv getrennt sichtbar)
+- Iterationsfokus: Robustheit für Vorlagen-Design-Status in Browser- und Node-Umgebung
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`
@@ -89,6 +89,7 @@
     - `modules/wiki_notiz_wissen/texts.json`
 - `tests/`
   - `tests/services/`
+    - `tests/services/module-registry.test.js`
     - `tests/services/ui-action-handlers.smoke.test.js`
   - `tests/start-files/`
     - `tests/start-files/start-import-resolution.test.js`
@@ -163,8 +164,9 @@
 64. `modules/wiki_notiz_wissen/manifest.json`
 65. `modules/wiki_notiz_wissen/schema.json`
 66. `modules/wiki_notiz_wissen/texts.json`
-67. `tests/services/ui-action-handlers.smoke.test.js`
-68. `tests/start-files/start-import-resolution.test.js`
-69. `todo.txt`
-70. `todo_kalender_erinnerung_start.html`
-71. `wiki_notiz_wissen_start.html`
+67. `tests/services/module-registry.test.js`
+68. `tests/services/ui-action-handlers.smoke.test.js`
+69. `tests/start-files/start-import-resolution.test.js`
+70. `todo.txt`
+71. `todo_kalender_erinnerung_start.html`
+72. `wiki_notiz_wissen_start.html`
