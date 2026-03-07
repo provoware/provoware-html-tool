@@ -443,6 +443,15 @@ body::before {
   grid-template-rows: auto 1fr;
 }
 
+.utility-cards {
+  gap: 10px;
+}
+
+.utility-card {
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(7, 15, 30, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
 .settings-group {
   border: 1px solid rgba(163, 184, 238, 0.5);
   border-radius: 10px;
@@ -1068,6 +1077,13 @@ body::before {
   --bg-panel-soft: rgba(18, 29, 48, 0.78);
   --text-main: #edf3ff;
   --text-muted: #c5d3ed;
+  --header-bg-start: rgba(17, 27, 43, 0.92);
+  --header-bg-end: rgba(20, 37, 64, 0.86);
+  --header-chip-bg-start: rgba(36, 54, 86, 0.8);
+  --header-chip-bg-end: rgba(18, 30, 52, 0.82);
+  --utility-card-bg-start: rgba(22, 34, 53, 0.8);
+  --utility-card-bg-end: rgba(13, 22, 36, 0.72);
+  --utility-card-border: rgba(178, 197, 235, 0.32);
   --accent: #3b82f6;
   --accent-strong: #1d4ed8;
   --header-action-focus-ring: 0 0 0 3px rgba(109, 166, 255, 0.5);
@@ -1116,13 +1132,18 @@ body::before {
 }
 
 .header {
-  background: linear-gradient(98deg, rgba(17, 27, 43, 0.92), rgba(20, 37, 64, 0.86));
+  background: linear-gradient(98deg, var(--header-bg-start), var(--header-bg-end));
   border-radius: 24px;
+}
+
+.header-intro {
+  display: grid;
+  gap: 4px;
 }
 
 .header-status-chip {
   border-color: rgba(176, 201, 244, 0.42);
-  background: linear-gradient(138deg, rgba(36, 54, 86, 0.8), rgba(18, 30, 52, 0.82));
+  background: linear-gradient(138deg, var(--header-chip-bg-start), var(--header-chip-bg-end));
 }
 
 .header-status-chip:hover,
@@ -1185,8 +1206,8 @@ body::before {
 .footer-box,
 .status-list > div,
 .log-list li {
-  border-color: rgba(178, 197, 235, 0.32);
-  background: linear-gradient(150deg, rgba(22, 34, 53, 0.8), rgba(13, 22, 36, 0.72));
+  border-color: var(--utility-card-border);
+  background: linear-gradient(150deg, var(--utility-card-bg-start), var(--utility-card-bg-end));
   color: #e6eeff;
 }
 
@@ -1261,7 +1282,30 @@ select {
 }
 
 @media (max-width: 980px) {
+  .app {
+    grid-template-columns: 1fr;
+    width: calc(100vw - 14px);
+    min-height: auto;
+    height: auto;
+    transform: none;
+    grid-template-areas:
+      "header"
+      "main"
+      "nav"
+      "widgets"
+      "footer";
+  }
+
   .startup-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .utility-cards {
     grid-template-columns: 1fr;
   }
 

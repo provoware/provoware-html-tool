@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 22 (siehe `todo.txt`)
-- Offene Punkte: 3 (siehe `todo.txt`)
-- Fortschritt: 88%
+- Erledigte Punkte: 24 (siehe `todo.txt`)
+- Offene Punkte: 1 (siehe `todo.txt`)
+- Fortschritt: 96%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -12,6 +12,7 @@
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
   - `css/app.css` (inkl. farbliche Hilfehinweise, Tastatur- und Drag&Drop-Stati)
+  - Neu: Farbtoken für Header und Utility-Karten (kühl-blau/grau, zentral über `:root` steuerbar)
   - Neu: `DESIGN_VORLAGE.md` (tiefe Bildanalyse mit Farb- und Layout-Token als Umsetzungs-Vorlage)
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
@@ -40,6 +41,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Priorität A umgesetzt: Farbwelt über CSS-Token geschärft und Header-Mikrostruktur minimal verbessert (ohne JS-Ankeränderung).
+- Rechte Spalte in Utility-Karten gegliedert; unter 980px gezielt auf Layoutbruch geprüft und stabilisiert.
 - Design-Soll-Ist-Abgleich geschärft: `DESIGN_VORLAGE.md` enthält jetzt einen messbaren 7-Punkte-Check mit klaren Lücken und Prioritäten.
 - Drei offene, klar abgegrenzte Design-Folgeaufgaben wurden in `todo.txt` geparkt (Farbwelt, Header-Mikrostruktur, Utility-Kartenaufteilung).
 - Ergebnis: Fokus liegt jetzt auf den kleinsten, visuellen Hebeln mit hoher Wirkung, ohne stabile JS-Logik anzufassen.
@@ -131,7 +134,9 @@
 
 
 ## Kurze Empfehlungsliste (unten, aktualisiert)
-1. Nutze bei jedem Sitzungsende den neuen Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
-2. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
-3. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
-4. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.
+1. Nutze die neuen Farbtoken in `css/app.css`, wenn du Farben weiter abstimmst (ein Ort statt vieler Einzelwerte).
+2. Prüfe nach Layout-Änderungen kurz die 980px-Ansicht, damit Utility-Karten mobil stabil bleiben.
+3. Nutze bei jedem Sitzungsende den neuen Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
+4. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
+5. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
+6. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.

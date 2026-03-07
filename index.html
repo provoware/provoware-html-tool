@@ -14,7 +14,7 @@
     <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
     <div id="app" class="app" data-layout-mode="standard">
       <header class="header panel" aria-label="Kopfbereich">
-        <div>
+        <div class="header-intro">
           <h1 id="app-title">👋 Willkommen zurück!</h1>
           <p id="app-subtitle">Dein kreatives Dashboard</p>
         </div>
@@ -120,8 +120,8 @@
         <div class="sidebar-head">
           <h2 class="panel-title" id="status-title">Projektinfos &amp; Hilfe</h2>
         </div>
-        <div class="sidebar-body">
-          <section class="settings-group" aria-label="Tool-Einstellungen und Tests">
+        <div class="sidebar-body utility-cards">
+          <section class="settings-group utility-card" aria-label="Tool-Einstellungen und Tests">
             <h3>Tool-Einstellungen und Tests</h3>
             <div class="settings-actions">
               <button id="action-select-dir" class="btn btn-primary" type="button">Ordner wählen</button>
@@ -134,19 +134,19 @@
             </div>
             <label class="checkline"><input id="a11y-quiet-mode" type="checkbox" /> Ruhiger Screenreader-Modus</label>
           </section>
-          <section class="settings-group" aria-label="Stabilitätsstatus">
+          <section class="settings-group utility-card" aria-label="Stabilitätsstatus">
             <h3>Stabilitätsstatus</h3>
-          <dl class="status-list">
-            <div><dt>Ordner</dt><dd id="status-folder">-</dd></div>
-            <div><dt>Lesen</dt><dd id="status-read">-</dd></div>
-            <div><dt>Schreiben</dt><dd id="status-write">-</dd></div>
-            <div><dt>Struktur</dt><dd id="status-structure">-</dd></div>
-            <div><dt>Letzter Test</dt><dd id="status-last-test">-</dd></div>
-            <div><dt>Gesamtampel</dt><dd id="status-overall">-</dd></div>
-            <div><dt>Layoutmodus</dt><dd id="status-layout">-</dd></div>
-          </dl>
+            <dl class="status-list">
+              <div><dt>Ordner</dt><dd id="status-folder">-</dd></div>
+              <div><dt>Lesen</dt><dd id="status-read">-</dd></div>
+              <div><dt>Schreiben</dt><dd id="status-write">-</dd></div>
+              <div><dt>Struktur</dt><dd id="status-structure">-</dd></div>
+              <div><dt>Letzter Test</dt><dd id="status-last-test">-</dd></div>
+              <div><dt>Gesamtampel</dt><dd id="status-overall">-</dd></div>
+              <div><dt>Layoutmodus</dt><dd id="status-layout">-</dd></div>
+            </dl>
           </section>
-          <section class="settings-group archive-overview" aria-label="Archiv-Übersicht">
+          <section class="settings-group utility-card archive-overview" aria-label="Archiv-Übersicht">
             <h3>Archiv-Übersicht</h3>
             <dl class="status-list archive-overview-list">
               <div><dt>Profil</dt><dd id="archive-overview-profile">-</dd></div>
