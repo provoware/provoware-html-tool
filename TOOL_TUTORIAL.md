@@ -10,6 +10,14 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Vorlagen-Layout schnell prüfen
+1. Seite neu laden.
+2. Prüfen, ob oben ein durchgehendes Titelband sichtbar ist.
+3. Prüfen, ob links die hohe Navigationsleiste klar getrennt ist.
+4. Prüfen, ob in der Mitte die große Arbeitsfläche mit feinem Raster sichtbar ist.
+5. Prüfen, ob rechts die eigene Statuskachel sichtbar ist.
+6. Prüfen, ob unten die Log-Zone als Segment-Fußleiste erscheint.
+
 ### Profil-Archiv und Zufallsmix schnell nutzen
 1. Einen Ordner wählen.
 2. Im Bereich **Profil-Archiv** ein Profil wählen (z. B. HardTechno).
@@ -58,4 +66,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Profil-Archiv mit Zufallsmix und JSON-Persistenz
+- Iterationsfokus: Design-Angleichung an Vorlagenlayout (Kachelstruktur + Darstellungszonen)
