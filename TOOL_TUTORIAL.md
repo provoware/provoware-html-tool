@@ -134,6 +134,15 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Auf **☆** klicken und prüfen, ob oben bei **Favoriten Schnellwahl** ein Button entsteht.
 5. Auf den Favoriten-Button klicken und prüfen, ob ein kurzes Kopier-Feedback erscheint und nach wenigen Sekunden wieder verschwindet.
 
+
+### Dashboard 3 Notizzeilen kurz prüfen (neu)
+1. Einen Ordner wählen.
+2. Im Modul **Dashboard 3: Textsammler** den Titel in einer Zeile bei Bedarf anpassen.
+3. Einen kurzen Eintrag tippen und mit **Enter** speichern.
+4. Danach einen zweiten Eintrag tippen und mit **Speichern** sichern.
+5. Erwartung: Feedback meldet erst „Neue Datei erstellt …“, danach „Eintrag angehängt …“.
+6. Im Projektordner prüfen: Datei liegt unter `data/dashboard3-notes/<Titel>.txt`.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -153,7 +162,6 @@ Kurze Anleitung für sichere kleine Iterationen.
    - `✖` für rot.
 4. Im Feld **Gesamtampel** prüfen, ob Symbol und Wort zusammen angezeigt werden (z. B. `⚠ gelb`).
 
-### Auto-Formatierung prüfen
 1. Seite neu laden.
 2. **Selbsttest starten** klicken.
 3. In **Startstatus**, **Prüfergebnisse** und **Letzte Meldungen** prüfen:
@@ -190,4 +198,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Aktualisiert: 2026-03-07
 - Iterationsfokus: To-do-Modul robust für Aufgabenfluss und Statusverwaltung erweitert
 - Iterationsfokus: Default-Profile und Templates-Default-Archiv als sofort nutzbare Startbasis
-- Iterationsfokus: Diagnose-Service ausgelagert plus neues Templates-Modul mit Favoriten-Schnellwahl
+- Iterationsfokus: Dashboard 3 Textsammler mit titelbasierten Einzeilen-Dateien (Enter + Speichern, Anfügen mit Feedback)

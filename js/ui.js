@@ -228,6 +228,34 @@ export const bindUiActions = (actions) => {
     });
   });
 
+  [0, 1, 2].forEach((rowIndex) => {
+    byId(`dashboard-note-title-${rowIndex}`)?.addEventListener('input', (event) => {
+      actions.onDashboardNoteChangeTitle({ rowIndex, title: event.target.value || '' });
+    });
+
+    byId(`dashboard-note-input-${rowIndex}`)?.addEventListener('input', (event) => {
+      actions.onDashboardNoteChangeInput({ rowIndex, value: event.target.value || '' });
+    });
+
+    byId(`dashboard-note-save-${rowIndex}`)?.addEventListener('click', async () => {
+      await actions.onDashboardNoteSave({
+        rowIndex,
+        title: byId(`dashboard-note-title-${rowIndex}`)?.value || '',
+        value: byId(`dashboard-note-input-${rowIndex}`)?.value || ''
+      });
+    });
+
+    byId(`dashboard-note-input-${rowIndex}`)?.addEventListener('keydown', async (event) => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      await actions.onDashboardNoteSave({
+        rowIndex,
+        title: byId(`dashboard-note-title-${rowIndex}`)?.value || '',
+        value: event.currentTarget?.value || ''
+      });
+    });
+  });
+
   byId('archive-list')?.addEventListener('click', async (event) => {
     const editCategory = event.target.getAttribute('data-edit');
     const deleteCategory = event.target.getAttribute('data-delete');
@@ -414,7 +442,14 @@ export const render = () => {
     archiveList.innerHTML = categories.map((category) => `<section class="archive-category"><h4>${category}</h4><ul>${renderCategoryList(state.profileArchive, state.selectedProfile, category) || '<li>-</li>'}</ul></section>`).join('');
   }
 
-  setText('mix-output', state.randomMix?.text || '-');
+  const noteRows = state.dashboardNotes?.rows || [];
+  noteRows.forEach((row, rowIndex) => {
+    const titleField = byId(`dashboard-note-title-${rowIndex}`);
+    if (titleField && document.activeElement !== titleField) titleField.value = row.title || '';
+    const inputField = byId(`dashboard-note-input-${rowIndex}`);
+    if (inputField && document.activeElement !== inputField) inputField.value = row.input || '';
+    setText(`dashboard-note-feedback-${rowIndex}`, row.feedback || '-');
+  });
 
   setText('module-registry-summary', state.moduleRegistry?.summary || '-');
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');

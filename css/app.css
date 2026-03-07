@@ -647,6 +647,26 @@ body::before {
   font-weight: 600;
 }
 
+.dashboard-notes {
+  border: 1px solid var(--grid-line);
+  border-radius: 9px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.dashboard-note-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(180px, 1.4fr) auto;
+  gap: 8px;
+  align-items: end;
+  margin-top: 8px;
+}
+
+.dashboard-note-row .sidebar-summary {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
 .archive-events li span {
   color: var(--text-muted);
   margin-right: 6px;

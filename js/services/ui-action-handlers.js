@@ -5,6 +5,25 @@ import { filesystemAdapter } from '../adapters/filesystem-adapter.js';
 const DEFAULT_PROFILE = 'HardTechno';
 const TEXT_FILE_EXTENSIONS = new Set(['txt', 'md', 'json', 'js', 'css', 'html', 'csv', 'xml', 'yml', 'yaml', 'log']);
 
+const DASHBOARD_NOTES_BASE_PATH = 'data/dashboard3-notes';
+const DASHBOARD_NOTE_DEFAULTS = ['pppoppi details ideen', 'Favoriten Genres', 'Templates-Input-Pool'];
+const DASHBOARD_NOTE_FILE_EXTENSION = '.txt';
+
+const withDefaultDashboardRows = (rows = []) => DASHBOARD_NOTE_DEFAULTS.map((title, index) => ({
+  title: rows[index]?.title || title,
+  input: rows[index]?.input || '',
+  feedback: rows[index]?.feedback || '-'
+}));
+
+const sanitizeFileName = (title = '') => String(title || '').trim().replace(/[\/:*?"<>|]/g, '_');
+
+const updateDashboardRowState = (setState, getState, rowIndex, patch = {}) => {
+  const rows = withDefaultDashboardRows(getState().dashboardNotes?.rows || []);
+  if (!rows[rowIndex]) return;
+  rows[rowIndex] = { ...rows[rowIndex], ...patch };
+  setState({ dashboardNotes: { basePath: DASHBOARD_NOTES_BASE_PATH, rows } });
+};
+
 const normalizeRelativePath = (path = '') => String(path || '').replaceAll('\\', '/').replace(/^\/+|\/+$/g, '');
 
 const joinPath = (basePath, fileName) => {
@@ -198,6 +217,74 @@ export const createUiActionHandlers = ({
   },
   onEditorChangeContent: (content) => {
     setState({ editorContent: content, editorDirty: true });
+  },
+  onDashboardNoteChangeTitle: ({ rowIndex, title }) => {
+    updateDashboardRowState(setState, getState, rowIndex, { title });
+  },
+  onDashboardNoteChangeInput: ({ rowIndex, value }) => {
+    updateDashboardRowState(setState, getState, rowIndex, { input: value });
+  },
+  onDashboardNoteSave: async ({ rowIndex, title, value }) => {
+    const normalizedTitle = String(title || '').trim();
+    const normalizedValue = String(value || '').trim();
+    if (!normalizedTitle) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_TITLE_MISSING', message: 'Titel fehlt.' };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      logEvent('WARN', result.code, result.message, { rowIndex });
+      return result;
+    }
+    if (!normalizedValue) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_VALUE_MISSING', message: 'Eintrag fehlt.' };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      logEvent('WARN', result.code, result.message, { rowIndex, title: normalizedTitle });
+      return result;
+    }
+
+    const safeFileName = sanitizeFileName(normalizedTitle);
+    if (!safeFileName) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_FILENAME_INVALID', message: 'Titel ist als Dateiname ungültig.' };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      logEvent('WARN', result.code, result.message, { rowIndex, title: normalizedTitle });
+      return result;
+    }
+
+    const filePath = `${DASHBOARD_NOTES_BASE_PATH}/${safeFileName}${DASHBOARD_NOTE_FILE_EXTENSION}`;
+    const exists = await filesystemAdapter.fileExists(filePath);
+    if (!exists.ok) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_EXISTS_CHECK_FAILED', message: 'Dateiprüfung fehlgeschlagen.', data: exists.data };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      logEvent('WARN', result.code, result.message, { rowIndex, title: normalizedTitle, filePath });
+      return result;
+    }
+
+    let previous = '';
+    if (exists.data?.exists) {
+      const loaded = await filesystemAdapter.readText(filePath);
+      if (!loaded.ok) {
+        const result = { ok: false, code: 'DASHBOARD_NOTE_READ_FAILED', message: 'Datei konnte nicht gelesen werden.', data: loaded.data };
+        updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+        logEvent('WARN', result.code, result.message, { rowIndex, filePath });
+        return result;
+      }
+      previous = loaded.data?.text || '';
+    }
+
+    const nextText = previous ? `${previous}
+${normalizedValue}` : normalizedValue;
+    const saved = await filesystemAdapter.writeText(filePath, nextText);
+    if (!saved.ok) {
+      const result = { ok: false, code: 'DASHBOARD_NOTE_SAVE_FAILED', message: 'Eintrag konnte nicht gespeichert werden.', data: saved.data };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      logEvent('WARN', result.code, result.message, { rowIndex, filePath });
+      return result;
+    }
+
+    const message = exists.data?.exists
+      ? `Eintrag angehängt: ${safeFileName}${DASHBOARD_NOTE_FILE_EXTENSION}`
+      : `Neue Datei erstellt: ${safeFileName}${DASHBOARD_NOTE_FILE_EXTENSION}`;
+    updateDashboardRowState(setState, getState, rowIndex, { title: normalizedTitle, input: '', feedback: message });
+    logEvent('INFO', exists.data?.exists ? 'DASHBOARD_NOTE_APPENDED' : 'DASHBOARD_NOTE_CREATED', message, { rowIndex, filePath });
+    return { ok: true, code: exists.data?.exists ? 'DASHBOARD_NOTE_APPENDED' : 'DASHBOARD_NOTE_CREATED', message, data: { filePath } };
   },
   onSaveEditorFile: async () => {
     const state = getState();

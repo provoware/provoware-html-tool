@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Genres-Modul nutzerfreundlich optimiert (Scrollbar statt Modulwachstum, modernere Archiv-Optik)
+- Iterationsfokus: Dashboard 3 Textsammler mit titelbasierten Einzeilen-Dateien und Datei-Anhängen
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`
@@ -18,6 +18,8 @@
   - `css/app.css`
 - `data/`
   - `data/app-config.json`
+  - `data/dashboard3-notes/`
+    - `data/dashboard3-notes/.gitkeep`
   - `data/module-registry.json`
   - `data/profile-archive.json`
   - `data/project-structure.json`
@@ -30,6 +32,7 @@
     - `js/adapters/browser-filesystem.js`
     - `js/adapters/desktop-filesystem.js`
     - `js/adapters/filesystem-adapter.js`
+  - `js/app.js`
   - `js/services/`
     - `js/services/config-loader.js`
     - `js/services/diagnosis-export.js`
@@ -40,7 +43,6 @@
     - `js/services/startup-check.js`
     - `js/services/templates-archive.js`
     - `js/services/ui-action-handlers.js`
-  - `js/app.js`
   - `js/state.js`
   - `js/status-visuals.js`
   - `js/ui.js`
@@ -77,43 +79,44 @@
 6. `assets/js/core.js`
 7. `css/app.css`
 8. `data/app-config.json`
-9. `data/module-registry.json`
-10. `data/profile-archive.json`
-11. `data/project-structure.json`
-12. `data/templates-archive.json`
-13. `data/themes.json`
-14. `data/ui_texts.json`
-15. `index.html`
-16. `js/adapters/browser-filesystem.js`
-17. `js/adapters/desktop-filesystem.js`
-18. `js/adapters/filesystem-adapter.js`
-19. `js/app.js`
-20. `js/services/config-loader.js`
-21. `js/services/diagnosis-export.js`
-22. `js/services/logger.js`
-23. `js/services/module-registry.js`
-24. `js/services/profile-archive.js`
-25. `js/services/project-selftest.js`
-26. `js/services/startup-check.js`
-27. `js/services/templates-archive.js`
-28. `js/services/ui-action-handlers.js`
-29. `js/state.js`
-30. `js/status-visuals.js`
-31. `js/ui.js`
-32. `modules/datenbank_baukasten/config.json`
-33. `modules/datenbank_baukasten/logic.js`
-34. `modules/datenbank_baukasten/manifest.json`
-35. `modules/datenbank_baukasten/schema.json`
-36. `modules/datenbank_baukasten/texts.json`
-37. `modules/todo_kalender_erinnerung/config.json`
-38. `modules/todo_kalender_erinnerung/logic.js`
-39. `modules/todo_kalender_erinnerung/manifest.json`
-40. `modules/todo_kalender_erinnerung/schema.json`
-41. `modules/todo_kalender_erinnerung/texts.json`
-42. `modules/wiki_notiz_wissen/config.json`
-43. `modules/wiki_notiz_wissen/logic.js`
-44. `modules/wiki_notiz_wissen/manifest.json`
-45. `modules/wiki_notiz_wissen/schema.json`
-46. `modules/wiki_notiz_wissen/texts.json`
-47. `tests/services/ui-action-handlers.smoke.test.js`
-48. `todo.txt`
+9. `data/dashboard3-notes/.gitkeep`
+10. `data/module-registry.json`
+11. `data/profile-archive.json`
+12. `data/project-structure.json`
+13. `data/templates-archive.json`
+14. `data/themes.json`
+15. `data/ui_texts.json`
+16. `index.html`
+17. `js/adapters/browser-filesystem.js`
+18. `js/adapters/desktop-filesystem.js`
+19. `js/adapters/filesystem-adapter.js`
+20. `js/app.js`
+21. `js/services/config-loader.js`
+22. `js/services/diagnosis-export.js`
+23. `js/services/logger.js`
+24. `js/services/module-registry.js`
+25. `js/services/profile-archive.js`
+26. `js/services/project-selftest.js`
+27. `js/services/startup-check.js`
+28. `js/services/templates-archive.js`
+29. `js/services/ui-action-handlers.js`
+30. `js/state.js`
+31. `js/status-visuals.js`
+32. `js/ui.js`
+33. `modules/datenbank_baukasten/config.json`
+34. `modules/datenbank_baukasten/logic.js`
+35. `modules/datenbank_baukasten/manifest.json`
+36. `modules/datenbank_baukasten/schema.json`
+37. `modules/datenbank_baukasten/texts.json`
+38. `modules/todo_kalender_erinnerung/config.json`
+39. `modules/todo_kalender_erinnerung/logic.js`
+40. `modules/todo_kalender_erinnerung/manifest.json`
+41. `modules/todo_kalender_erinnerung/schema.json`
+42. `modules/todo_kalender_erinnerung/texts.json`
+43. `modules/wiki_notiz_wissen/config.json`
+44. `modules/wiki_notiz_wissen/logic.js`
+45. `modules/wiki_notiz_wissen/manifest.json`
+46. `modules/wiki_notiz_wissen/schema.json`
+47. `modules/wiki_notiz_wissen/texts.json`
+48. `tests/services/ui-action-handlers.smoke.test.js`
+49. `todo.txt`

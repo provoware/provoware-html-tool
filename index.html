@@ -114,31 +114,48 @@
 
           <article class="module-panel" data-panel="mix">
             <header class="module-head">
-              <h3>Zufallsmix</h3>
+              <h3>Dashboard 3: Textsammler</h3>
               <div class="module-controls">
                 <button type="button" class="panel-control" title="Fensteroption">—</button>
                 <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
               </div>
             </header>
             <div class="module-body">
-              <section class="mix-box">
-                <div class="mix-options">
-                  <label><input id="mix-include-genres" type="checkbox" checked /> Genres</label>
-                  <label><input id="mix-include-moods" type="checkbox" checked /> Stimmungen</label>
-                  <label><input id="mix-include-styles" type="checkbox" checked /> Stile</label>
+              <section class="dashboard-notes" aria-label="Einzeilige Titel-Eingaben">
+                <p class="dashboard-note">Jede Zeile speichert in einer eigenen Datei unter <code>data/dashboard3-notes</code>. Enter oder Speichern hängt Text an.</p>
+
+                <div class="dashboard-note-row" data-note-row="0">
+                  <label>Titel
+                    <input id="dashboard-note-title-0" type="text" value="pppoppi details ideen" />
+                  </label>
+                  <label>Eintrag
+                    <input id="dashboard-note-input-0" type="text" placeholder="Text eingeben" />
+                  </label>
+                  <button id="dashboard-note-save-0" class="btn-small btn-accent" type="button">Speichern</button>
+                  <p id="dashboard-note-feedback-0" class="sidebar-summary">-</p>
                 </div>
-                <div class="mix-amounts">
-                  <label>Genres Menge <input id="mix-amount-genres" type="number" min="1" value="1" /></label>
-                  <label>Stimmungen Menge <input id="mix-amount-moods" type="number" min="1" value="1" /></label>
-                  <label>Stile Menge <input id="mix-amount-styles" type="number" min="1" value="1" /></label>
+
+                <div class="dashboard-note-row" data-note-row="1">
+                  <label>Titel
+                    <input id="dashboard-note-title-1" type="text" value="Favoriten Genres" />
+                  </label>
+                  <label>Eintrag
+                    <input id="dashboard-note-input-1" type="text" placeholder="Text eingeben" />
+                  </label>
+                  <button id="dashboard-note-save-1" class="btn-small btn-accent" type="button">Speichern</button>
+                  <p id="dashboard-note-feedback-1" class="sidebar-summary">-</p>
                 </div>
-                <div class="mix-quick">
-                  <button type="button" class="btn-small" data-mix-quick="1">Schnell 1</button>
-                  <button type="button" class="btn-small" data-mix-quick="3">Schnell 3</button>
-                  <button type="button" class="btn-small" data-mix-quick="5">Schnell 5</button>
-                  <button id="mix-generate" type="button" class="btn-small btn-accent">Mix erzeugen</button>
+
+                <div class="dashboard-note-row" data-note-row="2">
+                  <label>Titel
+                    <input id="dashboard-note-title-2" type="text" value="Templates-Input-Pool" />
+                  </label>
+                  <label>Eintrag
+                    <input id="dashboard-note-input-2" type="text" placeholder="Text eingeben" />
+                  </label>
+                  <button id="dashboard-note-save-2" class="btn-small btn-accent" type="button">Speichern</button>
+                  <p id="dashboard-note-feedback-2" class="sidebar-summary">-</p>
                 </div>
-                <p id="mix-output" class="mix-output">-</p>
               </section>
             </div>
           </article>
