@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Startdialog für Schreibrechte (Abfrage + Merken)
+- Iterationsfokus: Laienfreundliche GitHub-Action-Empfehlungen (Basis + Ausbau)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/
