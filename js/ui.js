@@ -41,6 +41,15 @@ const formatPermissionStatus = (allowed) => {
   return formatStatusWithSymbol(allowed ? 'green' : 'red', formatStatusWord(allowed ? 'ok' : 'nein'));
 };
 
+const formatWritePermissionStatus = (permissionStatus) => {
+  const canRead = permissionStatus?.read;
+  const canWrite = permissionStatus?.write;
+  if (canRead === true && canWrite === false) {
+    return formatStatusWithSymbol('yellow', formatStatusWord('nur lesen'));
+  }
+  return formatPermissionStatus(canWrite);
+};
+
 const formatStructureStatus = (selftestResult) => {
   if (!selftestResult) return '-';
   const hasMissingFiles = Boolean(selftestResult.data?.missingFiles?.length);
@@ -191,7 +200,7 @@ export const render = () => {
   const folderText = selectedName || (rememberedName ? `${rememberedName} (zuletzt gewählt)` : '-');
   setText('status-folder', folderText);
   setText('status-read', formatPermissionStatus(state.permissionStatus?.read));
-  setText('status-write', formatPermissionStatus(state.permissionStatus?.write));
+  setText('status-write', formatWritePermissionStatus(state.permissionStatus));
   setText('status-structure', formatStructureStatus(state.selftestResult));
   setText('status-last-test', autoFormatText(state.selftestResult?.summary || '-'));
   setText('status-overall', formatOverallStatus(state.selftestResult?.overallStatus || 'red'));

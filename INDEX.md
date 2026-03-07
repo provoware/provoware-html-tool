@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Robustheit im Profil-Archiv (klarer Profil-Standard ohne `undefined`-Profil)
+- Iterationsfokus: Nutzerfreundlichkeit bei Rechten (klarer Hinweis für `nur lesen`)
 
 ## Verzeichnisbaum (ohne `.git`)
 

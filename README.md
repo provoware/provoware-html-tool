@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 45
-- Offene Punkte: 2
-- Fortschritt: 95.7%
+- Erledigte Punkte: 46
+- Offene Punkte: 1
+- Fortschritt: 97.9%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -56,7 +56,6 @@
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
-2. Erweiterte Rechteanzeige (nur Lesen) visuell deutlicher machen.
 
 ## Laien-Befehle unten
 - Status prüfen: `git status`
@@ -91,3 +90,7 @@
 - Patchgrund 2: Nutzerführung verbessert durch klaren Profil-Standardwert im App-Start.
 - Betroffene Dateien: `js/app.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Profil-Logik geprüft.
+- Patchgrund 1: Rechteanzeige bei `nur lesen` klarer gemacht, damit der Status ohne Rückfrage verständlich bleibt.
+- Patchgrund 2: Hilfe für Laien erweitert, damit die neue Anzeige direkt geprüft werden kann.
+- Betroffene Dateien: `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Status-Ausgabe geprüft.
