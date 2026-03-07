@@ -3,14 +3,24 @@
 ## Ziel der aktuellen Iteration
 Die offenen Punkte aus der früheren Grobplanung in eine kleine, umsetzbare Reihenfolge überführen.
 
+## Festgelegter Start-Scope (P1 abgeschlossen)
+1. Offline-fähiges Grundgerüst mit statischem Einstiegspunkt (`index.html`) vorbereiten.
+2. Schlanke Basis für Styles und UI-Struktur als Dashboard-Skelett festlegen.
+3. JavaScript-Core nur für Startfluss und Modul-Registrierung im Minimalumfang planen.
+4. Genau ein Muster-Modul `datenbank_baukasten` als Referenzmodul vorsehen.
+5. Modul-Mindestteile begrenzen auf: `manifest`, `config`, `texts`, `schema`, `logic`.
+6. Dokumentation im Start nur auf `README.md` + `todo.txt` begrenzen.
+7. Alle erweiterten Themen (Logging-Ausbau, Self-Repair-Ausbau, Export-Details) bleiben geparkt.
+
 ## Priorisierte offene Punkte (geordnet)
 
 ### P1 – Projekt-Scope auf Kernsystem eingrenzen
 - **Problem:** Die alte Liste mischt Zielbild, Vollstruktur und Umsetzungsdetails.
 - **Patchgrund:** Ohne klaren Scope entstehen zu große, nicht prüfbare Änderungen.
-- **Nächster Schritt:** Minimalen Startumfang schriftlich festlegen (Core + Dashboard-Skelett + 1 Modul-Muster).
-- **Prüfschritt:** Scope ist in 5–8 klaren Punkten beschrieben.
-- **Fertig-Kriterium:** Entscheidungen sind stabil und ohne Widerspruch zu README/AGENTS.
+- **Status:** Erledigt in dieser Iteration.
+- **Ergebnis:** Start-Scope ist in 7 klaren Punkten festgelegt.
+- **Prüfschritt:** Abgleich mit README durchgeführt.
+- **Fertig-Kriterium:** Erfüllt.
 
 ### P2 – Umsetzungsphasen in kleine Arbeitspakete schneiden
 - **Problem:** Die bisherigen Phasen sind groß und technisch überladen.
