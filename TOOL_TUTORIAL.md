@@ -10,6 +10,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Modernes Layout schnell prüfen (neu)
+1. Seite neu laden.
+2. Mit Maus über die Navigations-Buttons fahren und auf leichtes Hover-Feedback achten.
+3. Mit **Tab** in ein Eingabefeld springen und den klaren Fokusrahmen prüfen.
+4. Prüfen, ob Hauptbereiche ruhiger wirken (hellere Karten, klarere Trennung, besserer Kontrast).
+
 ### Nur-Lesen-Hinweis kurz prüfen (neu)
 1. Einen Ordner wählen, bei dem Lesen erlaubt ist, Schreiben aber blockiert ist.
 2. Danach **Selbsttest starten**.
@@ -85,4 +91,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Offenen Pflichtpunkt schließen (Diagnose-Export als optionales Modul)
+- Iterationsfokus: Design, Layout und Nutzerfreundlichkeit modern und übersichtlich verbessern

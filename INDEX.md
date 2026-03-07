@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Offenen Pflichtpunkt schließen (Diagnose-Export als optionales Modul)
+- Iterationsfokus: Design, Layout und Nutzerfreundlichkeit modern und übersichtlich verbessern
 
 ## Verzeichnisbaum (ohne `.git`)
 
