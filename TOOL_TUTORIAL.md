@@ -460,3 +460,13 @@ Auswertung immer gleich:
 - **Nicht bestanden**: Befehl endet mit Fehler.
 
 Kurzregel: Vor Freigabe immer genau diesen Ein-Befehl-Check ausführen.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Startfehler unter Node 18 vermeiden
+Wenn der Service-Schnelltest mit `Cannot use import statement outside a module` stoppt, nutze den Standardweg:
+1. `bash scripts/minimal-check.sh`
+
+Der Schnelltest läuft dort jetzt mit Modul-Flag (ESM = JavaScript-Module mit `import/export`).
+
+Kurzregel: Für den Service-Schnelltest immer das Skript nutzen, nicht den blanken `node --test`-Aufruf.
+
