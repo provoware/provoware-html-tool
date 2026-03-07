@@ -108,3 +108,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 ## Stand
 - Aktualisiert: 2026-03-07
 - Iterationsfokus: zentrale Modul-IDs + Laien-Fehlerhilfe
+- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen

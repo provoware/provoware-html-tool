@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 53
+- Erledigte Punkte: 52
 - Offene Punkte: 0
 - Fortschritt: 100%
 

@@ -3,6 +3,7 @@
 ## Stand
 - Aktualisiert: 2026-03-07
 - Iterationsfokus: zentrale Modul-IDs + Laien-Fehlerhilfe
+- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -97,3 +98,31 @@
 35. `modules/todo_kalender_erinnerung/schema.json`
 36. `modules/todo_kalender_erinnerung/texts.json`
 37. `todo.txt`
+9. `data/profile-archive.json`
+10. `data/project-structure.json`
+11. `data/themes.json`
+12. `data/ui_texts.json`
+13. `index.html`
+14. `js/adapters/browser-filesystem.js`
+15. `js/adapters/desktop-filesystem.js`
+16. `js/adapters/filesystem-adapter.js`
+17. `js/app.js`
+18. `js/services/config-loader.js`
+19. `js/services/logger.js`
+20. `js/services/module-registry.js`
+21. `js/services/project-selftest.js`
+22. `js/services/startup-check.js`
+23. `js/state.js`
+24. `js/status-visuals.js`
+25. `js/ui.js`
+26. `modules/datenbank_baukasten/config.json`
+27. `modules/datenbank_baukasten/logic.js`
+28. `modules/datenbank_baukasten/manifest.json`
+29. `modules/datenbank_baukasten/schema.json`
+30. `modules/datenbank_baukasten/texts.json`
+31. `modules/todo_kalender_erinnerung/config.json`
+32. `modules/todo_kalender_erinnerung/logic.js`
+33. `modules/todo_kalender_erinnerung/manifest.json`
+34. `modules/todo_kalender_erinnerung/schema.json`
+35. `modules/todo_kalender_erinnerung/texts.json`
+36. `todo.txt`
