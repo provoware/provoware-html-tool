@@ -3,6 +3,7 @@ import { getState } from './state.js';
 import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 import { initGuideToolsModule } from './modules/guide-tools-module.js';
 import { initDashboardClock } from './modules/dashboard-clock.js';
+import { escapeHtml } from './services/html-escape.js';
 
 const byId = (id) => document.getElementById(id);
 let lastA11yAnnouncement = '';
@@ -130,12 +131,6 @@ const buildDashboardInfo = (state) => {
   const archiveStats = renderStats(state.profileStats);
   return `Ampel: ${overall} | Module: ${moduleSummary} | Archiv: ${archiveStats}`;
 };
-
-const escapeHtml = (value) => String(value || '')
-  .replaceAll('&', '&amp;')
-  .replaceAll('<', '&lt;')
-  .replaceAll('>', '&gt;')
-  .replaceAll('"', '&quot;');
 
 const readStoredTodos = () => {
   try {
