@@ -30,6 +30,19 @@ const setText = (id, text) => {
 
 const statusClass = (status) => (status === 'green' ? 'check-ok' : status === 'yellow' ? 'check-warn' : 'check-error');
 
+const STATUS_VISUALS = {
+  green: { symbol: '✔', label: 'ok' },
+  yellow: { symbol: '⚠', label: 'gelb' },
+  red: { symbol: '✖', label: 'rot' }
+};
+
+const statusVisual = (status) => STATUS_VISUALS[status] || STATUS_VISUALS.red;
+
+const formatOverallStatus = (status) => {
+  const visual = statusVisual(status);
+  return `${visual.symbol} ${visual.label}`;
+};
+
 export const applyTheme = (themeTokens = {}) => {
   const map = {
     bg: '--bg',
@@ -97,13 +110,16 @@ export const render = () => {
   setText('status-write', formatStatusWord(state.permissionStatus?.write ? 'ok' : 'nein'));
   setText('status-structure', formatStatusWord(state.selftestResult?.data?.missingFiles?.length ? 'fehlt teilweise' : 'ok/unklar'));
   setText('status-last-test', autoFormatText(state.selftestResult?.summary || '-'));
-  setText('status-overall', formatStatusWord(state.selftestResult?.overallStatus || 'rot'));
+  setText('status-overall', formatOverallStatus(state.selftestResult?.overallStatus || 'red'));
   setText('status-layout', state.layoutMode || '-');
 
   const checksList = byId('checks-list');
   if (checksList) {
     const checks = state.selftestResult?.checks || [];
-    checksList.innerHTML = checks.map((check) => `<article class="check-item ${statusClass(check.status)}"><strong>${autoFormatText(check.name)}</strong><br><span>${autoFormatText(check.message)}</span></article>`).join('');
+    checksList.innerHTML = checks.map((check) => {
+      const visual = statusVisual(check.status);
+      return `<article class="check-item ${statusClass(check.status)}"><strong>${visual.symbol} ${autoFormatText(check.name)}</strong><br><span>${autoFormatText(check.message)}</span></article>`;
+    }).join('');
   }
 
   const logList = byId('log-list');

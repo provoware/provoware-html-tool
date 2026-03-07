@@ -10,6 +10,15 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Statussymbole schnell prüfen
+1. Seite neu laden.
+2. **Selbsttest starten** klicken.
+3. In **Prüfergebnisse** prüfen, ob vor jedem Check ein Symbol steht:
+   - `✔` für ok,
+   - `⚠` für gelb,
+   - `✖` für rot.
+4. Im Feld **Gesamtampel** prüfen, ob Symbol und Wort zusammen angezeigt werden (z. B. `⚠ gelb`).
+
 ### Auto-Formatierung prüfen
 1. Seite neu laden.
 2. **Selbsttest starten** klicken.

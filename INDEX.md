@@ -1,6 +1,6 @@
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Auto-Formatierung und Lesbarkeit in der Dashboard-Ausgabe
+- Iterationsfokus: Robuste Statusanzeige mit Symbolen (ok/gelb/rot)
 
 ## Verzeichnisbaum (ohne `.git`)
 
