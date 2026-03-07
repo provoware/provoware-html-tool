@@ -1,12 +1,12 @@
 :root {
-  --bg: #0f1424;
-  --bg-panel: rgba(255, 255, 255, 0.78);
-  --bg-panel-soft: rgba(226, 235, 255, 0.66);
-  --header: #2f4bd8;
-  --text-main: #eef2ff;
-  --text-muted: #4d5a78;
-  --accent: #5f7bff;
-  --accent-strong: #8d6cff;
+  --bg: #2a3328;
+  --bg-panel: rgba(210, 220, 202, 0.72);
+  --bg-panel-soft: rgba(164, 176, 151, 0.7);
+  --header: #5b674f;
+  --text-main: #e7ede2;
+  --text-muted: #4f5d4b;
+  --accent: #7c8b69;
+  --accent-strong: #8e7f65;
   --ok: #2ba96e;
   --warn: #f59e0b;
   --error: #d0456c;
@@ -27,11 +27,11 @@ body {
   margin: 0;
   font-family: Inter, system-ui, -apple-system, sans-serif;
   font-size: var(--font-base);
-  color: #1f2f4c;
+  color: #233124;
   background:
-    radial-gradient(circle at 4% 8%, rgba(110, 136, 255, 0.22), transparent 32%),
-    radial-gradient(circle at 95% 85%, rgba(106, 58, 191, 0.34), transparent 34%),
-    linear-gradient(145deg, #0b1120 0%, #111a33 56%, #172145 100%);
+    radial-gradient(circle at 4% 8%, rgba(143, 162, 128, 0.26), transparent 32%),
+    radial-gradient(circle at 95% 85%, rgba(121, 110, 87, 0.3), transparent 34%),
+    linear-gradient(145deg, #1f281f 0%, #2a342b 56%, #384539 100%);
 }
 
 body::before {
@@ -40,9 +40,9 @@ body::before {
   inset: -15% -8%;
   z-index: -1;
   background:
-    radial-gradient(circle at 20% 20%, rgba(138, 175, 255, 0.22), transparent 38%),
-    radial-gradient(circle at 80% 10%, rgba(174, 129, 255, 0.2), transparent 42%),
-    radial-gradient(circle at 70% 85%, rgba(83, 122, 255, 0.15), transparent 44%);
+    radial-gradient(circle at 20% 20%, rgba(180, 194, 160, 0.22), transparent 38%),
+    radial-gradient(circle at 80% 10%, rgba(155, 143, 116, 0.2), transparent 42%),
+    radial-gradient(circle at 70% 85%, rgba(112, 133, 102, 0.16), transparent 44%);
   filter: blur(8px);
 }
 
@@ -54,8 +54,8 @@ body::before {
   margin: 18px auto;
   padding: 14px;
   border-radius: 24px;
-  border: 1px solid rgba(176, 198, 255, 0.24);
-  background: rgba(13, 21, 44, 0.45);
+  border: 1px solid rgba(170, 186, 156, 0.28);
+  background: rgba(36, 46, 34, 0.55);
   backdrop-filter: blur(4px);
   box-shadow: var(--shadow);
   grid-template-columns: 250px minmax(680px, 1fr) 300px;
@@ -80,10 +80,10 @@ body::before {
 
 .panel {
   background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-soft));
-  border: 1px solid rgba(203, 218, 255, 0.62);
+  border: 1px solid rgba(173, 188, 160, 0.62);
   border-radius: var(--radius);
   padding: 14px;
-  box-shadow: 0 10px 24px rgba(20, 35, 75, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  box-shadow: 0 10px 24px rgba(26, 37, 24, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
 }
@@ -93,8 +93,8 @@ body::before {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 80% at 10% -10%, rgba(92, 126, 255, 0.13), transparent 60%),
-    repeating-linear-gradient(132deg, transparent 0 12px, rgba(255, 255, 255, 0.08) 12px 13px);
+    radial-gradient(120% 80% at 10% -10%, rgba(132, 153, 112, 0.16), transparent 60%),
+    repeating-linear-gradient(132deg, transparent 0 12px, rgba(235, 240, 229, 0.08) 12px 13px);
   opacity: 0.66;
   pointer-events: none;
 }
@@ -106,7 +106,7 @@ body::before {
   align-items: center;
   gap: var(--space-3);
   color: var(--text-main);
-  background: linear-gradient(110deg, rgba(42, 64, 196, 0.95), rgba(96, 85, 221, 0.88));
+  background: linear-gradient(110deg, rgba(89, 102, 76, 0.95), rgba(122, 113, 89, 0.9));
 }
 
 .header h1 {
@@ -165,8 +165,8 @@ body::before {
 .workspace-dashboard {
   padding: 8px 10px;
   border-radius: 12px;
-  border: 1px solid rgba(145, 165, 224, 0.45);
-  background: rgba(244, 248, 255, 0.66);
+  border: 1px solid rgba(147, 166, 133, 0.45);
+  background: rgba(219, 228, 208, 0.66);
   position: relative;
   z-index: 1;
 }
@@ -177,7 +177,7 @@ body::before {
 
 .dashboard-note {
   margin: 0;
-  color: #3b4b6a;
+  color: #40513f;
 }
 
 .panel-grid {
@@ -191,15 +191,15 @@ body::before {
 }
 
 .module-panel {
-  border: 1px solid rgba(162, 183, 240, 0.5);
+  border: 1px solid rgba(156, 175, 142, 0.5);
   border-radius: 12px;
-  background: rgba(246, 250, 255, 0.74);
+  background: rgba(227, 235, 218, 0.74);
   backdrop-filter: blur(2px);
   padding: 10px;
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 0;
-  box-shadow: 0 6px 18px rgba(20, 42, 96, 0.11);
+  box-shadow: 0 6px 18px rgba(30, 45, 28, 0.14);
 }
 
 .module-head {
@@ -208,13 +208,13 @@ body::before {
   justify-content: space-between;
   gap: 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(163, 183, 239, 0.44);
+  border-bottom: 1px solid rgba(154, 171, 140, 0.44);
 }
 
 .module-head h3 {
   margin: 0;
   font-size: 0.95rem;
-  color: #253a63;
+  color: #2f412f;
 }
 
 .module-controls {

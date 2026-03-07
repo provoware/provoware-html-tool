@@ -2,8 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: zentrale Modul-IDs + Laien-Fehlerhilfe
-- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen
+- Iterationsfokus: Camouflage-Farben in mittlerer Helligkeit
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -34,7 +33,6 @@
 │   │   ├── desktop-filesystem.js
 │   │   └── filesystem-adapter.js
 │   ├── app.js
-│   ├── status-visuals.js
 │   ├── services
 │   │   ├── config-loader.js
 │   │   ├── logger.js
@@ -43,6 +41,7 @@
 │   │   ├── project-selftest.js
 │   │   └── startup-check.js
 │   ├── state.js
+│   ├── status-visuals.js
 │   └── ui.js
 ├── modules
 │   ├── datenbank_baukasten
@@ -65,64 +64,37 @@
 2. `INDEX.md`
 3. `README.md`
 4. `TOOL_TUTORIAL.md`
-5. `assets/css/base.css`
-6. `assets/js/core.js`
-7. `css/app.css`
-8. `data/app-config.json`
-9. `data/module-registry.json`
-10. `data/profile-archive.json`
-11. `data/project-structure.json`
-12. `data/themes.json`
-13. `data/ui_texts.json`
-14. `index.html`
-15. `js/adapters/browser-filesystem.js`
-16. `js/adapters/desktop-filesystem.js`
-17. `js/adapters/filesystem-adapter.js`
-18. `js/app.js`
-19. `js/services/config-loader.js`
-20. `js/services/logger.js`
-21. `js/services/module-registry.js`
-22. `js/services/project-selftest.js`
-23. `js/services/startup-check.js`
-24. `js/state.js`
-25. `js/status-visuals.js`
-26. `js/ui.js`
-27. `modules/datenbank_baukasten/config.json`
-28. `modules/datenbank_baukasten/logic.js`
-29. `modules/datenbank_baukasten/manifest.json`
-30. `modules/datenbank_baukasten/schema.json`
-31. `modules/datenbank_baukasten/texts.json`
-32. `modules/todo_kalender_erinnerung/config.json`
-33. `modules/todo_kalender_erinnerung/logic.js`
-34. `modules/todo_kalender_erinnerung/manifest.json`
-35. `modules/todo_kalender_erinnerung/schema.json`
-36. `modules/todo_kalender_erinnerung/texts.json`
-37. `todo.txt`
-9. `data/profile-archive.json`
-10. `data/project-structure.json`
-11. `data/themes.json`
-12. `data/ui_texts.json`
-13. `index.html`
-14. `js/adapters/browser-filesystem.js`
-15. `js/adapters/desktop-filesystem.js`
-16. `js/adapters/filesystem-adapter.js`
-17. `js/app.js`
-18. `js/services/config-loader.js`
-19. `js/services/logger.js`
-20. `js/services/module-registry.js`
-21. `js/services/project-selftest.js`
-22. `js/services/startup-check.js`
-23. `js/state.js`
-24. `js/status-visuals.js`
-25. `js/ui.js`
-26. `modules/datenbank_baukasten/config.json`
-27. `modules/datenbank_baukasten/logic.js`
-28. `modules/datenbank_baukasten/manifest.json`
-29. `modules/datenbank_baukasten/schema.json`
-30. `modules/datenbank_baukasten/texts.json`
-31. `modules/todo_kalender_erinnerung/config.json`
-32. `modules/todo_kalender_erinnerung/logic.js`
-33. `modules/todo_kalender_erinnerung/manifest.json`
-34. `modules/todo_kalender_erinnerung/schema.json`
-35. `modules/todo_kalender_erinnerung/texts.json`
-36. `todo.txt`
+5. `index.html`
+6. `todo.txt`
+7. `assets/css/base.css`
+8. `assets/js/core.js`
+9. `css/app.css`
+10. `data/app-config.json`
+11. `data/module-registry.json`
+12. `data/profile-archive.json`
+13. `data/project-structure.json`
+14. `data/themes.json`
+15. `data/ui_texts.json`
+16. `js/app.js`
+17. `js/state.js`
+18. `js/status-visuals.js`
+19. `js/ui.js`
+20. `js/adapters/browser-filesystem.js`
+21. `js/adapters/desktop-filesystem.js`
+22. `js/adapters/filesystem-adapter.js`
+23. `js/services/config-loader.js`
+24. `js/services/logger.js`
+25. `js/services/module-registry.js`
+26. `js/services/profile-archive.js`
+27. `js/services/project-selftest.js`
+28. `js/services/startup-check.js`
+29. `modules/datenbank_baukasten/config.json`
+30. `modules/datenbank_baukasten/logic.js`
+31. `modules/datenbank_baukasten/manifest.json`
+32. `modules/datenbank_baukasten/schema.json`
+33. `modules/datenbank_baukasten/texts.json`
+34. `modules/todo_kalender_erinnerung/config.json`
+35. `modules/todo_kalender_erinnerung/logic.js`
+36. `modules/todo_kalender_erinnerung/manifest.json`
+37. `modules/todo_kalender_erinnerung/schema.json`
+38. `modules/todo_kalender_erinnerung/texts.json`

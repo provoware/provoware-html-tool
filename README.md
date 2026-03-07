@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 52
+- Erledigte Punkte: 53
 - Offene Punkte: 0
 - Fortschritt: 100%
 
@@ -66,6 +66,7 @@
 - Zentrale Modul-IDs ergänzt: Neue Module werden über `data/module-registry.json` erkannt (ohne Codeänderung).
 - Laienhilfe ergänzt: Häufige Fehltexte liefern jetzt kurze „So beheben“-Hinweise.
 
+- Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 ## Offene Punkte
 - Aktuell keine offenen Pflichtpunkte.
 
@@ -135,3 +136,7 @@
 - Betroffene Dateien: `data/module-registry.json`, `js/services/module-registry.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JSON/JS-Syntax und direkt betroffene Status-Ausgabe geprüft.
 
+- Patchgrund 1: Nutzerwunsch nach Camouflage-Farben zwischen Hell und Dunkel im gesamten Layout.
+- Patchgrund 2: Nutzerführung verbessert durch ruhigere Kontraste in Karten, Header und Hintergrund.
+- Betroffene Dateien: `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene CSS-Syntax und direkt betroffene UI-Ausgabe geprüft.

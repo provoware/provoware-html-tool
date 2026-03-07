@@ -72,6 +72,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 6. Neue Module zentral pflegen: In `data/module-registry.json` eine neue Modul-ID eintragen und Seite neu laden.
 7. Bei häufigen Fehlern auf den „Hilfe:“‑Teil im Status achten und den kurzen Schritt direkt umsetzen.
 
+### Camouflage-Farben schnell prüfen (neu)
+1. Seite neu laden.
+2. Prüfen, ob Hintergrund und Karten weder sehr hell noch sehr dunkel wirken.
+3. Prüfen, ob Header und Karten in gedeckten Grün-Braun-Tönen (Camouflage) erscheinen.
+4. Mit **Tab** auf Buttons gehen und prüfen, ob Lesbarkeit weiter klar bleibt.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -107,5 +113,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: zentrale Modul-IDs + Laien-Fehlerhilfe
-- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen
+- Iterationsfokus: Camouflage-Farben in mittlerer Helligkeit
