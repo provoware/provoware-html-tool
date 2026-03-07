@@ -40,6 +40,7 @@
         <section class="workspace-dashboard">
           <h2 class="panel-title" id="startup-title">Dashboard</h2>
           <p id="dashboard-info-note" class="dashboard-note">Das 3x3 Raster ist gleich groß aufgeteilt. Es startet bewusst nur mit einem Todo-Listenmodul.</p>
+          <p id="dashboard-datetime" class="dashboard-datetime">Datum und Uhrzeit: -</p>
         </section>
 
         <section class="panel-grid" aria-label="Aktive Module">
@@ -56,6 +57,36 @@
                   <button id="todo-add" class="btn-small btn-accent" type="button">Hinzufügen</button>
                 </div>
                 <ul id="todo-list" class="todo-list"></ul>
+              </section>
+            </div>
+          </article>
+
+          <article class="module-panel" data-panel="guide-tools" data-module-default="active">
+            <header class="module-head">
+              <h3>Anleitungen und Toolbeschreibungen</h3>
+              <div class="module-controls"></div>
+            </header>
+            <div class="module-body">
+              <section class="guide-tools-panel" aria-label="Anleitungen und Toolbeschreibungen">
+                <div class="guide-tools-index">
+                  <h4>Index</h4>
+                  <ol id="guide-tools-index-list"></ol>
+                </div>
+                <div class="guide-tools-content">
+                  <div id="guide-tools-sections" class="guide-tools-sections"></div>
+                  <form id="guide-tools-form" class="guide-tools-form">
+                    <label for="guide-tools-title">Titel</label>
+                    <input id="guide-tools-title" type="text" maxlength="80" placeholder="z. B. Erstes Setup" />
+                    <label for="guide-tools-description">Beschreibung</label>
+                    <textarea id="guide-tools-description" rows="3" maxlength="400" placeholder="Kurze, einfache Anleitung."></textarea>
+                    <div class="guide-tools-actions">
+                      <button id="guide-tools-save" class="btn-small btn-accent" type="submit">Speichern</button>
+                      <button id="guide-tools-move-up" class="btn-small" type="button">Nach oben</button>
+                      <button id="guide-tools-move-down" class="btn-small" type="button">Nach unten</button>
+                    </div>
+                    <p id="guide-tools-feedback" class="sidebar-summary">Status: bereit.</p>
+                  </form>
+                </div>
               </section>
             </div>
           </article>
