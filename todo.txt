@@ -2,9 +2,9 @@
 P2 und P3 sauber abschließen und die nächsten offenen Punkte klein halten.
 
 ## Aktueller Fortschritt
-- Erledigte Punkte gesamt: 7
+- Erledigte Punkte gesamt: 8
 - Offene Punkte gesamt: 1
-- Entwicklungsfortschritt: 85%
+- Entwicklungsfortschritt: 90%
 
 ## Priorisierte offene Punkte (geordnet)
 
@@ -21,6 +21,7 @@ P2 und P3 sauber abschließen und die nächsten offenen Punkte klein halten.
 3. `TOOL_TUTORIAL.md` um eine kurze Offline-Start-Prüfung erweitert.
 4. `INDEX.md` auf den vollständigen aktuellen Dateistand aktualisiert.
 5. Startlogik robuster gemacht (`DOMContentLoaded`-Fallback in `assets/js/core.js`).
+6. Verbindungsstatus im Startskript robust gemacht (online/offline-Events).
 
 ## Geparkte Folgepunkte (bewusst nicht Teil dieser Iteration)
 - Feingranulare Logging-Strategie für mehrere Logdateien.

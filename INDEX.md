@@ -1,4 +1,4 @@
-Stand: aktualisiert nach Robustheits-Optimierung im Startskript.
+Stand: aktualisiert nach Verbindungsstatus-Optimierung im Startskript.
 
 ## Verzeichnisbaum (ohne `.git`)
 

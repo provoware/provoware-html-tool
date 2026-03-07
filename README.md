@@ -1,9 +1,9 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 7
+- Erledigte Punkte gesamt: 8
 - Offene Punkte gesamt: 1
-- Entwicklungsfortschritt: 85%
+- Entwicklungsfortschritt: 90%
 
 ## Aktuelle Toolstruktur und Toolumfang (fehlerfrei umgesetzt)
 - Steuerdateien:
@@ -17,14 +17,14 @@
   - `assets/css/base.css` (Basislayout und einfache Lesbarkeit)
   - `assets/js/core.js` (minimaler Startfluss mit Statusanzeige)
 - Umfang dieser Iteration:
-  - Robustere Startinitialisierung in `assets/js/core.js` umgesetzt.
-  - Statustext wird auch bei später DOM-Bereitschaft zuverlässig gesetzt.
+  - Startstatus reagiert jetzt auf Online-/Offline-Wechsel in `assets/js/core.js`.
+  - Statustext passt sich automatisch an die Verbindungsart an.
   - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
 
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
 - Dashboard-Skelett ist als stabile Basis vorhanden.
-- Basis-Statuswechsel im JavaScript-Core ist aktiv.
+- Basis-Statuswechsel im JavaScript-Core ist aktiv und reagiert auf Verbindungswechsel.
 
 ## Nächste Schritte (kurz)
 1. Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
@@ -41,7 +41,7 @@
 
 ## Empfehlungsliste (kurz)
 - Nächstes Patchziel auf P4 begrenzen, damit das Modulmuster sauber entsteht.
-- In `core.js` eine kleine Modul-Liste erst nach P4 ergänzen, nicht vorher.
+- Verbindungsstatus-Texte in einfacher Sprache beibehalten.
 - `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
 
 ## Befehle für Laien (einfach)
