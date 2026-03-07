@@ -2,9 +2,9 @@
 
 ## Status oben
 - Erledigte Punkte: 27 (siehe `todo.txt`)
-- Offene Punkte: 0 (siehe `todo.txt`)
-- Fortschritt: 100%
-- Stand dieser Iteration: Template-IDs werden jetzt in `data-template-*`-Attributen sicher escaped, damit keine Attribut-Injektion über manipulierte IDs möglich ist.
+- Offene Punkte: 3 (siehe `todo.txt`)
+- Fortschritt: 90%
+- Stand dieser Iteration: Es gibt jetzt eine klare, kurze Release-Lückenliste für ein laienperfektes Release (nur direkte nächste Schritte).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -171,3 +171,14 @@
 4. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
 5. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
 6. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.
+
+## Was fehlt noch für ein laienperfektes Release?
+1. **Erststart-Dialog als 4-Schritt-Assistent ergänzen.**
+   - Warum: Neue Nutzer brauchen direkt bei Start eine klare Reihenfolge statt vieler Optionen.
+   - Fertig, wenn: Nach `./start.sh` ein kurzer „Was jetzt?“-Ablauf mit 4 klaren Schritten angezeigt wird.
+2. **Klaren Notfall-Button „Alles prüfen und reparieren” im UI ergänzen.**
+   - Warum: Laien sollen Probleme ohne Terminal-Befehl lösen können.
+   - Fertig, wenn: Klick startet die bekannte Startprüfung + zeigt einfache Ergebnisbox (ok/offen/fehler).
+3. **Release-Schnelltest für Laien als Ein-Befehl-Check dokumentieren und sichtbar machen.**
+   - Warum: Vor Freigabe braucht es einen festen, leicht merkbaren Abschluss-Check.
+   - Fertig, wenn: Der Befehl ist in README + Tutorial gleich benannt und mit „Bestanden/Nicht bestanden“ erklärt.
