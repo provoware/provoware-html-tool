@@ -1,13 +1,13 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 16 (siehe `todo.txt`)
-- Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 89%
+- Erledigte Punkte: 17 (siehe `todo.txt`)
+- Offene Punkte: 1 (siehe `todo.txt`)
+- Fortschritt: 94%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
-  - `laienstart.html` (**Team-Standard-Einstieg**, transparenter Startpfad)
+  - `start.sh` (**Team-Standard-Einstieg**, laiengerechte Startroutine mit Selbsthilfe)
   - `index.html` (Hauptoberfläche, wird nach erfolgreichem Start automatisch geöffnet)
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
@@ -29,7 +29,8 @@
 - **Tests und Checks**
   - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`, `tests/scripts-laienstart.dry-run.test.js`
   - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck, jetzt Node-18-kompatibel für ES-Module)
-  - `scripts/laienstart.sh` (vollautomatischer Shell-Start mit präventiver Self-Repair-Logik)
+  - `start.sh` (Hauptstart im Projektordner, delegiert an robuste Startroutine)
+  - `scripts/laienstart.sh` (Startroutine-Engine mit Vorvalidierung, Self-Repair und Erfolgsvalidierung)
 - **GitHub Workflows (Basis aktiv)**
   - `.github/workflows/ci.yml` (frühe Fehler durch Tests)
   - `.github/workflows/lint.yml` (frühe Syntax-/Stilfehler)
@@ -37,12 +38,15 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
-- `scripts/laienstart.sh` prüft jetzt vor dem Start, ob der Projektordner schreibbar ist. Bei Fehlern gibt es klare Handlungsoptionen in einfacher Sprache.
-- `scripts/laienstart.sh` nutzt einen freien-Port-Fallback und meldet klar: „Port X belegt, nutze Port Y“.
+- Neuer Hauptstart `start.sh` im Projektordner: ein Befehl für Laien ohne Pfadwissen.
+- `scripts/laienstart.sh` hat jetzt eine klare Vorvalidierung (Schreibrecht, JSON-Prüfung, Pflichtdateien) und meldet jeden Schritt verständlich.
+- `scripts/laienstart.sh` nutzt freien-Port-Fallback und meldet klar: „Port X ist belegt. Nutze stattdessen Port Y“.
+- Erfolgsvalidierung ergänzt: nach Serverstart wird geprüft, ob `index.html` wirklich erreichbar ist, sonst wird mit klarer Fehlermeldung abgebrochen.
 - `scripts/minimal-check.sh` prüft JS-Dateien jetzt mit `node --experimental-default-type=module --check`, damit ES-Module unter Node 18 korrekt als Modul-Syntax geprüft werden.
 - Dashboard erweitert: Plugin-Verwaltung mit Auswahlmenü, Aktivieren/Deaktivieren, Hilfe-Text und direkter Ergebnisliste.
 - Neue Default-Plugins: Zeichenzähler (Eingabe/Ausgabe) und einfache Rechtschreibprüfung mit Auto-Spracherkennung (Deutsch/Englisch/Französisch).
-- Neuer Shell-Einstieg `scripts/laienstart.sh`: liest Pflicht-Abhängigkeiten jetzt aktiv aus `data/laienstart-dependency-map.json`, versucht automatische Installation (apt/brew), erzeugt fehlende Standarddateien und startet danach lokal die Oberfläche.
+- Shell-Startkette auf `./start.sh` umgestellt; `laienstart.html` wurde als Einstieg entfernt.
+- Startroutine ergänzt intelligente Self-Repair für fehlende Pflichtdateien aus `data/laienstart-required-files.json`.
 - Präventive Self-Repair ergänzt: fehlende Kern-JSON-Dateien (`app-config`, Registry, Laienstart-Configs) werden mit sicheren Standard-Dummys erzeugt.
 - Neuer gezielter Shell-Test: `tests/scripts-laienstart.dry-run.test.js` prüft Dry-Run + Self-Repair bei fehlenden Dateien automatisch.
 - Startkette für Einsteiger vereinfacht: optionaler Browser-Start plus lokaler Webserver in einem Befehl.
@@ -75,10 +79,9 @@
 
 ## Laien-Befehle (unten)
 - Team-Start (empfohlen):
-  - `bash scripts/laienstart.sh`
-  - Nur prüfen ohne Start (Dry-Run): `bash scripts/laienstart.sh --dry-run`
+  - `./start.sh`
+  - Nur prüfen ohne Start (Dry-Run): `./start.sh --dry-run`
   - Bei Schreibrechtsfehler im Projektordner zuerst Rechte geben: `chmod u+w .`
-  - Alternativ: `laienstart.html` im Browser öffnen
 - App direkt öffnen (nur wenn Startcheck bereits ok ist):
   - `index.html` im Browser öffnen
 - Lokale Tests starten:

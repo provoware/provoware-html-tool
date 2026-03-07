@@ -30,6 +30,6 @@
     "requireStartupCheck": true,
     "selftestAsFirstStep": true,
     "blockModulesUntilReady": true,
-    "teamDefaultEntry": "laienstart.html"
+    "teamDefaultEntry": "start.sh"
   }
 }
