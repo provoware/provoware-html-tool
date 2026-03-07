@@ -14,6 +14,8 @@
   --shadow: 0 20px 42px rgba(9, 14, 34, 0.38);
   --radius: 16px;
   --focus: 0 0 0 3px rgba(126, 152, 255, 0.4);
+  --header-chip-focus-ring: 0 0 0 3px rgba(210, 227, 255, 0.58);
+  --header-chip-focus-border: rgba(233, 242, 255, 0.94);
   --grid-line: rgba(102, 126, 164, 0.2);
   --space-1: 8px;
   --space-2: 12px;
@@ -1125,6 +1127,11 @@ body::before {
   box-shadow:
     0 0 0 2px rgba(186, 210, 255, 0.32),
     inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
+.header-status-chip:focus-visible {
+  border-color: var(--header-chip-focus-border);
+  box-shadow: var(--header-chip-focus-ring), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .header p,
