@@ -10,17 +10,16 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### GitHub-Start mit nur 3 Workflows
-Aktiv sind jetzt bewusst nur diese drei Dateien:
-1. **CI (`.github/workflows/ci.yml`)**: startet Tests bei Push/PR.
-2. **Lint (`.github/workflows/lint.yml`)**: prüft JS-Syntax früh.
-3. **CodeQL (`.github/workflows/codeql.yml`)**: findet Sicherheitsrisiken.
+### Import-/Export-Schnellcheck für direkte Service-Kette
+Wenn `js/app.js` Services importiert, prüfe zuerst klein und gezielt:
+1. `node --test tests/services/import-export-consistency.test.js`
+2. Nur bei Bedarf danach weitere Service-Tests starten.
 
-Bewusst noch nicht aktiv:
-- `dependabot.yml` (Update-PRs)
-- `release.yml` (automatische Releases)
+Was der neue Test absichert:
+- erwartete Exporte aus `module-registry`, `startup-check`, `project-selftest` sind vorhanden
+- `filesystemAdapter` und `desktopFilesystemAdapter` bieten dieselben Kernmethoden
 
-Kurzregel: erst Basis stabil laufen lassen, dann ausbauen.
+Kurzregel: erst diesen Schnellcheck nutzen, dann breiter testen.
 
 ## Kurzer Doku-Check
 1. Prüfen, ob die Reihenfolge für Einsteiger verständlich ist.

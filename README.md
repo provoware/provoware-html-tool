@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 10 (siehe `todo.txt`)
-- Offene Punkte: 6 (siehe `todo.txt`)
-- Fortschritt: 63%
+- Erledigte Punkte: 11 (siehe `todo.txt`)
+- Offene Punkte: 5 (siehe `todo.txt`)
+- Fortschritt: 69%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -22,7 +22,7 @@
   - `data/laienstart-required-files.json` (konfigurierbare Dateiliste für den Startcheck)
   - `data/profile-archive.json`, `data/templates-archive.json`
 - **Tests**
-  - `tests/services/*.test.js`, `tests/adapters/*.test.js`, `tests/start-files/*.test.js`
+  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`
 - **GitHub Workflows (Basis aktiv)**
   - `.github/workflows/ci.yml` (frühe Fehler durch Tests)
   - `.github/workflows/lint.yml` (frühe Syntax-/Stilfehler)
@@ -30,10 +30,10 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
-- GitHub-Automation auf eine kleine, wartbare Basis gesetzt.
-- Nur drei Start-Workflows eingeführt: CI, Lint, CodeQL.
-- Dependabot und Release bewusst zurückgestellt, bis die Basis stabil läuft.
-- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
+- Offener Punkt zur Import-/Export-Konsistenz der direkt betroffenen Services abgeschlossen.
+- Neuer gezielter Test ergänzt: `tests/services/import-export-consistency.test.js`.
+- Statuswerte in `README.md` mit `todo.txt` synchronisiert.
+- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den aktuellen Stand gebracht.
 
 ## Laien-Befehle (unten)
 - Team-Start (empfohlen):
