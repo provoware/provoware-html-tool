@@ -5,6 +5,7 @@ import { filesystemAdapter } from './adapters/filesystem-adapter.js';
 import { runStartupCheck } from './services/startup-check.js';
 import { detectTemplateDesignStatus, loadModuleRegistry } from './services/module-registry.js';
 import { createUiActionHandlers } from './services/ui-action-handlers.js';
+import { buildDiagnosisExport } from './services/diagnosis-export.js';
 import { applyTheme, bindUiActions, detectLayoutMode, render } from './ui.js';
 import {
   ARCHIVE_PATH,
@@ -13,6 +14,11 @@ import {
   createDefaultArchive,
   normalizeArchive
 } from './services/profile-archive.js';
+import {
+  TEMPLATE_ARCHIVE_PATH,
+  createDefaultTemplateArchive,
+  normalizeTemplateArchive
+} from './services/templates-archive.js';
 
 const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
 const DEFAULT_PROFILE = 'HardTechno';
@@ -56,6 +62,14 @@ const saveArchiveToDisk = async (archive) => {
   const write = await filesystemAdapter.writeJson(ARCHIVE_PATH, archive);
   if (!write.ok) {
     logEvent('WARN', write.code, 'Archiv konnte nicht gespeichert werden.', write.data);
+  }
+  return write.ok;
+};
+
+const saveTemplateArchiveToDisk = async (archive) => {
+  const write = await filesystemAdapter.writeJson(TEMPLATE_ARCHIVE_PATH, archive);
+  if (!write.ok) {
+    logEvent('WARN', write.code, 'Vorlagen-Archiv konnte nicht gespeichert werden.', write.data);
   }
   return write.ok;
 };
@@ -114,6 +128,43 @@ const updateArchive = async (mutate, fallbackMessage = 'Archivaktion') => {
   return result;
 };
 
+const loadTemplateArchive = async () => {
+  const exists = await filesystemAdapter.fileExists(TEMPLATE_ARCHIVE_PATH);
+  if (!exists.ok) {
+    logEvent('WARN', exists.code, 'Vorlagen-Archivstatus konnte nicht gelesen werden.', exists.data);
+    return;
+  }
+
+  let archive = createDefaultTemplateArchive();
+  if (exists.data.exists) {
+    const loaded = await filesystemAdapter.readJson(TEMPLATE_ARCHIVE_PATH);
+    if (loaded.ok) {
+      archive = normalizeTemplateArchive(loaded.data);
+    }
+  } else {
+    await saveTemplateArchiveToDisk(archive);
+  }
+
+  setState({
+    templateArchive: archive,
+    templateDraft: { id: null, title: '', content: '', category: 'Textbaustein' }
+  });
+};
+
+const updateTemplateArchive = async (mutate, fallbackMessage = 'Vorlagenaktion') => {
+  const state = window.appState;
+  const archive = normalizeTemplateArchive(state.templateArchive || createDefaultTemplateArchive());
+  const result = mutate(archive);
+  setState({ templateArchive: archive });
+  logEvent(result.ok ? 'INFO' : 'WARN', result.code, result.message, result.data || null);
+  if (result.ok) {
+    await saveTemplateArchiveToDisk(archive);
+  } else {
+    logEvent('WARN', 'TEMPLATE_ACTION_SKIPPED', fallbackMessage);
+  }
+  return result;
+};
+
 const copyToClipboardSafe = async (text) => {
   try {
     await navigator.clipboard.writeText(text);
@@ -149,28 +200,6 @@ const ensureStructure = async () => {
   await runSelftest(false);
 };
 
-const buildDiagnosisExport = () => {
-  const state = window.appState;
-  return {
-    exportedAt: new Date().toISOString(),
-    app: {
-      title: state.uiTexts?.titles?.appTitle || 'ProvoWare Dashboard',
-      layoutMode: state.layoutMode || 'standard'
-    },
-    directory: {
-      selectedName: state.selectedProjectDirectory?.name || null,
-      rememberedName: state.rememberedProjectDirectoryName || null,
-      permissions: state.permissionStatus || null
-    },
-    selftest: state.selftestResult || null,
-    profile: {
-      selected: state.selectedProfile || DEFAULT_PROFILE,
-      stats: state.profileStats || null
-    },
-    logs: (state.logs || []).slice(0, 20)
-  };
-};
-
 const onResize = () => {
   const mode = detectLayoutMode(window.appState.config || {});
   setState({ layoutMode: mode });
@@ -188,7 +217,8 @@ const init = async () => {
     rememberedProjectDirectoryName: readRememberedDirectoryName(),
     selectedProfile: DEFAULT_PROFILE,
     profileArchive: createDefaultArchive(),
-    profileStats: buildStats(createDefaultArchive(), DEFAULT_PROFILE)
+    profileStats: buildStats(createDefaultArchive(), DEFAULT_PROFILE),
+    templateArchive: createDefaultTemplateArchive()
   });
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
@@ -206,11 +236,14 @@ const init = async () => {
     selectDirectory,
     runSelftest,
     ensureStructure,
-    buildDiagnosisExport,
+    buildDiagnosisExport: () => buildDiagnosisExport(window.appState),
     copyToClipboardSafe,
     updateArchive,
+    updateTemplateArchive,
     logEvent
   }));
+
+  await loadTemplateArchive();
 
   const start = await runStartupCheck(loaded.data.projectStructure);
   setState({ debug: { startupReady: start.ok } });
