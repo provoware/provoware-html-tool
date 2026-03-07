@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 8 (siehe `todo.txt`)
-- Offene Punkte: 7 (siehe `todo.txt`)
-- Fortschritt: 53%
+- Erledigte Punkte: 10 (siehe `todo.txt`)
+- Offene Punkte: 5 (siehe `todo.txt`)
+- Fortschritt: 67%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -34,11 +34,12 @@
   - `tests/services/project-selftest.test.js`
   - `tests/services/ui-action-handlers.smoke.test.js`
   - `tests/start-files/start-import-resolution.test.js`
+  - `tests/adapters/desktop-filesystem.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- Selbsttest trennt jetzt sauber Ordner-Existenzprüfung (`listDirectory`) und optionalen Schreibtest.
-- Keine `.probe`-Datei mehr bei der Ordnerprüfung (keine Nebenartefakte im Projektordner).
-- Neuer direkter Test `tests/services/project-selftest.test.js` für die geänderte Selbsttest-Logik.
+- Desktop-Stub-Adapter gibt jetzt klarere Hinweise: was fehlt und was der nächste Schritt ist.
+- `runProjectSelftest` im Desktop-Stub akzeptiert jetzt bewusst Optionen für eine konsistente Adapter-Signatur.
+- Neuer direkter Test prüft die klare Fehlermeldung samt `nextStep`.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
 
 ## Laien-Befehle (unten)

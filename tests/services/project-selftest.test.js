@@ -46,3 +46,38 @@ test('Fehlender Ordner wird als fehlend markiert', async () => {
   assert.deepEqual(result.data.data.missingDirs, ['logs']);
   assert.equal(result.data.checks.some((item) => item.code === 'DIR_MISSING'), true);
 });
+
+test('Cleanup wird nur gewertet, wenn echte Funktion übergeben wird', async () => {
+  const cleanupCalls = [];
+  let lastToken = '';
+  const adapter = createAdapter({
+    checkPermissions: async () => ({ ok: true, data: { read: true, write: true } }),
+    writeText: async (_path, token) => {
+      lastToken = token;
+      return { ok: true };
+    },
+    readText: async () => ({ ok: true, data: { text: lastToken } })
+  });
+
+  const resultWithoutCleanup = await runProjectSelftest(adapter, {
+    projectStructure: { writeTestRules: { testFile: 'logs/write-test.txt' }, requiredDirectories: [], requiredFiles: [] },
+    runWriteTest: true,
+    cleanupAfterSuccess: 'invalid'
+  });
+
+  assert.equal(resultWithoutCleanup.data.checks.some((item) => item.code === 'WRITE_TEST_CLEANUP_OK'), false);
+  assert.equal(resultWithoutCleanup.data.checks.some((item) => item.code === 'WRITE_TEST_CLEANUP_FAILED'), false);
+
+  const resultWithCleanup = await runProjectSelftest(adapter, {
+    projectStructure: { writeTestRules: { testFile: 'logs/write-test.txt' }, requiredDirectories: [], requiredFiles: [] },
+    runWriteTest: true,
+    cleanupAfterSuccess: async (context) => {
+      cleanupCalls.push(context.testFile);
+      return { removed: true };
+    }
+  });
+
+  assert.equal(cleanupCalls.length, 1);
+  assert.equal(cleanupCalls[0], 'logs/write-test.txt');
+  assert.equal(resultWithCleanup.data.checks.some((item) => item.code === 'WRITE_TEST_CLEANUP_OK'), true);
+});

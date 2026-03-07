@@ -10,12 +10,11 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Selbsttest besser lesen (Ordner vs. Schreiben)
-1. `Selbsttest starten` ausführen.
-2. Prüfen: Ordnerstatus zeigt jetzt nur, ob der Ordner lesbar/verfügbar ist.
-3. Optional: Schreibtest separat aktivieren (`runWriteTest`), wenn du Schreiben prüfen willst.
-4. Ziel: Du siehst klarer, ob nur Schreiben fehlt oder ob der Ordner selbst fehlt.
-5. Hinweis: Es werden keine `.probe`-Dateien mehr für die Ordnerprüfung erzeugt.
+### Desktop-Hinweis besser lesen
+1. Wenn der Desktop-Adapter nicht aktiv ist, zeigt die Meldung jetzt klar den nächsten Schritt.
+2. Achte auf `nextStep` im Ergebnis (kurzer Handlungs-Hinweis).
+3. Ziel: Weniger Rätsel bei Startproblemen im Team.
+4. Konkreter nächster Schritt: Browser-Version öffnen und **Ordner wählen** nutzen.
 
 ## Kurzer Modul-Check
 1. `node --test tests/services/module-registry.test.js` ausführen.
