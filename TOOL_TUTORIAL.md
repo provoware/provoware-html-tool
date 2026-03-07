@@ -11,6 +11,17 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Maximierung mit Maus schnell wieder beenden
+Neu in dieser Iteration:
+- Jedes Modul hat jetzt den Kopf-Button **„Maximierung aufheben“**.
+- Wenn ein Modul links noch kein passendes Panel hat, zeigt das Tool eine kurze Hilfe-Meldung.
+
+Direkter Mini-Check:
+1. `bash scripts/minimal-check.sh`
+
+Kurzregel: Bei großem Modul per Kopf-Button sofort zurück ins 3x3-Grid.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Aktive Module im 3x3-Mittelbereich direkt öffnen
 Neu in dieser Iteration:
 - Der Mittelbereich bleibt ein 3x3-Grid für Module.

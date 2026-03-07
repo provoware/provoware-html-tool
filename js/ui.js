@@ -349,8 +349,18 @@ const bindWorkspaceControls = () => {
   hiddenPanelsBar.id = 'hidden-panels-bar';
   hiddenPanelsBar.className = 'hidden-panels-bar';
   hiddenPanelsBar.setAttribute('aria-label', 'Ausgeblendete Module');
+  const moduleFocusFeedback = document.createElement('p');
+  moduleFocusFeedback.id = 'module-focus-feedback';
+  moduleFocusFeedback.className = 'module-focus-feedback';
+  moduleFocusFeedback.setAttribute('aria-live', 'polite');
+  const setModuleFocusFeedback = (text) => {
+    moduleFocusFeedback.textContent = text;
+  };
   const dashboard = document.querySelector('.workspace-dashboard');
-  if (main && dashboard) main.insertBefore(hiddenPanelsBar, dashboard.nextSibling);
+  if (main && dashboard) {
+    main.insertBefore(hiddenPanelsBar, dashboard.nextSibling);
+    main.insertBefore(moduleFocusFeedback, hiddenPanelsBar.nextSibling);
+  }
 
   const renderHiddenPanelsBar = () => {
     if (!hiddenPanelsBar) return;
@@ -376,7 +386,8 @@ const bindWorkspaceControls = () => {
     controls.innerHTML = [
       '<button type="button" class="panel-control" data-panel-hide title="Ausblenden">◫</button>',
       '<button type="button" class="panel-control" data-panel-minimize title="Minimieren">—</button>',
-      '<button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>'
+      '<button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>',
+      '<button type="button" class="panel-control" data-panel-restore title="Maximierung aufheben">🗗</button>'
     ].join('');
   });
 
@@ -386,8 +397,24 @@ const bindWorkspaceControls = () => {
       if (!panel) return;
       const willMaximize = !panel.classList.contains('is-maximized');
       document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
-      if (willMaximize) panel.classList.add('is-maximized');
+      if (willMaximize) {
+        panel.classList.add('is-maximized');
+        setModuleFocusFeedback('Modul ist maximiert. Mit „Maximierung aufheben“ kommst du zurück ins 3x3-Grid.');
+      }
       app.classList.toggle('has-maximized-panel', willMaximize);
+      if (!willMaximize) {
+        setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-panel-restore]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.closest('.module-panel');
+      if (!panel || !panel.classList.contains('is-maximized')) return;
+      panel.classList.remove('is-maximized');
+      app.classList.remove('has-maximized-panel');
+      setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
     });
   });
 
@@ -424,9 +451,16 @@ const bindWorkspaceControls = () => {
     const button = event.target.closest('[data-module-focus]');
     if (!button) return;
     const moduleId = button.getAttribute('data-module-focus');
-    if (!moduleId) return;
+    const moduleLabel = button.querySelector('span')?.textContent?.trim() || 'Modul';
+    if (!moduleId) {
+      setModuleFocusFeedback(`Hinweis: ${moduleLabel} konnte nicht geöffnet werden. Bitte Modulzuordnung prüfen.`);
+      return;
+    }
     const panel = document.querySelector(`.module-panel[data-module-id="${moduleId}"]`);
-    if (!panel) return;
+    if (!panel) {
+      setModuleFocusFeedback(`Hinweis: Für ${moduleLabel} gibt es noch kein sichtbares Modul im Mittelbereich.`);
+      return;
+    }
     panel.classList.remove('is-hidden');
     panel.classList.remove('is-minimized');
     renderHiddenPanelsBar();
@@ -434,6 +468,7 @@ const bindWorkspaceControls = () => {
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
     panel.classList.add('is-maximized');
     app.classList.add('has-maximized-panel');
+    setModuleFocusFeedback(`${moduleLabel} ist jetzt geöffnet und maximiert.`);
   });
 
   const todoList = byId('todo-list');
@@ -485,6 +520,7 @@ const bindWorkspaceControls = () => {
     if (event.key !== 'Escape') return;
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
     app.classList.remove('has-maximized-panel');
+    setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
   });
 
   window.addEventListener('wheel', (event) => {
