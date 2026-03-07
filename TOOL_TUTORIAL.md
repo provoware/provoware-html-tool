@@ -1,61 +1,28 @@
 # TOOL_TUTORIAL.md
 
 ## Ziel
-Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten.
+Kurze Anleitung für sichere kleine Iterationen.
 
-## Minimalablauf pro Iteration
-1. Kurzplanung schreiben (Ziel, Dateien, Risiken, Nicht-Änderungen, Schritte).
-2. Kleine, begründete Patches umsetzen.
-3. Nur relevante Endprüfung machen.
-4. `README.md`, `todo.txt` und `INDEX.md` aktualisieren.
-
-## INDEX.md aktualisieren
-1. Aktuelle Projektdateien prüfen (ohne `.git`).
-2. Verzeichnisbaum in `INDEX.md` anpassen.
-3. Dateiliste in `INDEX.md` anpassen.
-4. Änderungen kurz in `README.md` und `todo.txt` spiegeln.
-
-## Offline-Start schnell prüfen
-1. Datei `index.html` direkt im Browser öffnen.
-2. Auf den Statustext achten: „Offline-Start aktiv. Basis geladen.“
-3. Wenn der Text sichtbar ist, ist der Minimalstart erfolgreich.
-
-## Todo-Liste mit Kalender und Erinnerung prüfen
+## Schnellstart
 1. `index.html` im Browser öffnen.
-2. Im Bereich „Todo-Liste mit Kalenderfunktion“ eine Aufgabe eintragen.
-3. Prüfen, dass die Aufgabe unten in der Liste erscheint.
-4. Erinnerungszeit auf nahen Zeitpunkt setzen.
-5. Prüfen, dass später der Zusatz „Erinnerung gesendet.“ angezeigt wird.
+2. Auf **Ordner wählen** klicken.
+3. Danach **Selbsttest starten**.
+4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
-## Verbindungsstatus schnell prüfen
-1. `index.html` im Browser öffnen.
-2. Browser kurz in den Offline-Modus setzen (DevTools Netzwerk: Offline).
-3. Prüfen: Text zeigt „Offline-Start aktiv. Basis geladen.“
-4. Offline-Modus beenden.
-5. Prüfen: Text wechselt auf „Start aktiv. Verbindung verfügbar.“
+## Kleine Erweiterung dieser Iteration (neu)
+### Optionaler Schreibtest
+1. Auf **Schreibtest ausführen** klicken.
+2. Der Test schreibt in `logs/write-test.txt`.
+3. Danach liest der Test die Datei wieder.
+4. Ergebnis steht im Prüfbereich und im Logpanel.
 
-## Panel-Design (Bildbeispiel) kurz prüfen (neu)
-1. `index.html` im Browser öffnen.
-2. Prüfen, dass beide Hauptkarten runde Ecken, Verlauf und Schatten haben.
-3. Prüfen, dass in jeder Karte eine sichtbare Rasterfläche vorhanden ist.
-4. Prüfen, dass unten drei kleine Segment-Chips sichtbar sind.
-5. Prüfen, dass Eingaben und Liste im Todo-Bereich weiterhin normal nutzbar sind.
+## Struktur aus JSON prüfen
+1. Datei `data/project-structure.json` öffnen.
+2. `requiredDirectories` und `requiredFiles` anpassen.
+3. Im UI auf **Projektstruktur anlegen** klicken.
+4. Danach **Selbsttest starten**.
 
-## Muster-Modul `datenbank_baukasten` prüfen
-1. Prüfen, dass genau diese Dateien existieren:
-   - `manifest.json`
-   - `config.json`
-   - `texts.json`
-   - `schema.json`
-   - `logic.js`
-2. `index.html` öffnen.
-3. In „Modulübersicht“ muss die Profilmeldung ohne Fehler erscheinen.
-
-## CSP-Basisschutz kurz prüfen
-1. `index.html` im Browser öffnen.
-2. DevTools öffnen und in „Elements“ den `<head>` prüfen.
-3. Es muss ein `meta` mit `http-equiv="Content-Security-Policy"` vorhanden sein.
-4. Ergebnis: Nur lokale Quellen (`'self'`) sind für Skript und Styles erlaubt.
-
----
-Stand: aktualisiert nach Layout-Anpassung im Panel-Stil.
+## Endprüfung (nur relevant)
+- Syntax prüfen: `node --check js/app.js`
+- JSON prüfen: `python3 -m json.tool data/project-structure.json > /dev/null`
+- UI-Test manuell: Startseite öffnen und Buttons testen.
