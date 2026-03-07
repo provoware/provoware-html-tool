@@ -1,72 +1,50 @@
 # todo.txt
 
 ## Ziel der aktuellen Iteration
-Die offenen Punkte aus der früheren Grobplanung in eine kleine, umsetzbare Reihenfolge überführen.
+Die nächsten offenen Punkte aus P2/P3 in kleine, direkt umsetzbare Doku-Schritte überführen.
 
-## Festgelegter Start-Scope (P1 abgeschlossen)
-1. Offline-fähiges Grundgerüst mit statischem Einstiegspunkt (`index.html`) vorbereiten.
-2. Schlanke Basis für Styles und UI-Struktur als Dashboard-Skelett festlegen.
-3. JavaScript-Core nur für Startfluss und Modul-Registrierung im Minimalumfang planen.
-4. Genau ein Muster-Modul `datenbank_baukasten` als Referenzmodul vorsehen.
-5. Modul-Mindestteile begrenzen auf: `manifest`, `config`, `texts`, `schema`, `logic`.
-6. Dokumentation im Start nur auf `README.md` + `todo.txt` begrenzen.
-7. Alle erweiterten Themen (Logging-Ausbau, Self-Repair-Ausbau, Export-Details) bleiben geparkt.
+## Aktueller Fortschritt
+- Erledigte Punkte gesamt: 4
+- Offene Punkte gesamt: 4
+- Entwicklungsfortschritt: 50%
 
 ## Priorisierte offene Punkte (geordnet)
 
-### P1 – Projekt-Scope auf Kernsystem eingrenzen
-- **Problem:** Die alte Liste mischt Zielbild, Vollstruktur und Umsetzungsdetails.
-- **Patchgrund:** Ohne klaren Scope entstehen zu große, nicht prüfbare Änderungen.
-- **Status:** Erledigt in dieser Iteration.
-- **Ergebnis:** Start-Scope ist in 7 klaren Punkten festgelegt.
-- **Prüfschritt:** Abgleich mit README durchgeführt.
-- **Fertig-Kriterium:** Erfüllt.
+### P2 – Umsetzungsphasen klein und sequenziell halten
+- **Problem:** Arbeitspakete sind definiert, aber noch nicht praktisch gestartet.
+- **Patchgrund:** Ohne Startpaket bleibt die Planung stehen.
+- **Nächster Schritt:** Arbeitspaket 1 (`index.html`, `assets/css/base.css`, `assets/js/core.js`) als Minimalstart umsetzen.
+- **Prüfschritt:** Dateien vorhanden, Offline-Start sichtbar.
+- **Fertig-Kriterium:** Dashboard-Skelett lädt lokal ohne Zusatzdienste.
 
-### P2 – Umsetzungsphasen in kleine Arbeitspakete schneiden
-- **Problem:** Die bisherigen Phasen sind groß und technisch überladen.
-- **Patchgrund:** Kleine Pakete reduzieren Risiko und erlauben gezielte Endvalidierung.
-- **Nächster Schritt:** In genau 3 sequenzielle Pakete aufteilen und sofort abarbeitbar machen.
-- **Arbeitspaket 1:** Startstruktur minimal anlegen (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
-  - Ziel: Offline-Startpunkt und sichtbares Dashboard-Skelett bereitstellen.
-  - Betroffene Dateien: nur die drei Startdateien.
-  - Abgrenzung: Keine Moduldateien, kein Logging, keine Exportfunktionen.
-- **Arbeitspaket 2:** Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
-  - Ziel: Einheitliche Modul-Basis mit `manifest`, `config`, `texts`, `schema`, `logic`.
-  - Betroffene Dateien: nur Modulordner und zugehörige Dateien.
-  - Abgrenzung: Keine weiteren Module, keine Sonderlogik im Core.
-- **Arbeitspaket 3:** Core-Registrierung für genau ein Modul verbinden.
-  - Ziel: Startfluss + Modulregistrierung funktional und klein halten.
-  - Betroffene Dateien: `assets/js/core.js` + Modul-Manifest (falls nötig).
-  - Abgrenzung: Keine dynamischen Loader-Ausbauten, keine zusätzlichen UI-Seiten.
-- **Prüfschritt:** Jedes Paket hat Ziel, betroffene Dateien und klare Abgrenzung.
-- **Fertig-Kriterium:** Es gibt eine sequenzielle Liste, die ohne Nebenarbeiten abgearbeitet werden kann.
+### P3 – Start-Minimum klar gegenüber späteren Dateien abgrenzen
+- **Problem:** Muss-Dateien und spätere Dateien sind noch nicht vollständig getrennt dokumentiert.
+- **Patchgrund:** Klare Abgrenzung senkt Pflege- und Umsetzungsrisiko.
+- **Nächster Schritt:** Für jede Startdatei genau einen Zweck-Satz ergänzen.
+- **Prüfschritt:** Jede Startdatei hat eine klare Kurzbeschreibung.
+- **Fertig-Kriterium:** Keine unklaren oder redundanten Startdateien.
 
-### P3 – Zielstruktur von „Soll“ zu „Start-Minimum“ reduzieren
-- **Problem:** Die Vollstruktur enthält viele Dateien ohne sofortigen Nutzen.
-- **Patchgrund:** Weniger Startdateien = weniger Pflegeaufwand und weniger Streuung.
-- **Nächster Schritt:** Muss-Dateien vs. spätere Dateien markieren.
-- **Prüfschritt:** Jede Startdatei hat einen klaren Zweck in einem Satz.
-- **Fertig-Kriterium:** Startstruktur ist schlank und direkt umsetzbar.
+### P4 – Modulstandard `datenbank_baukasten` als Muster fixieren
+- **Problem:** Muster ist geplant, aber nicht konkret als Datei-Set angelegt.
+- **Patchgrund:** Einheitliches Muster verhindert Sonderwege.
+- **Nächster Schritt:** Minimales Modul-Dateiset dokumentiert/angelegt vorbereiten.
+- **Prüfschritt:** `manifest`, `config`, `texts`, `schema`, `logic` eindeutig vorhanden/beschrieben.
+- **Fertig-Kriterium:** Muster kann 1:1 für weitere Module kopiert werden.
 
-### P4 – Modulstandard für `datenbank_baukasten` als Muster fixieren
-- **Problem:** Modulerwartungen sind breit beschrieben, aber nicht operationalisiert.
-- **Patchgrund:** Ein klares Muster verhindert Sonderlogik im Core.
-- **Nächster Schritt:** Minimale Modul-Definition (manifest, config, texts, schema, modul-logik) vereinheitlichen.
-- **Prüfschritt:** Modul kann als Vorlage für weitere Module dienen.
-- **Fertig-Kriterium:** Struktur und Verantwortlichkeiten sind eindeutig dokumentiert.
+### P5 – Doku-Landkarte klein halten
+- **Problem:** Doku wächst schnell ohne klare Priorität.
+- **Patchgrund:** Kleine Doku hält Iterationen stabil.
+- **Nächster Schritt:** Nur verhaltensrelevante Doku aktiv pflegen (`README.md`, `todo.txt`, `AGENTS.md`, `TOOL_TUTORIAL.md`, `INDEX.md`).
+- **Prüfschritt:** Keine leeren Platzhalter-Dokus im Repo.
+- **Fertig-Kriterium:** Dokuumfang bleibt schlank und direkt nutzbar.
 
-### P5 – Doku-Landkarte vereinfachen
-- **Problem:** Viele Doku-Dateien sind geplant, aber nicht priorisiert.
-- **Patchgrund:** Dokumentation soll Pflege helfen, nicht blockieren.
-- **Nächster Schritt:** „jetzt nötig“ vs. „später ergänzen“ trennen.
-- **Prüfschritt:** Nur verhaltensrelevante Doku im ersten Schritt aktiv.
-- **Fertig-Kriterium:** Keine redundanten oder leeren Doku-Baustellen.
+## Diese Iteration erledigt
+1. AGENTS-Struktur gestrafft und Index-Pflicht ergänzt.
+2. `todo.txt` auf nächste offene Punkte neu fokussiert.
+3. `INDEX.md` neu angelegt (Baum + vollständige Dateiliste).
+4. `TOOL_TUTORIAL.md` neu angelegt und um Index-Workflow erweitert.
 
 ## Geparkte Folgepunkte (bewusst nicht Teil dieser Iteration)
 - Feingranulare Logging-Strategie für mehrere Logdateien.
 - Self-Repair-Ausbau über Minimalbasis hinaus.
 - Erweiterte Export- und Archivregeln.
-
-## Iterationsregel
-- Maximal **3 zusammenhängende Patches pro Iteration**.
-- Bei mehr als einem neuen Konflikt: Patch abschließen, Rest neu einplanen.

@@ -1,8 +1,8 @@
 # AGENTS.md
 
 ## Arbeitsprinzip
-Arbeite immer **planungsbasiert**, **patchbasiert**, **codesparsam** und **traffic-sparsam**.
-Leitlinie: **Planung ist Gold, Handlung ist Silber**.
+- Arbeite immer planungsbasiert, patchbasiert, codesparsam und traffic-sparsam.
+- Leitlinie: Planung ist Gold, Handlung ist Silber.
 
 ## Pflicht vor jeder Änderung
 Vor dem ersten Patch immer kurz festhalten:
@@ -25,8 +25,9 @@ Ohne diese Vorarbeit kein Patch.
 - Kein Volltest ohne Anlass.
 - Keine Wiederholungsprüfung ohne neue Änderung.
 - Kleinster sinnvoller Eingriff hat Vorrang.
-- pro Iteration eine Minimalerweiterung optimal, der TOOL_TUTORIAL.md
-- pro Iteration eine Minimaloptimierung eines der folgenden Bereiche: Hilfe, Hilfeelemente, Optimierung Nutzerfreundlichkeit/Laientauglichkeit, Optimierung Robustheit. Alles dokumentieren, optimierung codequalität. Wähle optimal selbst den besten bereich. diese beiden sind unabhängig von den normalen Patches pro Iteration umzusetzen.
+- Pro Iteration: eine Minimalerweiterung in `TOOL_TUTORIAL.md`.
+- Pro Iteration: eine Minimaloptimierung in genau einem Bereich (Hilfe, Hilfeelemente, Nutzerfreundlichkeit/Laientauglichkeit, Robustheit).
+
 ## Validierung (nur am Ende der Iteration)
 Prüfe nur, was direkt betroffen ist:
 - Syntax
@@ -50,9 +51,9 @@ Wenn mehr als ein neuer Konflikt auftaucht:
 3. nächste Iteration sauber planen.
 
 ## Feste Iterationsgrenze
-Maximal **3 saubere Patches pro Iteration**.
-Lieber wenige klare Änderungen als viele halbverwandte Anpassungen.
-Aber wenn möglich Änderungen optimal vollständig abschließen.
+- Maximal 3 saubere Patches pro Iteration.
+- Lieber wenige klare Änderungen als viele halbverwandte Anpassungen.
+- Wenn möglich Änderungen vollständig und klein abschließen.
 
 ## Wartbarkeit
 - Logik, Konfiguration, Daten, Tests und Doku sauber trennen.
@@ -63,12 +64,14 @@ Aber wenn möglich Änderungen optimal vollständig abschließen.
 - Funktionen möglichst unter 40 Zeilen; über 60 Zeilen Teilung prüfen.
 
 ## Sprache
-Alle Ausgaben in einfacher Sprache.
-Fachbegriffe nur kurz erklären (in Klammern).
+- Alle Ausgaben in einfacher Sprache.
+- Fachbegriffe nur kurz erklären (in Klammern).
 
-## In jeder Iteration update von
-Immer zu aktualisieren sind diese Dateien:
-README.md Befehle für Laien ganz unten und oben aktuelle Anzeige von Menge erledigte Punkte und offene Punkte der Gesamtentwicklung, eine sich optimal anpassende Empfehlungsliste mit hilfreichen, unterstützenden, weiterführenden oder verbessernden Empfehlungen. kurz, stichpunkte. erledigte entfernen und dokumentieren. die anzeige des entwicklungsfortschritts in prozent, gefolgt von einer aktuellen Toolstruktur und Toolumfang (schon fehlerfrei umgesetzt) 
+## Pflicht-Updates je Iteration
+Immer aktualisieren:
+- `README.md`: oben Status (erledigte/offene Punkte), Fortschritt in %, aktuelle Toolstruktur und Toolumfang, unten Laien-Befehle, kurze Empfehlungsliste.
+- `TOOL_TUTORIAL.md`: mindestens eine kleine, sinnvolle Erweiterung.
+- `INDEX.md`: kompletter aktueller Verzeichnisbaum und vollständige Dateiliste (Projektdateien ohne `.git`).
 
 ## Strenge Patch-Checkliste
 Vor Abschluss jeder Iteration bestätigen:
@@ -80,3 +83,4 @@ Vor Abschluss jeder Iteration bestätigen:
 - [ ] Zwei konstruktive Empfehlungen formuliert
 - [ ] README.md aktualisiert
 - [ ] TOOL_TUTORIAL.md erweitert
+- [ ] INDEX.md aktualisiert
