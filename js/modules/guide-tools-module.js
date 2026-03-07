@@ -80,6 +80,16 @@ export const initGuideToolsModule = () => {
     return true;
   };
 
+  const readGuideIndex = (target) => Number(target?.closest('[data-guide-index]')?.getAttribute('data-guide-index'));
+
+  const moveSelectedBy = (offset) => {
+    const toIndex = selectedIndex + offset;
+    if (!moveSection(selectedIndex, toIndex)) return false;
+    selectIndex(toIndex);
+    render();
+    return true;
+  };
+
   const render = () => {
     // Ausnahme mit Begründung: Wir bauen hier bewusst Markup für Buttons; Nutzdaten werden vorher mit escapeHtml entschärft.
     indexList.innerHTML = sections.map((section, index) => (
@@ -109,24 +119,17 @@ export const initGuideToolsModule = () => {
   });
 
   moveUpButton.addEventListener('click', () => {
-    if (selectedIndex <= 0) return;
-    [sections[selectedIndex - 1], sections[selectedIndex]] = [sections[selectedIndex], sections[selectedIndex - 1]];
-    selectIndex(selectedIndex - 1);
-    render();
+    if (!moveSelectedBy(-1)) return;
     setFeedback('Eintrag nach oben verschoben.', 'ok');
   });
 
   moveDownButton.addEventListener('click', () => {
-    if (selectedIndex >= sections.length - 1) return;
-    [sections[selectedIndex + 1], sections[selectedIndex]] = [sections[selectedIndex], sections[selectedIndex + 1]];
-    selectIndex(selectedIndex + 1);
-    render();
+    if (!moveSelectedBy(1)) return;
     setFeedback('Eintrag nach unten verschoben.', 'ok');
   });
 
   indexList.addEventListener('click', (event) => {
-    const target = event.target;
-    const index = Number(target.getAttribute('data-guide-index'));
+    const index = readGuideIndex(event.target);
     if (!Number.isInteger(index) || index < 0 || index >= sections.length) return;
     selectIndex(index);
     render();
@@ -153,7 +156,7 @@ export const initGuideToolsModule = () => {
   sectionList.addEventListener('dragstart', (event) => {
     const card = event.target.closest('[data-guide-index]');
     if (!card) return;
-    dragIndex = Number(card.getAttribute('data-guide-index'));
+    dragIndex = readGuideIndex(card);
     card.classList.add('is-dragging');
     if (event.dataTransfer) {
       event.dataTransfer.effectAllowed = 'move';
@@ -175,8 +178,7 @@ export const initGuideToolsModule = () => {
 
   sectionList.addEventListener('drop', (event) => {
     event.preventDefault();
-    const card = event.target.closest('[data-guide-index]');
-    const toIndex = Number(card?.getAttribute('data-guide-index'));
+    const toIndex = readGuideIndex(event.target);
     const from = Number.isInteger(dragIndex) ? dragIndex : Number(event.dataTransfer?.getData('text/plain'));
     document.querySelectorAll('.guide-section.is-drop-target, .guide-section.is-dragging').forEach((node) => {
       node.classList.remove('is-drop-target', 'is-dragging');

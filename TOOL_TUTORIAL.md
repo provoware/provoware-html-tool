@@ -9,6 +9,18 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 3. Browser öffnet sich bei Erfolg automatisch mit `index.html`.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
+## Kleine Erweiterung dieser Iteration (neu)
+### Guide intern vereinheitlicht (leichter wartbar)
+Im Bereich **Anleitungen und Toolbeschreibungen** wurden wiederkehrende Schritte intern gebündelt:
+- Ein kleiner Helper liest den Abschnitts-Index zentral aus.
+- Ein zweiter Helper verschiebt Einträge nach oben/unten mit derselben Logik.
+
+Was sich für dich ändert:
+- Die Bedienung bleibt gleich.
+- Fehler durch doppelte Logik werden unwahrscheinlicher.
+
+Kurzregel: gleiche Aufgabe = ein gemeinsamer Helper statt doppeltem Code.
+
 
 
 

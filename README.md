@@ -18,6 +18,7 @@
   - Neu: Renderer-Teile unter `js/renderers/*` (`ui-header-renderer.js`, `ui-main-renderer.js`) für klar getrennte UI-Ausgabe.
   - Neu: Start-Readiness-Check in `js/app.js` als gemeinsamer Helper gebündelt (weniger doppelte Startlogik).
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
+  - Neu: kleine Vereinheitlichung im Guide-Modul (gemeinsame Helfer für Index-Auslesen und Verschieben, gleiche Funktion mit weniger Doppelcode).
   - Neu: `js/modules/plugin-manager.js` (Plugin-Auswahl, Zeichenzähler und einfache Rechtschreibprüfung DE/EN/FR mit Auto-Sprachschätzung)
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
@@ -44,6 +45,7 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Hilfe-Optimierung mit kleinstem Eingriff: Im Guide-Modul wurden wiederkehrende Schritte (Index lesen, Eintrag nach oben/unten verschieben) in kleine gemeinsame Helper gebündelt; Verhalten bleibt gleich, Wartung wird einfacher.
 - Kleine Robustheits-Refaktorierung: doppelter Startup-Readiness-Block in `js/app.js` wurde in einen gemeinsamen Helper ausgelagert (gleiches Verhalten, weniger Dupplikatcode).
 - Für Vollmodularität wurden zwei offene, klar messbare Folgeschritte in `todo.txt` ergänzt (UI-Renderer-Split und Action-Handler-Domänentrennung).
 - Priorität A umgesetzt: Farbwelt über CSS-Token geschärft und Header-Mikrostruktur minimal verbessert (ohne JS-Ankeränderung).
