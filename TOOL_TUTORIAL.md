@@ -200,3 +200,18 @@ Mini-Check zum Schluss:
 2. Browser öffnen und prüfen: 3 Spalten, Glas-Karten, gute Lesbarkeit.
 
 Kurzregel: zuerst Vorlage, dann kleiner CSS-Patch, dann gezielter Check.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Schnellaktionen besser lesbar wie in der Designvorlage
+Die vier Startschritte im Dashboard sind jetzt farblich getrennt:
+- Schritt 1: Blau
+- Schritt 2: Gold
+- Schritt 3: Grün
+- Schritt 4: Violett
+
+Warum das hilft:
+- Reihenfolge ist schneller erkennbar.
+- Jeder Schritt wirkt wie eine eigene Karte (Glas-Chip).
+- Die Orientierung wird für Einsteiger einfacher.
+
+Kurzregel: Schritte der Reihe nach lesen, Farbe nur als Zusatzhilfe nutzen.

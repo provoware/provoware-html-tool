@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 19 (siehe `todo.txt`)
+- Erledigte Punkte: 20 (siehe `todo.txt`)
 - Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 91%
+- Fortschritt: 92%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -40,6 +40,7 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Design-Mini-Feinschliff: Die 4 Startschritte im Bereich **Schnellaktionen** sind jetzt als farbige Glas-Chips (Blau/Gold/Grün/Violett) mit klarerer Hierarchie gestaltet – näher an der Designvorlage, ohne Logikänderung.
 - UI-Redesign: Dashboard jetzt im dunklen Glas-Look nahe der Designvorlage (3 Spalten, starke Kartenhierarchie, weiche Transparenz).
 - Neue Vorlage-Datei `DESIGN_VORLAGE.md`: enthält Tiefenanalyse der Referenz, Token und messbare Abgleichkriterien.
 - `AGENTS.md` erweitert: zusätzliche Design-Ziele und detaillierte Erfolgschecks für Struktur/Farbe/Transparenz/Responsive.
@@ -68,6 +69,16 @@
 - Drag&Drop für die Reihenfolge ergänzt und direktes Feedback eingebaut.
 - Dynamische Anpassung erweitert: Guide-Ansicht wechselt zwischen Split- und Stapelmodus je Fensterbreite.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` aktualisiert.
+
+### Design-Erfolgschecks dieser Iteration
+1. **Struktur-Check**: 3-Spalten-Layout bleibt erhalten, Reihenfolge unverändert.
+2. **Farb-Check**: Schnellaktionen zeigen klar 4 Tokens (Blau/Gold/Grün/Violett).
+3. **Transparenz-Check**: App-Container, Panels und Start-Chips bilden mindestens 3 sichtbare Transparenzebenen.
+4. **Lesbarkeits-Check**: Text auf den Start-Chips bleibt hell und kontrastreich.
+5. **Interaktions-Check**: Bestehende Button-/Fokuszustände bleiben aktiv und konsistent.
+6. **Responsive-Check**: Unter 980px bleibt 1-Spalten-Ansicht aktiv (kein Strukturumbau im Patch).
+7. **Stabilitäts-Check**: Keine ID/JS-Anker geändert.
+
 - Offener Punkt „Altbestand“ in `todo.txt` zu einer klaren Kandidatenliste (ohne Sofortlöschung) konkretisiert.
 - Registry-Robustheit gezielt abgesichert: zusätzlicher Regressionstest prüft ID-Bereinigung und Fallback-Quelle ohne Umbau im Produktivcode.
 - Standard-Regel ergänzt: Nutzdaten im DOM bevorzugt per `textContent`; `innerHTML`/`insertAdjacentHTML` nur als klar markierte Ausnahme mit Begründung im Code-Kommentar.
@@ -110,5 +121,5 @@
 ## Kurze Empfehlungsliste (unten, aktualisiert)
 1. Nutze bei jedem Sitzungsende den neuen Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
 2. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
-5. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
-6. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.
+3. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
+4. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.
