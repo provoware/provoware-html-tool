@@ -25,7 +25,8 @@ Ohne diese Vorarbeit kein Patch.
 - Kein Volltest ohne Anlass.
 - Keine Wiederholungsprüfung ohne neue Änderung.
 - Kleinster sinnvoller Eingriff hat Vorrang.
-
+- pro Iteration eine Minimalerweiterung optimal, der TOOL_TUTORIAL.md
+- pro Iteration eine Minimaloptimierung eines der folgenden Bereiche: Hilfe, Hilfeelemente, Optimierung Nutzerfreundlichkeit/Laientauglichkeit, Optimierung Robustheit. Alles dokumentieren, optimierung codequalität. Wähle optimal selbst den besten bereich. diese beiden sind unabhängig von den normalen Patches pro Iteration umzusetzen.
 ## Validierung (nur am Ende der Iteration)
 Prüfe nur, was direkt betroffen ist:
 - Syntax
@@ -51,6 +52,7 @@ Wenn mehr als ein neuer Konflikt auftaucht:
 ## Feste Iterationsgrenze
 Maximal **3 saubere Patches pro Iteration**.
 Lieber wenige klare Änderungen als viele halbverwandte Anpassungen.
+Aber wenn möglich Änderungen optimal vollständig abschließen.
 
 ## Wartbarkeit
 - Logik, Konfiguration, Daten, Tests und Doku sauber trennen.
@@ -64,6 +66,10 @@ Lieber wenige klare Änderungen als viele halbverwandte Anpassungen.
 Alle Ausgaben in einfacher Sprache.
 Fachbegriffe nur kurz erklären (in Klammern).
 
+## In jeder Iteration update von
+Immer zu aktualisieren sind diese Dateien:
+README.md Befehle für Laien ganz unten und oben aktuelle Anzeige von Menge erledigte Punkte und offene Punkte der Gesamtentwicklung, eine sich optimal anpassende Empfehlungsliste mit hilfreichen, unterstützenden, weiterführenden oder verbessernden Empfehlungen. kurz, stichpunkte. erledigte entfernen und dokumentieren. die anzeige des entwicklungsfortschritts in prozent, gefolgt von einer aktuellen Toolstruktur und Toolumfang (schon fehlerfrei umgesetzt) 
+
 ## Strenge Patch-Checkliste
 Vor Abschluss jeder Iteration bestätigen:
 - [ ] Patchgrund je Änderung dokumentiert
@@ -72,3 +78,5 @@ Vor Abschluss jeder Iteration bestätigen:
 - [ ] Relevante Endvalidierung ausgeführt
 - [ ] Kompaktes Änderungsprotokoll erstellt
 - [ ] Zwei konstruktive Empfehlungen formuliert
+- [ ] README.md aktualisiert
+- [ ] TOOL_TUTORIAL.md erweitert
