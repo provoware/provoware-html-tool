@@ -407,10 +407,21 @@ Mini-Check:
 Kurzregel: Für bessere Lesbarkeit zuerst Schriftgröße und dann Theme anpassen.
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Laien-Release-Check in 3 Minuten
-Wenn du kurz prüfen willst, ob ein Release für Einsteiger passt, nutze diese Reihenfolge:
-1. `./start.sh --dry-run` (Startgrundlage prüfen).
-2. `node --test tests/start-files/start-import-resolution.test.js` (Startdateien konsistent).
-3. `bash scripts/minimal-check.sh` (kleiner Abschluss-Check).
+### 4‑Schritt‑Assistent direkt im Dashboard
+Neu in dieser Iteration:
+- Im Bereich **Schnellaktionen** gibt es jetzt einen klaren Assistenten-Block.
+- Der Assistent zeigt immer den **aktuellen** Schritt (1 bis 4) mit kurzer Erklärung.
+- Mit einem Knopf startest du den passenden Schritt direkt.
 
-Kurzregel: Erst wenn alle drei Schritte ohne Fehler durchlaufen, ist der Stand releasebereit für den nächsten Team-Check.
+Kurzregel: Lies nur den aktuellen Schritt und nutze den Assistent-Knopf.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Laien-Release-Check in 3 Minuten
+Der feste Standard für den Release-Abschluss ist jetzt genau ein Befehl:
+1. `bash scripts/minimal-check.sh`
+
+Auswertung immer gleich:
+- **Bestanden**: Befehl endet ohne Fehler.
+- **Nicht bestanden**: Befehl endet mit Fehler.
+
+Kurzregel: Vor Freigabe immer genau diesen Ein-Befehl-Check ausführen.

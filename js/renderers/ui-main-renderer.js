@@ -81,6 +81,10 @@ export const renderMainSection = ({
   });
 
   const startupSteps = byId('startup-steps');
+  const startupAssistantTitle = byId('startup-assistant-title');
+  const startupAssistantText = byId('startup-assistant-text');
+  const startupAssistantHint = byId('startup-assistant-hint');
+  const startupAssistantAction = byId('startup-assistant-action');
   if (startupSteps) {
     const progress = buildStartupSteps(state);
     startupSteps.innerHTML = progress.steps.map((step, index) => {
@@ -89,6 +93,33 @@ export const renderMainSection = ({
         : (index === progress.currentIndex ? 'startup-step startup-step--current' : 'startup-step');
       return `<li class="${css}">${escapeHtml(step.label)}</li>`;
     }).join('');
+
+    const currentStep = progress.steps[progress.currentIndex];
+    const allDone = progress.steps.every((step) => step.done);
+    if (startupAssistantTitle) {
+      startupAssistantTitle.textContent = allDone ? 'Assistent: Fertig' : `Assistent: ${currentStep.assistantTitle}`;
+    }
+    if (startupAssistantText) {
+      startupAssistantText.textContent = allDone
+        ? 'Alle 4 Schritte sind erledigt. Du kannst jetzt normal weiterarbeiten.'
+        : currentStep.assistantText;
+    }
+    if (startupAssistantHint) {
+      startupAssistantHint.textContent = allDone
+        ? 'Du kannst bei Bedarf jederzeit erneut prüfen.'
+        : 'Der Knopf startet den passenden Schritt rechts im Bereich „Tool-Einstellungen und Tests“.';
+    }
+    if (startupAssistantAction) {
+      if (allDone) {
+        startupAssistantAction.disabled = true;
+        startupAssistantAction.textContent = 'Alles erledigt';
+        startupAssistantAction.dataset.assistantTarget = '';
+      } else {
+        startupAssistantAction.disabled = false;
+        startupAssistantAction.textContent = currentStep.actionLabel;
+        startupAssistantAction.dataset.assistantTarget = currentStep.actionTarget;
+      }
+    }
   }
 
   const dashboardInfo = buildDashboardInfo(state);

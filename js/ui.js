@@ -138,10 +138,38 @@ const buildStartupSteps = (state) => {
   const canRead = state.permissionStatus?.read === true;
   const startupReady = state.debug?.startupReady === true;
   const steps = [
-    { label: 'Schritt 1/4: Projektordner wählen', done: hasDirectory },
-    { label: 'Schritt 2/4: Rechte prüfen', done: hasDirectory && canRead },
-    { label: 'Schritt 3/4: Grundcheck ausführen', done: hasDirectory && Boolean(state.selftestResult) },
-    { label: 'Schritt 4/4: Module starten', done: startupReady }
+    {
+      label: 'Schritt 1/4: Projektordner wählen',
+      done: hasDirectory,
+      assistantTitle: 'Schritt 1: Projektordner wählen',
+      assistantText: 'Öffne zuerst deinen Projektordner. Danach kann das Tool Rechte und Struktur prüfen.',
+      actionTarget: 'action-select-dir',
+      actionLabel: 'Ordner jetzt wählen'
+    },
+    {
+      label: 'Schritt 2/4: Rechte prüfen',
+      done: hasDirectory && canRead,
+      assistantTitle: 'Schritt 2: Rechte prüfen',
+      assistantText: 'Prüfe die Leserechte. So siehst du sofort, ob der Ordner sauber erreichbar ist.',
+      actionTarget: 'action-run-selftest',
+      actionLabel: 'Rechte jetzt prüfen'
+    },
+    {
+      label: 'Schritt 3/4: Grundcheck ausführen',
+      done: hasDirectory && Boolean(state.selftestResult),
+      assistantTitle: 'Schritt 3: Grundcheck ausführen',
+      assistantText: 'Starte den Kurzcheck. Das Ergebnis zeigt dir direkt, ob wichtige Basisdateien stimmen.',
+      actionTarget: 'action-run-selftest',
+      actionLabel: 'Grundcheck starten'
+    },
+    {
+      label: 'Schritt 4/4: Module starten',
+      done: startupReady,
+      assistantTitle: 'Schritt 4: Module starten',
+      assistantText: 'Wenn die Ampel ok ist, kannst du direkt mit den Modulen arbeiten.',
+      actionTarget: 'action-ensure-structure',
+      actionLabel: 'Struktur falls nötig anlegen'
+    }
   ];
   const currentIndex = steps.findIndex((step) => !step.done);
   return { steps, currentIndex: currentIndex === -1 ? steps.length - 1 : currentIndex };
@@ -474,6 +502,11 @@ export const bindUiActions = (actions) => {
   });
   byId('plugin-toggle')?.addEventListener('click', () => {
     actions.onTogglePluginEnabled();
+  });
+  byId('startup-assistant-action')?.addEventListener('click', () => {
+    const targetId = byId('startup-assistant-action')?.dataset.assistantTarget;
+    if (!targetId) return;
+    byId(targetId)?.click();
   });
   document.addEventListener('input', () => {
     render();

@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 27 (siehe `todo.txt`)
-- Offene Punkte: 3 (siehe `todo.txt`)
-- Fortschritt: 90%
-- Stand dieser Iteration: Es gibt jetzt eine klare, kurze Release-Lückenliste für ein laienperfektes Release (nur direkte nächste Schritte).
+- Erledigte Punkte: 29 (siehe `todo.txt`)
+- Offene Punkte: 1 (siehe `todo.txt`)
+- Fortschritt: 97%
+- Stand dieser Iteration: Der 4‑Schritt‑Assistent ist als kleiner UI-Patch live, und der Release-Abschluss ist jetzt fest als Ein-Befehl-Check definiert.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -131,6 +131,8 @@
 - Einziger Escape-Einstieg klargestellt: HTML-String-Rendering nutzt zentral `js/services/html-escape.js`.
 - Kleine Safe-API ergänzt: `createSafeListItem(label)` als sichere Basis für einfache Listenbausteine.
 - Neue Testpflicht umgesetzt: Injection-Test für die neue Listen-API prüft „nur Text sichtbar" bei `<img onerror=...>` und `<script>...`.
+- Neu: 4‑Schritt‑Assistent im Dashboard ergänzt (mit klarer Schritt-Erklärung und direktem „Jetzt ausführen“-Knopf pro aktuellem Schritt).
+- Neu: Ein-Befehl-Release-Standard festgezogen: `bash scripts/minimal-check.sh` gilt als fester Abschluss mit klarer Auswertung „Bestanden/Nicht bestanden“.
 
 
 ## Feste PR-Checkliste (Sicherheits-Checkpunkt)
@@ -154,6 +156,9 @@
   - `node --test`
 - Lokalen Minimal-Check ausführen (empfohlen):
   - `bash scripts/minimal-check.sh`
+  - Standard-Release-Check (Ein-Befehl):
+    - `bash scripts/minimal-check.sh`
+    - Auswertung: **Bestanden** (Befehl endet ohne Fehler) oder **Nicht bestanden** (Befehl endet mit Fehler).
 - Nur JS-Syntax prüfen (direkt):
   - `find js tests -type f -name '*.js' -print0 | xargs -0 -n1 node --experimental-default-type=module --check`
 
@@ -173,12 +178,6 @@
 6. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.
 
 ## Was fehlt noch für ein laienperfektes Release?
-1. **Erststart-Dialog als 4-Schritt-Assistent ergänzen.**
-   - Warum: Neue Nutzer brauchen direkt bei Start eine klare Reihenfolge statt vieler Optionen.
-   - Fertig, wenn: Nach `./start.sh` ein kurzer „Was jetzt?“-Ablauf mit 4 klaren Schritten angezeigt wird.
-2. **Klaren Notfall-Button „Alles prüfen und reparieren” im UI ergänzen.**
+1. **Klaren Notfall-Button „Alles prüfen und reparieren” im UI ergänzen.**
    - Warum: Laien sollen Probleme ohne Terminal-Befehl lösen können.
    - Fertig, wenn: Klick startet die bekannte Startprüfung + zeigt einfache Ergebnisbox (ok/offen/fehler).
-3. **Release-Schnelltest für Laien als Ein-Befehl-Check dokumentieren und sichtbar machen.**
-   - Warum: Vor Freigabe braucht es einen festen, leicht merkbaren Abschluss-Check.
-   - Fertig, wenn: Der Befehl ist in README + Tutorial gleich benannt und mit „Bestanden/Nicht bestanden“ erklärt.
