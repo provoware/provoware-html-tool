@@ -105,6 +105,11 @@ export const bindUiActions = (actions) => {
   byId('action-ensure-structure')?.addEventListener('click', actions.onEnsureStructure);
   byId('action-run-write-test')?.addEventListener('click', () => actions.onRunSelftest(true));
   byId('action-switch-dir')?.addEventListener('click', actions.onSwitchDirectory);
+  byId('action-export-diagnosis')?.addEventListener('click', async () => {
+    const text = await actions.onExportDiagnosis();
+    const area = byId('diagnosis-transfer');
+    if (area) area.value = text;
+  });
 
   byId('profile-select')?.addEventListener('change', (event) => actions.onSelectProfile(event.target.value));
   byId('archive-sort')?.addEventListener('change', (event) => actions.onSortArchive(event.target.value));
@@ -187,6 +192,7 @@ export const render = () => {
   setText('action-ensure-structure', texts.buttons?.ensureStructure || 'Projektstruktur anlegen');
   setText('action-run-write-test', texts.buttons?.runWriteTest || 'Schreibtest ausführen');
   setText('action-switch-dir', texts.buttons?.switchDirectory || 'Ordner wechseln');
+  setText('action-export-diagnosis', 'Diagnose exportieren');
 
   const nextStep = byId('next-step');
   if (nextStep) {
