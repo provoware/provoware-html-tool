@@ -1,14 +1,14 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 4 (siehe `todo.txt`)
-- Offene Punkte: 11 (siehe `todo.txt`)
-- Fortschritt: 27%
+- Erledigte Punkte: 5 (siehe `todo.txt`)
+- Offene Punkte: 10 (siehe `todo.txt`)
+- Fortschritt: 33%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
-  - `index.html` (Hauptoberfläche)
-  - `laienstart.html` (automatischer, transparenter Startpfad für Einsteiger)
+  - `laienstart.html` (**Team-Standard-Einstieg**, transparenter Startpfad)
+  - `index.html` (Hauptoberfläche, wird nach erfolgreichem Start automatisch geöffnet)
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
   - `css/app.css`
@@ -26,6 +26,7 @@
 - **Daten**
   - `data/app-config.json`, `data/themes.json`, `data/ui_texts.json`
   - `data/module-registry.json`, `data/project-structure.json`
+  - `data/laienstart-required-files.json` (konfigurierbare Dateiliste für den Startcheck)
   - `data/profile-archive.json`, `data/templates-archive.json`
   - `data/dashboard3-notes/`
 - **Tests**
@@ -34,20 +35,24 @@
   - `tests/start-files/start-import-resolution.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- Neue Datei `laienstart.html` ergänzt: prüft automatisch Kerndateien, zeigt Fortschritt/Status und bietet Auto-Korrektur mit Nutzerwahl per Dialog.
-- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Startpfad aktualisiert.
+- `laienstart.html` visuell klarer und professioneller gestaltet (Karten, ruhige Farben, bessere Leseführung).
+- Die Liste `requiredFiles` ist jetzt konfigurierbar über `data/laienstart-required-files.json` (Fallback auf sichere Standardliste bei Fehler).
+- Team-Standard-Einstieg in `data/app-config.json` über `startBehavior.teamDefaultEntry = "laienstart.html"` festgelegt.
+- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
 
 ## Laien-Befehle (unten)
-- Empfohlener Start:
+- Team-Start (empfohlen):
   - `laienstart.html` im Browser öffnen
-- App lokal öffnen:
+- App direkt öffnen (nur wenn Startcheck bereits ok ist):
   - `index.html` im Browser öffnen
+- Startcheck-Dateiliste anpassen:
+  - `data/laienstart-required-files.json` bearbeiten
 - Kleiner Testlauf:
   - `node --test tests/services/module-registry.test.js`
 - Startdatei-Check:
   - `node --test tests/start-files/start-import-resolution.test.js`
 
 ## Kurze Empfehlungsliste
-1. Für den sicheren Einstieg zuerst immer `laienstart.html` öffnen.
-2. In der Startseite bei Problemen die Option `Automatisch korrigieren` nutzen.
-3. Danach in der GUI `Ordner wählen` und `Selbsttest starten` ausführen.
+1. Im Team immer zuerst `laienstart.html` nutzen, damit alle denselben transparenten Pfad sehen.
+2. Erweiterungen nur in `data/laienstart-required-files.json` eintragen, nicht direkt im HTML.
+3. Bei Problemen zuerst **Automatisch korrigieren** starten, danach in der GUI `Ordner wählen` und `Selbsttest starten`.

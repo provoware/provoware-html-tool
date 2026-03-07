@@ -1,0 +1,9 @@
+{
+  "requiredFiles": [
+    "./index.html",
+    "./css/app.css",
+    "./js/app.js",
+    "./data/app-config.json",
+    "./data/module-registry.json"
+  ]
+}

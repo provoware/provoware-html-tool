@@ -4,19 +4,18 @@
 Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 ## Schnellstart
-1. `index.html` im Browser öffnen.
+1. `laienstart.html` im Browser öffnen (Team-Standard).
 2. Auf **Ordner wählen** klicken.
 3. Danach **Selbsttest starten**.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
-
 ## Kleine Erweiterung dieser Iteration (neu)
-### Laienstart mit Auto-Korrektur nutzen
-1. `laienstart.html` im Browser öffnen.
-2. Auf Status, Fortschritt und Fehlercode achten.
-3. Bei Code `START_MISSING_RESOURCE` auf **Automatisch korrigieren** klicken.
-4. Dialog bestätigen, dann läuft der Wiederholstart automatisch weiter.
-5. Ziel: Erst bei fehlerfreier Prüfung startet die GUI.
+### Startcheck ohne HTML-Änderung erweitern
+1. Datei `data/laienstart-required-files.json` öffnen.
+2. In `requiredFiles` neue Pfade ergänzen (z. B. `./data/themes.json`).
+3. `laienstart.html` neu laden.
+4. Ziel: Die neue Datei wird direkt im Startcheck geprüft.
+5. Hinweis: Wenn die JSON-Datei fehlt, nutzt der Start eine sichere Fallback-Liste.
 
 ## Kurzer Modul-Check
 1. `node --test tests/services/module-registry.test.js` ausführen.
