@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 30 (siehe `todo.txt`)
+- Erledigte Punkte: 31 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Start-Robustheit wurde mit kleinem Eingriff verbessert (Pflichtdatei-Parsing im Dry-Run trennt Dateizeilen wieder korrekt).
+- Stand dieser Iteration: Start-Robustheit wurde mit kleinem Eingriff erweitert (Startup-Check fängt Laufzeitfehler jetzt klar ab und nutzt Self-Repair-Defaults bei ungültiger Projektstruktur).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -49,6 +49,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Startup-Check robuster gemacht: Adapter-Laufzeitfehler werden als klare Fehlercodes zurückgegeben, statt still abzubrechen.
+- Self-Repair ergänzt: ungültige Projektstruktur wird automatisch auf sichere Defaults gesetzt und transparent im Ergebnis markiert.
 - Start-Dry-Run stabilisiert: Pflichtdateien aus `data/laienstart-required-files.json` werden wieder zeilenweise ausgewertet; die frühere Sammelwarnung mit `\n` entfällt.
 - Bedienung für Mausnutzer verbessert: Jedes Modul hat jetzt zusätzlich den Button „Maximierung aufheben“ direkt im Modulkopf.
 - Neue Laien-Hilfe im Modulfokus: Wenn ein linkes Modul noch kein passendes Panel im Mittelbereich hat, erscheint eine kurze verständliche Hinweis-Meldung.
