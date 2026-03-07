@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: UI-Aktionsverdrahtung als eigener Service für bessere Wartbarkeit
+- Iterationsfokus: Default-Profile und Templates-Default-Archiv als projektweite Startdaten
 
 ## Verzeichnisbaum (ohne `.git`)
 

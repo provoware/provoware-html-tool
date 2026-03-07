@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 55
+- Erledigte Punkte: 56
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 83% (laufend, siehe `todo.txt`)
+- Fortschritt: 85% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -27,7 +27,7 @@
   - `data/themes.json`
   - `data/ui_texts.json`
   - `data/project-structure.json`
-  - `data/profile-archive.json` (JSON-Archiv für Profile)
+  - `data/profile-archive.json` (JSON-Archiv für Profile + Templates-Default-Archiv)
   - `data/module-registry.json` (zentrale Modul-IDs)
 
 ## Erledigte Kernpunkte
@@ -70,6 +70,7 @@
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 - UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
+- Default-Profilbestand erweitert: Die drei Profile enthalten jetzt je breite, klar unterscheidbare Genre-/Mood-/Stil-Listen inklusive regionaler und Underground-Beispiele; zusätzlich ist ein professionell kategorisiertes Templates-Default-Archiv mit 9 Bereichen und je 5 Starter-Einträgen integriert.
 
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
@@ -149,3 +150,8 @@
 - Patchgrund 2: Modularisierung verbessert durch neuen Service `ui-action-handlers` statt großer Inline-Handler in `app.js`.
 - Betroffene Dateien: `js/app.js`, `js/services/ui-action-handlers.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Aktionsausgabe geprüft.
+
+- Patchgrund 1: Nutzerwunsch umgesetzt, damit ein sofort nutzbares Default-Profil mit breitem Spektrum (Genres, Moods, Stile) projektseitig mitgeliefert wird.
+- Patchgrund 2: Neues Templates-Default-Archiv mit 9 Fachbereichen und je 5 professionell strukturierten Einträgen ergänzt, um Iterationen direkt praxisnah zu starten.
+- Betroffene Dateien: `js/services/profile-archive.js`, `data/profile-archive.json`, `data/project-structure.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS/JSON-Syntax und direkt betroffene Datenstruktur geprüft.
