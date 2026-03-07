@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: DOM-Sicherheitsstandard (zentrale Escape-Hilfe, Safe-List-API, PR-Checkpunkt, Injection-Test)
+- Iterationsfokus: Shell-Laienstart mit präventiver Self-Repair-Logik und Standard-Dummy-Konfigurationen
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
@@ -21,6 +21,8 @@
 - │  ├─ dashboard3-notes
 - │  │  └─ .gitkeep
 - │  ├─ app-config.json
+- │  ├─ laienstart-autofix-defaults.json
+- │  ├─ laienstart-dependency-map.json
 - │  ├─ laienstart-required-files.json
 - │  ├─ module-registry.json
 - │  ├─ profile-archive.json
@@ -89,6 +91,7 @@
 - │     ├─ schema.json
 - │     └─ texts.json
 - ├─ scripts
+- │  ├─ laienstart.sh
 - │  └─ minimal-check.sh
 - ├─ tests
 - │  ├─ adapters
@@ -131,76 +134,79 @@
 11. `css/app.css`
 12. `data/app-config.json`
 13. `data/dashboard3-notes/.gitkeep`
-14. `data/laienstart-required-files.json`
-15. `data/module-registry.json`
-16. `data/profile-archive.json`
-17. `data/project-structure.json`
-18. `data/templates-archive.json`
-19. `data/themes.json`
-20. `data/ui_texts.json`
-21. `datenbank_baukasten_start.html`
-22. `debugging_modul_start.html`
-23. `index.html`
-24. `js/adapters/browser-filesystem.js`
-25. `js/adapters/desktop-filesystem.js`
-26. `js/adapters/filesystem-adapter.js`
-27. `js/app.js`
-28. `js/modules/dashboard-clock.js`
-29. `js/modules/guide-tools-module.js`
-30. `js/services/config-loader.js`
-31. `js/services/diagnosis-export.js`
-32. `js/services/html-escape.js`
-33. `js/services/logger.js`
-34. `js/services/module-registry.js`
-35. `js/services/profile-archive.js`
-36. `js/services/project-selftest.js`
-37. `js/services/startup-check.js`
-38. `js/services/templates-archive.js`
-39. `js/services/ui-action-handlers.js`
-40. `js/state.js`
-41. `js/status-visuals.js`
-42. `js/ui.js`
-43. `laienstart.html`
-44. `logging_modul_start.html`
-45. `modules/backup_funktions_modul/config.json`
-46. `modules/backup_funktions_modul/logic.js`
-47. `modules/backup_funktions_modul/manifest.json`
-48. `modules/backup_funktions_modul/schema.json`
-49. `modules/backup_funktions_modul/texts.json`
-50. `modules/datenbank_baukasten/config.json`
-51. `modules/datenbank_baukasten/logic.js`
-52. `modules/datenbank_baukasten/manifest.json`
-53. `modules/datenbank_baukasten/schema.json`
-54. `modules/datenbank_baukasten/texts.json`
-55. `modules/debugging_modul/config.json`
-56. `modules/debugging_modul/logic.js`
-57. `modules/debugging_modul/manifest.json`
-58. `modules/debugging_modul/schema.json`
-59. `modules/debugging_modul/texts.json`
-60. `modules/logging_modul/config.json`
-61. `modules/logging_modul/logic.js`
-62. `modules/logging_modul/manifest.json`
-63. `modules/logging_modul/schema.json`
-64. `modules/logging_modul/texts.json`
-65. `modules/todo_kalender_erinnerung/config.json`
-66. `modules/todo_kalender_erinnerung/logic.js`
-67. `modules/todo_kalender_erinnerung/manifest.json`
-68. `modules/todo_kalender_erinnerung/schema.json`
-69. `modules/todo_kalender_erinnerung/texts.json`
-70. `modules/wiki_notiz_wissen/config.json`
-71. `modules/wiki_notiz_wissen/logic.js`
-72. `modules/wiki_notiz_wissen/manifest.json`
-73. `modules/wiki_notiz_wissen/schema.json`
-74. `modules/wiki_notiz_wissen/texts.json`
-75. `scripts/minimal-check.sh`
-76. `tests/adapters/desktop-filesystem.test.js`
-77. `tests/services/import-export-consistency.test.js`
-78. `tests/services/module-registry.test.js`
-79. `tests/services/project-selftest.test.js`
-80. `tests/services/startup-check.test.js`
-81. `tests/services/ui-action-handlers.smoke.test.js`
-82. `tests/services/ui-render-safety.test.js`
-83. `tests/start-files/start-import-resolution.test.js`
-84. `todo.txt`
-85. `todo_kalender_erinnerung_start.html`
-86. `wiki_notiz_wissen_start.html`
+14. `data/laienstart-autofix-defaults.json`
+15. `data/laienstart-dependency-map.json`
+16. `data/laienstart-required-files.json`
+17. `data/module-registry.json`
+18. `data/profile-archive.json`
+19. `data/project-structure.json`
+20. `data/templates-archive.json`
+21. `data/themes.json`
+22. `data/ui_texts.json`
+23. `datenbank_baukasten_start.html`
+24. `debugging_modul_start.html`
+25. `index.html`
+26. `js/adapters/browser-filesystem.js`
+27. `js/adapters/desktop-filesystem.js`
+28. `js/adapters/filesystem-adapter.js`
+29. `js/app.js`
+30. `js/modules/dashboard-clock.js`
+31. `js/modules/guide-tools-module.js`
+32. `js/services/config-loader.js`
+33. `js/services/diagnosis-export.js`
+34. `js/services/html-escape.js`
+35. `js/services/logger.js`
+36. `js/services/module-registry.js`
+37. `js/services/profile-archive.js`
+38. `js/services/project-selftest.js`
+39. `js/services/startup-check.js`
+40. `js/services/templates-archive.js`
+41. `js/services/ui-action-handlers.js`
+42. `js/state.js`
+43. `js/status-visuals.js`
+44. `js/ui.js`
+45. `laienstart.html`
+46. `logging_modul_start.html`
+47. `modules/backup_funktions_modul/config.json`
+48. `modules/backup_funktions_modul/logic.js`
+49. `modules/backup_funktions_modul/manifest.json`
+50. `modules/backup_funktions_modul/schema.json`
+51. `modules/backup_funktions_modul/texts.json`
+52. `modules/datenbank_baukasten/config.json`
+53. `modules/datenbank_baukasten/logic.js`
+54. `modules/datenbank_baukasten/manifest.json`
+55. `modules/datenbank_baukasten/schema.json`
+56. `modules/datenbank_baukasten/texts.json`
+57. `modules/debugging_modul/config.json`
+58. `modules/debugging_modul/logic.js`
+59. `modules/debugging_modul/manifest.json`
+60. `modules/debugging_modul/schema.json`
+61. `modules/debugging_modul/texts.json`
+62. `modules/logging_modul/config.json`
+63. `modules/logging_modul/logic.js`
+64. `modules/logging_modul/manifest.json`
+65. `modules/logging_modul/schema.json`
+66. `modules/logging_modul/texts.json`
+67. `modules/todo_kalender_erinnerung/config.json`
+68. `modules/todo_kalender_erinnerung/logic.js`
+69. `modules/todo_kalender_erinnerung/manifest.json`
+70. `modules/todo_kalender_erinnerung/schema.json`
+71. `modules/todo_kalender_erinnerung/texts.json`
+72. `modules/wiki_notiz_wissen/config.json`
+73. `modules/wiki_notiz_wissen/logic.js`
+74. `modules/wiki_notiz_wissen/manifest.json`
+75. `modules/wiki_notiz_wissen/schema.json`
+76. `modules/wiki_notiz_wissen/texts.json`
+77. `scripts/laienstart.sh`
+78. `scripts/minimal-check.sh`
+79. `tests/adapters/desktop-filesystem.test.js`
+80. `tests/services/import-export-consistency.test.js`
+81. `tests/services/module-registry.test.js`
+82. `tests/services/project-selftest.test.js`
+83. `tests/services/startup-check.test.js`
+84. `tests/services/ui-action-handlers.smoke.test.js`
+85. `tests/services/ui-render-safety.test.js`
+86. `tests/start-files/start-import-resolution.test.js`
+87. `todo.txt`
+88. `todo_kalender_erinnerung_start.html`
+89. `wiki_notiz_wissen_start.html`
