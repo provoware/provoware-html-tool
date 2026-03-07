@@ -1,10 +1,10 @@
 # INDEX
 
 ## Iterationshinweis
-- Diese Iteration hat eine kleine Guide-Vereinheitlichung umgesetzt (gemeinsame Helper für Index-Auslesen und Verschieben).
-- Diese Iteration hat die Guide-Tastatur (ArrowUp/ArrowDown/Enter/Leertaste) auf einen gemeinsamen Navigations-Helper vereinheitlicht.
-- Diese Iteration hat einen gezielten Mini-Test für Guide-Reorder/Index-Pfade ergänzt (`tests/modules/guide-tools-module.test.js`).
-- Diese Iteration hat neue Dateien für Renderer- und Domain-Aufteilung ergänzt.
+- Diese Iteration ergänzt einen Grenzfall-Test für Guide-Index-Navigation (ArrowUp auf 0, ArrowDown auf letztem Index).
+- Diese Iteration ergänzt eine kleine Lesbarkeitsoption im Guide-Helper (`mode: select/jump`).
+- Diese Iteration verbessert Wiki-Robustheit (Kopien statt direkter Store-Referenzen).
+- Diese Iteration verbessert den Genres-Zufallsgenerator (Anzahl wird auf 1 bis 20 geklammert).
 - Verzeichnisbaum und Dateiliste sind vollständig aktualisiert (ohne `.git`).
 
 ## Kompletter Verzeichnisbaum (ohne `.git`)
@@ -16,23 +16,17 @@
 │     ├─ ci.yml
 │     ├─ codeql.yml
 │     └─ lint.yml
-├─ AGENTS.md
-├─ DESIGN_VORLAGE.md
-├─ INDEX.md
-├─ README.md
-├─ TOOL_TUTORIAL.md
 ├─ assets
 │  ├─ css
 │  │  └─ base.css
 │  └─ js
 │     └─ core.js
-├─ backup_funktions_modul_start.html
 ├─ css
 │  └─ app.css
 ├─ data
-│  ├─ app-config.json
 │  ├─ dashboard3-notes
 │  │  └─ .gitkeep
+│  ├─ app-config.json
 │  ├─ laienstart-autofix-defaults.json
 │  ├─ laienstart-dependency-map.json
 │  ├─ laienstart-required-files.json
@@ -42,15 +36,11 @@
 │  ├─ templates-archive.json
 │  ├─ themes.json
 │  └─ ui_texts.json
-├─ datenbank_baukasten_start.html
-├─ debugging_modul_start.html
-├─ index.html
 ├─ js
 │  ├─ adapters
 │  │  ├─ browser-filesystem.js
 │  │  ├─ desktop-filesystem.js
 │  │  └─ filesystem-adapter.js
-│  ├─ app.js
 │  ├─ modules
 │  │  ├─ dashboard-clock.js
 │  │  ├─ guide-tools-module.js
@@ -59,6 +49,11 @@
 │  │  ├─ ui-header-renderer.js
 │  │  └─ ui-main-renderer.js
 │  ├─ services
+│  │  ├─ ui-actions
+│  │  │  ├─ archive-actions.js
+│  │  │  ├─ session-actions.js
+│  │  │  ├─ template-actions.js
+│  │  │  └─ workspace-actions.js
 │  │  ├─ code-formatter.js
 │  │  ├─ config-loader.js
 │  │  ├─ diagnosis-export.js
@@ -69,16 +64,11 @@
 │  │  ├─ project-selftest.js
 │  │  ├─ startup-check.js
 │  │  ├─ templates-archive.js
-│  │  ├─ ui-action-handlers.js
-│  │  └─ ui-actions
-│  │     ├─ archive-actions.js
-│  │     ├─ session-actions.js
-│  │     ├─ template-actions.js
-│  │     └─ workspace-actions.js
+│  │  └─ ui-action-handlers.js
+│  ├─ app.js
 │  ├─ state.js
 │  ├─ status-visuals.js
 │  └─ ui.js
-├─ logging_modul_start.html
 ├─ modules
 │  ├─ backup_funktions_modul
 │  │  ├─ config.json
@@ -119,26 +109,38 @@
 ├─ scripts
 │  ├─ laienstart.sh
 │  └─ minimal-check.sh
-├─ start.sh
 ├─ tests
 │  ├─ adapters
 │  │  └─ desktop-filesystem.test.js
 │  ├─ modules
 │  │  ├─ datenbank-baukasten.test.js
-│  │  └─ guide-tools-module.test.js
-│  ├─ scripts-laienstart.dry-run.test.js
+│  │  ├─ guide-tools-module.test.js
+│  │  └─ wiki-notiz-wissen.test.js
 │  ├─ services
 │  │  ├─ import-export-consistency.test.js
 │  │  ├─ module-registry.test.js
+│  │  ├─ profile-archive-random.test.js
 │  │  ├─ project-selftest.test.js
 │  │  ├─ startup-check.test.js
 │  │  ├─ ui-action-handlers.smoke.test.js
 │  │  ├─ ui-header-chips.test.js
 │  │  └─ ui-render-safety.test.js
-│  └─ start-files
-│     └─ start-import-resolution.test.js
+│  ├─ start-files
+│  │  └─ start-import-resolution.test.js
+│  └─ scripts-laienstart.dry-run.test.js
+├─ AGENTS.md
+├─ backup_funktions_modul_start.html
+├─ datenbank_baukasten_start.html
+├─ debugging_modul_start.html
+├─ DESIGN_VORLAGE.md
+├─ index.html
+├─ INDEX.md
+├─ logging_modul_start.html
+├─ README.md
+├─ start.sh
 ├─ todo.txt
 ├─ todo_kalender_erinnerung_start.html
+├─ TOOL_TUTORIAL.md
 └─ wiki_notiz_wissen_start.html
 ```
 
@@ -234,15 +236,17 @@
 88. `tests/adapters/desktop-filesystem.test.js`
 89. `tests/modules/datenbank-baukasten.test.js`
 90. `tests/modules/guide-tools-module.test.js`
-91. `tests/scripts-laienstart.dry-run.test.js`
-92. `tests/services/import-export-consistency.test.js`
-93. `tests/services/module-registry.test.js`
-94. `tests/services/project-selftest.test.js`
-95. `tests/services/startup-check.test.js`
-96. `tests/services/ui-action-handlers.smoke.test.js`
-97. `tests/services/ui-header-chips.test.js`
-98. `tests/services/ui-render-safety.test.js`
-99. `tests/start-files/start-import-resolution.test.js`
-100. `todo.txt`
-101. `todo_kalender_erinnerung_start.html`
-102. `wiki_notiz_wissen_start.html`
+91. `tests/modules/wiki-notiz-wissen.test.js`
+92. `tests/scripts-laienstart.dry-run.test.js`
+93. `tests/services/import-export-consistency.test.js`
+94. `tests/services/module-registry.test.js`
+95. `tests/services/profile-archive-random.test.js`
+96. `tests/services/project-selftest.test.js`
+97. `tests/services/startup-check.test.js`
+98. `tests/services/ui-action-handlers.smoke.test.js`
+99. `tests/services/ui-header-chips.test.js`
+100. `tests/services/ui-render-safety.test.js`
+101. `tests/start-files/start-import-resolution.test.js`
+102. `todo.txt`
+103. `todo_kalender_erinnerung_start.html`
+104. `wiki_notiz_wissen_start.html`

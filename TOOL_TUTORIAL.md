@@ -9,6 +9,21 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 3. Browser öffnet sich bei Erfolg automatisch mit `index.html`.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Grenzfall-Check für Guide + robuste Module
+Neu in dieser Iteration:
+- Guide-Index hat jetzt einen Mini-Test für Randfälle: `ArrowUp` auf Index `0` und `ArrowDown` am letzten Index.
+- Wiki-Lesen/Listen geben Kopien zurück. So bleibt der interne Store stabil.
+- Zufallsmix klemmt die gewünschte Anzahl sauber ein (1 bis 20), damit keine Ausreißer entstehen.
+
+Direkte Mini-Checks:
+1. `node --test tests/modules/guide-tools-module.test.js`
+2. `node --test tests/modules/wiki-notiz-wissen.test.js`
+3. `node --test tests/services/profile-archive-random.test.js`
+
+Kurzregel: Bei kleinen Logik-Patches nur die direkt betroffenen Mini-Tests starten.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Guide-Tastatur jetzt komplett über einen Navigations-Helper
 Im Guide-Index laufen jetzt auch Pfeiltasten und Sprungtasten über einen gemeinsamen Mini-Helper.

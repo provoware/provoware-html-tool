@@ -84,7 +84,29 @@ test('guide-tools: zentrale Index-Navigation deckt Arrow/Jump und Reorder mit ab
     initGuideToolsModule();
 
     indexList.dispatch('keydown', {
+      key: 'ArrowUp',
+      preventDefault: () => {}
+    });
+    assert.equal(focusedSelector, '[data-guide-index="0"]');
+    assert.equal(titleInput.value, 'Start prüfen');
+
+    indexList.dispatch('keydown', {
       key: 'ArrowDown',
+      preventDefault: () => {}
+    });
+    indexList.dispatch('keydown', {
+      key: 'ArrowDown',
+      preventDefault: () => {}
+    });
+    indexList.dispatch('keydown', {
+      key: 'ArrowDown',
+      preventDefault: () => {}
+    });
+    assert.equal(focusedSelector, '[data-guide-index="2"]');
+    assert.equal(titleInput.value, 'Ergebnis sichern');
+
+    indexList.dispatch('keydown', {
+      key: 'ArrowUp',
       preventDefault: () => {}
     });
     assert.equal(focusedSelector, '[data-guide-index="1"]');

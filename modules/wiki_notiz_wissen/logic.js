@@ -36,7 +36,15 @@ const buildEntry = (input = {}, previousId = null) => {
   return { ok: true, data: entry };
 };
 
-const cloneStore = (store = {}) => ({ entries: Array.isArray(store.entries) ? [...store.entries] : [] });
+const cloneEntry = (entry = {}) => ({
+  ...entry,
+  tags: normalizeList(entry.tags),
+  relatedIds: normalizeList(entry.relatedIds)
+});
+
+const cloneStore = (store = {}) => ({
+  entries: Array.isArray(store.entries) ? store.entries.map((entry) => cloneEntry(entry)) : []
+});
 
 export const createEmptyKnowledgeStore = () => ({ entries: [] });
 
@@ -68,7 +76,7 @@ export const readKnowledgeEntry = (store, entryId) => {
   const id = normalizeText(entryId);
   const entry = cloneStore(store).entries.find((item) => item.id === id);
   if (!entry) return { ok: false, code: 'NOT_FOUND', message: 'Eintrag wurde nicht gefunden.' };
-  return { ok: true, code: 'READ_OK', message: 'Eintrag geladen.', data: entry };
+  return { ok: true, code: 'READ_OK', message: 'Eintrag geladen.', data: cloneEntry(entry) };
 };
 
 export const updateKnowledgeEntry = (store, entryId, patch) => {
