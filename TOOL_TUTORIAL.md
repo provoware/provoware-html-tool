@@ -25,6 +25,25 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Auf **Import** klicken und danach die Liste prüfen.
 
 ## Auto-Formatierung prüfen
+### Statusbereich rechts mit Symbolen prüfen
+1. Seite neu laden.
+2. **Ordner wählen** und danach **Selbsttest starten**.
+3. Im Bereich **Projektordner-Status** prüfen:
+   - **Lesen** zeigt `✔ ok` oder `✖ nein`,
+   - **Schreiben** zeigt `✔ ok` oder `✖ nein`,
+   - **Struktur** zeigt `✔ ok` oder `⚠ fehlt teilweise`.
+4. Ziel: Das Symbolmuster ist überall gleich wie in der Gesamtampel und in den Prüfkarten.
+
+### Statussymbole schnell prüfen
+1. Seite neu laden.
+2. **Selbsttest starten** klicken.
+3. In **Prüfergebnisse** prüfen, ob vor jedem Check ein Symbol steht:
+   - `✔` für ok,
+   - `⚠` für gelb,
+   - `✖` für rot.
+4. Im Feld **Gesamtampel** prüfen, ob Symbol und Wort zusammen angezeigt werden (z. B. `⚠ gelb`).
+
+### Auto-Formatierung prüfen
 1. Seite neu laden.
 2. **Selbsttest starten** klicken.
 3. In **Startstatus**, **Prüfergebnisse** und **Letzte Meldungen** prüfen:

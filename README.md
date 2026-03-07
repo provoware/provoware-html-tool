@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 49
+- Erledigte Punkte: 43
 - Offene Punkte: 2
 - Fortschritt: 96%
 
@@ -9,7 +9,7 @@
 - Kernstart:
   - `index.html`
   - `css/app.css`
-  - `js/app.js`, `js/ui.js`, `js/state.js`
+  - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
 - Adapter-Layer:
   - `js/adapters/filesystem-adapter.js`
   - `js/adapters/browser-filesystem.js`
@@ -37,6 +37,20 @@
 - Statistik je Kategorie plus Gesamtmenge ergänzt.
 - Zufallsmix-Generator mit Bereichs-Auswahl, Mengenfeldern und Schnellbuttons ergänzt.
 - Mix-Ausgabe wird automatisch in Zwischenablage kopiert (wenn Browser erlaubt) und geloggt.
+- Klare Trennung in UI, State, Adapter, Services, Daten.
+- Startreihenfolge fest eingebaut: Config -> Theme -> Adapter -> Startup-Check -> UI.
+- Selbsttest als erster Kernschritt umgesetzt.
+- Projektstruktur-Regeln zentral in `data/project-structure.json`.
+- Einheitliche Adapter-API mit Standardantwort (`ok`, `code`, `message`, `data`).
+- Fünf Themes als Tokens und zentrale UI-Texte aus JSON.
+- Statuspanel und Logpanel für laienfreundliche Sicht.
+- Letzter gewählter Ordnername wird lokal gemerkt und beim Start angezeigt.
+- Neue Tool-Optik als Standard aktiviert (Größen, Raster, Karten-Look).
+- Vollautomatische Text-Formatierung für Checks, Logs und Start-Hinweise ergänzt.
+- Lesbarkeit in Check- und Log-Karten gezielt verbessert (Zeilenfluss, Umbruch, Zeitspalten).
+- Statussymbole ergänzt: Ampelstatus zeigt jetzt zusätzlich ✔ / ⚠ / ✖ für klare Erkennung bei schwachem Kontrast.
+- Statusbereich Lesen/Schreiben/Struktur nutzt jetzt ebenfalls einheitlich ✔ / ⚠ / ✖.
+- Status-Visuals wurden in `js/status-visuals.js` ausgelagert, damit weitere UI-Teile dieselbe Ampel-Logik nutzen können.
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
@@ -60,3 +74,7 @@
 - Patchgrund 2: Nutzerwunsch nach Zufallsmix, Mengensteuerung, Auto-Copy und Logging.
 - Betroffene Dateien: `index.html`, `css/app.css`, `js/app.js`, `js/ui.js`, `js/state.js`, `js/services/profile-archive.js`, `data/project-structure.json`, `data/profile-archive.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS/JSON-Syntax und direkt betroffene UI-Ausgabe geprüft.
+- Patchgrund 1: Einheitliches Muster für Statussymbole auch bei Lesen/Schreiben/Struktur.
+- Patchgrund 2: Wartbarkeit verbessert durch Auslagerung der Status-Visuals in eine kleine Hilfsdatei.
+- Betroffene Dateien: `js/ui.js`, `js/status-visuals.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
