@@ -8,11 +8,26 @@ DEPENDENCY_MAP_FILE="data/laienstart-dependency-map.json"
 AUTOFIX_FILE="data/laienstart-autofix-defaults.json"
 REQUIRED_FILES_FILE="data/laienstart-required-files.json"
 SERVER_PORT="${LAIENSTART_PORT:-8080}"
+DRY_RUN=0
 
 msg() { printf '%s\n' "$1"; }
 warn() { printf 'WARNUNG: %s\n' "$1"; }
 
 command_exists() { command -v "$1" >/dev/null 2>&1; }
+
+parse_args() {
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --dry-run)
+        DRY_RUN=1
+        ;;
+      *)
+        warn "Unbekanntes Argument wird ignoriert: $1"
+        ;;
+    esac
+    shift
+  done
+}
 
 try_install() {
   local cmd="$1"
@@ -110,6 +125,47 @@ check_dependency() {
   return 1
 }
 
+load_required_dependencies() {
+  if [[ ! -f "$DEPENDENCY_MAP_FILE" ]]; then
+    warn "Dependency-Map fehlt: $DEPENDENCY_MAP_FILE"
+    return 1
+  fi
+
+  if command_exists node; then
+    node -e '
+      const fs = require("fs");
+      const filePath = process.argv[1];
+      const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+      const dependencies = Array.isArray(data.dependencies) ? data.dependencies : [];
+      for (const dep of dependencies) {
+        if (dep && dep.required && typeof dep.name === "string" && dep.name.trim()) {
+          process.stdout.write(dep.name.trim() + "\n");
+        }
+      }
+    ' "$DEPENDENCY_MAP_FILE"
+    return $?
+  fi
+
+  if command_exists python3; then
+    python3 - "$DEPENDENCY_MAP_FILE" <<'PY'
+import json
+import sys
+
+file_path = sys.argv[1]
+with open(file_path, 'r', encoding='utf-8') as file:
+    data = json.load(file)
+
+for dep in data.get('dependencies', []):
+    if dep.get('required') and isinstance(dep.get('name'), str) and dep['name'].strip():
+        print(dep['name'].strip())
+PY
+    return $?
+  fi
+
+  warn "Weder node noch python3 verfügbar, um Dependency-Map zu lesen."
+  return 1
+}
+
 run_minimal_check_if_possible() {
   if [[ -x "scripts/minimal-check.sh" ]] || [[ -f "scripts/minimal-check.sh" ]]; then
     msg "Starte Minimal-Check für direkte Startlogik."
@@ -137,13 +193,35 @@ start_server() {
 }
 
 main() {
+  parse_args "$@"
+
   msg "ProvoWare Laienstart-Skript startet."
   ensure_base_configs
   ensure_runtime_files
 
+  local dependencies=()
+  if ! mapfile -t dependencies < <(load_required_dependencies); then
+    warn "Dependency-Map kann nicht gelesen werden: $DEPENDENCY_MAP_FILE"
+    exit 1
+  fi
+
+  if [[ "${#dependencies[@]}" -eq 0 ]]; then
+    warn "Keine Pflicht-Abhängigkeiten in $DEPENDENCY_MAP_FILE gefunden."
+    exit 1
+  fi
+
+  msg "Aktive Pflicht-Abhängigkeiten aus JSON: ${dependencies[*]}"
+
+  if [[ "$DRY_RUN" -eq 1 ]]; then
+    msg "Dry-Run aktiv: Self-Repair und JSON-Lesen wurden geprüft."
+    msg "Dry-Run beendet ohne Browser- oder Server-Start."
+    exit 0
+  fi
+
   local failed=0
-  check_dependency node || failed=1
-  check_dependency python3 || failed=1
+  for dependency in "${dependencies[@]}"; do
+    check_dependency "$dependency" || failed=1
+  done
 
   if [[ "$failed" -ne 0 ]]; then
     warn "Nicht alle Abhängigkeiten sind automatisch lösbar."

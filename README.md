@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 16 (siehe `todo.txt`)
-- Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 97%
+- Erledigte Punkte: 17 (siehe `todo.txt`)
+- Offene Punkte: 2 (siehe `todo.txt`)
+- Fortschritt: 96%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -26,7 +26,7 @@
   - `data/laienstart-dependency-map.json` (Standard-Dummy für Abhängigkeitsauflösung)
   - `data/profile-archive.json`, `data/templates-archive.json`
 - **Tests und Checks**
-  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`
+  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`, `tests/scripts-laienstart.dry-run.test.js`
   - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck)
   - `scripts/laienstart.sh` (vollautomatischer Shell-Start mit präventiver Self-Repair-Logik)
 - **GitHub Workflows (Basis aktiv)**
@@ -36,8 +36,9 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
-- Neuer Shell-Einstieg `scripts/laienstart.sh`: prüft Abhängigkeiten, versucht automatische Installation (apt/brew), erzeugt fehlende Standarddateien und startet danach lokal die Oberfläche.
+- Neuer Shell-Einstieg `scripts/laienstart.sh`: liest Pflicht-Abhängigkeiten jetzt aktiv aus `data/laienstart-dependency-map.json`, versucht automatische Installation (apt/brew), erzeugt fehlende Standarddateien und startet danach lokal die Oberfläche.
 - Präventive Self-Repair ergänzt: fehlende Kern-JSON-Dateien (`app-config`, Registry, Laienstart-Configs) werden mit sicheren Standard-Dummys erzeugt.
+- Neuer gezielter Shell-Test: `tests/scripts-laienstart.dry-run.test.js` prüft Dry-Run + Self-Repair bei fehlenden Dateien automatisch.
 - Startkette für Einsteiger vereinfacht: optionaler Browser-Start plus lokaler Webserver in einem Befehl.
 - Neuer UI-Render-Regressionstest: Eingaben wie `<img onerror=...>` werden als Text ausgegeben (kein ausführbares HTML).
 - Feste Regel eingeführt: dynamische Listen nutzen zentrale Escaping-Hilfe (`js/services/html-escape.js`) statt ad-hoc-Lösungen.
@@ -69,6 +70,7 @@
 ## Laien-Befehle (unten)
 - Team-Start (empfohlen):
   - `bash scripts/laienstart.sh`
+  - Nur prüfen ohne Start (Dry-Run): `bash scripts/laienstart.sh --dry-run`
   - Alternativ: `laienstart.html` im Browser öffnen
 - App direkt öffnen (nur wenn Startcheck bereits ok ist):
   - `index.html` im Browser öffnen

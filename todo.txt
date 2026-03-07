@@ -11,6 +11,8 @@
 [x] 2026-03-07 | Services (direkt betroffen) | Import-/Export-Konsistenz der direkt betroffenen Services vollständig gegen reale Nutzung prüfen | prüfen: Exporte gegen Importe in `js/app.js` und direkten Services abgleichen + gezielter Test `tests/services/import-export-consistency.test.js` | fertig wenn: keine ungenutzten/fehlenden Exporte in der Kette
 [x] 2026-03-07 | README.md | README-Status weiter an realen Projektzustand angleichen, falls an anderen Stellen noch Vollständigkeit suggeriert wird | prüfen: Statusabschnitt und Offene-Punkte-Abschnitt gegen `todo.txt` lesen | fertig wenn: keine falsche „alles fertig“-Aussage mehr
 
+[ ] 2026-03-07 | scripts/laienstart.sh + Startkette | Linux-Rechteprüfung, Projektordner-Schreibcheck, freie-Port-Alternative und fehlerfreier GUI-Start als eigene robuste Startroutine ergänzen | prüfen: Dry-Run + Start mit belegtem Port + Start ohne Schreibrechte simulieren | fertig wenn: Start wählt freien Port automatisch, meldet Rechteprobleme klar und startet GUI ohne manuellen Eingriff
+
 ## Mittel
 [ ] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
 [x] 2026-03-07 | js/adapters/desktop-filesystem.js | Stub-Adapter-Verhalten verständlicher machen (klare Nutzerhinweise im Fehlertext) | prüfen: Rückgabemeldung im UI-Log lesbar und eindeutig | fertig wenn: Meldung sagt klar, was fehlt und was der nächste Schritt ist
