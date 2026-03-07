@@ -1,5 +1,8 @@
+# INDEX.md
+
 ## Stand
 - Aktualisiert: 2026-03-07
+- Iterationsfokus: Profil-Archiv mit Zufallsmix und JSON-Persistenz
 - Iterationsfokus: Einheitliche Statussymbole inkl. Lesen/Schreiben/Struktur + ausgelagerte Status-Visuals
 
 ## Verzeichnisbaum (ohne `.git`)
@@ -19,6 +22,7 @@
 │   └── app.css
 ├── data
 │   ├── app-config.json
+│   ├── profile-archive.json
 │   ├── project-structure.json
 │   ├── themes.json
 │   └── ui_texts.json
@@ -33,6 +37,7 @@
 │   ├── services
 │   │   ├── config-loader.js
 │   │   ├── logger.js
+│   │   ├── profile-archive.js
 │   │   ├── project-selftest.js
 │   │   └── startup-check.js
 │   ├── state.js

@@ -19,47 +19,24 @@
   - `js/services/startup-check.js`
   - `js/services/project-selftest.js`
   - `js/services/logger.js`
+  - `js/services/profile-archive.js` (neues Profil-Archiv)
 - Zentrale Daten:
   - `data/app-config.json`
   - `data/themes.json`
   - `data/ui_texts.json`
-  - `data/project-structure.json` (Single Source of Truth)
-
-## Tool-Optik-Vorgabe (aus Designanalyse übernommen)
-### 1) Designcharakter
-- Kartenoptik (Panel-Look): jedes Hauptelement wirkt wie eine eigene Kachel.
-- Weiche Rundungen: große Eckradien für ruhige, moderne Wirkung.
-- Leichte Tiefe: dezenter Schatten für Trennung ohne harte Kanten.
-- Ruhiger Hintergrund: heller Verlauf statt flacher Vollfarbe.
-
-### 2) Layout und Struktur
-- Drei Hauptspalten im Standardmodus:
-  - links Aktionen,
-  - Mitte Hauptinhalt,
-  - rechts Status.
-- Breitenlogik:
-  - Mitte ist dominant (Mindestbreite 560px),
-  - Seitenbereiche bleiben kompakt.
-- Feste visuelle Ordnung durch klare Flächen pro Bereich (Header, Navigation, Main, Status, Footer).
-
-### 3) Optische Rasterführung
-- Panels bekommen ein schwaches Raster-Overlay.
-- Ziel: technische, geordnete Oberfläche ohne Überladung.
-- Raster bleibt absichtlich transparent, damit Inhalte klar lesbar bleiben.
-
-### 4) Farb- und Größenvorgaben
-- Standardtheme: `tool-optik-vorgabe-2026`.
-- Eckradius: 18px.
-- Primäre Tiefe: `0 10px 26px rgba(35,47,74,0.24)`.
-- Buttons: Mindesthöhe 48px für bessere Trefffläche (Maus/Finger).
-- Hauptbereich: Mindesthöhe 380px für stabile Inhaltswirkung.
-
-### 5) Nutzerfreundlichkeit (Laientauglichkeit)
-- Primäraktion bleibt farblich klar hervorgehoben.
-- Sekundäraktionen bleiben neutral, aber deutlich klickbar.
-- Titel und Untertitel sind oben zentral sichtbar und leicht erfassbar.
+  - `data/project-structure.json`
+  - `data/profile-archive.json` (JSON-Archiv für Profile)
 
 ## Erledigte Kernpunkte
+- Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.
+- Profilbasiertes Speichern (HardTechno, Chill, Hörspiele) mit JSON-Persistenz ergänzt.
+- Duplikatprüfung für Eingabe und Import/Normalisierung ergänzt.
+- Enter als Bestätigung plus Speichern-Buttons ergänzt.
+- Bearbeiten, Löschen und Sortieren (alphabetisch / Erstellzeit) ergänzt.
+- Import/Export als JSON-Textbereich ergänzt.
+- Statistik je Kategorie plus Gesamtmenge ergänzt.
+- Zufallsmix-Generator mit Bereichs-Auswahl, Mengenfeldern und Schnellbuttons ergänzt.
+- Mix-Ausgabe wird automatisch in Zwischenablage kopiert (wenn Browser erlaubt) und geloggt.
 - Klare Trennung in UI, State, Adapter, Services, Daten.
 - Startreihenfolge fest eingebaut: Config -> Theme -> Adapter -> Startup-Check -> UI.
 - Selbsttest als erster Kernschritt umgesetzt.
@@ -87,12 +64,16 @@
 
 ## Kurze Empfehlungsliste
 - Erst immer „Ordner wählen“, dann „Selbsttest starten“.
-- Bei ⚠ Gelb oder ✖ Rot zuerst Rechte und fehlende Struktur lösen.
-- Nach Neustart auf den Hinweis „zuletzt gewählt“ im Ordner-Status achten.
-- Empfehlung 1: Für sehr kleine Bildschirme zuerst den Main-Bereich prüfen, dann Navigation öffnen.
-- Empfehlung 2: Bei eigener Farbwahl den Kontrast von Überschrift und Buttontext immer gegenprüfen.
+- Danach das Profil oben im Archiv wählen und Einträge je Bereich ergänzen.
+- Für schnellen Mix zuerst Schnellbutton (1/3/5) klicken, dann Ergebnis nutzen.
+- Empfehlung 1: Vor großem Import erst Export machen (Backup als JSON).
+- Empfehlung 2: Bei vielen Einträgen Sortierung auf „Alphabetisch“ lassen.
 
 ## Iterationsprotokoll (kompakt)
+- Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
+- Patchgrund 2: Nutzerwunsch nach Zufallsmix, Mengensteuerung, Auto-Copy und Logging.
+- Betroffene Dateien: `index.html`, `css/app.css`, `js/app.js`, `js/ui.js`, `js/state.js`, `js/services/profile-archive.js`, `data/project-structure.json`, `data/profile-archive.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS/JSON-Syntax und direkt betroffene UI-Ausgabe geprüft.
 - Patchgrund 1: Einheitliches Muster für Statussymbole auch bei Lesen/Schreiben/Struktur.
 - Patchgrund 2: Wartbarkeit verbessert durch Auslagerung der Status-Visuals in eine kleine Hilfsdatei.
 - Betroffene Dateien: `js/ui.js`, `js/status-visuals.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.

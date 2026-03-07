@@ -1,12 +1,42 @@
 {
   "version": "1.0",
   "requiredDirectories": [
-    { "name": "css", "path": "css", "required": true, "createIfMissing": false },
-    { "name": "js", "path": "js", "required": true, "createIfMissing": false },
-    { "name": "adapters", "path": "js/adapters", "required": true, "createIfMissing": false },
-    { "name": "services", "path": "js/services", "required": true, "createIfMissing": false },
-    { "name": "data", "path": "data", "required": true, "createIfMissing": false },
-    { "name": "logs", "path": "logs", "required": false, "createIfMissing": true }
+    {
+      "name": "css",
+      "path": "css",
+      "required": true,
+      "createIfMissing": false
+    },
+    {
+      "name": "js",
+      "path": "js",
+      "required": true,
+      "createIfMissing": false
+    },
+    {
+      "name": "adapters",
+      "path": "js/adapters",
+      "required": true,
+      "createIfMissing": false
+    },
+    {
+      "name": "services",
+      "path": "js/services",
+      "required": true,
+      "createIfMissing": false
+    },
+    {
+      "name": "data",
+      "path": "data",
+      "required": true,
+      "createIfMissing": false
+    },
+    {
+      "name": "logs",
+      "path": "logs",
+      "required": false,
+      "createIfMissing": true
+    }
   ],
   "requiredFiles": [
     {
@@ -18,14 +48,48 @@
     {
       "path": "data/app-config.json",
       "type": "json",
-      "defaultContent": { "appName": "Neues Projekt", "version": "0.0.1" },
+      "defaultContent": {
+        "appName": "Neues Projekt",
+        "version": "0.0.1"
+      },
       "onMissing": "create"
     },
     {
       "path": "data/project-structure.json",
       "type": "json",
-      "defaultContent": { "version": "1.0", "requiredDirectories": [], "requiredFiles": [] },
+      "defaultContent": {
+        "version": "1.0",
+        "requiredDirectories": [],
+        "requiredFiles": []
+      },
       "onMissing": "warn"
+    },
+    {
+      "path": "data/profile-archive.json",
+      "type": "json",
+      "defaultContent": {
+        "version": 1,
+        "profiles": {
+          "HardTechno": {
+            "genres": [],
+            "moods": [],
+            "styles": []
+          },
+          "Chill": {
+            "genres": [],
+            "moods": [],
+            "styles": []
+          },
+          "Hörspiele": {
+            "genres": [],
+            "moods": [],
+            "styles": []
+          }
+        },
+        "events": [],
+        "lastMix": null
+      },
+      "onMissing": "create"
     }
   ],
   "selftestRules": {
@@ -36,8 +100,13 @@
       "required-directories",
       "required-files"
     ],
-    "optional": ["write-test"],
-    "needsUserAction": ["directory-selected", "write-test"]
+    "optional": [
+      "write-test"
+    ],
+    "needsUserAction": [
+      "directory-selected",
+      "write-test"
+    ]
   },
   "writeTestRules": {
     "enabledByDefault": false,
@@ -46,7 +115,15 @@
     "cleanupAfterSuccess": true
   },
   "modulePlaceholders": [
-    { "name": "backup", "path": "modules/backup", "enabled": false },
-    { "name": "diagnose-export", "path": "modules/diagnose-export", "enabled": false }
+    {
+      "name": "backup",
+      "path": "modules/backup",
+      "enabled": false
+    },
+    {
+      "name": "diagnose-export",
+      "path": "modules/diagnose-export",
+      "enabled": false
+    }
   ]
 }

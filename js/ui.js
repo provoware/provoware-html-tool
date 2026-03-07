@@ -1,3 +1,4 @@
+import { categories } from './services/profile-archive.js';
 import { getState } from './state.js';
 import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 
@@ -48,6 +49,21 @@ const formatStructureStatus = (selftestResult) => {
     : formatStatusWithSymbol('green', formatStatusWord('ok'));
 };
 
+const renderProfileOptions = (archive, selected) => {
+  const options = Object.keys(archive?.profiles || {});
+  return options.map((name) => `<option value="${name}" ${name === selected ? 'selected' : ''}>${name}</option>`).join('');
+};
+
+const renderCategoryList = (archive, profile, category) => {
+  const list = archive?.profiles?.[profile]?.[category] || [];
+  return list.map((item) => `<li><span>${item.value}</span><div><button class="btn-small" data-edit="${category}" data-value="${item.value}">Bearbeiten</button><button class="btn-small" data-delete="${category}" data-value="${item.value}">Löschen</button></div></li>`).join('');
+};
+
+const renderStats = (stats) => {
+  if (!stats) return '-';
+  return `Genres: ${stats.genres} | Stimmungen: ${stats.moods} | Stile: ${stats.styles} | Gesamt: ${stats.total}`;
+};
+
 export const applyTheme = (themeTokens = {}) => {
   const map = {
     bg: '--bg',
@@ -80,6 +96,69 @@ export const bindUiActions = (actions) => {
   byId('action-ensure-structure')?.addEventListener('click', actions.onEnsureStructure);
   byId('action-run-write-test')?.addEventListener('click', () => actions.onRunSelftest(true));
   byId('action-switch-dir')?.addEventListener('click', actions.onSwitchDirectory);
+
+  byId('profile-select')?.addEventListener('change', (event) => actions.onSelectProfile(event.target.value));
+  byId('archive-sort')?.addEventListener('change', (event) => actions.onSortArchive(event.target.value));
+
+  categories.forEach((category) => {
+    byId(`save-${category}`)?.addEventListener('click', () => {
+      const input = byId(`input-${category}`);
+      actions.onSaveCategoryEntry({ category, value: input?.value || '' });
+      if (input) input.value = '';
+    });
+    byId(`input-${category}`)?.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter') return;
+      event.preventDefault();
+      const input = event.currentTarget;
+      actions.onSaveCategoryEntry({ category, value: input.value || '' });
+      input.value = '';
+    });
+  });
+
+  byId('archive-list')?.addEventListener('click', async (event) => {
+    const editCategory = event.target.getAttribute('data-edit');
+    const deleteCategory = event.target.getAttribute('data-delete');
+    const value = event.target.getAttribute('data-value');
+    if (editCategory && value) {
+      const next = window.prompt('Neuer Text', value);
+      if (next !== null) {
+        await actions.onEditCategoryEntry({ category: editCategory, oldValue: value, newValue: next });
+      }
+    }
+    if (deleteCategory && value) {
+      await actions.onDeleteCategoryEntry({ category: deleteCategory, value });
+    }
+  });
+
+  byId('archive-export')?.addEventListener('click', async () => {
+    const text = await actions.onExportArchive();
+    const area = byId('archive-transfer');
+    if (area) area.value = text;
+  });
+
+  byId('archive-import')?.addEventListener('click', async () => {
+    const area = byId('archive-transfer');
+    await actions.onImportArchive(area?.value || '');
+  });
+
+  byId('mix-generate')?.addEventListener('click', async () => {
+    const includeCategories = categories.filter((category) => byId(`mix-include-${category}`)?.checked);
+    const amountPerCategory = Object.fromEntries(categories.map((category) => [category, Number(byId(`mix-amount-${category}`)?.value || 1)]));
+    await actions.onGenerateMix({ includeCategories, amountPerCategory });
+  });
+
+  document.querySelectorAll('[data-mix-quick]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const amount = Number(button.getAttribute('data-mix-quick'));
+      categories.forEach((category) => {
+        const input = byId(`mix-amount-${category}`);
+        if (input) input.value = String(amount);
+      });
+      const includeCategories = categories.filter((category) => byId(`mix-include-${category}`)?.checked);
+      const amountPerCategory = Object.fromEntries(categories.map((category) => [category, amount]));
+      await actions.onGenerateMix({ includeCategories, amountPerCategory });
+    });
+  });
 };
 
 export const render = () => {
@@ -125,6 +204,26 @@ export const render = () => {
       const visual = statusVisual(check.status);
       return `<article class="check-item ${statusClass(check.status)}"><strong>${visual.symbol} ${autoFormatText(check.name)}</strong><br><span>${autoFormatText(check.message)}</span></article>`;
     }).join('');
+  }
+
+  setText('archive-stats', renderStats(state.profileStats));
+  const profileSelect = byId('profile-select');
+  if (profileSelect) {
+    profileSelect.innerHTML = renderProfileOptions(state.profileArchive, state.selectedProfile);
+  }
+  const sortSelect = byId('archive-sort');
+  if (sortSelect) sortSelect.value = state.archiveSortMode || 'alpha';
+
+  const archiveList = byId('archive-list');
+  if (archiveList) {
+    archiveList.innerHTML = categories.map((category) => `<section class="archive-category"><h4>${category}</h4><ul>${renderCategoryList(state.profileArchive, state.selectedProfile, category) || '<li>-</li>'}</ul></section>`).join('');
+  }
+
+  setText('mix-output', state.randomMix?.text || '-');
+
+  const archiveEvents = byId('archive-events');
+  if (archiveEvents) {
+    archiveEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 6).map((item) => `<li><span>${item.timestamp.slice(11, 19)}</span> ${autoFormatText(item.message)}</li>`).join('');
   }
 
   const logList = byId('log-list');

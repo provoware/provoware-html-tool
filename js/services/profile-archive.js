@@ -1,0 +1,162 @@
+const CATEGORIES = ['genres', 'moods', 'styles'];
+
+const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+
+const ensureProfile = (archive, profile) => {
+  if (!archive.profiles[profile]) {
+    archive.profiles[profile] = { genres: [], moods: [], styles: [] };
+  }
+  return archive.profiles[profile];
+};
+
+const toRecord = (value) => ({ value: normalizeText(value), createdAt: new Date().toISOString() });
+
+const byValue = (a, b) => a.value.localeCompare(b.value, 'de', { sensitivity: 'base' });
+const byCreated = (a, b) => a.createdAt.localeCompare(b.createdAt);
+
+export const ARCHIVE_PATH = 'data/profile-archive.json';
+
+export const createDefaultArchive = () => ({
+  version: 1,
+  profiles: {
+    HardTechno: { genres: [], moods: [], styles: [] },
+    Chill: { genres: [], moods: [], styles: [] },
+    Hörspiele: { genres: [], moods: [], styles: [] }
+  },
+  events: [],
+  lastMix: null,
+  updatedAt: new Date().toISOString()
+});
+
+export const normalizeCategory = (value) => (CATEGORIES.includes(value) ? value : 'genres');
+
+export const normalizeArchive = (input) => {
+  const base = createDefaultArchive();
+  const safe = input && typeof input === 'object' ? input : {};
+  const profiles = safe.profiles && typeof safe.profiles === 'object' ? safe.profiles : {};
+
+  Object.entries(profiles).forEach(([profileName, categories]) => {
+    if (!categories || typeof categories !== 'object') return;
+    base.profiles[profileName] = { genres: [], moods: [], styles: [] };
+    CATEGORIES.forEach((category) => {
+      const list = Array.isArray(categories[category]) ? categories[category] : [];
+      const dedup = new Map();
+      list.forEach((item) => {
+        const value = normalizeText(item?.value ?? item);
+        if (!value) return;
+        const key = value.toLowerCase();
+        if (dedup.has(key)) return;
+        dedup.set(key, {
+          value,
+          createdAt: item?.createdAt && String(item.createdAt).trim() ? String(item.createdAt) : new Date().toISOString()
+        });
+      });
+      base.profiles[profileName][category] = [...dedup.values()].sort(byValue);
+    });
+  });
+
+  if (Array.isArray(safe.events)) {
+    base.events = safe.events.slice(0, 200);
+  }
+  if (safe.lastMix && typeof safe.lastMix === 'object') {
+    base.lastMix = safe.lastMix;
+  }
+  base.updatedAt = safe.updatedAt || new Date().toISOString();
+  return base;
+};
+
+export const addEntry = ({ archive, profile, category, value }) => {
+  const text = normalizeText(value);
+  if (!text) return { ok: false, code: 'ENTRY_EMPTY', message: 'Bitte Text eingeben.' };
+  const cat = normalizeCategory(category);
+  const target = ensureProfile(archive, profile);
+  const duplicate = target[cat].some((item) => item.value.toLowerCase() === text.toLowerCase());
+  if (duplicate) return { ok: false, code: 'ENTRY_DUPLICATE', message: 'Eintrag ist schon vorhanden.' };
+  target[cat].push(toRecord(text));
+  target[cat].sort(byValue);
+  archive.updatedAt = new Date().toISOString();
+  return { ok: true, code: 'ENTRY_ADDED', message: 'Eintrag wurde gespeichert.' };
+};
+
+export const editEntry = ({ archive, profile, category, oldValue, newValue }) => {
+  const text = normalizeText(newValue);
+  const cat = normalizeCategory(category);
+  const target = ensureProfile(archive, profile);
+  const oldKey = normalizeText(oldValue).toLowerCase();
+  const row = target[cat].find((item) => item.value.toLowerCase() === oldKey);
+  if (!row) return { ok: false, code: 'ENTRY_MISSING', message: 'Eintrag wurde nicht gefunden.' };
+  if (!text) return { ok: false, code: 'ENTRY_EMPTY', message: 'Bitte Text eingeben.' };
+  const duplicate = target[cat].some((item) => item !== row && item.value.toLowerCase() === text.toLowerCase());
+  if (duplicate) return { ok: false, code: 'ENTRY_DUPLICATE', message: 'Eintrag ist schon vorhanden.' };
+  row.value = text;
+  target[cat].sort(byValue);
+  archive.updatedAt = new Date().toISOString();
+  return { ok: true, code: 'ENTRY_UPDATED', message: 'Eintrag wurde geändert.' };
+};
+
+export const removeEntry = ({ archive, profile, category, value }) => {
+  const cat = normalizeCategory(category);
+  const target = ensureProfile(archive, profile);
+  const key = normalizeText(value).toLowerCase();
+  const next = target[cat].filter((item) => item.value.toLowerCase() !== key);
+  if (next.length === target[cat].length) return { ok: false, code: 'ENTRY_MISSING', message: 'Eintrag wurde nicht gefunden.' };
+  target[cat] = next;
+  archive.updatedAt = new Date().toISOString();
+  return { ok: true, code: 'ENTRY_REMOVED', message: 'Eintrag wurde entfernt.' };
+};
+
+export const sortArchive = ({ archive, mode }) => {
+  const sorter = mode === 'created' ? byCreated : byValue;
+  Object.values(archive.profiles).forEach((profile) => {
+    CATEGORIES.forEach((category) => profile[category].sort(sorter));
+  });
+  archive.updatedAt = new Date().toISOString();
+  return { ok: true, code: 'ARCHIVE_SORTED', message: 'Liste wurde sortiert.' };
+};
+
+const pickUnique = (items, amount) => {
+  const pool = [...items];
+  const result = [];
+  while (pool.length && result.length < amount) {
+    const index = Math.floor(Math.random() * pool.length);
+    result.push(pool.splice(index, 1)[0]);
+  }
+  return result;
+};
+
+export const createRandomMix = ({ archive, profile, includeCategories, amountPerCategory }) => {
+  const target = ensureProfile(archive, profile);
+  const categories = CATEGORIES.filter((category) => includeCategories?.includes(category));
+  if (!categories.length) return { ok: false, code: 'MIX_NO_CATEGORY', message: 'Bitte mindestens einen Bereich wählen.' };
+
+  const mix = {};
+  categories.forEach((category) => {
+    const requested = Number(amountPerCategory?.[category] || 0);
+    const amount = Number.isFinite(requested) && requested > 0 ? Math.floor(requested) : 1;
+    mix[category] = pickUnique(target[category], amount).map((item) => item.value);
+  });
+
+  const text = categories
+    .map((category) => `${category}: ${mix[category].length ? mix[category].join(', ') : '-'}`)
+    .join(' | ');
+
+  archive.lastMix = { profile, mix, text, createdAt: new Date().toISOString() };
+  archive.updatedAt = new Date().toISOString();
+  return { ok: true, code: 'MIX_CREATED', message: 'Zufallsmix wurde erstellt.', data: archive.lastMix };
+};
+
+export const addArchiveEvent = (archive, type, message, details = null) => {
+  archive.events = [{ timestamp: new Date().toISOString(), type, message, details }, ...archive.events].slice(0, 100);
+};
+
+export const buildStats = (archive, profile) => {
+  const target = ensureProfile(archive, profile);
+  const stats = {
+    genres: target.genres.length,
+    moods: target.moods.length,
+    styles: target.styles.length
+  };
+  return { ...stats, total: stats.genres + stats.moods + stats.styles };
+};
+
+export const categories = CATEGORIES;

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "profiles": {
+    "HardTechno": {
+      "genres": [],
+      "moods": [],
+      "styles": []
+    },
+    "Chill": {
+      "genres": [],
+      "moods": [],
+      "styles": []
+    },
+    "Hörspiele": {
+      "genres": [],
+      "moods": [],
+      "styles": []
+    }
+  },
+  "events": [],
+  "lastMix": null
+}
