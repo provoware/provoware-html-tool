@@ -6,6 +6,8 @@
 - Diese Iteration zentralisiert die Fehlerbehandlung beim Dashboard-Notizspeichern (weniger Doppelcode, konsistente Warnpfade).
 - Diese Iteration ergänzt 4 Design-Themes im Header sowie Schriftzoom mit Strg+Mausrad/Strg+Plus/Minus.
 - Diese Iteration verbessert die Header-Bedienung unter 980px (besseres 1-Spalten-Verhalten).
+- Diese Iteration setzt den 4‑Schritt‑Assistenten als kleinen UI-Patch im Dashboard um (mit direktem Aktionsknopf zum aktuellen Schritt).
+- Diese Iteration legt den Ein-Befehl-Release-Check fest: `bash scripts/minimal-check.sh` mit Auswertung „Bestanden/Nicht bestanden“ in README + Tutorial.
 - Diese Iteration ergänzt einen Grenzfall-Test für Guide-Index-Navigation (ArrowUp auf 0, ArrowDown auf letztem Index).
 - Diese Iteration vereinheitlicht die Guide-API (`mode` statt zusätzlichem `jump`-Boolean).
 - Diese Iteration verbessert Wiki-Robustheit (Kopien statt direkter Store-Referenzen).

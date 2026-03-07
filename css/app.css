@@ -383,6 +383,32 @@ body::before {
   color: #fff8e7;
 }
 
+.startup-assistant {
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(117, 143, 109, 0.5);
+  background: linear-gradient(140deg, rgba(235, 242, 227, 0.9), rgba(211, 224, 197, 0.84));
+}
+
+.startup-assistant h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+  color: #233325;
+}
+
+.startup-assistant-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.startup-assistant .btn-small[disabled] {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
 .dashboard-note {
   margin: 0;
   color: #1f2b20;
@@ -1287,6 +1313,16 @@ body::before {
   border-color: rgba(255, 218, 145, 0.62);
   background: linear-gradient(138deg, rgba(245, 158, 11, 0.52), rgba(132, 58, 15, 0.74));
   color: #fff8ea;
+}
+
+.startup-assistant {
+  border-color: rgba(172, 194, 236, 0.36);
+  background: linear-gradient(145deg, rgba(25, 36, 57, 0.72), rgba(44, 59, 92, 0.66));
+}
+
+.startup-assistant h3,
+.startup-assistant .dashboard-note {
+  color: #e4eeff;
 }
 
 .panel-grid {
