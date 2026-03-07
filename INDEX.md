@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Reproduzierbarer Minimal-Check für Kern-Syntax und Service-Schnelltest
+- Iterationsfokus: Doku-Abgleich für Platzhalter + robuster auswertbarer Modulstatus (statusCode)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github

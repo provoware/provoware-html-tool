@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 12 (siehe `todo.txt`)
-- Offene Punkte: 4 (siehe `todo.txt`)
-- Fortschritt: 75%
+- Erledigte Punkte: 13 (siehe `todo.txt`)
+- Offene Punkte: 3 (siehe `todo.txt`)
+- Fortschritt: 81%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -31,11 +31,14 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
-- Offener Punkt zur Import-/Export-Konsistenz der direkt betroffenen Services abgeschlossen.
-- Neuer gezielter Test ergänzt: `tests/services/import-export-consistency.test.js`.
-- Statuswerte in `README.md` mit `todo.txt` synchronisiert.
+- Doku-Abgleich: Platzhalter werden nicht mehr als fertige Integration dargestellt.
+- Modulstatus hat jetzt zusätzlich ein kleines Statusfeld (`statusCode`) für maschinelle Auswertung.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den aktuellen Stand gebracht.
-- Reproduzierbaren Minimal-Check ergänzt: `scripts/minimal-check.sh`.
+
+## Wichtiger Hinweis zu Platzhaltern
+- `assets/css/base.css` und `assets/js/core.js` liegen im Projekt als Vorlagen-Stand.
+- Diese Vorlagen sind in `index.html` derzeit **nicht** aktiv eingebunden.
+- Maßgeblich für den Live-Start sind weiter `css/app.css` und `js/app.js`.
 
 ## Laien-Befehle (unten)
 - Team-Start (empfohlen):
