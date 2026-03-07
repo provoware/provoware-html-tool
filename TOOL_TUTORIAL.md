@@ -9,13 +9,14 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 3. Danach **Selbsttest starten**.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
+
 ## Kleine Erweiterung dieser Iteration (neu)
-### AGENTS-Regeln in 60 Sekunden prüfen
-1. `AGENTS.md` öffnen.
-2. Prüfen, ob die 7 Pflichtpunkte vor dem ersten Patch klar sichtbar sind.
-3. Prüfen, ob Endvalidierung nur für direkt betroffene Bereiche beschrieben ist.
-4. Prüfen, ob die Patch-Checkliste vollständig ist.
-5. Ziel: Jede neue Iteration bleibt klein, verständlich und konsistent.
+### Laienstart mit Auto-Korrektur nutzen
+1. `laienstart.html` im Browser öffnen.
+2. Auf Status, Fortschritt und Fehlercode achten.
+3. Bei Code `START_MISSING_RESOURCE` auf **Automatisch korrigieren** klicken.
+4. Dialog bestätigen, dann läuft der Wiederholstart automatisch weiter.
+5. Ziel: Erst bei fehlerfreier Prüfung startet die GUI.
 
 ## Kurzer Modul-Check
 1. `node --test tests/services/module-registry.test.js` ausführen.
