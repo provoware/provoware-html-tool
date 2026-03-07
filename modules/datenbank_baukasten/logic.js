@@ -1,6 +1,4 @@
-function createDatenbankBaukastenModule() {
-  return {
-    id: 'datenbank_baukasten',
-    ready: true
-  };
-}
+export const createDatenbankBaukastenModule = () => ({
+  id: 'datenbank_baukasten',
+  ready: true
+});

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Datenbank-Baukasten - Einzelstart</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; line-height: 1.4; }
+      pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
+      button { padding: 0.5rem 0.8rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Datenbank-Baukasten (Einzelstart)</h1>
+    <p>Diese Startdatei nutzt nur das Modul, ohne Haupttool.</p>
+    <button id="run" type="button">Modul laden</button>
+    <pre id="out">Bereit.</pre>
+
+    <script type="module">
+      import { createDatenbankBaukastenModule } from './modules/datenbank_baukasten/logic.js';
+
+      const out = document.getElementById('out');
+      document.getElementById('run').addEventListener('click', () => {
+        const moduleData = createDatenbankBaukastenModule();
+        out.textContent = JSON.stringify(moduleData, null, 2);
+      });
+    </script>
+  </body>
+</html>
