@@ -2,7 +2,7 @@
 
 ## Kompletter aktueller Verzeichnisbaum
 
-- Stand dieser Übersicht: Iteration mit Header-Chip-Live-Status, Hover-/Fokus-Check und kleinem CSS-Token-Abgleich für stärkeren Fokuskontrast.
+- Stand dieser Übersicht: Iteration mit erweitertem Header-Fokus-Token-Muster (2 zusätzliche Header-Buttons), dokumentiertem Mini-Farbtoken-Abgleich und erledigtem letztem Todo-Punkt.
 
 ```
 .

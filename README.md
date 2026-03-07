@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 21 (siehe `todo.txt`)
-- Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 95%
+- Erledigte Punkte: 22 (siehe `todo.txt`)
+- Offene Punkte: 0 (siehe `todo.txt`)
+- Fortschritt: 100%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -40,6 +40,9 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Header-Fokus-Muster minimal erweitert: Die Buttons **„Linke Leiste“** und **„Rechte Leiste“** nutzen jetzt denselben tokenbasierten Fokusstil wie die Header-Chips (ohne Strukturumbau).
+- Mini-Designabgleich dokumentiert: Ein kleines Farbtoken-Cluster für Header-Aktionen wurde in `DESIGN_VORLAGE.md` gegen die Primärfarben abgeglichen.
+- Offener TODO-Punkt „Modulstandard nur bei echtem Eingriff“ als eingehalten abgeschlossen, da keine `modules/*/logic.js` geändert wurden.
 - Neuer Mini-Regressionstest für die Header-Chips: prüft nach `setState(...)` gezielt nur `#header-chip-project-status` und `#header-chip-autosave-status` (kein Full-UI-Test).
 - Projektstatus-Texte (`Wartet`, `In Arbeit`, `Bereit`) sind jetzt zentral als kleines Mapping in `js/ui.js` gebündelt für konsistente spätere Textanpassungen.
 - Header-Mini-Schritt professionell vervollständigt: Die zwei Status-Chips oben rechts werden jetzt als Live-Anzeige aus State-Daten befüllt (**Projektstatus** und **Autosave-Status**), ohne Layout-Umbau.
