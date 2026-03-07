@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo-Modul - Einzelstart</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; line-height: 1.4; }
+      input { min-width: 280px; padding: 0.45rem; }
+      button { padding: 0.5rem 0.8rem; margin-left: 0.4rem; }
+      pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Todo-Kalender-Erinnerung (Einzelstart)</h1>
+    <p>Hier läuft nur das Todo-Modul ohne Dashboard.</p>
+    <label for="title">Aufgabe:</label>
+    <input id="title" type="text" placeholder="z. B. Termin prüfen" maxlength="120" />
+    <button id="add" type="button">Aufgabe erzeugen</button>
+    <pre id="out">Noch keine Aufgabe.</pre>
+
+    <script type="module">
+      import { createTodoEntry, summarizeTodoStatus } from './modules/todo_kalender_erinnerung/logic.js';
+
+      const out = document.getElementById('out');
+      const tasks = [];
+
+      document.getElementById('add').addEventListener('click', () => {
+        const title = document.getElementById('title').value.trim();
+        if (!title) {
+          out.textContent = 'Titel fehlt.';
+          return;
+        }
+
+        const next = createTodoEntry({ title });
+        tasks.push(next);
+        out.textContent = JSON.stringify({ summary: summarizeTodoStatus(tasks), tasks }, null, 2);
+      });
+    </script>
+  </body>
+</html>

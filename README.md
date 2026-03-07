@@ -1,15 +1,19 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 67
+- Erledigte Punkte: 68
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 96% (laufend, siehe `todo.txt`)
+- Fortschritt: 97% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
   - `index.html`
   - `css/app.css`
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
+- Modul-Einzelstarts (ohne Haupttool):
+  - `datenbank_baukasten_start.html`
+  - `todo_kalender_erinnerung_start.html`
+  - `wiki_notiz_wissen_start.html`
 - Adapter-Layer:
   - `js/adapters/filesystem-adapter.js`
   - `js/adapters/browser-filesystem.js`
@@ -98,6 +102,7 @@
 - Genres-Bereich nutzerfreundlich optimiert: Listen bleiben jetzt in fester Kartenhöhe mit Scrollbar statt Modul-Vergrößerung; zusätzlich klarere Farbflächen und modernere Kartenoptik im Profil-Archiv.
 
 - Neues Wiki-, Notiz- und Wissensmodul als strukturierte Modulbasis ergänzt (CRUD, Suche/Filter, Verknüpfungen, Export).
+- Module jetzt einzeln startbar: Für jedes Modul gibt es eine eigene Startdatei im Hauptordner, nutzbar ohne Haupttool.
 - Unsichtbare Live-Statuszeile ergänzt (Screenreader-freundlich): Start, Gesamtstatus und letzte Meldung werden als gesprochene Kurzzusammenfassung bereitgestellt.
 - Skip-Link ergänzt: Mit Tastatur kann direkt zum Hauptinhalt gesprungen werden.
 - Ruhiger Screenreader-Modus ergänzt: Statusmeldungen werden bewusst kompakter gesprochen.
@@ -220,3 +225,8 @@
 - Patchgrund 2: Transparenz erhöht, damit je Zeile die zuletzt genutzte Datei direkt sichtbar ist.
 - Betroffene Dateien: `index.html`, `js/ui.js`, `js/services/ui-action-handlers.js`, `tests/services/ui-action-handlers.smoke.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene HTML/JS-Syntax, direkt betroffene Dashboard-3-Ausgabe und der Smoke-Test geprüft.
+
+- Patchgrund 1: Nutzerwunsch umgesetzt, damit jedes Modul über eine `modulname_startdatei` im Hauptordner direkt einzeln nutzbar ist.
+- Patchgrund 2: Robustheit für Einzelstart ergänzt durch Export im Datenbank-Modul.
+- Betroffene Dateien: `modules/datenbank_baukasten/logic.js`, `datenbank_baukasten_start.html`, `todo_kalender_erinnerung_start.html`, `wiki_notiz_wissen_start.html`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS/HTML-Syntax sowie direkte Modul-Einzelstarts geprüft.

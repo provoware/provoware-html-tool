@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wiki-Notiz-Wissen - Einzelstart</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; line-height: 1.4; }
+      input, textarea { width: 100%; max-width: 760px; margin-bottom: 0.5rem; padding: 0.45rem; }
+      button { padding: 0.5rem 0.8rem; }
+      pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Wiki-Notiz-Wissen (Einzelstart)</h1>
+    <p>Diese Seite startet nur das Wissensmodul.</p>
+
+    <label for="topic">Thema</label>
+    <input id="topic" type="text" placeholder="z. B. JSON-Basics" maxlength="120" />
+
+    <label for="content">Inhalt</label>
+    <textarea id="content" rows="5" placeholder="Kurze Notiz..."></textarea>
+
+    <button id="save" type="button">Eintrag speichern</button>
+    <pre id="out">Noch keine Einträge.</pre>
+
+    <script type="module">
+      import { createEmptyKnowledgeStore, createKnowledgeEntry, listKnowledgeEntries } from './modules/wiki_notiz_wissen/logic.js';
+
+      let store = createEmptyKnowledgeStore();
+      const out = document.getElementById('out');
+
+      document.getElementById('save').addEventListener('click', () => {
+        const topic = document.getElementById('topic').value;
+        const content = document.getElementById('content').value;
+
+        const created = createKnowledgeEntry(store, { topic, content });
+        if (!created.ok) {
+          out.textContent = created.message;
+          return;
+        }
+
+        store = created.data.store;
+        const listed = listKnowledgeEntries(store);
+        out.textContent = JSON.stringify(listed.data, null, 2);
+      });
+    </script>
+  </body>
+</html>

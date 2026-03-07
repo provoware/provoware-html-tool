@@ -10,6 +10,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Modul-Einzelstart ohne Haupttool kurz prüfen (neu)
+1. Datei `todo_kalender_erinnerung_start.html` im Browser öffnen.
+2. Einen Titel eingeben und **Aufgabe erzeugen** klicken.
+3. Prüfen, ob unten JSON mit `summary` und `tasks` erscheint.
+4. Danach `wiki_notiz_wissen_start.html` öffnen und Thema + Inhalt speichern.
+5. Prüfen, ob die Eintragsliste als JSON erscheint.
+
 ### Todo-Speicher + Wieder-einblenden-Leiste kurz prüfen (neu)
 1. Seite neu laden.
 2. Im Todo-Modul einen neuen Eintrag hinzufügen.
