@@ -10,16 +10,16 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Desktop-Hinweis besser lesen
-1. Wenn der Desktop-Adapter nicht aktiv ist, zeigt die Meldung jetzt klar den nächsten Schritt.
-2. Achte auf `nextStep` im Ergebnis (kurzer Handlungs-Hinweis).
-3. Ziel: Weniger Rätsel bei Startproblemen im Team.
-4. Konkreter nächster Schritt: Browser-Version öffnen und **Ordner wählen** nutzen.
+### Schreibrechte beim Start bewusst steuern
+1. Beim Start fragt ein Dialog, ob die App Schreibrechte anfragen soll.
+2. Deine Auswahl wird gemerkt (lokal im Browser-Speicher).
+3. Bei „Ja" kann die App später Dateien direkt schreiben.
+4. Bei „Nein" bleibt die App im Lesemodus, bis du die Einstellung änderst.
 
-## Kurzer Modul-Check
-1. `node --test tests/services/module-registry.test.js` ausführen.
-2. Prüfen, ob die Ausgabe ohne Fehler endet.
-3. Ziel: Registry-Logik bleibt stabil.
+## Kurzer Rechte-Check
+1. `node --test tests/services/startup-check.test.js` ausführen.
+2. Prüfen, ob der Schreibwunsch korrekt weitergegeben wird.
+3. Ziel: Startdialog und Rechteprüfung arbeiten gleich.
 
 ## Kurzer Startdatei-Check
 1. `node --test tests/start-files/start-import-resolution.test.js` ausführen.

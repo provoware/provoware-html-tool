@@ -4,6 +4,7 @@
 [x] 2026-03-07 | App-Startblocker | Startblocker durch fehlerhafte Registry-Datei entschärfen, damit Einzeldefekt dort die App nicht sofort stoppt | prüfen: `node --check js/services/module-registry.js` und Doppelblock-Sichtung | fertig wenn: keine Merge-Konfliktreste, keine doppelten Kernfunktionen
 
 ## Hoch
+[x] 2026-03-07 | js/app.js + js/adapters/browser-filesystem.js + js/services/startup-check.js | Schreibberechtigung beim Start per Dialog abfragen und Auswahl lokal merken | prüfen: Start ohne gespeicherte Wahl zeigt Dialog einmal, danach Rechtecheck nutzt gemerkte Wahl | fertig wenn: Schreibanfrage nur bei gemerktem „Ja“ aktiv angefragt wird
 [x] 2026-03-07 | js/services/project-selftest.js | Selbsttest logisch trennen: Existenzprüfung und Schreibprüfung nicht vermischen (Ordnerprobe aktuell über Schreibzugriff) | prüfen: Ablauf mit nur Leserechten vs. Schreibrechten vergleichen | fertig wenn: Existenzcheck ohne Schreibtest möglich ist
 [x] 2026-03-07 | js/services/project-selftest.js | `.probe`-Seiteneffekte vermeiden oder sicher löschen | prüfen: nach Selbsttest keine zusätzlichen Probe-Dateien im Projektordner | fertig wenn: Probe-Dateien gar nicht entstehen oder zuverlässig entfernt werden
 [x] 2026-03-07 | js/services/project-selftest.js | `cleanupAfterSuccess` nur als erledigt markieren, wenn Funktion real existiert und genutzt wird | prüfen: Code enthält echte Cleanup-Implementierung plus Aufrufpfad | fertig wenn: Cleanup nachvollziehbar aktiv oder Punkt bleibt offen
