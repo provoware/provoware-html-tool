@@ -25,15 +25,12 @@
 
       <nav class="nav panel tile-left" aria-label="Navigation">
         <div class="sidebar-head">
-          <h2 class="panel-title" id="nav-title">Navigation</h2>
+          <h2 class="panel-title" id="nav-title">Module</h2>
         </div>
-        <div class="sidebar-body">
-          <button id="action-select-dir" class="btn btn-primary" type="button">Ordner wählen</button>
-          <button id="action-run-selftest" class="btn" type="button">Selbsttest starten</button>
-          <button id="action-ensure-structure" class="btn" type="button">Projektstruktur anlegen</button>
-          <button id="action-run-write-test" class="btn" type="button">Schreibtest ausführen</button>
-          <button id="action-switch-dir" class="btn" type="button">Ordner wechseln</button>
-          <button id="action-export-diagnosis" class="btn" type="button">Diagnose exportieren</button>
+        <div class="sidebar-body sidebar-modules">
+          <p class="sidebar-hint">Nur aktive Nutzer-Module:</p>
+          <div id="sidebar-module-list" class="module-button-grid" aria-label="Aktive Nutzer-Module"></div>
+          <p id="module-registry-summary" class="sidebar-summary">-</p>
         </div>
       </nav>
 
@@ -165,7 +162,7 @@
                 <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
               </div>
             </header>
-            <div class="module-body"><p id="module-registry-summary">Freier Platz für aktives Modul.</p></div>
+            <div class="module-body"><p id="module-registry-summary-main">Freier Platz für aktives Modul.</p></div>
           </article>
 
           <article class="module-panel module-panel-placeholder" data-panel="module-6">
@@ -216,9 +213,22 @@
 
       <aside class="widgets panel tile-right" aria-label="Projektordner-Status">
         <div class="sidebar-head">
-          <h2 class="panel-title" id="status-title">Projektordner-Status</h2>
+          <h2 class="panel-title" id="status-title">Einstellungen &amp; Stabilität</h2>
         </div>
         <div class="sidebar-body">
+          <section class="settings-group" aria-label="Tool-Einstellungen und Tests">
+            <h3>Tool-Einstellungen und Tests</h3>
+            <div class="settings-actions">
+              <button id="action-select-dir" class="btn btn-primary" type="button">Ordner wählen</button>
+              <button id="action-run-selftest" class="btn" type="button">Selbsttest starten</button>
+              <button id="action-ensure-structure" class="btn" type="button">Projektstruktur anlegen</button>
+              <button id="action-run-write-test" class="btn" type="button">Schreibtest ausführen</button>
+              <button id="action-switch-dir" class="btn" type="button">Ordner wechseln</button>
+              <button id="action-export-diagnosis" class="btn" type="button">Diagnose exportieren</button>
+            </div>
+          </section>
+          <section class="settings-group" aria-label="Stabilitätsstatus">
+            <h3>Stabilitätsstatus</h3>
           <dl class="status-list">
             <div><dt>Ordner</dt><dd id="status-folder">-</dd></div>
             <div><dt>Lesen</dt><dd id="status-read">-</dd></div>
@@ -228,6 +238,7 @@
             <div><dt>Gesamtampel</dt><dd id="status-overall">-</dd></div>
             <div><dt>Layoutmodus</dt><dd id="status-layout">-</dd></div>
           </dl>
+          </section>
         </div>
       </aside>
 
