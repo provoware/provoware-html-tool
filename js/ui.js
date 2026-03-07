@@ -3,6 +3,7 @@ import { getState } from './state.js';
 import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 import { initGuideToolsModule } from './modules/guide-tools-module.js';
 import { initDashboardClock } from './modules/dashboard-clock.js';
+import { evaluatePlugin, getPluginCatalog } from './modules/plugin-manager.js';
 import { escapeHtml } from './services/html-escape.js';
 
 const byId = (id) => document.getElementById(id);
@@ -188,6 +189,14 @@ const renderSidebarModules = (modules = []) => {
     })
     .join('');
 };
+
+const renderPluginOptions = (selectedPluginId) => {
+  return getPluginCatalog()
+    .map((plugin) => `<option value="${escapeHtml(plugin.id)}" ${plugin.id === selectedPluginId ? 'selected' : ''}>${escapeHtml(plugin.name)}</option>`)
+    .join('');
+};
+
+const pluginEnabled = (state, pluginId) => state.pluginManager?.plugins?.[pluginId]?.enabled !== false;
 
 export const applyTheme = (themeTokens = {}) => {
   const map = {
@@ -377,6 +386,15 @@ export const bindUiActions = (actions) => {
   });
   byId('a11y-quiet-mode')?.addEventListener('change', (event) => {
     actions.onToggleA11yQuietMode(event.target.checked);
+  });
+  byId('plugin-select')?.addEventListener('change', (event) => {
+    actions.onSelectPlugin(event.target.value);
+  });
+  byId('plugin-toggle')?.addEventListener('click', () => {
+    actions.onTogglePluginEnabled();
+  });
+  document.addEventListener('input', () => {
+    render();
   });
 
   byId('profile-select')?.addEventListener('change', (event) => actions.onSelectProfile(event.target.value));
@@ -635,6 +653,29 @@ export const render = () => {
 
   const dashboardInfo = buildDashboardInfo(state);
   setText('dashboard-info-note', dashboardInfo);
+
+  const pluginCatalog = getPluginCatalog();
+  const selectedPluginId = state.pluginManager?.selectedPluginId || 'char-counter';
+  const pluginSelect = byId('plugin-select');
+  if (pluginSelect) {
+    pluginSelect.innerHTML = renderPluginOptions(selectedPluginId);
+  }
+  const selectedPlugin = pluginCatalog.find((item) => item.id === selectedPluginId) || pluginCatalog[0];
+  const selectedPluginEnabled = pluginEnabled(state, selectedPlugin?.id || 'char-counter');
+  setText('plugin-help-text', selectedPlugin?.help || 'Plugin-Hilfe nicht verfügbar.');
+  setText('plugin-state', selectedPluginEnabled ? 'Status: aktiv' : 'Status: deaktiviert');
+  setText('plugin-toggle', selectedPluginEnabled ? 'Plugin deaktivieren' : 'Plugin aktivieren');
+  const pluginOutput = byId('plugin-output');
+  if (pluginOutput) {
+    if (!selectedPluginEnabled) {
+      pluginOutput.innerHTML = '<li>Plugin ist deaktiviert. Aktivieren Sie es bei Bedarf.</li>';
+    } else {
+      const result = evaluatePlugin(selectedPlugin?.id || 'char-counter');
+      const lines = [result.title, ...(result.lines || [])];
+      pluginOutput.innerHTML = lines.map((line) => `<li>${escapeHtml(line)}</li>`).join('');
+    }
+  }
+
   setText('module-registry-summary', state.moduleRegistry?.summary || '-');
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
   const sidebarModuleList = byId('sidebar-module-list');

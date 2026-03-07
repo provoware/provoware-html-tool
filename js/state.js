@@ -38,6 +38,13 @@ const createState = () => ({
   editorDirty: false,
   moduleRegistry: { modules: [], summary: '-' },
   templateDesignStatus: { ok: false, message: '-' },
+  pluginManager: {
+    selectedPluginId: 'char-counter',
+    plugins: {
+      'char-counter': { enabled: true },
+      'spellcheck-auto': { enabled: true }
+    }
+  },
   debug: { startupReady: false }
 });
 

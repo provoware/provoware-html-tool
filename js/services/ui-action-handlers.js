@@ -154,6 +154,26 @@ export const createUiActionHandlers = ({
     setState({ a11yQuietMode: Boolean(enabled) });
     logEvent('INFO', 'A11Y_QUIET_MODE_CHANGED', enabled ? 'Ruhiger Modus wurde aktiviert.' : 'Ruhiger Modus wurde deaktiviert.');
   },
+  onSelectPlugin: (pluginId) => {
+    const state = getState();
+    const manager = state.pluginManager || { selectedPluginId: 'char-counter', plugins: {} };
+    setState({ pluginManager: { ...manager, selectedPluginId: pluginId || 'char-counter' } });
+  },
+  onTogglePluginEnabled: () => {
+    const state = getState();
+    const manager = state.pluginManager || { selectedPluginId: 'char-counter', plugins: {} };
+    const pluginId = manager.selectedPluginId || 'char-counter';
+    const entry = manager.plugins?.[pluginId] || { enabled: true };
+    setState({
+      pluginManager: {
+        ...manager,
+        plugins: {
+          ...(manager.plugins || {}),
+          [pluginId]: { enabled: !entry.enabled }
+        }
+      }
+    });
+  },
   onSetFilePreviewPath: (path) => {
     setState({ filePreviewPath: normalizeRelativePath(path) });
   },
