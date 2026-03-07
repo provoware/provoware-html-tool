@@ -1,5 +1,3 @@
-Stand: aktualisiert nach Robustheits-Optimierung im Startskript.
-
 ## Verzeichnisbaum (ohne `.git`)
 
 ```text
@@ -14,6 +12,13 @@ Stand: aktualisiert nach Robustheits-Optimierung im Startskript.
 │   └── js
 │       └── core.js
 ├── index.html
+├── modules
+│   └── datenbank_baukasten
+│       ├── config.json
+│       ├── logic.js
+│       ├── manifest.json
+│       ├── schema.json
+│       └── texts.json
 └── todo.txt
 ```
 
@@ -26,7 +31,12 @@ Stand: aktualisiert nach Robustheits-Optimierung im Startskript.
 5. `assets/css/base.css`
 6. `assets/js/core.js`
 7. `index.html`
-8. `todo.txt`
+8. `modules/datenbank_baukasten/config.json`
+9. `modules/datenbank_baukasten/logic.js`
+10. `modules/datenbank_baukasten/manifest.json`
+11. `modules/datenbank_baukasten/schema.json`
+12. `modules/datenbank_baukasten/texts.json`
+13. `todo.txt`
 
 ## Pflegehinweis
 - Diese Datei wird am Ende jeder Iteration aktualisiert.

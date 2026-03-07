@@ -1,0 +1,11 @@
+{
+  "tables": [
+    {
+      "name": "beispiel",
+      "columns": [
+        { "name": "id", "type": "number" },
+        { "name": "name", "type": "text" }
+      ]
+    }
+  ]
+}
