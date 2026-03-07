@@ -11,6 +11,18 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Barrierearme Hilfe im Guide- und Plugin-Bereich
+Neu in dieser Iteration:
+- Im Guide gibt es einen Zusatzhinweis: Reihenfolge geht auch ohne Ziehen mit **Nach oben/Nach unten**.
+- Die Plugin-Auswahl ist jetzt mit Hilfetexten verknüpft (`aria-describedby`).
+- Statuszeilen in Guide und Plugin melden Änderungen als Live-Status für Screenreader.
+
+Direkter Mini-Check:
+1. `node --check js/modules/guide-tools-module.js`
+
+Kurzregel: Wenn du Drag&Drop nicht nutzt, nimm immer die zwei Verschiebe-Buttons.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Maximierung mit Maus schnell wieder beenden
 Neu in dieser Iteration:
 - Jedes Modul hat jetzt den Kopf-Button **„Maximierung aufheben“**.

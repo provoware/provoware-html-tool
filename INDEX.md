@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration verbessert Barrierefreiheit und Hilfetexte minimal: zusätzliche Guide-Hinweise ohne Drag&Drop, ARIA-Verknüpfung in der Plugin-Auswahl und Live-Status für Guide/Plugin.
 - Diese Iteration ergänzt pro Modulkopf den Button „Maximierung aufheben“ und eine klare Fallback-Meldung bei fehlendem Modul-Panel-Match.
 - Diese Iteration schärft den Modulfluss im Mittelbereich: aktives Modul links anklicken, im 3x3-Grid sichtbar machen und direkt maximieren.
 - Diese Iteration behebt eine konkrete UI-Schwachstelle: Template-IDs in `data-template-*` werden jetzt escaped, damit keine Attribut-Injektion möglich ist.

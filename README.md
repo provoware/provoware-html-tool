@@ -4,7 +4,7 @@
 - Erledigte Punkte: 30 (siehe `todo.txt`)
 - Offene Punkte: 1 (siehe `todo.txt`)
 - Fortschritt: 97%
-- Stand dieser Iteration: Der Mittelbereich bleibt im 3x3-Grid, hat jetzt pro Modul einen Maus-Button zum Aufheben der Maximierung und zeigt bei fehlender Modulzuordnung eine klare Hinweis-Meldung.
+- Stand dieser Iteration: Barrierefreiheit und Hilfetexte wurden mit kleinem Eingriff verbessert (klare Zusatzhinweise, bessere ARIA-Beschreibung, Live-Status für Guide- und Plugin-Bereich).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -137,6 +137,20 @@
 - Neue Testpflicht umgesetzt: Injection-Test für die neue Listen-API prüft „nur Text sichtbar" bei `<img onerror=...>` und `<script>...`.
 - Neu: 4‑Schritt‑Assistent im Dashboard ergänzt (mit klarer Schritt-Erklärung und direktem „Jetzt ausführen“-Knopf pro aktuellem Schritt).
 - Neu: Ein-Befehl-Release-Standard festgezogen: `bash scripts/minimal-check.sh` gilt als fester Abschluss mit klarer Auswertung „Bestanden/Nicht bestanden“.
+
+
+## Iterations-Update: Barrierefreiheit + Hilfe (minimal)
+- Guide-Bereich hat jetzt einen zusätzlichen Hilfehinweis für die Alternative ohne Drag&Drop (Nach oben/Nach unten).
+- Plugin-Auswahl ist klarer beschrieben und mit den Hilfetexten verknüpft (`aria-describedby`).
+- Statusmeldungen in Guide und Plugin sind als Live-Status markiert (`role="status"`, `aria-live="polite"`).
+- Plugin-Ausgabe hat jetzt eine klare ARIA-Beschriftung für Screenreader.
+
+### Empfehlung zur Frage „Versionssystem mit Registry“
+Ja, ein kleines Versionssystem mit Registry ist sinnvoll – aber nur als Minimalstart:
+1. Pro Modul eine `version` nach SemVer (z. B. `1.2.0`) im Manifest pflegen.
+2. In `data/module-registry.json` je Modul die aktuelle freigegebene Version + optional `minAppVersion` pflegen.
+3. Beim Start nur eine leichte Plausibilitätsprüfung: „Version vorhanden und gültig“.
+4. Migrationen erst später ergänzen (bewusst nicht in dieser Iteration).
 
 
 ## Feste PR-Checkliste (Sicherheits-Checkpunkt)
