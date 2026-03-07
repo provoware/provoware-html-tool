@@ -10,6 +10,14 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Proportionale Skalierung mit Maus kurz prüfen (neu)
+1. Seite neu laden.
+2. **Strg** gedrückt halten und Mausrad nach oben drehen.
+3. Prüfen, ob die komplette Oberfläche proportional größer wird.
+4. **Strg** gedrückt halten und Mausrad nach unten drehen.
+5. Prüfen, ob die komplette Oberfläche proportional kleiner wird.
+6. **Strg + 0** drücken und prüfen, ob die Ansicht auf Standardgröße zurückspringt.
+
 ### Sidebar + 3x3 Modulfenster schnell prüfen (neu)
 1. Seite neu laden.
 2. Oben auf **Linke Leiste** und **Rechte Leiste** klicken und prüfen, ob beide Seitenleisten ein- und ausklappen.
@@ -216,3 +224,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Iterationsfokus: Dashboard 3 Textsammler mit titelbasierten Einzeilen-Dateien (Enter + Speichern, Anfügen mit Feedback)
 - Iterationsfokus: Dashboard 3 pro Zeile mit „Datei öffnen“-Button und sichtbarem Titel-Tooltip
 - Iterationsfokus: Dashboard 3 mit deaktiviertem Öffnen-Button bis Erstspeicherung plus Anzeige der letzten Datei je Zeile
+- Iterationsfokus: Kompakteres, kontrastreicheres Layout mit proportionaler Skalierung per Strg + Mausrad
