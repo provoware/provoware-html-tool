@@ -4,19 +4,11 @@
     "HardTechno": {
       "genres": [
         {
-          "value": "Hard Techno",
+          "value": "Acid Techno",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Industrial Techno",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Schranz",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Rave",
+          "value": "Dark Techno",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -24,17 +16,41 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Acid Techno",
+          "value": "Hard Techno",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Hard Trance",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Industrial Techno",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Neo Rave",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Rave",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
           "value": "Rawstyle",
           "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Schranz",
+          "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "moods": [
         {
-          "value": "treibend",
+          "value": "aggressiv",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "aufgeladen",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -42,7 +58,7 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "aggressiv",
+          "value": "ekstatisch",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -50,29 +66,33 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "fokussiert",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "hypnotisch",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "roh",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "treibend",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
           "value": "unterirdisch",
           "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "aufgeladen",
-          "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "styles": [
         {
-          "value": "Peak-Time",
+          "value": "Afterhours Tunnel",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Warehouse",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Underground Club",
+          "value": "B2B Pressure Set",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -80,7 +100,7 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Live-DJ-Set",
+          "value": "Festival Mainfloor",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -88,7 +108,23 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Festival Mainfloor",
+          "value": "Live-DJ-Set",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Peak-Time",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Underground Club",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Vinyl-Only Night",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Warehouse",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ]
@@ -96,19 +132,7 @@
     "Chill": {
       "genres": [
         {
-          "value": "Lo-Fi",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Downtempo",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
           "value": "Ambient",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Trip-Hop",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -116,25 +140,45 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "Bossa Nova Electronica",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "Chillout",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Bossa Nova Electronica",
+          "value": "Downtempo",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Future Garage",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Lo-Fi",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Neo Soul Beats",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Organic House",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Trip-Hop",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "moods": [
         {
-          "value": "ruhig",
+          "value": "entspannt",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "warm",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "nostalgisch",
+          "value": "klar",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -146,11 +190,27 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "nachtaktiv",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "nostalgisch",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "ruhig",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "schwebend",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "sonnig",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "nachtaktiv",
+          "value": "warm",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
@@ -160,7 +220,27 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Sunset Mix",
+          "value": "Coastal Vibes",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Dreamscape",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Focus Block",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Late Night Radio",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Midnight Winddown",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Morning Reset",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -172,15 +252,7 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Dreamscape",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Late Night Radio",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Coastal Vibes",
+          "value": "Sunset Mix",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ]
@@ -188,11 +260,15 @@
     "Hörspiele": {
       "genres": [
         {
-          "value": "Krimi",
+          "value": "Comedy",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Science-Fiction",
+          "value": "Cyberpunk",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Doku-Drama",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -204,29 +280,37 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Comedy",
+          "value": "Krimi",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "True Crime",
+          "value": "Mystery",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
           "value": "Regionaldialekt",
           "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Science-Fiction",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "True Crime",
+          "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "moods": [
         {
-          "value": "spannend",
+          "value": "abenteuerlich",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "mystisch",
+          "value": "berührend",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "humorvoll",
+          "value": "dramatisch",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -234,25 +318,37 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "abenteuerlich",
+          "value": "humorvoll",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "unheimlich",
+          "value": "mystisch",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
           "value": "nahbar",
           "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "rätselhaft",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "spannend",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "unheimlich",
+          "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "styles": [
         {
-          "value": "Binaural",
+          "value": "Atmosphärisch",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Erzähler-zentriert",
+          "value": "Binaural",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -260,7 +356,15 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Atmosphärisch",
+          "value": "Erzähler-zentriert",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Found-Footage Audio",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Kammerspiel",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -269,6 +373,10 @@
         },
         {
           "value": "Noir",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Serial Cliffhanger",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -283,7 +391,19 @@
     "categories": {
       "programmierung": [
         {
-          "value": "TypeScript API-Grundgerüst",
+          "value": "C# WebAPI Starter",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Go Worker-Service",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Kotlin Service Skeleton",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Node Worker mit Queue",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -295,11 +415,7 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Go Worker-Service",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "C# WebAPI Starter",
+          "value": "TypeScript API-Grundgerüst",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
@@ -309,11 +425,7 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Systemlast prüfen mit top/htop",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Rechte setzen mit chmod/chown",
+          "value": "JSON prüfen mit jq",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -323,23 +435,43 @@
         {
           "value": "Netz prüfen mit ss und ping",
           "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Prozesskette mit ps + grep + awk",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Rechte setzen mit chmod/chown",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Systemlast prüfen mit top/htop",
+          "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "vibe-coding": [
-        {
-          "value": "Feature in 30 Minuten als Mini-Prototyp",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Refactor mit Fokus auf Lesbarkeit",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
         {
           "value": "Code-Walkthrough für Teamübergabe",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "Debug-Session mit Zeitbox",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Feature in 30 Minuten als Mini-Prototyp",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Legacy-Code freundlich entwirren",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "Pair-Prompt für Bugfix",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Refactor mit Fokus auf Lesbarkeit",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -349,6 +481,14 @@
       ],
       "chat-gpt-prompts": [
         {
+          "value": "API-Dokumentation in einfacher Sprache",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Architektur-Entscheidung mit Pros/Cons",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "Bug reproduzieren und eingrenzen",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
@@ -357,33 +497,41 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "API-Dokumentation in einfacher Sprache",
+          "value": "Fehleranalyse mit Hypothesenliste",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Refactor-Plan in 3 sicheren Schritten",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
           "value": "Testfälle aus User Story ableiten",
           "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Architektur-Entscheidung mit Pros/Cons",
-          "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "automation": [
-        {
-          "value": "CI-Check für Lint+Test",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Release-Tag automatisch erzeugen",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
         {
           "value": "Backups nachts rotieren",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "CI-Check für Lint+Test",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "CSV-Import per Cronjob",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Datei-Watcher mit Delta-Export",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Healthcheck-Ping mit Alarm",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Release-Tag automatisch erzeugen",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -393,11 +541,7 @@
       ],
       "analyse": [
         {
-          "value": "Fehlercluster aus Logs bilden",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Laufzeitengpässe messen",
+          "value": "A/B Ergebnisvergleich",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -405,7 +549,19 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "A/B Ergebnisvergleich",
+          "value": "Fehlercluster aus Logs bilden",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Kostenanalyse pro Feature",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Laufzeitengpässe messen",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Nutzerpfad mit Drop-off-Check",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -415,11 +571,7 @@
       ],
       "recherche": [
         {
-          "value": "Technologie-Vergleich nach Kriterien",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Regionales Hosting prüfen",
+          "value": "Dokumentationslücken finden",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -427,25 +579,33 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "Quellenbewertung mit Vertrauensgrad",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Regionales Hosting prüfen",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Technologie-Vergleich nach Kriterien",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "Underground-Community-Trends sammeln",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Quellenbewertung mit Vertrauensgrad",
+          "value": "Wettbewerbsvergleich mit Scorecard",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "optimierung": [
         {
+          "value": "Barrierefreiheit verbessern",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "Build-Zeit verkürzen",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Caching-Strategie einführen",
-          "createdAt": "2026-03-07T00:00:00.000Z"
-        },
-        {
-          "value": "Datenbankindex prüfen",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -453,13 +613,25 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Barrierefreiheit verbessern",
+          "value": "Caching-Strategie einführen",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Cold-Start reduzieren",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Datenbankindex prüfen",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "UI-Fluss mit Mikrofeedback stärken",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ],
       "gui-bau-planung": [
         {
-          "value": "Wireframe für Dashboard",
+          "value": "Design-Token-Liste erstellen",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
@@ -471,11 +643,19 @@
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
+          "value": "Leitfaden für leise Zustände",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
           "value": "Nutzerfluss als Schrittkette",
           "createdAt": "2026-03-07T00:00:00.000Z"
         },
         {
-          "value": "Design-Token-Liste erstellen",
+          "value": "Responsive Checkliste pro Breakpoint",
+          "createdAt": "2026-03-07T00:00:00.000Z"
+        },
+        {
+          "value": "Wireframe für Dashboard",
           "createdAt": "2026-03-07T00:00:00.000Z"
         }
       ]

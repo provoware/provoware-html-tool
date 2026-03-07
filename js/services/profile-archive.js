@@ -3,34 +3,34 @@ const TEMPLATE_AREAS = ['programmierung', 'linux-befehle', 'vibe-coding', 'chat-
 
 const DEFAULT_PROFILE_CONTENT = Object.freeze({
   HardTechno: {
-    genres: ['Hard Techno', 'Industrial Techno', 'Schranz', 'Rave', 'Gabber', 'Acid Techno', 'Rawstyle'],
-    moods: ['treibend', 'düster', 'aggressiv', 'energiegeladen', 'hypnotisch', 'unterirdisch', 'aufgeladen'],
-    styles: ['Peak-Time', 'Warehouse', 'Underground Club', 'Berlin School', 'Live-DJ-Set', 'Hybrid Set', 'Festival Mainfloor']
+    genres: ['Hard Techno', 'Industrial Techno', 'Schranz', 'Rave', 'Gabber', 'Acid Techno', 'Rawstyle', 'Neo Rave', 'Dark Techno', 'Hard Trance'],
+    moods: ['treibend', 'düster', 'aggressiv', 'energiegeladen', 'hypnotisch', 'unterirdisch', 'aufgeladen', 'fokussiert', 'ekstatisch', 'roh'],
+    styles: ['Peak-Time', 'Warehouse', 'Underground Club', 'Berlin School', 'Live-DJ-Set', 'Hybrid Set', 'Festival Mainfloor', 'Afterhours Tunnel', 'Vinyl-Only Night', 'B2B Pressure Set']
   },
   Chill: {
-    genres: ['Lo-Fi', 'Downtempo', 'Ambient', 'Trip-Hop', 'Balearic', 'Chillout', 'Bossa Nova Electronica'],
-    moods: ['ruhig', 'warm', 'nostalgisch', 'leicht', 'meditativ', 'sonnig', 'nachtaktiv'],
-    styles: ['Cafe Session', 'Sunset Mix', 'Rainy Day', 'Study Flow', 'Dreamscape', 'Late Night Radio', 'Coastal Vibes']
+    genres: ['Lo-Fi', 'Downtempo', 'Ambient', 'Trip-Hop', 'Balearic', 'Chillout', 'Bossa Nova Electronica', 'Organic House', 'Future Garage', 'Neo Soul Beats'],
+    moods: ['ruhig', 'warm', 'nostalgisch', 'leicht', 'meditativ', 'sonnig', 'nachtaktiv', 'klar', 'schwebend', 'entspannt'],
+    styles: ['Cafe Session', 'Sunset Mix', 'Rainy Day', 'Study Flow', 'Dreamscape', 'Late Night Radio', 'Coastal Vibes', 'Morning Reset', 'Focus Block', 'Midnight Winddown']
   },
   Hörspiele: {
-    genres: ['Krimi', 'Science-Fiction', 'Fantasy', 'Historisch', 'Comedy', 'True Crime', 'Regionaldialekt'],
-    moods: ['spannend', 'mystisch', 'humorvoll', 'ernst', 'abenteuerlich', 'unheimlich', 'nahbar'],
-    styles: ['Binaural', 'Erzähler-zentriert', 'Dialog-lastig', 'Atmosphärisch', 'Kinderfreundlich', 'Noir', 'Underground-Podcast']
+    genres: ['Krimi', 'Science-Fiction', 'Fantasy', 'Historisch', 'Comedy', 'True Crime', 'Regionaldialekt', 'Mystery', 'Doku-Drama', 'Cyberpunk'],
+    moods: ['spannend', 'mystisch', 'humorvoll', 'ernst', 'abenteuerlich', 'unheimlich', 'nahbar', 'dramatisch', 'rätselhaft', 'berührend'],
+    styles: ['Binaural', 'Erzähler-zentriert', 'Dialog-lastig', 'Atmosphärisch', 'Kinderfreundlich', 'Noir', 'Underground-Podcast', 'Found-Footage Audio', 'Kammerspiel', 'Serial Cliffhanger']
   }
 });
 
 const DEFAULT_TEMPLATE_ARCHIVE = Object.freeze({
   version: 1,
   categories: {
-    programmierung: ['TypeScript API-Grundgerüst', 'Python Datenpipeline', 'Rust CLI-Skeleton', 'Go Worker-Service', 'C# WebAPI Starter'],
-    'linux-befehle': ['Dateien finden mit find + xargs', 'Systemlast prüfen mit top/htop', 'Rechte setzen mit chmod/chown', 'Logs filtern mit journalctl', 'Netz prüfen mit ss und ping'],
-    'vibe-coding': ['Feature in 30 Minuten als Mini-Prototyp', 'Refactor mit Fokus auf Lesbarkeit', 'Code-Walkthrough für Teamübergabe', 'Pair-Prompt für Bugfix', 'Spikes für neue Idee'],
-    'chat-gpt-prompts': ['Bug reproduzieren und eingrenzen', 'Code Review mit Risiko-Liste', 'API-Dokumentation in einfacher Sprache', 'Testfälle aus User Story ableiten', 'Architektur-Entscheidung mit Pros/Cons'],
-    automation: ['CI-Check für Lint+Test', 'Release-Tag automatisch erzeugen', 'Backups nachts rotieren', 'CSV-Import per Cronjob', 'Webhook mit Retry'],
-    analyse: ['Fehlercluster aus Logs bilden', 'Laufzeitengpässe messen', 'Datenqualität als Score', 'A/B Ergebnisvergleich', 'Risikomatrix für Deploy'],
-    recherche: ['Technologie-Vergleich nach Kriterien', 'Regionales Hosting prüfen', 'Open-Source-Lizenzcheck', 'Underground-Community-Trends sammeln', 'Quellenbewertung mit Vertrauensgrad'],
-    optimierung: ['Build-Zeit verkürzen', 'Caching-Strategie einführen', 'Datenbankindex prüfen', 'Bundle-Size reduzieren', 'Barrierefreiheit verbessern'],
-    'gui-bau-planung': ['Wireframe für Dashboard', 'Formular mit Fehlerhinweisen', 'Komponentenbaum planen', 'Nutzerfluss als Schrittkette', 'Design-Token-Liste erstellen']
+    programmierung: ['TypeScript API-Grundgerüst', 'Python Datenpipeline', 'Rust CLI-Skeleton', 'Go Worker-Service', 'C# WebAPI Starter', 'Node Worker mit Queue', 'Kotlin Service Skeleton'],
+    'linux-befehle': ['Dateien finden mit find + xargs', 'Systemlast prüfen mit top/htop', 'Rechte setzen mit chmod/chown', 'Logs filtern mit journalctl', 'Netz prüfen mit ss und ping', 'JSON prüfen mit jq', 'Prozesskette mit ps + grep + awk'],
+    'vibe-coding': ['Feature in 30 Minuten als Mini-Prototyp', 'Refactor mit Fokus auf Lesbarkeit', 'Code-Walkthrough für Teamübergabe', 'Pair-Prompt für Bugfix', 'Spikes für neue Idee', 'Debug-Session mit Zeitbox', 'Legacy-Code freundlich entwirren'],
+    'chat-gpt-prompts': ['Bug reproduzieren und eingrenzen', 'Code Review mit Risiko-Liste', 'API-Dokumentation in einfacher Sprache', 'Testfälle aus User Story ableiten', 'Architektur-Entscheidung mit Pros/Cons', 'Refactor-Plan in 3 sicheren Schritten', 'Fehleranalyse mit Hypothesenliste'],
+    automation: ['CI-Check für Lint+Test', 'Release-Tag automatisch erzeugen', 'Backups nachts rotieren', 'CSV-Import per Cronjob', 'Webhook mit Retry', 'Datei-Watcher mit Delta-Export', 'Healthcheck-Ping mit Alarm'],
+    analyse: ['Fehlercluster aus Logs bilden', 'Laufzeitengpässe messen', 'Datenqualität als Score', 'A/B Ergebnisvergleich', 'Risikomatrix für Deploy', 'Kostenanalyse pro Feature', 'Nutzerpfad mit Drop-off-Check'],
+    recherche: ['Technologie-Vergleich nach Kriterien', 'Regionales Hosting prüfen', 'Open-Source-Lizenzcheck', 'Underground-Community-Trends sammeln', 'Quellenbewertung mit Vertrauensgrad', 'Wettbewerbsvergleich mit Scorecard', 'Dokumentationslücken finden'],
+    optimierung: ['Build-Zeit verkürzen', 'Caching-Strategie einführen', 'Datenbankindex prüfen', 'Bundle-Size reduzieren', 'Barrierefreiheit verbessern', 'Cold-Start reduzieren', 'UI-Fluss mit Mikrofeedback stärken'],
+    'gui-bau-planung': ['Wireframe für Dashboard', 'Formular mit Fehlerhinweisen', 'Komponentenbaum planen', 'Nutzerfluss als Schrittkette', 'Design-Token-Liste erstellen', 'Leitfaden für leise Zustände', 'Responsive Checkliste pro Breakpoint']
   }
 });
 
@@ -200,16 +200,19 @@ export const createRandomMix = ({ archive, profile, includeCategories, amountPer
   if (!categories.length) return { ok: false, code: 'MIX_NO_CATEGORY', message: 'Bitte mindestens einen Bereich wählen.' };
 
   const mix = {};
+  const usage = {};
   categories.forEach((category) => {
-    const amount = normalizeMixAmount(amountPerCategory?.[category]);
-    mix[category] = pickUnique(target[category], amount).map((item) => item.value);
+    const requested = normalizeMixAmount(amountPerCategory?.[category]);
+    const used = Math.min(requested, target[category].length);
+    mix[category] = pickUnique(target[category], requested).map((item) => item.value);
+    usage[category] = { requested, used };
   });
 
   const text = categories
     .map((category) => `${category}: ${mix[category].length ? mix[category].join(', ') : '-'}`)
     .join(' | ');
 
-  archive.lastMix = { profile, mix, text, createdAt: new Date().toISOString() };
+  archive.lastMix = { profile, mix, usage, text, createdAt: new Date().toISOString() };
   archive.updatedAt = new Date().toISOString();
   return { ok: true, code: 'MIX_CREATED', message: 'Zufallsmix wurde erstellt.', data: archive.lastMix };
 };

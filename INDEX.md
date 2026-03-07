@@ -2,9 +2,11 @@
 
 ## Iterationshinweis
 - Diese Iteration ergänzt einen Grenzfall-Test für Guide-Index-Navigation (ArrowUp auf 0, ArrowDown auf letztem Index).
-- Diese Iteration ergänzt eine kleine Lesbarkeitsoption im Guide-Helper (`mode: select/jump`).
+- Diese Iteration vereinheitlicht die Guide-API (`mode` statt zusätzlichem `jump`-Boolean).
 - Diese Iteration verbessert Wiki-Robustheit (Kopien statt direkter Store-Referenzen).
 - Diese Iteration verbessert den Genres-Zufallsgenerator (Anzahl wird auf 1 bis 20 geklammert).
+- Diese Iteration erweitert Default-Archive (Genres/Moods/Styles und Templates) für besseren Start ohne Leereinträge.
+- Diese Iteration ergänzt im Zufallsmix `usage.requested`/`usage.used` je Bereich für klare UI-Rückmeldung.
 - Verzeichnisbaum und Dateiliste sind vollständig aktualisiert (ohne `.git`).
 
 ## Kompletter Verzeichnisbaum (ohne `.git`)

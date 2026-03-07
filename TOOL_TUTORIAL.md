@@ -10,6 +10,19 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Einheitliche Guide-API + klarerer Zufallsmix
+Neu in dieser Iteration:
+- Guide-Navigation nutzt nur noch `mode` (`select` oder `jump`). Der alte `jump`-Boolean entfällt.
+- Das Profil- und Templates-Archiv startet mit erweiterten Standard-Einträgen.
+- Der Zufallsmix liefert pro Bereich `usage.requested` und `usage.used`.
+
+Direkter Mini-Check:
+1. `node --test tests/services/profile-archive-random.test.js`
+
+Kurzregel: Für UI-Hinweise zur Mix-Menge immer `used` gegen `requested` anzeigen.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Grenzfall-Check für Guide + robuste Module
 Neu in dieser Iteration:

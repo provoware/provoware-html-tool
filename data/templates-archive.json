@@ -1,5 +1,51 @@
 {
   "version": 1,
-  "items": [],
+  "items": [
+    {
+      "id": "tpl-default-04",
+      "title": "Commit-Nachricht kompakt",
+      "content": "feat: klarer Titel\n\n- Änderung 1\n- Änderung 2\n- Test: <befehl>",
+      "category": "Textbaustein",
+      "favorite": false,
+      "createdAt": "2026-03-07T00:00:00.000Z",
+      "updatedAt": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-02",
+      "title": "Fehleranalyse Schritt für Schritt",
+      "content": "Analysiere den Fehler Schritt für Schritt: Ursache, direkte Auswirkung, kleinster Fix, kurzer Test.",
+      "category": "Promptvorlage",
+      "favorite": false,
+      "createdAt": "2026-03-07T00:00:00.000Z",
+      "updatedAt": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-01",
+      "title": "Kurzantwort in einfacher Sprache",
+      "content": "Bitte erkläre das Ergebnis in drei kurzen Punkten und nenne den nächsten sicheren Schritt.",
+      "category": "Textbaustein",
+      "favorite": false,
+      "createdAt": "2026-03-07T00:00:00.000Z",
+      "updatedAt": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-03",
+      "title": "Sauberer Patch-Plan",
+      "content": "Ziel, betroffene Datei, betroffener Block, Patchgrund, Risiko, Nicht-Änderung, Schritte.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-07T00:00:00.000Z",
+      "updatedAt": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-05",
+      "title": "UI-Checkliste vor Merge",
+      "content": "Prüfe Fokus, Lesbarkeit, responsives Verhalten und sichtbare Fehlermeldungen mit kurzem Ergebnisprotokoll.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-07T00:00:00.000Z",
+      "updatedAt": "2026-03-07T00:00:00.000Z"
+    }
+  ],
   "updatedAt": "2026-03-07T00:00:00.000Z"
 }
