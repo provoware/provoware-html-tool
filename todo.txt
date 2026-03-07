@@ -48,4 +48,4 @@
       - Löschkriterium: keine produktive Aktivierung geplant und Test-/Hinweislogik vorher angepasst.
 [x] 2026-03-07 | Modulstatus | Modulstatus robuster auswertbar machen (z. B. strukturierte Fehlercodes zusätzlich zu Text) | prüfen: Statusobjekt maschinell nutzbar auswerten | fertig wenn: Auswertung ohne Textparsing möglich ist
 
-[ ] 2026-03-07 | data/laienstart-required-files.json + scripts/laienstart.sh | Warnung "Kein Auto-Repair für unbekannte Pflichtdatei" mit zusammengeklebter Dateiliste prüfen (möglicher Newline-/Parsingfehler) | prüfen: `./start.sh --dry-run` zeigt pro Pflichtdatei getrennte Auswertung ohne Sammelstring | fertig wenn: keine Sammelwarnung mit `\n` mehr erscheint und bekannte Pflichtdateien korrekt erkannt werden
+[x] 2026-03-07 | data/laienstart-required-files.json + scripts/laienstart.sh | Warnung "Kein Auto-Repair für unbekannte Pflichtdatei" mit zusammengeklebter Dateiliste prüfen (möglicher Newline-/Parsingfehler) | prüfen: `./start.sh --dry-run` zeigt pro Pflichtdatei getrennte Auswertung ohne Sammelstring | fertig wenn: keine Sammelwarnung mit `\n` mehr erscheint und bekannte Pflichtdateien korrekt erkannt werden

@@ -270,7 +270,7 @@ ensure_required_runtime_files() {
       const fs = require("fs");
       const data = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
       for (const file of (Array.isArray(data.requiredFiles) ? data.requiredFiles : [])) {
-        if (typeof file === "string" && file.trim()) process.stdout.write(file.trim() + "\\n");
+        if (typeof file === "string" && file.trim()) process.stdout.write(file.trim() + "\n");
       }
     ' "$REQUIRED_FILES_FILE")
   else
