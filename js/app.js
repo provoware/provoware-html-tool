@@ -4,18 +4,14 @@ import { logEvent } from './services/logger.js';
 import { filesystemAdapter } from './adapters/filesystem-adapter.js';
 import { runStartupCheck } from './services/startup-check.js';
 import { detectTemplateDesignStatus, loadModuleRegistry } from './services/module-registry.js';
+import { createUiActionHandlers } from './services/ui-action-handlers.js';
 import { applyTheme, bindUiActions, detectLayoutMode, render } from './ui.js';
 import {
   ARCHIVE_PATH,
   addArchiveEvent,
-  addEntry,
   buildStats,
   createDefaultArchive,
-  createRandomMix,
-  editEntry,
-  normalizeArchive,
-  removeEntry,
-  sortArchive
+  normalizeArchive
 } from './services/profile-archive.js';
 
 const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
@@ -46,10 +42,6 @@ const applyLoadedData = (bundle) => {
   });
 };
 
-const refreshLayoutMode = () => {
-  const mode = detectLayoutMode(window.appState?.config || {});
-  setState({ layoutMode: mode });
-};
 
 const runSelftest = async (withWriteTest = false) => {
   const state = window.appState;
@@ -208,61 +200,17 @@ const init = async () => {
   const templateDesignStatus = detectTemplateDesignStatus();
   setState({ layoutMode: initialMode, moduleRegistry, templateDesignStatus, debug: { startupReady: false } });
 
-  bindUiActions({
-    onSelectDirectory: selectDirectory,
-    onRunSelftest: runSelftest,
-    onEnsureStructure: ensureStructure,
-    onSwitchDirectory: selectDirectory,
-    onExportDiagnosis: async () => {
-      const text = JSON.stringify(buildDiagnosisExport(), null, 2);
-      await copyToClipboardSafe(text);
-      logEvent('INFO', 'DIAGNOSIS_EXPORTED', 'Diagnose wurde als JSON bereitgestellt.');
-      return text;
-    },
-    onSelectProfile: (profile) => {
-      const archive = window.appState.profileArchive || createDefaultArchive();
-      setState({ selectedProfile: profile, profileStats: buildStats(archive, profile) });
-    },
-    onSaveCategoryEntry: ({ category, value }) => updateArchive((archive) => addEntry({ archive, profile: window.appState.selectedProfile, category, value })),
-    onEditCategoryEntry: ({ category, oldValue, newValue }) => updateArchive((archive) => editEntry({ archive, profile: window.appState.selectedProfile, category, oldValue, newValue })),
-    onDeleteCategoryEntry: ({ category, value }) => updateArchive((archive) => removeEntry({ archive, profile: window.appState.selectedProfile, category, value })),
-    onSortArchive: (mode) => {
-      setState({ archiveSortMode: mode });
-      return updateArchive((archive) => sortArchive({ archive, mode }));
-    },
-    onExportArchive: async () => {
-      const archive = normalizeArchive(window.appState.profileArchive || createDefaultArchive());
-      const text = JSON.stringify(archive, null, 2);
-      await copyToClipboardSafe(text);
-      logEvent('INFO', 'ARCHIVE_EXPORTED', 'Archiv wurde als JSON bereitgestellt.');
-      return text;
-    },
-    onImportArchive: (text) => {
-      try {
-        const parsed = normalizeArchive(JSON.parse(text));
-        return updateArchive((archive) => {
-          Object.assign(archive, parsed);
-          return { ok: true, code: 'ARCHIVE_IMPORTED', message: 'Archiv wurde importiert.' };
-        });
-      } catch (error) {
-        const result = { ok: false, code: 'ARCHIVE_IMPORT_FAILED', message: 'Import-JSON ist ungültig.', data: { error: String(error) } };
-        logEvent('WARN', result.code, result.message, result.data);
-        return result;
-      }
-    },
-    onGenerateMix: async ({ includeCategories, amountPerCategory }) => {
-      const result = await updateArchive((archive) => createRandomMix({
-        archive,
-        profile: window.appState.selectedProfile,
-        includeCategories,
-        amountPerCategory
-      }));
-      if (result.ok && result.data?.text) {
-        await copyToClipboardSafe(result.data.text);
-      }
-      return result;
-    }
-  });
+  bindUiActions(createUiActionHandlers({
+    getState: () => window.appState,
+    setState,
+    selectDirectory,
+    runSelftest,
+    ensureStructure,
+    buildDiagnosisExport,
+    copyToClipboardSafe,
+    updateArchive,
+    logEvent
+  }));
 
   const start = await runStartupCheck(loaded.data.projectStructure);
   setState({ debug: { startupReady: start.ok } });
