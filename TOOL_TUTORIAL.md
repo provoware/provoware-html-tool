@@ -63,6 +63,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. Prüfen, ob im Feld **Diagnose-Export (optional)** JSON erscheint.
 4. Optional: JSON aus der Zwischenablage in eine Datei einfügen und auf Felder `selftest`, `logs`, `profile` prüfen.
 
+### Modul- und Vorlagenstatus schnell prüfen (neu)
+1. Seite neu laden.
+2. Im Modul-Slot 5 prüfen, ob ein Text wie `2/2 Module vollständig verbunden` angezeigt wird.
+3. Im Modul-Slot 6 prüfen, ob der Vorlagen-Hinweis erscheint.
+4. Erwartung: Es steht klar, dass die Asset-Vorlage nicht aktiv ist, solange nur `css/app.css` und `js/app.js` geladen werden.
+5. Optionaler Fehlerfall: Wenn ein Modulteil fehlt oder defekt ist, zeigt die Meldung direkt den Namen und den ersten konkreten Fehler.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -98,4 +105,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: 3x3 Modulraster mit Sidebar-Toggles und Fenster-Maximierung umsetzen
+- Iterationsfokus: robuste Modulvalidierung mit klaren Fehlhinweisen

@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 49
+- Erledigte Punkte: 52
 - Offene Punkte: 0
 - Fortschritt: 100%
 
@@ -19,6 +19,7 @@
   - `js/services/startup-check.js`
   - `js/services/project-selftest.js`
   - `js/services/logger.js`
+  - `js/services/module-registry.js` (Modul- und Vorlagenstatus)
   - `js/services/profile-archive.js` (neues Profil-Archiv)
 - Zentrale Daten:
   - `data/app-config.json`
@@ -58,6 +59,9 @@
 - Nutzerführung verbessert durch klarere Fokus- und Hover-Zustände bei Schaltflächen und Eingabefeldern.
 - 3x3 Panel-Grid im Mittelbereich mit Fensterkarten und Maximize-Funktion ergänzt.
 - Linke und rechte Seitenleiste sind jetzt ein- und ausklappbar, damit mehr Platz für Module entsteht.
+- Modul-Registry-Check ergänzt: Das Dashboard zeigt jetzt direkt, wie viele Module vollständig verbunden sind (z. B. 2/2).
+- Vorlagen-Design-Status ergänzt: Das Dashboard zeigt jetzt klar, dass die Asset-Vorlage aktuell nicht eingebunden ist.
+- Robuste, inhaltliche Modulprüfung ergänzt: Zusätzlich zur Dateiprüfung werden jetzt Manifest- und JSON-Grundfelder geprüft.
 
 ## Offene Punkte
 - Aktuell keine offenen Pflichtpunkte.
@@ -114,3 +118,12 @@
 - Patchgrund 2: Nutzbarkeit verbessert durch Fensterkarten mit Standardoptionen und Maximize auf Toolgröße.
 - Betroffene Dateien: `index.html`, `css/app.css`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene HTML/CSS/JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
+
+- Patchgrund 1: Ursache für „Module funktionieren nicht“ sichtbar machen (fehlende Laufzeit-Verdrahtung war bisher nicht transparent).
+- Patchgrund 2: Ursache für „Vorlagen-Design nicht umgesetzt“ im UI klar erklären (Assets existieren, sind aber nicht eingebunden).
+- Betroffene Dateien: `js/services/module-registry.js`, `js/app.js`, `js/state.js`, `js/ui.js`, `index.html`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene HTML/JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
+- Patchgrund 1: Modulstatus robuster gemacht, damit nicht nur Dateiexistenz, sondern auch inhaltlich valide JSON/Manifest-Felder geprüft werden.
+- Patchgrund 2: Laientaugliche Fehlersicht verbessert durch klare Kurzmeldung je defektem Modul.
+- Betroffene Dateien: `js/services/module-registry.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Status-Ausgabe geprüft.
