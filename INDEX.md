@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: GitHub-Basis mit 3 Workflows (CI, Lint, CodeQL)
+- Iterationsfokus: Import-/Export-Konsistenz der direkten Service-Kette
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
@@ -91,6 +91,7 @@
 - │  ├─ adapters
 - │  │  └─ desktop-filesystem.test.js
 - │  ├─ services
+- │  │  ├─ import-export-consistency.test.js
 - │  │  ├─ module-registry.test.js
 - │  │  ├─ project-selftest.test.js
 - │  │  ├─ startup-check.test.js
@@ -186,11 +187,12 @@
 72. `modules/wiki_notiz_wissen/schema.json`
 73. `modules/wiki_notiz_wissen/texts.json`
 74. `tests/adapters/desktop-filesystem.test.js`
-75. `tests/services/module-registry.test.js`
-76. `tests/services/project-selftest.test.js`
-77. `tests/services/startup-check.test.js`
-78. `tests/services/ui-action-handlers.smoke.test.js`
-79. `tests/start-files/start-import-resolution.test.js`
-80. `todo.txt`
-81. `todo_kalender_erinnerung_start.html`
-82. `wiki_notiz_wissen_start.html`
+75. `tests/services/import-export-consistency.test.js`
+76. `tests/services/module-registry.test.js`
+77. `tests/services/project-selftest.test.js`
+78. `tests/services/startup-check.test.js`
+79. `tests/services/ui-action-handlers.smoke.test.js`
+80. `tests/start-files/start-import-resolution.test.js`
+81. `todo.txt`
+82. `todo_kalender_erinnerung_start.html`
+83. `wiki_notiz_wissen_start.html`
