@@ -470,3 +470,11 @@ Der Schnelltest läuft dort jetzt mit Modul-Flag (ESM = JavaScript-Module mit `i
 
 Kurzregel: Für den Service-Schnelltest immer das Skript nutzen, nicht den blanken `node --test`-Aufruf.
 
+## Kleine Erweiterung dieser Iteration (neu)
+Neu in dieser Iteration:
+- Dry-Run-Hinweis präzisiert: Wenn Pflichtdateien korrekt gelesen werden, erscheint **keine** Sammelwarnung mit `\n` mehr.
+
+Kurzer Prüfschritt:
+1. `./start.sh --dry-run` ausführen.
+2. Erwartung: `OK: Alle Pflichtdateien sind vorhanden.` oder einzelne klare Dateiwarnungen (je Datei eine Zeile).
+3. Nicht mehr erwartet: eine einzige Warnung mit zusammengeklebter Liste wie `index.html\n./css/app.css...`.

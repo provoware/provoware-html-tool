@@ -2,9 +2,9 @@
 
 ## Status oben
 - Erledigte Punkte: 30 (siehe `todo.txt`)
-- Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 94%
-- Stand dieser Iteration: Start-Robustheit wurde mit kleinem Eingriff verbessert (Node-18-kompatibler Service-Schnelltest im Minimal-Check).
+- Offene Punkte: 0 (siehe `todo.txt`)
+- Fortschritt: 100%
+- Stand dieser Iteration: Start-Robustheit wurde mit kleinem Eingriff verbessert (Pflichtdatei-Parsing im Dry-Run trennt Dateizeilen wieder korrekt).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -49,6 +49,7 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Start-Dry-Run stabilisiert: Pflichtdateien aus `data/laienstart-required-files.json` werden wieder zeilenweise ausgewertet; die frühere Sammelwarnung mit `\n` entfällt.
 - Bedienung für Mausnutzer verbessert: Jedes Modul hat jetzt zusätzlich den Button „Maximierung aufheben“ direkt im Modulkopf.
 - Neue Laien-Hilfe im Modulfokus: Wenn ein linkes Modul noch kein passendes Panel im Mittelbereich hat, erscheint eine kurze verständliche Hinweis-Meldung.
 - Modulfluss verbessert: Klick auf ein aktives Modul in der linken Leiste blendet das passende Modul im Mittelbereich ein und holt es in den Fokus.
