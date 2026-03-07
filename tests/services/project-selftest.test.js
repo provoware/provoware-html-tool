@@ -44,7 +44,39 @@ test('Fehlender Ordner wird als fehlend markiert', async () => {
   });
 
   assert.deepEqual(result.data.data.missingDirs, ['logs']);
-  assert.equal(result.data.checks.some((item) => item.code === 'DIR_MISSING'), true);
+  assert.equal(result.data.checks.some((item) => item.code === 'DIRECTORY_LIST_FAILED'), true);
+});
+
+test('Adapter-Laufzeitfehler bei Directory-IO liefert klaren Selftest-Code', async () => {
+  const adapter = createAdapter({
+    listDirectory: async () => {
+      throw new Error('kaputt');
+    }
+  });
+
+  const result = await runProjectSelftest(adapter, {
+    projectStructure: { requiredDirectories: [{ path: 'logs', required: true }], requiredFiles: [] },
+    runWriteTest: false
+  });
+
+  assert.deepEqual(result.data.data.missingDirs, ['logs']);
+  assert.equal(result.data.checks.some((item) => item.code === 'SELFTEST_LIST_DIRECTORY_THREW'), true);
+});
+
+test('Optionaler Schreibtest meldet Laufzeitfehlercode konsistent', async () => {
+  const adapter = createAdapter({
+    checkPermissions: async () => ({ ok: true, data: { read: true, write: true } }),
+    writeText: async () => {
+      throw new Error('write kaputt');
+    }
+  });
+
+  const result = await runProjectSelftest(adapter, {
+    projectStructure: { writeTestRules: { testFile: 'logs/write-test.txt' }, requiredDirectories: [], requiredFiles: [] },
+    runWriteTest: true
+  });
+
+  assert.equal(result.data.checks.some((item) => item.code === 'SELFTEST_WRITE_TEXT_THREW'), true);
 });
 
 test('Cleanup wird nur gewertet, wenn echte Funktion übergeben wird', async () => {

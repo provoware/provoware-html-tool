@@ -11,6 +11,18 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Selftest-IO jetzt mit safeCall abgesichert
+Neu in dieser Iteration:
+- `runProjectSelftest` schützt jetzt jeden Adapter-IO-Aufruf mit einem kleinen safeCall-Muster.
+- Bei Laufzeitfehlern kommen klare technische Codes wie `SELFTEST_LIST_DIRECTORY_THREW`.
+- Sichtbare Check-Namen bleiben einfach und laienfreundlich.
+
+Direkter Mini-Check:
+1. `node --test tests/services/project-selftest.test.js`
+
+Kurzregel: Bei Selftest-Fehlern immer zuerst den Code lesen, dann nur den betroffenen Adapter-Schritt prüfen.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Startup-Check mit Self-Repair
 Neu in dieser Iteration:
 - Wenn die Projektstruktur ungültig ist, nutzt der Startup-Check sichere Defaults (Selbstreparatur).

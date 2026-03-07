@@ -4,7 +4,7 @@
 - Erledigte Punkte: 31 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Start-Robustheit wurde mit kleinem Eingriff erweitert (Startup-Check fängt Laufzeitfehler jetzt klar ab und nutzt Self-Repair-Defaults bei ungültiger Projektstruktur).
+- Stand dieser Iteration: Selftest-Robustheit wurde mit kleinem Eingriff erweitert (Adapter-IO im `runProjectSelftest` nutzt jetzt ein sicheres `safeCall`-Muster mit konsistenten Fehlercodes wie im Startup-Check).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -49,6 +49,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- runProjectSelftest robuster gemacht: Jeder Adapter-IO-Aufruf ist jetzt per safeCall abgesichert; Laufzeitfehler liefern klare `SELFTEST_*_THREW`-Codes.
+- Benennungs- und Hilfe-Regeln festgelegt: technische Codes bleiben kurz und stabil, sichtbare Checks nutzen klare laienfreundliche Namen.
 - Startup-Check robuster gemacht: Adapter-Laufzeitfehler werden als klare Fehlercodes zurückgegeben, statt still abzubrechen.
 - Self-Repair ergänzt: ungültige Projektstruktur wird automatisch auf sichere Defaults gesetzt und transparent im Ergebnis markiert.
 - Start-Dry-Run stabilisiert: Pflichtdateien aus `data/laienstart-required-files.json` werden wieder zeilenweise ausgewertet; die frühere Sammelwarnung mit `\n` entfällt.
@@ -160,6 +162,18 @@ Ja, ein kleines Versionssystem mit Registry ist sinnvoll – aber nur als Minima
 - [ ] Keine ungeprüfte Nutzung von `innerHTML`/`insertAdjacentHTML` mit Nutzdaten.
 - [ ] Bei HTML-String-Rendering nur zentralen Helper `js/services/html-escape.js` nutzen.
 - [ ] Bei neuen dynamischen Listen mindestens 1 Injection-Test ergänzen (z. B. `<img onerror=...>` oder `<script>...`) und „nur Text sichtbar" prüfen.
+
+## Feste Regeln für Bezeichnungen und Hilfselemente
+- Fehlercodes:
+  - Technische Codes sind stabil, kurz und in Großbuchstaben (z. B. `SELFTEST_LIST_DIRECTORY_THREW`).
+  - Laufzeitfehler aus Adapter-IO enden auf `_THREW`.
+  - Fachliche Ergebniscodes bleiben lesbar und kurz (z. B. `DIR_MISSING`, `FILE_CREATED`).
+- Check-Namen für Nutzer:
+  - Immer klare, einfache Namen (z. B. `Ordnerwahl`, `Rechteprüfung`, `Optionaler Schreibtest`).
+  - Keine internen Klassennamen oder Pfadtechnik im sichtbaren Text.
+- Hilfemeldungen:
+  - Ein Satz, direkte Handlung, einfache Sprache.
+  - Bei Fehlern: erst Problem, dann nächster Schritt.
 
 ## Wichtiger Hinweis zu Platzhaltern
 - `assets/css/base.css` und `assets/js/core.js` liegen im Projekt als Vorlagen-Stand.

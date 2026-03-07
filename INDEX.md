@@ -2,6 +2,7 @@
 
 ## Iterationshinweis
 - Diese Iteration stärkt den Startup-Check: Laufzeitfehler werden mit klaren Codes gemeldet, und ungültige Projektstruktur wird per Self-Repair auf sichere Defaults gesetzt.
+- Diese Iteration stärkt den Projekt-Selbsttest: Adapter-IO in `runProjectSelftest` nutzt jetzt safeCall je Schritt und liefert konsistente `SELFTEST_*_THREW`-Fehlercodes.
 - Diese Iteration behebt den Dry-Run-Parsingfehler bei Pflichtdateien: keine Sammelwarnung mit `\n`, stattdessen klare Einzelauswertung pro Datei.
 - Diese Iteration verbessert Barrierefreiheit und Hilfetexte minimal: zusätzliche Guide-Hinweise ohne Drag&Drop, ARIA-Verknüpfung in der Plugin-Auswahl und Live-Status für Guide/Plugin.
 - Diese Iteration ergänzt pro Modulkopf den Button „Maximierung aufheben“ und eine klare Fallback-Meldung bei fehlendem Modul-Panel-Match.
