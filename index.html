@@ -7,57 +7,50 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'"
     />
-    <title>ProvoWare HTML Tool</title>
-    <link rel="stylesheet" href="assets/css/base.css" />
+    <title>ProvoWare Dashboard</title>
+    <link rel="stylesheet" href="css/app.css" />
   </head>
   <body>
-    <main id="app" class="app">
-      <h1>ProvoWare HTML Tool</h1>
-      <p id="status-text">Start bereit.</p>
-      <section class="dashboard" aria-label="Dashboard-Skelett">
-        <article class="card card-module">
-          <header class="card-topline">
-            <h2>Modulübersicht</h2>
-          </header>
-          <div class="panel-grid" aria-hidden="true"></div>
-          <p id="module-summary">Noch keine Module geladen.</p>
-          <div class="panel-footer" aria-hidden="true">
-            <span class="panel-chip">Check</span>
-            <span class="panel-chip">Konfig</span>
-            <span class="panel-chip">Schema</span>
-          </div>
-        </article>
+    <div id="app" class="app" data-layout-mode="standard">
+      <header class="header panel">
+        <h1 id="app-title">ProvoWare Dashboard</h1>
+        <p id="app-subtitle">Start wird vorbereitet.</p>
+      </header>
 
-        <article class="card card-todo" aria-label="Todo-Liste mit Kalender und Erinnerung">
-          <header class="card-topline">
-            <h2>Todo-Liste mit Kalenderfunktion</h2>
-          </header>
-          <div class="panel-grid" aria-hidden="true"></div>
-          <p id="todo-info">Noch keine Aufgaben vorhanden.</p>
-          <form id="todo-form" class="todo-form">
-            <label>
-              Aufgabe
-              <input id="todo-title" type="text" maxlength="120" required />
-            </label>
-            <label>
-              Fällig am
-              <input id="todo-due-date" type="date" required />
-            </label>
-            <label>
-              Erinnerung
-              <input id="todo-reminder" type="datetime-local" required />
-            </label>
-            <button type="submit">Aufgabe hinzufügen</button>
-          </form>
-          <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
-          <div class="panel-footer" aria-hidden="true">
-            <span class="panel-chip">Neu</span>
-            <span class="panel-chip">Heute</span>
-            <span class="panel-chip">Fällig</span>
-          </div>
-        </article>
-      </section>
-    </main>
-    <script src="assets/js/core.js"></script>
+      <nav class="nav panel" aria-label="Navigation">
+        <h2 class="panel-title" id="nav-title">Navigation</h2>
+        <button id="action-select-dir" class="btn btn-primary" type="button">Ordner wählen</button>
+        <button id="action-run-selftest" class="btn" type="button">Selbsttest starten</button>
+        <button id="action-ensure-structure" class="btn" type="button">Projektstruktur anlegen</button>
+        <button id="action-run-write-test" class="btn" type="button">Schreibtest ausführen</button>
+        <button id="action-switch-dir" class="btn" type="button">Ordner wechseln</button>
+      </nav>
+
+      <main class="main panel" aria-live="polite">
+        <h2 class="panel-title" id="startup-title">Startstatus</h2>
+        <section id="next-step" class="status-box" aria-label="Nächster Schritt"></section>
+        <section id="checks-list" class="checks" aria-label="Prüfergebnisse"></section>
+      </main>
+
+      <aside class="widgets panel" aria-label="Projektordner-Status">
+        <h2 class="panel-title" id="status-title">Projektordner-Status</h2>
+        <dl class="status-list">
+          <div><dt>Ordner</dt><dd id="status-folder">-</dd></div>
+          <div><dt>Lesen</dt><dd id="status-read">-</dd></div>
+          <div><dt>Schreiben</dt><dd id="status-write">-</dd></div>
+          <div><dt>Struktur</dt><dd id="status-structure">-</dd></div>
+          <div><dt>Letzter Test</dt><dd id="status-last-test">-</dd></div>
+          <div><dt>Gesamtampel</dt><dd id="status-overall">-</dd></div>
+          <div><dt>Layoutmodus</dt><dd id="status-layout">-</dd></div>
+        </dl>
+      </aside>
+
+      <footer class="footer panel" aria-label="Aktionsleiste">
+        <h2 class="panel-title" id="log-title">Letzte Meldungen</h2>
+        <ul id="log-list" class="log-list"></ul>
+      </footer>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
   </body>
 </html>

@@ -1,56 +1,50 @@
-# ProvoWare HTML Tool
+# ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
-## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 12
-- Offene Punkte gesamt: 0
-- Entwicklungsfortschritt: 100%
+## Status oben
+- Erledigte Punkte: 34
+- Offene Punkte: 3
+- Fortschritt: 92%
 
-## Aktuelle Toolstruktur und Toolumfang (fehlerfrei umgesetzt)
-- Steuerdateien:
-  - `AGENTS.md` (Arbeitsregeln)
-  - `todo.txt` (offene/erledigte Punkte)
-  - `README.md` (Projektstatus)
-  - `TOOL_TUTORIAL.md` (Kurzanleitung)
-  - `INDEX.md` (aktueller Verzeichnisbaum + Dateiliste)
-- Startdateien:
-  - `index.html` (offline ladbarer Einstieg mit Dashboard-Skelett)
-  - `assets/css/base.css` (Layout im Panel-Stil mit Rasterfläche)
-  - `assets/js/core.js` (Startfluss, Modul-Check und Todo-Logik)
-- Module:
-  - `modules/datenbank_baukasten/*` (Muster-Modul)
-  - `modules/todo_kalender_erinnerung/*` (Todo, Kalenderdatum, Erinnerung)
-- Umfang dieser Iteration:
-  - Dashboard visuell am Bildbeispiel ausgerichtet (runde Panels, Verlauf, Rasterfläche).
-  - Todo-Bereich klarer segmentiert (Statusblock, Eingabe, Liste, Footer-Chips).
-  - Nutzerfreundlichkeit verbessert (bessere Leseflächen und klarere optische Reihenfolge).
+## Aktuelle Toolstruktur und Toolumfang
+- Kernstart:
+  - `index.html`
+  - `css/app.css`
+  - `js/app.js`, `js/ui.js`, `js/state.js`
+- Adapter-Layer:
+  - `js/adapters/filesystem-adapter.js`
+  - `js/adapters/browser-filesystem.js`
+  - `js/adapters/desktop-filesystem.js`
+- Services:
+  - `js/services/config-loader.js`
+  - `js/services/startup-check.js`
+  - `js/services/project-selftest.js`
+  - `js/services/logger.js`
+- Zentrale Daten:
+  - `data/app-config.json`
+  - `data/themes.json`
+  - `data/ui_texts.json`
+  - `data/project-structure.json` (Single Source of Truth)
 
-## Aktueller Stand
-- Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
-- Modulprofil-Check prüft zwei Modulprofile konsistent.
-- Todo-Eingabe ist direkt im Dashboard nutzbar.
-- Aufgaben zeigen Fälligkeitsdatum und Erinnerungszeit.
-- Erreichte Erinnerungen werden in der Liste markiert.
+## Erledigte Kernpunkte
+- Klare Trennung in UI, State, Adapter, Services, Daten.
+- Startreihenfolge fest eingebaut: Config -> Theme -> Adapter -> Startup-Check -> UI.
+- Selbsttest als erster Kernschritt umgesetzt.
+- Projektstruktur-Regeln zentral in `data/project-structure.json`.
+- Einheitliche Adapter-API mit Standardantwort (`ok`, `code`, `message`, `data`).
+- Vier Themes als Tokens und zentrale UI-Texte aus JSON.
+- Statuspanel und Logpanel für laienfreundliche Sicht.
 
-## Nächste Schritte (kurz)
-1. Aufgaben lokal speichern (z. B. `localStorage`), damit sie nach Neustart bleiben.
-2. Kleine Filter ergänzen (heute, diese Woche, erledigt).
-3. Optional später Browser-Hinweis (Notification API) ergänzen.
+## Offene Punkte
+1. Persistenz „letzten Projektordner merken“ vorbereiten.
+2. Diagnose-Export als optionales Modul ergänzen.
+3. Erweiterte Rechteanzeige (nur Lesen) visuell deutlicher machen.
 
-## Festgelegter Start-Scope
-- Offline-fähiger Start mit statischem Einstiegspunkt.
-- Dashboard-Skelett als minimale UI-Basis.
-- Schlanker JavaScript-Core für Startfluss und Modul-Registrierung.
-- Modul-Mindestteile: `manifest`, `config`, `texts`, `schema`, `logic`.
-- Start-Dokumentation nur in `README.md` und `todo.txt`.
-
-## Empfehlungsliste (kurz)
-- Bei neuen UI-Blöcken zuerst Kontrast prüfen, dann Farben anpassen.
-- Interaktive Bereiche (Formular/Liste) visuell als eigene Segmente halten.
-- Modulprofil-Liste erst dynamisieren, wenn mehr Module da sind.
-- `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
-
-## Befehle für Laien (einfach)
+## Laien-Befehle unten
 - Status prüfen: `git status`
-- Änderungen ansehen: `git diff`
-- Projektdateien auflisten: `find . -maxdepth 4 -type f | sort`
-- Letzte Commits sehen: `git log --oneline -n 5`
+- Änderungen sehen: `git diff --stat`
+- Projektdateien auflisten: `find . -path './.git' -prune -o -type f -print | sort`
+- Letzte Commits: `git log --oneline -n 5`
+
+## Kurze Empfehlungsliste
+- Erst immer „Ordner wählen“, dann „Selbsttest starten“.
+- Bei Gelb/Rot zuerst Rechte und fehlende Struktur lösen.

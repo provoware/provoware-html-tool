@@ -1,0 +1,50 @@
+{
+  "dunkel": {
+    "bg": "#0f172a",
+    "bgPanel": "#182238",
+    "bgPanelSoft": "#1e2c45",
+    "header": "#223352",
+    "textMain": "#f8fafc",
+    "textMuted": "#cbd5e1",
+    "shadow": "0 8px 24px rgba(15,23,42,0.35)",
+    "radius": "14px",
+    "gridLine": "rgba(148,163,184,0.24)",
+    "focus": "0 0 0 3px rgba(56,189,248,0.35)"
+  },
+  "hell": {
+    "bg": "#f3f6fb",
+    "bgPanel": "#ffffff",
+    "bgPanelSoft": "#edf2fb",
+    "header": "#dce8fa",
+    "textMain": "#172033",
+    "textMuted": "#475569",
+    "shadow": "0 8px 20px rgba(15,23,42,0.12)",
+    "radius": "14px",
+    "gridLine": "rgba(51,65,85,0.2)",
+    "focus": "0 0 0 3px rgba(37,99,235,0.35)"
+  },
+  "kontraststark": {
+    "bg": "#000000",
+    "bgPanel": "#111111",
+    "bgPanelSoft": "#1b1b1b",
+    "header": "#202020",
+    "textMain": "#ffffff",
+    "textMuted": "#f5f5f5",
+    "shadow": "0 0 0 rgba(0,0,0,0)",
+    "radius": "8px",
+    "gridLine": "#ffffff",
+    "focus": "0 0 0 3px #ffff00"
+  },
+  "provoware-inspiriert": {
+    "bg": "#0e1a1f",
+    "bgPanel": "#13262d",
+    "bgPanelSoft": "#17323a",
+    "header": "#1f3f4b",
+    "textMain": "#e8f8fb",
+    "textMuted": "#b4d6dd",
+    "shadow": "0 8px 24px rgba(5,15,18,0.38)",
+    "radius": "16px",
+    "gridLine": "rgba(122,201,212,0.22)",
+    "focus": "0 0 0 3px rgba(74,222,128,0.35)"
+  }
+}
