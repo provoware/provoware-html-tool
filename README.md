@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 35
+- Erledigte Punkte: 39
 - Offene Punkte: 2
 - Fortschritt: 95%
 
@@ -25,15 +25,50 @@
   - `data/ui_texts.json`
   - `data/project-structure.json` (Single Source of Truth)
 
+## Tool-Optik-Vorgabe (aus Designanalyse übernommen)
+### 1) Designcharakter
+- Kartenoptik (Panel-Look): jedes Hauptelement wirkt wie eine eigene Kachel.
+- Weiche Rundungen: große Eckradien für ruhige, moderne Wirkung.
+- Leichte Tiefe: dezenter Schatten für Trennung ohne harte Kanten.
+- Ruhiger Hintergrund: heller Verlauf statt flacher Vollfarbe.
+
+### 2) Layout und Struktur
+- Drei Hauptspalten im Standardmodus:
+  - links Aktionen,
+  - Mitte Hauptinhalt,
+  - rechts Status.
+- Breitenlogik:
+  - Mitte ist dominant (Mindestbreite 560px),
+  - Seitenbereiche bleiben kompakt.
+- Feste visuelle Ordnung durch klare Flächen pro Bereich (Header, Navigation, Main, Status, Footer).
+
+### 3) Optische Rasterführung
+- Panels bekommen ein schwaches Raster-Overlay.
+- Ziel: technische, geordnete Oberfläche ohne Überladung.
+- Raster bleibt absichtlich transparent, damit Inhalte klar lesbar bleiben.
+
+### 4) Farb- und Größenvorgaben
+- Standardtheme: `tool-optik-vorgabe-2026`.
+- Eckradius: 18px.
+- Primäre Tiefe: `0 10px 26px rgba(35,47,74,0.24)`.
+- Buttons: Mindesthöhe 48px für bessere Trefffläche (Maus/Finger).
+- Hauptbereich: Mindesthöhe 380px für stabile Inhaltswirkung.
+
+### 5) Nutzerfreundlichkeit (Laientauglichkeit)
+- Primäraktion bleibt farblich klar hervorgehoben.
+- Sekundäraktionen bleiben neutral, aber deutlich klickbar.
+- Titel und Untertitel sind oben zentral sichtbar und leicht erfassbar.
+
 ## Erledigte Kernpunkte
 - Klare Trennung in UI, State, Adapter, Services, Daten.
 - Startreihenfolge fest eingebaut: Config -> Theme -> Adapter -> Startup-Check -> UI.
 - Selbsttest als erster Kernschritt umgesetzt.
 - Projektstruktur-Regeln zentral in `data/project-structure.json`.
 - Einheitliche Adapter-API mit Standardantwort (`ok`, `code`, `message`, `data`).
-- Vier Themes als Tokens und zentrale UI-Texte aus JSON.
+- Fünf Themes als Tokens und zentrale UI-Texte aus JSON.
 - Statuspanel und Logpanel für laienfreundliche Sicht.
 - Letzter gewählter Ordnername wird lokal gemerkt und beim Start angezeigt.
+- Neue Tool-Optik als Standard aktiviert (Größen, Raster, Karten-Look).
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
@@ -49,3 +84,5 @@
 - Erst immer „Ordner wählen“, dann „Selbsttest starten“.
 - Bei Gelb/Rot zuerst Rechte und fehlende Struktur lösen.
 - Nach Neustart auf den Hinweis „zuletzt gewählt“ im Ordner-Status achten.
+- Empfehlung 1: Für sehr kleine Bildschirme zuerst den Main-Bereich prüfen, dann Navigation öffnen.
+- Empfehlung 2: Bei eigener Farbwahl den Kontrast von Überschrift und Buttontext immer gegenprüfen.

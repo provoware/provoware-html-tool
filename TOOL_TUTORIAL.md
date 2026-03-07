@@ -10,7 +10,16 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Letzten Ordnernamen wiederfinden
+### Tool-Optik-Vorgabe schnell prüfen
+1. Seite neu laden.
+2. Auf drei Dinge achten:
+   - Kartenoptik mit weichen Ecken,
+   - leichter Raster-Look in den Flächen,
+   - deutlich hervorgehobener Primärbutton.
+3. Browserbreite auf ca. 1200px und 900px ändern.
+4. Prüfen, ob die Bereiche sauber in die nächste Layoutstufe wechseln.
+
+## Letzten Ordnernamen wiederfinden
 1. Einmal auf **Ordner wählen** klicken und einen Projektordner bestätigen.
 2. Seite neu laden.
 3. Im Bereich **Projektordner-Status** bei **Ordner** den Namen mit Hinweis **(zuletzt gewählt)** prüfen.

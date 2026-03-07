@@ -46,5 +46,17 @@
     "radius": "16px",
     "gridLine": "rgba(122,201,212,0.22)",
     "focus": "0 0 0 3px rgba(74,222,128,0.35)"
+  },
+  "tool-optik-vorgabe-2026": {
+    "bg": "#e9edf4",
+    "bgPanel": "#dfe6f4",
+    "bgPanelSoft": "#cfd7ea",
+    "header": "#6d2db1",
+    "textMain": "#f8fafc",
+    "textMuted": "#4b5b76",
+    "shadow": "0 10px 26px rgba(35,47,74,0.24)",
+    "radius": "18px",
+    "gridLine": "rgba(102,126,164,0.2)",
+    "focus": "0 0 0 3px rgba(115,168,255,0.45)"
   }
 }
