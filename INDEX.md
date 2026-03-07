@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: 3x3 Modulraster mit Sidebar-Toggles und Fenster-Maximierung umsetzen
+- Iterationsfokus: Modul-Registry und Vorlagen-Status transparent anzeigen
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -36,6 +36,7 @@
 │   ├── services
 │   │   ├── config-loader.js
 │   │   ├── logger.js
+│   │   ├── module-registry.js
 │   │   ├── profile-archive.js
 │   │   ├── project-selftest.js
 │   │   └── startup-check.js
@@ -77,19 +78,20 @@
 17. `js/app.js`
 18. `js/services/config-loader.js`
 19. `js/services/logger.js`
-20. `js/services/project-selftest.js`
-21. `js/services/startup-check.js`
-22. `js/state.js`
-23. `js/status-visuals.js`
-24. `js/ui.js`
-25. `modules/datenbank_baukasten/config.json`
-26. `modules/datenbank_baukasten/logic.js`
-27. `modules/datenbank_baukasten/manifest.json`
-28. `modules/datenbank_baukasten/schema.json`
-29. `modules/datenbank_baukasten/texts.json`
-30. `modules/todo_kalender_erinnerung/config.json`
-31. `modules/todo_kalender_erinnerung/logic.js`
-32. `modules/todo_kalender_erinnerung/manifest.json`
-33. `modules/todo_kalender_erinnerung/schema.json`
-34. `modules/todo_kalender_erinnerung/texts.json`
-35. `todo.txt`
+20. `js/services/module-registry.js`
+21. `js/services/project-selftest.js`
+22. `js/services/startup-check.js`
+23. `js/state.js`
+24. `js/status-visuals.js`
+25. `js/ui.js`
+26. `modules/datenbank_baukasten/config.json`
+27. `modules/datenbank_baukasten/logic.js`
+28. `modules/datenbank_baukasten/manifest.json`
+29. `modules/datenbank_baukasten/schema.json`
+30. `modules/datenbank_baukasten/texts.json`
+31. `modules/todo_kalender_erinnerung/config.json`
+32. `modules/todo_kalender_erinnerung/logic.js`
+33. `modules/todo_kalender_erinnerung/manifest.json`
+34. `modules/todo_kalender_erinnerung/schema.json`
+35. `modules/todo_kalender_erinnerung/texts.json`
+36. `todo.txt`

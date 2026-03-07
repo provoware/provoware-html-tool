@@ -274,6 +274,9 @@ export const render = () => {
 
   setText('mix-output', state.randomMix?.text || '-');
 
+  setText('module-registry-summary', state.moduleRegistry?.summary || '-');
+  setText('template-design-status', autoFormatText(state.templateDesignStatus?.message || '-'));
+
   const archiveEvents = byId('archive-events');
   if (archiveEvents) {
     archiveEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 6).map((item) => `<li><span>${item.timestamp.slice(11, 19)}</span> ${autoFormatText(item.message)}</li>`).join('');
