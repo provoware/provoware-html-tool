@@ -12,7 +12,8 @@
     "runSelftest": "Selbsttest starten",
     "ensureStructure": "Projektstruktur anlegen",
     "runWriteTest": "Schreibtest ausführen",
-    "switchDirectory": "Ordner wechseln"
+    "switchDirectory": "Ordner wechseln",
+    "logout": "Logout (sicher)"
   },
   "messages": {
     "startupWaiting": "Bitte zuerst einen Projektordner wählen.",

@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 17 (siehe `todo.txt`)
-- Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 94%
+- Erledigte Punkte: 18 (siehe `todo.txt`)
+- Offene Punkte: 2 (siehe `todo.txt`)
+- Fortschritt: 90%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -18,6 +18,7 @@
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
   - Neu für sichere Listen-Ausgabe: `js/services/html-escape.js` (zentrale HTML-Zeichenkodierung)
+  - Neu: `js/services/code-formatter.js` (vollautomatische, einfache Auto-Formatierung für Editor-Inhalte nach Dateityp)
   - `modules/*` (fachliche Module)
 - **Daten**
   - `data/app-config.json`, `data/themes.json`, `data/ui_texts.json`
@@ -27,7 +28,7 @@
   - `data/laienstart-dependency-map.json` (Standard-Dummy für Abhängigkeitsauflösung)
   - `data/profile-archive.json`, `data/templates-archive.json`
 - **Tests und Checks**
-  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`, `tests/scripts-laienstart.dry-run.test.js`
+  - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/modules/*.test.js`, `tests/adapters/*.test.js`, `tests/start-files/*.test.js`, `tests/scripts-laienstart.dry-run.test.js`
   - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck, jetzt Node-18-kompatibel für ES-Module)
   - `start.sh` (Hauptstart im Projektordner, delegiert an robuste Startroutine)
   - `scripts/laienstart.sh` (Startroutine-Engine mit Vorvalidierung, Self-Repair und Erfolgsvalidierung)
@@ -38,6 +39,10 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Dashboard zeigt den Start jetzt als 4 klare Schritte (Schritt 1/4 bis 4/4) mit Farbstatus für schnelleres Verstehen.
+- Neuer sicherer Logout-Button: speichert offene Editor-Änderungen automatisch und schließt ein Desktop-Backend sauber, wenn vorhanden.
+- Neue Auto-Formatierung für Editor-Inhalte: JSON wird strukturiert formatiert, JS/CSS/HTML werden zeilenweise geglättet.
+- `modules/datenbank_baukasten/logic.js` wurde zu einem robusten Baukasten erweitert (Blueprint erstellen, Datensatz ergänzen, Blueprint validieren).
 - Neuer Hauptstart `start.sh` im Projektordner: ein Befehl für Laien ohne Pfadwissen.
 - `scripts/laienstart.sh` hat jetzt eine klare Vorvalidierung (Schreibrecht, JSON-Prüfung, Pflichtdateien) und meldet jeden Schritt verständlich.
 - `scripts/laienstart.sh` nutzt freien-Port-Fallback und meldet klar: „Port X ist belegt. Nutze stattdessen Port Y“.
@@ -96,3 +101,8 @@
 2. Danach erst `dependabot.yml` aktivieren, damit PR-Last klein bleibt.
 3. Release-Workflow erst einführen, wenn Versionierung (Tags) klar geregelt ist.
 4. Bei CI-Fehlern zuerst `node --test` lokal ausführen, dann gezielt nachbessern.
+
+
+## Kurze Empfehlungsliste (unten, aktualisiert)
+1. Nutze bei jedem Sitzungsende den neuen Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
+2. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.

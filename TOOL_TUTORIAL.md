@@ -172,3 +172,18 @@ Die Startroutine prüft jetzt vor und nach dem Start automatisch:
 Wenn etwas scheitert, bekommst du klare Meldungen mit direkter Handlung.
 
 Kurzregel: immer `./start.sh` nutzen, nicht einzelne Startdateien öffnen.
+
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Startstatus in 4 Schritten + sicherer Logout
+Für Einsteiger ist der Start jetzt klar nummeriert:
+1. Schritt 1/4: Ordner wählen
+2. Schritt 2/4: Rechte prüfen
+3. Schritt 3/4: Grundcheck ausführen
+4. Schritt 4/4: Module starten
+
+Zusätzlich gibt es **„Logout (sicher)”**:
+- speichert offene Editor-Änderungen automatisch
+- versucht das Backend sicher zu schließen (falls Desktop-Backend aktiv ist)
+
+Kurzregel: erst Startschritte abarbeiten, am Ende immer „Logout (sicher)“ nutzen.
