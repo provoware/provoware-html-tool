@@ -18,6 +18,9 @@
 [x] 2026-03-07 | index.html + css/app.css | Rechte Spalte visuell in Utility-Karten trennen (Vorlagen/Mini-Notiz/Infos/Hilfe) ohne Logikumbau | prüfen: Struktur-Check im Browser + Responsive-Check unter 980px | fertig wenn: vier klar getrennte Kartenblöcke ohne Layoutbruch
 
 ## Mittel
+
+[ ] 2026-03-07 | js/ui.js | Für Vollmodularität große UI-Datei in kleinere Renderer-Module aufteilen (Header, Panels, Logs), ohne Verhaltensänderung | prüfen: gezielter Header-Test + UI-Render-Safety-Test laufen weiter | fertig wenn: `js/ui.js` deutlich kleiner und Renderer-Bereiche in eigene Service-/UI-Module ausgelagert sind
+[ ] 2026-03-07 | js/services/ui-action-handlers.js | Action-Handler nach Domänen trennen (Datei, Profil, Vorlagen, Diagnose), damit Wartung einfacher wird | prüfen: `node --test tests/services/ui-action-handlers.smoke.test.js` | fertig wenn: Handler-Domänen klar getrennt und Smoke-Test bleibt grün
 [x] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen (in dieser Iteration eingehalten: keine `modules/*/logic.js`-Änderung) | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
 [x] 2026-03-07 | js/adapters/desktop-filesystem.js | Stub-Adapter-Verhalten verständlicher machen (klare Nutzerhinweise im Fehlertext) | prüfen: Rückgabemeldung im UI-Log lesbar und eindeutig | fertig wenn: Meldung sagt klar, was fehlt und was der nächste Schritt ist
 [x] 2026-03-07 | js/services/module-registry.js | riskante Importzusammenführungen absichern, wenn Bereich erneut betroffen ist | prüfen: bei nächster Änderung gezielt Regressionstest der Registry-Ausgabe | fertig wenn: Zusammenführung ohne neue Doppelblöcke abgesichert ist
