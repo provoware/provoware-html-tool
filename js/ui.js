@@ -126,6 +126,21 @@ const renderStats = (stats) => {
   return `Genres: ${stats.genres} | Stimmungen: ${stats.moods} | Stile: ${stats.styles} | Gesamt: ${stats.total}`;
 };
 
+
+const buildStartupSteps = (state) => {
+  const hasDirectory = Boolean(state.selectedProjectDirectory);
+  const canRead = state.permissionStatus?.read === true;
+  const startupReady = state.debug?.startupReady === true;
+  const steps = [
+    { label: 'Schritt 1/4: Projektordner wählen', done: hasDirectory },
+    { label: 'Schritt 2/4: Rechte prüfen', done: hasDirectory && canRead },
+    { label: 'Schritt 3/4: Grundcheck ausführen', done: hasDirectory && Boolean(state.selftestResult) },
+    { label: 'Schritt 4/4: Module starten', done: startupReady }
+  ];
+  const currentIndex = steps.findIndex((step) => !step.done);
+  return { steps, currentIndex: currentIndex === -1 ? steps.length - 1 : currentIndex };
+};
+
 const buildDashboardInfo = (state) => {
   const overall = formatOverallStatus(state.selftestResult?.overallStatus || 'red');
   const moduleSummary = state.moduleRegistry?.summary || '-';
@@ -384,6 +399,9 @@ export const bindUiActions = (actions) => {
     const area = byId('diagnosis-transfer');
     if (area) area.value = text;
   });
+  byId('action-logout')?.addEventListener('click', async () => {
+    await actions.onLogoutWithAutosave();
+  });
   byId('a11y-quiet-mode')?.addEventListener('change', (event) => {
     actions.onToggleA11yQuietMode(event.target.checked);
   });
@@ -586,6 +604,7 @@ export const render = () => {
   setText('action-run-write-test', texts.buttons?.runWriteTest || 'Schreibtest ausführen');
   setText('action-switch-dir', texts.buttons?.switchDirectory || 'Ordner wechseln');
   setText('action-export-diagnosis', 'Diagnose exportieren');
+  setText('action-logout', texts.buttons?.logout || 'Logout (sicher)');
 
   const nextStep = byId('next-step');
   if (nextStep) {
@@ -650,6 +669,18 @@ export const render = () => {
     const lastFile = fileNameFromPath(row.lastSavedPath);
     setText(`dashboard-note-file-${rowIndex}`, `Letzte Datei: ${lastFile || '-'}`);
   });
+
+
+  const startupSteps = byId('startup-steps');
+  if (startupSteps) {
+    const progress = buildStartupSteps(state);
+    startupSteps.innerHTML = progress.steps.map((step, index) => {
+      const css = step.done
+        ? 'startup-step startup-step--done'
+        : (index === progress.currentIndex ? 'startup-step startup-step--current' : 'startup-step');
+      return `<li class="${css}">${escapeHtml(step.label)}</li>`;
+    }).join('');
+  }
 
   const dashboardInfo = buildDashboardInfo(state);
   setText('dashboard-info-note', dashboardInfo);

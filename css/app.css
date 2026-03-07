@@ -269,6 +269,30 @@ body::before {
   display: flex;
 }
 
+
+.startup-steps {
+  margin: 8px 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.startup-step {
+  border-radius: 8px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.startup-step--done {
+  background: rgba(43, 169, 110, 0.18);
+  color: #1d5f41;
+}
+
+.startup-step--current {
+  background: rgba(245, 158, 11, 0.2);
+  color: #6a4705;
+}
+
 .dashboard-note {
   margin: 0;
   color: #1f2b20;

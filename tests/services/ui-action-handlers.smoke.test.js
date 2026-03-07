@@ -86,3 +86,12 @@ test('smoke: dashboard-note datei öffnen meldet fehlende datei', async () => {
   assert.equal(result.code, 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED');
   assert.equal(base.getState().dashboardNotes.rows[0].feedback, 'Noch keine Datei gespeichert.');
 });
+
+
+test('smoke: logout ohne desktop-backend ist erfolgreich', async () => {
+  const base = makeBase();
+  const actions = createUiActionHandlers(base);
+  const result = await actions.onLogoutWithAutosave();
+  assert.equal(result.ok, true);
+  assert.equal(result.code, 'LOGOUT_DONE');
+});

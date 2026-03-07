@@ -1,6 +1,7 @@
 import { createDefaultArchive, createRandomMix, normalizeArchive, addEntry, editEntry, removeEntry, sortArchive, buildStats } from './profile-archive.js';
 import { addTemplate, editTemplate, removeTemplate, toggleTemplateFavorite } from './templates-archive.js';
 import { filesystemAdapter } from '../adapters/filesystem-adapter.js';
+import { formatEditorContentForPath } from './code-formatter.js';
 
 const DEFAULT_PROFILE = 'HardTechno';
 const TEXT_FILE_EXTENSIONS = new Set(['txt', 'md', 'json', 'js', 'css', 'html', 'csv', 'xml', 'yml', 'yaml', 'log']);
@@ -35,6 +36,14 @@ const joinPath = (basePath, fileName) => {
 const isTextLikeFile = (name = '') => {
   const extension = String(name).split('.').pop()?.toLowerCase();
   return extension ? TEXT_FILE_EXTENSIONS.has(extension) : false;
+};
+
+const tryShutdownBackend = async () => {
+  const api = globalThis.window?.provowareDesktopApi;
+  if (!api || typeof api.shutdownBackend !== 'function') {
+    return { ok: true, code: 'BACKEND_CLOSE_SKIPPED', message: 'Kein Desktop-Backend aktiv.' };
+  }
+  return api.shutdownBackend();
 };
 
 export const createUiActionHandlers = ({
@@ -239,6 +248,23 @@ export const createUiActionHandlers = ({
   onEditorChangeContent: (content) => {
     setState({ editorContent: content, editorDirty: true });
   },
+  onFormatEditorFile: async () => {
+    const state = getState();
+    const filePath = normalizeRelativePath(state.editorFilePath);
+    const result = formatEditorContentForPath({ path: filePath, content: state.editorContent || '' });
+    if (!result.ok) {
+      setState({ editorStatus: result.message });
+      logEvent('WARN', result.code, result.message, result.data);
+      return result;
+    }
+    setState({
+      editorContent: result.data?.content || '',
+      editorDirty: result.data?.changed ? true : state.editorDirty,
+      editorStatus: result.message
+    });
+    logEvent('INFO', result.code, result.message, result.data);
+    return result;
+  },
   onDashboardNoteChangeTitle: ({ rowIndex, title }) => {
     updateDashboardRowState(setState, getState, rowIndex, { title });
   },
@@ -357,5 +383,43 @@ ${normalizedValue}` : normalizedValue;
     setState({ editorStatus: status, editorDirty: false, filePreviewContent: state.editorContent || '' });
     logEvent('INFO', 'EDITOR_FILE_SAVED', status);
     return { ok: true, code: 'EDITOR_FILE_SAVED', message: status };
+  },
+  onLogoutWithAutosave: async () => {
+    const state = getState();
+    let autosave = { ok: true, code: 'AUTOSAVE_SKIPPED', message: 'Nichts zu speichern.' };
+    if (state.editorFilePath && state.editorDirty) {
+      const formatted = formatEditorContentForPath({ path: state.editorFilePath, content: state.editorContent || '' });
+      if (!formatted.ok) {
+        logEvent('WARN', formatted.code, formatted.message, formatted.data);
+        return formatted;
+      }
+      setState({ editorContent: formatted.data?.content || state.editorContent || '' });
+      autosave = await filesystemAdapter.writeText(normalizeRelativePath(state.editorFilePath), formatted.data?.content || '');
+      if (!autosave.ok) {
+        logEvent('WARN', autosave.code, 'Autospeichern vor Logout fehlgeschlagen.', autosave.data);
+        return autosave;
+      }
+      logEvent('INFO', 'EDITOR_AUTOSAVED_ON_LOGOUT', 'Editor wurde vor dem Logout gespeichert.', { path: state.editorFilePath });
+    }
+
+    const backendClose = await tryShutdownBackend();
+    if (!backendClose.ok) {
+      logEvent('WARN', backendClose.code, 'Backend konnte nicht sicher geschlossen werden.', backendClose.data);
+      return backendClose;
+    }
+
+    setState({
+      selectedProjectDirectory: null,
+      permissionStatus: { read: false, write: false, class: 'unknown' },
+      selftestResult: null,
+      debug: { startupReady: false },
+      editorFilePath: '',
+      editorContent: '',
+      editorDirty: false,
+      editorStatus: 'Session wurde sicher beendet.'
+    });
+    const result = { ok: true, code: 'LOGOUT_DONE', message: 'Logout abgeschlossen. Daten sind gesichert.', data: { autosave: autosave.code, backend: backendClose.code } };
+    logEvent('INFO', result.code, result.message, result.data);
+    return result;
   }
 });
