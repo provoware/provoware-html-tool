@@ -1,4 +1,38 @@
 const CATEGORIES = ['genres', 'moods', 'styles'];
+const TEMPLATE_AREAS = ['programmierung', 'linux-befehle', 'vibe-coding', 'chat-gpt-prompts', 'automation', 'analyse', 'recherche', 'optimierung', 'gui-bau-planung'];
+
+const DEFAULT_PROFILE_CONTENT = Object.freeze({
+  HardTechno: {
+    genres: ['Hard Techno', 'Industrial Techno', 'Schranz', 'Rave', 'Gabber', 'Acid Techno', 'Rawstyle'],
+    moods: ['treibend', 'düster', 'aggressiv', 'energiegeladen', 'hypnotisch', 'unterirdisch', 'aufgeladen'],
+    styles: ['Peak-Time', 'Warehouse', 'Underground Club', 'Berlin School', 'Live-DJ-Set', 'Hybrid Set', 'Festival Mainfloor']
+  },
+  Chill: {
+    genres: ['Lo-Fi', 'Downtempo', 'Ambient', 'Trip-Hop', 'Balearic', 'Chillout', 'Bossa Nova Electronica'],
+    moods: ['ruhig', 'warm', 'nostalgisch', 'leicht', 'meditativ', 'sonnig', 'nachtaktiv'],
+    styles: ['Cafe Session', 'Sunset Mix', 'Rainy Day', 'Study Flow', 'Dreamscape', 'Late Night Radio', 'Coastal Vibes']
+  },
+  Hörspiele: {
+    genres: ['Krimi', 'Science-Fiction', 'Fantasy', 'Historisch', 'Comedy', 'True Crime', 'Regionaldialekt'],
+    moods: ['spannend', 'mystisch', 'humorvoll', 'ernst', 'abenteuerlich', 'unheimlich', 'nahbar'],
+    styles: ['Binaural', 'Erzähler-zentriert', 'Dialog-lastig', 'Atmosphärisch', 'Kinderfreundlich', 'Noir', 'Underground-Podcast']
+  }
+});
+
+const DEFAULT_TEMPLATE_ARCHIVE = Object.freeze({
+  version: 1,
+  categories: {
+    programmierung: ['TypeScript API-Grundgerüst', 'Python Datenpipeline', 'Rust CLI-Skeleton', 'Go Worker-Service', 'C# WebAPI Starter'],
+    'linux-befehle': ['Dateien finden mit find + xargs', 'Systemlast prüfen mit top/htop', 'Rechte setzen mit chmod/chown', 'Logs filtern mit journalctl', 'Netz prüfen mit ss und ping'],
+    'vibe-coding': ['Feature in 30 Minuten als Mini-Prototyp', 'Refactor mit Fokus auf Lesbarkeit', 'Code-Walkthrough für Teamübergabe', 'Pair-Prompt für Bugfix', 'Spikes für neue Idee'],
+    'chat-gpt-prompts': ['Bug reproduzieren und eingrenzen', 'Code Review mit Risiko-Liste', 'API-Dokumentation in einfacher Sprache', 'Testfälle aus User Story ableiten', 'Architektur-Entscheidung mit Pros/Cons'],
+    automation: ['CI-Check für Lint+Test', 'Release-Tag automatisch erzeugen', 'Backups nachts rotieren', 'CSV-Import per Cronjob', 'Webhook mit Retry'],
+    analyse: ['Fehlercluster aus Logs bilden', 'Laufzeitengpässe messen', 'Datenqualität als Score', 'A/B Ergebnisvergleich', 'Risikomatrix für Deploy'],
+    recherche: ['Technologie-Vergleich nach Kriterien', 'Regionales Hosting prüfen', 'Open-Source-Lizenzcheck', 'Underground-Community-Trends sammeln', 'Quellenbewertung mit Vertrauensgrad'],
+    optimierung: ['Build-Zeit verkürzen', 'Caching-Strategie einführen', 'Datenbankindex prüfen', 'Bundle-Size reduzieren', 'Barrierefreiheit verbessern'],
+    'gui-bau-planung': ['Wireframe für Dashboard', 'Formular mit Fehlerhinweisen', 'Komponentenbaum planen', 'Nutzerfluss als Schrittkette', 'Design-Token-Liste erstellen']
+  }
+});
 
 const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -11,6 +45,39 @@ const ensureProfile = (archive, profile) => {
 
 const toRecord = (value) => ({ value: normalizeText(value), createdAt: new Date().toISOString() });
 
+const normalizeRecordList = (list) => {
+  const dedup = new Map();
+  list.forEach((item) => {
+    const value = normalizeText(item?.value ?? item);
+    if (!value) return;
+    const key = value.toLowerCase();
+    if (dedup.has(key)) return;
+    dedup.set(key, {
+      value,
+      createdAt: item?.createdAt && String(item.createdAt).trim() ? String(item.createdAt) : new Date().toISOString()
+    });
+  });
+  return [...dedup.values()].sort(byValue);
+};
+
+const createDefaultProfiles = () => Object.fromEntries(
+  Object.entries(DEFAULT_PROFILE_CONTENT).map(([profileName, profile]) => [
+    profileName,
+    {
+      genres: normalizeRecordList(profile.genres),
+      moods: normalizeRecordList(profile.moods),
+      styles: normalizeRecordList(profile.styles)
+    }
+  ])
+);
+
+const createDefaultTemplateArchive = () => ({
+  version: DEFAULT_TEMPLATE_ARCHIVE.version,
+  categories: Object.fromEntries(
+    TEMPLATE_AREAS.map((area) => [area, normalizeRecordList(DEFAULT_TEMPLATE_ARCHIVE.categories[area] || [])])
+  )
+});
+
 const byValue = (a, b) => a.value.localeCompare(b.value, 'de', { sensitivity: 'base' });
 const byCreated = (a, b) => a.createdAt.localeCompare(b.createdAt);
 
@@ -18,11 +85,8 @@ export const ARCHIVE_PATH = 'data/profile-archive.json';
 
 export const createDefaultArchive = () => ({
   version: 1,
-  profiles: {
-    HardTechno: { genres: [], moods: [], styles: [] },
-    Chill: { genres: [], moods: [], styles: [] },
-    Hörspiele: { genres: [], moods: [], styles: [] }
-  },
+  profiles: createDefaultProfiles(),
+  templateArchive: createDefaultTemplateArchive(),
   events: [],
   lastMix: null,
   updatedAt: new Date().toISOString()
@@ -40,20 +104,20 @@ export const normalizeArchive = (input) => {
     base.profiles[profileName] = { genres: [], moods: [], styles: [] };
     CATEGORIES.forEach((category) => {
       const list = Array.isArray(categories[category]) ? categories[category] : [];
-      const dedup = new Map();
-      list.forEach((item) => {
-        const value = normalizeText(item?.value ?? item);
-        if (!value) return;
-        const key = value.toLowerCase();
-        if (dedup.has(key)) return;
-        dedup.set(key, {
-          value,
-          createdAt: item?.createdAt && String(item.createdAt).trim() ? String(item.createdAt) : new Date().toISOString()
-        });
-      });
-      base.profiles[profileName][category] = [...dedup.values()].sort(byValue);
+      base.profiles[profileName][category] = normalizeRecordList(list);
     });
   });
+
+  const templateArchive = safe.templateArchive && typeof safe.templateArchive === 'object' ? safe.templateArchive : null;
+  if (templateArchive) {
+    const categories = templateArchive.categories && typeof templateArchive.categories === 'object' ? templateArchive.categories : {};
+    base.templateArchive = {
+      version: Number(templateArchive.version) || 1,
+      categories: Object.fromEntries(
+        TEMPLATE_AREAS.map((area) => [area, normalizeRecordList(Array.isArray(categories[area]) ? categories[area] : [])])
+      )
+    };
+  }
 
   if (Array.isArray(safe.events)) {
     base.events = safe.events.slice(0, 200);

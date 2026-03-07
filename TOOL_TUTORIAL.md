@@ -100,6 +100,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. Danach mit `markTodoDone(...)` auf erledigt setzen und mit `reactivateTodo(...)` wieder öffnen.
 4. Mit `filterTodos(...)` nach `status`, `area` oder `priority` filtern.
 5. Mit `exportTodosAsJson(...)` oder `exportTodosAsCsv(...)` den Exporttext erzeugen.
+### Templates-Modul kurz prüfen (neu)
+1. Einen Ordner wählen.
+2. Im Modul **Templates** Titel, Kategorie und Inhalt eintragen.
+3. Auf **Speichern** klicken und prüfen, ob der Eintrag in der Vorlagenliste erscheint.
+4. Auf **☆** klicken und prüfen, ob oben bei **Favoriten Schnellwahl** ein Button entsteht.
+5. Auf den Favoriten-Button klicken und prüfen, ob ein kurzes Kopier-Feedback erscheint und nach wenigen Sekunden wieder verschwindet.
 
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
@@ -128,13 +134,26 @@ Kurze Anleitung für sichere kleine Iterationen.
    - Enden bekommen automatisch Punkt, wenn keiner vorhanden ist,
    - lange Texte brechen ohne Layout-Bruch um.
 
+
+### Default-Profile und Template-Archiv prüfen (neu)
+1. Seite neu laden und einen Ordner wählen.
+2. Im Bereich **Profil-Archiv** das Profil **HardTechno**, **Chill** und **Hörspiele** nacheinander auswählen.
+3. Prüfen, ob in **Genres**, **Stimmungen** und **Stile** bereits mehrere unterschiedliche Starter-Einträge sichtbar sind.
+4. Auf **Export** klicken und im JSON prüfen, ob `templateArchive.categories` vorhanden ist.
+5. Ziel: Das Tool startet sofort mit brauchbaren Defaults für Musik-Profile und Vorlagen-Arbeit.
+
 ## Endprüfung (nur relevant)
 - Syntax prüfen: `node --check js/app.js`
 - Zusatz-Syntax: `node --check js/ui.js`
 - Zusatz-Syntax: `node --check js/state.js`
 - Zusatz-Syntax: `node --check js/services/ui-action-handlers.js`
+- Zusatz-Syntax: `node --check js/services/diagnosis-export.js`
+- Zusatz-Syntax: `node --check js/services/templates-archive.js`
+- Smoke-Test: `node --experimental-default-type=module --test tests/services/ui-action-handlers.smoke.test.js`
 - JSON prüfen: `python3 -m json.tool data/project-structure.json > /dev/null`
 
 ## Stand
 - Aktualisiert: 2026-03-07
 - Iterationsfokus: To-do-Modul robust für Aufgabenfluss und Statusverwaltung erweitert
+- Iterationsfokus: Default-Profile und Templates-Default-Archiv als sofort nutzbare Startbasis
+- Iterationsfokus: Diagnose-Service ausgelagert plus neues Templates-Modul mit Favoriten-Schnellwahl

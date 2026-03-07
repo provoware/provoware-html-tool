@@ -3,6 +3,8 @@
 ## Stand
 - Aktualisiert: 2026-03-07
 - Iterationsfokus: To-do-Modul inhaltlich erweitert (Status, Filter, Export, Persistenzstruktur)
+- Iterationsfokus: Default-Profile und Templates-Default-Archiv als projektweite Startdaten
+- Iterationsfokus: Diagnose-Service ausgelagert und Templates-Modul ergänzt
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -24,6 +26,7 @@
 │   ├── module-registry.json
 │   ├── profile-archive.json
 │   ├── project-structure.json
+│   ├── templates-archive.json
 │   ├── themes.json
 │   └── ui_texts.json
 ├── index.html
@@ -35,12 +38,14 @@
 │   ├── app.js
 │   ├── services
 │   │   ├── config-loader.js
+│   │   ├── diagnosis-export.js
 │   │   ├── logger.js
 │   │   ├── module-registry.js
 │   │   ├── profile-archive.js
 │   │   ├── project-selftest.js
-│   │   ├── ui-action-handlers.js
-│   │   └── startup-check.js
+│   │   ├── startup-check.js
+│   │   ├── templates-archive.js
+│   │   └── ui-action-handlers.js
 │   ├── state.js
 │   ├── status-visuals.js
 │   └── ui.js
@@ -57,6 +62,9 @@
 │       ├── manifest.json
 │       ├── schema.json
 │       └── texts.json
+├── tests
+│   └── services
+│       └── ui-action-handlers.smoke.test.js
 └── todo.txt
 ```
 
@@ -65,38 +73,42 @@
 2. `INDEX.md`
 3. `README.md`
 4. `TOOL_TUTORIAL.md`
-5. `index.html`
-6. `todo.txt`
-7. `assets/css/base.css`
-8. `assets/js/core.js`
-9. `css/app.css`
-10. `data/app-config.json`
-11. `data/module-registry.json`
-12. `data/profile-archive.json`
-13. `data/project-structure.json`
-14. `data/themes.json`
-15. `data/ui_texts.json`
-16. `js/app.js`
-17. `js/state.js`
-18. `js/status-visuals.js`
-19. `js/ui.js`
-20. `js/adapters/browser-filesystem.js`
-21. `js/adapters/desktop-filesystem.js`
-22. `js/adapters/filesystem-adapter.js`
-23. `js/services/config-loader.js`
-24. `js/services/logger.js`
-25. `js/services/module-registry.js`
-26. `js/services/profile-archive.js`
-27. `js/services/project-selftest.js`
-28. `js/services/startup-check.js`
-29. `js/services/ui-action-handlers.js`
-30. `modules/datenbank_baukasten/config.json`
-31. `modules/datenbank_baukasten/logic.js`
-32. `modules/datenbank_baukasten/manifest.json`
-33. `modules/datenbank_baukasten/schema.json`
-34. `modules/datenbank_baukasten/texts.json`
-35. `modules/todo_kalender_erinnerung/config.json`
-36. `modules/todo_kalender_erinnerung/logic.js`
-37. `modules/todo_kalender_erinnerung/manifest.json`
-38. `modules/todo_kalender_erinnerung/schema.json`
-39. `modules/todo_kalender_erinnerung/texts.json`
+5. `assets/css/base.css`
+6. `assets/js/core.js`
+7. `css/app.css`
+8. `data/app-config.json`
+9. `data/module-registry.json`
+10. `data/profile-archive.json`
+11. `data/project-structure.json`
+12. `data/templates-archive.json`
+13. `data/themes.json`
+14. `data/ui_texts.json`
+15. `index.html`
+16. `js/adapters/browser-filesystem.js`
+17. `js/adapters/desktop-filesystem.js`
+18. `js/adapters/filesystem-adapter.js`
+19. `js/app.js`
+20. `js/services/config-loader.js`
+21. `js/services/diagnosis-export.js`
+22. `js/services/logger.js`
+23. `js/services/module-registry.js`
+24. `js/services/profile-archive.js`
+25. `js/services/project-selftest.js`
+26. `js/services/startup-check.js`
+27. `js/services/templates-archive.js`
+28. `js/services/ui-action-handlers.js`
+29. `js/state.js`
+30. `js/status-visuals.js`
+31. `js/ui.js`
+32. `modules/datenbank_baukasten/config.json`
+33. `modules/datenbank_baukasten/logic.js`
+34. `modules/datenbank_baukasten/manifest.json`
+35. `modules/datenbank_baukasten/schema.json`
+36. `modules/datenbank_baukasten/texts.json`
+37. `modules/todo_kalender_erinnerung/config.json`
+38. `modules/todo_kalender_erinnerung/logic.js`
+39. `modules/todo_kalender_erinnerung/manifest.json`
+40. `modules/todo_kalender_erinnerung/schema.json`
+41. `modules/todo_kalender_erinnerung/texts.json`
+42. `tests/services/ui-action-handlers.smoke.test.js`
+43. `todo.txt`
