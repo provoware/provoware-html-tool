@@ -1,4 +1,5 @@
 import { getState } from './state.js';
+import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 
 const byId = (id) => document.getElementById(id);
 
@@ -30,17 +31,21 @@ const setText = (id, text) => {
 
 const statusClass = (status) => (status === 'green' ? 'check-ok' : status === 'yellow' ? 'check-warn' : 'check-error');
 
-const STATUS_VISUALS = {
-  green: { symbol: '✔', label: 'ok' },
-  yellow: { symbol: '⚠', label: 'gelb' },
-  red: { symbol: '✖', label: 'rot' }
+const formatOverallStatus = (status) => {
+  return formatStatusWithSymbol(status);
 };
 
-const statusVisual = (status) => STATUS_VISUALS[status] || STATUS_VISUALS.red;
+const formatPermissionStatus = (allowed) => {
+  if (typeof allowed !== 'boolean') return '-';
+  return formatStatusWithSymbol(allowed ? 'green' : 'red', formatStatusWord(allowed ? 'ok' : 'nein'));
+};
 
-const formatOverallStatus = (status) => {
-  const visual = statusVisual(status);
-  return `${visual.symbol} ${visual.label}`;
+const formatStructureStatus = (selftestResult) => {
+  if (!selftestResult) return '-';
+  const hasMissingFiles = Boolean(selftestResult.data?.missingFiles?.length);
+  return hasMissingFiles
+    ? formatStatusWithSymbol('yellow', formatStatusWord('fehlt teilweise'))
+    : formatStatusWithSymbol('green', formatStatusWord('ok'));
 };
 
 export const applyTheme = (themeTokens = {}) => {
@@ -106,9 +111,9 @@ export const render = () => {
   const rememberedName = state.rememberedProjectDirectoryName;
   const folderText = selectedName || (rememberedName ? `${rememberedName} (zuletzt gewählt)` : '-');
   setText('status-folder', folderText);
-  setText('status-read', formatStatusWord(state.permissionStatus?.read ? 'ok' : 'nein'));
-  setText('status-write', formatStatusWord(state.permissionStatus?.write ? 'ok' : 'nein'));
-  setText('status-structure', formatStatusWord(state.selftestResult?.data?.missingFiles?.length ? 'fehlt teilweise' : 'ok/unklar'));
+  setText('status-read', formatPermissionStatus(state.permissionStatus?.read));
+  setText('status-write', formatPermissionStatus(state.permissionStatus?.write));
+  setText('status-structure', formatStructureStatus(state.selftestResult));
   setText('status-last-test', autoFormatText(state.selftestResult?.summary || '-'));
   setText('status-overall', formatOverallStatus(state.selftestResult?.overallStatus || 'red'));
   setText('status-layout', state.layoutMode || '-');
