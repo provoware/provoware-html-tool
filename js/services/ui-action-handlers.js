@@ -296,7 +296,9 @@ ${normalizedValue}` : normalizedValue;
     const row = withDefaultDashboardRows(getState().dashboardNotes?.rows || [])[rowIndex];
     const filePath = normalizeRelativePath(row?.lastSavedPath);
     if (!filePath) {
-      return { ok: false, code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED', message: 'Noch keine Datei gespeichert.' };
+      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED', message: 'Noch keine Datei gespeichert.' };
+      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
+      return result;
     }
 
     const loaded = await filesystemAdapter.readText(filePath);

@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Dashboard 3 mit „Datei öffnen“-Button je Zeile und Titel-Hinweis für Dateinamen
+- Iterationsfokus: Dashboard 3 mit deaktiviertem „Datei öffnen“ bis Erstspeicherung und Anzeige der letzten Datei je Zeile
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`

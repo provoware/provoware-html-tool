@@ -13,7 +13,15 @@ const makeBase = () => {
     selectedProfile: 'HardTechno',
     profileArchive: createDefaultArchive(),
     logs: [],
-    templateArchive: { items: [] }
+    templateArchive: { items: [] },
+    dashboardNotes: {
+      basePath: 'data/dashboard3-notes',
+      rows: [
+        { title: 'pppoppi details ideen', input: '', feedback: '-', lastSavedPath: '' },
+        { title: 'Favoriten Genres', input: '', feedback: '-', lastSavedPath: '' },
+        { title: 'Templates-Input-Pool', input: '', feedback: '-', lastSavedPath: '' }
+      ]
+    }
   };
 
   return {
@@ -76,4 +84,5 @@ test('smoke: dashboard-note datei öffnen meldet fehlende datei', async () => {
   const result = await actions.onOpenDashboardNoteLastFileInEditor(0);
   assert.equal(result.ok, false);
   assert.equal(result.code, 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED');
+  assert.equal(base.getState().dashboardNotes.rows[0].feedback, 'Noch keine Datei gespeichert.');
 });

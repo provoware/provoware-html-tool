@@ -151,6 +151,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 5. In derselben Zeile auf **Datei öffnen** klicken.
 6. Erwartung: Datei wird direkt im Modul **Datei-Editor** geöffnet.
 
+### Dashboard 3 Button-Status + letzte Datei prüfen (neu)
+1. Seite laden und noch nichts speichern.
+2. Im Dashboard 3 prüfen: **Datei öffnen** ist je Zeile deaktiviert.
+3. In einer Zeile einen Titel + Eintrag speichern.
+4. Prüfen: In dieser Zeile ist **Datei öffnen** jetzt aktiv.
+5. Prüfen: Unter dem Feedback steht `Letzte Datei: <Dateiname>.txt`.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -208,3 +215,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Iterationsfokus: Default-Profile und Templates-Default-Archiv als sofort nutzbare Startbasis
 - Iterationsfokus: Dashboard 3 Textsammler mit titelbasierten Einzeilen-Dateien (Enter + Speichern, Anfügen mit Feedback)
 - Iterationsfokus: Dashboard 3 pro Zeile mit „Datei öffnen“-Button und sichtbarem Titel-Tooltip
+- Iterationsfokus: Dashboard 3 mit deaktiviertem Öffnen-Button bis Erstspeicherung plus Anzeige der letzten Datei je Zeile
