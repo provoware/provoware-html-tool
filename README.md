@@ -1,13 +1,14 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 3 (siehe `todo.txt`)
-- Offene Punkte: 12 (siehe `todo.txt`)
-- Fortschritt: 20%
+- Erledigte Punkte: 4 (siehe `todo.txt`)
+- Offene Punkte: 11 (siehe `todo.txt`)
+- Fortschritt: 27%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
   - `index.html` (Hauptoberfläche)
+  - `laienstart.html` (automatischer, transparenter Startpfad für Einsteiger)
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
   - `css/app.css`
@@ -33,11 +34,12 @@
   - `tests/start-files/start-import-resolution.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- `AGENTS.md` wurde stark fokussiert und laienfreundlich umgebaut.
-- Überholte Doku-Reste (sehr lange Historienblöcke) wurden aus `README.md` und `TOOL_TUTORIAL.md` entfernt.
-- `INDEX.md` wurde neu auf den aktuellen Stand gebracht.
+- Neue Datei `laienstart.html` ergänzt: prüft automatisch Kerndateien, zeigt Fortschritt/Status und bietet Auto-Korrektur mit Nutzerwahl per Dialog.
+- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Startpfad aktualisiert.
 
 ## Laien-Befehle (unten)
+- Empfohlener Start:
+  - `laienstart.html` im Browser öffnen
 - App lokal öffnen:
   - `index.html` im Browser öffnen
 - Kleiner Testlauf:
@@ -46,6 +48,6 @@
   - `node --test tests/start-files/start-import-resolution.test.js`
 
 ## Kurze Empfehlungsliste
-1. Erst immer `Ordner wählen`, dann `Selbsttest starten`.
-2. Bei Fehlern zuerst in `todo.txt` nach offenem Punkt suchen.
-3. Nur kleine, klar begründete Änderungen je Iteration machen.
+1. Für den sicheren Einstieg zuerst immer `laienstart.html` öffnen.
+2. In der Startseite bei Problemen die Option `Automatisch korrigieren` nutzen.
+3. Danach in der GUI `Ordner wählen` und `Selbsttest starten` ausführen.
