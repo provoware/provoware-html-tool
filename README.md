@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 14 (siehe `todo.txt`)
-- Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 88%
+- Erledigte Punkte: 15 (siehe `todo.txt`)
+- Offene Punkte: 1 (siehe `todo.txt`)
+- Fortschritt: 94%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -38,6 +38,7 @@
 - Dynamische Anpassung erweitert: Guide-Ansicht wechselt zwischen Split- und Stapelmodus je Fensterbreite.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` aktualisiert.
 - Offener Punkt „Altbestand“ in `todo.txt` zu einer klaren Kandidatenliste (ohne Sofortlöschung) konkretisiert.
+- Registry-Robustheit gezielt abgesichert: zusätzlicher Regressionstest prüft ID-Bereinigung und Fallback-Quelle ohne Umbau im Produktivcode.
 
 ## Wichtiger Hinweis zu Platzhaltern
 - `assets/css/base.css` und `assets/js/core.js` liegen im Projekt als Vorlagen-Stand.

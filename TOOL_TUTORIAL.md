@@ -75,3 +75,13 @@ Kurzregel: erst diesen Schnellcheck nutzen, dann breiter testen.
 2. Lokal `node --test` ausführen.
 3. Lokal JS-Syntaxcheck ausführen.
 4. Ziel: Basis-Workflows sind sofort nutzbar.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Registry-Ausfall sicher abfangen
+Wenn `data/module-registry.json` fehlt oder kaputt ist, arbeitet der Start mit einer Fallback-Liste weiter.
+
+Mini-Prüfung:
+1. `node --test tests/services/module-registry.test.js`
+2. Auf den Test für Fallback-Quelle und ID-Bereinigung achten.
+
+Kurzregel: Bei Registry-Problem erst diesen gezielten Test prüfen.
