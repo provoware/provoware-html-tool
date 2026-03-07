@@ -2,9 +2,9 @@
 P2 und P3 sauber abschließen und die nächsten offenen Punkte klein halten.
 
 ## Aktueller Fortschritt
-- Erledigte Punkte gesamt: 6
-- Offene Punkte gesamt: 2
-- Entwicklungsfortschritt: 75%
+- Erledigte Punkte gesamt: 7
+- Offene Punkte gesamt: 1
+- Entwicklungsfortschritt: 85%
 
 ## Priorisierte offene Punkte (geordnet)
 
@@ -15,18 +15,12 @@ P2 und P3 sauber abschließen und die nächsten offenen Punkte klein halten.
 - **Prüfschritt:** `manifest`, `config`, `texts`, `schema`, `logic` eindeutig vorhanden/beschrieben.
 - **Fertig-Kriterium:** Muster kann 1:1 für weitere Module kopiert werden.
 
-### P5 – Doku-Landkarte klein halten
-- **Problem:** Doku wächst schnell ohne klare Priorität.
-- **Patchgrund:** Kleine Doku hält Iterationen stabil.
-- **Nächster Schritt:** Nur verhaltensrelevante Doku aktiv pflegen (`README.md`, `todo.txt`, `AGENTS.md`, `TOOL_TUTORIAL.md`, `INDEX.md`).
-- **Prüfschritt:** Keine leeren Platzhalter-Dokus im Repo.
-- **Fertig-Kriterium:** Dokuumfang bleibt schlank und direkt nutzbar.
-
 ## Diese Iteration erledigt
 1. Arbeitspaket 1 minimal umgesetzt (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
 2. Startdateien mit klaren Ein-Satz-Zwecken in `README.md` dokumentiert.
 3. `TOOL_TUTORIAL.md` um eine kurze Offline-Start-Prüfung erweitert.
 4. `INDEX.md` auf den vollständigen aktuellen Dateistand aktualisiert.
+5. Startlogik robuster gemacht (`DOMContentLoaded`-Fallback in `assets/js/core.js`).
 
 ## Geparkte Folgepunkte (bewusst nicht Teil dieser Iteration)
 - Feingranulare Logging-Strategie für mehrere Logdateien.

@@ -1,4 +1,4 @@
-Stand: aktuell für diese Iteration.
+Stand: aktualisiert nach Robustheits-Optimierung im Startskript.
 
 ## Verzeichnisbaum (ohne `.git`)
 

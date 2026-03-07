@@ -19,3 +19,9 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
 1. Datei `index.html` direkt im Browser öffnen.
 2. Auf den Statustext achten: „Offline-Start aktiv. Basis geladen.“
 3. Wenn der Text sichtbar ist, ist der Minimalstart erfolgreich.
+
+## Robustheits-Check für Startstatus (neu)
+1. `index.html` normal im Browser öffnen.
+2. Seite einmal direkt neu laden (Strg+R).
+3. Prüfen, dass der Text weiterhin „Offline-Start aktiv. Basis geladen.“ zeigt.
+4. Ergebnis: Der Starttext bleibt stabil, auch wenn das DOM später fertig ist.

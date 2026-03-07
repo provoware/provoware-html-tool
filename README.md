@@ -1,9 +1,9 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 6
-- Offene Punkte gesamt: 2
-- Entwicklungsfortschritt: 75%
+- Erledigte Punkte gesamt: 7
+- Offene Punkte gesamt: 1
+- Entwicklungsfortschritt: 85%
 
 ## Aktuelle Toolstruktur und Toolumfang (fehlerfrei umgesetzt)
 - Steuerdateien:
@@ -17,9 +17,9 @@
   - `assets/css/base.css` (Basislayout und einfache Lesbarkeit)
   - `assets/js/core.js` (minimaler Startfluss mit Statusanzeige)
 - Umfang dieser Iteration:
-  - Arbeitspaket 1 minimal umgesetzt.
-  - Startdateien mit klarer Funktion angelegt.
-  - Doku- und Indexstand auf neuen Zustand aktualisiert.
+  - Robustere Startinitialisierung in `assets/js/core.js` umgesetzt.
+  - Statustext wird auch bei später DOM-Bereitschaft zuverlässig gesetzt.
+  - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
 
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
@@ -29,7 +29,7 @@
 ## Nächste Schritte (kurz)
 1. Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
 2. Startstruktur für Modul-Registrierung auf das Muster-Modul erweitern.
-3. P5 weiter klein halten und nur verhaltensrelevante Doku pflegen.
+3. Kleine Fehlerhinweise für fehlende Modulelemente ergänzen.
 
 ## Festgelegter Start-Scope
 - Offline-fähiger Start mit statischem Einstiegspunkt.
