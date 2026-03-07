@@ -583,6 +583,29 @@ body::before {
   font-variant-numeric: tabular-nums;
 }
 
+.templates-grid {
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+}
+
+#template-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+#template-list li > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.template-feedback {
+  min-height: 1.2rem;
+  color: var(--text-main);
+  margin: 8px 0;
+}
+
 .tile-left,
 .tile-center,
 .tile-right,

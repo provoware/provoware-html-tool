@@ -167,13 +167,38 @@
 
           <article class="module-panel module-panel-placeholder" data-panel="module-6">
             <header class="module-head">
-              <h3>Modul-Slot 6</h3>
+              <h3>Templates</h3>
               <div class="module-controls">
                 <button type="button" class="panel-control" title="Fensteroption">—</button>
                 <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
               </div>
             </header>
-            <div class="module-body"><p id="template-design-status">Freier Platz für aktives Modul.</p></div>
+            <div class="module-body">
+              <p id="template-design-status">-</p>
+              <input id="template-id" type="hidden" />
+              <div class="archive-input-grid templates-grid">
+                <label>Titel <input id="template-title" type="text" placeholder="Kurzname" /></label>
+                <label>Kategorie
+                  <select id="template-category">
+                    <option>Textbaustein</option>
+                    <option>Promptvorlage</option>
+                    <option>Arbeitsphrase</option>
+                  </select>
+                </label>
+              </div>
+              <label>Inhalt
+                <textarea id="template-content" rows="4" placeholder="Text einfügen"></textarea>
+              </label>
+              <div class="archive-transfer-actions">
+                <button id="template-save" class="btn-small btn-accent" type="button">Speichern</button>
+                <button id="template-clear" class="btn-small" type="button">Zurücksetzen</button>
+              </div>
+              <p id="template-feedback" class="template-feedback" aria-live="polite"></p>
+              <h4>Favoriten Schnellwahl</h4>
+              <div id="template-favorites" class="mix-quick"></div>
+              <h4>Vorlagenliste</h4>
+              <ul id="template-list" class="archive-events"></ul>
+            </div>
           </article>
 
           <article class="module-panel module-panel-placeholder" data-panel="module-7">

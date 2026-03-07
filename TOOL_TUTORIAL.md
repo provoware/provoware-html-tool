@@ -94,6 +94,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Danach auf **Export** und **Diagnose exportieren** klicken.
 5. Ziel: Alle Aktionen laufen unverändert, obwohl die Handler jetzt zentral in einem Service liegen.
 
+### Templates-Modul kurz prüfen (neu)
+1. Einen Ordner wählen.
+2. Im Modul **Templates** Titel, Kategorie und Inhalt eintragen.
+3. Auf **Speichern** klicken und prüfen, ob der Eintrag in der Vorlagenliste erscheint.
+4. Auf **☆** klicken und prüfen, ob oben bei **Favoriten Schnellwahl** ein Button entsteht.
+5. Auf den Favoriten-Button klicken und prüfen, ob ein kurzes Kopier-Feedback erscheint und nach wenigen Sekunden wieder verschwindet.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -134,8 +141,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Zusatz-Syntax: `node --check js/ui.js`
 - Zusatz-Syntax: `node --check js/state.js`
 - Zusatz-Syntax: `node --check js/services/ui-action-handlers.js`
+- Zusatz-Syntax: `node --check js/services/diagnosis-export.js`
+- Zusatz-Syntax: `node --check js/services/templates-archive.js`
+- Smoke-Test: `node --experimental-default-type=module --test tests/services/ui-action-handlers.smoke.test.js`
 - JSON prüfen: `python3 -m json.tool data/project-structure.json > /dev/null`
 
 ## Stand
 - Aktualisiert: 2026-03-07
 - Iterationsfokus: Default-Profile und Templates-Default-Archiv als sofort nutzbare Startbasis
+- Iterationsfokus: Diagnose-Service ausgelagert plus neues Templates-Modul mit Favoriten-Schnellwahl
