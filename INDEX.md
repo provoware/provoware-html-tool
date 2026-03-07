@@ -12,6 +12,7 @@
 - Diese Iteration verbessert den Genres-Zufallsgenerator (Anzahl wird auf 1 bis 20 geklammert).
 - Diese Iteration erweitert Default-Archive (Genres/Moods/Styles und Templates) für besseren Start ohne Leereinträge.
 - Diese Iteration ergänzt im Zufallsmix `usage.requested`/`usage.used` je Bereich für klare UI-Rückmeldung.
+- Diese Iteration ergänzt eine klare 3-Punkte-Lückenliste für ein laienperfektes Release (Assistent, Reparatur-Button, Release-Schnelltest).
 - Verzeichnisbaum und Dateiliste sind vollständig aktualisiert (ohne `.git`).
 
 ## Kompletter Verzeichnisbaum (ohne `.git`)

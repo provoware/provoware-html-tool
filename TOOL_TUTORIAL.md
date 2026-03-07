@@ -405,3 +405,12 @@ Mini-Check:
 3. Strg + Mausrad nutzen und auf die Anzeige "Schriftgröße: ...%" achten.
 
 Kurzregel: Für bessere Lesbarkeit zuerst Schriftgröße und dann Theme anpassen.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Laien-Release-Check in 3 Minuten
+Wenn du kurz prüfen willst, ob ein Release für Einsteiger passt, nutze diese Reihenfolge:
+1. `./start.sh --dry-run` (Startgrundlage prüfen).
+2. `node --test tests/start-files/start-import-resolution.test.js` (Startdateien konsistent).
+3. `bash scripts/minimal-check.sh` (kleiner Abschluss-Check).
+
+Kurzregel: Erst wenn alle drei Schritte ohne Fehler durchlaufen, ist der Stand releasebereit für den nächsten Team-Check.
