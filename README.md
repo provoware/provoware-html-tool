@@ -38,11 +38,9 @@
   - `tests/adapters/desktop-filesystem.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- Beim Start wird die lokale Schreibfreigabe jetzt einmal per Dialog abgefragt und als Entscheidung gemerkt.
-- Die Rechteprüfung fragt Schreibrechte nur noch dann aktiv an, wenn diese Entscheidung auf „Ja" steht.
-- `runStartupCheck` nutzt denselben Schreibwunsch, damit Startprüfung und Ordneraktion konsistent bleiben.
-- Neuer Test prüft, dass der Startup-Check den Schreibwunsch korrekt an die Rechteprüfung weitergibt.
-- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
+- Laienfreundliche Liste mit hilfreichen und weiterführenden GitHub Actions ergänzt.
+- Reihenfolge auf „erst Basis, dann Ausbau" gesetzt (kleiner Start, später erweitern).
+- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf diesen Stand aktualisiert.
 
 ## Laien-Befehle (unten)
 - Team-Start (empfohlen):
@@ -60,3 +58,5 @@
 1. Im Team immer zuerst `laienstart.html` nutzen, damit alle denselben transparenten Pfad sehen.
 2. Beim ersten Start die Schreibfrage bewusst beantworten; bei „Nein" läuft die App im sicheren Lesemodus.
 3. Erweiterungen nur in `data/laienstart-required-files.json` eintragen, nicht direkt im HTML.
+4. Für GitHub als Basis zuerst `ci.yml` (Tests), `lint.yml` (Code-Qualität) und `codeql.yml` (Sicherheitsanalyse) einführen.
+5. Danach optional `dependabot.yml` (Abhängigkeits-Updates) und ein Release-Workflow mit Tag + Artefakt hinzufügen.

@@ -10,16 +10,19 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Schreibrechte beim Start bewusst steuern
-1. Beim Start fragt ein Dialog, ob die App Schreibrechte anfragen soll.
-2. Deine Auswahl wird gemerkt (lokal im Browser-Speicher).
-3. Bei „Ja" kann die App später Dateien direkt schreiben.
-4. Bei „Nein" bleibt die App im Lesemodus, bis du die Einstellung änderst.
+### Hilfreiche GitHub Actions in klarer Reihenfolge
+1. **CI-Testlauf (`ci.yml`)**: startet bei Push/PR automatisch die wichtigen Tests.
+2. **Lint-Check (`lint.yml`)**: prüft Stil und typische Fehler früh.
+3. **CodeQL (`codeql.yml`)**: sucht Sicherheitsprobleme im Code.
+4. **Dependabot (`dependabot.yml`)**: erstellt Update-PRs für Abhängigkeiten.
+5. **Release-Workflow (`release.yml`)**: baut bei Tag ein Release-Artefakt.
 
-## Kurzer Rechte-Check
-1. `node --test tests/services/startup-check.test.js` ausführen.
-2. Prüfen, ob der Schreibwunsch korrekt weitergegeben wird.
-3. Ziel: Startdialog und Rechteprüfung arbeiten gleich.
+Kurzregel: erst 1–3 stabil betreiben, dann 4–5 ergänzen.
+
+## Kurzer Doku-Check
+1. Prüfen, ob die Action-Reihenfolge für Einsteiger verständlich ist.
+2. Prüfen, ob jeder Begriff kurz erklärt ist.
+3. Ziel: schneller Start ohne CI-Vorwissen.
 
 ## Kurzer Startdatei-Check
 1. `node --test tests/start-files/start-import-resolution.test.js` ausführen.
