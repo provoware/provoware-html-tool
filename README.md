@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 31 (siehe `todo.txt`)
+- Erledigte Punkte: 32 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Selftest-Robustheit wurde mit kleinem Eingriff erweitert (Adapter-IO im `runProjectSelftest` nutzt jetzt ein sicheres `safeCall`-Muster mit konsistenten Fehlercodes wie im Startup-Check).
+- Stand dieser Iteration: Header-Hinweis wurde mit kleinem Robustheits-Patch auf reine Textausgabe umgestellt (kein `innerHTML` für `next-step`), plus gezielter Injection-Test für `<img>/<script>` im Header.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -143,6 +143,9 @@
 - Neu: 4‑Schritt‑Assistent im Dashboard ergänzt (mit klarer Schritt-Erklärung und direktem „Jetzt ausführen“-Knopf pro aktuellem Schritt).
 - Neu: Ein-Befehl-Release-Standard festgezogen: `bash scripts/minimal-check.sh` gilt als fester Abschluss mit klarer Auswertung „Bestanden/Nicht bestanden“.
 
+- Header-Hinweis jetzt ohne HTML-Interpretation: `next-step` setzt nur noch Text (`textContent`) und verhindert damit Markup-Ausführung aus Nutztexten.
+- Neuer gezielter Header-Injection-Test: `<img onerror=...>` und `<script>...` bleiben im `next-step` sichtbar als Text.
+
 
 ## Iterations-Update: Barrierefreiheit + Hilfe (minimal)
 - Guide-Bereich hat jetzt einen zusätzlichen Hilfehinweis für die Alternative ohne Drag&Drop (Nach oben/Nach unten).
@@ -159,9 +162,9 @@ Ja, ein kleines Versionssystem mit Registry ist sinnvoll – aber nur als Minima
 
 
 ## Feste PR-Checkliste (Sicherheits-Checkpunkt)
-- [ ] Keine ungeprüfte Nutzung von `innerHTML`/`insertAdjacentHTML` mit Nutzdaten.
-- [ ] Bei HTML-String-Rendering nur zentralen Helper `js/services/html-escape.js` nutzen.
-- [ ] Bei neuen dynamischen Listen mindestens 1 Injection-Test ergänzen (z. B. `<img onerror=...>` oder `<script>...`) und „nur Text sichtbar" prüfen.
+- [x] Keine ungeprüfte Nutzung von `innerHTML`/`insertAdjacentHTML` mit Nutzdaten.
+- [x] Bei HTML-String-Rendering nur zentralen Helper `js/services/html-escape.js` nutzen.
+- [x] Bei neuen dynamischen Listen mindestens 1 Injection-Test ergänzen (z. B. `<img onerror=...>` oder `<script>...`) und „nur Text sichtbar" prüfen.
 
 ## Feste Regeln für Bezeichnungen und Hilfselemente
 - Fehlercodes:

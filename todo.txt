@@ -15,6 +15,8 @@
 [x] 2026-03-07 | Services (direkt betroffen) | Import-/Export-Konsistenz der direkt betroffenen Services vollständig gegen reale Nutzung prüfen | prüfen: Exporte gegen Importe in `js/app.js` und direkten Services abgleichen + gezielter Test `tests/services/import-export-consistency.test.js` | fertig wenn: keine ungenutzten/fehlenden Exporte in der Kette
 [x] 2026-03-07 | README.md | README-Status weiter an realen Projektzustand angleichen, falls an anderen Stellen noch Vollständigkeit suggeriert wird | prüfen: Statusabschnitt und Offene-Punkte-Abschnitt gegen `todo.txt` lesen | fertig wenn: keine falsche „alles fertig“-Aussage mehr
 
+[x] 2026-03-07 | js/renderers/ui-header-renderer.js + tests/services/ui-header-chips.test.js | Header-Hinweis ohne `innerHTML` ausgeben und Injection-Payload im Header-Test absichern | prüfen: `node --test tests/services/ui-header-chips.test.js` | fertig wenn: `next-step` nutzt nur Textausgabe und Test deckt `<img>/<script>` als reinen Text ab
+
 [x] 2026-03-07 | scripts/laienstart.sh + Startkette | Linux-Rechteprüfung, Projektordner-Schreibcheck, freie-Port-Alternative und fehlerfreier GUI-Start als eigene robuste Startroutine ergänzen | prüfen: Dry-Run + Start mit belegtem Port + Start ohne Schreibrechte simulieren | fertig wenn: Start wählt freien Port automatisch, meldet Rechteprobleme klar und startet GUI ohne manuellen Eingriff
 
 [x] 2026-03-07 | css/app.css | Farbwelt von warm-oliv auf kühl-blau/grau näher an Designvorlage verschieben (nur Token/Verläufe) | prüfen: visueller Vorher/Nachher-Abgleich + Kontrastcheck der Haupttexte | fertig wenn: Grundflächen klar blau/grau wirken und Lesbarkeit stabil bleibt
