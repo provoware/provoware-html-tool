@@ -25,7 +25,19 @@ Die offenen Punkte aus der früheren Grobplanung in eine kleine, umsetzbare Reih
 ### P2 – Umsetzungsphasen in kleine Arbeitspakete schneiden
 - **Problem:** Die bisherigen Phasen sind groß und technisch überladen.
 - **Patchgrund:** Kleine Pakete reduzieren Risiko und erlauben gezielte Endvalidierung.
-- **Nächster Schritt:** Jede Phase in maximal 3 konkrete Pakete teilen.
+- **Nächster Schritt:** In genau 3 sequenzielle Pakete aufteilen und sofort abarbeitbar machen.
+- **Arbeitspaket 1:** Startstruktur minimal anlegen (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
+  - Ziel: Offline-Startpunkt und sichtbares Dashboard-Skelett bereitstellen.
+  - Betroffene Dateien: nur die drei Startdateien.
+  - Abgrenzung: Keine Moduldateien, kein Logging, keine Exportfunktionen.
+- **Arbeitspaket 2:** Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
+  - Ziel: Einheitliche Modul-Basis mit `manifest`, `config`, `texts`, `schema`, `logic`.
+  - Betroffene Dateien: nur Modulordner und zugehörige Dateien.
+  - Abgrenzung: Keine weiteren Module, keine Sonderlogik im Core.
+- **Arbeitspaket 3:** Core-Registrierung für genau ein Modul verbinden.
+  - Ziel: Startfluss + Modulregistrierung funktional und klein halten.
+  - Betroffene Dateien: `assets/js/core.js` + Modul-Manifest (falls nötig).
+  - Abgrenzung: Keine dynamischen Loader-Ausbauten, keine zusätzlichen UI-Seiten.
 - **Prüfschritt:** Jedes Paket hat Ziel, betroffene Dateien und klare Abgrenzung.
 - **Fertig-Kriterium:** Es gibt eine sequenzielle Liste, die ohne Nebenarbeiten abgearbeitet werden kann.
 
