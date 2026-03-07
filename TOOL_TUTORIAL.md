@@ -10,12 +10,12 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Startcheck ohne HTML-Änderung erweitern
-1. Datei `data/laienstart-required-files.json` öffnen.
-2. In `requiredFiles` neue Pfade ergänzen (z. B. `./data/themes.json`).
-3. `laienstart.html` neu laden.
-4. Ziel: Die neue Datei wird direkt im Startcheck geprüft.
-5. Hinweis: Wenn die JSON-Datei fehlt, nutzt der Start eine sichere Fallback-Liste.
+### Selbsttest besser lesen (Ordner vs. Schreiben)
+1. `Selbsttest starten` ausführen.
+2. Prüfen: Ordnerstatus zeigt jetzt nur, ob der Ordner lesbar/verfügbar ist.
+3. Optional: Schreibtest separat aktivieren (`runWriteTest`), wenn du Schreiben prüfen willst.
+4. Ziel: Du siehst klarer, ob nur Schreiben fehlt oder ob der Ordner selbst fehlt.
+5. Hinweis: Es werden keine `.probe`-Dateien mehr für die Ordnerprüfung erzeugt.
 
 ## Kurzer Modul-Check
 1. `node --test tests/services/module-registry.test.js` ausführen.
