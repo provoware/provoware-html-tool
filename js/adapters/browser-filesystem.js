@@ -40,17 +40,18 @@ export const browserFilesystemAdapter = {
     }
   },
 
-  checkPermissions: async () => {
+  checkPermissions: async (options = {}) => {
     if (!rootHandle) {
       return response(false, 'NO_DIRECTORY', 'Kein Projektordner gewählt.');
     }
     try {
+      const requestWrite = options.requestWrite === true;
       const readState = await rootHandle.queryPermission({ mode: 'read' });
       let writeState = await rootHandle.queryPermission({ mode: 'readwrite' });
       if (readState !== 'granted') {
         await rootHandle.requestPermission({ mode: 'read' });
       }
-      if (writeState !== 'granted') {
+      if (requestWrite && writeState !== 'granted') {
         writeState = await rootHandle.requestPermission({ mode: 'readwrite' });
       }
       const read = readState === 'granted' || (await rootHandle.queryPermission({ mode: 'read' })) === 'granted';

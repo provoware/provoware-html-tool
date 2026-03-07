@@ -21,6 +21,7 @@ import {
 } from './services/templates-archive.js';
 
 const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
+const WRITE_PERMISSION_CHOICE_KEY = 'provoware:write-permission-choice';
 const DEFAULT_PROFILE = 'HardTechno';
 
 const readRememberedDirectoryName = () => {
@@ -37,6 +38,37 @@ const storeRememberedDirectoryName = (name) => {
   } catch {
     // Speicher kann je nach Browser-Einstellung blockiert sein.
   }
+};
+
+
+const readWritePermissionChoice = () => {
+  try {
+    const raw = window.localStorage.getItem(WRITE_PERMISSION_CHOICE_KEY);
+    if (raw === 'allow') return true;
+    if (raw === 'deny') return false;
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+const storeWritePermissionChoice = (allowWrite) => {
+  try {
+    window.localStorage.setItem(WRITE_PERMISSION_CHOICE_KEY, allowWrite ? 'allow' : 'deny');
+  } catch {
+    // Speicher kann je nach Browser-Einstellung blockiert sein.
+  }
+};
+
+const resolveWritePermissionChoiceAtStartup = () => {
+  const remembered = readWritePermissionChoice();
+  if (remembered !== null) {
+    return remembered;
+  }
+
+  const allowWrite = window.confirm('Soll die App beim Ordnerstart auch Schreibrechte anfragen? Empfehlung: Ja, wenn Struktur ergänzt oder Daten gespeichert werden sollen.');
+  storeWritePermissionChoice(allowWrite);
+  return allowWrite;
 };
 
 const applyLoadedData = (bundle) => {
@@ -174,7 +206,7 @@ const copyToClipboardSafe = async (text) => {
   }
 };
 
-const selectDirectory = async () => {
+const selectDirectory = async (allowWritePermission) => {
   const selected = await filesystemAdapter.selectProjectDirectory();
   logEvent(selected.ok ? 'INFO' : 'WARN', selected.code, selected.message, selected.data);
   if (!selected.ok) return;
@@ -182,14 +214,14 @@ const selectDirectory = async () => {
   setState({ selectedProjectDirectory: selected.data, rememberedProjectDirectoryName: selected.data?.name || null });
   if (selected.data?.name) storeRememberedDirectoryName(selected.data.name);
 
-  const permissions = await filesystemAdapter.checkPermissions();
+  const permissions = await filesystemAdapter.checkPermissions({ requestWrite: allowWritePermission === true });
   if (permissions.ok) {
     setState({ permissionStatus: permissions.data });
   }
   await runSelftest(false);
   await loadProfileArchive();
 
-  const start = await runStartupCheck(window.appState.projectStructure);
+  const start = await runStartupCheck(window.appState.projectStructure, { requestWrite: allowWritePermission === true });
   setState({ debug: { startupReady: start.ok } });
   logEvent(start.ok ? 'INFO' : 'WARN', start.code, start.message, start.data);
 };
@@ -211,10 +243,15 @@ const init = async () => {
     render();
   });
 
+  const allowWritePermission = filesystemAdapter.mode === 'browser'
+    ? resolveWritePermissionChoiceAtStartup()
+    : false;
+
   const loaded = await loadAllConfig();
   applyLoadedData(loaded.data);
   setState({
     rememberedProjectDirectoryName: readRememberedDirectoryName(),
+    writePermissionChoice: allowWritePermission,
     selectedProfile: DEFAULT_PROFILE,
     profileArchive: createDefaultArchive(),
     profileStats: buildStats(createDefaultArchive(), DEFAULT_PROFILE),
@@ -233,7 +270,7 @@ const init = async () => {
   bindUiActions(createUiActionHandlers({
     getState: () => window.appState,
     setState,
-    selectDirectory,
+    selectDirectory: () => selectDirectory(allowWritePermission),
     runSelftest,
     ensureStructure,
     buildDiagnosisExport: () => buildDiagnosisExport(window.appState),
@@ -245,7 +282,7 @@ const init = async () => {
 
   await loadTemplateArchive();
 
-  const start = await runStartupCheck(loaded.data.projectStructure);
+  const start = await runStartupCheck(loaded.data.projectStructure, { requestWrite: allowWritePermission === true });
   setState({ debug: { startupReady: start.ok } });
   logEvent(start.ok ? 'INFO' : 'WARN', start.code, start.message, start.data);
 

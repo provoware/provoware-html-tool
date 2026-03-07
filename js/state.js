@@ -5,6 +5,7 @@ const createState = () => ({
   projectStructure: null,
   selectedProjectDirectory: null,
   rememberedProjectDirectoryName: null,
+  writePermissionChoice: false,
   permissionStatus: { read: false, write: false, class: 'unknown' },
   selftestResult: null,
   layoutMode: 'standard',

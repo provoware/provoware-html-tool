@@ -1,6 +1,6 @@
 import { filesystemAdapter } from '../adapters/filesystem-adapter.js';
 
-export const runStartupCheck = async (projectStructure) => {
+export const runStartupCheck = async (projectStructure, options = {}) => {
   const directoryInfo = await filesystemAdapter.getDirectoryInfo();
   if (!directoryInfo.ok) {
     return {
@@ -11,7 +11,7 @@ export const runStartupCheck = async (projectStructure) => {
     };
   }
 
-  const permission = await filesystemAdapter.checkPermissions();
+  const permission = await filesystemAdapter.checkPermissions({ requestWrite: options.requestWrite === true });
   if (!permission.ok) {
     return {
       ok: false,

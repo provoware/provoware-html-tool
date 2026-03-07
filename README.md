@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 10 (siehe `todo.txt`)
-- Offene Punkte: 5 (siehe `todo.txt`)
-- Fortschritt: 67%
+- Erledigte Punkte: 9 (siehe `todo.txt`)
+- Offene Punkte: 7 (siehe `todo.txt`)
+- Fortschritt: 56%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -33,13 +33,15 @@
   - `tests/services/module-registry.test.js`
   - `tests/services/project-selftest.test.js`
   - `tests/services/ui-action-handlers.smoke.test.js`
+  - `tests/services/startup-check.test.js`
   - `tests/start-files/start-import-resolution.test.js`
   - `tests/adapters/desktop-filesystem.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- Desktop-Stub-Adapter gibt jetzt klarere Hinweise: was fehlt und was der nächste Schritt ist.
-- `runProjectSelftest` im Desktop-Stub akzeptiert jetzt bewusst Optionen für eine konsistente Adapter-Signatur.
-- Neuer direkter Test prüft die klare Fehlermeldung samt `nextStep`.
+- Beim Start wird die lokale Schreibfreigabe jetzt einmal per Dialog abgefragt und als Entscheidung gemerkt.
+- Die Rechteprüfung fragt Schreibrechte nur noch dann aktiv an, wenn diese Entscheidung auf „Ja" steht.
+- `runStartupCheck` nutzt denselben Schreibwunsch, damit Startprüfung und Ordneraktion konsistent bleiben.
+- Neuer Test prüft, dass der Startup-Check den Schreibwunsch korrekt an die Rechteprüfung weitergibt.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
 
 ## Laien-Befehle (unten)
@@ -50,11 +52,11 @@
 - Startcheck-Dateiliste anpassen:
   - `data/laienstart-required-files.json` bearbeiten
 - Kleiner Testlauf:
-  - `node --test tests/services/module-registry.test.js`
+  - `node --test tests/services/startup-check.test.js`
 - Startdatei-Check:
   - `node --test tests/start-files/start-import-resolution.test.js`
 
 ## Kurze Empfehlungsliste
 1. Im Team immer zuerst `laienstart.html` nutzen, damit alle denselben transparenten Pfad sehen.
-2. Erweiterungen nur in `data/laienstart-required-files.json` eintragen, nicht direkt im HTML.
-3. Bei Problemen zuerst **Automatisch korrigieren** starten, danach in der GUI `Ordner wählen` und `Selbsttest starten`.
+2. Beim ersten Start die Schreibfrage bewusst beantworten; bei „Nein" läuft die App im sicheren Lesemodus.
+3. Erweiterungen nur in `data/laienstart-required-files.json` eintragen, nicht direkt im HTML.
