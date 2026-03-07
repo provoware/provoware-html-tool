@@ -8,5 +8,6 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   if (!nextStep) return;
   const startupReady = state.debug?.startupReady;
   const nextMessage = startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || '';
-  nextStep.innerHTML = `<strong>${messages.actionNext || 'Nächster Schritt'}:</strong> ${autoFormatText(nextMessage)}`;
+  const label = messages.actionNext || 'Nächster Schritt';
+  nextStep.textContent = `${label}: ${autoFormatText(nextMessage)}`;
 };

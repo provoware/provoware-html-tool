@@ -502,3 +502,10 @@ Kurzer Prüfschritt:
 1. `./start.sh --dry-run` ausführen.
 2. Erwartung: `OK: Alle Pflichtdateien sind vorhanden.` oder einzelne klare Dateiwarnungen (je Datei eine Zeile).
 3. Nicht mehr erwartet: eine einzige Warnung mit zusammengeklebter Liste wie `index.html\n./css/app.css...`.
+
+
+## Mini-Erweiterung dieser Iteration: Header-Hinweis sicher halten
+1. Der Hinweis `next-step` wird nur als Text gesetzt (`textContent`).
+2. Grund: Nutztexte dürfen kein HTML im Browser ausführen.
+3. Kurzcheck: `node --test tests/services/ui-header-chips.test.js` ausführen.
+4. Erwartung: `<img ...>` und `<script>...` erscheinen nur als Text im Hinweis.

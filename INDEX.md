@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration stellt den Header-Hinweis (`next-step`) auf reine Textausgabe um und ergänzt einen Injection-Test für `<img>/<script>` im Header-Rendering.
 - Diese Iteration stärkt den Startup-Check: Laufzeitfehler werden mit klaren Codes gemeldet, und ungültige Projektstruktur wird per Self-Repair auf sichere Defaults gesetzt.
 - Diese Iteration stärkt den Projekt-Selbsttest: Adapter-IO in `runProjectSelftest` nutzt jetzt safeCall je Schritt und liefert konsistente `SELFTEST_*_THREW`-Fehlercodes.
 - Diese Iteration behebt den Dry-Run-Parsingfehler bei Pflichtdateien: keine Sammelwarnung mit `\n`, stattdessen klare Einzelauswertung pro Datei.
