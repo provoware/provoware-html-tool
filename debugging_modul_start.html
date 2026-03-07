@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debugging-Modul - Einzelstart</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; line-height: 1.4; }
+      input, select { padding: 0.45rem; margin-bottom: 0.6rem; }
+      button { padding: 0.5rem 0.8rem; }
+      pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
+    </style>
+    <script type="application/json" id="start-file-standard">
+      {"modulePath":"./modules/debugging_modul/logic.js","expectedExports":["createDebugSession","addDebugEvent","summarizeDebugSession"]}
+    </script>
+  </head>
+  <body>
+    <main aria-labelledby="page-title">
+      <h1 id="page-title">Debugging-Modul (Einzelstart)</h1>
+      <p>Session anlegen, Event ergänzen, Zusammenfassung prüfen.</p>
+      <label for="event-name">Event-Name</label>
+      <input id="event-name" type="text" value="DEBUG_CHECK" maxlength="80" />
+      <label for="event-level">Level</label>
+      <select id="event-level">
+        <option value="info">info</option>
+        <option value="warn">warn</option>
+        <option value="error">error</option>
+      </select>
+      <button id="add" type="button">Event ergänzen</button>
+      <pre id="out" role="status" aria-live="polite">Bereit.</pre>
+    </main>
+
+    <script type="module">
+      import { createDebugSession, addDebugEvent, summarizeDebugSession } from './modules/debugging_modul/logic.js';
+
+      const out = document.getElementById('out');
+      let session = createDebugSession('Einzelstart-Test');
+
+      document.getElementById('add').addEventListener('click', () => {
+        const name = document.getElementById('event-name').value;
+        const level = document.getElementById('event-level').value;
+        session = addDebugEvent(session, { name, level, details: 'Klicktest aus Startdatei' });
+        out.textContent = JSON.stringify({ session, summary: summarizeDebugSession(session) }, null, 2);
+      });
+    </script>
+  </body>
+</html>

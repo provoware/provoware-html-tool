@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 71
+- Erledigte Punkte: 72
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 98% (laufend, siehe `todo.txt`)
+- Fortschritt: 99% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -11,10 +11,14 @@
   - `css/app.css`
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
 - Modul-Einzelstarts (ohne Haupttool):
+  - `backup_funktions_modul_start.html`
   - `datenbank_baukasten_start.html`
+  - `debugging_modul_start.html`
+  - `logging_modul_start.html`
   - `todo_kalender_erinnerung_start.html`
   - `wiki_notiz_wissen_start.html`
-  - Je Startdatei jetzt mit kleinen Import-/Export-Buttons für Soforttests mit echten JSON-Daten.
+  - Globaler Standard je Startdatei: `<script id="start-file-standard" type="application/json">` mit `modulePath` und `expectedExports`.
+  - Startseiten sind direkt klickbar testbar und geben Statusmeldungen mit `aria-live` aus.
 - Adapter-Layer:
   - `js/adapters/filesystem-adapter.js`
   - `js/adapters/browser-filesystem.js`
@@ -48,7 +52,7 @@
 
 - Tests:
   - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
-  - `tests/start-files/start-import-resolution.test.js` (prüft nur, ob alle `*_start.html`-Modulimporte auflösbar sind)
+  - `tests/start-files/start-import-resolution.test.js` (prüft Import-Auflösung und erwartete Export-Funktionen laut `start-file-standard`)
 
 ## Erledigte Kernpunkte
 - Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.

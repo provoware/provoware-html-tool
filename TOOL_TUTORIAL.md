@@ -259,3 +259,11 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Iterationsfokus: Dashboard 3 pro Zeile mit „Datei öffnen“-Button und sichtbarem Titel-Tooltip
 - Iterationsfokus: Dashboard 3 mit deaktiviertem Öffnen-Button bis Erstspeicherung plus Anzeige der letzten Datei je Zeile
 - Iterationsfokus: Kompakteres, kontrastreicheres Layout mit proportionaler Skalierung per Strg + Mausrad
+
+### Startdatei-Standard für alle Module (neu)
+1. Lege im Projektordner eine Datei `modulname_start.html` an.
+2. Hinterlege im `<head>` diesen JSON-Block:
+   - `<script id="start-file-standard" type="application/json">{"modulePath":"./modules/<modul>/logic.js","expectedExports":["create...","add..."]}</script>`
+3. Nutze im `<body>` mindestens eine kleine Klick-Aktion (Button), damit das Modul sofort testbar ist.
+4. Nutze für Ausgaben `role="status"` und `aria-live="polite"` für bessere Barrierefreiheit.
+5. Danach Test ausführen: `node --test tests/start-files/start-import-resolution.test.js`.

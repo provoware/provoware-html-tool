@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backup-Funktions-Modul - Einzelstart</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 1rem; line-height: 1.4; }
+      textarea { width: 100%; min-height: 120px; max-width: 760px; padding: 0.45rem; margin-bottom: 0.6rem; }
+      button { padding: 0.5rem 0.8rem; }
+      pre { background: #f3f5f7; padding: 0.8rem; border-radius: 8px; overflow: auto; }
+    </style>
+    <script type="application/json" id="start-file-standard">
+      {"modulePath":"./modules/backup_funktions_modul/logic.js","expectedExports":["createBackupPayload","importBackupPayload"]}
+    </script>
+  </head>
+  <body>
+    <main aria-labelledby="page-title">
+      <h1 id="page-title">Backup-Funktions-Modul (Einzelstart)</h1>
+      <p>Backup erstellen und wieder einlesen, ohne Haupttool.</p>
+      <button id="create" type="button">Backup erzeugen</button>
+      <button id="import" type="button">Backup einlesen</button>
+      <label for="json-input">Backup-JSON</label>
+      <textarea id="json-input" placeholder="Hier JSON einfügen..."></textarea>
+      <pre id="out" role="status" aria-live="polite">Bereit.</pre>
+    </main>
+
+    <script type="module">
+      import { createBackupPayload, importBackupPayload } from './modules/backup_funktions_modul/logic.js';
+
+      const out = document.getElementById('out');
+      const input = document.getElementById('json-input');
+
+      document.getElementById('create').addEventListener('click', () => {
+        const result = createBackupPayload({
+          moduleId: 'backup_funktions_modul',
+          data: { demo: true, updatedAt: new Date().toISOString() }
+        });
+        const json = JSON.stringify(result.payload, null, 2);
+        input.value = json;
+        out.textContent = json;
+      });
+
+      document.getElementById('import').addEventListener('click', () => {
+        const result = importBackupPayload(input.value);
+        out.textContent = JSON.stringify(result, null, 2);
+      });
+    </script>
+  </body>
+</html>
