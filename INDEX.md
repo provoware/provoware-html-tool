@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: konkrete Maßnahmen für Robustheit und Einheitlichkeit (Fehlercodes, Antwortformat, Mini-Checks)
+- Iterationsfokus: kleine Layout-Vereinheitlichung plus neue Archiv-Übersicht für besseres Nutzerhandling
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/

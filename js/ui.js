@@ -30,6 +30,14 @@ const formatStatusWord = (value) => {
   return normalized ? normalized.toLowerCase() : '-';
 };
 
+const formatDateTime = (value) => {
+  const text = String(value || '').trim();
+  if (!text) return '-';
+  const parsed = new Date(text);
+  if (Number.isNaN(parsed.getTime())) return '-';
+  return parsed.toLocaleString('de-DE');
+};
+
 const setText = (id, text) => {
   const node = byId(id);
   if (node) node.textContent = text;
@@ -576,6 +584,9 @@ export const render = () => {
   setText('status-last-test', autoFormatText(state.selftestResult?.summary || '-'));
   setText('status-overall', formatOverallStatus(state.selftestResult?.overallStatus || 'red'));
   setText('status-layout', state.layoutMode || '-');
+  setText('archive-overview-profile', state.selectedProfile || '-');
+  setText('archive-overview-total', String(state.profileStats?.total ?? '-'));
+  setText('archive-overview-updated', formatDateTime(state.profileArchive?.updatedAt));
   const quietModeToggle = byId('a11y-quiet-mode');
   if (quietModeToggle) quietModeToggle.checked = Boolean(state.a11yQuietMode);
 
@@ -654,6 +665,13 @@ export const render = () => {
   const archiveEvents = byId('archive-events');
   if (archiveEvents) {
     archiveEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 6).map((item) => `<li><span>${item.timestamp.slice(11, 19)}</span> ${autoFormatText(item.message)}</li>`).join('');
+  }
+
+  const archiveOverviewEvents = byId('archive-overview-events');
+  if (archiveOverviewEvents) {
+    archiveOverviewEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 4)
+      .map((item) => `<li><span class="log-time">${item.timestamp.slice(11, 19)}</span>${autoFormatText(item.message)}</li>`)
+      .join('') || '<li>Keine Archiv-Meldungen.</li>';
   }
 
   const logList = byId('log-list');
