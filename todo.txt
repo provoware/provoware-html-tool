@@ -1,8 +1,8 @@
 ## Ziel der aktuellen Iteration
-P4 sauber abschließen und das Muster-Modul verbindlich machen.
+Neues Modul „Todo-Liste mit Kalenderfunktion und Erinnerung“ minimal und stabil ergänzen.
 
 ## Aktueller Fortschritt
-- Erledigte Punkte gesamt: 8
+- Erledigte Punkte gesamt: 11
 - Offene Punkte gesamt: 0
 - Entwicklungsfortschritt: 100%
 
@@ -10,18 +10,13 @@ P4 sauber abschließen und das Muster-Modul verbindlich machen.
 - Aktuell keine offenen Pflichtpunkte.
 
 ## Diese Iteration erledigt
-1. Arbeitspaket 1 minimal umgesetzt (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
-2. Startdateien mit klaren Ein-Satz-Zwecken in `README.md` dokumentiert.
-3. `TOOL_TUTORIAL.md` um eine kurze Offline-Start-Prüfung erweitert.
-4. `INDEX.md` auf den vollständigen aktuellen Dateistand aktualisiert.
-5. Startlogik robuster gemacht (`DOMContentLoaded`-Fallback in `assets/js/core.js`).
-6. Verbindungsstatus im Startskript robust gemacht (online/offline-Events).
-1. Modulstandard `datenbank_baukasten` mit `manifest`, `config`, `texts`, `schema`, `logic` angelegt.
-2. Startstruktur im Core um eine minimale Modul-Registrierung erweitert.
-3. Kleinen Robustheits-Hinweis für unvollständige Modulteile ergänzt.
-4. `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
+1. Dashboard um den Bereich „Todo-Liste mit Kalenderfunktion“ erweitert.
+2. Neue Formulareingaben für Aufgabe, Fälligkeitsdatum und Erinnerung ergänzt.
+3. Kernlogik für Aufgabenliste und Erinnerungsmarkierung eingebaut.
+4. Neues Modul `todo_kalender_erinnerung` mit allen Mindestdateien angelegt.
+5. `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf neuen Stand gebracht.
 
 ## Geparkte Folgepunkte (bewusst nicht Teil dieser Iteration)
-- Dynamische Modulerkennung aus Verzeichnissen.
-- Erweiterte Validierung je Dateiinhalt im Modul.
-- Detailliertes Logging je Modul-Ladevorgang.
+- Persistenz der Aufgaben über Browser-Neustart.
+- Filter und Sortierung für größere Listen.
+- Optional Browser-Notification bei aktiver Freigabe.

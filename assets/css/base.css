@@ -17,6 +17,8 @@ body {
 
 .dashboard {
   margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
 }
 
 .card {
@@ -24,4 +26,38 @@ body {
   border: 1px solid #d1d5db;
   border-radius: 8px;
   padding: 1rem;
+}
+
+.todo-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.todo-form label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.todo-form input,
+.todo-form button {
+  padding: 0.5rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.todo-form button {
+  background: #1d4ed8;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.todo-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.todo-list li {
+  margin: 0.35rem 0;
 }

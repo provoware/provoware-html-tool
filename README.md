@@ -1,7 +1,7 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 10
+- Erledigte Punkte gesamt: 11
 - Offene Punkte gesamt: 0
 - Entwicklungsfortschritt: 100%
 
@@ -14,45 +14,40 @@
   - `INDEX.md` (aktueller Verzeichnisbaum + Dateiliste)
 - Startdateien:
   - `index.html` (offline ladbarer Einstieg mit Dashboard-Skelett)
-  - `assets/css/base.css` (Basislayout und einfache Lesbarkeit)
-  - `assets/js/core.js` (Startfluss mit Statusanzeige und Modul-Check)
-- Modul-Muster:
-  - `modules/datenbank_baukasten/manifest.json`
-  - `modules/datenbank_baukasten/config.json`
-  - `modules/datenbank_baukasten/texts.json`
-  - `modules/datenbank_baukasten/schema.json`
-  - `modules/datenbank_baukasten/logic.js`
+  - `assets/css/base.css` (Basislayout und Formularstil)
+  - `assets/js/core.js` (Startfluss, Modul-Check und Todo-Logik)
+- Module:
+  - `modules/datenbank_baukasten/*` (Muster-Modul)
+  - `modules/todo_kalender_erinnerung/*` (Todo, Kalenderdatum, Erinnerung)
 - Umfang dieser Iteration:
-  - Modulprofil im Core gegen Fehlkonfiguration gehärtet (fehlende und unerwartete Teile).
-  - Modulvorgaben im Core per `Object.freeze` gegen Laufzeit-Manipulation stabilisiert.
-  - `index.html` hat jetzt eine enge CSP (Sicherheitsrichtlinie) gegen unnötige Skriptquellen.
+  - Neues Modul `todo_kalender_erinnerung` mit allen Mindestteilen angelegt.
+  - Dashboard um eine einfache Todo-Liste mit Fälligkeitsdatum und Erinnerungszeit erweitert.
+  - Reminder-Markierung ergänzt (nach Erreichung der Erinnerungszeit).
   - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
 
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
-- Dashboard-Skelett ist als stabile Basis vorhanden.
-- Basis-Statuswechsel im JavaScript-Core ist aktiv und reagiert auf Verbindungswechsel.
-- Modulprofil-Check arbeitet jetzt konsistent und meldet Fehlkonfiguration klar.
-- CSP-Basisschutz ist aktiv und begrenzt erlaubte Inhaltsquellen.
+- Modulprofil-Check prüft jetzt zwei Modulprofile konsistent.
+- Todo-Eingabe ist direkt im Dashboard nutzbar.
+- Aufgaben zeigen Fälligkeitsdatum und Erinnerungszeit.
+- Erreichte Erinnerungen werden in der Liste markiert.
 
 ## Nächste Schritte (kurz)
-1. Optional zweites Modul nach gleichem Muster testen.
-2. Modul-Liste später von statisch auf dynamisch umstellen.
-3. Fehlhinweise je Moduldatei bei Bedarf weiter verfeinern.
+1. Aufgaben lokal speichern (z. B. `localStorage`), damit sie nach Neustart bleiben.
+2. Kleine Filter ergänzen (heute, diese Woche, erledigt).
+3. Optional später Browser-Hinweis (Notification API) ergänzen.
 
 ## Festgelegter Start-Scope
 - Offline-fähiger Start mit statischem Einstiegspunkt.
 - Dashboard-Skelett als minimale UI-Basis.
 - Schlanker JavaScript-Core für Startfluss und Modul-Registrierung.
-- Ein Modul-Muster: `datenbank_baukasten`.
 - Modul-Mindestteile: `manifest`, `config`, `texts`, `schema`, `logic`.
 - Start-Dokumentation nur in `README.md` und `todo.txt`.
 
 ## Empfehlungsliste (kurz)
-- Bei neuen Modulen nur bekannte Dateischlüssel zulassen, damit der Profil-Check klar bleibt.
-- CSP nur gezielt lockern, wenn es einen konkreten Funktionsgrund gibt.
-- Verbindungsstatus-Texte in einfacher Sprache beibehalten.
-- Erst bei mehreren Modulen auf automatische Verzeichnis-Leselogik erweitern.
+- Erinnerungsintervall nur ändern, wenn es einen klaren Grund gibt.
+- Bei neuen Formularfeldern einfache Validierung beibehalten.
+- Modulprofil-Liste erst dynamisieren, wenn mehr Module da sind.
 - `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
 
 ## Befehle für Laien (einfach)
