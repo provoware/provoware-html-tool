@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 5 (siehe `todo.txt`)
-- Offene Punkte: 10 (siehe `todo.txt`)
-- Fortschritt: 33%
+- Erledigte Punkte: 8 (siehe `todo.txt`)
+- Offene Punkte: 7 (siehe `todo.txt`)
+- Fortschritt: 53%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -31,13 +31,14 @@
   - `data/dashboard3-notes/`
 - **Tests**
   - `tests/services/module-registry.test.js`
+  - `tests/services/project-selftest.test.js`
   - `tests/services/ui-action-handlers.smoke.test.js`
   - `tests/start-files/start-import-resolution.test.js`
 
 ## Was in dieser Iteration bereinigt wurde
-- `laienstart.html` visuell klarer und professioneller gestaltet (Karten, ruhige Farben, bessere Leseführung).
-- Die Liste `requiredFiles` ist jetzt konfigurierbar über `data/laienstart-required-files.json` (Fallback auf sichere Standardliste bei Fehler).
-- Team-Standard-Einstieg in `data/app-config.json` über `startBehavior.teamDefaultEntry = "laienstart.html"` festgelegt.
+- Selbsttest trennt jetzt sauber Ordner-Existenzprüfung (`listDirectory`) und optionalen Schreibtest.
+- Keine `.probe`-Datei mehr bei der Ordnerprüfung (keine Nebenartefakte im Projektordner).
+- Neuer direkter Test `tests/services/project-selftest.test.js` für die geänderte Selbsttest-Logik.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den neuen Stand gebracht.
 
 ## Laien-Befehle (unten)

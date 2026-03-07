@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Team-Standardstart über Laienstart + konfigurierbare Start-Dateiliste
+- Iterationsfokus: Selbsttest robust trennen (Ordner-Existenz getrennt vom Schreibtest)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/
@@ -85,6 +85,7 @@
 - ├─ tests/
 - │  ├─ tests/services/
 - │  │  ├─ tests/services/module-registry.test.js
+- │  │  ├─ tests/services/project-selftest.test.js
 - │  │  └─ tests/services/ui-action-handlers.smoke.test.js
 - │  └─ tests/start-files/
 - │     └─ tests/start-files/start-import-resolution.test.js
@@ -173,9 +174,10 @@
 68. `modules/wiki_notiz_wissen/texts.json`
 69. `README.md`
 70. `tests/services/module-registry.test.js`
-71. `tests/services/ui-action-handlers.smoke.test.js`
-72. `tests/start-files/start-import-resolution.test.js`
-73. `todo.txt`
-74. `todo_kalender_erinnerung_start.html`
-75. `TOOL_TUTORIAL.md`
-76. `wiki_notiz_wissen_start.html`
+71. `tests/services/project-selftest.test.js`
+72. `tests/services/ui-action-handlers.smoke.test.js`
+73. `tests/start-files/start-import-resolution.test.js`
+74. `todo.txt`
+75. `todo_kalender_erinnerung_start.html`
+76. `TOOL_TUTORIAL.md`
+77. `wiki_notiz_wissen_start.html`

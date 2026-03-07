@@ -33,13 +33,12 @@ export const runProjectSelftest = async (adapter, options = {}) => {
   const missingDirs = [];
   for (const dir of structure.requiredDirectories || []) {
     if (!dir.required) continue;
-    const marker = `${dir.path.replaceAll('/', '_')}/.probe`;
-    const writeProbe = await adapter.writeText(marker, 'probe');
-    if (writeProbe.ok) {
+    const directoryState = await adapter.listDirectory(dir.path);
+    if (directoryState.ok) {
       checks.push(pass(`Ordner ${dir.path}`, 'DIR_OK', 'Ordner ist verfügbar.'));
     } else {
       missingDirs.push(dir.path);
-      checks.push(warn(`Ordner ${dir.path}`, 'DIR_MISSING_OR_READ_ONLY', 'Ordner fehlt oder Schreiben ist nicht erlaubt.'));
+      checks.push(warn(`Ordner ${dir.path}`, 'DIR_MISSING', 'Ordner fehlt oder ist nicht lesbar.'));
     }
   }
 

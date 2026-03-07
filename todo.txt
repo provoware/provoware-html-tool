@@ -4,11 +4,11 @@
 [x] 2026-03-07 | App-Startblocker | Startblocker durch fehlerhafte Registry-Datei entschärfen, damit Einzeldefekt dort die App nicht sofort stoppt | prüfen: `node --check js/services/module-registry.js` und Doppelblock-Sichtung | fertig wenn: keine Merge-Konfliktreste, keine doppelten Kernfunktionen
 
 ## Hoch
-[ ] 2026-03-07 | js/services/project-selftest.js | Selbsttest logisch trennen: Existenzprüfung und Schreibprüfung nicht vermischen (Ordnerprobe aktuell über Schreibzugriff) | prüfen: Ablauf mit nur Leserechten vs. Schreibrechten vergleichen | fertig wenn: Existenzcheck ohne Schreibtest möglich ist
-[ ] 2026-03-07 | js/services/project-selftest.js | `.probe`-Seiteneffekte vermeiden oder sicher löschen | prüfen: nach Selbsttest keine zusätzlichen Probe-Dateien im Projektordner | fertig wenn: Probe-Dateien gar nicht entstehen oder zuverlässig entfernt werden
+[x] 2026-03-07 | js/services/project-selftest.js | Selbsttest logisch trennen: Existenzprüfung und Schreibprüfung nicht vermischen (Ordnerprobe aktuell über Schreibzugriff) | prüfen: Ablauf mit nur Leserechten vs. Schreibrechten vergleichen | fertig wenn: Existenzcheck ohne Schreibtest möglich ist
+[x] 2026-03-07 | js/services/project-selftest.js | `.probe`-Seiteneffekte vermeiden oder sicher löschen | prüfen: nach Selbsttest keine zusätzlichen Probe-Dateien im Projektordner | fertig wenn: Probe-Dateien gar nicht entstehen oder zuverlässig entfernt werden
 [ ] 2026-03-07 | js/services/project-selftest.js | `cleanupAfterSuccess` nur als erledigt markieren, wenn Funktion real existiert und genutzt wird | prüfen: Code enthält echte Cleanup-Implementierung plus Aufrufpfad | fertig wenn: Cleanup nachvollziehbar aktiv oder Punkt bleibt offen
 [ ] 2026-03-07 | Services (direkt betroffen) | Import-/Export-Konsistenz der direkt betroffenen Services vollständig gegen reale Nutzung prüfen | prüfen: Exporte gegen Importe in `js/app.js` und direkten Services abgleichen | fertig wenn: keine ungenutzten/fehlenden Exporte in der Kette
-[ ] 2026-03-07 | README.md | README-Status weiter an realen Projektzustand angleichen, falls an anderen Stellen noch Vollständigkeit suggeriert wird | prüfen: Statusabschnitt und Offene-Punkte-Abschnitt gegen `todo.txt` lesen | fertig wenn: keine falsche „alles fertig“-Aussage mehr
+[x] 2026-03-07 | README.md | README-Status weiter an realen Projektzustand angleichen, falls an anderen Stellen noch Vollständigkeit suggeriert wird | prüfen: Statusabschnitt und Offene-Punkte-Abschnitt gegen `todo.txt` lesen | fertig wenn: keine falsche „alles fertig“-Aussage mehr
 
 ## Mittel
 [ ] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
