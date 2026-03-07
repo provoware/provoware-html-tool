@@ -1,3 +1,6 @@
+## Stand
+- Aktualisiert: 2026-03-07
+
 ## Verzeichnisbaum (ohne `.git`)
 
 ```text

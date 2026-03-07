@@ -4,6 +4,7 @@ const createState = () => ({
   uiTexts: null,
   projectStructure: null,
   selectedProjectDirectory: null,
+  rememberedProjectDirectoryName: null,
   permissionStatus: { read: false, write: false, class: 'unknown' },
   selftestResult: null,
   layoutMode: 'standard',

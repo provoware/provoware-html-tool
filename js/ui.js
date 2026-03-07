@@ -67,7 +67,10 @@ export const render = () => {
     nextStep.innerHTML = `<strong>${messages.actionNext || 'Nächster Schritt'}:</strong> ${startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || ''}`;
   }
 
-  setText('status-folder', state.selectedProjectDirectory?.name || '-');
+  const selectedName = state.selectedProjectDirectory?.name;
+  const rememberedName = state.rememberedProjectDirectoryName;
+  const folderText = selectedName || (rememberedName ? `${rememberedName} (zuletzt gewählt)` : '-');
+  setText('status-folder', folderText);
   setText('status-read', state.permissionStatus?.read ? 'ok' : 'nein');
   setText('status-write', state.permissionStatus?.write ? 'ok' : 'nein');
   setText('status-structure', state.selftestResult?.data?.missingFiles?.length ? 'fehlt teilweise' : 'ok/unklar');

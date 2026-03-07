@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 34
-- Offene Punkte: 3
-- Fortschritt: 92%
+- Erledigte Punkte: 35
+- Offene Punkte: 2
+- Fortschritt: 95%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -33,11 +33,11 @@
 - Einheitliche Adapter-API mit Standardantwort (`ok`, `code`, `message`, `data`).
 - Vier Themes als Tokens und zentrale UI-Texte aus JSON.
 - Statuspanel und Logpanel für laienfreundliche Sicht.
+- Letzter gewählter Ordnername wird lokal gemerkt und beim Start angezeigt.
 
 ## Offene Punkte
-1. Persistenz „letzten Projektordner merken“ vorbereiten.
-2. Diagnose-Export als optionales Modul ergänzen.
-3. Erweiterte Rechteanzeige (nur Lesen) visuell deutlicher machen.
+1. Diagnose-Export als optionales Modul ergänzen.
+2. Erweiterte Rechteanzeige (nur Lesen) visuell deutlicher machen.
 
 ## Laien-Befehle unten
 - Status prüfen: `git status`
@@ -48,3 +48,4 @@
 ## Kurze Empfehlungsliste
 - Erst immer „Ordner wählen“, dann „Selbsttest starten“.
 - Bei Gelb/Rot zuerst Rechte und fehlende Struktur lösen.
+- Nach Neustart auf den Hinweis „zuletzt gewählt“ im Ordner-Status achten.

@@ -5,6 +5,24 @@ import { filesystemAdapter } from './adapters/filesystem-adapter.js';
 import { runStartupCheck } from './services/startup-check.js';
 import { applyTheme, bindUiActions, detectLayoutMode, render } from './ui.js';
 
+const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
+
+const readRememberedDirectoryName = () => {
+  try {
+    return window.localStorage.getItem(LAST_DIRECTORY_NAME_KEY);
+  } catch {
+    return null;
+  }
+};
+
+const storeRememberedDirectoryName = (name) => {
+  try {
+    window.localStorage.setItem(LAST_DIRECTORY_NAME_KEY, name);
+  } catch {
+    // Speicher kann je nach Browser-Einstellung blockiert sein.
+  }
+};
+
 const applyLoadedData = (bundle) => {
   setState({
     config: bundle.appConfig,
@@ -33,7 +51,9 @@ const selectDirectory = async () => {
   logEvent(selected.ok ? 'INFO' : 'WARN', selected.code, selected.message, selected.data);
   if (!selected.ok) return;
 
-  setState({ selectedProjectDirectory: selected.data });
+  setState({ selectedProjectDirectory: selected.data, rememberedProjectDirectoryName: selected.data?.name || null });
+  if (selected.data?.name) storeRememberedDirectoryName(selected.data.name);
+
   const permissions = await filesystemAdapter.checkPermissions();
   if (permissions.ok) {
     setState({ permissionStatus: permissions.data });
@@ -64,6 +84,7 @@ const init = async () => {
 
   const loaded = await loadAllConfig();
   applyLoadedData(loaded.data);
+  setState({ rememberedProjectDirectoryName: readRememberedDirectoryName() });
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
   const themeName = loaded.data.appConfig.defaultTheme;

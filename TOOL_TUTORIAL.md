@@ -10,11 +10,11 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Optionaler Schreibtest
-1. Auf **Schreibtest ausführen** klicken.
-2. Der Test schreibt in `logs/write-test.txt`.
-3. Danach liest der Test die Datei wieder.
-4. Ergebnis steht im Prüfbereich und im Logpanel.
+### Letzten Ordnernamen wiederfinden
+1. Einmal auf **Ordner wählen** klicken und einen Projektordner bestätigen.
+2. Seite neu laden.
+3. Im Bereich **Projektordner-Status** bei **Ordner** den Namen mit Hinweis **(zuletzt gewählt)** prüfen.
+4. So sieht man schneller, welcher Ordner zuletzt aktiv war.
 
 ## Struktur aus JSON prüfen
 1. Datei `data/project-structure.json` öffnen.
