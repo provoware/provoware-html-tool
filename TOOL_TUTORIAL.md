@@ -35,6 +35,14 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. Mit Screenreader (Vorleseprogramm) prüfen, ob eine kurze Statuszeile vorgelesen wird.
 4. Erwartung: Die Meldung enthält **Start**, **Gesamtstatus** und **letzte Meldung** in einfacher Sprache.
 
+### Textdatei-Vorschau und Editor kurz prüfen (neu)
+1. Einen Projektordner wählen.
+2. Im Modul **Textdatei-Vorschau** den Pfad leer lassen oder einen relativen Pfad eingeben (z. B. `modules`).
+3. **Dateiliste laden** klicken und eine Datei aus der Liste wählen.
+4. Prüfen, ob der Inhalt unten im Vorschau-Feld erscheint.
+5. Auf **Im Editor öffnen** klicken, im Editor Text ändern und **Speichern** klicken.
+6. Erwartung: Status meldet „Gespeichert …“ und der Editor zeigt den aktiven Dateipfad.
+
 ### Profil-Standard kurz prüfen
 1. Seite neu laden.
 2. Ohne Klick auf die Profil-Auswahl direkt einen Eintrag speichern.

@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 59
+- Erledigte Punkte: 60
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 87% (laufend, siehe `todo.txt`)
+- Fortschritt: 89% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -89,6 +89,9 @@
 
 - Neues Wiki-, Notiz- und Wissensmodul als strukturierte Modulbasis ergänzt (CRUD, Suche/Filter, Verknüpfungen, Export).
 - Unsichtbare Live-Statuszeile ergänzt (Screenreader-freundlich): Start, Gesamtstatus und letzte Meldung werden als gesprochene Kurzzusammenfassung bereitgestellt.
+- Skip-Link ergänzt: Mit Tastatur kann direkt zum Hauptinhalt gesprungen werden.
+- Ruhiger Screenreader-Modus ergänzt: Statusmeldungen werden bewusst kompakter gesprochen.
+- Neues Textdatei-Vorschau- und Editor-Modul ergänzt: Dateiliste je Pfad, Vorschau und Speichern im Editor.
 
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
@@ -111,6 +114,7 @@
 - Empfehlung 5: Vor dem ersten Speichern kurz prüfen, ob oben im Archiv ein Profil ausgewählt ist.
 - Empfehlung 6: Für Wissenseinträge klare Themennamen und kurze Quellenangabe nutzen, damit Suche schneller trifft.
 - Empfehlung 7: Bei Screenreader-Nutzung nach Aktionen kurz warten: die neue Live-Statuszeile liest Start, Gesamtstatus und letzte Meldung automatisch vor.
+- Empfehlung 8: Für Dateivorschau zuerst einen relativen Pfad testen (oder leer lassen), danach bei Bedarf „auch andere Dateien zeigen“ aktivieren.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.

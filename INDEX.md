@@ -1,5 +1,9 @@
 # INDEX.md
 
+## Stand
+- Aktualisiert: 2026-03-07
+- Iterationsfokus: Barrierefreiheit (Skip-Link, ruhiger Screenreader-Modus) und neues Textdatei-Vorschau-/Editor-Modul
+
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`
 - `INDEX.md`
