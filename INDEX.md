@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Kompakteres, kontrastreicheres Dashboard mit proportionaler Skalierung per Strg + Mausrad
+- Iterationsfokus: Todo-Startmodul robuster (optionaler localStorage) und ausgeblendete Module über Wieder-einblenden-Leiste zurückholbar
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`

@@ -10,6 +10,21 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Todo-Speicher + Wieder-einblenden-Leiste kurz prüfen (neu)
+1. Seite neu laden.
+2. Im Todo-Modul einen neuen Eintrag hinzufügen.
+3. Seite erneut laden und prüfen, ob der Eintrag noch da ist.
+4. Im Modulkopf auf **◫** klicken (Ausblenden).
+5. Prüfen, ob unter dem Dashboard eine Leiste mit **einblenden**-Button erscheint.
+6. Auf den Button klicken und prüfen, ob das Modul wieder sichtbar ist.
+
+### Todo-Startmodul und Fensterstandard kurz prüfen (neu)
+1. Seite neu laden.
+2. Prüfen, ob im 3x3-Raster zuerst nur das **Todo-Listenmodul** sichtbar ist.
+3. Im Modul auf **⛶** klicken und prüfen, ob maximiert wird.
+4. Danach auf **—** klicken und prüfen, ob der Modulinhalt minimiert wird.
+5. Danach auf **◫** klicken und prüfen, ob der Inhalt ausgeblendet wird.
+
 ### Proportionale Skalierung mit Maus kurz prüfen (neu)
 1. Seite neu laden.
 2. **Strg** gedrückt halten und Mausrad nach oben drehen.

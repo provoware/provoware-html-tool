@@ -39,249 +39,25 @@
         <p id="a11y-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
         <section class="workspace-dashboard">
           <h2 class="panel-title" id="startup-title">Dashboard</h2>
-          <p class="dashboard-note">Aktive Module erscheinen als Fensterkarten im 3x3 Raster. Jedes Modul kann maximiert werden. Mit Strg + Mausrad kann die gesamte Ansicht proportional skaliert werden (Strg + 0 setzt zurück).</p>
+          <p class="dashboard-note">Das 3x3 Raster ist gleich groß aufgeteilt. Es startet bewusst nur mit einem Todo-Listenmodul.</p>
         </section>
 
         <section class="panel-grid" aria-label="Aktive Module">
-          <article class="module-panel" data-panel="startup">
+          <article class="module-panel" data-panel="todo" data-module-default="active">
             <header class="module-head">
-              <h3>Startstatus</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
+              <h3>Todo-Listenmodul</h3>
+              <div class="module-controls"></div>
             </header>
             <div class="module-body">
-              <section id="next-step" class="status-box" aria-label="Nächster Schritt"></section>
-              <section id="checks-list" class="checks" aria-label="Prüfergebnisse"></section>
-            </div>
-          </article>
-
-          <article class="module-panel" data-panel="archive">
-            <header class="module-head">
-              <h3>Profil-Archiv</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body">
-              <section class="archive-module" aria-label="Profil-Archiv für Genres, Stimmungen, Stile">
-                <div class="archive-top-row">
-                  <label>Profil <select id="profile-select"></select></label>
-                  <label>Sortierung
-                    <select id="archive-sort">
-                      <option value="alpha">Alphabetisch</option>
-                      <option value="created">Nach Erstellzeit</option>
-                    </select>
-                  </label>
-                  <p id="archive-stats" class="archive-stats">-</p>
+              <section class="todo-panel" aria-label="Todo-Liste">
+                <div class="todo-form-row">
+                  <label for="todo-input">Neue Aufgabe</label>
+                  <input id="todo-input" type="text" placeholder="z. B. Modulstruktur prüfen" maxlength="120" />
+                  <button id="todo-add" class="btn-small btn-accent" type="button">Hinzufügen</button>
                 </div>
-
-                <div class="archive-input-grid">
-                  <label>Genre
-                    <input id="input-genres" type="text" placeholder="Genre eingeben" />
-                    <button id="save-genres" class="btn-small" type="button">Speichern</button>
-                  </label>
-                  <label>Stimmung
-                    <input id="input-moods" type="text" placeholder="Stimmung eingeben" />
-                    <button id="save-moods" class="btn-small" type="button">Speichern</button>
-                  </label>
-                  <label>Stil
-                    <input id="input-styles" type="text" placeholder="Stil eingeben" />
-                    <button id="save-styles" class="btn-small" type="button">Speichern</button>
-                  </label>
-                </div>
-
-                <section id="archive-list" class="archive-list" aria-label="Archivliste"></section>
-
-                <section class="archive-transfer">
-                  <h4>Import / Export (JSON)</h4>
-                  <textarea id="archive-transfer" rows="5" placeholder="JSON einfügen oder exportieren"></textarea>
-                  <div class="archive-transfer-actions">
-                    <button id="archive-export" class="btn-small" type="button">Export</button>
-                    <button id="archive-import" class="btn-small" type="button">Import</button>
-                  </div>
-                </section>
-
-                <section class="archive-transfer">
-                  <h4>Diagnose-Export (optional)</h4>
-                  <textarea id="diagnosis-transfer" rows="5" placeholder="Diagnose-JSON wird hier erzeugt"></textarea>
-                </section>
+                <ul id="todo-list" class="todo-list"></ul>
               </section>
             </div>
-          </article>
-
-          <article class="module-panel" data-panel="mix">
-            <header class="module-head">
-              <h3>Dashboard 3: Textsammler</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body">
-              <section class="dashboard-notes" aria-label="Einzeilige Titel-Eingaben">
-                <p class="dashboard-note">Jede Zeile speichert in einer eigenen Datei unter <code>data/dashboard3-notes</code>. Enter oder Speichern hängt Text an.</p>
-
-                <div class="dashboard-note-row" data-note-row="0">
-                  <label>Titel <span class="title-tip" title="Ungültige Zeichen werden ersetzt">ⓘ</span>
-                    <input id="dashboard-note-title-0" type="text" value="pppoppi details ideen" title="Ungültige Zeichen werden ersetzt" />
-                  </label>
-                  <label>Eintrag
-                    <input id="dashboard-note-input-0" type="text" placeholder="Text eingeben" />
-                  </label>
-                  <button id="dashboard-note-save-0" class="btn-small btn-accent" type="button">Speichern</button>
-                  <button id="dashboard-note-open-0" class="btn-small" type="button" disabled>Datei öffnen</button>
-                  <p id="dashboard-note-feedback-0" class="sidebar-summary">-</p>
-                  <p id="dashboard-note-file-0" class="sidebar-summary">Letzte Datei: -</p>
-                </div>
-
-                <div class="dashboard-note-row" data-note-row="1">
-                  <label>Titel <span class="title-tip" title="Ungültige Zeichen werden ersetzt">ⓘ</span>
-                    <input id="dashboard-note-title-1" type="text" value="Favoriten Genres" title="Ungültige Zeichen werden ersetzt" />
-                  </label>
-                  <label>Eintrag
-                    <input id="dashboard-note-input-1" type="text" placeholder="Text eingeben" />
-                  </label>
-                  <button id="dashboard-note-save-1" class="btn-small btn-accent" type="button">Speichern</button>
-                  <button id="dashboard-note-open-1" class="btn-small" type="button" disabled>Datei öffnen</button>
-                  <p id="dashboard-note-feedback-1" class="sidebar-summary">-</p>
-                  <p id="dashboard-note-file-1" class="sidebar-summary">Letzte Datei: -</p>
-                </div>
-
-                <div class="dashboard-note-row" data-note-row="2">
-                  <label>Titel <span class="title-tip" title="Ungültige Zeichen werden ersetzt">ⓘ</span>
-                    <input id="dashboard-note-title-2" type="text" value="Templates-Input-Pool" title="Ungültige Zeichen werden ersetzt" />
-                  </label>
-                  <label>Eintrag
-                    <input id="dashboard-note-input-2" type="text" placeholder="Text eingeben" />
-                  </label>
-                  <button id="dashboard-note-save-2" class="btn-small btn-accent" type="button">Speichern</button>
-                  <button id="dashboard-note-open-2" class="btn-small" type="button" disabled>Datei öffnen</button>
-                  <p id="dashboard-note-feedback-2" class="sidebar-summary">-</p>
-                  <p id="dashboard-note-file-2" class="sidebar-summary">Letzte Datei: -</p>
-                </div>
-              </section>
-            </div>
-          </article>
-
-          <article class="module-panel" data-panel="events">
-            <header class="module-head">
-              <h3>Archiv-Ereignisse</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body">
-              <ul id="archive-events" class="archive-events"></ul>
-            </div>
-          </article>
-
-          <article class="module-panel module-panel-placeholder" data-panel="module-5">
-            <header class="module-head">
-              <h3>Modul-Slot 5</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body"><p id="module-registry-summary-main">Freier Platz für aktives Modul.</p></div>
-          </article>
-
-          <article class="module-panel module-panel-placeholder" data-panel="module-6">
-            <header class="module-head">
-              <h3>Templates</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body">
-              <p id="template-design-status">-</p>
-              <input id="template-id" type="hidden" />
-              <div class="archive-input-grid templates-grid">
-                <label>Titel <input id="template-title" type="text" placeholder="Kurzname" /></label>
-                <label>Kategorie
-                  <select id="template-category">
-                    <option>Textbaustein</option>
-                    <option>Promptvorlage</option>
-                    <option>Arbeitsphrase</option>
-                  </select>
-                </label>
-              </div>
-              <label>Inhalt
-                <textarea id="template-content" rows="4" placeholder="Text einfügen"></textarea>
-              </label>
-              <div class="archive-transfer-actions">
-                <button id="template-save" class="btn-small btn-accent" type="button">Speichern</button>
-                <button id="template-clear" class="btn-small" type="button">Zurücksetzen</button>
-              </div>
-              <p id="template-feedback" class="template-feedback" aria-live="polite"></p>
-              <h4>Favoriten Schnellwahl</h4>
-              <div id="template-favorites" class="mix-quick"></div>
-              <h4>Vorlagenliste</h4>
-              <ul id="template-list" class="archive-events"></ul>
-            </div>
-          </article>
-
-          <article class="module-panel" data-panel="module-7">
-            <header class="module-head">
-              <h3>Textdatei-Vorschau</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body">
-              <div class="file-tools">
-                <label>Pfad (relativ)
-                  <input id="file-preview-path" type="text" placeholder="z. B. docs oder leer für Hauptordner" />
-                </label>
-                <button id="file-preview-load" class="btn-small" type="button">Dateiliste laden</button>
-                <label class="checkline"><input id="file-preview-include-other" type="checkbox" /> auch andere Dateien zeigen</label>
-              </div>
-              <p id="file-preview-status" class="sidebar-summary">Noch keine Datei geladen.</p>
-              <ul id="file-preview-list" class="archive-events" aria-label="Dateiliste"></ul>
-              <label>Vorschau
-                <textarea id="file-preview-content" rows="7" readonly placeholder="Dateiinhalt erscheint hier"></textarea>
-              </label>
-              <div class="archive-transfer-actions">
-                <button id="file-preview-open-editor" class="btn-small btn-accent" type="button">Im Editor öffnen</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="module-panel" data-panel="module-8">
-            <header class="module-head">
-              <h3>Datei-Editor</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body">
-              <p id="editor-file-path" class="sidebar-summary">-</p>
-              <label>Editor-Inhalt
-                <textarea id="editor-content" rows="10" placeholder="Vorschau-Datei im Editor öffnen"></textarea>
-              </label>
-              <div class="archive-transfer-actions">
-                <button id="editor-save" class="btn-small btn-accent" type="button">Speichern</button>
-              </div>
-              <p id="editor-status" class="sidebar-summary">Editor ist bereit.</p>
-            </div>
-          </article>
-
-          <article class="module-panel module-panel-placeholder" data-panel="module-9">
-            <header class="module-head">
-              <h3>Modul-Slot 9</h3>
-              <div class="module-controls">
-                <button type="button" class="panel-control" title="Fensteroption">—</button>
-                <button type="button" class="panel-control" data-panel-maximize title="Maximieren">⛶</button>
-              </div>
-            </header>
-            <div class="module-body"><p>Freier Platz für aktives Modul.</p></div>
           </article>
         </section>
       </main>
@@ -319,8 +95,24 @@
       </aside>
 
       <footer class="footer panel tile-footer" aria-label="Aktionsleiste">
-        <h2 class="panel-title" id="log-title">Letzte Meldungen</h2>
-        <ul id="log-list" class="log-list"></ul>
+        <section class="footer-grid" aria-label="Footer-Bereiche">
+          <article class="footer-box">
+            <h2 class="panel-title" id="log-title">Letzte Meldungen</h2>
+            <ul id="log-list" class="log-list"></ul>
+          </article>
+          <article class="footer-box">
+            <h2 class="panel-title">Aktiver Modus</h2>
+            <p class="sidebar-summary">Nur Todo-Modul aktiv.</p>
+          </article>
+          <article class="footer-box">
+            <h2 class="panel-title">Fensterstandard</h2>
+            <p class="sidebar-summary">Jedes Modul hat Maximieren, Minimieren und Ausblenden.</p>
+          </article>
+          <article class="footer-box">
+            <h2 class="panel-title">Tipp</h2>
+            <p class="sidebar-summary">Esc beendet Maximieren. Strg + 0 setzt den Zoom zurück.</p>
+          </article>
+        </section>
       </footer>
     </div>
 
