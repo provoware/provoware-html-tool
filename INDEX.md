@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Dashboard 3 Textsammler mit titelbasierten Einzeilen-Dateien und Datei-Anhängen
+- Iterationsfokus: Dashboard 3 mit „Datei öffnen“-Button je Zeile und Titel-Hinweis für Dateinamen
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`

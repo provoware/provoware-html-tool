@@ -69,3 +69,11 @@ test('smoke: dashboard-note validierung meldet fehlende felder', async () => {
   assert.equal(missingValue.ok, false);
   assert.equal(missingValue.code, 'DASHBOARD_NOTE_VALUE_MISSING');
 });
+
+test('smoke: dashboard-note datei öffnen meldet fehlende datei', async () => {
+  const base = makeBase();
+  const actions = createUiActionHandlers(base);
+  const result = await actions.onOpenDashboardNoteLastFileInEditor(0);
+  assert.equal(result.ok, false);
+  assert.equal(result.code, 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED');
+});

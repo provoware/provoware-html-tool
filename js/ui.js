@@ -245,6 +245,10 @@ export const bindUiActions = (actions) => {
       });
     });
 
+    byId(`dashboard-note-open-${rowIndex}`)?.addEventListener('click', async () => {
+      await actions.onOpenDashboardNoteLastFileInEditor(rowIndex);
+    });
+
     byId(`dashboard-note-input-${rowIndex}`)?.addEventListener('keydown', async (event) => {
       if (event.key !== 'Enter') return;
       event.preventDefault();
