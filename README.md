@@ -4,7 +4,7 @@
 - Erledigte Punkte: 32 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Header-Hinweis wurde mit kleinem Robustheits-Patch auf reine Textausgabe umgestellt (kein `innerHTML` für `next-step`), plus gezielter Injection-Test für `<img>/<script>` im Header.
+- Stand dieser Iteration: `next-step` bekam einen zweiten gezielten Robustheits-Test (Sonderzeichen + sehr langer Text >200 Zeichen) und ein weiteres kleines UI-Hinweisfeld (`checks-list`) rendert Nutztexte jetzt per Textknoten statt HTML-String.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -145,6 +145,8 @@
 
 - Header-Hinweis jetzt ohne HTML-Interpretation: `next-step` setzt nur noch Text (`textContent`) und verhindert damit Markup-Ausführung aus Nutztexten.
 - Neuer gezielter Header-Injection-Test: `<img onerror=...>` und `<script>...` bleiben im `next-step` sichtbar als Text.
+- Neuer zweiter `next-step`-Test: Sonderzeichen und sehr langer Nutztext (>200 Zeichen) bleiben stabil und werden nur als Text ausgegeben.
+- Kleiner UI-Folgeschritt „Text statt HTML“: `checks-list` baut die Hinweis-Artikel jetzt mit DOM-Textknoten auf (kein HTML-String für Nutztexte).
 
 
 ## Iterations-Update: Barrierefreiheit + Hilfe (minimal)

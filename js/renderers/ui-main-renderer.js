@@ -48,10 +48,20 @@ export const renderMainSection = ({
   const checksList = byId('checks-list');
   if (checksList) {
     const checks = state.selftestResult?.checks || [];
-    checksList.innerHTML = checks.map((check) => {
+    checksList.replaceChildren();
+    checks.forEach((check) => {
       const visual = statusVisual(check.status);
-      return `<article class="check-item ${statusClass(check.status)}"><strong>${escapeHtml(visual.symbol)} ${autoFormatHtml(check.name)}</strong><br><span>${autoFormatHtml(check.message)}</span></article>`;
-    }).join('');
+      const item = document.createElement('article');
+      item.className = `check-item ${statusClass(check.status)}`;
+
+      const title = document.createElement('strong');
+      title.textContent = `${visual.symbol} ${autoFormatText(check.name)}`;
+      const text = document.createElement('span');
+      text.textContent = autoFormatText(check.message);
+
+      item.append(title, document.createElement('br'), text);
+      checksList.append(item);
+    });
   }
 
   setText('archive-stats', renderStats(state.profileStats));
