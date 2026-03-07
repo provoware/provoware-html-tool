@@ -1,9 +1,9 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 7
-- Offene Punkte gesamt: 1
-- Entwicklungsfortschritt: 85%
+- Erledigte Punkte gesamt: 8
+- Offene Punkte gesamt: 0
+- Entwicklungsfortschritt: 100%
 
 ## Aktuelle Toolstruktur und Toolumfang (fehlerfrei umgesetzt)
 - Steuerdateien:
@@ -15,21 +15,27 @@
 - Startdateien:
   - `index.html` (offline ladbarer Einstieg mit Dashboard-Skelett)
   - `assets/css/base.css` (Basislayout und einfache Lesbarkeit)
-  - `assets/js/core.js` (minimaler Startfluss mit Statusanzeige)
+  - `assets/js/core.js` (Startfluss mit Statusanzeige und Modul-Check)
+- Modul-Muster:
+  - `modules/datenbank_baukasten/manifest.json`
+  - `modules/datenbank_baukasten/config.json`
+  - `modules/datenbank_baukasten/texts.json`
+  - `modules/datenbank_baukasten/schema.json`
+  - `modules/datenbank_baukasten/logic.js`
 - Umfang dieser Iteration:
-  - Robustere Startinitialisierung in `assets/js/core.js` umgesetzt.
-  - Statustext wird auch bei später DOM-Bereitschaft zuverlässig gesetzt.
-  - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
+  - Muster-Modul `datenbank_baukasten` als kopierbares Datei-Set angelegt.
+  - Startstruktur für Modul-Registrierung auf das Muster-Modul erweitert.
+  - Einfacher Hinweis bei unvollständigem Modul im Core ergänzt (Robustheit).
 
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
 - Dashboard-Skelett ist als stabile Basis vorhanden.
-- Basis-Statuswechsel im JavaScript-Core ist aktiv.
+- Modul-Muster ist vollständig und direkt kopierbar.
 
 ## Nächste Schritte (kurz)
-1. Muster-Modul `datenbank_baukasten` im Mindestumfang anlegen.
-2. Startstruktur für Modul-Registrierung auf das Muster-Modul erweitern.
-3. Kleine Fehlerhinweise für fehlende Modulelemente ergänzen.
+1. Optional zweites Modul nach gleichem Muster testen.
+2. Modul-Liste später von statisch auf dynamisch umstellen.
+3. Fehlhinweise je Moduldatei bei Bedarf weiter verfeinern.
 
 ## Festgelegter Start-Scope
 - Offline-fähiger Start mit statischem Einstiegspunkt.
@@ -40,12 +46,12 @@
 - Start-Dokumentation nur in `README.md` und `todo.txt`.
 
 ## Empfehlungsliste (kurz)
-- Nächstes Patchziel auf P4 begrenzen, damit das Modulmuster sauber entsteht.
-- In `core.js` eine kleine Modul-Liste erst nach P4 ergänzen, nicht vorher.
+- Beim nächsten Modul exakt die fünf Mindestteile aus dem Muster übernehmen.
+- Erst bei mehreren Modulen auf automatische Verzeichnis-Leselogik erweitern.
 - `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
 
 ## Befehle für Laien (einfach)
 - Status prüfen: `git status`
 - Änderungen ansehen: `git diff`
-- Projektdateien auflisten: `find . -maxdepth 3 -type f | sort`
+- Projektdateien auflisten: `find . -maxdepth 4 -type f | sort`
 - Letzte Commits sehen: `git log --oneline -n 5`
