@@ -131,6 +131,13 @@ export const loadModuleRegistry = async () => {
 };
 
 export const detectTemplateDesignStatus = () => {
+  if (typeof document === 'undefined' || typeof document.querySelector !== 'function') {
+    return {
+      ok: false,
+      message: 'Vorlagen-Design-Status ist nur im Browser prüfbar.'
+    };
+  }
+
   const hasTemplateCss = Boolean(document.querySelector('link[href="assets/css/base.css"]'));
   const hasTemplateJs = Boolean(document.querySelector('script[src="assets/js/core.js"]'));
 
