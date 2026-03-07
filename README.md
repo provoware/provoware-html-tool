@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 11 (siehe `todo.txt`)
-- Offene Punkte: 5 (siehe `todo.txt`)
-- Fortschritt: 69%
+- Erledigte Punkte: 12 (siehe `todo.txt`)
+- Offene Punkte: 4 (siehe `todo.txt`)
+- Fortschritt: 75%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -21,8 +21,9 @@
   - `data/module-registry.json`, `data/project-structure.json`
   - `data/laienstart-required-files.json` (konfigurierbare Dateiliste für den Startcheck)
   - `data/profile-archive.json`, `data/templates-archive.json`
-- **Tests**
+- **Tests und Checks**
   - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`
+  - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck)
 - **GitHub Workflows (Basis aktiv)**
   - `.github/workflows/ci.yml` (frühe Fehler durch Tests)
   - `.github/workflows/lint.yml` (frühe Syntax-/Stilfehler)
@@ -34,6 +35,7 @@
 - Neuer gezielter Test ergänzt: `tests/services/import-export-consistency.test.js`.
 - Statuswerte in `README.md` mit `todo.txt` synchronisiert.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den aktuellen Stand gebracht.
+- Reproduzierbaren Minimal-Check ergänzt: `scripts/minimal-check.sh`.
 
 ## Laien-Befehle (unten)
 - Team-Start (empfohlen):
@@ -42,8 +44,10 @@
   - `index.html` im Browser öffnen
 - Lokale Tests starten:
   - `node --test`
-- Lokale JS-Syntax prüfen:
-  - `find js modules tests -type f -name '*.js' -print0 | xargs -0 -n1 node --check`
+- Lokalen Minimal-Check ausführen (empfohlen):
+  - `bash scripts/minimal-check.sh`
+- Nur JS-Syntax prüfen (direkt):
+  - `find js tests -type f -name '*.js' -print0 | xargs -0 -n1 node --check`
 
 ## Kurze Empfehlungsliste
 1. Erst die drei Basis-Workflows 1–2 Wochen stabil beobachten.
