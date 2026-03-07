@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Robustheit/Sicherheit der UI-Ausgabe (zentrale Escaping-Regel + UI-Render-Regressionstest)
+- Iterationsfokus: DOM-Sicherheitsstandard (zentrale Escape-Hilfe, Safe-List-API, PR-Checkpunkt, Injection-Test)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github

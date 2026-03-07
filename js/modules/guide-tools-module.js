@@ -1,3 +1,5 @@
+import { escapeHtml } from '../services/html-escape.js';
+
 const GUIDE_STORAGE_KEY = 'provoware:guide-tools-module';
 
 const defaultSections = [
@@ -7,11 +9,6 @@ const defaultSections = [
 ];
 
 const normalize = (value) => String(value || '').replace(/\s+/g, ' ').trim();
-const escapeHtml = (value) => String(value || '')
-  .replaceAll('&', '&amp;')
-  .replaceAll('<', '&lt;')
-  .replaceAll('>', '&gt;')
-  .replaceAll('"', '&quot;');
 
 const readSections = () => {
   try {
@@ -84,10 +81,12 @@ export const initGuideToolsModule = () => {
   };
 
   const render = () => {
+    // Ausnahme mit Begründung: Wir bauen hier bewusst Markup für Buttons; Nutzdaten werden vorher mit escapeHtml entschärft.
     indexList.innerHTML = sections.map((section, index) => (
       `<li><button type="button" class="btn-small guide-index-btn ${index === selectedIndex ? 'is-selected' : ''}" data-guide-index="${index}" aria-current="${index === selectedIndex ? 'true' : 'false'}">${index + 1}. ${escapeHtml(section.title)}</button></li>`
     )).join('');
 
+    // Ausnahme mit Begründung: Karten-Markup wird zentral zusammengebaut, Titel/Beschreibung bleiben via escapeHtml reine Textausgabe.
     sectionList.innerHTML = sections.map((section, index) => (
       `<article id="guide-tool-section-${index}" class="guide-section ${index === selectedIndex ? 'is-selected' : ''}" role="option" aria-selected="${index === selectedIndex ? 'true' : 'false'}" tabindex="${index === selectedIndex ? '0' : '-1'}" data-guide-index="${index}" draggable="true"><h4>${escapeHtml(section.title)}</h4><p>${escapeHtml(section.description)}</p></article>`
     )).join('');

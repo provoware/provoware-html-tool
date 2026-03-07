@@ -44,6 +44,16 @@
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` aktualisiert.
 - Offener Punkt „Altbestand“ in `todo.txt` zu einer klaren Kandidatenliste (ohne Sofortlöschung) konkretisiert.
 - Registry-Robustheit gezielt abgesichert: zusätzlicher Regressionstest prüft ID-Bereinigung und Fallback-Quelle ohne Umbau im Produktivcode.
+- Standard-Regel ergänzt: Nutzdaten im DOM bevorzugt per `textContent`; `innerHTML`/`insertAdjacentHTML` nur als klar markierte Ausnahme mit Begründung im Code-Kommentar.
+- Einziger Escape-Einstieg klargestellt: HTML-String-Rendering nutzt zentral `js/services/html-escape.js`.
+- Kleine Safe-API ergänzt: `createSafeListItem(label)` als sichere Basis für einfache Listenbausteine.
+- Neue Testpflicht umgesetzt: Injection-Test für die neue Listen-API prüft „nur Text sichtbar" bei `<img onerror=...>` und `<script>...`.
+
+
+## Feste PR-Checkliste (Sicherheits-Checkpunkt)
+- [ ] Keine ungeprüfte Nutzung von `innerHTML`/`insertAdjacentHTML` mit Nutzdaten.
+- [ ] Bei HTML-String-Rendering nur zentralen Helper `js/services/html-escape.js` nutzen.
+- [ ] Bei neuen dynamischen Listen mindestens 1 Injection-Test ergänzen (z. B. `<img onerror=...>` oder `<script>...`) und „nur Text sichtbar" prüfen.
 
 ## Wichtiger Hinweis zu Platzhaltern
 - `assets/css/base.css` und `assets/js/core.js` liegen im Projekt als Vorlagen-Stand.
