@@ -94,6 +94,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Danach auf **Export** und **Diagnose exportieren** klicken.
 5. Ziel: Alle Aktionen laufen unverändert, obwohl die Handler jetzt zentral in einem Service liegen.
 
+
+### Wissensmodul (Wiki/Notiz) kurz prüfen (neu)
+1. In `modules/wiki_notiz_wissen/logic.js` eine einfache Testausführung machen (Node-Konsole oder kleines Script).
+2. Erst einen Eintrag mit `topic`, `source`, `detail`, `content`, `tags` anlegen.
+3. Danach mit `listKnowledgeEntries(..., { query: "thema" })` suchen und Ergebnis prüfen.
+4. Zwei Einträge mit `linkKnowledgeEntries` verknüpfen und `relatedIds` prüfen.
+5. Zum Schluss `exportKnowledgeEntries` aufrufen und prüfen, ob gültiges JSON mit `count` und `entries` zurückkommt.
 ### To-do-Datenfluss minimal prüfen (neu)
 1. Datei `modules/todo_kalender_erinnerung/logic.js` öffnen.
 2. Mit kurzer Probe (Konsole oder Testskript) eine Aufgabe mit Titel anlegen und `createTodoEntry(...)` ausführen.
@@ -147,6 +154,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 - Zusatz-Syntax: `node --check js/ui.js`
 - Zusatz-Syntax: `node --check js/state.js`
 - Zusatz-Syntax: `node --check js/services/ui-action-handlers.js`
+- Modul-Syntax: `node --check modules/wiki_notiz_wissen/logic.js`
+- JSON prüfen: `python3 -m json.tool data/module-registry.json > /dev/null`
+- JSON prüfen: `python3 -m json.tool modules/wiki_notiz_wissen/schema.json > /dev/null`
+
+## Stand
+- Aktualisiert: 2026-03-07
+- Iterationsfokus: Wiki-, Notiz- und Wissensmodul als strukturierte Wissensbasis
 - Zusatz-Syntax: `node --check js/services/diagnosis-export.js`
 - Zusatz-Syntax: `node --check js/services/templates-archive.js`
 - Smoke-Test: `node --experimental-default-type=module --test tests/services/ui-action-handlers.smoke.test.js`
