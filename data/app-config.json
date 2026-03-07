@@ -29,6 +29,7 @@
   "startBehavior": {
     "requireStartupCheck": true,
     "selftestAsFirstStep": true,
-    "blockModulesUntilReady": true
+    "blockModulesUntilReady": true,
+    "teamDefaultEntry": "laienstart.html"
   }
 }
