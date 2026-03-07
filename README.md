@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 55
+- Erledigte Punkte: 58
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 83% (laufend, siehe `todo.txt`)
+- Fortschritt: 86% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -22,13 +22,19 @@
   - `js/services/module-registry.js` (Modul- und Vorlagenstatus)
   - `js/services/profile-archive.js` (Profil-Archiv)
   - `js/services/ui-action-handlers.js` (UI-Aktionen zentral gebündelt)
+  - `js/services/diagnosis-export.js` (Diagnose-Export als eigener Service)
+  - `js/services/templates-archive.js` (Templates-Archiv mit Favoriten)
 - Zentrale Daten:
   - `data/app-config.json`
   - `data/themes.json`
   - `data/ui_texts.json`
   - `data/project-structure.json`
   - `data/profile-archive.json` (JSON-Archiv für Profile)
+  - `data/templates-archive.json` (JSON-Archiv für Templates)
   - `data/module-registry.json` (zentrale Modul-IDs)
+
+- Tests:
+  - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
 
 ## Erledigte Kernpunkte
 - Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.
@@ -70,6 +76,10 @@
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 - UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
+- Diagnose-Export aus `js/app.js` in `js/services/diagnosis-export.js` ausgelagert, damit `app.js` schlanker bleibt.
+- Neues Templates-Modul ergänzt: persistente Vorlagen mit Kategorie, Bearbeiten/Löschen, Favoriten und Schnellwahl-Kopieren.
+- Kopier-Feedback im Templates-Modul ergänzt: Meldung wird kurz angezeigt und verschwindet automatisch.
+- Kleiner Service-Smoke-Test für Export/Import/Mix ergänzt, damit UI-Änderungen schneller geprüft werden können.
 
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
@@ -149,3 +159,7 @@
 - Patchgrund 2: Modularisierung verbessert durch neuen Service `ui-action-handlers` statt großer Inline-Handler in `app.js`.
 - Betroffene Dateien: `js/app.js`, `js/services/ui-action-handlers.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Aktionsausgabe geprüft.
+- Patchgrund 1: App-Einstieg weiter entschlacken durch Auslagerung von `buildDiagnosisExport` in einen eigenen Service.
+- Patchgrund 2: Neues Templates-Modul für persistente Textbausteine/Promptvorlagen mit Favoriten-Schnellwahl und Copy-Feedback.
+- Betroffene Dateien: `js/app.js`, `js/services/diagnosis-export.js`, `js/services/templates-archive.js`, `js/services/ui-action-handlers.js`, `js/ui.js`, `js/state.js`, `index.html`, `css/app.css`, `data/templates-archive.json`, `tests/services/ui-action-handlers.smoke.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax, direkt betroffene Service-Logik und der kleine Smoke-Test ausgeführt.
