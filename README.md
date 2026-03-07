@@ -3,7 +3,7 @@
 ## Status oben
 - Erledigte Punkte: 13 (siehe `todo.txt`)
 - Offene Punkte: 3 (siehe `todo.txt`)
-- Fortschritt: 81%
+- Fortschritt: 84%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -11,8 +11,9 @@
   - `index.html` (Hauptoberfläche, wird nach erfolgreichem Start automatisch geöffnet)
   - `*_start.html` (Einzelstart pro Modul)
 - **Frontend**
-  - `css/app.css`
+  - `css/app.css` (inkl. farbliche Hilfehinweise, Tastatur- und Drag&Drop-Stati)
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
+  - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
   - `modules/*` (fachliche Module)
@@ -31,9 +32,11 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
-- Doku-Abgleich: Platzhalter werden nicht mehr als fertige Integration dargestellt.
-- Modulstatus hat jetzt zusätzlich ein kleines Statusfeld (`statusCode`) für maschinelle Auswertung.
-- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` auf den aktuellen Stand gebracht.
+- Hilfeelemente im Guide-Bereich verbessert: kurzer Bedienhinweis direkt am Index, klare ARIA-Beschriftung.
+- Intuitive Toolführung ergänzt: Tastaturnavigation (Pfeile, Enter/Leertaste), visuelle Auswahlfarben, verständliche Statusfarben.
+- Drag&Drop für die Reihenfolge ergänzt und direktes Feedback eingebaut.
+- Dynamische Anpassung erweitert: Guide-Ansicht wechselt zwischen Split- und Stapelmodus je Fensterbreite.
+- `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` aktualisiert.
 
 ## Wichtiger Hinweis zu Platzhaltern
 - `assets/css/base.css` und `assets/js/core.js` liegen im Projekt als Vorlagen-Stand.

@@ -54,9 +54,16 @@ export const initGuideToolsModule = () => {
   app.dataset.guideToolsBound = 'yes';
   const sections = readSections();
   let selectedIndex = 0;
+  let dragIndex = null;
 
-  const setFeedback = (text) => {
+  const setFeedback = (text, tone = 'neutral') => {
     feedback.textContent = `Status: ${text}`;
+    feedback.dataset.tone = tone;
+  };
+
+  const setLayoutMode = () => {
+    const compact = window.matchMedia('(max-width: 980px)').matches;
+    sectionList.dataset.layout = compact ? 'stacked' : 'split';
   };
 
   const selectIndex = (nextIndex) => {
@@ -66,16 +73,27 @@ export const initGuideToolsModule = () => {
     descriptionInput.value = active.description;
   };
 
+  const moveSection = (fromIndex, toIndex) => {
+    if (!Number.isInteger(fromIndex) || !Number.isInteger(toIndex)) return false;
+    if (fromIndex < 0 || toIndex < 0 || fromIndex >= sections.length || toIndex >= sections.length) return false;
+    if (fromIndex === toIndex) return false;
+    const [moved] = sections.splice(fromIndex, 1);
+    sections.splice(toIndex, 0, moved);
+    selectedIndex = toIndex;
+    return true;
+  };
+
   const render = () => {
     indexList.innerHTML = sections.map((section, index) => (
-      `<li><button type="button" class="btn-small" data-guide-index="${index}">${index + 1}. ${escapeHtml(section.title)}</button></li>`
+      `<li><button type="button" class="btn-small guide-index-btn ${index === selectedIndex ? 'is-selected' : ''}" data-guide-index="${index}" aria-current="${index === selectedIndex ? 'true' : 'false'}">${index + 1}. ${escapeHtml(section.title)}</button></li>`
     )).join('');
 
     sectionList.innerHTML = sections.map((section, index) => (
-      `<article id="guide-tool-section-${index}" class="guide-section ${index === selectedIndex ? 'is-selected' : ''}"><h4>${escapeHtml(section.title)}</h4><p>${escapeHtml(section.description)}</p></article>`
+      `<article id="guide-tool-section-${index}" class="guide-section ${index === selectedIndex ? 'is-selected' : ''}" role="option" aria-selected="${index === selectedIndex ? 'true' : 'false'}" tabindex="${index === selectedIndex ? '0' : '-1'}" data-guide-index="${index}" draggable="true"><h4>${escapeHtml(section.title)}</h4><p>${escapeHtml(section.description)}</p></article>`
     )).join('');
 
     writeSections(sections);
+    setLayoutMode();
   };
 
   form.addEventListener('submit', (event) => {
@@ -83,12 +101,12 @@ export const initGuideToolsModule = () => {
     const title = normalize(titleInput.value).slice(0, 80);
     const description = normalize(descriptionInput.value).slice(0, 400);
     if (!title || !description) {
-      setFeedback('Bitte Titel und Beschreibung ausfüllen.');
+      setFeedback('Bitte Titel und Beschreibung ausfüllen.', 'warn');
       return;
     }
     sections[selectedIndex] = { title, description };
     render();
-    setFeedback('Eintrag gespeichert.');
+    setFeedback('Eintrag gespeichert.', 'ok');
   });
 
   moveUpButton.addEventListener('click', () => {
@@ -96,7 +114,7 @@ export const initGuideToolsModule = () => {
     [sections[selectedIndex - 1], sections[selectedIndex]] = [sections[selectedIndex], sections[selectedIndex - 1]];
     selectIndex(selectedIndex - 1);
     render();
-    setFeedback('Eintrag nach oben verschoben.');
+    setFeedback('Eintrag nach oben verschoben.', 'ok');
   });
 
   moveDownButton.addEventListener('click', () => {
@@ -104,7 +122,7 @@ export const initGuideToolsModule = () => {
     [sections[selectedIndex + 1], sections[selectedIndex]] = [sections[selectedIndex], sections[selectedIndex + 1]];
     selectIndex(selectedIndex + 1);
     render();
-    setFeedback('Eintrag nach unten verschoben.');
+    setFeedback('Eintrag nach unten verschoben.', 'ok');
   });
 
   indexList.addEventListener('click', (event) => {
@@ -115,8 +133,69 @@ export const initGuideToolsModule = () => {
     render();
     const sectionNode = document.getElementById(`guide-tool-section-${index}`);
     sectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setFeedback(`Zu Abschnitt ${index + 1} gesprungen.`);
+    setFeedback(`Zu Abschnitt ${index + 1} gesprungen.`, 'neutral');
   });
+
+  indexList.addEventListener('keydown', (event) => {
+    if (!['ArrowUp', 'ArrowDown', 'Enter', ' '].includes(event.key)) return;
+    event.preventDefault();
+    if (event.key === 'ArrowUp') selectIndex(selectedIndex - 1);
+    if (event.key === 'ArrowDown') selectIndex(selectedIndex + 1);
+    render();
+    const activeButton = indexList.querySelector(`[data-guide-index="${selectedIndex}"]`);
+    activeButton?.focus();
+    if (event.key === 'Enter' || event.key === ' ') {
+      const sectionNode = document.getElementById(`guide-tool-section-${selectedIndex}`);
+      sectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setFeedback(`Abschnitt ${selectedIndex + 1} aktiv.`, 'neutral');
+    }
+  });
+
+  sectionList.addEventListener('dragstart', (event) => {
+    const card = event.target.closest('[data-guide-index]');
+    if (!card) return;
+    dragIndex = Number(card.getAttribute('data-guide-index'));
+    card.classList.add('is-dragging');
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', String(dragIndex));
+    }
+  });
+
+  sectionList.addEventListener('dragover', (event) => {
+    const card = event.target.closest('[data-guide-index]');
+    if (!card) return;
+    event.preventDefault();
+    card.classList.add('is-drop-target');
+  });
+
+  sectionList.addEventListener('dragleave', (event) => {
+    const card = event.target.closest('[data-guide-index]');
+    card?.classList.remove('is-drop-target');
+  });
+
+  sectionList.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const card = event.target.closest('[data-guide-index]');
+    const toIndex = Number(card?.getAttribute('data-guide-index'));
+    const from = Number.isInteger(dragIndex) ? dragIndex : Number(event.dataTransfer?.getData('text/plain'));
+    document.querySelectorAll('.guide-section.is-drop-target, .guide-section.is-dragging').forEach((node) => {
+      node.classList.remove('is-drop-target', 'is-dragging');
+    });
+    dragIndex = null;
+    if (!moveSection(from, toIndex)) return;
+    render();
+    setFeedback('Reihenfolge per Ziehen angepasst.', 'ok');
+  });
+
+  sectionList.addEventListener('dragend', () => {
+    dragIndex = null;
+    document.querySelectorAll('.guide-section.is-drop-target, .guide-section.is-dragging').forEach((node) => {
+      node.classList.remove('is-drop-target', 'is-dragging');
+    });
+  });
+
+  window.addEventListener('resize', setLayoutMode);
 
   selectIndex(0);
   render();
