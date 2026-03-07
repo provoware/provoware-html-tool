@@ -10,6 +10,20 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Auto-Formatierung prüfen
+1. Seite neu laden.
+2. **Selbsttest starten** klicken.
+3. In **Startstatus**, **Prüfergebnisse** und **Letzte Meldungen** prüfen:
+   - Texte starten sauber mit Großbuchstabe,
+   - Enden bekommen automatisch Punkt, wenn keiner vorhanden ist,
+   - lange Texte brechen ohne Layout-Bruch um.
+
+### Design-Feinschliff prüfen
+1. Mehrere Meldungen erzeugen (z. B. Struktur prüfen + Selbsttest).
+2. Im Log prüfen, ob Uhrzeiten ruhig untereinander stehen.
+3. Prüfen, ob lange Meldungen in Karten lesbar bleiben.
+
+## Kleine Erweiterung dieser Iteration (alt)
 ### Tool-Optik-Vorgabe schnell prüfen
 1. Seite neu laden.
 2. Auf drei Dinge achten:

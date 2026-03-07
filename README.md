@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 39
+- Erledigte Punkte: 41
 - Offene Punkte: 2
 - Fortschritt: 95%
 
@@ -69,6 +69,8 @@
 - Statuspanel und Logpanel für laienfreundliche Sicht.
 - Letzter gewählter Ordnername wird lokal gemerkt und beim Start angezeigt.
 - Neue Tool-Optik als Standard aktiviert (Größen, Raster, Karten-Look).
+- Vollautomatische Text-Formatierung für Checks, Logs und Start-Hinweise ergänzt.
+- Lesbarkeit in Check- und Log-Karten gezielt verbessert (Zeilenfluss, Umbruch, Zeitspalten).
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
@@ -86,3 +88,9 @@
 - Nach Neustart auf den Hinweis „zuletzt gewählt“ im Ordner-Status achten.
 - Empfehlung 1: Für sehr kleine Bildschirme zuerst den Main-Bereich prüfen, dann Navigation öffnen.
 - Empfehlung 2: Bei eigener Farbwahl den Kontrast von Überschrift und Buttontext immer gegenprüfen.
+
+## Iterationsprotokoll (kompakt)
+- Patchgrund 1: Uneinheitliche Texte in Checks/Logs wurden automatisch vereinheitlicht.
+- Patchgrund 2: Darstellung langer Meldungen wurde robuster gemacht.
+- Betroffene Dateien: `js/ui.js`, `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
