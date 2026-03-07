@@ -104,3 +104,17 @@ Mini-Test dafür:
 1. `node --test tests/services/ui-render-safety.test.js`
 
 Kurzregel: Nutzereingaben immer als Text ausgeben, nie als ungeprüftes HTML einfügen.
+
+
+## Kleine Erweiterung dieser Iteration (neu)
+### DOM-Sicherheitsstandard für Nutzdaten
+Für neue Ausgaben gilt jetzt eine klare Reihenfolge:
+1. Standard: DOM per `textContent` setzen.
+2. Ausnahme: `innerHTML` oder `insertAdjacentHTML` nur mit Kommentar-Begründung direkt am Code.
+3. HTML-Strings nur über `js/services/html-escape.js` (zentraler Escape-Einstieg).
+
+Mini-Prüfung:
+1. `node --test tests/services/ui-render-safety.test.js`
+2. Prüfen, dass Injection-Payloads (`<img onerror=...>`, `<script>...`) nur als Text sichtbar sind.
+
+Kurzregel: Erst `textContent`, sonst klar begründete Ausnahme mit zentralem Escape.
