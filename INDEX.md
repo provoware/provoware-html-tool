@@ -2,6 +2,8 @@
 
 ## Iterationshinweis
 - Diese Iteration hat eine kleine Guide-Vereinheitlichung umgesetzt (gemeinsame Helper für Index-Auslesen und Verschieben).
+- Diese Iteration hat die Guide-Tastatur (ArrowUp/ArrowDown/Enter/Leertaste) auf einen gemeinsamen Navigations-Helper vereinheitlicht.
+- Diese Iteration hat einen gezielten Mini-Test für Guide-Reorder/Index-Pfade ergänzt (`tests/modules/guide-tools-module.test.js`).
 - Diese Iteration hat neue Dateien für Renderer- und Domain-Aufteilung ergänzt.
 - Verzeichnisbaum und Dateiliste sind vollständig aktualisiert (ohne `.git`).
 
@@ -122,7 +124,8 @@
 │  ├─ adapters
 │  │  └─ desktop-filesystem.test.js
 │  ├─ modules
-│  │  └─ datenbank-baukasten.test.js
+│  │  ├─ datenbank-baukasten.test.js
+│  │  └─ guide-tools-module.test.js
 │  ├─ scripts-laienstart.dry-run.test.js
 │  ├─ services
 │  │  ├─ import-export-consistency.test.js
@@ -230,15 +233,16 @@
 87. `start.sh`
 88. `tests/adapters/desktop-filesystem.test.js`
 89. `tests/modules/datenbank-baukasten.test.js`
-90. `tests/scripts-laienstart.dry-run.test.js`
-91. `tests/services/import-export-consistency.test.js`
-92. `tests/services/module-registry.test.js`
-93. `tests/services/project-selftest.test.js`
-94. `tests/services/startup-check.test.js`
-95. `tests/services/ui-action-handlers.smoke.test.js`
-96. `tests/services/ui-header-chips.test.js`
-97. `tests/services/ui-render-safety.test.js`
-98. `tests/start-files/start-import-resolution.test.js`
-99. `todo.txt`
-100. `todo_kalender_erinnerung_start.html`
-101. `wiki_notiz_wissen_start.html`
+90. `tests/modules/guide-tools-module.test.js`
+91. `tests/scripts-laienstart.dry-run.test.js`
+92. `tests/services/import-export-consistency.test.js`
+93. `tests/services/module-registry.test.js`
+94. `tests/services/project-selftest.test.js`
+95. `tests/services/startup-check.test.js`
+96. `tests/services/ui-action-handlers.smoke.test.js`
+97. `tests/services/ui-header-chips.test.js`
+98. `tests/services/ui-render-safety.test.js`
+99. `tests/start-files/start-import-resolution.test.js`
+100. `todo.txt`
+101. `todo_kalender_erinnerung_start.html`
+102. `wiki_notiz_wissen_start.html`

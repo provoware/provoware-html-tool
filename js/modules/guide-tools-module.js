@@ -90,6 +90,18 @@ export const initGuideToolsModule = () => {
     return true;
   };
 
+  const navigateIndex = (nextIndex, options = {}) => {
+    const { jump = false, feedbackText = '' } = options;
+    selectIndex(nextIndex);
+    render();
+    const activeButton = indexList.querySelector(`[data-guide-index="${selectedIndex}"]`);
+    activeButton?.focus();
+    if (!jump) return;
+    const sectionNode = document.getElementById(`guide-tool-section-${selectedIndex}`);
+    sectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (feedbackText) setFeedback(feedbackText, 'neutral');
+  };
+
   const render = () => {
     // Ausnahme mit Begründung: Wir bauen hier bewusst Markup für Buttons; Nutzdaten werden vorher mit escapeHtml entschärft.
     indexList.innerHTML = sections.map((section, index) => (
@@ -131,25 +143,22 @@ export const initGuideToolsModule = () => {
   indexList.addEventListener('click', (event) => {
     const index = readGuideIndex(event.target);
     if (!Number.isInteger(index) || index < 0 || index >= sections.length) return;
-    selectIndex(index);
-    render();
-    const sectionNode = document.getElementById(`guide-tool-section-${index}`);
-    sectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setFeedback(`Zu Abschnitt ${index + 1} gesprungen.`, 'neutral');
+    navigateIndex(index, {
+      jump: true,
+      feedbackText: `Zu Abschnitt ${index + 1} gesprungen.`
+    });
   });
 
   indexList.addEventListener('keydown', (event) => {
     if (!['ArrowUp', 'ArrowDown', 'Enter', ' '].includes(event.key)) return;
     event.preventDefault();
-    if (event.key === 'ArrowUp') selectIndex(selectedIndex - 1);
-    if (event.key === 'ArrowDown') selectIndex(selectedIndex + 1);
-    render();
-    const activeButton = indexList.querySelector(`[data-guide-index="${selectedIndex}"]`);
-    activeButton?.focus();
+    if (event.key === 'ArrowUp') navigateIndex(selectedIndex - 1);
+    if (event.key === 'ArrowDown') navigateIndex(selectedIndex + 1);
     if (event.key === 'Enter' || event.key === ' ') {
-      const sectionNode = document.getElementById(`guide-tool-section-${selectedIndex}`);
-      sectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setFeedback(`Abschnitt ${selectedIndex + 1} aktiv.`, 'neutral');
+      navigateIndex(selectedIndex, {
+        jump: true,
+        feedbackText: `Abschnitt ${selectedIndex + 1} aktiv.`
+      });
     }
   });
 

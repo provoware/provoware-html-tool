@@ -10,6 +10,19 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Guide-Tastatur jetzt komplett über einen Navigations-Helper
+Im Guide-Index laufen jetzt auch Pfeiltasten und Sprungtasten über einen gemeinsamen Mini-Helper.
+
+Was das bringt:
+- Auswahlpfad (`ArrowUp`/`ArrowDown`) und Sprungpfad (`Enter`/`Leertaste`) sind zentral.
+- Die Bedienung bleibt gleich, aber spätere Anpassungen sind sicherer.
+
+Mini-Test für genau diesen Bereich:
+1. `node --test tests/modules/guide-tools-module.test.js`
+
+Kurzregel: Bei Guide-Navigation immer nur den kleinen Guide-Test starten, bevor du breiter testest.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Guide intern vereinheitlicht (leichter wartbar)
 Im Bereich **Anleitungen und Toolbeschreibungen** wurden wiederkehrende Schritte intern gebündelt:
 - Ein kleiner Helper liest den Abschnitts-Index zentral aus.
