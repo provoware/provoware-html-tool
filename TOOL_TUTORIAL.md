@@ -12,6 +12,16 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Design-Abgleich in 5 Minuten
+Wenn du die Vorlage mit dem aktuellen Stand vergleichst, arbeite kurz mit dieser Reihenfolge:
+1. `DESIGN_VORLAGE.md` öffnen und den Abschnitt **„Soll-Ist-Abgleich (Iteration 2026-03-07)”** lesen.
+2. Nur die Priorität-A-Punkte zuerst anfassen (Farbwelt, Header-Mikrostruktur).
+3. Vor jedem CSS-Patch prüfen: keine IDs/JS-Anker ändern.
+
+Kurzregel: erst Lücke messen, dann kleinsten sichtbaren Patch bauen.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Header-Tasten: Fokus besser sichtbar
 Oben rechts im Header haben jetzt auch diese zwei Tasten den klaren Token-Fokus:

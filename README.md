@@ -2,8 +2,8 @@
 
 ## Status oben
 - Erledigte Punkte: 22 (siehe `todo.txt`)
-- Offene Punkte: 0 (siehe `todo.txt`)
-- Fortschritt: 100%
+- Offene Punkte: 3 (siehe `todo.txt`)
+- Fortschritt: 88%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -40,6 +40,9 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Design-Soll-Ist-Abgleich geschärft: `DESIGN_VORLAGE.md` enthält jetzt einen messbaren 7-Punkte-Check mit klaren Lücken und Prioritäten.
+- Drei offene, klar abgegrenzte Design-Folgeaufgaben wurden in `todo.txt` geparkt (Farbwelt, Header-Mikrostruktur, Utility-Kartenaufteilung).
+- Ergebnis: Fokus liegt jetzt auf den kleinsten, visuellen Hebeln mit hoher Wirkung, ohne stabile JS-Logik anzufassen.
 - Header-Fokus-Muster minimal erweitert: Die Buttons **„Linke Leiste“** und **„Rechte Leiste“** nutzen jetzt denselben tokenbasierten Fokusstil wie die Header-Chips (ohne Strukturumbau).
 - Mini-Designabgleich dokumentiert: Ein kleines Farbtoken-Cluster für Header-Aktionen wurde in `DESIGN_VORLAGE.md` gegen die Primärfarben abgeglichen.
 - Offener TODO-Punkt „Modulstandard nur bei echtem Eingriff“ als eingehalten abgeschlossen, da keine `modules/*/logic.js` geändert wurden.
