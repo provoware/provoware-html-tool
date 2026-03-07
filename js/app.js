@@ -221,15 +221,20 @@ const selectDirectory = async (allowWritePermission) => {
   await runSelftest(false);
   await loadProfileArchive();
 
-  const start = await runStartupCheck(window.appState.projectStructure, { requestWrite: allowWritePermission === true });
-  setState({ debug: { startupReady: start.ok } });
-  logEvent(start.ok ? 'INFO' : 'WARN', start.code, start.message, start.data);
+  await runStartupReadinessCheck(window.appState.projectStructure, allowWritePermission);
 };
 
 const ensureStructure = async () => {
   const result = await filesystemAdapter.ensureProjectStructure(window.appState.projectStructure);
   logEvent(result.ok ? 'INFO' : 'WARN', result.code, result.message, result.data);
   await runSelftest(false);
+};
+
+
+const runStartupReadinessCheck = async (projectStructure, allowWritePermission) => {
+  const start = await runStartupCheck(projectStructure, { requestWrite: allowWritePermission === true });
+  setState({ debug: { startupReady: start.ok } });
+  logEvent(start.ok ? 'INFO' : 'WARN', start.code, start.message, start.data);
 };
 
 const onResize = () => {
@@ -282,9 +287,7 @@ const init = async () => {
 
   await loadTemplateArchive();
 
-  const start = await runStartupCheck(loaded.data.projectStructure, { requestWrite: allowWritePermission === true });
-  setState({ debug: { startupReady: start.ok } });
-  logEvent(start.ok ? 'INFO' : 'WARN', start.code, start.message, start.data);
+  await runStartupReadinessCheck(loaded.data.projectStructure, allowWritePermission);
 
   window.addEventListener('resize', onResize);
   render();

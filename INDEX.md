@@ -1,5 +1,9 @@
 # INDEX
 
+## Iterationshinweis
+- Diese Iteration hat keine neuen Dateien erzeugt oder gelöscht.
+- Verzeichnisbaum und Dateiliste bleiben unverändert vollständig.
+
 ## Kompletter Verzeichnisbaum (ohne `.git`)
 
 ```text

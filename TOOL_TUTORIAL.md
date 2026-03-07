@@ -13,6 +13,17 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Kleine Refaktor-Regel für Startlogik
+Wenn Startlogik an zwei Stellen gleich aussieht, zuerst einen kleinen gemeinsamen Helper bauen.
+
+Beispiel in dieser Iteration:
+- In `js/app.js` läuft der Startup-Readiness-Check jetzt über **eine** Funktion.
+- Ergebnis: gleiches Verhalten, aber weniger doppelte Wartungsstellen.
+
+Kurzregel: Duplizierten Startcode zuerst bündeln, dann erst erweitern.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Design-Abgleich in 5 Minuten
 Wenn du die Vorlage mit dem aktuellen Stand vergleichst, arbeite kurz mit dieser Reihenfolge:

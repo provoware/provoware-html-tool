@@ -2,8 +2,8 @@
 
 ## Status oben
 - Erledigte Punkte: 24 (siehe `todo.txt`)
-- Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 96%
+- Offene Punkte: 3 (siehe `todo.txt`)
+- Fortschritt: 89%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -15,6 +15,7 @@
   - Neu: Farbtoken für Header und Utility-Karten (kühl-blau/grau, zentral über `:root` steuerbar)
   - Neu: `DESIGN_VORLAGE.md` (tiefe Bildanalyse mit Farb- und Layout-Token als Umsetzungs-Vorlage)
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
+  - Neu: Start-Readiness-Check in `js/app.js` als gemeinsamer Helper gebündelt (weniger doppelte Startlogik).
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
   - Neu: `js/modules/plugin-manager.js` (Plugin-Auswahl, Zeichenzähler und einfache Rechtschreibprüfung DE/EN/FR mit Auto-Sprachschätzung)
 - **Module und Services**
@@ -41,6 +42,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Kleine Robustheits-Refaktorierung: doppelter Startup-Readiness-Block in `js/app.js` wurde in einen gemeinsamen Helper ausgelagert (gleiches Verhalten, weniger Dupplikatcode).
+- Für Vollmodularität wurden zwei offene, klar messbare Folgeschritte in `todo.txt` ergänzt (UI-Renderer-Split und Action-Handler-Domänentrennung).
 - Priorität A umgesetzt: Farbwelt über CSS-Token geschärft und Header-Mikrostruktur minimal verbessert (ohne JS-Ankeränderung).
 - Rechte Spalte in Utility-Karten gegliedert; unter 980px gezielt auf Layoutbruch geprüft und stabilisiert.
 - Design-Soll-Ist-Abgleich geschärft: `DESIGN_VORLAGE.md` enthält jetzt einen messbaren 7-Punkte-Check mit klaren Lücken und Prioritäten.
