@@ -11,6 +11,19 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Header-Tasten: Fokus besser sichtbar
+Oben rechts im Header haben jetzt auch diese zwei Tasten den klaren Token-Fokus:
+- `Linke Leiste`
+- `Rechte Leiste`
+
+Was sich für dich ändert:
+- Beim Tabben ist der aktive Button sofort sichtbar.
+- Die Farben bleiben nah an der Designvorlage (Primär-Blau-Cluster).
+
+Kurzregel: Wenn du per Tastatur arbeitest, müssen beide Header-Tasten den gleichen klaren Fokus zeigen.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Header-Chips gezielt testen (ohne Full-UI-Test)
 Wenn du nur den Header prüfen willst, nutze genau diesen Test:

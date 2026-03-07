@@ -72,6 +72,17 @@ Ziel: **möglichst exakte Annäherung** bei Farben, Glas-Effekt, Aufteilung und 
 - Erfolg: grünlicher Verlauf auf dunkler Basis
 - Warnung: amber/orange Verlauf auf dunkler Basis
 
+
+### Mini-Abgleich (Iteration 2026-03-07): Farbtoken-Cluster „Primär-Interaktion Header"
+- Ziel: Fokusfarbe für Header-Aktionen näher an die Primär-Token `#3479ff` bis `#1849bc` bringen.
+- Betroffene CSS-Token:
+  - `--header-action-focus-ring`
+  - `--header-action-focus-border`
+- Ergebnis:
+  - Fokus-Ring der Header-Buttons nutzt jetzt ein klareres Blau im Primärbereich.
+  - Fokus-Rand bleibt hell genug für guten Kontrast auf dunklem Glas-Hintergrund.
+- Hinweis: Nur ein Token-Cluster wurde angepasst (kein Layout- oder Strukturumbau).
+
 ### Flächentoken
 - Kartenhintergrund: `linear-gradient(152deg, rgba(56,73,104,.64), rgba(17,27,43,.64))`
 - App-Hintergrund: dunkles Blau mit radialen Highlights

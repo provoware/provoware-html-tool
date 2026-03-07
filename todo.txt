@@ -14,7 +14,7 @@
 [x] 2026-03-07 | scripts/laienstart.sh + Startkette | Linux-Rechteprüfung, Projektordner-Schreibcheck, freie-Port-Alternative und fehlerfreier GUI-Start als eigene robuste Startroutine ergänzen | prüfen: Dry-Run + Start mit belegtem Port + Start ohne Schreibrechte simulieren | fertig wenn: Start wählt freien Port automatisch, meldet Rechteprobleme klar und startet GUI ohne manuellen Eingriff
 
 ## Mittel
-[ ] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
+[x] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen (in dieser Iteration eingehalten: keine `modules/*/logic.js`-Änderung) | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
 [x] 2026-03-07 | js/adapters/desktop-filesystem.js | Stub-Adapter-Verhalten verständlicher machen (klare Nutzerhinweise im Fehlertext) | prüfen: Rückgabemeldung im UI-Log lesbar und eindeutig | fertig wenn: Meldung sagt klar, was fehlt und was der nächste Schritt ist
 [x] 2026-03-07 | js/services/module-registry.js | riskante Importzusammenführungen absichern, wenn Bereich erneut betroffen ist | prüfen: bei nächster Änderung gezielt Regressionstest der Registry-Ausgabe | fertig wenn: Zusammenführung ohne neue Doppelblöcke abgesichert ist
 [x] 2026-03-07 | Dokumentation | Platzhalter nicht als fertige Integration darstellen | prüfen: README/Tutorial auf Aussagen wie „aktiv“, „vollständig“ gegen Codezustand prüfen | fertig wenn: nur reale Integrationen als erledigt markiert sind

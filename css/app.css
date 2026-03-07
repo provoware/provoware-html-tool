@@ -16,6 +16,8 @@
   --focus: 0 0 0 3px rgba(126, 152, 255, 0.4);
   --header-chip-focus-ring: 0 0 0 3px rgba(210, 227, 255, 0.58);
   --header-chip-focus-border: rgba(233, 242, 255, 0.94);
+  --header-action-focus-ring: 0 0 0 3px rgba(142, 188, 255, 0.42);
+  --header-action-focus-border: rgba(205, 227, 255, 0.92);
   --grid-line: rgba(102, 126, 164, 0.2);
   --space-1: 8px;
   --space-2: 12px;
@@ -1068,6 +1070,8 @@ body::before {
   --text-muted: #c5d3ed;
   --accent: #3b82f6;
   --accent-strong: #1d4ed8;
+  --header-action-focus-ring: 0 0 0 3px rgba(109, 166, 255, 0.5);
+  --header-action-focus-border: rgba(181, 214, 255, 0.96);
   --shadow: 0 24px 44px rgba(2, 8, 20, 0.58);
   --radius: 20px;
 }
@@ -1132,6 +1136,12 @@ body::before {
 .header-status-chip:focus-visible {
   border-color: var(--header-chip-focus-border);
   box-shadow: var(--header-chip-focus-ring), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+#toggle-left-sidebar:focus-visible,
+#toggle-right-sidebar:focus-visible {
+  border-color: var(--header-action-focus-border);
+  box-shadow: var(--header-action-focus-ring), inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .header p,
