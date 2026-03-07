@@ -1,4 +1,8 @@
-const MODULE_FILES = ['manifest', 'config', 'texts', 'schema', 'logic'];
+const MODULE_FILES = Object.freeze(['manifest', 'config', 'texts', 'schema', 'logic']);
+const MODULE_PROFILE = Object.freeze({
+  id: 'datenbank_baukasten',
+  files: Object.freeze(['manifest', 'config', 'texts', 'schema', 'logic'])
+});
 
 function applyStartStatus() {
   const statusText = document.getElementById('status-text');
@@ -25,18 +29,22 @@ function registerModules() {
     return;
   }
 
-  const module = {
-    id: 'datenbank_baukasten',
-    files: ['manifest', 'config', 'texts', 'schema', 'logic']
-  };
+  const profileFiles = MODULE_PROFILE.files;
+  const uniqueProfileFiles = [...new Set(profileFiles)];
+  const missingFiles = MODULE_FILES.filter((fileKey) => !uniqueProfileFiles.includes(fileKey));
+  const extraFiles = uniqueProfileFiles.filter((fileKey) => !MODULE_FILES.includes(fileKey));
 
-  const missingFiles = MODULE_FILES.filter((fileKey) => !module.files.includes(fileKey));
   if (missingFiles.length > 0) {
-    moduleCardText.textContent = `Modul ${module.id} unvollständig. Fehlend: ${missingFiles.join(', ')}.`;
+    moduleCardText.textContent = `Modulprofil ${MODULE_PROFILE.id} unvollständig. Fehlend: ${missingFiles.join(', ')}.`;
     return;
   }
 
-  moduleCardText.textContent = `1 Modul bereit: ${module.id}. Mindestteile vollständig.`;
+  if (extraFiles.length > 0) {
+    moduleCardText.textContent = `Modulprofil ${MODULE_PROFILE.id} ungültig. Unerwartet: ${extraFiles.join(', ')}.`;
+    return;
+  }
+
+  moduleCardText.textContent = `1 Modulprofil bereit: ${MODULE_PROFILE.id}. Mindestteile konsistent hinterlegt.`;
 }
 
 function bootstrap() {

@@ -1,7 +1,7 @@
 # ProvoWare HTML Tool
 
 ## Statusanzeige (aktuell)
-- Erledigte Punkte gesamt: 8
+- Erledigte Punkte gesamt: 10
 - Offene Punkte gesamt: 0
 - Entwicklungsfortschritt: 100%
 
@@ -23,18 +23,17 @@
   - `modules/datenbank_baukasten/schema.json`
   - `modules/datenbank_baukasten/logic.js`
 - Umfang dieser Iteration:
-  - Startstatus reagiert jetzt auf Online-/Offline-Wechsel in `assets/js/core.js`.
-  - Statustext passt sich automatisch an die Verbindungsart an.
+  - Modulprofil im Core gegen Fehlkonfiguration gehärtet (fehlende und unerwartete Teile).
+  - Modulvorgaben im Core per `Object.freeze` gegen Laufzeit-Manipulation stabilisiert.
+  - `index.html` hat jetzt eine enge CSP (Sicherheitsrichtlinie) gegen unnötige Skriptquellen.
   - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
-  - Muster-Modul `datenbank_baukasten` als kopierbares Datei-Set angelegt.
-  - Startstruktur für Modul-Registrierung auf das Muster-Modul erweitert.
-  - Einfacher Hinweis bei unvollständigem Modul im Core ergänzt (Robustheit).
 
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
 - Dashboard-Skelett ist als stabile Basis vorhanden.
 - Basis-Statuswechsel im JavaScript-Core ist aktiv und reagiert auf Verbindungswechsel.
-- Modul-Muster ist vollständig und direkt kopierbar.
+- Modulprofil-Check arbeitet jetzt konsistent und meldet Fehlkonfiguration klar.
+- CSP-Basisschutz ist aktiv und begrenzt erlaubte Inhaltsquellen.
 
 ## Nächste Schritte (kurz)
 1. Optional zweites Modul nach gleichem Muster testen.
@@ -50,9 +49,9 @@
 - Start-Dokumentation nur in `README.md` und `todo.txt`.
 
 ## Empfehlungsliste (kurz)
-- Nächstes Patchziel auf P4 begrenzen, damit das Modulmuster sauber entsteht.
+- Bei neuen Modulen nur bekannte Dateischlüssel zulassen, damit der Profil-Check klar bleibt.
+- CSP nur gezielt lockern, wenn es einen konkreten Funktionsgrund gibt.
 - Verbindungsstatus-Texte in einfacher Sprache beibehalten.
-- Beim nächsten Modul exakt die fünf Mindestteile aus dem Muster übernehmen.
 - Erst bei mehreren Modulen auf automatische Verzeichnis-Leselogik erweitern.
 - `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
 
