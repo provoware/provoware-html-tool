@@ -41,7 +41,7 @@ test('laienstart dry-run liest dependencies aus JSON und repariert fehlende Date
     encoding: 'utf8'
   });
 
-  assert.match(output, /Aktive Pflicht-Abhängigkeiten aus JSON: node bash/);
+  assert.match(output, /Aktive Pflicht-Abhängigkeiten: node bash/);
   assert.match(output, /Dry-Run aktiv/);
 
   const repairedFiles = [

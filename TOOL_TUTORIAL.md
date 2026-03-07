@@ -4,23 +4,23 @@
 Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 ## Schnellstart
-1. `laienstart.html` im Browser öffnen (Team-Standard).
-2. Auf **Ordner wählen** klicken.
-3. Danach **Selbsttest starten**.
-4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
+1. `./start.sh` im Projektordner ausführen (Team-Standard).
+2. Hinweise im Terminal lesen (Vorvalidierung läuft automatisch).
+3. Browser öffnet sich bei Erfolg automatisch mit `index.html`.
+4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Vollautomatischer Shell-Laienstart mit Self-Repair
 Wenn du lieber per Terminal startest, nutze jetzt genau einen Befehl:
-1. `bash scripts/laienstart.sh`
+1. `./start.sh`
 
 Was dabei automatisch passiert:
 - Pflicht-Abhängigkeiten werden aus `data/laienstart-dependency-map.json` gelesen und dann geprüft (z. B. `node`, `python3`).
 - Wenn möglich, wird fehlende Software automatisch installiert (`apt-get` oder `brew`).
 - Fehlende Kern-JSON-Dateien werden als sichere Standard-Dummys angelegt.
-- Danach startet der lokale Server und öffnet `laienstart.html`.
-- Für einen sicheren Test ohne Serverstart: `bash scripts/laienstart.sh --dry-run` (prüft JSON-Lesen + Self-Repair).
+- Danach startet der lokale Server und öffnet `index.html`.
+- Für einen sicheren Test ohne Serverstart: `./start.sh --dry-run` (prüft Vorvalidierung + Self-Repair).
 
 Kurzregel: Ein Befehl starten, bei Bedarf Hinweise lesen, dann normal weiterarbeiten.
 
@@ -160,3 +160,15 @@ Intern wird dabei jetzt verwendet:
 
 Kurzregel: Bei `import`/`export` immer den Minimal-Check nutzen, nicht den alten `node --check`-Einzelaufruf ohne Flag.
 
+
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Intelligente Startroutine mit Erfolgsprüfung
+Die Startroutine prüft jetzt vor und nach dem Start automatisch:
+- Vor dem Start: Schreibrechte, JSON-Gültigkeit und Pflichtdateien.
+- Bei Lücken: gezielte Self-Repair für bekannte Standarddateien.
+- Nach dem Start: Erfolgsvalidierung per URL-Check auf `index.html`.
+
+Wenn etwas scheitert, bekommst du klare Meldungen mit direkter Handlung.
+
+Kurzregel: immer `./start.sh` nutzen, nicht einzelne Startdateien öffnen.

@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Minimal-Check-Robustheit für ES-Module unter Node 18
+- Iterationsfokus: Laien-Start vollständig über `start.sh` mit Vorvalidierung, Self-Repair und Erfolgsvalidierung
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
@@ -95,7 +95,6 @@
 - │  ├─ laienstart.sh
 - │  └─ minimal-check.sh
 - ├─ tests
-- │  ├─ scripts-laienstart.dry-run.test.js
 - │  ├─ adapters
 - │  │  └─ desktop-filesystem.test.js
 - │  ├─ services
@@ -105,20 +104,21 @@
 - │  │  ├─ startup-check.test.js
 - │  │  ├─ ui-action-handlers.smoke.test.js
 - │  │  └─ ui-render-safety.test.js
-- │  └─ start-files
-- │     └─ start-import-resolution.test.js
+- │  ├─ start-files
+- │  │  └─ start-import-resolution.test.js
+- │  └─ scripts-laienstart.dry-run.test.js
 - ├─ AGENTS.md
-- ├─ INDEX.md
-- ├─ README.md
-- ├─ TOOL_TUTORIAL.md
 - ├─ backup_funktions_modul_start.html
 - ├─ datenbank_baukasten_start.html
 - ├─ debugging_modul_start.html
 - ├─ index.html
-- ├─ laienstart.html
+- ├─ INDEX.md
 - ├─ logging_modul_start.html
+- ├─ README.md
+- ├─ start.sh
 - ├─ todo.txt
 - ├─ todo_kalender_erinnerung_start.html
+- ├─ TOOL_TUTORIAL.md
 - └─ wiki_notiz_wissen_start.html
 
 ## Vollständige Dateiliste (ohne `.git`)
@@ -168,48 +168,48 @@
 43. `js/state.js`
 44. `js/status-visuals.js`
 45. `js/ui.js`
-46. `laienstart.html`
-47. `logging_modul_start.html`
-48. `modules/backup_funktions_modul/config.json`
-49. `modules/backup_funktions_modul/logic.js`
-50. `modules/backup_funktions_modul/manifest.json`
-51. `modules/backup_funktions_modul/schema.json`
-52. `modules/backup_funktions_modul/texts.json`
-53. `modules/datenbank_baukasten/config.json`
-54. `modules/datenbank_baukasten/logic.js`
-55. `modules/datenbank_baukasten/manifest.json`
-56. `modules/datenbank_baukasten/schema.json`
-57. `modules/datenbank_baukasten/texts.json`
-58. `modules/debugging_modul/config.json`
-59. `modules/debugging_modul/logic.js`
-60. `modules/debugging_modul/manifest.json`
-61. `modules/debugging_modul/schema.json`
-62. `modules/debugging_modul/texts.json`
-63. `modules/logging_modul/config.json`
-64. `modules/logging_modul/logic.js`
-65. `modules/logging_modul/manifest.json`
-66. `modules/logging_modul/schema.json`
-67. `modules/logging_modul/texts.json`
-68. `modules/todo_kalender_erinnerung/config.json`
-69. `modules/todo_kalender_erinnerung/logic.js`
-70. `modules/todo_kalender_erinnerung/manifest.json`
-71. `modules/todo_kalender_erinnerung/schema.json`
-72. `modules/todo_kalender_erinnerung/texts.json`
-73. `modules/wiki_notiz_wissen/config.json`
-74. `modules/wiki_notiz_wissen/logic.js`
-75. `modules/wiki_notiz_wissen/manifest.json`
-76. `modules/wiki_notiz_wissen/schema.json`
-77. `modules/wiki_notiz_wissen/texts.json`
-78. `scripts/laienstart.sh`
-79. `scripts/minimal-check.sh`
+46. `logging_modul_start.html`
+47. `modules/backup_funktions_modul/config.json`
+48. `modules/backup_funktions_modul/logic.js`
+49. `modules/backup_funktions_modul/manifest.json`
+50. `modules/backup_funktions_modul/schema.json`
+51. `modules/backup_funktions_modul/texts.json`
+52. `modules/datenbank_baukasten/config.json`
+53. `modules/datenbank_baukasten/logic.js`
+54. `modules/datenbank_baukasten/manifest.json`
+55. `modules/datenbank_baukasten/schema.json`
+56. `modules/datenbank_baukasten/texts.json`
+57. `modules/debugging_modul/config.json`
+58. `modules/debugging_modul/logic.js`
+59. `modules/debugging_modul/manifest.json`
+60. `modules/debugging_modul/schema.json`
+61. `modules/debugging_modul/texts.json`
+62. `modules/logging_modul/config.json`
+63. `modules/logging_modul/logic.js`
+64. `modules/logging_modul/manifest.json`
+65. `modules/logging_modul/schema.json`
+66. `modules/logging_modul/texts.json`
+67. `modules/todo_kalender_erinnerung/config.json`
+68. `modules/todo_kalender_erinnerung/logic.js`
+69. `modules/todo_kalender_erinnerung/manifest.json`
+70. `modules/todo_kalender_erinnerung/schema.json`
+71. `modules/todo_kalender_erinnerung/texts.json`
+72. `modules/wiki_notiz_wissen/config.json`
+73. `modules/wiki_notiz_wissen/logic.js`
+74. `modules/wiki_notiz_wissen/manifest.json`
+75. `modules/wiki_notiz_wissen/schema.json`
+76. `modules/wiki_notiz_wissen/texts.json`
+77. `scripts/laienstart.sh`
+78. `scripts/minimal-check.sh`
+79. `start.sh`
 80. `tests/adapters/desktop-filesystem.test.js`
-81. `tests/services/import-export-consistency.test.js`
-82. `tests/services/module-registry.test.js`
-83. `tests/services/project-selftest.test.js`
-84. `tests/services/startup-check.test.js`
-85. `tests/services/ui-action-handlers.smoke.test.js`
-86. `tests/services/ui-render-safety.test.js`
-87. `tests/scripts-laienstart.dry-run.test.js`
+81. `tests/scripts-laienstart.dry-run.test.js`
+82. `tests/services/import-export-consistency.test.js`
+83. `tests/services/module-registry.test.js`
+84. `tests/services/project-selftest.test.js`
+85. `tests/services/startup-check.test.js`
+86. `tests/services/ui-action-handlers.smoke.test.js`
+87. `tests/services/ui-render-safety.test.js`
 88. `tests/start-files/start-import-resolution.test.js`
 89. `todo.txt`
 90. `todo_kalender_erinnerung_start.html`
