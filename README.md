@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 26 (siehe `todo.txt`)
+- Erledigte Punkte: 27 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Dashboard-Notizpfade weiter vereinheitlicht (Fehler-Helper auch beim Datei-Öffnen) und Save-Fehlerfälle per Test abgesichert.
+- Stand dieser Iteration: Template-IDs werden jetzt in `data-template-*`-Attributen sicher escaped, damit keine Attribut-Injektion über manipulierte IDs möglich ist.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -49,6 +49,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Sicherheits- und Robustheitsfix: `item.id` wird in Template-Listen/Favoriten für `data-template-*` konsequent escaped, damit eingeschleuste Anführungszeichen keine fremden Attribute erzeugen.
+- Neuer gezielter Sicherheitstest: prüft, dass eine manipulierte Template-ID (`x" onclick="...`) nur als escaped Attributwert gerendert wird.
 - Barrierefreiheit verbessert: klarere Fokus-Umrandung, sichtbare Zoom-Rückmeldung und kurze Zoom-Hinweise im Footer.
 - Nutzerfreundlichkeit verbessert: Theme-Auswahl direkt im Header mit vier Design-Themes aus der Vorlage.
 - Schriftgröße ist jetzt stabil per Strg+Mausrad und Strg+Plus/Minus zoombar; Strg+0 setzt zurück.
