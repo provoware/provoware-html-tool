@@ -94,6 +94,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Danach auf **Export** und **Diagnose exportieren** klicken.
 5. Ziel: Alle Aktionen laufen unverändert, obwohl die Handler jetzt zentral in einem Service liegen.
 
+### To-do-Datenfluss minimal prüfen (neu)
+1. Datei `modules/todo_kalender_erinnerung/logic.js` öffnen.
+2. Mit kurzer Probe (Konsole oder Testskript) eine Aufgabe mit Titel anlegen und `createTodoEntry(...)` ausführen.
+3. Danach mit `markTodoDone(...)` auf erledigt setzen und mit `reactivateTodo(...)` wieder öffnen.
+4. Mit `filterTodos(...)` nach `status`, `area` oder `priority` filtern.
+5. Mit `exportTodosAsJson(...)` oder `exportTodosAsCsv(...)` den Exporttext erzeugen.
+
 ## Auto-Formatierung prüfen
 ### Statusbereich rechts mit Symbolen prüfen
 1. Seite neu laden.
@@ -130,4 +137,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: UI-Aktionsverdrahtung als eigener Service für klarere Modulgrenzen
+- Iterationsfokus: To-do-Modul robust für Aufgabenfluss und Statusverwaltung erweitert

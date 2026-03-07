@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: UI-Aktionsverdrahtung als eigener Service für bessere Wartbarkeit
+- Iterationsfokus: To-do-Modul inhaltlich erweitert (Status, Filter, Export, Persistenzstruktur)
 
 ## Verzeichnisbaum (ohne `.git`)
 
