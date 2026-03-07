@@ -1,6 +1,6 @@
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Robuste Statusanzeige mit Symbolen (ok/gelb/rot)
+- Iterationsfokus: Einheitliche Statussymbole inkl. Lesen/Schreiben/Struktur + ausgelagerte Status-Visuals
 
 ## Verzeichnisbaum (ohne `.git`)
 
@@ -29,6 +29,7 @@
 │   │   ├── desktop-filesystem.js
 │   │   └── filesystem-adapter.js
 │   ├── app.js
+│   ├── status-visuals.js
 │   ├── services
 │   │   ├── config-loader.js
 │   │   ├── logger.js
@@ -74,15 +75,16 @@
 19. `js/services/project-selftest.js`
 20. `js/services/startup-check.js`
 21. `js/state.js`
-22. `js/ui.js`
-23. `modules/datenbank_baukasten/config.json`
-24. `modules/datenbank_baukasten/logic.js`
-25. `modules/datenbank_baukasten/manifest.json`
-26. `modules/datenbank_baukasten/schema.json`
-27. `modules/datenbank_baukasten/texts.json`
-28. `modules/todo_kalender_erinnerung/config.json`
-29. `modules/todo_kalender_erinnerung/logic.js`
-30. `modules/todo_kalender_erinnerung/manifest.json`
-31. `modules/todo_kalender_erinnerung/schema.json`
-32. `modules/todo_kalender_erinnerung/texts.json`
-33. `todo.txt`
+22. `js/status-visuals.js`
+23. `js/ui.js`
+24. `modules/datenbank_baukasten/config.json`
+25. `modules/datenbank_baukasten/logic.js`
+26. `modules/datenbank_baukasten/manifest.json`
+27. `modules/datenbank_baukasten/schema.json`
+28. `modules/datenbank_baukasten/texts.json`
+29. `modules/todo_kalender_erinnerung/config.json`
+30. `modules/todo_kalender_erinnerung/logic.js`
+31. `modules/todo_kalender_erinnerung/manifest.json`
+32. `modules/todo_kalender_erinnerung/schema.json`
+33. `modules/todo_kalender_erinnerung/texts.json`
+34. `todo.txt`

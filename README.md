@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 42
+- Erledigte Punkte: 43
 - Offene Punkte: 2
 - Fortschritt: 96%
 
@@ -9,7 +9,7 @@
 - Kernstart:
   - `index.html`
   - `css/app.css`
-  - `js/app.js`, `js/ui.js`, `js/state.js`
+  - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
 - Adapter-Layer:
   - `js/adapters/filesystem-adapter.js`
   - `js/adapters/browser-filesystem.js`
@@ -72,6 +72,8 @@
 - Vollautomatische Text-Formatierung für Checks, Logs und Start-Hinweise ergänzt.
 - Lesbarkeit in Check- und Log-Karten gezielt verbessert (Zeilenfluss, Umbruch, Zeitspalten).
 - Statussymbole ergänzt: Ampelstatus zeigt jetzt zusätzlich ✔ / ⚠ / ✖ für klare Erkennung bei schwachem Kontrast.
+- Statusbereich Lesen/Schreiben/Struktur nutzt jetzt ebenfalls einheitlich ✔ / ⚠ / ✖.
+- Status-Visuals wurden in `js/status-visuals.js` ausgelagert, damit weitere UI-Teile dieselbe Ampel-Logik nutzen können.
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
@@ -91,7 +93,7 @@
 - Empfehlung 2: Bei eigener Farbwahl den Kontrast von Überschrift und Buttontext immer gegenprüfen.
 
 ## Iterationsprotokoll (kompakt)
-- Patchgrund 1: Statusfarben allein waren bei schwachem Kontrast nicht robust genug.
-- Patchgrund 2: Wartbarkeit verbessert durch zentrales Status-Mapping für Symbol + Label.
-- Betroffene Dateien: `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Patchgrund 1: Einheitliches Muster für Statussymbole auch bei Lesen/Schreiben/Struktur.
+- Patchgrund 2: Wartbarkeit verbessert durch Auslagerung der Status-Visuals in eine kleine Hilfsdatei.
+- Betroffene Dateien: `js/ui.js`, `js/status-visuals.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
