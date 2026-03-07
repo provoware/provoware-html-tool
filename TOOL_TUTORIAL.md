@@ -11,6 +11,19 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Vollautomatischer Shell-Laienstart mit Self-Repair
+Wenn du lieber per Terminal startest, nutze jetzt genau einen Befehl:
+1. `bash scripts/laienstart.sh`
+
+Was dabei automatisch passiert:
+- Abhängigkeiten werden geprüft (`node`, `python3`).
+- Wenn möglich, wird fehlende Software automatisch installiert (`apt-get` oder `brew`).
+- Fehlende Kern-JSON-Dateien werden als sichere Standard-Dummys angelegt.
+- Danach startet der lokale Server und öffnet `laienstart.html`.
+
+Kurzregel: Ein Befehl starten, bei Bedarf Hinweise lesen, dann normal weiterarbeiten.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Sicherere Ausgabe bei Listen und Logs
 Bei Einträgen aus Archiv, Profilen oder Logs gilt jetzt:
 - Sonderzeichen wie `<` und `>` werden sicher angezeigt.
