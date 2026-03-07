@@ -12,6 +12,17 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Template-IDs sicher in Buttons nutzen
+Neu in dieser Iteration:
+- Template-IDs werden in `data-template-*` jetzt immer escaped (sicher kodiert).
+- So kann eine manipulierte ID keine fremden HTML-Attribute einschleusen.
+
+Direkter Mini-Check:
+1. `node --test tests/services/ui-render-safety.test.js`
+
+Kurzregel: Werte für `data-*` immer escapen, wenn sie aus Nutzdaten kommen.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Dashboard-Notizpfade: Öffnen + Speichern konsistent
 Neu in dieser Iteration:
 - Der Fehler-Helper gilt jetzt auch beim Öffnen der zuletzt gespeicherten Dashboard-Datei.

@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration behebt eine konkrete UI-Schwachstelle: Template-IDs in `data-template-*` werden jetzt escaped, damit keine Attribut-Injektion möglich ist.
 - Diese Iteration erweitert die Dashboard-Notiz-Konsistenz: Fehler-Helper jetzt auch beim Öffnen letzter Datei + Save-Fehlerfall-Tests (Exists/Read/Write).
 - Diese Iteration zentralisiert die Fehlerbehandlung beim Dashboard-Notizspeichern (weniger Doppelcode, konsistente Warnpfade).
 - Diese Iteration ergänzt 4 Design-Themes im Header sowie Schriftzoom mit Strg+Mausrad/Strg+Plus/Minus.

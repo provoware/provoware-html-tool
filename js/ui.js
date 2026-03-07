@@ -192,14 +192,17 @@ const writeStoredTodos = (todos) => {
 const renderTemplateList = (items = []) => {
   if (!items.length) return '<li>-</li>';
   return items
-    .map((item) => `<li><div><strong>${escapeHtml(item.title)}</strong><br><small>${escapeHtml(item.category)}</small></div><div><button class="btn-small" data-template-copy="${item.id}">Kopieren</button><button class="btn-small" data-template-edit="${item.id}">Bearbeiten</button><button class="btn-small" data-template-favorite="${item.id}">${item.favorite ? '★' : '☆'}</button><button class="btn-small" data-template-delete="${item.id}">Löschen</button></div></li>`)
+    .map((item) => {
+      const escapedId = escapeHtml(item.id);
+      return `<li><div><strong>${escapeHtml(item.title)}</strong><br><small>${escapeHtml(item.category)}</small></div><div><button class="btn-small" data-template-copy="${escapedId}">Kopieren</button><button class="btn-small" data-template-edit="${escapedId}">Bearbeiten</button><button class="btn-small" data-template-favorite="${escapedId}">${item.favorite ? '★' : '☆'}</button><button class="btn-small" data-template-delete="${escapedId}">Löschen</button></div></li>`;
+    })
     .join('');
 };
 
 const renderTemplateQuickButtons = (items = []) => {
   const favorites = items.filter((item) => item.favorite).slice(0, 8);
   if (!favorites.length) return '<p class="sidebar-empty">Noch keine Favoriten.</p>';
-  return favorites.map((item) => `<button type="button" class="btn-small" data-template-copy="${item.id}">${escapeHtml(item.title)}</button>`).join('');
+  return favorites.map((item) => `<button type="button" class="btn-small" data-template-copy="${escapeHtml(item.id)}">${escapeHtml(item.title)}</button>`).join('');
 };
 
 const renderFilePreviewList = (entries = []) => {
