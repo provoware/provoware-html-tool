@@ -73,6 +73,25 @@ const renderStats = (stats) => {
   return `Genres: ${stats.genres} | Stimmungen: ${stats.moods} | Stile: ${stats.styles} | Gesamt: ${stats.total}`;
 };
 
+const escapeHtml = (value) => String(value || '')
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;')
+  .replaceAll('"', '&quot;');
+
+const renderTemplateList = (items = []) => {
+  if (!items.length) return '<li>-</li>';
+  return items
+    .map((item) => `<li><div><strong>${escapeHtml(item.title)}</strong><br><small>${escapeHtml(item.category)}</small></div><div><button class="btn-small" data-template-copy="${item.id}">Kopieren</button><button class="btn-small" data-template-edit="${item.id}">Bearbeiten</button><button class="btn-small" data-template-favorite="${item.id}">${item.favorite ? '★' : '☆'}</button><button class="btn-small" data-template-delete="${item.id}">Löschen</button></div></li>`)
+    .join('');
+};
+
+const renderTemplateQuickButtons = (items = []) => {
+  const favorites = items.filter((item) => item.favorite).slice(0, 8);
+  if (!favorites.length) return '<p class="sidebar-empty">Noch keine Favoriten.</p>';
+  return favorites.map((item) => `<button type="button" class="btn-small" data-template-copy="${item.id}">${escapeHtml(item.title)}</button>`).join('');
+};
+
 const renderSidebarModules = (modules = []) => {
   if (!modules.length) {
     return '<p class="sidebar-empty">Noch keine aktiven Module gefunden.</p>';
@@ -224,6 +243,45 @@ export const bindUiActions = (actions) => {
     });
   });
 
+  byId('template-save')?.addEventListener('click', () => {
+    actions.onTemplateSave({
+      id: byId('template-id')?.value || null,
+      title: byId('template-title')?.value || '',
+      category: byId('template-category')?.value || 'Textbaustein',
+      content: byId('template-content')?.value || ''
+    });
+  });
+
+  byId('template-clear')?.addEventListener('click', () => actions.onTemplateResetDraft());
+
+  byId('template-list')?.addEventListener('click', async (event) => {
+    const id = event.target.getAttribute('data-template-edit');
+    if (id) {
+      actions.onTemplateStartEdit(id);
+      return;
+    }
+    const copyId = event.target.getAttribute('data-template-copy');
+    if (copyId) {
+      await actions.onTemplateCopy(copyId);
+      return;
+    }
+    const favoriteId = event.target.getAttribute('data-template-favorite');
+    if (favoriteId) {
+      await actions.onTemplateToggleFavorite(favoriteId);
+      return;
+    }
+    const deleteId = event.target.getAttribute('data-template-delete');
+    if (deleteId) {
+      await actions.onTemplateDelete(deleteId);
+    }
+  });
+
+  byId('template-favorites')?.addEventListener('click', async (event) => {
+    const id = event.target.getAttribute('data-template-copy');
+    if (!id) return;
+    await actions.onTemplateCopy(id);
+  });
+
   bindWorkspaceControls();
 };
 
@@ -295,6 +353,33 @@ export const render = () => {
     sidebarModuleList.innerHTML = renderSidebarModules(state.moduleRegistry?.modules || []);
   }
   setText('template-design-status', autoFormatText(state.templateDesignStatus?.message || '-'));
+
+  const templateDraft = state.templateDraft || { id: null, title: '', content: '', category: 'Textbaustein' };
+  const templateId = byId('template-id');
+  if (templateId) templateId.value = templateDraft.id || '';
+  const templateTitle = byId('template-title');
+  if (templateTitle) templateTitle.value = templateDraft.title || '';
+  const templateCategory = byId('template-category');
+  if (templateCategory) templateCategory.value = templateDraft.category || 'Textbaustein';
+  const templateContent = byId('template-content');
+  if (templateContent) templateContent.value = templateDraft.content || '';
+
+  const templateList = byId('template-list');
+  if (templateList) {
+    templateList.innerHTML = renderTemplateList(state.templateArchive?.items || []);
+  }
+
+  const templateFavorites = byId('template-favorites');
+  if (templateFavorites) {
+    templateFavorites.innerHTML = renderTemplateQuickButtons(state.templateArchive?.items || []);
+  }
+
+  const templateFeedback = byId('template-feedback');
+  if (templateFeedback) {
+    const text = state.templateFeedback?.message || '';
+    templateFeedback.textContent = text;
+    templateFeedback.style.visibility = text ? 'visible' : 'hidden';
+  }
 
   const archiveEvents = byId('archive-events');
   if (archiveEvents) {

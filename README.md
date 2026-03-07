@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 56
+- Erledigte Punkte: 58
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 84% (laufend, siehe `todo.txt`)
+- Fortschritt: 86% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -26,13 +26,19 @@
   - `modules/datenbank_baukasten`
   - `modules/todo_kalender_erinnerung`
   - `modules/wiki_notiz_wissen`
+  - `js/services/diagnosis-export.js` (Diagnose-Export als eigener Service)
+  - `js/services/templates-archive.js` (Templates-Archiv mit Favoriten)
 - Zentrale Daten:
   - `data/app-config.json`
   - `data/themes.json`
   - `data/ui_texts.json`
   - `data/project-structure.json`
   - `data/profile-archive.json` (JSON-Archiv für Profile)
+  - `data/templates-archive.json` (JSON-Archiv für Templates)
   - `data/module-registry.json` (zentrale Modul-IDs)
+
+- Tests:
+  - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
 
 ## Erledigte Kernpunkte
 - Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.
@@ -74,6 +80,12 @@
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 - UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
+- To-do-Modul fachlich erweitert: Aufgabenstruktur, Statusfluss (offen/erledigt), Filterlogik und JSON/CSV-Exportgrundlage ergänzt.
+- Default-Profilbestand erweitert: Die drei Profile enthalten jetzt je breite, klar unterscheidbare Genre-/Mood-/Stil-Listen inklusive regionaler und Underground-Beispiele; zusätzlich ist ein professionell kategorisiertes Templates-Default-Archiv mit 9 Bereichen und je 5 Starter-Einträgen integriert.
+- Diagnose-Export aus `js/app.js` in `js/services/diagnosis-export.js` ausgelagert, damit `app.js` schlanker bleibt.
+- Neues Templates-Modul ergänzt: persistente Vorlagen mit Kategorie, Bearbeiten/Löschen, Favoriten und Schnellwahl-Kopieren.
+- Kopier-Feedback im Templates-Modul ergänzt: Meldung wird kurz angezeigt und verschwindet automatisch.
+- Kleiner Service-Smoke-Test für Export/Import/Mix ergänzt, damit UI-Änderungen schneller geprüft werden können.
 
 - Neues Wiki-, Notiz- und Wissensmodul als strukturierte Modulbasis ergänzt (CRUD, Suche/Filter, Verknüpfungen, Export).
 
@@ -161,3 +173,11 @@
 - Patchgrund 2: Robustheit verbessert durch klare Feldvalidierung, Suche/Filter und sichere Verknüpfungs-/Exportlogik.
 - Betroffene Dateien: `modules/wiki_notiz_wissen/manifest.json`, `modules/wiki_notiz_wissen/config.json`, `modules/wiki_notiz_wissen/schema.json`, `modules/wiki_notiz_wissen/texts.json`, `modules/wiki_notiz_wissen/logic.js`, `data/module-registry.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JSON/JS-Syntax und direkte Modul-Logik (CRUD, Suche, Link, Export) geprüft.
+- Patchgrund 1: Nutzerwunsch umgesetzt, damit ein sofort nutzbares Default-Profil mit breitem Spektrum (Genres, Moods, Stile) projektseitig mitgeliefert wird.
+- Patchgrund 2: Neues Templates-Default-Archiv mit 9 Fachbereichen und je 5 professionell strukturierten Einträgen ergänzt, um Iterationen direkt praxisnah zu starten.
+- Betroffene Dateien: `js/services/profile-archive.js`, `data/profile-archive.json`, `data/project-structure.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS/JSON-Syntax und direkt betroffene Datenstruktur geprüft.
+- Patchgrund 1: App-Einstieg weiter entschlacken durch Auslagerung von `buildDiagnosisExport` in einen eigenen Service.
+- Patchgrund 2: Neues Templates-Modul für persistente Textbausteine/Promptvorlagen mit Favoriten-Schnellwahl und Copy-Feedback.
+- Betroffene Dateien: `js/app.js`, `js/services/diagnosis-export.js`, `js/services/templates-archive.js`, `js/services/ui-action-handlers.js`, `js/ui.js`, `js/state.js`, `index.html`, `css/app.css`, `data/templates-archive.json`, `tests/services/ui-action-handlers.smoke.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax, direkt betroffene Service-Logik und der kleine Smoke-Test ausgeführt.
