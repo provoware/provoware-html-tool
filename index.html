@@ -15,16 +15,20 @@
     <div id="app" class="app" data-layout-mode="standard">
       <header class="header panel" aria-label="Kopfbereich">
         <div class="header-intro">
-          <h1 id="app-title">👋 Willkommen zurück!</h1>
-          <p id="app-subtitle">Dein kreatives Dashboard</p>
+          <div class="header-title-group">
+            <h1 id="app-title">👋 Willkommen zurück!</h1>
+            <p id="app-subtitle">Dein kreatives Dashboard</p>
+          </div>
         </div>
         <div class="header-actions">
-          <div class="header-status-chips" aria-label="Projektstatus">
-            <span class="header-status-chip" tabindex="0"><small>Projektstatus</small><strong id="header-chip-project-status">Aktiv</strong></span>
-            <span class="header-status-chip" tabindex="0"><small>Autosave</small><strong id="header-chip-autosave-status">An</strong></span>
+          <ul class="header-status-chips" aria-label="Projektstatus">
+            <li class="header-status-chip"><small>Projektstatus</small><strong id="header-chip-project-status">Aktiv</strong></li>
+            <li class="header-status-chip"><small>Autosave</small><strong id="header-chip-autosave-status">An</strong></li>
+          </ul>
+          <div class="header-control-buttons" aria-label="Layout-Steuerung">
+            <button id="toggle-left-sidebar" class="btn-small" type="button" aria-pressed="false">Linke Leiste</button>
+            <button id="toggle-right-sidebar" class="btn-small" type="button" aria-pressed="false">Rechte Leiste</button>
           </div>
-          <button id="toggle-left-sidebar" class="btn-small" type="button" aria-pressed="false">Linke Leiste</button>
-          <button id="toggle-right-sidebar" class="btn-small" type="button" aria-pressed="false">Rechte Leiste</button>
         </div>
       </header>
 

@@ -1,8 +1,8 @@
 # INDEX
 
 ## Iterationshinweis
-- Diese Iteration hat keine neuen Dateien erzeugt oder gelöscht.
-- Verzeichnisbaum und Dateiliste bleiben unverändert vollständig.
+- Diese Iteration hat neue Dateien für Renderer- und Domain-Aufteilung ergänzt.
+- Verzeichnisbaum und Dateiliste sind vollständig aktualisiert (ohne `.git`).
 
 ## Kompletter Verzeichnisbaum (ohne `.git`)
 
@@ -52,6 +52,9 @@
 │  │  ├─ dashboard-clock.js
 │  │  ├─ guide-tools-module.js
 │  │  └─ plugin-manager.js
+│  ├─ renderers
+│  │  ├─ ui-header-renderer.js
+│  │  └─ ui-main-renderer.js
 │  ├─ services
 │  │  ├─ code-formatter.js
 │  │  ├─ config-loader.js
@@ -63,7 +66,12 @@
 │  │  ├─ project-selftest.js
 │  │  ├─ startup-check.js
 │  │  ├─ templates-archive.js
-│  │  └─ ui-action-handlers.js
+│  │  ├─ ui-action-handlers.js
+│  │  └─ ui-actions
+│  │     ├─ archive-actions.js
+│  │     ├─ session-actions.js
+│  │     ├─ template-actions.js
+│  │     └─ workspace-actions.js
 │  ├─ state.js
 │  ├─ status-visuals.js
 │  └─ ui.js
@@ -165,65 +173,71 @@
 31. `js/modules/dashboard-clock.js`
 32. `js/modules/guide-tools-module.js`
 33. `js/modules/plugin-manager.js`
-34. `js/services/code-formatter.js`
-35. `js/services/config-loader.js`
-36. `js/services/diagnosis-export.js`
-37. `js/services/html-escape.js`
-38. `js/services/logger.js`
-39. `js/services/module-registry.js`
-40. `js/services/profile-archive.js`
-41. `js/services/project-selftest.js`
-42. `js/services/startup-check.js`
-43. `js/services/templates-archive.js`
-44. `js/services/ui-action-handlers.js`
-45. `js/state.js`
-46. `js/status-visuals.js`
-47. `js/ui.js`
-48. `logging_modul_start.html`
-49. `modules/backup_funktions_modul/config.json`
-50. `modules/backup_funktions_modul/logic.js`
-51. `modules/backup_funktions_modul/manifest.json`
-52. `modules/backup_funktions_modul/schema.json`
-53. `modules/backup_funktions_modul/texts.json`
-54. `modules/datenbank_baukasten/config.json`
-55. `modules/datenbank_baukasten/logic.js`
-56. `modules/datenbank_baukasten/manifest.json`
-57. `modules/datenbank_baukasten/schema.json`
-58. `modules/datenbank_baukasten/texts.json`
-59. `modules/debugging_modul/config.json`
-60. `modules/debugging_modul/logic.js`
-61. `modules/debugging_modul/manifest.json`
-62. `modules/debugging_modul/schema.json`
-63. `modules/debugging_modul/texts.json`
-64. `modules/logging_modul/config.json`
-65. `modules/logging_modul/logic.js`
-66. `modules/logging_modul/manifest.json`
-67. `modules/logging_modul/schema.json`
-68. `modules/logging_modul/texts.json`
-69. `modules/todo_kalender_erinnerung/config.json`
-70. `modules/todo_kalender_erinnerung/logic.js`
-71. `modules/todo_kalender_erinnerung/manifest.json`
-72. `modules/todo_kalender_erinnerung/schema.json`
-73. `modules/todo_kalender_erinnerung/texts.json`
-74. `modules/wiki_notiz_wissen/config.json`
-75. `modules/wiki_notiz_wissen/logic.js`
-76. `modules/wiki_notiz_wissen/manifest.json`
-77. `modules/wiki_notiz_wissen/schema.json`
-78. `modules/wiki_notiz_wissen/texts.json`
-79. `scripts/laienstart.sh`
-80. `scripts/minimal-check.sh`
-81. `start.sh`
-82. `tests/adapters/desktop-filesystem.test.js`
-83. `tests/modules/datenbank-baukasten.test.js`
-84. `tests/scripts-laienstart.dry-run.test.js`
-85. `tests/services/import-export-consistency.test.js`
-86. `tests/services/module-registry.test.js`
-87. `tests/services/project-selftest.test.js`
-88. `tests/services/startup-check.test.js`
-89. `tests/services/ui-action-handlers.smoke.test.js`
-90. `tests/services/ui-header-chips.test.js`
-91. `tests/services/ui-render-safety.test.js`
-92. `tests/start-files/start-import-resolution.test.js`
-93. `todo.txt`
-94. `todo_kalender_erinnerung_start.html`
-95. `wiki_notiz_wissen_start.html`
+34. `js/renderers/ui-header-renderer.js`
+35. `js/renderers/ui-main-renderer.js`
+36. `js/services/code-formatter.js`
+37. `js/services/config-loader.js`
+38. `js/services/diagnosis-export.js`
+39. `js/services/html-escape.js`
+40. `js/services/logger.js`
+41. `js/services/module-registry.js`
+42. `js/services/profile-archive.js`
+43. `js/services/project-selftest.js`
+44. `js/services/startup-check.js`
+45. `js/services/templates-archive.js`
+46. `js/services/ui-action-handlers.js`
+47. `js/services/ui-actions/archive-actions.js`
+48. `js/services/ui-actions/session-actions.js`
+49. `js/services/ui-actions/template-actions.js`
+50. `js/services/ui-actions/workspace-actions.js`
+51. `js/state.js`
+52. `js/status-visuals.js`
+53. `js/ui.js`
+54. `logging_modul_start.html`
+55. `modules/backup_funktions_modul/config.json`
+56. `modules/backup_funktions_modul/logic.js`
+57. `modules/backup_funktions_modul/manifest.json`
+58. `modules/backup_funktions_modul/schema.json`
+59. `modules/backup_funktions_modul/texts.json`
+60. `modules/datenbank_baukasten/config.json`
+61. `modules/datenbank_baukasten/logic.js`
+62. `modules/datenbank_baukasten/manifest.json`
+63. `modules/datenbank_baukasten/schema.json`
+64. `modules/datenbank_baukasten/texts.json`
+65. `modules/debugging_modul/config.json`
+66. `modules/debugging_modul/logic.js`
+67. `modules/debugging_modul/manifest.json`
+68. `modules/debugging_modul/schema.json`
+69. `modules/debugging_modul/texts.json`
+70. `modules/logging_modul/config.json`
+71. `modules/logging_modul/logic.js`
+72. `modules/logging_modul/manifest.json`
+73. `modules/logging_modul/schema.json`
+74. `modules/logging_modul/texts.json`
+75. `modules/todo_kalender_erinnerung/config.json`
+76. `modules/todo_kalender_erinnerung/logic.js`
+77. `modules/todo_kalender_erinnerung/manifest.json`
+78. `modules/todo_kalender_erinnerung/schema.json`
+79. `modules/todo_kalender_erinnerung/texts.json`
+80. `modules/wiki_notiz_wissen/config.json`
+81. `modules/wiki_notiz_wissen/logic.js`
+82. `modules/wiki_notiz_wissen/manifest.json`
+83. `modules/wiki_notiz_wissen/schema.json`
+84. `modules/wiki_notiz_wissen/texts.json`
+85. `scripts/laienstart.sh`
+86. `scripts/minimal-check.sh`
+87. `start.sh`
+88. `tests/adapters/desktop-filesystem.test.js`
+89. `tests/modules/datenbank-baukasten.test.js`
+90. `tests/scripts-laienstart.dry-run.test.js`
+91. `tests/services/import-export-consistency.test.js`
+92. `tests/services/module-registry.test.js`
+93. `tests/services/project-selftest.test.js`
+94. `tests/services/startup-check.test.js`
+95. `tests/services/ui-action-handlers.smoke.test.js`
+96. `tests/services/ui-header-chips.test.js`
+97. `tests/services/ui-render-safety.test.js`
+98. `tests/start-files/start-import-resolution.test.js`
+99. `todo.txt`
+100. `todo_kalender_erinnerung_start.html`
+101. `wiki_notiz_wissen_start.html`
