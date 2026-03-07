@@ -2,81 +2,73 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Wiki-, Notiz- und Wissensmodul als strukturierte Wissensbasis
-- Iterationsfokus: To-do-Modul inhaltlich erweitert (Status, Filter, Export, Persistenzstruktur)
-- Iterationsfokus: Default-Profile und Templates-Default-Archiv als projektweite Startdaten
-- Iterationsfokus: Diagnose-Service ausgelagert und Templates-Modul ergänzt
+- Iterationsfokus: Barrierefreiheit (Skip-Link, ruhiger Screenreader-Modus) und neues Textdatei-Vorschau-/Editor-Modul
 
 ## Verzeichnisbaum (ohne `.git`)
+- `AGENTS.md`
+- `INDEX.md`
+- `README.md`
+- `TOOL_TUTORIAL.md`
+- `assets/`
+  - `assets/css/`
+    - `assets/css/base.css`
+  - `assets/js/`
+    - `assets/js/core.js`
+- `css/`
+  - `css/app.css`
+- `data/`
+  - `data/app-config.json`
+  - `data/module-registry.json`
+  - `data/profile-archive.json`
+  - `data/project-structure.json`
+  - `data/templates-archive.json`
+  - `data/themes.json`
+  - `data/ui_texts.json`
+- `index.html`
+- `js/`
+  - `js/adapters/`
+    - `js/adapters/browser-filesystem.js`
+    - `js/adapters/desktop-filesystem.js`
+    - `js/adapters/filesystem-adapter.js`
+  - `js/services/`
+    - `js/services/config-loader.js`
+    - `js/services/diagnosis-export.js`
+    - `js/services/logger.js`
+    - `js/services/module-registry.js`
+    - `js/services/profile-archive.js`
+    - `js/services/project-selftest.js`
+    - `js/services/startup-check.js`
+    - `js/services/templates-archive.js`
+    - `js/services/ui-action-handlers.js`
+  - `js/app.js`
+  - `js/state.js`
+  - `js/status-visuals.js`
+  - `js/ui.js`
+- `modules/`
+  - `modules/datenbank_baukasten/`
+    - `modules/datenbank_baukasten/config.json`
+    - `modules/datenbank_baukasten/logic.js`
+    - `modules/datenbank_baukasten/manifest.json`
+    - `modules/datenbank_baukasten/schema.json`
+    - `modules/datenbank_baukasten/texts.json`
+  - `modules/todo_kalender_erinnerung/`
+    - `modules/todo_kalender_erinnerung/config.json`
+    - `modules/todo_kalender_erinnerung/logic.js`
+    - `modules/todo_kalender_erinnerung/manifest.json`
+    - `modules/todo_kalender_erinnerung/schema.json`
+    - `modules/todo_kalender_erinnerung/texts.json`
+  - `modules/wiki_notiz_wissen/`
+    - `modules/wiki_notiz_wissen/config.json`
+    - `modules/wiki_notiz_wissen/logic.js`
+    - `modules/wiki_notiz_wissen/manifest.json`
+    - `modules/wiki_notiz_wissen/schema.json`
+    - `modules/wiki_notiz_wissen/texts.json`
+- `tests/`
+  - `tests/services/`
+    - `tests/services/ui-action-handlers.smoke.test.js`
+- `todo.txt`
 
-```text
-.
-├── assets
-│   ├── css
-│   │   └── base.css
-│   └── js
-│       └── core.js
-├── css
-│   └── app.css
-├── data
-│   ├── app-config.json
-│   ├── module-registry.json
-│   ├── profile-archive.json
-│   ├── project-structure.json
-│   ├── templates-archive.json
-│   ├── themes.json
-│   └── ui_texts.json
-├── js
-│   ├── adapters
-│   │   ├── browser-filesystem.js
-│   │   ├── desktop-filesystem.js
-│   │   └── filesystem-adapter.js
-│   ├── services
-│   │   ├── config-loader.js
-│   │   ├── diagnosis-export.js
-│   │   ├── logger.js
-│   │   ├── module-registry.js
-│   │   ├── profile-archive.js
-│   │   ├── project-selftest.js
-│   │   ├── startup-check.js
-│   │   └── ui-action-handlers.js
-│   ├── app.js
-│   │   ├── templates-archive.js
-│   │   └── ui-action-handlers.js
-│   ├── state.js
-│   ├── status-visuals.js
-│   └── ui.js
-├── modules
-│   ├── datenbank_baukasten
-│   │   ├── config.json
-│   │   ├── logic.js
-│   │   ├── manifest.json
-│   │   ├── schema.json
-│   │   └── texts.json
-│   ├── todo_kalender_erinnerung
-│   │   ├── config.json
-│   │   ├── logic.js
-│   │   ├── manifest.json
-│   │   ├── schema.json
-│   │   └── texts.json
-│   └── wiki_notiz_wissen
-│       ├── config.json
-│       ├── logic.js
-│       ├── manifest.json
-│       ├── schema.json
-│       └── texts.json
-├── AGENTS.md
-├── INDEX.md
-├── README.md
-├── TOOL_TUTORIAL.md
-├── index.html
-├── tests
-│   └── services
-│       └── ui-action-handlers.smoke.test.js
-└── todo.txt
-```
-
-## Dateiliste (alle Projektdateien, ohne `.git`)
+## Vollständige Dateiliste (ohne `.git`)
 1. `AGENTS.md`
 2. `INDEX.md`
 3. `README.md`
@@ -88,39 +80,6 @@
 9. `data/module-registry.json`
 10. `data/profile-archive.json`
 11. `data/project-structure.json`
-12. `data/themes.json`
-13. `data/ui_texts.json`
-14. `index.html`
-15. `js/adapters/browser-filesystem.js`
-16. `js/adapters/desktop-filesystem.js`
-17. `js/adapters/filesystem-adapter.js`
-18. `js/app.js`
-19. `js/services/config-loader.js`
-20. `js/services/logger.js`
-21. `js/services/module-registry.js`
-22. `js/services/profile-archive.js`
-23. `js/services/project-selftest.js`
-24. `js/services/startup-check.js`
-25. `js/services/ui-action-handlers.js`
-26. `js/state.js`
-27. `js/status-visuals.js`
-28. `js/ui.js`
-29. `modules/datenbank_baukasten/config.json`
-30. `modules/datenbank_baukasten/logic.js`
-31. `modules/datenbank_baukasten/manifest.json`
-32. `modules/datenbank_baukasten/schema.json`
-33. `modules/datenbank_baukasten/texts.json`
-34. `modules/todo_kalender_erinnerung/config.json`
-35. `modules/todo_kalender_erinnerung/logic.js`
-36. `modules/todo_kalender_erinnerung/manifest.json`
-37. `modules/todo_kalender_erinnerung/schema.json`
-38. `modules/todo_kalender_erinnerung/texts.json`
-39. `modules/wiki_notiz_wissen/config.json`
-40. `modules/wiki_notiz_wissen/logic.js`
-41. `modules/wiki_notiz_wissen/manifest.json`
-42. `modules/wiki_notiz_wissen/schema.json`
-43. `modules/wiki_notiz_wissen/texts.json`
-44. `todo.txt`
 12. `data/templates-archive.json`
 13. `data/themes.json`
 14. `data/ui_texts.json`
@@ -151,5 +110,10 @@
 39. `modules/todo_kalender_erinnerung/manifest.json`
 40. `modules/todo_kalender_erinnerung/schema.json`
 41. `modules/todo_kalender_erinnerung/texts.json`
-42. `tests/services/ui-action-handlers.smoke.test.js`
-43. `todo.txt`
+42. `modules/wiki_notiz_wissen/config.json`
+43. `modules/wiki_notiz_wissen/logic.js`
+44. `modules/wiki_notiz_wissen/manifest.json`
+45. `modules/wiki_notiz_wissen/schema.json`
+46. `modules/wiki_notiz_wissen/texts.json`
+47. `tests/services/ui-action-handlers.smoke.test.js`
+48. `todo.txt`

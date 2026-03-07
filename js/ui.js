@@ -3,6 +3,7 @@ import { getState } from './state.js';
 import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
 
 const byId = (id) => document.getElementById(id);
+let lastA11yAnnouncement = '';
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -58,6 +59,25 @@ const formatStructureStatus = (selftestResult) => {
     : formatStatusWithSymbol('green', formatStatusWord('ok'));
 };
 
+const buildA11yStatusText = (state, messages = {}) => {
+  const startupReady = state.debug?.startupReady;
+  const startupMessage = startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || '';
+  const overall = formatOverallStatus(state.selftestResult?.overallStatus || 'red');
+  if (state.a11yQuietMode) {
+    return [
+      `Start: ${autoFormatText(startupMessage) || '-'}`,
+      `Gesamtstatus: ${overall}`,
+      'Ruhiger Modus aktiv.'
+    ].join(' ');
+  }
+  const latestLog = state.logs?.[0]?.message ? autoFormatText(state.logs[0].message) : 'Keine neue Meldung.';
+  return [
+    `Start: ${autoFormatText(startupMessage) || '-'}`,
+    `Gesamtstatus: ${overall}`,
+    `Letzte Meldung: ${latestLog}`
+  ].join(' ');
+};
+
 const renderProfileOptions = (archive, selected) => {
   const options = Object.keys(archive?.profiles || {});
   return options.map((name) => `<option value="${name}" ${name === selected ? 'selected' : ''}>${name}</option>`).join('');
@@ -90,6 +110,13 @@ const renderTemplateQuickButtons = (items = []) => {
   const favorites = items.filter((item) => item.favorite).slice(0, 8);
   if (!favorites.length) return '<p class="sidebar-empty">Noch keine Favoriten.</p>';
   return favorites.map((item) => `<button type="button" class="btn-small" data-template-copy="${item.id}">${escapeHtml(item.title)}</button>`).join('');
+};
+
+const renderFilePreviewList = (entries = []) => {
+  if (!entries.length) return '<li>-</li>';
+  return entries
+    .map((entry) => `<li><button type="button" class="btn-small" data-preview-open="${escapeHtml(entry.path)}">${escapeHtml(entry.name)}</button></li>`)
+    .join('');
 };
 
 const renderSidebarModules = (modules = []) => {
@@ -178,6 +205,9 @@ export const bindUiActions = (actions) => {
     const text = await actions.onExportDiagnosis();
     const area = byId('diagnosis-transfer');
     if (area) area.value = text;
+  });
+  byId('a11y-quiet-mode')?.addEventListener('change', (event) => {
+    actions.onToggleA11yQuietMode(event.target.checked);
   });
 
   byId('profile-select')?.addEventListener('change', (event) => actions.onSelectProfile(event.target.value));
@@ -282,6 +312,38 @@ export const bindUiActions = (actions) => {
     await actions.onTemplateCopy(id);
   });
 
+  byId('file-preview-path')?.addEventListener('change', (event) => {
+    actions.onSetFilePreviewPath(event.target.value || '');
+  });
+
+  byId('file-preview-include-other')?.addEventListener('change', async (event) => {
+    actions.onToggleFilePreviewIncludeOther(event.target.checked);
+    await actions.onLoadFilePreviewList();
+  });
+
+  byId('file-preview-load')?.addEventListener('click', async () => {
+    actions.onSetFilePreviewPath(byId('file-preview-path')?.value || '');
+    await actions.onLoadFilePreviewList();
+  });
+
+  byId('file-preview-list')?.addEventListener('click', async (event) => {
+    const path = event.target.getAttribute('data-preview-open');
+    if (!path) return;
+    await actions.onOpenPreviewFile(path);
+  });
+
+  byId('file-preview-open-editor')?.addEventListener('click', () => {
+    actions.onOpenPreviewInEditor();
+  });
+
+  byId('editor-content')?.addEventListener('input', (event) => {
+    actions.onEditorChangeContent(event.target.value || '');
+  });
+
+  byId('editor-save')?.addEventListener('click', async () => {
+    await actions.onSaveEditorFile();
+  });
+
   bindWorkspaceControls();
 };
 
@@ -311,6 +373,12 @@ export const render = () => {
     nextStep.innerHTML = `<strong>${messages.actionNext || 'Nächster Schritt'}:</strong> ${autoFormatText(nextMessage)}`;
   }
 
+  const a11yText = buildA11yStatusText(state, messages);
+  if (a11yText !== lastA11yAnnouncement) {
+    setText('a11y-status', a11yText);
+    lastA11yAnnouncement = a11yText;
+  }
+
   const selectedName = state.selectedProjectDirectory?.name;
   const rememberedName = state.rememberedProjectDirectoryName;
   const folderText = selectedName || (rememberedName ? `${rememberedName} (zuletzt gewählt)` : '-');
@@ -321,6 +389,8 @@ export const render = () => {
   setText('status-last-test', autoFormatText(state.selftestResult?.summary || '-'));
   setText('status-overall', formatOverallStatus(state.selftestResult?.overallStatus || 'red'));
   setText('status-layout', state.layoutMode || '-');
+  const quietModeToggle = byId('a11y-quiet-mode');
+  if (quietModeToggle) quietModeToggle.checked = Boolean(state.a11yQuietMode);
 
   const checksList = byId('checks-list');
   if (checksList) {
@@ -393,6 +463,29 @@ export const render = () => {
       .map((item) => `<li><span class="log-time">${item.timestamp.slice(11, 19)}</span><strong>${autoFormatText(item.type)}</strong> ${autoFormatText(item.message)}</li>`)
       .join('');
   }
+
+  const filePreviewPath = byId('file-preview-path');
+  if (filePreviewPath) filePreviewPath.value = state.filePreviewPath || '';
+
+  const includeOther = byId('file-preview-include-other');
+  if (includeOther) includeOther.checked = Boolean(state.filePreviewIncludeOtherFiles);
+
+  setText('file-preview-status', state.filePreviewStatus || '-');
+
+  const filePreviewList = byId('file-preview-list');
+  if (filePreviewList) filePreviewList.innerHTML = renderFilePreviewList(state.filePreviewEntries || []);
+
+  const filePreviewContent = byId('file-preview-content');
+  if (filePreviewContent) filePreviewContent.value = state.filePreviewContent || '';
+
+  const editorContent = byId('editor-content');
+  if (editorContent && document.activeElement !== editorContent) {
+    editorContent.value = state.editorContent || '';
+  }
+
+  const dirtyBadge = state.editorDirty ? ' *ungespeichert' : '';
+  setText('editor-file-path', state.editorFilePath ? `${state.editorFilePath}${dirtyBadge}` : '-');
+  setText('editor-status', state.editorStatus || '-');
 
   document.getElementById('app')?.setAttribute('data-layout-mode', state.layoutMode || 'standard');
 };

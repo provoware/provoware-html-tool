@@ -1,7 +1,21 @@
 import { createDefaultArchive, createRandomMix, normalizeArchive, addEntry, editEntry, removeEntry, sortArchive, buildStats } from './profile-archive.js';
 import { addTemplate, editTemplate, removeTemplate, toggleTemplateFavorite } from './templates-archive.js';
+import { filesystemAdapter } from '../adapters/filesystem-adapter.js';
 
 const DEFAULT_PROFILE = 'HardTechno';
+const TEXT_FILE_EXTENSIONS = new Set(['txt', 'md', 'json', 'js', 'css', 'html', 'csv', 'xml', 'yml', 'yaml', 'log']);
+
+const normalizeRelativePath = (path = '') => String(path || '').replaceAll('\\', '/').replace(/^\/+|\/+$/g, '');
+
+const joinPath = (basePath, fileName) => {
+  const base = normalizeRelativePath(basePath);
+  return base ? `${base}/${fileName}` : fileName;
+};
+
+const isTextLikeFile = (name = '') => {
+  const extension = String(name).split('.').pop()?.toLowerCase();
+  return extension ? TEXT_FILE_EXTENSIONS.has(extension) : false;
+};
 
 export const createUiActionHandlers = ({
   getState,
@@ -115,5 +129,91 @@ export const createUiActionHandlers = ({
   },
   onTemplateResetDraft: () => {
     setState({ templateDraft: { id: null, title: '', content: '', category: 'Textbaustein' } });
+  },
+  onToggleA11yQuietMode: (enabled) => {
+    setState({ a11yQuietMode: Boolean(enabled) });
+    logEvent('INFO', 'A11Y_QUIET_MODE_CHANGED', enabled ? 'Ruhiger Modus wurde aktiviert.' : 'Ruhiger Modus wurde deaktiviert.');
+  },
+  onSetFilePreviewPath: (path) => {
+    setState({ filePreviewPath: normalizeRelativePath(path) });
+  },
+  onToggleFilePreviewIncludeOther: (enabled) => {
+    setState({ filePreviewIncludeOtherFiles: Boolean(enabled) });
+  },
+  onLoadFilePreviewList: async () => {
+    const state = getState();
+    const path = normalizeRelativePath(state.filePreviewPath);
+    const listed = await filesystemAdapter.listDirectory(path);
+    if (!listed.ok) {
+      const status = 'Dateiliste konnte nicht geladen werden.';
+      setState({ filePreviewEntries: [], filePreviewStatus: status });
+      logEvent('WARN', listed.code, status, listed.data);
+      return listed;
+    }
+
+    const includeOther = Boolean(state.filePreviewIncludeOtherFiles);
+    const files = (listed.data?.entries || [])
+      .filter((entry) => entry.kind === 'file')
+      .filter((entry) => includeOther || isTextLikeFile(entry.name))
+      .map((entry) => ({ ...entry, path: joinPath(path, entry.name) }));
+
+    const status = files.length
+      ? `${files.length} Datei(en) gefunden.`
+      : 'Keine passenden Dateien gefunden.';
+    setState({ filePreviewPath: path, filePreviewEntries: files, filePreviewStatus: status });
+    logEvent('INFO', 'FILE_PREVIEW_LIST_LOADED', status, { path, includeOther });
+    return { ok: true, code: 'FILE_PREVIEW_LIST_READY', message: status, data: { path, count: files.length } };
+  },
+  onOpenPreviewFile: async (path) => {
+    const normalizedPath = normalizeRelativePath(path);
+    if (!normalizedPath) {
+      return { ok: false, code: 'FILE_PREVIEW_MISSING_PATH', message: 'Dateipfad fehlt.' };
+    }
+    const loaded = await filesystemAdapter.readText(normalizedPath);
+    if (!loaded.ok) {
+      const status = 'Datei konnte nicht gelesen werden.';
+      setState({ filePreviewSelectedPath: normalizedPath, filePreviewStatus: status, filePreviewContent: '' });
+      logEvent('WARN', loaded.code, status, loaded.data);
+      return loaded;
+    }
+    const status = `Datei geladen: ${normalizedPath}`;
+    setState({ filePreviewSelectedPath: normalizedPath, filePreviewContent: loaded.data?.text || '', filePreviewStatus: status });
+    logEvent('INFO', 'FILE_PREVIEW_OPENED', status);
+    return { ok: true, code: 'FILE_PREVIEW_OPENED', message: status };
+  },
+  onOpenPreviewInEditor: () => {
+    const state = getState();
+    const filePath = normalizeRelativePath(state.filePreviewSelectedPath);
+    if (!filePath) {
+      return { ok: false, code: 'EDITOR_OPEN_FAILED', message: 'Keine Vorschau-Datei aktiv.' };
+    }
+    setState({
+      editorFilePath: filePath,
+      editorContent: state.filePreviewContent || '',
+      editorStatus: `Editor geöffnet: ${filePath}`,
+      editorDirty: false
+    });
+    logEvent('INFO', 'EDITOR_OPENED_FROM_PREVIEW', 'Vorschau wurde im Editor geöffnet.', { path: filePath });
+    return { ok: true, code: 'EDITOR_OPENED', message: 'Vorschau wurde im Editor geöffnet.' };
+  },
+  onEditorChangeContent: (content) => {
+    setState({ editorContent: content, editorDirty: true });
+  },
+  onSaveEditorFile: async () => {
+    const state = getState();
+    const filePath = normalizeRelativePath(state.editorFilePath);
+    if (!filePath) {
+      return { ok: false, code: 'EDITOR_SAVE_NO_FILE', message: 'Keine Editor-Datei aktiv.' };
+    }
+    const saved = await filesystemAdapter.writeText(filePath, state.editorContent || '');
+    if (!saved.ok) {
+      setState({ editorStatus: 'Speichern fehlgeschlagen.' });
+      logEvent('WARN', saved.code, 'Editor-Datei konnte nicht gespeichert werden.', saved.data);
+      return saved;
+    }
+    const status = `Gespeichert: ${filePath}`;
+    setState({ editorStatus: status, editorDirty: false, filePreviewContent: state.editorContent || '' });
+    logEvent('INFO', 'EDITOR_FILE_SAVED', status);
+    return { ok: true, code: 'EDITOR_FILE_SAVED', message: status };
   }
 });

@@ -14,6 +14,7 @@ export const desktopFilesystemAdapter = {
   writeJson: async () => notActive(),
   fileExists: async () => notActive(),
   createFile: async () => notActive(),
+  listDirectory: async () => notActive(),
   readText: async () => notActive(),
   writeText: async () => notActive(),
   runProjectSelftest: async () => notActive()

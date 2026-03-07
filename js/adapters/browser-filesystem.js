@@ -22,6 +22,11 @@ const ensureDirectoryPath = async (path, create = true) => {
   return current;
 };
 
+const getDirectoryHandleSafe = async (path) => {
+  if (!path) return rootHandle;
+  return ensureDirectoryPath(path, false);
+};
+
 export const browserFilesystemAdapter = {
   selectProjectDirectory: async () => {
     if (!('showDirectoryPicker' in window)) {
@@ -116,6 +121,24 @@ export const browserFilesystemAdapter = {
       return response(true, 'FILE_CREATED', 'Datei wurde erstellt.', { path });
     } catch (error) {
       return response(false, 'FILE_CREATE_FAILED', 'Datei konnte nicht erstellt werden.', { error: String(error) });
+    }
+  },
+
+  listDirectory: async (path = '') => {
+    if (!rootHandle) return response(false, 'NO_DIRECTORY', 'Kein Projektordner gewählt.');
+    try {
+      const directoryHandle = await getDirectoryHandleSafe(path);
+      const entries = [];
+      for await (const [name, handle] of directoryHandle.entries()) {
+        entries.push({ name, kind: handle.kind });
+      }
+      entries.sort((a, b) => {
+        if (a.kind !== b.kind) return a.kind === 'directory' ? -1 : 1;
+        return a.name.localeCompare(b.name, 'de');
+      });
+      return response(true, 'DIRECTORY_LIST_OK', 'Ordnerinhalt wurde gelesen.', { path, entries });
+    } catch (error) {
+      return response(false, 'DIRECTORY_LIST_FAILED', 'Ordnerinhalt konnte nicht gelesen werden.', { error: String(error), path });
     }
   },
 

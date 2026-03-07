@@ -15,6 +15,7 @@ export const filesystemAdapter = {
   writeJson: (...args) => activeAdapter.writeJson(...args),
   fileExists: (...args) => activeAdapter.fileExists(...args),
   createFile: (...args) => activeAdapter.createFile(...args),
+  listDirectory: (...args) => activeAdapter.listDirectory(...args),
   readText: (...args) => activeAdapter.readText(...args),
   writeText: (...args) => activeAdapter.writeText(...args),
   runProjectSelftest: (...args) => activeAdapter.runProjectSelftest(...args)
