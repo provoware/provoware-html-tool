@@ -1,23 +1,74 @@
-#AGENTS.md
+# AGENTS.md
 
-Strikte Arbeitsdisziplin:
-Arbeite strikt planungsbasiert, patchbasiert, codesparsam und traffic-sparsam. Planung ist Gold, Handlung ist Silber. Vor jeder Änderung zuerst Ziel, betroffene Dateien, betroffene Zeilen oder Blöcke, Patchgrund, Risiken und bewusste Nicht-Änderungen ermitteln. Danach eine konkrete Schrittliste erstellen. Nur dann patchen.
+## Arbeitsprinzip
+Arbeite immer **planungsbasiert**, **patchbasiert**, **codesparsam** und **traffic-sparsam**.
+Leitlinie: **Planung ist Gold, Handlung ist Silber**.
 
-Ändere nur begründet betroffene Dateien und nur die exakt betroffenen Stellen. Keine unnötigen Änderungen an stabilen Bereichen, keine kosmetischen Nebenanpassungen, keine globalen Umformatierungen, keine Volltests ohne Anlass, keine Endlos-Prüfschleifen, keine Wiederholungsprüfungen ohne neue Änderung, keine unnötigen Dateioperationen und keine unnötigen Dateizugriffe. Immer kleinster sinnvoller Eingriff.
+## Pflicht vor jeder Änderung
+Vor dem ersten Patch immer kurz festhalten:
+1. Ziel der Iteration
+2. Betroffene Dateien
+3. Betroffene Zeilen/Blöcke
+4. Patchgrund
+5. Risiken
+6. Bewusste Nicht-Änderungen
+7. Konkrete Schrittliste
 
-Validierung erfolgt grundsätzlich erst am Ende aller Patches einer Iteration. Dabei nur relevante Prüfungen ausführen: Syntax, direkt betroffene Logik, direkt betroffene Ausgabe und nur wirklich betroffene Tests. Nicht veränderte Dateien und Bereiche sollen weder unnötig erneut geprüft noch erneut analysiert werden.
+Ohne diese Vorarbeit kein Patch.
 
-Dokumentation nur bei echter Verhaltensänderung anpassen. Offene Konflikte oder Folgeprobleme nicht ungeplant mitbearbeiten, sondern sauber in todo.txt für die nächste Iteration dokumentieren. Jede Iteration endet mit einem kompakten Änderungsprotokoll, klarer Endvalidierung und zwei konstruktiven, unterstützenden Empfehlungen.
+## Patch-Regeln (streng)
+- Nur begründet betroffene Dateien ändern.
+- Nur exakt betroffene Stellen ändern.
+- Keine kosmetischen Nebenänderungen.
+- Keine globalen Umformatierungen.
+- Keine unnötigen Dateioperationen.
+- Kein Volltest ohne Anlass.
+- Keine Wiederholungsprüfung ohne neue Änderung.
+- Kleinster sinnvoller Eingriff hat Vorrang.
 
-Achte auf maximale Wartbarkeit: kleine, klar getrennte Dateien und Funktionen, getrennte Logik-, Config-, Daten-, Test- und Doku-Bereiche. Empfohlene Grenzen: Hilfsdateien bis 150 Zeilen, normale Module bis 300 Zeilen, Kernmodule bis 500 Zeilen; darüber Teilung prüfen. Funktionen möglichst unter 40 Zeilen, über 60 Zeilen Teilbarkeit prüfen. Alle Ausgaben in einfacher Sprache, Fachbegriffe nur kurz erklärt in Klammern.
+## Validierung (nur am Ende der Iteration)
+Prüfe nur, was direkt betroffen ist:
+- Syntax
+- direkt betroffene Logik
+- direkt betroffene Ausgabe
+- wirklich betroffene Tests
 
-Kein Patch ohne Patchgrund. Keine Datei ohne Anlass. Keine Prüfung ohne Ziel. Keine Wiederholung ohne neue Änderung. Keine Erweiterung der Iteration bei neu entdeckten Nebenproblemen, wenn diese nicht sauber isoliert lösbar sind. Stattdessen Todo-Eintrag mit Begründung, Prüfschritt und Fertig-Kriterium anlegen.
+Nicht geänderte Bereiche werden nicht erneut geprüft.
 
-Bevor Code geschrieben wird, immer prüfen, ob der gewünschte Effekt mit kleinerem Eingriff, Wiederverwendung bestehender Logik oder besserer Planung erreichbar ist. Erst minimaler Plan, dann minimaler Patch, dann minimale zielgerichtete Validierung.
+## Umgang mit Nebenproblemen
+- Neue Nebenprobleme nicht ungeplant mitbearbeiten.
+- Stattdessen Eintrag in `todo.txt` mit:
+  - Begründung
+  - Prüfschritt
+  - Fertig-Kriterium
 
-Pflicht-Abbruch bei Iterationsaufweitung, also: wenn mehr als ein neuer Konflikt auftaucht, aktuellen Patch sauber abschließen und Rest in todo.txt verschieben.
+## Pflicht-Abbruch bei Aufweitung
+Wenn mehr als ein neuer Konflikt auftaucht:
+1. laufenden Patch sauber abschließen,
+2. Rest in `todo.txt` verschieben,
+3. nächste Iteration sauber planen.
 
-eine feste Regel für maximale Patchanzahl pro Iteration, zum Beispiel: lieber 3 saubere Patches als 12 halbverwandte Änderungen. Das hält Iterationen kontrollierbar.
+## Feste Iterationsgrenze
+Maximal **3 saubere Patches pro Iteration**.
+Lieber wenige klare Änderungen als viele halbverwandte Anpassungen.
 
-strenge Patch-Checkliste
+## Wartbarkeit
+- Logik, Konfiguration, Daten, Tests und Doku sauber trennen.
+- Richtwerte:
+  - Hilfsdateien bis 150 Zeilen
+  - normale Module bis 300 Zeilen
+  - Kernmodule bis 500 Zeilen
+- Funktionen möglichst unter 40 Zeilen; über 60 Zeilen Teilung prüfen.
 
+## Sprache
+Alle Ausgaben in einfacher Sprache.
+Fachbegriffe nur kurz erklären (in Klammern).
+
+## Strenge Patch-Checkliste
+Vor Abschluss jeder Iteration bestätigen:
+- [ ] Patchgrund je Änderung dokumentiert
+- [ ] Nur begründete Dateien geändert
+- [ ] Nebenprobleme ggf. in `todo.txt` geparkt
+- [ ] Relevante Endvalidierung ausgeführt
+- [ ] Kompaktes Änderungsprotokoll erstellt
+- [ ] Zwei konstruktive Empfehlungen formuliert
