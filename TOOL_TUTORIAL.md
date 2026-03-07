@@ -10,6 +10,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Anleitungsmodul mit Index-Sprung kurz prüfen (neu)
+1. Seite laden und im Modul **Anleitungen und Toolbeschreibungen** auf einen Indexpunkt klicken.
+2. Prüfen, ob direkt zum passenden Abschnitt gesprungen wird.
+3. Titel und Beschreibung ändern und **Speichern** klicken.
+4. Mit **Nach oben** oder **Nach unten** die Reihenfolge verschieben.
+5. Prüfen, ob Reihenfolge, Text und Statusmeldung sichtbar aktualisiert werden.
+
 ### Vorlagen-Status robust ohne Browser prüfen (neu)
 1. Im Projektordner `node --test tests/services/module-registry.test.js` ausführen.
 2. Prüfen, ob der Test für „ohne document“ grün ist.

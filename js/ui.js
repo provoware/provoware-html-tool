@@ -1,6 +1,8 @@
 import { categories } from './services/profile-archive.js';
 import { getState } from './state.js';
 import { formatStatusWithSymbol, statusVisual } from './status-visuals.js';
+import { initGuideToolsModule } from './modules/guide-tools-module.js';
+import { initDashboardClock } from './modules/dashboard-clock.js';
 
 const byId = (id) => document.getElementById(id);
 let lastA11yAnnouncement = '';
@@ -528,6 +530,8 @@ export const bindUiActions = (actions) => {
   });
 
   bindWorkspaceControls();
+  initGuideToolsModule();
+  initDashboardClock();
 };
 
 export const render = () => {

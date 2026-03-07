@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 75
+- Erledigte Punkte: 79
 - Offene Punkte: siehe `todo.txt`
 - Fortschritt: 100% (laufend, siehe `todo.txt`)
 
@@ -10,6 +10,9 @@
   - `index.html`
   - `css/app.css`
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
+- Neue UI-Module:
+  - `js/modules/guide-tools-module.js` (Anleitungen/Toolbeschreibungen mit Index-Sprung, Editieren, Reihenfolge)
+  - `js/modules/dashboard-clock.js` (Datum/Uhrzeit im Dashboard)
 - Modul-Einzelstarts (ohne Haupttool):
   - `backup_funktions_modul_start.html`
   - `datenbank_baukasten_start.html`
@@ -88,6 +91,8 @@
 - Grid-Start jetzt vereinfacht: nur ein Todo-Listenmodul aktiv; Modulfenster nutzen einheitlich Maximieren/Minimieren/Ausblenden als Standard.
 - Footer ist jetzt kompakter und in vier gleich große Bereiche aufgeteilt.
 - Todo-Startliste speichert jetzt optional in `localStorage`, damit Aufgaben nach Reload bleiben.
+- Neues Modul „Anleitungen und Toolbeschreibungen“ ergänzt (bearbeiten, sortieren, klickbarer Index mit Sprung).
+- Datum und Uhrzeit laufen jetzt als eigenes Modul und werden im Dashboard live angezeigt.
 - Bei ausgeblendeten Modulen zeigt eine Leiste jetzt direkte „wieder einblenden“-Buttons.
 - Linke und rechte Seitenleiste sind jetzt ein- und ausklappbar, damit mehr Platz für Module entsteht.
 - Modul-Registry-Check ergänzt: Das Dashboard zeigt jetzt direkt, wie viele Module vollständig verbunden sind (z. B. 2/2).
@@ -128,7 +133,6 @@
 - Zielordner prüfen: Dateien liegen in `data/dashboard3-notes` und werden je Titel fortgeführt.
 - Zuletzt gespeicherte Zeile direkt öffnen: Im Dashboard 3 bei der passenden Zeile auf **Datei öffnen** klicken.
 - Erste Nutzung erkennen: **Datei öffnen** bleibt deaktiviert, bis in der Zeile mindestens einmal gespeichert wurde.
- unten
 - Status prüfen: `git status`
 - Änderungen sehen: `git diff --stat`
 - Projektdateien auflisten: `find . -path './.git' -prune -o -type f -print | sort`
@@ -257,3 +261,5 @@
 - Patchgrund 2: Linke Modul-Zusammenfassung bewusst schlank halten (nur Modulstatus), damit beide Hinweise klar getrennt bleiben.
 - Betroffene Dateien: `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und die direkt betroffene Startdatei-Testausgabe geprüft.
+
+
