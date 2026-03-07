@@ -40,7 +40,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
-- Header-Mini-Schritt: rechts oben wurden zwei kleine Status-Chips ergänzt (**Projektstatus: Aktiv**, **Autosave: An**) für eine klarere Vorlage-Annäherung, ohne ID-/JS-Eingriff.
+- Header-Mini-Schritt professionell vervollständigt: Die zwei Status-Chips oben rechts werden jetzt als Live-Anzeige aus State-Daten befüllt (**Projektstatus** und **Autosave-Status**), ohne Layout-Umbau.
+- Interaktions-Check ergänzt: Status-Chips haben jetzt einen kleinen, klar sichtbaren Hover-/Fokus-Zustand im Glas-Look.
 - Kontrast-Feinschliff: `.startup-step--done` und `.startup-step--current` nutzen jetzt stärkere Glas-Verläufe mit besser lesbarem Text auf hellen und dunklen Displays.
 - Design-Mini-Feinschliff: Die 4 Startschritte im Bereich **Schnellaktionen** sind jetzt als farbige Glas-Chips (Blau/Gold/Grün/Violett) mit klarerer Hierarchie gestaltet – näher an der Designvorlage, ohne Logikänderung.
 - UI-Redesign: Dashboard jetzt im dunklen Glas-Look nahe der Designvorlage (3 Spalten, starke Kartenhierarchie, weiche Transparenz).

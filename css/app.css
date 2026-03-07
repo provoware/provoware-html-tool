@@ -1119,6 +1119,14 @@ body::before {
   background: linear-gradient(138deg, rgba(36, 54, 86, 0.8), rgba(18, 30, 52, 0.82));
 }
 
+.header-status-chip:hover,
+.header-status-chip:focus-visible {
+  border-color: rgba(223, 234, 255, 0.86);
+  box-shadow:
+    0 0 0 2px rgba(186, 210, 255, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
 .header p,
 .sidebar-summary,
 .sidebar-hint,

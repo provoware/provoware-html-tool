@@ -11,14 +11,14 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Header-Statuschips + klare Startstatus-Farben
-Im Kopfbereich stehen jetzt rechts oben zwei kleine Status-Chips:
-- **Projektstatus: Aktiv**
-- **Autosave: An**
+### Header-Statuschips als Live-Anzeige
+Im Kopfbereich stehen rechts oben zwei kleine Status-Chips als Live-Anzeige aus dem aktuellen App-Status:
+- **Projektstatus**: zeigt z. B. `Wartet`, `In Arbeit`, `Bereit` oder den Ampel-Status.
+- **Autosave-Status**: zeigt z. B. `Bereit`, `Offen` oder `Gesichert`.
 
-Zusätzlich sind die Startschritte **„done“** und **„current“** kontrastreicher, bleiben aber im gleichen Glas-System.
+Zusätzlich gibt es einen kleinen Hover-/Fokus-Check direkt auf den Chips. So ist die Interaktion im Glas-Look klarer erkennbar.
 
-Kurzregel: Oben rechts kurz Status prüfen, dann die Startschritte nacheinander abarbeiten.
+Kurzregel: Vor dem Arbeiten kurz oben rechts prüfen, ob Projektstatus und Autosave passend stehen.
 
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Vollautomatischer Shell-Laienstart mit Self-Repair

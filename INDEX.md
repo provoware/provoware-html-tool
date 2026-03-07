@@ -2,7 +2,7 @@
 
 ## Kompletter aktueller Verzeichnisbaum
 
-- Stand dieser Übersicht: Iteration mit Header-Statuschips und Kontrast-Feinschliff bei Startstatus-Chips.
+- Stand dieser Übersicht: Iteration mit Live-Header-Statuschips aus State-Daten und kleinem Hover-/Fokus-Check im Glas-Look.
 
 ```
 .
