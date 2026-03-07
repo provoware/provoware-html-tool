@@ -99,6 +99,42 @@ export const detectLayoutMode = (config) => {
   return 'eng';
 };
 
+const bindWorkspaceControls = () => {
+  const app = byId('app');
+  if (!app || app.dataset.workspaceControlsBound === 'yes') return;
+  app.dataset.workspaceControlsBound = 'yes';
+
+  const setSidebarState = (id, cssClass) => {
+    const button = byId(id);
+    if (!button) return;
+    button.addEventListener('click', () => {
+      app.classList.toggle(cssClass);
+      const isCollapsed = app.classList.contains(cssClass);
+      button.setAttribute('aria-pressed', isCollapsed ? 'true' : 'false');
+    });
+  };
+
+  setSidebarState('toggle-left-sidebar', 'sidebar-left-collapsed');
+  setSidebarState('toggle-right-sidebar', 'sidebar-right-collapsed');
+
+  document.querySelectorAll('[data-panel-maximize]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const panel = button.closest('.module-panel');
+      if (!panel) return;
+      const willMaximize = !panel.classList.contains('is-maximized');
+      document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
+      if (willMaximize) panel.classList.add('is-maximized');
+      app.classList.toggle('has-maximized-panel', willMaximize);
+    });
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
+    app.classList.remove('has-maximized-panel');
+  });
+};
+
 export const bindUiActions = (actions) => {
   byId('action-select-dir')?.addEventListener('click', actions.onSelectDirectory);
   byId('action-run-selftest')?.addEventListener('click', () => actions.onRunSelftest(false));
@@ -173,6 +209,8 @@ export const bindUiActions = (actions) => {
       await actions.onGenerateMix({ includeCategories, amountPerCategory });
     });
   });
+
+  bindWorkspaceControls();
 };
 
 export const render = () => {

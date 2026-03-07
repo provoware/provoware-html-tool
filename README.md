@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 47
+- Erledigte Punkte: 49
 - Offene Punkte: 0
 - Fortschritt: 100%
 
@@ -54,6 +54,10 @@
 - Layout und Kartenoptik wurden näher an die Vorlagenstruktur angepasst (Titelband, linke Leiste, großes Rasterfeld, rechte Statuskachel, Segment-Fußleiste).
 - Standardprofil wird jetzt beim Start und beim Archivladen klar gesetzt, damit kein verstecktes Profil `undefined` entstehen kann.
 - Optionaler Diagnose-Export als JSON ergänzt (inklusive Status, Selbsttest, Profil-Statistik und letzter Meldungen).
+- Modernere UI mit ruhigerem Farbsystem, klareren Karten und besserem Kontrast ergänzt.
+- Nutzerführung verbessert durch klarere Fokus- und Hover-Zustände bei Schaltflächen und Eingabefeldern.
+- 3x3 Panel-Grid im Mittelbereich mit Fensterkarten und Maximize-Funktion ergänzt.
+- Linke und rechte Seitenleiste sind jetzt ein- und ausklappbar, damit mehr Platz für Module entsteht.
 
 ## Offene Punkte
 - Aktuell keine offenen Pflichtpunkte.
@@ -65,6 +69,7 @@
 - Letzte Commits: `git log --oneline -n 5`
 
 ## Kurze Empfehlungsliste
+- Bei vielen Modulen zuerst Seitenleisten einklappen, dann im 3x3-Raster arbeiten.
 - Erst immer „Ordner wählen“, dann „Selbsttest starten“.
 - Danach das Profil oben im Archiv wählen und Einträge je Bereich ergänzen.
 - Für schnellen Mix zuerst Schnellbutton (1/3/5) klicken, dann Ergebnis nutzen.
@@ -99,3 +104,13 @@
 - Patchgrund 2: Nutzerhilfe erweitert, damit Diagnose-JSON direkt erzeugt und geprüft werden kann.
 - Betroffene Dateien: `index.html`, `js/app.js`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene HTML/JS-Syntax sowie direkt betroffene Ausgabe geprüft.
+
+- Patchgrund 1: Nutzerwunsch nach modernem, übersichtlichem Layout bei gleicher Funktion.
+- Patchgrund 2: Nutzerfreundlichkeit verbessert durch klarere Kontraste, Fokusrahmen und Hover-Feedback.
+- Betroffene Dateien: `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene CSS-Syntax und direkt betroffene UI-Ausgabe geprüft.
+
+- Patchgrund 1: Konkrete Nutzerforderung nach neuem Layout mit 3x3-Modulraster und ein/ausklappbaren Seitenleisten.
+- Patchgrund 2: Nutzbarkeit verbessert durch Fensterkarten mit Standardoptionen und Maximize auf Toolgröße.
+- Betroffene Dateien: `index.html`, `css/app.css`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene HTML/CSS/JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
