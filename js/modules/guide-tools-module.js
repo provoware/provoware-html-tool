@@ -91,12 +91,12 @@ export const initGuideToolsModule = () => {
   };
 
   const navigateIndex = (nextIndex, options = {}) => {
-    const { jump = false, feedbackText = '' } = options;
+    const { jump = false, feedbackText = '', mode = jump ? 'jump' : 'select' } = options;
     selectIndex(nextIndex);
     render();
     const activeButton = indexList.querySelector(`[data-guide-index="${selectedIndex}"]`);
     activeButton?.focus();
-    if (!jump) return;
+    if (mode !== 'jump') return;
     const sectionNode = document.getElementById(`guide-tool-section-${selectedIndex}`);
     sectionNode?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (feedbackText) setFeedback(feedbackText, 'neutral');
@@ -144,6 +144,7 @@ export const initGuideToolsModule = () => {
     const index = readGuideIndex(event.target);
     if (!Number.isInteger(index) || index < 0 || index >= sections.length) return;
     navigateIndex(index, {
+      mode: 'jump',
       jump: true,
       feedbackText: `Zu Abschnitt ${index + 1} gesprungen.`
     });
@@ -156,6 +157,7 @@ export const initGuideToolsModule = () => {
     if (event.key === 'ArrowDown') navigateIndex(selectedIndex + 1);
     if (event.key === 'Enter' || event.key === ' ') {
       navigateIndex(selectedIndex, {
+        mode: 'jump',
         jump: true,
         feedbackText: `Abschnitt ${selectedIndex + 1} aktiv.`
       });

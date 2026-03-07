@@ -81,6 +81,12 @@ const createDefaultTemplateArchive = () => ({
 const byValue = (a, b) => a.value.localeCompare(b.value, 'de', { sensitivity: 'base' });
 const byCreated = (a, b) => a.createdAt.localeCompare(b.createdAt);
 
+const normalizeMixAmount = (rawAmount) => {
+  const requested = Number(rawAmount || 0);
+  if (!Number.isFinite(requested) || requested <= 0) return 1;
+  return Math.max(1, Math.min(20, Math.floor(requested)));
+};
+
 export const ARCHIVE_PATH = 'data/profile-archive.json';
 
 export const createDefaultArchive = () => ({
@@ -195,8 +201,7 @@ export const createRandomMix = ({ archive, profile, includeCategories, amountPer
 
   const mix = {};
   categories.forEach((category) => {
-    const requested = Number(amountPerCategory?.[category] || 0);
-    const amount = Number.isFinite(requested) && requested > 0 ? Math.floor(requested) : 1;
+    const amount = normalizeMixAmount(amountPerCategory?.[category]);
     mix[category] = pickUnique(target[category], amount).map((item) => item.value);
   });
 
