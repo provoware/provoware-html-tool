@@ -7,6 +7,22 @@ if (!globalThis.window) {
 
 const { createUiActionHandlers } = await import('../../js/services/ui-action-handlers.js');
 const { createDefaultArchive } = await import('../../js/services/profile-archive.js');
+const { filesystemAdapter } = await import('../../js/adapters/filesystem-adapter.js');
+
+
+const withFilesystemAdapterMocks = async (overrides, run) => {
+  const original = {
+    fileExists: filesystemAdapter.fileExists,
+    readText: filesystemAdapter.readText,
+    writeText: filesystemAdapter.writeText
+  };
+  Object.assign(filesystemAdapter, overrides);
+  try {
+    await run();
+  } finally {
+    Object.assign(filesystemAdapter, original);
+  }
+};
 
 const makeBase = () => {
   let state = {
@@ -94,4 +110,46 @@ test('smoke: logout ohne desktop-backend ist erfolgreich', async () => {
   const result = await actions.onLogoutWithAutosave();
   assert.equal(result.ok, true);
   assert.equal(result.code, 'LOGOUT_DONE');
+});
+
+
+test('smoke: dashboard-note save meldet exists-check-fehler vom adapter', async () => {
+  await withFilesystemAdapterMocks({
+    fileExists: async () => ({ ok: false, code: 'EXISTS_FAILED', data: { reason: 'disk' } })
+  }, async () => {
+    const base = makeBase();
+    const actions = createUiActionHandlers(base);
+    const result = await actions.onDashboardNoteSave({ rowIndex: 0, title: 'Test', value: 'Eintrag' });
+    assert.equal(result.ok, false);
+    assert.equal(result.code, 'DASHBOARD_NOTE_EXISTS_CHECK_FAILED');
+    assert.equal(base.getState().dashboardNotes.rows[0].feedback, 'Dateiprüfung fehlgeschlagen.');
+  });
+});
+
+test('smoke: dashboard-note save meldet read-fehler vom adapter', async () => {
+  await withFilesystemAdapterMocks({
+    fileExists: async () => ({ ok: true, data: { exists: true } }),
+    readText: async () => ({ ok: false, code: 'READ_FAILED', data: { reason: 'missing' } })
+  }, async () => {
+    const base = makeBase();
+    const actions = createUiActionHandlers(base);
+    const result = await actions.onDashboardNoteSave({ rowIndex: 1, title: 'Favoriten Genres', value: 'Neu' });
+    assert.equal(result.ok, false);
+    assert.equal(result.code, 'DASHBOARD_NOTE_READ_FAILED');
+    assert.equal(base.getState().dashboardNotes.rows[1].feedback, 'Datei konnte nicht gelesen werden.');
+  });
+});
+
+test('smoke: dashboard-note save meldet write-fehler vom adapter', async () => {
+  await withFilesystemAdapterMocks({
+    fileExists: async () => ({ ok: true, data: { exists: false } }),
+    writeText: async () => ({ ok: false, code: 'WRITE_FAILED', data: { reason: 'readonly' } })
+  }, async () => {
+    const base = makeBase();
+    const actions = createUiActionHandlers(base);
+    const result = await actions.onDashboardNoteSave({ rowIndex: 2, title: 'Templates-Input-Pool', value: 'Neu' });
+    assert.equal(result.ok, false);
+    assert.equal(result.code, 'DASHBOARD_NOTE_SAVE_FAILED');
+    assert.equal(base.getState().dashboardNotes.rows[2].feedback, 'Eintrag konnte nicht gespeichert werden.');
+  });
 });

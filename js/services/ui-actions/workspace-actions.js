@@ -31,6 +31,13 @@ const updateDashboardRowState = (setState, getState, rowIndex, patch = {}) => {
   setState({ dashboardNotes: { basePath: DASHBOARD_NOTES_BASE_PATH, rows } });
 };
 
+const createDashboardNoteFailure = ({ setState, getState, logEvent, rowIndex, code, message, data, logData = {} }) => {
+  const result = { ok: false, code, message, data };
+  updateDashboardRowState(setState, getState, rowIndex, { feedback: message });
+  logEvent('WARN', code, message, logData);
+  return result;
+};
+
 export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
   onSetFilePreviewPath: (path) => {
     setState({ filePreviewPath: normalizeRelativePath(path) });
@@ -124,43 +131,70 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     const normalizedTitle = String(title || '').trim();
     const normalizedValue = String(value || '').trim();
     if (!normalizedTitle) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_TITLE_MISSING', message: 'Titel fehlt.' };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      logEvent('WARN', result.code, result.message, { rowIndex });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_TITLE_MISSING',
+        message: 'Titel fehlt.',
+        logData: { rowIndex }
+      });
     }
     if (!normalizedValue) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_VALUE_MISSING', message: 'Eintrag fehlt.' };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      logEvent('WARN', result.code, result.message, { rowIndex, title: normalizedTitle });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_VALUE_MISSING',
+        message: 'Eintrag fehlt.',
+        logData: { rowIndex, title: normalizedTitle }
+      });
     }
 
     const safeFileName = sanitizeFileName(normalizedTitle);
     if (!safeFileName) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_FILENAME_INVALID', message: 'Titel ist als Dateiname ungültig.' };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      logEvent('WARN', result.code, result.message, { rowIndex, title: normalizedTitle });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_FILENAME_INVALID',
+        message: 'Titel ist als Dateiname ungültig.',
+        logData: { rowIndex, title: normalizedTitle }
+      });
     }
 
     const filePath = `${DASHBOARD_NOTES_BASE_PATH}/${safeFileName}${DASHBOARD_NOTE_FILE_EXTENSION}`;
     const exists = await filesystemAdapter.fileExists(filePath);
     if (!exists.ok) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_EXISTS_CHECK_FAILED', message: 'Dateiprüfung fehlgeschlagen.', data: exists.data };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      logEvent('WARN', result.code, result.message, { rowIndex, title: normalizedTitle, filePath });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_EXISTS_CHECK_FAILED',
+        message: 'Dateiprüfung fehlgeschlagen.',
+        data: exists.data,
+        logData: { rowIndex, title: normalizedTitle, filePath }
+      });
     }
 
     let previous = '';
     if (exists.data?.exists) {
       const loaded = await filesystemAdapter.readText(filePath);
       if (!loaded.ok) {
-        const result = { ok: false, code: 'DASHBOARD_NOTE_READ_FAILED', message: 'Datei konnte nicht gelesen werden.', data: loaded.data };
-        updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-        logEvent('WARN', result.code, result.message, { rowIndex, filePath });
-        return result;
+        return createDashboardNoteFailure({
+          setState,
+          getState,
+          logEvent,
+          rowIndex,
+          code: 'DASHBOARD_NOTE_READ_FAILED',
+          message: 'Datei konnte nicht gelesen werden.',
+          data: loaded.data,
+          logData: { rowIndex, filePath }
+        });
       }
       previous = loaded.data?.text || '';
     }
@@ -168,10 +202,16 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     const nextText = previous ? `${previous}\n${normalizedValue}` : normalizedValue;
     const saved = await filesystemAdapter.writeText(filePath, nextText);
     if (!saved.ok) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_SAVE_FAILED', message: 'Eintrag konnte nicht gespeichert werden.', data: saved.data };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      logEvent('WARN', result.code, result.message, { rowIndex, filePath });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_SAVE_FAILED',
+        message: 'Eintrag konnte nicht gespeichert werden.',
+        data: saved.data,
+        logData: { rowIndex, filePath }
+      });
     }
 
     const message = exists.data?.exists
@@ -190,16 +230,28 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     const row = withDefaultDashboardRows(getState().dashboardNotes?.rows || [])[rowIndex];
     const filePath = normalizeRelativePath(row?.lastSavedPath);
     if (!filePath) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED', message: 'Noch keine Datei gespeichert.' };
-      updateDashboardRowState(setState, getState, rowIndex, { feedback: result.message });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED',
+        message: 'Noch keine Datei gespeichert.'
+      });
     }
 
     const loaded = await filesystemAdapter.readText(filePath);
     if (!loaded.ok) {
-      const result = { ok: false, code: 'DASHBOARD_NOTE_EDITOR_READ_FAILED', message: 'Datei konnte nicht geladen werden.', data: loaded.data };
-      logEvent('WARN', result.code, result.message, { rowIndex, filePath });
-      return result;
+      return createDashboardNoteFailure({
+        setState,
+        getState,
+        logEvent,
+        rowIndex,
+        code: 'DASHBOARD_NOTE_EDITOR_READ_FAILED',
+        message: 'Datei konnte nicht geladen werden.',
+        data: loaded.data,
+        logData: { rowIndex, filePath }
+      });
     }
 
     const content = loaded.data?.text || '';
