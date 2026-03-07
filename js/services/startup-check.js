@@ -1,28 +1,94 @@
 import { filesystemAdapter } from '../adapters/filesystem-adapter.js';
 
+const safeCall = async (label, task) => {
+  try {
+    const result = await task();
+    return { ok: true, data: result };
+  } catch (error) {
+    return {
+      ok: false,
+      code: `${label}_THREW`,
+      message: 'Unerwarteter Laufzeitfehler.',
+      data: { error: String(error) }
+    };
+  }
+};
+
+const normalizeProjectStructure = (projectStructure) => {
+  if (!projectStructure || typeof projectStructure !== 'object') {
+    return {
+      projectStructure: { requiredDirectories: [], requiredFiles: [], writeTestRules: {} },
+      repaired: true,
+      reason: 'Projektstruktur war ungültig und wurde auf sichere Defaults gesetzt.'
+    };
+  }
+
+  return {
+    projectStructure,
+    repaired: false,
+    reason: ''
+  };
+};
+
 export const runStartupCheck = async (projectStructure, options = {}) => {
-  const directoryInfo = await filesystemAdapter.getDirectoryInfo();
+  const normalized = normalizeProjectStructure(projectStructure);
+
+  const directoryInfo = await safeCall('STARTUP_DIRECTORY', () => filesystemAdapter.getDirectoryInfo());
   if (!directoryInfo.ok) {
+    return {
+      ok: false,
+      code: directoryInfo.code,
+      message: 'Ordnerstatus konnte nicht gelesen werden.',
+      data: { ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }
+    };
+  }
+
+  if (!directoryInfo.data.ok) {
     return {
       ok: false,
       code: 'STARTUP_DIRECTORY_REQUIRED',
       message: 'Bitte zuerst einen Projektordner wählen.',
-      data: { ready: false, needsDirectory: true, needsSelftest: true }
+      data: { ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }
     };
   }
 
-  const permission = await filesystemAdapter.checkPermissions({ requestWrite: options.requestWrite === true });
+  const permission = await safeCall('STARTUP_PERMISSION', () => filesystemAdapter.checkPermissions({ requestWrite: options.requestWrite === true }));
   if (!permission.ok) {
+    return {
+      ok: false,
+      code: permission.code,
+      message: 'Rechteprüfung ist unerwartet abgebrochen.',
+      data: { ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }
+    };
+  }
+
+  if (!permission.data.ok) {
     return {
       ok: false,
       code: 'STARTUP_PERMISSION_FAILED',
       message: 'Rechteprüfung ist fehlgeschlagen.',
-      data: { ready: false, needsDirectory: false, needsSelftest: true }
+      data: { ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }
     };
   }
 
-  const selftest = await filesystemAdapter.runProjectSelftest({ projectStructure, runWriteTest: false });
-  const ready = selftest.ok && selftest.data.overallStatus === 'green';
+  const selftest = await safeCall('STARTUP_SELFTEST', () => filesystemAdapter.runProjectSelftest({ projectStructure: normalized.projectStructure, runWriteTest: false }));
+  if (!selftest.ok || !selftest.data || typeof selftest.data !== 'object') {
+    return {
+      ok: false,
+      code: selftest.code || 'STARTUP_SELFTEST_FAILED',
+      message: 'Selbsttest ist fehlgeschlagen. Bitte Selbsttest erneut starten.',
+      data: {
+        ready: false,
+        needsDirectory: false,
+        needsSelftest: true,
+        permission: permission.data.data,
+        selfRepair: normalized
+      }
+    };
+  }
+
+  const selftestData = selftest.data;
+  const ready = selftestData.ok && selftestData.data.overallStatus === 'green';
 
   return {
     ok: ready,
@@ -32,8 +98,9 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ready,
       needsDirectory: false,
       needsSelftest: !ready,
-      permission: permission.data,
-      selftest: selftest.data
+      permission: permission.data.data,
+      selftest: selftestData.data,
+      selfRepair: normalized
     }
   };
 };

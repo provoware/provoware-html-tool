@@ -11,6 +11,18 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Startup-Check mit Self-Repair
+Neu in dieser Iteration:
+- Wenn die Projektstruktur ungültig ist, nutzt der Startup-Check sichere Defaults (Selbstreparatur).
+- Unerwartete Adapter-Fehler liefern jetzt klare Codes, damit die Hilfe schneller passt.
+
+Direkter Mini-Check:
+1. `node --test tests/services/startup-check.test.js`
+
+Kurzregel: Bei Startfehlern zuerst den Startup-Check ausführen, dann den gemeldeten Code nutzen.
+
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Barrierearme Hilfe im Guide- und Plugin-Bereich
 Neu in dieser Iteration:
 - Im Guide gibt es einen Zusatzhinweis: Reihenfolge geht auch ohne Ziehen mit **Nach oben/Nach unten**.
