@@ -504,8 +504,9 @@ Kurzer Prüfschritt:
 3. Nicht mehr erwartet: eine einzige Warnung mit zusammengeklebter Liste wie `index.html\n./css/app.css...`.
 
 
-## Mini-Erweiterung dieser Iteration: Header-Hinweis sicher halten
+## Mini-Erweiterung dieser Iteration: Next-Step + Hinweisfelder sicher halten
 1. Der Hinweis `next-step` wird nur als Text gesetzt (`textContent`).
-2. Grund: Nutztexte dürfen kein HTML im Browser ausführen.
-3. Kurzcheck: `node --test tests/services/ui-header-chips.test.js` ausführen.
-4. Erwartung: `<img ...>` und `<script>...` erscheinen nur als Text im Hinweis.
+2. Zweiter gezielter Test deckt Sonderzeichen und sehr langen Text (>200 Zeichen) mit ab.
+3. Kleiner Folgeschritt „Text statt HTML“: `checks-list` baut Hinweis-Einträge über DOM-Textknoten.
+4. Kurzcheck: `node --test tests/services/ui-header-chips.test.js` ausführen.
+5. Erwartung: Sonderzeichen bleiben sichtbar und Nutztext wird nicht als HTML interpretiert.
