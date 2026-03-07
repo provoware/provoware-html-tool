@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 43
+- Erledigte Punkte: 44
 - Offene Punkte: 2
-- Fortschritt: 96%
+- Fortschritt: 96.5%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -51,6 +51,7 @@
 - Statussymbole ergänzt: Ampelstatus zeigt jetzt zusätzlich ✔ / ⚠ / ✖ für klare Erkennung bei schwachem Kontrast.
 - Statusbereich Lesen/Schreiben/Struktur nutzt jetzt ebenfalls einheitlich ✔ / ⚠ / ✖.
 - Status-Visuals wurden in `js/status-visuals.js` ausgelagert, damit weitere UI-Teile dieselbe Ampel-Logik nutzen können.
+- Layout und Kartenoptik wurden näher an die Vorlagenstruktur angepasst (Titelband, linke Leiste, großes Rasterfeld, rechte Statuskachel, Segment-Fußleiste).
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
@@ -68,6 +69,8 @@
 - Für schnellen Mix zuerst Schnellbutton (1/3/5) klicken, dann Ergebnis nutzen.
 - Empfehlung 1: Vor großem Import erst Export machen (Backup als JSON).
 - Empfehlung 2: Bei vielen Einträgen Sortierung auf „Alphabetisch“ lassen.
+- Empfehlung 3: Für Vorlagen-Look die Fensterbreite möglichst über 1200 px halten.
+- Empfehlung 4: Wenn die Fußleiste zu voll wirkt, erst über „Selbsttest starten“ neue klare Log-Einträge erzeugen.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
@@ -78,3 +81,7 @@
 - Patchgrund 2: Wartbarkeit verbessert durch Auslagerung der Status-Visuals in eine kleine Hilfsdatei.
 - Betroffene Dateien: `js/ui.js`, `js/status-visuals.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene UI-Ausgabe geprüft.
+- Patchgrund 1: Nutzerwunsch nach stärkerer Übereinstimmung mit der Design-Vorlage (Layout, Darstellung, Struktur).
+- Patchgrund 2: Nutzerfreundlichkeit verbessert durch klarere Kachelbereiche und visuell getrennte Aktionszonen.
+- Betroffene Dateien: `index.html`, `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur direkt betroffene HTML/CSS-Ausgabe sowie relevante Syntax geprüft.

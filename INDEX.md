@@ -2,8 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Profil-Archiv mit Zufallsmix und JSON-Persistenz
-- Iterationsfokus: Einheitliche Statussymbole inkl. Lesen/Schreiben/Struktur + ausgelagerte Status-Visuals
+- Iterationsfokus: Design-Angleichung an Vorlagenlayout (Kachelstruktur + Darstellungszonen)
 
 ## Verzeichnisbaum (ohne `.git`)
 
