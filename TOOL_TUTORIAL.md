@@ -10,7 +10,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
-### Profil-Standard kurz prüfen (neu)
+### Nur-Lesen-Hinweis kurz prüfen (neu)
+1. Einen Ordner wählen, bei dem Lesen erlaubt ist, Schreiben aber blockiert ist.
+2. Danach **Selbsttest starten**.
+3. Im Bereich **Projektordner-Status** bei **Schreiben** prüfen, ob `⚠ nur lesen` angezeigt wird.
+4. Ziel: Der Sonderfall ist klar sichtbar und nicht als kompletter Fehler missverständlich.
+
+### Profil-Standard kurz prüfen
 1. Seite neu laden.
 2. Ohne Klick auf die Profil-Auswahl direkt einen Eintrag speichern.
 3. Danach im Profil **HardTechno** prüfen, ob der Eintrag dort sichtbar ist.
@@ -44,7 +50,7 @@ Kurze Anleitung für sichere kleine Iterationen.
 2. **Ordner wählen** und danach **Selbsttest starten**.
 3. Im Bereich **Projektordner-Status** prüfen:
    - **Lesen** zeigt `✔ ok` oder `✖ nein`,
-   - **Schreiben** zeigt `✔ ok` oder `✖ nein`,
+   - **Schreiben** zeigt `✔ ok`, `⚠ nur lesen` oder `✖ nein`,
    - **Struktur** zeigt `✔ ok` oder `⚠ fehlt teilweise`.
 4. Ziel: Das Symbolmuster ist überall gleich wie in der Gesamtampel und in den Prüfkarten.
 
@@ -72,4 +78,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Robustheit im Profil-Archiv (klarer Profil-Standard ohne `undefined`-Profil)
+- Iterationsfokus: Nutzerfreundlichkeit bei Rechten (klarer Hinweis für `nur lesen`)
