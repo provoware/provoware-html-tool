@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Design, Layout und Nutzerfreundlichkeit modern und übersichtlich verbessern
+- Iterationsfokus: 3x3 Modulraster mit Sidebar-Toggles und Fenster-Maximierung umsetzen
 
 ## Verzeichnisbaum (ohne `.git`)
 

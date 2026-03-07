@@ -10,6 +10,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Sidebar + 3x3 Modulfenster schnell prüfen (neu)
+1. Seite neu laden.
+2. Oben auf **Linke Leiste** und **Rechte Leiste** klicken und prüfen, ob beide Seitenleisten ein- und ausklappen.
+3. Im Mittelbereich prüfen, ob ein 3x3 Modulraster sichtbar ist.
+4. Bei einem Modul auf **⛶** klicken und prüfen, ob das Modul auf Toolgröße maximiert.
+5. Mit **Esc** prüfen, ob das maximierte Modul wieder normal wird.
+
 ### Modernes Layout schnell prüfen (neu)
 1. Seite neu laden.
 2. Mit Maus über die Navigations-Buttons fahren und auf leichtes Hover-Feedback achten.
@@ -91,4 +98,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Design, Layout und Nutzerfreundlichkeit modern und übersichtlich verbessern
+- Iterationsfokus: 3x3 Modulraster mit Sidebar-Toggles und Fenster-Maximierung umsetzen
