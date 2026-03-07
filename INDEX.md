@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Laienstart-Robustheit (Rechtecheck + Port-Fallback) und Plugin-Verwaltung im Dashboard
+- Iterationsfokus: Minimal-Check-Robustheit für ES-Module unter Node 18
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github

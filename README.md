@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 18 (siehe `todo.txt`)
-- Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 97%
+- Erledigte Punkte: 16 (siehe `todo.txt`)
+- Offene Punkte: 2 (siehe `todo.txt`)
+- Fortschritt: 89%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -28,7 +28,7 @@
   - `data/profile-archive.json`, `data/templates-archive.json`
 - **Tests und Checks**
   - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/adapters/*.test.js`, `tests/start-files/*.test.js`, `tests/scripts-laienstart.dry-run.test.js`
-  - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck)
+  - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck, jetzt Node-18-kompatibel für ES-Module)
   - `scripts/laienstart.sh` (vollautomatischer Shell-Start mit präventiver Self-Repair-Logik)
 - **GitHub Workflows (Basis aktiv)**
   - `.github/workflows/ci.yml` (frühe Fehler durch Tests)
@@ -39,6 +39,7 @@
 ## Was in dieser Iteration bereinigt wurde
 - `scripts/laienstart.sh` prüft jetzt vor dem Start, ob der Projektordner schreibbar ist. Bei Fehlern gibt es klare Handlungsoptionen in einfacher Sprache.
 - `scripts/laienstart.sh` nutzt einen freien-Port-Fallback und meldet klar: „Port X belegt, nutze Port Y“.
+- `scripts/minimal-check.sh` prüft JS-Dateien jetzt mit `node --experimental-default-type=module --check`, damit ES-Module unter Node 18 korrekt als Modul-Syntax geprüft werden.
 - Dashboard erweitert: Plugin-Verwaltung mit Auswahlmenü, Aktivieren/Deaktivieren, Hilfe-Text und direkter Ergebnisliste.
 - Neue Default-Plugins: Zeichenzähler (Eingabe/Ausgabe) und einfache Rechtschreibprüfung mit Auto-Spracherkennung (Deutsch/Englisch/Französisch).
 - Neuer Shell-Einstieg `scripts/laienstart.sh`: liest Pflicht-Abhängigkeiten jetzt aktiv aus `data/laienstart-dependency-map.json`, versucht automatische Installation (apt/brew), erzeugt fehlende Standarddateien und startet danach lokal die Oberfläche.
@@ -85,7 +86,7 @@
 - Lokalen Minimal-Check ausführen (empfohlen):
   - `bash scripts/minimal-check.sh`
 - Nur JS-Syntax prüfen (direkt):
-  - `find js tests -type f -name '*.js' -print0 | xargs -0 -n1 node --check`
+  - `find js tests -type f -name '*.js' -print0 | xargs -0 -n1 node --experimental-default-type=module --check`
 
 ## Kurze Empfehlungsliste
 1. Erst die drei Basis-Workflows 1–2 Wochen stabil beobachten.

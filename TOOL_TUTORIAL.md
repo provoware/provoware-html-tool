@@ -147,3 +147,16 @@ Standard-Plugins:
 - **Rechtschreibprüfung (DE/EN/FR, auto)**: schätzt die Sprache automatisch und zeigt mögliche Tippfehler.
 
 Kurzregel: Erst Plugin wählen, dann Ergebnis lesen.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Node-18-Hinweis für den Minimal-Check
+Wenn du Node 18 nutzt, braucht der reine Syntax-Check ein Modul-Flag (ESM = JavaScript-Module mit `import/export`).
+
+Nutze dafür:
+1. `bash scripts/minimal-check.sh`
+
+Intern wird dabei jetzt verwendet:
+- `node --experimental-default-type=module --check`
+
+Kurzregel: Bei `import`/`export` immer den Minimal-Check nutzen, nicht den alten `node --check`-Einzelaufruf ohne Flag.
+
