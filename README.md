@@ -2,8 +2,8 @@
 
 ## Status oben
 - Erledigte Punkte: 53
-- Offene Punkte: 0
-- Fortschritt: 100%
+- Offene Punkte: siehe `todo.txt`
+- Fortschritt: laufend (siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -68,7 +68,7 @@
 
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 ## Offene Punkte
-- Aktuell keine offenen Pflichtpunkte.
+- Siehe `todo.txt` für den aktuellen, priorisierten Stand.
 
 ## Laien-Befehle unten
 - Status prüfen: `git status`
