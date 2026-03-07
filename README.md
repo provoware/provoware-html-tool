@@ -27,6 +27,7 @@
   - `data/ui_texts.json`
   - `data/project-structure.json`
   - `data/profile-archive.json` (JSON-Archiv für Profile)
+  - `data/module-registry.json` (zentrale Modul-IDs)
 
 ## Erledigte Kernpunkte
 - Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.
@@ -62,6 +63,8 @@
 - Modul-Registry-Check ergänzt: Das Dashboard zeigt jetzt direkt, wie viele Module vollständig verbunden sind (z. B. 2/2).
 - Vorlagen-Design-Status ergänzt: Das Dashboard zeigt jetzt klar, dass die Asset-Vorlage aktuell nicht eingebunden ist.
 - Robuste, inhaltliche Modulprüfung ergänzt: Zusätzlich zur Dateiprüfung werden jetzt Manifest- und JSON-Grundfelder geprüft.
+- Zentrale Modul-IDs ergänzt: Neue Module werden über `data/module-registry.json` erkannt (ohne Codeänderung).
+- Laienhilfe ergänzt: Häufige Fehltexte liefern jetzt kurze „So beheben“-Hinweise.
 
 ## Offene Punkte
 - Aktuell keine offenen Pflichtpunkte.
@@ -127,3 +130,8 @@
 - Patchgrund 2: Laientaugliche Fehlersicht verbessert durch klare Kurzmeldung je defektem Modul.
 - Betroffene Dateien: `js/services/module-registry.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Status-Ausgabe geprüft.
+- Patchgrund 1: Modul-IDs aus zentraler JSON-Datei laden, damit neue Module ohne Codeänderung validiert werden.
+- Patchgrund 2: Laientaugliche Fehlerhilfe je häufigem Fehlertext direkt in die Statusmeldung ergänzen.
+- Betroffene Dateien: `data/module-registry.json`, `js/services/module-registry.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JSON/JS-Syntax und direkt betroffene Status-Ausgabe geprüft.
+
