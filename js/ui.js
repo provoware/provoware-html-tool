@@ -2,6 +2,27 @@ import { getState } from './state.js';
 
 const byId = (id) => document.getElementById(id);
 
+const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+
+const ensureTerminalPunctuation = (value) => {
+  if (!value) return '';
+  if (/[.!?…]$/.test(value)) return value;
+  return `${value}.`;
+};
+
+const autoFormatText = (value) => {
+  const normalized = normalizeWhitespace(value);
+  if (!normalized) return '';
+  const withSpaces = normalized.replace(/[_-]+/g, ' ');
+  const capitalized = withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1);
+  return ensureTerminalPunctuation(capitalized);
+};
+
+const formatStatusWord = (value) => {
+  const normalized = normalizeWhitespace(value);
+  return normalized ? normalized.toLowerCase() : '-';
+};
+
 const setText = (id, text) => {
   const node = byId(id);
   if (node) node.textContent = text;
@@ -64,29 +85,33 @@ export const render = () => {
   const nextStep = byId('next-step');
   if (nextStep) {
     const startupReady = state.debug?.startupReady;
-    nextStep.innerHTML = `<strong>${messages.actionNext || 'Nächster Schritt'}:</strong> ${startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || ''}`;
+    const nextMessage = startupReady ? messages.startupReady || '' : messages.startupWaiting || messages.startupBlocked || '';
+    nextStep.innerHTML = `<strong>${messages.actionNext || 'Nächster Schritt'}:</strong> ${autoFormatText(nextMessage)}`;
   }
 
   const selectedName = state.selectedProjectDirectory?.name;
   const rememberedName = state.rememberedProjectDirectoryName;
   const folderText = selectedName || (rememberedName ? `${rememberedName} (zuletzt gewählt)` : '-');
   setText('status-folder', folderText);
-  setText('status-read', state.permissionStatus?.read ? 'ok' : 'nein');
-  setText('status-write', state.permissionStatus?.write ? 'ok' : 'nein');
-  setText('status-structure', state.selftestResult?.data?.missingFiles?.length ? 'fehlt teilweise' : 'ok/unklar');
-  setText('status-last-test', state.selftestResult?.summary || '-');
-  setText('status-overall', state.selftestResult?.overallStatus || 'rot');
+  setText('status-read', formatStatusWord(state.permissionStatus?.read ? 'ok' : 'nein'));
+  setText('status-write', formatStatusWord(state.permissionStatus?.write ? 'ok' : 'nein'));
+  setText('status-structure', formatStatusWord(state.selftestResult?.data?.missingFiles?.length ? 'fehlt teilweise' : 'ok/unklar'));
+  setText('status-last-test', autoFormatText(state.selftestResult?.summary || '-'));
+  setText('status-overall', formatStatusWord(state.selftestResult?.overallStatus || 'rot'));
   setText('status-layout', state.layoutMode || '-');
 
   const checksList = byId('checks-list');
   if (checksList) {
     const checks = state.selftestResult?.checks || [];
-    checksList.innerHTML = checks.map((check) => `<article class="check-item ${statusClass(check.status)}"><strong>${check.name}</strong><br><span>${check.message}</span></article>`).join('');
+    checksList.innerHTML = checks.map((check) => `<article class="check-item ${statusClass(check.status)}"><strong>${autoFormatText(check.name)}</strong><br><span>${autoFormatText(check.message)}</span></article>`).join('');
   }
 
   const logList = byId('log-list');
   if (logList) {
-    logList.innerHTML = (state.logs || []).slice(0, 10).map((item) => `<li><span class="log-time">${item.timestamp.slice(11, 19)}</span><strong>${item.type}</strong> ${item.message}</li>`).join('');
+    logList.innerHTML = (state.logs || [])
+      .slice(0, 10)
+      .map((item) => `<li><span class="log-time">${item.timestamp.slice(11, 19)}</span><strong>${autoFormatText(item.type)}</strong> ${autoFormatText(item.message)}</li>`)
+      .join('');
   }
 
   document.getElementById('app')?.setAttribute('data-layout-mode', state.layoutMode || 'standard');

@@ -1,6 +1,6 @@
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Tool-Optik-Vorgabe (Design, Layout, Größenwirkung)
+- Iterationsfokus: Auto-Formatierung und Lesbarkeit in der Dashboard-Ausgabe
 
 ## Verzeichnisbaum (ohne `.git`)
 
