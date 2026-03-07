@@ -269,3 +269,15 @@ Warum das hilft:
 - Die Orientierung wird für Einsteiger einfacher.
 
 Kurzregel: Schritte der Reihe nach lesen, Farbe nur als Zusatzhilfe nutzen.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Farbtoken + Utility-Karten sicher anpassen
+Wenn du den neuen Look weiter feinjustieren willst, arbeite in 2 kleinen Schritten:
+1. Farben nur über Token in `css/app.css` ändern (Header- und Utility-Karten-Token in `:root`).
+2. Rechte Spalte nur über Klassen `utility-cards` und `utility-card` anpassen.
+
+Sicherheitsregel:
+- Keine bestehenden IDs ändern (damit JS-Anker stabil bleiben).
+- Nach jeder Layout-Änderung kurz unter 980px prüfen.
+
+Kurzregel: erst Token, dann Karten, dann 980px-Check.
