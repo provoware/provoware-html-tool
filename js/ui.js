@@ -73,6 +73,20 @@ const renderStats = (stats) => {
   return `Genres: ${stats.genres} | Stimmungen: ${stats.moods} | Stile: ${stats.styles} | Gesamt: ${stats.total}`;
 };
 
+const renderSidebarModules = (modules = []) => {
+  if (!modules.length) {
+    return '<p class="sidebar-empty">Noch keine aktiven Module gefunden.</p>';
+  }
+
+  return modules
+    .map((module) => {
+      const status = module.ok ? 'ok' : 'prüfen';
+      const label = autoFormatText(module.name || module.id || 'Modul').replace(/[.!?…]+$/, '');
+      return `<button type="button" class="btn module-btn" title="${label}"><span>${label}</span><small>${status}</small></button>`;
+    })
+    .join('');
+};
+
 export const applyTheme = (themeTokens = {}) => {
   const map = {
     bg: '--bg',
@@ -220,9 +234,9 @@ export const render = () => {
 
   setText('app-title', texts.titles?.appTitle || 'ProvoWare Dashboard');
   setText('app-subtitle', texts.titles?.appSubtitle || 'Projektstart');
-  setText('nav-title', texts.titles?.navigation || 'Navigation');
+  setText('nav-title', 'Nutzer-Module');
   setText('startup-title', texts.titles?.startup || 'Startstatus');
-  setText('status-title', texts.titles?.status || 'Projektordner-Status');
+  setText('status-title', 'Einstellungen & Stabilität');
   setText('log-title', texts.titles?.logs || 'Letzte Meldungen');
 
   setText('action-select-dir', texts.buttons?.selectDirectory || 'Ordner wählen');
@@ -275,6 +289,11 @@ export const render = () => {
   setText('mix-output', state.randomMix?.text || '-');
 
   setText('module-registry-summary', state.moduleRegistry?.summary || '-');
+  setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
+  const sidebarModuleList = byId('sidebar-module-list');
+  if (sidebarModuleList) {
+    sidebarModuleList.innerHTML = renderSidebarModules(state.moduleRegistry?.modules || []);
+  }
   setText('template-design-status', autoFormatText(state.templateDesignStatus?.message || '-'));
 
   const archiveEvents = byId('archive-events');

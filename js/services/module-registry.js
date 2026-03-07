@@ -43,6 +43,7 @@ const readModuleIds = async () => {
 };
 
 const checkProfile = async (id) => {
+  let moduleName = id;
   const checks = await Promise.all(MODULE_FILES.map(async (file) => ({
     file,
     ok: (await fetch(filePath(id, file), { method: 'GET' }).catch(() => null))?.ok === true
@@ -56,6 +57,7 @@ const checkProfile = async (id) => {
     if (!manifest.ok) {
       issues.push(manifest.code === 'BROKEN_JSON' ? 'manifest ungültig' : 'manifest fehlt');
     } else {
+      moduleName = hasText(manifest.data?.name) ? manifest.data.name.trim() : id;
       const problem = validateManifest(manifest.data, id);
       if (problem) issues.push(problem);
     }
@@ -85,7 +87,7 @@ const checkProfile = async (id) => {
     }
   }
 
-  return { id, ok: missingFiles.length === 0 && issues.length === 0, missingFiles, issues };
+  return { id, name: moduleName, ok: missingFiles.length === 0 && issues.length === 0, missingFiles, issues };
 };
 
 const fixHintFor = (issue) => {

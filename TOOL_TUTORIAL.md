@@ -72,6 +72,14 @@ Kurze Anleitung für sichere kleine Iterationen.
 6. Neue Module zentral pflegen: In `data/module-registry.json` eine neue Modul-ID eintragen und Seite neu laden.
 7. Bei häufigen Fehlern auf den „Hilfe:“‑Teil im Status achten und den kurzen Schritt direkt umsetzen.
 
+
+### Neue Sidebar-Aufteilung kurz prüfen (neu)
+1. Seite neu laden.
+2. Links prüfen, ob nur Modul-Buttons sichtbar sind (ohne Selbsttest- oder Ordner-Aktionen).
+3. Prüfen, ob die Modul-Buttons kompakt wirken und zweispaltig angeordnet sind.
+4. Rechts im Bereich **Einstellungen & Stabilität** prüfen, ob alle Test-/Tool-Aktionen gebündelt stehen.
+5. Danach **Selbsttest starten** und prüfen, ob darunter der Stabilitätsstatus weiter aktualisiert wird.
+
 ### Camouflage-Farben schnell prüfen (neu)
 1. Seite neu laden.
 2. Prüfen, ob Hintergrund und Karten weder sehr hell noch sehr dunkel wirken.
@@ -113,4 +121,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Camouflage-Farben in mittlerer Helligkeit
+- Iterationsfokus: Sidebar mit Nutzer-Modulen links und gebündelten Einstellungen rechts

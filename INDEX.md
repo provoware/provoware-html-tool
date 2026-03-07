@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Camouflage-Farben in mittlerer Helligkeit
+- Iterationsfokus: Sidebar trennt Nutzer-Module von Einstellungen/Tests
 
 ## Verzeichnisbaum (ohne `.git`)
 

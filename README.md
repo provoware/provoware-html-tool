@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 53
+- Erledigte Punkte: 54
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: laufend (siehe `todo.txt`)
+- Fortschritt: 82% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -67,6 +67,7 @@
 - Laienhilfe ergänzt: Häufige Fehltexte liefern jetzt kurze „So beheben“-Hinweise.
 
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
+- Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
 
