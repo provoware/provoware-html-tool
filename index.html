@@ -41,6 +41,17 @@
           <h2 class="panel-title" id="startup-title">Dashboard</h2>
           <p id="dashboard-info-note" class="dashboard-note">Das 3x3 Raster ist gleich groß aufgeteilt. Es startet bewusst nur mit einem Todo-Listenmodul.</p>
           <p id="dashboard-datetime" class="dashboard-datetime">Datum und Uhrzeit: -</p>
+          <section class="settings-group" aria-label="Plugin-Verwaltung">
+            <h3>Plugin-Verwaltung</h3>
+            <p id="plugin-help-text" class="sidebar-summary">Plugins können ein- oder ausgeschaltet werden. So bleibt die Oberfläche einfach.</p>
+            <label for="plugin-select">Plugin-Auswahl</label>
+            <select id="plugin-select"></select>
+            <div class="settings-actions">
+              <button id="plugin-toggle" class="btn-small" type="button">Plugin aktivieren</button>
+            </div>
+            <p id="plugin-state" class="sidebar-summary">Status: -</p>
+            <ul id="plugin-output" class="log-list"><li>Plugin-Ausgabe erscheint hier.</li></ul>
+          </section>
         </section>
 
         <section class="panel-grid" aria-label="Aktive Module">

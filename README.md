@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 17 (siehe `todo.txt`)
-- Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 96%
+- Erledigte Punkte: 18 (siehe `todo.txt`)
+- Offene Punkte: 1 (siehe `todo.txt`)
+- Fortschritt: 97%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -14,6 +14,7 @@
   - `css/app.css` (inkl. farbliche Hilfehinweise, Tastatur- und Drag&Drop-Stati)
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
+  - Neu: `js/modules/plugin-manager.js` (Plugin-Auswahl, Zeichenzähler und einfache Rechtschreibprüfung DE/EN/FR mit Auto-Sprachschätzung)
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
   - Neu für sichere Listen-Ausgabe: `js/services/html-escape.js` (zentrale HTML-Zeichenkodierung)
@@ -36,6 +37,10 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- `scripts/laienstart.sh` prüft jetzt vor dem Start, ob der Projektordner schreibbar ist. Bei Fehlern gibt es klare Handlungsoptionen in einfacher Sprache.
+- `scripts/laienstart.sh` nutzt einen freien-Port-Fallback und meldet klar: „Port X belegt, nutze Port Y“.
+- Dashboard erweitert: Plugin-Verwaltung mit Auswahlmenü, Aktivieren/Deaktivieren, Hilfe-Text und direkter Ergebnisliste.
+- Neue Default-Plugins: Zeichenzähler (Eingabe/Ausgabe) und einfache Rechtschreibprüfung mit Auto-Spracherkennung (Deutsch/Englisch/Französisch).
 - Neuer Shell-Einstieg `scripts/laienstart.sh`: liest Pflicht-Abhängigkeiten jetzt aktiv aus `data/laienstart-dependency-map.json`, versucht automatische Installation (apt/brew), erzeugt fehlende Standarddateien und startet danach lokal die Oberfläche.
 - Präventive Self-Repair ergänzt: fehlende Kern-JSON-Dateien (`app-config`, Registry, Laienstart-Configs) werden mit sicheren Standard-Dummys erzeugt.
 - Neuer gezielter Shell-Test: `tests/scripts-laienstart.dry-run.test.js` prüft Dry-Run + Self-Repair bei fehlenden Dateien automatisch.
@@ -71,6 +76,7 @@
 - Team-Start (empfohlen):
   - `bash scripts/laienstart.sh`
   - Nur prüfen ohne Start (Dry-Run): `bash scripts/laienstart.sh --dry-run`
+  - Bei Schreibrechtsfehler im Projektordner zuerst Rechte geben: `chmod u+w .`
   - Alternativ: `laienstart.html` im Browser öffnen
 - App direkt öffnen (nur wenn Startcheck bereits ok ist):
   - `index.html` im Browser öffnen

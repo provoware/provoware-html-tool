@@ -132,3 +132,18 @@ Mini-Prüfung:
 2. Prüfen, dass Injection-Payloads (`<img onerror=...>`, `<script>...`) nur als Text sichtbar sind.
 
 Kurzregel: Erst `textContent`, sonst klar begründete Ausnahme mit zentralem Escape.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Plugin-Verwaltung für Laien im Dashboard
+Im Dashboard gibt es jetzt ein Plugin-Auswahlfeld mit Ein-/Aus-Schalter.
+
+So geht es einfach:
+1. Plugin im Auswahlfeld wählen.
+2. Mit dem Button aktivieren oder deaktivieren.
+3. Ergebnis direkt darunter lesen.
+
+Standard-Plugins:
+- **Zeichenzähler**: zählt Zeichen aus Eingabe- und Ausgabebereichen.
+- **Rechtschreibprüfung (DE/EN/FR, auto)**: schätzt die Sprache automatisch und zeigt mögliche Tippfehler.
+
+Kurzregel: Erst Plugin wählen, dann Ergebnis lesen.
