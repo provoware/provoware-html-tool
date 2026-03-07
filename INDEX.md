@@ -1,5 +1,3 @@
-Stand: aktualisiert nach Verbindungsstatus-Optimierung im Startskript.
-
 ## Verzeichnisbaum (ohne `.git`)
 
 ```text
@@ -15,7 +13,13 @@ Stand: aktualisiert nach Verbindungsstatus-Optimierung im Startskript.
 │       └── core.js
 ├── index.html
 ├── modules
-│   └── datenbank_baukasten
+│   ├── datenbank_baukasten
+│   │   ├── config.json
+│   │   ├── logic.js
+│   │   ├── manifest.json
+│   │   ├── schema.json
+│   │   └── texts.json
+│   └── todo_kalender_erinnerung
 │       ├── config.json
 │       ├── logic.js
 │       ├── manifest.json
@@ -38,9 +42,14 @@ Stand: aktualisiert nach Verbindungsstatus-Optimierung im Startskript.
 10. `modules/datenbank_baukasten/manifest.json`
 11. `modules/datenbank_baukasten/schema.json`
 12. `modules/datenbank_baukasten/texts.json`
-13. `todo.txt`
+13. `modules/todo_kalender_erinnerung/config.json`
+14. `modules/todo_kalender_erinnerung/logic.js`
+15. `modules/todo_kalender_erinnerung/manifest.json`
+16. `modules/todo_kalender_erinnerung/schema.json`
+17. `modules/todo_kalender_erinnerung/texts.json`
+18. `todo.txt`
 
 ## Pflegehinweis
 - Diese Datei wird am Ende jeder Iteration aktualisiert.
 - Wenn Dateien hinzukommen, umbenannt oder gelöscht werden, muss zuerst der Verzeichnisbaum und dann die Dateiliste angepasst werden.
-- Stand dieser Iteration: Struktur unverändert, Inhalte sicherheitsseitig aktualisiert.
+- Stand dieser Iteration: neues Modul `todo_kalender_erinnerung` ergänzt.

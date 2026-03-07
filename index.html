@@ -17,7 +17,27 @@
       <section class="dashboard" aria-label="Dashboard-Skelett">
         <article class="card">
           <h2>Modulübersicht</h2>
-          <p>Noch keine Module geladen.</p>
+          <p id="module-summary">Noch keine Module geladen.</p>
+        </article>
+        <article class="card" aria-label="Todo-Liste mit Kalender und Erinnerung">
+          <h2>Todo-Liste mit Kalenderfunktion</h2>
+          <p id="todo-info">Noch keine Aufgaben vorhanden.</p>
+          <form id="todo-form" class="todo-form">
+            <label>
+              Aufgabe
+              <input id="todo-title" type="text" maxlength="120" required />
+            </label>
+            <label>
+              Fällig am
+              <input id="todo-due-date" type="date" required />
+            </label>
+            <label>
+              Erinnerung
+              <input id="todo-reminder" type="datetime-local" required />
+            </label>
+            <button type="submit">Aufgabe hinzufügen</button>
+          </form>
+          <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
         </article>
       </section>
     </main>

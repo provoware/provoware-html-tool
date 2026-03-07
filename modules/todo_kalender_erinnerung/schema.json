@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TodoKalenderErinnerung",
+  "type": "object",
+  "required": ["title", "dueDate", "reminder"],
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "dueDate": { "type": "string", "format": "date" },
+    "reminder": { "type": "string", "format": "date-time" },
+    "reminded": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

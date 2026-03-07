@@ -1,0 +1,5 @@
+{
+  "maxItems": 200,
+  "reminderIntervalMs": 30000,
+  "dateFormat": "YYYY-MM-DD"
+}
