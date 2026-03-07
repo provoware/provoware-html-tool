@@ -10,6 +10,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Status rechts prüfen (Ampel, Rechte, Struktur).
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Robustheits- und Einheits-Check in 3 Minuten (neu)
+1. Im Projektordner `node --test tests/services/module-registry.test.js` ausführen.
+2. Prüfen, ob bei Fehlerfällen ein klarer Fehlercode in der Meldung steht (kurzer, fester Schlüssel).
+3. In betroffenen Service-Rückgaben prüfen, ob überall die Felder `ok`, `code`, `message`, `data` genutzt werden.
+4. Ziel: Gleiches Antwortmuster, klarere Fehlersuche und weniger Sonderfälle.
+
 ### Anleitungsmodul mit Index-Sprung kurz prüfen (neu)
 1. Seite laden und im Modul **Anleitungen und Toolbeschreibungen** auf einen Indexpunkt klicken.
 2. Prüfen, ob direkt zum passenden Abschnitt gesprungen wird.

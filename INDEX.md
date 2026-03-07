@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Anleitungs-/Toolbeschreibungsmodul, klickbarer Index-Sprung, modulares Datum/Uhrzeit-Widget
+- Iterationsfokus: konkrete Maßnahmen für Robustheit und Einheitlichkeit (Fehlercodes, Antwortformat, Mini-Checks)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ assets/
