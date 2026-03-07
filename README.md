@@ -4,7 +4,7 @@
 - Erledigte Punkte: 23 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Grenzfall-Test für Guide-Index + kleine Robustheitsverbesserungen in Wiki und Zufallsmix.
+- Stand dieser Iteration: Guide-API vereinheitlicht, Default-Archive erweitert und Zufallsmix mit requested/used ergänzt.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -47,6 +47,10 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Guide-API vereinfacht: `navigateIndex` nutzt jetzt nur noch `mode` (statt zusätzlichem `jump`-Boolean), damit die Aufrufe einheitlich bleiben.
+- Default-Archive erweitert: Genres, Moods, Styles sowie Kategorie-Archive enthalten mehr Startwerte für bessere Erstnutzung.
+- Templates-Default-Archiv erweitert: `data/templates-archive.json` startet jetzt mit fünf laienfreundlichen Standardvorlagen.
+- Zufallsmix ergänzt: Ergebnis enthält pro Bereich `usage.requested` und `usage.used`, damit die UI klar zeigen kann, wenn eine gewünschte Menge geklammert wurde.
 - Hilfe-Optimierung mit kleinstem Eingriff: Im Guide-Modul wurden wiederkehrende Schritte (Index lesen, Eintrag nach oben/unten verschieben) in kleine gemeinsame Helper gebündelt; Verhalten bleibt gleich, Wartung wird einfacher.
 - Neue Mini-Vereinheitlichung: Die Tastatur-Logik im Guide-Index nutzt jetzt ebenfalls einen gemeinsamen Navigations-Helper für Auswahl und Sprung.
 - Neuer enger Regressionstest: `tests/modules/guide-tools-module.test.js` prüft gezielt den Guide-Index-Pfad (Arrow/Enter) plus Reorder-Pfad.

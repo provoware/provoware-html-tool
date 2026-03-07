@@ -91,7 +91,7 @@ export const initGuideToolsModule = () => {
   };
 
   const navigateIndex = (nextIndex, options = {}) => {
-    const { jump = false, feedbackText = '', mode = jump ? 'jump' : 'select' } = options;
+    const { feedbackText = '', mode = 'select' } = options;
     selectIndex(nextIndex);
     render();
     const activeButton = indexList.querySelector(`[data-guide-index="${selectedIndex}"]`);
@@ -145,7 +145,6 @@ export const initGuideToolsModule = () => {
     if (!Number.isInteger(index) || index < 0 || index >= sections.length) return;
     navigateIndex(index, {
       mode: 'jump',
-      jump: true,
       feedbackText: `Zu Abschnitt ${index + 1} gesprungen.`
     });
   });
@@ -158,7 +157,6 @@ export const initGuideToolsModule = () => {
     if (event.key === 'Enter' || event.key === ' ') {
       navigateIndex(selectedIndex, {
         mode: 'jump',
-        jump: true,
         feedbackText: `Abschnitt ${selectedIndex + 1} aktiv.`
       });
     }

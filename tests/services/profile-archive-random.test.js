@@ -16,6 +16,8 @@ test('zufallsgenerator: amount wird auf sinnvollen Bereich geklammert', () => {
   assert.equal(result.ok, true);
   assert.equal(result.code, 'MIX_CREATED');
   assert.equal(result.data.mix.genres.length, archive.profiles.HardTechno.genres.length);
+  assert.equal(result.data.usage.genres.requested, 20);
+  assert.equal(result.data.usage.genres.used, archive.profiles.HardTechno.genres.length);
 
   const fallback = createRandomMix({
     archive,
@@ -25,4 +27,6 @@ test('zufallsgenerator: amount wird auf sinnvollen Bereich geklammert', () => {
   });
 
   assert.equal(fallback.data.mix.genres.length, 1);
+  assert.equal(fallback.data.usage.genres.requested, 1);
+  assert.equal(fallback.data.usage.genres.used, 1);
 });

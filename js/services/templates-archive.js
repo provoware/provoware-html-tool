@@ -1,5 +1,33 @@
 const TEMPLATE_CATEGORIES = ['Textbaustein', 'Promptvorlage', 'Arbeitsphrase'];
 
+const DEFAULT_TEMPLATE_ITEMS = Object.freeze([
+  {
+    title: 'Kurzantwort in einfacher Sprache',
+    category: 'Textbaustein',
+    content: 'Bitte erkläre das Ergebnis in drei kurzen Punkten und nenne den nächsten sicheren Schritt.'
+  },
+  {
+    title: 'Fehleranalyse Schritt für Schritt',
+    category: 'Promptvorlage',
+    content: 'Analysiere den Fehler Schritt für Schritt: Ursache, direkte Auswirkung, kleinster Fix, kurzer Test.'
+  },
+  {
+    title: 'Sauberer Patch-Plan',
+    category: 'Arbeitsphrase',
+    content: 'Ziel, betroffene Datei, betroffener Block, Patchgrund, Risiko, Nicht-Änderung, Schritte.'
+  },
+  {
+    title: 'Commit-Nachricht kompakt',
+    category: 'Textbaustein',
+    content: 'feat: klarer Titel\n\n- Änderung 1\n- Änderung 2\n- Test: <befehl>'
+  },
+  {
+    title: 'UI-Checkliste vor Merge',
+    category: 'Arbeitsphrase',
+    content: 'Prüfe Fokus, Lesbarkeit, responsives Verhalten und sichtbare Fehlermeldungen mit kurzem Ergebnisprotokoll.'
+  }
+]);
+
 const normalizeText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
 const normalizeContent = (value) => String(value || '').replace(/\r\n/g, '\n').trim();
@@ -19,7 +47,15 @@ export const templateCategories = TEMPLATE_CATEGORIES;
 
 export const createDefaultTemplateArchive = () => ({
   version: 1,
-  items: [],
+  items: sortItems(DEFAULT_TEMPLATE_ITEMS.map((item, index) => ({
+    id: `tpl-default-${String(index + 1).padStart(2, '0')}`,
+    title: normalizeText(item.title),
+    content: normalizeContent(item.content),
+    category: normalizeCategory(item.category),
+    favorite: false,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }))),
   updatedAt: new Date().toISOString()
 });
 
