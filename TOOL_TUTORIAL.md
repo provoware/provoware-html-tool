@@ -10,6 +10,18 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Header-Chips gezielt testen (ohne Full-UI-Test)
+Wenn du nur den Header prüfen willst, nutze genau diesen Test:
+1. `node --test tests/services/ui-header-chips.test.js`
+
+Was der Test absichert:
+- `setState(...)` setzt den Text in `#header-chip-project-status` korrekt (Wartet/In Arbeit/Bereit).
+- `setState(...)` setzt den Text in `#header-chip-autosave-status` korrekt (Bereit/Offen/Gesichert).
+
+Kurzregel: Für Header-Status immer diesen kleinen Test zuerst laufen lassen.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Header-Statuschips als Live-Anzeige
 Im Kopfbereich stehen rechts oben zwei kleine Status-Chips als Live-Anzeige aus dem aktuellen App-Status:

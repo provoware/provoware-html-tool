@@ -40,6 +40,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Neuer Mini-Regressionstest für die Header-Chips: prüft nach `setState(...)` gezielt nur `#header-chip-project-status` und `#header-chip-autosave-status` (kein Full-UI-Test).
+- Projektstatus-Texte (`Wartet`, `In Arbeit`, `Bereit`) sind jetzt zentral als kleines Mapping in `js/ui.js` gebündelt für konsistente spätere Textanpassungen.
 - Header-Mini-Schritt professionell vervollständigt: Die zwei Status-Chips oben rechts werden jetzt als Live-Anzeige aus State-Daten befüllt (**Projektstatus** und **Autosave-Status**), ohne Layout-Umbau.
 - Interaktions-Check ergänzt: Status-Chips haben jetzt einen kleinen, klar sichtbaren Hover-/Fokus-Zustand im Glas-Look.
 - Kontrast-Feinschliff: `.startup-step--done` und `.startup-step--current` nutzen jetzt stärkere Glas-Verläufe mit besser lesbarem Text auf hellen und dunklen Displays.

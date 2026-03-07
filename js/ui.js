@@ -10,6 +10,11 @@ const byId = (id) => document.getElementById(id);
 let lastA11yAnnouncement = '';
 const defaultTodos = Object.freeze(['Erste Aufgabe prüfen']);
 const TODO_STORAGE_KEY = 'provoware:todo-start-items';
+const HEADER_PROJECT_STATUS_TEXT = Object.freeze({
+  waiting: 'Wartet',
+  working: 'In Arbeit',
+  ready: 'Bereit'
+});
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -149,10 +154,10 @@ const buildDashboardInfo = (state) => {
 };
 
 const buildHeaderProjectStatus = (state) => {
-  if (state.debug?.startupReady === true) return 'Bereit';
+  if (state.debug?.startupReady === true) return HEADER_PROJECT_STATUS_TEXT.ready;
   if (state.selftestResult?.overallStatus) return formatOverallStatus(state.selftestResult.overallStatus);
-  if (state.selectedProjectDirectory) return 'In Arbeit';
-  return 'Wartet';
+  if (state.selectedProjectDirectory) return HEADER_PROJECT_STATUS_TEXT.working;
+  return HEADER_PROJECT_STATUS_TEXT.waiting;
 };
 
 const buildHeaderAutosaveStatus = (state) => {

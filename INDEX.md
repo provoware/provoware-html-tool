@@ -107,6 +107,7 @@
 │  │  ├─ project-selftest.test.js
 │  │  ├─ startup-check.test.js
 │  │  ├─ ui-action-handlers.smoke.test.js
+│  │  ├─ ui-header-chips.test.js
 │  │  └─ ui-render-safety.test.js
 │  ├─ start-files
 │  │  └─ start-import-resolution.test.js
@@ -221,5 +222,6 @@
 90. `tests/services/project-selftest.test.js`
 91. `tests/services/startup-check.test.js`
 92. `tests/services/ui-action-handlers.smoke.test.js`
-93. `tests/services/ui-render-safety.test.js`
-94. `tests/start-files/start-import-resolution.test.js`
+93. `tests/services/ui-header-chips.test.js`
+94. `tests/services/ui-render-safety.test.js`
+95. `tests/start-files/start-import-resolution.test.js`
