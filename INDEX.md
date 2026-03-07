@@ -2,7 +2,7 @@
 
 ## Kompletter aktueller Verzeichnisbaum
 
-- Stand dieser Übersicht: Iteration mit Design-Mini-Feinschliff (Schnellaktionen als farbige Glas-Chips).
+- Stand dieser Übersicht: Iteration mit Header-Statuschips und Kontrast-Feinschliff bei Startstatus-Chips.
 
 ```
 .
