@@ -13,6 +13,14 @@ const createState = () => ({
   selectedProfile: 'HardTechno',
   archiveSortMode: 'alpha',
   randomMix: null,
+  dashboardNotes: {
+    rows: [
+      { title: 'pppoppi details ideen', input: '', feedback: '-' },
+      { title: 'Favoriten Genres', input: '', feedback: '-' },
+      { title: 'Templates-Input-Pool', input: '', feedback: '-' }
+    ],
+    basePath: 'data/dashboard3-notes'
+  },
   templateArchive: null,
   templateDraft: { id: null, title: '', content: '', category: 'Textbaustein' },
   templateFeedback: null,

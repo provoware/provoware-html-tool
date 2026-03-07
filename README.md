@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 61
+- Erledigte Punkte: 62
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 90% (laufend, siehe `todo.txt`)
+- Fortschritt: 91% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -36,6 +36,7 @@
   - `data/profile-archive.json` (JSON-Archiv für Profile)
   - `data/templates-archive.json` (JSON-Archiv für Templates)
   - `data/module-registry.json` (zentrale Modul-IDs)
+  - `data/dashboard3-notes/` (einzeilige Dashboard-3-Notizen als Textdateien je Titel)
 
 - Tests:
   - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
@@ -84,6 +85,7 @@
 - Default-Profilbestand erweitert: Die drei Profile enthalten jetzt je breite, klar unterscheidbare Genre-/Mood-/Stil-Listen inklusive regionaler und Underground-Beispiele; zusätzlich ist ein professionell kategorisiertes Templates-Default-Archiv mit 9 Bereichen und je 5 Starter-Einträgen integriert.
 - Diagnose-Export aus `js/app.js` in `js/services/diagnosis-export.js` ausgelagert, damit `app.js` schlanker bleibt.
 - Neues Templates-Modul ergänzt: persistente Vorlagen mit Kategorie, Bearbeiten/Löschen, Favoriten und Schnellwahl-Kopieren.
+- Dashboard 3 erweitert: drei einzeilige Eingabebereiche mit editierbarem Titel, Speichern per Button oder Enter, Dateiablage pro Titel unter `data/dashboard3-notes`, Anfügen statt Überschreiben und direktes Nutzerfeedback inklusive Existenzprüfung.
 - Kopier-Feedback im Templates-Modul ergänzt: Meldung wird kurz angezeigt und verschwindet automatisch.
 - Kleiner Service-Smoke-Test für Export/Import/Mix ergänzt, damit UI-Änderungen schneller geprüft werden können.
 - Genres-Bereich nutzerfreundlich optimiert: Listen bleiben jetzt in fester Kartenhöhe mit Scrollbar statt Modul-Vergrößerung; zusätzlich klarere Farbflächen und modernere Kartenoptik im Profil-Archiv.
@@ -97,7 +99,10 @@
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
 
-## Laien-Befehle unten
+## Laien-Befehle
+- Dashboard-3-Eintrag speichern: Titel und Eintrag in einer Zeile setzen, dann **Enter** oder **Speichern**.
+- Zielordner prüfen: Dateien liegen in `data/dashboard3-notes` und werden je Titel fortgeführt.
+ unten
 - Status prüfen: `git status`
 - Änderungen sehen: `git diff --stat`
 - Projektdateien auflisten: `find . -path './.git' -prune -o -type f -print | sort`

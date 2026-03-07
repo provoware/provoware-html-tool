@@ -36,6 +36,12 @@
       "path": "logs",
       "required": false,
       "createIfMissing": true
+    },
+    {
+      "name": "dashboard3-notes",
+      "path": "data/dashboard3-notes",
+      "required": false,
+      "createIfMissing": true
     }
   ],
   "requiredFiles": [

@@ -1,7 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createUiActionHandlers } from '../../js/services/ui-action-handlers.js';
-import { createDefaultArchive } from '../../js/services/profile-archive.js';
+
+if (!globalThis.window) {
+  globalThis.window = {};
+}
+
+const { createUiActionHandlers } = await import('../../js/services/ui-action-handlers.js');
+const { createDefaultArchive } = await import('../../js/services/profile-archive.js');
 
 const makeBase = () => {
   let state = {
@@ -50,4 +55,17 @@ test('smoke: mix erzeugung liefert ok bei vorhandenen einträgen', async () => {
   const result = await actions.onGenerateMix({ includeCategories: ['genres'], amountPerCategory: { genres: 1 } });
   assert.equal(result.ok, true);
   assert.equal(result.code, 'MIX_CREATED');
+});
+
+test('smoke: dashboard-note validierung meldet fehlende felder', async () => {
+  const base = makeBase();
+  const actions = createUiActionHandlers(base);
+
+  const missingTitle = await actions.onDashboardNoteSave({ rowIndex: 0, title: '', value: 'Eintrag' });
+  assert.equal(missingTitle.ok, false);
+  assert.equal(missingTitle.code, 'DASHBOARD_NOTE_TITLE_MISSING');
+
+  const missingValue = await actions.onDashboardNoteSave({ rowIndex: 1, title: 'Favoriten Genres', value: '' });
+  assert.equal(missingValue.ok, false);
+  assert.equal(missingValue.code, 'DASHBOARD_NOTE_VALUE_MISSING');
 });
