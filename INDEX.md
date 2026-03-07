@@ -43,3 +43,4 @@ Stand: aktualisiert nach Verbindungsstatus-Optimierung im Startskript.
 ## Pflegehinweis
 - Diese Datei wird am Ende jeder Iteration aktualisiert.
 - Wenn Dateien hinzukommen, umbenannt oder gelöscht werden, muss zuerst der Verzeichnisbaum und dann die Dateiliste angepasst werden.
+- Stand dieser Iteration: Struktur unverändert, Inhalte sicherheitsseitig aktualisiert.

@@ -40,7 +40,13 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
    - `schema.json`
    - `logic.js`
 2. `index.html` öffnen.
-3. Im Kasten „Modulübersicht“ muss stehen: „1 Modul bereit: datenbank_baukasten. Mindestteile vollständig.“
+3. Im Kasten „Modulübersicht“ muss stehen: „1 Modulprofil bereit: datenbank_baukasten. Mindestteile konsistent hinterlegt.“
+
+## CSP-Basisschutz kurz prüfen (neu)
+1. `index.html` im Browser öffnen.
+2. DevTools öffnen und in „Elements“ den `<head>` prüfen.
+3. Es muss ein `meta` mit `http-equiv="Content-Security-Policy"` vorhanden sein.
+4. Ergebnis: Nur lokale Quellen (`'self'`) sind für Skript und Styles erlaubt.
 
 ---
 Stand: aktualisiert nach Modulstandard-Patch `datenbank_baukasten`.
