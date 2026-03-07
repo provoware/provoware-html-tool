@@ -355,3 +355,17 @@ Die zwei größten UI-Blocker sind jetzt sauber getrennt:
 - `js/services/ui-action-handlers.js` setzt sich aus Domänenmodulen zusammen (`ui-actions/*`).
 
 Kurzregel: Neue UI-Ausgabe bitte direkt im passenden Renderer ergänzen, neue Klicklogik direkt im passenden Domain-Action-Modul.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Vier Design-Themes + Schriftzoom für bessere Lesbarkeit
+Neu in dieser Iteration:
+- Oben im Header gibt es jetzt eine Theme-Auswahl mit 4 Design-Themes.
+- Die Schriftgröße kann mit **Strg + Mausrad** und **Strg + Plus/Minus** angepasst werden.
+- **Strg + 0** setzt die Schriftgröße auf 100% zurück.
+
+Mini-Check:
+1. App starten.
+2. Theme wechseln und prüfen, ob Farben sofort sichtbar wechseln.
+3. Strg + Mausrad nutzen und auf die Anzeige "Schriftgröße: ...%" achten.
+
+Kurzregel: Für bessere Lesbarkeit zuerst Schriftgröße und dann Theme anpassen.

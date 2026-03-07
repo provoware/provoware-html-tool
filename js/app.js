@@ -265,14 +265,15 @@ const init = async () => {
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
   const themeName = loaded.data.appConfig.defaultTheme;
-  applyTheme(loaded.data.themes[themeName] || loaded.data.themes.dunkel);
+  const initialTheme = loaded.data.themes[themeName] ? themeName : 'dunkel';
+  applyTheme(loaded.data.themes[initialTheme] || loaded.data.themes.dunkel);
 
   const initialMode = detectLayoutMode(loaded.data.appConfig);
   const moduleRegistry = await loadModuleRegistry();
   const templateDesignStatus = detectTemplateDesignStatus();
-  setState({ layoutMode: initialMode, moduleRegistry, templateDesignStatus, debug: { startupReady: false } });
+  setState({ layoutMode: initialMode, currentTheme: initialTheme, moduleRegistry, templateDesignStatus, debug: { startupReady: false } });
 
-  bindUiActions(createUiActionHandlers({
+  const actions = createUiActionHandlers({
     getState: () => window.appState,
     setState,
     selectDirectory: () => selectDirectory(allowWritePermission),
@@ -283,7 +284,17 @@ const init = async () => {
     updateArchive,
     updateTemplateArchive,
     logEvent
-  }));
+  });
+
+  bindUiActions({
+    ...actions,
+    onChangeTheme: (themeName) => {
+      const state = window.appState;
+      const nextTheme = state.themes?.[themeName] ? themeName : state.currentTheme || 'dunkel';
+      applyTheme(state.themes?.[nextTheme] || state.themes?.dunkel || {});
+      setState({ currentTheme: nextTheme });
+    }
+  });
 
   await loadTemplateArchive();
 

@@ -12,6 +12,7 @@ const byId = (id) => document.getElementById(id);
 let lastA11yAnnouncement = '';
 const defaultTodos = Object.freeze(['Erste Aufgabe prüfen']);
 const TODO_STORAGE_KEY = 'provoware:todo-start-items';
+const FONT_SCALE_STORAGE_KEY = 'provoware:font-scale';
 const HEADER_PROJECT_STATUS_TEXT = Object.freeze({
   waiting: 'Wartet',
   working: 'In Arbeit',
@@ -241,11 +242,36 @@ export const applyTheme = (themeTokens = {}) => {
     shadow: '--shadow',
     radius: '--radius',
     gridLine: '--grid-line',
-    focus: '--focus'
+    focus: '--focus',
+    accent: '--accent',
+    accentStrong: '--accent-strong',
+    bodyGradientStart: '--body-gradient-start',
+    bodyGradientMid: '--body-gradient-mid',
+    bodyGradientEnd: '--body-gradient-end',
+    panelBorder: '--panel-border',
+    panelOverlay: '--panel-overlay'
   };
   Object.entries(map).forEach(([token, cssVar]) => {
     if (themeTokens[token]) document.documentElement.style.setProperty(cssVar, themeTokens[token]);
   });
+};
+
+const readStoredFontScale = () => {
+  try {
+    const raw = Number(window.localStorage.getItem(FONT_SCALE_STORAGE_KEY));
+    if (!Number.isFinite(raw)) return 1;
+    return Math.min(1.35, Math.max(0.85, raw));
+  } catch {
+    return 1;
+  }
+};
+
+const writeStoredFontScale = (scale) => {
+  try {
+    window.localStorage.setItem(FONT_SCALE_STORAGE_KEY, String(scale));
+  } catch {
+    // Speicher kann blockiert sein.
+  }
 };
 
 export const detectLayoutMode = (config) => {
@@ -260,13 +286,18 @@ const bindWorkspaceControls = () => {
   const app = byId('app');
   if (!app || app.dataset.workspaceControlsBound === 'yes') return;
   app.dataset.workspaceControlsBound = 'yes';
-  let uiScale = 1;
+  let fontScale = readStoredFontScale();
 
-  const applyUiScale = (nextScale) => {
+  const applyFontScale = (nextScale) => {
     const rounded = Number(nextScale.toFixed(2));
-    uiScale = Math.min(1.2, Math.max(0.72, rounded));
-    document.documentElement.style.setProperty('--ui-scale', String(uiScale));
+    fontScale = Math.min(1.35, Math.max(0.85, rounded));
+    document.documentElement.style.setProperty('--font-scale', String(fontScale));
+    const zoomStatus = byId('zoom-status');
+    if (zoomStatus) zoomStatus.textContent = `Schriftgröße: ${Math.round(fontScale * 100)}%`;
+    writeStoredFontScale(fontScale);
   };
+
+  applyFontScale(fontScale);
 
   const setSidebarState = (id, cssClass) => {
     const button = byId(id);
@@ -389,7 +420,17 @@ const bindWorkspaceControls = () => {
   window.addEventListener('keydown', (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === '0') {
       event.preventDefault();
-      applyUiScale(1);
+      applyFontScale(1);
+      return;
+    }
+    if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '=')) {
+      event.preventDefault();
+      applyFontScale(fontScale + 0.05);
+      return;
+    }
+    if ((event.ctrlKey || event.metaKey) && event.key === '-') {
+      event.preventDefault();
+      applyFontScale(fontScale - 0.05);
       return;
     }
     if (event.key !== 'Escape') return;
@@ -400,8 +441,8 @@ const bindWorkspaceControls = () => {
   window.addEventListener('wheel', (event) => {
     if (!event.ctrlKey) return;
     event.preventDefault();
-    const step = event.deltaY > 0 ? -0.04 : 0.04;
-    applyUiScale(uiScale + step);
+    const step = event.deltaY > 0 ? -0.05 : 0.05;
+    applyFontScale(fontScale + step);
   }, { passive: false });
 };
 
@@ -421,6 +462,9 @@ export const bindUiActions = (actions) => {
   });
   byId('a11y-quiet-mode')?.addEventListener('change', (event) => {
     actions.onToggleA11yQuietMode(event.target.checked);
+  });
+  byId('theme-select')?.addEventListener('change', (event) => {
+    actions.onChangeTheme(event.target.value);
   });
   byId('plugin-select')?.addEventListener('change', (event) => {
     actions.onSelectPlugin(event.target.value);
@@ -662,6 +706,16 @@ export const render = () => {
     renderTemplateQuickButtons,
     renderFilePreviewList
   });
+
+
+  const themeSelect = byId('theme-select');
+  const themeEntries = Object.entries(state.themes || {});
+  if (themeSelect && themeEntries.length) {
+    themeSelect.innerHTML = themeEntries
+      .map(([name]) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`)
+      .join('');
+    themeSelect.value = state.currentTheme || themeEntries[0][0];
+  }
 
   document.getElementById('app')?.setAttribute('data-layout-mode', state.layoutMode || 'standard');
 };
