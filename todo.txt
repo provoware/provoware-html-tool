@@ -1,21 +1,22 @@
-## Ziel der aktuellen Iteration
-Startansicht visuell am Panel-Design des Bildbeispiels ausrichten, ohne die bestehende Logik zu ändern.
+## Kritisch
+[x] 2026-03-07 | js/services/module-registry.js | Merge-Reste, doppelte Deklarationen und doppelte Funktionen bereinigen, damit Datei wieder importierbar ist | prüfen: `node --check js/services/module-registry.js` | fertig wenn: keine Syntaxfehler, genau eine konsistente `loadModuleRegistry`-Implementierung vorhanden
+[x] 2026-03-07 | Services-Importkette (direkt betroffen) | Syntax- und Importfähigkeit der direkt betroffenen JS-Dateien prüfen (`module-registry`, `project-selftest`, `filesystem-adapter`, `desktop-filesystem`) | prüfen: `node --check <datei>` je Datei | fertig wenn: alle Prüfungen ohne Fehler durchlaufen
+[x] 2026-03-07 | App-Startblocker | Startblocker durch fehlerhafte Registry-Datei entschärfen, damit Einzeldefekt dort die App nicht sofort stoppt | prüfen: `node --check js/services/module-registry.js` und Doppelblock-Sichtung | fertig wenn: keine Merge-Konfliktreste, keine doppelten Kernfunktionen
 
-## Aktueller Fortschritt
-- Erledigte Punkte gesamt: 12
-- Offene Punkte gesamt: 0
-- Entwicklungsfortschritt: 100%
+## Hoch
+[ ] 2026-03-07 | js/services/project-selftest.js | Selbsttest logisch trennen: Existenzprüfung und Schreibprüfung nicht vermischen (Ordnerprobe aktuell über Schreibzugriff) | prüfen: Ablauf mit nur Leserechten vs. Schreibrechten vergleichen | fertig wenn: Existenzcheck ohne Schreibtest möglich ist
+[ ] 2026-03-07 | js/services/project-selftest.js | `.probe`-Seiteneffekte vermeiden oder sicher löschen | prüfen: nach Selbsttest keine zusätzlichen Probe-Dateien im Projektordner | fertig wenn: Probe-Dateien gar nicht entstehen oder zuverlässig entfernt werden
+[ ] 2026-03-07 | js/services/project-selftest.js | `cleanupAfterSuccess` nur als erledigt markieren, wenn Funktion real existiert und genutzt wird | prüfen: Code enthält echte Cleanup-Implementierung plus Aufrufpfad | fertig wenn: Cleanup nachvollziehbar aktiv oder Punkt bleibt offen
+[ ] 2026-03-07 | Services (direkt betroffen) | Import-/Export-Konsistenz der direkt betroffenen Services vollständig gegen reale Nutzung prüfen | prüfen: Exporte gegen Importe in `js/app.js` und direkten Services abgleichen | fertig wenn: keine ungenutzten/fehlenden Exporte in der Kette
+[ ] 2026-03-07 | README.md | README-Status weiter an realen Projektzustand angleichen, falls an anderen Stellen noch Vollständigkeit suggeriert wird | prüfen: Statusabschnitt und Offene-Punkte-Abschnitt gegen `todo.txt` lesen | fertig wenn: keine falsche „alles fertig“-Aussage mehr
 
-## Priorisierte offene Punkte (geordnet)
-- Aktuell keine offenen Pflichtpunkte.
+## Mittel
+[ ] 2026-03-07 | modules/*/logic.js (nur bei echtem Eingriff) | Modulstandard nur in real betroffenen Modulen angleichen | prüfen: nur geänderte Module auf Export/Signatur prüfen | fertig wenn: keine Sammelumstellung außerhalb betroffener Module
+[ ] 2026-03-07 | js/adapters/desktop-filesystem.js | Stub-Adapter-Verhalten verständlicher machen (klare Nutzerhinweise im Fehlertext) | prüfen: Rückgabemeldung im UI-Log lesbar und eindeutig | fertig wenn: Meldung sagt klar, was fehlt und was der nächste Schritt ist
+[ ] 2026-03-07 | js/services/module-registry.js | riskante Importzusammenführungen absichern, wenn Bereich erneut betroffen ist | prüfen: bei nächster Änderung gezielt Regressionstest der Registry-Ausgabe | fertig wenn: Zusammenführung ohne neue Doppelblöcke abgesichert ist
+[ ] 2026-03-07 | Dokumentation | Platzhalter nicht als fertige Integration darstellen | prüfen: README/Tutorial auf Aussagen wie „aktiv“, „vollständig“ gegen Codezustand prüfen | fertig wenn: nur reale Integrationen als erledigt markiert sind
 
-## Diese Iteration erledigt
-1. Dashboard-Karten auf Panel-Stil mit Verlauf, Schatten und runden Ecken umgestellt.
-2. Rasterflächen als visuelle Leitstruktur in beide Hauptkarten ergänzt.
-3. Todo-Bereich klar segmentiert (Info, Formular, Liste, Footer-Chips).
-4. Pflichtdokumente `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` aktualisiert.
-
-## Geparkte Folgepunkte (bewusst nicht Teil dieser Iteration)
-- Persistenz der Aufgaben über Browser-Neustart.
-- Filter und Sortierung für größere Listen.
-- Optional Browser-Notification bei aktiver Freigabe.
+## Später
+[ ] 2026-03-07 | Qualitätssicherung | kleine automatische Syntax-/Strukturprüfungen ergänzen | prüfen: einfacher lokaler Check-Befehl für Kerndateien vorhanden | fertig wenn: ein reproduzierbarer Minimal-Check dokumentiert ist
+[ ] 2026-03-07 | Altbestand | redundante Altdateien gezielt prüfen | prüfen: Kandidatenliste mit Begründung und Löschkriterium erstellen | fertig wenn: klare Liste ohne Sofortlöschung vorliegt
+[ ] 2026-03-07 | Modulstatus | Modulstatus robuster auswertbar machen (z. B. strukturierte Fehlercodes zusätzlich zu Text) | prüfen: Statusobjekt maschinell nutzbar auswerten | fertig wenn: Auswertung ohne Textparsing möglich ist
