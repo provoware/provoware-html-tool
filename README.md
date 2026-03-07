@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 44
+- Erledigte Punkte: 45
 - Offene Punkte: 2
-- Fortschritt: 96.5%
+- Fortschritt: 95.7%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -52,6 +52,7 @@
 - Statusbereich Lesen/Schreiben/Struktur nutzt jetzt ebenfalls einheitlich ✔ / ⚠ / ✖.
 - Status-Visuals wurden in `js/status-visuals.js` ausgelagert, damit weitere UI-Teile dieselbe Ampel-Logik nutzen können.
 - Layout und Kartenoptik wurden näher an die Vorlagenstruktur angepasst (Titelband, linke Leiste, großes Rasterfeld, rechte Statuskachel, Segment-Fußleiste).
+- Standardprofil wird jetzt beim Start und beim Archivladen klar gesetzt, damit kein verstecktes Profil `undefined` entstehen kann.
 
 ## Offene Punkte
 1. Diagnose-Export als optionales Modul ergänzen.
@@ -71,6 +72,7 @@
 - Empfehlung 2: Bei vielen Einträgen Sortierung auf „Alphabetisch“ lassen.
 - Empfehlung 3: Für Vorlagen-Look die Fensterbreite möglichst über 1200 px halten.
 - Empfehlung 4: Wenn die Fußleiste zu voll wirkt, erst über „Selbsttest starten“ neue klare Log-Einträge erzeugen.
+- Empfehlung 5: Vor dem ersten Speichern kurz prüfen, ob oben im Archiv ein Profil ausgewählt ist.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
@@ -85,3 +87,7 @@
 - Patchgrund 2: Nutzerfreundlichkeit verbessert durch klarere Kachelbereiche und visuell getrennte Aktionszonen.
 - Betroffene Dateien: `index.html`, `css/app.css`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur direkt betroffene HTML/CSS-Ausgabe sowie relevante Syntax geprüft.
+- Patchgrund 1: Robustheit im Profil-Archiv verbessert, damit Aktionen nie in ein implizites `undefined`-Profil schreiben.
+- Patchgrund 2: Nutzerführung verbessert durch klaren Profil-Standardwert im App-Start.
+- Betroffene Dateien: `js/app.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Profil-Logik geprüft.
