@@ -292,3 +292,13 @@ Sicherheitsregel:
 - Nach jeder Layout-Änderung kurz unter 980px prüfen.
 
 Kurzregel: erst Token, dann Karten, dann 980px-Check.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Große UI-Dateien jetzt einfacher pflegen
+Die zwei größten UI-Blocker sind jetzt sauber getrennt:
+- `js/ui.js` steuert nur noch den Ablauf und ruft Renderer-Teile auf.
+- `js/renderers/ui-header-renderer.js` rendert den Header-Bereich.
+- `js/renderers/ui-main-renderer.js` rendert die restlichen Hauptbereiche.
+- `js/services/ui-action-handlers.js` setzt sich aus Domänenmodulen zusammen (`ui-actions/*`).
+
+Kurzregel: Neue UI-Ausgabe bitte direkt im passenden Renderer ergänzen, neue Klicklogik direkt im passenden Domain-Action-Modul.

@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 24 (siehe `todo.txt`)
-- Offene Punkte: 3 (siehe `todo.txt`)
-- Fortschritt: 89%
+- Erledigte Punkte: 23 (siehe `todo.txt`)
+- Offene Punkte: 0 (siehe `todo.txt`)
+- Fortschritt: 100%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -15,11 +15,13 @@
   - Neu: Farbtoken für Header und Utility-Karten (kühl-blau/grau, zentral über `:root` steuerbar)
   - Neu: `DESIGN_VORLAGE.md` (tiefe Bildanalyse mit Farb- und Layout-Token als Umsetzungs-Vorlage)
   - `js/app.js`, `js/ui.js`, `js/state.js`, `js/status-visuals.js`
+  - Neu: Renderer-Teile unter `js/renderers/*` (`ui-header-renderer.js`, `ui-main-renderer.js`) für klar getrennte UI-Ausgabe.
   - Neu: Start-Readiness-Check in `js/app.js` als gemeinsamer Helper gebündelt (weniger doppelte Startlogik).
   - `js/modules/guide-tools-module.js` (intuitive Führung für Anleitungsliste)
   - Neu: `js/modules/plugin-manager.js` (Plugin-Auswahl, Zeichenzähler und einfache Rechtschreibprüfung DE/EN/FR mit Auto-Sprachschätzung)
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
+  - Neu: domänenscharfe UI-Aktionsmodule unter `js/services/ui-actions/*` (Session, Archiv, Vorlagen, Workspace).
   - Neu für sichere Listen-Ausgabe: `js/services/html-escape.js` (zentrale HTML-Zeichenkodierung)
   - Neu: `js/services/code-formatter.js` (vollautomatische, einfache Auto-Formatierung für Editor-Inhalte nach Dateityp)
   - `modules/*` (fachliche Module)
@@ -87,6 +89,8 @@
 - Drag&Drop für die Reihenfolge ergänzt und direktes Feedback eingebaut.
 - Dynamische Anpassung erweitert: Guide-Ansicht wechselt zwischen Split- und Stapelmodus je Fensterbreite.
 - `README.md`, `TOOL_TUTORIAL.md` und `INDEX.md` aktualisiert.
+- Größte Blocker geschlossen: `js/ui.js` wurde in Renderer-Teile aufgespalten und `js/services/ui-action-handlers.js` in Domänenmodule getrennt.
+- Header-Mikrostruktur professionell nachgezogen: semantische Statusliste + getrennte Steuerbutton-Gruppe ohne ID-Bruch.
 
 ### Design-Erfolgschecks dieser Iteration
 1. **Struktur-Check**: 3-Spalten-Layout bleibt erhalten, Reihenfolge unverändert.
