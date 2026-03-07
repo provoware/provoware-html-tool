@@ -10,6 +10,29 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
 
+## Kleine Erweiterung dieser Iteration (neu)
+### Maximierung mit Maus schnell wieder beenden
+Neu in dieser Iteration:
+- Jedes Modul hat jetzt den Kopf-Button **„Maximierung aufheben“**.
+- Wenn ein Modul links noch kein passendes Panel hat, zeigt das Tool eine kurze Hilfe-Meldung.
+
+Direkter Mini-Check:
+1. `bash scripts/minimal-check.sh`
+
+Kurzregel: Bei großem Modul per Kopf-Button sofort zurück ins 3x3-Grid.
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Aktive Module im 3x3-Mittelbereich direkt öffnen
+Neu in dieser Iteration:
+- Der Mittelbereich bleibt ein 3x3-Grid für Module.
+- Klick auf ein Modul links bei **Nutzer-Module** öffnet das passende Modul im Grid sofort.
+- Das gewählte Modul wird direkt maximiert, damit du sofort arbeiten kannst.
+
+Direkter Mini-Check:
+1. `bash scripts/minimal-check.sh`
+
+Kurzregel: Erst Modul links anklicken, dann im großen Modul weiterarbeiten.
+
 
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Template-IDs sicher in Buttons nutzen

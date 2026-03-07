@@ -1,10 +1,10 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 29 (siehe `todo.txt`)
+- Erledigte Punkte: 30 (siehe `todo.txt`)
 - Offene Punkte: 1 (siehe `todo.txt`)
 - Fortschritt: 97%
-- Stand dieser Iteration: Der 4‑Schritt‑Assistent ist als kleiner UI-Patch live, und der Release-Abschluss ist jetzt fest als Ein-Befehl-Check definiert.
+- Stand dieser Iteration: Der Mittelbereich bleibt im 3x3-Grid, hat jetzt pro Modul einen Maus-Button zum Aufheben der Maximierung und zeigt bei fehlender Modulzuordnung eine klare Hinweis-Meldung.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -49,6 +49,10 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Bedienung für Mausnutzer verbessert: Jedes Modul hat jetzt zusätzlich den Button „Maximierung aufheben“ direkt im Modulkopf.
+- Neue Laien-Hilfe im Modulfokus: Wenn ein linkes Modul noch kein passendes Panel im Mittelbereich hat, erscheint eine kurze verständliche Hinweis-Meldung.
+- Modulfluss verbessert: Klick auf ein aktives Modul in der linken Leiste blendet das passende Modul im Mittelbereich ein und holt es in den Fokus.
+- Maximieren vereinfacht: Der Modul-Klick aus der Leiste setzt das gewählte Modul direkt auf groß (Maximieren) im 3x3-Bereich.
 - Sicherheits- und Robustheitsfix: `item.id` wird in Template-Listen/Favoriten für `data-template-*` konsequent escaped, damit eingeschleuste Anführungszeichen keine fremden Attribute erzeugen.
 - Neuer gezielter Sicherheitstest: prüft, dass eine manipulierte Template-ID (`x" onclick="...`) nur als escaped Attributwert gerendert wird.
 - Barrierefreiheit verbessert: klarere Fokus-Umrandung, sichtbare Zoom-Rückmeldung und kurze Zoom-Hinweise im Footer.

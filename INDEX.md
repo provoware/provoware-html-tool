@@ -1,6 +1,8 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration ergänzt pro Modulkopf den Button „Maximierung aufheben“ und eine klare Fallback-Meldung bei fehlendem Modul-Panel-Match.
+- Diese Iteration schärft den Modulfluss im Mittelbereich: aktives Modul links anklicken, im 3x3-Grid sichtbar machen und direkt maximieren.
 - Diese Iteration behebt eine konkrete UI-Schwachstelle: Template-IDs in `data-template-*` werden jetzt escaped, damit keine Attribut-Injektion möglich ist.
 - Diese Iteration erweitert die Dashboard-Notiz-Konsistenz: Fehler-Helper jetzt auch beim Öffnen letzter Datei + Save-Fehlerfall-Tests (Exists/Read/Write).
 - Diese Iteration zentralisiert die Fehlerbehandlung beim Dashboard-Notizspeichern (weniger Doppelcode, konsistente Warnpfade).
