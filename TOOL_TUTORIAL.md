@@ -12,6 +12,20 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Dashboard-Notizen: einheitliche Fehlerpfade
+Neu in dieser Iteration:
+- Das Speichern von Dashboard-Notizen nutzt intern einen gemeinsamen Fehler-Helper.
+- Rückgabe, Feedback im Feld und Log-Warnung bleiben dadurch konsistent.
+- Verhalten für Nutzer bleibt gleich, Wartung ist einfacher.
+
+Direkter Mini-Check:
+1. `node --test tests/services/ui-action-handlers.smoke.test.js`
+
+Kurzregel: Wenn mehrere Fehlerpfade gleich aussehen, zuerst klein zentralisieren.
+
+
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Einheitliche Guide-API + klarerer Zufallsmix
 Neu in dieser Iteration:
 - Guide-Navigation nutzt nur noch `mode` (`select` oder `jump`). Der alte `jump`-Boolean entfällt.

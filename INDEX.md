@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration zentralisiert die Fehlerbehandlung beim Dashboard-Notizspeichern (weniger Doppelcode, konsistente Warnpfade).
 - Diese Iteration ergänzt 4 Design-Themes im Header sowie Schriftzoom mit Strg+Mausrad/Strg+Plus/Minus.
 - Diese Iteration verbessert die Header-Bedienung unter 980px (besseres 1-Spalten-Verhalten).
 - Diese Iteration ergänzt einen Grenzfall-Test für Guide-Index-Navigation (ArrowUp auf 0, ArrowDown auf letztem Index).
