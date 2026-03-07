@@ -1,0 +1,4 @@
+{
+  "maxSnapshotCount": 20,
+  "defaultExportType": "application/json"
+}

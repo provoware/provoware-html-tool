@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 68
+- Erledigte Punkte: 71
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 97% (laufend, siehe `todo.txt`)
+- Fortschritt: 98% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -14,6 +14,7 @@
   - `datenbank_baukasten_start.html`
   - `todo_kalender_erinnerung_start.html`
   - `wiki_notiz_wissen_start.html`
+  - Je Startdatei jetzt mit kleinen Import-/Export-Buttons für Soforttests mit echten JSON-Daten.
 - Adapter-Layer:
   - `js/adapters/filesystem-adapter.js`
   - `js/adapters/browser-filesystem.js`
@@ -27,7 +28,10 @@
   - `js/services/profile-archive.js` (Profil-Archiv)
   - `js/services/ui-action-handlers.js` (UI-Aktionen zentral gebündelt)
 - Module (aktuell registriert):
+  - `modules/backup_funktions_modul`
   - `modules/datenbank_baukasten`
+  - `modules/debugging_modul`
+  - `modules/logging_modul`
   - `modules/todo_kalender_erinnerung`
   - `modules/wiki_notiz_wissen`
   - `js/services/diagnosis-export.js` (Diagnose-Export als eigener Service)
@@ -44,6 +48,7 @@
 
 - Tests:
   - `tests/services/ui-action-handlers.smoke.test.js` (kleiner Smoke-Test für Export/Import/Mix)
+  - `tests/start-files/start-import-resolution.test.js` (prüft nur, ob alle `*_start.html`-Modulimporte auflösbar sind)
 
 ## Erledigte Kernpunkte
 - Neues Profil-Modul für Genres, Stimmungen und Stile im Hauptbereich ergänzt.
@@ -230,3 +235,8 @@
 - Patchgrund 2: Robustheit für Einzelstart ergänzt durch Export im Datenbank-Modul.
 - Betroffene Dateien: `modules/datenbank_baukasten/logic.js`, `datenbank_baukasten_start.html`, `todo_kalender_erinnerung_start.html`, `wiki_notiz_wissen_start.html`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS/HTML-Syntax sowie direkte Modul-Einzelstarts geprüft.
+
+- Patchgrund 1: Einzelmodule sollten sofort mit echten Daten testbar sein; dafür wurden pro `*_start.html` kleine Import-/Export-Buttons ergänzt.
+- Patchgrund 2: Für spätere Automatisierung wurde ein minimaler Node-Test ergänzt, der Modul-Importe aller `*_start.html` auflöst.
+- Betroffene Dateien: `datenbank_baukasten_start.html`, `todo_kalender_erinnerung_start.html`, `wiki_notiz_wissen_start.html`, `modules/backup_funktions_modul/*`, `modules/debugging_modul/*`, `modules/logging_modul/*`, `data/module-registry.json`, `tests/start-files/start-import-resolution.test.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene HTML/JSON/JS-Syntax, neue Modul-Importauflösung und der neue kleine Startdatei-Test geprüft.

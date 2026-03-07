@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BackupPayload",
+  "type": "object",
+  "required": ["moduleId", "createdAt", "version", "data"],
+  "properties": {
+    "moduleId": { "type": "string", "minLength": 1 },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "version": { "type": "integer", "minimum": 1 },
+    "data": { "type": "object" }
+  },
+  "additionalProperties": false
+}

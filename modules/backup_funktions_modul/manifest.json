@@ -1,0 +1,6 @@
+{
+  "id": "backup_funktions_modul",
+  "name": "Backup-Funktionsmodul",
+  "version": "0.1.0",
+  "description": "Erstellt und prüft kleine JSON-Backups für schnelle Wiederherstellungstests."
+}
