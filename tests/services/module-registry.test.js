@@ -72,3 +72,36 @@ test('loadModuleRegistry liefert statusCode für robuste Auswertung', async () =
 
   globalThis.fetch = originalFetch;
 });
+
+test('loadModuleRegistry nutzt fallback und bereinigt doppelte/leerwerte ids', async () => {
+  const originalFetch = globalThis.fetch;
+  const response = (ok, data) => ({ ok, json: async () => data });
+
+  globalThis.fetch = async (path) => {
+    if (path === './data/module-registry.json') {
+      return response(true, { moduleIds: [' alpha ', '', 'alpha', 'beta'] });
+    }
+
+    if (path.includes('/alpha/') || path.includes('/beta/')) {
+      return response(true, path.endsWith('/logic.js') ? undefined : { id: path.includes('/alpha/') ? 'alpha' : 'beta', name: 'Name', version: '1.0.0' });
+    }
+
+    return response(false);
+  };
+
+  const result = await loadModuleRegistry();
+  const moduleIds = result.modules.map((item) => item.id);
+
+  assert.deepEqual(moduleIds, ['alpha', 'beta']);
+  assert.match(result.summary, /Quelle: data\/module-registry\.json/);
+
+  globalThis.fetch = async (path) => {
+    if (path === './data/module-registry.json') return response(false);
+    return response(false);
+  };
+
+  const fallbackResult = await loadModuleRegistry();
+  assert.match(fallbackResult.summary, /Quelle: fallback/);
+
+  globalThis.fetch = originalFetch;
+});

@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Hilfeelemente, intuitive Guide-Führung, Tastatur- und Drag&Drop-Bedienung
+- Iterationsfokus: Robustheit der Modul-Registry (Regressionstest für ID-Bereinigung und Fallback-Quelle)
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
