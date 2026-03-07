@@ -148,6 +148,18 @@ const buildDashboardInfo = (state) => {
   return `Ampel: ${overall} | Module: ${moduleSummary} | Archiv: ${archiveStats}`;
 };
 
+const buildHeaderProjectStatus = (state) => {
+  if (state.debug?.startupReady === true) return 'Bereit';
+  if (state.selftestResult?.overallStatus) return formatOverallStatus(state.selftestResult.overallStatus);
+  if (state.selectedProjectDirectory) return 'In Arbeit';
+  return 'Wartet';
+};
+
+const buildHeaderAutosaveStatus = (state) => {
+  if (!state.editorFilePath) return 'Bereit';
+  return state.editorDirty ? 'Offen' : 'Gesichert';
+};
+
 const readStoredTodos = () => {
   try {
     const raw = window.localStorage.getItem(TODO_STORAGE_KEY);
@@ -593,6 +605,8 @@ export const render = () => {
 
   setText('app-title', texts.titles?.appTitle || 'ProvoWare Dashboard');
   setText('app-subtitle', texts.titles?.appSubtitle || 'Projektstart');
+  setText('header-chip-project-status', buildHeaderProjectStatus(state));
+  setText('header-chip-autosave-status', buildHeaderAutosaveStatus(state));
   setText('nav-title', 'Nutzer-Module');
   setText('startup-title', texts.titles?.startup || 'Startstatus');
   setText('status-title', 'Einstellungen & Stabilität');
