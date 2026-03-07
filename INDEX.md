@@ -2,16 +2,12 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: UI-Aktionsverdrahtung als eigener Service für bessere Wartbarkeit
+- Iterationsfokus: Wiki-, Notiz- und Wissensmodul als strukturierte Wissensbasis
 
 ## Verzeichnisbaum (ohne `.git`)
 
 ```text
 .
-├── AGENTS.md
-├── INDEX.md
-├── README.md
-├── TOOL_TUTORIAL.md
 ├── assets
 │   ├── css
 │   │   └── base.css
@@ -26,21 +22,20 @@
 │   ├── project-structure.json
 │   ├── themes.json
 │   └── ui_texts.json
-├── index.html
 ├── js
 │   ├── adapters
 │   │   ├── browser-filesystem.js
 │   │   ├── desktop-filesystem.js
 │   │   └── filesystem-adapter.js
-│   ├── app.js
 │   ├── services
 │   │   ├── config-loader.js
 │   │   ├── logger.js
 │   │   ├── module-registry.js
 │   │   ├── profile-archive.js
 │   │   ├── project-selftest.js
-│   │   ├── ui-action-handlers.js
-│   │   └── startup-check.js
+│   │   ├── startup-check.js
+│   │   └── ui-action-handlers.js
+│   ├── app.js
 │   ├── state.js
 │   ├── status-visuals.js
 │   └── ui.js
@@ -51,12 +46,23 @@
 │   │   ├── manifest.json
 │   │   ├── schema.json
 │   │   └── texts.json
-│   └── todo_kalender_erinnerung
+│   ├── todo_kalender_erinnerung
+│   │   ├── config.json
+│   │   ├── logic.js
+│   │   ├── manifest.json
+│   │   ├── schema.json
+│   │   └── texts.json
+│   └── wiki_notiz_wissen
 │       ├── config.json
 │       ├── logic.js
 │       ├── manifest.json
 │       ├── schema.json
 │       └── texts.json
+├── AGENTS.md
+├── INDEX.md
+├── README.md
+├── TOOL_TUTORIAL.md
+├── index.html
 └── todo.txt
 ```
 
@@ -65,38 +71,43 @@
 2. `INDEX.md`
 3. `README.md`
 4. `TOOL_TUTORIAL.md`
-5. `index.html`
-6. `todo.txt`
-7. `assets/css/base.css`
-8. `assets/js/core.js`
-9. `css/app.css`
-10. `data/app-config.json`
-11. `data/module-registry.json`
-12. `data/profile-archive.json`
-13. `data/project-structure.json`
-14. `data/themes.json`
-15. `data/ui_texts.json`
-16. `js/app.js`
-17. `js/state.js`
-18. `js/status-visuals.js`
-19. `js/ui.js`
-20. `js/adapters/browser-filesystem.js`
-21. `js/adapters/desktop-filesystem.js`
-22. `js/adapters/filesystem-adapter.js`
-23. `js/services/config-loader.js`
-24. `js/services/logger.js`
-25. `js/services/module-registry.js`
-26. `js/services/profile-archive.js`
-27. `js/services/project-selftest.js`
-28. `js/services/startup-check.js`
-29. `js/services/ui-action-handlers.js`
-30. `modules/datenbank_baukasten/config.json`
-31. `modules/datenbank_baukasten/logic.js`
-32. `modules/datenbank_baukasten/manifest.json`
-33. `modules/datenbank_baukasten/schema.json`
-34. `modules/datenbank_baukasten/texts.json`
-35. `modules/todo_kalender_erinnerung/config.json`
-36. `modules/todo_kalender_erinnerung/logic.js`
-37. `modules/todo_kalender_erinnerung/manifest.json`
-38. `modules/todo_kalender_erinnerung/schema.json`
-39. `modules/todo_kalender_erinnerung/texts.json`
+5. `assets/css/base.css`
+6. `assets/js/core.js`
+7. `css/app.css`
+8. `data/app-config.json`
+9. `data/module-registry.json`
+10. `data/profile-archive.json`
+11. `data/project-structure.json`
+12. `data/themes.json`
+13. `data/ui_texts.json`
+14. `index.html`
+15. `js/adapters/browser-filesystem.js`
+16. `js/adapters/desktop-filesystem.js`
+17. `js/adapters/filesystem-adapter.js`
+18. `js/app.js`
+19. `js/services/config-loader.js`
+20. `js/services/logger.js`
+21. `js/services/module-registry.js`
+22. `js/services/profile-archive.js`
+23. `js/services/project-selftest.js`
+24. `js/services/startup-check.js`
+25. `js/services/ui-action-handlers.js`
+26. `js/state.js`
+27. `js/status-visuals.js`
+28. `js/ui.js`
+29. `modules/datenbank_baukasten/config.json`
+30. `modules/datenbank_baukasten/logic.js`
+31. `modules/datenbank_baukasten/manifest.json`
+32. `modules/datenbank_baukasten/schema.json`
+33. `modules/datenbank_baukasten/texts.json`
+34. `modules/todo_kalender_erinnerung/config.json`
+35. `modules/todo_kalender_erinnerung/logic.js`
+36. `modules/todo_kalender_erinnerung/manifest.json`
+37. `modules/todo_kalender_erinnerung/schema.json`
+38. `modules/todo_kalender_erinnerung/texts.json`
+39. `modules/wiki_notiz_wissen/config.json`
+40. `modules/wiki_notiz_wissen/logic.js`
+41. `modules/wiki_notiz_wissen/manifest.json`
+42. `modules/wiki_notiz_wissen/schema.json`
+43. `modules/wiki_notiz_wissen/texts.json`
+44. `todo.txt`

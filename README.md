@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 55
+- Erledigte Punkte: 56
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 83% (laufend, siehe `todo.txt`)
+- Fortschritt: 84% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -22,6 +22,10 @@
   - `js/services/module-registry.js` (Modul- und Vorlagenstatus)
   - `js/services/profile-archive.js` (Profil-Archiv)
   - `js/services/ui-action-handlers.js` (UI-Aktionen zentral gebündelt)
+- Module (aktuell registriert):
+  - `modules/datenbank_baukasten`
+  - `modules/todo_kalender_erinnerung`
+  - `modules/wiki_notiz_wissen`
 - Zentrale Daten:
   - `data/app-config.json`
   - `data/themes.json`
@@ -71,6 +75,8 @@
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 - UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
 
+- Neues Wiki-, Notiz- und Wissensmodul als strukturierte Modulbasis ergänzt (CRUD, Suche/Filter, Verknüpfungen, Export).
+
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
 
@@ -90,6 +96,7 @@
 - Empfehlung 3: Für Vorlagen-Look die Fensterbreite möglichst über 1200 px halten.
 - Empfehlung 4: Wenn die Fußleiste zu voll wirkt, erst über „Selbsttest starten“ neue klare Log-Einträge erzeugen.
 - Empfehlung 5: Vor dem ersten Speichern kurz prüfen, ob oben im Archiv ein Profil ausgewählt ist.
+- Empfehlung 6: Für Wissenseinträge klare Themennamen und kurze Quellenangabe nutzen, damit Suche schneller trifft.
 
 ## Iterationsprotokoll (kompakt)
 - Patchgrund 1: Nutzerwunsch nach persistentem Profil-Archiv inkl. Duplikatprüfung und Bearbeitung.
@@ -149,3 +156,8 @@
 - Patchgrund 2: Modularisierung verbessert durch neuen Service `ui-action-handlers` statt großer Inline-Handler in `app.js`.
 - Betroffene Dateien: `js/app.js`, `js/services/ui-action-handlers.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene JS-Syntax und direkt betroffene Aktionsausgabe geprüft.
+
+- Patchgrund 1: Nutzerwunsch nach einem strukturierten Wiki-, Notiz- und Wissensmodul als internes Nachschlagewerk.
+- Patchgrund 2: Robustheit verbessert durch klare Feldvalidierung, Suche/Filter und sichere Verknüpfungs-/Exportlogik.
+- Betroffene Dateien: `modules/wiki_notiz_wissen/manifest.json`, `modules/wiki_notiz_wissen/config.json`, `modules/wiki_notiz_wissen/schema.json`, `modules/wiki_notiz_wissen/texts.json`, `modules/wiki_notiz_wissen/logic.js`, `data/module-registry.json`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JSON/JS-Syntax und direkte Modul-Logik (CRUD, Suche, Link, Export) geprüft.

@@ -2,6 +2,7 @@
   "version": 1,
   "moduleIds": [
     "datenbank_baukasten",
-    "todo_kalender_erinnerung"
+    "todo_kalender_erinnerung",
+    "wiki_notiz_wissen"
   ]
 }
