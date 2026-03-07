@@ -169,6 +169,13 @@ const bindWorkspaceControls = () => {
   const app = byId('app');
   if (!app || app.dataset.workspaceControlsBound === 'yes') return;
   app.dataset.workspaceControlsBound = 'yes';
+  let uiScale = 1;
+
+  const applyUiScale = (nextScale) => {
+    const rounded = Number(nextScale.toFixed(2));
+    uiScale = Math.min(1.2, Math.max(0.72, rounded));
+    document.documentElement.style.setProperty('--ui-scale', String(uiScale));
+  };
 
   const setSidebarState = (id, cssClass) => {
     const button = byId(id);
@@ -195,10 +202,22 @@ const bindWorkspaceControls = () => {
   });
 
   window.addEventListener('keydown', (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === '0') {
+      event.preventDefault();
+      applyUiScale(1);
+      return;
+    }
     if (event.key !== 'Escape') return;
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
     app.classList.remove('has-maximized-panel');
   });
+
+  window.addEventListener('wheel', (event) => {
+    if (!event.ctrlKey) return;
+    event.preventDefault();
+    const step = event.deltaY > 0 ? -0.04 : 0.04;
+    applyUiScale(uiScale + step);
+  }, { passive: false });
 };
 
 export const bindUiActions = (actions) => {

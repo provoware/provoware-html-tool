@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 64
+- Erledigte Punkte: 65
 - Offene Punkte: siehe `todo.txt`
-- Fortschritt: 93% (laufend, siehe `todo.txt`)
+- Fortschritt: 94% (laufend, siehe `todo.txt`)
 
 ## Aktuelle Toolstruktur und Toolumfang
 - Kernstart:
@@ -88,6 +88,7 @@
 - Dashboard 3 erweitert: drei einzeilige Eingabebereiche mit editierbarem Titel, Speichern per Button oder Enter, Dateiablage pro Titel unter `data/dashboard3-notes`, Anfügen statt Überschreiben und direktes Nutzerfeedback inklusive Existenzprüfung.
 - Dashboard 3 nutzerfreundlich erweitert: pro Zeile gibt es jetzt **Datei öffnen** (öffnet die zuletzt gespeicherte Zeilen-Datei direkt im Editor) plus sichtbaren Titel-Hinweis per Tooltip („Ungültige Zeichen werden ersetzt“).
 - Dashboard 3 weiter verbessert: **Datei öffnen** ist je Zeile erst aktiv, wenn bereits gespeichert wurde; zusätzlich wird je Zeile die zuletzt genutzte Datei angezeigt.
+- Dashboard kompakter und kontrastreicher verbessert: bessere Ein-Bildschirm-Nutzung und proportionale Gesamtskalierung mit **Strg + Mausrad** (Reset mit **Strg + 0**).
 - Kopier-Feedback im Templates-Modul ergänzt: Meldung wird kurz angezeigt und verschwindet automatisch.
 - Kleiner Service-Smoke-Test für Export/Import/Mix ergänzt, damit UI-Änderungen schneller geprüft werden können.
 - Genres-Bereich nutzerfreundlich optimiert: Listen bleiben jetzt in fester Kartenhöhe mit Scrollbar statt Modul-Vergrößerung; zusätzlich klarere Farbflächen und modernere Kartenoptik im Profil-Archiv.
