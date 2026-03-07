@@ -40,6 +40,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Header-Mini-Schritt: rechts oben wurden zwei kleine Status-Chips ergänzt (**Projektstatus: Aktiv**, **Autosave: An**) für eine klarere Vorlage-Annäherung, ohne ID-/JS-Eingriff.
+- Kontrast-Feinschliff: `.startup-step--done` und `.startup-step--current` nutzen jetzt stärkere Glas-Verläufe mit besser lesbarem Text auf hellen und dunklen Displays.
 - Design-Mini-Feinschliff: Die 4 Startschritte im Bereich **Schnellaktionen** sind jetzt als farbige Glas-Chips (Blau/Gold/Grün/Violett) mit klarerer Hierarchie gestaltet – näher an der Designvorlage, ohne Logikänderung.
 - UI-Redesign: Dashboard jetzt im dunklen Glas-Look nahe der Designvorlage (3 Spalten, starke Kartenhierarchie, weiche Transparenz).
 - Neue Vorlage-Datei `DESIGN_VORLAGE.md`: enthält Tiefenanalyse der Referenz, Token und messbare Abgleichkriterien.
@@ -72,9 +74,9 @@
 
 ### Design-Erfolgschecks dieser Iteration
 1. **Struktur-Check**: 3-Spalten-Layout bleibt erhalten, Reihenfolge unverändert.
-2. **Farb-Check**: Schnellaktionen zeigen klar 4 Tokens (Blau/Gold/Grün/Violett).
-3. **Transparenz-Check**: App-Container, Panels und Start-Chips bilden mindestens 3 sichtbare Transparenzebenen.
-4. **Lesbarkeits-Check**: Text auf den Start-Chips bleibt hell und kontrastreich.
+2. **Farb-Check**: Schnellaktionen zeigen klar 4 Tokens (Blau/Gold/Grün/Violett), Header ergänzt passende Status-Chips im Glas-Look.
+3. **Transparenz-Check**: App-Container, Panels, Header-Chips und Start-Chips bilden mindestens 3 sichtbare Transparenzebenen.
+4. **Lesbarkeits-Check**: Text auf Start-Chips (`done/current`) und Header-Chips bleibt hell und kontrastreich.
 5. **Interaktions-Check**: Bestehende Button-/Fokuszustände bleiben aktiv und konsistent.
 6. **Responsive-Check**: Unter 980px bleibt 1-Spalten-Ansicht aktiv (kein Strukturumbau im Patch).
 7. **Stabilitäts-Check**: Keine ID/JS-Anker geändert.

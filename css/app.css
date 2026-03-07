@@ -159,10 +159,38 @@ body::before {
 
 .header-actions {
   display: flex;
+  align-items: center;
+  justify-content: flex-end;
   gap: 8px;
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
+}
+
+.header-status-chips {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.header-status-chip {
+  display: grid;
+  min-width: 116px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(194, 214, 252, 0.36);
+  background: linear-gradient(142deg, rgba(40, 58, 92, 0.6), rgba(20, 34, 58, 0.62));
+  color: #eff5ff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.header-status-chip small {
+  font-size: 0.7rem;
+  color: rgba(211, 226, 250, 0.92);
+}
+
+.header-status-chip strong {
+  font-size: 1.04rem;
+  line-height: 1.1;
 }
 
 .nav {
@@ -299,13 +327,15 @@ body::before {
 }
 
 .startup-step--done {
-  background: rgba(43, 169, 110, 0.18);
-  color: #1d5f41;
+  border-color: rgba(145, 231, 194, 0.46);
+  background: linear-gradient(140deg, rgba(44, 170, 112, 0.34), rgba(15, 73, 49, 0.58));
+  color: #f1fff8;
 }
 
 .startup-step--current {
-  background: rgba(245, 158, 11, 0.2);
-  color: #6a4705;
+  border-color: rgba(255, 222, 152, 0.52);
+  background: linear-gradient(140deg, rgba(245, 158, 11, 0.42), rgba(132, 62, 16, 0.62));
+  color: #fff8e7;
 }
 
 .dashboard-note {
@@ -1084,6 +1114,11 @@ body::before {
   border-radius: 24px;
 }
 
+.header-status-chip {
+  border-color: rgba(176, 201, 244, 0.42);
+  background: linear-gradient(138deg, rgba(36, 54, 86, 0.8), rgba(18, 30, 52, 0.82));
+}
+
 .header p,
 .sidebar-summary,
 .sidebar-hint,
@@ -1147,13 +1182,15 @@ body::before {
 }
 
 .startup-step--done {
-  background: linear-gradient(138deg, rgba(34, 197, 94, 0.36), rgba(20, 83, 45, 0.5));
-  color: #e8fff1;
+  border-color: rgba(144, 240, 194, 0.58);
+  background: linear-gradient(138deg, rgba(34, 197, 94, 0.46), rgba(14, 74, 41, 0.72));
+  color: #f0fff6;
 }
 
 .startup-step--current {
-  background: linear-gradient(138deg, rgba(245, 158, 11, 0.38), rgba(120, 53, 15, 0.52));
-  color: #fff5df;
+  border-color: rgba(255, 218, 145, 0.62);
+  background: linear-gradient(138deg, rgba(245, 158, 11, 0.52), rgba(132, 58, 15, 0.74));
+  color: #fff8ea;
 }
 
 .panel-grid {

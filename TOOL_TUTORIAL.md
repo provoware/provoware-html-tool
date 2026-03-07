@@ -11,6 +11,16 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 
 
 ## Kleine Erweiterung dieser Iteration (neu)
+### Header-Statuschips + klare Startstatus-Farben
+Im Kopfbereich stehen jetzt rechts oben zwei kleine Status-Chips:
+- **Projektstatus: Aktiv**
+- **Autosave: An**
+
+Zusätzlich sind die Startschritte **„done“** und **„current“** kontrastreicher, bleiben aber im gleichen Glas-System.
+
+Kurzregel: Oben rechts kurz Status prüfen, dann die Startschritte nacheinander abarbeiten.
+
+## Kleine Erweiterung dieser Iteration (neu)
 ### Vollautomatischer Shell-Laienstart mit Self-Repair
 Wenn du lieber per Terminal startest, nutze jetzt genau einen Befehl:
 1. `./start.sh`
