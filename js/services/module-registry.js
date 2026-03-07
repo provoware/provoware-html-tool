@@ -87,7 +87,10 @@ const checkProfile = async (id) => {
     }
   }
 
-  return { id, name: moduleName, ok: missingFiles.length === 0 && issues.length === 0, missingFiles, issues };
+  const isHealthy = missingFiles.length === 0 && issues.length === 0;
+  const statusCode = isHealthy ? 'OK' : (missingFiles.length > 0 ? 'MISSING_FILES' : 'INVALID_CONTENT');
+
+  return { id, name: moduleName, ok: isHealthy, statusCode, missingFiles, issues };
 };
 
 const fixHintFor = (issue) => {

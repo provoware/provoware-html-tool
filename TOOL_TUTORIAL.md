@@ -9,6 +9,16 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 3. Danach **Selbsttest starten**.
 4. Status rechts prüfen (Ampel, Lesen, Schreiben, Struktur).
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Platzhalter klar erkennen (kein Live-Feature)
+Wenn du den Design-Status prüfst, gilt:
+- `assets/css/base.css` und `assets/js/core.js` sind aktuell Vorlagen-Dateien.
+- Ohne Einbindung in `index.html` sind sie **nicht aktiv**.
+- Der aktive Lauf nutzt weiter `css/app.css` und `js/app.js`.
+
+Kurzregel: Datei vorhanden heißt nicht automatisch integriert.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Minimal-Check als Ein-Befehl-Start
 Wenn du vor einer Änderung nur das Nötigste prüfen willst:
