@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Startdatei-Standard mit Export-Checks sowie neue klickbare Startseiten für Backup/Debug/Logging
+- Iterationsfokus: Startdatei-A11y-Baseline (`role="status"` + `aria-live`) und klare Dashboard-Ampel (Status + Modul/Archiv getrennt sichtbar)
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`

@@ -267,3 +267,13 @@ Kurze Anleitung für sichere kleine Iterationen.
 3. Nutze im `<body>` mindestens eine kleine Klick-Aktion (Button), damit das Modul sofort testbar ist.
 4. Nutze für Ausgaben `role="status"` und `aria-live="polite"` für bessere Barrierefreiheit.
 5. Danach Test ausführen: `node --test tests/start-files/start-import-resolution.test.js`.
+
+### Startdatei-A11y-Baseline kurz prüfen (neu)
+1. Neue oder geänderte `*_start.html` speichern.
+2. Test ausführen: `node --test tests/start-files/start-import-resolution.test.js`.
+3. Ziel: Jede Startdatei hat `start-file-standard` plus `role="status"` und `aria-live`.
+
+### Dashboard-Info kurz prüfen (neu)
+1. Dashboard öffnen.
+2. Auf die Infozeile im Dashboard und in der linken Leiste schauen.
+3. Ziel: Dashboard zeigt `Ampel + Module + Archiv`; linke Leiste zeigt nur die Modul-Zusammenfassung.
