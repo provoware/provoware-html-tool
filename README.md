@@ -76,6 +76,7 @@
 - Camouflage-Farbschema ergänzt: jetzt mittlere Helligkeit zwischen Hell und Dunkel mit ruhigerem Kontrast.
 - Linke Sidebar zeigt jetzt nur aktive Nutzer-Module als kompakte 2-Spalten-Buttons; Einstellungen, Tests und Stabilitätsinfos sind rechts gebündelt.
 - UI-Aktionsverdrahtung aus `js/app.js` in `js/services/ui-action-handlers.js` ausgelagert, damit der App-Einstieg klarer und wartbarer bleibt.
+- To-do-Modul fachlich erweitert: Aufgabenstruktur, Statusfluss (offen/erledigt), Filterlogik und JSON/CSV-Exportgrundlage ergänzt.
 - Default-Profilbestand erweitert: Die drei Profile enthalten jetzt je breite, klar unterscheidbare Genre-/Mood-/Stil-Listen inklusive regionaler und Underground-Beispiele; zusätzlich ist ein professionell kategorisiertes Templates-Default-Archiv mit 9 Bereichen und je 5 Starter-Einträgen integriert.
 - Diagnose-Export aus `js/app.js` in `js/services/diagnosis-export.js` ausgelagert, damit `app.js` schlanker bleibt.
 - Neues Templates-Modul ergänzt: persistente Vorlagen mit Kategorie, Bearbeiten/Löschen, Favoriten und Schnellwahl-Kopieren.

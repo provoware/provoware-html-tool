@@ -94,6 +94,12 @@ Kurze Anleitung für sichere kleine Iterationen.
 4. Danach auf **Export** und **Diagnose exportieren** klicken.
 5. Ziel: Alle Aktionen laufen unverändert, obwohl die Handler jetzt zentral in einem Service liegen.
 
+### To-do-Datenfluss minimal prüfen (neu)
+1. Datei `modules/todo_kalender_erinnerung/logic.js` öffnen.
+2. Mit kurzer Probe (Konsole oder Testskript) eine Aufgabe mit Titel anlegen und `createTodoEntry(...)` ausführen.
+3. Danach mit `markTodoDone(...)` auf erledigt setzen und mit `reactivateTodo(...)` wieder öffnen.
+4. Mit `filterTodos(...)` nach `status`, `area` oder `priority` filtern.
+5. Mit `exportTodosAsJson(...)` oder `exportTodosAsCsv(...)` den Exporttext erzeugen.
 ### Templates-Modul kurz prüfen (neu)
 1. Einen Ordner wählen.
 2. Im Modul **Templates** Titel, Kategorie und Inhalt eintragen.
@@ -148,5 +154,6 @@ Kurze Anleitung für sichere kleine Iterationen.
 
 ## Stand
 - Aktualisiert: 2026-03-07
+- Iterationsfokus: To-do-Modul robust für Aufgabenfluss und Statusverwaltung erweitert
 - Iterationsfokus: Default-Profile und Templates-Default-Archiv als sofort nutzbare Startbasis
 - Iterationsfokus: Diagnose-Service ausgelagert plus neues Templates-Modul mit Favoriten-Schnellwahl

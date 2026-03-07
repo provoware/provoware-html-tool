@@ -1,5 +1,10 @@
 {
+  "title": "To-do-Modul",
   "empty": "Noch keine Aufgaben vorhanden.",
-  "count": "Aufgabe(n) geplant.",
-  "reminded": "Erinnerung gesendet."
+  "count": "{open} offen, {done} erledigt.",
+  "statusOpen": "Offen",
+  "statusDone": "Erledigt",
+  "hint": "Tipp: Aufgaben mit Bereich und Priorität anlegen. Dann kannst du klar filtern.",
+  "exportHint": "Export möglich als JSON oder CSV.",
+  "reminderHint": "Reminder ist optional und bereitet die Erinnerung vor."
 }
