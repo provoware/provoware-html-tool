@@ -32,6 +32,8 @@
   - Noch bewusst **nicht aktiv**: `dependabot.yml`, `release.yml`
 
 ## Was in dieser Iteration bereinigt wurde
+- Sicherheitslücke im UI reduziert: kritische `innerHTML`-Ausgaben escapen (HTML-Sonderzeichen sicher kodieren), damit eingeschleuste Tags/Skripte nicht ausgeführt werden.
+- Betroffen sind besonders Archiv-, Log-, Selbsttest- und Profil-Ausgaben in `js/ui.js`.
 - Hilfeelemente im Guide-Bereich verbessert: kurzer Bedienhinweis direkt am Index, klare ARIA-Beschriftung.
 - Intuitive Toolführung ergänzt: Tastaturnavigation (Pfeile, Enter/Leertaste), visuelle Auswahlfarben, verständliche Statusfarben.
 - Drag&Drop für die Reihenfolge ergänzt und direktes Feedback eingebaut.
