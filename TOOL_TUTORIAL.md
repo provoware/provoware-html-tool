@@ -26,6 +26,12 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
 3. Prüfen, dass der Text weiterhin „Offline-Start aktiv. Basis geladen.“ zeigt.
 4. Ergebnis: Der Starttext bleibt stabil, auch wenn das DOM später fertig ist.
 
+## Verbindungsstatus schnell prüfen (neu)
+1. `index.html` im Browser öffnen.
+2. Browser kurz in den Offline-Modus setzen (DevTools Netzwerk: Offline).
+3. Prüfen: Text zeigt „Offline-Start aktiv. Basis geladen.“
+4. Offline-Modus beenden.
+5. Prüfen: Text wechselt auf „Start aktiv. Verbindung verfügbar.“
 ## Muster-Modul `datenbank_baukasten` prüfen (neu)
 1. Prüfen, dass genau diese Dateien existieren:
    - `manifest.json`

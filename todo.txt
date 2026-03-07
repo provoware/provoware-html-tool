@@ -10,6 +10,12 @@ P4 sauber abschließen und das Muster-Modul verbindlich machen.
 - Aktuell keine offenen Pflichtpunkte.
 
 ## Diese Iteration erledigt
+1. Arbeitspaket 1 minimal umgesetzt (`index.html`, `assets/css/base.css`, `assets/js/core.js`).
+2. Startdateien mit klaren Ein-Satz-Zwecken in `README.md` dokumentiert.
+3. `TOOL_TUTORIAL.md` um eine kurze Offline-Start-Prüfung erweitert.
+4. `INDEX.md` auf den vollständigen aktuellen Dateistand aktualisiert.
+5. Startlogik robuster gemacht (`DOMContentLoaded`-Fallback in `assets/js/core.js`).
+6. Verbindungsstatus im Startskript robust gemacht (online/offline-Events).
 1. Modulstandard `datenbank_baukasten` mit `manifest`, `config`, `texts`, `schema`, `logic` angelegt.
 2. Startstruktur im Core um eine minimale Modul-Registrierung erweitert.
 3. Kleinen Robustheits-Hinweis für unvollständige Modulteile ergänzt.

@@ -1,3 +1,5 @@
+Stand: aktualisiert nach Verbindungsstatus-Optimierung im Startskript.
+
 ## Verzeichnisbaum (ohne `.git`)
 
 ```text

@@ -6,9 +6,19 @@ function applyStartStatus() {
     return;
   }
 
-  statusText.textContent = 'Offline-Start aktiv. Basis geladen.';
+  statusText.textContent = getConnectionStatus();
 }
 
+function getConnectionStatus() {
+  if (navigator.onLine) {
+    return 'Start aktiv. Verbindung verfügbar.';
+  }
+
+  return 'Offline-Start aktiv. Basis geladen.';
+}
+
+window.addEventListener('online', applyStartStatus);
+window.addEventListener('offline', applyStartStatus);
 function registerModules() {
   const moduleCardText = document.querySelector('.card p');
   if (!moduleCardText) {

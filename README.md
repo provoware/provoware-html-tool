@@ -23,6 +23,9 @@
   - `modules/datenbank_baukasten/schema.json`
   - `modules/datenbank_baukasten/logic.js`
 - Umfang dieser Iteration:
+  - Startstatus reagiert jetzt auf Online-/Offline-Wechsel in `assets/js/core.js`.
+  - Statustext passt sich automatisch an die Verbindungsart an.
+  - Doku- und Indexstand auf aktuellen Zustand aktualisiert.
   - Muster-Modul `datenbank_baukasten` als kopierbares Datei-Set angelegt.
   - Startstruktur für Modul-Registrierung auf das Muster-Modul erweitert.
   - Einfacher Hinweis bei unvollständigem Modul im Core ergänzt (Robustheit).
@@ -30,6 +33,7 @@
 ## Aktueller Stand
 - Lokaler Offline-Start ist sichtbar und ohne Zusatzdienste nutzbar.
 - Dashboard-Skelett ist als stabile Basis vorhanden.
+- Basis-Statuswechsel im JavaScript-Core ist aktiv und reagiert auf Verbindungswechsel.
 - Modul-Muster ist vollständig und direkt kopierbar.
 
 ## Nächste Schritte (kurz)
@@ -46,6 +50,8 @@
 - Start-Dokumentation nur in `README.md` und `todo.txt`.
 
 ## Empfehlungsliste (kurz)
+- Nächstes Patchziel auf P4 begrenzen, damit das Modulmuster sauber entsteht.
+- Verbindungsstatus-Texte in einfacher Sprache beibehalten.
 - Beim nächsten Modul exakt die fünf Mindestteile aus dem Muster übernehmen.
 - Erst bei mehreren Modulen auf automatische Verzeichnis-Leselogik erweitern.
 - `INDEX.md` weiterhin direkt nach Dateiänderungen aktualisieren.
