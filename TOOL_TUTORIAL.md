@@ -16,10 +16,11 @@ Wenn du lieber per Terminal startest, nutze jetzt genau einen Befehl:
 1. `bash scripts/laienstart.sh`
 
 Was dabei automatisch passiert:
-- Abhängigkeiten werden geprüft (`node`, `python3`).
+- Pflicht-Abhängigkeiten werden aus `data/laienstart-dependency-map.json` gelesen und dann geprüft (z. B. `node`, `python3`).
 - Wenn möglich, wird fehlende Software automatisch installiert (`apt-get` oder `brew`).
 - Fehlende Kern-JSON-Dateien werden als sichere Standard-Dummys angelegt.
 - Danach startet der lokale Server und öffnet `laienstart.html`.
+- Für einen sicheren Test ohne Serverstart: `bash scripts/laienstart.sh --dry-run` (prüft JSON-Lesen + Self-Repair).
 
 Kurzregel: Ein Befehl starten, bei Bedarf Hinweise lesen, dann normal weiterarbeiten.
 

@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Shell-Laienstart mit präventiver Self-Repair-Logik und Standard-Dummy-Konfigurationen
+- Iterationsfokus: Shell-Laienstart mit JSON-gesteuerter Dependency-Prüfung und Dry-Run-Self-Repair-Test
 
 ## Verzeichnisbaum (ohne `.git`)
 - ├─ .github
@@ -94,6 +94,7 @@
 - │  ├─ laienstart.sh
 - │  └─ minimal-check.sh
 - ├─ tests
+- │  ├─ scripts-laienstart.dry-run.test.js
 - │  ├─ adapters
 - │  │  └─ desktop-filesystem.test.js
 - │  ├─ services
@@ -206,7 +207,8 @@
 83. `tests/services/startup-check.test.js`
 84. `tests/services/ui-action-handlers.smoke.test.js`
 85. `tests/services/ui-render-safety.test.js`
-86. `tests/start-files/start-import-resolution.test.js`
-87. `todo.txt`
-88. `todo_kalender_erinnerung_start.html`
-89. `wiki_notiz_wissen_start.html`
+86. `tests/scripts-laienstart.dry-run.test.js`
+87. `tests/start-files/start-import-resolution.test.js`
+88. `todo.txt`
+89. `todo_kalender_erinnerung_start.html`
+90. `wiki_notiz_wissen_start.html`
