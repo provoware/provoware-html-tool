@@ -15,12 +15,24 @@
       <h1>ProvoWare HTML Tool</h1>
       <p id="status-text">Start bereit.</p>
       <section class="dashboard" aria-label="Dashboard-Skelett">
-        <article class="card">
-          <h2>Modulübersicht</h2>
+        <article class="card card-module">
+          <header class="card-topline">
+            <h2>Modulübersicht</h2>
+          </header>
+          <div class="panel-grid" aria-hidden="true"></div>
           <p id="module-summary">Noch keine Module geladen.</p>
+          <div class="panel-footer" aria-hidden="true">
+            <span class="panel-chip">Check</span>
+            <span class="panel-chip">Konfig</span>
+            <span class="panel-chip">Schema</span>
+          </div>
         </article>
-        <article class="card" aria-label="Todo-Liste mit Kalender und Erinnerung">
-          <h2>Todo-Liste mit Kalenderfunktion</h2>
+
+        <article class="card card-todo" aria-label="Todo-Liste mit Kalender und Erinnerung">
+          <header class="card-topline">
+            <h2>Todo-Liste mit Kalenderfunktion</h2>
+          </header>
+          <div class="panel-grid" aria-hidden="true"></div>
           <p id="todo-info">Noch keine Aufgaben vorhanden.</p>
           <form id="todo-form" class="todo-form">
             <label>
@@ -38,6 +50,11 @@
             <button type="submit">Aufgabe hinzufügen</button>
           </form>
           <ul id="todo-list" class="todo-list" aria-live="polite"></ul>
+          <div class="panel-footer" aria-hidden="true">
+            <span class="panel-chip">Neu</span>
+            <span class="panel-chip">Heute</span>
+            <span class="panel-chip">Fällig</span>
+          </div>
         </article>
       </section>
     </main>

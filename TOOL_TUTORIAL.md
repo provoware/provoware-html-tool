@@ -20,7 +20,7 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
 2. Auf den Statustext achten: „Offline-Start aktiv. Basis geladen.“
 3. Wenn der Text sichtbar ist, ist der Minimalstart erfolgreich.
 
-## Todo-Liste mit Kalender und Erinnerung prüfen (neu)
+## Todo-Liste mit Kalender und Erinnerung prüfen
 1. `index.html` im Browser öffnen.
 2. Im Bereich „Todo-Liste mit Kalenderfunktion“ eine Aufgabe eintragen.
 3. Prüfen, dass die Aufgabe unten in der Liste erscheint.
@@ -33,6 +33,13 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
 3. Prüfen: Text zeigt „Offline-Start aktiv. Basis geladen.“
 4. Offline-Modus beenden.
 5. Prüfen: Text wechselt auf „Start aktiv. Verbindung verfügbar.“
+
+## Panel-Design (Bildbeispiel) kurz prüfen (neu)
+1. `index.html` im Browser öffnen.
+2. Prüfen, dass beide Hauptkarten runde Ecken, Verlauf und Schatten haben.
+3. Prüfen, dass in jeder Karte eine sichtbare Rasterfläche vorhanden ist.
+4. Prüfen, dass unten drei kleine Segment-Chips sichtbar sind.
+5. Prüfen, dass Eingaben und Liste im Todo-Bereich weiterhin normal nutzbar sind.
 
 ## Muster-Modul `datenbank_baukasten` prüfen
 1. Prüfen, dass genau diese Dateien existieren:
@@ -51,4 +58,4 @@ Kurzanleitung für die Pflege dieses Repositories in kleinen, sicheren Schritten
 4. Ergebnis: Nur lokale Quellen (`'self'`) sind für Skript und Styles erlaubt.
 
 ---
-Stand: aktualisiert nach Modul-Erweiterung `todo_kalender_erinnerung`.
+Stand: aktualisiert nach Layout-Anpassung im Panel-Stil.
