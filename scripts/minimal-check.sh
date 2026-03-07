@@ -8,6 +8,6 @@ echo "[1/2] JS-Syntax prüfen (Kernpfade)"
 find js tests -type f -name '*.js' -print0 | xargs -0 -n1 node --experimental-default-type=module --check
 
 echo "[2/2] Direkten Service-Schnelltest prüfen"
-node --test tests/services/import-export-consistency.test.js
+node --experimental-default-type=module --test tests/services/import-export-consistency.test.js
 
 echo "Minimal-Check erfolgreich abgeschlossen."

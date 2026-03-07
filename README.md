@@ -2,9 +2,9 @@
 
 ## Status oben
 - Erledigte Punkte: 30 (siehe `todo.txt`)
-- Offene Punkte: 1 (siehe `todo.txt`)
-- Fortschritt: 97%
-- Stand dieser Iteration: Barrierefreiheit und Hilfetexte wurden mit kleinem Eingriff verbessert (klare Zusatzhinweise, bessere ARIA-Beschreibung, Live-Status für Guide- und Plugin-Bereich).
+- Offene Punkte: 2 (siehe `todo.txt`)
+- Fortschritt: 94%
+- Stand dieser Iteration: Start-Robustheit wurde mit kleinem Eingriff verbessert (Node-18-kompatibler Service-Schnelltest im Minimal-Check).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -39,7 +39,7 @@
   - `data/profile-archive.json`, `data/templates-archive.json`
 - **Tests und Checks**
   - `tests/services/*.test.js` (inkl. Import-/Export-Konsistenzcheck und UI-Render-Sicherheit), `tests/modules/*.test.js`, `tests/adapters/*.test.js`, `tests/start-files/*.test.js`, `tests/scripts-laienstart.dry-run.test.js`
-  - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck, jetzt Node-18-kompatibel für ES-Module)
+  - `scripts/minimal-check.sh` (kleiner reproduzierbarer Syntax-/Struktur-Schnellcheck, jetzt auch beim Service-Schnelltest Node-18-kompatibel für ES-Module)
   - `start.sh` (Hauptstart im Projektordner, delegiert an robuste Startroutine)
   - `scripts/laienstart.sh` (Startroutine-Engine mit Vorvalidierung, Self-Repair und Erfolgsvalidierung)
 - **GitHub Workflows (Basis aktiv)**
