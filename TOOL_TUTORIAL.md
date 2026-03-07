@@ -276,4 +276,4 @@ Kurze Anleitung für sichere kleine Iterationen.
 ### Dashboard-Info kurz prüfen (neu)
 1. Dashboard öffnen.
 2. Auf die Infozeile im Dashboard und in der linken Leiste schauen.
-3. Ziel: Beide zeigen Modul-Übersicht und Archiv-Statistik in einer Zeile.
+3. Ziel: Dashboard zeigt `Ampel + Module + Archiv`; linke Leiste zeigt nur die Modul-Zusammenfassung.

@@ -102,9 +102,10 @@ const renderStats = (stats) => {
 };
 
 const buildDashboardInfo = (state) => {
+  const overall = formatOverallStatus(state.selftestResult?.overallStatus || 'red');
   const moduleSummary = state.moduleRegistry?.summary || '-';
   const archiveStats = renderStats(state.profileStats);
-  return `Info: Module ${moduleSummary} | Archiv ${archiveStats}`;
+  return `Ampel: ${overall} | Module: ${moduleSummary} | Archiv: ${archiveStats}`;
 };
 
 const escapeHtml = (value) => String(value || '')
@@ -611,7 +612,7 @@ export const render = () => {
 
   const dashboardInfo = buildDashboardInfo(state);
   setText('dashboard-info-note', dashboardInfo);
-  setText('module-registry-summary', dashboardInfo);
+  setText('module-registry-summary', state.moduleRegistry?.summary || '-');
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
   const sidebarModuleList = byId('sidebar-module-list');
   if (sidebarModuleList) {

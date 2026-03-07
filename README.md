@@ -1,7 +1,7 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 73
+- Erledigte Punkte: 74
 - Offene Punkte: siehe `todo.txt`
 - Fortschritt: 99% (laufend, siehe `todo.txt`)
 
@@ -116,7 +116,7 @@
 - Skip-Link ergänzt: Mit Tastatur kann direkt zum Hauptinhalt gesprungen werden.
 - Ruhiger Screenreader-Modus ergänzt: Statusmeldungen werden bewusst kompakter gesprochen.
 - Neues Textdatei-Vorschau- und Editor-Modul ergänzt: Dateiliste je Pfad, Vorschau und Speichern im Editor.
-- Dashboard-Info verbessert: Die sichtbare Infolinie zeigt jetzt gebündelt Modulübersicht und Archiv-Statistik.
+- Dashboard-Info verbessert: Die sichtbare Infolinie zeigt jetzt als Ampel-Übersicht Gesamtstatus plus Modulübersicht und Archiv-Statistik.
 
 ## Offene Punkte
 - Siehe `todo.txt` für den aktuellen, priorisierten Stand.
@@ -250,3 +250,8 @@
 - Patchgrund 2: Nutzerfeedback im Dashboard bündeln, damit Infos und Archiv-Statistik auf einen Blick sichtbar sind.
 - Betroffene Dateien: `tests/start-files/start-import-resolution.test.js`, `index.html`, `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
 - Endvalidierung: nur betroffene HTML/JS-Syntax und den direkt betroffenen Startdatei-Test geprüft.
+
+- Patchgrund 1: Dashboard-Infozeile als schnelle Ampel-Übersicht präzisieren (Gesamtstatus + Module + Archiv).
+- Patchgrund 2: Linke Modul-Zusammenfassung bewusst schlank halten (nur Modulstatus), damit beide Hinweise klar getrennt bleiben.
+- Betroffene Dateien: `js/ui.js`, `README.md`, `TOOL_TUTORIAL.md`, `INDEX.md`.
+- Endvalidierung: nur betroffene JS-Syntax und die direkt betroffene Startdatei-Testausgabe geprüft.

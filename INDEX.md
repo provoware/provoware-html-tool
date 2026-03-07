@@ -2,7 +2,7 @@
 
 ## Stand
 - Aktualisiert: 2026-03-07
-- Iterationsfokus: Startdatei-A11y-Baseline (`role="status"` + `aria-live`) und klareres Dashboard-Feedback zu Modul/Archiv-Infos
+- Iterationsfokus: Startdatei-A11y-Baseline (`role="status"` + `aria-live`) und klare Dashboard-Ampel (Status + Modul/Archiv getrennt sichtbar)
 
 ## Verzeichnisbaum (ohne `.git`)
 - `AGENTS.md`
