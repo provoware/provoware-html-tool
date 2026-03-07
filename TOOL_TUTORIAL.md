@@ -97,6 +97,15 @@ Nutze erst diese kurze Reihenfolge:
 
 Kurzregel: erst prüfen, dann entscheiden, zuletzt löschen.
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Header-Chips: stärkerer Fokuskontrast per CSS-Token
+Für Tastatur-Nutzung wurde der Fokus-Ring der Header-Chips gezielt verstärkt:
+- klarerer Ring bei `:focus-visible`
+- nur CSS-Token-Abgleich, keine Änderung an HTML oder JS
+
+Kurzregel: Wenn du mit Tab navigierst, muss der aktive Header-Chip sofort gut sichtbar sein.
+
 ## Zusatz-Check (weiter nutzbar)
 ### Import-/Export-Schnellcheck für direkte Service-Kette
 Wenn `js/app.js` Services importiert, prüfe zuerst klein und gezielt:

@@ -2,7 +2,7 @@
 
 ## Kompletter aktueller Verzeichnisbaum
 
-- Stand dieser Übersicht: Iteration mit Live-Header-Statuschips aus State-Daten und kleinem Hover-/Fokus-Check im Glas-Look.
+- Stand dieser Übersicht: Iteration mit Header-Chip-Live-Status, Hover-/Fokus-Check und kleinem CSS-Token-Abgleich für stärkeren Fokuskontrast.
 
 ```
 .

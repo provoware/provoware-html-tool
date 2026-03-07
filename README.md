@@ -1,9 +1,9 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
 ## Status oben
-- Erledigte Punkte: 20 (siehe `todo.txt`)
-- Offene Punkte: 2 (siehe `todo.txt`)
-- Fortschritt: 92%
+- Erledigte Punkte: 21 (siehe `todo.txt`)
+- Offene Punkte: 1 (siehe `todo.txt`)
+- Fortschritt: 95%
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -44,6 +44,7 @@
 - Projektstatus-Texte (`Wartet`, `In Arbeit`, `Bereit`) sind jetzt zentral als kleines Mapping in `js/ui.js` gebündelt für konsistente spätere Textanpassungen.
 - Header-Mini-Schritt professionell vervollständigt: Die zwei Status-Chips oben rechts werden jetzt als Live-Anzeige aus State-Daten befüllt (**Projektstatus** und **Autosave-Status**), ohne Layout-Umbau.
 - Interaktions-Check ergänzt: Status-Chips haben jetzt einen kleinen, klar sichtbaren Hover-/Fokus-Zustand im Glas-Look.
+- CSS-Token-Abgleich als Mini-Schritt: Header-Chips nutzen jetzt einen klareren Fokus-Ring für besseren Tastaturkontrast, ohne HTML-/JS-Ankeränderung.
 - Kontrast-Feinschliff: `.startup-step--done` und `.startup-step--current` nutzen jetzt stärkere Glas-Verläufe mit besser lesbarem Text auf hellen und dunklen Displays.
 - Design-Mini-Feinschliff: Die 4 Startschritte im Bereich **Schnellaktionen** sind jetzt als farbige Glas-Chips (Blau/Gold/Grün/Violett) mit klarerer Hierarchie gestaltet – näher an der Designvorlage, ohne Logikänderung.
 - UI-Redesign: Dashboard jetzt im dunklen Glas-Look nahe der Designvorlage (3 Spalten, starke Kartenhierarchie, weiche Transparenz).
