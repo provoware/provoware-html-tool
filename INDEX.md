@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration hat eine kleine Guide-Vereinheitlichung umgesetzt (gemeinsame Helper für Index-Auslesen und Verschieben).
 - Diese Iteration hat neue Dateien für Renderer- und Domain-Aufteilung ergänzt.
 - Verzeichnisbaum und Dateiliste sind vollständig aktualisiert (ohne `.git`).
 
