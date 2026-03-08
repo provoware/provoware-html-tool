@@ -1,8 +1,8 @@
 import { logEvent } from './logger.js';
 
 const FALLBACKS = {
-  appConfig: { appName: 'ProvoWare Dashboard', version: '0.1.0', defaultTheme: 'dunkel', layoutModes: ['standard'], startBehavior: { selftestAsFirstStep: true } },
-  themes: { dunkel: { bg: '#0f172a', bgPanel: '#182238', textMain: '#f8fafc' } },
+  appConfig: { appName: 'ProvoWare Dashboard', version: '0.1.0', defaultTheme: 'design-nachtblau', layoutModes: ['standard'], startBehavior: { selftestAsFirstStep: true } },
+  themes: { 'design-nachtblau': { bg: '#0f172a', bgPanel: '#182238', textMain: '#f8fafc' } },
   uiTexts: { messages: { startupBlocked: 'Start ist noch nicht bereit.' }, errors: { unknown: 'Ein Fehler ist aufgetreten.' } },
   projectStructure: { requiredDirectories: [], requiredFiles: [], selftestRules: { always: [], optional: [], needsUserAction: [] }, writeTestRules: { enabledByDefault: false } }
 };

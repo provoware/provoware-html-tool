@@ -1,5 +1,5 @@
 const MODULE_FILES = Object.freeze(['manifest', 'config', 'texts', 'schema', 'logic']);
-const FALLBACK_MODULE_IDS = Object.freeze(['datenbank_baukasten', 'todo_kalender_erinnerung']);
+const FALLBACK_MODULE_IDS = Object.freeze(['backup_funktions_modul', 'datenbank_baukasten', 'debugging_modul', 'logging_modul', 'todo_kalender_erinnerung', 'wiki_notiz_wissen']);
 
 const filePath = (id, file) => `./modules/${id}/${file === 'logic' ? 'logic.js' : `${file}.json`}`;
 
@@ -33,7 +33,11 @@ const readModuleIds = async () => {
   const registry = await readJsonIfOk('./data/module-registry.json');
   if (!registry.ok) return { ids: [...FALLBACK_MODULE_IDS], source: 'fallback' };
 
-  const moduleIds = registry.data?.moduleIds;
+  const moduleIds = Array.isArray(registry.data?.moduleIds)
+    ? registry.data.moduleIds
+    : (Array.isArray(registry.data?.modules)
+        ? registry.data.modules.map((entry) => (typeof entry === 'string' ? entry : entry?.id))
+        : null);
   if (!Array.isArray(moduleIds)) return { ids: [...FALLBACK_MODULE_IDS], source: 'fallback' };
 
   const ids = [...new Set(moduleIds.map((id) => String(id || '').trim()).filter(Boolean))];
