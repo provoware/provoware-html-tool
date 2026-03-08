@@ -16,6 +16,7 @@ Neu in dieser Iteration:
 - Es gibt einen kleinen WCAG-Check (Mindestkontrast 4.5:1) für zentrale Dark-Theme-Textfarben.
 - Im Bereich **Tool-Einstellungen und Tests** gibt es den Schalter **„Rasterhilfe anzeigen“**.
 - Damit können die 7 leeren Camouflage-Slots im 3x3-Grid optional ein- oder ausgeblendet werden.
+- Die letzte Wahl wird optional im Browser gespeichert (localStorage) und beim Start wieder geladen.
 
 Direkte Mini-Checks:
 1. `node --test tests/services/theme-contrast-dark.test.js`

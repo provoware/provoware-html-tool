@@ -35,7 +35,9 @@ const darkThemeContrastPairs = [
   { name: 'Info-Text auf Body-Hintergrund', fg: '#e4ecff', bg: '#151f30' },
   { name: 'Modul-Button-Text auf Modul-Button-Hintergrund', fg: '#f2f6ff', bg: '#23364f' },
   { name: 'Kleine Modul-Label auf Modul-Button-Hintergrund', fg: '#e2ecff', bg: '#23364f' },
-  { name: 'Panel-Titel auf Utility-Card-Hintergrund', fg: '#f3f7ff', bg: '#1a2a42' }
+  { name: 'Panel-Titel auf Utility-Card-Hintergrund', fg: '#f3f7ff', bg: '#1a2a42' },
+  { name: 'Statuswert auf Utility-Card-Hintergrund', fg: '#e6eeff', bg: '#1a2a42' },
+  { name: 'Statuslabel auf Utility-Card-Hintergrund', fg: '#c5d3ed', bg: '#1a2a42' }
 ];
 
 test('dark-theme kontrast erreicht WCAG AA für normale texte', () => {

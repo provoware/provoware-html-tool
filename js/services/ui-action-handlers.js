@@ -13,7 +13,8 @@ export const createUiActionHandlers = ({
   copyToClipboardSafe,
   updateArchive,
   updateTemplateArchive,
-  logEvent
+  logEvent,
+  storeGridHelpPreference
 }) => ({
   ...createSessionActions({
     getState,
@@ -23,7 +24,8 @@ export const createUiActionHandlers = ({
     ensureStructure,
     buildDiagnosisExport,
     copyToClipboardSafe,
-    logEvent
+    logEvent,
+    storeGridHelpPreference
   }),
   ...createArchiveActions({
     getState,

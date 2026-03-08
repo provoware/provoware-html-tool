@@ -22,6 +22,7 @@ import {
 
 const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
 const WRITE_PERMISSION_CHOICE_KEY = 'provoware:write-permission-choice';
+const GRID_HELP_VISIBILITY_KEY = 'provoware:grid-help-visibility';
 const DEFAULT_PROFILE = 'HardTechno';
 
 const readRememberedDirectoryName = () => {
@@ -69,6 +70,26 @@ const resolveWritePermissionChoiceAtStartup = () => {
   const allowWrite = window.confirm('Soll die App beim Ordnerstart auch Schreibrechte anfragen? Empfehlung: Ja, wenn Struktur ergänzt oder Daten gespeichert werden sollen.');
   storeWritePermissionChoice(allowWrite);
   return allowWrite;
+};
+
+
+const readGridHelpVisibilityChoice = () => {
+  try {
+    const raw = window.localStorage.getItem(GRID_HELP_VISIBILITY_KEY);
+    if (raw === 'show') return true;
+    if (raw === 'hide') return false;
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+const storeGridHelpVisibilityChoice = (showGridHelp) => {
+  try {
+    window.localStorage.setItem(GRID_HELP_VISIBILITY_KEY, showGridHelp ? 'show' : 'hide');
+  } catch {
+    // Speicher kann je nach Browser-Einstellung blockiert sein.
+  }
 };
 
 const applyLoadedData = (bundle) => {
@@ -254,9 +275,12 @@ const init = async () => {
 
   const loaded = await loadAllConfig();
   applyLoadedData(loaded.data);
+  const rememberedGridHelpVisibility = readGridHelpVisibilityChoice();
+
   setState({
     rememberedProjectDirectoryName: readRememberedDirectoryName(),
     writePermissionChoice: allowWritePermission,
+    showGridHelp: rememberedGridHelpVisibility !== null ? rememberedGridHelpVisibility : true,
     selectedProfile: DEFAULT_PROFILE,
     profileArchive: createDefaultArchive(),
     profileStats: buildStats(createDefaultArchive(), DEFAULT_PROFILE),
@@ -283,7 +307,8 @@ const init = async () => {
     copyToClipboardSafe,
     updateArchive,
     updateTemplateArchive,
-    logEvent
+    logEvent,
+    storeGridHelpPreference: storeGridHelpVisibilityChoice
   });
 
   bindUiActions({

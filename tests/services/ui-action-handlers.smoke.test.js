@@ -165,3 +165,18 @@ test('smoke: rasterhilfe-toggle setzt den zustand', async () => {
   actions.onToggleGridHelp(true);
   assert.equal(base.getState().showGridHelp, true);
 });
+
+
+test('smoke: rasterhilfe-toggle speichert optional in localStorage-callback', async () => {
+  const base = makeBase();
+  const saved = [];
+  const actions = createUiActionHandlers({
+    ...base,
+    storeGridHelpPreference: (value) => saved.push(value)
+  });
+
+  actions.onToggleGridHelp(false);
+  actions.onToggleGridHelp(true);
+
+  assert.deepEqual(saved, [false, true]);
+});
