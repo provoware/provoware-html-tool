@@ -203,22 +203,16 @@ Ja, ein kleines Versionssystem mit Registry ist sinnvoll – aber nur als Minima
 - Nur JS-Syntax prüfen (direkt):
   - `find js tests -type f -name '*.js' -print0 | xargs -0 -n1 node --experimental-default-type=module --check`
 
-## Kurze Empfehlungsliste
+## Kurze Empfehlungsliste (aktualisiert)
 1. Erst die drei Basis-Workflows 1–2 Wochen stabil beobachten.
 2. Danach erst `dependabot.yml` aktivieren, damit PR-Last klein bleibt.
 3. Release-Workflow erst einführen, wenn Versionierung (Tags) klar geregelt ist.
 4. Bei CI-Fehlern zuerst `node --test` lokal ausführen, dann gezielt nachbessern.
+5. Nutze die neuen Farbtoken in `css/app.css`, wenn du Farben weiter abstimmst (ein Ort statt vieler Einzelwerte).
+6. Prüfe nach Layout-Änderungen kurz die 980px-Ansicht, damit Utility-Karten mobil stabil bleiben.
+7. Nutze bei jedem Sitzungsende den Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
+8. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
 
-
-## Kurze Empfehlungsliste (unten, aktualisiert)
-1. Nutze die neuen Farbtoken in `css/app.css`, wenn du Farben weiter abstimmst (ein Ort statt vieler Einzelwerte).
-2. Prüfe nach Layout-Änderungen kurz die 980px-Ansicht, damit Utility-Karten mobil stabil bleiben.
-3. Nutze bei jedem Sitzungsende den neuen Button **„Logout (sicher)”** für Autospeichern + sauberen Abschluss.
-4. Nutze vor dem Speichern im Editor die Auto-Formatierung, damit JSON/JS/CSS/HTML lesbar und stabil bleiben.
-5. Bei größeren Designwünschen zuerst `DESIGN_VORLAGE.md` aktualisieren, dann erst CSS patchen.
-6. Vor Merge immer den Struktur-/Farb-/Transparenz-Check aus `AGENTS.md` kurz abhaken.
-
-## Was fehlt noch für ein laienperfektes Release?
-1. **Klaren Notfall-Button „Alles prüfen und reparieren” im UI ergänzen.**
-   - Warum: Laien sollen Probleme ohne Terminal-Befehl lösen können.
-   - Fertig, wenn: Klick startet die bekannte Startprüfung + zeigt einfache Ergebnisbox (ok/offen/fehler).
+## Offene Punkte für das nächste Release
+- Aktuell keine offenen Pflichtpunkte mehr in dieser Iteration.
+- Frühere Idee „Notfall-Button *Alles prüfen und reparieren*“ ist als optionale Produktidee geparkt und kein offener Pflichtpunkt.
