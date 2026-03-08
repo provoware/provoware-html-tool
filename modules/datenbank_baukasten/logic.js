@@ -1,8 +1,8 @@
 const asText = (value) => String(value || '').trim();
 const nowIso = () => new Date().toISOString();
 
-const normalizeColumn = (column = {}) => ({
-  name: asText(column.name) || 'spalte',
+const normalizeColumn = (column = {}, index = 0) => ({
+  name: asText(column.name) || `spalte_${index + 1}`,
   type: asText(column.type).toLowerCase() || 'text',
   required: Boolean(column.required)
 });
@@ -27,8 +27,11 @@ export const createDatenbankBaukastenModule = () => ({
   version: '1.1.0'
 });
 
-export const createTableBlueprint = ({ tableName = 'tabelle', columns = [] } = {}) => {
-  const safeColumns = (Array.isArray(columns) ? columns : []).map(normalizeColumn);
+export const createTableBlueprint = (input = {}) => {
+  const safeInput = input && typeof input === 'object' ? input : {};
+  const tableName = safeInput.tableName;
+  const columns = safeInput.columns;
+  const safeColumns = (Array.isArray(columns) ? columns : []).map((column, index) => normalizeColumn(column, index));
   return {
     tableName: asText(tableName) || 'tabelle',
     columns: safeColumns,

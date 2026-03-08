@@ -21,7 +21,7 @@ export const addDebugEvent = (session, input = {}) => {
   const safe = session && typeof session === 'object' ? session : createDebugSession();
   const event = {
     id: nextId(),
-    name: asText(input.name) || 'DEBUG_EVENT_UNSPECIFIED',
+    name: asText(input.name) || 'Ohne Namen',
     level: normalizeLevel(input.level),
     details: asText(input.details),
     createdAt: nowIso()

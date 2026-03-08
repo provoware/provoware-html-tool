@@ -20,11 +20,11 @@ const normalizeStatus = (status) => {
 
 export const createTodoEntry = (input = {}) => {
   const title = asText(input.title);
-  if (!title) throw new Error('Titel fehlt.');
+  const safeTitle = title || 'Neue Aufgabe';
 
   const task = {
     id: asText(input.id) || createId(),
-    title,
+    title: safeTitle,
     detail: asText(input.detail),
     area: asText(input.area) || 'Allgemein',
     priority: normalizePriority(input.priority),
@@ -44,8 +44,7 @@ export const updateTodoEntry = (task, patch = {}) => {
   const base = { ...task };
   if (patch.title !== undefined) {
     const title = asText(patch.title);
-    if (!title) throw new Error('Titel darf nicht leer sein.');
-    base.title = title;
+    base.title = title || base.title || 'Neue Aufgabe';
   }
   if (patch.detail !== undefined) base.detail = asText(patch.detail);
   if (patch.area !== undefined) base.area = asText(patch.area) || 'Allgemein';
