@@ -96,6 +96,7 @@ test('loadModuleRegistry nutzt fallback und bereinigt doppelte/leerwerte ids', a
 
   assert.deepEqual(moduleIds, ['alpha', 'beta']);
   assert.match(result.summary, /Quelle: data\/module-registry\.json/);
+  assert.match(result.summary, /Doppelte moduleIds wurden bereinigt \(alpha\)/);
 
   globalThis.fetch = async (path) => {
     if (path === './data/module-registry.json') return response(false);

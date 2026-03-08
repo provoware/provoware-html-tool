@@ -65,17 +65,20 @@ const readModuleIds = async () => {
   }
 
   // Nur echte Text-IDs akzeptieren, damit kein "[object Object]" als Modul-ID durchrutscht.
-  const ids = [...new Set(moduleIds.filter((id) => typeof id === 'string').map((id) => id.trim()).filter(Boolean))];
+  const normalizedIds = moduleIds.filter((id) => typeof id === 'string').map((id) => id.trim()).filter(Boolean);
+  const ids = [...new Set(normalizedIds)];
+  const duplicateIds = [...new Set(normalizedIds.filter((id, index) => normalizedIds.indexOf(id) !== index))];
   if (ids.length === 0) {
     return {
       ids: [...FALLBACK_MODULE_IDS],
       source: 'fallback',
       fallbackReason: 'module-registry.json enthält keine nutzbaren Modul-IDs',
-      nextStep: 'Mindestens eine gültige Modul-ID in "moduleIds" eintragen.'
+      nextStep: 'Mindestens eine gültige Modul-ID in "moduleIds" eintragen.',
+      duplicateIds: []
     };
   }
 
-  return { ids, source: 'data/module-registry.json', fallbackReason: null, nextStep: null };
+  return { ids, source: 'data/module-registry.json', fallbackReason: null, nextStep: null, duplicateIds };
 };
 
 const checkProfile = async (id) => {
@@ -177,11 +180,14 @@ export const loadModuleRegistry = async () => {
   const moduleIds = await readModuleIds();
   const modules = await Promise.all(moduleIds.ids.map((id) => checkProfile(id)));
   const summary = buildSummary(modules, moduleIds.source);
-  if (!moduleIds.fallbackReason) return { modules, summary };
+  const duplicateHint = moduleIds.duplicateIds?.length
+    ? ` Hinweis: Doppelte moduleIds wurden bereinigt (${moduleIds.duplicateIds.join(', ')}). Nächster Schritt: data/module-registry.json auf Duplikate prüfen.`
+    : '';
+  if (!moduleIds.fallbackReason) return { modules, summary: `${summary}${duplicateHint}` };
 
   return {
     modules,
-    summary: `${summary} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.${moduleIds.nextStep ? ` Nächster Schritt: ${moduleIds.nextStep}` : ''}`
+    summary: `${summary}${duplicateHint} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.${moduleIds.nextStep ? ` Nächster Schritt: ${moduleIds.nextStep}` : ''}`
   };
 };
 

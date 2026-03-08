@@ -27,6 +27,8 @@
 [x] 2026-03-07 | index.html + css/app.css | Header-Mikrostruktur näher an Vorlage bringen (Suchfeld/Hotkey-Chip/Utility-Icons als kleine Leiste, ohne ID-Brüche) | prüfen: Fokuszustände per Tab testen + `node --test tests/services/ui-header-chips.test.js` | fertig wenn: neue Header-Elemente sichtbar, tastaturbedienbar und bestehende Header-Chip-Tests weiter grün
 [x] 2026-03-07 | index.html + css/app.css | Rechte Spalte visuell in Utility-Karten trennen (Vorlagen/Mini-Notiz/Infos/Hilfe) ohne Logikumbau | prüfen: Struktur-Check im Browser + Responsive-Check unter 980px | fertig wenn: vier klar getrennte Kartenblöcke ohne Layoutbruch
 
+[x] 2026-03-08 | js/services/module-registry.js + tests/services/module-registry.test.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 015: Duplicate-Guard-Hinweis für moduleIds sichtbar machen, eine Archivvorlage ergänzen und Statusdateien fortschreiben | prüfen: `node --test tests/services/module-registry.test.js` und `node --check js/services/module-registry.js` | fertig wenn: Duplikate erscheinen als klarer Hinweis, Test ist grün, Statistikstände sind konsistent
+
 ## Mittel
 
 [x] 2026-03-07 | js/ui.js | Für Vollmodularität große UI-Datei in kleinere Renderer-Module aufteilen (Header, Panels, Logs), ohne Verhaltensänderung | prüfen: gezielter Header-Test + UI-Render-Safety-Test laufen weiter | fertig wenn: `js/ui.js` deutlich kleiner und Renderer-Bereiche in eigene Service-/UI-Module ausgelagert sind
