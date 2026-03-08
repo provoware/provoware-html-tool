@@ -196,6 +196,7 @@ body::before {
   gap: 10px;
   position: relative;
   z-index: 1;
+  align-items: stretch;
 }
 
 .header-card {
@@ -204,6 +205,8 @@ body::before {
   padding: 10px;
   background: linear-gradient(145deg, rgba(29, 49, 80, 0.62), rgba(20, 37, 64, 0.68));
   min-width: 0;
+  display: grid;
+  align-content: start;
 }
 
 .header-card .panel-title {
@@ -215,6 +218,7 @@ body::before {
 .header-status-chips {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(56px, auto);
   gap: 6px;
   list-style: none;
   margin: 0;
@@ -225,6 +229,8 @@ body::before {
   display: grid;
   min-width: min(116px, 100%);
   max-width: 100%;
+  height: 100%;
+  align-content: start;
   padding: 6px 10px;
   border-radius: 10px;
   border: 1px solid rgba(204, 223, 255, 0.42);
@@ -247,6 +253,7 @@ body::before {
   overflow: hidden;
   text-overflow: ellipsis;
   min-height: calc(1.1em * 2);
+  overflow-wrap: anywhere;
 }
 
 .header-title-group {
@@ -1124,6 +1131,15 @@ body::before {
   .widgets {
     max-width: none;
   }
+
+  .header-dashboard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .header-card {
+    padding: 9px;
+  }
 }
 
 @media (max-width: 980px) {
@@ -1156,6 +1172,7 @@ body::before {
 
   .header-dashboard {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
   }
 
   .header-status-chip {
@@ -1171,7 +1188,7 @@ body::before {
 
   .theme-switch select {
     min-width: 0;
-    width: min(220px, 100%);
+    width: 100%;
   }
 
   .panel-grid,
@@ -1328,6 +1345,11 @@ body::before {
 
 @media (max-width: 720px) {
   .header-dashboard {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .header-status-chips {
     grid-template-columns: 1fr;
   }
 

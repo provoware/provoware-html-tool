@@ -76,7 +76,7 @@
 
 ## Release-Blocker (offen, nummeriert)
 [ ] 1) 2026-03-08 | Header-Dashboard | Interaktive Dashboard-Kacheln mit optionaler Zielnavigation ergänzen (z. B. Klick auf Statistik führt zum passenden Bereich) | prüfen: Tastatur-Fokus + Klick führen reproduzierbar zum Zielbereich | fertig wenn: alle vier Header-Kacheln haben klare Fokus- und Interaktionslogik
-[ ] 2) 2026-03-08 | Responsive Layout | Header-Dashboard bei 1280px/980px/720px visuell feinjustieren (Abstände, Zeilenumbrüche, Chip-Höhen) | prüfen: Screenshot-Vergleich je Breakpoint ohne Überlauf | fertig wenn: keine abgeschnittenen Inhalte oder überlappenden Controls
+[x] 2) 2026-03-08 | Responsive Layout | Header-Dashboard bei 1280px/980px/720px visuell feinjustieren (Abstände, Zeilenumbrüche, Chip-Höhen) | prüfen: Screenshot-Vergleich je Breakpoint ohne Überlauf | fertig wenn: keine abgeschnittenen Inhalte oder überlappenden Controls
 [ ] 3) 2026-03-08 | Nutzerführung | Selbsttest-Status im Header mit eindeutiger Farbmarke + Kurzlegende koppeln | prüfen: Statuswechsel red/yellow/green sichtbar und verständlich | fertig wenn: Nutzer erkennt Risiko sofort ohne in rechte Spalte zu wechseln
 [ ] 4) 2026-03-08 | Tool-Analytik | Dashboard-Statistik um 7-Tage-Aktivität (Archiv-Events pro Tag) ergänzen | prüfen: fehlende Daten liefern robusten Fallback statt leerer Anzeige | fertig wenn: kleine Trendanzeige stabil auch ohne Historie funktioniert
 [ ] 5) 2026-03-08 | Buttons & Bereiche | Einheitliche States (hover/active/focus/disabled) für `btn` und `btn-small` dokumentieren und im CSS zentralisieren | prüfen: visuelle Konsistenz in Header/Main/Widgets | fertig wenn: keine abweichenden Button-Grundstile in Kernbereichen mehr sichtbar
