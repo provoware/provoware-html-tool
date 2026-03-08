@@ -11,10 +11,25 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   const selftestLabel = selftestStatus === 'green'
     ? 'stabil'
     : (selftestStatus === 'yellow' ? 'prüfen' : (selftestStatus === 'red' ? 'kritisch' : 'offen'));
+  const selftestBadgeClass = selftestStatus === 'green'
+    ? 'is-stable'
+    : (selftestStatus === 'yellow' ? 'is-review' : (selftestStatus === 'red' ? 'is-critical' : 'is-open'));
+  const selftestLegend = selftestStatus === 'green'
+    ? 'Ampel: 🟢 stabil – alle Kernchecks bestanden.'
+    : (selftestStatus === 'yellow'
+      ? 'Ampel: 🟡 prüfen – mindestens ein Check braucht Nacharbeit.'
+      : (selftestStatus === 'red'
+        ? 'Ampel: 🔴 kritisch – bitte zuerst Selbsttest-Fehler beheben.'
+        : 'Ampel: ⚪ offen – bitte Selbsttest starten.'));
   setText('header-stat-modules', String(modulesCount));
   setText('header-stat-templates', String(templateCount));
   setText('header-stat-events', String(archiveEventsCount));
   setText('header-stat-health', selftestLabel);
+  const healthNode = byId('header-stat-health');
+  if (healthNode) {
+    healthNode.className = `header-health-status ${selftestBadgeClass}`;
+  }
+  setText('header-stat-health-legend', selftestLegend);
   setText('layout-budget-label', layoutBudgetStatus?.label || 'Layoutbudget aktiv: H15/F10/S8');
   setText('layout-budget-warning', layoutBudgetStatus?.warning || 'Budgetprüfung ausstehend.');
 

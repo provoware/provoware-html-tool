@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-28",
+      "title": "Header-Ampel mit Kurzlegende prüfen",
+      "content": "Starte den Selbsttest und prüfe die Header-Ampel: rot=kritisch, gelb=prüfen, grün=stabil. Die Kurzlegende muss den nächsten Schritt in einem Satz erklären.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T23:10:00.000Z",
+      "updatedAt": "2026-03-08T23:10:00.000Z"
+    },
+    {
       "id": "tpl-default-27",
       "title": "Footer-Plugin und 3x3-Grid zusammen prüfen",
       "content": "Prüfe im Hauptbereich ein sauberes 3x3-Panel-Grid ohne Zusatzboxen und verifiziere in der Fußzeile die Plugin-Auswahl mit Status, Toggle und Ausgabe ohne Überlauf.",
@@ -245,7 +254,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T22:05:00.000Z",
+  "updatedAt": "2026-03-08T23:10:00.000Z",
   "required_fields": [
     "id",
     "title",

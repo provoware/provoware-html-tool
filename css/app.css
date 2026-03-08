@@ -343,6 +343,51 @@ body::before {
   font-weight: 700;
 }
 
+.header-health-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.header-health-status.is-stable {
+  color: #d8ffe6;
+  background: rgba(33, 114, 62, 0.5);
+  border-color: rgba(124, 234, 167, 0.56);
+}
+
+.header-health-status.is-review {
+  color: #fff4d2;
+  background: rgba(135, 97, 20, 0.44);
+  border-color: rgba(242, 201, 113, 0.62);
+}
+
+.header-health-status.is-critical {
+  color: #ffdfe3;
+  background: rgba(138, 41, 57, 0.5);
+  border-color: rgba(255, 152, 168, 0.62);
+}
+
+.header-health-status.is-open {
+  color: #e8f2ff;
+  background: rgba(67, 84, 112, 0.42);
+  border-color: rgba(178, 197, 228, 0.5);
+}
+
+.header-health-legend {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: rgba(216, 230, 255, 0.88);
+  font-size: 0.73rem;
+  line-height: 1.25;
+}
+
 .nav {
   grid-area: nav;
   display: grid;

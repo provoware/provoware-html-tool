@@ -8,6 +8,7 @@
 | UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
+| UP-025 | Header UX | Selbsttest-Ampel im Header um klickbare Detailhilfe („Warum gelb/rot?“) erweitern | Farbstatus und Legende sind vorhanden, aber Rückfragen zur Ursache entstehen weiterhin ohne direkten Kontextsprung | Schnellere Fehlerklärung direkt aus dem Header ohne Wechsel in andere Bereiche | offen | 026 |
 
 **Passende Vorschläge:**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -24,6 +25,10 @@
 **Passende Vorschläge:**
 1. Pro Layoutbereich einen kleinen „Position merken“-Schalter ergänzen
 2. Im Hilfehinweis kurz erklären, wann Footer- oder Sidebar-Modus sinnvoller ist
+
+**Passende Vorschläge:**
+1. Klick auf die Ampel öffnet automatisch den passenden Selbsttest-Abschnitt rechts
+2. Bei „rot“ zusätzlich den wichtigsten fehlgeschlagenen Check als Einzeiler anzeigen
 
 ## Erledigt
 
