@@ -4,15 +4,23 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 5
+- Offene Upgrade-Empfehlungen: 6
 - Erledigte Upgrade-Empfehlungen: 27
 - Default-Archive: 3
-- Letzte Iteration: 032
+- Letzte Iteration: 033
 - Scan-Modus: delta
 
 
 
 
+
+
+## Iterations-Update 033 (Mini-Patch)
+
+- Neu: `todo.txt` wieder vollständig im Checkbox-Format strukturiert und ein offener Layout-Punkt abgearbeitet (kürzere Leerzustand-Texte).
+- Robustheit: Leere Slots nutzen jetzt kürzere Standardtexte mit geringerem Umbruchrisiko.
+- UX: Der nächste Schritt bleibt schneller lesbar („Modul aktivieren oder Projektstruktur anlegen“).
+- Archiv: Templates-Defaultarchiv um eine neue Kurzprüfung für leere Slots ergänzt.
 
 ## Iterations-Update 032 (Mini-Patch)
 
