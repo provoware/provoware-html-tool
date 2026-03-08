@@ -360,9 +360,18 @@
       "favorite": false,
       "createdAt": "2026-03-09T08:10:00.000Z",
       "updatedAt": "2026-03-09T08:10:00.000Z"
+    },
+    {
+      "id": "tpl-default-41",
+      "title": "Rechte-Leiste Auto-Label Quickcheck",
+      "content": "Prüfe bei <1100px mit maximiertem Modul: rechter Schalter zeigt „Rechte Leiste (Auto)“; ab 1100px oder ohne Maximierung springt er robust auf „Rechte Leiste“ zurück.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T09:00:00.000Z",
+      "updatedAt": "2026-03-09T09:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T08:10:00.000Z",
+  "updatedAt": "2026-03-09T09:00:00.000Z",
   "required_fields": [
     "id",
     "title",

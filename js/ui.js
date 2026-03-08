@@ -458,6 +458,24 @@ const writeStoredFontScale = (scale) => {
   }
 };
 
+
+export const shouldAutoCollapseRightSidebar = ({ hasMaximizedPanel, viewportWidth }) => {
+  return Boolean(hasMaximizedPanel) && Number(viewportWidth) < AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH;
+};
+
+export const syncRightSidebarAutoCollapseState = ({ app, toggleButton, viewportWidth = window.innerWidth, baseLabel = 'Rechte Leiste' }) => {
+  if (!app?.classList) return false;
+  const shouldAutoCollapse = shouldAutoCollapseRightSidebar({
+    hasMaximizedPanel: app.classList.contains('has-maximized-panel'),
+    viewportWidth
+  });
+  app.classList.toggle('sidebar-right-auto-collapsed', shouldAutoCollapse);
+  if (toggleButton) {
+    toggleButton.textContent = shouldAutoCollapse ? `${baseLabel} (Auto)` : baseLabel;
+  }
+  return shouldAutoCollapse;
+};
+
 export const detectLayoutMode = (config) => {
   const width = window.innerWidth;
   if (width >= (config.minimumSizes?.wide?.minWidth || 1400)) return 'wide';
@@ -494,10 +512,15 @@ const bindWorkspaceControls = () => {
     });
   };
 
+  const rightSidebarToggleButton = byId('toggle-right-sidebar');
+  const rightSidebarToggleBaseLabel = rightSidebarToggleButton?.textContent?.trim() || 'Rechte Leiste';
+
   const syncSidebarAutoCollapse = () => {
-    const shouldAutoCollapseRightSidebar = app.classList.contains('has-maximized-panel')
-      && window.innerWidth < AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH;
-    app.classList.toggle('sidebar-right-auto-collapsed', shouldAutoCollapseRightSidebar);
+    syncRightSidebarAutoCollapseState({
+      app,
+      toggleButton: rightSidebarToggleButton,
+      baseLabel: rightSidebarToggleBaseLabel
+    });
   };
 
   setSidebarState('toggle-left-sidebar', 'sidebar-left-collapsed');
