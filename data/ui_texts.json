@@ -13,11 +13,15 @@
     "ensureStructure": "Projektstruktur anlegen",
     "runWriteTest": "Schreibtest ausführen",
     "switchDirectory": "Ordner wechseln",
-    "logout": "Logout (sicher)"
+    "logout": "Logout (sicher)",
+    "showMoreTools": "Mehr Tools",
+    "showLessTools": "Weniger Tools"
   },
   "messages": {
-    "startupWaiting": "Bitte zuerst einen Projektordner wählen.",
+    "startupWaiting": "Bitte Selbsttest starten.",
     "startupReady": "Grundcheck ist erfolgreich. Module können starten.",
+    "startupReadyNext": "Modul wählen",
+    "startupMissingFolderNext": "Ordner wählen",
     "startupBlocked": "Grundcheck ist nicht fertig. Bitte Status prüfen.",
     "permissionReadOnly": "Es gibt nur Leserechte. Schreibfunktionen sind eingeschränkt.",
     "directoryMissing": "Es ist noch kein Projektordner gewählt.",

@@ -23,6 +23,14 @@
   --space-2: 12px;
   --space-3: 16px;
   --space-4: 24px;
+  --space-inset: 14px;
+  --space-outer: 10px;
+  --space-panel-gap: 10px;
+  --panel-nav-min: 220px;
+  --panel-nav-max: 320px;
+  --panel-main-min: 620px;
+  --panel-widgets-min: 260px;
+  --panel-widgets-max: 360px;
   --font-base: 16px;
   --body-gradient-start: #1f281f;
   --body-gradient-mid: #2a342b;
@@ -112,14 +120,14 @@ body::before {
   height: auto;
   max-width: 1700px;
   width: calc(100vw - 20px);
-  margin: 10px auto;
-  padding: 14px;
+  margin: var(--space-outer) auto;
+  padding: var(--space-inset);
   border-radius: 24px;
   border: 1px solid var(--panel-border);
   background: rgba(32, 44, 36, 0.58);
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow);
-  grid-template-columns: minmax(220px, 0.82fr) minmax(600px, 2fr) minmax(260px, 0.95fr);
+  grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
   grid-template-rows: auto minmax(0, 1fr) auto;
   grid-template-areas:
     "header header header"
@@ -130,22 +138,22 @@ body::before {
 }
 
 .app.sidebar-left-collapsed {
-  grid-template-columns: 64px minmax(680px, 1fr) 300px;
+  grid-template-columns: 64px minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
 }
 
 .app.sidebar-right-collapsed {
-  grid-template-columns: 250px minmax(680px, 1fr) 64px;
+  grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) 64px;
 }
 
 .app.sidebar-left-collapsed.sidebar-right-collapsed {
-  grid-template-columns: 64px minmax(680px, 1fr) 64px;
+  grid-template-columns: 64px minmax(var(--panel-main-min), 1fr) 64px;
 }
 
 .panel {
   background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-soft));
   border: 1px solid var(--panel-border);
   border-radius: var(--radius);
-  padding: 14px;
+  padding: var(--space-inset);
   box-shadow: 0 14px 30px rgba(18, 30, 21, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.24);
   position: relative;
   overflow: hidden;
@@ -254,7 +262,9 @@ body::before {
   grid-area: nav;
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 8px;
+  gap: var(--space-1);
+  min-width: var(--panel-nav-min);
+  max-width: var(--panel-nav-max);
 }
 
 .sidebar-body {
@@ -323,12 +333,13 @@ body::before {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: var(--space-2);
+  min-width: min(100%, var(--panel-main-min));
   min-height: 0;
   overflow: hidden;
 }
 
 .workspace-dashboard {
-  padding: 8px 10px;
+  padding: var(--space-2) var(--space-inset);
   border-radius: 12px;
   border: 1px solid rgba(147, 166, 133, 0.45);
   background: rgba(229, 238, 218, 0.88);
@@ -435,13 +446,22 @@ body::before {
   color: #1f2b20;
 }
 
+#next-step.dashboard-note {
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 8px;
+  border: 1px solid rgba(112, 137, 102, 0.55);
+  background: rgba(241, 247, 236, 0.92);
+  min-height: 2.2rem;
+}
+
 .panel-grid {
   position: relative;
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+  gap: var(--space-panel-gap);
   min-height: 0;
   align-items: stretch;
 }
@@ -540,6 +560,9 @@ body::before {
   grid-area: widgets;
   display: grid;
   grid-template-rows: auto 1fr;
+  min-width: var(--panel-widgets-min);
+  max-width: var(--panel-widgets-max);
+  width: 100%;
 }
 
 .utility-cards {
@@ -594,6 +617,10 @@ body::before {
   min-height: 40px;
   font-size: 0.84rem;
   padding: 8px;
+}
+
+.btn-small-tools {
+  display: none;
 }
 
 .checkline {
@@ -1010,7 +1037,7 @@ body::before {
   .app.sidebar-left-collapsed,
   .app.sidebar-right-collapsed,
   .app.sidebar-left-collapsed.sidebar-right-collapsed {
-    grid-template-columns: minmax(220px, 250px) 1fr;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
     grid-template-rows: auto auto minmax(0, 1fr) auto;
     grid-template-areas:
       "header header"
@@ -1027,6 +1054,11 @@ body::before {
     pointer-events: auto;
     max-height: none;
   }
+
+  .nav,
+  .widgets {
+    max-width: none;
+  }
 }
 
 @media (max-width: 980px) {
@@ -1037,8 +1069,8 @@ body::before {
   .app {
     grid-template-columns: 1fr;
     width: calc(100vw - 10px);
-    margin: 8px auto;
-    padding: 10px;
+    margin: var(--space-1) auto;
+    padding: var(--space-2);
     min-height: auto;
     height: auto;
     transform: none;
@@ -1048,6 +1080,13 @@ body::before {
       "nav"
       "widgets"
       "footer";
+  }
+
+  .nav,
+  .main,
+  .widgets {
+    min-width: 0;
+    max-width: none;
   }
 
   .header {
@@ -1072,7 +1111,6 @@ body::before {
   .panel-grid,
   .footer-grid,
   .module-button-grid,
-  .settings-actions,
   .archive-input-grid,
   .archive-list,
   .mix-options,
@@ -1081,6 +1119,28 @@ body::before {
   .startup-steps {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+  }
+
+  .settings-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-actions .btn-small-tools {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .settings-actions .btn:nth-child(n + 3):not(.btn-small-tools) {
+    display: none;
+  }
+
+  .widgets.tools-expanded .settings-actions .btn:nth-child(n + 3):not(.btn-small-tools) {
+    display: inline-flex;
+  }
+
+  .widgets.tools-expanded .settings-actions .btn-small-tools {
+    order: 99;
   }
 
   .module-panel[data-panel='archive'] {
