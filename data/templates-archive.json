@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-38",
+      "title": "Panel-Overlay bei 980px ruhig prüfen",
+      "content": "Prüfe bei 980px und 720px: Panelhintergründe bleiben lesbar, das Overlay wirkt sichtbar ruhiger und Inhalte verlieren keine erkennbare Struktur.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T06:35:00.000Z",
+      "updatedAt": "2026-03-09T06:35:00.000Z"
+    },
+    {
       "id": "tpl-default-37",
       "title": "Sidebar-Kompaktmodus und ruhiger Hintergrund prüfen",
       "content": "Prüfe bei 980px und 720px: Modulbuttons links stehen in einer Spalte und der Hintergrund bleibt sichtbar ruhiger ohne die Lesbarkeit der Panelinhalte zu stören.",

@@ -10,7 +10,7 @@
 | UP-032 | Header UX | Header-Navigations-Feedback nach 3 Sekunden automatisch ausblenden | Die neue Rückmeldung hilft, bleibt aber dauerhaft sichtbar und kann den Statistikbereich unnötig belegen | Ruhigeres Dashboard bei weiter klarer Bestätigung nach Navigation | offen | 031 |
 | UP-033 | Accessibility UX | Deaktivierte Buttons um kurzen Tooltip-Titel mit Grund ergänzen | Einheitliche Disabled-Optik ist klar, aber ohne Grund bleibt der nächste Schritt teilweise unklar | Weniger Fehlklicks und schnellere Selbsthilfe durch direkten Hinweis am Knopf | offen | 032 |
 | UP-034 | Leerzustand UX | Leere Modul-Slots im Header-Monitoring auf Zeichenlimit prüfen und bei Überschreitung automatisch kürzen | Kürzere Texte wurden lokal verbessert, können aber bei späteren Änderungen wieder ausufern | Dauerhaft kompakte Leerzustände ohne manuelle Nacharbeit | offen | 033 |
-| UP-036 | Visual Calm | Panel-Overlay bei kleinen Breiten weiter drosseln (Breakpoint-abhängig), falls Textkontrast sinkt | Nach reduzierten Hintergrundmustern bleibt das Innen-Overlay als möglicher Reststörer in dichten Ansichten sichtbar | Noch ruhigere Lesbarkeit ohne komplettes Redesign | offen | 035 |
+| UP-037 | Sidebar UX | Linke Modulleiste bei <=980px optional einklappbar machen (nur Titelzeile sichtbar) | Der 1-Spalten-Modus hilft bereits, auf sehr kleinen Breiten bleibt der vertikale Platz dennoch schnell knapp | Mehr nutzbare Höhe für Inhalte bei weiterhin schneller Rückkehr zur Modulliste | offen | 036 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -36,9 +36,9 @@
 1. Zeichenlimit als kleine Konstante nahe am Slot-Renderer halten (z. B. 70 Zeichen)
 2. Bei Kürzung ein Ellipsis nutzen und den Volltext als `title` setzen
 
-**Passende Vorschläge (UP-036):**
-1. Overlay-Intensität nur für `max-width: 980px` reduzieren, Desktop unverändert lassen
-2. Bei Bedarf nur Header-/Sidebar-Panels ausnehmen statt global alle Panels
+**Passende Vorschläge (UP-037):**
+1. Im eingeklappten Zustand nur ein klarer „Module anzeigen“-Knopf sichtbar lassen
+2. Einklappstatus je Sitzung im UI-State merken, ohne neue Persistenzdatei
 
 **Passende Vorschläge (UP-035):**
 1. Unterhalb eines festen Breakpoints (`<= 980px`) automatisch auf eine Modulbutton-Spalte wechseln
@@ -48,6 +48,12 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-036 | Visual Calm | Panel-Overlay bei kleinen Breiten weiter drosseln (Breakpoint-abhängig), falls Textkontrast sinkt | Nach reduzierten Hintergrundmustern bleibt das Innen-Overlay als möglicher Reststörer in dichten Ansichten sichtbar | Noch ruhigere Lesbarkeit ohne komplettes Redesign | erledigt | 036 |
+
+**Passende Vorschläge:**
+1. Overlay-Intensität nur für `max-width: 980px` reduzieren, Desktop unverändert lassen
+2. Bei Bedarf nur Header-/Sidebar-Panels ausnehmen statt global alle Panels
+
 | UP-035 | Sidebar UX | Linke Modulleiste bei sehr schmalen Breiten mit optionalem 1-Spalten-Modus für Modulbuttons absichern | Durch breitere Leiste steigt die Lesbarkeit, bei engen Fenstern kann das 2-Spalten-Raster aber wieder drücken | Stabilere Bedienung auf kleinen Breiten ohne harte Umbauten | erledigt | 035 |
 
 **Passende Vorschläge:**
