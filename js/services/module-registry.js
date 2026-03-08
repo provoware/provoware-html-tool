@@ -106,6 +106,15 @@ const fixHintFor = (issue) => {
   return 'Hilfe: Moduldateien prüfen und fehlende Pflichtfelder ergänzen.';
 };
 
+const missingFileHintFor = (file) => {
+  if (file === 'manifest') return 'Hilfe: Datei modules/<modul-id>/manifest.json anlegen (id, name, version eintragen).';
+  if (file === 'config') return 'Hilfe: Datei modules/<modul-id>/config.json als JSON-Objekt { ... } anlegen.';
+  if (file === 'texts') return 'Hilfe: Datei modules/<modul-id>/texts.json als JSON-Objekt { ... } anlegen.';
+  if (file === 'schema') return 'Hilfe: Datei modules/<modul-id>/schema.json als JSON-Objekt { ... } anlegen.';
+  if (file === 'logic') return 'Hilfe: Datei modules/<modul-id>/logic.js anlegen und die Modul-Funktionen exportieren.';
+  return 'Hilfe: Fehlende Moduldatei anlegen.';
+};
+
 const buildSummary = (modules, source) => {
   const healthyModules = modules.filter((item) => item.ok).length;
   const brokenModules = modules.filter((item) => !item.ok);
@@ -117,7 +126,8 @@ const buildSummary = (modules, source) => {
   const detail = brokenModules
     .map((item) => {
       if (item.missingFiles.length > 0) {
-        return `${item.id}: fehlt ${item.missingFiles.join(', ')}. Hilfe: Datei anlegen.`;
+        const firstMissingFile = item.missingFiles[0];
+        return `${item.id}: fehlt ${item.missingFiles.join(', ')}. ${missingFileHintFor(firstMissingFile)}`;
       }
       const firstIssue = item.issues[0] || 'ungültig';
       return `${item.id}: ${firstIssue}. ${fixHintFor(firstIssue)}`;
