@@ -555,6 +555,16 @@ export const bindUiActions = (actions) => {
   byId('action-logout')?.addEventListener('click', async () => {
     await actions.onLogoutWithAutosave();
   });
+  byId('action-toggle-tools')?.addEventListener('click', () => {
+    const widgets = byId('widgets-panel');
+    const toggleButton = byId('action-toggle-tools');
+    if (!widgets || !toggleButton) return;
+    const expanded = widgets.classList.toggle('tools-expanded');
+    toggleButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    toggleButton.textContent = expanded
+      ? (getState().uiTexts?.buttons?.showLessTools || 'Weniger Tools')
+      : (getState().uiTexts?.buttons?.showMoreTools || 'Mehr Tools');
+  });
   byId('a11y-quiet-mode')?.addEventListener('change', (event) => {
     actions.onToggleA11yQuietMode(event.target.checked);
   });
@@ -779,6 +789,14 @@ export const render = () => {
   setText('action-switch-dir', texts.buttons?.switchDirectory || 'Ordner wechseln');
   setText('action-export-diagnosis', 'Diagnose exportieren');
   setText('action-logout', texts.buttons?.logout || 'Logout (sicher)');
+  const toolsToggle = byId('action-toggle-tools');
+  const toolsExpanded = byId('widgets-panel')?.classList.contains('tools-expanded') === true;
+  if (toolsToggle) {
+    toolsToggle.textContent = toolsExpanded
+      ? (texts.buttons?.showLessTools || 'Weniger Tools')
+      : (texts.buttons?.showMoreTools || 'Mehr Tools');
+    toolsToggle.setAttribute('aria-expanded', toolsExpanded ? 'true' : 'false');
+  }
 
   const a11yText = buildA11yStatusText(state, messages);
   if (a11yText !== lastA11yAnnouncement) {

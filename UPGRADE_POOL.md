@@ -5,15 +5,15 @@
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
 | UP-001 | Layout | Zentrale Größenlogik für Panels vereinheitlichen | Verhindert inkonsistente Skalierung | stabilere Darstellung bei Fensteränderung | offen | 001 |
-| UP-007 | Responsive UX | Für die rechte Werkzeugspalte eine einklappbare Mobil-Kurzansicht ergänzen | Auf kleinen Geräten sind viele Aktionsknöpfe unterhalb der Faltung schwer sichtbar | Schnellere Bedienung auf Smartphone und kleinen Laptops | offen | 007 |
+| UP-008 | Responsive QA | Einen kleinen DOM-basierten Test für den mobilen Tools-Toggle ergänzen | CSS-Regeln sind vorhanden, aber ein Sichtbarkeits-Sanity-Check fehlt noch | Frühere Erkennung von Mobile-Regressionsfehlern | offen | 008 |
 
 **Passende Vorschläge:**
 1. Min-/Max-Breiten je Hauptpanel definieren
 2. Einheitliche Spacing-Tokens für Innen- und Außenabstände einführen
 
 **Passende Vorschläge:**
-1. Mobile-Kurzansicht per „Mehr Tools“-Knopf ein-/ausblenden
-2. Wichtigste zwei Aktionen im eingeklappten Zustand immer sichtbar lassen
+1. Prüfen: Toggle-Schalter setzt `aria-expanded` auf `true/false`
+2. Prüfen: die ersten zwei Tool-Aktionen bleiben immer sichtbar
 
 ## Erledigt
 
@@ -48,3 +48,9 @@
 **Passende Vorschläge:**
 1. Bei erfolgreichem Start eine Zeile „Nächster Schritt: Modul wählen“ anzeigen
 2. Bei fehlendem Ordner eine Zeile „Nächster Schritt: Ordner wählen“ im Hauptbereich fix platzieren
+
+| UP-007 | Responsive UX | Für die rechte Werkzeugspalte eine einklappbare Mobil-Kurzansicht ergänzen | Auf kleinen Geräten sind viele Aktionsknöpfe unterhalb der Faltung schwer sichtbar | Schnellere Bedienung auf Smartphone und kleinen Laptops | erledigt | 008 |
+
+**Passende Vorschläge:**
+1. Mobile-Kurzansicht per „Mehr Tools“-Knopf ein-/ausblenden
+2. Wichtigste zwei Aktionen im eingeklappten Zustand immer sichtbar lassen

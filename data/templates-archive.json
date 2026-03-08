@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-11",
+      "title": "Mobile Tools kompakt prüfen",
+      "content": "Zeige mobil zuerst 2 Kernaktionen, schalte Zusatzaktionen per 'Mehr Tools' frei und prüfe 3 Breakpoints: Desktop, Tablet, Mobil.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T05:00:00.000Z",
+      "updatedAt": "2026-03-08T05:00:00.000Z"
+    },
+    {
       "id": "tpl-default-10",
       "title": "Responsive UI-Mini-Patch",
       "content": "Definiere pro Hauptpanel Min-/Max-Breite, setze gemeinsame Spacing-Tokens und prüfe den nächsten Schritt auf Mobil + Desktop.",
@@ -92,7 +101,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T04:00:00.000Z",
+  "updatedAt": "2026-03-08T05:00:00.000Z",
   "required_fields": [
     "id",
     "title",

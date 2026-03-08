@@ -619,6 +619,10 @@ body::before {
   padding: 8px;
 }
 
+.btn-small-tools {
+  display: none;
+}
+
 .checkline {
   display: flex;
   align-items: center;
@@ -1107,7 +1111,6 @@ body::before {
   .panel-grid,
   .footer-grid,
   .module-button-grid,
-  .settings-actions,
   .archive-input-grid,
   .archive-list,
   .mix-options,
@@ -1116,6 +1119,28 @@ body::before {
   .startup-steps {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
+  }
+
+  .settings-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-actions .btn-small-tools {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .settings-actions .btn:nth-child(n + 3):not(.btn-small-tools) {
+    display: none;
+  }
+
+  .widgets.tools-expanded .settings-actions .btn:nth-child(n + 3):not(.btn-small-tools) {
+    display: inline-flex;
+  }
+
+  .widgets.tools-expanded .settings-actions .btn-small-tools {
+    order: 99;
   }
 
   .module-panel[data-panel='archive'] {

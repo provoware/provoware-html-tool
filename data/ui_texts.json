@@ -13,7 +13,9 @@
     "ensureStructure": "Projektstruktur anlegen",
     "runWriteTest": "Schreibtest ausführen",
     "switchDirectory": "Ordner wechseln",
-    "logout": "Logout (sicher)"
+    "logout": "Logout (sicher)",
+    "showMoreTools": "Mehr Tools",
+    "showLessTools": "Weniger Tools"
   },
   "messages": {
     "startupWaiting": "Bitte Selbsttest starten.",

@@ -163,7 +163,7 @@
         </section>
       </main>
 
-      <aside class="widgets panel tile-right" aria-label="Projektordner-Status">
+      <aside id="widgets-panel" class="widgets panel tile-right" aria-label="Projektordner-Status">
         <div class="sidebar-head">
           <h2 class="panel-title" id="status-title">Projektinfos &amp; Hilfe</h2>
         </div>
@@ -178,6 +178,7 @@
               <button id="action-switch-dir" class="btn" type="button">Ordner wechseln</button>
               <button id="action-export-diagnosis" class="btn" type="button">Diagnose exportieren</button>
               <button id="action-logout" class="btn" type="button">Logout (sicher)</button>
+              <button id="action-toggle-tools" class="btn btn-small-tools" type="button" aria-expanded="false">Mehr Tools</button>
             </div>
             <label class="checkline"><input id="a11y-quiet-mode" type="checkbox" /> Ruhiger Screenreader-Modus</label>
             <label class="checkline"><input id="toggle-grid-help" type="checkbox" /> Rasterhilfe anzeigen <span class="checkline-hint">zeigt ein echtes 3x3-Hilfsraster</span></label>
