@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-39",
+      "title": "Layout-Quickcheck Statusleisten",
+      "content": "Prüfe nach Layout-Patches: keine horizontale Scrollleiste in Modulen, Statuswerte als 2-Spalten-Key-Value lesbar, rechte Sidebar bleibt im Viewport.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T07:00:00.000Z",
+      "updatedAt": "2026-03-09T07:00:00.000Z"
+    },
+    {
       "id": "tpl-default-38",
       "title": "Panel-Overlay bei 980px ruhig prüfen",
       "content": "Prüfe bei 980px und 720px: Panelhintergründe bleiben lesbar, das Overlay wirkt sichtbar ruhiger und Inhalte verlieren keine erkennbare Struktur.",

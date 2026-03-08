@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 7
+- Offene Upgrade-Empfehlungen: 8
 - Erledigte Upgrade-Empfehlungen: 29
 - Default-Archive: 3
-- Letzte Iteration: 036
+- Letzte Iteration: 037
 - Scan-Modus: delta
 
 
@@ -15,6 +15,14 @@
 
 
 
+
+
+## Iterations-Update 037 (Mini-Patch)
+
+- Neu: Zehn offene Layout-Punkte aus `todo.txt` mit kleinem CSS/Renderer-Patch abgeschlossen (Sidebar-Guard, Status-Badges, Key-Value-Statusscan, keine Modul-Overflow-X).
+- Robustheit: Rechte Sidebar und Statusleisten haben Mindest-/Maximalgrenzen, damit Inhalte bei enger Breite weniger aus dem Raster laufen.
+- UX: Fensterleisten und Steuer-Icons sind größer, Statusmarker kompakter und schneller erfassbar (✓/⚠).
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Layout-Quickcheck Statusleisten“ erweitert.
 
 ## Iterations-Update 036 (Mini-Patch)
 

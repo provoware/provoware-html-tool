@@ -396,10 +396,12 @@ const renderSidebarModules = (modules = []) => {
 
   return modules
     .map((module) => {
-      const status = module.ok ? 'ok' : 'prüfen';
+      const isHealthy = Boolean(module.ok);
+      const statusLabel = isHealthy ? 'bereit' : 'prüfen';
+      const statusIcon = isHealthy ? '✓' : '⚠';
       const label = autoFormatText(module.name || module.id || 'Modul').replace(/[.!?…]+$/, '');
       const moduleId = escapeHtml(module.id || '');
-      return `<button type="button" class="btn module-btn" data-module-focus="${moduleId}" title="${escapeHtml(label)}"><span>${escapeHtml(label)}</span><small>${escapeHtml(status)}</small></button>`;
+      return `<button type="button" class="btn module-btn" data-module-focus="${moduleId}" title="${escapeHtml(label)}"><span>${escapeHtml(label)}</span><small class="module-status-badge ${isHealthy ? 'is-ready' : 'is-check'}" aria-label="Status: ${statusLabel}">${statusIcon}</small></button>`;
     })
     .join('');
 };

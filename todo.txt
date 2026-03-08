@@ -3,6 +3,7 @@
 - Keine freien Sammelzeilen ohne Checkbox-Format.
 
 ## Kritisch
+[x] 2026-03-09 | todo.txt + css/app.css + js/ui.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 037: Zehn offene Layout-Punkte mit Minimal-Patch erledigt (rechte Sidebar-Guard, Status-Badges, kein Modul-Overflow-X, freundlichere Titelzeilen, größere Fenstericons, scanbare Key-Value-Statusliste, vereinheitlichte Radius/Schatten, einheitliche Feldhöhen, reduzierte Rahmenlast, Mindestbreite für Statusleisten) | prüfen: `node --check js/ui.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: 10 markierte Layoutpunkte sichtbar abgeschlossen sind und Pflichtdateien konsistent bleiben
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 036: UP-036 als Mini-CSS-Feinschliff umgesetzt (Overlay bei <=980px weiter gedrosselt), genau eine Archivvorlage ergänzt und Upgrade-/Registry-Status konsistent fortgeführt | prüfen: `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: Overlay auf <=980px ruhiger wirkt, Archiv genau einen neuen sinnvollen Eintrag hat und Pflichtdateien konsistent aktualisiert sind
 [x] 2026-03-09 | todo.txt + index.html + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 033: todo.txt in konsistente Checkbox-Struktur überführt und offenen Punkt „Platzhaltertexte in leeren Slots stark kürzen“ mit kurzem Leerzustandstext umgesetzt | prüfen: `node --check index.html` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` | fertig wenn: keine freien Sammelzeilen ohne Checkbox vorhanden sind und Leerzustands-Hinweise kurz/verständlich bleiben
 [x] 2026-03-09 | todo.txt + index.html + css/app.css + js/ui.js + js/renderers/ui-header-renderer.js + js/renderers/ui-main-renderer.js + tests/services/ui-header-chips.test.js + tests/services/ui-header-navigation.test.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 031: Sechs offene Upgrade-Punkte erledigt (UP-025/026/027/029/030/031) mit Header-Feedback, Selbsttest-Hilfe, Slot-Direktknopf, Header-Sichtbarkeits-Guard, Trend-Hinweis und Account-Kopierleiste | prüfen: `node --check js/ui.js js/renderers/ui-header-renderer.js js/renderers/ui-main-renderer.js` + `node --test tests/services/ui-header-chips.test.js tests/services/ui-header-navigation.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: alle sechs Punkte im Upgrade-Pool als erledigt stehen und neue UI-Hinweise robust funktionieren
@@ -102,36 +103,36 @@
 ## Offene Layout-Punkte (strukturiert)
 [ ] Überlagerte Modulfenster im Standardzustand verhindern, feste Startpositionen oder Docking-Logik einführen.
 [x] Transparente Fensterflächen durch opake Inhaltsflächen ersetzen. (Iteration 034: Panel-Hintergründe opaker gesetzt, Overlay abgeschwächt.)
-[ ] Rechte Seitenleiste vollständig innerhalb des Viewports halten.
+[x] Rechte Seitenleiste vollständig innerhalb des Viewports halten. (Iteration 037: `.widgets` mit Mindest-/Maximalbreite abgesichert.)
 [ ] Kopfbereich in getrennte Funktionszonen aufteilen.
 [ ] Klare visuelle Hierarchie für Hauptinhalt, Nebeninhalt und Hilfsinhalt definieren.
 [ ] Einheitliches Karten- und Fenstersystem für alle Panels festlegen.
 [ ] Farbsemantik systemweit vereinheitlichen.
 [x] Linke Modulliste verbreitern. (Iteration 034: linke Zielbreite auf 11vw erhöht.)
 [x] Modulkacheln links mit mehr Innenabstand und sauberem Umbruch gestalten. (Iteration 034: Padding/Zeilenumbruch in `.module-btn` verbessert.)
-[ ] Wiederholte Statusanzeigen wie „OK“ auf kompakte Badges oder Icons umstellen.
+[x] Wiederholte Statusanzeigen wie „OK“ auf kompakte Badges oder Icons umstellen. (Iteration 037: Modulstatus als Icon-Badge ✓/⚠ umgesetzt.)
 [x] Mindestschriftgröße im gesamten Hauptbereich erhöhen. (Iteration 034: `.main` auf 1.02rem angehoben.)
 [x] Kontraste auf dunklen Flächen anheben. (Iteration 034: Header-Stat-Karten und gedämpfte Texte kontrastreicher.)
 [x] Hintergrundmuster deutlich reduzieren oder entfernen. (Iteration 035: Hintergrundradiale deutlich abgeschwächt.)
 [x] Panel-Overlay bei <=980px weiter drosseln. (Iteration 036: `--panel-overlay` im 980er Breakpoint gezielt reduziert.)
 [ ] Grid-Logik und Floating-Window-Logik nicht parallel als Hauptprinzip nutzen.
 [ ] Leere Modul-Slots optisch stark zurücknehmen.
-[ ] Horizontales Scrollen in Modulen vollständig vermeiden.
+[x] Horizontales Scrollen in Modulen vollständig vermeiden. (Iteration 037: `overflow-x: hidden` in Modulkörpern ergänzt.)
 [ ] Account-Archiv ohne Overflow-X neu ausrichten.
-[ ] Fenstertitelleisten höher und laienfreundlicher gestalten.
-[ ] Fenstersteuer-Icons vergrößern.
+[x] Fenstertitelleisten höher und laienfreundlicher gestalten. (Iteration 037: Titelleiste mit mehr Höhe, klarerer Textgröße.)
+[x] Fenstersteuer-Icons vergrößern. (Iteration 037: Panel-Controls auf 34x30px vergrößert.)
 [ ] Rechte Werkzeugleiste in Funktionsgruppen gliedern.
 [ ] Statusbadge nicht mit Überschriften kollidieren lassen.
 [ ] Untere Infobereiche höher, einklappbar oder tab-basiert gestalten.
 [ ] Sekundärinformationen standardmäßig reduzieren.
-[ ] Statusinformationen als scanbare Key-Value-Struktur darstellen.
+[x] Statusinformationen als scanbare Key-Value-Struktur darstellen. (Iteration 037: Statusliste in stabiles 2-Spalten-Key-Value-Grid umgestellt.)
 [ ] Einheitliches Spacing-System für alle Abstände einführen.
-[ ] Rundungen, Rahmen und Schatten systemweit vereinheitlichen.
+[x] Rundungen, Rahmen und Schatten systemweit vereinheitlichen. (Iteration 037: Panel-/Modul-Schatten und Radius lokal harmonisiert.)
 [ ] Pro Bereich nur eine primäre Aktion visuell hervorheben.
 [ ] Bedienlogik konsequent auf Dashboard oder Fenstermodus ausrichten.
 [ ] Standardpositionen offener Fenster so setzen, dass Kernstatus sichtbar bleibt.
 [ ] Spaltenverhältnis zwischen links, Mitte und rechts neu ausbalancieren.
-[ ] Formularfelder, Buttons und Suchleisten einheitlich ausrichten.
+[x] Formularfelder, Buttons und Suchleisten einheitlich ausrichten. (Iteration 037: gemeinsame Mindesthöhe für Kernfelder/Buttons gesetzt.)
 [ ] Platzhalterbereiche wie „Linke Leiste“ und „Rechte Leiste“ in der Standardansicht ausblenden oder funktional füllen.
 [ ] Hilfstexte nur kontextbezogen oder einklappbar anzeigen.
 [ ] Blickführung von oben nach unten und links nach rechts sauber strukturieren.
@@ -149,7 +150,7 @@
 [ ] Innere Layoutberechnung so anpassen, dass unnötige Scrollleisten verschwinden.
 [x] Platzhaltertexte in leeren Slots stark kürzen. (Iteration 033: als kurzer Leerzustand umgesetzt.)
 [ ] Snap-to-grid oder feste Dock-Zonen für Modulfenster einführen.
-[ ] Schatten- und Rahmenlast reduzieren.
+[x] Schatten- und Rahmenlast reduzieren. (Iteration 037: globale Schattenintensität und Panel-Schatten reduziert.)
 [ ] Standardansicht insgesamt entschlacken.
 [ ] Aktiven Fokuszustand eines Moduls klar markieren.
 [ ] Linke Modulspalte in klarere Gruppen und Abschnitte gliedern.
@@ -163,7 +164,7 @@
 [ ] Standardansicht, Bearbeitungsansicht und Expertenansicht strukturell trennen.
 [ ] Fensterinhalte nicht über zentralen Grid-Slots schweben lassen, wenn diese parallel bedient werden sollen.
 [ ] Such- und Eingabefelder mit einheitlicher Höhe und konsistenter Buttonkante gestalten.
-[ ] Zu schmale Status- und Infoleisten auf Mindestbreite prüfen.
+[x] Zu schmale Status- und Infoleisten auf Mindestbreite prüfen. (Iteration 037: Mindestbreite für Status-/Hinweisleisten gesetzt.)
 [ ] Fenstertitel stärker vom Inhaltsbereich absetzen.
 [ ] Schwebende Fenster mit klarer Fokus-Hervorhebung und inaktivem Zustand versehen.
 [ ] Seitenleisten bei kleineren Breiten einklappbar machen.
