@@ -25,6 +25,10 @@ export const createSessionActions = ({ getState, setState, selectDirectory, runS
     setState({ a11yQuietMode: Boolean(enabled) });
     logEvent('INFO', 'A11Y_QUIET_MODE_CHANGED', enabled ? 'Ruhiger Modus wurde aktiviert.' : 'Ruhiger Modus wurde deaktiviert.');
   },
+  onToggleGridHelp: (enabled) => {
+    setState({ showGridHelp: Boolean(enabled) });
+    logEvent('INFO', 'GRID_HELP_VISIBILITY_CHANGED', enabled ? 'Rasterhilfe wird angezeigt.' : 'Rasterhilfe ist ausgeblendet.');
+  },
   onSelectPlugin: (pluginId) => {
     const state = getState();
     const manager = state.pluginManager || { selectedPluginId: 'char-counter', plugins: {} };

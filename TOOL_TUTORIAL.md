@@ -9,6 +9,20 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 3. Browser öffnet sich bei Erfolg automatisch mit `index.html`.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
+
+## Kleine Erweiterung dieser Iteration (neu)
+### Kontrast-Check + Rasterhilfe-Schalter
+Neu in dieser Iteration:
+- Es gibt einen kleinen WCAG-Check (Mindestkontrast 4.5:1) für zentrale Dark-Theme-Textfarben.
+- Im Bereich **Tool-Einstellungen und Tests** gibt es den Schalter **„Rasterhilfe anzeigen“**.
+- Damit können die 7 leeren Camouflage-Slots im 3x3-Grid optional ein- oder ausgeblendet werden.
+
+Direkte Mini-Checks:
+1. `node --test tests/services/theme-contrast-dark.test.js`
+2. `node --test tests/services/ui-action-handlers.smoke.test.js`
+
+Kurzregel: Erst Kontrast prüfen, dann bei Bedarf die Rasterhilfe sichtbar lassen.
+
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Modul-Hilfe zeigt jetzt konkrete Dateischritte
 Neu in dieser Iteration:

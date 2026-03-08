@@ -153,3 +153,15 @@ test('smoke: dashboard-note save meldet write-fehler vom adapter', async () => {
     assert.equal(base.getState().dashboardNotes.rows[2].feedback, 'Eintrag konnte nicht gespeichert werden.');
   });
 });
+
+
+test('smoke: rasterhilfe-toggle setzt den zustand', async () => {
+  const base = makeBase();
+  const actions = createUiActionHandlers(base);
+
+  actions.onToggleGridHelp(false);
+  assert.equal(base.getState().showGridHelp, false);
+
+  actions.onToggleGridHelp(true);
+  assert.equal(base.getState().showGridHelp, true);
+});

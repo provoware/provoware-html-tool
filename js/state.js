@@ -26,6 +26,7 @@ const createState = () => ({
   templateDraft: { id: null, title: '', content: '', category: 'Textbaustein' },
   templateFeedback: null,
   a11yQuietMode: false,
+  showGridHelp: true,
   filePreviewPath: '',
   filePreviewIncludeOtherFiles: false,
   filePreviewEntries: [],

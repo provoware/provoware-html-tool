@@ -1368,6 +1368,10 @@ body::before {
   font-weight: 600;
 }
 
+.panel-grid:not(.panel-grid--show-help) .module-panel.is-empty-slot {
+  display: none;
+}
+
 .module-head h3,
 .panel-title,
 .settings-group h3,
