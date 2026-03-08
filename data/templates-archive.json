@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-14",
+      "title": "Fallback-Hinweis klar formulieren",
+      "content": "Wenn ein Fallback aktiv ist: Grund in einem kurzen Satz nennen und den nächsten Schritt direkt dazu schreiben.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T08:00:00.000Z",
+      "updatedAt": "2026-03-08T08:00:00.000Z"
+    },
+    {
       "id": "tpl-default-13",
       "title": "Fallback-Check vor Release",
       "content": "Prüfe vor Release drei Fallbacks: Theme-Key vorhanden, Module-Registry lesbar und klare Meldung bei Defekt.",
@@ -119,7 +128,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T07:00:00.000Z",
+  "updatedAt": "2026-03-08T08:00:00.000Z",
   "required_fields": [
     "id",
     "title",

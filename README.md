@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 4
+- Offene Upgrade-Empfehlungen: 5
 - Erledigte Upgrade-Empfehlungen: 6
 - Default-Archive: 1
-- Letzte Iteration: 011
+- Letzte Iteration: 012
 - Scan-Modus: delta
 
 ## Aktuelle Toolstruktur und Toolumfang
