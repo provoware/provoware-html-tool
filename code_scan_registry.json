@@ -1,0 +1,17 @@
+{
+  "meta": {
+    "version": 1,
+    "last_scan": "",
+    "last_update_iteration": "001",
+    "scan_mode": "delta",
+    "project_phase": "early"
+  },
+  "stats": {
+    "open_total": 0,
+    "done_total": 0,
+    "by_type": {},
+    "by_priority": {}
+  },
+  "open": [],
+  "done": []
+}
