@@ -95,20 +95,21 @@
 [x] 6) 2026-03-08 | Inhaltliche Qualität | Leere Modul-Slots durch zielgerichtete Platzhalter mit konkretem Next Step ersetzen | prüfen: jeder leere Slot enthält Handlungssatz statt nur „Modul-Slot leer“ | fertig wenn: alle freien Slots liefern direkt nutzbare Hilfe
 
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 032: Offene Release-Blocker 4/5 final abgeschlossen, Button-States zentralisiert, ein neuer Default-Template-Check ergänzt und Pflichtdateien synchronisiert | prüfen: `node --check js/renderers/ui-header-renderer.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: keine offenen Release-Blocker in todo.txt verbleiben und Statusdateien konsistent sind
+[x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 034: Sechs offene Layout-Aufgaben lokal geschlossen (opake Panels, breitere linke Leiste, bessere Modulbutton-Innenabstände/Umbrüche, größere Mindestschrift im Hauptbereich, höherer Kontrast auf dunklen Flächen, kompaktere Statusboxen) und Pflichtdateien synchronisiert | prüfen: `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: sechs gewählte Layoutpunkte in todo.txt erledigt sind und UI-Änderung ohne JSON-Fehler bleibt
 
 ## Offene Layout-Punkte (strukturiert)
 [ ] Überlagerte Modulfenster im Standardzustand verhindern, feste Startpositionen oder Docking-Logik einführen.
-[ ] Transparente Fensterflächen durch opake Inhaltsflächen ersetzen.
+[x] Transparente Fensterflächen durch opake Inhaltsflächen ersetzen. (Iteration 034: Panel-Hintergründe opaker gesetzt, Overlay abgeschwächt.)
 [ ] Rechte Seitenleiste vollständig innerhalb des Viewports halten.
 [ ] Kopfbereich in getrennte Funktionszonen aufteilen.
 [ ] Klare visuelle Hierarchie für Hauptinhalt, Nebeninhalt und Hilfsinhalt definieren.
 [ ] Einheitliches Karten- und Fenstersystem für alle Panels festlegen.
 [ ] Farbsemantik systemweit vereinheitlichen.
-[ ] Linke Modulliste verbreitern.
-[ ] Modulkacheln links mit mehr Innenabstand und sauberem Umbruch gestalten.
+[x] Linke Modulliste verbreitern. (Iteration 034: linke Zielbreite auf 11vw erhöht.)
+[x] Modulkacheln links mit mehr Innenabstand und sauberem Umbruch gestalten. (Iteration 034: Padding/Zeilenumbruch in `.module-btn` verbessert.)
 [ ] Wiederholte Statusanzeigen wie „OK“ auf kompakte Badges oder Icons umstellen.
-[ ] Mindestschriftgröße im gesamten Hauptbereich erhöhen.
-[ ] Kontraste auf dunklen Flächen anheben.
+[x] Mindestschriftgröße im gesamten Hauptbereich erhöhen. (Iteration 034: `.main` auf 1.02rem angehoben.)
+[x] Kontraste auf dunklen Flächen anheben. (Iteration 034: Header-Stat-Karten und gedämpfte Texte kontrastreicher.)
 [ ] Hintergrundmuster deutlich reduzieren oder entfernen.
 [ ] Grid-Logik und Floating-Window-Logik nicht parallel als Hauptprinzip nutzen.
 [ ] Leere Modul-Slots optisch stark zurücknehmen.
@@ -140,7 +141,7 @@
 [ ] Aufgabenliste im To-do-Modul kontrastreicher und klarer strukturieren.
 [ ] Hilfebereich kleiner, einklappbar oder seitlich andockbar machen.
 [ ] Helle Modulflächen tonal besser an den dunklen Hintergrund anpassen.
-[ ] Statusboxen oben links kompakter gestalten.
+[x] Statusboxen oben links kompakter gestalten. (Iteration 034: `status-box` Padding/Margin reduziert.)
 [ ] Statistikbereich rechts oben stärker an den Hauptheader anbinden.
 [ ] Innere Layoutberechnung so anpassen, dass unnötige Scrollleisten verschwinden.
 [x] Platzhaltertexte in leeren Slots stark kürzen. (Iteration 033: als kurzer Leerzustand umgesetzt.)

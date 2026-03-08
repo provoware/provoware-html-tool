@@ -4,16 +4,23 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 6
+- Offene Upgrade-Empfehlungen: 7
 - Erledigte Upgrade-Empfehlungen: 27
 - Default-Archive: 3
-- Letzte Iteration: 033
+- Letzte Iteration: 034
 - Scan-Modus: delta
 
 
 
 
 
+
+## Iterations-Update 034 (Mini-Patch)
+
+- Neu: Sechs offene Layout-Punkte aus `todo.txt` mit einem lokalen CSS-Patch geschlossen.
+- Robustheit: Panel-Flächen sind opaker und Overlays zurückgenommen, wodurch Inhalte stabiler lesbar bleiben.
+- UX: Linke Leiste und Modulbuttons sind besser lesbar (mehr Breite, mehr Innenabstand, sauberer Umbruch), dazu größere Mindestschrift im Hauptbereich.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Sechs Layout-Basispunkte schnell prüfen“ ergänzt.
 
 ## Iterations-Update 033 (Mini-Patch)
 
