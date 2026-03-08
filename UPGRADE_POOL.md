@@ -9,6 +9,7 @@
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
 | UP-032 | Header UX | Header-Navigations-Feedback nach 3 Sekunden automatisch ausblenden | Die neue Rückmeldung hilft, bleibt aber dauerhaft sichtbar und kann den Statistikbereich unnötig belegen | Ruhigeres Dashboard bei weiter klarer Bestätigung nach Navigation | offen | 031 |
 | UP-033 | Accessibility UX | Deaktivierte Buttons um kurzen Tooltip-Titel mit Grund ergänzen | Einheitliche Disabled-Optik ist klar, aber ohne Grund bleibt der nächste Schritt teilweise unklar | Weniger Fehlklicks und schnellere Selbsthilfe durch direkten Hinweis am Knopf | offen | 032 |
+| UP-034 | Leerzustand UX | Leere Modul-Slots im Header-Monitoring auf Zeichenlimit prüfen und bei Überschreitung automatisch kürzen | Kürzere Texte wurden lokal verbessert, können aber bei späteren Änderungen wieder ausufern | Dauerhaft kompakte Leerzustände ohne manuelle Nacharbeit | offen | 033 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -29,6 +30,10 @@
 **Passende Vorschläge (UP-033):**
 1. Tooltip nur für deaktivierte Schaltflächen mit vorhandener Grundmeldung setzen
 2. Zusätzlich im Statusbereich denselben Grundtext einmal als Klartext ausgeben
+
+**Passende Vorschläge (UP-034):**
+1. Zeichenlimit als kleine Konstante nahe am Slot-Renderer halten (z. B. 70 Zeichen)
+2. Bei Kürzung ein Ellipsis nutzen und den Volltext als `title` setzen
 
 ## Erledigt
 

@@ -3,6 +3,7 @@
 - Keine freien Sammelzeilen ohne Checkbox-Format.
 
 ## Kritisch
+[x] 2026-03-09 | todo.txt + index.html + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 033: todo.txt in konsistente Checkbox-Struktur überführt und offenen Punkt „Platzhaltertexte in leeren Slots stark kürzen“ mit kurzem Leerzustandstext umgesetzt | prüfen: `node --check index.html` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` | fertig wenn: keine freien Sammelzeilen ohne Checkbox vorhanden sind und Leerzustands-Hinweise kurz/verständlich bleiben
 [x] 2026-03-09 | todo.txt + index.html + css/app.css + js/ui.js + js/renderers/ui-header-renderer.js + js/renderers/ui-main-renderer.js + tests/services/ui-header-chips.test.js + tests/services/ui-header-navigation.test.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 031: Sechs offene Upgrade-Punkte erledigt (UP-025/026/027/029/030/031) mit Header-Feedback, Selbsttest-Hilfe, Slot-Direktknopf, Header-Sichtbarkeits-Guard, Trend-Hinweis und Account-Kopierleiste | prüfen: `node --check js/ui.js js/renderers/ui-header-renderer.js js/renderers/ui-main-renderer.js` + `node --test tests/services/ui-header-chips.test.js tests/services/ui-header-navigation.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: alle sechs Punkte im Upgrade-Pool als erledigt stehen und neue UI-Hinweise robust funktionieren
 [x] 2026-03-09 | todo.txt + AGENTS.md + index.html + js/renderers/ui-header-renderer.js + tests/services/ui-header-chips.test.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 030: UP-020 priorisiert (7-Tage-Trend in Header-Statistik), doppelte UP-027-ID im Upgrade-Pool bereinigt und AGENTS.md auf aktuellen Mini-Fokus/Effizienz geschärft | prüfen: `node --check js/renderers/ui-header-renderer.js` + `node --test tests/services/ui-header-chips.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: Header zeigt robusten 7-Tage-Trend, Upgrade-IDs sind eindeutig und Pflichtdateien konsistent aktualisiert
 [x] 2026-03-09 | todo.txt + index.html + css/app.css + js/ui.js + tests/services/ui-header-navigation.test.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 029: Header-Kacheln als klare Sprungziele mit Tastatursteuerung ergänzen, fehlersicheren Ziel-Guard einbauen und genau eine neue Dashboard-Templatevorlage ergänzen | prüfen: `node --check js/ui.js` + `node --test tests/services/ui-header-navigation.test.js tests/services/ui-header-chips.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: alle vier Header-Kacheln reagieren auf Klick/Enter/Space, ohne Ziel wird sauber abgebrochen und Archiv enthält genau eine neue sinnvolle Vorlage
@@ -94,143 +95,75 @@
 [x] 6) 2026-03-08 | Inhaltliche Qualität | Leere Modul-Slots durch zielgerichtete Platzhalter mit konkretem Next Step ersetzen | prüfen: jeder leere Slot enthält Handlungssatz statt nur „Modul-Slot leer“ | fertig wenn: alle freien Slots liefern direkt nutzbare Hilfe
 
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 032: Offene Release-Blocker 4/5 final abgeschlossen, Button-States zentralisiert, ein neuer Default-Template-Check ergänzt und Pflichtdateien synchronisiert | prüfen: `node --check js/renderers/ui-header-renderer.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: keine offenen Release-Blocker in todo.txt verbleiben und Statusdateien konsistent sind
-1. Überlagerte Modulfenster im Standardzustand verhindern, feste Startpositionen oder Docking-Logik einführen.
 
-2. Transparente Fensterflächen durch opake Inhaltsflächen ersetzen.
-
-3. Rechte Seitenleiste vollständig innerhalb des Viewports halten.
-
-4. Kopfbereich in getrennte Funktionszonen aufteilen.
-
-5. Klare visuelle Hierarchie für Hauptinhalt, Nebeninhalt und Hilfsinhalt definieren.
-
-6. Einheitliches Karten- und Fenstersystem für alle Panels festlegen.
-
-7. Farbsemantik systemweit vereinheitlichen.
-
-8. Linke Modulliste verbreitern.
-
-9. Modulkacheln links mit mehr Innenabstand und sauberem Umbruch gestalten.
-
-10. Wiederholte Statusanzeigen wie „OK“ auf kompakte Badges oder Icons umstellen.
-
-11. Mindestschriftgröße im gesamten Hauptbereich erhöhen.
-
-12. Kontraste auf dunklen Flächen anheben.
-
-13. Hintergrundmuster deutlich reduzieren oder entfernen.
-
-14. Grid-Logik und Floating-Window-Logik nicht parallel als Hauptprinzip nutzen.
-
-15. Leere Modul-Slots optisch stark zurücknehmen.
-
-16. Horizontales Scrollen in Modulen vollständig vermeiden.
-
-17. Account-Archiv ohne Overflow-X neu ausrichten.
-
-18. Fenstertitelleisten höher und laienfreundlicher gestalten.
-
-19. Fenstersteuer-Icons vergrößern.
-
-20. Rechte Werkzeugleiste in Funktionsgruppen gliedern.
-
-21. Statusbadge nicht mit Überschriften kollidieren lassen.
-
-22. Untere Infobereiche höher, einklappbar oder tab-basiert gestalten.
-
-23. Sekundärinformationen standardmäßig reduzieren.
-
-24. Statusinformationen als scanbare Key-Value-Struktur darstellen.
-
-25. Einheitliches Spacing-System für alle Abstände einführen.
-
-26. Rundungen, Rahmen und Schatten systemweit vereinheitlichen.
-
-27. Pro Bereich nur eine primäre Aktion visuell hervorheben.
-
-28. Bedienlogik konsequent auf Dashboard oder Fenstermodus ausrichten.
-
-29. Standardpositionen offener Fenster so setzen, dass Kernstatus sichtbar bleibt.
-
-30. Spaltenverhältnis zwischen links, Mitte und rechts neu ausbalancieren.
-
-31. Formularfelder, Buttons und Suchleisten einheitlich ausrichten.
-
-32. Platzhalterbereiche wie „Linke Leiste“ und „Rechte Leiste“ in der Standardansicht ausblenden oder funktional füllen.
-
-33. Hilfstexte nur kontextbezogen oder einklappbar anzeigen.
-
-34. Blickführung von oben nach unten und links nach rechts sauber strukturieren.
-
-35. Nächsten sinnvollen Handlungsschritt deutlich sichtbar machen.
-
-36. Technische Begriffe in laienfreundliche Sprache übersetzen.
-
-37. Debug- und Rohbauinformationen in einen Expertenmodus auslagern.
-
-38. Z-Ebenen für Hintergrund, Arbeitsfläche und Dialog verbindlich definieren.
-
-39. Toolbar im Account-Archiv mit sauberer Aufteilung aus Aktionen und Suche umbauen.
-
-40. To-do-Modul visuell neu gewichten.
-
-41. Aufgabenliste im To-do-Modul kontrastreicher und klarer strukturieren.
-
-42. Hilfebereich kleiner, einklappbar oder seitlich andockbar machen.
-
-43. Helle Modulflächen tonal besser an den dunklen Hintergrund anpassen.
-
-44. Statusboxen oben links kompakter gestalten.
-
-45. Statistikbereich rechts oben stärker an den Hauptheader anbinden.
-
-46. Innere Layoutberechnung so anpassen, dass unnötige Scrollleisten verschwinden.
-
-47. Platzhaltertexte in leeren Slots stark kürzen.
-
-48. Snap-to-grid oder feste Dock-Zonen für Modulfenster einführen.
-
-49. Schatten- und Rahmenlast reduzieren.
-
-50. Standardansicht insgesamt entschlacken.
-
-51. Aktiven Fokuszustand eines Moduls klar markieren.
-
-52. Linke Modulspalte in klarere Gruppen und Abschnitte gliedern.
-
-53. Buttontypen in der rechten Leiste visuell differenzieren.
-
-54. Innenabstände in Panels systematisch erhöhen.
-
-55. Linien, Konturen und Rahmen optisch beruhigen.
-
-56. Überschriftenhierarchie mit klaren Größenstufen vereinheitlichen.
-
-57. Mindest- und Maximalbreiten für alle Hauptbereiche definieren.
-
-58. Mehr visuelle Ruheflächen zwischen Funktionsgruppen einplanen.
-
-59. Einen klaren Startworkflow sichtbar im Layout verankern.
-
-60. Standardansicht, Bearbeitungsansicht und Expertenansicht strukturell trennen.
-
-61. Fensterinhalte nicht über zentralen Grid-Slots schweben lassen, wenn diese parallel bedient werden sollen.
-
-62. Such- und Eingabefelder mit einheitlicher Höhe und konsistenter Buttonkante gestalten.
-
-63. Zu schmale Status- und Infoleisten auf Mindestbreite prüfen.
-
-64. Fenstertitel stärker vom Inhaltsbereich absetzen.
-
-65. Schwebende Fenster mit klarer Fokus-Hervorhebung und inaktivem Zustand versehen.
-
-66. Seitenleisten bei kleineren Breiten einklappbar machen.
-
-67. Alle Modulcontainer auf gemeinsame Mindesthöhe und Rasterlogik prüfen.
-
-68. Zu dichte Textblöcke in Statusbereichen in mehrere Zeilen oder Chips zerlegen.
-
-69. Warnboxen farblich klarer vom normalen Status trennen.
-
-70. Hauptarbeitsfläche gegenüber Hilfs- und Metabereichen optisch dominanter machen.
-
+## Offene Layout-Punkte (strukturiert)
+[ ] Überlagerte Modulfenster im Standardzustand verhindern, feste Startpositionen oder Docking-Logik einführen.
+[ ] Transparente Fensterflächen durch opake Inhaltsflächen ersetzen.
+[ ] Rechte Seitenleiste vollständig innerhalb des Viewports halten.
+[ ] Kopfbereich in getrennte Funktionszonen aufteilen.
+[ ] Klare visuelle Hierarchie für Hauptinhalt, Nebeninhalt und Hilfsinhalt definieren.
+[ ] Einheitliches Karten- und Fenstersystem für alle Panels festlegen.
+[ ] Farbsemantik systemweit vereinheitlichen.
+[ ] Linke Modulliste verbreitern.
+[ ] Modulkacheln links mit mehr Innenabstand und sauberem Umbruch gestalten.
+[ ] Wiederholte Statusanzeigen wie „OK“ auf kompakte Badges oder Icons umstellen.
+[ ] Mindestschriftgröße im gesamten Hauptbereich erhöhen.
+[ ] Kontraste auf dunklen Flächen anheben.
+[ ] Hintergrundmuster deutlich reduzieren oder entfernen.
+[ ] Grid-Logik und Floating-Window-Logik nicht parallel als Hauptprinzip nutzen.
+[ ] Leere Modul-Slots optisch stark zurücknehmen.
+[ ] Horizontales Scrollen in Modulen vollständig vermeiden.
+[ ] Account-Archiv ohne Overflow-X neu ausrichten.
+[ ] Fenstertitelleisten höher und laienfreundlicher gestalten.
+[ ] Fenstersteuer-Icons vergrößern.
+[ ] Rechte Werkzeugleiste in Funktionsgruppen gliedern.
+[ ] Statusbadge nicht mit Überschriften kollidieren lassen.
+[ ] Untere Infobereiche höher, einklappbar oder tab-basiert gestalten.
+[ ] Sekundärinformationen standardmäßig reduzieren.
+[ ] Statusinformationen als scanbare Key-Value-Struktur darstellen.
+[ ] Einheitliches Spacing-System für alle Abstände einführen.
+[ ] Rundungen, Rahmen und Schatten systemweit vereinheitlichen.
+[ ] Pro Bereich nur eine primäre Aktion visuell hervorheben.
+[ ] Bedienlogik konsequent auf Dashboard oder Fenstermodus ausrichten.
+[ ] Standardpositionen offener Fenster so setzen, dass Kernstatus sichtbar bleibt.
+[ ] Spaltenverhältnis zwischen links, Mitte und rechts neu ausbalancieren.
+[ ] Formularfelder, Buttons und Suchleisten einheitlich ausrichten.
+[ ] Platzhalterbereiche wie „Linke Leiste“ und „Rechte Leiste“ in der Standardansicht ausblenden oder funktional füllen.
+[ ] Hilfstexte nur kontextbezogen oder einklappbar anzeigen.
+[ ] Blickführung von oben nach unten und links nach rechts sauber strukturieren.
+[ ] Nächsten sinnvollen Handlungsschritt deutlich sichtbar machen.
+[ ] Technische Begriffe in laienfreundliche Sprache übersetzen.
+[ ] Debug- und Rohbauinformationen in einen Expertenmodus auslagern.
+[ ] Z-Ebenen für Hintergrund, Arbeitsfläche und Dialog verbindlich definieren.
+[ ] Toolbar im Account-Archiv mit sauberer Aufteilung aus Aktionen und Suche umbauen.
+[ ] To-do-Modul visuell neu gewichten.
+[ ] Aufgabenliste im To-do-Modul kontrastreicher und klarer strukturieren.
+[ ] Hilfebereich kleiner, einklappbar oder seitlich andockbar machen.
+[ ] Helle Modulflächen tonal besser an den dunklen Hintergrund anpassen.
+[ ] Statusboxen oben links kompakter gestalten.
+[ ] Statistikbereich rechts oben stärker an den Hauptheader anbinden.
+[ ] Innere Layoutberechnung so anpassen, dass unnötige Scrollleisten verschwinden.
+[x] Platzhaltertexte in leeren Slots stark kürzen. (Iteration 033: als kurzer Leerzustand umgesetzt.)
+[ ] Snap-to-grid oder feste Dock-Zonen für Modulfenster einführen.
+[ ] Schatten- und Rahmenlast reduzieren.
+[ ] Standardansicht insgesamt entschlacken.
+[ ] Aktiven Fokuszustand eines Moduls klar markieren.
+[ ] Linke Modulspalte in klarere Gruppen und Abschnitte gliedern.
+[ ] Buttontypen in der rechten Leiste visuell differenzieren.
+[ ] Innenabstände in Panels systematisch erhöhen.
+[ ] Linien, Konturen und Rahmen optisch beruhigen.
+[ ] Überschriftenhierarchie mit klaren Größenstufen vereinheitlichen.
+[ ] Mindest- und Maximalbreiten für alle Hauptbereiche definieren.
+[ ] Mehr visuelle Ruheflächen zwischen Funktionsgruppen einplanen.
+[ ] Einen klaren Startworkflow sichtbar im Layout verankern.
+[ ] Standardansicht, Bearbeitungsansicht und Expertenansicht strukturell trennen.
+[ ] Fensterinhalte nicht über zentralen Grid-Slots schweben lassen, wenn diese parallel bedient werden sollen.
+[ ] Such- und Eingabefelder mit einheitlicher Höhe und konsistenter Buttonkante gestalten.
+[ ] Zu schmale Status- und Infoleisten auf Mindestbreite prüfen.
+[ ] Fenstertitel stärker vom Inhaltsbereich absetzen.
+[ ] Schwebende Fenster mit klarer Fokus-Hervorhebung und inaktivem Zustand versehen.
+[ ] Seitenleisten bei kleineren Breiten einklappbar machen.
+[ ] Alle Modulcontainer auf gemeinsame Mindesthöhe und Rasterlogik prüfen.
+[ ] Zu dichte Textblöcke in Statusbereichen in mehrere Zeilen oder Chips zerlegen.
+[ ] Warnboxen farblich klarer vom normalen Status trennen.
+[ ] Hauptarbeitsfläche gegenüber Hilfs- und Metabereichen optisch dominanter machen.

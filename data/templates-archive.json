@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-35",
+      "title": "Leere Modul-Slots kurz prüfen",
+      "content": "Prüfe einen freien Slot: Die Hilfe bleibt kurz (\"Modul aktivieren oder Projektstruktur anlegen\") und der Knopf startet direkt den nächsten Schritt.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T04:20:00.000Z",
+      "updatedAt": "2026-03-09T04:20:00.000Z"
+    },
+    {
       "id": "tpl-default-34",
       "title": "Button-States einheitlich prüfen",
       "content": "Prüfe je einen aktiven und deaktivierten `btn` plus `btn-small`: Hover/Active/Fokus sehen gleich aus, deaktivierte Knöpfe heben sich klar ab und bleiben ohne Bewegungs-Effekt.",
@@ -308,7 +317,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T03:40:00.000Z",
+  "updatedAt": "2026-03-09T04:20:00.000Z",
   "required_fields": [
     "id",
     "title",
