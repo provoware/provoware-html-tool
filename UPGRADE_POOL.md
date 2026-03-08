@@ -10,6 +10,7 @@
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
 | UP-025 | Header UX | Selbsttest-Ampel im Header um klickbare Detailhilfe („Warum gelb/rot?“) erweitern | Farbstatus und Legende sind vorhanden, aber Rückfragen zur Ursache entstehen weiterhin ohne direkten Kontextsprung | Schnellere Fehlerklärung direkt aus dem Header ohne Wechsel in andere Bereiche | offen | 026 |
 | UP-026 | Account-Archiv UX | Schnellkopierleiste für E-Mail, URL und Benutzername im Detaildialog ergänzen | Wiederkehrende Accountdaten sollen ohne Umwege nutzbar sein | Schnellerer Alltagsworkflow mit weniger Klicks beim Wechsel zwischen Tools | offen | 027 |
+| UP-027 | Layout Robustheit | Sichtbarkeits-Guard für Header-Karten ergänzen (Mindestzeilen + Overflow-Warnhinweis bei Clipping-Risiko) | Nach mehreren Header-Erweiterungen steigt die Gefahr von verdeckten Inhalten bei knapper Höhe | Frühere Erkennung von Abschneidungen und stabilere Lesbarkeit über Breakpoints hinweg | offen | 028 |
 
 **Passende Vorschläge:**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -34,6 +35,10 @@
 **Passende Vorschläge:**
 1. Kopier-Buttons nur zeigen, wenn Feldwert vorhanden ist
 2. Nach Klick eine kurze „Kopiert“-Rückmeldung direkt im Dialog anzeigen
+
+**Passende Vorschläge:**
+1. Bei erkannter Überlänge in einer Header-Karte automatisch auf 2-Spalten-Layout wechseln
+2. Eine kleine Debug-Markierung für betroffene Karte nur im Entwicklermodus anzeigen
 
 ## Erledigt
 

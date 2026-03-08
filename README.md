@@ -4,14 +4,21 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 6
+- Offene Upgrade-Empfehlungen: 7
 - Erledigte Upgrade-Empfehlungen: 20
 - Default-Archive: 3
-- Letzte Iteration: 027
+- Letzte Iteration: 028
 - Scan-Modus: delta
 
 
 
+
+## Iterations-Update 028 (Mini-Patch)
+
+- Neu: Header- und Modulkopf-Layout lokal nachgeschärft, damit Titel, Buttons und Statusblöcke nicht mehr abgeschnitten oder überdeckt werden.
+- Robustheit: Dashboard-Container nutzt defensivere Höhen- und Overflow-Regeln (`min-height`, `overflow-wrap`, umbruchfähige Kopfzeilen).
+- UX: Lesbarkeit verbessert durch stabile Zeilenhöhen/Abstände und sichtbarere Header-Unterkante bei vielen Inhalten.
+- Archiv: Templates-Defaultarchiv um eine neue Sichtbarkeits-Prüfvorlage erweitert.
 
 ## Iterations-Update 027 (Mini-Patch)
 
