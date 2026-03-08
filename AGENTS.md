@@ -434,12 +434,12 @@ Maximale Fortschrittsdichte erzeugen.
 
 ---
 
-## Zusatzauftrag Iteration 1 (Kerninkonsistenzen)
-Für die nächste Iteration gilt ein enger Pflichtfokus mit Minimal-Patch:
+## Zusatzauftrag Iteration 030 (Mini-Fokus)
+Für die aktuelle Iteration gilt ein enger Pflichtfokus mit Minimal-Patch:
 
-1. `module-registry.json`-Schema vereinheitlichen (`{"version":1,"moduleIds":[]}`)
-2. Fallback-Modulliste fachlich angleichen
-3. Theme-Fallback auf realen Theme-Key vereinheitlichen
+1. `UP-020` priorisieren: 7-Tage-Trend in Header-Statistik umsetzen
+2. Doppelte ID `UP-027` im `UPGRADE_POOL.md` bereinigen (nur ID-Konsistenz)
+3. `AGENTS.md` auf aktuellen Fortschritt und effiziente Ausführung schärfen
 
 Verbindliche Vorarbeit vor jedem Patch (kurz dokumentieren):
 - betroffene Dateien
@@ -450,19 +450,22 @@ Verbindliche Vorarbeit vor jedem Patch (kurz dokumentieren):
 - bewusst nicht geänderte Bereiche
 
 Verbindliche Analyse-Suchbegriffe vor Patch:
-- `module-registry.json`
-- `moduleIds`
-- `"modules"`
-- `FALLBACK_MODULE_IDS`
-- `dunkel`
-- `defaultTheme`
+- `header-stat-events`
+- `profileArchive.events`
+- `UP-020`
+- `UP-027`
+- `7-Tage-Trend`
 
 Zusätzliche Nicht-Ziele in dieser Iteration:
-- keine Slot-Engine
-- `js/ui.js` nicht zerlegen
+- keine Header-Komplettneugestaltung
+- keine globalen CSS-Refactorings
 - keine Persistenzreform
-- keine Startseiten-Neustruktur
-- keine Accessibility-Runde
+- keine Volltest-Runde
 - keine Doku-Rundumerneuerung
+
+Effizienzleitplanken (ergänzend):
+- Header-Änderungen zuerst in Renderer und Tests patchen, erst danach Markup/CSS minimal nachziehen
+- Bei Doku-Konsistenzfehlern nur ID/Status korrigieren, keine inhaltlichen Nebenpatches
+- Für UX-Mehrwert bevorzugt bestehende Datenpfade nutzen (keine neue Datenquelle aufbauen)
 
 Die Punkte sind zuerst in `todo.txt` als Checkbox-Aufgaben zu pflegen und danach exakt patchbasiert abzuarbeiten.

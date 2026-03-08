@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-32",
+      "title": "7-Tage-Trend im Header prüfen",
+      "content": "Prüfe im Header den Wert „7-Tage-Trend“ mit leerem Archiv und mit gültigen Zeitstempeln: ohne Historie erscheint „0 (keine Historie)\", bei Daten zeigt die Zahl den Vergleich zur Vorwoche robust ohne Absturz.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T02:20:00.000Z",
+      "updatedAt": "2026-03-09T02:20:00.000Z"
+    },
+    {
       "id": "tpl-default-31",
       "title": "Header-Kachel-Navigation prüfen",
       "content": "Prüfe alle vier Header-Kacheln per Klick, Enter und Leertaste: Jede Kachel springt zum passenden Zielbereich, bei fehlendem Ziel erscheint nur ein klarer Warnhinweis ohne Absturz.",
@@ -281,7 +290,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T01:20:00.000Z",
+  "updatedAt": "2026-03-09T02:20:00.000Z",
   "required_fields": [
     "id",
     "title",

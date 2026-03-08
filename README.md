@@ -5,14 +5,21 @@
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
 - Offene Upgrade-Empfehlungen: 9
-- Erledigte Upgrade-Empfehlungen: 20
+- Erledigte Upgrade-Empfehlungen: 21
 - Default-Archive: 3
-- Letzte Iteration: 029
+- Letzte Iteration: 030
 - Scan-Modus: delta
 
 
 
 
+
+## Iterations-Update 030 (Mini-Patch)
+
+- Neu: Dashboard-Statistik zeigt jetzt zusätzlich einen 7-Tage-Trend für Archiv-Meldungen (inkl. Vergleich zur Vorwoche).
+- Robustheit: Trendberechnung filtert ungültige/zu alte/zukünftige Zeitstempel defensiv und fällt bei leerer Historie sicher auf „0 (keine Historie)“ zurück.
+- UX: Trendwert macht Veränderungen direkt im Header sichtbar, ohne in Archivlisten wechseln zu müssen.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „7-Tage-Trend im Header prüfen“ erweitert.
 
 ## Iterations-Update 029 (Mini-Patch)
 
