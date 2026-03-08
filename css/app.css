@@ -624,6 +624,8 @@ body::before {
 .module-registry-next-step-actions {
   display: flex;
   justify-content: flex-start;
+  gap: 6px;
+  flex-wrap: wrap;
   margin-top: 8px;
 }
 

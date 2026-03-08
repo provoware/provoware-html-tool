@@ -24,6 +24,8 @@ const isTextLikeFile = (name = '') => {
   return extension ? TEXT_FILE_EXTENSIONS.has(extension) : false;
 };
 
+const MODULE_NEXT_STEP_DEFAULT_CONTENT = '{\n  "version": 1\n}\n';
+
 const updateDashboardRowState = (setState, getState, rowIndex, patch = {}) => {
   const rows = withDefaultDashboardRows(getState().dashboardNotes?.rows || []);
   if (!rows[rowIndex]) return;
@@ -109,11 +111,16 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
       return { ok: false, code: 'MODULE_NEXT_STEP_FILE_MISSING', message };
     }
     const exists = await filesystemAdapter.fileExists(filePath);
-    if (!exists.ok || !exists.data?.exists) {
-      const message = `Datei konnte nicht geöffnet werden: ${filePath}`;
+    if (!exists.ok) {
+      setState({ editorStatus: `Datei konnte nicht geöffnet werden: ${filePath}` });
+      logEvent('WARN', exists.code, 'Dateiprüfung für Modul-Hinweis fehlgeschlagen.', exists.data);
+      return exists;
+    }
+    if (!exists.data?.exists) {
+      const message = `Datei fehlt noch: ${filePath}`;
       setState({ editorStatus: message });
-      logEvent('WARN', exists.code || 'MODULE_NEXT_STEP_FILE_MISSING', message, exists.data);
-      return exists.ok ? { ok: false, code: 'MODULE_NEXT_STEP_FILE_MISSING', message, data: { path: filePath } } : exists;
+      logEvent('WARN', 'MODULE_NEXT_STEP_FILE_MISSING', message, { path: filePath });
+      return { ok: false, code: 'MODULE_NEXT_STEP_FILE_MISSING', message, data: { path: filePath } };
     }
     const loaded = await filesystemAdapter.readText(filePath);
     if (!loaded.ok) {
@@ -124,6 +131,43 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     setState({
       editorFilePath: filePath,
       editorContent: loaded.data?.text || '',
+      editorStatus: `Editor geöffnet: ${filePath}`,
+      editorDirty: false
+    });
+    logEvent('INFO', 'MODULE_NEXT_STEP_FILE_OPENED', 'Datei aus Modul-Hinweis im Editor geöffnet.', { path: filePath });
+    return { ok: true, code: 'MODULE_NEXT_STEP_FILE_OPENED', message: `Datei geöffnet: ${filePath}`, data: { path: filePath } };
+  },
+  onCreateModuleRegistryNextStepFile: async (path) => {
+    const filePath = normalizeRelativePath(path);
+    if (!filePath) {
+      const message = 'Kein Dateipfad zum Anlegen gefunden.';
+      setState({ editorStatus: message });
+      return { ok: false, code: 'MODULE_NEXT_STEP_CREATE_PATH_MISSING', message };
+    }
+    const exists = await filesystemAdapter.fileExists(filePath);
+    if (!exists.ok) {
+      setState({ editorStatus: `Datei konnte nicht geprüft werden: ${filePath}` });
+      logEvent('WARN', exists.code, 'Dateiprüfung vor Datei-Anlage fehlgeschlagen.', exists.data);
+      return exists;
+    }
+    if (!exists.data?.exists) {
+      const created = await filesystemAdapter.createFile(filePath, MODULE_NEXT_STEP_DEFAULT_CONTENT);
+      if (!created.ok) {
+        setState({ editorStatus: `Datei konnte nicht angelegt werden: ${filePath}` });
+        logEvent('WARN', created.code, 'Datei aus Modul-Hinweis konnte nicht angelegt werden.', created.data);
+        return created;
+      }
+      logEvent('INFO', 'MODULE_NEXT_STEP_FILE_CREATED', 'Datei aus Modul-Hinweis wurde angelegt.', { path: filePath });
+    }
+    const loaded = await filesystemAdapter.readText(filePath);
+    if (!loaded.ok) {
+      setState({ editorStatus: `Datei konnte nicht gelesen werden: ${filePath}` });
+      logEvent('WARN', loaded.code, 'Datei aus Modul-Hinweis konnte nicht gelesen werden.', loaded.data);
+      return loaded;
+    }
+    setState({
+      editorFilePath: filePath,
+      editorContent: loaded.data?.text || MODULE_NEXT_STEP_DEFAULT_CONTENT,
       editorStatus: `Editor geöffnet: ${filePath}`,
       editorDirty: false
     });

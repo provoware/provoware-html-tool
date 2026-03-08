@@ -173,12 +173,18 @@ export const renderMainSection = ({
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
   const moduleRegistryNextStep = state.moduleRegistry?.nextStep || 'Keine Aktion nötig.';
   setText('module-registry-next-step', `Nächster Modul-Schritt: ${moduleRegistryNextStep}`);
+  const nextStepPath = extractNextStepFilePath(moduleRegistryNextStep);
   const moduleRegistryOpenButton = byId('module-registry-open-next-step');
   if (moduleRegistryOpenButton) {
-    const nextStepPath = extractNextStepFilePath(moduleRegistryNextStep);
     moduleRegistryOpenButton.disabled = !nextStepPath;
     moduleRegistryOpenButton.dataset.filePath = nextStepPath;
     moduleRegistryOpenButton.title = nextStepPath ? `Datei öffnen: ${nextStepPath}` : 'Kein Dateipfad im nächsten Schritt gefunden.';
+  }
+  const moduleRegistryCreateButton = byId('module-registry-create-next-step');
+  if (moduleRegistryCreateButton) {
+    moduleRegistryCreateButton.disabled = !nextStepPath;
+    moduleRegistryCreateButton.dataset.filePath = nextStepPath;
+    moduleRegistryCreateButton.title = nextStepPath ? `Datei anlegen: ${nextStepPath}` : 'Kein Dateipfad im nächsten Schritt gefunden.';
   }
   const sidebarModuleList = byId('sidebar-module-list');
   if (sidebarModuleList) {

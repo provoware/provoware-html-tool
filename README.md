@@ -5,10 +5,17 @@
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
 - Offene Upgrade-Empfehlungen: 2
-- Erledigte Upgrade-Empfehlungen: 14
+- Erledigte Upgrade-Empfehlungen: 15
 - Default-Archive: 2
-- Letzte Iteration: 017
+- Letzte Iteration: 018
 - Scan-Modus: delta
+
+
+## Iterations-Update 018 (Mini-Patch)
+
+- Neu: Modul-Next-Step hat jetzt neben **„Datei öffnen“** auch **„Datei anlegen“** für fehlende Dateien.
+- Robustheit: Öffnen-Flow unterscheidet klar zwischen Pfad fehlt, Datei fehlt und Lese-/Prüffehler.
+- Tests: Ein gezielter Unit-Test deckt den Öffnen-Flow für vorhandenen und fehlenden Pfad ab.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
