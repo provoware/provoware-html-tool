@@ -1006,7 +1006,9 @@ body::before {
 
   .app {
     grid-template-columns: 1fr;
-    width: calc(100vw - 14px);
+    width: calc(100vw - 10px);
+    margin: 8px auto;
+    padding: 10px;
     min-height: auto;
     height: auto;
     transform: none;
@@ -1023,8 +1025,13 @@ body::before {
     align-items: flex-start;
   }
 
+  .header-actions,
   .header-control-buttons {
     width: 100%;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
   }
 
   .theme-switch {
@@ -1039,7 +1046,9 @@ body::before {
   .archive-input-grid,
   .archive-list,
   .mix-options,
-  .mix-amounts {
+  .mix-amounts,
+  .utility-cards,
+  .startup-steps {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
   }
@@ -1049,8 +1058,16 @@ body::before {
     grid-row: span 1;
   }
 
+  .module-panel[data-panel='todo'] {
+    grid-row: auto;
+  }
+
   .guide-tools-panel {
     grid-template-columns: 1fr;
+  }
+
+  .workspace-dashboard {
+    padding: 10px;
   }
 }
 
@@ -1409,44 +1426,6 @@ select {
   padding: 4px;
 }
 
-@media (max-width: 980px) {
-  .app {
-    grid-template-columns: 1fr;
-    width: calc(100vw - 14px);
-    min-height: auto;
-    height: auto;
-    transform: none;
-    grid-template-areas:
-      "header"
-      "main"
-      "nav"
-      "widgets"
-      "footer";
-  }
-
-  .startup-steps {
-    grid-template-columns: 1fr;
-  }
-
-  .header-actions {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .utility-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .panel-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-
-  .module-panel[data-panel='todo'] {
-    grid-row: auto;
-  }
-}
-
 @media (max-width: 720px) {
   .header-actions,
   .header-control-buttons {
@@ -1467,17 +1446,6 @@ select {
 
   .module-btn {
     padding: 9px 10px;
-  }
-}
-
-@media (max-width: 980px) {
-  .panel-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-
-  .module-panel[data-panel='todo'] {
-    grid-row: auto;
   }
 }
 
@@ -1544,18 +1512,6 @@ select {
   .panel-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto;
-  }
-}
-
-@media (max-width: 980px) {
-  .app {
-    margin: 8px auto;
-    width: calc(100vw - 10px);
-    padding: 10px;
-  }
-
-  .workspace-dashboard {
-    padding: 10px;
   }
 }
 
