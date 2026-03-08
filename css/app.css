@@ -1288,6 +1288,10 @@ body::before {
 }
 
 @media (max-width: 980px) {
+  :root {
+    --panel-overlay: rgba(146, 166, 126, 0.12);
+  }
+
   body {
     overflow: auto;
   }

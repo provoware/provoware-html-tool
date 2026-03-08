@@ -5,15 +5,23 @@
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
 - Offene Upgrade-Empfehlungen: 7
-- Erledigte Upgrade-Empfehlungen: 28
+- Erledigte Upgrade-Empfehlungen: 29
 - Default-Archive: 3
-- Letzte Iteration: 035
+- Letzte Iteration: 036
 - Scan-Modus: delta
 
 
 
 
 
+
+
+## Iterations-Update 036 (Mini-Patch)
+
+- Neu: `UP-036` umgesetzt: Panel-Overlay wird nur unterhalb von `<=980px` weiter reduziert.
+- Robustheit: Breakpoint-lokale Variable hält Desktop-Darstellung unverändert und begrenzt Seiteneffekte.
+- UX: Panelinhalte wirken auf kleineren Breiten ruhiger und bleiben schneller lesbar.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Panel-Overlay bei 980px ruhig prüfen“ ergänzt.
 
 ## Iterations-Update 035 (Mini-Patch)
 
