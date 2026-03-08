@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { syncRightSidebarAutoCollapseState } from '../../js/ui.js';
+import {
+  buildSidebarToggleLabel,
+  syncLeftSidebarAutoCollapseState,
+  syncRightSidebarAutoCollapseState
+} from '../../js/ui.js';
 
 const createClassList = (initial = []) => {
   const classes = new Set(initial);
@@ -59,4 +63,30 @@ test('ui-sidebar-auto-collapse(dom): entfernt Klasse + Auto-Label außerhalb der
   assert.equal(result, false);
   assert.equal(classList.has('sidebar-right-auto-collapsed'), false);
   assert.equal(toggleButton.textContent, 'Rechte Leiste');
+});
+
+test('ui-sidebar-auto-collapse(dom): linke Leiste klappt bei <=980px im Maximieren-Modus automatisch ein', () => {
+  const classList = createClassList(['has-maximized-panel']);
+  const app = { classList };
+  const toggleButton = { textContent: 'Linke Leiste', setAttribute: () => {} };
+
+  const result = syncLeftSidebarAutoCollapseState({
+    app,
+    toggleButton,
+    viewportWidth: 980,
+    baseLabel: 'Linke Leiste'
+  });
+
+  assert.equal(result, true);
+  assert.equal(classList.has('sidebar-left-auto-collapsed'), true);
+  assert.equal(toggleButton.textContent, 'Linke Leiste (Auto)');
+});
+
+test('ui-sidebar-auto-collapse(dom): Label-Regel priorisiert Auto vor Manuell', () => {
+  const label = buildSidebarToggleLabel({
+    baseLabel: 'Rechte Leiste',
+    isAutoCollapsed: true,
+    isManuallyCollapsed: true
+  });
+  assert.equal(label, 'Rechte Leiste (Auto)');
 });

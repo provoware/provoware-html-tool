@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-42",
+      "title": "Werkzeugleisten-Gruppen schnell prüfen",
+      "content": "Prüfe in der rechten Leiste: Basis- und Zusatzaktionen bleiben getrennt, Aktionstypen sind visuell unterscheidbar und „Mehr Tools“ blendet Zusatzaktionen robust ein.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T07:45:00.000Z",
+      "updatedAt": "2026-03-09T07:45:00.000Z"
+    },
+    {
       "id": "tpl-default-39",
       "title": "Layout-Quickcheck Statusleisten",
       "content": "Prüfe nach Layout-Patches: keine horizontale Scrollleiste in Modulen, Statuswerte als 2-Spalten-Key-Value lesbar, rechte Sidebar bleibt im Viewport.",

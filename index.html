@@ -256,14 +256,18 @@
           <section class="settings-group utility-card" aria-label="Tool-Einstellungen und Tests">
             <h3>Tool-Einstellungen und Tests</h3>
             <div class="settings-actions">
-              <button id="action-select-dir" class="btn btn-primary" type="button">Ordner wählen</button>
-              <button id="action-run-selftest" class="btn" type="button">Selbsttest starten</button>
-              <button id="action-ensure-structure" class="btn" type="button">Projektstruktur anlegen</button>
-              <button id="action-run-write-test" class="btn" type="button">Schreibtest ausführen</button>
-              <button id="action-switch-dir" class="btn" type="button">Ordner wechseln</button>
-              <button id="action-export-diagnosis" class="btn" type="button">Diagnose exportieren</button>
-              <button id="action-logout" class="btn" type="button">Logout (sicher)</button>
-              <button id="action-toggle-tools" class="btn btn-small-tools" type="button" aria-expanded="false">Mehr Tools</button>
+              <div class="settings-action-group" aria-label="Basisaktionen">
+                <button id="action-select-dir" class="btn btn-primary btn-action-main" type="button">Ordner wählen</button>
+                <button id="action-run-selftest" class="btn btn-action-check" type="button">Selbsttest starten</button>
+                <button id="action-ensure-structure" class="btn btn-action-setup" type="button">Projektstruktur anlegen</button>
+              </div>
+              <div class="settings-action-group" aria-label="Zusatzaktionen">
+                <button id="action-run-write-test" class="btn btn-action-check" type="button">Schreibtest ausführen</button>
+                <button id="action-switch-dir" class="btn btn-action-secondary" type="button">Ordner wechseln</button>
+                <button id="action-export-diagnosis" class="btn btn-action-secondary" type="button">Diagnose exportieren</button>
+                <button id="action-logout" class="btn btn-action-danger" type="button">Logout (sicher)</button>
+                <button id="action-toggle-tools" class="btn btn-small-tools" type="button" aria-expanded="false">Mehr Tools</button>
+              </div>
             </div>
             <label class="checkline"><input id="a11y-quiet-mode" type="checkbox" /> Ruhiger Screenreader-Modus</label>
             <label class="checkline"><input id="toggle-grid-help" type="checkbox" /> Rasterhilfe anzeigen <span class="checkline-hint">zeigt ein echtes 3x3-Hilfsraster</span></label>
@@ -304,7 +308,10 @@
             <section class="settings-group" aria-label="Plugin-Verwaltung">
               <h3>Plugin-Verwaltung</h3>
               <p id="plugin-help-text" class="sidebar-summary">Plugins können ein- oder ausgeschaltet werden. So bleibt die Oberfläche einfach.</p>
-              <p id="plugin-help-extra" class="guide-help-note">Tipp: Wähle ein Plugin, prüfe den Status darunter und aktiviere nur bei Bedarf.</p>
+              <details class="guide-help-collapsible">
+                <summary>Wann ist dieser Bereich wichtig?</summary>
+                <p id="plugin-help-extra" class="guide-help-note">Tipp: Wähle ein Plugin, prüfe den Status darunter und aktiviere nur bei Bedarf.</p>
+              </details>
               <label for="plugin-select">Plugin-Auswahl</label>
               <select id="plugin-select" aria-describedby="plugin-help-text plugin-help-extra"></select>
               <div class="settings-actions">

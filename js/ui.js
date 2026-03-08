@@ -16,6 +16,7 @@ const FONT_SCALE_STORAGE_KEY = 'provoware:font-scale';
 const PANEL_PROPORTION_STORAGE_KEY = 'provoware:panel-proportion-preset';
 const PANEL_PROPORTION_MANUAL_STORAGE_KEY = 'provoware:panel-proportion-manual';
 const AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH = 1100;
+const AUTO_COLLAPSE_LEFT_SIDEBAR_MAX_WIDTH = 980;
 const PANEL_PROPORTION_PRESETS = Object.freeze({
   balanced: { navMin: '220px', navMax: '320px', mainMin: '620px', widgetsMin: '260px', widgetsMax: '360px' },
   'focus-main': { navMin: '190px', navMax: '250px', mainMin: '760px', widgetsMin: '220px', widgetsMax: '290px' },
@@ -463,6 +464,32 @@ export const shouldAutoCollapseRightSidebar = ({ hasMaximizedPanel, viewportWidt
   return Boolean(hasMaximizedPanel) && Number(viewportWidth) < AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH;
 };
 
+export const shouldAutoCollapseLeftSidebar = ({ hasMaximizedPanel, viewportWidth }) => {
+  return Boolean(hasMaximizedPanel) && Number(viewportWidth) <= AUTO_COLLAPSE_LEFT_SIDEBAR_MAX_WIDTH;
+};
+
+export const buildSidebarToggleLabel = ({ baseLabel, isAutoCollapsed = false, isManuallyCollapsed = false }) => {
+  if (!baseLabel) return '';
+  if (isAutoCollapsed) return `${baseLabel} (Auto)`;
+  if (isManuallyCollapsed) return `${baseLabel} (Manuell)`;
+  return baseLabel;
+};
+
+export const syncSidebarToggleButtonState = ({ app, toggleButton, baseLabel, manualClass, autoClass }) => {
+  if (!app?.classList || !toggleButton) return false;
+  const isAutoCollapsed = autoClass ? app.classList.contains(autoClass) : false;
+  const isManuallyCollapsed = manualClass ? app.classList.contains(manualClass) : false;
+  toggleButton.textContent = buildSidebarToggleLabel({
+    baseLabel,
+    isAutoCollapsed,
+    isManuallyCollapsed
+  });
+  if (typeof toggleButton.setAttribute === 'function') {
+    toggleButton.setAttribute('aria-pressed', (isAutoCollapsed || isManuallyCollapsed) ? 'true' : 'false');
+  }
+  return isAutoCollapsed || isManuallyCollapsed;
+};
+
 export const syncRightSidebarAutoCollapseState = ({ app, toggleButton, viewportWidth = window.innerWidth, baseLabel = 'Rechte Leiste' }) => {
   if (!app?.classList) return false;
   const shouldAutoCollapse = shouldAutoCollapseRightSidebar({
@@ -470,9 +497,18 @@ export const syncRightSidebarAutoCollapseState = ({ app, toggleButton, viewportW
     viewportWidth
   });
   app.classList.toggle('sidebar-right-auto-collapsed', shouldAutoCollapse);
-  if (toggleButton) {
-    toggleButton.textContent = shouldAutoCollapse ? `${baseLabel} (Auto)` : baseLabel;
-  }
+  syncSidebarToggleButtonState({ app, toggleButton, baseLabel, manualClass: 'sidebar-right-collapsed', autoClass: 'sidebar-right-auto-collapsed' });
+  return shouldAutoCollapse;
+};
+
+export const syncLeftSidebarAutoCollapseState = ({ app, toggleButton, viewportWidth = window.innerWidth, baseLabel = 'Linke Leiste' }) => {
+  if (!app?.classList) return false;
+  const shouldAutoCollapse = shouldAutoCollapseLeftSidebar({
+    hasMaximizedPanel: app.classList.contains('has-maximized-panel'),
+    viewportWidth
+  });
+  app.classList.toggle('sidebar-left-auto-collapsed', shouldAutoCollapse);
+  syncSidebarToggleButtonState({ app, toggleButton, baseLabel, manualClass: 'sidebar-left-collapsed', autoClass: 'sidebar-left-auto-collapsed' });
   return shouldAutoCollapse;
 };
 
@@ -513,9 +549,16 @@ const bindWorkspaceControls = () => {
   };
 
   const rightSidebarToggleButton = byId('toggle-right-sidebar');
+  const leftSidebarToggleButton = byId('toggle-left-sidebar');
   const rightSidebarToggleBaseLabel = rightSidebarToggleButton?.textContent?.trim() || 'Rechte Leiste';
+  const leftSidebarToggleBaseLabel = leftSidebarToggleButton?.textContent?.trim() || 'Linke Leiste';
 
   const syncSidebarAutoCollapse = () => {
+    syncLeftSidebarAutoCollapseState({
+      app,
+      toggleButton: leftSidebarToggleButton,
+      baseLabel: leftSidebarToggleBaseLabel
+    });
     syncRightSidebarAutoCollapseState({
       app,
       toggleButton: rightSidebarToggleButton,
