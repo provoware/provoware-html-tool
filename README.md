@@ -4,7 +4,7 @@
 - Erledigte Punkte: 32 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: Modul-Hilfe bei fehlenden Moduldateien ist jetzt konkreter (Dateiname + nächster Schritt in einfacher Sprache).
+- Stand dieser Iteration: `code_scan_registry.json` hat jetzt das Feld `scope` und ab Iteration 10 gilt ein kleiner Scan-Rotationsmodus (9x Delta, 1x gezielter Bereichs-Scan älterer Module).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**

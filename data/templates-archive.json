@@ -45,7 +45,16 @@
       "favorite": false,
       "createdAt": "2026-03-07T00:00:00.000Z",
       "updatedAt": "2026-03-07T00:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-06",
+      "title": "Scan-Rotation Mini-Plan",
+      "content": "Notiere für Iteration 10: älteres Modul, Zielbereich, 3 Prüfpunkte und 1 kleiner Altlast-Fix.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T00:00:00.000Z",
+      "updatedAt": "2026-03-08T00:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-07T00:00:00.000Z"
+  "updatedAt": "2026-03-08T00:00:00.000Z"
 }

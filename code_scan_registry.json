@@ -1,10 +1,22 @@
 {
   "meta": {
     "version": 1,
-    "last_scan": "",
-    "last_update_iteration": "001",
+    "last_scan": "2026-03-08T00:00:00Z",
+    "last_update_iteration": "002",
     "scan_mode": "delta",
-    "project_phase": "early"
+    "project_phase": "early",
+    "scope_values": [
+      "ui",
+      "logic",
+      "data",
+      "style",
+      "docs"
+    ],
+    "rotation_mode": {
+      "enabled_from_iteration": "010",
+      "cycle": "9x-delta-1x-targeted-legacy-module-scan",
+      "target_rule": "older-module-with-open-debt"
+    }
   },
   "stats": {
     "open_total": 0,
