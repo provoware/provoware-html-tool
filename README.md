@@ -4,11 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 2
+- Offene Upgrade-Empfehlungen: 3
 - Erledigte Upgrade-Empfehlungen: 17
 - Default-Archive: 2
-- Letzte Iteration: 020
+- Letzte Iteration: 021
 - Scan-Modus: delta
+
+
+## Iterations-Update 021 (Mini-Patch)
+
+- Neu: Header-Dashboard in vier gleich große Bereiche gegliedert (Intro, Schnellaktionen, Steuerung, Statistik).
+- UX: Schnellaktionen in den Header verschoben und kompakter strukturiert.
+- Robustheit: Header-Statistik zeigt defensive Fallback-Werte auch bei fehlenden Daten.
+- Archiv: Templates-Defaultarchiv um eine neue 4-Bereiche-Qualitätsvorlage ergänzt.
 
 
 ## Iterations-Update 020 (Mini-Patch)

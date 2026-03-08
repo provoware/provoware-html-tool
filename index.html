@@ -14,18 +14,40 @@
     <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
     <div id="app" class="app" data-layout-mode="standard">
       <header class="header panel" aria-label="Kopfbereich">
-        <div class="header-intro">
-          <div class="header-title-group">
-            <h1 id="app-title">👋 Willkommen zurück!</h1>
-            <p id="app-subtitle">Dein kreatives Dashboard</p>
+        <section class="header-dashboard" aria-label="Header-Dashboard mit vier Bereichen">
+          <div class="header-card header-card-intro">
+            <div class="header-title-group">
+              <h1 id="app-title">👋 Willkommen zurück!</h1>
+              <p id="app-subtitle">Dein kreatives Dashboard</p>
+            </div>
+            <ul class="header-status-chips" aria-label="Projektstatus">
+              <li class="header-status-chip"><small>Projektstatus</small><strong id="header-chip-project-status">Aktiv</strong></li>
+              <li class="header-status-chip"><small>Autosave</small><strong id="header-chip-autosave-status">An</strong></li>
+            </ul>
           </div>
-        </div>
-        <div class="header-actions">
-          <ul class="header-status-chips" aria-label="Projektstatus">
-            <li class="header-status-chip"><small>Projektstatus</small><strong id="header-chip-project-status">Aktiv</strong></li>
-            <li class="header-status-chip"><small>Autosave</small><strong id="header-chip-autosave-status">An</strong></li>
-          </ul>
-          <div class="header-control-buttons" aria-label="Layout-Steuerung">
+
+          <section class="header-card header-card-quick" aria-label="Schnellaktionen">
+            <h2 class="panel-title" id="startup-title">Schnellaktionen</h2>
+            <p id="dashboard-info-note" class="dashboard-note">Direkter Start für häufige Schritte mit klaren, großen Kacheln.</p>
+            <p id="dashboard-datetime" class="dashboard-datetime">Datum und Uhrzeit: -</p>
+            <ol id="startup-steps" class="startup-steps">
+              <li>Schritt 1/4: Projektordner wählen</li>
+              <li>Schritt 2/4: Rechte prüfen</li>
+              <li>Schritt 3/4: Grundcheck ausführen</li>
+              <li>Schritt 4/4: Module starten</li>
+            </ol>
+            <section id="startup-assistant" class="startup-assistant" aria-label="4-Schritt-Assistent">
+              <h3 id="startup-assistant-title">Assistent: Schritt 1 starten</h3>
+              <p id="startup-assistant-text" class="dashboard-note">Wähle zuerst den Projektordner.</p>
+              <div class="startup-assistant-actions">
+                <button id="startup-assistant-action" class="btn-small btn-accent" type="button" data-assistant-target="action-select-dir">Jetzt ausführen</button>
+                <p id="startup-assistant-hint" class="dashboard-note">Nutzt den passenden Knopf rechts automatisch.</p>
+              </div>
+            </section>
+            <p id="next-step" class="dashboard-note"><strong>Nächster Schritt:</strong> Wähle zuerst den Projektordner und starte danach den Kurzcheck.</p>
+          </section>
+
+          <section class="header-card header-card-controls" aria-label="Layout-Steuerung">
             <button id="toggle-left-sidebar" class="btn-small" type="button" aria-pressed="false">Linke Leiste</button>
             <button id="toggle-right-sidebar" class="btn-small" type="button" aria-pressed="false">Rechte Leiste</button>
             <label class="theme-switch" for="theme-select">Farbtheme
@@ -39,8 +61,18 @@
               </select>
             </label>
             <p id="zoom-status" class="zoom-status" aria-live="polite">Schriftgröße: 100%</p>
-          </div>
-        </div>
+          </section>
+
+          <section class="header-card header-card-stats" aria-label="Dashboard-Statistiken">
+            <h2 class="panel-title">Dashboard-Statistik</h2>
+            <dl class="header-stats-list">
+              <div><dt>Module aktiv</dt><dd id="header-stat-modules">0</dd></div>
+              <div><dt>Vorlagen</dt><dd id="header-stat-templates">0</dd></div>
+              <div><dt>Archiv-Meldungen</dt><dd id="header-stat-events">0</dd></div>
+              <div><dt>Selbsttest-Status</dt><dd id="header-stat-health">-</dd></div>
+            </dl>
+          </section>
+        </section>
       </header>
 
       <nav class="nav panel tile-left" aria-label="Navigation">
@@ -69,24 +101,6 @@
       <main id="main-content" class="main panel tile-center" aria-label="Modulbereich" tabindex="-1">
         <p id="a11y-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
         <section class="workspace-dashboard">
-          <h2 class="panel-title" id="startup-title">Schnellaktionen</h2>
-          <p id="dashboard-info-note" class="dashboard-note">Direkter Start für häufige Schritte mit klaren, großen Kacheln.</p>
-          <p id="dashboard-datetime" class="dashboard-datetime">Datum und Uhrzeit: -</p>
-          <ol id="startup-steps" class="startup-steps">
-            <li>Schritt 1/4: Projektordner wählen</li>
-            <li>Schritt 2/4: Rechte prüfen</li>
-            <li>Schritt 3/4: Grundcheck ausführen</li>
-            <li>Schritt 4/4: Module starten</li>
-          </ol>
-          <section id="startup-assistant" class="startup-assistant" aria-label="4-Schritt-Assistent">
-            <h3 id="startup-assistant-title">Assistent: Schritt 1 starten</h3>
-            <p id="startup-assistant-text" class="dashboard-note">Wähle zuerst den Projektordner.</p>
-            <div class="startup-assistant-actions">
-              <button id="startup-assistant-action" class="btn-small btn-accent" type="button" data-assistant-target="action-select-dir">Jetzt ausführen</button>
-              <p id="startup-assistant-hint" class="dashboard-note">Nutzt den passenden Knopf rechts automatisch.</p>
-            </div>
-          </section>
-          <p id="next-step" class="dashboard-note"><strong>Nächster Schritt:</strong> Wähle zuerst den Projektordner und starte danach den Kurzcheck.</p>
           <section class="settings-group" aria-label="Plugin-Verwaltung">
             <h3>Plugin-Verwaltung</h3>
             <p id="plugin-help-text" class="sidebar-summary">Plugins können ein- oder ausgeschaltet werden. So bleibt die Oberfläche einfach.</p>
