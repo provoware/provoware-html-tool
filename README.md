@@ -4,16 +4,30 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 6
-- Erledigte Upgrade-Empfehlungen: 27
+- Offene Upgrade-Empfehlungen: 7
+- Erledigte Upgrade-Empfehlungen: 28
 - Default-Archive: 3
-- Letzte Iteration: 033
+- Letzte Iteration: 035
 - Scan-Modus: delta
 
 
 
 
 
+
+## Iterations-Update 035 (Mini-Patch)
+
+- Neu: `UP-035` umgesetzt: Modulbuttons in der linken Leiste schalten bei `<=980px` gezielt in 1 Spalte.
+- Robustheit: Weniger Umbruch-/Überlaufdruck in der Sidebar auf kleinen Breiten.
+- UX: Hintergrundmuster im Body deutlich reduziert, damit Inhalte ruhiger und schneller lesbar sind.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Sidebar-Kompaktmodus und ruhiger Hintergrund“ ergänzt.
+
+## Iterations-Update 034 (Mini-Patch)
+
+- Neu: Sechs offene Layout-Punkte aus `todo.txt` mit einem lokalen CSS-Patch geschlossen.
+- Robustheit: Panel-Flächen sind opaker und Overlays zurückgenommen, wodurch Inhalte stabiler lesbar bleiben.
+- UX: Linke Leiste und Modulbuttons sind besser lesbar (mehr Breite, mehr Innenabstand, sauberer Umbruch), dazu größere Mindestschrift im Hauptbereich.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Sechs Layout-Basispunkte schnell prüfen“ ergänzt.
 
 ## Iterations-Update 033 (Mini-Patch)
 

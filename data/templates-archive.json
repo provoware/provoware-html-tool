@@ -2,6 +2,24 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-37",
+      "title": "Sidebar-Kompaktmodus und ruhiger Hintergrund prüfen",
+      "content": "Prüfe bei 980px und 720px: Modulbuttons links stehen in einer Spalte und der Hintergrund bleibt sichtbar ruhiger ohne die Lesbarkeit der Panelinhalte zu stören.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T06:10:00.000Z",
+      "updatedAt": "2026-03-09T06:10:00.000Z"
+    },
+    {
+      "id": "tpl-default-36",
+      "title": "Sechs Layout-Basispunkte schnell prüfen",
+      "content": "Prüfe kurz: opake Panels, breitere linke Leiste, lesbare Modulbuttons mit Umbruch, größere Hauptschrift, höhere Kontraste in dunklen Statistikflächen und kompakte Statusboxen.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T05:20:00.000Z",
+      "updatedAt": "2026-03-09T05:20:00.000Z"
+    },
+    {
       "id": "tpl-default-35",
       "title": "Leere Modul-Slots kurz prüfen",
       "content": "Prüfe einen freien Slot: Die Hilfe bleibt kurz (\"Modul aktivieren oder Projektstruktur anlegen\") und der Knopf startet direkt den nächsten Schritt.",
@@ -317,7 +335,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T04:20:00.000Z",
+  "updatedAt": "2026-03-09T06:10:00.000Z",
   "required_fields": [
     "id",
     "title",
