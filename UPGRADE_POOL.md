@@ -6,6 +6,7 @@
 |---|---|---|---|---|---|---|
 | UP-001 | Layout | Zentrale Größenlogik für Panels vereinheitlichen | Verhindert inkonsistente Skalierung | stabilere Darstellung bei Fensteränderung | offen | 001 |
 | UP-008 | Responsive QA | Einen kleinen DOM-basierten Test für den mobilen Tools-Toggle ergänzen | CSS-Regeln sind vorhanden, aber ein Sichtbarkeits-Sanity-Check fehlt noch | Frühere Erkennung von Mobile-Regressionsfehlern | offen | 008 |
+| UP-009 | Header UX | Header-Statuschips mit fester Max-Zeilenhöhe + kompakter Overflow-Anzeige ergänzen | Bei vielen Statuswerten kann der Header auf kleinen Breiten zu hoch werden | Stabilere Header-Höhe und klarere Priorisierung wichtiger Statuswerte | offen | 009 |
 
 **Passende Vorschläge:**
 1. Min-/Max-Breiten je Hauptpanel definieren
@@ -14,6 +15,10 @@
 **Passende Vorschläge:**
 1. Prüfen: Toggle-Schalter setzt `aria-expanded` auf `true/false`
 2. Prüfen: die ersten zwei Tool-Aktionen bleiben immer sichtbar
+
+**Passende Vorschläge:**
+1. Erste 2 Status-Chips immer sichtbar halten, Rest hinter „+N“
+2. Tooltip mit vollständiger Statusliste bei Hover/Fokus anzeigen
 
 ## Erledigt
 

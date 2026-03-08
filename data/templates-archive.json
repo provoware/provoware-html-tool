@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-12",
+      "title": "Header-Layout schnell prüfen",
+      "content": "Prüfe bei 3 Breiten (Desktop, Tablet, Mobil), ob Status-Chips umbrechen, Theme-Auswahl sichtbar bleibt und keine Header-Elemente abgeschnitten werden.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T06:00:00.000Z",
+      "updatedAt": "2026-03-08T06:00:00.000Z"
+    },
+    {
       "id": "tpl-default-11",
       "title": "Mobile Tools kompakt prüfen",
       "content": "Zeige mobil zuerst 2 Kernaktionen, schalte Zusatzaktionen per 'Mehr Tools' frei und prüfe 3 Breakpoints: Desktop, Tablet, Mobil.",
@@ -101,7 +110,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T05:00:00.000Z",
+  "updatedAt": "2026-03-08T06:00:00.000Z",
   "required_fields": [
     "id",
     "title",

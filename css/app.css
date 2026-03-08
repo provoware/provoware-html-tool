@@ -198,6 +198,7 @@ body::before {
   flex-wrap: wrap;
   position: relative;
   z-index: 1;
+  min-width: 0;
 }
 
 .header-status-chips {
@@ -206,11 +207,14 @@ body::before {
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .header-status-chip {
   display: grid;
-  min-width: 116px;
+  min-width: min(116px, 100%);
+  max-width: 100%;
   padding: 6px 10px;
   border-radius: 10px;
   border: 1px solid rgba(204, 223, 255, 0.42);
@@ -250,6 +254,7 @@ body::before {
 
 .theme-switch select {
   min-width: 140px;
+  max-width: 100%;
 }
 
 .zoom-status {
@@ -1103,9 +1108,20 @@ body::before {
     justify-content: flex-start;
   }
 
+  .header-status-chip {
+    min-width: 0;
+    flex: 1 1 132px;
+  }
+
   .theme-switch {
     width: 100%;
     justify-content: space-between;
+    gap: 8px;
+  }
+
+  .theme-switch select {
+    min-width: 0;
+    width: min(220px, 100%);
   }
 
   .panel-grid,
