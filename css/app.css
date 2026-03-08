@@ -1472,12 +1472,12 @@ select {
 
 @media (max-width: 980px) {
   .panel-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, minmax(90px, 1fr));
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
   .module-panel[data-panel='todo'] {
-    grid-row: span 2;
+    grid-row: auto;
   }
 }
 
