@@ -7,12 +7,12 @@
 | UP-029 | Header UX | Header-Kachel-Navigation um kleine Ziel-Rückmeldung ("Bereich geöffnet") ergänzen | Navigation ist jetzt vorhanden, aber ohne direkte Bestätigung kann der Sprung bei langen Seiten unklar wirken | Klareres Feedback nach Klick/Enter ohne zusätzliche Dialoge | offen | 029 |
 | UP-027 | Grid UX | Leere Modul-Slots mit optionalem Direktknopf „Projektstruktur anlegen“ ergänzen | Der neue Hinweistext hilft, aber ein direkter Klickweg reduziert Reibung weiter | Schnellere Aktivierung freier Panels ohne Suchaufwand | offen | 028 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
-| UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
 | UP-025 | Header UX | Selbsttest-Ampel im Header um klickbare Detailhilfe („Warum gelb/rot?“) erweitern | Farbstatus und Legende sind vorhanden, aber Rückfragen zur Ursache entstehen weiterhin ohne direkten Kontextsprung | Schnellere Fehlerklärung direkt aus dem Header ohne Wechsel in andere Bereiche | offen | 026 |
 | UP-026 | Account-Archiv UX | Schnellkopierleiste für E-Mail, URL und Benutzername im Detaildialog ergänzen | Wiederkehrende Accountdaten sollen ohne Umwege nutzbar sein | Schnellerer Alltagsworkflow mit weniger Klicks beim Wechsel zwischen Tools | offen | 027 |
-| UP-027 | Layout Robustheit | Sichtbarkeits-Guard für Header-Karten ergänzen (Mindestzeilen + Overflow-Warnhinweis bei Clipping-Risiko) | Nach mehreren Header-Erweiterungen steigt die Gefahr von verdeckten Inhalten bei knapper Höhe | Frühere Erkennung von Abschneidungen und stabilere Lesbarkeit über Breakpoints hinweg | offen | 028 |
+| UP-030 | Layout Robustheit | Sichtbarkeits-Guard für Header-Karten ergänzen (Mindestzeilen + Overflow-Warnhinweis bei Clipping-Risiko) | Nach mehreren Header-Erweiterungen steigt die Gefahr von verdeckten Inhalten bei knapper Höhe | Frühere Erkennung von Abschneidungen und stabilere Lesbarkeit über Breakpoints hinweg | offen | 028 |
+| UP-031 | Dashboard UX | 7-Tage-Trend mit Mini-Hinweistext (Vergleich zur Vorwoche) ergänzen | Der neue Trendwert ist kompakt, aber die Vergleichsbasis ist ohne Hint nicht für alle sofort klar | Weniger Rückfragen und schnellere Einordnung der Trendzahl direkt im Header | offen | 030 |
 
 **Passende Vorschläge:**
 1. Direktknopf nur in leeren Slots zeigen, damit belegte Module ruhig bleiben
@@ -50,10 +50,21 @@
 1. Bei erkannter Überlänge in einer Header-Karte automatisch auf 2-Spalten-Layout wechseln
 2. Eine kleine Debug-Markierung für betroffene Karte nur im Entwicklermodus anzeigen
 
+
+**Passende Vorschläge:**
+1. Hint nur bei Hover/Fokus anzeigen, damit die Karte kompakt bleibt
+2. Bei fehlenden Vorwochenwerten im Hint klar „Vergleich nicht verfügbar“ schreiben
+
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | erledigt | 030 |
+
+**Passende Vorschläge:**
+1. Trendwert bei sehr vielen Events zusätzlich farblich markieren (nur dezent)
+2. Optionalen Tooltip mit kurzer Formel (7 Tage vs. 7 Tage davor) anbieten
+
 | UP-023 | Layout Robustheit | Budgetwarnung um kleine Toleranzgrenze (z. B. +0,5%) und Debounce-Messung erweitern | Einzelne Reflow-Spitzen beim Resize können kurzzeitige Fehlwarnungen erzeugen | Ruhigere, präzisere Regressionswarnungen ohne zusätzlichen Bedienaufwand | erledigt | 025 |
 
 **Passende Vorschläge:**

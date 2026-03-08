@@ -12,7 +12,8 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     'header-chip-autosave-status': createNode(),
     'next-step': { textContent: '', innerHTML: '' },
     'header-stat-health': { textContent: '', className: '' },
-    'header-stat-health-legend': createNode()
+    'header-stat-health-legend': createNode(),
+    'header-stat-events-trend': createNode()
   };
   const previousDocument = globalThis.document;
   globalThis.document = {
@@ -76,6 +77,37 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     setState({
       selectedProjectDirectory: { name: 'Demo-Projekt' },
       selftestResult: null,
+      debug: { startupReady: true },
+      editorFilePath: '',
+      editorDirty: false,
+      profileArchive: { events: [] }
+    });
+    render();
+    assert.equal(nodes['header-stat-events-trend'].textContent, '0 (keine Historie)');
+
+    const now = Date.now();
+    const day = 24 * 60 * 60 * 1000;
+    setState({
+      selectedProjectDirectory: { name: 'Demo-Projekt' },
+      selftestResult: null,
+      debug: { startupReady: true },
+      editorFilePath: '',
+      editorDirty: false,
+      profileArchive: {
+        events: [
+          { timestamp: new Date(now - day).toISOString() },
+          { timestamp: new Date(now - (2 * day)).toISOString() },
+          { timestamp: new Date(now - (8 * day)).toISOString() },
+          { timestamp: new Date(now - (10 * day)).toISOString() }
+        ]
+      }
+    });
+    render();
+    assert.equal(nodes['header-stat-events-trend'].textContent, '2 (±0)');
+
+    setState({
+      selectedProjectDirectory: { name: 'Demo-Projekt' },
+      selftestResult: null,
       debug: { startupReady: false },
       editorFilePath: '',
       editorDirty: false,
@@ -119,7 +151,8 @@ test('header-chips: next-step zeigt sonderzeichen und sehr langen text nur als t
     'header-chip-autosave-status': createNode(),
     'next-step': { textContent: '', innerHTML: '' },
     'header-stat-health': { textContent: '', className: '' },
-    'header-stat-health-legend': createNode()
+    'header-stat-health-legend': createNode(),
+    'header-stat-events-trend': createNode()
   };
   const previousDocument = globalThis.document;
   const longWaitingText = `${`äöü ß & < > " ' . `.repeat(45)}ende`;
