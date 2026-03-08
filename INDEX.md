@@ -3,6 +3,7 @@
 ## Iterationshinweis
 - Diese Iteration ergänzt einen zentralen Safe-Input-Helper (`safeText`/`safeObject`/`safeArray`) und eine kurze Modul-Textkonvention im Format „Problem + nächster Schritt“.
 - Diese Iteration ergänzt einen sehr kleinen Visual-Regressionstest für Footer-Höhe/Abstände, damit die kompakte Darstellung stabil bleibt.
+- Diese Iteration ergänzt einen zweiten kleinen Footer-Texttest (Zeilenhöhe/Schriftgröße) und bündelt Grid-/Footer-Checks in einem UI-Smoke-Test.
 - Diese Iteration ergänzt einen Rasterhilfe-Hinweis, einen kleinen UI-Test für die echte 3x3-Struktur (9 Slots) und macht den Footerbereich kompakter.
 - Diese Iteration verbessert die Modul-Hilfe bei fehlenden Dateien: Summary nennt weiter die fehlenden Dateien und gibt jetzt je Dateityp einen konkreten nächsten Schritt.
 - Diese Iteration ergänzt einen zweiten `next-step`-Test (Sonderzeichen + >200 Zeichen) und stellt `checks-list` auf Textknoten statt HTML-String für Nutztexte um.
@@ -148,6 +149,7 @@
 │  │  ├─ startup-check.test.js
 │  │  ├─ ui-action-handlers.smoke.test.js
 │  │  ├─ ui-grid-help-layout.test.js
+│  │  ├─ ui-layout-smoke.test.js
 │  │  ├─ ui-footer-compactness.test.js
 │  │  ├─ ui-header-chips.test.js
 │  │  ├─ ui-render-safety.test.js
@@ -273,11 +275,12 @@
 98. `tests/services/ui-action-handlers.smoke.test.js`
 99. `tests/services/ui-grid-help-layout.test.js`
 100. `tests/services/ui-footer-compactness.test.js`
-101. `tests/services/ui-header-chips.test.js`
-102. `tests/services/ui-render-safety.test.js`
-103. `tests/services/theme-contrast-dark.test.js`
-104. `tests/start-files/start-import-resolution.test.js`
-105. `todo.txt`
-106. `todo_kalender_erinnerung_start.html`
-107. `wiki_notiz_wissen_start.html`
-108. `js/services/module-boundary-utils.js`
+101. `tests/services/ui-layout-smoke.test.js`
+102. `tests/services/ui-header-chips.test.js`
+103. `tests/services/ui-render-safety.test.js`
+104. `tests/services/theme-contrast-dark.test.js`
+105. `tests/start-files/start-import-resolution.test.js`
+106. `todo.txt`
+107. `todo_kalender_erinnerung_start.html`
+108. `wiki_notiz_wissen_start.html`
+109. `js/services/module-boundary-utils.js`

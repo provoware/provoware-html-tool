@@ -23,3 +23,11 @@ test('ui-footer-compactness: kompakte footer-abstände bleiben stabil', () => {
   assert.equal(findRule(css, '.footer', 'padding: 4px;'), true);
   assert.equal(findRule(css, '.footer-box', 'padding: 4px;'), true);
 });
+
+
+test('ui-footer-compactness: kompakte footer-textdarstellung bleibt stabil', () => {
+  const css = readCss();
+
+  assert.equal(findRule(css, '.panel-title', 'font-size: 1rem;'), true);
+  assert.equal(findRule(css, '.log-list li', 'line-height: 1.35;'), true);
+});
