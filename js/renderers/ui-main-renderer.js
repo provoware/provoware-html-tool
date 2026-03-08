@@ -5,6 +5,13 @@ import { escapeHtml } from '../services/html-escape.js';
 
 const statusClass = (status) => (status === 'green' ? 'check-ok' : status === 'yellow' ? 'check-warn' : 'check-error');
 
+const NEXT_STEP_FILE_PATH_PATTERN = /(data\/[\w./-]+\.[\w]+|modules\/[\w./-]+\.[\w]+)/i;
+
+const extractNextStepFilePath = (nextStep) => {
+  const match = String(nextStep || '').match(NEXT_STEP_FILE_PATH_PATTERN);
+  return match?.[1] || '';
+};
+
 export const renderMainSection = ({
   state,
   byId,
@@ -164,7 +171,15 @@ export const renderMainSection = ({
 
   setText('module-registry-summary', state.moduleRegistry?.summary || '-');
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
-  setText('module-registry-next-step', `Nächster Modul-Schritt: ${state.moduleRegistry?.nextStep || 'Keine Aktion nötig.'}`);
+  const moduleRegistryNextStep = state.moduleRegistry?.nextStep || 'Keine Aktion nötig.';
+  setText('module-registry-next-step', `Nächster Modul-Schritt: ${moduleRegistryNextStep}`);
+  const moduleRegistryOpenButton = byId('module-registry-open-next-step');
+  if (moduleRegistryOpenButton) {
+    const nextStepPath = extractNextStepFilePath(moduleRegistryNextStep);
+    moduleRegistryOpenButton.disabled = !nextStepPath;
+    moduleRegistryOpenButton.dataset.filePath = nextStepPath;
+    moduleRegistryOpenButton.title = nextStepPath ? `Datei öffnen: ${nextStepPath}` : 'Kein Dateipfad im nächsten Schritt gefunden.';
+  }
   const sidebarModuleList = byId('sidebar-module-list');
   if (sidebarModuleList) {
     sidebarModuleList.innerHTML = renderSidebarModules(state.moduleRegistry?.modules || []);
