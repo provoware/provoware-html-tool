@@ -9,6 +9,7 @@
 | UP-009 | Header UX | Header-Statuschips mit fester Max-Zeilenhöhe + kompakter Overflow-Anzeige ergänzen | Bei vielen Statuswerten kann der Header auf kleinen Breiten zu hoch werden | Stabilere Header-Höhe und klarere Priorisierung wichtiger Statuswerte | offen | 009 |
 | UP-011 | Modul-Feedback | Im Modulstatus zusätzlich ein kurzes Feld `nextStep` ausgeben (z. B. Datei anlegen, JSON prüfen) | Fehler sind erkennbar, aber der nächste Schritt muss teils aus langem Text gelesen werden | Schnellere Selbsthilfe und weniger Rückfragen im Support | offen | 012 |
 | UP-012 | Datenqualität | Kurzen Duplicate-Guard für `moduleIds` in Registry-Checks ergänzen (Hinweis bei mehrfachen IDs) | Doppelte IDs werden aktuell still bereinigt, aber nicht sichtbar gemacht | Klareres Datenfeedback vor späteren Modulkonflikten | offen | 013 |
+| UP-013 | Songtext UX | Splitter-Breiten mit gespeicherten Panel-Proportionen ergänzen (links/mitte/rechts) | Drei-Fenster-Editor braucht stabile, wiederherstellbare Arbeitsbreiten pro Nutzer | Schnellere Wiederaufnahme des Workflows und weniger manuelles Nachjustieren | offen | 014 |
 
 **Passende Vorschläge:**
 1. Min-/Max-Breiten je Hauptpanel definieren
@@ -29,6 +30,10 @@
 **Passende Vorschläge:**
 1. Duplicate-Hinweis als eigene Warnkategorie im Summary markieren
 2. Optional: bereinigte ID-Liste als Debug-Hinweis im Developer-Modus ausgeben
+
+**Passende Vorschläge:**
+1. Pro Panel eine Mindest- und Maximalbreite im Manifest hinterlegen
+2. Letzte Panel-Breiten in einer kleinen User-Preference-Datei speichern
 
 
 ## Erledigt

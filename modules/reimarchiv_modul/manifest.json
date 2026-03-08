@@ -1,0 +1,6 @@
+{
+  "id": "reimarchiv_modul",
+  "name": "Reimarchiv-Modul",
+  "version": "0.1.0",
+  "description": "Speichert Reimgruppen mit Referenzwort, Varianten und Suchfunktion für die Songarbeit."
+}

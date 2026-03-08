@@ -6,6 +6,8 @@
     "debugging_modul",
     "logging_modul",
     "todo_kalender_erinnerung",
-    "wiki_notiz_wissen"
+    "wiki_notiz_wissen",
+    "songtext_arbeitszentrum",
+    "reimarchiv_modul"
   ]
 }
