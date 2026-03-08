@@ -146,7 +146,8 @@
 │  │  ├─ startup-check.test.js
 │  │  ├─ ui-action-handlers.smoke.test.js
 │  │  ├─ ui-header-chips.test.js
-│  │  └─ ui-render-safety.test.js
+│  │  ├─ ui-render-safety.test.js
+│  │  └─ theme-contrast-dark.test.js
 │  ├─ start-files
 │  │  └─ start-import-resolution.test.js
 │  └─ scripts-laienstart.dry-run.test.js
@@ -268,8 +269,9 @@
 98. `tests/services/ui-action-handlers.smoke.test.js`
 99. `tests/services/ui-header-chips.test.js`
 100. `tests/services/ui-render-safety.test.js`
-101. `tests/start-files/start-import-resolution.test.js`
-102. `todo.txt`
-103. `todo_kalender_erinnerung_start.html`
-104. `wiki_notiz_wissen_start.html`
-105. `js/services/module-boundary-utils.js`
+101. `tests/services/theme-contrast-dark.test.js`
+102. `tests/start-files/start-import-resolution.test.js`
+103. `todo.txt`
+104. `todo_kalender_erinnerung_start.html`
+105. `wiki_notiz_wissen_start.html`
+106. `js/services/module-boundary-utils.js`

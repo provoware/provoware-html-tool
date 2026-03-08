@@ -548,6 +548,9 @@ export const bindUiActions = (actions) => {
   byId('a11y-quiet-mode')?.addEventListener('change', (event) => {
     actions.onToggleA11yQuietMode(event.target.checked);
   });
+  byId('toggle-grid-help')?.addEventListener('change', (event) => {
+    actions.onToggleGridHelp(event.target.checked);
+  });
   byId('theme-select')?.addEventListener('change', (event) => {
     actions.onChangeTheme(event.target.value);
   });
@@ -562,7 +565,8 @@ export const bindUiActions = (actions) => {
     if (!targetId) return;
     byId(targetId)?.click();
   });
-  document.addEventListener('input', () => {
+  document.addEventListener('input', (event) => {
+    if (event?.target?.type === 'checkbox') return;
     render();
   });
 

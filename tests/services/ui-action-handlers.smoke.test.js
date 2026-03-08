@@ -153,3 +153,30 @@ test('smoke: dashboard-note save meldet write-fehler vom adapter', async () => {
     assert.equal(base.getState().dashboardNotes.rows[2].feedback, 'Eintrag konnte nicht gespeichert werden.');
   });
 });
+
+
+test('smoke: rasterhilfe-toggle setzt den zustand', async () => {
+  const base = makeBase();
+  const actions = createUiActionHandlers(base);
+
+  actions.onToggleGridHelp(false);
+  assert.equal(base.getState().showGridHelp, false);
+
+  actions.onToggleGridHelp(true);
+  assert.equal(base.getState().showGridHelp, true);
+});
+
+
+test('smoke: rasterhilfe-toggle speichert optional in localStorage-callback', async () => {
+  const base = makeBase();
+  const saved = [];
+  const actions = createUiActionHandlers({
+    ...base,
+    storeGridHelpPreference: (value) => saved.push(value)
+  });
+
+  actions.onToggleGridHelp(false);
+  actions.onToggleGridHelp(true);
+
+  assert.deepEqual(saved, [false, true]);
+});

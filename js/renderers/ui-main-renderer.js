@@ -44,6 +44,11 @@ export const renderMainSection = ({
   setText('archive-overview-updated', formatDateTime(state.profileArchive?.updatedAt));
   const quietModeToggle = byId('a11y-quiet-mode');
   if (quietModeToggle) quietModeToggle.checked = Boolean(state.a11yQuietMode);
+  const gridHelpToggle = byId('toggle-grid-help');
+  const showGridHelp = state.showGridHelp !== false;
+  if (gridHelpToggle) gridHelpToggle.checked = showGridHelp;
+  const panelGrid = byId('panel-grid');
+  if (panelGrid) panelGrid.classList.toggle('panel-grid--show-help', showGridHelp);
 
   const checksList = byId('checks-list');
   if (checksList) {

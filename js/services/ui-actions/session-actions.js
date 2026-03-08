@@ -10,7 +10,7 @@ const tryShutdownBackend = async () => {
   return api.shutdownBackend();
 };
 
-export const createSessionActions = ({ getState, setState, selectDirectory, runSelftest, ensureStructure, buildDiagnosisExport, copyToClipboardSafe, logEvent }) => ({
+export const createSessionActions = ({ getState, setState, selectDirectory, runSelftest, ensureStructure, buildDiagnosisExport, copyToClipboardSafe, logEvent, storeGridHelpPreference }) => ({
   onSelectDirectory: selectDirectory,
   onRunSelftest: runSelftest,
   onEnsureStructure: ensureStructure,
@@ -24,6 +24,14 @@ export const createSessionActions = ({ getState, setState, selectDirectory, runS
   onToggleA11yQuietMode: (enabled) => {
     setState({ a11yQuietMode: Boolean(enabled) });
     logEvent('INFO', 'A11Y_QUIET_MODE_CHANGED', enabled ? 'Ruhiger Modus wurde aktiviert.' : 'Ruhiger Modus wurde deaktiviert.');
+  },
+  onToggleGridHelp: (enabled) => {
+    const nextValue = Boolean(enabled);
+    setState({ showGridHelp: nextValue });
+    if (typeof storeGridHelpPreference === 'function') {
+      storeGridHelpPreference(nextValue);
+    }
+    logEvent('INFO', 'GRID_HELP_VISIBILITY_CHANGED', nextValue ? 'Rasterhilfe wird angezeigt.' : 'Rasterhilfe ist ausgeblendet.');
   },
   onSelectPlugin: (pluginId) => {
     const state = getState();
