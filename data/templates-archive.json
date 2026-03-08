@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-17",
+      "title": "Duplikate in moduleIds sauber melden",
+      "content": "Wenn moduleIds doppelt sind, bereinige sie defensiv und gib im Ergebnis klar aus, welche IDs betroffen waren und was der nächste Schritt ist.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T11:20:00.000Z",
+      "updatedAt": "2026-03-08T11:20:00.000Z"
+    },
+    {
       "id": "tpl-default-16",
       "title": "Song-Start mit 3-Fenster-Workflow",
       "content": "Links Ideen sammeln, markierten Teil mit einem Klick in die aktive Sektion übernehmen, rechts die Gesamtvorschau prüfen.",
