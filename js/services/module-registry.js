@@ -31,19 +31,39 @@ const validateSimpleObject = (value, field) => {
 
 const readModuleIds = async () => {
   const registry = await readJsonIfOk('./data/module-registry.json');
-  if (!registry.ok) return { ids: [...FALLBACK_MODULE_IDS], source: 'fallback' };
+  if (!registry.ok) {
+    return {
+      ids: [...FALLBACK_MODULE_IDS],
+      source: 'fallback',
+      fallbackReason: 'module-registry.json fehlt oder ist nicht lesbar'
+    };
+  }
 
+  // Altformat "modules" bleibt nur als Lese-Fallback erlaubt.
   const moduleIds = Array.isArray(registry.data?.moduleIds)
     ? registry.data.moduleIds
     : (Array.isArray(registry.data?.modules)
         ? registry.data.modules.map((entry) => (typeof entry === 'string' ? entry : entry?.id))
         : null);
-  if (!Array.isArray(moduleIds)) return { ids: [...FALLBACK_MODULE_IDS], source: 'fallback' };
+  if (!Array.isArray(moduleIds)) {
+    return {
+      ids: [...FALLBACK_MODULE_IDS],
+      source: 'fallback',
+      fallbackReason: 'module-registry.json hat kein gültiges moduleIds-Array'
+    };
+  }
 
-  const ids = [...new Set(moduleIds.map((id) => String(id || '').trim()).filter(Boolean))];
-  if (ids.length === 0) return { ids: [...FALLBACK_MODULE_IDS], source: 'fallback' };
+  // Nur echte Text-IDs akzeptieren, damit kein "[object Object]" als Modul-ID durchrutscht.
+  const ids = [...new Set(moduleIds.filter((id) => typeof id === 'string').map((id) => id.trim()).filter(Boolean))];
+  if (ids.length === 0) {
+    return {
+      ids: [...FALLBACK_MODULE_IDS],
+      source: 'fallback',
+      fallbackReason: 'module-registry.json enthält keine nutzbaren Modul-IDs'
+    };
+  }
 
-  return { ids, source: 'data/module-registry.json' };
+  return { ids, source: 'data/module-registry.json', fallbackReason: null };
 };
 
 const checkProfile = async (id) => {
@@ -144,7 +164,13 @@ const buildSummary = (modules, source) => {
 export const loadModuleRegistry = async () => {
   const moduleIds = await readModuleIds();
   const modules = await Promise.all(moduleIds.ids.map((id) => checkProfile(id)));
-  return { modules, summary: buildSummary(modules, moduleIds.source) };
+  const summary = buildSummary(modules, moduleIds.source);
+  if (!moduleIds.fallbackReason) return { modules, summary };
+
+  return {
+    modules,
+    summary: `${summary} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.`
+  };
 };
 
 export const detectTemplateDesignStatus = () => {

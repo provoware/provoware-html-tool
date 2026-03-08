@@ -48,7 +48,7 @@
 [x] 2026-03-07 | data/laienstart-required-files.json + scripts/laienstart.sh | Warnung "Kein Auto-Repair für unbekannte Pflichtdatei" mit zusammengeklebter Dateiliste prüfen (möglicher Newline-/Parsingfehler) | prüfen: `./start.sh --dry-run` zeigt pro Pflichtdatei getrennte Auswertung ohne Sammelstring | fertig wenn: keine Sammelwarnung mit `\n` mehr erscheint und bekannte Pflichtdateien korrekt erkannt werden
 
 
-[ ] 2026-03-08 | js/services/* + js/modules/* (gezielt) | Projektcode schrittweise klarer auskommentieren (Robustheit/Transparenz), startend mit häufig geänderten Pfaden | prüfen: nur lokal betroffene Dateien, pro Iteration maximal 1-2 Module | fertig wenn: pro betroffenem Modul kurze Zweck- und Guard-Kommentare vorhanden
+[x] 2026-03-08 | js/services/* + js/modules/* (gezielt) | Projektcode schrittweise klarer auskommentieren (Robustheit/Transparenz), startend mit häufig geänderten Pfaden | prüfen: nur lokal betroffene Dateien, pro Iteration maximal 1-2 Module | fertig wenn: pro betroffenem Modul kurze Zweck- und Guard-Kommentare vorhanden
 
 ## Nächste Iteration – Patchauftrag 1
 [x] 2026-03-08 | Vorarbeit (Analyse vor Patch) | Vor jedem Patch kurz ausgeben: betroffene Dateien, betroffene Blöcke/Funktionen, Ist-Verhalten, Soll-Verhalten, Risiken, bewusste Nicht-Änderungen | prüfen: Analyseblock steht direkt vor den Code-Änderungen im Iterationsprotokoll | fertig wenn: kein Patch ohne diesen Analyseblock startet

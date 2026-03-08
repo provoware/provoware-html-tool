@@ -8,6 +8,7 @@
 | UP-008 | Responsive QA | Einen kleinen DOM-basierten Test für den mobilen Tools-Toggle ergänzen | CSS-Regeln sind vorhanden, aber ein Sichtbarkeits-Sanity-Check fehlt noch | Frühere Erkennung von Mobile-Regressionsfehlern | offen | 008 |
 | UP-009 | Header UX | Header-Statuschips mit fester Max-Zeilenhöhe + kompakter Overflow-Anzeige ergänzen | Bei vielen Statuswerten kann der Header auf kleinen Breiten zu hoch werden | Stabilere Header-Höhe und klarere Priorisierung wichtiger Statuswerte | offen | 009 |
 | UP-010 | Daten-Robustheit | Kleinen Schema-Guard für `data/module-registry.json` ergänzen (Version + `moduleIds` Typprüfung mit Hinweis) | Verhindert stille Fehlzustände bei manuell beschädigten Registry-Dateien | Schnellere Fehlerdiagnose und stabilerer Modulstart | offen | 011 |
+| UP-011 | Modul-Feedback | Im Modulstatus zusätzlich ein kurzes Feld `nextStep` ausgeben (z. B. Datei anlegen, JSON prüfen) | Fehler sind erkennbar, aber der nächste Schritt muss teils aus langem Text gelesen werden | Schnellere Selbsthilfe und weniger Rückfragen im Support | offen | 012 |
 
 **Passende Vorschläge:**
 1. Min-/Max-Breiten je Hauptpanel definieren
@@ -24,6 +25,10 @@
 **Passende Vorschläge:**
 1. Bei ungültiger Registry auf letzte gültige Datei aus `backup/` zurückfallen
 2. Hinweistext im UI mit direktem Pfad zur defekten Datei anzeigen
+**Passende Vorschläge:**
+1. `nextStep` pro Fehlerklasse als kurze feste Bausteine verwalten
+2. UI-Hinweis bei mehreren Fehlern auf den wichtigsten nächsten Schritt begrenzen
+
 
 ## Erledigt
 
