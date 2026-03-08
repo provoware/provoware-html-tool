@@ -4,61 +4,67 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-029 | Header UX | Header-Kachel-Navigation um kleine Ziel-Rückmeldung ("Bereich geöffnet") ergänzen | Navigation ist jetzt vorhanden, aber ohne direkte Bestätigung kann der Sprung bei langen Seiten unklar wirken | Klareres Feedback nach Klick/Enter ohne zusätzliche Dialoge | offen | 029 |
-| UP-027 | Grid UX | Leere Modul-Slots mit optionalem Direktknopf „Projektstruktur anlegen“ ergänzen | Der neue Hinweistext hilft, aber ein direkter Klickweg reduziert Reibung weiter | Schnellere Aktivierung freier Panels ohne Suchaufwand | offen | 028 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
-| UP-025 | Header UX | Selbsttest-Ampel im Header um klickbare Detailhilfe („Warum gelb/rot?“) erweitern | Farbstatus und Legende sind vorhanden, aber Rückfragen zur Ursache entstehen weiterhin ohne direkten Kontextsprung | Schnellere Fehlerklärung direkt aus dem Header ohne Wechsel in andere Bereiche | offen | 026 |
-| UP-026 | Account-Archiv UX | Schnellkopierleiste für E-Mail, URL und Benutzername im Detaildialog ergänzen | Wiederkehrende Accountdaten sollen ohne Umwege nutzbar sein | Schnellerer Alltagsworkflow mit weniger Klicks beim Wechsel zwischen Tools | offen | 027 |
-| UP-030 | Layout Robustheit | Sichtbarkeits-Guard für Header-Karten ergänzen (Mindestzeilen + Overflow-Warnhinweis bei Clipping-Risiko) | Nach mehreren Header-Erweiterungen steigt die Gefahr von verdeckten Inhalten bei knapper Höhe | Frühere Erkennung von Abschneidungen und stabilere Lesbarkeit über Breakpoints hinweg | offen | 028 |
-| UP-031 | Dashboard UX | 7-Tage-Trend mit Mini-Hinweistext (Vergleich zur Vorwoche) ergänzen | Der neue Trendwert ist kompakt, aber die Vergleichsbasis ist ohne Hint nicht für alle sofort klar | Weniger Rückfragen und schnellere Einordnung der Trendzahl direkt im Header | offen | 030 |
+| UP-032 | Header UX | Header-Navigations-Feedback nach 3 Sekunden automatisch ausblenden | Die neue Rückmeldung hilft, bleibt aber dauerhaft sichtbar und kann den Statistikbereich unnötig belegen | Ruhigeres Dashboard bei weiter klarer Bestätigung nach Navigation | offen | 031 |
 
-**Passende Vorschläge:**
-1. Direktknopf nur in leeren Slots zeigen, damit belegte Module ruhig bleiben
-2. Nach erfolgreichem Struktur-Anlegen kurze Rückmeldung im Slot anzeigen
-
-**Passende Vorschläge:**
-1. Rückmeldung nur 2-3 Sekunden als unaufdringliche Statuszeile anzeigen
-2. Fokus nach Sprung auf die Zielüberschrift setzen, nicht auf den ersten Eingabewert
-
-**Passende Vorschläge:**
+**Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
 2. Bei wiederholtem Fehlschlag kurz „Was kann ich jetzt tun?“ mit 2 Klickwegen einblenden
 
-**Passende Vorschläge:**
-1. Für fehlende Historie einen robusten „keine Verlaufsdaten“-Fallback anzeigen
-2. Trendwerte optional ein-/ausblendbar machen, damit das Dashboard kompakt bleibt
-
-**Passende Vorschläge:**
+**Passende Vorschläge (UP-021):**
 1. Referenzbilder pro Breakpoint im CI-Artefakt als optionalen Check speichern
 2. Bei größerem Pixel-Delta nur den betroffenen Header-Bereich markieren
 
-**Passende Vorschläge:**
+**Passende Vorschläge (UP-024):**
 1. Pro Layoutbereich einen kleinen „Position merken“-Schalter ergänzen
 2. Im Hilfehinweis kurz erklären, wann Footer- oder Sidebar-Modus sinnvoller ist
 
-**Passende Vorschläge:**
-1. Klick auf die Ampel öffnet automatisch den passenden Selbsttest-Abschnitt rechts
-2. Bei „rot“ zusätzlich den wichtigsten fehlgeschlagenen Check als Einzeiler anzeigen
-
-**Passende Vorschläge:**
-1. Kopier-Buttons nur zeigen, wenn Feldwert vorhanden ist
-2. Nach Klick eine kurze „Kopiert“-Rückmeldung direkt im Dialog anzeigen
-
-**Passende Vorschläge:**
-1. Bei erkannter Überlänge in einer Header-Karte automatisch auf 2-Spalten-Layout wechseln
-2. Eine kleine Debug-Markierung für betroffene Karte nur im Entwicklermodus anzeigen
-
-
-**Passende Vorschläge:**
-1. Hint nur bei Hover/Fokus anzeigen, damit die Karte kompakt bleibt
-2. Bei fehlenden Vorwochenwerten im Hint klar „Vergleich nicht verfügbar“ schreiben
+**Passende Vorschläge (UP-032):**
+1. Nur Erfolgsmeldungen automatisch ausblenden, Warnungen sichtbar lassen
+2. Die Ausblenddauer als kleinen Konfigwert in `data/app-config.json` hinterlegen
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-031 | Dashboard UX | 7-Tage-Trend mit Mini-Hinweistext (Vergleich zur Vorwoche) ergänzen | Der neue Trendwert ist kompakt, aber die Vergleichsbasis ist ohne Hint nicht für alle sofort klar | Weniger Rückfragen und schnellere Einordnung der Trendzahl direkt im Header | erledigt | 031 |
+
+**Passende Vorschläge:**
+1. Hint nur bei Hover/Fokus anzeigen, damit die Karte kompakt bleibt
+2. Bei fehlenden Vorwochenwerten im Hint klar „Vergleich nicht verfügbar“ schreiben
+
+| UP-030 | Layout Robustheit | Sichtbarkeits-Guard für Header-Karten ergänzen (Mindestzeilen + Overflow-Warnhinweis bei Clipping-Risiko) | Nach mehreren Header-Erweiterungen steigt die Gefahr von verdeckten Inhalten bei knapper Höhe | Frühere Erkennung von Abschneidungen und stabilere Lesbarkeit über Breakpoints hinweg | erledigt | 031 |
+
+**Passende Vorschläge:**
+1. Bei erkannter Überlänge in einer Header-Karte automatisch auf 2-Spalten-Layout wechseln
+2. Eine kleine Debug-Markierung für betroffene Karte nur im Entwicklermodus anzeigen
+
+| UP-029 | Header UX | Header-Kachel-Navigation um kleine Ziel-Rückmeldung ("Bereich geöffnet") ergänzen | Navigation ist jetzt vorhanden, aber ohne direkte Bestätigung kann der Sprung bei langen Seiten unklar wirken | Klareres Feedback nach Klick/Enter ohne zusätzliche Dialoge | erledigt | 031 |
+
+**Passende Vorschläge:**
+1. Rückmeldung nur 2-3 Sekunden als unaufdringliche Statuszeile anzeigen
+2. Fokus nach Sprung auf die Zielüberschrift setzen, nicht auf den ersten Eingabewert
+
+| UP-027 | Grid UX | Leere Modul-Slots mit optionalem Direktknopf „Projektstruktur anlegen“ ergänzen | Der neue Hinweistext hilft, aber ein direkter Klickweg reduziert Reibung weiter | Schnellere Aktivierung freier Panels ohne Suchaufwand | erledigt | 031 |
+
+**Passende Vorschläge:**
+1. Direktknopf nur in leeren Slots zeigen, damit belegte Module ruhig bleiben
+2. Nach erfolgreichem Struktur-Anlegen kurze Rückmeldung im Slot anzeigen
+
+| UP-026 | Account-Archiv UX | Schnellkopierleiste für E-Mail, URL und Benutzername im Detaildialog ergänzen | Wiederkehrende Accountdaten sollen ohne Umwege nutzbar sein | Schnellerer Alltagsworkflow mit weniger Klicks beim Wechsel zwischen Tools | erledigt | 031 |
+
+**Passende Vorschläge:**
+1. Kopier-Buttons nur zeigen, wenn Feldwert vorhanden ist
+2. Nach Klick eine kurze „Kopiert“-Rückmeldung direkt im Dialog anzeigen
+
+| UP-025 | Header UX | Selbsttest-Ampel im Header um klickbare Detailhilfe („Warum gelb/rot?“) erweitern | Farbstatus und Legende sind vorhanden, aber Rückfragen zur Ursache entstehen weiterhin ohne direkten Kontextsprung | Schnellere Fehlerklärung direkt aus dem Header ohne Wechsel in andere Bereiche | erledigt | 031 |
+
+**Passende Vorschläge:**
+1. Klick auf die Ampel öffnet automatisch den passenden Selbsttest-Abschnitt rechts
+2. Bei „rot“ zusätzlich den wichtigsten fehlgeschlagenen Check als Einzeiler anzeigen
+
 | UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | erledigt | 030 |
 
 **Passende Vorschläge:**

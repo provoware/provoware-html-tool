@@ -13,7 +13,8 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     'next-step': { textContent: '', innerHTML: '' },
     'header-stat-health': { textContent: '', className: '' },
     'header-stat-health-legend': createNode(),
-    'header-stat-events-trend': createNode()
+    'header-stat-events-trend': createNode(),
+    'header-stat-events-trend-hint': createNode()
   };
   const previousDocument = globalThis.document;
   globalThis.document = {
@@ -84,6 +85,7 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     });
     render();
     assert.equal(nodes['header-stat-events-trend'].textContent, '0 (keine Historie)');
+    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich nicht verfügbar');
 
     const now = Date.now();
     const day = 24 * 60 * 60 * 1000;
@@ -104,6 +106,7 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     });
     render();
     assert.equal(nodes['header-stat-events-trend'].textContent, '2 (±0)');
+    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich zur Vorwoche');
 
     setState({
       selectedProjectDirectory: { name: 'Demo-Projekt' },
@@ -152,7 +155,8 @@ test('header-chips: next-step zeigt sonderzeichen und sehr langen text nur als t
     'next-step': { textContent: '', innerHTML: '' },
     'header-stat-health': { textContent: '', className: '' },
     'header-stat-health-legend': createNode(),
-    'header-stat-events-trend': createNode()
+    'header-stat-events-trend': createNode(),
+    'header-stat-events-trend-hint': createNode()
   };
   const previousDocument = globalThis.document;
   const longWaitingText = `${`äöü ß & < > " ' . `.repeat(45)}ende`;

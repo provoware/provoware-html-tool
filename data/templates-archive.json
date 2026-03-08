@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-33",
+      "title": "Header-Feedback nach Navigation kurz prüfen",
+      "content": "Klicke eine Header-Kachel und prüfe die Rückmeldung „Bereich geöffnet“. Nach kurzer Zeit soll die Anzeige wieder ruhig werden, Warnungen bei fehlendem Ziel bleiben sichtbar.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T03:15:00.000Z",
+      "updatedAt": "2026-03-09T03:15:00.000Z"
+    },
+    {
       "id": "tpl-default-32",
       "title": "7-Tage-Trend im Header prüfen",
       "content": "Prüfe im Header den Wert „7-Tage-Trend“ mit leerem Archiv und mit gültigen Zeitstempeln: ohne Historie erscheint „0 (keine Historie)\", bei Daten zeigt die Zahl den Vergleich zur Vorwoche robust ohne Absturz.",
@@ -290,7 +299,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T02:20:00.000Z",
+  "updatedAt": "2026-03-09T03:15:00.000Z",
   "required_fields": [
     "id",
     "title",

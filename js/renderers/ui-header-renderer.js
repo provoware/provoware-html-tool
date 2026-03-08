@@ -27,6 +27,11 @@ const buildArchiveTrendLabel = (events) => {
   return `${currentCount} (±0)`;
 };
 
+const buildArchiveTrendHint = (events) => {
+  if (!Array.isArray(events) || events.length === 0) return 'Vergleich nicht verfügbar';
+  return 'Vergleich zur Vorwoche';
+};
+
 export const renderHeaderSection = ({ state, texts, messages, setText, byId, autoFormatText, buildHeaderProjectStatus, buildHeaderAutosaveStatus, layoutBudgetStatus }) => {
   setText('app-title', texts.titles?.appTitle || 'ProvoWare Dashboard');
   setText('app-subtitle', texts.titles?.appSubtitle || 'Projektstart');
@@ -37,6 +42,7 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   const templateCount = Array.isArray(state.templateArchive?.items) ? state.templateArchive.items.length : 0;
   const archiveEventsCount = Array.isArray(state.profileArchive?.events) ? state.profileArchive.events.length : 0;
   const archiveEventsTrend = buildArchiveTrendLabel(state.profileArchive?.events);
+  const archiveEventsTrendHint = buildArchiveTrendHint(state.profileArchive?.events);
   const selftestStatus = state.selftestResult?.overallStatus;
   const selftestLabel = selftestStatus === 'green'
     ? 'stabil'
@@ -55,6 +61,7 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   setText('header-stat-templates', String(templateCount));
   setText('header-stat-events', String(archiveEventsCount));
   setText('header-stat-events-trend', archiveEventsTrend);
+  setText('header-stat-events-trend-hint', archiveEventsTrendHint);
   setText('header-stat-health', selftestLabel);
   const healthNode = byId('header-stat-health');
   if (healthNode) {
