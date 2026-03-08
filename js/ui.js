@@ -523,12 +523,22 @@ const bindWorkspaceControls = () => {
     setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
   });
 
-  window.addEventListener('wheel', (event) => {
-    if (!event.ctrlKey) return;
+  let lastWheelZoomAt = 0;
+  const handleZoomWheel = (event) => {
+    if (!(event.ctrlKey || event.metaKey)) return;
+    const now = Date.now();
+    if (now - lastWheelZoomAt < 28) {
+      event.preventDefault();
+      return;
+    }
+    lastWheelZoomAt = now;
     event.preventDefault();
     const step = event.deltaY > 0 ? -0.05 : 0.05;
     applyFontScale(fontScale + step);
-  }, { passive: false });
+  };
+
+  window.addEventListener('wheel', handleZoomWheel, { passive: false });
+  document.addEventListener('wheel', handleZoomWheel, { passive: false, capture: true });
 };
 
 export const bindUiActions = (actions) => {
