@@ -1356,11 +1356,20 @@ body::before {
 .panel-grid {
   gap: 12px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(220px, 1fr));
 }
 
 .module-panel[data-panel='todo'] {
   grid-row: span 2;
+}
+
+.panel-grid.panel-grid--show-help .module-panel[data-panel='todo'] {
+  grid-row: span 1;
+}
+
+.panel-grid.panel-grid--show-help .module-panel[data-panel='archive'] {
+  grid-column: span 1;
+  grid-row: span 1;
 }
 
 .module-panel.is-empty-slot {
@@ -1525,7 +1534,7 @@ select {
 @media (max-width: 1340px) {
   .panel-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
+    grid-template-rows: repeat(2, minmax(220px, auto));
+    grid-auto-rows: minmax(220px, auto);
   }
 }
-
