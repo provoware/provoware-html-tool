@@ -6,7 +6,7 @@ import { runStartupCheck } from './services/startup-check.js';
 import { detectTemplateDesignStatus, loadModuleRegistry } from './services/module-registry.js';
 import { createUiActionHandlers } from './services/ui-action-handlers.js';
 import { buildDiagnosisExport } from './services/diagnosis-export.js';
-import { applyTheme, bindUiActions, detectLayoutMode, render } from './ui.js';
+import { applyPanelProportionPreset, applyTheme, bindUiActions, detectLayoutMode, render, resolveInitialPanelProportionPreset } from './ui.js';
 import {
   ARCHIVE_PATH,
   addArchiveEvent,
@@ -301,9 +301,11 @@ const init = async () => {
   applyTheme(loaded.data.themes[initialTheme] || loaded.data.themes['design-nachtblau']);
 
   const initialMode = detectLayoutMode(loaded.data.appConfig);
+  const initialPanelPreset = resolveInitialPanelProportionPreset();
+  applyPanelProportionPreset(initialPanelPreset);
   const moduleRegistry = await loadModuleRegistry();
   const templateDesignStatus = detectTemplateDesignStatus();
-  setState({ layoutMode: initialMode, currentTheme: initialTheme, moduleRegistry, templateDesignStatus, debug: { startupReady: false } });
+  setState({ layoutMode: initialMode, currentTheme: initialTheme, moduleRegistry, templateDesignStatus, panelProportionPreset: initialPanelPreset, debug: { startupReady: false } });
 
   const actions = createUiActionHandlers({
     getState: () => window.appState,
@@ -326,6 +328,9 @@ const init = async () => {
       const nextTheme = state.themes?.[themeName] ? themeName : state.currentTheme || 'design-nachtblau';
       applyTheme(state.themes?.[nextTheme] || state.themes?.['design-nachtblau'] || {});
       setState({ currentTheme: nextTheme });
+    },
+    onSetPanelProportionPreset: (preset) => {
+      setState({ panelProportionPreset: preset });
     }
   });
 

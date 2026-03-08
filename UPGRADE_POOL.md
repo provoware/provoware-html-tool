@@ -4,21 +4,28 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-013 | Songtext UX | Splitter-Breiten mit gespeicherten Panel-Proportionen ergänzen (links/mitte/rechts) | Drei-Fenster-Editor braucht stabile, wiederherstellbare Arbeitsbreiten pro Nutzer | Schnellere Wiederaufnahme des Workflows und weniger manuelles Nachjustieren | offen | 014 |
-| UP-017 | Modul-Feedback | Nach „Datei anlegen“ optional ein kurzes Vorlagenmenü je Dateityp anbieten (manifest/config/schema/logic) | Die Datei wird jetzt direkt erzeugt, bleibt aber inhaltlich noch leer und braucht oft denselben Starter-Inhalt | Schnellere Erstbefüllung mit weniger Tippfehlern in Standarddateien | offen | 018 |
+| UP-018 | Layout UX | Panel-Proportionen um feine manuelle Prozent-Schieberegler ergänzen | Presets sind schnell, aber manche Nutzer brauchen exaktere Breiten für ihren Workflow | Höhere Layout-Flexibilität bei weiter klarer Bedienung | offen | 019 |
 
 **Passende Vorschläge:**
-1. Pro Panel eine Mindest- und Maximalbreite im Manifest hinterlegen
-2. Letzte Panel-Breiten in einer kleinen User-Preference-Datei speichern
-
-**Passende Vorschläge:**
-1. Für `manifest.json` und `config.json` zuerst starten, danach auf weitere Dateitypen ausweiten
-2. Vorlagen nur bei neu angelegten Dateien zeigen, nicht bei bestehenden
+1. Prozentwerte je Preset im Tooltip sichtbar machen
+2. Bei sehr kleinen Viewports automatisch auf „Ausgewogen“ zurückfallen
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-017 | Modul-Feedback | Nach „Datei anlegen“ optional ein kurzes Vorlagenmenü je Dateityp anbieten (manifest/config/schema/logic) | Die Datei wird jetzt direkt erzeugt, bleibt aber inhaltlich noch leer und braucht oft denselben Starter-Inhalt | Schnellere Erstbefüllung mit weniger Tippfehlern in Standarddateien | erledigt | 019 |
+
+**Passende Vorschläge:**
+1. Für `manifest.json` und `config.json` zuerst starten, danach auf weitere Dateitypen ausweiten
+2. Vorlagen nur bei neu angelegten Dateien zeigen, nicht bei bestehenden
+
+| UP-013 | Songtext UX | Splitter-Breiten mit gespeicherten Panel-Proportionen ergänzen (links/mitte/rechts) | Drei-Fenster-Editor braucht stabile, wiederherstellbare Arbeitsbreiten pro Nutzer | Schnellere Wiederaufnahme des Workflows und weniger manuelles Nachjustieren | erledigt | 019 |
+
+**Passende Vorschläge:**
+1. Pro Panel eine Mindest- und Maximalbreite im Manifest hinterlegen
+2. Letzte Panel-Breiten in einer kleinen User-Preference-Datei speichern
+
 | UP-016 | Modul-Feedback | Fehlende Datei aus `nextStep` als „Datei anlegen“-Aktion direkt neben „Datei öffnen“ anbieten | Der Pfad ist jetzt direkt öffnbar, bei nicht vorhandener Datei fehlte der direkte Folgeschritt | Kürzere Fehlerbehebung auch bei noch nicht angelegten Moduldateien | erledigt | 018 |
 
 **Passende Vorschläge:**
