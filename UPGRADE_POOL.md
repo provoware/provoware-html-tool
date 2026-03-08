@@ -9,6 +9,7 @@
 | UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
 | UP-022 | Layout Governance | Layout-Budgets (Header 15%, Footer 10%, Sidebars je 8%) als feste Konfig-Vorgabe beim Start einblenden | Flächenziele sind jetzt umgesetzt, aber ohne sichtbare Governance könnten spätere Patches sie unbemerkt aufweichen | Stabilere, nachvollziehbare Einfenster-Standards über mehrere Iterationen hinweg | offen | 023 |
+| UP-023 | Layout Robustheit | Budgetwarnung um kleine Toleranzgrenze (z. B. +0,5%) und Debounce-Messung erweitern | Einzelne Reflow-Spitzen beim Resize können kurzzeitige Fehlwarnungen erzeugen | Ruhigere, präzisere Regressionswarnungen ohne zusätzlichen Bedienaufwand | offen | 024 |
 
 **Passende Vorschläge:**
 1. Prozentwerte je Preset im Tooltip sichtbar machen
@@ -29,6 +30,10 @@
 **Passende Vorschläge:**
 1. Layout-Budget-Werte im Header als kleine Infozeile mit aktuellem Modus zeigen
 2. Bei Budget-Verletzung in Debug-Ansicht eine kurze Warnung ausgeben
+
+**Passende Vorschläge:**
+1. Warnhinweis erst nach zwei aufeinanderfolgenden Überschreitungen anzeigen
+2. Toleranzwert als kleinen Konfigwert in `data/app-config.json` ablegen
 
 ## Erledigt
 

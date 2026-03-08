@@ -1,4 +1,4 @@
-export const renderHeaderSection = ({ state, texts, messages, setText, byId, autoFormatText, buildHeaderProjectStatus, buildHeaderAutosaveStatus }) => {
+export const renderHeaderSection = ({ state, texts, messages, setText, byId, autoFormatText, buildHeaderProjectStatus, buildHeaderAutosaveStatus, layoutBudgetStatus }) => {
   setText('app-title', texts.titles?.appTitle || 'ProvoWare Dashboard');
   setText('app-subtitle', texts.titles?.appSubtitle || 'Projektstart');
   setText('header-chip-project-status', buildHeaderProjectStatus(state));
@@ -15,6 +15,8 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   setText('header-stat-templates', String(templateCount));
   setText('header-stat-events', String(archiveEventsCount));
   setText('header-stat-health', selftestLabel);
+  setText('layout-budget-label', layoutBudgetStatus?.label || 'Layoutbudget aktiv: H15/F10/S8');
+  setText('layout-budget-warning', layoutBudgetStatus?.warning || 'Budgetprüfung ausstehend.');
 
   const nextStep = byId('next-step');
   if (!nextStep) return;

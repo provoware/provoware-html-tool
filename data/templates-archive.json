@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-26",
+      "title": "Budgetwarnung im Header kurz prüfen",
+      "content": "Prüfe bei Desktopbreite: Header zeigt 'Layoutbudget aktiv: H15/F10/S8' und meldet eine kurze Warnung, sobald Header, Footer oder Sidebar ihr Budget überschreiten.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T21:00:00.000Z",
+      "updatedAt": "2026-03-08T21:00:00.000Z"
+    },
+    {
       "id": "tpl-default-25",
       "title": "Einfenster-Layout mit Flächenbudget prüfen",
       "content": "Prüfe im Einfenster-Modus: Header maximal 15%, Footer maximal 10%, Sidebars je maximal 8% und Hauptmodul vollständig sichtbar; Zoom nur über Strg + Mausrad oder Strg + +/- nutzen.",
@@ -227,7 +236,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T20:05:00.000Z",
+  "updatedAt": "2026-03-08T21:00:00.000Z",
   "required_fields": [
     "id",
     "title",
