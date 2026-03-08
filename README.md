@@ -4,12 +4,21 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 5
+- Offene Upgrade-Empfehlungen: 6
 - Erledigte Upgrade-Empfehlungen: 20
-- Default-Archive: 2
-- Letzte Iteration: 026
+- Default-Archive: 3
+- Letzte Iteration: 027
 - Scan-Modus: delta
 
+
+
+
+## Iterations-Update 027 (Mini-Patch)
+
+- Neu: Neues Modul `account_archiv_modul` im 3x3-Grid mit Titelliste, Mehrprofil-Auswahl, Favoritenblock, kompakter Statistik und lokalem Detaildialog.
+- Robustheit: Account-Archiv lädt jetzt mit defensiver Normalisierung und fällt bei ungültiger Titel-/Profilauswahl sicher auf gültige Einträge zurück.
+- UX: Sichtbares Sofort-Suchfeld, klare Leerzustände und verständliche Rückmeldungen für Speichern/Favorisieren/Archivieren ergänzt.
+- Archiv: Templates-Defaultarchiv um „Account-Archiv Schnellprüfung“ erweitert.
 
 ## Iterations-Update 026 (Mini-Patch)
 

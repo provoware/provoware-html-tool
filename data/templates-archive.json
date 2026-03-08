@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-29",
+      "title": "Account-Archiv Schnellprüfung",
+      "content": "Lege einen Titel mit zwei Profilen an, prüfe Sofortsuche, setze Favorit und öffne die Detailansicht im Dialog.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T00:10:00.000Z",
+      "updatedAt": "2026-03-09T00:10:00.000Z"
+    },
+    {
       "id": "tpl-default-28",
       "title": "Header-Ampel mit Kurzlegende prüfen",
       "content": "Starte den Selbsttest und prüfe die Header-Ampel: rot=kritisch, gelb=prüfen, grün=stabil. Die Kurzlegende muss den nächsten Schritt in einem Satz erklären.",
@@ -254,7 +263,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T23:10:00.000Z",
+  "updatedAt": "2026-03-09T00:10:00.000Z",
   "required_fields": [
     "id",
     "title",

@@ -31,6 +31,11 @@ const DEFAULT_TEMPLATE_ITEMS = Object.freeze([
     title: 'Bug-Ticket in klaren Schritten',
     category: 'Textbaustein',
     content: 'Problem kurz nennen, Reproduktion in 3 Schritten, erwartetes Ergebnis, tatsächliches Ergebnis, kleinster nächster Fix.'
+  },
+  {
+    title: 'Account-Archiv Schnellprüfung',
+    category: 'Arbeitsphrase',
+    content: 'Lege einen Titel mit zwei Profilen an, prüfe Sofortsuche, setze Favorit und öffne die Detailansicht im Dialog.'
   }
 ]);
 
