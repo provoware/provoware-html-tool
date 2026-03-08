@@ -353,6 +353,27 @@ const renderTemplateQuickButtons = (items = []) => {
   return favorites.map((item) => `<button type="button" class="btn-small" data-template-copy="${escapeHtml(item.id)}">${escapeHtml(item.title)}</button>`).join('');
 };
 
+
+const renderAccountList = (items = []) => {
+  if (!items.length) return '<li class="account-empty">Keine passenden Titel gefunden.</li>';
+  return items.map((item) => {
+    const id = escapeHtml(item.id);
+    const profileCount = Array.isArray(item.profiles) ? item.profiles.length : 0;
+    const last = item.lastOpenedAt ? formatDateTime(item.lastOpenedAt) : '-';
+    return `<li><button type="button" class="btn-small" data-account-select="${id}">${escapeHtml(item.title)}</button><small>Profile: ${profileCount} | Favorit: ${item.favorite ? 'ja' : 'nein'} | Letzter Zugriff: ${escapeHtml(last)}</small><div><button class="btn-small" data-account-favorite="${id}">${item.favorite ? '★ Favorit' : '☆ Favorit'}</button><button class="btn-small" data-account-dialog="${id}">Details</button><button class="btn-small" data-account-edit="${id}">Bearbeiten</button><button class="btn-small" data-account-archive="${id}">Archivieren</button></div></li>`;
+  }).join('');
+};
+
+const renderAccountProfileOptions = (profiles = [], selectedProfileId = '') => {
+  if (!profiles.length) return '<option value="">Kein Profil</option>';
+  return profiles.map((profile) => `<option value="${escapeHtml(profile.id)}" ${profile.id === selectedProfileId ? 'selected' : ''}>${escapeHtml(profile.profileName)}</option>`).join('');
+};
+
+const renderAccountCustomFields = (fields = []) => {
+  if (!fields.length) return '<li class="account-empty">Keine Zusatzfelder vorhanden.</li>';
+  return fields.map((field, index) => `<li><strong>${escapeHtml(field.label)}:</strong> ${escapeHtml(field.value)} <button class="btn-small" data-account-custom-remove="${index}">Löschen</button></li>`).join('');
+};
+
 const renderFilePreviewList = (entries = []) => {
   if (!entries.length) return '<li>-</li>';
   return entries
@@ -919,8 +940,63 @@ export const bindUiActions = (actions) => {
     actions.onEditorChangeContent(event.target.value || '');
   });
 
-  byId('editor-save')?.addEventListener('click', async () => {
-    await actions.onSaveEditorFile();
+  byId('account-search')?.addEventListener('input', (event) => {
+    actions.onAccountSearch(event.target.value || '');
+  });
+
+  byId('account-create-title')?.addEventListener('click', async () => {
+    await actions.onCreateAccountTitle();
+  });
+
+  byId('account-create-profile')?.addEventListener('click', async () => {
+    const titleId = byId('account-title-list')?.getAttribute('data-selected-title') || '';
+    if (!titleId) return;
+    await actions.onCreateAccountProfile(titleId);
+  });
+
+  byId('account-title-list')?.addEventListener('click', async (event) => {
+    const titleId = event.target.getAttribute('data-account-select');
+    if (titleId) { actions.onSelectAccountTitle(titleId); return; }
+    const favoriteId = event.target.getAttribute('data-account-favorite');
+    if (favoriteId) { await actions.onToggleAccountFavorite(favoriteId); return; }
+    const dialogId = event.target.getAttribute('data-account-dialog');
+    if (dialogId) {
+      const profileId = byId('account-profile-select')?.value || '';
+      await actions.onOpenAccountDialog({ titleId: dialogId, profileId });
+      return;
+    }
+    const editId = event.target.getAttribute('data-account-edit');
+    if (editId) { await actions.onEditAccountTitle(editId); return; }
+    const archiveId = event.target.getAttribute('data-account-archive');
+    if (archiveId) { await actions.onArchiveAccountTitle(archiveId); }
+  });
+
+  byId('account-profile-select')?.addEventListener('change', (event) => {
+    actions.onSelectAccountProfile(event.target.value || '');
+  });
+
+  byId('account-dialog-close')?.addEventListener('click', () => actions.onCloseAccountDialog());
+  byId('account-detail-dialog')?.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    actions.onCloseAccountDialog();
+  });
+
+  byId('account-custom-add')?.addEventListener('click', async () => {
+    const titleId = byId('account-title-list')?.getAttribute('data-selected-title') || '';
+    const profileId = byId('account-profile-select')?.value || '';
+    if (!titleId || !profileId) return;
+    const label = byId('account-custom-label')?.value || '';
+    const value = byId('account-custom-value')?.value || '';
+    await actions.onAddCustomField({ titleId, profileId, label, value });
+  });
+
+  byId('account-custom-list')?.addEventListener('click', async (event) => {
+    const index = Number(event.target.getAttribute('data-account-custom-remove'));
+    if (!Number.isInteger(index)) return;
+    const titleId = byId('account-title-list')?.getAttribute('data-selected-title') || '';
+    const profileId = byId('account-profile-select')?.value || '';
+    if (!titleId || !profileId) return;
+    await actions.onRemoveCustomField({ titleId, profileId, index });
   });
 
   bindWorkspaceControls();
@@ -1042,7 +1118,10 @@ export const render = () => {
     renderSidebarModules,
     renderTemplateList,
     renderTemplateQuickButtons,
-    renderFilePreviewList
+    renderFilePreviewList,
+    renderAccountList,
+    renderAccountProfileOptions,
+    renderAccountCustomFields
   });
 
 

@@ -34,7 +34,10 @@ export const renderMainSection = ({
   renderSidebarModules,
   renderTemplateList,
   renderTemplateQuickButtons,
-  renderFilePreviewList
+  renderFilePreviewList,
+  renderAccountList,
+  renderAccountProfileOptions,
+  renderAccountCustomFields
 }) => {
   const selectedName = state.selectedProjectDirectory?.name;
   const rememberedName = state.rememberedProjectDirectoryName;
@@ -49,6 +52,68 @@ export const renderMainSection = ({
   setText('archive-overview-profile', state.selectedProfile || '-');
   setText('archive-overview-total', String(state.profileStats?.total ?? '-'));
   setText('archive-overview-updated', formatDateTime(state.profileArchive?.updatedAt));
+
+  const accountItems = (state.accountArchive?.items || []).filter((item) => !item.archived);
+  const accountSearch = String(state.accountArchiveSearch || '').toLowerCase();
+  const filteredAccounts = accountSearch
+    ? accountItems.filter((item) => {
+      const profileText = (item.profiles || []).flatMap((profile) => [profile.profileName, profile.loginEmail, profile.websiteUrl, profile.username, profile.notes, ...(profile.tags || []), ...((profile.customFields || []).flatMap((field) => [field.label, field.value]))]).join(' ').toLowerCase();
+      return `${item.title} ${(item.tags || []).join(' ')} ${profileText}`.toLowerCase().includes(accountSearch);
+    })
+    : accountItems;
+  const titleId = filteredAccounts.some((item) => item.id === state.selectedAccountTitleId)
+    ? state.selectedAccountTitleId
+    : (filteredAccounts[0]?.id || '');
+  const selectedTitle = accountItems.find((item) => item.id === titleId) || null;
+  const selectedProfile = (selectedTitle?.profiles || []).find((profile) => profile.id === state.selectedAccountProfileId) || selectedTitle?.profiles?.[0] || null;
+
+  const accountTitleList = byId('account-title-list');
+  if (accountTitleList) {
+    accountTitleList.innerHTML = renderAccountList(filteredAccounts);
+    accountTitleList.dataset.selectedTitle = titleId;
+  }
+  const accountProfileSelect = byId('account-profile-select');
+  if (accountProfileSelect) {
+    accountProfileSelect.innerHTML = renderAccountProfileOptions(selectedTitle?.profiles || [], selectedProfile?.id || '');
+    accountProfileSelect.disabled = !(selectedTitle?.profiles || []).length;
+  }
+  setText('account-stats', `Titel: ${state.accountArchiveStats?.titles ?? 0} | Profile: ${state.accountArchiveStats?.profiles ?? 0} | Favoriten: ${state.accountArchiveStats?.favorites ?? 0} | Mehrfachprofile: ${state.accountArchiveStats?.multiProfileTitles ?? 0}`);
+  setText('account-detail-title', selectedTitle?.title || 'Kein Titel ausgewählt');
+  setText('account-detail-email', selectedProfile?.loginEmail || '-');
+  setText('account-detail-url', selectedProfile?.websiteUrl || '-');
+  setText('account-detail-username', selectedProfile?.username || '-');
+  setText('account-detail-notes', selectedProfile?.notes || 'Keine Notiz hinterlegt.');
+  const customList = byId('account-custom-list');
+  if (customList) customList.innerHTML = renderAccountCustomFields(selectedProfile?.customFields || []);
+  const accountFeedback = byId('account-feedback');
+  if (accountFeedback) accountFeedback.textContent = state.accountArchiveFeedback || 'Bereit.';
+  const accountFavorites = byId('account-favorites');
+  if (accountFavorites) {
+    const favorites = accountItems.filter((item) => item.favorite).slice(0, 3);
+    accountFavorites.innerHTML = favorites.length ? favorites.map((item) => `<li>${escapeHtml(item.title)}</li>`).join('') : '<li>Keine Favoriten.</li>';
+  }
+  const accountMostViewed = byId('account-most-viewed');
+  if (accountMostViewed) {
+    const viewed = [...accountItems].sort((a, b) => (b.openCount || 0) - (a.openCount || 0)).slice(0, 3);
+    accountMostViewed.innerHTML = viewed.length ? viewed.map((item) => `<li>${escapeHtml(item.title)} (${item.openCount || 0})</li>`).join('') : '<li>Noch keine Nutzung.</li>';
+  }
+
+  const accountDialog = byId('account-detail-dialog');
+  const accountDialogBody = byId('account-dialog-content');
+  if (accountDialog && accountDialogBody) {
+    const dialogTitle = accountItems.find((item) => item.id === state.accountArchiveDialog?.titleId);
+    const dialogProfile = dialogTitle?.profiles?.find((profile) => profile.id === state.accountArchiveDialog?.profileId) || dialogTitle?.profiles?.[0];
+    if (state.accountArchiveDialog?.open && dialogTitle) {
+      accountDialogBody.innerHTML = `<h4>${escapeHtml(dialogTitle.title)}</h4><p><strong>Profil:</strong> ${escapeHtml(dialogProfile?.profileName || '-')}</p><p><strong>E-Mail:</strong> ${escapeHtml(dialogProfile?.loginEmail || '-')}</p><p><strong>URL:</strong> ${escapeHtml(dialogProfile?.websiteUrl || '-')}</p><p><strong>Benutzername:</strong> ${escapeHtml(dialogProfile?.username || '-')}</p><p><strong>Notizen:</strong> ${escapeHtml(dialogProfile?.notes || '-')}</p>`;
+      if (typeof accountDialog.showModal === 'function' && !accountDialog.open) accountDialog.showModal();
+      else if (typeof accountDialog.showModal !== 'function') accountDialog.setAttribute('open', 'open');
+    } else if (accountDialog.open) {
+      accountDialog.close();
+    } else {
+      accountDialog.removeAttribute('open');
+    }
+  }
+
   const quietModeToggle = byId('a11y-quiet-mode');
   const panelProportionSelect = byId('panel-proportion-select');
   if (panelProportionSelect) panelProportionSelect.value = state.panelProportionPreset || 'balanced';

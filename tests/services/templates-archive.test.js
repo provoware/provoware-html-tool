@@ -31,3 +31,12 @@ test('normalizeTemplateArchive ergänzt required_fields und meldet Reparatur', (
   assert.equal(result.archive.required_fields.includes('title'), true);
   assert.equal(result.repair.applied, true);
 });
+
+
+test('Template-Defaults enthalten den Account-Archiv-Schnellcheck', () => {
+  const archive = createDefaultTemplateArchive();
+  const entry = archive.items.find((item) => item.title === 'Account-Archiv Schnellprüfung');
+
+  assert.ok(entry);
+  assert.equal(entry.category, 'Arbeitsphrase');
+});

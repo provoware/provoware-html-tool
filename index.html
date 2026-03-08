@@ -164,9 +164,57 @@
             </div>
           </article>
 
-          <article class="module-panel is-empty-slot" aria-hidden="true" data-panel="empty-1">
-            <header class="module-head"><h3>Modul-Slot leer</h3></header>
-            <div class="module-body module-panel-placeholder"><p>Modul-Slot leer</p></div>
+          <article class="module-panel" data-panel="account-archive" data-module-id="account_archiv_modul" data-module-default="active">
+            <header class="module-head">
+              <h3>Account-Archiv</h3>
+              <div class="module-controls"></div>
+            </header>
+            <div class="module-body account-archive-panel">
+              <div class="account-archive-head">
+                <button id="account-create-title" class="btn-small btn-accent" type="button">Neuer Titel</button>
+                <button id="account-create-profile" class="btn-small" type="button">Neues Profil</button>
+                <input id="account-search" type="search" placeholder="Suche nach Titel, Profil, E-Mail oder Link" />
+              </div>
+              <p id="account-stats" class="sidebar-summary">Titel: 0 | Profile: 0 | Favoriten: 0 | Mehrfachprofile: 0</p>
+              <div class="account-archive-content">
+                <section>
+                  <h4>Titel</h4>
+                  <ul id="account-title-list" class="account-list"><li class="account-empty">Noch kein Titel vorhanden.</li></ul>
+                </section>
+                <section>
+                  <h4>Details</h4>
+                  <p id="account-detail-title" class="sidebar-summary">Kein Titel ausgewählt</p>
+                  <label for="account-profile-select">Profilauswahl</label>
+                  <select id="account-profile-select"><option value="">Kein Profil</option></select>
+                  <dl class="account-detail-fields">
+                    <div><dt>Login-E-Mail</dt><dd id="account-detail-email">-</dd></div>
+                    <div><dt>Webseite / Link</dt><dd id="account-detail-url">-</dd></div>
+                    <div><dt>Benutzername</dt><dd id="account-detail-username">-</dd></div>
+                  </dl>
+                  <p id="account-detail-notes" class="sidebar-summary">Keine Notiz hinterlegt.</p>
+                  <div class="account-custom-row">
+                    <input id="account-custom-label" type="text" placeholder="Feldname" />
+                    <input id="account-custom-value" type="text" placeholder="Wert" />
+                    <button id="account-custom-add" class="btn-small" type="button">Zusatzfeld speichern</button>
+                  </div>
+                  <ul id="account-custom-list" class="account-custom-list"><li class="account-empty">Keine Zusatzfelder vorhanden.</li></ul>
+                </section>
+                <section>
+                  <h4>Favoriten</h4>
+                  <ul id="account-favorites" class="account-small-list"><li>Keine Favoriten.</li></ul>
+                  <h4>Meist geöffnet</h4>
+                  <ul id="account-most-viewed" class="account-small-list"><li>Noch keine Nutzung.</li></ul>
+                  <p id="account-feedback" class="sidebar-summary">Bereit.</p>
+                </section>
+              </div>
+              <dialog id="account-detail-dialog">
+                <article class="account-dialog-body">
+                  <h3>Account-Detailansicht</h3>
+                  <div id="account-dialog-content">Keine Daten.</div>
+                  <button id="account-dialog-close" class="btn-small" type="button">Schließen</button>
+                </article>
+              </dialog>
+            </div>
           </article>
           <article class="module-panel is-empty-slot" aria-hidden="true" data-panel="empty-2">
             <header class="module-head"><h3>Modul-Slot leer</h3></header>

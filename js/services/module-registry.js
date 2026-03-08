@@ -1,5 +1,5 @@
 const MODULE_FILES = Object.freeze(['manifest', 'config', 'texts', 'schema', 'logic']);
-const FALLBACK_MODULE_IDS = Object.freeze(['backup_funktions_modul', 'datenbank_baukasten', 'debugging_modul', 'logging_modul', 'todo_kalender_erinnerung', 'wiki_notiz_wissen', 'songtext_arbeitszentrum', 'reimarchiv_modul']);
+const FALLBACK_MODULE_IDS = Object.freeze(['backup_funktions_modul', 'datenbank_baukasten', 'debugging_modul', 'logging_modul', 'todo_kalender_erinnerung', 'wiki_notiz_wissen', 'songtext_arbeitszentrum', 'reimarchiv_modul', 'account_archiv_modul']);
 
 const filePath = (id, file) => `./modules/${id}/${file === 'logic' ? 'logic.js' : `${file}.json`}`;
 

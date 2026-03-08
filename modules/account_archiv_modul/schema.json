@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AccountArchive",
+  "type": "object",
+  "required": ["version", "items", "stats", "updatedAt"],
+  "properties": {
+    "version": { "type": "number" },
+    "items": { "type": "array" },
+    "stats": { "type": "object" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  }
+}

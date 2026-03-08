@@ -1,0 +1,6 @@
+{
+  "id": "account_archiv_modul",
+  "name": "Account-Archiv-Modul",
+  "version": "0.1.0",
+  "description": "Verwaltet Account-Titel mit mehreren Profilen, Suche, Favoriten und kompakter Detailansicht."
+}

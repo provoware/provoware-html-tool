@@ -19,6 +19,12 @@ import {
   createDefaultTemplateArchive,
   normalizeTemplateArchive
 } from './services/templates-archive.js';
+import {
+  ACCOUNT_ARCHIVE_PATH,
+  buildAccountArchiveStats,
+  createDefaultAccountArchive,
+  normalizeAccountArchive
+} from './services/account-archive.js';
 
 const LAST_DIRECTORY_NAME_KEY = 'provoware:last-directory-name';
 const WRITE_PERMISSION_CHOICE_KEY = 'provoware:write-permission-choice';
@@ -127,6 +133,14 @@ const saveTemplateArchiveToDisk = async (archive) => {
   return write.ok;
 };
 
+const saveAccountArchiveToDisk = async (archive) => {
+  const write = await filesystemAdapter.writeJson(ACCOUNT_ARCHIVE_PATH, archive);
+  if (!write.ok) {
+    logEvent('WARN', write.code, 'Account-Archiv konnte nicht gespeichert werden.', write.data);
+  }
+  return write.ok;
+};
+
 const loadProfileArchive = async () => {
   const exists = await filesystemAdapter.fileExists(ARCHIVE_PATH);
   if (!exists.ok) {
@@ -226,6 +240,68 @@ const updateTemplateArchive = async (mutate, fallbackMessage = 'Vorlagenaktion')
   return result;
 };
 
+const loadAccountArchive = async () => {
+  const exists = await filesystemAdapter.fileExists(ACCOUNT_ARCHIVE_PATH);
+  if (!exists.ok) {
+    logEvent('WARN', exists.code, 'Account-Archivstatus konnte nicht gelesen werden.', exists.data);
+    return;
+  }
+
+  let archive = createDefaultAccountArchive();
+  let accountArchiveFeedback = '';
+  if (exists.data.exists) {
+    const loaded = await filesystemAdapter.readJson(ACCOUNT_ARCHIVE_PATH);
+    if (loaded.ok) {
+      const normalized = normalizeAccountArchive(loaded.data, { withReport: true });
+      archive = normalized.archive;
+      if (normalized.repair?.applied) {
+        accountArchiveFeedback = 'Account-Archiv wurde defensiv repariert.';
+        await saveAccountArchiveToDisk(archive);
+      }
+    }
+  } else {
+    await saveAccountArchiveToDisk(archive);
+  }
+
+  const firstActive = (archive.items || []).find((item) => !item.archived);
+  setState({
+    accountArchive: archive,
+    accountArchiveStats: buildAccountArchiveStats(archive),
+    selectedAccountTitleId: firstActive?.id || '',
+    selectedAccountProfileId: firstActive?.profiles?.[0]?.id || '',
+    accountArchiveFeedback
+  });
+};
+
+const updateAccountArchive = async (mutate, fallbackMessage = 'Account-Aktion') => {
+  const state = window.appState;
+  const archive = normalizeAccountArchive(state.accountArchive || createDefaultAccountArchive());
+  const result = mutate(archive);
+  const firstActive = (archive.items || []).find((item) => !item.archived);
+  const selectedTitleId = (archive.items || []).some((item) => item.id === state.selectedAccountTitleId && !item.archived)
+    ? state.selectedAccountTitleId
+    : (firstActive?.id || '');
+  const selectedTitle = (archive.items || []).find((item) => item.id === selectedTitleId);
+  const selectedProfileId = (selectedTitle?.profiles || []).some((profile) => profile.id === state.selectedAccountProfileId)
+    ? state.selectedAccountProfileId
+    : (selectedTitle?.profiles?.[0]?.id || '');
+
+  setState({
+    accountArchive: archive,
+    accountArchiveStats: buildAccountArchiveStats(archive),
+    selectedAccountTitleId: selectedTitleId,
+    selectedAccountProfileId: selectedProfileId,
+    accountArchiveFeedback: result.message
+  });
+  logEvent(result.ok ? 'INFO' : 'WARN', result.code, result.message, result.data || null);
+  if (result.ok) {
+    await saveAccountArchiveToDisk(archive);
+  } else {
+    logEvent('WARN', 'ACCOUNT_ACTION_SKIPPED', fallbackMessage);
+  }
+  return result;
+};
+
 const copyToClipboardSafe = async (text) => {
   try {
     await navigator.clipboard.writeText(text);
@@ -249,6 +325,7 @@ const selectDirectory = async (allowWritePermission) => {
   }
   await runSelftest(false);
   await loadProfileArchive();
+  await loadAccountArchive();
 
   await runStartupReadinessCheck(window.appState.projectStructure, allowWritePermission);
 };
@@ -292,7 +369,9 @@ const init = async () => {
     selectedProfile: DEFAULT_PROFILE,
     profileArchive: createDefaultArchive(),
     profileStats: buildStats(createDefaultArchive(), DEFAULT_PROFILE),
-    templateArchive: createDefaultTemplateArchive()
+    templateArchive: createDefaultTemplateArchive(),
+    accountArchive: createDefaultAccountArchive(),
+    accountArchiveStats: buildAccountArchiveStats(createDefaultAccountArchive())
   });
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
@@ -317,6 +396,7 @@ const init = async () => {
     copyToClipboardSafe,
     updateArchive,
     updateTemplateArchive,
+    updateAccountArchive,
     logEvent,
     storeGridHelpPreference: storeGridHelpVisibilityChoice
   });
@@ -335,6 +415,7 @@ const init = async () => {
   });
 
   await loadTemplateArchive();
+  await loadAccountArchive();
 
   await runStartupReadinessCheck(loaded.data.projectStructure, allowWritePermission);
 
