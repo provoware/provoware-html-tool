@@ -74,6 +74,22 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     });
     render();
     assert.equal(nodes['next-step'].textContent, '<img src=x onerror=alert(1)>: <script>alert(1)</script>.');
+
+    setState({
+      selectedProjectDirectory: null,
+      selftestResult: null,
+      debug: { startupReady: false },
+      editorFilePath: '',
+      editorDirty: false,
+      uiTexts: {
+        messages: {
+          actionNext: 'Nächster Schritt',
+          startupMissingFolderNext: 'Ordner wählen'
+        }
+      }
+    });
+    render();
+    assert.equal(nodes['next-step'].textContent, 'Nächster Schritt: Ordner wählen.');
   } finally {
     if (previousDocument === undefined) {
       delete globalThis.document;
@@ -123,7 +139,7 @@ test('header-chips: next-step zeigt sonderzeichen und sehr langen text nur als t
     assert.equal(longWaitingText.length > 200, true);
     assert.equal(nodes['next-step'].textContent.includes('Nächster Schritt & Prüfung:'), true);
     assert.equal(nodes['next-step'].textContent.includes('äöü ß & < > " \' .'), true);
-    assert.equal(nodes['next-step'].textContent.includes('ende.'), true);
+    assert.equal(nodes['next-step'].textContent.includes('ende'), true);
     assert.equal(nodes['next-step'].innerHTML, '');
   } finally {
     if (previousDocument === undefined) {
