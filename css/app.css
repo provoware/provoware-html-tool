@@ -155,7 +155,15 @@ body::before {
   grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-left-target-width), var(--panel-nav-max)) minmax(0, 1fr) 64px;
 }
 
+.app.sidebar-right-auto-collapsed {
+  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-left-target-width), var(--panel-nav-max)) minmax(0, 1fr) 64px;
+}
+
 .app.sidebar-left-collapsed.sidebar-right-collapsed {
+  grid-template-columns: 64px minmax(0, 1fr) 64px;
+}
+
+.app.sidebar-left-collapsed.sidebar-right-auto-collapsed {
   grid-template-columns: 64px minmax(0, 1fr) 64px;
 }
 
@@ -515,7 +523,9 @@ body::before {
 .app.sidebar-left-collapsed .nav .sidebar-body,
 .app.sidebar-left-collapsed .nav .panel-title,
 .app.sidebar-right-collapsed .widgets .sidebar-body,
-.app.sidebar-right-collapsed .widgets .panel-title {
+.app.sidebar-right-collapsed .widgets .panel-title,
+.app.sidebar-right-auto-collapsed .widgets .sidebar-body,
+.app.sidebar-right-auto-collapsed .widgets .panel-title {
   opacity: 0;
   pointer-events: none;
   max-height: 0;
@@ -1355,6 +1365,26 @@ body::before {
       "nav"
       "widgets"
       "footer";
+  }
+
+  .app.sidebar-left-collapsed .nav {
+    padding: 10px;
+  }
+
+  .app.sidebar-left-collapsed .nav .sidebar-head {
+    margin-bottom: 0;
+  }
+
+  .app.sidebar-left-collapsed .nav .panel-title {
+    opacity: 1;
+    pointer-events: auto;
+    max-height: none;
+    overflow: visible;
+    margin: 0;
+  }
+
+  .app.sidebar-left-collapsed .nav .sidebar-body {
+    display: none;
   }
 
   .nav,

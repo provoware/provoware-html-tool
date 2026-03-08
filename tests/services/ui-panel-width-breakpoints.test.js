@@ -27,3 +27,11 @@ test('ui-panel-width-breakpoints: tablet und mobil haben eigene fallback-regeln'
   assert.equal(hasText(css, 'grid-template-columns: 1fr;'), true);
   assert.equal(hasText(css, '.nav,\n  .main,\n  .widgets {'), true);
 });
+
+test('ui-panel-width-breakpoints: auto-collapse rechts bei maximiertem panel und linker mobile-collapse sind definiert', () => {
+  const css = readCss();
+  assert.equal(hasText(css, '.app.sidebar-right-auto-collapsed {'), true);
+  assert.equal(hasText(css, '.app.sidebar-left-collapsed.sidebar-right-auto-collapsed {'), true);
+  assert.equal(hasText(css, '.app.sidebar-right-auto-collapsed .widgets .sidebar-body,'), true);
+  assert.equal(hasText(css, '.app.sidebar-left-collapsed .nav .sidebar-body {\n    display: none;\n  }'), true);
+});

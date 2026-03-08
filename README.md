@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 8
-- Erledigte Upgrade-Empfehlungen: 29
+- Offene Upgrade-Empfehlungen: 7
+- Erledigte Upgrade-Empfehlungen: 31
 - Default-Archive: 3
-- Letzte Iteration: 037
+- Letzte Iteration: 038
 - Scan-Modus: delta
 
 
@@ -16,6 +16,13 @@
 
 
 
+
+## Iterations-Update 038 (Mini-Patch)
+
+- Neu: `UP-038` und `UP-037` als kleiner Sidebar-Patch umgesetzt (rechts auto-einklappen bei maximiertem Modul <1100px, links bei <=980px einklappbar mit sichtbarer Titelzeile).
+- Robustheit: Auto-Collapse rechts wird an Maximieren/Restore/Hide/Escape/Resize defensiv synchronisiert und bleibt außerhalb der Bedingung inaktiv.
+- UX: Auf kleinen Breiten reagieren beide Sidebars jetzt symmetrischer und planbarer, damit die Modulfläche bei Fokusmodus mehr Platz bekommt.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Sidebar-Auto-Collapse unter 1100px prüfen“ erweitert.
 
 ## Iterations-Update 037 (Mini-Patch)
 
