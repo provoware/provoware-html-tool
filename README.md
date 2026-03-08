@@ -4,19 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 1
+- Offene Upgrade-Empfehlungen: 2
 - Erledigte Upgrade-Empfehlungen: 17
 - Default-Archive: 2
-- Letzte Iteration: 019
+- Letzte Iteration: 020
 - Scan-Modus: delta
 
 
-## Iterations-Update 019 (Mini-Patch)
+## Iterations-Update 020 (Mini-Patch)
 
-- Neu: Nach **„Datei anlegen“** gibt es ein kleines Vorlagenmenü nur für `manifest.json` und `config.json`.
-- Robustheit: Create-Flow setzt Guards für Dateityp und zeigt klaren Vorlagenstatus statt stiller Fallbacks.
-- UX/Layout: Neues Header-Preset für Panel-Breiten (Ausgewogen, Mitte-Fokus, Seiten-Fokus) wird lokal gespeichert.
-- Tests: Zweiter gezielter Test deckt `onCreateModuleRegistryNextStepFile` für „Datei fehlt → wird erstellt → Editor geöffnet“ ab.
+- Neu: Startfehler liefern jetzt immer eine konkrete Knopf-Empfehlung (Ordner wählen, Grundcheck starten oder Struktur anlegen).
+- Robustheit: `runStartupCheck` ergänzt pro Exit-Punkt ein `nextAction`-Objekt statt nur Fehlertext.
+- UX: Der Start-Assistent übernimmt diese Empfehlung automatisch und zeigt klare Hilfe in einfacher Sprache.
+- Tests: Startup-Check-Tests prüfen jetzt zusätzlich die empfohlenen Zielaktionen.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**

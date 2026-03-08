@@ -52,6 +52,7 @@ test('Startup-Check nutzt sichere Defaults bei ungültiger Projektstruktur', asy
 
   assert.equal(result.ok, true);
   assert.equal(result.data.selfRepair.repaired, true);
+  assert.equal(result.data.nextAction?.target, 'action-run-selftest');
   assert.equal(typeof result.data.selfRepair.reason, 'string');
   assert.deepEqual(selftestOptions.projectStructure.requiredFiles, []);
 
@@ -76,6 +77,7 @@ test('Startup-Check meldet Laufzeitfehler aus Adapter klar zurück', async () =>
   assert.equal(result.ok, false);
   assert.equal(result.code, 'STARTUP_DIRECTORY_THREW');
   assert.equal(result.data.needsDirectory, true);
+  assert.equal(result.data.nextAction?.target, 'action-select-dir');
 
   filesystemAdapter.getDirectoryInfo = original.getDirectoryInfo;
   filesystemAdapter.checkPermissions = original.checkPermissions;
@@ -98,6 +100,7 @@ test('Startup-Check bleibt robust bei unvollständiger Selbsttest-Antwort', asyn
   assert.equal(result.ok, false);
   assert.equal(result.code, 'STARTUP_SELFTEST_INVALID_PAYLOAD');
   assert.equal(result.data.needsSelftest, true);
+  assert.equal(result.data.nextAction?.target, 'action-run-selftest');
 
   filesystemAdapter.getDirectoryInfo = original.getDirectoryInfo;
   filesystemAdapter.checkPermissions = original.checkPermissions;
