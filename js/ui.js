@@ -14,10 +14,12 @@ const defaultTodos = Object.freeze(['Erste Aufgabe prüfen']);
 const TODO_STORAGE_KEY = 'provoware:todo-start-items';
 const FONT_SCALE_STORAGE_KEY = 'provoware:font-scale';
 const PANEL_PROPORTION_STORAGE_KEY = 'provoware:panel-proportion-preset';
+const PANEL_PROPORTION_MANUAL_STORAGE_KEY = 'provoware:panel-proportion-manual';
 const PANEL_PROPORTION_PRESETS = Object.freeze({
   balanced: { navMin: '220px', navMax: '320px', mainMin: '620px', widgetsMin: '260px', widgetsMax: '360px' },
   'focus-main': { navMin: '190px', navMax: '250px', mainMin: '760px', widgetsMin: '220px', widgetsMax: '290px' },
-  'focus-sidebars': { navMin: '260px', navMax: '340px', mainMin: '520px', widgetsMin: '300px', widgetsMax: '380px' }
+  'focus-sidebars': { navMin: '260px', navMax: '340px', mainMin: '520px', widgetsMin: '300px', widgetsMax: '380px' },
+  manual: { navMin: '180px', navMax: '320px', mainMin: '520px', widgetsMin: '180px', widgetsMax: '320px' }
 });
 const HEADER_PROJECT_STATUS_TEXT = Object.freeze({
   waiting: 'Wartet',
@@ -28,8 +30,11 @@ const LAYOUT_BUDGETS = Object.freeze({
   headerMaxPercent: 15,
   footerMaxPercent: 10,
   sidebarMaxPercent: 8,
+  sidebarTolerancePercent: 0.5,
   desktopMinViewportWidth: 1341
 });
+const LAYOUT_BUDGET_DEBOUNCE_MS = 140;
+let layoutBudgetTimeoutId = null;
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -175,8 +180,9 @@ const measureLayoutBudgetStatus = () => {
   const warnings = [];
   if (headerPercent > LAYOUT_BUDGETS.headerMaxPercent) warnings.push(`Header ${headerPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.headerMaxPercent}%`);
   if (footerPercent > LAYOUT_BUDGETS.footerMaxPercent) warnings.push(`Footer ${footerPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.footerMaxPercent}%`);
-  if (navPercent > LAYOUT_BUDGETS.sidebarMaxPercent) warnings.push(`Links ${navPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.sidebarMaxPercent}%`);
-  if (widgetsPercent > LAYOUT_BUDGETS.sidebarMaxPercent) warnings.push(`Rechts ${widgetsPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.sidebarMaxPercent}%`);
+  const sidebarWarnLimit = LAYOUT_BUDGETS.sidebarMaxPercent + LAYOUT_BUDGETS.sidebarTolerancePercent;
+  if (navPercent > sidebarWarnLimit) warnings.push(`Links ${navPercent.toFixed(1)}% > ${sidebarWarnLimit.toFixed(1)}%`);
+  if (widgetsPercent > sidebarWarnLimit) warnings.push(`Rechts ${widgetsPercent.toFixed(1)}% > ${sidebarWarnLimit.toFixed(1)}%`);
   if (warnings.length > 0) {
     return { label, warning: `⚠ Budgetwarnung: ${warnings.join(' | ')}` };
   }
@@ -187,6 +193,65 @@ const measureLayoutBudgetStatus = () => {
   };
 };
 
+
+
+const sanitizeManualPercent = (value, fallback) => {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return fallback;
+  return Math.min(34, Math.max(14, Math.round(numeric)));
+};
+
+const readManualPanelProportions = () => {
+  try {
+    const raw = JSON.parse(window.localStorage.getItem(PANEL_PROPORTION_MANUAL_STORAGE_KEY) || '{}');
+    const left = sanitizeManualPercent(raw.left, 25);
+    const right = sanitizeManualPercent(raw.right, 25);
+    return { left, right };
+  } catch {
+    return { left: 25, right: 25 };
+  }
+};
+
+const storeManualPanelProportions = (left, right) => {
+  try {
+    window.localStorage.setItem(PANEL_PROPORTION_MANUAL_STORAGE_KEY, JSON.stringify({ left, right }));
+  } catch {
+    // Speicher kann blockiert sein.
+  }
+};
+
+const applyManualPanelProportions = (leftInput, rightInput) => {
+  const left = sanitizeManualPercent(leftInput, 25);
+  const right = sanitizeManualPercent(rightInput, 25);
+  const totalSides = left + right;
+  const normalizedLeft = totalSides > 68 ? left - (totalSides - 68) : left;
+  const normalizedRight = totalSides > 68 ? right - (totalSides - 68) : right;
+  const main = Math.max(32, 100 - normalizedLeft - normalizedRight);
+  const root = document.documentElement;
+  root.style.setProperty('--layout-sidebar-left-target-width', `${normalizedLeft}%`);
+  root.style.setProperty('--layout-sidebar-right-target-width', `${normalizedRight}%`);
+  root.style.setProperty('--panel-main-min', `${Math.max(500, Math.round((window.innerWidth || 1200) * (main / 100)))}px`);
+  storeManualPanelProportions(normalizedLeft, normalizedRight);
+  return { left: normalizedLeft, right: normalizedRight, main };
+};
+
+const syncManualPanelUi = (left, right, main) => {
+  setText('panel-width-left-value', `${left}%`);
+  setText('panel-width-right-value', `${right}%`);
+  setText('panel-width-main-value', `Mitte: ${main}%`);
+  const leftRange = byId('panel-width-left');
+  const rightRange = byId('panel-width-right');
+  if (leftRange) leftRange.value = String(left);
+  if (rightRange) rightRange.value = String(right);
+};
+
+const scheduleBudgetRender = () => {
+  if (layoutBudgetTimeoutId) window.clearTimeout(layoutBudgetTimeoutId);
+  layoutBudgetTimeoutId = window.setTimeout(() => {
+    layoutBudgetTimeoutId = null;
+    render();
+  }, LAYOUT_BUDGET_DEBOUNCE_MS);
+};
 
 const buildStartupSteps = (state) => {
   const hasDirectory = Boolean(state.selectedProjectDirectory);
@@ -411,10 +476,10 @@ const bindWorkspaceControls = () => {
   const setModuleFocusFeedback = (text) => {
     moduleFocusFeedback.textContent = text;
   };
-  const dashboard = document.querySelector('.workspace-dashboard');
-  if (main && dashboard) {
-    main.insertBefore(hiddenPanelsBar, dashboard.nextSibling);
-    main.insertBefore(moduleFocusFeedback, hiddenPanelsBar.nextSibling);
+  const panelGrid = byId('panel-grid');
+  if (main && panelGrid) {
+    main.insertBefore(hiddenPanelsBar, panelGrid);
+    main.insertBefore(moduleFocusFeedback, panelGrid);
   }
 
   const renderHiddenPanelsBar = () => {
@@ -657,8 +722,35 @@ export const bindUiActions = (actions) => {
     await actions.onApplyModuleRegistryTemplate({ path: filePath, templateId });
   });
   byId('panel-proportion-select')?.addEventListener('change', (event) => {
-    const selected = applyPanelProportionPreset(event.target.value || 'balanced');
+    const nextValue = event.target.value || 'balanced';
+    const selected = applyPanelProportionPreset(nextValue);
+    if (selected === 'manual') {
+      const manual = readManualPanelProportions();
+      const applied = applyManualPanelProportions(manual.left, manual.right);
+      syncManualPanelUi(applied.left, applied.right, applied.main);
+    }
     if (typeof actions.onSetPanelProportionPreset === 'function') actions.onSetPanelProportionPreset(selected);
+    scheduleBudgetRender();
+  });
+  byId('panel-width-left')?.addEventListener('input', () => {
+    const left = byId('panel-width-left')?.value || 25;
+    const right = byId('panel-width-right')?.value || 25;
+    const applied = applyManualPanelProportions(left, right);
+    syncManualPanelUi(applied.left, applied.right, applied.main);
+    const select = byId('panel-proportion-select');
+    if (select) select.value = 'manual';
+    if (typeof actions.onSetPanelProportionPreset === 'function') actions.onSetPanelProportionPreset('manual');
+    scheduleBudgetRender();
+  });
+  byId('panel-width-right')?.addEventListener('input', () => {
+    const left = byId('panel-width-left')?.value || 25;
+    const right = byId('panel-width-right')?.value || 25;
+    const applied = applyManualPanelProportions(left, right);
+    syncManualPanelUi(applied.left, applied.right, applied.main);
+    const select = byId('panel-proportion-select');
+    if (select) select.value = 'manual';
+    if (typeof actions.onSetPanelProportionPreset === 'function') actions.onSetPanelProportionPreset('manual');
+    scheduleBudgetRender();
   });
   document.addEventListener('input', (event) => {
     if (event?.target?.type === 'checkbox') return;
@@ -863,6 +955,10 @@ export const applyPanelProportionPreset = (preset = 'balanced') => {
   root.style.setProperty('--panel-main-min', values.mainMin);
   root.style.setProperty('--panel-widgets-min', values.widgetsMin);
   root.style.setProperty('--panel-widgets-max', values.widgetsMax);
+  if (key !== 'manual') {
+    root.style.setProperty('--layout-sidebar-left-target-width', '8vw');
+    root.style.setProperty('--layout-sidebar-right-target-width', '8vw');
+  }
   storePanelProportionPreset(key);
   return key;
 };
@@ -899,6 +995,16 @@ export const render = () => {
   setText('action-switch-dir', texts.buttons?.switchDirectory || 'Ordner wechseln');
   setText('action-export-diagnosis', 'Diagnose exportieren');
   setText('action-logout', texts.buttons?.logout || 'Logout (sicher)');
+  const manual = readManualPanelProportions();
+  const manualMain = Math.max(32, 100 - manual.left - manual.right);
+  syncManualPanelUi(manual.left, manual.right, manualMain);
+  if (state.panelProportionPreset === 'manual') {
+    applyManualPanelProportions(manual.left, manual.right);
+  } else {
+    document.documentElement.style.setProperty('--layout-sidebar-left-target-width', '8vw');
+    document.documentElement.style.setProperty('--layout-sidebar-right-target-width', '8vw');
+  }
+
   const toolsToggle = byId('action-toggle-tools');
   const toolsExpanded = byId('widgets-panel')?.classList.contains('tools-expanded') === true;
   if (toolsToggle) {

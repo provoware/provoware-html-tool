@@ -4,16 +4,10 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-018 | Layout UX | Panel-Proportionen um feine manuelle Prozent-Schieberegler ergänzen | Presets sind schnell, aber manche Nutzer brauchen exaktere Breiten für ihren Workflow | Höhere Layout-Flexibilität bei weiter klarer Bedienung | offen | 019 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
 | UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
-| UP-022 | Layout Governance | Layout-Budgets (Header 15%, Footer 10%, Sidebars je 8%) als feste Konfig-Vorgabe beim Start einblenden | Flächenziele sind jetzt umgesetzt, aber ohne sichtbare Governance könnten spätere Patches sie unbemerkt aufweichen | Stabilere, nachvollziehbare Einfenster-Standards über mehrere Iterationen hinweg | offen | 023 |
-| UP-023 | Layout Robustheit | Budgetwarnung um kleine Toleranzgrenze (z. B. +0,5%) und Debounce-Messung erweitern | Einzelne Reflow-Spitzen beim Resize können kurzzeitige Fehlwarnungen erzeugen | Ruhigere, präzisere Regressionswarnungen ohne zusätzlichen Bedienaufwand | offen | 024 |
-
-**Passende Vorschläge:**
-1. Prozentwerte je Preset im Tooltip sichtbar machen
-2. Bei sehr kleinen Viewports automatisch auf „Ausgewogen“ zurückfallen
+| UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
 
 **Passende Vorschläge:**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -28,17 +22,31 @@
 2. Bei größerem Pixel-Delta nur den betroffenen Header-Bereich markieren
 
 **Passende Vorschläge:**
-1. Layout-Budget-Werte im Header als kleine Infozeile mit aktuellem Modus zeigen
-2. Bei Budget-Verletzung in Debug-Ansicht eine kurze Warnung ausgeben
-
-**Passende Vorschläge:**
-1. Warnhinweis erst nach zwei aufeinanderfolgenden Überschreitungen anzeigen
-2. Toleranzwert als kleinen Konfigwert in `data/app-config.json` ablegen
+1. Pro Layoutbereich einen kleinen „Position merken“-Schalter ergänzen
+2. Im Hilfehinweis kurz erklären, wann Footer- oder Sidebar-Modus sinnvoller ist
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-023 | Layout Robustheit | Budgetwarnung um kleine Toleranzgrenze (z. B. +0,5%) und Debounce-Messung erweitern | Einzelne Reflow-Spitzen beim Resize können kurzzeitige Fehlwarnungen erzeugen | Ruhigere, präzisere Regressionswarnungen ohne zusätzlichen Bedienaufwand | erledigt | 025 |
+
+**Passende Vorschläge:**
+1. Warnhinweis erst nach zwei aufeinanderfolgenden Überschreitungen anzeigen
+2. Toleranzwert als kleinen Konfigwert in `data/app-config.json` ablegen
+
+| UP-022 | Layout Governance | Layout-Budgets (Header 15%, Footer 10%, Sidebars je 8%) als feste Konfig-Vorgabe beim Start einblenden | Flächenziele sind jetzt umgesetzt, aber ohne sichtbare Governance könnten spätere Patches sie unbemerkt aufweichen | Stabilere, nachvollziehbare Einfenster-Standards über mehrere Iterationen hinweg | erledigt | 025 |
+
+**Passende Vorschläge:**
+1. Layout-Budget-Werte im Header als kleine Infozeile mit aktuellem Modus zeigen
+2. Bei Budget-Verletzung in Debug-Ansicht eine kurze Warnung ausgeben
+
+| UP-018 | Layout UX | Panel-Proportionen um feine manuelle Prozent-Schieberegler ergänzen | Presets sind schnell, aber manche Nutzer brauchen exaktere Breiten für ihren Workflow | Höhere Layout-Flexibilität bei weiter klarer Bedienung | erledigt | 025 |
+
+**Passende Vorschläge:**
+1. Prozentwerte je Preset im Tooltip sichtbar machen
+2. Bei sehr kleinen Viewports automatisch auf „Ausgewogen“ zurückfallen
+
 | UP-017 | Modul-Feedback | Nach „Datei anlegen“ optional ein kurzes Vorlagenmenü je Dateityp anbieten (manifest/config/schema/logic) | Die Datei wird jetzt direkt erzeugt, bleibt aber inhaltlich noch leer und braucht oft denselben Starter-Inhalt | Schnellere Erstbefüllung mit weniger Tippfehlern in Standarddateien | erledigt | 019 |
 
 **Passende Vorschläge:**

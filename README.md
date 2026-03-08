@@ -4,11 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 6
-- Erledigte Upgrade-Empfehlungen: 17
+- Offene Upgrade-Empfehlungen: 4
+- Erledigte Upgrade-Empfehlungen: 20
 - Default-Archive: 2
-- Letzte Iteration: 024
+- Letzte Iteration: 025
 - Scan-Modus: delta
+
+
+## Iterations-Update 025 (Mini-Patch)
+
+- Neu: Plugin-Verwaltung in die Fußzeile verschoben, damit der Hauptbereich vollständig für das 3x3-Panel-Grid reserviert ist.
+- Robustheit: Layoutbudget-Warnung nutzt jetzt Toleranz (+0,5%) und Debounce-Messung, um Resize-Spitzen ohne Fehlalarm abzufangen.
+- UX: Panel-Breiten bieten jetzt zusätzlich manuelle Prozent-Schieberegler (links/rechts, Mitte automatisch), inklusive klarer Live-Werte.
+- Archiv: Templates-Defaultarchiv um eine neue Vorlage zur Prüfung von Footer-Plugin + 3x3-Grid ergänzt.
 
 
 ## Iterations-Update 024 (Mini-Patch)
