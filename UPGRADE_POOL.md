@@ -10,8 +10,7 @@
 | UP-032 | Header UX | Header-Navigations-Feedback nach 3 Sekunden automatisch ausblenden | Die neue Rückmeldung hilft, bleibt aber dauerhaft sichtbar und kann den Statistikbereich unnötig belegen | Ruhigeres Dashboard bei weiter klarer Bestätigung nach Navigation | offen | 031 |
 | UP-033 | Accessibility UX | Deaktivierte Buttons um kurzen Tooltip-Titel mit Grund ergänzen | Einheitliche Disabled-Optik ist klar, aber ohne Grund bleibt der nächste Schritt teilweise unklar | Weniger Fehlklicks und schnellere Selbsthilfe durch direkten Hinweis am Knopf | offen | 032 |
 | UP-034 | Leerzustand UX | Leere Modul-Slots im Header-Monitoring auf Zeichenlimit prüfen und bei Überschreitung automatisch kürzen | Kürzere Texte wurden lokal verbessert, können aber bei späteren Änderungen wieder ausufern | Dauerhaft kompakte Leerzustände ohne manuelle Nacharbeit | offen | 033 |
-| UP-037 | Sidebar UX | Linke Modulleiste bei <=980px optional einklappbar machen (nur Titelzeile sichtbar) | Der 1-Spalten-Modus hilft bereits, auf sehr kleinen Breiten bleibt der vertikale Platz dennoch schnell knapp | Mehr nutzbare Höhe für Inhalte bei weiterhin schneller Rückkehr zur Modulliste | offen | 036 |
-| UP-038 | Layout Robustheit | Rechtsleiste bei <1100px automatisch einklappen, wenn ein Modul maximiert ist | Trotz Breiten-Guard kann bei engen Ansichten die aktive Arbeitsfläche unnötig gedrängt werden | Mehr Platz für aktive Module ohne manuellen Umschaltaufwand | offen | 037 |
+| UP-039 | Sidebar UX | Header-Schalter bei aktivem Auto-Collapse rechts temporär als „Auto“ markieren | Nutzer sehen sonst nicht direkt, warum die rechte Leiste eingeklappt ist | Klareres Verhalten auf kleinen Breiten ohne zusätzliche Klickwege | offen | 038 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -37,22 +36,26 @@
 1. Zeichenlimit als kleine Konstante nahe am Slot-Renderer halten (z. B. 70 Zeichen)
 2. Bei Kürzung ein Ellipsis nutzen und den Volltext als `title` setzen
 
-**Passende Vorschläge (UP-037):**
-1. Im eingeklappten Zustand nur ein klarer „Module anzeigen“-Knopf sichtbar lassen
-2. Einklappstatus je Sitzung im UI-State merken, ohne neue Persistenzdatei
-
-**Passende Vorschläge (UP-038):**
-1. Nur im Zustand `.has-maximized-panel` automatisch einklappen, sonst unverändert lassen
-2. Beim Einklappen eine kurze Rückmeldung „Rechtsleiste temporär minimiert“ im Header anzeigen
-
-**Passende Vorschläge (UP-035):**
-1. Unterhalb eines festen Breakpoints (`<= 980px`) automatisch auf eine Modulbutton-Spalte wechseln
-2. Einen kleinen Hinweis „Kompaktmodus aktiv“ in der linken Leiste anzeigen
+**Passende Vorschläge (UP-039):**
+1. `toggle-right-sidebar` bei Auto-Collapse mit kurzem Zusatztext „(Auto)" versehen
+2. Zusatz nur zeigen, solange `.has-maximized-panel` und Breite <1100px aktiv sind
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-038 | Layout Robustheit | Rechtsleiste bei <1100px automatisch einklappen, wenn ein Modul maximiert ist | Trotz Breiten-Guard kann bei engen Ansichten die aktive Arbeitsfläche unnötig gedrängt werden | Mehr Platz für aktive Module ohne manuellen Umschaltaufwand | erledigt | 038 |
+
+**Passende Vorschläge:**
+1. Nur im Zustand `.has-maximized-panel` automatisch einklappen, sonst unverändert lassen
+2. Beim Einklappen eine kurze Rückmeldung „Rechtsleiste temporär minimiert“ im Header anzeigen
+
+| UP-037 | Sidebar UX | Linke Modulleiste bei <=980px optional einklappbar machen (nur Titelzeile sichtbar) | Der 1-Spalten-Modus hilft bereits, auf sehr kleinen Breiten bleibt der vertikale Platz dennoch schnell knapp | Mehr nutzbare Höhe für Inhalte bei weiterhin schneller Rückkehr zur Modulliste | erledigt | 038 |
+
+**Passende Vorschläge:**
+1. Im eingeklappten Zustand nur ein klarer „Module anzeigen“-Knopf sichtbar lassen
+2. Einklappstatus je Sitzung im UI-State merken, ohne neue Persistenzdatei
+
 | UP-036 | Visual Calm | Panel-Overlay bei kleinen Breiten weiter drosseln (Breakpoint-abhängig), falls Textkontrast sinkt | Nach reduzierten Hintergrundmustern bleibt das Innen-Overlay als möglicher Reststörer in dichten Ansichten sichtbar | Noch ruhigere Lesbarkeit ohne komplettes Redesign | erledigt | 036 |
 
 **Passende Vorschläge:**

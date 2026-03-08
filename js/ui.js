@@ -15,6 +15,7 @@ const TODO_STORAGE_KEY = 'provoware:todo-start-items';
 const FONT_SCALE_STORAGE_KEY = 'provoware:font-scale';
 const PANEL_PROPORTION_STORAGE_KEY = 'provoware:panel-proportion-preset';
 const PANEL_PROPORTION_MANUAL_STORAGE_KEY = 'provoware:panel-proportion-manual';
+const AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH = 1100;
 const PANEL_PROPORTION_PRESETS = Object.freeze({
   balanced: { navMin: '220px', navMax: '320px', mainMin: '620px', widgetsMin: '260px', widgetsMax: '360px' },
   'focus-main': { navMin: '190px', navMax: '250px', mainMin: '760px', widgetsMin: '220px', widgetsMax: '290px' },
@@ -489,7 +490,14 @@ const bindWorkspaceControls = () => {
       app.classList.toggle(cssClass);
       const isCollapsed = app.classList.contains(cssClass);
       button.setAttribute('aria-pressed', isCollapsed ? 'true' : 'false');
+      syncSidebarAutoCollapse();
     });
+  };
+
+  const syncSidebarAutoCollapse = () => {
+    const shouldAutoCollapseRightSidebar = app.classList.contains('has-maximized-panel')
+      && window.innerWidth < AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH;
+    app.classList.toggle('sidebar-right-auto-collapsed', shouldAutoCollapseRightSidebar);
   };
 
   setSidebarState('toggle-left-sidebar', 'sidebar-left-collapsed');
@@ -553,6 +561,7 @@ const bindWorkspaceControls = () => {
         setModuleFocusFeedback('Modul ist maximiert. Mit „Maximierung aufheben“ kommst du zurück ins 3x3-Grid.');
       }
       app.classList.toggle('has-maximized-panel', willMaximize);
+      syncSidebarAutoCollapse();
       if (!willMaximize) {
         setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
       }
@@ -565,6 +574,7 @@ const bindWorkspaceControls = () => {
       if (!panel || !panel.classList.contains('is-maximized')) return;
       panel.classList.remove('is-maximized');
       app.classList.remove('has-maximized-panel');
+      syncSidebarAutoCollapse();
       setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
     });
   });
@@ -584,6 +594,7 @@ const bindWorkspaceControls = () => {
       panel.classList.toggle('is-hidden');
       if (panel.classList.contains('is-hidden')) panel.classList.remove('is-maximized');
       app.classList.toggle('has-maximized-panel', Boolean(document.querySelector('.module-panel.is-maximized')));
+      syncSidebarAutoCollapse();
       renderHiddenPanelsBar();
     });
   });
@@ -619,6 +630,7 @@ const bindWorkspaceControls = () => {
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
     panel.classList.add('is-maximized');
     app.classList.add('has-maximized-panel');
+    syncSidebarAutoCollapse();
     setModuleFocusFeedback(`${moduleLabel} ist jetzt geöffnet und maximiert.`);
   });
 
@@ -671,8 +683,12 @@ const bindWorkspaceControls = () => {
     if (event.key !== 'Escape') return;
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
     app.classList.remove('has-maximized-panel');
+    syncSidebarAutoCollapse();
     setModuleFocusFeedback('Maximierung beendet. Alle Module sind wieder im 3x3-Grid sichtbar.');
   });
+
+  window.addEventListener('resize', syncSidebarAutoCollapse);
+  syncSidebarAutoCollapse();
 
   let lastWheelZoomAt = 0;
   const handleZoomWheel = (event) => {
