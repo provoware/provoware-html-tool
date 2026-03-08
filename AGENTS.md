@@ -431,3 +431,38 @@ Nicht maximal breit prüfen.
 Maximal gezielt prüfen.
 Nicht maximale Bewegung erzeugen.
 Maximale Fortschrittsdichte erzeugen.
+
+---
+
+## Zusatzauftrag Iteration 1 (Kerninkonsistenzen)
+Für die nächste Iteration gilt ein enger Pflichtfokus mit Minimal-Patch:
+
+1. `module-registry.json`-Schema vereinheitlichen (`{"version":1,"moduleIds":[]}`)
+2. Fallback-Modulliste fachlich angleichen
+3. Theme-Fallback auf realen Theme-Key vereinheitlichen
+
+Verbindliche Vorarbeit vor jedem Patch (kurz dokumentieren):
+- betroffene Dateien
+- betroffene Funktionen/Blöcke
+- Ist-Verhalten
+- Soll-Verhalten
+- Risiken
+- bewusst nicht geänderte Bereiche
+
+Verbindliche Analyse-Suchbegriffe vor Patch:
+- `module-registry.json`
+- `moduleIds`
+- `"modules"`
+- `FALLBACK_MODULE_IDS`
+- `dunkel`
+- `defaultTheme`
+
+Zusätzliche Nicht-Ziele in dieser Iteration:
+- keine Slot-Engine
+- `js/ui.js` nicht zerlegen
+- keine Persistenzreform
+- keine Startseiten-Neustruktur
+- keine Accessibility-Runde
+- keine Doku-Rundumerneuerung
+
+Die Punkte sind zuerst in `todo.txt` als Checkbox-Aufgaben zu pflegen und danach exakt patchbasiert abzuarbeiten.
