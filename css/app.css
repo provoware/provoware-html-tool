@@ -1411,3 +1411,57 @@ select {
     grid-row: auto;
   }
 }
+
+/* Iteration: Professionelleres Layout (kleiner, gezielter Feinschliff) */
+:root {
+  --layout-gap: 14px;
+  --card-shadow-soft: 0 14px 30px rgba(4, 10, 24, 0.34);
+  --ui-transition: 0.16s ease;
+}
+
+.app {
+  gap: var(--layout-gap);
+}
+
+.panel,
+.module-panel,
+.settings-group,
+.footer-box {
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.workspace-dashboard {
+  padding: 12px 14px;
+}
+
+.panel-grid {
+  gap: var(--layout-gap);
+}
+
+.footer-grid {
+  gap: 10px;
+}
+
+.btn,
+.btn-small,
+.panel-control {
+  transition: transform var(--ui-transition), box-shadow var(--ui-transition), border-color var(--ui-transition);
+}
+
+.btn:hover,
+.btn-small:hover,
+.panel-control:hover {
+  border-color: rgba(218, 231, 255, 0.66);
+}
+
+.btn:focus-visible,
+.btn-small:focus-visible,
+.panel-control:focus-visible {
+  border-color: rgba(222, 236, 255, 0.92);
+}
+
+@media (max-width: 980px) {
+  .workspace-dashboard {
+    padding: 10px;
+  }
+}
