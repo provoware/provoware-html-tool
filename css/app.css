@@ -72,8 +72,8 @@ body {
   font-size: calc(var(--font-base) * var(--font-scale));
   color: var(--text-main);
   background:
-    radial-gradient(circle at 4% 8%, rgba(143, 162, 128, 0.26), transparent 32%),
-    radial-gradient(circle at 95% 85%, rgba(121, 110, 87, 0.3), transparent 34%),
+    radial-gradient(circle at 4% 8%, rgba(143, 162, 128, 0.14), transparent 28%),
+    radial-gradient(circle at 95% 85%, rgba(121, 110, 87, 0.16), transparent 30%),
     linear-gradient(145deg, var(--body-gradient-start) 0%, var(--body-gradient-mid) 56%, var(--body-gradient-end) 100%);
   overflow: auto;
 }
@@ -84,10 +84,10 @@ body::before {
   inset: -15% -8%;
   z-index: -1;
   background:
-    radial-gradient(circle at 20% 20%, rgba(180, 194, 160, 0.22), transparent 38%),
-    radial-gradient(circle at 80% 10%, rgba(155, 143, 116, 0.2), transparent 42%),
-    radial-gradient(circle at 70% 85%, rgba(112, 133, 102, 0.16), transparent 44%);
-  filter: blur(8px);
+    radial-gradient(circle at 20% 20%, rgba(180, 194, 160, 0.1), transparent 32%),
+    radial-gradient(circle at 80% 10%, rgba(155, 143, 116, 0.08), transparent 34%),
+    radial-gradient(circle at 70% 85%, rgba(112, 133, 102, 0.06), transparent 36%);
+  filter: blur(5px);
 }
 
 .sr-only {
@@ -1336,8 +1336,12 @@ body::before {
     width: 100%;
   }
 
+  .nav .module-button-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .panel-grid,
-  .module-button-grid,
   .archive-input-grid,
   .archive-list,
   .mix-options,

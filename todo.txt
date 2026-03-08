@@ -96,6 +96,7 @@
 
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 032: Offene Release-Blocker 4/5 final abgeschlossen, Button-States zentralisiert, ein neuer Default-Template-Check ergänzt und Pflichtdateien synchronisiert | prüfen: `node --check js/renderers/ui-header-renderer.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: keine offenen Release-Blocker in todo.txt verbleiben und Statusdateien konsistent sind
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 034: Sechs offene Layout-Aufgaben lokal geschlossen (opake Panels, breitere linke Leiste, bessere Modulbutton-Innenabstände/Umbrüche, größere Mindestschrift im Hauptbereich, höherer Kontrast auf dunklen Flächen, kompaktere Statusboxen) und Pflichtdateien synchronisiert | prüfen: `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: sechs gewählte Layoutpunkte in todo.txt erledigt sind und UI-Änderung ohne JSON-Fehler bleibt
+[x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 035: UP-035 als 1-Spalten-Modulbutton-Guard für <=980px gezielt umgesetzt und Hintergrundmuster lokal reduziert, damit Lesbarkeit auf kleinen Breiten stabiler bleibt | prüfen: `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: Sidebar-Buttons auf <=980px einspaltig bleiben und Hintergrund sichtbar ruhiger ist
 
 ## Offene Layout-Punkte (strukturiert)
 [ ] Überlagerte Modulfenster im Standardzustand verhindern, feste Startpositionen oder Docking-Logik einführen.
@@ -110,7 +111,7 @@
 [ ] Wiederholte Statusanzeigen wie „OK“ auf kompakte Badges oder Icons umstellen.
 [x] Mindestschriftgröße im gesamten Hauptbereich erhöhen. (Iteration 034: `.main` auf 1.02rem angehoben.)
 [x] Kontraste auf dunklen Flächen anheben. (Iteration 034: Header-Stat-Karten und gedämpfte Texte kontrastreicher.)
-[ ] Hintergrundmuster deutlich reduzieren oder entfernen.
+[x] Hintergrundmuster deutlich reduzieren oder entfernen. (Iteration 035: Hintergrundradiale deutlich abgeschwächt.)
 [ ] Grid-Logik und Floating-Window-Logik nicht parallel als Hauptprinzip nutzen.
 [ ] Leere Modul-Slots optisch stark zurücknehmen.
 [ ] Horizontales Scrollen in Modulen vollständig vermeiden.
