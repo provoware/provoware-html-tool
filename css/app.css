@@ -37,7 +37,8 @@
   --layout-header-max-height: 15vh;
   --layout-footer-max-height: 10vh;
   --layout-sidebar-min-width: 128px;
-  --layout-sidebar-target-width: 8vw;
+  --layout-sidebar-left-target-width: 8vw;
+  --layout-sidebar-right-target-width: 8vw;
   --font-base: 16px;
   --body-gradient-start: #1f281f;
   --body-gradient-mid: #2a342b;
@@ -135,7 +136,7 @@ body::before {
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow);
   grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
-  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-nav-max)) minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-widgets-max));
+  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-left-target-width), var(--panel-nav-max)) minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-right-target-width), var(--panel-widgets-max));
   grid-template-rows: minmax(96px, var(--layout-header-max-height)) minmax(0, 1fr) minmax(72px, var(--layout-footer-max-height));
   grid-template-areas:
     "header header header"
@@ -146,11 +147,11 @@ body::before {
 }
 
 .app.sidebar-left-collapsed {
-  grid-template-columns: 64px minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-widgets-max));
+  grid-template-columns: 64px minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-right-target-width), var(--panel-widgets-max));
 }
 
 .app.sidebar-right-collapsed {
-  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-nav-max)) minmax(0, 1fr) 64px;
+  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-left-target-width), var(--panel-nav-max)) minmax(0, 1fr) 64px;
 }
 
 .app.sidebar-left-collapsed.sidebar-right-collapsed {
@@ -417,25 +418,14 @@ body::before {
 .main {
   grid-area: main;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: var(--space-2);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
   min-width: min(100%, var(--panel-main-min));
   min-height: 0;
   overflow: hidden;
 }
 
-.workspace-dashboard {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(147, 166, 133, 0.45);
-  background: rgba(229, 238, 218, 0.88);
-  position: relative;
-  z-index: 1;
-}
-
-.workspace-dashboard .panel-title {
-  margin: 0 0 4px;
-}
+/* workspace-dashboard removed: main reserved for 3x3 grid */
 
 .hidden-panels-bar {
   display: none;
@@ -748,7 +738,7 @@ body::before {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: 1.05fr 1.35fr 0.85fr 0.75fr;
   gap: 6px;
   min-height: 100%;
   position: relative;
@@ -761,6 +751,19 @@ body::before {
   background: rgba(242, 247, 237, 0.85);
   padding: 6px;
   min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.footer-box-plugin {
+  overflow: hidden;
+}
+
+.footer-box-plugin .settings-group {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto minmax(0, 1fr);
+  gap: 4px;
 }
 
 .todo-panel {
@@ -902,7 +905,7 @@ body::before {
   margin: 0;
   display: grid;
   gap: 6px;
-  max-height: 160px;
+  max-height: 100%;
   overflow: auto;
 }
 
@@ -1225,7 +1228,6 @@ body::before {
   }
 
   .panel-grid,
-  .footer-grid,
   .module-button-grid,
   .archive-input-grid,
   .archive-list,
@@ -1238,6 +1240,10 @@ body::before {
   }
 
   .settings-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1272,11 +1278,30 @@ body::before {
     grid-template-columns: 1fr;
   }
 
-  .workspace-dashboard {
-    padding: 10px;
-  }
 }
 
+
+.panel-proportion-manual {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.panel-proportion-manual label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #243126;
+}
+
+.panel-proportion-manual input[type='range'] {
+  width: 100%;
+}
+
+.panel-proportion-manual .sidebar-summary {
+  margin: 0;
+  font-size: 0.82rem;
+}
 .dashboard-datetime {
   margin: 6px 0 0;
   font-size: 0.88rem;
@@ -1450,4 +1475,14 @@ body::before {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(3, minmax(0, 1fr));
   }
+}
+
+
+.plugin-output {
+  max-height: none;
+}
+
+#log-list .log-time {
+  display: inline-block;
+  min-width: 56px;
 }

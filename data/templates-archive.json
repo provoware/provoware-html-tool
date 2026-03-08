@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-27",
+      "title": "Footer-Plugin und 3x3-Grid zusammen prüfen",
+      "content": "Prüfe im Hauptbereich ein sauberes 3x3-Panel-Grid ohne Zusatzboxen und verifiziere in der Fußzeile die Plugin-Auswahl mit Status, Toggle und Ausgabe ohne Überlauf.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T22:05:00.000Z",
+      "updatedAt": "2026-03-08T22:05:00.000Z"
+    },
+    {
       "id": "tpl-default-26",
       "title": "Budgetwarnung im Header kurz prüfen",
       "content": "Prüfe bei Desktopbreite: Header zeigt 'Layoutbudget aktiv: H15/F10/S8' und meldet eine kurze Warnung, sobald Header, Footer oder Sidebar ihr Budget überschreiten.",
@@ -236,7 +245,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T21:00:00.000Z",
+  "updatedAt": "2026-03-08T22:05:00.000Z",
   "required_fields": [
     "id",
     "title",
