@@ -1,4 +1,6 @@
-const normalizeText = (value) => String(value || '').trim();
+import { safeObject, safeText, userProblemNextStep } from '../../js/services/module-boundary-utils.js';
+
+const normalizeText = (value) => safeText(value);
 
 const normalizeList = (values) => {
   if (!Array.isArray(values)) return [];
@@ -19,8 +21,20 @@ const buildEntry = (input = {}, previousId = null) => {
   const topic = normalizeText(input.topic);
   const content = normalizeText(input.content);
 
-  if (!topic) return { ok: false, code: 'TOPIC_REQUIRED', message: 'Thema fehlt.' };
-  if (!content) return { ok: false, code: 'CONTENT_REQUIRED', message: 'Inhalt fehlt.' };
+  if (!topic) {
+    return {
+      ok: false,
+      code: 'TOPIC_REQUIRED',
+      message: userProblemNextStep('Thema fehlt.', 'Bitte ein kurzes Thema eintragen.')
+    };
+  }
+  if (!content) {
+    return {
+      ok: false,
+      code: 'CONTENT_REQUIRED',
+      message: userProblemNextStep('Inhalt fehlt.', 'Bitte mindestens einen Satz ergänzen.')
+    };
+  }
 
   const entry = {
     id: previousId || createEntryId(topic),
@@ -85,7 +99,7 @@ export const updateKnowledgeEntry = (store, entryId, patch) => {
   const index = nextStore.entries.findIndex((item) => item.id === id);
   if (index < 0) return { ok: false, code: 'NOT_FOUND', message: 'Eintrag wurde nicht gefunden.' };
 
-  const safePatch = patch && typeof patch === 'object' ? patch : {};
+  const safePatch = safeObject(patch);
   const merged = { ...nextStore.entries[index], ...safePatch };
   const built = buildEntry(merged, id);
   if (!built.ok) return built;

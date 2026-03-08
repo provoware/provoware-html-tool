@@ -1,6 +1,8 @@
+import { safeArray, safeObject, safeText } from '../../js/services/module-boundary-utils.js';
+
 const LEVELS = new Set(['info', 'warn', 'error']);
 
-const asText = (value) => String(value || '').trim();
+const asText = (value) => safeText(value);
 const nowIso = () => new Date().toISOString();
 
 const normalizeLevel = (level) => {
@@ -18,7 +20,7 @@ export const createDebugSession = (name = 'Standard-Debug-Sitzung') => ({
 });
 
 export const addDebugEvent = (session, input = {}) => {
-  const safe = session && typeof session === 'object' ? session : createDebugSession();
+  const safe = safeObject(session, createDebugSession());
   const event = {
     id: nextId(),
     name: asText(input.name) || 'Ohne Namen',
@@ -30,7 +32,7 @@ export const addDebugEvent = (session, input = {}) => {
 };
 
 export const summarizeDebugSession = (session) => {
-  const events = Array.isArray(session?.events) ? session.events : [];
+  const events = safeArray(session?.events);
   const countByLevel = { info: 0, warn: 0, error: 0 };
   events.forEach((event) => {
     const level = normalizeLevel(event.level);
