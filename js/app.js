@@ -348,6 +348,14 @@ const onResize = () => {
   setState({ layoutMode: mode });
 };
 
+const resolveUsableThemeKey = (themes, preferredThemeKey) => {
+  const themeKeys = Object.keys(themes || {});
+  if (themeKeys.length === 0) return null;
+  if (preferredThemeKey && themes?.[preferredThemeKey]) return preferredThemeKey;
+  if (themes?.['design-nachtblau']) return 'design-nachtblau';
+  return themeKeys[0];
+};
+
 const init = async () => {
   subscribeState((next) => {
     window.appState = next;
@@ -376,8 +384,8 @@ const init = async () => {
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
   const themeName = loaded.data.appConfig.defaultTheme;
-  const initialTheme = loaded.data.themes[themeName] ? themeName : 'design-nachtblau';
-  applyTheme(loaded.data.themes[initialTheme] || loaded.data.themes['design-nachtblau']);
+  const initialTheme = resolveUsableThemeKey(loaded.data.themes, themeName);
+  applyTheme((initialTheme && loaded.data.themes?.[initialTheme]) || {});
 
   const initialMode = detectLayoutMode(loaded.data.appConfig);
   const initialPanelPreset = resolveInitialPanelProportionPreset();
@@ -405,8 +413,8 @@ const init = async () => {
     ...actions,
     onChangeTheme: (themeName) => {
       const state = window.appState;
-      const nextTheme = state.themes?.[themeName] ? themeName : state.currentTheme || 'design-nachtblau';
-      applyTheme(state.themes?.[nextTheme] || state.themes?.['design-nachtblau'] || {});
+      const nextTheme = resolveUsableThemeKey(state.themes, themeName) || resolveUsableThemeKey(state.themes, state.currentTheme);
+      applyTheme((nextTheme && state.themes?.[nextTheme]) || {});
       setState({ currentTheme: nextTheme });
     },
     onSetPanelProportionPreset: (preset) => {

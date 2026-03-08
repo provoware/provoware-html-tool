@@ -647,6 +647,12 @@ body::before {
 .module-panel-placeholder p {
   margin: 0;
   color: #4f5d7a;
+  line-height: 1.4;
+}
+
+.module-panel-placeholder {
+  display: flex;
+  align-items: center;
 }
 
 .module-panel.is-empty-slot {
