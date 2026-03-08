@@ -4,15 +4,22 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 4
+- Offene Upgrade-Empfehlungen: 5
 - Erledigte Upgrade-Empfehlungen: 27
 - Default-Archive: 3
-- Letzte Iteration: 031
+- Letzte Iteration: 032
 - Scan-Modus: delta
 
 
 
 
+
+## Iterations-Update 032 (Mini-Patch)
+
+- Neu: Offene Release-Blocker 4/5 im TODO-Register final geschlossen und konsistent dokumentiert.
+- Robustheit: Deaktivierte `btn`/`btn-small` brechen Hover/Active-Effekte jetzt zentral ab und vermeiden irreführende Interaktion.
+- UX: Button-States sind über Header/Main/Widgets einheitlich, inklusive klarer Disabled-Darstellung.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Button-States einheitlich prüfen“ erweitert.
 
 ## Iterations-Update 031 (Mini-Patch)
 

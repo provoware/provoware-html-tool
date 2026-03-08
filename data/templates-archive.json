@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-34",
+      "title": "Button-States einheitlich prüfen",
+      "content": "Prüfe je einen aktiven und deaktivierten `btn` plus `btn-small`: Hover/Active/Fokus sehen gleich aus, deaktivierte Knöpfe heben sich klar ab und bleiben ohne Bewegungs-Effekt.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T03:40:00.000Z",
+      "updatedAt": "2026-03-09T03:40:00.000Z"
+    },
+    {
       "id": "tpl-default-33",
       "title": "Header-Feedback nach Navigation kurz prüfen",
       "content": "Klicke eine Header-Kachel und prüfe die Rückmeldung „Bereich geöffnet“. Nach kurzer Zeit soll die Anzeige wieder ruhig werden, Warnungen bei fehlendem Ziel bleiben sichtbar.",
@@ -299,7 +308,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T03:15:00.000Z",
+  "updatedAt": "2026-03-09T03:40:00.000Z",
   "required_fields": [
     "id",
     "title",

@@ -591,11 +591,6 @@ body::before {
   flex-wrap: wrap;
 }
 
-.startup-assistant .btn-small[disabled] {
-  opacity: 0.72;
-  cursor: not-allowed;
-}
-
 .dashboard-note {
   margin: 0;
   color: #1f2b20;
@@ -910,6 +905,11 @@ body::before {
   position: relative;
   z-index: 1;
   cursor: pointer;
+}
+
+/* Einheitliche Kernzustände für btn + btn-small (hover/active/focus/disabled). */
+.btn,
+.btn-small {
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
@@ -924,6 +924,21 @@ body::before {
 .btn-small:active,
 .panel-control:active {
   transform: translateY(0);
+}
+
+.btn:is(:disabled, [aria-disabled="true"]),
+.btn-small:is(:disabled, [aria-disabled="true"]) {
+  opacity: 0.72;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn:is(:disabled, [aria-disabled="true"]):hover,
+.btn-small:is(:disabled, [aria-disabled="true"]):hover,
+.btn:is(:disabled, [aria-disabled="true"]):active,
+.btn-small:is(:disabled, [aria-disabled="true"]):active {
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-primary {
@@ -1135,7 +1150,6 @@ body::before {
   background: linear-gradient(180deg, rgba(244, 248, 255, 0.98), rgba(229, 238, 255, 0.92));
   padding: 6px 10px;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .btn-accent {
