@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-23",
+      "title": "Header-Dashboard mit 4 Bereichen prüfen",
+      "content": "Prüfe Intro, Schnellaktionen, Steuerung und Statistik als vier gleich große Karten: keine Überlappung, klare Reihenfolge, saubere Fokusführung.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T18:10:00.000Z",
+      "updatedAt": "2026-03-08T18:10:00.000Z"
+    },
+    {
       "id": "tpl-default-22",
       "title": "Startfehler immer mit Knopf lösen",
       "content": "Wenn ein Startcheck fehlschlägt, zeige sofort einen klaren Knopf mit nächstem Schritt (Ordner wählen, Grundcheck starten oder Struktur anlegen).",
@@ -200,7 +209,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T16:30:00.000Z",
+  "updatedAt": "2026-03-08T18:10:00.000Z",
   "required_fields": [
     "id",
     "title",

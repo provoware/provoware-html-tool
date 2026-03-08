@@ -4,6 +4,18 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   setText('header-chip-project-status', buildHeaderProjectStatus(state));
   setText('header-chip-autosave-status', buildHeaderAutosaveStatus(state));
 
+  const modulesCount = Array.isArray(state.moduleRegistry?.modules) ? state.moduleRegistry.modules.length : 0;
+  const templateCount = Array.isArray(state.templateArchive?.items) ? state.templateArchive.items.length : 0;
+  const archiveEventsCount = Array.isArray(state.profileArchive?.events) ? state.profileArchive.events.length : 0;
+  const selftestStatus = state.selftestResult?.overallStatus;
+  const selftestLabel = selftestStatus === 'green'
+    ? 'stabil'
+    : (selftestStatus === 'yellow' ? 'prüfen' : (selftestStatus === 'red' ? 'kritisch' : 'offen'));
+  setText('header-stat-modules', String(modulesCount));
+  setText('header-stat-templates', String(templateCount));
+  setText('header-stat-events', String(archiveEventsCount));
+  setText('header-stat-health', selftestLabel);
+
   const nextStep = byId('next-step');
   if (!nextStep) return;
   const startupReady = state.debug?.startupReady;

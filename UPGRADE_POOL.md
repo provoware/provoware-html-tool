@@ -6,6 +6,7 @@
 |---|---|---|---|---|---|---|
 | UP-018 | Layout UX | Panel-Proportionen um feine manuelle Prozent-Schieberegler ergänzen | Presets sind schnell, aber manche Nutzer brauchen exaktere Breiten für ihren Workflow | Höhere Layout-Flexibilität bei weiter klarer Bedienung | offen | 019 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
+| UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
 
 **Passende Vorschläge:**
 1. Prozentwerte je Preset im Tooltip sichtbar machen
@@ -14,6 +15,10 @@
 **Passende Vorschläge:**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
 2. Bei wiederholtem Fehlschlag kurz „Was kann ich jetzt tun?“ mit 2 Klickwegen einblenden
+
+**Passende Vorschläge:**
+1. Für fehlende Historie einen robusten „keine Verlaufsdaten“-Fallback anzeigen
+2. Trendwerte optional ein-/ausblendbar machen, damit das Dashboard kompakt bleibt
 
 ## Erledigt
 
