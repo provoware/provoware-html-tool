@@ -262,7 +262,7 @@ const ensureStructure = async () => {
 
 const runStartupReadinessCheck = async (projectStructure, allowWritePermission) => {
   const start = await runStartupCheck(projectStructure, { requestWrite: allowWritePermission === true });
-  setState({ debug: { startupReady: start.ok } });
+  setState({ debug: { startupReady: start.ok }, startupCheck: start });
   logEvent(start.ok ? 'INFO' : 'WARN', start.code, start.message, start.data);
 };
 
@@ -305,7 +305,7 @@ const init = async () => {
   applyPanelProportionPreset(initialPanelPreset);
   const moduleRegistry = await loadModuleRegistry();
   const templateDesignStatus = detectTemplateDesignStatus();
-  setState({ layoutMode: initialMode, currentTheme: initialTheme, moduleRegistry, templateDesignStatus, panelProportionPreset: initialPanelPreset, debug: { startupReady: false } });
+  setState({ layoutMode: initialMode, currentTheme: initialTheme, moduleRegistry, templateDesignStatus, panelProportionPreset: initialPanelPreset, debug: { startupReady: false }, startupCheck: null });
 
   const actions = createUiActionHandlers({
     getState: () => window.appState,

@@ -14,6 +14,37 @@ const safeCall = async (label, task) => {
   }
 };
 
+
+const STARTUP_ACTIONS = Object.freeze({
+  SELECT_DIRECTORY: Object.freeze({
+    target: 'action-select-dir',
+    label: 'Ordner jetzt wählen',
+    hint: 'Bitte zuerst den Projektordner wählen. Danach geht es automatisch mit dem nächsten Schritt weiter.'
+  }),
+  RUN_SELFTEST: Object.freeze({
+    target: 'action-run-selftest',
+    label: 'Grundcheck jetzt starten',
+    hint: 'Bitte den Grundcheck erneut starten. Danach siehst du direkt den nächsten klaren Schritt.'
+  }),
+  ENSURE_STRUCTURE: Object.freeze({
+    target: 'action-ensure-structure',
+    label: 'Struktur jetzt anlegen',
+    hint: 'Lege die fehlende Struktur jetzt an. Danach erneut den Grundcheck starten.'
+  })
+});
+
+const withAction = (payload, actionKey) => {
+  const action = STARTUP_ACTIONS[actionKey] || STARTUP_ACTIONS.RUN_SELFTEST;
+  return {
+    ...payload,
+    nextAction: {
+      target: action.target,
+      label: action.label,
+      hint: action.hint
+    }
+  };
+};
+
 const normalizeProjectStructure = (projectStructure) => {
   if (!projectStructure || typeof projectStructure !== 'object') {
     return {
@@ -39,7 +70,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: directoryInfo.code,
       message: 'Ordnerstatus konnte nicht gelesen werden.',
-      data: { ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }
+      data: withAction({ ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }, 'SELECT_DIRECTORY')
     };
   }
 
@@ -48,7 +79,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: 'STARTUP_DIRECTORY_REQUIRED',
       message: 'Bitte zuerst einen Projektordner wählen.',
-      data: { ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }
+      data: withAction({ ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }, 'SELECT_DIRECTORY')
     };
   }
 
@@ -58,7 +89,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: permission.code,
       message: 'Rechteprüfung ist unerwartet abgebrochen.',
-      data: { ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }
+      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST')
     };
   }
 
@@ -67,7 +98,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: 'STARTUP_PERMISSION_FAILED',
       message: 'Rechteprüfung ist fehlgeschlagen.',
-      data: { ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }
+      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST')
     };
   }
 
@@ -77,13 +108,13 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: selftest.code || 'STARTUP_SELFTEST_FAILED',
       message: 'Selbsttest ist fehlgeschlagen. Bitte Selbsttest erneut starten.',
-      data: {
+      data: withAction({
         ready: false,
         needsDirectory: false,
         needsSelftest: true,
         permission: permission.data.data,
         selfRepair: normalized
-      }
+      }, 'RUN_SELFTEST')
     };
   }
 
@@ -97,13 +128,13 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: 'STARTUP_SELFTEST_INVALID_PAYLOAD',
       message: 'Selbsttest-Antwort ist unvollständig. Bitte Selbsttest erneut starten.',
-      data: {
+      data: withAction({
         ready: false,
         needsDirectory: false,
         needsSelftest: true,
         permission: permission.data.data,
         selfRepair: normalized
-      }
+      }, 'RUN_SELFTEST')
     };
   }
 
@@ -113,13 +144,13 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
     ok: ready,
     code: ready ? 'STARTUP_READY' : 'STARTUP_BLOCKED',
     message: ready ? 'Grundcheck ist erfolgreich.' : 'Grundcheck ist noch nicht erfolgreich.',
-    data: {
+    data: withAction({
       ready,
       needsDirectory: false,
       needsSelftest: !ready,
       permission: permission.data.data,
       selftest: selftestPayload,
       selfRepair: normalized
-    }
+    }, ready ? 'RUN_SELFTEST' : 'ENSURE_STRUCTURE')
   };
 };

@@ -5,10 +5,15 @@
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
 | UP-018 | Layout UX | Panel-Proportionen um feine manuelle Prozent-Schieberegler ergänzen | Presets sind schnell, aber manche Nutzer brauchen exaktere Breiten für ihren Workflow | Höhere Layout-Flexibilität bei weiter klarer Bedienung | offen | 019 |
+| UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
 
 **Passende Vorschläge:**
 1. Prozentwerte je Preset im Tooltip sichtbar machen
 2. Bei sehr kleinen Viewports automatisch auf „Ausgewogen“ zurückfallen
+
+**Passende Vorschläge:**
+1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
+2. Bei wiederholtem Fehlschlag kurz „Was kann ich jetzt tun?“ mit 2 Klickwegen einblenden
 
 ## Erledigt
 

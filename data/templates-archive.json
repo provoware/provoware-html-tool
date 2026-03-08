@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-22",
+      "title": "Startfehler immer mit Knopf lösen",
+      "content": "Wenn ein Startcheck fehlschlägt, zeige sofort einen klaren Knopf mit nächstem Schritt (Ordner wählen, Grundcheck starten oder Struktur anlegen).",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T16:30:00.000Z",
+      "updatedAt": "2026-03-08T16:30:00.000Z"
+    },
+    {
       "id": "tpl-default-21",
       "title": "Manifest/Config Vorlagen nach Datei-Anlage",
       "content": "Lege fehlende manifest.json oder config.json zuerst an, setze danach die passende Schnellvorlage ein und prüfe den Inhalt direkt im Editor.",
@@ -191,7 +200,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T15:10:00.000Z",
+  "updatedAt": "2026-03-08T16:30:00.000Z",
   "required_fields": [
     "id",
     "title",

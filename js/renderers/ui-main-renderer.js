@@ -120,18 +120,23 @@ export const renderMainSection = ({
 
     const currentStep = progress.steps[progress.currentIndex];
     const allDone = progress.steps.every((step) => step.done);
+    const startupCheck = state.startupCheck;
+    const suggestedAction = startupCheck?.ok === false ? startupCheck?.data?.nextAction : null;
+
     if (startupAssistantTitle) {
       startupAssistantTitle.textContent = allDone ? 'Assistent: Fertig' : `Assistent: ${currentStep.assistantTitle}`;
     }
     if (startupAssistantText) {
       startupAssistantText.textContent = allDone
         ? 'Alle 4 Schritte sind erledigt. Du kannst jetzt normal weiterarbeiten.'
-        : currentStep.assistantText;
+        : (startupCheck?.ok === false
+          ? `${currentStep.assistantText} Fehlerhilfe: ${startupCheck.message}`
+          : currentStep.assistantText);
     }
     if (startupAssistantHint) {
       startupAssistantHint.textContent = allDone
         ? 'Du kannst bei Bedarf jederzeit erneut prüfen.'
-        : 'Der Knopf startet den passenden Schritt rechts im Bereich „Tool-Einstellungen und Tests“.';
+        : (suggestedAction?.hint || 'Der Knopf startet den passenden Schritt rechts im Bereich „Tool-Einstellungen und Tests“.');
     }
     if (startupAssistantAction) {
       if (allDone) {
@@ -140,8 +145,8 @@ export const renderMainSection = ({
         startupAssistantAction.dataset.assistantTarget = '';
       } else {
         startupAssistantAction.disabled = false;
-        startupAssistantAction.textContent = currentStep.actionLabel;
-        startupAssistantAction.dataset.assistantTarget = currentStep.actionTarget;
+        startupAssistantAction.textContent = suggestedAction?.label || currentStep.actionLabel;
+        startupAssistantAction.dataset.assistantTarget = suggestedAction?.target || currentStep.actionTarget;
       }
     }
   }
