@@ -1447,6 +1447,20 @@ select {
   .module-btn {
     padding: 9px 10px;
   }
+
+  .btn,
+  .btn-small {
+    border-color: rgba(225, 236, 255, 0.8);
+    color: #f6f9ff;
+  }
+
+  .sidebar-summary,
+  .sidebar-hint,
+  .guide-help-note,
+  .dashboard-note {
+    color: #f0f6ff;
+    line-height: 1.5;
+  }
 }
 
 /* Iteration: Professionelleres Layout (kleiner, gezielter Feinschliff) */
@@ -1515,18 +1529,3 @@ select {
   }
 }
 
-@media (max-width: 720px) {
-  .btn,
-  .btn-small {
-    border-color: rgba(225, 236, 255, 0.8);
-    color: #f6f9ff;
-  }
-
-  .sidebar-summary,
-  .sidebar-hint,
-  .guide-help-note,
-  .dashboard-note {
-    color: #f0f6ff;
-    line-height: 1.5;
-  }
-}
