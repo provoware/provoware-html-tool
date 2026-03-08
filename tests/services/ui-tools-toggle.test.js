@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 import { setState } from '../../js/state.js';
 import { bindUiActions } from '../../js/ui.js';
@@ -105,4 +106,14 @@ test('tools-toggle: aria-expanded und label wechseln robust beim klick', () => {
       globalThis.document = previousDocument;
     }
   }
+});
+
+
+test('tools-toggle: erste zwei Tool-Aktionen bleiben als Kernaktionen sichtbar', () => {
+  const html = readFileSync(new URL('../../index.html', import.meta.url), 'utf8');
+  const blocks = Array.from(html.matchAll(/<div class="settings-actions">([\s\S]*?)<\/div>/g)).map((match) => match[1]);
+  const toolsBlock = blocks.find((block) => block.includes('action-select-dir'));
+  assert.ok(toolsBlock, 'Tool-Settings-Block fehlt');
+  const buttonIds = Array.from(toolsBlock.matchAll(/id="([^"]+)"/g)).map((match) => match[1]);
+  assert.deepEqual(buttonIds.slice(0, 2), ['action-select-dir', 'action-run-selftest']);
 });

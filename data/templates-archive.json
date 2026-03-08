@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-19",
+      "title": "Modul-Next-Step direkt öffnen",
+      "content": "Wenn im Modulstatus ein Dateipfad im nächsten Schritt steht, öffne die Datei direkt im Editor und prüfe sie vor dem nächsten Test.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T13:40:00.000Z",
+      "updatedAt": "2026-03-08T13:40:00.000Z"
+    },
+    {
       "id": "tpl-default-18",
       "title": "Modulstatus mit nextStep knapp halten",
       "content": "Formuliere Modulstatus immer mit kurzer Zählung (Warnungen/Fehler) und genau einem nächsten Schritt mit Dateipfad.",
@@ -164,7 +173,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T12:20:00.000Z",
+  "updatedAt": "2026-03-08T13:40:00.000Z",
   "required_fields": [
     "id",
     "title",

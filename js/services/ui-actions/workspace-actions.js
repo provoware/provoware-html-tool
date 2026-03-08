@@ -101,6 +101,35 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     logEvent('INFO', 'EDITOR_OPENED_FROM_PREVIEW', 'Vorschau wurde im Editor geöffnet.', { path: filePath });
     return { ok: true, code: 'EDITOR_OPENED', message: 'Vorschau wurde im Editor geöffnet.' };
   },
+  onOpenModuleRegistryNextStepFile: async (path) => {
+    const filePath = normalizeRelativePath(path);
+    if (!filePath) {
+      const message = 'Kein Dateipfad im Modul-Hinweis gefunden.';
+      setState({ editorStatus: message });
+      return { ok: false, code: 'MODULE_NEXT_STEP_FILE_MISSING', message };
+    }
+    const exists = await filesystemAdapter.fileExists(filePath);
+    if (!exists.ok || !exists.data?.exists) {
+      const message = `Datei konnte nicht geöffnet werden: ${filePath}`;
+      setState({ editorStatus: message });
+      logEvent('WARN', exists.code || 'MODULE_NEXT_STEP_FILE_MISSING', message, exists.data);
+      return exists.ok ? { ok: false, code: 'MODULE_NEXT_STEP_FILE_MISSING', message, data: { path: filePath } } : exists;
+    }
+    const loaded = await filesystemAdapter.readText(filePath);
+    if (!loaded.ok) {
+      setState({ editorStatus: `Datei konnte nicht gelesen werden: ${filePath}` });
+      logEvent('WARN', loaded.code, 'Datei aus Modul-Hinweis konnte nicht gelesen werden.', loaded.data);
+      return loaded;
+    }
+    setState({
+      editorFilePath: filePath,
+      editorContent: loaded.data?.text || '',
+      editorStatus: `Editor geöffnet: ${filePath}`,
+      editorDirty: false
+    });
+    logEvent('INFO', 'MODULE_NEXT_STEP_FILE_OPENED', 'Datei aus Modul-Hinweis im Editor geöffnet.', { path: filePath });
+    return { ok: true, code: 'MODULE_NEXT_STEP_FILE_OPENED', message: `Datei geöffnet: ${filePath}`, data: { path: filePath } };
+  },
   onEditorChangeContent: (content) => {
     setState({ editorContent: content, editorDirty: true });
   },

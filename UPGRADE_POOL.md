@@ -4,31 +4,39 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-001 | Layout | Zentrale Größenlogik für Panels vereinheitlichen | Verhindert inkonsistente Skalierung | stabilere Darstellung bei Fensteränderung | offen | 001 |
-| UP-008 | Responsive QA | Einen kleinen DOM-basierten Test für den mobilen Tools-Toggle ergänzen | CSS-Regeln sind vorhanden, aber ein Sichtbarkeits-Sanity-Check fehlt noch | Frühere Erkennung von Mobile-Regressionsfehlern | offen | 008 |
 | UP-013 | Songtext UX | Splitter-Breiten mit gespeicherten Panel-Proportionen ergänzen (links/mitte/rechts) | Drei-Fenster-Editor braucht stabile, wiederherstellbare Arbeitsbreiten pro Nutzer | Schnellere Wiederaufnahme des Workflows und weniger manuelles Nachjustieren | offen | 014 |
-| UP-015 | Modul-Feedback | Bei Modulstatus-Fehlern den direkten Dateipfad (z. B. `modules/<id>/manifest.json`) klickbar anzeigen | nextStep ist jetzt klarer, aber der Zielort muss noch schneller erreichbar sein | Weniger Suchzeit bei Fehlerbehebung und kürzere Support-Schleifen | offen | 016 |
-
-**Passende Vorschläge:**
-1. Min-/Max-Breiten je Hauptpanel definieren
-2. Einheitliche Spacing-Tokens für Innen- und Außenabstände einführen
-
-**Passende Vorschläge:**
-1. Prüfen: Toggle-Schalter setzt `aria-expanded` auf `true/false`
-2. Prüfen: die ersten zwei Tool-Aktionen bleiben immer sichtbar
+| UP-016 | Modul-Feedback | Fehlende Datei aus `nextStep` als „Datei anlegen“-Aktion direkt neben „Datei öffnen“ anbieten | Der Pfad ist jetzt direkt öffnbar, bei nicht vorhandener Datei fehlt aber noch der direkte Folgeschritt | Kürzere Fehlerbehebung auch bei noch nicht angelegten Moduldateien | offen | 017 |
 
 **Passende Vorschläge:**
 1. Pro Panel eine Mindest- und Maximalbreite im Manifest hinterlegen
 2. Letzte Panel-Breiten in einer kleinen User-Preference-Datei speichern
 
 **Passende Vorschläge:**
-1. Pfad aus `nextStep` automatisch als „Datei öffnen“-Aktion anbieten
-2. Bei fehlender Datei einen „Neu anlegen“-CTA direkt daneben anzeigen
+1. Nur für bekannte JSON-/JS-Dateitypen aktivieren
+2. Nach erfolgreichem Anlegen Datei direkt im Editor öffnen
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-015 | Modul-Feedback | Bei Modulstatus-Fehlern den direkten Dateipfad (z. B. `modules/<id>/manifest.json`) klickbar anzeigen | nextStep ist jetzt klarer, aber der Zielort muss noch schneller erreichbar sein | Weniger Suchzeit bei Fehlerbehebung und kürzere Support-Schleifen | erledigt | 017 |
+
+**Passende Vorschläge:**
+1. Pfad aus `nextStep` automatisch als „Datei öffnen“-Aktion anbieten
+2. Bei fehlender Datei einen „Neu anlegen“-CTA direkt daneben anzeigen
+
+| UP-008 | Responsive QA | Einen kleinen DOM-basierten Test für den mobilen Tools-Toggle ergänzen | CSS-Regeln sind vorhanden, aber ein Sichtbarkeits-Sanity-Check fehlt noch | Frühere Erkennung von Mobile-Regressionsfehlern | erledigt | 017 |
+
+**Passende Vorschläge:**
+1. Prüfen: Toggle-Schalter setzt `aria-expanded` auf `true/false`
+2. Separater Check: Erste 2 Tool-Aktionen bleiben als Kernaktionen sichtbar
+
+| UP-001 | Layout | Zentrale Größenlogik für Panels vereinheitlichen | Verhindert inkonsistente Skalierung | stabilere Darstellung bei Fensteränderung | erledigt | 017 |
+
+**Passende Vorschläge:**
+1. Min-/Max-Breiten je Hauptpanel definieren
+2. Einheitliche Spacing-Tokens für Innen- und Außenabstände einführen
+
 | UP-014 | Modul-Feedback | Modulstatus-Summary um eine kurze Warnungszählung ergänzen (z. B. „1 Warnung, 2 Fehler“) | Aktuell stehen Warnhinweise nur im Fließtext und sind schwerer scannbar | Schnellere Erfassung kritischer Punkte im Startstatus | erledigt | 016 |
 
 **Passende Vorschläge:**

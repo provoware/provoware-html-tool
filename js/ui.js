@@ -585,6 +585,11 @@ export const bindUiActions = (actions) => {
     if (!targetId) return;
     byId(targetId)?.click();
   });
+  byId('module-registry-open-next-step')?.addEventListener('click', async () => {
+    const filePath = byId('module-registry-open-next-step')?.dataset.filePath || '';
+    if (!filePath || typeof actions.onOpenModuleRegistryNextStepFile !== 'function') return;
+    await actions.onOpenModuleRegistryNextStepFile(filePath);
+  });
   document.addEventListener('input', (event) => {
     if (event?.target?.type === 'checkbox') return;
     render();
