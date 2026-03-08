@@ -4,11 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 5
+- Offene Upgrade-Empfehlungen: 6
 - Erledigte Upgrade-Empfehlungen: 17
 - Default-Archive: 2
-- Letzte Iteration: 023
+- Letzte Iteration: 024
 - Scan-Modus: delta
+
+
+## Iterations-Update 024 (Mini-Patch)
+
+- Neu: Header zeigt jetzt dauerhaft „Layoutbudget aktiv: H15/F10/S8“ in der Layout-Steuerung.
+- Robustheit: Kleine Budgetprüfung ergänzt defensive Fallback-Meldungen, falls DOM-/Viewport-Werte noch nicht stabil verfügbar sind.
+- UX: Bei Budgetüberschreitung erscheint sofort ein kurzer Warnhinweis im Header.
+- Archiv: Templates-Defaultarchiv um eine neue Budgetwarnungs-Prüfvorlage erweitert.
 
 
 ## Iterations-Update 023 (Mini-Patch)

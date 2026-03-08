@@ -24,6 +24,12 @@ const HEADER_PROJECT_STATUS_TEXT = Object.freeze({
   working: 'In Arbeit',
   ready: 'Bereit'
 });
+const LAYOUT_BUDGETS = Object.freeze({
+  headerMaxPercent: 15,
+  footerMaxPercent: 10,
+  sidebarMaxPercent: 8,
+  desktopMinViewportWidth: 1341
+});
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -136,6 +142,49 @@ const renderCategoryList = (archive, profile, category) => {
 const renderStats = (stats) => {
   if (!stats) return '-';
   return `Genres: ${stats.genres} | Stimmungen: ${stats.moods} | Stile: ${stats.styles} | Gesamt: ${stats.total}`;
+};
+
+const measureLayoutBudgetStatus = () => {
+  const label = `Layoutbudget aktiv: H${LAYOUT_BUDGETS.headerMaxPercent}/F${LAYOUT_BUDGETS.footerMaxPercent}/S${LAYOUT_BUDGETS.sidebarMaxPercent}`;
+  if (typeof window === 'undefined') {
+    return { label, warning: 'Budgetprüfung ausstehend.' };
+  }
+
+  const viewportHeight = window.innerHeight;
+  const viewportWidth = window.innerWidth;
+  if (viewportHeight <= 0 || viewportWidth <= 0) {
+    return { label, warning: 'Budgetprüfung ausstehend.' };
+  }
+
+  if (viewportWidth < LAYOUT_BUDGETS.desktopMinViewportWidth) {
+    return { label, warning: 'Budgetprüfung: Mobil/Tablet-Modus, Warnung pausiert.' };
+  }
+
+  const header = byId('app')?.querySelector('.header');
+  const footer = byId('app')?.querySelector('.footer');
+  const nav = byId('app')?.querySelector('.nav');
+  const widgets = byId('app')?.querySelector('.widgets');
+  if (!header || !footer || !nav || !widgets) {
+    return { label, warning: 'Budgetprüfung ausstehend.' };
+  }
+
+  const headerPercent = (header.getBoundingClientRect().height / viewportHeight) * 100;
+  const footerPercent = (footer.getBoundingClientRect().height / viewportHeight) * 100;
+  const navPercent = (nav.getBoundingClientRect().width / viewportWidth) * 100;
+  const widgetsPercent = (widgets.getBoundingClientRect().width / viewportWidth) * 100;
+  const warnings = [];
+  if (headerPercent > LAYOUT_BUDGETS.headerMaxPercent) warnings.push(`Header ${headerPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.headerMaxPercent}%`);
+  if (footerPercent > LAYOUT_BUDGETS.footerMaxPercent) warnings.push(`Footer ${footerPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.footerMaxPercent}%`);
+  if (navPercent > LAYOUT_BUDGETS.sidebarMaxPercent) warnings.push(`Links ${navPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.sidebarMaxPercent}%`);
+  if (widgetsPercent > LAYOUT_BUDGETS.sidebarMaxPercent) warnings.push(`Rechts ${widgetsPercent.toFixed(1)}% > ${LAYOUT_BUDGETS.sidebarMaxPercent}%`);
+  if (warnings.length > 0) {
+    return { label, warning: `⚠ Budgetwarnung: ${warnings.join(' | ')}` };
+  }
+
+  return {
+    label,
+    warning: `Budget ok: H${headerPercent.toFixed(1)}% F${footerPercent.toFixed(1)}% S-L${navPercent.toFixed(1)}% S-R${widgetsPercent.toFixed(1)}%`
+  };
 };
 
 
@@ -824,6 +873,7 @@ export const render = () => {
   const state = getState();
   const texts = state.uiTexts || {};
   const messages = texts.messages || {};
+  const layoutBudgetStatus = measureLayoutBudgetStatus();
 
   renderHeaderSection({
     state,
@@ -833,7 +883,8 @@ export const render = () => {
     byId,
     autoFormatText,
     buildHeaderProjectStatus,
-    buildHeaderAutosaveStatus
+    buildHeaderAutosaveStatus,
+    layoutBudgetStatus
   });
 
   setText('nav-title', 'Nutzer-Module');

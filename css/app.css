@@ -293,6 +293,27 @@ body::before {
   color: #d7e8ff;
 }
 
+.layout-budget-label,
+.layout-budget-warning {
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  border: 1px solid rgba(205, 219, 248, 0.3);
+  background: rgba(16, 31, 54, 0.42);
+}
+
+.layout-budget-label {
+  color: #ddecff;
+}
+
+.layout-budget-warning {
+  color: #ffefca;
+  border-color: rgba(245, 181, 90, 0.52);
+  background: rgba(107, 63, 11, 0.34);
+}
+
 .header-stats-list {
   margin: 0;
   display: grid;
