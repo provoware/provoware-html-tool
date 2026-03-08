@@ -164,6 +164,7 @@ export const renderMainSection = ({
 
   setText('module-registry-summary', state.moduleRegistry?.summary || '-');
   setText('module-registry-summary-main', state.moduleRegistry?.summary || '-');
+  setText('module-registry-next-step', `Nächster Modul-Schritt: ${state.moduleRegistry?.nextStep || 'Keine Aktion nötig.'}`);
   const sidebarModuleList = byId('sidebar-module-list');
   if (sidebarModuleList) {
     sidebarModuleList.innerHTML = renderSidebarModules(state.moduleRegistry?.modules || []);
