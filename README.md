@@ -4,7 +4,7 @@
 - Erledigte Punkte: 32 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: `next-step` bekam einen zweiten gezielten Robustheits-Test (Sonderzeichen + sehr langer Text >200 Zeichen) und ein weiteres kleines UI-Hinweisfeld (`checks-list`) rendert Nutztexte jetzt per Textknoten statt HTML-String.
+- Stand dieser Iteration: Modul-Hilfe bei fehlenden Moduldateien ist jetzt konkreter (Dateiname + nächster Schritt in einfacher Sprache).
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
@@ -25,6 +25,7 @@
   - Neu: `js/modules/plugin-manager.js` (Plugin-Auswahl, Zeichenzähler und einfache Rechtschreibprüfung DE/EN/FR mit Auto-Sprachschätzung)
 - **Module und Services**
   - `js/adapters/*`, `js/services/*`, `js/modules/*`
+  - Neu: `js/services/module-registry.js` gibt bei fehlenden Moduldateien präzisere Hilfe je Dateityp (z. B. `manifest.json`, `logic.js`).
   - Neu: domänenscharfe UI-Aktionsmodule unter `js/services/ui-actions/*` (Session, Archiv, Vorlagen, Workspace).
   - Neu: Dashboard-Notiz-Fehlerbehandlung in `workspace-actions` zentralisiert (weniger Doppelcode, konsistente Rückgaben).
   - Neu für sichere Listen-Ausgabe: `js/services/html-escape.js` (zentrale HTML-Zeichenkodierung)

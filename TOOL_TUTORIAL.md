@@ -9,6 +9,17 @@ Kurze Anleitung für sichere, kleine Iterationen in einfacher Sprache.
 3. Browser öffnet sich bei Erfolg automatisch mit `index.html`.
 4. Bei Problemen klare Fehlerhilfe im Terminal befolgen.
 
+## Kleine Erweiterung dieser Iteration (neu)
+### Modul-Hilfe zeigt jetzt konkrete Dateischritte
+Neu in dieser Iteration:
+- Wenn ein Moduldatei-Check fehlschlägt, zeigt die Hilfe jetzt je Dateityp einen klaren nächsten Schritt.
+- Beispiel: Statt nur „Datei anlegen“ steht jetzt direkt `manifest.json` oder `logic.js` mit Kurz-Anweisung.
+
+Direkter Mini-Check:
+1. `node --test tests/services/module-registry.test.js`
+
+Kurzregel: Immer zuerst die **erste fehlende Datei** aus der Meldung anlegen, dann neu prüfen.
+
 
 ## Kleine Erweiterung dieser Iteration (neu)
 ### Selftest-IO jetzt mit safeCall abgesichert

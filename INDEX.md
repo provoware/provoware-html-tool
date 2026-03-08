@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration verbessert die Modul-Hilfe bei fehlenden Dateien: Summary nennt weiter die fehlenden Dateien und gibt jetzt je Dateityp einen konkreten nächsten Schritt.
 - Diese Iteration ergänzt einen zweiten `next-step`-Test (Sonderzeichen + >200 Zeichen) und stellt `checks-list` auf Textknoten statt HTML-String für Nutztexte um.
 - Diese Iteration stellt den Header-Hinweis (`next-step`) auf reine Textausgabe um und ergänzt einen Injection-Test für `<img>/<script>` im Header-Rendering.
 - Diese Iteration stärkt den Startup-Check: Laufzeitfehler werden mit klaren Codes gemeldet, und ungültige Projektstruktur wird per Self-Repair auf sichere Defaults gesetzt.

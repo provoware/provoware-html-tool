@@ -69,6 +69,8 @@ test('loadModuleRegistry liefert statusCode für robuste Auswertung', async () =
   assert.equal(byId.ok_modul.statusCode, 'OK');
   assert.equal(byId.kaputt_modul.statusCode, 'INVALID_CONTENT');
   assert.equal(byId.missing_modul.statusCode, 'MISSING_FILES');
+  assert.match(result.summary, /missing_modul: fehlt manifest, config, texts, schema, logic\./);
+  assert.match(result.summary, /Hilfe: Datei modules\/\<modul-id\>\/manifest\.json anlegen/);
 
   globalThis.fetch = originalFetch;
 });
