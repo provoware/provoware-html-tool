@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-25",
+      "title": "Einfenster-Layout mit Flächenbudget prüfen",
+      "content": "Prüfe im Einfenster-Modus: Header maximal 15%, Footer maximal 10%, Sidebars je maximal 8% und Hauptmodul vollständig sichtbar; Zoom nur über Strg + Mausrad oder Strg + +/- nutzen.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T20:05:00.000Z",
+      "updatedAt": "2026-03-08T20:05:00.000Z"
+    },
+    {
       "id": "tpl-default-24",
       "title": "Header-Breakpoint-Check ohne Überlauf",
       "content": "Prüfe Header bei 1280px, 980px und 720px mit Screenshot-Vergleich: keine abgeschnittenen Texte, keine überlappenden Controls und gleich hohe Status-Chips.",
@@ -218,7 +227,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T19:10:00.000Z",
+  "updatedAt": "2026-03-08T20:05:00.000Z",
   "required_fields": [
     "id",
     "title",
