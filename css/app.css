@@ -220,6 +220,15 @@ body::before {
   overflow: visible;
 }
 
+.header-card[data-nav-target] {
+  cursor: pointer;
+}
+
+.header-card[data-nav-target]:focus-visible {
+  outline: 2px solid rgba(236, 244, 255, 0.9);
+  outline-offset: 2px;
+}
+
 .header-card .panel-title {
   margin: 0 0 6px;
   color: #e9f2ff;

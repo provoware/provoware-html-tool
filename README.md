@@ -4,15 +4,22 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 7
+- Offene Upgrade-Empfehlungen: 9
 - Erledigte Upgrade-Empfehlungen: 20
 - Default-Archive: 3
-- Letzte Iteration: 028
+- Letzte Iteration: 029
 - Scan-Modus: delta
 
 
 
 
+
+## Iterations-Update 029 (Mini-Patch)
+
+- Neu: Alle vier Header-Kacheln sind jetzt interaktiv und springen per Klick/Enter/Leertaste zu einem passenden Zielbereich.
+- Robustheit: Zielnavigation nutzt einen Guard und bricht bei fehlendem Ziel sicher mit Warnlog statt Fehler ab.
+- UX: Header-Karten zeigen sichtbaren Fokusrahmen und erhalten damit klare Tastaturführung.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Header-Kachel-Navigation prüfen“ erweitert.
 
 ## Iterations-Update 028 (Mini-Patch)
 

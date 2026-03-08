@@ -4,6 +4,7 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-029 | Header UX | Header-Kachel-Navigation um kleine Ziel-Rückmeldung ("Bereich geöffnet") ergänzen | Navigation ist jetzt vorhanden, aber ohne direkte Bestätigung kann der Sprung bei langen Seiten unklar wirken | Klareres Feedback nach Klick/Enter ohne zusätzliche Dialoge | offen | 029 |
 | UP-027 | Grid UX | Leere Modul-Slots mit optionalem Direktknopf „Projektstruktur anlegen“ ergänzen | Der neue Hinweistext hilft, aber ein direkter Klickweg reduziert Reibung weiter | Schnellere Aktivierung freier Panels ohne Suchaufwand | offen | 028 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
 | UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
@@ -16,6 +17,10 @@
 **Passende Vorschläge:**
 1. Direktknopf nur in leeren Slots zeigen, damit belegte Module ruhig bleiben
 2. Nach erfolgreichem Struktur-Anlegen kurze Rückmeldung im Slot anzeigen
+
+**Passende Vorschläge:**
+1. Rückmeldung nur 2-3 Sekunden als unaufdringliche Statuszeile anzeigen
+2. Fokus nach Sprung auf die Zielüberschrift setzen, nicht auf den ersten Eingabewert
 
 **Passende Vorschläge:**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten

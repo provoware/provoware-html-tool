@@ -682,6 +682,24 @@ const bindWorkspaceControls = () => {
   document.addEventListener('wheel', handleZoomWheel, { passive: false, capture: true });
 };
 
+
+const triggerHeaderCardNavigation = (cardNode, actions) => {
+  if (!cardNode) return;
+  const targetId = cardNode.dataset?.navTarget;
+  if (!targetId) return;
+  const target = byId(targetId);
+  if (!target || target.hasAttribute?.('disabled')) {
+    if (typeof actions?.onAddLog === 'function') {
+      actions.onAddLog('warn', `Navigation übersprungen: Ziel "${targetId}" nicht verfügbar.`);
+    }
+    return;
+  }
+  if (typeof target.focus === 'function') target.focus();
+  const tag = String(target.tagName || '').toLowerCase();
+  const isClickable = typeof target.click === 'function' && (tag === 'button' || target.getAttribute?.('role') === 'button');
+  if (isClickable) target.click();
+};
+
 export const bindUiActions = (actions) => {
   byId('action-select-dir')?.addEventListener('click', actions.onSelectDirectory);
   byId('action-run-selftest')?.addEventListener('click', () => actions.onRunSelftest(false));
@@ -725,6 +743,17 @@ export const bindUiActions = (actions) => {
     const targetId = byId('startup-assistant-action')?.dataset.assistantTarget;
     if (!targetId) return;
     byId(targetId)?.click();
+  });
+  document.querySelectorAll('.header-card[data-nav-target]').forEach((cardNode) => {
+    cardNode.addEventListener('click', (event) => {
+      if (event.target?.closest?.('button,select,input,textarea,a,label')) return;
+      triggerHeaderCardNavigation(cardNode, actions);
+    });
+    cardNode.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      triggerHeaderCardNavigation(cardNode, actions);
+    });
   });
   byId('module-registry-open-next-step')?.addEventListener('click', async () => {
     const filePath = byId('module-registry-open-next-step')?.dataset.filePath || '';
