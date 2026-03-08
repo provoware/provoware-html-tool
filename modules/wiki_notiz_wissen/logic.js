@@ -85,7 +85,8 @@ export const updateKnowledgeEntry = (store, entryId, patch) => {
   const index = nextStore.entries.findIndex((item) => item.id === id);
   if (index < 0) return { ok: false, code: 'NOT_FOUND', message: 'Eintrag wurde nicht gefunden.' };
 
-  const merged = { ...nextStore.entries[index], ...patch };
+  const safePatch = patch && typeof patch === 'object' ? patch : {};
+  const merged = { ...nextStore.entries[index], ...safePatch };
   const built = buildEntry(merged, id);
   if (!built.ok) return built;
 

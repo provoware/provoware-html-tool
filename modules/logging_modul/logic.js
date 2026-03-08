@@ -9,6 +9,15 @@ const normalizeSeverity = (value) => {
   return SEVERITY.has(clean) ? clean : 'info';
 };
 
+const normalizeContext = (value) => {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch {
+    return { info: 'Kontext konnte nicht sicher gespeichert werden.' };
+  }
+};
+
 export const createLogStore = () => ({
   createdAt: nowIso(),
   entries: []
@@ -18,11 +27,11 @@ export const addLogEntry = (store, input = {}) => {
   const safeStore = store && typeof store === 'object' ? store : createLogStore();
   const entry = {
     id: nextId(),
-    eventName: asText(input.eventName) || 'LOG_EVENT_UNSPECIFIED',
+    eventName: asText(input.eventName) || 'Unbenanntes Ereignis',
     severity: normalizeSeverity(input.severity),
-    source: asText(input.source) || 'app',
+    source: asText(input.source) || 'Anwendung',
     message: asText(input.message),
-    context: input.context && typeof input.context === 'object' ? input.context : {},
+    context: normalizeContext(input.context),
     createdAt: nowIso()
   };
   return {

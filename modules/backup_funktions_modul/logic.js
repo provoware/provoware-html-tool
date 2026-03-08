@@ -20,14 +20,14 @@ const isValidPayload = (payload) => {
 };
 
 export const createBackupPayload = ({ moduleId, data, version = 1 }) => {
-  const id = asText(moduleId);
-  if (!id) throw new Error('Modul-ID fehlt.');
+  const id = asText(moduleId) || 'unbekanntes_modul';
+  const safeVersion = Number.isInteger(version) && version > 0 ? version : 1;
   return {
     event: EVENT.BACKUP_CREATE_FINISHED,
     payload: {
       moduleId: id,
       createdAt: nowIso(),
-      version,
+      version: safeVersion,
       data: data && typeof data === 'object' ? data : {}
     }
   };
