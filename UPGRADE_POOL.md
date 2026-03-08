@@ -4,6 +4,7 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-027 | Grid UX | Leere Modul-Slots mit optionalem Direktknopf „Projektstruktur anlegen“ ergänzen | Der neue Hinweistext hilft, aber ein direkter Klickweg reduziert Reibung weiter | Schnellere Aktivierung freier Panels ohne Suchaufwand | offen | 028 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
 | UP-020 | Dashboard UX | Header-Statistiken um kleine Trendwerte (letzte 7 Tage) erweitern | Aktuelle Zahlen zeigen nur Momentaufnahme; Richtung der Entwicklung bleibt unsichtbar | Schnellere Priorisierung von Problemen direkt im Dashboard | offen | 021 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
@@ -11,6 +12,10 @@
 | UP-025 | Header UX | Selbsttest-Ampel im Header um klickbare Detailhilfe („Warum gelb/rot?“) erweitern | Farbstatus und Legende sind vorhanden, aber Rückfragen zur Ursache entstehen weiterhin ohne direkten Kontextsprung | Schnellere Fehlerklärung direkt aus dem Header ohne Wechsel in andere Bereiche | offen | 026 |
 | UP-026 | Account-Archiv UX | Schnellkopierleiste für E-Mail, URL und Benutzername im Detaildialog ergänzen | Wiederkehrende Accountdaten sollen ohne Umwege nutzbar sein | Schnellerer Alltagsworkflow mit weniger Klicks beim Wechsel zwischen Tools | offen | 027 |
 | UP-027 | Layout Robustheit | Sichtbarkeits-Guard für Header-Karten ergänzen (Mindestzeilen + Overflow-Warnhinweis bei Clipping-Risiko) | Nach mehreren Header-Erweiterungen steigt die Gefahr von verdeckten Inhalten bei knapper Höhe | Frühere Erkennung von Abschneidungen und stabilere Lesbarkeit über Breakpoints hinweg | offen | 028 |
+
+**Passende Vorschläge:**
+1. Direktknopf nur in leeren Slots zeigen, damit belegte Module ruhig bleiben
+2. Nach erfolgreichem Struktur-Anlegen kurze Rückmeldung im Slot anzeigen
 
 **Passende Vorschläge:**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten

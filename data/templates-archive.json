@@ -9,6 +9,12 @@
       "favorite": false,
       "createdAt": "2026-03-09T01:20:00.000Z",
       "updatedAt": "2026-03-09T01:20:00.000Z"
+      "title": "Leere Modul-Slots mit Next Step prüfen",
+      "content": "Prüfe alle leeren Panels: Statt nur 'leer' muss ein klarer nächster Schritt sichtbar sein (Plugin aktivieren oder Projektstruktur anlegen).",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T01:15:00.000Z",
+      "updatedAt": "2026-03-09T01:15:00.000Z"
     },
     {
       "id": "tpl-default-29",
