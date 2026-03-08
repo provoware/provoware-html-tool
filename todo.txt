@@ -1,3 +1,7 @@
+## Pflege-Regel
+- Nur strukturierte TODO-Zeilen im Format `[ ] ...` oder `[x] ...` verwenden.
+- Keine freien Sammelzeilen ohne Checkbox-Format.
+
 ## Kritisch
 [x] 2026-03-07 | js/services/module-registry.js | Merge-Reste, doppelte Deklarationen und doppelte Funktionen bereinigen, damit Datei wieder importierbar ist | prüfen: `node --check js/services/module-registry.js` | fertig wenn: keine Syntaxfehler, genau eine konsistente `loadModuleRegistry`-Implementierung vorhanden
 [x] 2026-03-07 | Services-Importkette (direkt betroffen) | Syntax- und Importfähigkeit der direkt betroffenen JS-Dateien prüfen (`module-registry`, `project-selftest`, `filesystem-adapter`, `desktop-filesystem`) | prüfen: `node --check <datei>` je Datei | fertig wenn: alle Prüfungen ohne Fehler durchlaufen

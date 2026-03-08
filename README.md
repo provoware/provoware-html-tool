@@ -216,3 +216,4 @@ Ja, ein kleines Versionssystem mit Registry ist sinnvoll – aber nur als Minima
 ## Offene Punkte für das nächste Release
 - Aktuell keine offenen Pflichtpunkte mehr in dieser Iteration.
 - Frühere Idee „Notfall-Button *Alles prüfen und reparieren*“ ist als optionale Produktidee geparkt und kein offener Pflichtpunkt.
+- Pflege-Regel ab jetzt: `todo.txt` nur mit `[ ]`/`[x]`-Einträgen führen (keine Freitext-Sammelzeilen).
