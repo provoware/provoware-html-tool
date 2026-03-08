@@ -4,11 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 3
+- Offene Upgrade-Empfehlungen: 4
 - Erledigte Upgrade-Empfehlungen: 17
 - Default-Archive: 2
-- Letzte Iteration: 021
+- Letzte Iteration: 022
 - Scan-Modus: delta
+
+
+## Iterations-Update 022 (Mini-Patch)
+
+- Neu: Header-Dashboard an 1280px/980px/720px lokal feinjustiert (Abstände, Umbrüche, Chip-Höhen) ohne Layout-Überlauf.
+- Robustheit: Header-Chips nutzen defensives Zeilenverhalten (`overflow-wrap:anywhere`) und stabile Mindesthöhe je Grid-Zeile.
+- UX: Theme-Auswahl im Header reagiert unter 980px jetzt mit voller Breite ohne abgeschnittene Auswahlfelder.
+- Archiv: Templates-Defaultarchiv um eine neue Breakpoint-Check-Vorlage ergänzt.
 
 
 ## Iterations-Update 021 (Mini-Patch)
