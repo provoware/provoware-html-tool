@@ -1,6 +1,7 @@
 # INDEX
 
 ## Iterationshinweis
+- Diese Iteration ergänzt einen zentralen Safe-Input-Helper (`safeText`/`safeObject`/`safeArray`) und eine kurze Modul-Textkonvention im Format „Problem + nächster Schritt“.
 - Diese Iteration verbessert die Modul-Hilfe bei fehlenden Dateien: Summary nennt weiter die fehlenden Dateien und gibt jetzt je Dateityp einen konkreten nächsten Schritt.
 - Diese Iteration ergänzt einen zweiten `next-step`-Test (Sonderzeichen + >200 Zeichen) und stellt `checks-list` auf Textknoten statt HTML-String für Nutztexte um.
 - Diese Iteration stellt den Header-Hinweis (`next-step`) auf reine Textausgabe um und ergänzt einen Injection-Test für `<img>/<script>` im Header-Rendering.
@@ -79,6 +80,7 @@
 │  │  ├─ diagnosis-export.js
 │  │  ├─ html-escape.js
 │  │  ├─ logger.js
+│  │  ├─ module-boundary-utils.js
 │  │  ├─ module-registry.js
 │  │  ├─ profile-archive.js
 │  │  ├─ project-selftest.js
@@ -270,3 +272,4 @@
 102. `todo.txt`
 103. `todo_kalender_erinnerung_start.html`
 104. `wiki_notiz_wissen_start.html`
+105. `js/services/module-boundary-utils.js`

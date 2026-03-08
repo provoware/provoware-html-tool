@@ -1,4 +1,6 @@
-const asText = (value) => String(value || '').trim();
+import { safeArray, safeObject, safeText, userProblemNextStep } from '../../js/services/module-boundary-utils.js';
+
+const asText = (value) => safeText(value);
 const nowIso = () => new Date().toISOString();
 
 const normalizeColumn = (column = {}, index = 0) => ({
@@ -28,10 +30,10 @@ export const createDatenbankBaukastenModule = () => ({
 });
 
 export const createTableBlueprint = (input = {}) => {
-  const safeInput = input && typeof input === 'object' ? input : {};
+  const safeInput = safeObject(input);
   const tableName = safeInput.tableName;
   const columns = safeInput.columns;
-  const safeColumns = (Array.isArray(columns) ? columns : []).map((column, index) => normalizeColumn(column, index));
+  const safeColumns = safeArray(columns).map((column, index) => normalizeColumn(column, index));
   return {
     tableName: asText(tableName) || 'tabelle',
     columns: safeColumns,
@@ -42,7 +44,7 @@ export const createTableBlueprint = (input = {}) => {
 };
 
 export const addRecordToBlueprint = (blueprint, record = {}) => {
-  const safe = blueprint && typeof blueprint === 'object' ? blueprint : createTableBlueprint();
+  const safe = safeObject(blueprint, createTableBlueprint());
   const normalized = normalizeRecord(record, safe.columns || []);
   return {
     ...safe,
@@ -53,13 +55,25 @@ export const addRecordToBlueprint = (blueprint, record = {}) => {
 
 export const validateBlueprint = (blueprint) => {
   if (!blueprint || typeof blueprint !== 'object') {
-    return { ok: false, code: 'BLUEPRINT_INVALID', message: 'Baukasten ist kein Objekt.' };
+    return {
+      ok: false,
+      code: 'BLUEPRINT_INVALID',
+      message: userProblemNextStep('Baukasten ist kein Objekt.', 'Bitte Baukasten neu laden oder ein neues Objekt starten.')
+    };
   }
   if (!asText(blueprint.tableName)) {
-    return { ok: false, code: 'BLUEPRINT_TABLE_MISSING', message: 'Tabellenname fehlt.' };
+    return {
+      ok: false,
+      code: 'BLUEPRINT_TABLE_MISSING',
+      message: userProblemNextStep('Tabellenname fehlt.', 'Bitte einen kurzen Tabellennamen eingeben.')
+    };
   }
   if (!Array.isArray(blueprint.columns)) {
-    return { ok: false, code: 'BLUEPRINT_COLUMNS_INVALID', message: 'Spaltenliste fehlt.' };
+    return {
+      ok: false,
+      code: 'BLUEPRINT_COLUMNS_INVALID',
+      message: userProblemNextStep('Spaltenliste fehlt.', 'Bitte mindestens eine Spalte anlegen.')
+    };
   }
   return { ok: true, code: 'BLUEPRINT_OK', message: 'Baukasten ist gültig.' };
 };

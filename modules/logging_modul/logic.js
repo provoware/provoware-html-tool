@@ -1,6 +1,8 @@
+import { safeArray, safeObject, safeText } from '../../js/services/module-boundary-utils.js';
+
 const SEVERITY = new Set(['info', 'warn', 'error']);
 
-const asText = (value) => String(value || '').trim();
+const asText = (value) => safeText(value);
 const nowIso = () => new Date().toISOString();
 const nextId = () => `log_${Date.now()}_${Math.random().toString(16).slice(2, 8)}`;
 
@@ -10,9 +12,10 @@ const normalizeSeverity = (value) => {
 };
 
 const normalizeContext = (value) => {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return {};
+  const safeValue = safeObject(value, null);
+  if (!safeValue) return {};
   try {
-    return JSON.parse(JSON.stringify(value));
+    return JSON.parse(JSON.stringify(safeValue));
   } catch {
     return { info: 'Kontext konnte nicht sicher gespeichert werden.' };
   }
@@ -24,7 +27,7 @@ export const createLogStore = () => ({
 });
 
 export const addLogEntry = (store, input = {}) => {
-  const safeStore = store && typeof store === 'object' ? store : createLogStore();
+  const safeStore = safeObject(store, createLogStore());
   const entry = {
     id: nextId(),
     eventName: asText(input.eventName) || 'Unbenanntes Ereignis',
@@ -41,6 +44,6 @@ export const addLogEntry = (store, input = {}) => {
 };
 
 export const exportLogEntries = (store) => {
-  const entries = Array.isArray(store?.entries) ? store.entries : [];
+  const entries = safeArray(store?.entries);
   return JSON.stringify({ exportedAt: nowIso(), count: entries.length, entries }, null, 2);
 };
