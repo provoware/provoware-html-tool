@@ -14,7 +14,8 @@ const withFilesystemAdapterMocks = async (overrides, run) => {
   const original = {
     fileExists: filesystemAdapter.fileExists,
     readText: filesystemAdapter.readText,
-    writeText: filesystemAdapter.writeText
+    writeText: filesystemAdapter.writeText,
+    createFile: filesystemAdapter.createFile
   };
   Object.assign(filesystemAdapter, overrides);
   try {
@@ -101,6 +102,34 @@ test('smoke: dashboard-note datei öffnen meldet fehlende datei', async () => {
   assert.equal(result.ok, false);
   assert.equal(result.code, 'DASHBOARD_NOTE_EDITOR_OPEN_FAILED');
   assert.equal(base.getState().dashboardNotes.rows[0].feedback, 'Noch keine Datei gespeichert.');
+});
+
+test('smoke: modul-next-step öffnen bei vorhandener datei lädt editor', async () => {
+  await withFilesystemAdapterMocks({
+    fileExists: async () => ({ ok: true, data: { exists: true } }),
+    readText: async () => ({ ok: true, data: { text: 'inhalt' } })
+  }, async () => {
+    const base = makeBase();
+    const actions = createUiActionHandlers(base);
+    const result = await actions.onOpenModuleRegistryNextStepFile('data/module-registry.json');
+    assert.equal(result.ok, true);
+    assert.equal(result.code, 'MODULE_NEXT_STEP_FILE_OPENED');
+    assert.equal(base.getState().editorFilePath, 'data/module-registry.json');
+    assert.equal(base.getState().editorContent, 'inhalt');
+  });
+});
+
+test('smoke: modul-next-step öffnen bei fehlender datei liefert guard-code', async () => {
+  await withFilesystemAdapterMocks({
+    fileExists: async () => ({ ok: true, data: { exists: false } })
+  }, async () => {
+    const base = makeBase();
+    const actions = createUiActionHandlers(base);
+    const result = await actions.onOpenModuleRegistryNextStepFile('modules/test/manifest.json');
+    assert.equal(result.ok, false);
+    assert.equal(result.code, 'MODULE_NEXT_STEP_FILE_MISSING');
+    assert.equal(base.getState().editorStatus, 'Datei fehlt noch: modules/test/manifest.json');
+  });
 });
 
 

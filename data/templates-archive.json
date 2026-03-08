@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-20",
+      "title": "Next-Step Datei erst anlegen, dann öffnen",
+      "content": "Wenn der Modul-Hinweis auf eine fehlende Datei zeigt, nutze erst 'Datei anlegen' und prüfe danach den neuen Inhalt direkt im Editor.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T14:20:00.000Z",
+      "updatedAt": "2026-03-08T14:20:00.000Z"
+    },
+    {
       "id": "tpl-default-19",
       "title": "Modul-Next-Step direkt öffnen",
       "content": "Wenn im Modulstatus ein Dateipfad im nächsten Schritt steht, öffne die Datei direkt im Editor und prüfe sie vor dem nächsten Test.",
@@ -173,7 +182,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T13:40:00.000Z",
+  "updatedAt": "2026-03-08T14:20:00.000Z",
   "required_fields": [
     "id",
     "title",

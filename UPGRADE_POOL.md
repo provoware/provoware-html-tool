@@ -5,20 +5,26 @@
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
 | UP-013 | Songtext UX | Splitter-Breiten mit gespeicherten Panel-Proportionen ergänzen (links/mitte/rechts) | Drei-Fenster-Editor braucht stabile, wiederherstellbare Arbeitsbreiten pro Nutzer | Schnellere Wiederaufnahme des Workflows und weniger manuelles Nachjustieren | offen | 014 |
-| UP-016 | Modul-Feedback | Fehlende Datei aus `nextStep` als „Datei anlegen“-Aktion direkt neben „Datei öffnen“ anbieten | Der Pfad ist jetzt direkt öffnbar, bei nicht vorhandener Datei fehlt aber noch der direkte Folgeschritt | Kürzere Fehlerbehebung auch bei noch nicht angelegten Moduldateien | offen | 017 |
+| UP-017 | Modul-Feedback | Nach „Datei anlegen“ optional ein kurzes Vorlagenmenü je Dateityp anbieten (manifest/config/schema/logic) | Die Datei wird jetzt direkt erzeugt, bleibt aber inhaltlich noch leer und braucht oft denselben Starter-Inhalt | Schnellere Erstbefüllung mit weniger Tippfehlern in Standarddateien | offen | 018 |
 
 **Passende Vorschläge:**
 1. Pro Panel eine Mindest- und Maximalbreite im Manifest hinterlegen
 2. Letzte Panel-Breiten in einer kleinen User-Preference-Datei speichern
 
 **Passende Vorschläge:**
-1. Nur für bekannte JSON-/JS-Dateitypen aktivieren
-2. Nach erfolgreichem Anlegen Datei direkt im Editor öffnen
+1. Für `manifest.json` und `config.json` zuerst starten, danach auf weitere Dateitypen ausweiten
+2. Vorlagen nur bei neu angelegten Dateien zeigen, nicht bei bestehenden
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-016 | Modul-Feedback | Fehlende Datei aus `nextStep` als „Datei anlegen“-Aktion direkt neben „Datei öffnen“ anbieten | Der Pfad ist jetzt direkt öffnbar, bei nicht vorhandener Datei fehlte der direkte Folgeschritt | Kürzere Fehlerbehebung auch bei noch nicht angelegten Moduldateien | erledigt | 018 |
+
+**Passende Vorschläge:**
+1. Nur für bekannte JSON-/JS-Dateitypen aktivieren
+2. Nach erfolgreichem Anlegen Datei direkt im Editor öffnen
+
 | UP-015 | Modul-Feedback | Bei Modulstatus-Fehlern den direkten Dateipfad (z. B. `modules/<id>/manifest.json`) klickbar anzeigen | nextStep ist jetzt klarer, aber der Zielort muss noch schneller erreichbar sein | Weniger Suchzeit bei Fehlerbehebung und kürzere Support-Schleifen | erledigt | 017 |
 
 **Passende Vorschläge:**

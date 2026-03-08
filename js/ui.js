@@ -590,6 +590,11 @@ export const bindUiActions = (actions) => {
     if (!filePath || typeof actions.onOpenModuleRegistryNextStepFile !== 'function') return;
     await actions.onOpenModuleRegistryNextStepFile(filePath);
   });
+  byId('module-registry-create-next-step')?.addEventListener('click', async () => {
+    const filePath = byId('module-registry-create-next-step')?.dataset.filePath || '';
+    if (!filePath || typeof actions.onCreateModuleRegistryNextStepFile !== 'function') return;
+    await actions.onCreateModuleRegistryNextStepFile(filePath);
+  });
   document.addEventListener('input', (event) => {
     if (event?.target?.type === 'checkbox') return;
     render();
