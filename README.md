@@ -4,11 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 4
+- Offene Upgrade-Empfehlungen: 5
 - Erledigte Upgrade-Empfehlungen: 17
 - Default-Archive: 2
-- Letzte Iteration: 022
+- Letzte Iteration: 023
 - Scan-Modus: delta
+
+
+## Iterations-Update 023 (Mini-Patch)
+
+- Neu: Einfenster-Layout jetzt mit festen Flächenbudgets (Header max. 15%, Footer max. 10%, Sidebars mit 8vw-Zielbreite) und priorisiertem Hauptbereich.
+- Robustheit: Header und Footer erhalten begrenzte Höhen mit internem Overflow, damit Inhalte nicht das Hauptmodul verdrängen.
+- UX: Hinweistext präzisiert, dass Vergrößerung/Verkleinerung nur proportional über Strg + Mausrad bzw. Strg + +/- erfolgt.
+- Archiv: Templates-Defaultarchiv um eine neue Einfenster-Layout-Prüfvorlage ergänzt.
 
 
 ## Iterations-Update 022 (Mini-Patch)

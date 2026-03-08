@@ -34,6 +34,10 @@
   --panel-nav-tablet-max: 280px;
   --panel-widgets-min: 260px;
   --panel-widgets-max: 360px;
+  --layout-header-max-height: 15vh;
+  --layout-footer-max-height: 10vh;
+  --layout-sidebar-min-width: 128px;
+  --layout-sidebar-target-width: 8vw;
   --font-base: 16px;
   --body-gradient-start: #1f281f;
   --body-gradient-mid: #2a342b;
@@ -120,8 +124,8 @@ body::before {
   display: grid;
   gap: var(--space-3);
   min-height: calc(100vh - 20px);
-  height: auto;
-  max-width: 1700px;
+  height: calc(100vh - 20px);
+  max-width: 100%;
   width: calc(100vw - 20px);
   margin: var(--space-outer) auto;
   padding: var(--space-inset);
@@ -130,8 +134,9 @@ body::before {
   background: rgba(32, 44, 36, 0.58);
   backdrop-filter: blur(8px);
   box-shadow: var(--shadow);
-  grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), var(--panel-main-max)) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
+  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-nav-max)) minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-widgets-max));
+  grid-template-rows: minmax(96px, var(--layout-header-max-height)) minmax(0, 1fr) minmax(72px, var(--layout-footer-max-height));
   grid-template-areas:
     "header header header"
     "nav main widgets"
@@ -141,15 +146,15 @@ body::before {
 }
 
 .app.sidebar-left-collapsed {
-  grid-template-columns: 64px minmax(var(--panel-main-min), var(--panel-main-max)) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
+  grid-template-columns: 64px minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-widgets-max));
 }
 
 .app.sidebar-right-collapsed {
-  grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), var(--panel-main-max)) 64px;
+  grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-target-width), var(--panel-nav-max)) minmax(0, 1fr) 64px;
 }
 
 .app.sidebar-left-collapsed.sidebar-right-collapsed {
-  grid-template-columns: 64px minmax(var(--panel-main-min), var(--panel-main-max)) 64px;
+  grid-template-columns: 64px minmax(0, 1fr) 64px;
 }
 
 .panel {
@@ -178,6 +183,8 @@ body::before {
   display: grid;
   color: var(--text-main);
   background: linear-gradient(112deg, rgba(77, 96, 80, 0.95), rgba(118, 106, 85, 0.92));
+  min-height: 0;
+  overflow: auto;
 }
 
 .header h1 {
@@ -319,8 +326,10 @@ body::before {
   display: grid;
   grid-template-rows: auto 1fr;
   gap: var(--space-1);
-  min-width: var(--panel-nav-min);
-  max-width: var(--panel-nav-max);
+  min-width: 0;
+  max-width: none;
+  width: 100%;
+  min-height: 0;
 }
 
 .sidebar-body {
@@ -616,9 +625,10 @@ body::before {
   grid-area: widgets;
   display: grid;
   grid-template-rows: auto 1fr;
-  min-width: var(--panel-widgets-min);
-  max-width: var(--panel-widgets-max);
+  min-width: 0;
+  max-width: none;
   width: 100%;
+  min-height: 0;
 }
 
 .utility-cards {
@@ -711,13 +721,15 @@ body::before {
 .footer {
   grid-area: footer;
   padding: 8px;
+  min-height: 0;
+  overflow: auto;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px;
-  height: 100%;
+  min-height: 100%;
   position: relative;
   z-index: 1;
 }
@@ -1109,7 +1121,7 @@ body::before {
   .app.sidebar-left-collapsed,
   .app.sidebar-right-collapsed,
   .app.sidebar-left-collapsed.sidebar-right-collapsed {
-    grid-template-columns: minmax(var(--panel-nav-tablet-min), var(--panel-nav-tablet-max)) minmax(0, var(--panel-main-max));
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
     grid-template-rows: auto auto minmax(0, 1fr) auto;
     grid-template-areas:
       "header header"

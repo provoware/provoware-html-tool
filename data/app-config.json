@@ -31,5 +31,12 @@
     "selftestAsFirstStep": true,
     "blockModulesUntilReady": true,
     "teamDefaultEntry": "start.sh"
+  },
+  "layoutBudgetDefaults": {
+    "singleWindow": true,
+    "headerMaxViewportHeightPercent": 15,
+    "footerMaxViewportHeightPercent": 10,
+    "sidebarMaxViewportWidthPercent": 8,
+    "mainAreaPriority": "full-visible"
   }
 }
