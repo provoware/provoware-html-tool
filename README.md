@@ -5,9 +5,9 @@
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
 - Offene Upgrade-Empfehlungen: 7
-- Erledigte Upgrade-Empfehlungen: 31
+- Erledigte Upgrade-Empfehlungen: 32
 - Default-Archive: 3
-- Letzte Iteration: 038
+- Letzte Iteration: 039
 - Scan-Modus: delta
 
 
@@ -16,6 +16,13 @@
 
 
 
+
+## Iterations-Update 039 (Mini-Patch)
+
+- Neu: `UP-039` umgesetzt: rechter Sidebar-Schalter zeigt bei aktivem Auto-Collapse temporär den Zusatz „(Auto)“.
+- Robustheit: Auto-Collapse-Logik ist in eine kleine Sync-Hilfe gebündelt und bleibt bei fehlendem Toggle-Element defensiv stabil.
+- UX: Der Auto-Zustand ist direkt im Schalter lesbar, sodass der temporäre Wechsel der rechten Leiste sofort erklärbar ist.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Rechte-Leiste Auto-Label Quickcheck“ ergänzt.
 
 ## Iterations-Update 038 (Mini-Patch)
 
