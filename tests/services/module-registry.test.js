@@ -44,7 +44,7 @@ test('loadModuleRegistry liefert statusCode für robuste Auswertung', async () =
   const response = (ok, data) => ({ ok, json: async () => data });
   globalThis.fetch = async (path) => {
     if (path === './data/module-registry.json') {
-      return response(true, { moduleIds: ['ok_modul', 'kaputt_modul', 'missing_modul'] });
+      return response(true, { version: 1, moduleIds: ['ok_modul', 'kaputt_modul', 'missing_modul'] });
     }
 
     if (path.includes('/missing_modul/')) return response(false);
@@ -81,7 +81,7 @@ test('loadModuleRegistry nutzt fallback und bereinigt doppelte/leerwerte ids', a
 
   globalThis.fetch = async (path) => {
     if (path === './data/module-registry.json') {
-      return response(true, { moduleIds: [' alpha ', '', 'alpha', 'beta'] });
+      return response(true, { version: 1, moduleIds: [' alpha ', '', 'alpha', 'beta'] });
     }
 
     if (path.includes('/alpha/') || path.includes('/beta/')) {
@@ -104,6 +104,16 @@ test('loadModuleRegistry nutzt fallback und bereinigt doppelte/leerwerte ids', a
 
   const fallbackResult = await loadModuleRegistry();
   assert.match(fallbackResult.summary, /Quelle: fallback/);
+  assert.match(fallbackResult.summary, /Nächster Schritt:/);
+
+  globalThis.fetch = async (path) => {
+    if (path === './data/module-registry.json') return response(true, { version: 2, moduleIds: ['alpha'] });
+    return response(false);
+  };
+
+  const badVersionResult = await loadModuleRegistry();
+  assert.match(badVersionResult.summary, /keine gültige version/);
+  assert.match(badVersionResult.summary, /Feld "version" auf 1 setzen/);
 
   globalThis.fetch = originalFetch;
 });
