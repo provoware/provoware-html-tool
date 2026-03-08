@@ -4,14 +4,22 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 6
+- Offene Upgrade-Empfehlungen: 7
 - Erledigte Upgrade-Empfehlungen: 20
 - Default-Archive: 3
-- Letzte Iteration: 027
+- Letzte Iteration: 028
 - Scan-Modus: delta
 
 
 
+
+
+## Iterations-Update 028 (Mini-Patch)
+
+- Neu: Leere Modul-Slots zeigen jetzt einen konkreten nächsten Schritt statt nur „leer“.
+- Robustheit: Theme-Auswahl nutzt eine defensive Schlüsselauflösung und fällt bei unbekanntem Default sicher auf einen vorhandenen Theme-Key zurück.
+- UX: Platzhaltertexte in freien Panels nennen direkt zwei klare Wege (Plugin aktivieren oder Projektstruktur anlegen).
+- Archiv: Templates-Defaultarchiv um „Leere Modul-Slots mit Next Step prüfen“ erweitert.
 
 ## Iterations-Update 027 (Mini-Patch)
 
