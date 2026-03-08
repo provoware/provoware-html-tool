@@ -25,6 +25,7 @@ const createState = () => ({
   templateArchive: null,
   templateDraft: { id: null, title: '', content: '', category: 'Textbaustein' },
   templateFeedback: null,
+  templateArchiveStatus: '',
   a11yQuietMode: false,
   showGridHelp: true,
   filePreviewPath: '',

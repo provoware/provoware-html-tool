@@ -508,6 +508,16 @@ body::before {
   color: #4f5d7a;
 }
 
+.module-panel.is-empty-slot {
+  border-style: dashed;
+  background: rgba(236, 240, 233, 0.7);
+}
+
+.module-panel.is-empty-slot .module-head h3,
+.module-panel.is-empty-slot .module-panel-placeholder p {
+  color: #56624f;
+}
+
 .module-panel[data-panel='archive'] {
   grid-column: span 1;
   grid-row: span 1;

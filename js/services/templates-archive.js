@@ -1,4 +1,5 @@
 const TEMPLATE_CATEGORIES = ['Textbaustein', 'Promptvorlage', 'Arbeitsphrase'];
+const TEMPLATE_REQUIRED_FIELDS = Object.freeze(['id', 'title', 'content', 'category', 'favorite', 'createdAt', 'updatedAt']);
 
 const DEFAULT_TEMPLATE_ITEMS = Object.freeze([
   {
@@ -25,6 +26,11 @@ const DEFAULT_TEMPLATE_ITEMS = Object.freeze([
     title: 'UI-Checkliste vor Merge',
     category: 'Arbeitsphrase',
     content: 'Prüfe Fokus, Lesbarkeit, responsives Verhalten und sichtbare Fehlermeldungen mit kurzem Ergebnisprotokoll.'
+  },
+  {
+    title: 'Bug-Ticket in klaren Schritten',
+    category: 'Textbaustein',
+    content: 'Problem kurz nennen, Reproduktion in 3 Schritten, erwartetes Ergebnis, tatsächliches Ergebnis, kleinster nächster Fix.'
   }
 ]);
 
@@ -41,12 +47,24 @@ const normalizeCategory = (value) => {
 
 const sortItems = (items) => items.sort((a, b) => a.title.localeCompare(b.title, 'de', { sensitivity: 'base' }));
 
+const ensureArchiveShape = (archive) => {
+  if (!archive || typeof archive !== 'object' || !Array.isArray(archive.items)) {
+    return {
+      ok: false,
+      code: 'TEMPLATE_ARCHIVE_INVALID',
+      message: 'Vorlagen-Archiv ist ungültig. Bitte neu laden.'
+    };
+  }
+  return null;
+};
+
 export const TEMPLATE_ARCHIVE_PATH = 'data/templates-archive.json';
 
 export const templateCategories = TEMPLATE_CATEGORIES;
 
 export const createDefaultTemplateArchive = () => ({
   version: 1,
+  required_fields: [...TEMPLATE_REQUIRED_FIELDS],
   items: sortItems(DEFAULT_TEMPLATE_ITEMS.map((item, index) => ({
     id: `tpl-default-${String(index + 1).padStart(2, '0')}`,
     title: normalizeText(item.title),
@@ -59,11 +77,21 @@ export const createDefaultTemplateArchive = () => ({
   updatedAt: new Date().toISOString()
 });
 
-export const normalizeTemplateArchive = (input) => {
+export const normalizeTemplateArchive = (input, options = {}) => {
   const base = createDefaultTemplateArchive();
   const safe = input && typeof input === 'object' ? input : {};
   const items = Array.isArray(safe.items) ? safe.items : [];
   const dedup = new Map();
+  const repair = { applied: false, reason: '' };
+
+  const requiredFields = Array.isArray(safe.required_fields)
+    ? safe.required_fields.map((field) => normalizeText(field)).filter(Boolean)
+    : [];
+
+  if (!requiredFields.length || TEMPLATE_REQUIRED_FIELDS.some((field) => !requiredFields.includes(field))) {
+    repair.applied = true;
+    repair.reason = 'required_fields ergänzt';
+  }
 
   items.forEach((item) => {
     const title = normalizeText(item?.title);
@@ -83,10 +111,16 @@ export const normalizeTemplateArchive = (input) => {
 
   base.items = sortItems([...dedup.values()]);
   base.updatedAt = normalizeText(safe.updatedAt) || new Date().toISOString();
+
+  if (options.withReport) {
+    return { archive: base, repair };
+  }
   return base;
 };
 
 export const addTemplate = ({ archive, title, content, category }) => {
+  const invalidArchive = ensureArchiveShape(archive);
+  if (invalidArchive) return invalidArchive;
   const safeTitle = normalizeText(title);
   const safeContent = normalizeContent(content);
   if (!safeTitle || !safeContent) {
@@ -112,6 +146,8 @@ export const addTemplate = ({ archive, title, content, category }) => {
 };
 
 export const editTemplate = ({ archive, id, title, content, category }) => {
+  const invalidArchive = ensureArchiveShape(archive);
+  if (invalidArchive) return invalidArchive;
   const target = archive.items.find((item) => item.id === id);
   if (!target) {
     return { ok: false, code: 'TEMPLATE_MISSING', message: 'Vorlage wurde nicht gefunden.' };
@@ -135,6 +171,8 @@ export const editTemplate = ({ archive, id, title, content, category }) => {
 };
 
 export const removeTemplate = ({ archive, id }) => {
+  const invalidArchive = ensureArchiveShape(archive);
+  if (invalidArchive) return invalidArchive;
   const before = archive.items.length;
   archive.items = archive.items.filter((item) => item.id !== id);
   if (archive.items.length === before) {
@@ -145,6 +183,8 @@ export const removeTemplate = ({ archive, id }) => {
 };
 
 export const toggleTemplateFavorite = ({ archive, id }) => {
+  const invalidArchive = ensureArchiveShape(archive);
+  if (invalidArchive) return invalidArchive;
   const target = archive.items.find((item) => item.id === id);
   if (!target) {
     return { ok: false, code: 'TEMPLATE_MISSING', message: 'Vorlage wurde nicht gefunden.' };

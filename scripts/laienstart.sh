@@ -412,7 +412,8 @@ start_server() {
   fi
 
   open_browser
-  msg "Start erfolgreich. Zum Beenden: STRG+C"
+  msg "Start erfolgreich. Die Oberfläche ist jetzt nutzbar."
+  msg "Zum Beenden: STRG+C"
   wait "$server_pid"
 }
 
@@ -420,7 +421,8 @@ main() {
   parse_args "$@"
 
   step "ProvoWare Startroutine"
-  msg "Start läuft. Bitte kurze Hinweise beachten."
+  msg "Start läuft. Die Schritte werden nacheinander klar angezeigt."
+  msg "Tipp: Mit ./start.sh --dry-run prüfen Sie alles ohne Serverstart."
 
   step "Vorvalidierung"
   check_project_writable
@@ -445,7 +447,8 @@ main() {
   msg "Aktive Pflicht-Abhängigkeiten: ${dependencies[*]}"
 
   if [[ "$DRY_RUN" -eq 1 ]]; then
-    msg "Dry-Run aktiv: Vorvalidierung + Self-Repair erfolgreich geprüft."
+    msg "Dry-Run aktiv: Vorvalidierung + Self-Repair wurden erfolgreich geprüft."
+    msg "Nächster Schritt: Für den echten Start einfach ./start.sh ausführen."
     msg "Dry-Run beendet ohne Browser- oder Server-Start."
     exit 0
   fi

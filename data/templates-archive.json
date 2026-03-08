@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-09",
+      "title": "Bug-Ticket in klaren Schritten",
+      "content": "Problem kurz nennen, Reproduktion in 3 Schritten, erwartetes Ergebnis, tatsächliches Ergebnis, kleinster nächster Fix.",
+      "category": "Textbaustein",
+      "favorite": false,
+      "createdAt": "2026-03-08T02:00:00.000Z",
+      "updatedAt": "2026-03-08T02:00:00.000Z"
+    },
+    {
       "id": "tpl-default-04",
       "title": "Commit-Nachricht kompakt",
       "content": "feat: klarer Titel\n\n- Änderung 1\n- Änderung 2\n- Test: <befehl>",
@@ -74,5 +83,14 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T01:00:00.000Z"
+  "updatedAt": "2026-03-08T03:00:00.000Z",
+  "required_fields": [
+    "id",
+    "title",
+    "content",
+    "category",
+    "favorite",
+    "createdAt",
+    "updatedAt"
+  ]
 }
