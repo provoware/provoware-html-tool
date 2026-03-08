@@ -35,7 +35,17 @@ const readModuleIds = async () => {
     return {
       ids: [...FALLBACK_MODULE_IDS],
       source: 'fallback',
-      fallbackReason: 'module-registry.json fehlt oder ist nicht lesbar'
+      fallbackReason: 'module-registry.json fehlt oder ist nicht lesbar',
+      nextStep: 'Datei data/module-registry.json prüfen oder neu erzeugen.'
+    };
+  }
+
+  if (registry.data?.version !== 1) {
+    return {
+      ids: [...FALLBACK_MODULE_IDS],
+      source: 'fallback',
+      fallbackReason: 'module-registry.json hat keine gültige version (erwartet: 1)',
+      nextStep: 'In data/module-registry.json das Feld "version" auf 1 setzen.'
     };
   }
 
@@ -49,7 +59,8 @@ const readModuleIds = async () => {
     return {
       ids: [...FALLBACK_MODULE_IDS],
       source: 'fallback',
-      fallbackReason: 'module-registry.json hat kein gültiges moduleIds-Array'
+      fallbackReason: 'module-registry.json hat kein gültiges moduleIds-Array',
+      nextStep: 'In data/module-registry.json ein Array "moduleIds" mit Text-IDs eintragen.'
     };
   }
 
@@ -59,11 +70,12 @@ const readModuleIds = async () => {
     return {
       ids: [...FALLBACK_MODULE_IDS],
       source: 'fallback',
-      fallbackReason: 'module-registry.json enthält keine nutzbaren Modul-IDs'
+      fallbackReason: 'module-registry.json enthält keine nutzbaren Modul-IDs',
+      nextStep: 'Mindestens eine gültige Modul-ID in "moduleIds" eintragen.'
     };
   }
 
-  return { ids, source: 'data/module-registry.json', fallbackReason: null };
+  return { ids, source: 'data/module-registry.json', fallbackReason: null, nextStep: null };
 };
 
 const checkProfile = async (id) => {
@@ -169,7 +181,7 @@ export const loadModuleRegistry = async () => {
 
   return {
     modules,
-    summary: `${summary} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.`
+    summary: `${summary} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.${moduleIds.nextStep ? ` Nächster Schritt: ${moduleIds.nextStep}` : ''}`
   };
 };
 
