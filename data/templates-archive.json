@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-13",
+      "title": "Fallback-Check vor Release",
+      "content": "Prüfe vor Release drei Fallbacks: Theme-Key vorhanden, Module-Registry lesbar und klare Meldung bei Defekt.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T07:00:00.000Z",
+      "updatedAt": "2026-03-08T07:00:00.000Z"
+    },
+    {
       "id": "tpl-default-12",
       "title": "Header-Layout schnell prüfen",
       "content": "Prüfe bei 3 Breiten (Desktop, Tablet, Mobil), ob Status-Chips umbrechen, Theme-Auswahl sichtbar bleibt und keine Header-Elemente abgeschnitten werden.",
@@ -110,7 +119,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T06:00:00.000Z",
+  "updatedAt": "2026-03-08T07:00:00.000Z",
   "required_fields": [
     "id",
     "title",

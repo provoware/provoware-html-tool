@@ -297,8 +297,8 @@ const init = async () => {
   logEvent(loaded.ok ? 'INFO' : 'WARN', loaded.code, loaded.message);
 
   const themeName = loaded.data.appConfig.defaultTheme;
-  const initialTheme = loaded.data.themes[themeName] ? themeName : 'dunkel';
-  applyTheme(loaded.data.themes[initialTheme] || loaded.data.themes.dunkel);
+  const initialTheme = loaded.data.themes[themeName] ? themeName : 'design-nachtblau';
+  applyTheme(loaded.data.themes[initialTheme] || loaded.data.themes['design-nachtblau']);
 
   const initialMode = detectLayoutMode(loaded.data.appConfig);
   const moduleRegistry = await loadModuleRegistry();
@@ -323,8 +323,8 @@ const init = async () => {
     ...actions,
     onChangeTheme: (themeName) => {
       const state = window.appState;
-      const nextTheme = state.themes?.[themeName] ? themeName : state.currentTheme || 'dunkel';
-      applyTheme(state.themes?.[nextTheme] || state.themes?.dunkel || {});
+      const nextTheme = state.themes?.[themeName] ? themeName : state.currentTheme || 'design-nachtblau';
+      applyTheme(state.themes?.[nextTheme] || state.themes?.['design-nachtblau'] || {});
       setState({ currentTheme: nextTheme });
     }
   });
