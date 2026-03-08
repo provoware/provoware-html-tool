@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 7
+- Offene Upgrade-Empfehlungen: 8
 - Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 040
+- Letzte Iteration: 041
 - Scan-Modus: delta
 
 
@@ -16,6 +16,13 @@
 
 
 
+
+## Iterations-Update 041 (Mini-Patch)
+
+- Neu: Zehn offene Layout-/UX-Punkte aus `todo.txt` mit einem lokalen CSS/HTML-Patch abgeschlossen.
+- Robustheit: Aktive Modulbereiche zeigen jetzt einen klaren Fokuszustand (`:focus-within`) und bleiben besser erkennbar.
+- UX: Begriffe wurden laienfreundlicher, Warnhinweise klarer und der Hilfebereich kompakter/einklappbar.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „10er-Layout-Feinschliff schnell prüfen“ ergänzt.
 
 ## Iterations-Update 039 (Mini-Patch)
 

@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-43",
+      "title": "10er-Layout-Feinschliff schnell prüfen",
+      "content": "Prüfe im Header und in Modulflächen: Warnhinweise sind klar abgesetzt, Leerslots wirken zurückgenommen, der aktive Modulfokus ist sichtbar und Nebeninfos bleiben ruhig.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T08:15:00.000Z",
+      "updatedAt": "2026-03-09T08:15:00.000Z"
+    },
+    {
       "id": "tpl-default-42",
       "title": "Werkzeugleisten-Gruppen schnell prüfen",
       "content": "Prüfe in der rechten Leiste: Basis- und Zusatzaktionen bleiben getrennt, Aktionstypen sind visuell unterscheidbar und „Mehr Tools“ blendet Zusatzaktionen robust ein.",
@@ -380,7 +389,7 @@
       "updatedAt": "2026-03-09T09:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T09:00:00.000Z",
+  "updatedAt": "2026-03-09T08:15:00.000Z",
   "required_fields": [
     "id",
     "title",

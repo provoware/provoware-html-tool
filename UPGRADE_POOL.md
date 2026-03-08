@@ -11,6 +11,7 @@
 | UP-033 | Accessibility UX | Deaktivierte Buttons um kurzen Tooltip-Titel mit Grund ergänzen | Einheitliche Disabled-Optik ist klar, aber ohne Grund bleibt der nächste Schritt teilweise unklar | Weniger Fehlklicks und schnellere Selbsthilfe durch direkten Hinweis am Knopf | offen | 032 |
 | UP-034 | Leerzustand UX | Leere Modul-Slots im Header-Monitoring auf Zeichenlimit prüfen und bei Überschreitung automatisch kürzen | Kürzere Texte wurden lokal verbessert, können aber bei späteren Änderungen wieder ausufern | Dauerhaft kompakte Leerzustände ohne manuelle Nacharbeit | offen | 033 |
 | UP-041 | Sidebar UX | Sidebar-Schalter um kurzes Tooltip mit aktueller Ursache („Auto durch Breite", „Manuell durch Klick") erweitern | Labels sind klarer, aber die Auslöseursache ist ohne Hover weiter knapp | Noch verständlichere Zustandsdiagnose direkt am Schalter ohne neue Statusfläche | offen | 040 |
+| UP-042 | Fokus UX | Aktive Modulkarte beim Tastatur- oder Klickfokus mit kurzer Statuszeile markieren | Der neue Fokusrahmen hilft visuell, aber eine zusätzliche Kurzzeile würde den Kontext für Laien noch klarer machen | Schnellere Orientierung, welches Modul gerade aktiv ist, besonders bei vielen offenen Fenstern | offen | 041 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -39,6 +40,10 @@
 **Passende Vorschläge (UP-041):**
 1. Tooltip nur im eingeklappten Zustand setzen, damit die Oberfläche ruhig bleibt
 2. Tooltip-Text aus derselben Sync-Hilfe ableiten, damit Label und Grund nie auseinanderlaufen
+
+**Passende Vorschläge (UP-042):**
+1. Statuszeile nur zeigen, wenn ein Modul fokussiert ist und nach 3 Sekunden wieder ausblenden
+2. Fokusquelle (Klick/Tastatur) nur intern nutzen, Text aber bewusst einfach halten
 
 ## Erledigt
 

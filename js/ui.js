@@ -152,7 +152,7 @@ const renderStats = (stats) => {
 };
 
 const measureLayoutBudgetStatus = () => {
-  const label = `Layoutbudget aktiv: H${LAYOUT_BUDGETS.headerMaxPercent}/F${LAYOUT_BUDGETS.footerMaxPercent}/S${LAYOUT_BUDGETS.sidebarMaxPercent}`;
+  const label = `Platzverteilung aktiv: H${LAYOUT_BUDGETS.headerMaxPercent}/F${LAYOUT_BUDGETS.footerMaxPercent}/S${LAYOUT_BUDGETS.sidebarMaxPercent}`;
   if (typeof window === 'undefined') {
     return { label, warning: 'Budgetprüfung ausstehend.' };
   }
