@@ -119,6 +119,26 @@ test('smoke: modul-next-step öffnen bei vorhandener datei lädt editor', async 
   });
 });
 
+
+
+test('smoke: modul-next-step create bei fehlender datei erstellt und öffnet editor', async () => {
+  await withFilesystemAdapterMocks({
+    fileExists: async () => ({ ok: true, data: { exists: false } }),
+    createFile: async () => ({ ok: true }),
+    readText: async () => ({ ok: true, data: { text: '{\n  "id": "test"\n}\n' } })
+  }, async () => {
+    const base = makeBase();
+    const actions = createUiActionHandlers(base);
+    const result = await actions.onCreateModuleRegistryNextStepFile('modules/test/manifest.json');
+    assert.equal(result.ok, true);
+    assert.equal(result.code, 'MODULE_NEXT_STEP_FILE_OPENED');
+    assert.equal(base.getState().editorFilePath, 'modules/test/manifest.json');
+    assert.equal(base.getState().editorStatus, 'Editor geöffnet: modules/test/manifest.json');
+    assert.equal(base.getState().moduleRegistryTemplateType, 'manifest-basic');
+  });
+});
+
+
 test('smoke: modul-next-step öffnen bei fehlender datei liefert guard-code', async () => {
   await withFilesystemAdapterMocks({
     fileExists: async () => ({ ok: true, data: { exists: false } })

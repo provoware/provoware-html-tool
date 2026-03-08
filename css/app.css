@@ -629,6 +629,14 @@ body::before {
   margin-top: 8px;
 }
 
+#module-registry-template-select {
+  min-width: 170px;
+}
+
+#module-registry-template-status {
+  min-height: 1.2rem;
+}
+
 .settings-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

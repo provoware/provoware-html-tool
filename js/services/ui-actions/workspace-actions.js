@@ -25,12 +25,24 @@ const isTextLikeFile = (name = '') => {
 };
 
 const MODULE_NEXT_STEP_DEFAULT_CONTENT = '{\n  "version": 1\n}\n';
+const MODULE_NEXT_STEP_TEMPLATE_CONTENT = Object.freeze({
+  'manifest-basic': '{\n  "id": "module_id",\n  "name": "Neues Modul",\n  "version": "0.1.0"\n}\n',
+  'config-basic': '{\n  "enabled": true,\n  "options": {}\n}\n'
+});
 
 const updateDashboardRowState = (setState, getState, rowIndex, patch = {}) => {
   const rows = withDefaultDashboardRows(getState().dashboardNotes?.rows || []);
   if (!rows[rowIndex]) return;
   rows[rowIndex] = { ...rows[rowIndex], ...patch };
   setState({ dashboardNotes: { basePath: DASHBOARD_NOTES_BASE_PATH, rows } });
+};
+
+
+const moduleTemplateTypeFromPath = (path = '') => {
+  const lower = String(path || '').toLowerCase();
+  if (lower.endsWith('/manifest.json')) return 'manifest-basic';
+  if (lower.endsWith('/config.json')) return 'config-basic';
+  return '';
 };
 
 const createDashboardNoteFailure = ({ setState, getState, logEvent, rowIndex, code, message, data, logData = {} }) => {
@@ -150,6 +162,7 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
       logEvent('WARN', exists.code, 'Dateiprüfung vor Datei-Anlage fehlgeschlagen.', exists.data);
       return exists;
     }
+    const templateType = moduleTemplateTypeFromPath(filePath);
     if (!exists.data?.exists) {
       const created = await filesystemAdapter.createFile(filePath, MODULE_NEXT_STEP_DEFAULT_CONTENT);
       if (!created.ok) {
@@ -157,7 +170,14 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
         logEvent('WARN', created.code, 'Datei aus Modul-Hinweis konnte nicht angelegt werden.', created.data);
         return created;
       }
-      logEvent('INFO', 'MODULE_NEXT_STEP_FILE_CREATED', 'Datei aus Modul-Hinweis wurde angelegt.', { path: filePath });
+      const templateStatus = templateType
+        ? 'Datei erstellt. Optional Vorlage wählen und einsetzen.'
+        : 'Datei erstellt. Keine Schnellvorlage für diesen Dateityp.';
+      setState({ moduleRegistryTemplatePath: filePath, moduleRegistryTemplateType: templateType, moduleRegistryTemplateStatus: templateStatus });
+      logEvent('INFO', 'MODULE_NEXT_STEP_FILE_CREATED', 'Datei aus Modul-Hinweis wurde angelegt.', { path: filePath, templateType });
+    } else {
+      const templateStatus = templateType ? 'Datei vorhanden. Vorlage kann bei Bedarf eingesetzt werden.' : 'Datei vorhanden. Keine Schnellvorlage für diesen Dateityp.';
+      setState({ moduleRegistryTemplatePath: filePath, moduleRegistryTemplateType: templateType, moduleRegistryTemplateStatus: templateStatus });
     }
     const loaded = await filesystemAdapter.readText(filePath);
     if (!loaded.ok) {
@@ -173,6 +193,34 @@ export const createWorkspaceActions = ({ getState, setState, logEvent }) => ({
     });
     logEvent('INFO', 'MODULE_NEXT_STEP_FILE_OPENED', 'Datei aus Modul-Hinweis im Editor geöffnet.', { path: filePath });
     return { ok: true, code: 'MODULE_NEXT_STEP_FILE_OPENED', message: `Datei geöffnet: ${filePath}`, data: { path: filePath } };
+  },
+
+  onApplyModuleRegistryTemplate: async ({ path, templateId }) => {
+    const filePath = normalizeRelativePath(path);
+    const selectedTemplateId = String(templateId || '').trim();
+    if (!filePath || !selectedTemplateId || !MODULE_NEXT_STEP_TEMPLATE_CONTENT[selectedTemplateId]) {
+      const message = 'Vorlage kann nur für manifest.json oder config.json eingesetzt werden.';
+      setState({ moduleRegistryTemplateStatus: message });
+      return { ok: false, code: 'MODULE_TEMPLATE_NOT_SUPPORTED', message };
+    }
+    const write = await filesystemAdapter.writeText(filePath, MODULE_NEXT_STEP_TEMPLATE_CONTENT[selectedTemplateId]);
+    if (!write.ok) {
+      const message = `Vorlage konnte nicht gespeichert werden: ${filePath}`;
+      setState({ moduleRegistryTemplateStatus: message, editorStatus: message });
+      logEvent('WARN', write.code, 'Vorlage aus Modul-Hinweis konnte nicht gespeichert werden.', write.data);
+      return write;
+    }
+    setState({
+      editorFilePath: filePath,
+      editorContent: MODULE_NEXT_STEP_TEMPLATE_CONTENT[selectedTemplateId],
+      editorStatus: `Vorlage eingesetzt und Editor geöffnet: ${filePath}`,
+      editorDirty: false,
+      moduleRegistryTemplatePath: filePath,
+      moduleRegistryTemplateType: selectedTemplateId,
+      moduleRegistryTemplateStatus: `Vorlage eingesetzt: ${selectedTemplateId}.`
+    });
+    logEvent('INFO', 'MODULE_TEMPLATE_APPLIED', 'Vorlage aus Modul-Hinweis wurde eingesetzt.', { path: filePath, templateId: selectedTemplateId });
+    return { ok: true, code: 'MODULE_TEMPLATE_APPLIED', message: `Vorlage eingesetzt: ${filePath}`, data: { path: filePath, templateId: selectedTemplateId } };
   },
   onEditorChangeContent: (content) => {
     setState({ editorContent: content, editorDirty: true });

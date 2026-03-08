@@ -31,6 +31,13 @@
             <label class="theme-switch" for="theme-select">Farbtheme
               <select id="theme-select" aria-label="Farbtheme wählen"></select>
             </label>
+            <label class="theme-switch" for="panel-proportion-select">Panel-Breiten
+              <select id="panel-proportion-select" aria-label="Panel-Breiten wählen">
+                <option value="balanced">Ausgewogen (25/50/25)</option>
+                <option value="focus-main">Mitte-Fokus (20/60/20)</option>
+                <option value="focus-sidebars">Seiten-Fokus (30/40/30)</option>
+              </select>
+            </label>
             <p id="zoom-status" class="zoom-status" aria-live="polite">Schriftgröße: 100%</p>
           </div>
         </div>
@@ -48,7 +55,14 @@
           <div class="module-registry-next-step-actions">
             <button id="module-registry-open-next-step" class="btn-small" type="button" disabled>Datei öffnen</button>
             <button id="module-registry-create-next-step" class="btn-small" type="button" disabled>Datei anlegen</button>
+            <select id="module-registry-template-select" class="btn-small" disabled>
+              <option value="">Vorlage wählen</option>
+              <option value="manifest-basic">manifest.json Basis</option>
+              <option value="config-basic">config.json Basis</option>
+            </select>
+            <button id="module-registry-apply-template" class="btn-small" type="button" disabled>Vorlage einsetzen</button>
           </div>
+          <p id="module-registry-template-status" class="sidebar-summary">Vorlagenmenü inaktiv.</p>
         </div>
       </nav>
 

@@ -50,6 +50,8 @@ export const renderMainSection = ({
   setText('archive-overview-total', String(state.profileStats?.total ?? '-'));
   setText('archive-overview-updated', formatDateTime(state.profileArchive?.updatedAt));
   const quietModeToggle = byId('a11y-quiet-mode');
+  const panelProportionSelect = byId('panel-proportion-select');
+  if (panelProportionSelect) panelProportionSelect.value = state.panelProportionPreset || 'balanced';
   if (quietModeToggle) quietModeToggle.checked = Boolean(state.a11yQuietMode);
   const gridHelpToggle = byId('toggle-grid-help');
   const showGridHelp = state.showGridHelp !== false;
@@ -186,6 +188,23 @@ export const renderMainSection = ({
     moduleRegistryCreateButton.dataset.filePath = nextStepPath;
     moduleRegistryCreateButton.title = nextStepPath ? `Datei anlegen: ${nextStepPath}` : 'Kein Dateipfad im nächsten Schritt gefunden.';
   }
+  const templateSelect = byId('module-registry-template-select');
+  const templateApplyButton = byId('module-registry-apply-template');
+  const templatePath = state.moduleRegistryTemplatePath || '';
+  const templateType = state.moduleRegistryTemplateType || '';
+  const templateEnabled = Boolean(templatePath && templateType);
+  if (templateSelect) {
+    templateSelect.disabled = !templateEnabled;
+    if (templateEnabled) templateSelect.value = templateType;
+    if (!templateEnabled) templateSelect.value = '';
+    templateSelect.dataset.filePath = templatePath;
+  }
+  if (templateApplyButton) {
+    templateApplyButton.disabled = !templateEnabled;
+    templateApplyButton.dataset.filePath = templatePath;
+    templateApplyButton.title = templateEnabled ? `Vorlage einsetzen: ${templatePath}` : 'Vorlagenmenü erst nach Datei-Anlage verfügbar.';
+  }
+  setText('module-registry-template-status', state.moduleRegistryTemplateStatus || 'Vorlagenmenü inaktiv.');
   const sidebarModuleList = byId('sidebar-module-list');
   if (sidebarModuleList) {
     sidebarModuleList.innerHTML = renderSidebarModules(state.moduleRegistry?.modules || []);

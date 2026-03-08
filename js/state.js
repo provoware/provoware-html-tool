@@ -38,6 +38,10 @@ const createState = () => ({
   editorContent: '',
   editorStatus: 'Editor ist bereit.',
   editorDirty: false,
+  moduleRegistryTemplatePath: '',
+  moduleRegistryTemplateType: '',
+  moduleRegistryTemplateStatus: 'Vorlagenmenü inaktiv.',
+  panelProportionPreset: 'balanced',
   moduleRegistry: { modules: [], summary: '-' },
   templateDesignStatus: { ok: false, message: '-' },
   pluginManager: {

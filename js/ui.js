@@ -13,6 +13,12 @@ let lastA11yAnnouncement = '';
 const defaultTodos = Object.freeze(['Erste Aufgabe prüfen']);
 const TODO_STORAGE_KEY = 'provoware:todo-start-items';
 const FONT_SCALE_STORAGE_KEY = 'provoware:font-scale';
+const PANEL_PROPORTION_STORAGE_KEY = 'provoware:panel-proportion-preset';
+const PANEL_PROPORTION_PRESETS = Object.freeze({
+  balanced: { navMin: '220px', navMax: '320px', mainMin: '620px', widgetsMin: '260px', widgetsMax: '360px' },
+  'focus-main': { navMin: '190px', navMax: '250px', mainMin: '760px', widgetsMin: '220px', widgetsMax: '290px' },
+  'focus-sidebars': { navMin: '260px', navMax: '340px', mainMin: '520px', widgetsMin: '300px', widgetsMax: '380px' }
+});
 const HEADER_PROJECT_STATUS_TEXT = Object.freeze({
   waiting: 'Wartet',
   working: 'In Arbeit',
@@ -595,6 +601,16 @@ export const bindUiActions = (actions) => {
     if (!filePath || typeof actions.onCreateModuleRegistryNextStepFile !== 'function') return;
     await actions.onCreateModuleRegistryNextStepFile(filePath);
   });
+  byId('module-registry-apply-template')?.addEventListener('click', async () => {
+    const filePath = byId('module-registry-apply-template')?.dataset.filePath || '';
+    const templateId = byId('module-registry-template-select')?.value || '';
+    if (!filePath || !templateId || typeof actions.onApplyModuleRegistryTemplate !== 'function') return;
+    await actions.onApplyModuleRegistryTemplate({ path: filePath, templateId });
+  });
+  byId('panel-proportion-select')?.addEventListener('change', (event) => {
+    const selected = applyPanelProportionPreset(event.target.value || 'balanced');
+    if (typeof actions.onSetPanelProportionPreset === 'function') actions.onSetPanelProportionPreset(selected);
+  });
   document.addEventListener('input', (event) => {
     if (event?.target?.type === 'checkbox') return;
     render();
@@ -770,6 +786,39 @@ export const bindUiActions = (actions) => {
   initGuideToolsModule();
   initDashboardClock();
 };
+
+
+const readPanelProportionPreset = () => {
+  try {
+    const raw = window.localStorage.getItem(PANEL_PROPORTION_STORAGE_KEY) || '';
+    return PANEL_PROPORTION_PRESETS[raw] ? raw : 'balanced';
+  } catch {
+    return 'balanced';
+  }
+};
+
+const storePanelProportionPreset = (preset) => {
+  try {
+    window.localStorage.setItem(PANEL_PROPORTION_STORAGE_KEY, PANEL_PROPORTION_PRESETS[preset] ? preset : 'balanced');
+  } catch {
+    // Speicher kann blockiert sein.
+  }
+};
+
+export const applyPanelProportionPreset = (preset = 'balanced') => {
+  const key = PANEL_PROPORTION_PRESETS[preset] ? preset : 'balanced';
+  const values = PANEL_PROPORTION_PRESETS[key];
+  const root = document.documentElement;
+  root.style.setProperty('--panel-nav-min', values.navMin);
+  root.style.setProperty('--panel-nav-max', values.navMax);
+  root.style.setProperty('--panel-main-min', values.mainMin);
+  root.style.setProperty('--panel-widgets-min', values.widgetsMin);
+  root.style.setProperty('--panel-widgets-max', values.widgetsMax);
+  storePanelProportionPreset(key);
+  return key;
+};
+
+export const resolveInitialPanelProportionPreset = () => readPanelProportionPreset();
 
 export const render = () => {
   const state = getState();

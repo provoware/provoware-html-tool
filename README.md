@@ -4,18 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 2
-- Erledigte Upgrade-Empfehlungen: 15
+- Offene Upgrade-Empfehlungen: 1
+- Erledigte Upgrade-Empfehlungen: 17
 - Default-Archive: 2
-- Letzte Iteration: 018
+- Letzte Iteration: 019
 - Scan-Modus: delta
 
 
-## Iterations-Update 018 (Mini-Patch)
+## Iterations-Update 019 (Mini-Patch)
 
-- Neu: Modul-Next-Step hat jetzt neben **„Datei öffnen“** auch **„Datei anlegen“** für fehlende Dateien.
-- Robustheit: Öffnen-Flow unterscheidet klar zwischen Pfad fehlt, Datei fehlt und Lese-/Prüffehler.
-- Tests: Ein gezielter Unit-Test deckt den Öffnen-Flow für vorhandenen und fehlenden Pfad ab.
+- Neu: Nach **„Datei anlegen“** gibt es ein kleines Vorlagenmenü nur für `manifest.json` und `config.json`.
+- Robustheit: Create-Flow setzt Guards für Dateityp und zeigt klaren Vorlagenstatus statt stiller Fallbacks.
+- UX/Layout: Neues Header-Preset für Panel-Breiten (Ausgewogen, Mitte-Fokus, Seiten-Fokus) wird lokal gespeichert.
+- Tests: Zweiter gezielter Test deckt `onCreateModuleRegistryNextStepFile` für „Datei fehlt → wird erstellt → Editor geöffnet“ ab.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
