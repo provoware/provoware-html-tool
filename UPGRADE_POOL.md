@@ -25,3 +25,10 @@
 **Passende Vorschläge:**
 1. Für jeden Rotationslauf ein kurzes Ergebnisfeld (`keine Funde`/`x Funde`) im Registry-Meta ergänzen
 2. Kandidatenliste halbjährlich prüfen und nach realen Fehlerfunden neu gewichten
+
+| UP-004 | Registry-Prozess | `rotation_last_target` und kurzes `scope_examples`-Objekt ergänzen | Letzter Zielkandidat und einheitliche Scope-Formulierungen waren nicht direkt sichtbar | Schnellere Orientierung und konsistentere neue Funde | erledigt | 004 |
+
+**Passende Vorschläge:**
+1. `rotation_last_target.result` bei jedem Rotationslauf auf `keine_funde` oder `funde` setzen
+2. `scope_examples` jährlich kurz gegen reale Fundstellen nachschärfen
+

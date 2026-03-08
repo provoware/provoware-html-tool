@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": 1,
-    "last_scan": "2026-03-08T00:30:00Z",
-    "last_update_iteration": "003",
+    "last_scan": "2026-03-08T01:00:00Z",
+    "last_update_iteration": "004",
     "scan_mode": "delta",
     "project_phase": "early",
     "scope_values": [
@@ -46,7 +46,19 @@
         "reason": "Adapterpfad mit klarer Fallback-Logik"
       }
     ],
-    "entry_scope_rule": "open[].scope und done[].scope nutzen nur Werte aus scope_values"
+    "entry_scope_rule": "open[].scope und done[].scope nutzen nur Werte aus scope_values",
+    "rotation_last_target": {
+      "module": "js/services/module-registry.js",
+      "iteration": "010",
+      "result": "geplant"
+    },
+    "scope_examples": {
+      "ui": "Fehlender Label-Text in einem Button",
+      "logic": "Null-Check vor Modul-Initialisierung fehlt",
+      "data": "Archiv-Eintrag ohne Pflichtfeld category",
+      "style": "Kontrast im Hinweisbanner zu niedrig",
+      "docs": "README-Abschnitt widerspricht aktuellem Verhalten"
+    }
   },
   "stats": {
     "open_total": 0,

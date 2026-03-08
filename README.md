@@ -4,7 +4,7 @@
 - Erledigte Punkte: 32 (siehe `todo.txt`)
 - Offene Punkte: 0 (siehe `todo.txt`)
 - Fortschritt: 100%
-- Stand dieser Iteration: `code_scan_registry.json` hat jetzt ein `scope -> Standard-Priorität`-Mapping und eine feste Kandidatenliste für den Rotationsscan ab Iteration 10.
+- Stand dieser Iteration: `code_scan_registry.json` zeigt jetzt zusätzlich `rotation_last_target` und kurze `scope_examples` für einheitlichere Einträge.
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
