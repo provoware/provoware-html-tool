@@ -50,7 +50,7 @@
           <section class="header-card header-card-controls" aria-label="Layout-Steuerung" role="button" tabindex="0" data-nav-target="panel-proportion-select">
             <button id="toggle-left-sidebar" class="btn-small" type="button" aria-pressed="false">Linke Leiste</button>
             <button id="toggle-right-sidebar" class="btn-small" type="button" aria-pressed="false">Rechte Leiste</button>
-            <p id="layout-budget-label" class="layout-budget-label" role="status" aria-live="polite">Layoutbudget aktiv: H15/F10/S8</p>
+            <p id="layout-budget-label" class="layout-budget-label" role="status" aria-live="polite">Platzverteilung aktiv: H15/F10/S8</p>
             <p id="layout-budget-warning" class="layout-budget-warning" role="status" aria-live="polite">Budgetprüfung ausstehend.</p>
             <label class="theme-switch" for="theme-select">Farbtheme
               <select id="theme-select" aria-label="Farbtheme wählen"></select>
@@ -73,8 +73,8 @@
             <p id="zoom-status" class="zoom-status" aria-live="polite">Schriftgröße: 100%</p>
           </section>
 
-          <section class="header-card header-card-stats" aria-label="Dashboard-Statistiken" role="button" tabindex="0" data-nav-target="action-run-selftest">
-            <h2 class="panel-title">Dashboard-Statistik</h2>
+          <section class="header-card header-card-stats" aria-label="Dashboard-Überblick" role="button" tabindex="0" data-nav-target="action-run-selftest">
+            <h2 class="panel-title">Dashboard-Überblick</h2>
             <dl class="header-stats-list">
               <div><dt>Module aktiv</dt><dd id="header-stat-modules">0</dd></div>
               <div><dt>Vorlagen</dt><dd id="header-stat-templates">0</dd></div>
@@ -305,20 +305,20 @@
             <ul id="log-list" class="log-list"></ul>
           </article>
           <article class="footer-box footer-box-plugin">
-            <section class="settings-group" aria-label="Plugin-Verwaltung">
-              <h3>Plugin-Verwaltung</h3>
+            <section class="settings-group" aria-label="Erweiterungen">
+              <h3>Erweiterungen</h3>
               <p id="plugin-help-text" class="sidebar-summary">Plugins können ein- oder ausgeschaltet werden. So bleibt die Oberfläche einfach.</p>
               <details class="guide-help-collapsible">
                 <summary>Wann ist dieser Bereich wichtig?</summary>
                 <p id="plugin-help-extra" class="guide-help-note">Tipp: Wähle ein Plugin, prüfe den Status darunter und aktiviere nur bei Bedarf.</p>
               </details>
-              <label for="plugin-select">Plugin-Auswahl</label>
+              <label for="plugin-select">Erweiterungs-Auswahl</label>
               <select id="plugin-select" aria-describedby="plugin-help-text plugin-help-extra"></select>
               <div class="settings-actions">
-                <button id="plugin-toggle" class="btn-small" type="button">Plugin aktivieren</button>
+                <button id="plugin-toggle" class="btn-small" type="button">Erweiterung aktivieren</button>
               </div>
               <p id="plugin-state" class="sidebar-summary" role="status" aria-live="polite">Status: -</p>
-              <ul id="plugin-output" class="log-list plugin-output" aria-label="Plugin-Ausgabe" aria-live="polite"><li>Plugin-Ausgabe erscheint hier.</li></ul>
+              <ul id="plugin-output" class="log-list plugin-output" aria-label="Plugin-Ausgabe" aria-live="polite"><li>Ausgabe der Erweiterung erscheint hier.</li></ul>
             </section>
           </article>
           <article class="footer-box">
@@ -326,8 +326,11 @@
             <p class="sidebar-summary">Jedes Modul hat Maximieren, Minimieren und Ausblenden.</p>
           </article>
           <article class="footer-box">
-            <h2 class="panel-title">Tipp</h2>
-            <p class="sidebar-summary">Esc beendet Maximieren. Strg + Mausrad oder Strg + +/- vergrößert/verkleinert das Tool proportional. Strg + 0 setzt auf 100% zurück.</p>
+            <h2 class="panel-title">Hilfe kompakt</h2>
+            <details class="guide-help-collapsible sidebar-help-compact">
+              <summary>Kurze Bedienhilfe anzeigen</summary>
+              <p class="sidebar-summary">Esc beendet Maximieren. Strg + Mausrad oder Strg + +/- passt die Größe an. Strg + 0 setzt auf 100% zurück.</p>
+            </details>
           </article>
         </section>
       </footer>
