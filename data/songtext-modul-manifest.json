@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "moduleSet": "songtext-und-reimarchiv",
+  "songModule": {
+    "id": "songtext_arbeitszentrum",
+    "purpose": "Drei-Fenster-Workflow: sammeln, strukturieren, Vorschau",
+    "uiPrinciples": [
+      "kleine klare Oberfläche",
+      "Tastatur bedienbar",
+      "klare Labels und Tooltips",
+      "keine unnötigen Zwischendialoge"
+    ],
+    "allowedSectionTypes": [
+      "Intro",
+      "Strophe 1",
+      "Strophe 2",
+      "Refrain",
+      "Hook",
+      "Bridge",
+      "Outro",
+      "Genre",
+      "Mood",
+      "Notiz",
+      "Sonstiges"
+    ],
+    "namingRules": {
+      "sectionTitleSuffix": ":",
+      "archiveIdPattern": "<titel>_v<n>",
+      "versioning": "gleicher Titel wird fortlaufend versioniert"
+    },
+    "archiveRules": {
+      "saveMode": "append",
+      "noOverwrite": true,
+      "searchFields": ["title", "id"]
+    }
+  },
+  "rhymeModule": {
+    "id": "reimarchiv_modul",
+    "purpose": "Reimdaten strukturiert speichern, suchen und kopierbar ausgeben",
+    "entryFields": ["referenceWord", "rhymes", "variants", "notes"],
+    "separationRule": "Reimlogik bleibt im Reimmodul; Songlogik bleibt im Songmodul"
+  },
+  "interface": {
+    "songToRhyme": "requestRhymesForWord(api, word)",
+    "rhymeToSong": "buildCopyText(searchResult)",
+    "errorPolicy": "bei fehlender API oder leerem Wort immer klare Fehlercodes statt stiller Fehler"
+  },
+  "extensionRules": {
+    "coreLogicStable": true,
+    "newFieldsNeedSchemaUpdate": true,
+    "newUiActionsNeedKeyboardSupport": true
+  }
+}

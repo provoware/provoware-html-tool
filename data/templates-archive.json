@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-16",
+      "title": "Song-Start mit 3-Fenster-Workflow",
+      "content": "Links Ideen sammeln, markierten Teil mit einem Klick in die aktive Sektion übernehmen, rechts die Gesamtvorschau prüfen.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T10:30:00.000Z",
+      "updatedAt": "2026-03-08T10:30:00.000Z"
+    },
+    {
       "id": "tpl-default-15",
       "title": "Schema-Guard schnell prüfen",
       "content": "Prüfe bei Registry-Dateien zuerst version=1 und moduleIds als Array; gib bei Fehlern direkt einen klaren nächsten Schritt aus.",
@@ -137,7 +146,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T09:00:00.000Z",
+  "updatedAt": "2026-03-08T10:30:00.000Z",
   "required_fields": [
     "id",
     "title",
