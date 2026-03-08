@@ -5,9 +5,9 @@
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
 - Offene Upgrade-Empfehlungen: 7
-- Erledigte Upgrade-Empfehlungen: 32
+- Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 039
+- Letzte Iteration: 040
 - Scan-Modus: delta
 
 
@@ -374,3 +374,9 @@ Ja, ein kleines Versionssystem mit Registry ist sinnvoll – aber nur als Minima
 - Aktuell keine offenen Pflichtpunkte mehr in dieser Iteration.
 - Frühere Idee „Notfall-Button *Alles prüfen und reparieren*“ ist als optionale Produktidee geparkt und kein offener Pflichtpunkt.
 - Pflege-Regel ab jetzt: `todo.txt` nur mit `[ ]`/`[x]`-Einträgen führen (keine Freitext-Sammelzeilen).
+## Iterations-Update 040 (Mini-Patch)
+
+- Neu: Fünf offene TODO-Punkte erledigt: Sidebar-Labels zentral synchronisiert, linke Auto-Collapse-Regel ergänzt, rechte Werkzeugleiste gruppiert, Hilfetext einklappbar gemacht und Buttontypen differenziert.
+- Robustheit: Eine zentrale Sync-Hilfe steuert Sidebar-Label und `aria-pressed` konsistent, damit keine doppelte Zustandslogik in Event-Handlern auseinanderläuft.
+- UX: Schaltertexte zeigen jetzt klar „(Auto)“ oder „(Manuell)“, und der Plugin-Hinweis bleibt als einklappbarer Kontexttext bei Bedarf erreichbar.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Sidebar-Label-Sync kurz prüfen“ erweitert.
