@@ -4,15 +4,22 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 9
-- Erledigte Upgrade-Empfehlungen: 21
+- Offene Upgrade-Empfehlungen: 4
+- Erledigte Upgrade-Empfehlungen: 27
 - Default-Archive: 3
-- Letzte Iteration: 030
+- Letzte Iteration: 031
 - Scan-Modus: delta
 
 
 
 
+
+## Iterations-Update 031 (Mini-Patch)
+
+- Neu: Sechs offene Upgrade-Punkte umgesetzt (UP-025, UP-026, UP-027, UP-029, UP-030, UP-031).
+- Robustheit: Header meldet jetzt Clipping-Risiken in der Statistik-Kachel mit einem klaren Sichtbarkeits-Hinweis.
+- UX: Header-Navigation gibt direkt „Bereich geöffnet“ zurück, leere Slots haben einen Direktknopf und die Selbsttest-Hilfe ist klickbar.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Header-Feedback nach Navigation kurz prüfen“ erweitert.
 
 ## Iterations-Update 030 (Mini-Patch)
 

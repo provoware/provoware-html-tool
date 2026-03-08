@@ -400,6 +400,28 @@ body::before {
   line-height: 1.25;
 }
 
+.header-trend-hint {
+  grid-column: 1 / -1;
+  margin: -2px 0 2px;
+  color: rgba(206, 222, 247, 0.86);
+  font-size: 0.72rem;
+}
+
+.header-selftest-help {
+  justify-self: start;
+}
+
+.header-card-feedback,
+.header-visibility-warning {
+  margin: 0;
+  font-size: 0.73rem;
+  color: rgba(216, 232, 255, 0.9);
+}
+
+.header-visibility-warning {
+  color: #ffefca;
+}
+
 .nav {
   grid-area: nav;
   display: grid;
@@ -670,6 +692,8 @@ body::before {
 .module-panel-placeholder {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .module-panel.is-empty-slot {

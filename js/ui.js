@@ -193,6 +193,14 @@ const measureLayoutBudgetStatus = () => {
   };
 };
 
+const measureHeaderVisibilityWarning = () => {
+  const statsCard = document.querySelector('.header-card-stats');
+  if (!statsCard) return 'Sichtbarkeit stabil.';
+  const clipped = statsCard.scrollHeight > (statsCard.clientHeight + 2);
+  if (clipped) return '⚠ Sichtbarkeit: Header-Karte ist zu hoch, Inhalte können abgeschnitten sein.';
+  return 'Sichtbarkeit stabil.';
+};
+
 
 
 const sanitizeManualPercent = (value, fallback) => {
@@ -692,18 +700,27 @@ const triggerHeaderCardNavigation = (cardNode, actions) => {
     if (typeof actions?.onAddLog === 'function') {
       actions.onAddLog('warn', `Navigation übersprungen: Ziel "${targetId}" nicht verfügbar.`);
     }
+    setText('header-card-feedback', `Bereich nicht verfügbar: ${targetId}.`);
     return;
   }
   if (typeof target.focus === 'function') target.focus();
   const tag = String(target.tagName || '').toLowerCase();
   const isClickable = typeof target.click === 'function' && (tag === 'button' || target.getAttribute?.('role') === 'button');
   if (isClickable) target.click();
+  setText('header-card-feedback', `Bereich geöffnet: ${targetId}.`);
 };
 
 export const bindUiActions = (actions) => {
   byId('action-select-dir')?.addEventListener('click', actions.onSelectDirectory);
   byId('action-run-selftest')?.addEventListener('click', () => actions.onRunSelftest(false));
+  byId('header-selftest-help')?.addEventListener('click', () => {
+    byId('action-run-selftest')?.focus();
+    actions.onRunSelftest(false);
+  });
   byId('action-ensure-structure')?.addEventListener('click', actions.onEnsureStructure);
+  document.querySelectorAll('[data-empty-slot-ensure="true"]').forEach((button) => {
+    button.addEventListener('click', () => actions.onEnsureStructure());
+  });
   byId('action-run-write-test')?.addEventListener('click', () => actions.onRunSelftest(true));
   byId('action-switch-dir')?.addEventListener('click', actions.onSwitchDirectory);
   byId('action-export-diagnosis')?.addEventListener('click', async () => {
@@ -1005,6 +1022,21 @@ export const bindUiActions = (actions) => {
   });
 
   byId('account-dialog-close')?.addEventListener('click', () => actions.onCloseAccountDialog());
+  byId('account-dialog-content')?.addEventListener('click', async (event) => {
+    const copyField = event.target.getAttribute('data-account-copy');
+    if (!copyField) return;
+    const text = event.target.getAttribute('data-copy-value') || '';
+    if (!text || text === '-') {
+      setText('account-feedback', 'Kopieren übersprungen: Feld ist leer.');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      setText('account-feedback', `${copyField} kopiert.`);
+    } catch {
+      setText('account-feedback', `Kopieren fehlgeschlagen (${copyField}).`);
+    }
+  });
   byId('account-detail-dialog')?.addEventListener('cancel', (event) => {
     event.preventDefault();
     actions.onCloseAccountDialog();
@@ -1075,6 +1107,7 @@ export const render = () => {
   const texts = state.uiTexts || {};
   const messages = texts.messages || {};
   const layoutBudgetStatus = measureLayoutBudgetStatus();
+  const visibilityWarning = measureHeaderVisibilityWarning();
 
   renderHeaderSection({
     state,
@@ -1100,6 +1133,7 @@ export const render = () => {
   setText('action-switch-dir', texts.buttons?.switchDirectory || 'Ordner wechseln');
   setText('action-export-diagnosis', 'Diagnose exportieren');
   setText('action-logout', texts.buttons?.logout || 'Logout (sicher)');
+  setText('header-visibility-warning', visibilityWarning);
   const manual = readManualPanelProportions();
   const manualMain = Math.max(32, 100 - manual.left - manual.right);
   syncManualPanelUi(manual.left, manual.right, manualMain);

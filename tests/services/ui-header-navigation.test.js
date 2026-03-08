@@ -20,9 +20,11 @@ test('header-navigation: klick und tastatur lösen zielaktion aus', () => {
   const clickHits = [];
 
   const nodes = {
+    'header-selftest-help': { addEventListener: () => {} },
     'action-select-dir': { tagName: 'BUTTON', focus: () => focusHits.push('action-select-dir'), click: () => clickHits.push('action-select-dir'), addEventListener: () => {} },
     'panel-proportion-select': { tagName: 'SELECT', focus: () => focusHits.push('panel-proportion-select'), addEventListener: () => {} },
-    'action-run-selftest': { tagName: 'BUTTON', focus: () => focusHits.push('action-run-selftest'), click: () => clickHits.push('action-run-selftest'), addEventListener: () => {} }
+    'action-run-selftest': { tagName: 'BUTTON', focus: () => focusHits.push('action-run-selftest'), click: () => clickHits.push('action-run-selftest'), addEventListener: () => {} },
+    'header-card-feedback': { textContent: '' }
   };
 
   const previousDocument = globalThis.document;
@@ -52,7 +54,7 @@ test('header-navigation: fehlendes ziel schreibt warnung und verschachtelte butt
 
   const previousDocument = globalThis.document;
   globalThis.document = {
-    getElementById: () => null,
+    getElementById: (id) => (id === 'header-card-feedback' ? { textContent: '' } : null),
     querySelectorAll: (selector) => selector === '.header-card[data-nav-target]' ? [cardMissing] : [],
     addEventListener: () => {}
   };
@@ -66,6 +68,38 @@ test('header-navigation: fehlendes ziel schreibt warnung und verschachtelte butt
     assert.equal(logs.length, 1);
     assert.equal(logs[0].level, 'warn');
     assert.equal(logs[0].message.includes('missing-target'), true);
+  } finally {
+    if (previousDocument === undefined) delete globalThis.document;
+    else globalThis.document = previousDocument;
+  }
+});
+
+test('header-navigation: selftest-hilfe-knopf startet selbsttest und setzt fokus', () => {
+  const handlers = {};
+  const focusHits = [];
+  const runHits = [];
+  const nodes = {
+    'header-selftest-help': { addEventListener: (type, handler) => { handlers[type] = handler; } },
+    'action-run-selftest': {
+      tagName: 'BUTTON',
+      focus: () => focusHits.push('action-run-selftest'),
+      click: () => {},
+      addEventListener: () => {}
+    },
+    'header-card-feedback': { textContent: '' }
+  };
+  const previousDocument = globalThis.document;
+  globalThis.document = {
+    getElementById: (id) => nodes[id] || null,
+    querySelectorAll: () => [],
+    addEventListener: () => {}
+  };
+
+  try {
+    bindUiActions({ onRunSelftest: () => runHits.push('run') });
+    handlers.click?.({});
+    assert.deepEqual(focusHits, ['action-run-selftest']);
+    assert.deepEqual(runHits, ['run']);
   } finally {
     if (previousDocument === undefined) delete globalThis.document;
     else globalThis.document = previousDocument;

@@ -104,7 +104,10 @@ export const renderMainSection = ({
     const dialogTitle = accountItems.find((item) => item.id === state.accountArchiveDialog?.titleId);
     const dialogProfile = dialogTitle?.profiles?.find((profile) => profile.id === state.accountArchiveDialog?.profileId) || dialogTitle?.profiles?.[0];
     if (state.accountArchiveDialog?.open && dialogTitle) {
-      accountDialogBody.innerHTML = `<h4>${escapeHtml(dialogTitle.title)}</h4><p><strong>Profil:</strong> ${escapeHtml(dialogProfile?.profileName || '-')}</p><p><strong>E-Mail:</strong> ${escapeHtml(dialogProfile?.loginEmail || '-')}</p><p><strong>URL:</strong> ${escapeHtml(dialogProfile?.websiteUrl || '-')}</p><p><strong>Benutzername:</strong> ${escapeHtml(dialogProfile?.username || '-')}</p><p><strong>Notizen:</strong> ${escapeHtml(dialogProfile?.notes || '-')}</p>`;
+      const emailValue = escapeHtml(dialogProfile?.loginEmail || '-');
+      const urlValue = escapeHtml(dialogProfile?.websiteUrl || '-');
+      const usernameValue = escapeHtml(dialogProfile?.username || '-');
+      accountDialogBody.innerHTML = `<h4>${escapeHtml(dialogTitle.title)}</h4><p><strong>Profil:</strong> ${escapeHtml(dialogProfile?.profileName || '-')}</p><p><strong>E-Mail:</strong> ${emailValue} <button class="btn-small" type="button" data-account-copy="E-Mail" data-copy-value="${emailValue}">Kopieren</button></p><p><strong>URL:</strong> ${urlValue} <button class="btn-small" type="button" data-account-copy="URL" data-copy-value="${urlValue}">Kopieren</button></p><p><strong>Benutzername:</strong> ${usernameValue} <button class="btn-small" type="button" data-account-copy="Benutzername" data-copy-value="${usernameValue}">Kopieren</button></p><p><strong>Notizen:</strong> ${escapeHtml(dialogProfile?.notes || '-')}</p>`;
       if (typeof accountDialog.showModal === 'function' && !accountDialog.open) accountDialog.showModal();
       else if (typeof accountDialog.showModal !== 'function') accountDialog.setAttribute('open', 'open');
     } else if (accountDialog.open) {
