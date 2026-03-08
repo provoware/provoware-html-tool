@@ -3,6 +3,12 @@
   "items": [
     {
       "id": "tpl-default-30",
+      "title": "Dashboard-Header ohne Abschneiden prüfen",
+      "content": "Prüfe bei 1440px, 1280px und 980px: Header-Inhalte bleiben komplett sichtbar, keine Texte werden durch Rahmen abgeschnitten und Modulkopf-Buttons überdecken keine Titel.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T01:20:00.000Z",
+      "updatedAt": "2026-03-09T01:20:00.000Z"
       "title": "Leere Modul-Slots mit Next Step prüfen",
       "content": "Prüfe alle leeren Panels: Statt nur 'leer' muss ein klarer nächster Schritt sichtbar sein (Plugin aktivieren oder Projektstruktur anlegen).",
       "category": "Arbeitsphrase",
@@ -272,7 +278,7 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T00:10:00.000Z",
+  "updatedAt": "2026-03-09T01:20:00.000Z",
   "required_fields": [
     "id",
     "title",

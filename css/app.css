@@ -34,7 +34,7 @@
   --panel-nav-tablet-max: 280px;
   --panel-widgets-min: 260px;
   --panel-widgets-max: 360px;
-  --layout-header-max-height: 15vh;
+  --layout-header-max-height: 20vh;
   --layout-footer-max-height: 10vh;
   --layout-sidebar-min-width: 128px;
   --layout-sidebar-left-target-width: 8vw;
@@ -137,12 +137,12 @@ body::before {
   box-shadow: var(--shadow);
   grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
   grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-left-target-width), var(--panel-nav-max)) minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-right-target-width), var(--panel-widgets-max));
-  grid-template-rows: minmax(96px, var(--layout-header-max-height)) minmax(0, 1fr) minmax(72px, var(--layout-footer-max-height));
+  grid-template-rows: minmax(120px, var(--layout-header-max-height)) minmax(0, 1fr) minmax(72px, var(--layout-footer-max-height));
   grid-template-areas:
     "header header header"
     "nav main widgets"
     "footer footer footer";
-  overflow: hidden;
+  overflow: auto;
 
 }
 
@@ -184,8 +184,8 @@ body::before {
   display: grid;
   color: var(--text-main);
   background: linear-gradient(112deg, rgba(77, 96, 80, 0.95), rgba(118, 106, 85, 0.92));
-  min-height: 0;
-  overflow: auto;
+  min-height: clamp(120px, 16vh, 220px);
+  overflow: visible;
 }
 
 .header h1 {
@@ -205,6 +205,7 @@ body::before {
   position: relative;
   z-index: 1;
   align-items: stretch;
+  align-content: start;
 }
 
 .header-card {
@@ -215,6 +216,8 @@ body::before {
   min-width: 0;
   display: grid;
   align-content: start;
+  row-gap: 6px;
+  overflow: visible;
 }
 
 .header-card .panel-title {
@@ -602,9 +605,10 @@ body::before {
 
 .module-head {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 8px;
+  flex-wrap: wrap;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(154, 171, 140, 0.44);
 }
@@ -612,12 +616,16 @@ body::before {
 .module-head h3 {
   margin: 0;
   font-size: 0.95rem;
+  line-height: 1.28;
   color: #182619;
+  overflow-wrap: anywhere;
 }
 
 .module-controls {
   display: flex;
   gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .module-panel.is-minimized .module-body,
