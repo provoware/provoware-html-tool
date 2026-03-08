@@ -1363,6 +1363,15 @@ body::before {
   grid-row: span 2;
 }
 
+.panel-grid.panel-grid--show-help .module-panel[data-panel='todo'] {
+  grid-row: span 1;
+}
+
+.panel-grid.panel-grid--show-help .module-panel[data-panel='archive'] {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
 .module-panel.is-empty-slot {
   border-style: dashed;
   border-color: rgba(154, 183, 229, 0.36);
