@@ -5,15 +5,15 @@
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
 | UP-001 | Layout | Zentrale Größenlogik für Panels vereinheitlichen | Verhindert inkonsistente Skalierung | stabilere Darstellung bei Fensteränderung | offen | 001 |
-| UP-005 | Template-Archiv | Ein leichtes Schema-Validierungsfeld (`required_fields`) für Standard-Templates im Archiv ergänzen | Beschädigte oder unvollständige Einträge werden aktuell erst spät sichtbar | Frühere Fehlererkennung und klarere Reparaturhinweise beim Laden | offen | 005 |
+| UP-006 | Toolstart | Eine kurze Start-Zusammenfassung im UI ergänzen (Ordnerstatus + nächster Klick) | Nutzer sehen aktuell viele Infos, aber keinen kompakten nächsten Schritt im Hauptbereich | Schnellere Orientierung direkt nach dem Start | offen | 006 |
 
 **Passende Vorschläge:**
 1. Min-/Max-Breiten je Hauptpanel definieren
 2. Einheitliche Spacing-Tokens für Innen- und Außenabstände einführen
 
 **Passende Vorschläge:**
-1. Beim Laden fehlende Felder direkt mit Standardwerten ergänzen und kurz protokollieren
-2. Eine kleine UI-Hinweiszeile für „Archiv repariert“ im Vorlagenbereich ergänzen
+1. Bei erfolgreichem Start eine Zeile „Nächster Schritt: Modul wählen“ anzeigen
+2. Bei fehlendem Ordner eine Zeile „Nächster Schritt: Ordner wählen“ im Hauptbereich fix platzieren
 
 ## Erledigt
 
@@ -36,3 +36,9 @@
 **Passende Vorschläge:**
 1. `rotation_last_target.result` bei jedem Rotationslauf auf `keine_funde` oder `funde` setzen
 2. `scope_examples` jährlich kurz gegen reale Fundstellen nachschärfen
+
+| UP-005 | Template-Archiv | Ein leichtes Schema-Validierungsfeld (`required_fields`) für Standard-Templates im Archiv ergänzen | Beschädigte oder unvollständige Einträge wurden zu spät sichtbar | Frühere Fehlererkennung und klare Reparaturhinweise beim Laden | erledigt | 006 |
+
+**Passende Vorschläge:**
+1. Beim Laden fehlende Felder direkt mit Standardwerten ergänzen und kurz protokollieren
+2. Eine kleine UI-Hinweiszeile für „Archiv repariert“ im Vorlagenbereich ergänzen

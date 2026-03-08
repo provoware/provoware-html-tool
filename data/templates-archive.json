@@ -83,5 +83,14 @@
       "updatedAt": "2026-03-08T01:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T02:00:00.000Z"
+  "updatedAt": "2026-03-08T03:00:00.000Z",
+  "required_fields": [
+    "id",
+    "title",
+    "content",
+    "category",
+    "favorite",
+    "createdAt",
+    "updatedAt"
+  ]
 }

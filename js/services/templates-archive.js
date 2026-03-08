@@ -1,4 +1,5 @@
 const TEMPLATE_CATEGORIES = ['Textbaustein', 'Promptvorlage', 'Arbeitsphrase'];
+const TEMPLATE_REQUIRED_FIELDS = Object.freeze(['id', 'title', 'content', 'category', 'favorite', 'createdAt', 'updatedAt']);
 
 const DEFAULT_TEMPLATE_ITEMS = Object.freeze([
   {
@@ -63,6 +64,7 @@ export const templateCategories = TEMPLATE_CATEGORIES;
 
 export const createDefaultTemplateArchive = () => ({
   version: 1,
+  required_fields: [...TEMPLATE_REQUIRED_FIELDS],
   items: sortItems(DEFAULT_TEMPLATE_ITEMS.map((item, index) => ({
     id: `tpl-default-${String(index + 1).padStart(2, '0')}`,
     title: normalizeText(item.title),
@@ -75,11 +77,21 @@ export const createDefaultTemplateArchive = () => ({
   updatedAt: new Date().toISOString()
 });
 
-export const normalizeTemplateArchive = (input) => {
+export const normalizeTemplateArchive = (input, options = {}) => {
   const base = createDefaultTemplateArchive();
   const safe = input && typeof input === 'object' ? input : {};
   const items = Array.isArray(safe.items) ? safe.items : [];
   const dedup = new Map();
+  const repair = { applied: false, reason: '' };
+
+  const requiredFields = Array.isArray(safe.required_fields)
+    ? safe.required_fields.map((field) => normalizeText(field)).filter(Boolean)
+    : [];
+
+  if (!requiredFields.length || TEMPLATE_REQUIRED_FIELDS.some((field) => !requiredFields.includes(field))) {
+    repair.applied = true;
+    repair.reason = 'required_fields ergänzt';
+  }
 
   items.forEach((item) => {
     const title = normalizeText(item?.title);
@@ -99,6 +111,10 @@ export const normalizeTemplateArchive = (input) => {
 
   base.items = sortItems([...dedup.values()]);
   base.updatedAt = normalizeText(safe.updatedAt) || new Date().toISOString();
+
+  if (options.withReport) {
+    return { archive: base, repair };
+  }
   return base;
 };
 

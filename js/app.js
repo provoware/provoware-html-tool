@@ -189,10 +189,17 @@ const loadTemplateArchive = async () => {
   }
 
   let archive = createDefaultTemplateArchive();
+  let templateArchiveStatus = '';
   if (exists.data.exists) {
     const loaded = await filesystemAdapter.readJson(TEMPLATE_ARCHIVE_PATH);
     if (loaded.ok) {
-      archive = normalizeTemplateArchive(loaded.data);
+      const normalized = normalizeTemplateArchive(loaded.data, { withReport: true });
+      archive = normalized.archive;
+      if (normalized.repair?.applied) {
+        templateArchiveStatus = 'Archiv repariert: Pflichtfelder wurden ergänzt.';
+        logEvent('INFO', 'TEMPLATE_ARCHIVE_REPAIRED', templateArchiveStatus, { reason: normalized.repair.reason });
+        await saveTemplateArchiveToDisk(archive);
+      }
     }
   } else {
     await saveTemplateArchiveToDisk(archive);
@@ -200,6 +207,7 @@ const loadTemplateArchive = async () => {
 
   setState({
     templateArchive: archive,
+    templateArchiveStatus,
     templateDraft: { id: null, title: '', content: '', category: 'Textbaustein' }
   });
 };

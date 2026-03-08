@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { addTemplate, createDefaultTemplateArchive } from '../../js/services/templates-archive.js';
+import { addTemplate, createDefaultTemplateArchive, normalizeTemplateArchive } from '../../js/services/templates-archive.js';
 
 test('Template-Defaults enthalten den neuen Bug-Ticket-Eintrag', () => {
   const archive = createDefaultTemplateArchive();
@@ -16,4 +16,18 @@ test('addTemplate gibt klare Fehlermeldung bei ungültigem Archiv zurück', () =
 
   assert.equal(result.ok, false);
   assert.equal(result.code, 'TEMPLATE_ARCHIVE_INVALID');
+});
+
+
+test('normalizeTemplateArchive ergänzt required_fields und meldet Reparatur', () => {
+  const input = {
+    version: 1,
+    items: [{ id: 'x1', title: 'Test', content: 'Inhalt', category: 'Textbaustein', favorite: false }]
+  };
+
+  const result = normalizeTemplateArchive(input, { withReport: true });
+
+  assert.equal(Array.isArray(result.archive.required_fields), true);
+  assert.equal(result.archive.required_fields.includes('title'), true);
+  assert.equal(result.repair.applied, true);
 });

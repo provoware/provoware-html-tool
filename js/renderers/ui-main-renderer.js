@@ -197,6 +197,11 @@ export const renderMainSection = ({
     templateFeedback.style.visibility = text ? 'visible' : 'hidden';
   }
 
+  const templateArchiveStatus = byId('template-archive-status');
+  if (templateArchiveStatus) {
+    templateArchiveStatus.textContent = state.templateArchiveStatus || 'Vorlagen-Archiv bereit.';
+  }
+
   const archiveEvents = byId('archive-events');
   if (archiveEvents) {
     archiveEvents.innerHTML = (state.profileArchive?.events || []).slice(0, 6).map((item) => `<li><span>${escapeHtml(item.timestamp.slice(11, 19))}</span> ${autoFormatHtml(item.message)}</li>`).join('');
