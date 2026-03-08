@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": 1,
-    "last_scan": "2026-03-08T00:00:00Z",
-    "last_update_iteration": "002",
+    "last_scan": "2026-03-08T00:30:00Z",
+    "last_update_iteration": "003",
     "scan_mode": "delta",
     "project_phase": "early",
     "scope_values": [
@@ -16,7 +16,37 @@
       "enabled_from_iteration": "010",
       "cycle": "9x-delta-1x-targeted-legacy-module-scan",
       "target_rule": "older-module-with-open-debt"
-    }
+    },
+    "scope_priority_defaults": {
+      "logic": "hoch",
+      "data": "hoch",
+      "ui": "mittel",
+      "style": "mittel",
+      "docs": "niedrig"
+    },
+    "rotation_candidate_modules": [
+      {
+        "module": "js/services/module-registry.js",
+        "risk": "hoch",
+        "reason": "kritischer Einstiegspfad für Modul-Laden und Fehlermeldungen"
+      },
+      {
+        "module": "js/ui.js",
+        "risk": "mittel",
+        "reason": "zentraler UI-Knoten mit hoher Änderungsfrequenz"
+      },
+      {
+        "module": "scripts/laienstart.sh",
+        "risk": "mittel",
+        "reason": "Startkette mit Nutzerkontakt und Umgebungsabhängigkeiten"
+      },
+      {
+        "module": "js/adapters/desktop-filesystem.js",
+        "risk": "niedrig",
+        "reason": "Adapterpfad mit klarer Fallback-Logik"
+      }
+    ],
+    "entry_scope_rule": "open[].scope und done[].scope nutzen nur Werte aus scope_values"
   },
   "stats": {
     "open_total": 0,

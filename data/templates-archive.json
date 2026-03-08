@@ -54,7 +54,16 @@
       "favorite": false,
       "createdAt": "2026-03-08T00:00:00.000Z",
       "updatedAt": "2026-03-08T00:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-07",
+      "title": "Scope-Priorität schnell setzen",
+      "content": "Ordne jede neue Fundstelle sofort einem scope zu und nutze Standard-Priorität: logic/data=hoch, ui/style=mittel, docs=niedrig.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-08T00:30:00.000Z",
+      "updatedAt": "2026-03-08T00:30:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-08T00:00:00.000Z"
+  "updatedAt": "2026-03-08T00:30:00.000Z"
 }
