@@ -88,7 +88,26 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
   }
 
   const selftestData = selftest.data;
-  const ready = selftestData.ok && selftestData.data.overallStatus === 'green';
+  const selftestPayload = selftestData && typeof selftestData.data === 'object' && selftestData.data
+    ? selftestData.data
+    : null;
+
+  if (!selftestPayload) {
+    return {
+      ok: false,
+      code: 'STARTUP_SELFTEST_INVALID_PAYLOAD',
+      message: 'Selbsttest-Antwort ist unvollständig. Bitte Selbsttest erneut starten.',
+      data: {
+        ready: false,
+        needsDirectory: false,
+        needsSelftest: true,
+        permission: permission.data.data,
+        selfRepair: normalized
+      }
+    };
+  }
+
+  const ready = selftestData.ok && selftestPayload.overallStatus === 'green';
 
   return {
     ok: ready,
@@ -99,7 +118,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       needsDirectory: false,
       needsSelftest: !ready,
       permission: permission.data.data,
-      selftest: selftestData.data,
+      selftest: selftestPayload,
       selfRepair: normalized
     }
   };

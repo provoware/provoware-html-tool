@@ -81,3 +81,25 @@ test('Startup-Check meldet Laufzeitfehler aus Adapter klar zurück', async () =>
   filesystemAdapter.checkPermissions = original.checkPermissions;
   filesystemAdapter.runProjectSelftest = original.runProjectSelftest;
 });
+
+test('Startup-Check bleibt robust bei unvollständiger Selbsttest-Antwort', async () => {
+  const original = {
+    getDirectoryInfo: filesystemAdapter.getDirectoryInfo,
+    checkPermissions: filesystemAdapter.checkPermissions,
+    runProjectSelftest: filesystemAdapter.runProjectSelftest
+  };
+
+  filesystemAdapter.getDirectoryInfo = async () => ({ ok: true, data: { name: 'demo' } });
+  filesystemAdapter.checkPermissions = async () => ({ ok: true, data: { read: true, write: true } });
+  filesystemAdapter.runProjectSelftest = async () => ({ ok: true });
+
+  const result = await runStartupCheck({}, {});
+
+  assert.equal(result.ok, false);
+  assert.equal(result.code, 'STARTUP_SELFTEST_INVALID_PAYLOAD');
+  assert.equal(result.data.needsSelftest, true);
+
+  filesystemAdapter.getDirectoryInfo = original.getDirectoryInfo;
+  filesystemAdapter.checkPermissions = original.checkPermissions;
+  filesystemAdapter.runProjectSelftest = original.runProjectSelftest;
+});
