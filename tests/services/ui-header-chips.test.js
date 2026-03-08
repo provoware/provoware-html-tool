@@ -10,7 +10,9 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
   const nodes = {
     'header-chip-project-status': createNode(),
     'header-chip-autosave-status': createNode(),
-    'next-step': { textContent: '', innerHTML: '' }
+    'next-step': { textContent: '', innerHTML: '' },
+    'header-stat-health': { textContent: '', className: '' },
+    'header-stat-health-legend': createNode()
   };
   const previousDocument = globalThis.document;
   globalThis.document = {
@@ -61,6 +63,18 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
 
     setState({
       selectedProjectDirectory: { name: 'Demo-Projekt' },
+      selftestResult: { overallStatus: 'yellow' },
+      debug: { startupReady: true },
+      editorFilePath: '',
+      editorDirty: false
+    });
+    render();
+    assert.equal(nodes['header-stat-health'].textContent, 'prüfen');
+    assert.equal(nodes['header-stat-health'].className.includes('is-review'), true);
+    assert.equal(nodes['header-stat-health-legend'].textContent.includes('🟡 prüfen'), true);
+
+    setState({
+      selectedProjectDirectory: { name: 'Demo-Projekt' },
       selftestResult: null,
       debug: { startupReady: false },
       editorFilePath: '',
@@ -103,7 +117,9 @@ test('header-chips: next-step zeigt sonderzeichen und sehr langen text nur als t
   const nodes = {
     'header-chip-project-status': createNode(),
     'header-chip-autosave-status': createNode(),
-    'next-step': { textContent: '', innerHTML: '' }
+    'next-step': { textContent: '', innerHTML: '' },
+    'header-stat-health': { textContent: '', className: '' },
+    'header-stat-health-legend': createNode()
   };
   const previousDocument = globalThis.document;
   const longWaitingText = `${`äöü ß & < > " ' . `.repeat(45)}ende`;

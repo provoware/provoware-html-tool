@@ -4,11 +4,19 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 4
+- Offene Upgrade-Empfehlungen: 5
 - Erledigte Upgrade-Empfehlungen: 20
 - Default-Archive: 2
-- Letzte Iteration: 025
+- Letzte Iteration: 026
 - Scan-Modus: delta
+
+
+## Iterations-Update 026 (Mini-Patch)
+
+- Neu: Selbsttest-Status im Header zeigt jetzt eine klare Farbampel plus kurze Legende direkt in der Statistik-Kachel.
+- Robustheit: Header-Renderer setzt bei unbekanntem Status defensiv auf „offen“ mit neutraler Klasse und sicherem Hinweistext.
+- UX: Bei gelb/rot/grün wird der Zustand mit kurzer Bedeutung in einfacher Sprache erklärt.
+- Archiv: Templates-Defaultarchiv um eine neue Vorlage „Header-Ampel mit Kurzlegende prüfen“ ergänzt.
 
 
 ## Iterations-Update 025 (Mini-Patch)
