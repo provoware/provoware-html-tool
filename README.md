@@ -1,10 +1,14 @@
 # ProvoWare Dashboard (HTML/CSS/JS/JSON)
 
-## Status oben
-- Erledigte Punkte: 32 (siehe `todo.txt`)
-- Offene Punkte: 0 (siehe `todo.txt`)
-- Fortschritt: 100%
-- Stand dieser Iteration: `code_scan_registry.json` zeigt jetzt zusätzlich `rotation_last_target` und kurze `scope_examples` für einheitlichere Einträge.
+## Projektstatus kompakt
+
+- Offene Code-Stellen: 0
+- Erledigte Code-Stellen: 0
+- Offene Upgrade-Empfehlungen: 2
+- Erledigte Upgrade-Empfehlungen: 3
+- Default-Archive: 1
+- Letzte Iteration: 005
+- Scan-Modus: delta
 
 ## Aktuelle Toolstruktur und Toolumfang
 - **Startdateien**
