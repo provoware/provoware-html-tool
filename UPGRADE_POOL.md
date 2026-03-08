@@ -6,14 +6,8 @@
 |---|---|---|---|---|---|---|
 | UP-001 | Layout | Zentrale Größenlogik für Panels vereinheitlichen | Verhindert inkonsistente Skalierung | stabilere Darstellung bei Fensteränderung | offen | 001 |
 | UP-008 | Responsive QA | Einen kleinen DOM-basierten Test für den mobilen Tools-Toggle ergänzen | CSS-Regeln sind vorhanden, aber ein Sichtbarkeits-Sanity-Check fehlt noch | Frühere Erkennung von Mobile-Regressionsfehlern | offen | 008 |
-| UP-009 | Header UX | Header-Statuschips mit fester Max-Zeilenhöhe + kompakter Overflow-Anzeige ergänzen | Bei vielen Statuswerten kann der Header auf kleinen Breiten zu hoch werden | Stabilere Header-Höhe und klarere Priorisierung wichtiger Statuswerte | offen | 009 |
-| UP-011 | Modul-Feedback | Im Modulstatus zusätzlich ein kurzes Feld `nextStep` ausgeben (z. B. Datei anlegen, JSON prüfen) | Fehler sind erkennbar, aber der nächste Schritt muss teils aus langem Text gelesen werden | Schnellere Selbsthilfe und weniger Rückfragen im Support | offen | 012 |
 | UP-013 | Songtext UX | Splitter-Breiten mit gespeicherten Panel-Proportionen ergänzen (links/mitte/rechts) | Drei-Fenster-Editor braucht stabile, wiederherstellbare Arbeitsbreiten pro Nutzer | Schnellere Wiederaufnahme des Workflows und weniger manuelles Nachjustieren | offen | 014 |
-| UP-014 | Modul-Feedback | Modulstatus-Summary um eine kurze Warnungszählung ergänzen (z. B. „1 Warnung, 2 Fehler“) | Aktuell stehen Warnhinweise nur im Fließtext und sind schwerer scannbar | Schnellere Erfassung kritischer Punkte im Startstatus | offen | 015 |
-
-**Passende Vorschläge:**
-1. Warnungen nach Priorität (hoch/mittel) farblich markieren
-2. Bei nur Warnungen den primären CTA auf „Jetzt prüfen“ setzen
+| UP-015 | Modul-Feedback | Bei Modulstatus-Fehlern den direkten Dateipfad (z. B. `modules/<id>/manifest.json`) klickbar anzeigen | nextStep ist jetzt klarer, aber der Zielort muss noch schneller erreichbar sein | Weniger Suchzeit bei Fehlerbehebung und kürzere Support-Schleifen | offen | 016 |
 
 **Passende Vorschläge:**
 1. Min-/Max-Breiten je Hauptpanel definieren
@@ -24,22 +18,35 @@
 2. Prüfen: die ersten zwei Tool-Aktionen bleiben immer sichtbar
 
 **Passende Vorschläge:**
-1. Erste 2 Status-Chips immer sichtbar halten, Rest hinter „+N“
-2. Tooltip mit vollständiger Statusliste bei Hover/Fokus anzeigen
-
-**Passende Vorschläge:**
-1. `nextStep` pro Fehlerklasse als kurze feste Bausteine verwalten
-2. UI-Hinweis bei mehreren Fehlern auf den wichtigsten nächsten Schritt begrenzen
-
-**Passende Vorschläge:**
 1. Pro Panel eine Mindest- und Maximalbreite im Manifest hinterlegen
 2. Letzte Panel-Breiten in einer kleinen User-Preference-Datei speichern
 
+**Passende Vorschläge:**
+1. Pfad aus `nextStep` automatisch als „Datei öffnen“-Aktion anbieten
+2. Bei fehlender Datei einen „Neu anlegen“-CTA direkt daneben anzeigen
 
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-014 | Modul-Feedback | Modulstatus-Summary um eine kurze Warnungszählung ergänzen (z. B. „1 Warnung, 2 Fehler“) | Aktuell stehen Warnhinweise nur im Fließtext und sind schwerer scannbar | Schnellere Erfassung kritischer Punkte im Startstatus | erledigt | 016 |
+
+**Passende Vorschläge:**
+1. Warnungen nach Priorität (hoch/mittel) farblich markieren
+2. Bei nur Warnungen den primären CTA auf „Jetzt prüfen“ setzen
+
+| UP-011 | Modul-Feedback | Im Modulstatus zusätzlich ein kurzes Feld `nextStep` ausgeben (z. B. Datei anlegen, JSON prüfen) | Fehler sind erkennbar, aber der nächste Schritt muss teils aus langem Text gelesen werden | Schnellere Selbsthilfe und weniger Rückfragen im Support | erledigt | 016 |
+
+**Passende Vorschläge:**
+1. `nextStep` pro Fehlerklasse als kurze feste Bausteine verwalten
+2. UI-Hinweis bei mehreren Fehlern auf den wichtigsten nächsten Schritt begrenzen
+
+| UP-009 | Header UX | Header-Statuschips mit fester Max-Zeilenhöhe + kompakter Overflow-Anzeige ergänzen | Bei vielen Statuswerten kann der Header auf kleinen Breiten zu hoch werden | Stabilere Header-Höhe und klarere Priorisierung wichtiger Statuswerte | erledigt | 016 |
+
+**Passende Vorschläge:**
+1. Erste 2 Status-Chips immer sichtbar halten, Rest hinter „+N“
+2. Tooltip mit vollständiger Statusliste bei Hover/Fokus anzeigen
+
 | UP-012 | Datenqualität | Kurzen Duplicate-Guard für `moduleIds` in Registry-Checks ergänzen (Hinweis bei mehrfachen IDs) | Doppelte IDs werden aktuell still bereinigt, aber nicht sichtbar gemacht | Klareres Datenfeedback vor späteren Modulkonflikten | erledigt | 015 |
 
 **Passende Vorschläge:**

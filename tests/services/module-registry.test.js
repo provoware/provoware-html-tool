@@ -69,6 +69,10 @@ test('loadModuleRegistry liefert statusCode für robuste Auswertung', async () =
   assert.equal(byId.ok_modul.statusCode, 'OK');
   assert.equal(byId.kaputt_modul.statusCode, 'INVALID_CONTENT');
   assert.equal(byId.missing_modul.statusCode, 'MISSING_FILES');
+  assert.equal(result.errorCount, 2);
+  assert.equal(result.warningCount, 0);
+  assert.match(result.summary, /^Status: 0 Warnungen, 2 Fehler\./);
+  assert.match(result.nextStep, /Hilfe:/);
   assert.match(result.summary, /missing_modul: fehlt manifest, config, texts, schema, logic\./);
   assert.match(result.summary, /Hilfe: Datei modules\/\<modul-id\>\/manifest\.json anlegen/);
 
@@ -95,6 +99,10 @@ test('loadModuleRegistry nutzt fallback und bereinigt doppelte/leerwerte ids', a
   const moduleIds = result.modules.map((item) => item.id);
 
   assert.deepEqual(moduleIds, ['alpha', 'beta']);
+  assert.equal(result.warningCount, 1);
+  assert.equal(result.errorCount, 0);
+  assert.equal(result.nextStep, 'data/module-registry.json auf Duplikate prüfen.');
+  assert.match(result.summary, /^Status: 1 Warnung, 0 Fehler\./);
   assert.match(result.summary, /Quelle: data\/module-registry\.json/);
   assert.match(result.summary, /Doppelte moduleIds wurden bereinigt \(alpha\)/);
 
@@ -104,6 +112,10 @@ test('loadModuleRegistry nutzt fallback und bereinigt doppelte/leerwerte ids', a
   };
 
   const fallbackResult = await loadModuleRegistry();
+  assert.equal(fallbackResult.warningCount, 1);
+  assert.equal(fallbackResult.errorCount, 8);
+  assert.match(fallbackResult.summary, /^Status: 1 Warnung, 8 Fehler\./);
+  assert.match(fallbackResult.nextStep, /Datei data\/module-registry\.json prüfen/);
   assert.match(fallbackResult.summary, /Quelle: fallback/);
   assert.match(fallbackResult.summary, /Nächster Schritt:/);
 

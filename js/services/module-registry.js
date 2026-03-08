@@ -157,9 +157,13 @@ const missingFileHintFor = (file) => {
 const buildSummary = (modules, source) => {
   const healthyModules = modules.filter((item) => item.ok).length;
   const brokenModules = modules.filter((item) => !item.ok);
+  const errorCount = brokenModules.length;
 
   if (brokenModules.length === 0) {
-    return `${healthyModules}/${modules.length} Module vollständig verbunden (Quelle: ${source}).`;
+    return {
+      summary: `${healthyModules}/${modules.length} Module vollständig verbunden (Quelle: ${source}).`,
+      errorCount
+    };
   }
 
   const detail = brokenModules
@@ -173,21 +177,51 @@ const buildSummary = (modules, source) => {
     })
     .join(' | ');
 
-  return `${healthyModules}/${modules.length} Module vollständig verbunden (Quelle: ${source}). Fehler: ${detail}`;
+  return {
+    summary: `${healthyModules}/${modules.length} Module vollständig verbunden (Quelle: ${source}). Fehler: ${detail}`,
+    errorCount
+  };
+};
+
+const buildRegistryNextStep = (modules, moduleIds) => {
+  if (moduleIds.fallbackReason && moduleIds.nextStep) return moduleIds.nextStep;
+  if (moduleIds.duplicateIds?.length) return 'data/module-registry.json auf Duplikate prüfen.';
+
+  const firstBroken = modules.find((item) => !item.ok);
+  if (!firstBroken) return 'Keine Aktion nötig.';
+  if (firstBroken.missingFiles.length > 0) return missingFileHintFor(firstBroken.missingFiles[0]);
+
+  const firstIssue = firstBroken.issues[0] || '';
+  return fixHintFor(firstIssue);
 };
 
 export const loadModuleRegistry = async () => {
   const moduleIds = await readModuleIds();
   const modules = await Promise.all(moduleIds.ids.map((id) => checkProfile(id)));
-  const summary = buildSummary(modules, moduleIds.source);
-  const duplicateHint = moduleIds.duplicateIds?.length
+  const { summary, errorCount } = buildSummary(modules, moduleIds.source);
+  const duplicateCount = moduleIds.duplicateIds?.length || 0;
+  const warningCount = (moduleIds.fallbackReason ? 1 : 0) + (duplicateCount > 0 ? 1 : 0);
+  const statusSummary = `Status: ${warningCount} Warnung${warningCount === 1 ? '' : 'en'}, ${errorCount} Fehler.`;
+  const duplicateHint = duplicateCount > 0
     ? ` Hinweis: Doppelte moduleIds wurden bereinigt (${moduleIds.duplicateIds.join(', ')}). Nächster Schritt: data/module-registry.json auf Duplikate prüfen.`
     : '';
-  if (!moduleIds.fallbackReason) return { modules, summary: `${summary}${duplicateHint}` };
+  const nextStep = buildRegistryNextStep(modules, moduleIds);
+  if (!moduleIds.fallbackReason) {
+    return {
+      modules,
+      summary: `${statusSummary} ${summary}${duplicateHint}`,
+      nextStep,
+      warningCount,
+      errorCount
+    };
+  }
 
   return {
     modules,
-    summary: `${summary}${duplicateHint} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.${moduleIds.nextStep ? ` Nächster Schritt: ${moduleIds.nextStep}` : ''}`
+    summary: `${statusSummary} ${summary}${duplicateHint} Hinweis: Fallback aktiv, weil ${moduleIds.fallbackReason}.${moduleIds.nextStep ? ` Nächster Schritt: ${moduleIds.nextStep}` : ''}`,
+    nextStep,
+    warningCount,
+    errorCount
   };
 };
 
