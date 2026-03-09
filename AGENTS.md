@@ -474,3 +474,39 @@ Die Punkte sind zuerst in `todo.txt` als Checkbox-Aufgaben zu pflegen und danach
 - Iteration 048: Header-Trend robust gegen ungültige Zeitstempel abgeschlossen.
 - Iteration 049: Release-Finalisierung mit minimalem Renderer-/Doku-Delta abgeschlossen.
 - Effizienz weiter verbindlich: zuerst Renderer/Logik, dann nur minimale Markup/CSS-Nachzüge.
+
+---
+
+## Zusatzauftrag Iteration 050 (Design-/Layout-Analyse, Mini-Fokus)
+Für die aktuelle Iteration gilt ein enger Pflichtfokus mit Minimal-Patch:
+
+1. Das bereitgestellte Dashboard-Bild gründlich auf Darstellungsfehler, Layout-Schwächen und Lesbarkeitsrisiken analysieren.
+2. Zielvorgaben für einen lokalen UI-Fix klar, kurz und umsetzbar in `todo.txt` verankern.
+3. Upgrade-/Registry-/README-/Archiv-Stand konsistent auf Iteration 050 ziehen.
+
+Verbindliche Vorarbeit vor jedem Folge-Patch (kurz dokumentieren):
+- betroffene Dateien
+- betroffene Layout-Blöcke (Header, Hauptbereich, Sidebar, Footer)
+- Ist-Verhalten
+- Soll-Verhalten
+- Risiken
+- bewusst nicht geänderte Bereiche
+
+Verbindliche Analyse-Suchbegriffe vor Patch:
+- `Header-Dichte`
+- `Kontrast`
+- `Überlagerung`
+- `Sidebar-Hierarchie`
+- `Iteration 050`
+
+Zusätzliche Nicht-Ziele in dieser Iteration:
+- keine komplette Dashboard-Neugestaltung
+- keine globalen CSS-Token-Rewrites
+- keine JS-Architekturänderung
+- keine Volltest-Runde
+- kein mehrstufiger Refactor außerhalb direkter UI-Zielblöcke
+
+Effizienzleitplanken (ergänzend):
+- zuerst Analyse und To-do-Ziele schärfen, danach erst lokale CSS/Markup-Patches
+- pro Patch nur eine klar messbare Layout-/Darstellungsverbesserung bündeln
+- bestehende Datenpfade und Komponenten wiederverwenden, keine neue UI-Datenquelle einführen

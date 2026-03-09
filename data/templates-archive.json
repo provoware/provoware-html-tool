@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-54",
+      "title": "Design-Audit 050: Header/Sidebar/Footer Sichtprüfung",
+      "content": "Prüfe am Referenzbild und im Browser: Header-Dichte reduziert, Warn-/Selbsttest-Texte kontrastklar, keine Überlagerung zwischen Meldungsbereich und Slot-Zeilen, rechte Sidebar mit klarer KPI->Trend->Selbsttest-Hierarchie.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T18:00:00.000Z",
+      "updatedAt": "2026-03-09T18:00:00.000Z"
+    },
+    {
       "id": "tpl-default-53",
       "title": "Header-Release-Fallback ohne Helfer prüfen",
       "content": "Prüfe Release-nah: Header rendert auch bei fehlenden Helferfunktionen stabil, zeigt 0 (keine Historie) für Archiv-Trend und setzt den nächsten Schritt ohne Absturz nur wenn ein Zielknoten vorhanden ist.",

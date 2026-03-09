@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": 1,
-    "last_scan": "2026-03-09T01:17:13Z",
-    "last_update_iteration": "049",
+    "last_scan": "2026-03-09T18:05:00Z",
+    "last_update_iteration": "050",
     "scan_mode": "delta",
     "project_phase": "early",
     "scope_values": [
@@ -61,11 +61,76 @@
     }
   },
   "stats": {
-    "open_total": 0,
+    "open_total": 4,
     "done_total": 0,
-    "by_type": {},
-    "by_priority": {}
+    "by_type": {
+      "layout-overlap": 1,
+      "contrast-risk": 1,
+      "information-density": 1,
+      "sidebar-hierarchy": 1
+    },
+    "by_priority": {
+      "hoch": 2,
+      "mittel": 2
+    }
   },
-  "open": [],
+  "open": [
+    {
+      "id": "CSR-050-001",
+      "file": "index.html",
+      "line": 1,
+      "type": "layout-overlap",
+      "priority": "hoch",
+      "scope": "ui",
+      "summary": "Unterer Dashboard-Bereich wirkt visuell überlagert",
+      "details": "Im Referenzbild überdeckt eine helle Schicht den Bereich zwischen 'Letzte Meldungen' und Modul-Slots; Lesbarkeit und Fokus sinken.",
+      "recommended_fix": "Footer-/Panel-Höhen, Layer-Reihenfolge und Overflow lokal prüfen und nur betroffene Container angleichen.",
+      "status": "offen",
+      "created_in_iteration": "050",
+      "last_checked_iteration": "050"
+    },
+    {
+      "id": "CSR-050-002",
+      "file": "css/app.css",
+      "line": 1,
+      "type": "contrast-risk",
+      "priority": "hoch",
+      "scope": "style",
+      "summary": "Mehrere Status-/Hinweistexte haben zu geringe visuelle Trennung",
+      "details": "Warn- und Hilfstexte liegen auf halbtransparenten Flächen mit geringer Kontrastreserve, besonders im Header und Assistentenfeld.",
+      "recommended_fix": "Kontrast in Status-, Warn- und Hilfsblöcken lokal erhöhen; transparente Flächen dort reduzieren.",
+      "status": "offen",
+      "created_in_iteration": "050",
+      "last_checked_iteration": "050"
+    },
+    {
+      "id": "CSR-050-003",
+      "file": "index.html",
+      "line": 1,
+      "type": "information-density",
+      "priority": "mittel",
+      "scope": "ui",
+      "summary": "Header enthält zu viele gleichgewichtete Informationen auf engem Raum",
+      "details": "Titel, Schrittlisten, Budgetwarnung, Dropdowns und Slider konkurrieren ohne klare visuelle Hierarchie.",
+      "recommended_fix": "Header in zwei Ebenen gliedern und sekundäre Steuerung stärker gruppieren.",
+      "status": "offen",
+      "created_in_iteration": "050",
+      "last_checked_iteration": "050"
+    },
+    {
+      "id": "CSR-050-004",
+      "file": "index.html",
+      "line": 1,
+      "type": "sidebar-hierarchy",
+      "priority": "mittel",
+      "scope": "ui",
+      "summary": "Rechte Sidebar mischt KPIs, Trend und Selbsttest ohne ruhige Reihenfolge",
+      "details": "Wichtige KPIs und kritischer Selbsttest stehen visuell dicht beieinander; nächste Handlung ist nicht sofort klar.",
+      "recommended_fix": "Abstände/Hierarchie lokal verbessern und klaren CTA unter Selbstteststatus priorisieren.",
+      "status": "offen",
+      "created_in_iteration": "050",
+      "last_checked_iteration": "050"
+    }
+  ],
   "done": []
 }

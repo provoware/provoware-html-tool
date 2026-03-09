@@ -2,13 +2,20 @@
 
 ## Projektstatus kompakt
 
-- Offene Code-Stellen: 0
+- Offene Code-Stellen: 4
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 2
+- Offene Upgrade-Empfehlungen: 3
 - Erledigte Upgrade-Empfehlungen: 48
 - Default-Archive: 3
-- Letzte Iteration: 049
+- Letzte Iteration: 050
 - Scan-Modus: delta
+## Iterations-Update 050 (Design-Analyse, Mini-Patch)
+
+- Neu: Referenzbild professionell analysiert und vier konkrete Darstellungs-/Layout-Schwachstellen im Registry-Register priorisiert.
+- Robustheit: Überlagerungs- und Kontrast-Risiken als offene, nachverfolgbare Fixpunkte dokumentiert.
+- UX: Konkrete Zielvorgaben für Header-Dichte, Sidebar-Hierarchie und Handlungsführung als To-do-Checkliste ergänzt.
+- Archiv: Templates-Defaultarchiv um „Design-Audit 050: Header/Sidebar/Footer Sichtprüfung“ erweitert.
+
 ## Iterations-Update 049 (Mini-Patch)
 
 - Neu: Fünf offene Upgrade-Pool-Aufgaben (UP-019, UP-021, UP-024, UP-048, UP-049) als lokales Minimal-Delta abgeschlossen.
