@@ -1094,8 +1094,9 @@ body::before {
   grid-area: footer;
   position: relative;
   z-index: calc(var(--z-base) + 1);
-  padding: 8px;
+  padding: 10px;
   min-height: var(--footer-h);
+  max-height: var(--footer-h);
   overflow: auto;
 }
 
@@ -1604,7 +1605,7 @@ select {
 }
 
 .tile-footer {
-  background: linear-gradient(90deg, rgba(96, 117, 255, 0.4), rgba(210, 223, 255, 0.74), rgba(96, 82, 178, 0.4));
+  background: linear-gradient(180deg, var(--surface-1), var(--surface-2));
 }
 
 @media (max-width: 1340px) {
