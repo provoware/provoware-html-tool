@@ -20,6 +20,7 @@
   --status-error-bg: rgba(138, 41, 57, 0.5);
   --status-error-border: rgba(255, 152, 168, 0.62);
   --module-min-height: 240px;
+  --layout-main-dynamic-min-height: 240px;
   --shadow: 0 16px 36px rgba(7, 12, 30, 0.34);
   --radius: 16px;
   --focus: 0 0 0 3px rgba(126, 152, 255, 0.4);
@@ -593,7 +594,7 @@ body::before {
   min-width: 0;
   max-inline-size: min(100%, 1600px);
   max-width: 100%;
-  min-height: 0;
+  min-height: var(--layout-main-dynamic-min-height);
   overflow: hidden;
   border-color: rgba(189, 209, 176, 0.8);
   box-shadow: 0 14px 24px rgba(12, 24, 15, 0.25);
@@ -2056,4 +2057,11 @@ select {
 .account-dialog-body {
   display: grid;
   gap: 8px;
+}
+
+@media (max-height: 760px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+  }
 }
