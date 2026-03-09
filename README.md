@@ -4,11 +4,18 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 13
-- Erledigte Upgrade-Empfehlungen: 33
+- Offene Upgrade-Empfehlungen: 3
+- Erledigte Upgrade-Empfehlungen: 43
 - Default-Archive: 3
-- Letzte Iteration: 046
+- Letzte Iteration: 047
 - Scan-Modus: delta
+## Iterations-Update 047 (Mini-Patch)
+
+- Neu: Zehn offene Upgrade-Pool-Empfehlungen lokal abgeschlossen und in den Erledigt-Bereich verschoben.
+- Robustheit: Header-Feedback blendet sich nach 3 Sekunden zurück auf Grundzustand aus; dynamische Mindesthöhe für den Hauptbereich stabilisiert kleine Fensterhöhen.
+- UX: Deaktivierte Aktionsfelder liefern direkte Tooltip-Gründe, Sidebar-Schalter zeigen die Ursache per Tooltip und aktiver Modulkontext wird klarer rückgemeldet.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Header-Hinweise kurz gegenprüfen“ erweitert.
+
 ## Iterations-Update 046 (Mini-Patch)
 
 - Neu: Alle 7 offenen Layout-Aufgaben aus `todo.txt` als gezielter Minimal-Patch abgeschlossen.

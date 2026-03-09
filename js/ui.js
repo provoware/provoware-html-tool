@@ -75,6 +75,53 @@ const setText = (id, text) => {
   if (node) node.textContent = text;
 };
 
+let headerFeedbackTimeoutId = null;
+const setHeaderFeedback = (message) => {
+  const node = byId('header-card-feedback');
+  if (!node) return;
+  node.textContent = message;
+  if (headerFeedbackTimeoutId) window.clearTimeout(headerFeedbackTimeoutId);
+  headerFeedbackTimeoutId = window.setTimeout(() => {
+    if (node.textContent === message) node.textContent = 'Bereich bereit.';
+  }, 3000);
+};
+
+const setDisabledReasonTitles = () => {
+  [
+    ['module-registry-open-next-step', 'Der Button wird aktiv, sobald ein konkreter Pfad aus dem Modulstatus vorliegt.'],
+    ['module-registry-create-next-step', 'Der Button wird aktiv, sobald eine fehlende Datei als nächster Schritt erkannt wurde.'],
+    ['module-registry-template-select', 'Vorlagen sind erst auswählbar, wenn eine fehlende Datei erkannt wurde.'],
+    ['module-registry-apply-template', 'Vorlage einsetzen wird aktiv, sobald Vorlagen-Auswahl möglich ist.']
+  ].forEach(([id, reason]) => {
+    const node = byId(id);
+    if (!node) return;
+    const syncTitle = () => {
+      const isDisabled = node.hasAttribute('disabled') || node.getAttribute('aria-disabled') === 'true';
+      if (isDisabled) {
+        node.setAttribute('title', reason);
+        return;
+      }
+      node.removeAttribute('title');
+    };
+    syncTitle();
+    const observer = new MutationObserver(syncTitle);
+    observer.observe(node, { attributes: true, attributeFilter: ['disabled', 'aria-disabled'] });
+  });
+};
+
+const syncSidebarToggleCauseTooltip = ({ button, app, manualClass, autoClass }) => {
+  if (!button || !app) return;
+  if (app.classList.contains(autoClass)) {
+    button.title = 'Auto durch Breite';
+    return;
+  }
+  if (app.classList.contains(manualClass)) {
+    button.title = 'Manuell durch Klick';
+    return;
+  }
+  button.title = 'Geöffnet';
+};
+
 const formatOverallStatus = (status) => {
   return formatStatusWithSymbol(status);
 };
@@ -488,6 +535,7 @@ export const syncSidebarToggleButtonState = ({ app, toggleButton, baseLabel, man
   if (typeof toggleButton.setAttribute === 'function') {
     toggleButton.setAttribute('aria-pressed', (isAutoCollapsed || isManuallyCollapsed) ? 'true' : 'false');
   }
+  syncSidebarToggleCauseTooltip({ button: toggleButton, app, manualClass, autoClass });
   return isAutoCollapsed || isManuallyCollapsed;
 };
 
@@ -579,6 +627,10 @@ const bindWorkspaceControls = () => {
       document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
       app.classList.remove('has-maximized-panel');
     }
+    const modeMessage = mode === 'window'
+      ? 'Fenstermodus aktiv.'
+      : (mode === 'expert' ? 'Expertenmodus aktiv.' : 'Dashboard aktiv.');
+    setHeaderFeedback(modeMessage);
     window.localStorage.setItem(WORKSPACE_MODE_STORAGE_KEY, mode);
   };
   applyWorkspaceMode(window.localStorage.getItem(WORKSPACE_MODE_STORAGE_KEY) || app.dataset.layoutMode || 'dashboard');
@@ -626,6 +678,8 @@ const bindWorkspaceControls = () => {
       if (app.dataset.layoutMode !== 'window') return;
       document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => entry.classList.remove('is-active-window'));
       panel.classList.add('is-active-window');
+      const panelTitle = panel.querySelector('h3')?.textContent?.trim() || 'Modul';
+      setModuleFocusFeedback(`Aktiv: ${panelTitle}`);
     });
     const controls = panel.querySelector('.module-controls');
     if (!controls) return;
@@ -795,6 +849,14 @@ const bindWorkspaceControls = () => {
   window.addEventListener('resize', syncSidebarAutoCollapse);
   syncSidebarAutoCollapse();
 
+  const applyDynamicLayoutMinHeight = () => {
+    const viewportHeight = Math.max(window.innerHeight || 0, 0);
+    const dynamicMin = Math.max(220, Math.min(340, Math.round(viewportHeight * 0.31)));
+    document.documentElement.style.setProperty('--layout-main-dynamic-min-height', `${dynamicMin}px`);
+  };
+  applyDynamicLayoutMinHeight();
+  window.addEventListener('resize', applyDynamicLayoutMinHeight);
+
   let lastWheelZoomAt = 0;
   const handleZoomWheel = (event) => {
     if (!(event.ctrlKey || event.metaKey)) return;
@@ -823,14 +885,14 @@ const triggerHeaderCardNavigation = (cardNode, actions) => {
     if (typeof actions?.onAddLog === 'function') {
       actions.onAddLog('warn', `Navigation übersprungen: Ziel "${targetId}" nicht verfügbar.`);
     }
-    setText('header-card-feedback', `Bereich nicht verfügbar: ${targetId}.`);
+    setHeaderFeedback(`Bereich nicht verfügbar: ${targetId}.`);
     return;
   }
   if (typeof target.focus === 'function') target.focus();
   const tag = String(target.tagName || '').toLowerCase();
   const isClickable = typeof target.click === 'function' && (tag === 'button' || target.getAttribute?.('role') === 'button');
   if (isClickable) target.click();
-  setText('header-card-feedback', `Bereich geöffnet: ${targetId}.`);
+  setHeaderFeedback(`Bereich geöffnet: ${targetId}.`);
 };
 
 export const bindUiActions = (actions) => {
@@ -843,6 +905,11 @@ export const bindUiActions = (actions) => {
   byId('action-ensure-structure')?.addEventListener('click', actions.onEnsureStructure);
   document.querySelectorAll('[data-empty-slot-ensure="true"]').forEach((button) => {
     button.addEventListener('click', () => actions.onEnsureStructure());
+  });
+  document.querySelectorAll('.module-panel.is-empty-slot .module-panel-placeholder p').forEach((node) => {
+    const text = String(node.textContent || '').trim();
+    if (text.length <= 72) return;
+    node.textContent = `${text.slice(0, 69).trimEnd()}…`;
   });
   byId('action-run-write-test')?.addEventListener('click', () => actions.onRunSelftest(true));
   byId('action-switch-dir')?.addEventListener('click', actions.onSwitchDirectory);
@@ -884,6 +951,7 @@ export const bindUiActions = (actions) => {
     if (!targetId) return;
     byId(targetId)?.click();
   });
+  setDisabledReasonTitles();
   document.querySelectorAll('.header-card[data-nav-target]').forEach((cardNode) => {
     cardNode.addEventListener('click', (event) => {
       if (event.target?.closest?.('button,select,input,textarea,a,label')) return;
