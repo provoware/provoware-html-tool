@@ -237,6 +237,13 @@ body::before {
   pointer-events: none;
 }
 
+.main.panel::after {
+  opacity: 0.34;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--glow) 9%, transparent), transparent 50%, color-mix(in srgb, var(--glow-2) 5%, transparent)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0));
+}
+
 .nav,
 .module-panel,
 .settings-group,
@@ -824,9 +831,9 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 12px;
   background:
-    linear-gradient(135deg, rgba(232, 223, 141, 0.08), rgba(232, 223, 141, 0) 42%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
-  backdrop-filter: blur(6px);
+    linear-gradient(135deg, rgba(232, 223, 141, 0.04), rgba(232, 223, 141, 0) 46%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.01));
+  backdrop-filter: blur(2px);
   padding: 12px;
   display: grid;
   grid-template-rows: auto 1fr;
