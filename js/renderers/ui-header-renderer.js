@@ -4,7 +4,7 @@ const evaluateArchiveTrend = (events) => {
   if (!Array.isArray(events) || events.length === 0) {
     return {
       label: '0 (keine Historie)',
-      hint: 'Vergleich nicht verfügbar'
+      hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
     };
   }
 
@@ -12,7 +12,7 @@ const evaluateArchiveTrend = (events) => {
   if (!Number.isFinite(nowMs)) {
     return {
       label: '0 (keine Historie)',
-      hint: 'Vergleich nicht verfügbar'
+      hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
     };
   }
 
@@ -37,7 +37,7 @@ const evaluateArchiveTrend = (events) => {
   if (validEventsCount === 0) {
     return {
       label: '0 (keine gültigen Zeitstempel)',
-      hint: 'Vergleich nicht verfügbar'
+      hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
     };
   }
 

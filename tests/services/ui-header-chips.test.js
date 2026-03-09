@@ -85,7 +85,7 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     });
     render();
     assert.equal(nodes['header-stat-events-trend'].textContent, '0 (keine Historie)');
-    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich nicht verfügbar');
+    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich nicht verfügbar (keine verwertbaren Daten)');
 
     const now = Date.now();
     const day = 24 * 60 * 60 * 1000;
@@ -123,7 +123,7 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     });
     render();
     assert.equal(nodes['header-stat-events-trend'].textContent, '0 (keine gültigen Zeitstempel)');
-    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich nicht verfügbar');
+    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich nicht verfügbar (keine verwertbaren Daten)');
 
     setState({
       selectedProjectDirectory: { name: 'Demo-Projekt' },

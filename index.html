@@ -41,6 +41,7 @@
               <p id="startup-assistant-text" class="dashboard-note">Wähle zuerst den Projektordner.</p>
               <div class="startup-assistant-actions">
                 <button id="startup-assistant-action" class="btn-small btn-accent" type="button" data-assistant-target="action-select-dir">Jetzt ausführen</button>
+                <button id="startup-assistant-alt-action" class="btn-small" type="button" data-assistant-target="" hidden>Alternative anzeigen</button>
                 <p id="startup-assistant-hint" class="dashboard-note">Nutzt den passenden Knopf rechts automatisch.</p>
               </div>
             </section>
@@ -290,6 +291,7 @@
               </div>
               <div class="settings-action-group" aria-label="Zusatzaktionen">
                 <button id="action-run-write-test" class="btn btn-action-check" type="button">Schreibtest ausführen</button>
+                <button id="action-check-archive-quality" class="btn btn-action-check" type="button">Datenqualität prüfen</button>
                 <button id="action-switch-dir" class="btn btn-action-secondary" type="button">Ordner wechseln</button>
                 <button id="action-export-diagnosis" class="btn btn-action-secondary" type="button">Diagnose exportieren</button>
                 <button id="action-logout" class="btn btn-action-danger" type="button">Logout (sicher)</button>
@@ -319,9 +321,11 @@
               <div><dt>Letzte Änderung</dt><dd id="archive-overview-updated">-</dd></div>
             </dl>
             <p id="template-archive-status" class="sidebar-summary">Vorlagen-Archiv bereit.</p>
+            <p id="archive-quality-status" class="sidebar-summary">Noch nicht geprüft.</p>
             <p class="archive-overview-title">Letzte Archiv-Meldungen</p>
             <ul id="archive-overview-events" class="log-list archive-overview-events"></ul>
           </section>
+          <div id="plugin-sidebar-slot"></div>
         </div>
       </aside>
 
@@ -331,9 +335,10 @@
             <h2 class="panel-title" id="log-title">Letzte Meldungen</h2>
             <ul id="log-list" class="log-list"></ul>
           </article>
-          <article class="footer-box footer-box-plugin">
+          <article id="plugin-panel" class="footer-box footer-box-plugin">
             <section class="settings-group" aria-label="Erweiterungen">
               <h3>Erweiterungen</h3>
+              <button id="plugin-location-toggle" class="btn-small" type="button">Plugin in Seitenleiste anzeigen</button>
               <p id="plugin-help-text" class="sidebar-summary">Plugins können ein- oder ausgeschaltet werden. So bleibt die Oberfläche einfach.</p>
               <details class="guide-help-collapsible">
                 <summary>Wann ist dieser Bereich wichtig?</summary>

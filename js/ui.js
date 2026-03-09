@@ -946,8 +946,19 @@ export const bindUiActions = (actions) => {
   byId('plugin-toggle')?.addEventListener('click', () => {
     actions.onTogglePluginEnabled();
   });
+  byId('plugin-location-toggle')?.addEventListener('click', () => {
+    actions.onTogglePluginLocation();
+  });
+  byId('action-check-archive-quality')?.addEventListener('click', () => {
+    actions.onCheckArchiveQuality();
+  });
   byId('startup-assistant-action')?.addEventListener('click', () => {
     const targetId = byId('startup-assistant-action')?.dataset.assistantTarget;
+    if (!targetId) return;
+    byId(targetId)?.click();
+  });
+  byId('startup-assistant-alt-action')?.addEventListener('click', () => {
+    const targetId = byId('startup-assistant-alt-action')?.dataset.assistantTarget;
     if (!targetId) return;
     byId(targetId)?.click();
   });
@@ -1321,6 +1332,7 @@ export const render = () => {
   setText('action-run-selftest', texts.buttons?.runSelftest || 'Selbsttest starten');
   setText('action-ensure-structure', texts.buttons?.ensureStructure || 'Projektstruktur anlegen');
   setText('action-run-write-test', texts.buttons?.runWriteTest || 'Schreibtest ausführen');
+  setText('action-check-archive-quality', 'Datenqualität prüfen');
   setText('action-switch-dir', texts.buttons?.switchDirectory || 'Ordner wechseln');
   setText('action-export-diagnosis', 'Diagnose exportieren');
   setText('action-logout', texts.buttons?.logout || 'Logout (sicher)');
@@ -1377,6 +1389,17 @@ export const render = () => {
     renderAccountProfileOptions,
     renderAccountCustomFields
   });
+
+  const pluginPanel = byId('plugin-panel');
+  const pluginSidebarSlot = byId('plugin-sidebar-slot');
+  const footerGrid = document.querySelector('.footer-grid');
+  if (pluginPanel && pluginSidebarSlot && footerGrid) {
+    if (state.pluginManager?.location === 'sidebar') {
+      pluginSidebarSlot.appendChild(pluginPanel);
+    } else {
+      footerGrid.appendChild(pluginPanel);
+    }
+  }
 
 
   const themeSelect = byId('theme-select');

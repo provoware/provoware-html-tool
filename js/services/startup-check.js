@@ -30,18 +30,36 @@ const STARTUP_ACTIONS = Object.freeze({
     target: 'action-ensure-structure',
     label: 'Struktur jetzt anlegen',
     hint: 'Lege die fehlende Struktur jetzt an. Danach erneut den Grundcheck starten.'
+  }),
+  RUN_WRITE_TEST: Object.freeze({
+    target: 'action-run-write-test',
+    label: 'Schreibtest als Alternative',
+    hint: 'Wenn der Grundcheck blockiert ist, hilft der Schreibtest als schneller Gegencheck.'
+  }),
+  SWITCH_DIRECTORY: Object.freeze({
+    target: 'action-switch-dir',
+    label: 'Anderen Ordner wählen',
+    hint: 'Wenn Rechte blockieren, teste direkt einen anderen Projektordner.'
   })
 });
 
-const withAction = (payload, actionKey) => {
+const withAction = (payload, actionKey, alternativeActionKey = '') => {
   const action = STARTUP_ACTIONS[actionKey] || STARTUP_ACTIONS.RUN_SELFTEST;
+  const alternative = STARTUP_ACTIONS[alternativeActionKey] || null;
   return {
     ...payload,
     nextAction: {
       target: action.target,
       label: action.label,
       hint: action.hint
-    }
+    },
+    alternativeAction: alternative
+      ? {
+        target: alternative.target,
+        label: alternative.label,
+        hint: alternative.hint
+      }
+      : null
   };
 };
 
@@ -89,7 +107,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: permission.code,
       message: 'Rechteprüfung ist unerwartet abgebrochen.',
-      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST')
+      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
     };
   }
 
@@ -98,7 +116,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: 'STARTUP_PERMISSION_FAILED',
       message: 'Rechteprüfung ist fehlgeschlagen.',
-      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST')
+      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
     };
   }
 
@@ -114,7 +132,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
         needsSelftest: true,
         permission: permission.data.data,
         selfRepair: normalized
-      }, 'RUN_SELFTEST')
+      }, 'RUN_SELFTEST', 'RUN_WRITE_TEST')
     };
   }
 
@@ -134,7 +152,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
         needsSelftest: true,
         permission: permission.data.data,
         selfRepair: normalized
-      }, 'RUN_SELFTEST')
+      }, 'RUN_SELFTEST', 'RUN_WRITE_TEST')
     };
   }
 
@@ -151,6 +169,6 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       permission: permission.data.data,
       selftest: selftestPayload,
       selfRepair: normalized
-    }, ready ? 'RUN_SELFTEST' : 'ENSURE_STRUCTURE')
+    }, ready ? 'RUN_SELFTEST' : 'ENSURE_STRUCTURE', ready ? '' : 'RUN_WRITE_TEST')
   };
 };

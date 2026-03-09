@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-52",
+      "title": "Release-Check: Assistent-Alternative + Datenqualität",
+      "content": "Prüfe vor Release: Start-Assistent zeigt bei Blockade eine Alternative, Header-Hinweis nennt klar 'keine verwertbaren Daten' und Datenqualität-Check meldet ok/warnung ohne Migration.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T16:20:00.000Z",
+      "updatedAt": "2026-03-09T16:20:00.000Z"
+    },
+    {
       "id": "tpl-default-51",
       "title": "Release-Finalisierung: Header-Trend Schnellcheck",
       "content": "Prüfe vor Release mit leerem Archiv, gültigen Zeitstempeln und ungültigen Zeitstempeln: 7-Tage-Trend bleibt stabil, Hinweistext passt zum Datenzustand und zeigt keine falsche Vorwochen-Aussage.",

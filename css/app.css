@@ -1036,6 +1036,14 @@ body::before {
   overflow: hidden;
 }
 
+#plugin-sidebar-slot .footer-box-plugin {
+  min-height: 0;
+}
+
+#plugin-sidebar-slot .footer-box-plugin .settings-group {
+  background: rgba(247, 251, 255, 0.84);
+}
+
 .footer-box-plugin .settings-group {
   height: 100%;
   display: grid;
