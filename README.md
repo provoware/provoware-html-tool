@@ -2,13 +2,20 @@
 
 ## Projektstatus kompakt
 
-- Offene Code-Stellen: 4
-- Erledigte Code-Stellen: 0
+- Offene Code-Stellen: 2
+- Erledigte Code-Stellen: 2
 - Offene Upgrade-Empfehlungen: 3
-- Erledigte Upgrade-Empfehlungen: 48
+- Erledigte Upgrade-Empfehlungen: 49
 - Default-Archive: 3
 - Letzte Iteration: 050
 - Scan-Modus: delta
+## Iterations-Update 050 (UI-Kontrast + Überlagerung, Mini-Patch)
+
+- Neu: Lokaler CSS-Patch erhöht Kontrast für Header-Status-/Hilfstexte und entschärft halbtransparente Flächen im Assistentenbereich.
+- Robustheit: Main- und Footer-Bereich besitzen nun klar getrennte Ebenen, sodass Überlagerungen bei enger Höhe seltener auftreten.
+- UX: Warnungen, Trendhinweis und Selbsttest-Hilfen sind sichtbarer; Footer wurde leicht angehoben, damit untere Inhalte ruhiger lesbar bleiben.
+- Archiv: Templates-Defaultarchiv um „Iteration-050 UI-Freigabe: Kontrast + Footer-Trennung“ erweitert.
+
 ## Iterations-Update 050 (Design-Analyse, Mini-Patch)
 
 - Neu: Referenzbild professionell analysiert und vier konkrete Darstellungs-/Layout-Schwachstellen im Registry-Register priorisiert.
