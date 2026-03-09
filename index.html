@@ -99,26 +99,40 @@
           <h2 class="panel-title" id="nav-title">Module</h2>
         </div>
         <div class="sidebar-body sidebar-modules">
-          <p class="sidebar-hint">Nur aktive Nutzer-Module:</p>
-          <div id="sidebar-module-list" class="module-button-grid" aria-label="Aktive Nutzer-Module"></div>
-          <p id="module-registry-summary" class="sidebar-summary">-</p>
-          <p id="module-registry-next-step" class="sidebar-summary">Nächster Modul-Schritt: -</p>
-          <div class="module-registry-next-step-actions">
-            <button id="module-registry-open-next-step" class="btn-small" type="button" disabled>Datei öffnen</button>
-            <button id="module-registry-create-next-step" class="btn-small" type="button" disabled>Datei anlegen</button>
-            <select id="module-registry-template-select" class="btn-small" disabled>
-              <option value="">Vorlage wählen</option>
-              <option value="manifest-basic">manifest.json Basis</option>
-              <option value="config-basic">config.json Basis</option>
-            </select>
-            <button id="module-registry-apply-template" class="btn-small" type="button" disabled>Vorlage einsetzen</button>
-          </div>
-          <p id="module-registry-template-status" class="sidebar-summary">Vorlagenmenü inaktiv.</p>
+          <section class="nav-section" aria-label="Modulauswahl">
+            <h3 class="nav-section-title">Modulauswahl</h3>
+            <p class="sidebar-hint">Nur aktive Nutzer-Module:</p>
+            <div id="sidebar-module-list" class="module-button-grid" aria-label="Aktive Nutzer-Module"></div>
+            <p id="module-registry-summary" class="sidebar-summary">-</p>
+          </section>
+          <section class="nav-section" aria-label="Nächster Schritt">
+            <h3 class="nav-section-title">Nächster Schritt</h3>
+            <p id="module-registry-next-step" class="sidebar-summary">Nächster Modul-Schritt: -</p>
+            <div class="module-registry-next-step-actions">
+              <button id="module-registry-open-next-step" class="btn-small" type="button" disabled>Datei öffnen</button>
+              <button id="module-registry-create-next-step" class="btn-small" type="button" disabled>Datei anlegen</button>
+              <select id="module-registry-template-select" class="btn-small" disabled>
+                <option value="">Vorlage wählen</option>
+                <option value="manifest-basic">manifest.json Basis</option>
+                <option value="config-basic">config.json Basis</option>
+              </select>
+              <button id="module-registry-apply-template" class="btn-small" type="button" disabled>Vorlage einsetzen</button>
+            </div>
+            <p id="module-registry-template-status" class="sidebar-summary">Vorlagenmenü inaktiv.</p>
+          </section>
         </div>
       </nav>
 
       <main id="main-content" class="main panel tile-center" aria-label="Modulbereich" tabindex="-1">
         <p id="a11y-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+        <section class="main-start-workflow" aria-label="Startworkflow">
+          <h2 class="main-start-workflow-title">Startworkflow</h2>
+          <ol>
+            <li>Modul wählen</li>
+            <li>Aufgabe erfassen</li>
+            <li>Nächsten Schritt ausführen</li>
+          </ol>
+        </section>
         <section id="panel-grid" class="panel-grid" aria-label="Aktive Module">
           <article class="module-panel" data-panel="todo" data-module-id="todo_kalender_erinnerung" data-module-default="active">
             <header class="module-head">
