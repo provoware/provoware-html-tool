@@ -322,7 +322,18 @@ body::before {
 }
 
 .header-card-intro {
-  row-gap: 10px;
+  grid-template-rows: auto auto;
+  row-gap: 8px;
+}
+
+.header-card-intro .header-status-chips {
+  padding-top: 8px;
+  border-top: 1px solid rgba(198, 220, 255, 0.34);
+}
+
+.header-card-quick {
+  grid-template-rows: auto auto auto auto 1fr auto;
+  row-gap: 8px;
 }
 
 .header-control-buttons {
@@ -670,6 +681,8 @@ body::before {
   padding-left: 18px;
   display: grid;
   gap: 6px;
+  border-top: 1px solid rgba(191, 212, 246, 0.34);
+  padding-top: 8px;
 }
 
 .startup-step {
@@ -706,7 +719,7 @@ body::before {
 }
 
 .startup-assistant {
-  margin: 8px 0;
+  margin: 4px 0;
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid rgba(117, 143, 109, 0.5);
@@ -892,7 +905,9 @@ body::before {
 }
 
 .utility-cards {
+  display: grid;
   gap: 10px;
+  align-content: start;
 }
 
 .settings-group + .settings-group {
@@ -915,6 +930,16 @@ body::before {
   margin: 0 0 var(--space-1);
   font-size: 0.88rem;
   color: #334864;
+}
+
+.utility-card-lead {
+  margin: 0 0 var(--space-1);
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(160, 187, 239, 0.54);
+  background: rgba(232, 241, 255, 0.74);
+  color: #263c5b;
+  font-size: 0.82rem;
 }
 
 .archive-overview {

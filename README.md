@@ -7,9 +7,16 @@
 - Offene Upgrade-Empfehlungen: 3
 - Erledigte Upgrade-Empfehlungen: 49
 - Default-Archive: 3
-- Letzte Iteration: 050
+- Letzte Iteration: 051
 - Scan-Modus: delta
 ## Iterations-Update 050 (UI-Kontrast + Überlagerung, Mini-Patch)
+
+## Iterations-Update 051 (Release-Feinschliff Layout/UX, Mini-Patch)
+
+- Neu: Rechte Sidebar in eine klarere Reihenfolge gebracht (erst Stabilitätsstatus/KPI, dann Archiv-Trend, danach Aktionen mit klarer „Nächste Aktion“-Leitlinie).
+- Robustheit: Header trennt Statuschips und Prozessschritte jetzt deutlicher in zwei Ebenen, um visuelle Kollisionen bei engen Breiten zu reduzieren.
+- UX: Schnellaktionen führen Laien direkter durch den Startpfad („Ordner wählen“, dann „Selbsttest starten“).
+- Archiv: `todo.txt`-Releasepunkte für Sidebar-Hierarchie und Header-Dichte geschlossen.
 
 - Neu: Lokaler CSS-Patch erhöht Kontrast für Header-Status-/Hilfstexte und entschärft halbtransparente Flächen im Assistentenbereich.
 - Robustheit: Main- und Footer-Bereich besitzen nun klar getrennte Ebenen, sodass Überlagerungen bei enger Höhe seltener auftreten.
