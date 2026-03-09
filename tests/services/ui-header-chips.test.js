@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+import { renderHeaderSection } from '../../js/renderers/ui-header-renderer.js';
 import { setState } from '../../js/state.js';
 import { render } from '../../js/ui.js';
 
@@ -218,4 +219,26 @@ test('header-chips: next-step zeigt sonderzeichen und sehr langen text nur als t
       globalThis.document = previousDocument;
     }
   }
+});
+
+test('header-chips: renderHeaderSection bleibt robust bei fehlenden optionalen Helfern', () => {
+  const textsWritten = {};
+
+  renderHeaderSection({
+    state: null,
+    texts: { titles: {} },
+    messages: {},
+    setText: (id, value) => {
+      textsWritten[id] = value;
+    },
+    byId: undefined,
+    autoFormatText: undefined,
+    buildHeaderProjectStatus: () => 'Wartet',
+    buildHeaderAutosaveStatus: () => 'Bereit',
+    layoutBudgetStatus: null
+  });
+
+  assert.equal(textsWritten['header-stat-events'], '0');
+  assert.equal(textsWritten['header-stat-events-trend'], '0 (keine Historie)');
+  assert.equal(textsWritten['header-stat-events-trend-hint'], 'Vergleich nicht verfügbar (keine verwertbaren Daten)');
 });

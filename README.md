@@ -4,7 +4,7 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 1
+- Offene Upgrade-Empfehlungen: 2
 - Erledigte Upgrade-Empfehlungen: 48
 - Default-Archive: 3
 - Letzte Iteration: 049
@@ -15,6 +15,7 @@
 - Robustheit: Start-Assistent liefert bei Blockaden jetzt zusätzlich einen Alternativpfad; Datenqualität-Check meldet ungültige Zeitstempel defensiv als Warnung statt stiller Ignorierung.
 - UX: Plugin-Verwaltung ist zwischen Footer und rechter Seitenleiste umschaltbar, Header-Hinweis nennt bei fehlender Historie klar „keine verwertbaren Daten“.
 - Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Release-Check: Assistent-Alternative + Datenqualität“ erweitert.
+- Nachtrag: Header-Renderer nutzt jetzt zentrale Event-Normalisierung und defensive Fallbacks für optionale Helfer (`byId`, `autoFormatText`).
 
 ## Iterations-Update 048 (Mini-Patch)
 

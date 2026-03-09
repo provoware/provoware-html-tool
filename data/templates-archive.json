@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-53",
+      "title": "Header-Release-Fallback ohne Helfer prüfen",
+      "content": "Prüfe Release-nah: Header rendert auch bei fehlenden Helferfunktionen stabil, zeigt 0 (keine Historie) für Archiv-Trend und setzt den nächsten Schritt ohne Absturz nur wenn ein Zielknoten vorhanden ist.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T17:10:00.000Z",
+      "updatedAt": "2026-03-09T17:10:00.000Z"
+    },
+    {
       "id": "tpl-default-52",
       "title": "Release-Check: Assistent-Alternative + Datenqualität",
       "content": "Prüfe vor Release: Start-Assistent zeigt bei Blockade eine Alternative, Header-Hinweis nennt klar 'keine verwertbaren Daten' und Datenqualität-Check meldet ok/warnung ohne Migration.",

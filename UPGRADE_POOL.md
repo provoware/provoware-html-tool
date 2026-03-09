@@ -5,6 +5,11 @@
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
 | UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | offen | 049 |
+| UP-051 | Header Robustheit | Header-Renderer soll `setText` defensiv als No-Op behandeln, wenn der Hook fehlt oder kein Funktionswert ist | Aktuell ist `byId`/`autoFormatText` abgesichert; ein fehlender `setText` kann in isolierten Test-/Embed-Szenarien dennoch früh abbrechen | Stabilerer Header-Renderpfad auch in Teilintegrationen und weniger Setup-Zwang für kleine Tests | offen | 049 |
+
+**Passende Vorschläge (UP-051):**
+1. Defensiven Guard nur lokal im Header-Renderer ergänzen, ohne globale Helper-API zu ändern
+2. Einen Mini-Testfall ergänzen, der fehlendes `setText` simuliert und Absturzfreiheit prüft
 
 **Passende Vorschläge (UP-050):**
 1. Kürzung nur bei sichtbarer Zweitoption anwenden, damit Standardfälle unverändert bleiben

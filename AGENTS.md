@@ -472,5 +472,5 @@ Die Punkte sind zuerst in `todo.txt` als Checkbox-Aufgaben zu pflegen und danach
 
 ### Fortschrittsstand (kompakt)
 - Iteration 048: Header-Trend robust gegen ungültige Zeitstempel abgeschlossen.
-- Iteration 049: Release-Finalisierung mit minimalem Renderer-/Doku-Delta gestartet.
+- Iteration 049: Release-Finalisierung mit minimalem Renderer-/Doku-Delta abgeschlossen.
 - Effizienz weiter verbindlich: zuerst Renderer/Logik, dann nur minimale Markup/CSS-Nachzüge.
