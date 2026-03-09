@@ -4,7 +4,7 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-053 | Sidebar UX | Rechte Sidebar in zwei klare Gruppen (KPIs/Trend und Selbsttest/CTA) mit Zwischenabstand gliedern | KPI, Trend und Selbsttest stehen aktuell noch zu dicht und erschweren schnelle Priorisierung | Ruhigerer Blicklauf mit schneller auffindbarer nächster Aktion in der Sidebar | offen | 050 |
+| UP-053 | Sidebar UX | Rechte Sidebar in zwei klare Gruppen (KPIs/Trend und Selbsttest/CTA) mit Zwischenabstand gliedern | KPI, Trend und Selbsttest stehen aktuell noch zu dicht und erschweren schnelle Priorisierung | Ruhigerer Blicklauf mit schneller auffindbarer nächster Aktion in der Sidebar | erledigt | 063 |
 
 **Passende Vorschläge (UP-053):**
 1. Nur KPI-/Trend-Block und Selbsttest-Block lokal trennen, ohne Datenpfade zu ändern

@@ -290,7 +290,7 @@ body::before {
 .header-dashboard {
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
   position: relative;
   z-index: var(--z-header);
   align-items: stretch;
@@ -989,7 +989,8 @@ body::before {
 }
 
 .utility-cards > .settings-group:nth-of-type(3) {
-  margin-top: 2px;
+  margin-top: 10px;
+  border-top-color: rgba(225, 194, 112, 0.45);
 }
 
 #plugin-sidebar-slot .settings-group {
@@ -1026,6 +1027,18 @@ body::before {
   background: rgba(127, 208, 255, 0.08);
   color: #c5d7eb;
   font-size: 0.82rem;
+}
+
+
+.utility-card .settings-action-group:first-child .btn-action-check {
+  order: -1;
+  border-color: rgba(225, 194, 112, 0.72);
+  box-shadow: 0 0 0 1px rgba(225, 194, 112, 0.25), 0 10px 20px rgba(0, 0, 0, 0.26);
+}
+
+.plugin-default-hint {
+  margin-bottom: 6px;
+  color: #d7c188;
 }
 
 .archive-overview {
