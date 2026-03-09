@@ -4,8 +4,13 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-052 | Visual Clarity UX | Halbtransparente Overlay-Flächen im unteren Dashboard-Bereich durch klar getrennte Ebenen (Panel vs. Footer) ersetzen | Im aktuellen Bild wirken „Letzte Meldungen“ und Slot-Bereich visuell überdeckt, wodurch Lesefluss und Fokus leiden | Stabilere Darstellung ohne Schichtkonflikte und schneller erfassbarer Inhalt bei Standardauflösung | offen | 050 |
 | UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | offen | 049 |
 | UP-051 | Header Robustheit | Header-Renderer soll `setText` defensiv als No-Op behandeln, wenn der Hook fehlt oder kein Funktionswert ist | Aktuell ist `byId`/`autoFormatText` abgesichert; ein fehlender `setText` kann in isolierten Test-/Embed-Szenarien dennoch früh abbrechen | Stabilerer Header-Renderpfad auch in Teilintegrationen und weniger Setup-Zwang für kleine Tests | offen | 049 |
+
+**Passende Vorschläge (UP-052):**
+1. Höhe und Z-Index nur für die betroffenen Footer-/Panel-Container lokal angleichen
+2. Bei kleinen Höhen automatisch kompaktere Innenabstände aktivieren, ohne Modulreihenfolge zu ändern
 
 **Passende Vorschläge (UP-051):**
 1. Defensiven Guard nur lokal im Header-Renderer ergänzen, ohne globale Helper-API zu ändern
