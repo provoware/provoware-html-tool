@@ -139,7 +139,7 @@ body::before {
   box-shadow: var(--shadow);
   grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));
   grid-template-columns: clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-left-target-width), var(--panel-nav-max)) minmax(0, 1fr) clamp(var(--layout-sidebar-min-width), var(--layout-sidebar-right-target-width), var(--panel-widgets-max));
-  grid-template-rows: minmax(120px, var(--layout-header-max-height)) minmax(0, 1fr) minmax(72px, var(--layout-footer-max-height));
+  grid-template-rows: minmax(120px, auto) minmax(0, 1fr) minmax(72px, auto);
   grid-template-areas:
     "header header header"
     "nav main widgets"
@@ -577,7 +577,7 @@ body::before {
   grid-template-rows: auto minmax(0, 1fr);
   gap: var(--space-2);
   font-size: 1.02rem;
-  min-width: clamp(520px, 58vw, 1280px);
+  min-width: 0;
   max-inline-size: min(100%, 1600px);
   max-width: 100%;
   min-height: 0;
@@ -1566,6 +1566,10 @@ select {
 
   .app.sidebar-left-collapsed .nav .sidebar-body,
   .app.sidebar-left-auto-collapsed .nav .sidebar-body {
+    display: none;
+  }
+
+  .app.sidebar-left-collapsed .nav .sidebar-body {
     display: none;
   }
 

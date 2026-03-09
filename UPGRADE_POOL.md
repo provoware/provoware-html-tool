@@ -14,6 +14,7 @@
 | UP-042 | Fokus UX | Aktive Modulkarte beim Tastatur- oder Klickfokus mit kurzer Statuszeile markieren | Der neue Fokusrahmen hilft visuell, aber eine zusätzliche Kurzzeile würde den Kontext für Laien noch klarer machen | Schnellere Orientierung, welches Modul gerade aktiv ist, besonders bei vielen offenen Fenstern | offen | 041 |
 | UP-043 | Layout UX | Footer-Bereiche bei kleiner Höhe automatisch in zwei kompakte Reihen statt vier Spalten staffeln | In enger Höhe wirken Footer-Karten dicht, obwohl die Inhalte selbst kurz bleiben | Mehr Lesbarkeit im unteren Bereich ohne zusätzliche Klicks oder neue Panels | offen | 042 |
 | UP-044 | Layout UX | Rechte Hilfsspalte optional als einklappbare Sektion pro Karte (statt immer offen) umschalten | Die Inhalte sind nützlich, nehmen aber in ruhigen Phasen dauerhaft Sichtfläche ein | Mehr Fokus auf der Hauptarbeitsfläche bei weiterhin schnellem Zugriff auf Hilfe | offen | 043 |
+| UP-045 | Layout Robustheit | Hauptlayout bei reduzierter Fensterhöhe mit dynamischer Mindestfläche je Bereich absichern | Starre Höhenanteile wurden reduziert, aber ein kleiner Guard für Extremhöhen fehlt noch | Weniger Überlagerungsrisiko bei sehr kleinen Laptop-Displays und Splitscreen-Nutzung | offen | 044 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -54,6 +55,10 @@
 **Passende Vorschläge (UP-044):**
 1. Pro Utility-Karte einen kleinen „Einklappen“-Schalter mit `aria-expanded` ergänzen
 2. Den letzten Offen/Zu-Zustand nur pro Sitzung im UI-State speichern (ohne Persistenzumbau)
+
+**Passende Vorschläge (UP-045):**
+1. Unter 760px Höhe Hauptbereich priorisieren und Footer auf kompakte Einspalter-Regel setzen
+2. Für Extremhöhen eine kurze Hinweiszeile „Kompaktansicht aktiv“ im Footer zeigen
 
 ## Erledigt
 
