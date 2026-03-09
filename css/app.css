@@ -290,7 +290,7 @@ body::before {
 .header-dashboard {
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr 1fr;
-  gap: 10px;
+  gap: 12px;
   position: relative;
   z-index: var(--z-header);
   align-items: stretch;
@@ -989,7 +989,21 @@ body::before {
 }
 
 .utility-cards > .settings-group:nth-of-type(3) {
-  margin-top: 2px;
+  margin-top: 10px;
+  border-top-color: rgba(225, 194, 112, 0.45);
+}
+
+.utility-cards > .settings-group:nth-of-type(2) {
+  position: relative;
+}
+
+.utility-cards > .settings-group:nth-of-type(2)::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -8px;
+  border-bottom: 1px solid rgba(225, 194, 112, 0.34);
 }
 
 #plugin-sidebar-slot .settings-group {
@@ -1026,6 +1040,18 @@ body::before {
   background: rgba(127, 208, 255, 0.08);
   color: #c5d7eb;
   font-size: 0.82rem;
+}
+
+
+.utility-card .settings-action-group:first-child .btn-action-check {
+  order: -1;
+  border-color: rgba(225, 194, 112, 0.72);
+  box-shadow: 0 0 0 1px rgba(225, 194, 112, 0.25), 0 10px 20px rgba(0, 0, 0, 0.26);
+}
+
+.plugin-default-hint {
+  margin-bottom: 6px;
+  color: #d7c188;
 }
 
 .archive-overview {
@@ -1158,18 +1184,24 @@ body::before {
 .footer-toggle-row {
   display: flex;
   justify-content: center;
+  padding-top: 1px;
 }
 
 .footer-toggle {
   border: 1px solid var(--panel-border-soft);
   border-radius: 999px;
-  padding: 0.28em 0.95em;
-  min-height: clamp(26px, 1.8em, 34px);
+  padding: 0.24em 0.82em;
+  min-height: clamp(24px, 1.7em, 32px);
+  min-width: 122px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.34em;
   font: inherit;
-  font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
-  line-height: 1.2;
+  font-size: clamp(0.8rem, 0.77rem + 0.18vw, 0.9rem);
+  line-height: 1.15;
   color: var(--text-soft);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.014));
 }
 
 .footer-grid {
@@ -1860,6 +1892,14 @@ select {
 
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .footer-toggle {
+    min-height: 28px;
+    min-width: 110px;
+    padding: 0.2em 0.64em;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
 
   .settings-actions .btn-small-tools {

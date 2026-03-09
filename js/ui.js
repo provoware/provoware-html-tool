@@ -1,5 +1,5 @@
 import { categories } from './services/profile-archive.js';
-import { getState } from './state.js';
+import { getState, setState } from './state.js';
 import { formatStatusWithSymbol } from './status-visuals.js';
 import { initGuideToolsModule } from './modules/guide-tools-module.js';
 import { initDashboardClock } from './modules/dashboard-clock.js';
@@ -38,6 +38,15 @@ const LAYOUT_BUDGETS = Object.freeze({
 });
 const LAYOUT_BUDGET_DEBOUNCE_MS = 140;
 let layoutBudgetTimeoutId = null;
+
+const syncFooterCollapseUi = (collapsed) => {
+  const footer = byId('app')?.querySelector('.footer');
+  const button = byId('footer-toggle');
+  if (!footer || !button) return;
+  footer.classList.toggle('is-collapsed', collapsed === true);
+  button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+  button.textContent = collapsed ? '▸ Footer ausklappen' : '▾ Footer einklappen';
+};
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
 
@@ -964,12 +973,9 @@ export const bindUiActions = (actions) => {
     actions.onTogglePluginLocation();
   });
   byId('footer-toggle')?.addEventListener('click', () => {
-    const footer = byId('app')?.querySelector('.footer');
-    const button = byId('footer-toggle');
-    if (!footer || !button) return;
-    const collapsed = footer.classList.toggle('is-collapsed');
-    button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-    button.textContent = collapsed ? 'Footer ausklappen' : 'Footer einklappen';
+    const collapsed = !getState().footerCollapsed;
+    setState({ footerCollapsed: collapsed });
+    syncFooterCollapseUi(collapsed);
   });
   byId('action-check-archive-quality')?.addEventListener('click', () => {
     actions.onCheckArchiveQuality();
@@ -1326,9 +1332,12 @@ export const applyPanelProportionPreset = (preset = 'balanced') => {
 
 export const resolveInitialPanelProportionPreset = () => readPanelProportionPreset();
 
+export { syncFooterCollapseUi };
+
 export const render = () => {
   const state = getState();
   const texts = state.uiTexts || {};
+  syncFooterCollapseUi(state.footerCollapsed === true);
   const messages = texts.messages || {};
   const layoutBudgetStatus = measureLayoutBudgetStatus();
   const visibilityWarning = measureHeaderVisibilityWarning();

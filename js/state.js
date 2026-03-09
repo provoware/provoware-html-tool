@@ -62,6 +62,7 @@ const createState = () => ({
     }
   },
   archiveQualityStatus: 'Noch nicht geprüft.',
+  footerCollapsed: false,
   debug: { startupReady: false }
 });
 
