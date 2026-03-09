@@ -15,6 +15,7 @@
 | UP-043 | Layout UX | Footer-Bereiche bei kleiner Höhe automatisch in zwei kompakte Reihen statt vier Spalten staffeln | In enger Höhe wirken Footer-Karten dicht, obwohl die Inhalte selbst kurz bleiben | Mehr Lesbarkeit im unteren Bereich ohne zusätzliche Klicks oder neue Panels | offen | 042 |
 | UP-044 | Layout UX | Rechte Hilfsspalte optional als einklappbare Sektion pro Karte (statt immer offen) umschalten | Die Inhalte sind nützlich, nehmen aber in ruhigen Phasen dauerhaft Sichtfläche ein | Mehr Fokus auf der Hauptarbeitsfläche bei weiterhin schnellem Zugriff auf Hilfe | offen | 043 |
 | UP-045 | Layout Robustheit | Hauptlayout bei reduzierter Fensterhöhe mit dynamischer Mindestfläche je Bereich absichern | Starre Höhenanteile wurden reduziert, aber ein kleiner Guard für Extremhöhen fehlt noch | Weniger Überlagerungsrisiko bei sehr kleinen Laptop-Displays und Splitscreen-Nutzung | offen | 044 |
+| UP-046 | Modus-UX | Moduswechsel mit kleinem Hinweisbanner („Dashboard aktiv“, „Fenstermodus aktiv“, „Expertenmodus aktiv“) ergänzen | Die neue Modusauswahl ist funktional, aber ohne kurze Sichtmeldung kann der Wechsel übersehen werden | Klarere Orientierung direkt nach dem Umschalten mit minimaler UI-Last | offen | 045 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -59,6 +60,10 @@
 **Passende Vorschläge (UP-045):**
 1. Unter 760px Höhe Hauptbereich priorisieren und Footer auf kompakte Einspalter-Regel setzen
 2. Für Extremhöhen eine kurze Hinweiszeile „Kompaktansicht aktiv“ im Footer zeigen
+
+**Passende Vorschläge (UP-046):**
+1. Hinweis nur 2 Sekunden einblenden und dann automatisch ausblenden
+2. Farben des Banners an bestehende Statussemantik (neutral/info) koppeln
 
 ## Erledigt
 

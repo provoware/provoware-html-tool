@@ -15,6 +15,7 @@ const TODO_STORAGE_KEY = 'provoware:todo-start-items';
 const FONT_SCALE_STORAGE_KEY = 'provoware:font-scale';
 const PANEL_PROPORTION_STORAGE_KEY = 'provoware:panel-proportion-preset';
 const PANEL_PROPORTION_MANUAL_STORAGE_KEY = 'provoware:panel-proportion-manual';
+const WORKSPACE_MODE_STORAGE_KEY = 'provoware:workspace-mode';
 const AUTO_COLLAPSE_RIGHT_SIDEBAR_MAX_WIDTH = 1100;
 const AUTO_COLLAPSE_LEFT_SIDEBAR_MAX_WIDTH = 980;
 const PANEL_PROPORTION_PRESETS = Object.freeze({
@@ -569,6 +570,20 @@ const bindWorkspaceControls = () => {
   setSidebarState('toggle-left-sidebar', 'sidebar-left-collapsed');
   setSidebarState('toggle-right-sidebar', 'sidebar-right-collapsed');
 
+  const workspaceModeSelect = byId('workspace-mode-select');
+  const applyWorkspaceMode = (rawMode) => {
+    const mode = ['dashboard', 'window', 'expert'].includes(rawMode) ? rawMode : 'dashboard';
+    app.dataset.layoutMode = mode;
+    if (workspaceModeSelect) workspaceModeSelect.value = mode;
+    if (mode === 'dashboard') {
+      document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
+      app.classList.remove('has-maximized-panel');
+    }
+    window.localStorage.setItem(WORKSPACE_MODE_STORAGE_KEY, mode);
+  };
+  applyWorkspaceMode(window.localStorage.getItem(WORKSPACE_MODE_STORAGE_KEY) || app.dataset.layoutMode || 'dashboard');
+  workspaceModeSelect?.addEventListener('change', (event) => applyWorkspaceMode(event.target.value));
+
   const main = byId('main-content');
   const hiddenPanelsBar = document.createElement('section');
   hiddenPanelsBar.id = 'hidden-panels-bar';
@@ -606,6 +621,12 @@ const bindWorkspaceControls = () => {
   };
 
   document.querySelectorAll('.module-panel').forEach((panel) => {
+    panel.classList.remove('is-active-window');
+    panel.addEventListener('click', () => {
+      if (app.dataset.layoutMode !== 'window') return;
+      document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => entry.classList.remove('is-active-window'));
+      panel.classList.add('is-active-window');
+    });
     const controls = panel.querySelector('.module-controls');
     if (!controls) return;
     controls.innerHTML = [
@@ -618,6 +639,7 @@ const bindWorkspaceControls = () => {
 
   document.querySelectorAll('[data-panel-maximize]').forEach((button) => {
     button.addEventListener('click', () => {
+      if (app.dataset.layoutMode === 'dashboard') return;
       const panel = button.closest('.module-panel');
       if (!panel) return;
       const willMaximize = !panel.classList.contains('is-maximized');
@@ -636,6 +658,7 @@ const bindWorkspaceControls = () => {
 
   document.querySelectorAll('[data-panel-restore]').forEach((button) => {
     button.addEventListener('click', () => {
+      if (app.dataset.layoutMode === 'dashboard') return;
       const panel = button.closest('.module-panel');
       if (!panel || !panel.classList.contains('is-maximized')) return;
       panel.classList.remove('is-maximized');
@@ -694,10 +717,14 @@ const bindWorkspaceControls = () => {
     renderHiddenPanelsBar();
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
-    panel.classList.add('is-maximized');
-    app.classList.add('has-maximized-panel');
+    if (app.dataset.layoutMode !== 'dashboard') {
+      panel.classList.add('is-maximized');
+      app.classList.add('has-maximized-panel');
+    }
     syncSidebarAutoCollapse();
-    setModuleFocusFeedback(`${moduleLabel} ist jetzt geöffnet und maximiert.`);
+    setModuleFocusFeedback(app.dataset.layoutMode === 'dashboard'
+      ? `${moduleLabel} ist jetzt im Dashboard sichtbar.`
+      : `${moduleLabel} ist jetzt geöffnet und maximiert.`);
   });
 
   const todoList = byId('todo-list');

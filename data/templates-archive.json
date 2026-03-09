@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-47",
+      "title": "Modus- und Fensterlogik schnell prüfen",
+      "content": "Prüfe kurz: Dashboard-Modus zeigt Module ohne Overlay-Maximierung, Fenstermodus markiert aktives Fenster klar, Expertenmodus blendet zusätzliche Panelkennung ein.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T12:00:00.000Z",
+      "updatedAt": "2026-03-09T12:00:00.000Z"
+    },
+    {
       "id": "tpl-default-46",
       "title": "Layout-Überlagerung schnell prüfen",
       "content": "Prüfe bei enger Fensterhöhe und mittlerer Breite: Header, Hauptbereich und Footer dürfen sich nicht überdecken; alle Bereiche bleiben scroll- und lesbar.",
