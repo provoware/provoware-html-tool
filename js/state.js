@@ -54,7 +54,7 @@ const createState = () => ({
   moduleRegistry: { modules: [], summary: '-' },
   templateDesignStatus: { ok: false, message: '-' },
   pluginManager: {
-    location: 'footer',
+    location: 'sidebar',
     selectedPluginId: 'char-counter',
     plugins: {
       'char-counter': { enabled: true },

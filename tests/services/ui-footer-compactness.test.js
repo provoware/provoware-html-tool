@@ -17,9 +17,9 @@ const findRule = (css, selector, expectedFragment) => {
 test('ui-footer-compactness: kompakte footer-abstände bleiben stabil', () => {
   const css = readCss();
 
-  assert.equal(findRule(css, '.footer', 'padding: 8px;'), true);
-  assert.equal(findRule(css, '.footer-grid', 'gap: 6px;'), true);
-  assert.equal(findRule(css, '.footer-box', 'padding: 6px;'), true);
+  assert.equal(findRule(css, '.footer', 'padding: 10px;'), true);
+  assert.equal(findRule(css, '.footer-grid', 'gap: var(--gap);'), true);
+  assert.equal(findRule(css, '.footer-box', 'padding: clamp(6px, 0.42rem + 0.18vw, 10px);'), true);
   assert.equal(findRule(css, '.footer', 'padding: 4px;'), true);
   assert.equal(findRule(css, '.footer-box', 'padding: 4px;'), true);
 });

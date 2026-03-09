@@ -332,7 +332,10 @@
       </aside>
 
       <footer class="footer panel tile-footer" aria-label="Aktionsleiste">
-        <section class="footer-grid" aria-label="Footer-Bereiche">
+        <div class="footer-toggle-row">
+          <button id="footer-toggle" class="footer-toggle" type="button" aria-expanded="true" aria-controls="footer-panels">Footer einklappen</button>
+        </div>
+        <section id="footer-panels" class="footer-grid" aria-label="Footer-Bereiche">
           <article class="footer-box">
             <h2 class="panel-title" id="log-title">Letzte Meldungen</h2>
             <ul id="log-list" class="log-list"></ul>
@@ -356,11 +359,8 @@
             </section>
           </article>
           <article class="footer-box">
-            <h2 class="panel-title">Fensterstandard</h2>
+            <h2 class="panel-title">Fensterstandard & Hilfe</h2>
             <p class="sidebar-summary">Jedes Modul hat Maximieren, Minimieren und Ausblenden.</p>
-          </article>
-          <article class="footer-box">
-            <h2 class="panel-title">Hilfe kompakt</h2>
             <details class="guide-help-collapsible sidebar-help-compact">
               <summary>Kurze Bedienhilfe anzeigen</summary>
               <p class="sidebar-summary">Esc beendet Maximieren. Strg + Mausrad oder Strg + +/- passt die Größe an. Strg + 0 setzt auf 100% zurück.</p>

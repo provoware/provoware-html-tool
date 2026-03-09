@@ -55,7 +55,7 @@ export const createSessionActions = ({ getState, setState, selectDirectory, runS
   },
   onTogglePluginLocation: () => {
     const state = getState();
-    const manager = state.pluginManager || { location: 'footer', selectedPluginId: 'char-counter', plugins: {} };
+    const manager = state.pluginManager || { location: 'sidebar', selectedPluginId: 'char-counter', plugins: {} };
     const location = manager.location === 'sidebar' ? 'footer' : 'sidebar';
     setState({ pluginManager: { ...manager, location } });
   },

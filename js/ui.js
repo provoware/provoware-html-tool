@@ -963,6 +963,14 @@ export const bindUiActions = (actions) => {
   byId('plugin-location-toggle')?.addEventListener('click', () => {
     actions.onTogglePluginLocation();
   });
+  byId('footer-toggle')?.addEventListener('click', () => {
+    const footer = byId('app')?.querySelector('.footer');
+    const button = byId('footer-toggle');
+    if (!footer || !button) return;
+    const collapsed = footer.classList.toggle('is-collapsed');
+    button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    button.textContent = collapsed ? 'Footer ausklappen' : 'Footer einklappen';
+  });
   byId('action-check-archive-quality')?.addEventListener('click', () => {
     actions.onCheckArchiveQuality();
   });
