@@ -1126,6 +1126,16 @@ body::before {
   z-index: 1;
 }
 
+
+.footer.is-collapsed .footer-grid {
+  display: none;
+}
+
+.footer.is-collapsed {
+  grid-template-rows: auto;
+  min-height: auto;
+}
+
 .footer-box {
   border: 1px solid var(--panel-border);
   border-radius: 10px;
