@@ -111,6 +111,23 @@ test('header-chips: setzen nach setState nur die zwei Status-Texte korrekt', () 
     setState({
       selectedProjectDirectory: { name: 'Demo-Projekt' },
       selftestResult: null,
+      debug: { startupReady: true },
+      editorFilePath: '',
+      editorDirty: false,
+      profileArchive: {
+        events: [
+          { timestamp: 'invalid-date' },
+          { timestamp: '' }
+        ]
+      }
+    });
+    render();
+    assert.equal(nodes['header-stat-events-trend'].textContent, '0 (keine gültigen Zeitstempel)');
+    assert.equal(nodes['header-stat-events-trend-hint'].textContent, 'Vergleich nicht verfügbar');
+
+    setState({
+      selectedProjectDirectory: { name: 'Demo-Projekt' },
+      selftestResult: null,
       debug: { startupReady: false },
       editorFilePath: '',
       editorDirty: false,

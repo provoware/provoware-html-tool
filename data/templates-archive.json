@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-50",
+      "title": "Header-Trend mit ungültigen Zeitstempeln prüfen",
+      "content": "Prüfe den Header-Trend mit fehlerhaften Event-Zeitstempeln: Anzeige muss „0 (keine gültigen Zeitstempel)“ und den Hinweis „Vergleich nicht verfügbar“ zeigen, ohne Absturz oder irreführenden Wochenvergleich.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T14:10:00.000Z",
+      "updatedAt": "2026-03-09T14:10:00.000Z"
+    },
+    {
       "id": "tpl-default-49",
       "title": "Header-Hinweise kurz gegenprüfen",
       "content": "Prüfe kurz: Header-Rückmeldung blendet sich nach 3 Sekunden aus, Moduswechsel zeigt einen klaren Hinweis und deaktivierte Buttons erklären den Grund per Tooltip.",
