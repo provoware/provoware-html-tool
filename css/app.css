@@ -78,6 +78,9 @@
   --panel-overlay: rgba(193, 186, 115, 0.08);
   --surface-edge-soft: rgba(232, 223, 141, 0.36);
   --surface-edge-strong: rgba(232, 223, 141, 0.5);
+  --icon-btn-border: rgba(232, 223, 141, 0.32);
+  --icon-btn-hover-border: rgba(232, 223, 141, 0.56);
+  --icon-btn-glow: rgba(232, 223, 141, 0.18);
   --header-bg-start: rgba(17, 24, 29, 0.94);
   --header-bg-end: rgba(11, 15, 18, 0.9);
   --header-chip-bg-start: rgba(36, 54, 86, 0.8);
@@ -583,6 +586,12 @@ body::before {
   display: grid;
   gap: 4px;
   align-items: center;
+  border-color: var(--icon-btn-border);
+}
+
+.module-btn:hover {
+  border-color: var(--icon-btn-hover-border);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 184, 0.12), 0 0 0 1px var(--icon-btn-glow), 0 8px 16px rgba(0, 0, 0, 0.22);
 }
 
 .module-btn span {
@@ -814,7 +823,9 @@ body::before {
 .module-panel {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+  background:
+    linear-gradient(135deg, rgba(232, 223, 141, 0.08), rgba(232, 223, 141, 0) 42%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
   backdrop-filter: blur(6px);
   padding: 12px;
   display: grid;
@@ -1067,6 +1078,16 @@ body::before {
 .settings-actions .btn:not(.btn-primary) {
   filter: saturate(0.84);
 }
+
+.settings-actions .btn {
+  border-color: var(--icon-btn-border);
+}
+
+.settings-actions .btn:hover {
+  border-color: var(--icon-btn-hover-border);
+  box-shadow: inset 0 1px 0 rgba(255, 246, 184, 0.12), 0 0 0 1px var(--icon-btn-glow), 0 10px 20px rgba(0, 0, 0, 0.24);
+}
+
 
 .btn-action-main,
 .btn-action-check,
