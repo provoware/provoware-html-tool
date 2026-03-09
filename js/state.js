@@ -54,12 +54,14 @@ const createState = () => ({
   moduleRegistry: { modules: [], summary: '-' },
   templateDesignStatus: { ok: false, message: '-' },
   pluginManager: {
+    location: 'footer',
     selectedPluginId: 'char-counter',
     plugins: {
       'char-counter': { enabled: true },
       'spellcheck-auto': { enabled: true }
     }
   },
+  archiveQualityStatus: 'Noch nicht geprüft.',
   debug: { startupReady: false }
 });
 

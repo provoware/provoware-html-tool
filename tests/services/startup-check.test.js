@@ -106,3 +106,24 @@ test('Startup-Check bleibt robust bei unvollständiger Selbsttest-Antwort', asyn
   filesystemAdapter.checkPermissions = original.checkPermissions;
   filesystemAdapter.runProjectSelftest = original.runProjectSelftest;
 });
+
+test('Startup-Check liefert bei blockierter Rechteprüfung eine Alternative', async () => {
+  const original = {
+    getDirectoryInfo: filesystemAdapter.getDirectoryInfo,
+    checkPermissions: filesystemAdapter.checkPermissions,
+    runProjectSelftest: filesystemAdapter.runProjectSelftest
+  };
+
+  filesystemAdapter.getDirectoryInfo = async () => ({ ok: true, data: { name: 'demo' } });
+  filesystemAdapter.checkPermissions = async () => ({ ok: false, code: 'PERM_FAIL', message: 'blockiert' });
+
+  const result = await runStartupCheck({}, {});
+
+  assert.equal(result.ok, false);
+  assert.equal(result.data.nextAction?.target, 'action-run-selftest');
+  assert.equal(result.data.alternativeAction?.target, 'action-switch-dir');
+
+  filesystemAdapter.getDirectoryInfo = original.getDirectoryInfo;
+  filesystemAdapter.checkPermissions = original.checkPermissions;
+  filesystemAdapter.runProjectSelftest = original.runProjectSelftest;
+});

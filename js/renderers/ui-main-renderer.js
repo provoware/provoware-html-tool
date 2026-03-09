@@ -177,6 +177,7 @@ export const renderMainSection = ({
   const startupAssistantText = byId('startup-assistant-text');
   const startupAssistantHint = byId('startup-assistant-hint');
   const startupAssistantAction = byId('startup-assistant-action');
+  const startupAssistantAltAction = byId('startup-assistant-alt-action');
   if (startupSteps) {
     const progress = buildStartupSteps(state);
     startupSteps.innerHTML = progress.steps.map((step, index) => {
@@ -190,6 +191,7 @@ export const renderMainSection = ({
     const allDone = progress.steps.every((step) => step.done);
     const startupCheck = state.startupCheck;
     const suggestedAction = startupCheck?.ok === false ? startupCheck?.data?.nextAction : null;
+    const alternativeAction = startupCheck?.ok === false ? startupCheck?.data?.alternativeAction : null;
 
     if (startupAssistantTitle) {
       startupAssistantTitle.textContent = allDone ? 'Assistent: Fertig' : `Assistent: ${currentStep.assistantTitle}`;
@@ -204,7 +206,7 @@ export const renderMainSection = ({
     if (startupAssistantHint) {
       startupAssistantHint.textContent = allDone
         ? 'Du kannst bei Bedarf jederzeit erneut prüfen.'
-        : (suggestedAction?.hint || 'Der Knopf startet den passenden Schritt rechts im Bereich „Tool-Einstellungen und Tests“.');
+        : (alternativeAction?.hint || suggestedAction?.hint || 'Der Knopf startet den passenden Schritt rechts im Bereich „Tool-Einstellungen und Tests“.');
     }
     if (startupAssistantAction) {
       if (allDone) {
@@ -216,6 +218,13 @@ export const renderMainSection = ({
         startupAssistantAction.textContent = suggestedAction?.label || currentStep.actionLabel;
         startupAssistantAction.dataset.assistantTarget = suggestedAction?.target || currentStep.actionTarget;
       }
+    }
+    if (startupAssistantAltAction) {
+      const showAlternative = !allDone && alternativeAction?.target;
+      startupAssistantAltAction.hidden = !showAlternative;
+      startupAssistantAltAction.disabled = !showAlternative;
+      startupAssistantAltAction.textContent = showAlternative ? (alternativeAction.label || 'Alternative anzeigen') : 'Alternative anzeigen';
+      startupAssistantAltAction.dataset.assistantTarget = showAlternative ? alternativeAction.target : '';
     }
   }
 
@@ -231,6 +240,8 @@ export const renderMainSection = ({
   const selectedPlugin = pluginCatalog.find((item) => item.id === selectedPluginId) || pluginCatalog[0];
   const selectedPluginEnabled = pluginEnabled(state, selectedPlugin?.id || 'char-counter');
   setText('plugin-help-text', selectedPlugin?.help || 'Plugin-Hilfe nicht verfügbar.');
+  setText('plugin-location-toggle', state.pluginManager?.location === 'sidebar' ? 'Plugin im Footer anzeigen' : 'Plugin in Seitenleiste anzeigen');
+  setText('archive-quality-status', state.archiveQualityStatus || 'Noch nicht geprüft.');
   setText('plugin-state', selectedPluginEnabled ? 'Status: aktiv' : 'Status: deaktiviert');
   setText('plugin-toggle', selectedPluginEnabled ? 'Plugin deaktivieren' : 'Plugin aktivieren');
   const pluginOutput = byId('plugin-output');

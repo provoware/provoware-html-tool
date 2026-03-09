@@ -4,31 +4,11 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
-| UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
-| UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
-| UP-048 | Release-Readiness | Vor dem Release einen kompakten „Datenqualität prüfen“-Schalter für Archivzeitstempel ergänzen (nur Prüflauf, keine Migration) | Einzelne ungültige Zeitstempel werden jetzt robust abgefangen, bleiben aber ohne aktive Prüfung im Datenbestand unentdeckt | Frühere Erkennung stiller Datenprobleme und klarer Freigabe-Check ohne Systemumbau | offen | 048 |
-| UP-049 | Release UX | Header-Trend-Hinweis bei fehlender Historie um klaren Kurzgrund („keine verwertbaren Daten") ergänzen | Die Trendzahl ist robust, der Grund bleibt in Grenzfällen noch knapp und kann bei Release-Abnahmen Rückfragen erzeugen | Schnellere Freigabe-Entscheidung durch eindeutigen Grundtext direkt im Header | offen | 049 |
+| UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | offen | 049 |
 
-**Passende Vorschläge (UP-019):**
-1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
-2. Bei wiederholtem Fehlschlag kurz „Was kann ich jetzt tun?“ mit 2 Klickwegen einblenden
-
-**Passende Vorschläge (UP-021):**
-1. Referenzbilder pro Breakpoint im CI-Artefakt als optionalen Check speichern
-2. Bei größerem Pixel-Delta nur den betroffenen Header-Bereich markieren
-
-**Passende Vorschläge (UP-024):**
-1. Pro Layoutbereich einen kleinen „Position merken“-Schalter ergänzen
-2. Im Hilfehinweis kurz erklären, wann Footer- oder Sidebar-Modus sinnvoller ist
-
-**Passende Vorschläge (UP-048):**
-1. Prüfschalter nur im Expertenmodus zeigen, damit die Standardansicht ruhig bleibt
-2. Ergebnis als kurze Ampel („ok“, „warnung“) direkt im Header-Status ausgeben
-
-**Passende Vorschläge (UP-049):**
-1. Zusatzgrund nur in Grenzfällen anzeigen, damit die Standardansicht kompakt bleibt
-2. Kurzgrund aus derselben Trendfunktion ableiten, damit Zahl und Hinweis nie auseinanderlaufen
+**Passende Vorschläge (UP-050):**
+1. Kürzung nur bei sichtbarer Zweitoption anwenden, damit Standardfälle unverändert bleiben
+2. Gleiche Begrenzung auch für den Trend-Hinweis nutzen, damit Header-Texte konsistent wirken
 
 **Passende Vorschläge (UP-032):**
 1. Nur Erfolgsmeldungen automatisch ausblenden, Warnungen sichtbar lassen
@@ -75,6 +55,11 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | erledigt | 049 |
+| UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | erledigt | 049 |
+| UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | erledigt | 049 |
+| UP-048 | Release-Readiness | Vor dem Release einen kompakten „Datenqualität prüfen“-Schalter für Archivzeitstempel ergänzen (nur Prüflauf, keine Migration) | Einzelne ungültige Zeitstempel werden jetzt robust abgefangen, bleiben aber ohne aktive Prüfung im Datenbestand unentdeckt | Frühere Erkennung stiller Datenprobleme und klarer Freigabe-Check ohne Systemumbau | erledigt | 049 |
+| UP-049 | Release UX | Header-Trend-Hinweis bei fehlender Historie um klaren Kurzgrund („keine verwertbaren Daten") ergänzen | Die Trendzahl ist robust, der Grund bleibt in Grenzfällen noch knapp und kann bei Release-Abnahmen Rückfragen erzeugen | Schnellere Freigabe-Entscheidung durch eindeutigen Grundtext direkt im Header | erledigt | 049 |
 | UP-032 | Header UX | Header-Navigations-Feedback nach 3 Sekunden automatisch ausblenden | Die neue Rückmeldung hilft, bleibt aber dauerhaft sichtbar und kann den Statistikbereich unnötig belegen | Ruhigeres Dashboard bei weiter klarer Bestätigung nach Navigation | erledigt | 047 |
 | UP-033 | Accessibility UX | Deaktivierte Buttons um kurzen Tooltip-Titel mit Grund ergänzen | Einheitliche Disabled-Optik ist klar, aber ohne Grund bleibt der nächste Schritt teilweise unklar | Weniger Fehlklicks und schnellere Selbsthilfe durch direkten Hinweis am Knopf | erledigt | 047 |
 | UP-034 | Leerzustand UX | Leere Modul-Slots im Header-Monitoring auf Zeichenlimit prüfen und bei Überschreitung automatisch kürzen | Kürzere Texte wurden lokal verbessert, können aber bei späteren Änderungen wieder ausufern | Dauerhaft kompakte Leerzustände ohne manuelle Nacharbeit | erledigt | 047 |

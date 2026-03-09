@@ -53,6 +53,22 @@ export const createSessionActions = ({ getState, setState, selectDirectory, runS
       }
     });
   },
+  onTogglePluginLocation: () => {
+    const state = getState();
+    const manager = state.pluginManager || { location: 'footer', selectedPluginId: 'char-counter', plugins: {} };
+    const location = manager.location === 'sidebar' ? 'footer' : 'sidebar';
+    setState({ pluginManager: { ...manager, location } });
+  },
+  onCheckArchiveQuality: () => {
+    const state = getState();
+    const events = Array.isArray(state.profileArchive?.events) ? state.profileArchive.events : [];
+    const invalid = events.filter((event) => Number.isNaN(new Date(event?.createdAt || event?.timestamp || '').getTime())).length;
+    const message = invalid > 0
+      ? `Warnung: ${invalid} ungültige Zeitstempel gefunden.`
+      : `OK: ${events.length} Zeitstempel sind verwertbar.`;
+    setState({ archiveQualityStatus: message });
+    logEvent(invalid > 0 ? 'WARN' : 'INFO', 'ARCHIVE_QUALITY_CHECKED', message, { invalid, total: events.length });
+  },
   onLogoutWithAutosave: async () => {
     const state = getState();
     let autosave = { ok: true, code: 'AUTOSAVE_SKIPPED', message: 'Nichts zu speichern.' };
