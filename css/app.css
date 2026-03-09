@@ -1190,9 +1190,11 @@ body::before {
 .footer-toggle {
   border: 1px solid var(--panel-border-soft);
   border-radius: 999px;
-  padding: 0.24em 0.82em;
-  min-height: clamp(24px, 1.7em, 32px);
-  min-width: 122px;
+  padding: 0;
+  width: 84px;
+  height: 26px;
+  min-height: 26px;
+  min-width: 84px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1206,7 +1208,7 @@ body::before {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--gap);
   min-height: 100%;
   position: relative;
