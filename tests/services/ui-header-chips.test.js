@@ -242,3 +242,24 @@ test('header-chips: renderHeaderSection bleibt robust bei fehlenden optionalen H
   assert.equal(textsWritten['header-stat-events-trend'], '0 (keine Historie)');
   assert.equal(textsWritten['header-stat-events-trend-hint'], 'Vergleich nicht verfügbar (keine verwertbaren Daten)');
 });
+
+
+test('header-chips: renderHeaderSection bleibt robust ohne setText-Hook', () => {
+  const nextStepNode = { textContent: '' };
+
+  assert.doesNotThrow(() => {
+    renderHeaderSection({
+      state: { debug: { startupReady: false }, selectedProjectDirectory: null },
+      texts: { titles: {} },
+      messages: {},
+      setText: undefined,
+      byId: (id) => (id === 'next-step' ? nextStepNode : null),
+      autoFormatText: undefined,
+      buildHeaderProjectStatus: () => 'Wartet',
+      buildHeaderAutosaveStatus: () => 'Bereit',
+      layoutBudgetStatus: null
+    });
+  });
+
+  assert.equal(nextStepNode.textContent.includes('Ordner wählen'), true);
+});

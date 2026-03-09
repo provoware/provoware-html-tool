@@ -5,25 +5,17 @@
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
 | UP-053 | Sidebar UX | Rechte Sidebar in zwei klare Gruppen (KPIs/Trend und Selbsttest/CTA) mit Zwischenabstand gliedern | KPI, Trend und Selbsttest stehen aktuell noch zu dicht und erschweren schnelle Priorisierung | Ruhigerer Blicklauf mit schneller auffindbarer nächster Aktion in der Sidebar | offen | 050 |
-| UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | offen | 049 |
-| UP-051 | Header Robustheit | Header-Renderer soll `setText` defensiv als No-Op behandeln, wenn der Hook fehlt oder kein Funktionswert ist | Aktuell ist `byId`/`autoFormatText` abgesichert; ein fehlender `setText` kann in isolierten Test-/Embed-Szenarien dennoch früh abbrechen | Stabilerer Header-Renderpfad auch in Teilintegrationen und weniger Setup-Zwang für kleine Tests | offen | 049 |
 
 **Passende Vorschläge (UP-053):**
 1. Nur KPI-/Trend-Block und Selbsttest-Block lokal trennen, ohne Datenpfade zu ändern
 2. CTA unter dem Selbsttest visuell priorisieren, damit der nächste Schritt direkt erkennbar bleibt
 
-**Passende Vorschläge (UP-051):**
-1. Defensiven Guard nur lokal im Header-Renderer ergänzen, ohne globale Helper-API zu ändern
-2. Einen Mini-Testfall ergänzen, der fehlendes `setText` simuliert und Absturzfreiheit prüft
-
-**Passende Vorschläge (UP-050):**
-1. Kürzung nur bei sichtbarer Zweitoption anwenden, damit Standardfälle unverändert bleiben
-2. Gleiche Begrenzung auch für den Trend-Hinweis nutzen, damit Header-Texte konsistent wirken
-
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-051 | Header Robustheit | Header-Renderer soll `setText` defensiv als No-Op behandeln, wenn der Hook fehlt oder kein Funktionswert ist | Aktuell ist `byId`/`autoFormatText` abgesichert; ein fehlender `setText` kann in isolierten Test-/Embed-Szenarien dennoch früh abbrechen | Stabilerer Header-Renderpfad auch in Teilintegrationen und weniger Setup-Zwang für kleine Tests | erledigt | 061 |
+| UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | erledigt | 061 |
 | UP-052 | Visual Clarity UX | Halbtransparente Overlay-Flächen im unteren Dashboard-Bereich durch klar getrennte Ebenen (Panel vs. Footer) ersetzen | Im aktuellen Bild wirken „Letzte Meldungen“ und Slot-Bereich visuell überdeckt, wodurch Lesefluss und Fokus leiden | Stabilere Darstellung ohne Schichtkonflikte und schneller erfassbarer Inhalt bei Standardauflösung | erledigt | 050 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | erledigt | 049 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | erledigt | 049 |
