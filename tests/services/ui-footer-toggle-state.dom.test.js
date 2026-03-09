@@ -49,12 +49,12 @@ test('ui-footer-toggle-state(dom): setzt Collapse-Klasse und Buttontexte konsist
 
   syncFooterCollapseUi(true);
   assert.equal(classList.contains('is-collapsed'), true);
-  assert.equal(button.textContent, 'Footer ausklappen');
+  assert.equal(button.textContent, '▸ Footer ausklappen');
   assert.equal(button.attrs['aria-expanded'], 'false');
 
   syncFooterCollapseUi(false);
   assert.equal(classList.contains('is-collapsed'), false);
-  assert.equal(button.textContent, 'Footer einklappen');
+  assert.equal(button.textContent, '▾ Footer einklappen');
   assert.equal(button.attrs['aria-expanded'], 'true');
 
   global.document = previousDocument;

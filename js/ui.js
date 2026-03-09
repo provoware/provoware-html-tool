@@ -45,7 +45,7 @@ const syncFooterCollapseUi = (collapsed) => {
   if (!footer || !button) return;
   footer.classList.toggle('is-collapsed', collapsed === true);
   button.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-  button.textContent = collapsed ? 'Footer ausklappen' : 'Footer einklappen';
+  button.textContent = collapsed ? '▸ Footer ausklappen' : '▾ Footer einklappen';
 };
 
 const normalizeWhitespace = (value) => String(value || '').replace(/\s+/g, ' ').trim();
