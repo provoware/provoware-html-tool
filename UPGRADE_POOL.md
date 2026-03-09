@@ -7,6 +7,7 @@
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | offen | 020 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | offen | 022 |
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | offen | 025 |
+| UP-048 | Release-Readiness | Vor dem Release einen kompakten „Datenqualität prüfen“-Schalter für Archivzeitstempel ergänzen (nur Prüflauf, keine Migration) | Einzelne ungültige Zeitstempel werden jetzt robust abgefangen, bleiben aber ohne aktive Prüfung im Datenbestand unentdeckt | Frühere Erkennung stiller Datenprobleme und klarer Freigabe-Check ohne Systemumbau | offen | 048 |
 
 **Passende Vorschläge (UP-019):**
 1. Bei gesperrter Schreibfreigabe direkt die passende Alternative (nur lesen) als Zweitknopf anbieten
@@ -19,6 +20,10 @@
 **Passende Vorschläge (UP-024):**
 1. Pro Layoutbereich einen kleinen „Position merken“-Schalter ergänzen
 2. Im Hilfehinweis kurz erklären, wann Footer- oder Sidebar-Modus sinnvoller ist
+
+**Passende Vorschläge (UP-048):**
+1. Prüfschalter nur im Expertenmodus zeigen, damit die Standardansicht ruhig bleibt
+2. Ergebnis als kurze Ampel („ok“, „warnung“) direkt im Header-Status ausgeben
 
 **Passende Vorschläge (UP-032):**
 1. Nur Erfolgsmeldungen automatisch ausblenden, Warnungen sichtbar lassen

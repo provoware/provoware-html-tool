@@ -4,11 +4,18 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 3
+- Offene Upgrade-Empfehlungen: 4
 - Erledigte Upgrade-Empfehlungen: 43
 - Default-Archive: 3
-- Letzte Iteration: 047
+- Letzte Iteration: 048
 - Scan-Modus: delta
+## Iterations-Update 048 (Mini-Patch)
+
+- Neu: Header-Trend behandelt jetzt ungültige Archiv-Zeitstempel als klaren Fallback statt als missverständlichen Vorwochenvergleich.
+- Robustheit: Bei rein ungültigen Zeitstempeln zeigt die Statistik defensiv „0 (keine gültigen Zeitstempel)" und bleibt absturzfrei.
+- UX: Der Hinweistext bleibt in diesem Fall eindeutig bei „Vergleich nicht verfügbar“, wodurch Fehlinterpretationen reduziert werden.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Header-Trend mit ungültigen Zeitstempeln prüfen“ erweitert.
+
 ## Iterations-Update 047 (Mini-Patch)
 
 - Neu: Zehn offene Upgrade-Pool-Empfehlungen lokal abgeschlossen und in den Erledigt-Bereich verschoben.

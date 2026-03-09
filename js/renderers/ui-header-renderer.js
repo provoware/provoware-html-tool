@@ -9,10 +9,12 @@ const buildArchiveTrendLabel = (events) => {
   const previousWindowStart = nowMs - (14 * MS_PER_DAY);
   let currentCount = 0;
   let previousCount = 0;
+  let validEventsCount = 0;
 
   events.forEach((event) => {
     const parsedTime = Date.parse(String(event?.timestamp || ''));
     if (!Number.isFinite(parsedTime)) return;
+    validEventsCount += 1;
     if (parsedTime > nowMs || parsedTime < previousWindowStart) return;
     if (parsedTime >= currentWindowStart) {
       currentCount += 1;
@@ -20,6 +22,8 @@ const buildArchiveTrendLabel = (events) => {
     }
     previousCount += 1;
   });
+
+  if (validEventsCount === 0) return '0 (keine gültigen Zeitstempel)';
 
   const delta = currentCount - previousCount;
   if (delta > 0) return `${currentCount} (+${delta})`;
@@ -29,6 +33,8 @@ const buildArchiveTrendLabel = (events) => {
 
 const buildArchiveTrendHint = (events) => {
   if (!Array.isArray(events) || events.length === 0) return 'Vergleich nicht verfügbar';
+  const hasValidTimestamp = events.some((event) => Number.isFinite(Date.parse(String(event?.timestamp || ''))));
+  if (!hasValidTimestamp) return 'Vergleich nicht verfügbar';
   return 'Vergleich zur Vorwoche';
 };
 
