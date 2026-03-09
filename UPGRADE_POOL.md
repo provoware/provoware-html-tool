@@ -4,13 +4,13 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
-| UP-052 | Visual Clarity UX | Halbtransparente Overlay-Flächen im unteren Dashboard-Bereich durch klar getrennte Ebenen (Panel vs. Footer) ersetzen | Im aktuellen Bild wirken „Letzte Meldungen“ und Slot-Bereich visuell überdeckt, wodurch Lesefluss und Fokus leiden | Stabilere Darstellung ohne Schichtkonflikte und schneller erfassbarer Inhalt bei Standardauflösung | offen | 050 |
+| UP-053 | Sidebar UX | Rechte Sidebar in zwei klare Gruppen (KPIs/Trend und Selbsttest/CTA) mit Zwischenabstand gliedern | KPI, Trend und Selbsttest stehen aktuell noch zu dicht und erschweren schnelle Priorisierung | Ruhigerer Blicklauf mit schneller auffindbarer nächster Aktion in der Sidebar | offen | 050 |
 | UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | offen | 049 |
 | UP-051 | Header Robustheit | Header-Renderer soll `setText` defensiv als No-Op behandeln, wenn der Hook fehlt oder kein Funktionswert ist | Aktuell ist `byId`/`autoFormatText` abgesichert; ein fehlender `setText` kann in isolierten Test-/Embed-Szenarien dennoch früh abbrechen | Stabilerer Header-Renderpfad auch in Teilintegrationen und weniger Setup-Zwang für kleine Tests | offen | 049 |
 
-**Passende Vorschläge (UP-052):**
-1. Höhe und Z-Index nur für die betroffenen Footer-/Panel-Container lokal angleichen
-2. Bei kleinen Höhen automatisch kompaktere Innenabstände aktivieren, ohne Modulreihenfolge zu ändern
+**Passende Vorschläge (UP-053):**
+1. Nur KPI-/Trend-Block und Selbsttest-Block lokal trennen, ohne Datenpfade zu ändern
+2. CTA unter dem Selbsttest visuell priorisieren, damit der nächste Schritt direkt erkennbar bleibt
 
 **Passende Vorschläge (UP-051):**
 1. Defensiven Guard nur lokal im Header-Renderer ergänzen, ohne globale Helper-API zu ändern
@@ -20,51 +20,11 @@
 1. Kürzung nur bei sichtbarer Zweitoption anwenden, damit Standardfälle unverändert bleiben
 2. Gleiche Begrenzung auch für den Trend-Hinweis nutzen, damit Header-Texte konsistent wirken
 
-**Passende Vorschläge (UP-032):**
-1. Nur Erfolgsmeldungen automatisch ausblenden, Warnungen sichtbar lassen
-2. Die Ausblenddauer als kleinen Konfigwert in `data/app-config.json` hinterlegen
-
-**Passende Vorschläge (UP-033):**
-1. Tooltip nur für deaktivierte Schaltflächen mit vorhandener Grundmeldung setzen
-2. Zusätzlich im Statusbereich denselben Grundtext einmal als Klartext ausgeben
-
-**Passende Vorschläge (UP-034):**
-1. Zeichenlimit als kleine Konstante nahe am Slot-Renderer halten (z. B. 70 Zeichen)
-2. Bei Kürzung ein Ellipsis nutzen und den Volltext als `title` setzen
-
-**Passende Vorschläge (UP-041):**
-1. Tooltip nur im eingeklappten Zustand setzen, damit die Oberfläche ruhig bleibt
-2. Tooltip-Text aus derselben Sync-Hilfe ableiten, damit Label und Grund nie auseinanderlaufen
-
-**Passende Vorschläge (UP-042):**
-1. Statuszeile nur zeigen, wenn ein Modul fokussiert ist und nach 3 Sekunden wieder ausblenden
-2. Fokusquelle (Klick/Tastatur) nur intern nutzen, Text aber bewusst einfach halten
-
-**Passende Vorschläge (UP-043):**
-1. Breakpoint an realer Footerhöhe (statt nur Breite) ausrichten, z. B. via `max-height`
-2. Reihenfolge der Footer-Karten beibehalten, damit sich Nutzer nicht neu orientieren müssen
-
-**Passende Vorschläge (UP-044):**
-1. Pro Utility-Karte einen kleinen „Einklappen“-Schalter mit `aria-expanded` ergänzen
-2. Den letzten Offen/Zu-Zustand nur pro Sitzung im UI-State speichern (ohne Persistenzumbau)
-
-**Passende Vorschläge (UP-045):**
-1. Unter 760px Höhe Hauptbereich priorisieren und Footer auf kompakte Einspalter-Regel setzen
-2. Für Extremhöhen eine kurze Hinweiszeile „Kompaktansicht aktiv“ im Footer zeigen
-
-**Passende Vorschläge (UP-046):**
-1. Hinweis nur 2 Sekunden einblenden und dann automatisch ausblenden
-2. Farben des Banners an bestehende Statussemantik (neutral/info) koppeln
-
-**Passende Vorschläge (UP-047):**
-1. Kompaktmodus nur unterhalb einer kleinen Höhen-Schwelle (z. B. <760px) automatisch aktivieren
-2. Aufklapp-Zustand pro Sitzung merken, ohne neue Persistenzdatei einzuführen
-
-
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-052 | Visual Clarity UX | Halbtransparente Overlay-Flächen im unteren Dashboard-Bereich durch klar getrennte Ebenen (Panel vs. Footer) ersetzen | Im aktuellen Bild wirken „Letzte Meldungen“ und Slot-Bereich visuell überdeckt, wodurch Lesefluss und Fokus leiden | Stabilere Darstellung ohne Schichtkonflikte und schneller erfassbarer Inhalt bei Standardauflösung | erledigt | 050 |
 | UP-019 | Fehlerführung UX | Start-Assistent um kontextabhängige Zweitoption („Alternative anzeigen“) bei blockierten Checks ergänzen | Ein klarer Primärknopf hilft, aber manche Fälle brauchen sofort einen alternativen Weg ohne Suche | Weniger Sackgassen bei Rechte- oder Strukturproblemen und schnellere Selbsthilfe für Laien | erledigt | 049 |
 | UP-021 | Responsive QA | Visuelle Header-Snapshot-Prüfung für 1280px/980px/720px als kleinen Vergleichstest automatisieren | Der manuelle Blick erkennt Überlauf gut, aber Regressionen zwischen Iterationen bleiben ohne Referenzbilder schwer sichtbar | Früheres Erkennen von Layout-Brüchen bei minimalem Zusatzaufwand | erledigt | 049 |
 | UP-024 | Layout UX | Plugin-Verwaltung optional zwischen rechter Seitenleiste und Footer umschaltbar machen | Die Footer-Lösung schafft Platz im 3x3-Grid, manche Workflows brauchen jedoch seitliche Sofortsicht | Flexible Position je Arbeitsstil ohne doppelte UI-Pflege | erledigt | 049 |

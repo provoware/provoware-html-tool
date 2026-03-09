@@ -486,9 +486,18 @@
       "favorite": false,
       "createdAt": "2026-03-09T09:00:00.000Z",
       "updatedAt": "2026-03-09T09:00:00.000Z"
+    },
+    {
+      "id": "tpl-default-55",
+      "title": "Iteration-050 UI-Freigabe: Kontrast + Footer-Trennung",
+      "content": "Prüfe Warn-/Hilfstexte im Header und Assistentenfeld auf klare Lesbarkeit und kontrolliere bei 1280x720, dass Main-Grid und Footer nicht überlagern.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T19:10:00.000Z",
+      "updatedAt": "2026-03-09T19:10:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T11:00:00.000Z",
+  "updatedAt": "2026-03-09T19:10:00.000Z",
   "required_fields": [
     "id",
     "title",

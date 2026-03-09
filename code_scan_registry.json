@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": 1,
-    "last_scan": "2026-03-09T18:05:00Z",
+    "last_scan": "2026-03-09T19:20:00Z",
     "last_update_iteration": "050",
     "scan_mode": "delta",
     "project_phase": "early",
@@ -61,48 +61,17 @@
     }
   },
   "stats": {
-    "open_total": 4,
-    "done_total": 0,
+    "open_total": 2,
+    "done_total": 2,
     "by_type": {
-      "layout-overlap": 1,
-      "contrast-risk": 1,
       "information-density": 1,
       "sidebar-hierarchy": 1
     },
     "by_priority": {
-      "hoch": 2,
       "mittel": 2
     }
   },
   "open": [
-    {
-      "id": "CSR-050-001",
-      "file": "index.html",
-      "line": 1,
-      "type": "layout-overlap",
-      "priority": "hoch",
-      "scope": "ui",
-      "summary": "Unterer Dashboard-Bereich wirkt visuell überlagert",
-      "details": "Im Referenzbild überdeckt eine helle Schicht den Bereich zwischen 'Letzte Meldungen' und Modul-Slots; Lesbarkeit und Fokus sinken.",
-      "recommended_fix": "Footer-/Panel-Höhen, Layer-Reihenfolge und Overflow lokal prüfen und nur betroffene Container angleichen.",
-      "status": "offen",
-      "created_in_iteration": "050",
-      "last_checked_iteration": "050"
-    },
-    {
-      "id": "CSR-050-002",
-      "file": "css/app.css",
-      "line": 1,
-      "type": "contrast-risk",
-      "priority": "hoch",
-      "scope": "style",
-      "summary": "Mehrere Status-/Hinweistexte haben zu geringe visuelle Trennung",
-      "details": "Warn- und Hilfstexte liegen auf halbtransparenten Flächen mit geringer Kontrastreserve, besonders im Header und Assistentenfeld.",
-      "recommended_fix": "Kontrast in Status-, Warn- und Hilfsblöcken lokal erhöhen; transparente Flächen dort reduzieren.",
-      "status": "offen",
-      "created_in_iteration": "050",
-      "last_checked_iteration": "050"
-    },
     {
       "id": "CSR-050-003",
       "file": "index.html",
@@ -132,5 +101,26 @@
       "last_checked_iteration": "050"
     }
   ],
-  "done": []
+  "done": [
+    {
+      "id": "CSR-050-001",
+      "file": "index.html",
+      "line": 1,
+      "type": "layout-overlap",
+      "summary": "Unterer Dashboard-Bereich wirkt visuell überlagert",
+      "resolution": "Lokaler CSS-Patch mit höherem Kontrast, reduzierter Overlay-Intensität und stabiler Main/Footer-Ebenentrennung umgesetzt.",
+      "scope": "ui",
+      "closed_in_iteration": "050"
+    },
+    {
+      "id": "CSR-050-002",
+      "file": "css/app.css",
+      "line": 1,
+      "type": "contrast-risk",
+      "summary": "Mehrere Status-/Hinweistexte haben zu geringe visuelle Trennung",
+      "resolution": "Lokaler CSS-Patch mit höherem Kontrast, reduzierter Overlay-Intensität und stabiler Main/Footer-Ebenentrennung umgesetzt.",
+      "scope": "style",
+      "closed_in_iteration": "050"
+    }
+  ]
 }
