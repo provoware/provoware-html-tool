@@ -1,9 +1,20 @@
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-const buildArchiveTrendLabel = (events) => {
-  if (!Array.isArray(events) || events.length === 0) return '0 (keine Historie)';
+const evaluateArchiveTrend = (events) => {
+  if (!Array.isArray(events) || events.length === 0) {
+    return {
+      label: '0 (keine Historie)',
+      hint: 'Vergleich nicht verfügbar'
+    };
+  }
+
   const nowMs = Date.now();
-  if (!Number.isFinite(nowMs)) return '0 (keine Historie)';
+  if (!Number.isFinite(nowMs)) {
+    return {
+      label: '0 (keine Historie)',
+      hint: 'Vergleich nicht verfügbar'
+    };
+  }
 
   const currentWindowStart = nowMs - (7 * MS_PER_DAY);
   const previousWindowStart = nowMs - (14 * MS_PER_DAY);
@@ -23,19 +34,22 @@ const buildArchiveTrendLabel = (events) => {
     previousCount += 1;
   });
 
-  if (validEventsCount === 0) return '0 (keine gültigen Zeitstempel)';
+  if (validEventsCount === 0) {
+    return {
+      label: '0 (keine gültigen Zeitstempel)',
+      hint: 'Vergleich nicht verfügbar'
+    };
+  }
 
   const delta = currentCount - previousCount;
-  if (delta > 0) return `${currentCount} (+${delta})`;
-  if (delta < 0) return `${currentCount} (${delta})`;
-  return `${currentCount} (±0)`;
-};
+  const label = delta > 0
+    ? `${currentCount} (+${delta})`
+    : (delta < 0 ? `${currentCount} (${delta})` : `${currentCount} (±0)`);
 
-const buildArchiveTrendHint = (events) => {
-  if (!Array.isArray(events) || events.length === 0) return 'Vergleich nicht verfügbar';
-  const hasValidTimestamp = events.some((event) => Number.isFinite(Date.parse(String(event?.timestamp || ''))));
-  if (!hasValidTimestamp) return 'Vergleich nicht verfügbar';
-  return 'Vergleich zur Vorwoche';
+  return {
+    label,
+    hint: 'Vergleich zur Vorwoche'
+  };
 };
 
 export const renderHeaderSection = ({ state, texts, messages, setText, byId, autoFormatText, buildHeaderProjectStatus, buildHeaderAutosaveStatus, layoutBudgetStatus }) => {
@@ -47,8 +61,7 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   const modulesCount = Array.isArray(state.moduleRegistry?.modules) ? state.moduleRegistry.modules.length : 0;
   const templateCount = Array.isArray(state.templateArchive?.items) ? state.templateArchive.items.length : 0;
   const archiveEventsCount = Array.isArray(state.profileArchive?.events) ? state.profileArchive.events.length : 0;
-  const archiveEventsTrend = buildArchiveTrendLabel(state.profileArchive?.events);
-  const archiveEventsTrendHint = buildArchiveTrendHint(state.profileArchive?.events);
+  const archiveTrend = evaluateArchiveTrend(state.profileArchive?.events);
   const selftestStatus = state.selftestResult?.overallStatus;
   const selftestLabel = selftestStatus === 'green'
     ? 'stabil'
@@ -66,8 +79,8 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   setText('header-stat-modules', String(modulesCount));
   setText('header-stat-templates', String(templateCount));
   setText('header-stat-events', String(archiveEventsCount));
-  setText('header-stat-events-trend', archiveEventsTrend);
-  setText('header-stat-events-trend-hint', archiveEventsTrendHint);
+  setText('header-stat-events-trend', archiveTrend.label);
+  setText('header-stat-events-trend-hint', archiveTrend.hint);
   setText('header-stat-health', selftestLabel);
   const healthNode = byId('header-stat-health');
   if (healthNode) {

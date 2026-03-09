@@ -4,11 +4,18 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 4
+- Offene Upgrade-Empfehlungen: 5
 - Erledigte Upgrade-Empfehlungen: 43
 - Default-Archive: 3
-- Letzte Iteration: 048
+- Letzte Iteration: 049
 - Scan-Modus: delta
+## Iterations-Update 049 (Mini-Patch)
+
+- Neu: Header-Trend-Berechnung intern auf eine gemeinsame Auswertung zusammengeführt (gleiche Ausgabe, weniger Doppel-Logik).
+- Robustheit: Trend-Label und Trend-Hinweis nutzen jetzt dieselbe defensive Datengrundlage, dadurch sinkt Drift-Risiko bei Grenzfällen.
+- UX: Die Ausgabe bleibt konsistent zwischen Zahl und Hinweistext, auch wenn nur ungültige Zeitstempel vorliegen.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Release-Finalisierung: Header-Trend Schnellcheck“ erweitert.
+
 ## Iterations-Update 048 (Mini-Patch)
 
 - Neu: Header-Trend behandelt jetzt ungültige Archiv-Zeitstempel als klaren Fallback statt als missverständlichen Vorwochenvergleich.
