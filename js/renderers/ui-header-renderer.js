@@ -1,19 +1,23 @@
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
+const NO_DATA_TREND = {
+  label: '0 (keine Historie)',
+  hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
+};
+const NO_VALID_TIMESTAMPS_TREND = {
+  label: '0 (keine gültigen Zeitstempel)',
+  hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
+};
+
+const getArchiveEvents = (state) => (Array.isArray(state?.profileArchive?.events) ? state.profileArchive.events : []);
 
 const evaluateArchiveTrend = (events) => {
   if (!Array.isArray(events) || events.length === 0) {
-    return {
-      label: '0 (keine Historie)',
-      hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
-    };
+    return NO_DATA_TREND;
   }
 
   const nowMs = Date.now();
   if (!Number.isFinite(nowMs)) {
-    return {
-      label: '0 (keine Historie)',
-      hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
-    };
+    return NO_DATA_TREND;
   }
 
   const currentWindowStart = nowMs - (7 * MS_PER_DAY);
@@ -35,10 +39,7 @@ const evaluateArchiveTrend = (events) => {
   });
 
   if (validEventsCount === 0) {
-    return {
-      label: '0 (keine gültigen Zeitstempel)',
-      hint: 'Vergleich nicht verfügbar (keine verwertbaren Daten)'
-    };
+    return NO_VALID_TIMESTAMPS_TREND;
   }
 
   const delta = currentCount - previousCount;
@@ -53,16 +54,21 @@ const evaluateArchiveTrend = (events) => {
 };
 
 export const renderHeaderSection = ({ state, texts, messages, setText, byId, autoFormatText, buildHeaderProjectStatus, buildHeaderAutosaveStatus, layoutBudgetStatus }) => {
+  const safeState = state || {};
+  const safeById = typeof byId === 'function' ? byId : () => null;
+  const safeAutoFormatText = typeof autoFormatText === 'function' ? autoFormatText : (value) => String(value || '');
+  const archiveEvents = getArchiveEvents(safeState);
+
   setText('app-title', texts.titles?.appTitle || 'ProvoWare Dashboard');
   setText('app-subtitle', texts.titles?.appSubtitle || 'Projektstart');
-  setText('header-chip-project-status', buildHeaderProjectStatus(state));
-  setText('header-chip-autosave-status', buildHeaderAutosaveStatus(state));
+  setText('header-chip-project-status', buildHeaderProjectStatus(safeState));
+  setText('header-chip-autosave-status', buildHeaderAutosaveStatus(safeState));
 
-  const modulesCount = Array.isArray(state.moduleRegistry?.modules) ? state.moduleRegistry.modules.length : 0;
-  const templateCount = Array.isArray(state.templateArchive?.items) ? state.templateArchive.items.length : 0;
-  const archiveEventsCount = Array.isArray(state.profileArchive?.events) ? state.profileArchive.events.length : 0;
-  const archiveTrend = evaluateArchiveTrend(state.profileArchive?.events);
-  const selftestStatus = state.selftestResult?.overallStatus;
+  const modulesCount = Array.isArray(safeState.moduleRegistry?.modules) ? safeState.moduleRegistry.modules.length : 0;
+  const templateCount = Array.isArray(safeState.templateArchive?.items) ? safeState.templateArchive.items.length : 0;
+  const archiveEventsCount = archiveEvents.length;
+  const archiveTrend = evaluateArchiveTrend(archiveEvents);
+  const selftestStatus = safeState.selftestResult?.overallStatus;
   const selftestLabel = selftestStatus === 'green'
     ? 'stabil'
     : (selftestStatus === 'yellow' ? 'prüfen' : (selftestStatus === 'red' ? 'kritisch' : 'offen'));
@@ -82,7 +88,7 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   setText('header-stat-events-trend', archiveTrend.label);
   setText('header-stat-events-trend-hint', archiveTrend.hint);
   setText('header-stat-health', selftestLabel);
-  const healthNode = byId('header-stat-health');
+  const healthNode = safeById('header-stat-health');
   if (healthNode) {
     healthNode.className = `header-health-status ${selftestBadgeClass}`;
   }
@@ -90,14 +96,14 @@ export const renderHeaderSection = ({ state, texts, messages, setText, byId, aut
   setText('layout-budget-label', layoutBudgetStatus?.label || 'Layoutbudget aktiv: H15/F10/S8');
   setText('layout-budget-warning', layoutBudgetStatus?.warning || 'Budgetprüfung ausstehend.');
 
-  const nextStep = byId('next-step');
+  const nextStep = safeById('next-step');
   if (!nextStep) return;
-  const startupReady = state.debug?.startupReady;
-  const hasSelectedFolder = Boolean(state.selectedProjectDirectory?.name);
+  const startupReady = safeState.debug?.startupReady;
+  const hasSelectedFolder = Boolean(safeState.selectedProjectDirectory?.name);
   const fallbackWaiting = messages.startupWaiting || messages.startupBlocked || 'Bitte zuerst Ordner wählen';
   const nextMessage = startupReady
     ? (messages.startupReadyNext || 'Modul wählen')
     : (hasSelectedFolder ? fallbackWaiting : (messages.startupMissingFolderNext || 'Ordner wählen'));
   const label = messages.actionNext || 'Nächster Schritt';
-  nextStep.textContent = `${label}: ${autoFormatText(nextMessage || 'Ordner wählen')}`;
+  nextStep.textContent = `${label}: ${safeAutoFormatText(nextMessage || 'Ordner wählen')}`;
 };
