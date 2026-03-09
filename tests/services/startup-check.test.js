@@ -101,6 +101,7 @@ test('Startup-Check bleibt robust bei unvollständiger Selbsttest-Antwort', asyn
   assert.equal(result.code, 'STARTUP_SELFTEST_INVALID_PAYLOAD');
   assert.equal(result.data.needsSelftest, true);
   assert.equal(result.data.nextAction?.target, 'action-run-selftest');
+  assert.equal(result.data.alternativeAction?.target, 'action-run-write-test');
 
   filesystemAdapter.getDirectoryInfo = original.getDirectoryInfo;
   filesystemAdapter.checkPermissions = original.checkPermissions;
@@ -151,6 +152,7 @@ test('Startup-Check bleibt robust bei Randfällen der Selbsttest-Payload', async
     assert.equal(result.ok, false);
     assert.equal(result.code, 'STARTUP_SELFTEST_INVALID_PAYLOAD');
     assert.equal(result.data.needsSelftest, true);
+    assert.equal(result.data.alternativeAction?.target, 'action-run-write-test');
   }
 
   filesystemAdapter.getDirectoryInfo = original.getDirectoryInfo;
