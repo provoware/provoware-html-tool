@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desktop Dashboard Layout</title>
+  <style>
+    :root {
+      --bg-0: #0b0f12;
+      --bg-1: #11181d;
+      --surface-1: rgba(255,255,255,0.03);
+      --surface-2: rgba(255,255,255,0.015);
+      --surface-3: rgba(255,255,255,0.035);
+      --surface-4: rgba(255,255,255,0.012);
+      --surface-5: rgba(255,255,255,0.025);
+      --surface-6: rgba(255,255,255,0.01);
+      --text-soft: #b8c7d1;
+      --glow: #7fd0ff;
+      --glow-2: #ffd86b;
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
+      --shadow-hover: 0 14px 34px rgba(0, 0, 0, 0.42);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --header-h: 60px;
+      --nav-w: 88px;
+      --action-w: 260px;
+      --footer-h: 146px;
+      --gap: 14px;
+      --tile-min-h: 140px;
+      --panel-border: 1px solid rgba(255, 255, 255, 0.05);
+      --panel-inset: inset 0 1px 0 rgba(255,255,255,0.05);
+      --theme-border: rgba(255, 255, 255, 0.12);
+      --theme-outline: rgba(127, 208, 255, 0.12);
+      --theme-hover-border: rgba(127, 208, 255, 0.35);
+      --overlay-1: rgba(127, 208, 255, 0.06);
+      --overlay-2: rgba(255, 216, 107, 0.04);
+      --overlay-3: rgba(255,255,255,0.02);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: white;
+    }
+
+    body {
+      padding: 14px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--glow) 18%, transparent), transparent 26%),
+        radial-gradient(circle at top right, color-mix(in srgb, var(--glow-2) 15%, transparent), transparent 22%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-0));
+    }
+
+    .app-shell {
+      height: 100%;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: var(--header-h) minmax(0, 1fr) auto;
+      gap: var(--gap);
+    }
+
+    .panel-surface {
+      background: linear-gradient(180deg, var(--surface-1), var(--surface-2));
+      border: var(--panel-border);
+      box-shadow: var(--panel-inset), var(--shadow);
+    }
+
+    .theme-surface {
+      border-color: color-mix(in srgb, var(--glow) 25%, rgba(255,255,255,0.05));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 0 1px color-mix(in srgb, var(--glow) 10%, transparent),
+        0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    .theme-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--glow) 16%, transparent), transparent 40%, color-mix(in srgb, var(--glow-2) 10%, transparent)),
+        linear-gradient(180deg, var(--overlay-3), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .interactive {
+      transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    .interactive:hover {
+      transform: translateY(-1px);
+      border-color: var(--theme-hover-border);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px var(--theme-outline), var(--shadow-hover);
+    }
+
+    .header {
+      width: 100%;
+      min-height: 0;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+    }
+
+    .header-group,
+    .header-actions,
+    .theme-switcher {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stage {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: var(--nav-w) minmax(0, 1fr) var(--action-w);
+      gap: var(--gap);
+    }
+
+    .nav,
+    .actions,
+    .tile,
+    .footer-panel {
+      min-height: 0;
+    }
+
+    .nav {
+      border-radius: var(--radius-lg);
+      padding: 12px 10px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 12px;
+    }
+
+    .nav-stack,
+    .nav-bottom,
+    .action-stack,
+    .action-stack-secondary {
+      display: grid;
+      gap: 10px;
+    }
+
+    .nav-stack {
+      align-content: start;
+    }
+
+    .nav-bottom {
+      align-content: end;
+    }
+
+    .main-grid {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(var(--tile-min-h), 1fr));
+      gap: var(--gap);
+    }
+
+    .tile,
+    .footer-panel,
+    .icon-btn,
+    .action-btn,
+    .brand-chip,
+    .footer-toggle {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile {
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .actions {
+      border-radius: var(--radius-lg);
+      padding: 12px;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .action-section {
+      min-height: 0;
+      border-radius: calc(var(--radius-lg) - 4px);
+      border: 1px solid rgba(255,255,255,0.04);
+      background: linear-gradient(180deg, var(--surface-5), var(--surface-6));
+      padding: 10px;
+      display: grid;
+      align-content: start;
+      gap: 10px;
+    }
+
+    .action-stack,
+    .action-stack-secondary {
+      grid-auto-rows: minmax(52px, auto);
+    }
+
+    .footer-wrap {
+      min-height: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-toggle-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-toggle {
+      width: 84px;
+      height: 26px;
+      border-radius: 999px;
+      border: var(--panel-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--panel-inset), var(--shadow);
+    }
+
+    .footer {
+      overflow: hidden;
+      max-height: var(--footer-h);
+      opacity: 1;
+      transition: max-height 220ms ease, opacity 220ms ease;
+    }
+
+    .footer.collapsed {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--gap);
+      min-height: var(--footer-h);
+    }
+
+    .footer-panel {
+      min-height: var(--footer-h);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      padding: 0;
+    }
+
+    .icon-btn,
+    .action-btn,
+    .brand-chip {
+      border: var(--panel-border);
+      background: linear-gradient(180deg, var(--surface-3), var(--surface-4));
+      box-shadow: var(--panel-inset);
+    }
+
+    .brand-chip {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .icon-btn {
+      width: 100%;
+      min-height: 48px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .action-btn {
+      width: 100%;
+      min-height: 56px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .symbol {
+      position: relative;
+      z-index: 1;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(28px, 20%, 48px);
+      height: clamp(28px, 20%, 48px);
+      filter: drop-shadow(0 0 16px color-mix(in srgb, var(--glow) 10%, transparent));
+    }
+
+    .tile .symbol {
+      width: clamp(42px, 24%, 66px);
+      height: clamp(42px, 24%, 66px);
+    }
+
+    .footer-panel .symbol {
+      width: 34px;
+      height: 34px;
+    }
+
+    .footer-toggle .symbol {
+      transition: transform 220ms ease;
+    }
+
+    .footer-toggle[aria-expanded="false"] .symbol {
+      transform: rotate(180deg);
+    }
+
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .swatch[data-theme="theme-camo"] {
+      background: linear-gradient(135deg, #334127, #a89a58);
+    }
+
+    .swatch[data-theme="theme-red"] {
+      background: linear-gradient(135deg, #6d151e, #ff6c47);
+    }
+
+    .swatch[data-theme="theme-neon"] {
+      background: linear-gradient(135deg, #74fff3, #ffe460);
+    }
+
+    .swatch[data-theme="theme-ragga"] {
+      background: linear-gradient(135deg, #4fe92a, #ff5a22);
+    }
+
+    .theme-camo {
+      --bg-0: #090b08;
+      --bg-1: #11150f;
+      --text-soft: #d6c783;
+      --glow: #bac16f;
+      --glow-2: #d8b65f;
+      --theme-hover-border: rgba(186, 193, 111, 0.38);
+      --theme-outline: rgba(186, 193, 111, 0.12);
+    }
+
+    .theme-neon {
+      --bg-0: #07090c;
+      --bg-1: #0d1218;
+      --text-soft: #f1f5ba;
+      --glow: #89fff2;
+      --glow-2: #ffd84c;
+      --theme-hover-border: rgba(137, 255, 242, 0.38);
+      --theme-outline: rgba(137, 255, 242, 0.12);
+    }
+
+    .theme-ragga {
+      --bg-0: #120804;
+      --bg-1: #1d120a;
+      --text-soft: #ffe05f;
+      --glow: #7dff33;
+      --glow-2: #ff7a33;
+      --theme-hover-border: rgba(125, 255, 51, 0.38);
+      --theme-outline: rgba(125, 255, 51, 0.12);
+    }
+
+    .theme-red {
+      --bg-0: #0b0608;
+      --bg-1: #13090c;
+      --text-soft: #ff9f7d;
+      --glow: #ff563f;
+      --glow-2: #ff8f6b;
+      --theme-hover-border: rgba(255, 86, 63, 0.38);
+      --theme-outline: rgba(255, 86, 63, 0.12);
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .stroke {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .fill {
+      fill: currentColor;
+    }
+
+    @media (max-width: 1180px) {
+      body {
+        overflow: auto;
+      }
+
+      .app-shell {
+        min-height: calc(100vh - 28px);
+        height: auto;
+      }
+
+      .stage {
+        grid-template-columns: var(--nav-w) minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto;
+      }
+
+      .actions {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: none;
+        grid-auto-rows: minmax(120px, auto);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stage {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+
+      .nav {
+        grid-template-rows: auto;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        align-items: stretch;
+      }
+
+      .nav-stack,
+      .nav-bottom {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .nav > div:empty {
+        display: none;
+      }
+
+      .actions {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+      }
+
+      .main-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-camo">
+  <svg width="0" height="0" style="position:absolute;visibility:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-grid" viewBox="0 0 24 24">
+      <rect class="stroke" x="4" y="4" width="6" height="6" rx="1"></rect>
+      <rect class="stroke" x="14" y="4" width="6" height="6" rx="1"></rect>
+      <rect class="stroke" x="4" y="14" width="6" height="6" rx="1"></rect>
+      <rect class="stroke" x="14" y="14" width="6" height="6" rx="1"></rect>
+    </symbol>
+    <symbol id="i-bars" viewBox="0 0 24 24">
+      <rect class="fill" x="4" y="11" width="3.5" height="9" rx="1"></rect>
+      <rect class="fill" x="10.25" y="7" width="3.5" height="13" rx="1"></rect>
+      <rect class="fill" x="16.5" y="3" width="3.5" height="17" rx="1"></rect>
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <rect class="stroke" x="3" y="5" width="18" height="14" rx="2"></rect>
+      <path class="stroke" d="M4 7l8 6 8-6"></path>
+    </symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24">
+      <path class="stroke" d="M3 8a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"></path>
+    </symbol>
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <circle class="stroke" cx="9" cy="9" r="3"></circle>
+      <circle class="stroke" cx="16.5" cy="10" r="2.5"></circle>
+      <path class="stroke" d="M4 19c.8-2.7 3-4 5-4s4.2 1.3 5 4"></path>
+      <path class="stroke" d="M13.5 19c.5-1.8 1.9-2.8 3.7-2.8 1.7 0 3 .8 3.8 2.8"></path>
+    </symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24">
+      <circle class="stroke" cx="12" cy="12" r="3.2"></circle>
+      <path class="stroke" d="M12 2.8l1.1 2.2 2.5.4.7 2.4 2 1.5-1 2.3 1 2.3-2 1.5-.7 2.4-2.5.4L12 21.2l-2.1-2.2-2.5-.4-.7-2.4-2-1.5 1-2.3-1-2.3 2-1.5.7-2.4 2.5-.4L12 2.8z"></path>
+    </symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24">
+      <path class="stroke" d="M5 6h10a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H11l-4 3v-3H5a4 4 0 0 1-4-4v-2a4 4 0 0 1 4-4z"></path>
+    </symbol>
+    <symbol id="i-card" viewBox="0 0 24 24">
+      <rect class="stroke" x="4" y="5" width="16" height="14" rx="2"></rect>
+      <path class="stroke" d="M7 9h10M7 13h6"></path>
+    </symbol>
+    <symbol id="i-pie" viewBox="0 0 24 24">
+      <path class="stroke" d="M12 3v9h9"></path>
+      <path class="stroke" d="M12 3a9 9 0 1 0 9 9"></path>
+    </symbol>
+    <symbol id="i-square" viewBox="0 0 24 24">
+      <rect class="stroke" x="5" y="5" width="14" height="14" rx="2"></rect>
+    </symbol>
+    <symbol id="i-dots" viewBox="0 0 24 24">
+      <circle class="fill" cx="6" cy="12" r="1.8"></circle>
+      <circle class="fill" cx="12" cy="12" r="1.8"></circle>
+      <circle class="fill" cx="18" cy="12" r="1.8"></circle>
+    </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path class="stroke" d="M7 16h10l-1.2-1.8V10a3.8 3.8 0 0 0-7.6 0v4.2L7 16z"></path>
+      <path class="stroke" d="M10 18a2 2 0 0 0 4 0"></path>
+    </symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24">
+      <path class="stroke" d="M12 20s-6.5-4.3-8.4-8A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 8.4 6c-1.9 3.7-8.4 8-8.4 8z"></path>
+    </symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24">
+      <path class="stroke" d="M7 18h9a4 4 0 0 0 .5-8 5 5 0 0 0-9.6-1.4A3.5 3.5 0 0 0 7 18z"></path>
+    </symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24">
+      <path class="stroke" d="M9 21H5V10h4v11zM9 10l4-7 1 1v4h4a2 2 0 0 1 2 2l-1.2 7a2 2 0 0 1-2 1H9"></path>
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path class="stroke" d="M6 9l6 6 6-6"></path>
+    </symbol>
+  </svg>
+
+  <div class="app-shell">
+    <header class="header panel-surface theme-surface">
+      <div class="header-group">
+        <button class="brand-chip interactive theme-surface theme-overlay" type="button" aria-label="Brand">
+          <span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-square"></use></svg></span>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <div class="theme-switcher" aria-label="Theme Switcher">
+          <button class="swatch" type="button" data-theme="theme-camo" aria-label="Camouflage"></button>
+          <button class="swatch" type="button" data-theme="theme-red" aria-label="Red"></button>
+          <button class="swatch" type="button" data-theme="theme-neon" aria-label="Neon"></button>
+          <button class="swatch" type="button" data-theme="theme-ragga" aria-label="Ragga"></button>
+        </div>
+        <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Header Action" style="width:48px;min-height:48px;">
+          <span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-dots"></use></svg></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="stage">
+      <aside class="nav panel-surface theme-surface" aria-label="Navigation">
+        <div class="nav-stack">
+          <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Navigation Item"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-square"></use></svg></span></button>
+          <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Navigation Item"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-mail"></use></svg></span></button>
+          <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Navigation Item"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-folder"></use></svg></span></button>
+          <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Navigation Item"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-chat"></use></svg></span></button>
+          <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Navigation Item"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-card"></use></svg></span></button>
+        </div>
+        <div aria-hidden="true"></div>
+        <div class="nav-bottom">
+          <button class="icon-btn interactive theme-surface theme-overlay" type="button" aria-label="Navigation Item"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-gear"></use></svg></span></button>
+        </div>
+      </aside>
+
+      <section class="main-grid" aria-label="Primary Modules">
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-bars"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-mail"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-grid"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-folder"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-users"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-gear"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-chat"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-card"></use></svg></span></button>
+        <button class="tile panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Primary Tile"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-pie"></use></svg></span></button>
+      </section>
+
+      <aside class="actions panel-surface theme-surface" aria-label="Actions">
+        <section class="action-section" aria-label="Primary Actions">
+          <div class="action-stack">
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-cloud"></use></svg></span></button>
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-heart"></use></svg></span></button>
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-bell"></use></svg></span></button>
+          </div>
+        </section>
+
+        <section class="action-section" aria-label="Secondary Actions">
+          <div class="action-stack-secondary">
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-thumb"></use></svg></span></button>
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-folder"></use></svg></span></button>
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-card"></use></svg></span></button>
+            <button class="action-btn interactive theme-surface theme-overlay" type="button" aria-label="Action Button"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-square"></use></svg></span></button>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <div class="footer-wrap">
+      <div class="footer-toggle-row">
+        <button class="footer-toggle interactive theme-surface" id="footerToggle" type="button" aria-expanded="true" aria-controls="footerPanels">
+          <span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-chevron"></use></svg></span>
+        </button>
+      </div>
+
+      <footer class="footer" id="footerPanels" aria-label="Footer Panels">
+        <div class="footer-grid">
+          <button class="footer-panel panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Footer Panel"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-grid"></use></svg></span></button>
+          <button class="footer-panel panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Footer Panel"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-chat"></use></svg></span></button>
+          <button class="footer-panel panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Footer Panel"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-folder"></use></svg></span></button>
+          <button class="footer-panel panel-surface theme-surface theme-overlay interactive" type="button" aria-label="Footer Panel"><span class="symbol"><svg viewBox="0 0 24 24"><use href="#i-pie"></use></svg></span></button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const body = document.body;
+    const footer = document.getElementById("footerPanels");
+    const footerToggle = document.getElementById("footerToggle");
+    const themeButtons = document.querySelectorAll(".swatch");
+    const themeClasses = ["theme-camo", "theme-red", "theme-neon", "theme-ragga"];
+
+    footerToggle.addEventListener("click", () => {
+      const collapsed = footer.classList.toggle("collapsed");
+      footerToggle.setAttribute("aria-expanded", String(!collapsed));
+    });
+
+    themeButtons.forEach((swatch) => {
+      swatch.addEventListener("click", () => {
+        const nextTheme = swatch.dataset.theme;
+        if (!themeClasses.includes(nextTheme)) {
+          return;
+        }
+        body.classList.remove(...themeClasses);
+        body.classList.add(nextTheme);
+      });
+    });
+  </script>
+</body>
+</html>
