@@ -4,11 +4,18 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 12
+- Offene Upgrade-Empfehlungen: 13
 - Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 045
+- Letzte Iteration: 046
 - Scan-Modus: delta
+## Iterations-Update 046 (Mini-Patch)
+
+- Neu: Alle 7 offenen Layout-Aufgaben aus `todo.txt` als gezielter Minimal-Patch abgeschlossen.
+- Robustheit: Fenstermodus verhindert Overlay-Maximierung und hält Module parallel im Grid mit klaren Aktiv/Inaktiv-Zuständen.
+- UX: Statuswerte umbrechen jetzt sauber in Chips, Footer-Infobereich ist höher und Farbsemantik in Statusbereichen konsistenter.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Fenstermodus-Rasterfokus prüfen“ erweitert.
+
 ## Iterations-Update 045 (Mini-Patch)
 
 - Neu: Zehn offene TODO-Aufgaben mit lokalem UI-Patch abgeschlossen (Modus-Trennung, Panel-Verhalten, Toolbar-Aufteilung, Titelabsetzung).

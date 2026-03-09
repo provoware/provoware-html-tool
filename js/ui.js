@@ -642,6 +642,12 @@ const bindWorkspaceControls = () => {
       if (app.dataset.layoutMode === 'dashboard') return;
       const panel = button.closest('.module-panel');
       if (!panel) return;
+      if (app.dataset.layoutMode === 'window') {
+        document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => entry.classList.remove('is-active-window'));
+        panel.classList.add('is-active-window');
+        setModuleFocusFeedback('Fenstermodus bleibt im Raster: Das ausgewählte Modul ist jetzt aktiv markiert.');
+        return;
+      }
       const willMaximize = !panel.classList.contains('is-maximized');
       document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
       if (willMaximize) {
@@ -717,14 +723,20 @@ const bindWorkspaceControls = () => {
     renderHiddenPanelsBar();
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
-    if (app.dataset.layoutMode !== 'dashboard') {
+    if (app.dataset.layoutMode === 'window') {
+      document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => entry.classList.remove('is-active-window'));
+      panel.classList.add('is-active-window');
+      app.classList.remove('has-maximized-panel');
+    } else if (app.dataset.layoutMode !== 'dashboard') {
       panel.classList.add('is-maximized');
       app.classList.add('has-maximized-panel');
     }
     syncSidebarAutoCollapse();
     setModuleFocusFeedback(app.dataset.layoutMode === 'dashboard'
       ? `${moduleLabel} ist jetzt im Dashboard sichtbar.`
-      : `${moduleLabel} ist jetzt geöffnet und maximiert.`);
+      : app.dataset.layoutMode === 'window'
+        ? `${moduleLabel} ist jetzt im Fenstermodus aktiv.`
+        : `${moduleLabel} ist jetzt geöffnet und maximiert.`);
   });
 
   const todoList = byId('todo-list');
