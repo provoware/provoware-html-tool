@@ -69,6 +69,25 @@ const STARTUP_ACTIONS = Object.freeze({
   })
 });
 
+
+const ACTION_PAYLOAD_PRESETS = Object.freeze({
+  DIRECTORY_REQUIRED: Object.freeze({
+    ready: false,
+    needsDirectory: true,
+    needsSelftest: true
+  }),
+  PERMISSION_REQUIRED: Object.freeze({
+    ready: false,
+    needsDirectory: false,
+    needsSelftest: true
+  })
+});
+
+const withActionPreset = (presetKey, payload, actionKey, alternativeActionKey = '') => withAction({
+  ...(ACTION_PAYLOAD_PRESETS[presetKey] || {}),
+  ...payload
+}, actionKey, alternativeActionKey);
+
 const withAction = (payload, actionKey, alternativeActionKey = '') => {
   const action = STARTUP_ACTIONS[actionKey] || STARTUP_ACTIONS.RUN_SELFTEST;
   const alternative = STARTUP_ACTIONS[alternativeActionKey] || null;
@@ -134,7 +153,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: directoryInfo.code,
       message: 'Ordnerstatus konnte nicht gelesen werden.',
-      data: withAction({ ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }, 'SELECT_DIRECTORY')
+      data: withActionPreset('DIRECTORY_REQUIRED', { selfRepair: normalized }, 'SELECT_DIRECTORY')
     };
   }
 
@@ -144,7 +163,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: meta.code,
       message: meta.message,
-      data: withAction({ ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }, 'SELECT_DIRECTORY')
+      data: withActionPreset('DIRECTORY_REQUIRED', { selfRepair: normalized }, 'SELECT_DIRECTORY')
     };
   }
 
@@ -154,7 +173,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: permission.code,
       message: 'Rechteprüfung ist unerwartet abgebrochen.',
-      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
+      data: withActionPreset('PERMISSION_REQUIRED', { selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
     };
   }
 
@@ -164,7 +183,7 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: meta.code,
       message: meta.message,
-      data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
+      data: withActionPreset('PERMISSION_REQUIRED', { selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
     };
   }
 

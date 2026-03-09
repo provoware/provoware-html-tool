@@ -10,14 +10,6 @@
 1. Nur KPI-/Trend-Block und Selbsttest-Block lokal trennen, ohne Datenpfade zu ändern
 2. CTA unter dem Selbsttest visuell priorisieren, damit der nächste Schritt direkt erkennbar bleibt
 
-**Passende Vorschläge (UP-051):**
-1. Defensiven Guard nur lokal im Header-Renderer ergänzen, ohne globale Helper-API zu ändern
-2. Einen Mini-Testfall ergänzen, der fehlendes `setText` simuliert und Absturzfreiheit prüft
-
-**Passende Vorschläge (UP-050):**
-1. Kürzung nur bei sichtbarer Zweitoption anwenden, damit Standardfälle unverändert bleiben
-2. Gleiche Begrenzung auch für den Trend-Hinweis nutzen, damit Header-Texte konsistent wirken
-
 ## Erledigt
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
