@@ -619,6 +619,18 @@ const bindWorkspaceControls = () => {
   setSidebarState('toggle-right-sidebar', 'sidebar-right-collapsed');
 
   const workspaceModeSelect = byId('workspace-mode-select');
+  const ensureSingleWindowPanel = (preferredPanel = null) => {
+    if (app.dataset.layoutMode !== 'window') return;
+    const visiblePanels = [...document.querySelectorAll('.module-panel:not(.is-hidden)')];
+    if (!visiblePanels.length) return;
+    const activePanel = preferredPanel && !preferredPanel.classList.contains('is-hidden')
+      ? preferredPanel
+      : (document.querySelector('.module-panel.is-active-window:not(.is-hidden)') || visiblePanels[0]);
+    document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => {
+      if (entry !== activePanel) entry.classList.remove('is-active-window');
+    });
+    activePanel.classList.add('is-active-window');
+  };
   const applyWorkspaceMode = (rawMode) => {
     const mode = ['dashboard', 'window', 'expert'].includes(rawMode) ? rawMode : 'dashboard';
     app.dataset.layoutMode = mode;
@@ -630,6 +642,7 @@ const bindWorkspaceControls = () => {
     const modeMessage = mode === 'window'
       ? 'Fenstermodus aktiv.'
       : (mode === 'expert' ? 'Expertenmodus aktiv.' : 'Dashboard aktiv.');
+    if (mode === 'window') ensureSingleWindowPanel();
     setHeaderFeedback(modeMessage);
     window.localStorage.setItem(WORKSPACE_MODE_STORAGE_KEY, mode);
   };
@@ -697,8 +710,7 @@ const bindWorkspaceControls = () => {
       const panel = button.closest('.module-panel');
       if (!panel) return;
       if (app.dataset.layoutMode === 'window') {
-        document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => entry.classList.remove('is-active-window'));
-        panel.classList.add('is-active-window');
+        ensureSingleWindowPanel(panel);
         setModuleFocusFeedback('Fenstermodus bleibt im Raster: Das ausgewählte Modul ist jetzt aktiv markiert.');
         return;
       }
@@ -742,7 +754,9 @@ const bindWorkspaceControls = () => {
       if (!panel) return;
       panel.classList.toggle('is-hidden');
       if (panel.classList.contains('is-hidden')) panel.classList.remove('is-maximized');
+      if (panel.classList.contains('is-hidden')) panel.classList.remove('is-active-window');
       app.classList.toggle('has-maximized-panel', Boolean(document.querySelector('.module-panel.is-maximized')));
+      ensureSingleWindowPanel();
       syncSidebarAutoCollapse();
       renderHiddenPanelsBar();
     });
@@ -754,6 +768,7 @@ const bindWorkspaceControls = () => {
     const panel = document.querySelector(`.module-panel[data-panel="${panelId}"]`);
     if (!panel) return;
     panel.classList.remove('is-hidden');
+    ensureSingleWindowPanel(panel);
     renderHiddenPanelsBar();
   });
 
@@ -778,8 +793,7 @@ const bindWorkspaceControls = () => {
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     document.querySelectorAll('.module-panel.is-maximized').forEach((entry) => entry.classList.remove('is-maximized'));
     if (app.dataset.layoutMode === 'window') {
-      document.querySelectorAll('.module-panel.is-active-window').forEach((entry) => entry.classList.remove('is-active-window'));
-      panel.classList.add('is-active-window');
+      ensureSingleWindowPanel(panel);
       app.classList.remove('has-maximized-panel');
     } else if (app.dataset.layoutMode !== 'dashboard') {
       panel.classList.add('is-maximized');

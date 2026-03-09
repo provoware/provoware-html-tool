@@ -2067,11 +2067,15 @@ select {
 
 .app[data-layout-mode='window'] .module-panel {
   min-height: var(--module-min-height);
+  display: none;
   opacity: 0.78;
   transition: opacity var(--ui-transition), box-shadow var(--ui-transition), border-color var(--ui-transition);
 }
 
 .app[data-layout-mode='window'] .module-panel.is-active-window {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
   opacity: 1;
   border-color: rgba(76, 120, 232, 0.78);
   box-shadow: 0 0 0 2px rgba(125, 161, 255, 0.35), 0 8px 18px rgba(22, 34, 56, 0.2);
