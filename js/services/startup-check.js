@@ -79,6 +79,24 @@ const normalizeProjectStructure = (projectStructure) => {
   };
 };
 
+const buildSelftestRetryData = (permissionData, normalized) => withAction({
+  ready: false,
+  needsDirectory: false,
+  needsSelftest: true,
+  permission: permissionData,
+  selfRepair: normalized
+}, 'RUN_SELFTEST', 'RUN_WRITE_TEST');
+
+const extractSelftestPayload = (selftestData) => {
+  if (!selftestData || typeof selftestData !== 'object') {
+    return null;
+  }
+
+  return selftestData.data && typeof selftestData.data === 'object'
+    ? selftestData.data
+    : null;
+};
+
 export const runStartupCheck = async (projectStructure, options = {}) => {
   const normalized = normalizeProjectStructure(projectStructure);
 
@@ -126,33 +144,19 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
       ok: false,
       code: selftest.code || 'STARTUP_SELFTEST_FAILED',
       message: 'Selbsttest ist fehlgeschlagen. Bitte Selbsttest erneut starten.',
-      data: withAction({
-        ready: false,
-        needsDirectory: false,
-        needsSelftest: true,
-        permission: permission.data.data,
-        selfRepair: normalized
-      }, 'RUN_SELFTEST', 'RUN_WRITE_TEST')
+      data: buildSelftestRetryData(permission.data.data, normalized)
     };
   }
 
   const selftestData = selftest.data;
-  const selftestPayload = selftestData && typeof selftestData.data === 'object' && selftestData.data
-    ? selftestData.data
-    : null;
+  const selftestPayload = extractSelftestPayload(selftestData);
 
   if (!selftestPayload) {
     return {
       ok: false,
       code: 'STARTUP_SELFTEST_INVALID_PAYLOAD',
       message: 'Selbsttest-Antwort ist unvollständig. Bitte Selbsttest erneut starten.',
-      data: withAction({
-        ready: false,
-        needsDirectory: false,
-        needsSelftest: true,
-        permission: permission.data.data,
-        selfRepair: normalized
-      }, 'RUN_SELFTEST', 'RUN_WRITE_TEST')
+      data: buildSelftestRetryData(permission.data.data, normalized)
     };
   }
 
