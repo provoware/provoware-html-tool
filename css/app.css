@@ -23,6 +23,8 @@
   --space-2: 12px;
   --space-3: 16px;
   --space-4: 24px;
+  --space-section: 14px;
+  --space-cluster: 10px;
   --space-inset: 14px;
   --space-outer: 10px;
   --space-panel-gap: 10px;
@@ -558,7 +560,8 @@ body::before {
   grid-template-rows: minmax(0, 1fr);
   gap: 0;
   font-size: 1.02rem;
-  min-width: min(100%, var(--panel-main-min));
+  min-width: clamp(520px, 58vw, 1280px);
+  max-width: 100%;
   min-height: 0;
   overflow: hidden;
 }
@@ -670,17 +673,18 @@ body::before {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: var(--space-panel-gap);
+  gap: var(--space-section);
   min-height: 0;
   align-items: stretch;
+  overflow: hidden;
 }
 
 .module-panel {
   border: 1px solid rgba(156, 175, 142, 0.36);
   border-radius: 12px;
-  background: rgba(239, 245, 233, 0.92);
+  background: rgba(228, 236, 223, 0.95);
   backdrop-filter: blur(2px);
-  padding: 10px;
+  padding: 12px;
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 0;
@@ -700,13 +704,13 @@ body::before {
   gap: 8px;
   flex-wrap: wrap;
   min-height: 42px;
-  padding: 2px 0 10px;
-  border-bottom: 1px solid rgba(154, 171, 140, 0.44);
+  padding: 2px 0 12px;
+  border-bottom: 1px solid rgba(138, 156, 126, 0.5);
 }
 
 .module-head h3 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.32;
   color: #182619;
   overflow-wrap: anywhere;
@@ -743,7 +747,7 @@ body::before {
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
 .module-panel-placeholder p {
@@ -756,7 +760,7 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--space-cluster);
 }
 
 .module-panel.is-empty-slot {
@@ -939,7 +943,7 @@ body::before {
 .footer-grid {
   display: grid;
   grid-template-columns: 1.05fr 1.35fr 0.85fr 0.75fr;
-  gap: 6px;
+  gap: var(--space-cluster);
   min-height: 100%;
   position: relative;
   z-index: 1;
@@ -949,7 +953,7 @@ body::before {
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   background: rgba(242, 247, 237, 0.85);
-  padding: 6px;
+  padding: 8px;
   min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -968,7 +972,13 @@ body::before {
 
 .todo-panel {
   display: grid;
-  gap: 10px;
+  gap: var(--space-section);
+}
+
+.todo-section-title {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #1e2d4b;
 }
 
 .todo-form-row {
@@ -991,15 +1001,20 @@ body::before {
   justify-content: space-between;
   gap: 8px;
   align-items: center;
-  border: 1px solid rgba(171, 191, 245, 0.65);
+  border: 1px solid rgba(124, 152, 222, 0.76);
   border-radius: 8px;
-  background: rgba(243, 249, 255, 0.9);
-  padding: 6px 8px;
+  background: rgba(235, 244, 255, 0.96);
+  padding: 8px 10px;
+}
+
+.todo-list li span {
+  color: #162946;
+  font-weight: 600;
 }
 
 .panel-title {
   margin: 0 0 var(--space-2);
-  font-size: 1rem;
+  font-size: 1.04rem;
   color: #172217;
   position: relative;
   z-index: 1;
@@ -1237,7 +1252,8 @@ body::before {
 }
 
 .archive-category h4 {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
+  font-size: 0.96rem;
   text-transform: capitalize;
   color: #233e68;
 }
@@ -1613,6 +1629,7 @@ body::before {
 .guide-tools-index h4,
 .guide-section h4 {
   margin: 0 0 6px;
+  font-size: 0.96rem;
 }
 
 
@@ -1772,6 +1789,10 @@ body::before {
   grid-row: span 1;
 }
 
+.panel-grid .module-panel[data-panel='todo'] {
+  grid-column: span 2;
+}
+
 @media (min-width: 981px) {
   .panel-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1791,7 +1812,8 @@ body::before {
 
 .account-archive-panel {
   display: grid;
-  gap: 8px;
+  gap: var(--space-section);
+  overflow-x: hidden;
 }
 
 .account-archive-head {
@@ -1810,9 +1832,10 @@ body::before {
 
 .account-archive-content {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-cluster);
   min-height: 0;
+  overflow-x: hidden;
 }
 
 .account-list,
@@ -1834,6 +1857,8 @@ body::before {
   border-radius: 8px;
   padding: 6px;
   background: rgba(243, 249, 255, 0.9);
+  overflow-x: hidden;
+  word-break: break-word;
 }
 
 .account-list li div {
