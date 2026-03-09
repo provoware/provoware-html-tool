@@ -12,6 +12,19 @@ const extractNextStepFilePath = (nextStep) => {
   return match?.[1] || '';
 };
 
+
+const clampAssistantHint = (hintText, maxLength = 110) => {
+  const normalized = String(hintText || '').trim();
+  if (!normalized || normalized.length <= maxLength) {
+    return { shortText: normalized, fullText: normalized };
+  }
+
+  return {
+    shortText: `${normalized.slice(0, maxLength - 1).trimEnd()}…`,
+    fullText: normalized
+  };
+};
+
 export const renderMainSection = ({
   state,
   byId,
@@ -204,9 +217,13 @@ export const renderMainSection = ({
           : currentStep.assistantText);
     }
     if (startupAssistantHint) {
-      startupAssistantHint.textContent = allDone
+      const assistantHintText = allDone
         ? 'Du kannst bei Bedarf jederzeit erneut prüfen.'
         : (alternativeAction?.hint || suggestedAction?.hint || 'Der Knopf startet den passenden Schritt rechts im Bereich „Tool-Einstellungen und Tests“.');
+      const hasAlternativeAction = Boolean(!allDone && alternativeAction?.target);
+      const clampedHint = hasAlternativeAction ? clampAssistantHint(assistantHintText, 110) : { shortText: assistantHintText, fullText: assistantHintText };
+      startupAssistantHint.textContent = clampedHint.shortText;
+      startupAssistantHint.title = clampedHint.fullText;
     }
     if (startupAssistantAction) {
       if (allDone) {

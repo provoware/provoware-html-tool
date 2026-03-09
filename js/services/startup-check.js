@@ -1,5 +1,32 @@
 import { filesystemAdapter } from '../adapters/filesystem-adapter.js';
 
+const STARTUP_RESULT_META = Object.freeze({
+  STARTUP_DIRECTORY_READ_FAILED: Object.freeze({
+    code: 'STARTUP_DIRECTORY_REQUIRED',
+    message: 'Bitte zuerst einen Projektordner wählen.'
+  }),
+  STARTUP_PERMISSION_FAILED: Object.freeze({
+    code: 'STARTUP_PERMISSION_FAILED',
+    message: 'Rechteprüfung ist fehlgeschlagen.'
+  }),
+  STARTUP_SELFTEST_FAILED: Object.freeze({
+    code: 'STARTUP_SELFTEST_FAILED',
+    message: 'Selbsttest ist fehlgeschlagen. Bitte Selbsttest erneut starten.'
+  }),
+  STARTUP_SELFTEST_INVALID_PAYLOAD: Object.freeze({
+    code: 'STARTUP_SELFTEST_INVALID_PAYLOAD',
+    message: 'Selbsttest-Antwort ist unvollständig. Bitte Selbsttest erneut starten.'
+  }),
+  STARTUP_READY: Object.freeze({
+    code: 'STARTUP_READY',
+    message: 'Grundcheck ist erfolgreich.'
+  }),
+  STARTUP_BLOCKED: Object.freeze({
+    code: 'STARTUP_BLOCKED',
+    message: 'Grundcheck ist noch nicht erfolgreich.'
+  })
+});
+
 const safeCall = async (label, task) => {
   try {
     const result = await task();
@@ -13,7 +40,6 @@ const safeCall = async (label, task) => {
     };
   }
 };
-
 
 const STARTUP_ACTIONS = Object.freeze({
   SELECT_DIRECTORY: Object.freeze({
@@ -97,6 +123,8 @@ const extractSelftestPayload = (selftestData) => {
     : null;
 };
 
+const startupMeta = (key) => STARTUP_RESULT_META[key];
+
 export const runStartupCheck = async (projectStructure, options = {}) => {
   const normalized = normalizeProjectStructure(projectStructure);
 
@@ -111,10 +139,11 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
   }
 
   if (!directoryInfo.data.ok) {
+    const meta = startupMeta('STARTUP_DIRECTORY_READ_FAILED');
     return {
       ok: false,
-      code: 'STARTUP_DIRECTORY_REQUIRED',
-      message: 'Bitte zuerst einen Projektordner wählen.',
+      code: meta.code,
+      message: meta.message,
       data: withAction({ ready: false, needsDirectory: true, needsSelftest: true, selfRepair: normalized }, 'SELECT_DIRECTORY')
     };
   }
@@ -130,20 +159,22 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
   }
 
   if (!permission.data.ok) {
+    const meta = startupMeta('STARTUP_PERMISSION_FAILED');
     return {
       ok: false,
-      code: 'STARTUP_PERMISSION_FAILED',
-      message: 'Rechteprüfung ist fehlgeschlagen.',
+      code: meta.code,
+      message: meta.message,
       data: withAction({ ready: false, needsDirectory: false, needsSelftest: true, selfRepair: normalized }, 'RUN_SELFTEST', 'SWITCH_DIRECTORY')
     };
   }
 
   const selftest = await safeCall('STARTUP_SELFTEST', () => filesystemAdapter.runProjectSelftest({ projectStructure: normalized.projectStructure, runWriteTest: false }));
   if (!selftest.ok || !selftest.data || typeof selftest.data !== 'object') {
+    const meta = startupMeta('STARTUP_SELFTEST_FAILED');
     return {
       ok: false,
-      code: selftest.code || 'STARTUP_SELFTEST_FAILED',
-      message: 'Selbsttest ist fehlgeschlagen. Bitte Selbsttest erneut starten.',
+      code: selftest.code || meta.code,
+      message: meta.message,
       data: buildSelftestRetryData(permission.data.data, normalized)
     };
   }
@@ -152,20 +183,22 @@ export const runStartupCheck = async (projectStructure, options = {}) => {
   const selftestPayload = extractSelftestPayload(selftestData);
 
   if (!selftestPayload) {
+    const meta = startupMeta('STARTUP_SELFTEST_INVALID_PAYLOAD');
     return {
       ok: false,
-      code: 'STARTUP_SELFTEST_INVALID_PAYLOAD',
-      message: 'Selbsttest-Antwort ist unvollständig. Bitte Selbsttest erneut starten.',
+      code: meta.code,
+      message: meta.message,
       data: buildSelftestRetryData(permission.data.data, normalized)
     };
   }
 
   const ready = selftestData.ok && selftestPayload.overallStatus === 'green';
+  const meta = startupMeta(ready ? 'STARTUP_READY' : 'STARTUP_BLOCKED');
 
   return {
     ok: ready,
-    code: ready ? 'STARTUP_READY' : 'STARTUP_BLOCKED',
-    message: ready ? 'Grundcheck ist erfolgreich.' : 'Grundcheck ist noch nicht erfolgreich.',
+    code: meta.code,
+    message: meta.message,
     data: withAction({
       ready,
       needsDirectory: false,
