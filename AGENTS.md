@@ -434,12 +434,12 @@ Maximale Fortschrittsdichte erzeugen.
 
 ---
 
-## Zusatzauftrag Iteration 030 (Mini-Fokus)
+## Zusatzauftrag Iteration 049 (Release-Finalisierung, Mini-Fokus)
 Für die aktuelle Iteration gilt ein enger Pflichtfokus mit Minimal-Patch:
 
-1. `UP-020` priorisieren: 7-Tage-Trend in Header-Statistik umsetzen
-2. Doppelte ID `UP-027` im `UPGRADE_POOL.md` bereinigen (nur ID-Konsistenz)
-3. `AGENTS.md` auf aktuellen Fortschritt und effiziente Ausführung schärfen
+1. Release-Finalisierung in `AGENTS.md` klar und kurz verankern
+2. Überflüssige Doppel-Logik in direkt betroffenen Header-Funktionen reduzieren
+3. Upgrade-/Registry-/Todo-Stand konsistent auf Iteration 049 ziehen
 
 Verbindliche Vorarbeit vor jedem Patch (kurz dokumentieren):
 - betroffene Dateien
@@ -452,9 +452,9 @@ Verbindliche Vorarbeit vor jedem Patch (kurz dokumentieren):
 Verbindliche Analyse-Suchbegriffe vor Patch:
 - `header-stat-events`
 - `profileArchive.events`
-- `UP-020`
-- `UP-027`
-- `7-Tage-Trend`
+- `UP-049`
+- `Release-Finalisierung`
+- `code_scan_registry`
 
 Zusätzliche Nicht-Ziele in dieser Iteration:
 - keine Header-Komplettneugestaltung
@@ -471,5 +471,6 @@ Effizienzleitplanken (ergänzend):
 Die Punkte sind zuerst in `todo.txt` als Checkbox-Aufgaben zu pflegen und danach exakt patchbasiert abzuarbeiten.
 
 ### Fortschrittsstand (kompakt)
-- Iteration 045: Fokus auf zehn lokale TODO-Abschlüsse mit kleinem UI-Delta erledigt.
+- Iteration 048: Header-Trend robust gegen ungültige Zeitstempel abgeschlossen.
+- Iteration 049: Release-Finalisierung mit minimalem Renderer-/Doku-Delta gestartet.
 - Effizienz weiter verbindlich: zuerst Renderer/Logik, dann nur minimale Markup/CSS-Nachzüge.

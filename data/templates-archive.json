@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-51",
+      "title": "Release-Finalisierung: Header-Trend Schnellcheck",
+      "content": "Prüfe vor Release mit leerem Archiv, gültigen Zeitstempeln und ungültigen Zeitstempeln: 7-Tage-Trend bleibt stabil, Hinweistext passt zum Datenzustand und zeigt keine falsche Vorwochen-Aussage.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T15:05:00.000Z",
+      "updatedAt": "2026-03-09T15:05:00.000Z"
+    },
+    {
       "id": "tpl-default-50",
       "title": "Header-Trend mit ungültigen Zeitstempeln prüfen",
       "content": "Prüfe den Header-Trend mit fehlerhaften Event-Zeitstempeln: Anzeige muss „0 (keine gültigen Zeitstempel)“ und den Hinweis „Vergleich nicht verfügbar“ zeigen, ohne Absturz oder irreführenden Wochenvergleich.",
