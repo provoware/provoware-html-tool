@@ -1097,12 +1097,29 @@ body::before {
   padding: 10px;
   min-height: var(--footer-h);
   max-height: var(--footer-h);
-  overflow: auto;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+}
+
+.footer-toggle-row {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-toggle {
+  border: 1px solid var(--panel-border-soft);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font: inherit;
+  color: var(--text-soft);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gap);
   min-height: 100%;
   position: relative;
