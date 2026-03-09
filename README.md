@@ -4,11 +4,18 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 11
+- Offene Upgrade-Empfehlungen: 12
 - Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 044
+- Letzte Iteration: 045
 - Scan-Modus: delta
+## Iterations-Update 045 (Mini-Patch)
+
+- Neu: Zehn offene TODO-Aufgaben mit lokalem UI-Patch abgeschlossen (Modus-Trennung, Panel-Verhalten, Toolbar-Aufteilung, Titelabsetzung).
+- Robustheit: Fenstermaximierung bleibt jetzt im Grid-Kontext statt als globales Fixed-Overlay, inklusive defensivem Modus-Guard.
+- UX: Neuer Arbeitsmodus-Schalter (`Dashboard`, `Fenstermodus`, `Expertenmodus`) und klarere Account-Toolbar für Aktionen/Suche.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Modus- und Fensterlogik schnell prüfen“ erweitert.
+
 
 
 

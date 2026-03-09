@@ -469,3 +469,7 @@ Effizienzleitplanken (ergänzend):
 - Für UX-Mehrwert bevorzugt bestehende Datenpfade nutzen (keine neue Datenquelle aufbauen)
 
 Die Punkte sind zuerst in `todo.txt` als Checkbox-Aufgaben zu pflegen und danach exakt patchbasiert abzuarbeiten.
+
+### Fortschrittsstand (kompakt)
+- Iteration 045: Fokus auf zehn lokale TODO-Abschlüsse mit kleinem UI-Delta erledigt.
+- Effizienz weiter verbindlich: zuerst Renderer/Logik, dann nur minimale Markup/CSS-Nachzüge.
