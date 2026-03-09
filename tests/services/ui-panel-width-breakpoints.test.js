@@ -11,12 +11,12 @@ const hasText = (css, text) => css.includes(text);
 
 test('ui-panel-width-breakpoints: desktop nutzt tokenisierte panel-min/max-breiten', () => {
   const css = readCss();
-  assert.equal(hasText(css, '--panel-nav-min: 220px;'), true);
-  assert.equal(hasText(css, '--panel-nav-max: 320px;'), true);
+  assert.equal(hasText(css, '--panel-nav-min: var(--nav-w);'), true);
+  assert.equal(hasText(css, '--panel-nav-max: var(--nav-w);'), true);
   assert.equal(hasText(css, '--panel-main-min: 620px;'), true);
-  assert.equal(hasText(css, '--panel-widgets-min: 260px;'), true);
-  assert.equal(hasText(css, '--panel-widgets-max: 360px;'), true);
-  assert.equal(hasText(css, 'grid-template-columns: minmax(var(--panel-nav-min), var(--panel-nav-max)) minmax(var(--panel-main-min), 1fr) minmax(var(--panel-widgets-min), var(--panel-widgets-max));'), true);
+  assert.equal(hasText(css, '--panel-widgets-min: var(--action-w);'), true);
+  assert.equal(hasText(css, '--panel-widgets-max: var(--action-w);'), true);
+  assert.equal(hasText(css, 'grid-template-columns: var(--nav-w) minmax(0, 1fr) var(--action-w);'), true);
 });
 
 test('ui-panel-width-breakpoints: tablet und mobil haben eigene fallback-regeln', () => {

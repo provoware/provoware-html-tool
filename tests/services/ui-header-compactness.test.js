@@ -18,10 +18,10 @@ const findRule = (css, selector, expectedFragment) => {
 test('ui-header-compactness: header ist kompakter bei desktop-breite', () => {
   const css = readCss();
 
-  assert.equal(findRule(css, '.header', 'min-height: clamp(92px, 12vh, 170px);'), true);
-  assert.equal(findRule(css, '.header-dashboard', 'gap: 8px;'), true);
-  assert.equal(findRule(css, '.header-card', 'padding: 8px;'), true);
-  assert.equal(findRule(css, '.header-status-chips', 'grid-auto-rows: minmax(50px, auto);'), true);
+  assert.equal(findRule(css, '.header', 'height: 100%;'), true);
+  assert.equal(findRule(css, '.header-dashboard', 'gap: 10px;'), true);
+  assert.equal(findRule(css, '.header-card', 'padding: 6px 8px;'), true);
+  assert.match(css, /@media \(min-width: 981px\)[\s\S]*\.header-status-chips\s*\{[\s\S]*grid-auto-rows:\s*minmax\(36px, auto\);[\s\S]*\}/m);
 });
 
 test('ui-header-compactness: 980px behält klare hierarchy mit kompakten abständen', () => {
