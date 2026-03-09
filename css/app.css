@@ -1184,18 +1184,24 @@ body::before {
 .footer-toggle-row {
   display: flex;
   justify-content: center;
+  padding-top: 1px;
 }
 
 .footer-toggle {
   border: 1px solid var(--panel-border-soft);
   border-radius: 999px;
-  padding: 0.28em 0.95em;
-  min-height: clamp(26px, 1.8em, 34px);
+  padding: 0.24em 0.82em;
+  min-height: clamp(24px, 1.7em, 32px);
+  min-width: 122px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.34em;
   font: inherit;
-  font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.92rem);
-  line-height: 1.2;
+  font-size: clamp(0.8rem, 0.77rem + 0.18vw, 0.9rem);
+  line-height: 1.15;
   color: var(--text-soft);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.014));
 }
 
 .footer-grid {
@@ -1889,9 +1895,10 @@ select {
   }
 
   .footer-toggle {
-    min-height: 30px;
-    padding: 0.24em 0.72em;
-    font-size: 0.82rem;
+    min-height: 28px;
+    min-width: 110px;
+    padding: 0.2em 0.64em;
+    font-size: 0.8rem;
     white-space: nowrap;
   }
 
