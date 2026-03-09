@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 10
+- Offene Upgrade-Empfehlungen: 11
 - Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 043
+- Letzte Iteration: 044
 - Scan-Modus: delta
 
 
@@ -16,6 +16,13 @@
 
 
 
+
+## Iterations-Update 044 (Mini-Patch)
+
+- Neu: Lokaler Layout-Fix gegen Überlagerung zwischen Header, Hauptbereich und Footer bei engeren Fenstergrößen.
+- Robustheit: Grid-Zeilen nutzen inhaltssichere Höhen statt harter Max-Anteile; Hauptbereich hat keine kollisionsfördernde Mindestbreite mehr.
+- UX: Bessere Lesbarkeit ohne überdeckte Bereiche in typischen Laptop-/Splitscreen-Szenarien.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Layout-Überlagerung schnell prüfen“ erweitert.
 
 ## Iterations-Update 043 (Mini-Patch)
 

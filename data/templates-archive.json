@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-46",
+      "title": "Layout-Überlagerung schnell prüfen",
+      "content": "Prüfe bei enger Fensterhöhe und mittlerer Breite: Header, Hauptbereich und Footer dürfen sich nicht überdecken; alle Bereiche bleiben scroll- und lesbar.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T11:00:00.000Z",
+      "updatedAt": "2026-03-09T11:00:00.000Z"
+    },
+    {
       "id": "tpl-default-45",
       "title": "Layout-043 Schnellprüfung (10 offene Punkte)",
       "content": "Prüfe kurz: linke Leiste in zwei Funktionszonen, sichtbarer Startworkflow über dem Grid, einheitliche Feldhöhen und klar dominanter Hauptbereich ohne Überlauf.",
@@ -407,7 +416,7 @@
       "updatedAt": "2026-03-09T09:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T09:20:00.000Z",
+  "updatedAt": "2026-03-09T11:00:00.000Z",
   "required_fields": [
     "id",
     "title",
