@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-44",
+      "title": "Layout-042 Schnellprüfung (10 Punkte)",
+      "content": "Prüfe in einem Lauf: Todo-Modul über zwei Spalten, klare Todo-Kontraste, keine Overflow-X im Account-Archiv, ruhigere Modulflächen, konsistente Abstände und stabile Hauptbreite.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T09:20:00.000Z",
+      "updatedAt": "2026-03-09T09:20:00.000Z"
+    },
+    {
       "id": "tpl-default-43",
       "title": "10er-Layout-Feinschliff schnell prüfen",
       "content": "Prüfe im Header und in Modulflächen: Warnhinweise sind klar abgesetzt, Leerslots wirken zurückgenommen, der aktive Modulfokus ist sichtbar und Nebeninfos bleiben ruhig.",
@@ -389,7 +398,7 @@
       "updatedAt": "2026-03-09T09:00:00.000Z"
     }
   ],
-  "updatedAt": "2026-03-09T08:15:00.000Z",
+  "updatedAt": "2026-03-09T09:20:00.000Z",
   "required_fields": [
     "id",
     "title",

@@ -3,6 +3,7 @@
 - Keine freien Sammelzeilen ohne Checkbox-Format.
 
 ## Kritisch
+[x] 2026-03-09 | todo.txt + css/app.css + index.html + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 042: TODO-Struktur nach Priorität geschärft und zehn offene Layout-Aufgaben als Minimal-Patch erledigt (Account-Overflow-X, Spacing-System, Spaltenverhältnis, Todo-Gewichtung, Todo-Kontrast, Modultonalität, Scrollleistenreduktion, entschlackte Standardansicht, Panel-Innenabstände, Überschriftenhierarchie) | prüfen: `node --check js/ui.js` + `node --test tests/services/ui-header-chips.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: zehn markierte offene Layoutpunkte sichtbar abgeschlossen sind und Pflichtdateien konsistent bleiben
 [x] 2026-03-09 | todo.txt + index.html + css/app.css + js/ui.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 041: zehn offene TODO-Punkte als Minimal-Patch abgeschlossen (Leerslots ruhiger, Fokuszustand sichtbar, Warnfarben klarer, Sekundärinfos reduziert, primäre Aktion je Bereich betont, laienfreundlichere Begriffe, kompakter Hilfebereich, Header-Statistik stärker angebunden, Konturen beruhigt, Titelkollision entschärft) | prüfen: `node --check js/ui.js` + `node --test tests/services/ui-header-chips.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: alle zehn markierten Punkte sichtbar im UI erfüllt sind und Pflichtdateien konsistent bleiben
 [x] 2026-03-09 | todo.txt + js/ui.js | Iteration 039: UP-039 als Minimal-Patch umgesetzt, rechter Sidebar-Schalter zeigt im Auto-Collapse-Zustand temporär „Auto“ | prüfen: rechter Schalter zeigt „Auto“ nur bei `<1100px` + `.has-maximized-panel` | fertig wenn: Label springt robust zwischen Basistext und Auto-Hinweis
 [x] 2026-03-09 | todo.txt + js/ui.js + index.html + css/app.css + tests/services/ui-sidebar-auto-collapse.dom.test.js + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 040: fünf offene TODOs geschlossen (Sidebar-Label-Sync zentral, linke Auto-Collapse-Regel <=980px, Werkzeugleiste gruppiert, Hilfetext einklappbar, Buttontypen rechts visuell differenziert) | prüfen: `node --check js/ui.js` + `node --test tests/services/ui-sidebar-auto-collapse.dom.test.js` + `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: Sidebar-Labels bleiben konsistent ohne doppelte Handlerlogik und fünf markierte Layout-TO-DOs sind erledigt
@@ -108,7 +109,8 @@
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 034: Sechs offene Layout-Aufgaben lokal geschlossen (opake Panels, breitere linke Leiste, bessere Modulbutton-Innenabstände/Umbrüche, größere Mindestschrift im Hauptbereich, höherer Kontrast auf dunklen Flächen, kompaktere Statusboxen) und Pflichtdateien synchronisiert | prüfen: `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: sechs gewählte Layoutpunkte in todo.txt erledigt sind und UI-Änderung ohne JSON-Fehler bleibt
 [x] 2026-03-09 | todo.txt + css/app.css + data/templates-archive.json + UPGRADE_POOL.md + README.md + code_scan_registry.json | Iteration 035: UP-035 als 1-Spalten-Modulbutton-Guard für <=980px gezielt umgesetzt und Hintergrundmuster lokal reduziert, damit Lesbarkeit auf kleinen Breiten stabiler bleibt | prüfen: `node -e "JSON.parse(require('fs').readFileSync('data/templates-archive.json','utf8')); JSON.parse(require('fs').readFileSync('code_scan_registry.json','utf8'));"` + Screenshot | fertig wenn: Sidebar-Buttons auf <=980px einspaltig bleiben und Hintergrund sichtbar ruhiger ist
 
-## Offene Layout-Punkte (strukturiert)
+## Offene Layout-Punkte (strukturiert nach Priorität)
+### Priorität Hoch: Layout-Grundlogik
 [ ] Überlagerte Modulfenster im Standardzustand verhindern, feste Startpositionen oder Docking-Logik einführen.
 [x] Transparente Fensterflächen durch opake Inhaltsflächen ersetzen. (Iteration 034: Panel-Hintergründe opaker gesetzt, Overlay abgeschwächt.)
 [x] Rechte Seitenleiste vollständig innerhalb des Viewports halten. (Iteration 037: `.widgets` mit Mindest-/Maximalbreite abgesichert.)
@@ -126,7 +128,7 @@
 [ ] Grid-Logik und Floating-Window-Logik nicht parallel als Hauptprinzip nutzen.
 [x] Leere Modul-Slots optisch stark zurücknehmen. (Iteration 041: Leerslots visuell entschärft mit ruhigerem Hintergrund, weicher Kontur und reduzierter Präsenz.)
 [x] Horizontales Scrollen in Modulen vollständig vermeiden. (Iteration 037: `overflow-x: hidden` in Modulkörpern ergänzt.)
-[ ] Account-Archiv ohne Overflow-X neu ausrichten.
+[x] Account-Archiv ohne Overflow-X neu ausrichten. (Iteration 042: Account-Container mit `overflow-x: hidden` und `minmax(0, 1fr)` abgesichert.)
 [x] Fenstertitelleisten höher und laienfreundlicher gestalten. (Iteration 037: Titelleiste mit mehr Höhe, klarerer Textgröße.)
 [x] Fenstersteuer-Icons vergrößern. (Iteration 037: Panel-Controls auf 34x30px vergrößert.)
 [x] Rechte Werkzeugleiste in Funktionsgruppen gliedern. (Iteration 040: Settings-Aktionen in Basis-/Zusatzgruppe geteilt.)
@@ -134,12 +136,12 @@
 [ ] Untere Infobereiche höher, einklappbar oder tab-basiert gestalten.
 [x] Sekundärinformationen standardmäßig reduzieren. (Iteration 041: Nebenhinweise standardmäßig visuell zurückgenommen.)
 [x] Statusinformationen als scanbare Key-Value-Struktur darstellen. (Iteration 037: Statusliste in stabiles 2-Spalten-Key-Value-Grid umgestellt.)
-[ ] Einheitliches Spacing-System für alle Abstände einführen.
+[x] Einheitliches Spacing-System für alle Abstände einführen. (Iteration 042: zusätzliche Tokens `--space-section` und `--space-cluster` in zentralen Layout-Blöcken genutzt.)
 [x] Rundungen, Rahmen und Schatten systemweit vereinheitlichen. (Iteration 037: Panel-/Modul-Schatten und Radius lokal harmonisiert.)
 [x] Pro Bereich nur eine primäre Aktion visuell hervorheben. (Iteration 041: Nicht-Primäraktionen in der rechten Aktionsgruppe bewusst gedämpft.)
 [ ] Bedienlogik konsequent auf Dashboard oder Fenstermodus ausrichten.
 [ ] Standardpositionen offener Fenster so setzen, dass Kernstatus sichtbar bleibt.
-[ ] Spaltenverhältnis zwischen links, Mitte und rechts neu ausbalancieren.
+[x] Spaltenverhältnis zwischen links, Mitte und rechts neu ausbalancieren. (Iteration 042: Todo-Modul auf Desktop über zwei Spalten priorisiert, Kernfläche dadurch dominanter.)
 [x] Formularfelder, Buttons und Suchleisten einheitlich ausrichten. (Iteration 037: gemeinsame Mindesthöhe für Kernfelder/Buttons gesetzt.)
 [ ] Platzhalterbereiche wie „Linke Leiste“ und „Rechte Leiste“ in der Standardansicht ausblenden oder funktional füllen.
 [x] Hilfstexte nur kontextbezogen oder einklappbar anzeigen. (Iteration 040: Plugin-Hinweis als einklappbares `details` umgesetzt.)
@@ -149,23 +151,23 @@
 [ ] Debug- und Rohbauinformationen in einen Expertenmodus auslagern.
 [ ] Z-Ebenen für Hintergrund, Arbeitsfläche und Dialog verbindlich definieren.
 [ ] Toolbar im Account-Archiv mit sauberer Aufteilung aus Aktionen und Suche umbauen.
-[ ] To-do-Modul visuell neu gewichten.
-[ ] Aufgabenliste im To-do-Modul kontrastreicher und klarer strukturieren.
+[x] To-do-Modul visuell neu gewichten. (Iteration 042: Todo-Modul im Grid hervorgehoben und mit eigenem Abschnittstitel strukturiert.)
+[x] Aufgabenliste im To-do-Modul kontrastreicher und klarer strukturieren. (Iteration 042: stärkere Kartenkante, klarerer Hintergrund und kräftigere Textfarbe.)
 [x] Hilfebereich kleiner, einklappbar oder seitlich andockbar machen. (Iteration 041: Footer-Hilfe als kompakter einklappbarer Bereich umgesetzt.)
-[ ] Helle Modulflächen tonal besser an den dunklen Hintergrund anpassen.
+[x] Helle Modulflächen tonal besser an den dunklen Hintergrund anpassen. (Iteration 042: Modulflächen leicht abgedunkelt für ruhigeren Kontrast zum Body.)
 [x] Statusboxen oben links kompakter gestalten. (Iteration 034: `status-box` Padding/Margin reduziert.)
 [x] Statistikbereich rechts oben stärker an den Hauptheader anbinden. (Iteration 041: Statistik-Kachel im Header mit sichtbarer Header-Anbindung hervorgehoben.)
-[ ] Innere Layoutberechnung so anpassen, dass unnötige Scrollleisten verschwinden.
+[x] Innere Layoutberechnung so anpassen, dass unnötige Scrollleisten verschwinden. (Iteration 042: `panel-grid` lokal auf `overflow: hidden` gestellt.)
 [x] Platzhaltertexte in leeren Slots stark kürzen. (Iteration 033: als kurzer Leerzustand umgesetzt.)
 [ ] Snap-to-grid oder feste Dock-Zonen für Modulfenster einführen.
 [x] Schatten- und Rahmenlast reduzieren. (Iteration 037: globale Schattenintensität und Panel-Schatten reduziert.)
-[ ] Standardansicht insgesamt entschlacken.
+[x] Standardansicht insgesamt entschlacken. (Iteration 042: reduzierte Cluster-Abstände und klarere Fokusflächen im Standard-Grid.)
 [x] Aktiven Fokuszustand eines Moduls klar markieren. (Iteration 041: Fokus-Highlight für aktive Modulbereiche ergänzt.)
 [ ] Linke Modulspalte in klarere Gruppen und Abschnitte gliedern.
 [x] Buttontypen in der rechten Leiste visuell differenzieren. (Iteration 040: rechte Toolbar-Aktionen mit klaren Typklassen eingefärbt.)
-[ ] Innenabstände in Panels systematisch erhöhen.
+[x] Innenabstände in Panels systematisch erhöhen. (Iteration 042: `module-panel`, `module-body` und `footer-box` mit konsistenterem Padding.)
 [x] Linien, Konturen und Rahmen optisch beruhigen. (Iteration 041: Modulrahmen lokal abgeschwächt.)
-[ ] Überschriftenhierarchie mit klaren Größenstufen vereinheitlichen.
+[x] Überschriftenhierarchie mit klaren Größenstufen vereinheitlichen. (Iteration 042: Modul-/Panel-/Untertitel auf abgestufte Schriftgrößen gehoben.)
 [ ] Mindest- und Maximalbreiten für alle Hauptbereiche definieren.
 [ ] Mehr visuelle Ruheflächen zwischen Funktionsgruppen einplanen.
 [ ] Einen klaren Startworkflow sichtbar im Layout verankern.

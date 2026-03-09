@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 8
+- Offene Upgrade-Empfehlungen: 9
 - Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 041
+- Letzte Iteration: 042
 - Scan-Modus: delta
 
 
@@ -16,6 +16,13 @@
 
 
 
+
+## Iterations-Update 042 (Mini-Patch)
+
+- Neu: `todo.txt` nach Priorität geschärft und zehn offene Layout-Punkte mit kleinem CSS/HTML-Delta abgeschlossen.
+- Robustheit: Account-Archiv und Grid-Bereich wurden lokal gegen Overflow-X bzw. unnötige Scrollleisten abgesichert.
+- UX: Todo-Modul stärker gewichtet, Aufgabenliste klarer kontrastiert und Abstände/Überschriften konsistenter gestuft.
+- Archiv: Templates-Defaultarchiv um die Prüfvorgabe „Layout-042 Schnellprüfung (10 Punkte)“ erweitert.
 
 ## Iterations-Update 041 (Mini-Patch)
 
