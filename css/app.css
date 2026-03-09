@@ -453,6 +453,8 @@ body::before {
   grid-template-rows: auto 1fr;
   gap: var(--space-1);
   min-width: 0;
+  min-inline-size: clamp(200px, 22vw, 360px);
+  max-inline-size: clamp(240px, 30vw, 420px);
   max-width: none;
   width: 100%;
   min-height: 0;
@@ -468,6 +470,21 @@ body::before {
 
 .sidebar-modules {
   gap: 10px;
+}
+
+.nav-section {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(151, 169, 139, 0.36);
+  background: rgba(242, 247, 237, 0.78);
+}
+
+.nav-section-title {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #324235;
 }
 
 .sidebar-hint,
@@ -557,13 +574,40 @@ body::before {
 .main {
   grid-area: main;
   display: grid;
-  grid-template-rows: minmax(0, 1fr);
-  gap: 0;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: var(--space-2);
   font-size: 1.02rem;
   min-width: clamp(520px, 58vw, 1280px);
+  max-inline-size: min(100%, 1600px);
   max-width: 100%;
   min-height: 0;
   overflow: hidden;
+  border-color: rgba(189, 209, 176, 0.8);
+  box-shadow: 0 14px 24px rgba(12, 24, 15, 0.25);
+}
+
+.main-start-workflow {
+  display: grid;
+  gap: 4px;
+  border: 1px solid rgba(142, 160, 124, 0.46);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(240, 247, 232, 0.88);
+}
+
+.main-start-workflow-title {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #263628;
+}
+
+.main-start-workflow ol {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 2px;
+  color: #1f2e20;
+  font-size: 0.88rem;
 }
 
 /* workspace-dashboard removed: main reserved for 3x3 grid */
@@ -708,6 +752,10 @@ body::before {
   border-bottom: 1px solid rgba(138, 156, 126, 0.5);
 }
 
+.module-head + .module-body {
+  padding-top: 12px;
+}
+
 .module-head h3 {
   margin: 0;
   font-size: 1.05rem;
@@ -802,6 +850,8 @@ body::before {
   display: grid;
   grid-template-rows: auto 1fr;
   min-width: var(--layout-sidebar-min-width);
+  min-inline-size: clamp(230px, 20vw, 360px);
+  max-inline-size: clamp(260px, 28vw, 420px);
   max-width: min(100%, var(--panel-widgets-max));
   width: 100%;
   min-height: 0;
@@ -809,6 +859,10 @@ body::before {
 
 .utility-cards {
   gap: 10px;
+}
+
+.settings-group + .settings-group {
+  margin-top: 4px;
 }
 
 .utility-card {
@@ -943,7 +997,7 @@ body::before {
 .footer-grid {
   display: grid;
   grid-template-columns: 1.05fr 1.35fr 0.85fr 0.75fr;
-  gap: var(--space-cluster);
+  gap: 6px;
   min-height: 100%;
   position: relative;
   z-index: 1;
@@ -953,7 +1007,7 @@ body::before {
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   background: rgba(242, 247, 237, 0.85);
-  padding: 8px;
+  padding: 6px;
   min-height: 0;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
@@ -1014,7 +1068,7 @@ body::before {
 
 .panel-title {
   margin: 0 0 var(--space-2);
-  font-size: 1.04rem;
+  font-size: 1rem;
   color: #172217;
   position: relative;
   z-index: 1;
@@ -1044,6 +1098,14 @@ body::before {
 .btn,
 .btn-small {
   transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+input[type='text'],
+input[type='search'],
+textarea,
+select {
+  min-height: 36px;
+  border-radius: 9px;
 }
 
 .btn:hover,

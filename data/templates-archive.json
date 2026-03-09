@@ -2,6 +2,15 @@
   "version": 1,
   "items": [
     {
+      "id": "tpl-default-45",
+      "title": "Layout-043 Schnellprüfung (10 offene Punkte)",
+      "content": "Prüfe kurz: linke Leiste in zwei Funktionszonen, sichtbarer Startworkflow über dem Grid, einheitliche Feldhöhen und klar dominanter Hauptbereich ohne Überlauf.",
+      "category": "Arbeitsphrase",
+      "favorite": false,
+      "createdAt": "2026-03-09T10:05:00.000Z",
+      "updatedAt": "2026-03-09T10:05:00.000Z"
+    },
+    {
       "id": "tpl-default-44",
       "title": "Layout-042 Schnellprüfung (10 Punkte)",
       "content": "Prüfe in einem Lauf: Todo-Modul über zwei Spalten, klare Todo-Kontraste, keine Overflow-X im Account-Archiv, ruhigere Modulflächen, konsistente Abstände und stabile Hauptbreite.",

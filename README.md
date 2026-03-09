@@ -4,10 +4,10 @@
 
 - Offene Code-Stellen: 0
 - Erledigte Code-Stellen: 0
-- Offene Upgrade-Empfehlungen: 9
+- Offene Upgrade-Empfehlungen: 10
 - Erledigte Upgrade-Empfehlungen: 33
 - Default-Archive: 3
-- Letzte Iteration: 042
+- Letzte Iteration: 043
 - Scan-Modus: delta
 
 
@@ -16,6 +16,13 @@
 
 
 
+
+## Iterations-Update 043 (Mini-Patch)
+
+- Neu: Zehn offene Layout-/UX-Punkte aus `todo.txt` mit einem lokalen HTML/CSS-Patch abgeschlossen.
+- Robustheit: Hauptbereiche haben nun klare Min-/Max-Breiten und stabilere Abschnittsgrenzen gegen Layoutbruch.
+- UX: Linke Leiste wurde in klare Funktionszonen gegliedert und ein sichtbarer 3-Schritt-Startworkflow im Hauptbereich ergänzt.
+- Archiv: Templates-Defaultarchiv um die neue Prüfvorgabe „Layout-043 Schnellprüfung (10 offene Punkte)“ erweitert.
 
 ## Iterations-Update 042 (Mini-Patch)
 
