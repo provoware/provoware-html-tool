@@ -88,6 +88,7 @@
   --ui-transition: 0.16s ease;
   --surface-border-strong: rgba(214, 229, 255, 0.46);
   --surface-glow: rgba(165, 196, 255, 0.2);
+  --text-soft: #b8c7d1;
   --z-base: 1;
   --z-header: 10;
   --z-floating: 40;
@@ -1100,8 +1101,8 @@ body::before {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.05fr 1.35fr 0.85fr 0.75fr;
-  gap: 6px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap);
   min-height: 100%;
   position: relative;
   z-index: 1;
@@ -1209,7 +1210,7 @@ body::before {
 /* Einheitliche Kernzustände für btn + btn-small (hover/active/focus/disabled). */
 .btn,
 .btn-small {
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
 }
 
 input[type='text'],
@@ -1236,7 +1237,10 @@ select {
 
 .btn:is(:disabled, [aria-disabled="true"]),
 .btn-small:is(:disabled, [aria-disabled="true"]) {
-  opacity: 0.72;
+  opacity: 0.78;
+  color: var(--text-soft);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.016));
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -1250,6 +1254,7 @@ select {
 }
 
 .btn-primary {
+  border-color: rgba(164, 196, 255, 0.65);
   background: linear-gradient(90deg, var(--accent), var(--accent-strong));
   color: #fff;
   font-weight: 700;
@@ -1486,9 +1491,10 @@ select {
 }
 
 .btn-small {
-  border: 1px solid rgba(162, 181, 240, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 9px;
-  background: linear-gradient(180deg, rgba(244, 248, 255, 0.98), rgba(229, 238, 255, 0.92));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  color: var(--text-main);
   padding: 6px 10px;
   cursor: pointer;
 }
