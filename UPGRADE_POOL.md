@@ -9,6 +9,8 @@
 
 | ID | Bereich | Empfehlung | Grund | Erwarteter Effekt | Status | Iteration |
 |---|---|---|---|---|---|---|
+| UP-055 | Startup Robustheit | Selftest-Retry-Action über Preset-Builder vereinheitlichen (statt manuellem Payload) | Doppelte Payload-Logik erhöht Pflegeaufwand und Fehlergefahr bei künftigen Pfaden | Konsistentere Fehlerführung mit einem einheitlichen Action-Baustein | erledigt | 066 |
+| UP-054 | Startup Robustheit | Directory/Permission-Fehlerdaten über gemeinsamen Builder erzeugen | Wiederholte Payload-Erzeugung in ähnlichen Fehlerpfaden erschwert spätere Anpassungen | Weniger Copy-Paste und klarere Wartung bei unverändertem Verhalten | erledigt | 066 |
 | UP-053 | Sidebar UX | Rechte Sidebar in zwei klare Gruppen (KPIs/Trend und Selbsttest/CTA) mit Zwischenabstand gliedern | KPI, Trend und Selbsttest stehen aktuell noch zu dicht und erschweren schnelle Priorisierung | Ruhigerer Blicklauf mit schneller auffindbarer nächster Aktion in der Sidebar | erledigt | 063 |
 | UP-051 | Header Robustheit | Header-Renderer soll `setText` defensiv als No-Op behandeln, wenn der Hook fehlt oder kein Funktionswert ist | Aktuell ist `byId`/`autoFormatText` abgesichert; ein fehlender `setText` kann in isolierten Test-/Embed-Szenarien dennoch früh abbrechen | Stabilerer Header-Renderpfad auch in Teilintegrationen und weniger Setup-Zwang für kleine Tests | erledigt | 061 |
 | UP-050 | Release UX | Start-Assistent-Hinweis bei aktivem Alternativpfad auf max. 110 Zeichen begrenzen und Volltext als Tooltip behalten | Mit Zweitoption bleibt der Assistent klarer, aber längere Hinweise können auf kleinen Breiten den Fluss brechen | Ruhigeres Header-Layout mit weiterhin vollständiger Information bei Bedarf | erledigt | 061 |
