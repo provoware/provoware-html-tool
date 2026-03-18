@@ -83,3 +83,4 @@
 16. Statushinweise später mit einem kurzen Änderungsgrund für Prüfung oder Sicherung ergänzen.
 17. Statushinweise später mit einem kleinen Aktualisieren-Auslöser für Prüfung und Sicherung ergänzen.
 18. AGENTS-Regeln später um ein kurzes Entscheidungsraster für Datei-Zugriff oder Validierung ergänzen.
+19. Header-Suche später mit kleinen Vorschlägen aus zuletzt genutzten Projekten oder Modulen ergänzen.

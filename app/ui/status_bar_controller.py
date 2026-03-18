@@ -13,8 +13,7 @@ class StatusBarController(QWidget):
         for text in (
             f"Projekt: {app_state.active_project_name}",
             f"Speichern {app_state.save_status}",
-            app_state.check_hint_text(),
-            app_state.backup_hint_text(),
+            app_state.status_summary_text(),
             app_state.search_status_text(),
             "Hilfe und Diagnose schnell erreichbar",
         ):

@@ -13,8 +13,8 @@ class AppStateService:
 
     def search_helper_text(self) -> str:
         if self.active_project_name == "Kein Projekt offen":
-            return "Schnellhilfe: Suche nach Projekten, Modulen oder Hilfe."
-        return f"Schnellhilfe: Suche in {self.active_project_name} nach Modulen oder Hilfe."
+            return "Schnellhilfe: Gib zum Beispiel einen Projektnamen, ein Modul oder Hilfe ein."
+        return f"Schnellhilfe: Suche in {self.active_project_name} zum Beispiel nach einem Modul oder Hilfe."
 
     def check_status_text(self) -> str:
         return f"Letzte Prüfung: {self.last_check_label}"
@@ -27,6 +27,9 @@ class AppStateService:
 
     def backup_hint_text(self) -> str:
         return f"Sicherung zuletzt {self.last_backup_label}"
+
+    def status_summary_text(self) -> str:
+        return f"Prüfung {self.last_check_label} · Sicherung {self.last_backup_label}"
 
     def search_status_text(self) -> str:
         if self.active_project_name == "Kein Projekt offen":

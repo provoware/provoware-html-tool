@@ -34,7 +34,7 @@ class HeaderDashboardBar(QWidget):
 
         search = QLineEdit()
         search.setPlaceholderText("Projekt, Modul oder Hilfe suchen")
-        search.setToolTip("Gib einen Namen oder ein Hilfethema ein")
+        search.setToolTip("Gib zum Beispiel einen Projektnamen, ein Modul oder ein Hilfethema ein")
         search.setClearButtonEnabled(True)
         search.setMinimumWidth(260)
         search_group.addWidget(search)
