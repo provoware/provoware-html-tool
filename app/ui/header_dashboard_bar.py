@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 
 from app.services.app_state_service import AppStateService
 from app.ui.dialogs.help_dialog import HelpDialog
@@ -12,12 +12,14 @@ class HeaderDashboardBar(QWidget):
         super().__init__()
         self._help_dialog: HelpDialog | None = None
         self._repair_dialog: RepairDialog | None = None
+        self.setStyleSheet("background: #f8fafc; border-bottom: 1px solid #d8e0ea;")
+
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(12, 8, 12, 6)
-        layout.setSpacing(10)
+        layout.setContentsMargins(14, 10, 14, 8)
+        layout.setSpacing(12)
 
         summary = QVBoxLayout()
-        summary.setSpacing(2)
+        summary.setSpacing(1)
 
         eyebrow = QLabel("Startbereich")
         eyebrow.setStyleSheet("color: #6a7482; font-size: 11px;")
@@ -34,49 +36,67 @@ class HeaderDashboardBar(QWidget):
 
         layout.addLayout(summary)
 
-        search_group = QVBoxLayout()
-        search_group.setSpacing(2)
+        search_frame = QFrame()
+        search_frame.setStyleSheet(
+            "QFrame {background: #ffffff; border: 1px solid #d8e0ea; border-radius: 10px;}"
+        )
+        search_layout = QVBoxLayout(search_frame)
+        search_layout.setContentsMargins(10, 8, 10, 8)
+        search_layout.setSpacing(3)
 
         search = QLineEdit()
         search.setPlaceholderText("Projekt, Modul oder Hilfe suchen")
         search.setToolTip("Gib zum Beispiel einen Projektnamen, ein Modul oder ein Hilfethema ein")
         search.setClearButtonEnabled(True)
-        search.setMinimumWidth(280)
-        search_group.addWidget(search)
+        search.setMinimumWidth(300)
+        search_layout.addWidget(search)
 
         helper = QLabel(app_state.search_helper_text())
         helper.setStyleSheet("color: #6a7482; font-size: 11px;")
         helper.setWordWrap(True)
-        search_group.addWidget(helper)
+        search_layout.addWidget(helper)
 
-        layout.addLayout(search_group, 1)
+        layout.addWidget(search_frame, 1)
 
         status_group = QVBoxLayout()
-        status_group.setSpacing(4)
+        status_group.setSpacing(3)
 
-        for text in (
-            f"Speichern {app_state.save_status}",
-            app_state.check_status_text(),
-            app_state.backup_status_text(),
-        ):
-            status_group.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignRight)
+        top_status_row = QHBoxLayout()
+        top_status_row.setSpacing(6)
+        top_status_row.setAlignment(Qt.AlignmentFlag.AlignRight)
+        for text in (f"Speichern {app_state.save_status}", app_state.check_status_text()):
+            top_status_row.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignRight)
+        status_group.addLayout(top_status_row)
 
-        refresh_hint = QLabel("Aktualisieren folgt später mit echter Prüfung und Sicherung.")
+        bottom_status_row = QHBoxLayout()
+        bottom_status_row.setSpacing(6)
+        bottom_status_row.setAlignment(Qt.AlignmentFlag.AlignRight)
+        bottom_status_row.addWidget(StatusChip(app_state.backup_status_text()), 0, Qt.AlignmentFlag.AlignRight)
+
+        refresh_hint = QLabel("Prüfung und Sicherung bleiben sichtbar vorbereitet.")
         refresh_hint.setStyleSheet("color: #6a7482; font-size: 11px;")
         refresh_hint.setWordWrap(True)
-        status_group.addWidget(refresh_hint, 0, Qt.AlignmentFlag.AlignRight)
+        refresh_hint.setAlignment(Qt.AlignmentFlag.AlignRight)
+        bottom_status_row.addWidget(refresh_hint, 0, Qt.AlignmentFlag.AlignRight)
+        status_group.addLayout(bottom_status_row)
 
         layout.addLayout(status_group, 0)
+
+        action_group = QVBoxLayout()
+        action_group.setSpacing(6)
 
         help_button = QPushButton("Kurzhilfe")
         help_button.setToolTip("Zeigt kurz und einfach, wo Suche, Projektbereich und Module liegen")
         help_button.clicked.connect(self._open_help_dialog)
-        layout.addWidget(help_button, 0, Qt.AlignmentFlag.AlignVCenter)
+        action_group.addWidget(help_button)
 
         repair_button = QPushButton("Sichere Prüfung")
         repair_button.setToolTip("Öffnet vorbereitete, sichere Prüfschritte ohne Datenänderung")
         repair_button.clicked.connect(self._open_repair_dialog)
-        layout.addWidget(repair_button, 0, Qt.AlignmentFlag.AlignVCenter)
+        action_group.addWidget(repair_button)
+
+        layout.addLayout(action_group, 0)
+        layout.setAlignment(action_group, Qt.AlignmentFlag.AlignTop)
 
     def _open_help_dialog(self) -> None:
         if self._help_dialog is None:
