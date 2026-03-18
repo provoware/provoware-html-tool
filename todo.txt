@@ -1,22 +1,22 @@
 1. Altprojekt entfernen
    1.1 Alte Web-, Demo-, Altlast- und Testdateien entfernen.
-   1.2 Nur .git und für den Neuaufbau nötige neue Dateien behalten.
+   1.2 Nur `.git` und für den Neuaufbau nötige neue Dateien behalten.
    1.3 Entfernte Bereiche kurz dokumentieren.
 
 2. Repo-Grundstruktur anlegen
-   2.1 Zielordner app, resources, schemas und tests vollständig anlegen.
+   2.1 Zielordner `app`, `resources`, `schemas` und `tests` vollständig anlegen.
    2.2 Platzhalterdateien nur dort nutzen, wo noch keine echte Logik nötig ist.
    2.3 Linux-taugliche Startpfade fest verankern.
 
-3. README / todo / AGENTS erstellen
-   3.1 README mit Ziel, Struktur und Linux-Start pflegen.
-   3.2 todo.txt pro Iteration mit genau einem Folgepunkt ergänzen.
-   3.3 AGENTS.md als strengen Arbeitsstandard pflegen.
+3. README / todo / AGENTS pflegen
+   3.1 README mit Ziel, Struktur und Linux-Start aktuell halten.
+   3.2 `todo.txt` pro Iteration mit genau einem Folgepunkt ergänzen.
+   3.3 `AGENTS.md` als strengen Arbeitsstandard klar und knapp halten.
 
 4. Start- und Bootstrap-Logik
-   4.1 AppBootstrap mit klarer Startreihenfolge ausbauen.
-   4.2 StartupChecks für Pfade, Dateien und SQLite vertiefen.
-   4.3 DependencyReport im Fehlerfall laienverständlich ausgeben.
+   4.1 `AppBootstrap` mit klarer Startreihenfolge ausbauen.
+   4.2 `StartupChecks` für Pfade, Dateien und SQLite vertiefen.
+   4.3 `DependencyReport` im Fehlerfall laienverständlich ausgeben.
 
 5. AppShell mit 5 Zonen
    5.1 Shell-Layout an Referenzproportionen annähern.
@@ -44,7 +44,7 @@
    9.3 Preset-Anwendung im Host abbilden.
 
 10. Datenhaltung + Pfade
-   10.1 Projektdateien project.json, layout.json, modules.json und couplings.json fest verdrahten.
+   10.1 Projektdateien `project.json`, `layout.json`, `modules.json` und `couplings.json` fest verdrahten.
    10.2 State- und Cache-Pfade sauber trennen.
    10.3 Atomare Schreibpfade absichern.
 
@@ -56,7 +56,7 @@
 12. Kernmodule als Grundgerüst
    12.1 Editor, Templates und Styles mit Basisaktionen füllen.
    12.2 Randomizer, Tasks und Wiki an gemeinsame Dock-Basis anbinden.
-   12.3 FileFinder mit SearchService koppeln.
+   12.3 `FileFinder` mit `SearchService` koppeln.
 
 13. Recovery / Diagnose / Status
    13.1 Sitzungswiederherstellung vorbereiten.
@@ -68,6 +68,7 @@
    14.2 Hilfetexte für Laien ergänzen.
    14.3 Kleinschrittige Wartungsregeln in Doku und Code prüfen.
 
-15. Folgepunkt
+15. Folgepunkte
    15.1 Header- und Statusbereich visuell enger an die Referenz `LAYOUT_UND_DESIGNVORGABEMUSTER.md` anpassen.
    15.2 Startskript um kurze Vorab-Prüfung für fehlende Linux-Systempakete ergänzen.
+   15.3 README um eine kurze Tabelle für Ordnerzweck und Startschritte ergänzen.

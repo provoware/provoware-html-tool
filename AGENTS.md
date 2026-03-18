@@ -6,7 +6,16 @@
 - Arbeite codesparsam: keine broad rewrites, keine großflächigen Stiländerungen, keine kosmetischen Umbauten.
 - Jede Iteration besteht aus genau zwei Anpassungsschritten zur Annäherung an `LAYOUT_UND_DESIGNVORGABEMUSTER.md`.
 - Ergänze pro Iteration genau eine weiterführende Aufgabe in `todo.txt`.
-- Validierung erst nach allen Patches der Iteration und nur gezielt für direkt betroffene Logik.
+- Validierung erst nach allen Patches der Iteration und nur gezielt für direkt betroffene Logik oder Ausgabe.
+
+## Eingangsprüfung vor jeder Änderung
+1. Zielstelle bestimmen.
+2. Betroffene Dateien und Blöcke benennen.
+3. Patchgrund benennen.
+4. Kleinsten sinnvollen Änderungsumfang wählen.
+5. Seiteneffekte und Risiken abschätzen.
+6. Bewusste Nicht-Änderungen festhalten.
+7. Danach eine kurze Schrittliste für genau zwei Anpassungsschritte erstellen.
 
 ## Minimal Traffic
 - Nur nötige Dateien lesen.
@@ -16,15 +25,10 @@
 
 ## Codesparsames Patchen
 - Immer präzise an Ort und Stelle patchen.
+- Nur begründet betroffene Dateien ändern.
 - Keine broad rewrites.
 - Keine Kosmetik-Umbauten.
 - Keine massenhaften Stiländerungen.
-
-## Eingangsprüfung vor jeder Änderung
-1. Zielstelle bestimmen.
-2. Patchgrund benennen.
-3. Kleinsten sinnvollen Änderungsumfang wählen.
-4. Seiteneffekte abschätzen.
 
 ## Begrenzung auf betroffene Dateien
 - Nur angrenzende Dateien ändern, wenn fachlich nötig.
@@ -32,11 +36,12 @@
 - Keine unnötigen Renames.
 - Keine grundlosen Umstrukturierungen außerhalb des Ziels.
 
-## Testregeln
+## Validierung und Tests
 - Tests nur ausführen, wenn sie für den konkreten Patch sinnvoll sind.
 - Keine reflexartigen Volltests.
 - Keine endlosen Prüfschleifen.
-- Bei Struktur- und Platzhalterarbeiten reichen gezielte Syntax- und Importprüfungen.
+- Bei Struktur-, Doku- und Platzhalterarbeiten reichen gezielte Syntax-, Format- oder Konsistenzprüfungen.
+- Validierung immer gesammelt erst nach dem zweiten Anpassungsschritt.
 
 ## Nutzerfreundlichkeit zuerst
 - UI-Texte in einfacher Sprache.
@@ -48,6 +53,11 @@
 - Für jede Änderung klaren Fehlerpfad mitdenken.
 - Fehlermeldungen in einfacher Sprache formulieren.
 - Sicheren Fallback ohne Datenverlust bevorzugen.
+
+## Iterationsabschluss
+- Kurzes Änderungsprotokoll festhalten.
+- Endvalidierung mit nur direkt relevanten Prüfungen dokumentieren.
+- Genau zwei konstruktive, unterstützende Empfehlungen geben.
 
 ## Verboten
 1. Endlosprüfungen.
