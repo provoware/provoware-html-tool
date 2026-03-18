@@ -1,10 +1,13 @@
 # Provoware HTML Tool
 
-## Projektname
-Provoware HTML Tool wird als neue Linux-Desktop-Anwendung mit Python, PySide6 und Qt Widgets neu aufgebaut.
+## Kurzüberblick
+Provoware HTML Tool wird als neue Linux-Desktop-Anwendung mit Python, PySide6 und Qt Widgets neu aufgebaut. Die Oberfläche soll ruhig, verständlich und robust sein, damit Projekte, Module, Presets, Texte und Arbeitsstände ohne Umwege gepflegt werden können.
 
 ## Ziel des Tools
-Das Tool soll Projekte, Module, Presets, Texte und Arbeitsstände in einer ruhigen Desktop-Oberfläche verwalten. Der Fokus liegt auf klarer Bedienung, robuster Datenhaltung und einfacher Erweiterbarkeit.
+- Projekte und Arbeitsstände klar verwalten
+- Module und Presets geordnet bereitstellen
+- Daten robust speichern und sicher wiederherstellen
+- Die Anwendung später klein und nachvollziehbar erweitern
 
 ## Zielgruppe
 - Menschen ohne Technikschwerpunkt, die eine verständliche Oberfläche brauchen
@@ -14,7 +17,7 @@ Das Tool soll Projekte, Module, Presets, Texte und Arbeitsstände in einer ruhig
 ## Kernprinzipien
 - Linux-only
 - Klare Oberfläche statt Effektspielerei
-- Kleine, wartbare Dateien
+- Kleine, wartbare Dateien und Funktionen
 - Robuste Fehlerpfade mit sicheren Fallbacks
 - Trennung von Systemdaten, Einstellungen, Nutzerdaten, State und Cache
 
@@ -25,17 +28,18 @@ Die AppShell besteht aus fünf sichtbaren Zonen:
 3. Linke globale Sidebar
 4. Zentrale Workspace-Fläche
 5. Rechte Modulbibliothek
+
 Zusätzlich gibt es unten eine Statusleiste für Speichern, Prozesse, Index und Diagnose.
 
 ## Architekturüberblick
-- `run.py` startet das Tool
-- `app/main.py` baut Anwendung und Hauptfenster auf
-- `app/bootstrap/` kümmert sich um Startfolge, Pfade und Startchecks
-- `app/core/` hält Kontext, EventBus, Fehler und ServiceRegistry
-- `app/services/` kapselt Fachlogik
-- `app/storage/` trennt INI, SQLite, JSON, State und Cache
-- `app/modules/` enthält Modulgrundgerüste und Registry
-- `app/ui/` enthält Shell, Sidebars, Tabs, Dialoge und Workspace
+- `run.py` startet das Tool.
+- `app/main.py` baut Anwendung und Hauptfenster auf.
+- `app/bootstrap/` kümmert sich um Startfolge, Pfade und Startchecks.
+- `app/core/` hält Kontext, EventBus, Fehler und ServiceRegistry.
+- `app/services/` kapselt Fachlogik.
+- `app/storage/` trennt INI, SQLite, JSON, State und Cache.
+- `app/modules/` enthält Modulgrundgerüste und Registry.
+- `app/ui/` enthält Shell, Sidebars, Tabs, Dialoge und Workspace.
 
 ## Datenhaltung
 - INI für kleine Einstellungen
@@ -50,20 +54,30 @@ Projektbezogene Dateien sind vorbereitet für:
 - `modules.json`
 - `couplings.json`
 
-## Repo-Struktur
-Die Struktur ist bewusst klein und klar:
-- `app/` Anwendungslogik
-- `resources/` Icons, Themes, Defaults
-- `schemas/` JSON-Schemata
-- `tests/` gezielte Basis-Tests
+## Repo-Struktur im Alltag
+| Pfad | Zweck |
+| --- | --- |
+| `app/` | Anwendungslogik, UI und Startpfade |
+| `resources/` | Icons, Themes und Standarddateien |
+| `schemas/` | JSON-Schemata für feste Datenformate |
+| `tests/` | Kleine, gezielte Prüfungen für betroffene Logik |
+| `README.md` | Einstieg, Zielbild und Startinfos |
+| `todo.txt` | Nächste fachliche Schritte |
+| `AGENTS.md` | Arbeitsregeln für kleine, saubere Iterationen |
 
 ## Start unter Linux
-Für den einfachen Start reicht ein Befehl:
+### Schnellstart
 ```bash
 ./start.sh
 ```
 
-Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert die nötigen Pakete und startet danach das Programm automatisch.
+Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert nötige Pakete und startet danach das Programm automatisch.
+
+### Empfohlene Startschritte
+1. Repository klonen oder bereitstellen.
+2. In das Projektverzeichnis wechseln.
+3. `./start.sh` ausführen.
+4. Hinweise im Terminal lesen, falls Systempakete oder Python-Pakete fehlen.
 
 ## Entwicklungsprinzipien
 - Erst planen, dann patchen
@@ -73,7 +87,7 @@ Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert die n
 - Keine unnötigen Volltests
 
 ## Status / Roadmap
-Aktuell ist das Repository auf eine neue tragfähige PySide6-Grundarchitektur zurückgesetzt. Als Nächstes folgen vertiefte Workspace-Aktionen, echte Projektpersistenz und ausbaubare Modulinteraktionen.
+Das Repository ist aktuell auf eine tragfähige PySide6-Grundarchitektur ausgerichtet. Als Nächstes folgen vertiefte Workspace-Aktionen, echte Projektpersistenz und ausbaubare Modulinteraktionen.
 
 ## Hinweise zur Laientauglichkeit
 - Sichtbare Hauptaktionen
@@ -82,7 +96,7 @@ Aktuell ist das Repository auf eine neue tragfähige PySide6-Grundarchitektur zu
 - Hilfe- und Reparaturzugriff direkt in der Oberfläche
 
 ## Hinweise zu kleinen Patches und Wartbarkeit
-- Bevorzuge gezielte Änderungen an klar abgegrenzten Dateien
-- Halte Dokumentation, Logik, Datenmodelle und UI getrennt
-- Vermeide Seiteneffekte in Nachbarbereichen
-- Nutze die vorhandene Service- und Storage-Trennung statt Direktzugriffe
+- Bevorzuge gezielte Änderungen an klar abgegrenzten Dateien.
+- Halte Dokumentation, Logik, Datenmodelle und UI getrennt.
+- Vermeide Seiteneffekte in Nachbarbereichen.
+- Nutze die vorhandene Service- und Storage-Trennung statt Direktzugriffe.
