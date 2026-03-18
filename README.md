@@ -65,6 +65,7 @@ Projektbezogene Dateien sind vorbereitet für:
 | `resources/` | Icons, Themes und Standarddateien |
 | `schemas/` | JSON-Schemata für feste Datenformate |
 | `tests/` | Kleine, gezielte Prüfungen für betroffene Logik |
+| `TOOL_MOCKUP.md` | Text-Mockup der sichtbaren Oberfläche in einfacher Sprache |
 | `README.md` | Einstieg, Zielbild und Startinfos |
 | `todo.txt` | Nächste fachliche Schritte |
 | `AGENTS.md` | Arbeitsregeln für kleine, saubere Iterationen |
@@ -92,6 +93,11 @@ Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert nöti
 
 ## Status / Roadmap
 Das Repository ist aktuell auf eine tragfähige PySide6-Grundarchitektur ausgerichtet. Als Nächstes folgen vertiefte Workspace-Aktionen, echte Projektpersistenz und ausbaubare Modulinteraktionen.
+
+## Aktueller Iterationsstand
+- Die Projektanlage fängt leere Eingaben jetzt sicher mit `Neues Projekt` ab.
+- Nach dem Schreiben der Projektdateien wird geprüft, ob die nötigen Ausgaben wirklich vorhanden sind.
+- `TOOL_MOCKUP.md` beschreibt die sichtbare Oberfläche und soll bei UI- oder Textänderungen mitgepflegt werden.
 
 ## Hinweise zur Laientauglichkeit
 - Sichtbare Hauptaktionen
