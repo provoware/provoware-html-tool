@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QListWidget, QVBoxLayout, QWidget
 
+from app.ui.widgets.action_tile import ActionTile
 from app.ui.widgets.section_header import SectionHeader
 
 
@@ -33,3 +34,20 @@ class RightModuleSidebar(QWidget):
             widget = QListWidget()
             widget.addItems(items)
             layout.addWidget(widget)
+            action = self._build_action(title)
+            if action is not None:
+                layout.addWidget(action)
+
+    def _build_action(self, title: str) -> ActionTile | None:
+        actions = {
+            "Presets": ("Preset öffnen", "Diese Direktaktion wird mit der Preset-Verwaltung verbunden."),
+            "Kopplungen": ("Kopplung ansehen", "Diese Direktaktion wird mit echten Modulverbindungen gefüllt."),
+        }
+        action_data = actions.get(title)
+        if action_data is None:
+            return None
+        text, tooltip = action_data
+        action = ActionTile(text)
+        action.setEnabled(False)
+        action.setToolTip(tooltip)
+        return action
