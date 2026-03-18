@@ -19,8 +19,14 @@ class AppStateService:
     def check_status_text(self) -> str:
         return f"Letzte Prüfung: {self.last_check_label}"
 
+    def check_hint_text(self) -> str:
+        return f"Prüfung zuletzt {self.last_check_label}"
+
     def backup_status_text(self) -> str:
         return f"Letzte Sicherung: {self.last_backup_label}"
+
+    def backup_hint_text(self) -> str:
+        return f"Sicherung zuletzt {self.last_backup_label}"
 
     def search_status_text(self) -> str:
         if self.active_project_name == "Kein Projekt offen":
