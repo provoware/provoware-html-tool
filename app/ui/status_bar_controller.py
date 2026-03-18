@@ -11,12 +11,12 @@ class StatusBarController(QWidget):
         layout.setContentsMargins(12, 4, 12, 8)
         layout.setSpacing(6)
         for text in (
-            "Projekt ruhig",
+            f"Projekt: {app_state.active_project_name}",
             f"Speichern {app_state.save_status}",
             app_state.check_status_text(),
             app_state.backup_status_text(),
-            "Suche wartet auf deinen Begriff",
-            "Hilfe und Diagnose bereit",
+            app_state.search_status_text(),
+            "Hilfe und Diagnose schnell erreichbar",
         ):
             layout.addWidget(StatusChip(text))
         layout.addStretch(1)

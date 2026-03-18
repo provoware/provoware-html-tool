@@ -39,7 +39,7 @@ class HeaderDashboardBar(QWidget):
         search.setMinimumWidth(260)
         search_group.addWidget(search)
 
-        helper = QLabel("Schnellhilfe: Namen, Module oder Hilfebegriffe eingeben.")
+        helper = QLabel(app_state.search_helper_text())
         helper.setStyleSheet("color: #6a7482; font-size: 11px;")
         helper.setWordWrap(True)
         search_group.addWidget(helper)
@@ -49,7 +49,7 @@ class HeaderDashboardBar(QWidget):
         for text in (
             f"Speichern {app_state.save_status}",
             app_state.check_status_text(),
-            "System ruhig",
+            app_state.system_status_text(),
         ):
             layout.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignVCenter)
 
