@@ -1,4 +1,5 @@
-from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QWidget
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 
 from app.ui.widgets.status_chip import StatusChip
 
@@ -7,13 +8,30 @@ class HeaderDashboardBar(QWidget):
     def __init__(self) -> None:
         super().__init__()
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(12, 12, 12, 8)
-        layout.addWidget(QLabel("Profil: Standardprofil"))
-        layout.addWidget(QLabel("Projekt: Kein Projekt offen"))
+        layout.setContentsMargins(12, 10, 12, 6)
+        layout.setSpacing(10)
+
+        summary = QVBoxLayout()
+        summary.setSpacing(2)
+
+        title = QLabel("Bereit für dein nächstes Projekt")
+        title.setStyleSheet("font-weight: 600;")
+        summary.addWidget(title)
+
+        subtitle = QLabel("Profil Standardprofil · Noch kein Projekt geöffnet")
+        subtitle.setStyleSheet("color: #566171;")
+        summary.addWidget(subtitle)
+
+        layout.addLayout(summary)
+
         search = QLineEdit()
-        search.setPlaceholderText("Global suchen")
-        layout.addWidget(search, 1)
-        for text in ("Speichern ok", "Letzte Sicherung: keine", "Warnungen: keine"):
-            layout.addWidget(StatusChip(text))
-        layout.addWidget(QPushButton("Hilfe"))
-        layout.addWidget(QPushButton("Reparieren"))
+        search.setPlaceholderText("Projekt, Modul oder Hilfe suchen")
+        search.setClearButtonEnabled(True)
+        search.setMinimumWidth(260)
+        layout.addWidget(search, 1, Qt.AlignmentFlag.AlignVCenter)
+
+        for text in ("Speichern bereit", "Sicherung fehlt noch", "Keine Warnung"):
+            layout.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignVCenter)
+
+        layout.addWidget(QPushButton("Hilfe"), 0, Qt.AlignmentFlag.AlignVCenter)
+        layout.addWidget(QPushButton("Reparieren"), 0, Qt.AlignmentFlag.AlignVCenter)

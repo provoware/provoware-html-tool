@@ -7,13 +7,13 @@ class StatusBarController(QWidget):
     def __init__(self) -> None:
         super().__init__()
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(12, 8, 12, 12)
+        layout.setContentsMargins(12, 6, 12, 10)
+        layout.setSpacing(8)
         for text in (
-            "Speichern bereit",
-            "Prozesse: ruhig",
-            "Suchindex: leer",
-            "Warnungen: 0",
-            "Diagnose: bereit",
+            "Projektstatus: ruhig",
+            "Speichern: bereit",
+            "Suchlauf: noch leer",
+            "Diagnose: startklar",
         ):
             layout.addWidget(StatusChip(text))
         layout.addStretch(1)
