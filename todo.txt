@@ -79,3 +79,4 @@
    15.8 Leere Zustände später mit kleinen Direktaktionen wie „Projekt anlegen“ oder „Preset wählen“ ergänzen.
    15.9 Header-Schnellhilfe später bei Fokus oder erster Suche als kleine kontextnahe Hilfe einblenden.
    15.10 Echte Prüf- und Sicherungszeiten später aus Diagnose- und Wiederherstellungsablauf fortschreiben.
+16. Statushinweise später mit einem kurzen Änderungsgrund für Prüfung oder Sicherung ergänzen.
