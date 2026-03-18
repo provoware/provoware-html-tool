@@ -84,6 +84,7 @@ OFFENE PUNKTE
 20. Projektanlage später vor dem Schreiben auf Namenskonflikte im Zielordner hinweisen.
 22. Direktaktionen später mit echter Projekt-, Preset- und Kopplungslogik verdrahten.
 23. Header-Aktionen später mit echter Hilfe- und Reparaturfunktion verbinden.
+24. Hilfe- und Reparaturdialoge später mit echten Hilfelinks und sicheren Prüfaktionen füllen.
 
 ERLEDIGTE PUNKTE
 
