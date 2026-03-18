@@ -73,3 +73,4 @@
    15.2 Startskript um kurze Vorab-Prüfung für fehlende Linux-Systempakete ergänzen.
    15.3 README um eine kurze Tabelle für Ordnerzweck und Startschritte ergänzen.
    15.4 Sichtbare Hilfehinweise für leere Projekt- und Modulbereiche weiter konkretisieren.
+   15.5 Suchfeld im Header mit einer kleinen Schnellhilfe unter oder neben dem Eingabefeld erklären.
