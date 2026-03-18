@@ -12,6 +12,7 @@
 - Erst drei Anpassungsschritte planen.
 - Dann genau eine weiterführende Aufgabe in `todo.txt` ergänzen.
 - Erst danach gezielt validieren.
+- Typische Fehler vermeiden: keinen Prüfschritt vorziehen, keinen Sammelschritt bauen und keine Folgeaufgabe vergessen.
 
 ## Eingangsprüfung vor jeder Änderung
 1. Zielstelle bestimmen.

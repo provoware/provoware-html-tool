@@ -87,7 +87,7 @@ OFFENE PUNKTE
 29. Änderungsgründe später aus echter Diagnose, Prüfung oder Sicherung statt aus Platzhaltertext speisen.
 30. README später um einen kurzen Abschnitt mit typischen Startfehlern und einfachen Lösungen ergänzen, sobald die Startprüfung echte Detailmeldungen liefert.
 31. Statusleiste später bei wenig Breite automatisch von zwei Gruppen auf eine kompakte Zeile umstellen.
-33. Iterations-Kurzregel später um einen kleinen Hinweis für typische Fehler bei der Schrittplanung ergänzen.
+34. Iterations-Kurzregel später um einen kurzen Hinweis ergänzen, wie bei unklarer Zielstelle zuerst eingegrenzt werden soll.
 
 ERLEDIGTE PUNKTE
 
@@ -105,3 +105,4 @@ ERLEDIGTE PUNKTE
 - 26. Ergebnisbereich mit kleinen Statusstufen für bereit, geprüft und Hinweis ergänzt.
 - 16. Statushinweise um einen kurzen Änderungsgrund für Prüfung und Sicherung ergänzt.
 - 32. Iterationshinweise um ein kurzes Beispiel mit drei Anpassungsschritten und eine kleine Kurzregel ergänzt.
+- 33. Iterations-Kurzregel um einen kleinen Hinweis zu typischen Fehlern bei der Schrittplanung ergänzt.
