@@ -1,11 +1,12 @@
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 
+from app.services.app_state_service import AppStateService
 from app.ui.widgets.status_chip import StatusChip
 
 
 class HeaderDashboardBar(QWidget):
-    def __init__(self) -> None:
+    def __init__(self, app_state: AppStateService) -> None:
         super().__init__()
         layout = QHBoxLayout(self)
         layout.setContentsMargins(12, 8, 12, 4)
@@ -45,7 +46,11 @@ class HeaderDashboardBar(QWidget):
 
         layout.addLayout(search_group, 1)
 
-        for text in ("Speichern bereit", "Prüfung heute noch offen", "System ruhig"):
+        for text in (
+            f"Speichern {app_state.save_status}",
+            app_state.check_status_text(),
+            "System ruhig",
+        ):
             layout.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignVCenter)
 
         layout.addWidget(QPushButton("Hilfe"), 0, Qt.AlignmentFlag.AlignVCenter)
