@@ -28,7 +28,8 @@ Dieses Mockup beschreibt die sichtbaren Bereiche in einfacher Sprache. Es hilft 
 
 ### 5. Rechte Modulleiste
 - Listen für Module, Presets und Kopplungen.
-- Leere Zustände erklären kurz, warum noch nichts angezeigt wird.
+- Ein kleines Filterfeld blendet Module direkt passend zum Suchtext ein oder aus.
+- Kurze Statushinweise erklären sichtbar, wie viele Module gerade passen und warum Presets oder Kopplungen noch leer bleiben können.
 
 ### 6. Statusleiste unten
 - Zeigt aktives Projekt, Speichern, Prüfung/Sicherung, Suche und Hilfezugang.
