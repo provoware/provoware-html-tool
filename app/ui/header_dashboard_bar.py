@@ -57,7 +57,7 @@ class HeaderDashboardBar(QWidget):
         for text in (
             f"Speichern {app_state.save_status}",
             app_state.check_status_text(),
-            app_state.system_status_text(),
+            app_state.backup_status_text(),
         ):
             status_group.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignRight)
 
