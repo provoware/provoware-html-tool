@@ -39,3 +39,16 @@ def test_project_service_reports_missing_output_files(tmp_path):
 
     with pytest.raises(ValueError, match="modules.json"):
         service.create_project("Fehlender Output")
+
+
+def test_project_service_persists_open_modules_and_layout(tmp_path):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Mit Modulen")
+
+    service.save_workspace_state(project.slug, ["Editor", "Wiki"])
+
+    project_dir = tmp_path / project.slug
+    modules_payload = json.loads((project_dir / "modules.json").read_text(encoding="utf-8"))
+    layout_payload = json.loads((project_dir / "layout.json").read_text(encoding="utf-8"))
+    assert modules_payload == {"modules": [{"name": "Editor"}, {"name": "Wiki"}]}
+    assert layout_payload == {"docks": [{"title": "Editor", "area": "right"}, {"title": "Wiki", "area": "right"}]}

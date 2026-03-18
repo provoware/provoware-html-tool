@@ -88,6 +88,7 @@ OFFENE PUNKTE
 30. README später um einen kurzen Abschnitt mit typischen Startfehlern und einfachen Lösungen ergänzen, sobald die Startprüfung echte Detailmeldungen liefert.
 36. Statusleiste später bei sehr wenig Breite zusätzlich einzelne Hinweise hinter einer kleinen Mehr-Anzeige bündeln.
 35. Iterationsbeispiele später um einen knappen Hinweis ergänzen, wann ein neuer Hinweis besser als Beispiel statt als neue Regel ergänzt wird.
+37. Sitzungswiederherstellung später um echte Projektnamen aus `project.json` statt aus Slugs abbilden.
 
 ERLEDIGTE PUNKTE
 
