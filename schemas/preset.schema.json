@@ -1,0 +1,9 @@
+{
+  "title": "Preset",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

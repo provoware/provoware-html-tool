@@ -1,0 +1,2 @@
+class EditorModule:
+    key = "editor"

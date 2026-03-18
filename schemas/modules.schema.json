@@ -1,0 +1,9 @@
+{
+  "title": "Modules",
+  "type": "object",
+  "properties": {
+    "modules": {
+      "type": "array"
+    }
+  }
+}

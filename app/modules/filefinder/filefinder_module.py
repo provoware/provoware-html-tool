@@ -1,0 +1,2 @@
+class FileFinderModule:
+    key = "filefinder"

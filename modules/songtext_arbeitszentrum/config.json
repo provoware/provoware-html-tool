@@ -1,7 +1,0 @@
-{
-  "maxCollectionLength": 20000,
-  "maxSections": 80,
-  "maxArchiveSongs": 500,
-  "supportedTransferModes": ["append", "replace", "new-section"],
-  "defaultSectionTemplates": ["Intro", "Strophe 1", "Strophe 2", "Refrain", "Hook", "Bridge", "Outro"]
-}

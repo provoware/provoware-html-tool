@@ -1,0 +1,9 @@
+{
+  "title": "Couplings",
+  "type": "object",
+  "properties": {
+    "couplings": {
+      "type": "array"
+    }
+  }
+}

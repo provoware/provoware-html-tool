@@ -1,0 +1,2 @@
+class WikiModule:
+    key = "wiki"

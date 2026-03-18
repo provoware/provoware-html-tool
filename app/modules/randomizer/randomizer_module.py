@@ -1,0 +1,2 @@
+class RandomizerModule:
+    key = "randomizer"

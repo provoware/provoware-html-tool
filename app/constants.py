@@ -1,0 +1,5 @@
+APP_NAME = "Provoware HTML Tool"
+APP_VERSION = "0.1.0"
+ORGANIZATION_NAME = "Provoware"
+DEFAULT_PROFILE_NAME = "Standardprofil"
+SQLITE_FILE_NAME = "app.sqlite3"
