@@ -1,5 +1,9 @@
 # Provoware HTML Tool
 
+> **Entwicklungsfortschritt:** ca. 31 %  
+> **Erledigte offene Punkte:** 5 von 16 größeren Aufgabenblöcken sind als belastbare Grundlage sichtbar umgesetzt.  
+> **Hinweis:** Die Einschätzung ist eine bewusste Grobschätzung aus der aktuell vorhandenen Repo-Struktur, Startlogik und Grundoberfläche.
+
 ## Kurzüberblick
 Provoware HTML Tool wird als neue Linux-Desktop-Anwendung mit Python, PySide6 und Qt Widgets neu aufgebaut. Die Oberfläche soll ruhig, verständlich und robust sein, damit Projekte, Module, Presets, Texte und Arbeitsstände ohne Umwege gepflegt werden können.
 
