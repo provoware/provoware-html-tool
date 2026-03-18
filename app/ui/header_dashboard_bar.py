@@ -28,12 +28,22 @@ class HeaderDashboardBar(QWidget):
 
         layout.addLayout(summary)
 
+        search_group = QVBoxLayout()
+        search_group.setSpacing(2)
+
         search = QLineEdit()
         search.setPlaceholderText("Projekt, Modul oder Hilfe suchen")
         search.setToolTip("Suche nach Projekten, Modulen oder Hilfethemen")
         search.setClearButtonEnabled(True)
         search.setMinimumWidth(260)
-        layout.addWidget(search, 1, Qt.AlignmentFlag.AlignVCenter)
+        search_group.addWidget(search)
+
+        helper = QLabel("Tipp: Du kannst nach Namen, Modulen oder Hilfethemen suchen.")
+        helper.setStyleSheet("color: #6a7482; font-size: 11px;")
+        helper.setWordWrap(True)
+        search_group.addWidget(helper)
+
+        layout.addLayout(search_group, 1)
 
         for text in ("Speichern bereit", "Sicherung noch offen", "System ruhig"):
             layout.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignVCenter)

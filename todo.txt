@@ -74,3 +74,6 @@
    15.3 README um eine kurze Tabelle für Ordnerzweck und Startschritte ergänzen.
    15.4 Sichtbare Hilfehinweise für leere Projekt- und Modulbereiche weiter konkretisieren.
    15.5 Suchfeld im Header mit einer kleinen Schnellhilfe unter oder neben dem Eingabefeld erklären.
+   15.6 Statusleiste um einen kurzen Hinweis auf letzte Sicherung oder letzten Prüfzeitpunkt ergänzen.
+   15.7 Statushinweis später mit echten Zeitdaten aus Prüfung oder Sicherung verbinden.
+   15.8 Leere Zustände später mit kleinen Direktaktionen wie „Projekt anlegen“ oder „Preset wählen“ ergänzen.
