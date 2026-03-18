@@ -15,6 +15,7 @@ class StatusBarController(QWidget):
             f"Speichern {app_state.save_status}",
             app_state.status_summary_text(),
             app_state.search_status_text(),
+            "Aktualisieren folgt mit echten Prüfdaten",
             "Hilfe und Diagnose direkt erreichbar",
         ):
             layout.addWidget(StatusChip(text))

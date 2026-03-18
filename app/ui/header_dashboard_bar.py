@@ -57,9 +57,14 @@ class HeaderDashboardBar(QWidget):
         for text in (
             f"Speichern {app_state.save_status}",
             app_state.check_status_text(),
-            app_state.system_status_text(),
+            app_state.backup_status_text(),
         ):
             status_group.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignRight)
+
+        refresh_hint = QLabel("Aktualisieren folgt später mit echter Prüfung und Sicherung.")
+        refresh_hint.setStyleSheet("color: #6a7482; font-size: 11px;")
+        refresh_hint.setWordWrap(True)
+        status_group.addWidget(refresh_hint, 0, Qt.AlignmentFlag.AlignRight)
 
         layout.addLayout(status_group, 0)
 
