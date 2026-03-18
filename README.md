@@ -78,6 +78,17 @@ Projektbezogene Dateien sind vorbereitet für:
 
 Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert nötige Pakete und startet danach das Programm automatisch.
 
+### Voraussetzungen
+- Linux-System mit Python 3
+- Schreibrechte im Projektordner für virtuelle Umgebung und lokale Arbeitsdateien
+- Internetzugriff beim ersten Start, falls Python-Pakete noch fehlen
+
+### Wenn der Start nicht klappt
+1. Terminal-Ausgabe ruhig komplett lesen.
+2. Fehlende Pakete oder Rechteprobleme zuerst beheben.
+3. Danach `./start.sh` erneut ausführen.
+4. Bleibt der Fehler bestehen, die letzte klare Fehlermeldung für die weitere Analyse notieren.
+
 ### Empfohlene Startschritte
 1. Repository klonen oder bereitstellen.
 2. In das Projektverzeichnis wechseln.
@@ -93,6 +104,16 @@ Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert nöti
 
 ## Status / Roadmap
 Das Repository ist aktuell auf eine tragfähige PySide6-Grundarchitektur ausgerichtet. Als Nächstes folgen vertiefte Workspace-Aktionen, echte Projektpersistenz und ausbaubare Modulinteraktionen.
+
+## Was schon nutzbar ist
+- Grundstart der Desktop-Anwendung über den vorgesehenen Linux-Startpfad
+- Sichtbare AppShell mit klar getrennten Hauptzonen
+- Erste sichere Leitplanken für Projektanlage, Hilfetexte und Statushinweise
+
+## Was noch vorbereitet wird
+- Echte Arbeitsabläufe für Projekte, Module und Presets
+- Dauerhafte Speicherung mit vollständiger Wiederherstellung
+- Hilfen und Reparaturaktionen mit echter Fachlogik statt vorbereiteter Platzhalter
 
 ## Aktueller Iterationsstand
 - Die Projektanlage fängt leere Eingaben jetzt sicher mit `Neues Projekt` ab.

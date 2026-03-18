@@ -86,6 +86,7 @@ OFFENE PUNKTE
 27. Status-Aktualisieren später mit echten Prüf- und Sicherungsabläufen statt Platzhalterzeit ergänzen.
 28. Statushinweise später nur dann als Aktion zeigen, wenn echte Prüfdaten oder Sicherungsdaten bereitstehen.
 29. Änderungsgründe später aus echter Diagnose, Prüfung oder Sicherung statt aus Platzhaltertext speisen.
+30. README später um einen kurzen Abschnitt mit typischen Startfehlern und einfachen Lösungen ergänzen, sobald die Startprüfung echte Detailmeldungen liefert.
 
 ERLEDIGTE PUNKTE
 
