@@ -83,6 +83,7 @@ OFFENE PUNKTE
 19. Header-Suche später mit kleinen Vorschlägen aus zuletzt genutzten Projekten oder Modulen ergänzen.
 20. Projektanlage später vor dem Schreiben auf Namenskonflikte im Zielordner hinweisen.
 22. Direktaktionen später mit echter Projekt-, Preset- und Kopplungslogik verdrahten.
+23. Header-Aktionen später mit echter Hilfe- und Reparaturfunktion verbinden.
 
 ERLEDIGTE PUNKTE
 
