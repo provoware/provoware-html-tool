@@ -4,7 +4,7 @@
 - Arbeite immer planungsbasiert: Zielstelle, Patchgrund, kleinsten Umfang und Seiteneffekte vor dem Patch kurz festhalten.
 - Arbeite traffic-sparsam: lies nur nötige Dateien und prüfe nur direkt betroffene Bereiche.
 - Arbeite codesparsam: keine broad rewrites, keine großflächigen Stiländerungen, keine kosmetischen Umbauten.
-- Jede Iteration besteht aus genau zwei Anpassungsschritten zur Annäherung an `LAYOUT_UND_DESIGNVORGABEMUSTER.md`.
+- Jede Iteration besteht aus genau drei Anpassungsschritten zur Annäherung an `LAYOUT_UND_DESIGNVORGABEMUSTER.md`.
 - Ergänze pro Iteration genau eine weiterführende Aufgabe in `todo.txt`.
 - Validierung erst nach allen Patches der Iteration und nur gezielt für direkt betroffene Logik oder Ausgabe.
 
@@ -15,7 +15,7 @@
 4. Kleinsten sinnvollen Änderungsumfang wählen.
 5. Seiteneffekte und Risiken abschätzen.
 6. Bewusste Nicht-Änderungen festhalten.
-7. Danach eine kurze Schrittliste für genau zwei Anpassungsschritte erstellen.
+7. Danach eine kurze Schrittliste für genau drei Anpassungsschritte erstellen.
 
 ## Minimal Traffic
 - Nur nötige Dateien lesen.
@@ -43,7 +43,7 @@
 - Keine reflexartigen Volltests.
 - Keine endlosen Prüfschleifen.
 - Bei Struktur-, Doku- und Platzhalterarbeiten reichen gezielte Syntax-, Format- oder Konsistenzprüfungen.
-- Validierung immer gesammelt erst nach dem zweiten Anpassungsschritt.
+- Validierung immer gesammelt erst nach dem dritten Anpassungsschritt.
 
 ## Nutzerfreundlichkeit zuerst
 - UI-Texte in einfacher Sprache.
