@@ -1,4 +1,3 @@
-from collections.abc import Callable
 from dataclasses import dataclass, field
 
 from app.utils.time_utils import timestamp_label
@@ -11,22 +10,6 @@ class AppStateService:
     save_status: str = "bereit"
     last_check_label: str = field(default_factory=timestamp_label)
     last_backup_label: str = field(default_factory=timestamp_label)
-    _listeners: list[Callable[[], None]] = field(default_factory=list)
-
-    def subscribe(self, listener: Callable[[], None]) -> None:
-        self._listeners.append(listener)
-
-    def refresh_check_label(self) -> None:
-        self.last_check_label = timestamp_label()
-        self._notify()
-
-    def refresh_backup_label(self) -> None:
-        self.last_backup_label = timestamp_label()
-        self._notify()
-
-    def _notify(self) -> None:
-        for listener in self._listeners:
-            listener()
 
     def search_helper_text(self) -> str:
         if self.active_project_name == "Kein Projekt offen":
