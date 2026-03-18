@@ -85,7 +85,7 @@ OFFENE PUNKTE
 22. Direktaktionen später mit echter Projekt-, Preset- und Kopplungslogik verdrahten.
 23. Header-Aktionen später mit echter Hilfe- und Reparaturfunktion verbinden.
 24. Hilfe- und Reparaturdialoge später mit echten Hilfelinks und sicheren Prüfaktionen füllen.
-25. Reparaturdialog später mit einem klaren Ergebnisbereich für sichere Prüfungen ergänzen.
+26. Ergebnisbereich später mit kleinen Statusstufen für bereit, geprüft und Hinweis ergänzen.
 
 ERLEDIGTE PUNKTE
 
@@ -97,3 +97,4 @@ ERLEDIGTE PUNKTE
 - 15.6 Statusleiste um einen kurzen Hinweis auf letzte Sicherung oder letzten Prüfzeitpunkt ergänzt.
 - 23. Header-Aktionen mit nutzbarer Hilfe und vorbereitetem Reparaturdialog sichtbar konkretisiert.
 - 24. Hilfe- und Reparaturdialoge mit einfachen, sicheren Platzhalteraktionen vorbereitet.
+- 25. Reparaturdialog um einen klaren Ergebnisbereich für sichere Prüfungen ergänzt.
