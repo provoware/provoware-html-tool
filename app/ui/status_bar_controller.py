@@ -12,7 +12,8 @@ class StatusBarController(QWidget):
         for text in (
             "Projekt ruhig",
             "Speichern bereit",
-            "Letzte Prüfung: noch offen",
+            "Letzte Prüfung: heute noch offen",
+            "Letzte Sicherung: bitte vor dem Schließen starten",
             "Suche wartet auf deinen Begriff",
             "Hilfe und Diagnose bereit",
         ):

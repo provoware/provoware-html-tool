@@ -77,3 +77,4 @@
    15.6 Statusleiste um einen kurzen Hinweis auf letzte Sicherung oder letzten Prüfzeitpunkt ergänzen.
    15.7 Statushinweis später mit echten Zeitdaten aus Prüfung oder Sicherung verbinden.
    15.8 Leere Zustände später mit kleinen Direktaktionen wie „Projekt anlegen“ oder „Preset wählen“ ergänzen.
+   15.9 Header-Schnellhilfe später bei Fokus oder erster Suche als kleine kontextnahe Hilfe einblenden.
