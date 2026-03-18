@@ -33,19 +33,19 @@ class HeaderDashboardBar(QWidget):
 
         search = QLineEdit()
         search.setPlaceholderText("Projekt, Modul oder Hilfe suchen")
-        search.setToolTip("Suche nach Projekten, Modulen oder Hilfethemen")
+        search.setToolTip("Gib einen Namen oder ein Hilfethema ein")
         search.setClearButtonEnabled(True)
         search.setMinimumWidth(260)
         search_group.addWidget(search)
 
-        helper = QLabel("Tipp: Du kannst nach Namen, Modulen oder Hilfethemen suchen.")
+        helper = QLabel("Schnellhilfe: Namen, Module oder Hilfebegriffe eingeben.")
         helper.setStyleSheet("color: #6a7482; font-size: 11px;")
         helper.setWordWrap(True)
         search_group.addWidget(helper)
 
         layout.addLayout(search_group, 1)
 
-        for text in ("Speichern bereit", "Sicherung noch offen", "System ruhig"):
+        for text in ("Speichern bereit", "Prüfung heute noch offen", "System ruhig"):
             layout.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignVCenter)
 
         layout.addWidget(QPushButton("Hilfe"), 0, Qt.AlignmentFlag.AlignVCenter)
