@@ -1,4 +1,6 @@
-from PySide6.QtWidgets import QDialog, QLabel, QPushButton, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QDialog, QHBoxLayout, QLabel, QPushButton, QVBoxLayout, QWidget
+
+from app.ui.widgets.status_chip import StatusChip
 
 
 class RepairDialog(QDialog):
@@ -32,6 +34,16 @@ class RepairDialog(QDialog):
         result_title.setStyleSheet("font-weight: 600;")
         layout.addWidget(result_title)
 
+        level_row = QHBoxLayout()
+        level_row.setSpacing(6)
+        self.ready_chip = StatusChip("Bereit")
+        self.checked_chip = StatusChip("Prüfung offen")
+        self.note_chip = StatusChip("Hinweis folgt")
+        for chip in (self.ready_chip, self.checked_chip, self.note_chip):
+            level_row.addWidget(chip)
+        level_row.addStretch(1)
+        layout.addLayout(level_row)
+
         self.result_label = QLabel(
             "Noch keine Prüfung gestartet.\n"
             "Wenn du oben auf „Pfade prüfen“ klickst, erscheint hier ein kurzer, sicherer Bericht."
@@ -47,6 +59,9 @@ class RepairDialog(QDialog):
         layout.addWidget(close_button)
 
     def _show_path_check_result(self) -> None:
+        self.ready_chip.setText("Bereit")
+        self.checked_chip.setText("Geprüft")
+        self.note_chip.setText("Hinweis: keine Änderung")
         self.result_label.setText(
             "Sichere Prüfung vorbereitet.\n"
             "Pfade wirken im Platzhalterbericht erreichbar, und es wurde nichts geändert.\n"

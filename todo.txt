@@ -86,6 +86,7 @@ OFFENE PUNKTE
 23. Header-Aktionen später mit echter Hilfe- und Reparaturfunktion verbinden.
 24. Hilfe- und Reparaturdialoge später mit echten Hilfelinks und sicheren Prüfaktionen füllen.
 26. Ergebnisbereich später mit kleinen Statusstufen für bereit, geprüft und Hinweis ergänzen.
+27. Status-Aktualisieren später mit echten Prüf- und Sicherungsabläufen statt Platzhalterzeit ergänzen.
 
 ERLEDIGTE PUNKTE
 
@@ -98,3 +99,5 @@ ERLEDIGTE PUNKTE
 - 23. Header-Aktionen mit nutzbarer Hilfe und vorbereitetem Reparaturdialog sichtbar konkretisiert.
 - 24. Hilfe- und Reparaturdialoge mit einfachen, sicheren Platzhalteraktionen vorbereitet.
 - 25. Reparaturdialog um einen klaren Ergebnisbereich für sichere Prüfungen ergänzt.
+- 17. Statushinweise mit kleinem Aktualisieren-Auslöser für Prüfung und Sicherung vorbereitet.
+- 26. Ergebnisbereich mit kleinen Statusstufen für bereit, geprüft und Hinweis ergänzt.
