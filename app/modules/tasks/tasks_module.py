@@ -1,0 +1,2 @@
+class TasksModule:
+    key = "tasks"

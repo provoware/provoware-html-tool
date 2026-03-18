@@ -1,9 +1,0 @@
-{
-  "enabled": true,
-  "repairMissingFiles": true,
-  "runMinimalCheck": true,
-  "autoOpenBrowser": true,
-  "maxRepairRounds": 2,
-  "repairDelaySeconds": 1,
-  "notes": "Standard-Dummy für den Shell-Laienstart. Kann projektbezogen angepasst werden."
-}

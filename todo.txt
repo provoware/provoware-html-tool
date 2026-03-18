@@ -1,39 +1,72 @@
-[x] 2026-03-09 | Iteration 050 | Rechte Sidebar hierarchisch beruhigen: KPI, Trend, Selbsttest und CTA in klarer Reihenfolge mit mehr Luft trennen | prüfen: Keyboard-Fokus + Blicklauf | fertig wenn: nächste Aktion in <=3 Sekunden auffindbar
-[x] 2026-03-09 | Iteration 050 | Header-Dichte reduzieren: Statuschips und Prozessschritte in zwei klar getrennte Ebenen mit konsistentem Zeilenraster bringen | prüfen: Sichtprüfung bei 1270px/980px | fertig wenn: keine visuelle Kollision zwischen Titel, Status und Assistentenbereich
-[x] 2026-03-09 | Iteration 051 | Farbwelt der globalen CSS-Root-Tokens vollständig auf kühl-dunkle Vorgabenmuster-Basis harmonisieren (insb. --bg, --bg-panel, Body-Radials) | prüfen: visueller Delta-Check gegen Vorgabenmuster bei 100% Zoom | fertig wenn: keine dominanten oliv/warmen Grundflächen mehr sichtbar
-[x] 2026-03-09 | Iteration 051 | Header-Höhenverhältnis auf Vorgabenmuster-Niveau reduzieren (aktuell deutlich höher als 60px-Musterhöhe) ohne Informationsverlust | prüfen: 1270px und 980px ohne Überlappung | fertig wenn: Header wirkt kompakter und behält klare Hierarchie
-[ ] 2026-03-09 | Iteration 052A | HARTER SOLL-IST-CHECK gegen `LAYOUT_UND_DESIGNVORGABEMUSTER.html` dokumentieren und als Basis für Patches festschreiben | Ziel: exakter Delta-Status pro Kernbereich (Raster, Token, Header, Nav, Actions, Footer) | Betroffene Dateien/Blöcke: `css/app.css` (`:root`, `.app`, `.header`, `.panel`, `.main-grid`), `index.html` (Header-Block, Stage-Container, rechte Utility-Spalte, Footer-Block), `GLOBAL_LAYOUT_DESIGN_STANDARD.md` (nur Referenzbezug) | Patchgrund: aktuell sind zentrale Musterwerte (`--header-h:60`, `--nav-w:88`, `--action-w:260`, `--footer-h:146`) strukturell noch nicht durchgehend im Live-Layout verankert | Risiko: bei zu breitem Umbau könnten JS-Anker brechen oder responsive Verhalten kippen | Bewusste Nicht-Änderungen: keine JS-Logik, keine ID/ARIA-Änderung, keine Modul-Inhaltsänderung | prüfen: Sichtprüfung 1270px/980px + vorhandene Layout-Tests | fertig wenn: jede Abweichung als konkret patchbarer Punkt mit Priorität A/B/C erfasst ist
-[x] 2026-03-09 | Iteration 052B | Token-First-Angleichung an Musterwerte vorbereitet (Design-Tokens + Hintergrund-/Panel-Flächen) | prüfen: `tests/services/theme-contrast-dark.test.js` | fertig wenn: Grundfarbwelt klar kühl-dunkel wirkt und keine dominanten warm/oliven Grundflächen im Shell-Bereich sichtbar sind
-[x] 2026-03-09 | Iteration 052C | Header+Dashboard-Karten als kompakter Desktop-Block umgesetzt (60px-Rasterzeile, reduzierte Desktop-Dichte) | prüfen: `tests/services/ui-header-compactness.test.js` | fertig wenn: Header ohne Überlappung im kompakten Rhythmus bleibt
-[x] 2026-03-09 | Iteration 052D | Stage-Raster auf Musterproportionen gesetzt (88px | fluid | 260px, Gap 14, Footer 146px) | prüfen: `tests/services/ui-panel-width-breakpoints.test.js` + `tests/services/ui-grid-help-layout.test.js` | fertig wenn: Desktop-Grid den Musterproportionen folgt
-[x] 2026-03-09 | Iteration 052E | Rechte Utility-Spalte visuell in zwei klare Kartenblöcke gegliedert (Info-Block oben, Tools/Plugin-Block unten) ohne ID-/Handler-Eingriff | prüfen: `tests/services/ui-tools-toggle.test.js` + `tests/services/ui-action-handlers.smoke.test.js` | fertig wenn: Hierarchie rechts auf den ersten Blick klar ist
-[x] 2026-03-09 | Iteration 052G | Warmton-Reste in Modul-/Widget-Inhaltskarten auf dunkle Glasflächen gemappt (Navigation, Workflow-Box, Modul-/Footer-Karten) | prüfen: `tests/services/ui-layout-smoke.test.js` + `tests/services/theme-contrast-dark.test.js` | fertig wenn: Inhaltskarten farblich konsistent zur dunklen Musterwelt sind
-[ ] 2026-03-09 | Iteration 052H | Restpunkt für Folgeiteration: modulinterne Detailkomponenten (`todo-list`, `account-detail`, einzelne Formularfelder) ebenfalls auf dunkle Kartenharmonie nachziehen, ohne Datendarstellung zu übersteuern | prüfen: visuell + modulbezogene Tests | fertig wenn: auch tiefe Inhaltsbereiche keine hellen Inseln mehr zeigen
-[ ] 2026-03-09 | Iteration 052F | Footer-Bereich auf Musterhöhe/-rhythmus (146px, Toggle-Mitte, 3 Karten) ausrichten | Ziel: unterer Bereich als ruhiger, klarer Abschluss im Musterstil | Betroffene Dateien/Blöcke: `index.html` Footer-Struktur, `css/app.css` Footer-Grid (`.footer-wrap`, `.footer-toggle-row`, `.footer-panel`) | Patchgrund: aktueller Footer folgt noch nicht durchgehend der Muster-Vertikaldramaturgie | Risiko: bei reduzierter Höhe Textkollisionen | Bewusste Nicht-Änderungen: keine neuen Footer-Features, nur Layout/Spacing | prüfen: `tests/services/ui-footer-compactness.test.js` | fertig wenn: Footer bei 100% Zoom ohne Kollisionen die 3-Karten-Logik trägt
-[x] 2026-03-09 | Iteration 053A | Vorlage-Datei `LAYOUT_UND_DESIGNVORGABEMUSTER.md` im Repo ergänzt, damit der in AGENTS.md definierte Zwei-Schritte-Abgleich pro Iteration ohne Suchverlust umsetzbar bleibt | prüfen: `rg --files -g 'LAYOUT_UND_DESIGNVORGABEMUSTER.md'` | fertig wenn: Datei auffindbar ist oder ein fixer Ersatzpfad dokumentiert wurde
-[ ] 2026-03-09 | Iteration 053B | Iterations-Template für Planblock + Endvalidierung standardisieren (Ziel, Scope, Risiken, Nicht-Änderungen, 2-Schritte-Abgleich, 2 TODOs) zur weiteren Traffic- und Patch-Reduktion | prüfen: Kurz-Review auf Doppelarbeit in den nächsten 3 Iterationen | fertig wenn: jede Iteration mit identischem kompakten Schema startet und endet
-[x] 2026-03-09 | Iteration 053C | Footer-Toggle-Zeile wie im Vorgabenmuster als eigene mittige Steuerzeile oberhalb der Footer-Karten eingezogen (ohne neue Funktion, nur Struktur/Spacing) | prüfen: `tests/services/ui-footer-compactness.test.js` | fertig wenn: Footer-Steuerung klar getrennt und mittig vor den Karten sitzt
-[x] 2026-03-09 | Iteration 053D | Footer-Kartenzahl visuell auf ruhige 3-Panel-Hierarchie reduziert (Plugin-Slot bleibt optional in Sidebar) zur stärkeren Musterannäherung | prüfen: Sichtprüfung + `tests/services/ui-layout-smoke.test.js` | fertig wenn: Footer wirkt als ruhiger Abschluss mit klarer Primär-/Sekundärordnung
-[x] 2026-03-09 | Iteration 054A | Footer-Toggle nach Muster interaktiv geschaltet (Expand/Collapse) und an vorhandene Höhen-Budgets gekoppelt, ohne neue Abhängigkeiten | prüfen: `tests/services/ui-footer-compactness.test.js` + Layout-Budget-Hinweis im UI | fertig wenn: Toggle steuert Footer sichtbar und kollisionsfrei
-[x] 2026-03-09 | Iteration 054B | Plugin-Bereich startet standardmäßig in der rechten Seitenleiste und Footer bleibt als Kurzstatus, um 3-Panel-Ruhe dauerhaft zu sichern | prüfen: `tests/services/ui-tools-toggle.test.js` + `tests/services/ui-action-handlers.smoke.test.js` | fertig wenn: Plugin-Ort bleibt klar und Umschalter funktioniert stabil
-[x] 2026-03-09 | Iteration 055A | Footer-Collapse-Zustand in Session-State speichern, damit Ein-/Ausklappen nach Re-Render stabil bleibt | prüfen: gezielter UI-State-Test für `footer-toggle` | fertig wenn: Toggle-Zustand bleibt bei Status-Updates unverändert
-[x] 2026-03-09 | Iteration 055B | Plugin-Sidebar-Default mit kurzer UI-Hinweiszeile erklären (einfache Sprache), um Erstnutzung klarer zu machen | prüfen: Sichtprüfung + `tests/services/ui-action-handlers.smoke.test.js` | fertig wenn: Nutzer verstehen den Standardort ohne Zusatzfrage
-[x] 2026-03-09 | Iteration 056A | Footer-Collapse-Button bei sehr kleinen Breiten zusätzlich mit Icon/kurzem Label absichern, damit die neue font-skalierte Höhe klar lesbar bleibt | prüfen: Sichtprüfung 980px + `tests/services/ui-footer-compactness.test.js` | fertig wenn: Toggle bleibt klar und nicht gequetscht
-[ ] 2026-03-09 | Iteration 056B | Footer-Panel-Inhalt bei langen Listen (Log/Plugin) per lokalem Scrollbereich begrenzen, damit die font-abhängige Innenabstandsskalierung keine Überläufe erzeugt | prüfen: Sichtprüfung + `tests/services/ui-action-handlers.smoke.test.js` | fertig wenn: Panel bleibt stabil ohne Textkollisionen
-[ ] 2026-03-09 | Iteration 057A | Linke und rechte Icon-Buttons (Sidebar + Utility) auf gleiche Gold-Kantenstärke und Hover-Glow abstimmen, damit der Rahmenrhythmus wie im Vorlagebild durchgehend wirkt | prüfen: Sichtprüfung bei 1270px und 980px | fertig wenn: Icon-Buttons lesen sich als zusammengehörige Steuerfamilie
-[ ] 2026-03-09 | Iteration 057B | Hauptkachelraster (3x3) mit leicht stärkerem diagonalen Flächenverlauf pro Karte angleichen, damit die Lichtführung dem Vorlagebild näher kommt ohne Textkontrastverlust | prüfen: `tests/services/ui-grid-theme-e2e.test.js` + Sichtprüfung | fertig wenn: Kacheln zeigen ruhige diagonale Lichtspur ohne Lesbarkeitsverlust
-[ ] 2026-03-09 | Iteration 058A | Sidebar-Modulbuttons mit kompakter Icon-only-Alternative für sehr schmale Zustände versehen (ohne Informationsverlust), damit die linke Leiste dem Vorlagenrhythmus bei Collapse näher kommt | prüfen: Sichtprüfung bei collapsed left sidebar + `tests/services/ui-sidebar-auto-collapse.dom.test.js` | fertig wenn: Buttons bleiben klar bedienbar und wirken als Icon-Familie
-[ ] 2026-03-09 | Iteration 058B | 3x3-Kachellicht pro Zeile fein differenzieren (oben minimal heller als unten), um die diagonale Tiefenwirkung der Vorlage zu verstärken ohne Textkontrastverlust | prüfen: `tests/services/ui-grid-theme-e2e.test.js` + `tests/services/theme-contrast-dark.test.js` | fertig wenn: Tiefe sichtbar, Kontrast stabil
-[ ] 2026-03-09 | Iteration 059A | Zentralbereich bei 100%/125% Zoom auf Restschleier prüfen und ggf. lokale Overlay-Stufen für `.main-start-workflow` separat tokenisieren, damit Text dauerhaft klar bleibt | prüfen: Sichtprüfung + `tests/services/ui-layout-smoke.test.js` | fertig wenn: Startworkflow ohne milchigen Schleier lesbar bleibt
-[ ] 2026-03-09 | Iteration 059B | Modulkopf-Buttons im Zentrum mit leicht höherem Kontrast (Text/Icon) gegen dunkle Kartenkante absichern, damit Bedienung in dunkler Szene schneller erfassbar ist | prüfen: `tests/services/theme-contrast-dark.test.js` + Sichtprüfung | fertig wenn: Kopf-Controls sind auf den ersten Blick klar erkennbar
-[x] 2026-03-09 | Iteration 060A | Startup-Check-Fehlercodes in kleine Mapping-Konstante ausgelagert, damit Rückgaben zentral wartbar bleiben und neue Fälle ohne Copy-Paste ergänzt werden können | prüfen: `tests/services/startup-check.test.js` | fertig wenn: Fehlermeldungs-/Code-Paare stehen zentral und alle Startup-Tests bleiben grün
+1. Altprojekt entfernen
+   1.1 Alte Web-, Demo-, Altlast- und Testdateien entfernen.
+   1.2 Nur .git und für den Neuaufbau nötige neue Dateien behalten.
+   1.3 Entfernte Bereiche kurz dokumentieren.
 
-[x] 2026-03-09 | Iteration 061A | Startup-Check: gemeinsame Action-Payloads für Directory/Permission-Fehler weiter vereinheitlichen, damit Rückgaben noch konsistenter wartbar sind | prüfen: `tests/services/startup-check.test.js` | fertig wenn: wiederkehrende Fehlerpfade nutzen eine gemeinsame Hilfsfunktion ohne Verhaltensänderung
-[x] 2026-03-09 | Iteration 062A | Startup-Check: Selftest-Retry-Payload auf withActionPreset umstellen, damit alle Fehlerpfade dieselbe Preset-Logik nutzen und doppeltes Payload-Muster entfällt | prüfen: `tests/services/startup-check.test.js` | fertig wenn: Retry-Pfad nutzt Preset-Baustein ohne Verhaltensänderung
-[x] 2026-03-09 | Iteration 063A | Rechte Sidebar-Gruppierung mit kleinem DOM-Test absichern (Abstand + CTA-Priorität), damit die neue visuelle Hierarchie regressionssicher bleibt | prüfen: neuer gezielter UI-DOM-Test | fertig wenn: Gruppe/CTA-Regeln bei künftigen CSS-Patches stabil erkannt werden
-[x] 2026-03-09 | Iteration 064A | Footer-Toggle-Icon per kleinem DOM-Test auf beide Zustände (eingeklappt/ausgeklappt) inklusive Prefix-Symbol absichern, damit spätere Textänderungen die Mobil-Lesbarkeit nicht regressieren | prüfen: neuer gezielter UI-DOM-Test | fertig wenn: beide Toggle-Texte mit Symbol stabil erkannt werden
-[ ] 2026-03-09 | Iteration 065A | Footer-Toggle-Kompaktstil bei 980px/1270px mit kleinem CSS-DOM-Test absichern (Min-Breite + Zentrierung), damit der neue Musterrhythmus stabil bleibt | prüfen: neuer gezielter CSS-DOM-Test | fertig wenn: Toggle-Kompaktwerte regressionssicher erkannt werden
-[ ] 2026-03-09 | Iteration 066A | AGENTS-Standard: kurzes Fehlerklassen-Schema (Validation, Runtime, External, Unknown) ergänzen, damit Fallbacks konsistent und schneller ableitbar bleiben | prüfen: Inhaltsreview AGENTS.md auf Eindeutigkeit | fertig wenn: jede neue Änderung kann einer Fehlerklasse mit Standardreaktion zugeordnet werden
-[ ] 2026-03-09 | Iteration 067A | Startup-Check: Builder-Helfer für Action-Presets um kleine Fehlerklassen-Map (Directory/Permission/Selftest) ergänzen, damit neue Fehlerpfade ohne Copy-Paste konsistent bleiben | prüfen: `tests/services/startup-check.test.js` | fertig wenn: neue Fehlerpfade nutzen nur noch klassifizierten Preset-Builder ohne Verhaltensänderung
-[ ] 2026-03-09 | Iteration 068A | Footer-Kartenanzahl per gezieltem Layout-Test auf 4-Spalten-Referenz absichern, damit die Muster-Proportion stabil bleibt | prüfen: neuer CSS-DOM-Test für .footer-grid columns + Sichtprüfung 1270px | fertig wenn: 4-Spalten-Rhythmus regressionssicher erkannt wird
-[ ] 2026-03-09 | Iteration 069A | Header-Kompaktabstand bei 1270px gezielt gegen Vorgabenmuster (60px Kopfzeile + harmonische Kartenlücken) mit kleinem CSS-Test absichern, damit Sammeltests nicht wegen impliziter Annahmen kippen | prüfen: neuer header-compact CSS-Test + Sichtprüfung 1270px | fertig wenn: Header-Kompaktmaß ist explizit regressionssicher
+2. Repo-Grundstruktur anlegen
+   2.1 Zielordner app, resources, schemas und tests vollständig anlegen.
+   2.2 Platzhalterdateien nur dort nutzen, wo noch keine echte Logik nötig ist.
+   2.3 Linux-taugliche Startpfade fest verankern.
+
+3. README / todo / AGENTS erstellen
+   3.1 README mit Ziel, Struktur und Linux-Start pflegen.
+   3.2 todo.txt pro Iteration mit genau einem Folgepunkt ergänzen.
+   3.3 AGENTS.md als strengen Arbeitsstandard pflegen.
+
+4. Start- und Bootstrap-Logik
+   4.1 AppBootstrap mit klarer Startreihenfolge ausbauen.
+   4.2 StartupChecks für Pfade, Dateien und SQLite vertiefen.
+   4.3 DependencyReport im Fehlerfall laienverständlich ausgeben.
+
+5. AppShell mit 5 Zonen
+   5.1 Shell-Layout an Referenzproportionen annähern.
+   5.2 Zonen mit stabilen Mindestbreiten und Leerzuständen absichern.
+   5.3 Hilfe- und Reparaturzugang sichtbar halten.
+
+6. Projekt-Tab-Logik
+   6.1 Neue Projekte sauber anlegen und schließen.
+   6.2 Ungespeichert-Status sichtbar führen.
+   6.3 Plus-Aktion mit Dialog verbinden.
+
+7. Globale Sidebar
+   7.1 Profil, Einstellungen und Datenverwaltung anbinden.
+   7.2 Backup und Wiederherstellung sichtbar vorbereiten.
+   7.3 Hilfe und Preset-Verwaltung ergänzen.
+
+8. Rechte Modulbibliothek
+   8.1 Modul-, Preset- und Kopplungslisten mit Aktionen verbinden.
+   8.2 Filter und Statushinweise ergänzen.
+   8.3 Leere Zustände klar erklären.
+
+9. Workspace-Host + Docking
+   9.1 Modul-Docks dynamisch öffnen und schließen.
+   9.2 Layout laden und speichern.
+   9.3 Preset-Anwendung im Host abbilden.
+
+10. Datenhaltung + Pfade
+   10.1 Projektdateien project.json, layout.json, modules.json und couplings.json fest verdrahten.
+   10.2 State- und Cache-Pfade sauber trennen.
+   10.3 Atomare Schreibpfade absichern.
+
+11. Modul-Registry
+   11.1 Kategorien und Metadaten erweitern.
+   11.2 Instanziierung für spätere Plugins offen halten.
+   11.3 Registry-Fehler freundlich melden.
+
+12. Kernmodule als Grundgerüst
+   12.1 Editor, Templates und Styles mit Basisaktionen füllen.
+   12.2 Randomizer, Tasks und Wiki an gemeinsame Dock-Basis anbinden.
+   12.3 FileFinder mit SearchService koppeln.
+
+13. Recovery / Diagnose / Status
+   13.1 Sitzungswiederherstellung vorbereiten.
+   13.2 Diagnoseübersicht mit klaren Meldungen ergänzen.
+   13.3 Speicher- und Warnstatus in Header und Footer angleichen.
+
+14. Feinschliff + Doku
+   14.1 UI an Layout-Referenz weiter annähern.
+   14.2 Hilfetexte für Laien ergänzen.
+   14.3 Kleinschrittige Wartungsregeln in Doku und Code prüfen.
+
+15. Folgepunkt
+   15.1 Header- und Statusbereich visuell enger an die Referenz `LAYOUT_UND_DESIGNVORGABEMUSTER.md` anpassen.

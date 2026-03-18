@@ -1,0 +1,2 @@
+class StylesModule:
+    key = "styles"
