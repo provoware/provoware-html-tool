@@ -63,13 +63,13 @@ class HeaderDashboardBar(QWidget):
 
         layout.addLayout(status_group, 0)
 
-        help_button = QPushButton("Hilfe")
-        help_button.setToolTip("Öffnet eine kurze Hilfe zu den sichtbaren Bereichen")
+        help_button = QPushButton("Kurzhilfe")
+        help_button.setToolTip("Zeigt kurz und einfach, wo Suche, Projektbereich und Module liegen")
         help_button.clicked.connect(self._open_help_dialog)
         layout.addWidget(help_button, 0, Qt.AlignmentFlag.AlignVCenter)
 
-        repair_button = QPushButton("Reparieren")
-        repair_button.setToolTip("Öffnet den sicheren Startpunkt für Prüfungen")
+        repair_button = QPushButton("Sichere Prüfung")
+        repair_button.setToolTip("Öffnet vorbereitete, sichere Prüfschritte ohne Datenänderung")
         repair_button.clicked.connect(self._open_repair_dialog)
         layout.addWidget(repair_button, 0, Qt.AlignmentFlag.AlignVCenter)
 
