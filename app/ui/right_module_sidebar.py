@@ -10,8 +10,8 @@ class RightModuleSidebar(QWidget):
         layout.setContentsMargins(8, 8, 12, 8)
         for title, items in {
             "Module": ["Editor", "Templates", "Styles", "Randomizer", "Tasks", "Wiki", "FileFinder"],
-            "Presets": ["Standard-Arbeitsplatz"],
-            "Kopplungen": ["Noch keine Kopplungen"],
+            "Presets": ["Noch kein Preset gewählt", "Tipp: Wähle später ein passendes Arbeitsmuster."],
+            "Kopplungen": ["Noch keine Kopplungen", "Sie erscheinen hier, sobald du Module verbindest."],
         }.items():
             layout.addWidget(SectionHeader(title))
             widget = QListWidget()

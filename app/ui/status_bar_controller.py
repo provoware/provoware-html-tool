@@ -12,8 +12,9 @@ class StatusBarController(QWidget):
         for text in (
             "Projekt ruhig",
             "Speichern bereit",
-            "Suche noch leer",
-            "Diagnose bereit",
+            "Letzte Prüfung: noch offen",
+            "Suche wartet auf deinen Begriff",
+            "Hilfe und Diagnose bereit",
         ):
             layout.addWidget(StatusChip(text))
         layout.addStretch(1)
