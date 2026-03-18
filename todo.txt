@@ -86,7 +86,7 @@ OFFENE PUNKTE
 28. Statushinweise später nur dann als Aktion zeigen, wenn echte Prüfdaten oder Sicherungsdaten bereitstehen.
 29. Änderungsgründe später aus echter Diagnose, Prüfung oder Sicherung statt aus Platzhaltertext speisen.
 30. README später um einen kurzen Abschnitt mit typischen Startfehlern und einfachen Lösungen ergänzen, sobald die Startprüfung echte Detailmeldungen liefert.
-31. Statusleiste später bei wenig Breite automatisch von zwei Gruppen auf eine kompakte Zeile umstellen.
+36. Statusleiste später bei sehr wenig Breite zusätzlich einzelne Hinweise hinter einer kleinen Mehr-Anzeige bündeln.
 35. Iterationsbeispiele später um einen knappen Hinweis ergänzen, wann ein neuer Hinweis besser als Beispiel statt als neue Regel ergänzt wird.
 
 ERLEDIGTE PUNKTE
@@ -107,3 +107,4 @@ ERLEDIGTE PUNKTE
 - 32. Iterationshinweise um ein kurzes Beispiel mit drei Anpassungsschritten und eine kleine Kurzregel ergänzt.
 - 33. Iterations-Kurzregel um einen kleinen Hinweis zu typischen Fehlern bei der Schrittplanung ergänzt.
 - 34. Iterationsbeispiel um einen kurzen Einengungs-Hinweis für unklare Zielstellen ergänzt.
+- 31. Statusleiste bei wenig Breite automatisch von zwei Gruppen auf eine kompakte Anordnung umgestellt.
