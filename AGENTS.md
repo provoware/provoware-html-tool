@@ -8,6 +8,11 @@
 - Ergänze pro Iteration genau eine weiterführende Aufgabe in `todo.txt`.
 - Validierung erst nach allen Patches der Iteration und nur gezielt für direkt betroffene Logik oder Ausgabe.
 
+## Iterations-Kurzregel
+- Erst drei Anpassungsschritte planen.
+- Dann genau eine weiterführende Aufgabe in `todo.txt` ergänzen.
+- Erst danach gezielt validieren.
+
 ## Eingangsprüfung vor jeder Änderung
 1. Zielstelle bestimmen.
 2. Betroffene Dateien und Blöcke benennen.
@@ -16,6 +21,11 @@
 5. Seiteneffekte und Risiken abschätzen.
 6. Bewusste Nicht-Änderungen festhalten.
 7. Danach eine kurze Schrittliste für genau drei Anpassungsschritte erstellen.
+
+Kurzbeispiel für die Schrittliste:
+1. Regel oder Zielstelle anpassen.
+2. Nötige Folgeänderung direkt daneben ergänzen.
+3. Zum Schluss nur die betroffenen Stellen prüfen.
 
 ## Minimal Traffic
 - Nur nötige Dateien lesen.
