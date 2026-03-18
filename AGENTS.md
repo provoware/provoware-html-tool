@@ -27,6 +27,7 @@ Kurzbeispiel für die Schrittliste:
 1. Regel oder Zielstelle anpassen.
 2. Nötige Folgeänderung direkt daneben ergänzen.
 3. Zum Schluss nur die betroffenen Stellen prüfen.
+Einengung bei unklarer Zielstelle: erst Datei, dann Block, dann Zeile festlegen.
 
 ## Minimal Traffic
 - Nur nötige Dateien lesen.
