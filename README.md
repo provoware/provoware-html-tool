@@ -58,12 +58,12 @@ Die Struktur ist bewusst klein und klar:
 - `tests/` gezielte Basis-Tests
 
 ## Start unter Linux
+Für den einfachen Start reicht ein Befehl:
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python run.py
+./start.sh
 ```
+
+Das Skript legt bei Bedarf die geschützte Python-Umgebung an, installiert die nötigen Pakete und startet danach das Programm automatisch.
 
 ## Entwicklungsprinzipien
 - Erst planen, dann patchen

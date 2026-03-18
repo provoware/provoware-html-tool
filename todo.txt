@@ -70,3 +70,4 @@
 
 15. Folgepunkt
    15.1 Header- und Statusbereich visuell enger an die Referenz `LAYOUT_UND_DESIGNVORGABEMUSTER.md` anpassen.
+   15.2 Startskript um kurze Vorab-Prüfung für fehlende Linux-Systempakete ergänzen.
