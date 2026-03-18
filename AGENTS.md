@@ -22,6 +22,8 @@
 - Kein Vollrepo-Scannen ohne zwingenden Grund.
 - Keine unnötigen Datei- oder Netzoperationen.
 - Nur betroffene Stellen erneut prüfen.
+- Vor jedem weiteren Datei-Zugriff kurz begründen, warum die schon gelesenen Informationen nicht reichen.
+- Such- und Prüfkommandos immer so klein wie möglich eingrenzen, damit keine unnötigen Treffer ausgewertet werden müssen.
 
 ## Codesparsames Patchen
 - Immer präzise an Ort und Stelle patchen.
@@ -53,6 +55,12 @@
 - Für jede Änderung klaren Fehlerpfad mitdenken.
 - Fehlermeldungen in einfacher Sprache formulieren.
 - Sicheren Fallback ohne Datenverlust bevorzugen.
+
+## Wartbarkeit und Entwicklungseffizienz
+- Bevorzuge kleine, klar getrennte Dateien für Logik, Konfiguration, Daten, Tests und Doku.
+- Prüfe Teilung, wenn Hilfsdateien deutlich über 150 Zeilen, normale Module über 300 Zeilen oder Kernmodule über 500 Zeilen wachsen.
+- Halte Funktionen möglichst unter 40 Zeilen; ab etwa 60 Zeilen Teilung oder Auslagerung aktiv prüfen.
+- Neue Regeln so formulieren, dass sie im Alltag schnell prüfbar sind und keine unnötige Zusatzarbeit erzeugen.
 
 ## Iterationsabschluss
 - Kurzes Änderungsprotokoll festhalten.
