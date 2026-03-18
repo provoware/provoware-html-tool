@@ -2,18 +2,22 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QHBoxLayout, QLabel, QLineEdit, QPushButton, QVBoxLayout, QWidget
 
 from app.services.app_state_service import AppStateService
+from app.ui.dialogs.help_dialog import HelpDialog
+from app.ui.dialogs.repair_dialog import RepairDialog
 from app.ui.widgets.status_chip import StatusChip
 
 
 class HeaderDashboardBar(QWidget):
     def __init__(self, app_state: AppStateService) -> None:
         super().__init__()
+        self._help_dialog: HelpDialog | None = None
+        self._repair_dialog: RepairDialog | None = None
         layout = QHBoxLayout(self)
-        layout.setContentsMargins(12, 8, 12, 4)
-        layout.setSpacing(8)
+        layout.setContentsMargins(12, 8, 12, 6)
+        layout.setSpacing(10)
 
         summary = QVBoxLayout()
-        summary.setSpacing(1)
+        summary.setSpacing(2)
 
         eyebrow = QLabel("Startbereich")
         eyebrow.setStyleSheet("color: #6a7482; font-size: 11px;")
@@ -23,8 +27,9 @@ class HeaderDashboardBar(QWidget):
         title.setStyleSheet("font-weight: 600; font-size: 16px;")
         summary.addWidget(title)
 
-        subtitle = QLabel("Standardprofil aktiv · Öffne ein Projekt oder starte ein neues.")
+        subtitle = QLabel("Standardprofil aktiv. Öffne ein Projekt oder starte ruhig neu.")
         subtitle.setStyleSheet("color: #566171;")
+        subtitle.setWordWrap(True)
         summary.addWidget(subtitle)
 
         layout.addLayout(summary)
@@ -36,7 +41,7 @@ class HeaderDashboardBar(QWidget):
         search.setPlaceholderText("Projekt, Modul oder Hilfe suchen")
         search.setToolTip("Gib zum Beispiel einen Projektnamen, ein Modul oder ein Hilfethema ein")
         search.setClearButtonEnabled(True)
-        search.setMinimumWidth(260)
+        search.setMinimumWidth(280)
         search_group.addWidget(search)
 
         helper = QLabel(app_state.search_helper_text())
@@ -46,12 +51,38 @@ class HeaderDashboardBar(QWidget):
 
         layout.addLayout(search_group, 1)
 
+        status_group = QVBoxLayout()
+        status_group.setSpacing(4)
+
         for text in (
             f"Speichern {app_state.save_status}",
             app_state.check_status_text(),
             app_state.system_status_text(),
         ):
-            layout.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignVCenter)
+            status_group.addWidget(StatusChip(text), 0, Qt.AlignmentFlag.AlignRight)
 
-        layout.addWidget(QPushButton("Hilfe"), 0, Qt.AlignmentFlag.AlignVCenter)
-        layout.addWidget(QPushButton("Reparieren"), 0, Qt.AlignmentFlag.AlignVCenter)
+        layout.addLayout(status_group, 0)
+
+        help_button = QPushButton("Hilfe")
+        help_button.setToolTip("Öffnet eine kurze Hilfe zu den sichtbaren Bereichen")
+        help_button.clicked.connect(self._open_help_dialog)
+        layout.addWidget(help_button, 0, Qt.AlignmentFlag.AlignVCenter)
+
+        repair_button = QPushButton("Reparieren")
+        repair_button.setToolTip("Öffnet den sicheren Startpunkt für Prüfungen")
+        repair_button.clicked.connect(self._open_repair_dialog)
+        layout.addWidget(repair_button, 0, Qt.AlignmentFlag.AlignVCenter)
+
+    def _open_help_dialog(self) -> None:
+        if self._help_dialog is None:
+            self._help_dialog = HelpDialog(self)
+        self._help_dialog.show()
+        self._help_dialog.raise_()
+        self._help_dialog.activateWindow()
+
+    def _open_repair_dialog(self) -> None:
+        if self._repair_dialog is None:
+            self._repair_dialog = RepairDialog(self)
+        self._repair_dialog.show()
+        self._repair_dialog.raise_()
+        self._repair_dialog.activateWindow()

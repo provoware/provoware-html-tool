@@ -9,13 +9,13 @@ class StatusBarController(QWidget):
         super().__init__()
         layout = QHBoxLayout(self)
         layout.setContentsMargins(12, 4, 12, 8)
-        layout.setSpacing(6)
+        layout.setSpacing(4)
         for text in (
             f"Projekt: {app_state.active_project_name}",
             f"Speichern {app_state.save_status}",
             app_state.status_summary_text(),
             app_state.search_status_text(),
-            "Hilfe und Diagnose schnell erreichbar",
+            "Hilfe und Diagnose direkt erreichbar",
         ):
             layout.addWidget(StatusChip(text))
         layout.addStretch(1)
