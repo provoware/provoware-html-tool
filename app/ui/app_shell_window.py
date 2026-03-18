@@ -22,12 +22,14 @@ class AppShellWindow(QMainWindow):
         outer = QVBoxLayout(root)
         outer.setContentsMargins(0, 0, 0, 0)
 
-        self.header = HeaderDashboardBar()
+        app_state = context.services.get("app_state")
+
+        self.header = HeaderDashboardBar(app_state)
         self.tabs = ProjectTabBar()
         self.left_sidebar = LeftGlobalSidebar()
         self.workspace = ProjectWorkspaceHost()
         self.right_sidebar = RightModuleSidebar()
-        self.status_bar_widget = StatusBarController()
+        self.status_bar_widget = StatusBarController(app_state)
 
         splitter = QSplitter()
         splitter.addWidget(self.left_sidebar)
