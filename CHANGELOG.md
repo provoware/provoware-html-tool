@@ -2,6 +2,12 @@
 
 ## 2026-05-07
 
+### UI-Profi-Upgrade: Iteration 5
+- Verbleibende Widget-Styles aus `StatusChip` und `SectionHeader` entfernt.
+- Reparaturdialog-Ergebnisbereich und Abschnittstitel auf zentrale Theme-Haken umgestellt.
+- Theme-Regeln für `StatusChip`, `SectionHeader`, `DialogSectionTitle` und `RepairResultBox` ergänzt.
+- Validierung durchgeführt: Haken vorhanden, Theme-Selektoren vorhanden, Pfadprüfungs-Klickfunktion unverändert.
+
 ### UI-Profi-Upgrade: Iteration 4
 - Workspace-Empty-State von lokalen Text-Styles befreit.
 - Statusleiste von lokalem Container-Style befreit.
