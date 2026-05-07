@@ -7,6 +7,7 @@ from app.ui.widgets.action_tile import ActionTile
 class WorkspaceEmptyState(QWidget):
     def __init__(self) -> None:
         super().__init__()
+        self.setObjectName("WorkspaceEmptyState")
         layout = QVBoxLayout(self)
         layout.setContentsMargins(32, 32, 32, 32)
         layout.setSpacing(12)
@@ -16,8 +17,8 @@ class WorkspaceEmptyState(QWidget):
             "So geht es leicht: 1. Projekt anlegen. 2. Rechts ein Modul wählen. 3. In der Mitte loslegen.\n\n"
             "Bis dahin bleibt deine Arbeitsfläche ruhig und unverändert."
         )
+        message.setObjectName("WorkspaceEmptyMessage")
         message.setWordWrap(True)
-        message.setStyleSheet("font-size: 15px;")
         layout.addWidget(message)
 
         project_button = ActionTile("Projekt anlegen")
@@ -31,7 +32,7 @@ class WorkspaceEmptyState(QWidget):
         layout.addWidget(preset_button, 0, Qt.AlignmentFlag.AlignLeft)
 
         note = QLabel("Hinweis: Die Schaltflächen sind schon sichtbar und werden im nächsten Schritt aktiviert.")
+        note.setObjectName("WorkspaceEmptyNote")
         note.setWordWrap(True)
-        note.setStyleSheet("color: #666; font-size: 13px;")
         layout.addWidget(note)
         layout.addStretch(1)
