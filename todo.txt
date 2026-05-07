@@ -90,8 +90,8 @@ OFFENE PUNKTE
 35. Iterationsbeispiele später um einen knappen Hinweis ergänzen, wann ein neuer Hinweis besser als Beispiel statt als neue Regel ergänzt wird.
 37. Sitzungswiederherstellung später um echte Projektnamen aus `project.json` statt aus Slugs abbilden.
 38. Modulfeld später um kleine Bereichsfilter wie Inhalt, Planung oder Suche ergänzen, sobald mehr Module vorliegen.
-42. UI-Iteration 5: Verbleibende `setStyleSheet`-Treffer in Widgets und Dialogen prüfen, minimal zentralisieren oder bewusst begründen.
 43. ZIP-Abschluss: Nach der nächsten Gesamtvalidierung aktuellen Projektstand lokal als ZIP ausgeben.
+44. UI-Iteration 6: Lokale Sichtprüfung, Compile-Prüfung und ZIP-Ausgabe auf Kubuntu durchführen.
 
 ERLEDIGTE PUNKTE
 
@@ -116,3 +116,4 @@ ERLEDIGTE PUNKTE
 - 40. UI-Iteration 2: Header-Inline-Styles entfernt, Header-Haken ergänzt und Theme-Selektoren validiert.
 - 41. UI-Iteration 3: Rechte Sidebar-Hinweisstyles zentralisiert und strukturell validiert.
 - 42. UI-Iteration 4: Workspace-Empty-State und Statusleiste zentralisiert und strukturell validiert.
+- 44. UI-Iteration 5: Widget- und Reparaturdialog-Styles zentralisiert und strukturell validiert.
