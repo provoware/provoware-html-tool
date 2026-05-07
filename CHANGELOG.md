@@ -2,6 +2,13 @@
 
 ## 2026-05-07
 
+### UI-Profi-Upgrade: Iteration 4
+- Workspace-Empty-State von lokalen Text-Styles befreit.
+- Statusleiste von lokalem Container-Style befreit.
+- Workspace- und Statusleisten-Widgets mit zentralen `objectName`-Haken versehen.
+- Theme-Regeln für `WorkspaceEmptyState`, `WorkspaceEmptyMessage`, `WorkspaceEmptyNote` und `StatusBarController` ergänzt.
+- Validierung durchgeführt: Haken vorhanden, Theme-Selektoren vorhanden, kompakte Statusleistenlogik unverändert.
+
 ### UI-Profi-Upgrade: Iteration 3
 - Rechte Modul-Sidebar von lokalen Hinweis-Styles befreit.
 - Hinweislabels in `app/ui/right_module_sidebar.py` mit `SidebarHintText` markiert.
