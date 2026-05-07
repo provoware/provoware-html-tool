@@ -54,6 +54,29 @@ def app_stylesheet() -> str:
         line-height: 1.4;
     }
 
+    QLabel#SectionHeader,
+    QLabel#DialogSectionTitle {
+        color: #0f172a;
+        font-weight: 700;
+        padding: 6px 0;
+    }
+
+    QLabel#StatusChip {
+        padding: 3px 8px;
+        border: 1px solid #7d8896;
+        border-radius: 9px;
+        background: #f3f6fa;
+        color: #334155;
+    }
+
+    QLabel#RepairResultBox {
+        background: #f4f6f8;
+        border: 1px solid #d9dee5;
+        border-radius: 6px;
+        padding: 10px;
+        color: #172033;
+    }
+
     QFrame#HeaderSearchFrame {
         background: #ffffff;
         border: 1px solid #d8e0ea;
