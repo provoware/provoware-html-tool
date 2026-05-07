@@ -6,11 +6,13 @@ from PySide6.QtWidgets import QApplication, QMessageBox
 
 from app.bootstrap.app_bootstrap import AppBootstrap
 from app.constants import APP_NAME
+from app.ui.theme import app_stylesheet
 
 
 def run() -> int:
     app = QApplication(sys.argv)
     app.setApplicationName(APP_NAME)
+    app.setStyleSheet(app_stylesheet())
 
     bootstrap = AppBootstrap()
     result = bootstrap.bootstrap()
