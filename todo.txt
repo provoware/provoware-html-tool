@@ -90,7 +90,7 @@ OFFENE PUNKTE
 35. Iterationsbeispiele später um einen knappen Hinweis ergänzen, wann ein neuer Hinweis besser als Beispiel statt als neue Regel ergänzt wird.
 37. Sitzungswiederherstellung später um echte Projektnamen aus `project.json` statt aus Slugs abbilden.
 38. Modulfeld später um kleine Bereichsfilter wie Inhalt, Planung oder Suche ergänzen, sobald mehr Module vorliegen.
-39. UI-Iteration 2: Header-Inline-Styles prüfen und nur dort entschärfen, wo sie globale Theme-Regeln blockieren.
+40. UI-Iteration 3: Sidebar- und Workspace-Dateien auf harte Inline-Styles prüfen und nur gezielt zentralisieren.
 
 ERLEDIGTE PUNKTE
 
@@ -112,3 +112,4 @@ ERLEDIGTE PUNKTE
 - 34. Iterationsbeispiel um einen kurzen Einengungs-Hinweis für unklare Zielstellen ergänzt.
 - 31. Statusleiste bei wenig Breite automatisch von zwei Gruppen auf eine kompakte Anordnung umgestellt.
 - 39. UI-Iteration 1: Globales Qt-Stylesheet ergänzt, zentral eingebunden und strukturell validiert.
+- 40. UI-Iteration 2: Header-Inline-Styles entfernt, Header-Haken ergänzt und Theme-Selektoren validiert.
