@@ -2,6 +2,12 @@
 
 ## 2026-05-07
 
+### UI-Profi-Upgrade: Iteration 2
+- Header-Inline-Styles aus `app/ui/header_dashboard_bar.py` entfernt.
+- Header-Widgets mit sprechenden `objectName`-Werten versehen.
+- Header-Optik zentral in `app/ui/theme.py` über Qt-Selektoren gesteuert.
+- Validierung durchgeführt: Header-Haken vorhanden, Theme-Selektoren vorhanden, Dialog- und Button-Logik unverändert.
+
 ### UI-Profi-Upgrade: Iteration 1
 - Globales Qt-Stylesheet in `app/ui/theme.py` ergänzt.
 - Stylesheet zentral in `app/main.py` eingebunden.
@@ -12,4 +18,4 @@
 ### Offene Validierung
 - Sichtprüfung im laufenden PySide6-Fenster lokal mit `./start.sh` durchführen.
 - Kleine, mittlere und große Fensterbreite prüfen.
-- Prüfen, ob vorhandene Inline-Styles einzelne globale Styles bewusst überschreiben.
+- Prüfen, ob weitere vorhandene Inline-Styles einzelne globale Styles bewusst überschreiben.
