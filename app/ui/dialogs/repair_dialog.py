@@ -31,7 +31,7 @@ class RepairDialog(QDialog):
         layout.addWidget(self.diagnose_button)
 
         result_title = QLabel("Ergebnisbereich")
-        result_title.setStyleSheet("font-weight: 600;")
+        result_title.setObjectName("DialogSectionTitle")
         layout.addWidget(result_title)
 
         level_row = QHBoxLayout()
@@ -48,10 +48,8 @@ class RepairDialog(QDialog):
             "Noch keine Prüfung gestartet.\n"
             "Wenn du oben auf „Pfade prüfen“ klickst, erscheint hier ein kurzer, sicherer Bericht."
         )
+        self.result_label.setObjectName("RepairResultBox")
         self.result_label.setWordWrap(True)
-        self.result_label.setStyleSheet(
-            "background: #f4f6f8; border: 1px solid #d9dee5; border-radius: 6px; padding: 10px;"
-        )
         layout.addWidget(self.result_label)
 
         close_button = QPushButton("Später")
