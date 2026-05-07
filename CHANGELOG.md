@@ -2,6 +2,12 @@
 
 ## 2026-05-07
 
+### UI-Profi-Upgrade: Iteration 3
+- Rechte Modul-Sidebar von lokalen Hinweis-Styles befreit.
+- Hinweislabels in `app/ui/right_module_sidebar.py` mit `SidebarHintText` markiert.
+- Zentrale Theme-Regel `QLabel#SidebarHintText` in `app/ui/theme.py` ergänzt.
+- Validierung durchgeführt: Sidebar-Haken vorhanden, Theme-Selektor vorhanden, Modulfilter-, Preset- und Kopplungslogik unverändert.
+
 ### UI-Profi-Upgrade: Iteration 2
 - Header-Inline-Styles aus `app/ui/header_dashboard_bar.py` entfernt.
 - Header-Widgets mit sprechenden `objectName`-Werten versehen.
