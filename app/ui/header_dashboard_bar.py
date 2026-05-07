@@ -12,7 +12,7 @@ class HeaderDashboardBar(QWidget):
         super().__init__()
         self._help_dialog: HelpDialog | None = None
         self._repair_dialog: RepairDialog | None = None
-        self.setStyleSheet("background: #f8fafc; border-bottom: 1px solid #d8e0ea;")
+        self.setObjectName("HeaderDashboardBar")
 
         layout = QHBoxLayout(self)
         layout.setContentsMargins(14, 10, 14, 8)
@@ -22,24 +22,22 @@ class HeaderDashboardBar(QWidget):
         summary.setSpacing(1)
 
         eyebrow = QLabel("Startbereich")
-        eyebrow.setStyleSheet("color: #6a7482; font-size: 11px;")
+        eyebrow.setObjectName("HeaderEyebrow")
         summary.addWidget(eyebrow)
 
         title = QLabel("Bereit für dein nächstes Projekt")
-        title.setStyleSheet("font-weight: 600; font-size: 16px;")
+        title.setObjectName("HeaderTitle")
         summary.addWidget(title)
 
         subtitle = QLabel("Standardprofil aktiv. Öffne ein Projekt oder starte ruhig neu.")
-        subtitle.setStyleSheet("color: #566171;")
+        subtitle.setObjectName("HeaderSubtitle")
         subtitle.setWordWrap(True)
         summary.addWidget(subtitle)
 
         layout.addLayout(summary)
 
         search_frame = QFrame()
-        search_frame.setStyleSheet(
-            "QFrame {background: #ffffff; border: 1px solid #d8e0ea; border-radius: 10px;}"
-        )
+        search_frame.setObjectName("HeaderSearchFrame")
         search_layout = QVBoxLayout(search_frame)
         search_layout.setContentsMargins(10, 8, 10, 8)
         search_layout.setSpacing(3)
@@ -52,7 +50,7 @@ class HeaderDashboardBar(QWidget):
         search_layout.addWidget(search)
 
         helper = QLabel(app_state.search_helper_text())
-        helper.setStyleSheet("color: #6a7482; font-size: 11px;")
+        helper.setObjectName("HeaderHelperText")
         helper.setWordWrap(True)
         search_layout.addWidget(helper)
 
@@ -74,7 +72,7 @@ class HeaderDashboardBar(QWidget):
         bottom_status_row.addWidget(StatusChip(app_state.backup_status_text()), 0, Qt.AlignmentFlag.AlignRight)
 
         refresh_hint = QLabel("Prüfung und Sicherung bleiben sichtbar vorbereitet.")
-        refresh_hint.setStyleSheet("color: #6a7482; font-size: 11px;")
+        refresh_hint.setObjectName("HeaderHelperText")
         refresh_hint.setWordWrap(True)
         refresh_hint.setAlignment(Qt.AlignmentFlag.AlignRight)
         bottom_status_row.addWidget(refresh_hint, 0, Qt.AlignmentFlag.AlignRight)
