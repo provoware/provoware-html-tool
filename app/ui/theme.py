@@ -22,6 +22,36 @@ def app_stylesheet() -> str:
         border-radius: 12px;
     }
 
+    QWidget#HeaderDashboardBar {
+        background: #f8fafc;
+        border-bottom: 1px solid #d8e0ea;
+    }
+
+    QLabel#HeaderEyebrow {
+        color: #6a7482;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+    }
+
+    QLabel#HeaderTitle {
+        color: #0f172a;
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    QLabel#HeaderSubtitle,
+    QLabel#HeaderHelperText {
+        color: #566171;
+        font-size: 12px;
+    }
+
+    QFrame#HeaderSearchFrame {
+        background: #ffffff;
+        border: 1px solid #d8e0ea;
+        border-radius: 12px;
+    }
+
     QLineEdit,
     QTextEdit,
     QPlainTextEdit,
