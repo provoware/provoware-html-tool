@@ -11,6 +11,7 @@ class RightModuleSidebar(QWidget):
 
     def __init__(self) -> None:
         super().__init__()
+        self.setObjectName("RightModuleSidebar")
         layout = QVBoxLayout(self)
         layout.setContentsMargins(8, 8, 12, 8)
         layout.setSpacing(8)
@@ -34,8 +35,8 @@ class RightModuleSidebar(QWidget):
         layout.addWidget(self.module_filter)
 
         self.module_status = QLabel()
+        self.module_status.setObjectName("SidebarHintText")
         self.module_status.setWordWrap(True)
-        self.module_status.setStyleSheet("color: #6a7482; font-size: 11px;")
         layout.addWidget(self.module_status)
 
         self.module_list = QListWidget()
@@ -46,8 +47,8 @@ class RightModuleSidebar(QWidget):
 
         layout.addWidget(SectionHeader("Presets"))
         self.preset_status = QLabel("1 kleine Basisansicht ist vorbereitet. Weitere Presets folgen später mit echter Auswahl.")
+        self.preset_status.setObjectName("SidebarHintText")
         self.preset_status.setWordWrap(True)
-        self.preset_status.setStyleSheet("color: #6a7482; font-size: 11px;")
         layout.addWidget(self.preset_status)
 
         self.preset_list = QListWidget()
@@ -66,8 +67,8 @@ class RightModuleSidebar(QWidget):
         self.coupling_status = QLabel(
             "Noch keine Kopplung bereit. Sie erscheint hier, sobald zwei Module gemeinsam genutzt werden."
         )
+        self.coupling_status.setObjectName("SidebarHintText")
         self.coupling_status.setWordWrap(True)
-        self.coupling_status.setStyleSheet("color: #6a7482; font-size: 11px;")
         layout.addWidget(self.coupling_status)
 
         self.coupling_list = QListWidget()
