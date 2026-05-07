@@ -42,15 +42,31 @@ def app_stylesheet() -> str:
 
     QLabel#HeaderSubtitle,
     QLabel#HeaderHelperText,
-    QLabel#SidebarHintText {
+    QLabel#SidebarHintText,
+    QLabel#WorkspaceEmptyNote {
         color: #566171;
         font-size: 12px;
+    }
+
+    QLabel#WorkspaceEmptyMessage {
+        color: #172033;
+        font-size: 15px;
+        line-height: 1.4;
     }
 
     QFrame#HeaderSearchFrame {
         background: #ffffff;
         border: 1px solid #d8e0ea;
         border-radius: 12px;
+    }
+
+    QWidget#WorkspaceEmptyState {
+        background-color: #f3f6fa;
+    }
+
+    QWidget#StatusBarController {
+        background: #f8fafc;
+        border-top: 1px solid #d8e0ea;
     }
 
     QLineEdit,
