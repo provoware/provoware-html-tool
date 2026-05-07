@@ -41,7 +41,8 @@ def app_stylesheet() -> str:
     }
 
     QLabel#HeaderSubtitle,
-    QLabel#HeaderHelperText {
+    QLabel#HeaderHelperText,
+    QLabel#SidebarHintText {
         color: #566171;
         font-size: 12px;
     }
