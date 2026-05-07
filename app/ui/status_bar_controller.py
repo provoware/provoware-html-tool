@@ -9,7 +9,7 @@ class StatusBarController(QWidget):
     def __init__(self, app_state: AppStateService) -> None:
         super().__init__()
         self._compact_breakpoint = 920
-        self.setStyleSheet("background: #f8fafc; border-top: 1px solid #d8e0ea;")
+        self.setObjectName("StatusBarController")
 
         self._layout = QHBoxLayout(self)
         self._layout.setContentsMargins(14, 6, 14, 10)
