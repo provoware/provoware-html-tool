@@ -1,0 +1,46 @@
+name: Python-Paketierung
+
+on:
+  pull_request:
+    paths:
+      - "pyproject.toml"
+      - "app/**"
+      - "tests/test_project_service.py"
+      - "tests/test_paths.py"
+      - ".github/workflows/python-packaging.yml"
+  push:
+    branches: [main]
+    paths:
+      - "pyproject.toml"
+      - "app/**"
+      - "tests/test_project_service.py"
+      - "tests/test_paths.py"
+      - ".github/workflows/python-packaging.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  packaging:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - name: Quellen laden
+        uses: actions/checkout@v4
+      - name: Python vorbereiten
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Editierbare Installation und pytest
+        run: python -m pip install -e . pytest
+      - name: Paket und Metadaten nachweisen
+        run: |
+          python -c "import app, importlib.metadata as m; d=m.distribution('provoware-html-tool'); assert d.version == '0.1.0'; print('Paketierung erfolgreich:', d.metadata['Name'])"
+          python -m pip wheel --no-deps --wheel-dir "$RUNNER_TEMP/wheelhouse" .
+      - name: Betroffene Projekt- und Pfadtests
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest -q tests/test_project_service.py tests/test_paths.py

@@ -117,3 +117,4 @@ ERLEDIGTE PUNKTE
 - 41. UI-Iteration 3: Rechte Sidebar-Hinweisstyles zentralisiert und strukturell validiert.
 - 42. UI-Iteration 4: Workspace-Empty-State und Statusleiste zentralisiert und strukturell validiert.
 - 44. UI-Iteration 5: Widget- und Reparaturdialog-Styles zentralisiert und strukturell validiert.
+46. Installierbares Paket später um Ressourcen- und Schema-Dateien ergänzen: prüfen, ob ein gebautes Wheel ohne Quellverzeichnis alle benötigten assets korrekt findet.
