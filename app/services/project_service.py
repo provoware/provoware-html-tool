@@ -4,6 +4,7 @@ import json
 
 from app.models.project_models import ProjectRecord
 from app.storage.json_document_store import JsonDocumentStore
+from app.utils.atomic_write import atomic_write_text
 from app.utils.validation import require_text
 
 
@@ -33,4 +34,4 @@ class ProjectService:
         self._write_project_json(project_dir / "layout.json", layout_payload)
 
     def _write_project_json(self, target, payload: dict) -> None:
-        target.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        atomic_write_text(target, json.dumps(payload, indent=2, ensure_ascii=False) + "\n")

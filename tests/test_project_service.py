@@ -52,3 +52,25 @@ def test_project_service_persists_open_modules_and_layout(tmp_path):
     layout_payload = json.loads((project_dir / "layout.json").read_text(encoding="utf-8"))
     assert modules_payload == {"modules": [{"name": "Editor"}, {"name": "Wiki"}]}
     assert layout_payload == {"docks": [{"title": "Editor", "area": "right"}, {"title": "Wiki", "area": "right"}]}
+
+def test_workspace_write_failure_preserves_existing_json(tmp_path, monkeypatch):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Schreibabbruch")
+    service.save_workspace_state(project.slug, ["Editor"])
+    project_dir = tmp_path / project.slug
+    modules = project_dir / "modules.json"
+    layout = project_dir / "layout.json"
+    old_modules = modules.read_bytes()
+    old_layout = layout.read_bytes()
+
+    def fail_replace(source, target):
+        raise OSError("Kein Speicherplatz")
+
+    monkeypatch.setattr("app.utils.atomic_write.os.replace", fail_replace)
+    with pytest.raises(OSError, match="Kein Speicherplatz"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+
+    assert modules.read_bytes() == old_modules
+    assert layout.read_bytes() == old_layout
+    assert list(project_dir.glob(".modules.json.*.tmp")) == []
+
