@@ -118,3 +118,4 @@ ERLEDIGTE PUNKTE
 - 42. UI-Iteration 4: Workspace-Empty-State und Statusleiste zentralisiert und strukturell validiert.
 - 44. UI-Iteration 5: Widget- und Reparaturdialog-Styles zentralisiert und strukturell validiert.
 46. Installierbares Paket später um Ressourcen- und Schema-Dateien ergänzen: prüfen, ob ein gebautes Wheel ohne Quellverzeichnis alle benötigten assets korrekt findet.
+47. Projektzustand nach dem atomaren Einzeldatei-Schutz später als gemeinsame Transaktion sichern (modules.json und layout.json zusammen), Absturz zwischen beiden Schreibvorgängen simulieren und nach Neustart konsistent wiederherstellen.
