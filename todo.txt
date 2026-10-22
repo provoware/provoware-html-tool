@@ -119,3 +119,5 @@ ERLEDIGTE PUNKTE
 - 44. UI-Iteration 5: Widget- und Reparaturdialog-Styles zentralisiert und strukturell validiert.
 46. Installierbares Paket später um Ressourcen- und Schema-Dateien ergänzen: prüfen, ob ein gebautes Wheel ohne Quellverzeichnis alle benötigten assets korrekt findet.
 47. Projektzustand nach dem atomaren Einzeldatei-Schutz später als gemeinsame Transaktion sichern (modules.json und layout.json zusammen), Absturz zwischen beiden Schreibvorgängen simulieren und nach Neustart konsistent wiederherstellen.
+
+48. Nach Sicherung gegen gleiche Projektordnernamen die Projektanlage um eine verständliche Vorschau des berechneten Ordnernamens erweitern; bestehende Projekte und gespeicherte Inhalte niemals automatisch umbenennen oder ersetzen.

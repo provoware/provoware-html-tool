@@ -13,7 +13,10 @@ class JsonDocumentStore:
 
     def write_project_bundle(self, project: ProjectRecord) -> None:
         project_dir = self.base_dir / project.slug
-        project_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            project_dir.mkdir(parents=True, exist_ok=False)
+        except FileExistsError as exc:
+            raise ValueError("Ein Projekt mit diesem Ordnernamen existiert bereits.") from exc
         payloads = {
             "project.json": {"name": project.name, "slug": project.slug, "version": 1},
             "layout.json": {"docks": []},

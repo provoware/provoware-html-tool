@@ -74,3 +74,40 @@ def test_workspace_write_failure_preserves_existing_json(tmp_path, monkeypatch):
     assert modules.read_bytes() == old_modules
     assert layout.read_bytes() == old_layout
     assert list(project_dir.glob(".modules.json.*.tmp")) == []
+
+
+@pytest.mark.parametrize(
+    ("first_name", "colliding_name"),
+    [
+        ("Mein Projekt", "Mein-Projekt"),
+        ("Projekt!", "Projekt?"),
+        ("Gleich", "Gleich"),
+    ],
+)
+def test_project_slug_collision_preserves_existing_files(
+    tmp_path, first_name, colliding_name
+):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    original = service.create_project(first_name)
+    project_dir = tmp_path / original.slug
+    files = ("project.json", "layout.json", "modules.json", "couplings.json")
+    (project_dir / "modules.json").write_text(
+        '{"modules": [{"name": "Wichtiger Inhalt"}]}\\n', encoding="utf-8"
+    )
+    previous = {name: (project_dir / name).read_bytes() for name in files}
+
+    with pytest.raises(ValueError, match="existiert bereits"):
+        service.create_project(colliding_name)
+
+    assert {name: (project_dir / name).read_bytes() for name in files} == previous
+
+
+def test_project_creation_refuses_existing_empty_directory(tmp_path):
+    project_dir = tmp_path / "belegter-pfad"
+    project_dir.mkdir()
+    service = ProjectService(JsonDocumentStore(tmp_path))
+
+    with pytest.raises(ValueError, match="existiert bereits"):
+        service.create_project("Belegter Pfad")
+
+    assert list(project_dir.iterdir()) == []
