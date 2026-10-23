@@ -134,7 +134,7 @@ def test_workspace_second_write_failure_restores_both_files(tmp_path, monkeypatc
     monkeypatch.setattr(transaction, "atomic_write_text", fail_second)
     with pytest.raises(OSError, match="Schreibabbruch"):
         service.save_workspace_state(project.slug, ["Wiki"])
-    assert {(folder / name).read_bytes() for name in transaction.FILES} == original
+    assert {name: (folder / name).read_bytes() for name in transaction.FILES} == original
     assert not (folder / transaction.JOURNAL).exists()
 
 
@@ -161,7 +161,7 @@ def test_workspace_interrupted_process_recovers_on_restart(tmp_path, monkeypatch
 
     monkeypatch.setattr(transaction, "atomic_write_text", real_write)
     assert transaction.WorkspaceTransaction().recover_all(tmp_path) == 1
-    assert {(folder / name).read_bytes() for name in transaction.FILES} == original
+    assert {name: (folder / name).read_bytes() for name in transaction.FILES} == original
     assert not (folder / transaction.JOURNAL).exists()
 
 
