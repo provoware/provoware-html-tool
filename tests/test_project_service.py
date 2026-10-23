@@ -111,3 +111,80 @@ def test_project_creation_refuses_existing_empty_directory(tmp_path):
         service.create_project("Belegter Pfad")
 
     assert list(project_dir.iterdir()) == []
+
+
+def test_workspace_second_write_failure_restores_both_files(tmp_path, monkeypatch):
+    from app.storage import workspace_transaction as transaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Rücksetzen")
+    service.save_workspace_state(project.slug, ["Editor"])
+    folder = tmp_path / project.slug
+    original = {name: (folder / name).read_bytes() for name in transaction.FILES}
+    real_write = transaction.atomic_write_text
+    failed = False
+
+    def fail_second(target, content):
+        nonlocal failed
+        if target.name == "layout.json" and not failed:
+            failed = True
+            raise OSError("Schreibabbruch")
+        return real_write(target, content)
+
+    monkeypatch.setattr(transaction, "atomic_write_text", fail_second)
+    with pytest.raises(OSError, match="Schreibabbruch"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert {(folder / name).read_bytes() for name in transaction.FILES} == original
+    assert not (folder / transaction.JOURNAL).exists()
+
+
+def test_workspace_interrupted_process_recovers_on_restart(tmp_path, monkeypatch):
+    from app.storage import workspace_transaction as transaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Absturz")
+    service.save_workspace_state(project.slug, ["Editor"])
+    folder = tmp_path / project.slug
+    original = {name: (folder / name).read_bytes() for name in transaction.FILES}
+    real_write = transaction.atomic_write_text
+
+    def crash_before_layout(target, content):
+        if target.name == "layout.json":
+            raise SystemExit("simulierter Prozessabbruch")
+        return real_write(target, content)
+
+    monkeypatch.setattr(transaction, "atomic_write_text", crash_before_layout)
+    with pytest.raises(SystemExit, match="Prozessabbruch"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert (folder / transaction.JOURNAL).exists()
+    assert (folder / "modules.json").read_bytes() != original["modules.json"]
+
+    monkeypatch.setattr(transaction, "atomic_write_text", real_write)
+    assert transaction.WorkspaceTransaction().recover_all(tmp_path) == 1
+    assert {(folder / name).read_bytes() for name in transaction.FILES} == original
+    assert not (folder / transaction.JOURNAL).exists()
+
+
+def test_workspace_corrupt_journal_fails_closed(tmp_path):
+    from app.storage.workspace_transaction import JOURNAL, WorkspaceTransaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Beschädigt")
+    folder = tmp_path / project.slug
+    old_modules = (folder / "modules.json").read_bytes()
+    old_layout = (folder / "layout.json").read_bytes()
+    (folder / JOURNAL).write_text('{"version": 1, "before": {}}', encoding="utf-8")
+
+    with pytest.raises(ValueError, match="beschädigt"):
+        WorkspaceTransaction().recover_all(tmp_path)
+    with pytest.raises(ValueError, match="beschädigt"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert (folder / "modules.json").read_bytes() == old_modules
+    assert (folder / "layout.json").read_bytes() == old_layout
+
+
+@pytest.mark.parametrize("slug", ["../fremd", ".", "/tmp/fremd", "foo/bar"])
+def test_workspace_rejects_path_traversal(tmp_path, slug):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    with pytest.raises(ValueError, match="Ungültiger Projektordner"):
+        service.save_workspace_state(slug, ["Editor"])

@@ -95,6 +95,8 @@ OFFENE PUNKTE
 
 49. Nach tatsächlichem Prüf- bzw. Sicherungserfolg die Zeitstempel aus dem zuständigen Dienst setzen; bei fehlgeschlagenen Vorgängen keine Erfolge anzeigen.
 
+50. Workspace-Transaktion: Wiederherstellung nach echtem Stromausfall, beschädigten Datenträgern und konkurrierenden Lesezugriffen zusätzlich im isolierten Kubuntu-Test prüfen.
+
 ERLEDIGTE PUNKTE
 
 - 15.1 Header- und Statusbereich visuell kompakter gegliedert und näher an die vorhandene Layoutstruktur gerückt.
