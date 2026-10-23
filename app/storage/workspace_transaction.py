@@ -48,6 +48,8 @@ class WorkspaceTransaction:
             self._recover_locked(directory)
             before = {}
             for name in FILES:
+                if (directory / name).is_symlink():
+                    raise ValueError("Projektdatei ist eine Verknüpfung; Schreiben abgebrochen.")
                 old = (directory / name).read_bytes()
                 json.loads(old)
                 before[name] = {
@@ -66,6 +68,7 @@ class WorkspaceTransaction:
             except Exception:
                 self._recover_locked(directory)
                 raise
+            _sync_directory(directory)
             (directory / JOURNAL).unlink()
             _sync_directory(directory)
 
@@ -86,6 +89,8 @@ class WorkspaceTransaction:
 
     def _recover_locked(self, directory: Path) -> bool:
         journal = directory / JOURNAL
+        if journal.is_symlink():
+            raise ValueError("Workspace-Sicherung ist eine Verknüpfung; Wiederherstellung abgebrochen.")
         if not journal.exists():
             return False
         try:
@@ -109,7 +114,11 @@ class WorkspaceTransaction:
             raise ValueError("Workspace-Sicherung ist beschädigt; Dateien wurden nicht verändert.") from exc
 
         for name in FILES:
+            if (directory / name).is_symlink():
+                raise ValueError("Projektdatei ist eine Verknüpfung; Wiederherstellung abgebrochen.")
+        for name in FILES:
             atomic_write_text(directory / name, originals[name])
+        _sync_directory(directory)
         journal.unlink()
         _sync_directory(directory)
         return True
