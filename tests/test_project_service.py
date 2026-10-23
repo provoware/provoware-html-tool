@@ -188,3 +188,18 @@ def test_workspace_rejects_path_traversal(tmp_path, slug):
     service = ProjectService(JsonDocumentStore(tmp_path))
     with pytest.raises(ValueError, match="Ungültiger Projektordner"):
         service.save_workspace_state(slug, ["Editor"])
+
+
+def test_workspace_rejects_symlink_without_changing_external_data(tmp_path):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Verknüpfung")
+    folder = tmp_path / project.slug
+    external = tmp_path / "fremd.json"
+    external.write_text('{"modules": ["Wichtig"]}', encoding="utf-8")
+    (folder / "modules.json").unlink()
+    (folder / "modules.json").symlink_to(external)
+
+    with pytest.raises(ValueError, match="Verknüpfung"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert external.read_text(encoding="utf-8") == '{"modules": ["Wichtig"]}'
+    assert (folder / "modules.json").is_symlink()
