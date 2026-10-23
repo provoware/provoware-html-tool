@@ -93,6 +93,8 @@ OFFENE PUNKTE
 43. ZIP-Abschluss: Nach der nächsten Gesamtvalidierung aktuellen Projektstand lokal als ZIP ausgeben.
 44. UI-Iteration 6: Lokale Sichtprüfung, Compile-Prüfung und ZIP-Ausgabe auf Kubuntu durchführen.
 
+49. Nach tatsächlichem Prüf- bzw. Sicherungserfolg die Zeitstempel aus dem zuständigen Dienst setzen; bei fehlgeschlagenen Vorgängen keine Erfolge anzeigen.
+
 ERLEDIGTE PUNKTE
 
 - 15.1 Header- und Statusbereich visuell kompakter gegliedert und näher an die vorhandene Layoutstruktur gerückt.
