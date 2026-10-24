@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import json
+from pathlib import Path
 
 from app.models.project_models import ProjectRecord
 from app.storage.json_document_store import JsonDocumentStore
-from app.utils.atomic_write import atomic_write_text
+from app.storage.workspace_transaction import WorkspaceTransaction
 from app.utils.validation import require_text
 
 
@@ -24,14 +24,14 @@ class ProjectService:
         return project
 
     def save_workspace_state(self, project_slug: str, open_modules: list[str]) -> None:
+        if not project_slug or Path(project_slug).name != project_slug or project_slug in {".", ".."}:
+            raise ValueError("Ungültiger Projektordner.")
         project_dir = self.document_store.base_dir / project_slug
-        if not project_dir.exists():
+        if project_dir.is_symlink() or not project_dir.is_dir():
             raise ValueError("Projektordner wurde nicht gefunden.")
 
-        modules_payload = {"modules": [{"name": name} for name in open_modules]}
-        layout_payload = {"docks": [{"title": name, "area": "right"} for name in open_modules]}
-        self._write_project_json(project_dir / "modules.json", modules_payload)
-        self._write_project_json(project_dir / "layout.json", layout_payload)
-
-    def _write_project_json(self, target, payload: dict) -> None:
-        atomic_write_text(target, json.dumps(payload, indent=2, ensure_ascii=False) + "\n")
+        payloads = {
+            "modules.json": {"modules": [{"name": name} for name in open_modules]},
+            "layout.json": {"docks": [{"title": name, "area": "right"} for name in open_modules]},
+        }
+        WorkspaceTransaction().save(project_dir, payloads)

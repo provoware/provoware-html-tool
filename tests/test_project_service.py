@@ -1,4 +1,6 @@
 import json
+import subprocess
+import sys
 
 import pytest
 
@@ -111,3 +113,159 @@ def test_project_creation_refuses_existing_empty_directory(tmp_path):
         service.create_project("Belegter Pfad")
 
     assert list(project_dir.iterdir()) == []
+
+
+def test_workspace_second_write_failure_restores_both_files(tmp_path, monkeypatch):
+    from app.storage import workspace_transaction as transaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Rücksetzen")
+    service.save_workspace_state(project.slug, ["Editor"])
+    folder = tmp_path / project.slug
+    original = {name: (folder / name).read_bytes() for name in transaction.FILES}
+    real_write = transaction.atomic_write_text
+    failed = False
+
+    def fail_second(target, content):
+        nonlocal failed
+        if target.name == "layout.json" and not failed:
+            failed = True
+            raise OSError("Schreibabbruch")
+        return real_write(target, content)
+
+    monkeypatch.setattr(transaction, "atomic_write_text", fail_second)
+    with pytest.raises(OSError, match="Schreibabbruch"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert {name: (folder / name).read_bytes() for name in transaction.FILES} == original
+    assert not (folder / transaction.JOURNAL).exists()
+
+
+def test_workspace_interrupted_process_recovers_on_restart(tmp_path, monkeypatch):
+    from app.storage import workspace_transaction as transaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Absturz")
+    service.save_workspace_state(project.slug, ["Editor"])
+    folder = tmp_path / project.slug
+    original = {name: (folder / name).read_bytes() for name in transaction.FILES}
+    real_write = transaction.atomic_write_text
+
+    def crash_before_layout(target, content):
+        if target.name == "layout.json":
+            raise SystemExit("simulierter Prozessabbruch")
+        return real_write(target, content)
+
+    monkeypatch.setattr(transaction, "atomic_write_text", crash_before_layout)
+    with pytest.raises(SystemExit, match="Prozessabbruch"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert (folder / transaction.JOURNAL).exists()
+    assert (folder / "modules.json").read_bytes() != original["modules.json"]
+
+    monkeypatch.setattr(transaction, "atomic_write_text", real_write)
+    assert transaction.WorkspaceTransaction().recover_all(tmp_path) == 1
+    assert {name: (folder / name).read_bytes() for name in transaction.FILES} == original
+    assert not (folder / transaction.JOURNAL).exists()
+
+
+def test_workspace_corrupt_journal_fails_closed(tmp_path):
+    from app.storage.workspace_transaction import JOURNAL, WorkspaceTransaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Beschädigt")
+    folder = tmp_path / project.slug
+    old_modules = (folder / "modules.json").read_bytes()
+    old_layout = (folder / "layout.json").read_bytes()
+    (folder / JOURNAL).write_text('{"version": 1, "before": {}}', encoding="utf-8")
+
+    with pytest.raises(ValueError, match="beschädigt"):
+        WorkspaceTransaction().recover_all(tmp_path)
+    with pytest.raises(ValueError, match="beschädigt"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert (folder / "modules.json").read_bytes() == old_modules
+    assert (folder / "layout.json").read_bytes() == old_layout
+
+
+@pytest.mark.parametrize("slug", ["../fremd", ".", "/tmp/fremd", "foo/bar"])
+def test_workspace_rejects_path_traversal(tmp_path, slug):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    with pytest.raises(ValueError, match="Ungültiger Projektordner"):
+        service.save_workspace_state(slug, ["Editor"])
+
+
+def test_workspace_rejects_symlink_without_changing_external_data(tmp_path):
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Verknüpfung")
+    folder = tmp_path / project.slug
+    external = tmp_path / "fremd.json"
+    external.write_text('{"modules": ["Wichtig"]}', encoding="utf-8")
+    (folder / "modules.json").unlink()
+    (folder / "modules.json").symlink_to(external)
+
+    with pytest.raises(ValueError, match="Verknüpfung"):
+        service.save_workspace_state(project.slug, ["Wiki"])
+    assert external.read_text(encoding="utf-8") == '{"modules": ["Wichtig"]}'
+    assert (folder / "modules.json").is_symlink()
+
+
+
+def test_workspace_hard_process_exit_recovers_original_files(tmp_path):
+    """Ein echter Prozessabbruch umgeht finally und erfordert Neustart-Recovery."""
+    from app.storage.workspace_transaction import FILES, JOURNAL, WorkspaceTransaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Prozessende")
+    service.save_workspace_state(project.slug, ["Editor"])
+    folder = tmp_path / project.slug
+    originals = {name: (folder / name).read_bytes() for name in FILES}
+
+    child = """
+import os
+import sys
+from pathlib import Path
+from app.services.project_service import ProjectService
+from app.storage.json_document_store import JsonDocumentStore
+from app.storage import workspace_transaction as tx
+
+real_write = tx.atomic_write_text
+
+def crash_before_second_write(target, content):
+    if target.name == "layout.json":
+        os._exit(71)
+    return real_write(target, content)
+
+tx.atomic_write_text = crash_before_second_write
+ProjectService(JsonDocumentStore(Path(sys.argv[1]))).save_workspace_state(sys.argv[2], ["Wiki"])
+"""
+    result = subprocess.run(
+        [sys.executable, "-c", child, str(tmp_path), project.slug],
+        cwd=__import__("pathlib").Path(__file__).resolve().parents[1],
+        capture_output=True,
+        text=True,
+        timeout=15,
+        check=False,
+    )
+    assert result.returncode == 71, result.stderr
+    assert (folder / JOURNAL).exists()
+    assert (folder / "modules.json").read_bytes() != originals["modules.json"]
+
+    assert WorkspaceTransaction().recover_all(tmp_path) == 1
+    assert {name: (folder / name).read_bytes() for name in FILES} == originals
+    assert not (folder / JOURNAL).exists()
+
+
+def test_workspace_dangling_journal_symlink_blocks_startup_without_data_change(tmp_path):
+    from app.storage.workspace_transaction import FILES, JOURNAL, WorkspaceTransaction
+
+    service = ProjectService(JsonDocumentStore(tmp_path))
+    project = service.create_project("Hängender Link")
+    folder = tmp_path / project.slug
+    originals = {name: (folder / name).read_bytes() for name in FILES}
+    journal = folder / JOURNAL
+    journal.symlink_to(folder / "nicht-vorhanden.json")
+    assert journal.is_symlink() and not journal.exists()
+
+    with pytest.raises(ValueError, match="Verknüpfung"):
+        WorkspaceTransaction().recover_all(tmp_path)
+
+    assert journal.is_symlink()
+    assert {name: (folder / name).read_bytes() for name in FILES} == originals

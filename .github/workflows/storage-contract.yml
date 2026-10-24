@@ -5,9 +5,11 @@ on:
     paths:
       - "app/services/project_service.py"
       - "app/storage/json_document_store.py"
+      - "app/storage/workspace_transaction.py"
       - "app/utils/atomic_write.py"
       - "tests/test_atomic_write.py"
       - "tests/test_project_service.py"
+      - "app/bootstrap/app_bootstrap.py"
       - "pyproject.toml"
       - ".github/workflows/storage-contract.yml"
   push:
@@ -15,9 +17,11 @@ on:
     paths:
       - "app/services/project_service.py"
       - "app/storage/json_document_store.py"
+      - "app/storage/workspace_transaction.py"
       - "app/utils/atomic_write.py"
       - "tests/test_atomic_write.py"
       - "tests/test_project_service.py"
+      - "app/bootstrap/app_bootstrap.py"
       - "pyproject.toml"
       - ".github/workflows/storage-contract.yml"
 

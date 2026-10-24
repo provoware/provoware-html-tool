@@ -26,6 +26,7 @@ from app.storage.ini_settings_store import IniSettingsStore
 from app.storage.json_document_store import JsonDocumentStore
 from app.storage.sqlite_store import SQLiteStore
 from app.storage.state_store import StateStore
+from app.storage.workspace_transaction import WorkspaceTransaction
 from app.ui.app_shell_window import AppShellWindow
 
 
@@ -42,6 +43,12 @@ class AppBootstrap:
         report = DependencyReport()
         try:
             StartupChecks(paths).run()
+            try:
+                restored = WorkspaceTransaction().recover_all(paths.projects_dir)
+            except (OSError, ValueError) as exc:
+                raise StartupError("Eine Projektwiederherstellung ist fehlgeschlagen. Bitte Daten sichern und prüfen.") from exc
+            if restored:
+                report.add(f"{restored} Projekt(e) nach Unterbrechung wiederhergestellt")
             report.add("Ordner und Datenbank sind bereit")
             context = self._build_context(paths, report)
             window = AppShellWindow(context)
