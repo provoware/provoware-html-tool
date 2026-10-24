@@ -96,6 +96,7 @@ OFFENE PUNKTE
 49. Nach tatsächlichem Prüf- bzw. Sicherungserfolg die Zeitstempel aus dem zuständigen Dienst setzen; bei fehlgeschlagenen Vorgängen keine Erfolge anzeigen.
 
 50. Workspace-Transaktion: Wiederherstellung nach echtem Stromausfall, beschädigten Datenträgern und konkurrierenden Lesezugriffen zusätzlich im isolierten Kubuntu-Test prüfen.
+51. Workspace-Transaktion: Den Lesezugriff fremder Prozesse während eines zweistufigen Schreibvorgangs auf konsistente Snapshots prüfen und bei Bedarf sperrgestützten Lesepfad einführen.
 
 ERLEDIGTE PUNKTE
 

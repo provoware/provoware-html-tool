@@ -1,6 +1,6 @@
 # Vorrelease-Pflichtmatrix – provoware-html-tool
 
-Stand: 2026-10-23 · Basis-HEAD: 310a8b9bfd02199ae9515a932dbf462fb650dbc9 · Arbeitszweig: fix/workspace-journal-recovery-20261023
+Stand: 2026-10-24 · Basis-HEAD: 310a8b9bfd02199ae9515a932dbf462fb650dbc9 · Arbeitszweig: fix/workspace-journal-recovery-20261023
 
 Statusregeln: **PASS** nur für nachgewiesene, konkret benannte Tests auf passendem Commit; **OFFEN** ohne ausreichenden Beleg; **BLOCKED** bei fehlender Vorbedingung. Keine Gesamtprozentzahl.
 
@@ -37,3 +37,22 @@ Statusregeln: **PASS** nur für nachgewiesene, konkret benannte Tests auf passen
 **Risiko / Einschränkung:** Simulierter Prozessabbruch ist kein echter Stromausfall. Während des kurzen Schreibfensters könnten fremde, nicht kooperierende Leser einen Zwischenstand sehen; daher bleibt ein zusätzlicher Integrationstest offen. Kein Merge ohne grüne vorgeschriebene Prüfungen.
 
 **Nachverfolgung:** GitHub Issue #418; Branch fix/workspace-journal-recovery-20261023; PR und finale Commit-SHA nach GitHub-Übertragung. Nächster Schritt: CI-Gates prüfen, dann realistische Neustart-/Datenträger- und GUI-Tests im isolierten Testbereich.
+
+
+
+## Fortsetzung #418 – 24.10.2026 (Prüfung nach Commit ausstehend)
+
+Ausgangs-PR-HEAD: `43c8629ede89e30ea7da2f4b972d798e1a0474b0`; PR: #422; Branch: `fix/workspace-journal-recovery-20261023`.
+Am Ausgangs-HEAD waren Storage-CI und Paketierungs-CI für Python 3.11/3.12 erfolgreich:
+[Storage](https://github.com/provoware/provoware-html-tool/actions/runs/40015247088) und
+[Paketierung](https://github.com/provoware/provoware-html-tool/actions/runs/40015247101).
+Diese Nachweise gelten **nicht automatisch** für den neuen Commit.
+
+Drei gezielte Anpassungsschritte:
+1. **Fehlerpfad:** Ein hängender symbolischer Link auf das Rücksetzprotokoll darf die Startwiederherstellung nicht stillschweigend umgehen.
+2. **Realistischere Prüfung:** Ein eigenständiger Python-Prozess wird zwischen den zwei Dateischreibvorgängen mit `os._exit(71)` ohne Aufräumroutine beendet; der Folgeprozess muss beide Originaldateien wiederherstellen.
+3. **Nachverfolgung:** Regressionen, Matrix und genau eine weitere Folgeaufgabe dokumentieren; anschließend beide GitHub-Prüfketten am finalen PR-HEAD prüfen.
+
+Erwartete Ergebnisse: hängender Journal-Link führt zu **BLOCKED** statt Startfreigabe; Prozessabbruch wird rückgesetzt. **PASS erst nach tatsächlichem Testlauf.**
+Offen bleiben Stromausfall-/Datenträgertests, konkurrierende Fremdleser, GUI, 800×600, Skalierung und Gesamt-Release.
+Keine Migration, kein Merge und keine Veröffentlichung.

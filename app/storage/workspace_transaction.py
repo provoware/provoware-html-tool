@@ -73,7 +73,8 @@ class WorkspaceTransaction:
             _sync_directory(directory)
 
     def recover(self, directory: Path) -> bool:
-        if not (directory / JOURNAL).exists():
+        journal = directory / JOURNAL
+        if not journal.exists() and not journal.is_symlink():
             return False
         with _project_lock(directory):
             return self._recover_locked(directory)
